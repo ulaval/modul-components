@@ -1,112 +1,114 @@
-// ======================================================================
-//  Titles
-// ======================================================================
+.m-u--app-body {
+    // ======================================================================
+    //  Titles
+    // ======================================================================
 
-@include titleStyles();
+    @include titleStyles();
 
-// ======================================================================
-//  Text
-// ======================================================================
+    // ======================================================================
+    //  Text
+    // ======================================================================
 
-@include textStyles();
+    @include textStyles();
 
-// ======================================================================
-//  Link
-// ======================================================================
-a {
-    color: $m-color--interactive;
-    font-family: $m-font-family;
-}
-
-// ======================================================================
-//  Font
-// ======================================================================
-.m-u--font {
-    &-size {
-        font-size: $m-font-size;
-
-        &--l {
-            font-size: $m-font-size--l;
-        }
-
-        &--s {
-            font-size: $m-font-size--s;
-        }
-
-        &--xs {
-            font-size: $m-font-size--xs;
-        }
-
-        &,
-        &--l,
-        &--s,
-        &--xs {
-            font-family: $m-font-family;
-        }
-    }
-
-    &-style {
-        &--normal {
-            font-style: normal;
-        }
-
-        &--italic {
-            font-style: italic;
-        }
-
-        &,
-        &--l,
-        &--s,
-        &--xs {
-            font-family: $m-font-family;
-        }
-    }
-
-    &-weight {
-        &--black {
-            font-weight: $m-font-weight--black;
-        }
-
-        &--bold {
-            font-weight: $m-font-weight--bold;
-        }
-
-        &--normal {
-            font-weight: $m-font-weight;
-        }
-
-        &,
-        &--l,
-        &--s,
-        &--xs {
-            font-family: $m-font-family;
-        }
-    }
-}
-
-// ======================================================================
-//  Typo
-// ======================================================================
-.m-u--typo {
-    &--precision {
-        &,
-        &-italic {
-            font-family: $m-font-family;
-            font-size: $m-font-size--s;
-            color: $m-color--text-light;
-        }
-
-        &-italic {
-            font-style: italic;
-        }
-    }
-
-    &--highlighting {
-        display: inline;
+    // ======================================================================
+    //  Link
+    // ======================================================================
+    a {
+        color: $m-color--interactive;
         font-family: $m-font-family;
-        font-size: $m-font-size--s;
-        font-weight: $m-font-weight--bold;
-        background: $m-color--warning-lightest;
-        box-shadow: 0 0 0 2px $m-color--warning-lightest;
+    }
+
+    // ======================================================================
+    //  Font
+    // ======================================================================
+    .m-u--font {
+        &-size {
+            font-size: $m-font-size;
+
+            &--l {
+                font-size: $m-font-size--l;
+            }
+
+            &--s {
+                font-size: $m-font-size--s;
+            }
+
+            &--xs {
+                font-size: $m-font-size--xs;
+            }
+
+            &,
+            &--l,
+            &--s,
+            &--xs {
+                font-family: $m-font-family;
+            }
+        }
+
+        &-style {
+            &--normal {
+                font-style: normal;
+            }
+
+            &--italic {
+                font-style: italic;
+            }
+
+            &,
+            &--l,
+            &--s,
+            &--xs {
+                font-family: $m-font-family;
+            }
+        }
+
+        &-weight {
+            &--black {
+                font-weight: $m-font-weight--black;
+            }
+
+            &--bold {
+                font-weight: $m-font-weight--bold;
+            }
+
+            &--normal {
+                font-weight: $m-font-weight;
+            }
+
+            &,
+            &--l,
+            &--s,
+            &--xs {
+                font-family: $m-font-family;
+            }
+        }
+    }
+
+    // ======================================================================
+    //  Typo
+    // ======================================================================
+    .m-u--typo {
+        &--precision {
+            &,
+            &-italic {
+                font-family: $m-font-family;
+                font-size: $m-font-size--s;
+                color: $m-color--text-light;
+            }
+
+            &-italic {
+                font-style: italic;
+            }
+        }
+
+        &--highlighting {
+            display: inline;
+            font-family: $m-font-family;
+            font-size: $m-font-size--s;
+            font-weight: $m-font-weight--bold;
+            background: $m-color--warning-lightest;
+            box-shadow: 0 0 0 2px $m-color--warning-lightest;
+        }
     }
 }

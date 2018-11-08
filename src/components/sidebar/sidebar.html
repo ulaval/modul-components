@@ -3,7 +3,7 @@
     <portal :target-el="portalTargetSelector" v-if="portalCreated">
         <transition name="m--is">
             <div v-show="propOpen" v-if="portalMounted"
-                class="m-sidebar__wrap m--is-sidebar"
+                class="m-sidebar__wrap m-u--app-body m--is-sidebar"
                 :class="[{ 'm--is-close-on-backdrop': closeOnBackdrop,
                            'm--is-disabled':disabled },
                            'm--is-origin-' + origin,
