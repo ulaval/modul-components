@@ -64,7 +64,7 @@
              :preload="true"
              :open-trigger="'mousedown'"
              :lazy="false"
-             @after-enter="onAfterEnter"
+             @after-enter="calculateFilterableListeHeight"
              @portal-content-mounted="portalContentMounted">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>

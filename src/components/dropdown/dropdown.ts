@@ -10,6 +10,7 @@ import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { normalizeString } from '../../utils/str/str';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import uuid from '../../utils/uuid/uuid';
 import ButtonPlugin from '../button/button';
 import { DROPDOWN_NAME } from '../component-names';
@@ -17,6 +18,7 @@ import { MDropdownGroup } from '../dropdown-group/dropdown-group';
 import DropdownItemPlugin, { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from '../dropdown-item/dropdown-item';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import PopupPlugin, { MPopup } from '../popup/popup';
+import { MSidebar } from '../sidebar/sidebar';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
@@ -127,14 +129,15 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
     }
 
-    private onAfterEnter(): void {
-        if (this.as<MediaQueries>().isMqMaxS && this.filterable) {
+    private calculateFilterableListeHeight(): void {
+        if (this.filterable && !UserAgentUtil.isAndroid()) {
             this.$children.forEach((popup, index) => {
-                if (popup.$options.name === 'MPopup') {
+                if (popup.$options.name === MPopup.name) {
                     popup.$children.forEach((sidebar, index) => {
-                        if (sidebar.$options.name === 'MSidebar') {
-                            // (this.$refs.items as HTMLElement).style.height = (sidebar.$refs.body as HTMLElement).clientHeight + 'px';
-                            // (sidebar.$refs.body as HTMLElement).style.overflow = 'hidden';
+                        if (sidebar.$options.name === MSidebar.name) {
+                            let sidebarComponent: MSidebar = sidebar as MSidebar;
+                            (this.$refs.items as HTMLElement).style.height = sidebarComponent.$refs.body.clientHeight + 'px';
+                            sidebarComponent.$refs.body.style.overflow = 'hidden';
                         }
                     });
                 }
@@ -202,12 +205,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.focusedIndex > -1 ? this.internalNavigationItems[this.focusedIndex].value : this.model;
     }
 
-    @Watch('isMqMaxS')
-    private onisMqMaxS(value: boolean, old: boolean): void {
-        if (value !== old) {
-            this.$nextTick(() => this.buildItemsMap());
-        }
-    }
+    // @Watch('isMqMaxS')
+    // private onisMqMaxS(value: boolean, old: boolean): void {
+    //     if (value !== old) {
+    //         this.$nextTick(() => this.buildItemsMap());
+    //     }
+    // }
 
     private get selectedText(): string {
         let result: string | undefined = '';
@@ -262,7 +265,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
-        this.$refs.popup.update();
+        if (this.as<MediaQueries>().isMqMinS) {
+            this.$refs.popup.update();
+        }
         this.focusSelected();
     }
 

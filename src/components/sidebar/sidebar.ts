@@ -62,8 +62,15 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public paddingFooter: boolean;
 
+    public $refs: {
+        baseWindow: HTMLElement;
+        article: HTMLElement;
+        modalWrap: HTMLElement;
+        body: HTMLElement;
+    };
+
     public get popupBody(): any {
-        return (this.$refs.article as Element).querySelector('.m-popup__body');
+        return this.$refs.article.querySelector('.m-popup__body');
     }
 
     public handlesFocus(): boolean {
@@ -79,7 +86,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     public getPortalElement(): HTMLElement {
-        return this.$refs.article as HTMLElement;
+        return this.$refs.article;
     }
 
     protected mounted(): void {
