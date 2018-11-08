@@ -20,7 +20,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
         padding: $m-padding $m-padding--s;
 
         &:not(.m--is-disabled) {
-            &:not(.m--is-inactive) {
+            &:not(.m--is-inactive):not(.m--is-readonly) {
                 &:not(.m--is-selected) {
                     cursor: pointer;
 

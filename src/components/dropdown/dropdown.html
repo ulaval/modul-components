@@ -101,8 +101,10 @@
             :aria-labelledby="id"
             aria-live="polite">
             <slot></slot>
-            <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
-            <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && !dirty"
+                             :readonly="true">{{ propTextNoData }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && dirty"
+                             :readonly="true">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
 
         <template slot="footer"
