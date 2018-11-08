@@ -1,48 +1,50 @@
-.m-u--link {
-    transition: color $m-transition-duration ease;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    font-weight: $m-font-weight--bold;
-    color: $m-color--interactive;
-    text-decoration: none;
+.m-u--app-body {
+    .m-u--link {
+        transition: color $m-transition-duration ease;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        font-weight: $m-font-weight--bold;
+        color: $m-color--interactive;
+        text-decoration: none;
 
-    &:hover,
-    &:focus {
-        color: $m-color--interactive-light;
+        &:hover,
+        &:focus {
+            color: $m-color--interactive-light;
 
-        .m-u--link-text {
-            text-decoration: underline;
+            .m-u--link-text {
+                text-decoration: underline;
+            }
+        }
+
+        &:active {
+            color: $m-color--interactive-dark;
+        }
+
+        &:not(.m-u--link-unvisited):not(:hover):not(:focus):visited {
+            color: $m-color--interactive-darker;
         }
     }
 
-    &:active {
-        color: $m-color--interactive-dark;
+    .m-u--link-text {
+        position: relative;
+        vertical-align: middle;
     }
 
-    &:not(.m-u--link-unvisited):not(:hover):not(:focus):visited {
-        color: $m-color--interactive-darker;
+    .m-u--link-icon-left,
+    .m-u--link-icon-right {
+        display: inline-flex;
+        flex-shrink: 0;
+        vertical-align: middle;
+        stroke-width: 2px;
+        width: 0.8em;
     }
-}
 
-.m-u--link-text {
-    position: relative;
-    vertical-align: middle;
-}
+    .m-u--link-icon-left {
+        margin-right: $m-margin--s;
+    }
 
-.m-u--link-icon-left,
-.m-u--link-icon-right {
-    display: inline-flex;
-    flex-shrink: 0;
-    vertical-align: middle;
-    stroke-width: 2px;
-    width: 0.8em;
-}
-
-.m-u--link-icon-left {
-    margin-right: $m-margin--s;
-}
-
-.m-u--link-icon-right {
-    margin-left: $m-margin--s;
+    .m-u--link-icon-right {
+        margin-left: $m-margin--s;
+    }
 }

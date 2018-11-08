@@ -5,35 +5,31 @@ $m-steppers--badge--size: 14px;
 
 .m-steppers-item {
     display: inline-flex;
-    flex-direction: column;
-    align-items: center;
+    list-style: none;
     z-index: 1;
-    outline: none;
 
     &.m--is-visited {
-        cursor: pointer;
-
-        &:focus .m-steppers-item__icon,
-        &:focus .m-steppers-item__title,
-        &:hover .m-steppers-item__icon,
-        &:hover .m-steppers-item__title {
-            color: $m-color--interactive;
-        }
-
-        &::before,
-        &::after {
+        .m-steppers-item__button {
             cursor: pointer;
+
+            &:hover,
+            &:focus {
+                .m-steppers-item__icon,
+                .m-steppers-item__title {
+                    color: $m-color--interactive;
+                }
+            }
         }
 
         .m-steppers-item__icon {
-            border-color: $m-color--ul-blue;
+            border-color: $m-color--interactive;
         }
     }
 
     &.m--is-in-progress {
         .m-steppers-item {
             &__icon {
-                border-color: $m-color--ul-yellow;
+                border-color: $m-color--active;
             }
 
             &__title {
@@ -43,10 +39,8 @@ $m-steppers--badge--size: 14px;
     }
 
     &.m--is-disabled {
-        cursor: not-allowed;
-
-        &::before,
-        &::after {
+        .m-steppers-item__button {
+            user-select: none;
             cursor: not-allowed;
         }
 
@@ -66,7 +60,19 @@ $m-steppers--badge--size: 14px;
         }
     }
 
+    &__button {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        outline: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
     &__icon {
+        transition: color $m-transition-duration ease, border-color $m-transition-duration ease;
         position: relative;
         display: flex;
         align-items: center;
@@ -77,10 +83,11 @@ $m-steppers--badge--size: 14px;
         border: 2px solid;
         background-color: $m-color--white;
         font-size: $m-steppers--icon--size;
-        transition: color $m-transition-duration;
+        color: $m-color--text;
     }
 
     &__icon-completed {
+        transition: color $m-transition-duration ease;
         position: absolute;
         bottom: -4px; // Magic number
         right: -6px; // Magic number

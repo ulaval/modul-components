@@ -1,6 +1,6 @@
 <div class="m-steppers">
     <div class="m-steppers__overflow-wrapper" ref="overflowWrapper">
-        <ul class="m-steppers__wrap" :class="{ 'm--is-last': last }" ref="wrapItem">
+        <ul class="m-steppers__wrap" ref="wrapItem">
             <li aria-hidden="true" class="m-steppers__default-line" ref="defaultLine"></li>
             <li aria-hidden="true" class="m-steppers__selected-line" :class="{ 'm--is-anim-active': isAnimActive }" ref="selectedLine"></li>
             <slot></slot>

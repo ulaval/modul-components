@@ -7,6 +7,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { OVERLAY_NAME } from '../component-names';
 import WithRender from './overlay.html?style=./overlay.scss';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
+import { targetIsInput } from 'src/utils/event/event';
 
 @WithRender
 @Component({
@@ -29,7 +30,6 @@ export class MOverlay extends ModulVue {
     public disableSaveButton: boolean;
 
     public hasKeyboard: boolean = false;
-    public isOverflowing: boolean = false;
 
     public $refs: {
         dialogWrap: HTMLElement,
@@ -52,21 +52,12 @@ export class MOverlay extends ModulVue {
 
     private onFocusIn(): void {
         if (this.isAndroid) {
-            if (this.$refs.body.scrollHeight < this.$refs.article.clientHeight) {
-                this.isOverflowing = true;
-                let footerHeight: number = this.$refs.footer.clientHeight;
-                this.$refs.body.style.paddingBottom = `calc(100% - ${footerHeight}px)`;
-            }
             this.hasKeyboard = true;
         }
     }
 
     private onFocusOut(): void {
         if (this.isAndroid) {
-            if (this.isOverflowing) {
-                this.isOverflowing = false;
-                this.$refs.body.style.paddingBottom = '0';
-            }
             this.hasKeyboard = false;
         }
     }
@@ -93,10 +84,6 @@ export class MOverlay extends ModulVue {
 
     private get isSaveButtonDisabled(): boolean {
         return this.disableSaveButton;
-    }
-
-    private get hasFooterSlot(): boolean {
-        return !!this.$slots.footer;
     }
 
     private save(e: MouseEvent): void {
