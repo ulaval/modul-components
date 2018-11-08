@@ -8,55 +8,6 @@ $m-checkbox--width: 16px;
     line-height: 1;
 
     &:not(.m--is-disabled) {
-        .m-checkbox {
-            &__wrap {
-                cursor: pointer;
-            }
-
-            &__input {
-                border-color: $m-color--text;
-                color: $m-color--interactive;
-
-                &__icon {
-                    position: relative;
-                    top: -1px; // Magic number
-                    left: 1px; // Magic number
-                    width: 10px;
-                    height: 5px;
-                    transform: rotate(-32deg);
-
-                    &::before,
-                    &::after {
-                        transition: background $m-transition-duration ease;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        content: '';
-                        background: $m-color--interactive;
-                        width: 0;
-                        border-radius: 2px;
-                    }
-
-                    &::before {
-                        bottom: 0;
-                        transition: width 0.1s ease;
-                        transition-delay: 0;
-                        transform: rotate(-20deg);
-                        width: 0;
-                        height: 2px;
-                    }
-
-                    &::after {
-                        top: 0;
-                        transition: height 0.1s ease;
-                        transition-delay: 0.1s;
-                        width: 2px;
-                        height: 0;
-                    }
-                }
-            }
-        }
-
         &:not(.m--has-error):not(.m--is-valid) {
             .m-checkbox__wrap:hover,
             &.m--is-focus {
@@ -98,19 +49,19 @@ $m-checkbox--width: 16px;
                 }
             }
         }
+    }
 
-        &.m--is-checked {
-            .m-checkbox__input {
-                &__icon {
-                    &::before {
-                        transition-delay: 0.2s;
-                        width: 10px;
-                    }
+    &.m--is-checked {
+        .m-checkbox__input {
+            &__icon {
+                &::before {
+                    transition-delay: 0.2s;
+                    width: 10px;
+                }
 
-                    &::after {
-                        transition-delay: 0;
-                        height: 6px;
-                    }
+                &::after {
+                    transition-delay: 0;
+                    height: 6px;
                 }
             }
         }
@@ -124,6 +75,13 @@ $m-checkbox--width: 16px;
 
             &__input {
                 border-color: $m-color--disabled;
+
+                &__icon {
+                    &::before,
+                    &::after {
+                        background: $m-color--disabled;
+                    }
+                }
             }
 
             &__label {
@@ -203,6 +161,7 @@ $m-checkbox--width: 16px;
     &__wrap {
         display: inline-flex;
         align-items: center;
+        cursor: pointer;
     }
 
     &__input {
@@ -217,6 +176,46 @@ $m-checkbox--width: 16px;
         border-width: $m-border-width--s;
         border-style: solid;
         border-radius: $m-border-width;
+        border-color: $m-color--text;
+        color: $m-color--interactive;
+
+        &__icon {
+            position: relative;
+            top: -1px; // Magic number
+            left: 1px; // Magic number
+            width: 10px;
+            height: 5px;
+            transform: rotate(-32deg);
+
+            &::before,
+            &::after {
+                transition: background $m-transition-duration ease;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                content: '';
+                background: $m-color--interactive;
+                width: 0;
+                border-radius: 2px;
+            }
+
+            &::before {
+                bottom: 0;
+                transition: width 0.1s ease;
+                transition-delay: 0;
+                transform: rotate(-20deg);
+                width: 0;
+                height: 2px;
+            }
+
+            &::after {
+                top: 0;
+                transition: height 0.1s ease;
+                transition-delay: 0.1s;
+                width: 2px;
+                height: 0;
+            }
+        }
     }
 
     &__label {
