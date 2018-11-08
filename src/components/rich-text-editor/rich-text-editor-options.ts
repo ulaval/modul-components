@@ -12,6 +12,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public wordPasteModal: boolean = false;
     public initOnClick: boolean = true;
     public wordPasteKeepFormatting: boolean = false;
+    public placeholderText: string = '';
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {

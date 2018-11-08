@@ -10,8 +10,10 @@
             padding: $m-padding--xs $m-padding--s;
             color: $m-color--grey-lightest;
         }
+    }
 
-        &__empty-table-custom {
+    &__empty {
+        &__cell {
             text-align: center;
             background-color: $m-color--error;
             color: $m-color--white;

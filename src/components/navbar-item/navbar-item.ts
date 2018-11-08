@@ -6,6 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME } from '../component-names';
 import { BaseNavbar, Navbar } from '../navbar/navbar';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
+import NavbarItemHelper from './navbar-item-helper';
 
 // must be sync with selected css class
 const FAKE_SELECTED_CLASS: string = 'm--is-fake-selected';
@@ -42,6 +43,9 @@ export class MNavbarItem extends ModulVue {
             this.parentNavbar = (parentNavbar as any) as Navbar;
             this.setDimension();
 
+            if (this.parentNavbar.autoSelect && NavbarItemHelper.isRouterLinkActive(this)) {
+                this.parentNavbar.updateValue(this.value);
+            }
         } else {
             console.error('m-navbar-item need to be inside m-navbar');
         }
