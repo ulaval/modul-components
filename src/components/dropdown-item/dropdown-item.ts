@@ -93,8 +93,8 @@ export class MDropdownItem extends ModulVue {
         return (this.root as MDropdownInterface).focused === this.value && !this.readonly;
     }
 
-    private get tabindex(): string | undefined {
-        return this.disabled || this.readonly ? undefined : '0';
+    private get tabindex(): number | undefined {
+        return this.disabled || this.readonly ? undefined : 0;
     }
 
     private onClick(): void {

@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import { SIDEBAR_NAME } from '../component-names';
@@ -69,8 +68,8 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
         body: HTMLElement;
     };
 
-    public get popupBody(): any {
-        return this.$refs.article.querySelector('.m-popup__body');
+    public get popupBody(): HTMLElement {
+        return this.$refs.article.querySelector('.m-popup__body') as HTMLElement;
     }
 
     public handlesFocus(): boolean {
@@ -130,7 +129,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     private get propWidth(): string {
 
         if (this.origin === MSidebarOrigin.Left || this.origin === MSidebarOrigin.Right) {
-            return this.width ? this.width : '50%' ;
+            return this.width ? this.width : '50%';
         } else {
             return '100%';
         }

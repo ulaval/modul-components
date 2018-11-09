@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import { ModulVue } from '../../utils/vue/vue';
@@ -12,7 +11,7 @@ import WithRender from './popup.html?style=./popup.scss';
 
 @WithRender
 @Component({
-    mixins: [ MediaQueries, OpenTrigger]
+    mixins: [MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -79,10 +78,6 @@ export class MPopup extends ModulVue {
 
     public get popupBody(): Element {
         return (this.$children[0] as any).popupBody;
-    }
-
-    public update(): void {
-        this.$refs.popper.update();
     }
 
     private get propOpen(): boolean {

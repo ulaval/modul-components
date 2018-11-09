@@ -1,16 +1,17 @@
-<div class="m-popper" :class="{ 'm--is-open': propOpen }">
+<div class="m-popper"
+     :class="{ 'm--is-open': propOpen }">
     <slot name="trigger"></slot>
-    <portal :target-el="portalTargetSelector" v-if="hasDefaultSlot && portalCreated">
-        <transition
-            name="m--is"
-            @before-enter="onBeforeEnter"
-            @enter="onEnter"
-            @after-enter="onAfterEnter"
-            @enter-cancelled="onEnterCancelled"
-            @before-leave="onAfterLeave"
-            @leave="onLeave"
-            @after-leave="onAfterLeave"
-            @leave-cancelled="onLeaveCancelled">
+    <portal :target-el="portalTargetSelector"
+            v-if="hasDefaultSlot && portalCreated">
+        <transition name="m--is"
+                    @before-enter="onBeforeEnter"
+                    @enter="onEnter"
+                    @after-enter="onAfterEnter"
+                    @enter-cancelled="onEnterCancelled"
+                    @before-leave="onAfterLeave"
+                    @leave="onLeave"
+                    @after-leave="onAfterLeave"
+                    @leave-cancelled="onLeaveCancelled">
             <article ref="popper"
                      class="m-popper__article"
                      :class="[{ 'm--is-default-anim': defaultAnim,
@@ -22,14 +23,22 @@
                                 className ]"
                      :aria-hidden="!propOpen || isHidden"
                      :style="{ width: width }"
-                     v-show="propOpen" v-if="portalMounted">
-                <header class="m-popper__header" :class="{ 'm--no-padding': !padding || !paddingHeader }"  v-if="hasHeaderSlot">
+                     v-show="propOpen"
+                     v-if="portalMounted">
+                <header class="m-popper__header"
+                        :class="{ 'm--no-padding': !padding || !paddingHeader }"
+                        v-if="hasHeaderSlot">
                     <slot name="header"></slot>
                 </header>
-                <div class="m-popper__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                <div class="m-popper__body"
+                     :class="{ 'm--no-padding': !padding || !paddingBody }"
+                     v-if="hasDefaultSlot"
+                     ref="body">
                     <slot></slot>
                 </div>
-                <footer class="m-popper__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
+                <footer class="m-popper__footer"
+                        :class="{ 'm--no-padding': !padding || !paddingFooter }"
+                        v-if="hasFooterSlot">
                     <slot name="footer"></slot>
                 </footer>
             </article>

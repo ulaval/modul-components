@@ -129,7 +129,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private calculateFilterableListeHeight(): void {
-        if (this.filterable && !UserAgentUtil.isAndroid()) {
+        if (this.filterable && !UserAgentUtil.isAndroid() && this.as<MediaQueries>().isMqMaxS) {
             this.$children.forEach((popup, index) => {
                 if (popup.$options.name === MPopup.name) {
                     popup.$children.forEach((sidebar, index) => {
@@ -204,12 +204,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.focusedIndex > -1 ? this.internalNavigationItems[this.focusedIndex].value : this.model;
     }
 
-    // @Watch('isMqMaxS')
-    // private onisMqMaxS(value: boolean, old: boolean): void {
-    //     if (value !== old) {
-    //         this.$nextTick(() => this.buildItemsMap());
-    //     }
-    // }
+    @Watch('isMqMaxS')
+    private onIsMqMaxS(value: boolean, old: boolean): void {
+        if (value !== old) {
+            this.$nextTick(() => this.buildItemsMap());
+        }
+    }
 
     private get selectedText(): string {
         let result: string | undefined = '';
@@ -264,9 +264,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
-        if (this.as<MediaQueries>().isMqMinS) {
-            this.$refs.popup.update();
-        }
+        // this.$refs.popup.update();
         this.focusSelected();
     }
 
