@@ -10,7 +10,6 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './limit-text.html?style=./limit-text.scss';
 
-
 @WithRender
 @Component({
     mixins: [MediaQueries, ElementQueries]

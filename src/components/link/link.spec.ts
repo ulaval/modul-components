@@ -5,7 +5,6 @@ import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import LinkPlugin, { MLink, MLinkIconPosition } from './link';
 
-
 describe('MLink', () => {
     let localVue: VueConstructor<Vue>;
 

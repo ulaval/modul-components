@@ -153,7 +153,11 @@ export class MLink extends ModulVue {
     }
 
     private get isTargetBlank(): boolean {
-        return this.target === '_blank';
+        return this.propTarget === '_blank';
+    }
+
+    private get propTarget(): string | undefined {
+        return this.isButton ? undefined : this.target;
     }
 
     private get propTabindex(): number {
