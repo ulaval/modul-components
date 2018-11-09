@@ -1,0 +1,15 @@
+{
+    "alt-require": true,
+    "attr-lowercase": ["@animationStart", "@animationDone", "@beforeClose", "@afterLeave", "viewBox", "preserveAspectRatio", "gradientUnits", "gradientTransform"],
+    "attr-no-duplication": true,
+    "attr-unsafe-chars": true,
+    "attr-value-double-quotes": true,
+    "doctype-first": false,
+    "id-class-ad-disabled": true,
+    "space-tab-mixed-disabled": "space4",
+    "spec-char-escape": false,
+    "src-not-empty": true,
+    "tag-pair": true,
+    "tag-self-close": true,
+    "tagname-lowercase": false
+}

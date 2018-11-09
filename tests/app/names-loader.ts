@@ -18,3 +18,10 @@ export function getFiltersNames(): string[] {
         return filtersName[prop];
     });
 }
+
+export function getUtilsNames(): string[] {
+    const utilsNames: any = require('../../src/utils/utils-names');
+    return Object.keys(utilsNames).map((prop) => {
+        return utilsNames[prop];
+    });
+}

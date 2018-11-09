@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
 
-import { Attributes } from './attributes/attributes';
 import { MediaQueriesTest } from './media-queries/media-queries';
-import { getComponentsNames, getDirectiveNames, getFiltersNames } from './names-loader';
+import { getComponentsNames, getDirectiveNames, getFiltersNames, getUtilsNames } from './names-loader';
 import { Navigation } from './navigation/navigation';
 import { Viewer } from './viewer/viewer';
 
@@ -14,13 +13,6 @@ const routerFactory: () => Router = () => {
         {
             path: '/',
             component: Navigation
-        },
-        {
-            path: '/attributes',
-            component: Attributes,
-            beforeEnter: (to, from, next) => {
-                next();
-            }
         },
         {
             path: '/media-queries',
@@ -48,6 +40,14 @@ const routerFactory: () => Router = () => {
         componentRoutes.push({
             path: '/filters/' + tag,
             meta: tag,
+            component: Viewer
+        });
+    });
+
+    getUtilsNames().forEach(name => {
+        componentRoutes.push({
+            path: '/services/' + name,
+            meta: name,
             component: Viewer
         });
     });

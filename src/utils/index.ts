@@ -13,7 +13,8 @@ export { MediaQueries as MediaQueriesUtils, MediaQueriesBpMin, MediaQueriesBpMax
 export * from './dialog/alert';
 export * from './dialog/confirm';
 export * from './modul/modul';
-export * from './svg/sprites';
+export { default as SpritesPlugin } from './svg/sprites';
+export { default as DefaultSpritesPlugin } from './svg/default-sprites';
 export * from './scroll-to/scroll-to';
 
 // Preserve the default import to prevent breaking changes when using legacy import.

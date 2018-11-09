@@ -7,7 +7,6 @@
         right: 0;
         bottom: 0;
         left: 0;
-        justify-content: center;
         outline: none;
         min-width: $m-min-width;
         overflow: hidden;
@@ -51,20 +50,22 @@
     &__article {
         transform: translate3d(0, 0, 0);
         cursor: auto;
-        width: 100%;
         max-width: $m-max-width--l;
         margin: 0 auto;
         background: $m-color--white;
         box-shadow: $m-box-shadow;
         height: 100%;
-        display: grid;
-        grid-template-rows: minmax($m-box--min-height, max-content) auto;
+        flex-direction: column;
     }
 
     &__header,
-    &__content,
-    &__footer {
+    &__footer,
+    &__article {
         width: 100%;
+        background: $m-color--white;
+        display: flex;
+        align-items: center;
+        position: relative;
     }
 
     &__header,
@@ -96,34 +97,38 @@
         }
     }
 
-    &__body-container {
+    &__body {
         overflow-x: hidden;
         overflow-y: auto;
-
-        &:not(.m--is-android) {
-            display: grid;
-            grid-template-rows: auto minmax($m-box--min-height, max-content);
-        }
-    }
-
-    &__body {
+        position: relative;
+        flex: 1 1 auto;
         width: 100%;
         min-height: 120px;
-        position: relative;
-        transition: padding-bottom 0.5s ease;
-        overflow-x: hidden;
-        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
 
-        @include m-fixed-box-padding();
         @include m-scrollbar();
+    }
+
+    &__content {
+        @include m-fixed-box-padding();
     }
 
     &__footer {
         border-top: $m-border-width--s solid $m-color--border;
+        animation: fadeIn 0.5s linear forwards;
 
         &__save-button {
             margin-right: $m-margin;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
         }
     }
 }

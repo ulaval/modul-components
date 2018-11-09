@@ -1,5 +1,5 @@
 <div>
-    <div style="max-width: 400px;">
+    <div style="max-width: 600px;">
         <div class="m-u--display--flex" style="justify-content:space-evenly;">
             <div v-m-draggable="true" style="width: 25%; height: 25%; margin: 20px; padding: 10px; background-color: #09f; cursor: -webkit-grab;">
                 <div class="dragImage" style="position: absolute; top: -99999px; left: -99999px; height: 100px; width: 100px !important; background-color: #cdf3e3; border: 1px dashed #009962;"></div>
@@ -16,6 +16,11 @@
                 <div class="dragImage" style="position: absolute; top: -99999px; left: -99999px; height: 0; width: 0 !important; background-color: transparent; border:none; visibility: hidden; display: none;"></div>
                 <span style="color:white;"><span style="font-size: 1.2rem; font-weight: 500;">Drag me</span> <br>No
                     drag image</span>
+            </div>
+            <div v-m-draggable="true"  style="width: 25%; height: 25%; margin: 20px; padding: 10px; background-color: #09f;">
+                <div class="dragImage" style="position: absolute; top: -99999px; left: -99999px; height: 100px; width: 100px !important; background-color: #cdf3e3; border: 1px dashed #009962;"></div>
+                <div class="dragHandle" style="width: 20px; height: 20px; background: #ccc; cursor: grab;"></div>
+                <span style="color:white;"><span style="font-size: 1.2rem; font-weight: 500;">Drag me</span> <br>With handle</span>
             </div>
         </div>
         <div>

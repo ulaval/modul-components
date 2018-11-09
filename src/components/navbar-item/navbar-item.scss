@@ -55,6 +55,27 @@
     }
 }
 
+// most basic skin
+.m-navbar.m--is-skin-plain {
+    &.m--is-anim-ready {
+        .m-navbar-item__text {
+            transition: opacity $m-transition-duration ease;
+        }
+    }
+
+    .m-navbar-item {
+        &.m--is-disabled {
+            .m-navbar-item__text {
+                opacity: 0.6;
+            }
+        }
+
+        &__contents {
+            color: currentColor;
+        }
+    }
+}
+
 // Light skin styles
 .m-navbar.m--is-skin-tab-underline {
     &.m--is-anim-ready {

@@ -1,5 +1,4 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-
 import { targetIsInput } from '../../utils/event/event';
 import { dragDropDelay, polyFillActive } from '../../utils/polyfills';
 import { clearUserSelection } from '../../utils/selection/selection';
@@ -143,7 +142,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.destroyGrabBehavior();
         this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: MouseEvent) => {
-            if (targetIsInput(this.element, event)) {
+            if (targetIsInput(this.element, event) || (this.draggableHasHandle(this.element) && !this.isHandleUsedToDrag(event))) {
                 this.turnDragOff();
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.intputTouchUpListener));
             } else if (this.targetIsGrabbable(event)) {
@@ -276,6 +275,15 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
+    }
+
+    private draggableHasHandle(element: HTMLElement): boolean {
+        return element.getElementsByClassName('dragHandle').length > 0;
+    }
+
+    private isHandleUsedToDrag(event: MouseEvent): boolean {
+        let elementDragged: HTMLElement = event.target as HTMLElement;
+        return elementDragged.classList.contains('dragHandle');
     }
 }
 
