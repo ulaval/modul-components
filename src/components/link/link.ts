@@ -1,19 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-
-import { KeyCode } from '../../utils/keycode/keycode';
+import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
 import WithRender from './link.html?style=./link.scss';
-
-export enum MLinkMode {
-    RouterLink = 'router-link',
-    Link = 'link',
-    Button = 'button'
-}
 
 export enum MLinkIconPosition {
     Left = 'left',
@@ -31,17 +23,11 @@ const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
 @WithRender
 @Component
 export class MLink extends ModulVue {
-    @Prop({ default: '/' })
-    public url: string;
+    @Prop()
+    public url: string | Object;
 
-    @Prop({
-        default: MLinkMode.RouterLink,
-        validator: value =>
-            value === MLinkMode.RouterLink ||
-            value === MLinkMode.Link ||
-            value === MLinkMode.Button
-    })
-    public mode: MLinkMode;
+    @Prop()
+    public extern: boolean;
 
     @Prop()
     public disabled: boolean;
@@ -80,51 +66,58 @@ export class MLink extends ModulVue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
-    @Prop({ default: '1' })
-    public tabindex: string;
-
-    protected mounted(): void {
-        this.isButtonChanged(this.mode === MLinkMode.Button);
-    }
-
-    @Watch('isButton')
-    private isButtonChanged(isButton: boolean): void {
-        if (isButton) {
-            this.$nextTick(() => {
-                this.$el.setAttribute('role', 'button');
-            });
-        } else {
-            this.$nextTick(() => {
-                if (this.$el.hasAttribute('role')) {
-                    this.$el.removeAttribute('role');
-                }
-            });
-        }
-    }
+    @Prop({ default: 0 })
+    public tabindex: number;
 
     private onClick(event): void {
-        this.$el.blur();
+
         if (this.isButton || this.disabled) {
             event.preventDefault();
         }
         if (!this.disabled) {
             this.$emit('click', event);
+            this.$el.blur();
         }
+    }
+
+    private get hasUrl(): boolean {
+        return !!this.url && !this.disabled;
     }
 
     private get isRouterLink(): boolean {
-        return this.mode === MLinkMode.RouterLink;
-    }
-
-    private onKeyup(event): void {
-        event = event || window.event;
-        if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
-            this.onClick(event);
-        }
+        return this.hasUrl && !this.extern;
     }
 
     private get isButton(): boolean {
-        return this.mode === MLinkMode.Button;
+        return !this.hasUrl;
+    }
+
+    private get isExternalLink(): boolean {
+        return this.hasUrl && this.extern;
+    }
+
+    private get buttonRole(): string | undefined {
+        return this.isButton ? 'button' : undefined;
+    }
+
+    private get componentToShow(): string {
+        if (this.isButton) {
+            return 'span';
+        } else if (this.isRouterLink) {
+            return 'router-link';
+        }
+        return 'a';
+    }
+
+    private get routerLinkUrl(): string | Object | undefined {
+        if (this.isRouterLink) {
+            return !this.isObject(this.url) ? { path: this.url } : this.url;
+        }
+        return undefined;
+    }
+
+    private get href(): string | Object | undefined {
+        return this.isExternalLink ? (this.isButton ? '#' : this.url) : undefined;
     }
 
     private get isSkinText(): boolean {
@@ -159,18 +152,12 @@ export class MLink extends ModulVue {
             : ICON_NAME_DEFAULT;
     }
 
-    private get propUrl(): string | undefined {
-        return this.isButton
-            ? '#'
-            : !this.disabled ? this.url : undefined;
-    }
-
     private get isTargetBlank(): boolean {
         return this.target === '_blank';
     }
 
-    private get routerLinkUrl(): string | Object {
-        return !this.isObject(this.url) ? { path: this.url } : this.url;
+    private get propTabindex(): number {
+        return this.disabled ? -1 : this.tabindex;
     }
 
     private isObject(a): boolean {

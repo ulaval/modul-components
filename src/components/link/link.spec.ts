@@ -1,10 +1,10 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import VueRouter from 'vue-router';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
-import LinkPlugin, { MLink, MLinkIconPosition, MLinkMode } from './link';
+import LinkPlugin, { MLink, MLinkIconPosition } from './link';
+
 
 describe('MLink', () => {
     let localVue: VueConstructor<Vue>;
@@ -26,13 +26,13 @@ describe('MLink', () => {
         addMessages(localVue, ['components/link/link.lang.en.json']);
     });
 
-    describe('RouterLink mode', () => {
+    describe('Link using RouterLink', () => {
         it('should render correctly', () => {
             const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink
+                    url: '/'
                 }
             });
 
@@ -44,7 +44,7 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink
+                    url: '/'
                 },
                 slots: {
                     default: 'Link'
@@ -59,8 +59,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink,
-                    target: '_self'
+                    target: '_self',
+                    url: '/'
                 }
             });
 
@@ -72,8 +72,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink,
-                    target: '_blank'
+                    target: '_blank',
+                    url: '/'
                 }
             });
 
@@ -85,7 +85,6 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink,
                     url: '/test'
                 }
             });
@@ -98,7 +97,6 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink,
                     url: { name: 'named', params: { paramId: 123 } }
                 }
             });
@@ -109,10 +107,7 @@ describe('MLink', () => {
         it('should render correctly all link status', async () => {
             const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
-                localVue: localVue,
-                propsData: {
-                    mode: MLinkMode.RouterLink
-                }
+                localVue: localVue
             });
 
             await renderAllLinkStyles(link);
@@ -123,7 +118,7 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link,
+                    url: '/',
                     icon: true
                 }
             });
@@ -132,13 +127,14 @@ describe('MLink', () => {
         });
     });
 
-    describe('Link mode', () => {
+    describe('Link with extern prop', () => {
         it('should render correctly', () => {
             const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link
+                    extern: true,
+                    url: '/'
                 }
             });
 
@@ -150,7 +146,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link,
+                    extern: true,
+                    url: '/',
                     target: '_self'
                 }
             });
@@ -163,7 +160,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link,
+                    extern: true,
+                    url: '/',
                     target: '_blank'
                 }
             });
@@ -176,7 +174,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link
+                    extern: true,
+                    url: '/'
                 },
                 slots: {
                     default: 'Link'
@@ -191,7 +190,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link
+                    extern: true,
+                    url: '/'
                 }
             });
 
@@ -203,7 +203,8 @@ describe('MLink', () => {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.Link,
+                    extern: true,
+                    url: '/',
                     icon: true
                 }
             });
@@ -212,14 +213,11 @@ describe('MLink', () => {
         });
     });
 
-    describe('Button mode', () => {
+    describe('Link use as button', () => {
         it('should render correctly', () => {
             const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
-                localVue: localVue,
-                propsData: {
-                    mode: MLinkMode.Button
-                }
+                localVue: localVue
             });
 
             return expect(renderComponent(link.vm)).resolves.toMatchSnapshot();
