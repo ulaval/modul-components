@@ -40,9 +40,7 @@ export class HttpService implements RestAdapter {
                     protectedUrls.every(url => {
                         if (strUtils.startsWith(config.url, url)) {
                             let token: string = authFn();
-                            config.headers = config.headers ?
-                                Object.assign(config.headers, { [AUTHORIZATION_HEADER]: token }) :
-                                Object.assign({ [AUTHORIZATION_HEADER]: token });
+                            config.headers = Object.assign(config.headers || {}, token);
                             return false;
                         }
                         return true;
