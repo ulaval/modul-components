@@ -116,8 +116,8 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
     public set propOpen(value) {
         if (value !== this.internalPropOpen) {
-            this.$emit('update:open', value);
             this.internalPropOpen = value;
+            this.$emit('update:open', value);
         }
     }
 
