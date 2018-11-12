@@ -59,6 +59,10 @@ $m-table--row-min-height: 64px;
                     padding-right: $m-spacing;
                 }
             }
+
+            &:hover {
+                background-color: $m-color--interactive-lightest;
+            }
         }
     }
 }
