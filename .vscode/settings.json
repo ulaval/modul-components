@@ -1,20 +1,25 @@
 {
     "editor.detectIndentation": false,
-    "editor.tabSize": 4,
     "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 4,
     "files.insertFinalNewline": true,
     "stylelint.enable": true,
     "css.validate": false,
+    "less.validate": false,
     "scss.validate": false,
     "tslint.configFile": "conf/tslint.json",
+    "tslint.run": "onSave",
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    "typescriptHero.imports.organizeOnSave": true,
-    "typescriptHero.imports.multiLineTrailingComma": false,
-    "typescriptHero.imports.multiLineWrapThreshold": 9999,
-    "typescriptHero.imports.grouping": [
-        "Plains",
-        "/bootstrap/",
-        "Modules",
-        "Workspace"
-    ]
+    "files.exclude": {
+        "**/node_modules/": true,
+        "**/dist/": true,
+        "**/.vs/": true
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "html.format.wrapLineLength": 0,
+    "html.format.wrapAttributes": "force-aligned",
+    "typescript.updateImportsOnFileMove.enabled": "prompt"
 }

@@ -30,9 +30,9 @@ type StackMap = {
 };
 
 export class Modul {
-    public bodyEl: HTMLElement = document.documentElement || document.body; // The order is important for tooltip positioning in the RTE.
-    public bodyStyle: any = this.bodyEl.style;
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
+    public bodyEl: HTMLElement = document.querySelector('body') as HTMLElement;
+    public bodyStyle: any = this.bodyEl.style;
     public event = new Vue();
     public scrollPosition: number = 0;
     public stopScrollPosition: number = 0;
@@ -150,8 +150,6 @@ export class Modul {
 
     private ensureBackdrop(viewportIsSmall: boolean): number {
         if (!this.backdropElement) {
-            // this.stopScrollBody(viewportIsSmall);
-
             let element: HTMLElement = document.createElement('div');
             let id: string = BACKDROP_ID + '-' + uuid.generate();
             element.setAttribute('id', id);

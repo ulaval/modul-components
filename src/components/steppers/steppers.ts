@@ -63,10 +63,35 @@ export class MSteppers extends BaseSteppers {
     }
 
     protected mounted(): void {
-        this.setMinWidth();
-        this.setHiddenHeight();
+        this.initWidthAndHeightOfSteppers();
+    }
+
+    private initWidthAndHeightOfSteppers(): void {
         this.setLineWidth();
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
+        let overflowWrapperStyleHeight: any = (this.$refs.overflowWrapper as HTMLElement).style.height;
+        let elStyleHeight: any = this.$el.style.height;
+        let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
+        let initHeight: number = wrapItem.clientHeight;
+        let scrollbarSpace: number = 40;
+
+        if (document.readyState === 'complete' || initHeight > 0) {
+            elStyleHeight = initHeight + 'px';
+            overflowWrapperStyleHeight = initHeight + scrollbarSpace + 'px';
+            this.setMinWidth();
+        } else {
+            let intervalForDomReady: any = setInterval(() => {
+                // The document is ready when the clientHeight is larger than 0
+                if (wrapItem.clientHeight > 0) {
+                    initHeight = wrapItem.clientHeight;
+                    elStyleHeight = initHeight + 'px';
+                    overflowWrapperStyleHeight = initHeight + scrollbarSpace + 'px';
+                    this.setMinWidth();
+                    this.setLineWidth();
+                    window.clearInterval(intervalForDomReady);
+                }
+            }, 100);
+        }
     }
 
     private setMinWidth(): void {
@@ -83,14 +108,6 @@ export class MSteppers extends BaseSteppers {
         wrapItem.style.minWidth = minWidth + 'px';
         wrapItem.style.display = 'flex';
         wrapItem.style.opacity = '1';
-    }
-
-    private setHiddenHeight(): void {
-        let overflowWrapper: HTMLElement = this.$refs.overflowWrapper as HTMLElement;
-        let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
-        let initHeight: number = wrapItem.clientHeight;
-        this.$el.style.height = initHeight + 'px';
-        overflowWrapper.style.height = initHeight + 40 + 'px';
     }
 
     private centeringElement(element): void {

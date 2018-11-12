@@ -3,7 +3,6 @@
 import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
@@ -23,7 +22,7 @@ const INNER_HTML_ATTR: string = 'innerHTML';
 enum froalaEvents {
     Initialized = 'froalaEditor.initialized',
     InitializationDelayed = 'froalaEditor.initializationDelayed',
-    ContentChanged= 'froalaEditor.contentChanged',
+    ContentChanged = 'froalaEditor.contentChanged',
     Focus = 'froalaEditor.focus',
     Blur = 'froalaEditor.blur',
     KeyUp = 'froalaEditor.keyup',
@@ -53,7 +52,7 @@ export enum FroalaStatus {
     mixins: [
         ElementQueries
     ]
-})export class VueFroala extends ModulVue {
+}) export class VueFroala extends ModulVue {
     @Prop({
         default: 'div'
     })
@@ -72,8 +71,9 @@ export enum FroalaStatus {
     public config: any;
 
     @Prop()
-    public customTranslations: {[key: string]: string};
+    public customTranslations: { [key: string]: string };
 
+    protected internalValue: string = '';
     protected currentTag: string = 'div';
     protected listeningEvents: Event[] = [];
     protected froalaEditor: any = undefined;
@@ -84,12 +84,10 @@ export enum FroalaStatus {
         immediateVueModelUpdate: false,
         vueIgnoreAttrs: undefined
     };
-    protected model: string | undefined = undefined;
-    protected oldModel: string | undefined = undefined;
-    protected rawHtmlInput: string | undefined = undefined;
 
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
+    protected isLoaded: boolean = false;
 
     protected isDirty: boolean = false;
     protected status: FroalaStatus = FroalaStatus.Blurred;
@@ -98,8 +96,7 @@ export enum FroalaStatus {
 
     @Watch('value')
     public refreshValue(): void {
-        this.model = this.value;
-        this.updateValue();
+        this.htmlSet();
     }
 
     public get isEmpty(): boolean {
@@ -167,7 +164,7 @@ export enum FroalaStatus {
     }
 
     protected addSubMenus(): void {
-         // add mobile mode submenus
+        // add mobile mode submenus
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
@@ -194,7 +191,6 @@ export enum FroalaStatus {
 
     protected created(): void {
         this.currentTag = this.tag || this.currentTag;
-        this.model = this.value;
     }
 
     protected mounted(): void {
@@ -277,6 +273,7 @@ export enum FroalaStatus {
             events: {
                 [froalaEvents.InitializationDelayed]: (_e, editor) => {
                     this.froalaEditor = editor;
+                    this.isLoaded = true;
                     this.setReadOnly();
                     this.htmlSet();
                     window.addEventListener('resize', this.onResize);
@@ -293,8 +290,6 @@ export enum FroalaStatus {
                     if (!this.disabled) {
                         window.removeEventListener('resize', this.onResize);
                         this.unblockMobileBlur();
-
-                        this.refreshDirtyModel();
 
                         if (this.isInitialized) { this.$emit('focus'); }
                         this.showToolbar();
@@ -317,8 +312,7 @@ export enum FroalaStatus {
                                 this.isFocused = false;
                                 this.status = FroalaStatus.Blurred;
 
-                                this.refreshDirtyModel();
-
+                                this.isDirty = false;
                                 this.unblockMobileBlur();
                                 this.internalReadonly = false;
                             }
@@ -363,18 +357,9 @@ export enum FroalaStatus {
 
         this._$element = $(this.$refs.editor);
 
-        this.setContent();
-
         this.registerEvents();
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
-        }
-    }
-
-    private refreshDirtyModel(): void {
-        if (this.isDirty) {
-            this.isDirty = false;
-            this.updateModel();
         }
     }
 
@@ -464,24 +449,9 @@ export enum FroalaStatus {
         }
     }
 
-    private updateValue(): void {
-        if (JSON.stringify(this.oldModel) === JSON.stringify(this.model)) {
-            return;
-        }
-
-        this.setContent();
-    }
-
-    private setContent(): void {
-        if (this.model || this.model === '') {
-            this.oldModel = this.model;
-
-            this.htmlSet();
-        }
-    }
-
     private destroyEditor(): void {
         if (this._$element) {
+            this.isLoaded = false;
             this.isInitialized = false;
             this.isFocused = false;
             this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
@@ -496,17 +466,11 @@ export enum FroalaStatus {
     }
 
     private updateModel(): void {
-        let modelContent: string = '';
-
         const returnedHtml: any = this._$element.froalaEditor('html.get');
-        if (typeof returnedHtml === 'string' && returnedHtml !== this.rawHtmlInput) {
-            this.rawHtmlInput = returnedHtml;
-            modelContent = this.removeEmptyHTML(returnedHtml);
-        } else {
-            modelContent = (this.oldModel) ? this.oldModel : '';
-        }
+        if (this.internalValue === returnedHtml) { return; }
 
-        this.oldModel = modelContent;
+        const modelContent: string = this.removeEmptyHTML(returnedHtml);
+        this.internalValue = returnedHtml;
         this.$emit('input', modelContent);
     }
 
@@ -539,8 +503,11 @@ export enum FroalaStatus {
     }
 
     private htmlSet(): void {
+        if (this.internalValue === this.value || !this.isLoaded) { return; }
+
         if (this.froalaEditor) {
-            this.froalaEditor.html.set(this.model || '', true);
+            this.internalValue = this.value;
+            this.froalaEditor.html.set(this.value || '', true);
             if (this.froalaEditor.undo) {
                 // This will reset the undo stack everytime the model changes externally. Can we fix this?
                 this.froalaEditor.undo.reset();

@@ -23,7 +23,6 @@ $m-modal--max-width--s: 420px !default;
             justify-content: center;
         }
 
-        // doesn't work for slot content because of the scoped style... >_<
         h1,
         h2,
         h3,
@@ -34,7 +33,6 @@ $m-modal--max-width--s: 420px !default;
             font-size: $m-font-size--h4;
             font-weight: $m-font-weight--bold;
         }
-        ////////////////////////////////////////////
 
         @include m-is-ie() {
             display: block;
@@ -163,27 +161,43 @@ $m-modal--max-width--s: 420px !default;
     }
 
     &__body {
-        position: relative;
-        width: 100%;
-        flex: 1 1 auto;
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
+        flex: 1 1 auto;
+        width: 100%;
         min-height: 120px;
         -webkit-overflow-scrolling: touch;
 
+        @include m-scrollbar();
+    }
+
+    &__content {
         @include m-box-padding();
 
         @include m-is-ie() {
             flex: none;
         }
-
-        @include m-scrollbar();
     }
 
     &__footer {
         display: flex;
+        position: relative;
         flex-direction: column;
         justify-content: center;
         border-top: 1px solid $m-color--grey;
+        animation: fadeIn 0.5s linear forwards;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            z-index: -1;
+        }
+
+        100% {
+            opacity: 1;
+            z-index: 1;
+        }
     }
 }

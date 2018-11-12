@@ -43,6 +43,10 @@ export class MRichTextEditorSandBox extends Vue {
     public focusEditor(): void {
         (this.$refs['rteTestFocus'] as InputManagement).focusInput();
     }
+
+    public resetModelPleinePage(): void {
+        this.fullScreenFormModel = '';
+    }
 }
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {
     install(v): void {

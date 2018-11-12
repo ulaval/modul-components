@@ -22,117 +22,14 @@
             <a href="#" v-m-scroll-to:green="getGlobalParameters()">Scroll to green</a>
         </div>
     </p>
-    <p class="m-u--margin-bottom">
-        test service Vue.$scrollTo
-    </p>
-    <p>
-        <div>
-            <a href="#" @click="scrollToGreenUsingService()">Scroll to green using service</a>
-            <a href="#" @click="scrollToBottom()">Scroll to bottom</a>
-        </div>
-    </p>
     <!-- Test case -->
-    <div ref="blue" style="height: 1000px; background-color: royalblue;"> <a href="#" @click="scrollToTop()">Scroll to
-            top</a>
+    <div ref="blue" style="height: 1000px; background-color: royalblue;"> 
     </div>
-    <a href="#" @click="scrollToGreenUsingService()">Scroll to green using service</a>
-    <div ref="red" style="height: 1000px; background-color: red;"> <a href="#" @click="scrollToTop()">Scroll to top</a>
+    <div ref="red" style="height: 1000px; background-color: red;">
     </div>
-    <div ref="green" style="height: 1000px; background-color: green;"> <a href="#" @click="scrollToTop()">Scroll to top</a>
+    <div ref="green" style="height: 1000px; background-color: green;">
     </div>
 
-    <!-- Test in container -->
-    <h3>Test Scroll-to in container</h3>
-    <p class="m-u--margin-bottom">Use the scroll-to service to scroll down in a container</p>
-    <p>
-        <div>
-            <a href="#" @click.prevent="scrollInOrangeUsingService()">Scroll inside to green</a>
-            <a href="#" @click.prevent="scrollInToTopOrangeUsingService()">Scroll inside to top</a>
-            <a href="#" @click.prevent="scrollInToBottomOrangeUsingService()">Scroll inside to bottom</a>
-            <a href="#" @click.prevent="scrollInToDown200InOrangeUsingService()">Scroll inside to y=200</a>
-        </div>
-    </p>
-    <div ref="orange" style="height: 200px; background-color: orange; overflow-y: scroll;">
-        <a href="#" @click.prevent="scrollInOrangeUsingService()">Scroll to green inside</a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-            <a href="#" @click.prevent="scrollInOrangeUsingService()">Scroll to green inside</a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
-            fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
-            similique ad.</p>
-        <div ref="greenInOrange" style="height: 1000px; background-color: green;">
-            </div>
-    </div>
-    <a ref="bottom" href="#" @click="scrollToTop()">Scroll to top</a>
+
 </div>

@@ -1,55 +1,65 @@
-.m-u {
-    // ======================================================================
-    //  Display
-    // ======================================================================
-    &--display {
-        &--block {
-            display: block;
-        }
-
-        &--flex {
-            display: flex;
-        }
-
-        &--inline {
-            display: inline;
-
-            &-block {
-                display: inline-block;
+.m-u--app-body {
+    .m-u {
+        // ======================================================================
+        //  Display
+        // ======================================================================
+        &--display {
+            &--block {
+                display: block;
             }
 
-            &-flex {
-                display: inline-flex;
+            &--flex {
+                display: flex;
+            }
+
+            &--inline {
+                display: inline;
+
+                &-block {
+                    display: inline-block;
+                }
+
+                &-flex {
+                    display: inline-flex;
+                }
             }
         }
-    }
-    // ======================================================================
-    //  Max and min width
-    // ======================================================================
-    &--max-width {
-        max-width: $m-max-width;
+        // ======================================================================
+        //  Max and min width
+        // ======================================================================
+        &--max-width {
+            max-width: $m-max-width;
 
-        &--xs {
-            max-width: $m-max-width--xs;
+            &--xs {
+                max-width: $m-max-width--xs;
+            }
+
+            &--s {
+                max-width: $m-max-width--s;
+            }
+
+            &--l {
+                max-width: $m-max-width--l;
+            }
+
+            &--text {
+                max-width: $m-max-width--text;
+                display: flex !important;
+            }
         }
 
-        &--s {
-            max-width: $m-max-width--s;
+        &--min-width {
+            min-width: $m-min-width;
         }
 
-        &--l {
-            max-width: $m-max-width--l;
-        }
-
-        &--text {
-            max-width: $m-max-width--text;
-            display: flex !important;
-        }
-    }
-
-    &--min-width {
-        min-width: $m-min-width;
-    }
+        // ======================================================================
+        //  Margin & Padding
+        // ======================================================================
+        @function get-margin-padding-value($prop, $size) {
+            @if $prop == 'margin' {
+                @if $size == '' {
+                    @return $m-margin;
+                }
 
     // ======================================================================
     //  Margin & Padding
@@ -58,11 +68,11 @@
         $m-props: 'margin', 'padding';
         $m-directions: '', '-top', '-right', '-bottom', '-left';
 
-        @each $prop in $m-props {
-            @each $direction in $m-directions {
-                &--no-#{$prop}#{$direction} {
-                    #{$prop}#{$direction}: 0;
-                }
+            @each $prop in $m-props {
+                @each $direction in $m-directions {
+                    &--no-#{$prop}#{$direction} {
+                        #{$prop}#{$direction}: 0;
+                    }
 
                 @each $size, $spacing in $m-spacing-map {
                     @if ( $size == '') {
@@ -79,6 +89,8 @@
                 }
             }
         }
+
+        @include m-margin-padding();
     }
 
     @include m-spacing-factory();
