@@ -57,28 +57,20 @@
 
     <h3>Toast with multiple options</h3>
     <p class="m-u--margin-bottom">
-        Multiple toasts, in multiple location, some are stacked, some are in errors.
+        Multiple toasts, in multiple location, some are in errors.
     </p>
     <m-button @click="allOpen = !allOpen">Toggle Toast</m-button>
     <m-toast state="error"
              position="top-right"
              :open.sync="allOpen"
-             action-label="Réessayer"
+             action-label="Réessayer de faire le questionnaire"
              @action-button="doSomething('funny')">
-            Les 3 informations en rouge sont à revoir pour continuer
-    </m-toast>
-    <m-toast state="error"
-             position="bottom-center"
-            :open.sync="allOpen"
-            action-label="Réessayer"
-            @action-button="doSomething('funny')">
-            Les 3 informations en rouge sont à revoir pour continuer
+            Les 3 informations en rouge sont à revoir pour continuer. On pourrait même mettre un texte plus long
     </m-toast>
     <m-toast state="information"
              position="bottom-center"
             :open.sync="allOpen"
             action-label="Yay!"
-            offset="-80px"
             @action-button="doSomething('funny')">
             Give him a friend, we forget the trees get lonely too. We'll do another happy little painting. Absolutely no pressure. You are just a whisper floating across a mountain.
     </m-toast>

@@ -20,21 +20,23 @@
                 <div class="m-toast__icon" v-if="icon">
                     <m-icon :name="getIcon()"></m-icon>
                 </div>
-                <div class="m-toast__body m--has-close-button">
-                    <div class="m-toast__text">
-                        <slot></slot>
+                <div class="m-toast__content">
+                    <div class="m-toast__body"
+                         ref="toastbody">
+                        <div class="m-toast__text">
+                            <slot></slot>
+                        </div>
                     </div>
-                </div>
-                <div class="m-toast__actions">
-
                     <m-icon-button class="m-toast__close-button"
                         icon-name="m-svg__close-clear"
                         skin="link"
                         @click="onClose">
                         {{'m-toast:close' | f-m-i18n}}
                     </m-icon-button>
-                    <div class="m-toast__action" v-if="actionLabel">
-                        <m-button @click="onAction">{{ actionLabel }}</m-button>
+                    <div class="m-toast__actions">
+                        <div class="m-toast__primary-action" v-if="actionLabel">
+                            <m-button @click="onAction">{{ actionLabel }}</m-button>
+                        </div>
                     </div>
                 </div>
             </div>

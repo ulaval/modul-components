@@ -76,7 +76,8 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     public offset: string;
 
     public $refs: {
-        toast: HTMLElement
+        toast: HTMLElement,
+        toastbody: HTMLElement
     };
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {

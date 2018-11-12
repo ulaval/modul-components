@@ -1,8 +1,8 @@
 @import 'abstracts/variables';
 
 $m-toast-icon-size: 32px;
-$m-toast-min-width: 300px;
-$m-toast-max-width: 600px;
+$m-toast-min-width: 340px;
+$m-toast-max-width: 768px;
 
 @mixin m-toast-skin-default($color, $background-color) {
     .m-toast {
@@ -22,6 +22,22 @@ $m-toast-max-width: 600px;
     position: fixed;
     z-index: 2;
 
+    &.m--is-large {
+        .m-toast__body {
+            order: 1;
+        }
+
+        .m-toast__close-button {
+            order: 3;
+        }
+
+        .m-toast__actions {
+            order: 2;
+            flex: 0 auto;
+            padding: 0;
+        }
+    }
+
     &__wrap {
         position: relative;
         display: flex;
@@ -38,24 +54,33 @@ $m-toast-max-width: 600px;
         }
     }
 
-    &__body {
+    &__content {
         display: flex;
-        flex: 3 1 0;
-        padding-left: $m-margin;
+        flex-flow: row wrap;
+        flex: 1 1;
     }
 
-    &__actions {
+    &__body {
         display: flex;
-        flex: 1 1 $m-toast-icon-size;
-        flex-flow: row-reverse wrap;
+        flex: 1 0;
+        padding: 0 $m-margin;
     }
 
     &__close-button {
+        flex: 0 auto;
+
         .m-button__icon .m-icon {
             font-size: $m-font-size--s;
             height: $m-font-size--s;
             color: $m-color--interactive-light;
         }
+    }
+
+    &__actions {
+        display: flex;
+        flex: 1 100%;
+        flex-flow: row-reverse wrap;
+        padding: $m-margin 0 0 $m-margin;
     }
 
     &.m--is-enter-active,
