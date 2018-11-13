@@ -1,6 +1,5 @@
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MouseButtons } from '../../utils/mouse/mouse';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -171,6 +170,8 @@ export class Portal extends ModulVue implements PortalMixin {
 
                         if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                             this.portalTargetEl.style.position = 'absolute';
+                            this.portalTargetEl.style.top = '0';
+                            this.portalTargetEl.style.left = '0';
 
                             // this.opening is important since it's fix a race condition where the portal
                             // could appear behind the content of the page if it was toggled too quickly.
@@ -277,7 +278,7 @@ export class Portal extends ModulVue implements PortalMixin {
         this.propOpen = true;
     }
 
-    private ensurePortalTargetEl(onPortalReady: () => void = () => {}): void {
+    private ensurePortalTargetEl(onPortalReady: () => void = () => { }): void {
         if (!this.portalTargetEl) {
             this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
             this.portalTargetEl = document.createElement('div');
