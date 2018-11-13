@@ -6,26 +6,34 @@
 
 @font-face {
     font-family: 'Source Sans Variable';
-    src: url('/base/fonts/fonts/SourceSansVariable-Roman.otf');
+    src: url('./base/fonts/SourceSansVariable-Roman.otf');
     src:
-        url('/base/fonts/fonts/SourceSansVariable-Roman.otf.woff') format('woff'),
-        url('/base/fonts/fonts/SourceSansVariable-Roman.otf.woff2') format('woff2'),
-        url('/base/fonts/fonts/SourceSansVariable-Roman.ttf') format('truetype'),
-        url('/base/fonts/fonts/SourceSansVariable-Roman.ttf.woff') format('woff'),
-        url('/base/fonts/fonts/SourceSansVariable-Roman.ttf.woff2') format('woff2');
+        url('./base/fonts/SourceSansVariable-Roman.otf.woff') format('woff'),
+        url('./base/fonts/SourceSansVariable-Roman.otf.woff2') format('woff2'),
+        url('./base/fonts/SourceSansVariable-Roman.ttf') format('truetype'),
+        url('./base/fonts/SourceSansVariable-Roman.ttf.woff') format('woff'),
+        url('./base/fonts/SourceSansVariable-Roman.ttf.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Source Sans Variable';
-    src: url('/base/fonts/fonts/SourceSansVariable-Italic.otf');
+    src: url('./base/fonts/SourceSansVariable-Italic.otf');
     src:
-        url('/base/fonts/fonts/SourceSansVariable-Italic.otf.woff') format('woff'),
-        url('/base/fonts/fonts/SourceSansVariable-Italic.otf.woff2') format('woff2'),
-        url('/base/fonts/fonts/SourceSansVariable-Italic.ttf') format('truetype'),
-        url('/base/fonts/fonts/SourceSansVariable-Italic.ttf.woff') format('woff'),
-        url('/base/fonts/fonts/SourceSansVariable-Italic.ttf.woff2') format('woff2');
+        url('./base/fonts/SourceSansVariable-Italic.otf.woff') format('woff'),
+        url('./base/fonts/SourceSansVariable-Italic.otf.woff2') format('woff2'),
+        url('./base/fonts/SourceSansVariable-Italic.ttf') format('truetype'),
+        url('./base/fonts/SourceSansVariable-Italic.ttf.woff') format('woff'),
+        url('./base/fonts/SourceSansVariable-Italic.ttf.woff2') format('woff2');
     font-weight: normal;
     font-style: italic;
+}
+
+@supports (font-variations-settings: 'wdth' 300) {
+    @font-face {
+        font-family: 'Source Sans Pro';
+        font-weight: normal;
+        font-style: normal;
+    }
 }

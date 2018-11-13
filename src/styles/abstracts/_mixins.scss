@@ -13,6 +13,7 @@
     .m-u--h6 {
         font-family: $m-font-family;
         font-variation-settings: 'wght' 400;
+        font-weight: normal;
         line-height: 1.1;
     }
 
@@ -68,7 +69,8 @@
 
     b,
     strong {
-        font-weight: $m-font-weight--bold;
+        font-variation-settings: 'wght' 400;
+        font-weight: normal;
     }
 
     i,
@@ -85,7 +87,7 @@
         word-break: break-all;
         word-wrap: break-word;
         font-size: $m-font-size--s;
-        font-weight: $m-font-weight;
+        font-variation-settings: 'wght' 300;
         color: $m-color--text;
     }
 }
