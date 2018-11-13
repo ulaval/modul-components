@@ -1,33 +1,15 @@
-// -----------------------------------------------------------------------------
-// This file contains all application-wide Sass functions.
-// -----------------------------------------------------------------------------
+@function map-has-deep-key ($map, $keys...) {
+    @if type-of($map) != 'map' {
+        @error 'The argument $map: `#{$map}` is of incorrect type: `#{type-of($map)}`. Type of `Map` is required!';
+    }
 
-/// Native `url(..)` function wrapper
-/// @param {String} $base - base URL for the asset
-/// @param {String} $type - asset type folder (e.g. `fonts/`)
-/// @param {String} $path - asset path
-/// @return {Url}
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
 
-@function asset($base, $type, $path) {
-    @return url($base + $type + $path);
-}
+        $map: map-get($map, $key);
+    }
 
-/// Returns URL to an image based on its path
-/// @param {String} $path - image path
-/// @param {String} $base [$base-url] - base URL
-/// @return {Url}
-/// @require $base-url
-
-@function image($path, $base: $base-url) {
-    @return asset($base, 'images/', $path);
-}
-
-/// Returns URL to a font based on its path
-/// @param {String} $path - font path
-/// @param {String} $base [$base-url] - base URL
-/// @return {Url}
-/// @require $base-url
-
-@function font($path, $base: $base-url) {
-    @return asset($base, 'fonts/', $path);
+    @return true;
 }

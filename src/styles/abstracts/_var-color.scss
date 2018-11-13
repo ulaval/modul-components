@@ -90,6 +90,9 @@ $m-color--border-dark: $m-color--grey-dark !default;
 $m-color--border: $m-color--grey-light !default;
 $m-color--border-light: $m-color--grey-lighter !default;
 
+// ======================================================================
+//  map variable to be used with m-color function
+// ======================================================================
 $m-color-map: (
     text : $m-color--grey-darker,
     grey : (
@@ -107,46 +110,3 @@ $m-color-map: (
         red : $m-color--ul-red
     )
 );
-
-@function map-has-deep-key ($map, $keys...) {
-    @if type-of($map) != 'map' {
-        @error 'The argument $map: `#{$map}` is of incorrect type: `#{type-of($map)}`. Type of `Map` is required!';
-    }
-
-    @each $key in $keys {
-        @if not map-has-key($map, $key) {
-            @return false;
-        }
-
-        $map: map-get($map, $key);
-    }
-
-    @return true;
-}
-
-@function m-color($color, $variant: null) {
-    $m-map: $m-color-map;
-
-    @if ($variant != null) {
-        @if map-has-deep-key($m-map, $color, $variant) {
-            @return map-get(map-get($m-map, $color), $variant);
-        }
-
-        @else {
-            @error "Unknown color, check _var-color.scss file. Valide colors are : '#{$m-map}' ";
-        }
-    }
-
-    @else if map-has-key($m-map, $color) {
-        @return map-get($m-map, $color);
-    }
-
-    @error "Unknown color, check _var-color.scss file. Valide colors are : '#{$m-map}' ";
-
-    @return null;
-}
-
-.test2 {
-    background-color: m-color(ul, blue);
-    color: m-color(text);
-}

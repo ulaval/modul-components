@@ -1,0 +1,21 @@
+@function m-color($color, $variant: null) {
+    $m-map: $m-color-map;
+
+    @if ($variant != null) {
+        @if map-has-deep-key($m-map, $color, $variant) {
+            @return map-get(map-get($m-map, $color), $variant);
+        }
+
+        @else {
+            @error "Unknown color, check _var-color.scss file. Valide colors are : '#{$m-map}' ";
+        }
+    }
+
+    @if map-has-key($m-map, $color) {
+        @return map-get($m-map, $color);
+    }
+
+    @error "Unknown color, check _var-color.scss file. Valide colors are : '#{$m-map}' ";
+
+    @return null;
+}

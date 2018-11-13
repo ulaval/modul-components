@@ -46,6 +46,9 @@ $m-spacing: 16px !default;
 $m-spacing--s: 8px !default;
 $m-spacing--xs: 4px !default;
 
+// ======================================================================
+//  map variable to be used with m-spacing function
+// ======================================================================
 $m-spacing-map: (
     'xxxxl': 64px,
     'xxxl': 56px,
@@ -57,15 +60,3 @@ $m-spacing-map: (
     's': 8px,
     'xs': 4px
 );
-
-@function m-spacing($size: '') {
-    $m-map: $m-spacing-map;
-
-    @if map-has-key($m-map, $size) {
-        @return map-get($m-map, $size);
-    }
-
-    @error "Unknown spacing size '#{$size}', Valide sizes are : '#{$m-map}' ";
-
-    @return null;
-}
