@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as parser from 'node-html-parser';
 import Project, { ClassDeclaration, ClassInstanceMemberTypes, ClassInstancePropertyTypes, Decorator, Expression, LanguageService, MethodDeclaration, ObjectLiteralExpression, ParameterDeclaration, PropertyAssignment, SourceFile, StringLiteral, SyntaxKind, Type, TypeChecker } from 'ts-simple-ast';
-
 import { Meta, MetaComponent, MetaEvent, MetaProps, MetaSlot } from '../../src/meta/v2';
+
 
 const MIXINS_PROPERTY_NAME: string = 'mixins';
 const COMPONENT_DECORATOR_NAME: string = 'Component';
@@ -268,7 +268,6 @@ export class MetaGenerator {
     }
 
     private getTypeValueAsString(type): string {
-
         return type.value;
     }
 
