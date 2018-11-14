@@ -1,8 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
-import { InputState } from '../../mixins/input-state/input-state';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CHECKBOX_NAME } from '../component-names';
@@ -65,6 +64,14 @@ export class MCheckbox extends ModulVue {
 
     private get hasLabelSlot(): boolean {
         return !!this.$slots.default;
+    }
+
+    private get forId(): string | undefined {
+        if (this.as<InputStateMixin>().readonly) {
+            return undefined;
+        } else {
+            return this.id;
+        }
     }
 }
 

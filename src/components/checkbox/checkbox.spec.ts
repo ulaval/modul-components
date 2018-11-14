@@ -1,6 +1,5 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MValidationMessage } from '../validation-message/validation-message';
@@ -52,6 +51,17 @@ describe('MCheckbox', () => {
             localVue: localVue,
             propsData: {
                 disabled: true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when readonly', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                readonly: true
             }
         });
 

@@ -1,12 +1,13 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { CHECKBOX_NAME } from '../component-names';
 import WithRender from './checkbox.sandbox.html';
 
 @WithRender
 @Component
 export class MCheckboxSandbox extends Vue {
+    public checkboxReadOnlyValue: boolean = true;
+    public isReadOnly: boolean = true;
 }
 
 const CheckboxSandboxPlugin: PluginObject<any> = {

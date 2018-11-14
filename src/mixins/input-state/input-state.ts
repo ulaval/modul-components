@@ -1,6 +1,5 @@
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 
 export enum InputStateValue {
@@ -37,6 +36,7 @@ export interface InputStateMixin {
     validMessage: string;
     errorMessage: string;
 
+    readonly: boolean;
     disabled: boolean;
     getInput(): HTMLElement | undefined;
 }

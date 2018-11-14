@@ -132,6 +132,25 @@ $m-checkbox--width: 16px;
         }
     }
 
+    &.m--is-readonly {
+        .m-checkbox {
+            &__wrap {
+                cursor: not-allowed;
+            }
+
+            &__input {
+                border-color: $m-color--disabled;
+
+                &__icon {
+                    &::before,
+                    &::after {
+                        background: $m-color--disabled;
+                    }
+                }
+            }
+        }
+    }
+
     &.m--has-error {
         .m-checkbox__input {
             border-color: $m-color--error;
