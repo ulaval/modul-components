@@ -50,13 +50,13 @@ $m-spacing--xs: 4px !default;
 //  map variable to be used with m-spacing function
 // ======================================================================
 $m-spacing-map: (
-    'xxxxl': 64px,
-    'xxxl': 56px,
-    'xxl': 48px,
-    'xl': 40px,
-    'l': 32px,
-    'm': 24px,
-    '': 16px,
-    's': 8px,
-    'xs': 4px
+    xxxxl: $m-spacing--xxxxl,
+    xxxl: $m-spacing--xxxl,
+    xxl: $m-spacing--xxl,
+    xl: $m-spacing--xl,
+    l: $m-spacing--l,
+    m: $m-spacing--m,
+    '' : $m-spacing,
+    s: $m-spacing--s,
+    xs: $m-spacing--xs
 );
