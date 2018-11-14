@@ -10,14 +10,13 @@
     "tslint.configFile": "conf/tslint.json",
     "tslint.autoFixOnSave": true,
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    "search.exclude": {
-        "**/node_modules/": true,
-        "**/dist/": true,
-        "**/.vscode/": true
-    },
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
+    },
+    "files.exclude": {
+        "**/.circleci/": true,
+        "**/.github/": true,
     },
     "html.format.wrapLineLength": 0,
     "html.format.wrapAttributes": "force-aligned",
