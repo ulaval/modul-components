@@ -396,3 +396,35 @@
     border-#{map-get($m-opposite, $m-direction)}-color: $m-color;
     border-#{map-get($m-opposite, $m-direction)}-width: $m-size/1.5;
 }
+
+@mixin font-weight($value: null) {
+    font-weight: normal;
+
+    @if $value {
+        @if type-of($value) == number {
+            font-variation-settings: 'wght' $value;
+        }
+
+        @else {
+            @if $value == 'light' {
+                font-variation-settings: 'wght' $m-font-weight--light;
+            }
+
+            @if $value == 'regular' {
+                font-variation-settings: 'wght' $m-font-weight--regular;
+            }
+
+            @if $value == 'bold' {
+                font-variation-settings: 'wght' $m-font-weight--bold;
+            }
+
+            @if $value == 'black' {
+                font-variation-settings: 'wght' $m-font-weight--black;
+            }
+        }
+    }
+
+    @else {
+        font-variation-settings: 'wght' $m-font-weight--regular;
+    }
+}

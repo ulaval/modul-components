@@ -1,0 +1,59 @@
+@import '../../styles/abstracts/variables';
+
+.m-textfield-sandbox {
+    &__light {
+        @include font-weight('light');
+    }
+
+    &__regular {
+        @include font-weight('regular');
+    }
+
+    &__bold {
+        @include font-weight('bold');
+    }
+
+    &__black {
+        @include font-weight('black');
+    }
+
+    &__111 {
+        @include font-weight(111);
+    }
+
+    &__222 {
+        @include font-weight(222);
+    }
+
+    &__333 {
+        @include font-weight(333);
+    }
+
+    &__444 {
+        @include font-weight(444);
+    }
+
+    &__555 {
+        @include font-weight(555);
+    }
+
+    &__666 {
+        @include font-weight(666);
+    }
+
+    &__777 {
+        @include font-weight(777);
+    }
+
+    &__888 {
+        @include font-weight(888);
+    }
+
+    &__999 {
+        @include font-weight(999);
+    }
+
+    &__none {
+        @include font-weight();
+    }
+}

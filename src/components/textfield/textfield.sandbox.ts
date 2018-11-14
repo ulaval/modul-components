@@ -1,9 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { TEXTFIELD_NAME } from '../component-names';
 import TextfieldPlugin from './textfield';
-import WithRender from './textfield.sandbox.html';
+import WithRender from './textfield.sandbox.html?style=./textfield.sandbox.scss';
 
 @WithRender
 @Component
