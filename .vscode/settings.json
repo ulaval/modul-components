@@ -10,10 +10,10 @@
     "tslint.configFile": "conf/tslint.json",
     "tslint.autoFixOnSave": true,
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    "files.exclude": {
+    "search.exclude": {
         "**/node_modules/": true,
         "**/dist/": true,
-        "**/.vs/": true
+        "**/.vscode/": true
     },
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
