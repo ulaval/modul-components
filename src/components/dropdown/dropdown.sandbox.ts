@@ -1,6 +1,5 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { DROPDOWN_NAME } from '../component-names';
 import WithRender from './dropdown.sandbox.html';
 
@@ -19,6 +18,7 @@ export class MDropdownSandbox extends Vue {
     public numValue: undefined = undefined;
 
     public numItems: number[] = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007];
+    public strItems: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7', 'item8'];
 }
 
 const DropdownSandboxPlugin: PluginObject<any> = {
