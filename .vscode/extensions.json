@@ -6,6 +6,7 @@
         "eg2.tslint",
         "Orta.vscode-jest",
         "MS-vsliveshare.vsliveshare",
-        "mkaufman.htmlhint"
+        "mkaufman.htmlhint",
+        "mrmlnc.vscode-scss"
     ]
 }

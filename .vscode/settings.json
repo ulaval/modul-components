@@ -8,7 +8,7 @@
     "less.validate": false,
     "scss.validate": false,
     "tslint.configFile": "conf/tslint.json",
-    "tslint.run": "onSave",
+    "tslint.autoFixOnSave": true,
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "files.exclude": {
         "**/node_modules/": true,
