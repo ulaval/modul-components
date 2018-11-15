@@ -1,0 +1,30 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Defaut m-back</h2>
+    <p>
+        <m-back @click="alert()"></m-back>
+    </p>
+
+    <h2>Prop url</h2>
+    <p>
+        <m-back url="/"
+                @click="alert()">Home page</m-back>
+    </p>
+    <h3 class="m-u--h4">Target = "_blank"</h3>
+    <p>
+        <m-back url="/"
+                @click="alert()"
+                target="_blank">Home page</m-back>
+    </p>
+
+
+    <h2>Prop underline</h2>
+    <p>
+        <m-back @click="alert()"
+                :underline="true">underline = true</m-back>
+    </p>
+    <p>
+        <m-back @click="alert()">underline = false (default)</m-back>
+    </p>
+
+
+</div>

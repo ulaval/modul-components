@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
-
 import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
+
 
 const FrenchPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -10,6 +10,7 @@ const FrenchPlugin: PluginObject<any> = {
             const msgs: BundleMessagesMap[] = [
                 require('../components/accordion/accordion.lang.fr.json'),
                 require('../components/accordion-group/accordion-group.lang.fr.json'),
+                require('../components/back/back.lang.fr.json'),
                 require('../components/list-item/list-item.lang.fr.json'),
                 require('../components/modal/modal.lang.fr.json'),
                 require('../components/datefields/datefields.lang.fr.json'),

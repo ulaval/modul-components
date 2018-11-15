@@ -1,8 +1,8 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
+import BackPlugin from './back/back';
 import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
 import CarouselItemPlugin from './carousel-item/carousel-item';
@@ -85,6 +85,7 @@ import TreeNodePlugin from './tree-node/tree-node';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
+
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
 }
@@ -97,6 +98,7 @@ const ComponentsPlugin: PluginObject<any> = {
 
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
+        Vue.use(BackPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
         Vue.use(CarouselPlugin);

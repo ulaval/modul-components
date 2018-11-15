@@ -1,0 +1,13 @@
+<m-link class="m-back"
+        :url="url"
+        @click="onClick"
+        :disabled="disabled"
+        :tabindex="tabindex"
+        :target="target"
+        :unvisited="true"
+        :underline="underline"
+        :icon-size="iconSize"
+        icon-name="m-svg__chevron--left">
+    <slot v-if="hasDefaultSlot()"></slot>
+    <template v-else>{{i18nBack}}</template>
+</m-link>

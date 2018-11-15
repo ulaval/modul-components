@@ -1,6 +1,7 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
+export const BACK_NAME: string = 'm-back';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CAROUSEL_NAME: string = 'm-carousel';
