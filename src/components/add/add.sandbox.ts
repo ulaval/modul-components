@@ -8,7 +8,7 @@ import WithRender from './add.sandbox.html';
 @Component
 export class MAddSandbox extends ModulVue {
     private alert(): void {
-        alert('Test!');
+        alert('ADD - Test!');
     }
 }
 

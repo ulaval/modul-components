@@ -1,4 +1,9 @@
 <div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Defaut</h2>
+    <p>
+        <m-add @click="alert()"></m-add>
+    </p>
+
     <h2 class="m-u--no-margin">Prop skin</h2>
     <h3 class="m-u--h4">Skin = "default"</h3>
     <p>
@@ -28,7 +33,12 @@
     <h2>Prop icon-position</h2>
     <h3 class="m-u--h4">icon-position = "left" (default)</h3>
     <p>
-        <m-add @click="alert()">Skin default</m-add>
+        <m-add @click="alert()">icon-position = "left"</m-add>
+    </p>
+    <h3 class="m-u--h4">icon-position = "right"</h3>
+    <p>
+        <m-add @click="alert()"
+               icon-position="right">icon-position = "right"</m-add>
     </p>
 
 
