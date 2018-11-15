@@ -24,7 +24,7 @@ const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
 @Component
 export class MLink extends ModulVue {
     @Prop()
-    public url: string | Object;
+    public url: string | Location;
 
     @Prop()
     public extern: boolean;
@@ -104,14 +104,11 @@ export class MLink extends ModulVue {
         return this.isRouterLink ? 'router-link' : 'a';
     }
 
-    private get routerLinkUrl(): string | Object | undefined {
-        if (this.isRouterLink) {
-            return !this.isObject(this.url) ? { path: this.url } : this.url;
-        }
-        return undefined;
+    private get routerLinkUrl(): string | Location | undefined {
+        return this.isRouterLink ? this.url : undefined;
     }
 
-    private get href(): string | Object | undefined {
+    private get href(): string | Location | undefined {
         return this.isButton ? '#' : (this.isExternalLink ? this.url : undefined);
     }
 
