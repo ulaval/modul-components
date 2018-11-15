@@ -1,0 +1,45 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Prop skin</h2>
+    <h3 class="m-u--h4">Skin = "default"</h3>
+    <p>
+        <m-add @click="alert()">Skin default</m-add>
+        <br>
+        <m-add @click="alert()"
+               skin="text"
+               :disabled="true">Skin default (disabled)</m-add>
+    </p>
+    <h3 class="m-u--h4">Skin = "light"</h3>
+    <p style="padding: 12px; background: #000;">
+        <m-add @click="alert()"
+               skin="light">Skin light</m-add>
+        <br>
+        <m-add @click="alert()"
+               skin="light"
+               :disabled="true">Skin light (disabled)</m-add>
+    </p>
+    <h3 class="m-u--h4">Skin = "text"</h3>
+    <p>
+        <m-add @click="alert()"
+               skin="text">Skin text</m-add>
+        <br>
+        <m-add skin="text"
+               :disabled="true">Skin text (disabled)</m-add>
+    </p>
+    <h2>Prop icon-position</h2>
+    <h3 class="m-u--h4">icon-position = "left" (default)</h3>
+    <p>
+        <m-add @click="alert()">Skin default</m-add>
+    </p>
+
+
+    <h3>Prop url</h3>
+    <p>
+        <m-add url="/"
+               @click="alert()">Home page</m-add>
+    </p>
+    <h3 class="m-u--h4">Target = "_blank"</h3>
+    <m-add url="/"
+           @click="alert()"
+           target="_blank">Home page</m-add>
+
+</div>
