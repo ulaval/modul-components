@@ -179,6 +179,16 @@
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.4862,1.945" x1="17.5" y1="2.7" x2="17.5" y2="6.6"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" x1="17.5" y1="7.6" x2="17.5" y2="7.8"/>
     </symbol>
+    <symbol id="m-svg__drag-vertical" viewBox="0 0 12.7 28.9" >
+        <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.4,9.4
+            6.4,0.6 9.1,3.3 6.4,0.6 3.6,3.3 	"/>
+        <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6.3,19.5
+            6.3,28.3 3.6,25.6 6.3,28.3 9.1,25.5 	"/>
+
+            <line fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="1" y1="12.5" x2="11.7" y2="12.5"/>
+
+            <line fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="1" y1="16.5" x2="11.7" y2="16.5"/>
+    </symbol>
     <symbol id="m-svg__edit" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M23.2,3.7l-2.9-2.9
             c-0.4-0.4-1-0.4-1.4,0L2.7,17L7,21.3L23.2,5.1C23.6,4.7,23.6,4.1,23.2,3.7z"/>

@@ -20,41 +20,70 @@
     <h4>États de la pastille</h4>
     <p>
         <h5>Complété (completed)</h5>
-        <m-icon-file v-m-badge="{ state: 'completed' }" extension="pdf"></m-icon-file>
+        <m-icon-file v-m-badge="{ state: 'completed' }"
+                     extension="pdf"></m-icon-file>
         <h5>En erreur (error)</h5>
-        <m-icon-file v-m-badge="{ state: 'error' }" extension="pdf"></m-icon-file>
+        <m-icon-file v-m-badge="{ state: 'error' }"
+                     extension="pdf"></m-icon-file>
         <h5>Avertissement (warning)</h5>
-        <m-icon-file v-m-badge="{ state: 'warning' }" extension="pdf"></m-icon-file>
+        <m-icon-file v-m-badge="{ state: 'warning' }"
+                     extension="pdf"></m-icon-file>
     </p>
 
     <h4>Tailles</h4>
     <p>
-        <m-icon name="m-svg__calendar" v-m-badge="{ state: 'completed'}" size="12px"></m-icon>
-        <m-icon name="m-svg__calendar" v-m-badge="{ state: 'completed'}" size="24px"></m-icon>
-        <m-icon name="m-svg__calendar" v-m-badge="{ state: 'completed'}" size="48px"></m-icon>
-        <m-icon name="m-svg__calendar" v-m-badge="{ state: 'completed'}" size="72px"></m-icon>
-        <m-icon name="m-svg__calendar" v-m-badge="{ state: 'completed'}" size="144px"></m-icon>
+        <m-icon name="m-svg__calendar"
+                v-m-badge="{ state: 'completed'}"
+                size="12px"></m-icon>
+        <m-icon name="m-svg__calendar"
+                v-m-badge="{ state: 'completed'}"
+                size="24px"></m-icon>
+        <m-icon name="m-svg__calendar"
+                v-m-badge="{ state: 'completed'}"
+                size="48px"></m-icon>
+        <m-icon name="m-svg__calendar"
+                v-m-badge="{ state: 'completed'}"
+                size="72px"></m-icon>
+        <m-icon name="m-svg__calendar"
+                v-m-badge="{ state: 'completed'}"
+                size="144px"></m-icon>
     </p>
 
     <h4>Ajustement de la position de la pastille</h4>
     L'icône d'horloge n'a pas de position définie par le concepteur, par défaut, la pastille est placé en bas à droite du carré de 24px par 24px. Il est possible d'ajuster sa position.
     <p>
         <h5>Par défaut</h5>
-        <m-icon name="m-svg__clock" v-m-badge="{ state: 'completed'}" size="24px"></m-icon>
-        <br/>
-        <m-icon name="m-svg__clock" v-m-badge="{ state: 'completed'}" size="72px"></m-icon>
+        <m-icon name="m-svg__clock"
+                v-m-badge="{ state: 'completed'}"
+                size="24px"></m-icon>
+        <br />
+        <m-icon name="m-svg__clock"
+                v-m-badge="{ state: 'completed'}"
+                size="72px"></m-icon>
         <h5>Après</h5>
         size: 24px
         offsetX: -2px
         offsetY: -1px
-        <br/>
-        <m-icon name="m-svg__clock" v-m-badge="{ state: 'completed', offsetX: '-2px', offsetY: '-1px'}" size="24px"></m-icon>
-        <br/>
-        <br/>
+        <br />
+        <m-icon name="m-svg__clock"
+                v-m-badge="{ state: 'completed', offsetX: '-2px', offsetY: '-1px'}"
+                size="24px"></m-icon>
+        <br />
+        <br />
         size: 72px
         offsetX: -6px
         offsetY: -3px
-        <br/>
-        <m-icon name="m-svg__clock" v-m-badge="{ state: 'completed', offsetX: '-6px', offsetY: '-3px'}" size="72px"></m-icon>
+        <br />
+        <m-icon name="m-svg__clock"
+                v-m-badge="{ state: 'completed', offsetX: '-6px', offsetY: '-3px'}"
+                size="72px"></m-icon>
+    </p>
+
+    <h4>Icon testing</h4>
+
+    <h5>Vertical drag</h5>
+    <p>
+        <m-icon name="m-svg__drag-vertical"
+                size="24px"></m-icon>
     </p>
 </div>
