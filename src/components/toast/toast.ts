@@ -1,4 +1,4 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
@@ -8,8 +8,11 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import WithRender from './toast.html?style=./toast.scss';
 import { ModulVue } from '../../utils/vue/vue';
-import { PortalMixinImpl, BackdropMode, Portal, PortalTransitionDuration, PortalMixin } from '../../mixins/portal/portal';
+import { PortalMixinImpl, BackdropMode, Portal, PortalMixin } from '../../mixins/portal/portal';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import ModulPlugin from '../../utils/modul/modul';
+import PortalPlugin from 'portal-vue';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 
 export enum MToastState {
     Confirmation = 'confirmation',
@@ -75,9 +78,13 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     })
     public offset: string;
 
+    @Prop({
+        default: false
+    })
+    public isSameLine: boolean;
+
     public $refs: {
-        toast: HTMLElement,
-        toastbody: HTMLElement
+        toast: HTMLElement
     };
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
@@ -185,9 +192,12 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 const ToastPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TOAST, 'plugin.install');
+        v.use(ModulPlugin);
+        v.use(PortalPlugin);
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
+        v.use(MediaQueriesPlugin);
         v.component(TOAST, MToast);
     }
 };

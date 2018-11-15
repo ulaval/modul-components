@@ -22,52 +22,32 @@ $m-toast-max-width: 768px;
     position: fixed;
     z-index: 2;
 
-    &.m--is-large {
-        .m-toast__body {
-            order: 1;
-        }
-
-        .m-toast__close-button {
-            order: 3;
-        }
-
-        .m-toast__actions {
-            order: 2;
-            flex: 0 auto;
-            padding: 0;
-        }
-    }
-
     &__wrap {
         position: relative;
         display: flex;
+        flex-flow: row wrap;
         align-items: center;
         padding: $m-margin;
     }
 
     &__icon {
         display: flex;
-        flex: 0 1 $m-toast-icon-size;
+        order: 1;
 
         .m-icon {
             font-size: $m-toast-icon-size;
         }
     }
 
-    &__content {
-        display: flex;
-        flex-flow: row wrap;
-        flex: 1 1;
-    }
-
     &__body {
         display: flex;
-        flex: 1 0;
+        order: 2;
+        flex: 1 0 50%;
         padding: 0 $m-margin;
     }
 
     &__close-button {
-        flex: 0 auto;
+        order: 4;
 
         .m-button__icon .m-icon {
             font-size: $m-font-size--s;
@@ -78,9 +58,15 @@ $m-toast-max-width: 768px;
 
     &__actions {
         display: flex;
-        flex: 1 100%;
+        order: 5;
+        flex: 0 100%;
         flex-flow: row-reverse wrap;
         padding: $m-margin 0 0 $m-margin;
+
+        &.m--is-same-line {
+            order: 3;
+            flex: 0 0;
+        }
     }
 
     &.m--is-enter-active,
