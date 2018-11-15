@@ -23,7 +23,7 @@ A set of VueJS components for MOD**UL** web applications (beta release).
 
 Please refer to [this repository](https://github.com/simardo/vuejs-typescript-template) for a template of a modul project using vue-cli 2.x
 
-You can also check [this repository](https://github.com/chuckmah/my-cli-module-project) for an example of a modul project using vue-cli 3+ and single file components.
+You can also check [this repository](https://github.com/chuckmah/my-cli-module-project) for an example of a modul project using vue-cli 3+
 
 ## Contributing
 
