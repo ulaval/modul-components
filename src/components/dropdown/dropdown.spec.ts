@@ -1,10 +1,8 @@
 import { createLocalVue, mount, Slots, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
 import { getDefaultMock } from '../../../tests/helpers/mock';
-import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DropdownPlugin, { MDropdown } from './dropdown';
 
@@ -33,7 +31,7 @@ describe('MDropdown', () => {
             localVue: localVue
         });
 
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     it('should render correctly when placeholder is set', () => {
@@ -45,7 +43,7 @@ describe('MDropdown', () => {
             }
         });
 
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     it('should render correctly when footer slot is set', () => {
@@ -57,7 +55,7 @@ describe('MDropdown', () => {
                 footer: '<div>footer-content</div>'
             }
         });
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     // Need to be improve
