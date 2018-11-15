@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
@@ -28,16 +27,16 @@ export class MTable extends ModulVue {
     })
     public skin: MTableSkin;
 
-    @Prop()
+    @Prop({ default: () => [] })
     columns: MColumnTable[];
 
-    @Prop()
+    @Prop({ default: () => [] })
     rows: any[];
 
     protected i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
 
     public columnWidth(col: MColumnTable): { width: string } | '' {
-        return col.width ? { width:  col.width } : '';
+        return col.width ? { width: col.width } : '';
     }
 
     public get isEmpty(): boolean {
