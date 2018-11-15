@@ -98,6 +98,7 @@
         <ul :id="ariaControls"
             class="m-dropdown__list"
             ref="items"
+            :style="itemsHeightStyle"
             :aria-labelledby="id"
             aria-live="polite">
             <slot></slot>

@@ -71,6 +71,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalOpen: boolean = false;
     private dirty: boolean = false;
     private id: string = `mDropdown-${uuid.generate()}`;
+    private itemsHeightStyleInternal: number | object | undefined = {};
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -121,11 +122,22 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 this.scrollToFocused();
 
                 this.$emit('open');
+                // Reset the height of the list before calculating its height
+                // (this code is executed before the method calculateFilterableListeHeight())
+                this.itemsHeightStyle = undefined;
             } else {
                 this.internalFilter = '';
                 this.$emit('close');
             }
         });
+    }
+
+    private set itemsHeightStyle(value: object | number | undefined) {
+        this.itemsHeightStyleInternal = value === undefined ? undefined : { height: value + 'px' };
+    }
+
+    private get itemsHeightStyle(): object | number | undefined {
+        return this.itemsHeightStyleInternal;
     }
 
     private calculateFilterableListeHeight(): void {
@@ -138,15 +150,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 if (popup.$options.name === MPopup.name) {
                     popup.$children.forEach((sidebar, index) => {
                         if (sidebar.$options.name === MSidebar.name) {
-
-                            // Reset the height of the list before calculating its height
-                            (this.$refs.items as HTMLElement).style.height = 'auto';
-
                             // Set height of the list with height of MSidebar body
                             let sidebarComponent: MSidebar = sidebar as MSidebar;
-                            let sidebarComponentClientHeight: number = sidebarComponent.$refs.body.clientHeight;
-                            let listeMinHeight: number = 80;
-                            (this.$refs.items as HTMLElement).style.height = (sidebarComponentClientHeight > listeMinHeight ? sidebarComponentClientHeight : listeMinHeight) + 'px';
+                            this.itemsHeightStyle = sidebarComponent.$refs.body.clientHeight;
                             sidebarComponent.$refs.body.style.overflow = 'hidden';
                         }
                     });
