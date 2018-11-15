@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MLink Link use as button should render correctly 1`] = `<span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"></span> </span>`;
+exports[`MLink Link use as button should render correctly 1`] = `<a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"></span> </a>`;
 
 exports[`MLink Link using RouterLink should pass route values to router-link using url prop 1`] = `<a tabindex="0" class="m-link"> <span class="m-link__text"></span> </a>`;
 
@@ -36,11 +36,11 @@ exports[`MLink Link using RouterLink should render correctly all icon style: siz
     </svg> <span class="m-link__text"></span> </a>
 `;
 
-exports[`MLink Link using RouterLink should render correctly all link status: disabled 1`] = `<span role="button" tabindex="-1" class="m-link m--is-unvisited m--is-disabled m--is-button"> <span class="m-link__text"></span> </span>`;
+exports[`MLink Link using RouterLink should render correctly all link status: disabled 1`] = `<a href="#" role="button" tabindex="-1" class="m-link m--is-unvisited m--is-disabled m--is-button"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link using RouterLink should render correctly all link status: underline 1`] = `<span role="button" tabindex="0" class="m-link m--is-unvisited m--no-underline m--is-button"> <span class="m-link__text"></span> </span>`;
+exports[`MLink Link using RouterLink should render correctly all link status: underline 1`] = `<a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--no-underline m--is-button"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link using RouterLink should render correctly all link status: unvisited 1`] = `<span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"></span> </span>`;
+exports[`MLink Link using RouterLink should render correctly all link status: unvisited 1`] = `<a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"></span> </a>`;
 
 exports[`MLink Link using RouterLink should render correctly when url prop is a string 1`] = `<a tabindex="0" class="m-link"> <span class="m-link__text"></span> </a>`;
 
@@ -80,7 +80,7 @@ exports[`MLink Link with extern prop should render correctly all icon style: siz
     </svg> <span class="m-link__text"></span> </a>
 `;
 
-exports[`MLink Link with extern prop should render correctly all link status: disabled 1`] = `<span role="button" tabindex="-1" class="m-link m--is-unvisited m--is-disabled m--is-button"> <span class="m-link__text"></span> </span>`;
+exports[`MLink Link with extern prop should render correctly all link status: disabled 1`] = `<a href="#" role="button" tabindex="-1" class="m-link m--is-unvisited m--is-disabled m--is-button"> <span class="m-link__text"></span> </a>`;
 
 exports[`MLink Link with extern prop should render correctly all link status: underline 1`] = `<a href="/" tabindex="0" class="m-link m--no-underline"> <span class="m-link__text"></span> </a>`;
 

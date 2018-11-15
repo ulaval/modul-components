@@ -22,8 +22,9 @@ exports[`MErrorMessage given error should render correctly expanded 1`] = `
         <p><strong><span class="m-i18n">No référence de l'erreur</span>:
             </strong>123456879</p>
         <p>Elle a eu lieu le &lt;strong&gt;2018-01-02&lt;/strong&gt; à &lt;strong&gt;00:01:02&lt;/strong&gt;</p>
-    </div> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
-    </span>
+    </div>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    </a>
 </div>
 `;
 
@@ -50,8 +51,9 @@ exports[`MErrorMessage given error should render correctly expanded with stack t
             </strong>123456879</p>
         <p>Elle a eu lieu le &lt;strong&gt;2018-01-02&lt;/strong&gt; à &lt;strong&gt;00:01:02&lt;/strong&gt;</p>
         <div class="m-error-message__stacktrace"><pre></pre></div>
-    </div> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
-    </span>
+    </div>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    </a>
 </div>
 `;
 
@@ -77,8 +79,9 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
         <p><strong><span class="m-i18n">No référence de l'erreur</span>:
             </strong>123456879</p>
         <p>Elle a eu lieu le &lt;strong&gt;2018-01-02&lt;/strong&gt; à &lt;strong&gt;00:01:02&lt;/strong&gt;</p>
-    </div> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
-    </span>
+    </div>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    </a>
 </div>
 `;
 
@@ -105,8 +108,9 @@ exports[`MErrorMessage given error with stack trace should render correctly expa
             </strong>123456879</p>
         <p>Elle a eu lieu le &lt;strong&gt;2018-01-02&lt;/strong&gt; à &lt;strong&gt;00:01:02&lt;/strong&gt;</p>
         <div class="m-error-message__stacktrace"><pre>This is a stack trace</pre></div>
-    </div> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
-    </span>
+    </div>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    </a>
 </div>
 `;
 
@@ -129,8 +133,9 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
     <article class="m-accordion m--is-light m--is-closed m--has-icon-left">
         <div tabindex="0" id="uuid" role="tab" aria-controls="uuid-controls" class="m-accordion__header m--has-padding">
             <div class="m-accordion__header__content"><span class="m-i18n">Détails de l'erreur</span> <span class="m-i18n m-accordion__hidden">m-accordion:open</span> </div> <span aria-hidden="true" class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"></span></div>
-    </article> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
-    </span>
+    </article>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    </a>
 </div>
 `;
 
@@ -156,7 +161,8 @@ exports[`MErrorMessage should render correctly expanded 1`] = `
         <p><strong><span class="m-i18n">No référence de l'erreur</span>:
             </strong>123456879</p>
         <p>Elle a eu lieu le &lt;strong&gt;2018-01-02&lt;/strong&gt; à &lt;strong&gt;00:01:02&lt;/strong&gt;</p>
-    </div> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
-    </span>
+    </div>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span>
+    </a>
 </div>
 `;

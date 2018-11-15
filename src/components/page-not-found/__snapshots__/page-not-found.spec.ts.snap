@@ -16,9 +16,10 @@ exports[`MPageNotFound should render correctly 1`] = `
             </div>
         </div>
     </div>
-    <p>m-page-not-found:directions</p> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text">
+    <p>m-page-not-found:directions</p>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text">
         m-page-not-found:back-to-portal
-    </span> </span>
+    </span> </a>
 </div>
 `;
 
@@ -38,8 +39,9 @@ exports[`MPageNotFound should render correctly with back-to-label override 1`] =
             </div>
         </div>
     </div>
-    <p>m-page-not-found:directions</p> <span role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text">
+    <p>m-page-not-found:directions</p>
+    <a href="#" role="button" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text">
         Some back to label
-    </span> </span>
+    </span> </a>
 </div>
 `;
