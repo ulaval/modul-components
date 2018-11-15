@@ -1,8 +1,7 @@
 import ElementQueries from 'css-element-queries/src/ElementQueries';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { PANEL_NAME } from '../component-names';
 import WithRender from './panel.html?style=./panel.scss';
 
@@ -53,6 +52,9 @@ export class MPanel extends Vue {
 
     @Prop({ default: true })
     public paddingFooter: boolean;
+
+    @Emit('click')
+    onClick(): void { }
 
     protected mounted(): void {
         ElementQueries.init();
@@ -113,9 +115,6 @@ export class MPanel extends Vue {
         return this.paddingFooter && this.padding;
     }
 
-    private onClick(): void {
-        this.$emit('click');
-    }
 }
 
 const PanelPlugin: PluginObject<any> = {

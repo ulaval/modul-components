@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { MENU_NAME } from '../component-names';
@@ -67,9 +66,8 @@ export class MMenu extends BaseMenu implements Menu {
         this.model = value;
     }
 
-    public onClick(event: Event, value: string): void {
-        this.$emit('click', event, value);
-    }
+    @Emit('click')
+    onClick(event: Event, value: string): void { }
 
     protected mounted(): void {
         this.model = this.selected;

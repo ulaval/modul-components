@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { LIST_ITEM_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -29,9 +28,8 @@ export class MListItem extends Vue {
     @Prop({ default: false })
     public borderBottom: boolean;
 
-    private click(event): void {
-        this.$emit('click', event);
-    }
+    @Emit('click')
+    click(event: Event): void { }
 
     private get hasIcon(): boolean {
         return this.iconName !== '' && this.iconName !== undefined;

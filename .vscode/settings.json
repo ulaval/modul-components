@@ -8,16 +8,18 @@
     "less.validate": false,
     "scss.validate": false,
     "tslint.configFile": "conf/tslint.json",
-    "tslint.run": "onSave",
+    "tslint.autoFixOnSave": true,
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
-    "files.exclude": {
-        "**/node_modules/": true,
-        "**/dist/": true,
-        "**/.vs/": true
-    },
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
+    },
+    "files.exclude": {
+        "**/.circleci/": true,
+        "**/.github/": true,
+    },
+    "search.exclude": {
+        "package-lock.json": true,
     },
     "html.format.wrapLineLength": 0,
     "html.format.wrapAttributes": "force-aligned",

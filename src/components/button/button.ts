@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { BUTTON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
@@ -62,18 +61,16 @@ export class MButton extends Vue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
-    private onClick(event: Event): void {
-        this.$emit('click', event);
+    @Emit('click')
+    onClick(event: Event): void {
         this.$el.blur();
     }
 
-    private onFocus(event: Event): void {
-        this.$emit('focus');
-    }
+    @Emit('focus')
+    onFocus(event: Event): void { }
 
-    private onBlur(event: Event): void {
-        this.$emit('blur');
-    }
+    @Emit('blur')
+    onBlur(event: Event): void { }
 
     private get isSkinPrimary(): boolean {
         return this.skin === MButtonSkin.Primary;
