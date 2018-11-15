@@ -8,10 +8,14 @@
                    'm--is-close': !propOpen,
                    'm--is-last': last,
                    'm--is-accordion': propMode === 'accordion' }">
-    <header class="m-step__header" @keyup.enter="openStep" @click="openStep" ref="header">
+    <header class="m-step__header"
+            @keyup.enter="openStep"
+            @click="openStep"
+            ref="header">
         <span class="m-step__header__icon">
             <m-icon :name="iconName"></m-icon>
-            <span class="m-step__header__icon-badge" v-if="state">
+            <span class="m-step__header__icon-badge"
+                  v-if="state">
                 <m-icon :name="getIcon()"></m-icon>
             </span>
         </span>
@@ -20,8 +24,11 @@
             <slot name="header"></slot>
         </div>
     </header>
-    <transition @enter="accordionEnter" @after-enter="accordionAfterEnter" @leave="accordionLeave">
-        <div class="m-step__body" v-if="propOpen">
+    <transition @enter="accordionEnter"
+                @after-enter="accordionAfterEnter"
+                @leave="accordionLeave">
+        <div class="m-step__body"
+             v-if="propOpen">
             <slot></slot>
         </div>
     </transition>

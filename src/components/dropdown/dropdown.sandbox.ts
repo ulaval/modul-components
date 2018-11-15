@@ -1,17 +1,13 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { DROPDOWN_NAME } from '../component-names';
 import WithRender from './dropdown.sandbox.html';
 
 @WithRender
 @Component
 export class MDropdownSandbox extends Vue {
-    // tslint:disable-next-line:no-null-keyword
     public nullValue1: string = '4a';
-    // tslint:disable-next-line:no-null-keyword
     public nullValue2: string = '5a';
-    // tslint:disable-next-line:no-null-keyword
     public nullValue3: string = '6a';
     public undefinedValue1: string = '';
     public undefinedValue2: string = '';

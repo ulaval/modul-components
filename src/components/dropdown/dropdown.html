@@ -75,7 +75,7 @@
              :preload="true"
              :open-trigger="'mousedown'"
              :lazy="false"
-             @after-enter="calculateFilterableListeHeight"
+             @portal-content-visible="calculateFilterableListeHeight"
              @portal-content-mounted="portalContentMounted">
         <template slot="header"
                   v-if="isMqMaxS && (hasLabel || filterable)">

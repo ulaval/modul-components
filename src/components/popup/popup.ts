@@ -109,8 +109,8 @@ export class MPopup extends ModulVue {
         this.$emit('close');
     }
 
-    private onAfterEnter(): void {
-        this.$emit('after-enter');
+    private onPortalContentVisible(): void {
+        this.$emit('portal-content-visible');
     }
 
     private get hasTriggerSlot(): boolean {
