@@ -1,10 +1,12 @@
 <div class="m-add-sandbox">
-    <h2 class="m-u--no-margin">Defaut</h2>
+    <h2 class="m-u--no-margin">Defaut m-add</h2>
+    <p>When m-add is use without content in default slot, always add title attribute to component that will describe the action of button.</p>
     <p>
-        <m-add @click="alert()"></m-add>
+        <m-add @click="alert()"
+               title="Add without content in default slot"></m-add>
     </p>
 
-    <h2 class="m-u--no-margin">Prop skin</h2>
+    <h2>Prop skin</h2>
     <h3 class="m-u--h4">Skin = "default"</h3>
     <p>
         <m-add @click="alert()">Skin default</m-add>
