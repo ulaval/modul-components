@@ -155,10 +155,6 @@ export class MLink extends ModulVue {
     private get propTabindex(): number {
         return this.disabled ? -1 : this.tabindex;
     }
-
-    private isObject(a): boolean {
-        return !!a && a.constructor === Object;
-    }
 }
 
 const LinkPlugin: PluginObject<any> = {
