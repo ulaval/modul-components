@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { Messages } from '../../utils/i18n/i18n';
 import { ICON_FILE_NAME } from '../component-names';
 import IconPluggin from '../icon/icon';
@@ -108,26 +107,24 @@ export class MIconFile extends Vue {
     @Prop()
     public $i18n: Messages;
 
-    public get svgTitle(): string {
-        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
-        let currentTooltip: string = this.tooltipGroup[cleanExtension] || TOOLTIP_OTHER;
-        let i18n: Messages = (Vue.prototype as any).$i18n;
-        let tooltipContent: string = i18n.translate(`m-icon-file:${currentTooltip}`);
-
-        return tooltipContent;
-    }
     @Prop({ default: '24px' })
     public size: string;
 
     private tooltipGroup: FileGroup = {};
     private fileMap: FileGroup = {};
 
+    @Emit('click')
+    onClick(event: Event): void { }
+
+    @Emit('keydown')
+    onKeydown(event: Event): void { }
+
     public get spriteId(): string {
         let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
         return this.fileMap[cleanExtension] || GROUP_OTHER;
     }
 
-    protected beforeMount(): void {
+    public beforeMount(): void {
         this.mapExtensionsGroup(EXT_IMAGE, GROUP_IMAGE, TOOLTIP_IMAGE);
         this.mapExtensionsGroup(EXT_TEXT, GROUP_TEXT, TOOLTIP_TEXT);
         this.mapExtensionsGroup(EXT_DOC, GROUP_WORD, TOOLTIP_WORD);
@@ -158,18 +155,19 @@ export class MIconFile extends Vue {
         this.mapExtensionsGroup(EXT_MARKUP_HTML, GROUP_MARKUP, TOOLTIP_MARKUP_HTML);
     }
 
+    public get svgTitle(): string {
+        let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
+        let currentTooltip: string = this.tooltipGroup[cleanExtension] || TOOLTIP_OTHER;
+        let i18n: Messages = (Vue.prototype as any).$i18n;
+        let tooltipContent: string = i18n.translate(`m-icon-file:${currentTooltip}`);
+
+        return tooltipContent;
+    }
+
     private mapExtensionsGroup(extensions, category: string, tooltip: string): void {
         extensions.split(',').forEach(ex => this.fileMap[ex] = category);
         extensions.split(',').forEach(ex => this.tooltipGroup[ex] = tooltip);
 
-    }
-
-    private onClick(event): void {
-        this.$emit('click', event);
-    }
-
-    private onKeydown(event): void {
-        this.$emit('keydown', event);
     }
 }
 

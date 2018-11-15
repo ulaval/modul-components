@@ -2,6 +2,7 @@
     "extends": "tslint-config-standard",
     "rulesDirectory": ["./tslint"],
     "rules": {
+        "no-consecutive-blank-lines": false,
         "func-method-return-type": true,
         "await-promise": false,
         "no-use-before-declare": false,
