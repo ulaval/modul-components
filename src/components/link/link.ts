@@ -84,16 +84,16 @@ export class MLink extends ModulVue {
         return !!this.url && !this.disabled;
     }
 
-    private get isRouterLink(): boolean {
-        return this.hasUrl && !this.extern;
-    }
-
     private get isButton(): boolean {
         return !this.hasUrl;
     }
 
+    private get isRouterLink(): boolean {
+        return !this.isButton && !this.extern;
+    }
+
     private get isExternalLink(): boolean {
-        return this.hasUrl && this.extern;
+        return !this.isButton && this.extern;
     }
 
     private get buttonRole(): string | undefined {
@@ -101,12 +101,7 @@ export class MLink extends ModulVue {
     }
 
     private get componentToShow(): string {
-        if (this.isButton) {
-            return 'span';
-        } else if (this.isRouterLink) {
-            return 'router-link';
-        }
-        return 'a';
+        return this.isRouterLink ? 'router-link' : 'a';
     }
 
     private get routerLinkUrl(): string | Object | undefined {
@@ -117,7 +112,7 @@ export class MLink extends ModulVue {
     }
 
     private get href(): string | Object | undefined {
-        return this.isExternalLink ? (this.isButton ? '#' : this.url) : undefined;
+        return this.isButton ? '#' : (this.isExternalLink ? this.url : undefined);
     }
 
     private get isSkinText(): boolean {
