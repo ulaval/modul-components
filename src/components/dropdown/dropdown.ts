@@ -129,13 +129,24 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private calculateFilterableListeHeight(): void {
+        // To display the contents of the list above the device keyboard,
+        // fixed the height of the list when the dropdown is filterable and in mobile mode.
         if (this.filterable && !UserAgentUtil.isAndroid() && this.as<MediaQueries>().isMqMaxS) {
             this.$children.forEach((popup, index) => {
+
+                // Find the MPopup component that has the MSidebar child component
                 if (popup.$options.name === MPopup.name) {
                     popup.$children.forEach((sidebar, index) => {
                         if (sidebar.$options.name === MSidebar.name) {
+
+                            // Reset the height of the list before calculating its height
+                            (this.$refs.items as HTMLElement).style.height = 'auto';
+
+                            // Set height of the list with height of MSidebar body
                             let sidebarComponent: MSidebar = sidebar as MSidebar;
-                            (this.$refs.items as HTMLElement).style.height = sidebarComponent.$refs.body.clientHeight + 'px';
+                            let sidebarComponentClientHeight: number = sidebarComponent.$refs.body.clientHeight;
+                            let listeMinHeight: number = 80;
+                            (this.$refs.items as HTMLElement).style.height = (sidebarComponentClientHeight > listeMinHeight ? sidebarComponentClientHeight : listeMinHeight) + 'px';
                             sidebarComponent.$refs.body.style.overflow = 'hidden';
                         }
                     });
