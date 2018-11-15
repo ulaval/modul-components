@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { BACK_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
 import WithRender from './back.html';
 
 @WithRender
@@ -42,6 +43,7 @@ export class MBack extends ModulVue {
 const BackPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(BACK_NAME, 'plugin.install');
+        v.use(I18nPlugin);
         v.component(BACK_NAME, MBack);
     }
 };
