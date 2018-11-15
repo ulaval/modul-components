@@ -6,14 +6,7 @@ exports[`tooltip should render correctly 1`] = `
     <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="Close tooltip">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
@@ -29,14 +22,7 @@ exports[`tooltip should render correctly when close title is set 1`] = `
     <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="test close">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
@@ -63,14 +49,7 @@ exports[`tooltip should render correctly when disabled 1`] = `
     <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="Close tooltip">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
@@ -86,14 +65,7 @@ exports[`tooltip should render correctly when is open 1`] = `
     <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="Close tooltip">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
@@ -112,14 +84,7 @@ exports[`tooltip should render correctly when mode is link 1`] = `
     </a>
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="Close tooltip">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
@@ -135,14 +100,7 @@ exports[`tooltip should render correctly when open title is set 1`] = `
     <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="Close tooltip">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
@@ -158,14 +116,7 @@ exports[`tooltip should render correctly with default slot 1`] = `
     <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }">
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="Close tooltip">
                 <!---->
                 <use aria-hidden="true"></use>
             </svg>
