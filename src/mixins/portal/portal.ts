@@ -170,6 +170,8 @@ export class Portal extends ModulVue implements PortalMixin {
 
                         if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
                             this.portalTargetEl.style.position = 'absolute';
+                            this.portalTargetEl.style.top = '0';
+                            this.portalTargetEl.style.left = '0';
 
                             // this.opening is important since it's fix a race condition where the portal
                             // could appear behind the content of the page if it was toggled too quickly.
