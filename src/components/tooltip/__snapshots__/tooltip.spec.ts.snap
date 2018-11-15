@@ -3,16 +3,18 @@
 exports[`tooltip should render correctly 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
     <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="Open tooltip" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>
@@ -22,18 +24,20 @@ exports[`tooltip should render correctly 1`] = `
 `;
 
 exports[`tooltip should render correctly when close title is set 1`] = `
-<m-popup open="open" placement="bottom" close-on-backdrop="true" class="m-tooltip">
-    <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" aria-expanded="true" icon-name="m-svg__information" title="test close" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+<m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
+    <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="Open tooltip" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>
@@ -45,7 +49,9 @@ exports[`tooltip should render correctly when close title is set 1`] = `
 exports[`tooltip should render correctly when close-button is false 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
     <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="Open tooltip" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
+        <!---->
         <div class="m-tooltip__body"></div>
     </div>
 </m-popup>
@@ -54,16 +60,18 @@ exports[`tooltip should render correctly when close-button is false 1`] = `
 exports[`tooltip should render correctly when disabled 1`] = `
 <m-popup placement="bottom" disabled="disabled" close-on-backdrop="true" class="m-tooltip m--is-disabled">
     <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="Open tooltip" button-size="22px" disabled="disabled" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>
@@ -73,18 +81,20 @@ exports[`tooltip should render correctly when disabled 1`] = `
 `;
 
 exports[`tooltip should render correctly when is open 1`] = `
-<m-popup open="open" placement="bottom" close-on-backdrop="true" class="m-tooltip">
-    <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" aria-expanded="true" icon-name="m-svg__information" title="Close tooltip" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+<m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
+    <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="Open tooltip" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>
@@ -95,17 +105,22 @@ exports[`tooltip should render correctly when is open 1`] = `
 
 exports[`tooltip should render correctly when mode is link 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
-    <a href="#" tabindex="1" slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" class="m-link m-tooltip__link m--is-unvisited m--is-button"> <span class="m-link__text">Link</span> </a>
+    <!---->
+    <a href="#" tabindex="1" class="m-link m-tooltip__link m--is-unvisited m--is-button" slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls">
+        <!----><span class="m-link__text">Link</span>
+        <!---->
+    </a>
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>
@@ -117,16 +132,18 @@ exports[`tooltip should render correctly when mode is link 1`] = `
 exports[`tooltip should render correctly when open title is set 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
     <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="test open" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>
@@ -138,16 +155,18 @@ exports[`tooltip should render correctly when open title is set 1`] = `
 exports[`tooltip should render correctly with default slot 1`] = `
 <m-popup placement="bottom" close-on-backdrop="true" class="m-tooltip">
     <m-icon-button slot="trigger" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" icon-name="m-svg__information" title="Open tooltip" button-size="22px" class="m-tooltip__icon"></m-icon-button>
+    <!---->
     <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
         <div tabindex="0" class="m-tooltip__close-button">
-            <svg aria-hidden="true" width="12px" height="12px" svg-tile="function boundFn(a) {
+            <svg aria-hidden="true" width="12px" height="12px" class="m-icon" svg-tile="function boundFn (a) {
     var l = arguments.length;
     return l
-      ? l &gt; 1
+      ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" class="m-icon">
+  }">
+                <!---->
                 <use aria-hidden="true"></use>
             </svg>
         </div>

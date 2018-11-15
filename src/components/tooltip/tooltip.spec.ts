@@ -1,9 +1,7 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import TooltipPlugin, { MTooltip, MTooltipMode } from './tooltip';
 
@@ -27,8 +25,8 @@ describe('tooltip', () => {
         });
 
         return expect(
-            renderComponent(tooltip.vm)
-        ).resolves.toMatchSnapshot();
+            tooltip.html()
+        ).toMatchSnapshot();
     });
 
     it('should render correctly when is open', () => {
@@ -40,8 +38,8 @@ describe('tooltip', () => {
         });
 
         return expect(
-            renderComponent(tooltip.vm)
-        ).resolves.toMatchSnapshot();
+            tooltip.html()
+        ).toMatchSnapshot();
     });
 
     it('should render correctly with default slot', () => {
@@ -52,7 +50,7 @@ describe('tooltip', () => {
             }
         });
 
-        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+        return expect(tooltip.html()).toMatchSnapshot();
     });
 
     it('should render correctly when mode is link', () => {
@@ -67,7 +65,7 @@ describe('tooltip', () => {
             }
         });
 
-        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+        return expect(tooltip.html()).toMatchSnapshot();
     });
 
     it('should render correctly when disabled', () => {
@@ -78,7 +76,7 @@ describe('tooltip', () => {
             }
         });
 
-        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+        return expect(tooltip.html()).toMatchSnapshot();
     });
 
     it('should render correctly when close-button is false', () => {
@@ -89,7 +87,7 @@ describe('tooltip', () => {
             }
         });
 
-        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+        return expect(tooltip.html()).toMatchSnapshot();
     });
 
     it('should render correctly when open title is set', () => {
@@ -100,7 +98,7 @@ describe('tooltip', () => {
             }
         });
 
-        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+        return expect(tooltip.html()).toMatchSnapshot();
     });
 
     it('should render correctly when close title is set', () => {
@@ -113,7 +111,7 @@ describe('tooltip', () => {
             }
         });
 
-        return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
+        return expect(tooltip.html()).toMatchSnapshot();
     });
 
     it('should emit click event when is clicked', () => {
