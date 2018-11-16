@@ -3,9 +3,10 @@ import ToastPlugin, { MToast, MToastPosition } from './toast';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalMixin, Portal } from '../../mixins/portal/portal';
-import { renderComponent, PortalStub } from '../../../tests/helpers/render';
+import { PortalStub } from '../../../tests/helpers/render';
 import { MMessageState } from '../message/message';
 
+jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
 let localVue: VueConstructor<Vue>;
 
@@ -17,7 +18,6 @@ let open: boolean;
 let actionLabel: string;
 let icon: boolean;
 let offset: string;
-let isSameLine: boolean;
 
 const defaultSlot: any = {
     default: `toast message content`
@@ -25,9 +25,8 @@ const defaultSlot: any = {
 
 const ACTION_LABEL: string = 'Action';
 
-const initializeShallowWrapper: any = () => {
+const initializeShallowWrapper: () => any = () => {
     wrapper = mount(MToast, {
-        attachToDocument: true,
         localVue: localVue,
         slots: defaultSlot,
         propsData: {
@@ -37,8 +36,7 @@ const initializeShallowWrapper: any = () => {
             open,
             actionLabel,
             icon,
-            offset,
-            isSameLine
+            offset
         },
         stubs: {
             transition: TransitionStub,
@@ -54,9 +52,11 @@ describe(`MToast`, () => {
         localVue.use(ToastPlugin);
     });
 
-    describe(`Given that no props have been passed`, () => {
-        beforeEach(() => {
+    describe(`Given that no props have been passed`, async () => {
+        beforeEach(async () => {
             initializeShallowWrapper();
+            wrapper.vm.$nextTick();
+            jest.runOnlyPendingTimers();
         });
 
         describe(`When the Toast is created`, () => {
@@ -88,7 +88,7 @@ describe(`MToast`, () => {
         });
 
         describe(`When the close button is clicked`, () => {
-            it(`Should emit a close event`, async () => {
+            it(`Should emit a close event`, () => {
                 wrapper.find('.m-toast__close-button').trigger('click');
 
                 expect(wrapper.emitted('close')).toBeTruthy();
@@ -100,6 +100,8 @@ describe(`MToast`, () => {
         beforeEach(() => {
             actionLabel = ACTION_LABEL;
             initializeShallowWrapper();
+            wrapper.vm.$nextTick();
+            jest.runOnlyPendingTimers();
         });
 
         describe(`When the Toast is created`, () => {
@@ -108,18 +110,41 @@ describe(`MToast`, () => {
             });
 
             it(`Should show a button with the label on it`, () => {
-                const label: string = wrapper.find('.m-toast__close-button').html();
+                const label: string = wrapper.find('.m-toast__actions').html();
 
-                expect(label).toBe(ACTION_LABEL);
+                expect(label).toContain(ACTION_LABEL);
             });
         });
 
         describe(`When the action button is clicked`, () => {
             it(`Should emit a action event`, () => {
-                wrapper.find('.m-toast__actions').trigger('click');
+                wrapper.find('.m-toast__actions').find('m-link').trigger('click');
 
-                expect(wrapper.emitted('onAction')).toBeTruthy();
+                expect(wrapper.emitted('action-button')).toBeTruthy();
             });
         });
+    });
+
+    describe(`Given that a timeout prop have been passed`, () => {
+        beforeEach(() => {
+            timeout = 5000;
+            initializeShallowWrapper();
+            wrapper.vm.$nextTick();
+            jest.runOnlyPendingTimers();
+        });
+
+        describe(`When the Toast is created`, () => {
+            it(`Should appear and then disappear`, () => {
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeTruthy();
+                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBeTruthy();
+                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBeTruthy();
+
+                jest.runOnlyPendingTimers();
+
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeFalsy();
+            });
+
+        });
+
     });
 });
