@@ -1,5 +1,4 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -79,11 +78,13 @@ import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
+import TitlePlugin from './title/title';
 import TooltipPlugin from './tooltip/tooltip';
 import TreeIconPlugin from './tree-icon/tree-icon';
 import TreeNodePlugin from './tree-node/tree-node';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
+
 
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
@@ -172,6 +173,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TextareaPlugin);
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
+        Vue.use(TitlePlugin);
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);

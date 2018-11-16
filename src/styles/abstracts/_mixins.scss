@@ -1,3 +1,40 @@
+
+@mixin m-title-commun-styles() {
+    font-family: $m-font-family;
+    font-weight: $m-font-weight--bold;
+    line-height: 1.1;
+}
+
+@mixin m-h1-styles() {
+    margin: 0;
+    font-size: $m-font-size--h1;
+}
+
+@mixin m-h2-styles() {
+    margin: $m-spacing--l 0 0 0;
+    font-size: $m-font-size--h2;
+}
+
+@mixin m-h3-styles() {
+    margin: $m-padding--l 0 0 0;
+    font-size: $m-font-size--h3;
+}
+
+@mixin m-h4-styles() {
+    margin: $m-spacing--m 0 0 0;
+    font-size: $m-font-size--h4;
+}
+
+@mixin m-h5-styles() {
+    margin: $m-spacing--m 0 0 0;
+    font-size: $m-font-size--h5;
+}
+
+@mixin m-h6-styles() {
+    margin: $m-spacing--m 0 0 0;
+    font-size: $m-font-size--h5;
+}
+
 @mixin titleStyles() {
     h1,
     h2,
@@ -11,51 +48,37 @@
     .m-u--h4,
     .m-u--h5,
     .m-u--h6 {
-        font-family: $m-font-family;
-        font-weight: $m-font-weight--bold;
-        line-height: 1.1;
-    }
-
-    h4,
-    h5,
-    h6,
-    .m-u--h4,
-    .m-u--h5,
-    .m-u--h6 {
-        margin: $m-margin--l 0 0 0;
+        @include m-title-commun-styles();
     }
 
     h1,
     .m-u--h1 {
-        margin: 0;
-        font-size: $m-font-size--h1;
+        @include m-h1-styles();
     }
 
     h2,
     .m-u--h2 {
-        margin: $m-padding--l 0 0 0;
-        font-size: $m-font-size--h2;
+        @include m-h2-styles();
     }
 
     h3,
     .m-u--h3 {
-        margin: $m-padding--l 0 0 0;
-        font-size: $m-font-size--h3;
+        @include m-h3-styles();
     }
 
     h4,
     .m-u--h4 {
-        font-size: $m-font-size--h4;
+        @include m-h4-styles();
     }
 
     h5,
     .m-u--h5 {
-        font-size: $m-font-size--h5;
+        @include m-h5-styles();
     }
 
     h6,
     .m-u--h6 {
-        font-size: $m-font-size--h6;
+        @include m-h6-styles();
     }
 }
 

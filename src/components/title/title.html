@@ -1,0 +1,8 @@
+<component class="m-title"
+           :class="[ 'm--is-skin-' + componentSkin,
+                { 'm--has-border': border,
+                'm--no-margin': !margin}]"
+           @click="onClick"
+           :is="'h' + level">
+    <slot></slot>
+</component>

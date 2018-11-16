@@ -1,0 +1,41 @@
+@import 'abstracts/variables';
+
+.m-title {
+    &.m--is-skin {
+        &-h1,
+        &-h2,
+        &-h3,
+        &-h4,
+        &-h6 {
+            @include m-title-commun-styles();
+        }
+
+        &-h1 {
+            @include m-h1-styles();
+        }
+
+        &-h2 {
+            @include m-h2-styles();
+        }
+
+        &-h3 {
+            @include m-h3-styles();
+        }
+
+        &-h4 {
+            @include m-h4-styles();
+        }
+
+        &-h5 {
+            @include m-h5-styles();
+        }
+
+        &-h6 {
+            @include m-h6-styles();
+        }
+    }
+
+    &.m--no-margin {
+        margin: 0;
+    }
+}
