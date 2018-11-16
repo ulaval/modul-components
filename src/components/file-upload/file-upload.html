@@ -144,7 +144,7 @@
                         <div class="m-file-upload__completed-list__infos">
                             <p class="m-file-upload__completed-list__infos-label">
                                 <m-link :url="file.url"
-                                        :extern="true"
+                                        :router-link="false"
                                         target="_blank"
                                         v-if="file.url">{{file.name}}</m-link>
                                 <template v-else>{{file.name}}</template>

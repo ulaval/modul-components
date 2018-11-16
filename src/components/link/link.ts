@@ -26,8 +26,8 @@ export class MLink extends ModulVue {
     @Prop()
     public url: string | Location;
 
-    @Prop()
-    public extern: boolean;
+    @Prop({ default: true })
+    public routerLink: boolean;
 
     @Prop()
     public disabled: boolean;
@@ -89,11 +89,11 @@ export class MLink extends ModulVue {
     }
 
     private get isRouterLink(): boolean {
-        return !this.isButton && !this.extern;
+        return !this.isButton && this.routerLink;
     }
 
     private get isExternalLink(): boolean {
-        return !this.isButton && this.extern;
+        return !this.isButton && !this.routerLink;
     }
 
     private get buttonRole(): string | undefined {

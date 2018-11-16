@@ -38,7 +38,7 @@
                 v-for="link in links">
                 <m-link class="m-message-page__link"
                         icon-name="m-svg__chevron--right"
-                        :extern="true"
+                        :router-link="false"
                         :url="link.url"
                         :target="isTargetExternal(link.external)">{{link.label}}</m-link>
             </li>

@@ -12,7 +12,7 @@
         <p>Do you want to close the window?</p>
     </m-dialog>
 
-    <h2>Link use as router-link</h2>
+    <h2>Link use with router-link = true</h2>
     <p>
         <m-link url="/">Home page</m-link>
     </p>
@@ -47,32 +47,33 @@
     </p>
 
 
-    <h2>Link with prop <strong>extern: <i>boolean</i></strong></h2>
+    <h2>Link use with <strong>router-link = false</strong></h2>
     <h3 class="m-u--h5 m-u--margin-top--s">Link use whitout router-link</h3>
-    <p>When <strong>extern = true</strong>, the page will be reloaded after each navigation.</p>
+    <p>When <strong>router-link = false</strong>, the page will be reloaded after each navigation.</p>
     <p>
         <m-link url="/"
-                :extern="true">Home page</m-link>
+                :router-link="false">Home page</m-link>
     </p>
     <p>
         <m-link url="m-button"
-                :extern="true">m-button sandbox</m-link>
+                :router-link="false">m-button sandbox</m-link>
     </p>
     <p>
         <m-link url="https://www.google.ca/"
-                :extern="true">Google</m-link>
+                :router-link="false">Google</m-link>
     </p>
 
-    <h3 class="m-u--h5">Never use external link width prop extern = false</h3>
+    <h3 class="m-u--h5">Never use external link width prop router-link = true</h3>
     <p>
-        <m-link url="https://www.google.ca/">Google (this link will not work)</m-link>
+        <m-link url="https://www.google.ca/"
+                :router-link="true">Google (this link will not work)</m-link>
     </p>
 
     <h3 class="m-u--h5">Open link in new tab</h3>
     <p>Use <strong>target="_blank"</strong></p>
     <p>
         <m-link url="https://www.google.ca/"
-                :extern="true"
+                :router-link="false"
                 target="_blank">Google</m-link>
     </p>
 
