@@ -4,7 +4,7 @@
     line-height: 1.1;
 }
 
-@mixin m-font-size-h1() {
+@mixin m-h1-font-style() {
     font-size: $m-font-size--h1;
 
     @media (max-width: $m-mq--max--s) {
@@ -12,7 +12,7 @@
     }
 }
 
-@mixin m-font-size-h2() {
+@mixin m-h2-font-style() {
     font-size: $m-font-size--h2;
 
     @media (max-width: $m-mq--max--s) {
@@ -20,7 +20,7 @@
     }
 }
 
-@mixin m-font-size-h3() {
+@mixin m-h3-font-style() {
     font-size: $m-font-size--h3;
 
     @media (max-width: $m-mq--max--s) {
@@ -28,7 +28,7 @@
     }
 }
 
-@mixin m-font-size-h4() {
+@mixin m-h4-font-style() {
     font-size: $m-font-size--h4;
 
     @media (max-width: $m-mq--max--s) {
@@ -37,7 +37,7 @@
     }
 }
 
-@mixin m-font-size-h5() {
+@mixin m-h5-font-style() {
     font-size: $m-font-size--h5;
 
     @media (max-width: $m-mq--max--s) {
@@ -45,7 +45,7 @@
     }
 }
 
-@mixin m-font-size-h6() {
+@mixin m-h6-font-style() {
     font-size: $m-font-size--h6;
 
     @media (max-width: $m-mq--max--s) {
@@ -73,42 +73,42 @@
     .m-u--h1 {
         margin: 0;
 
-        @include m-font-size-h1();
+        @include m-h1-font-style();
     }
 
     h2,
     .m-u--h2 {
         margin: $m-spacing--l 0 0 0;
 
-        @include m-font-size-h2();
+        @include m-h2-font-style();
     }
 
     h3,
     .m-u--h3 {
         margin: $m-spacing--l 0 0 0;
 
-        @include m-font-size-h3();
+        @include m-h3-font-style();
     }
 
     h4,
     .m-u--h4 {
         margin: $m-spacing--m 0 0 0;
 
-        @include m-font-size-h4();
+        @include m-h4-font-style();
     }
 
     h5,
     .m-u--h5 {
         margin: $m-spacing--m 0 0 0;
 
-        @include m-font-size-h5();
+        @include m-h5-font-style();
     }
 
     h6,
     .m-u--h6 {
         margin: $m-spacing--m 0 0 0;
 
-        @include m-font-size-h6();
+        @include m-h6-font-style();
     }
 }
 
