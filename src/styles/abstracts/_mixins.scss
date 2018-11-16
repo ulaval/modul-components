@@ -1,4 +1,59 @@
-@mixin m-title-styles() {
+@mixin m-commons-title-styles() {
+    font-family: $m-font-family;
+    font-weight: $m-font-weight--bold;
+    line-height: 1.1;
+}
+
+@mixin m-font-size-h1() {
+    font-size: $m-font-size--h1;
+
+    @media (max-width: $m-mq--max--s) {
+        font-size: $m-font-size--mobile-h1;
+    }
+}
+
+@mixin m-font-size-h2() {
+    font-size: $m-font-size--h2;
+
+    @media (max-width: $m-mq--max--s) {
+        font-size: $m-font-size--mobile-h2;
+    }
+}
+
+@mixin m-font-size-h3() {
+    font-size: $m-font-size--h3;
+
+    @media (max-width: $m-mq--max--s) {
+        font-size: $m-font-size--mobile-h3;
+    }
+}
+
+@mixin m-font-size-h4() {
+    font-size: $m-font-size--h4;
+
+    @media (max-width: $m-mq--max--s) {
+        font-size: $m-font-size--mobile-h4;
+        font-weight: $m-font-weight--black;
+    }
+}
+
+@mixin m-font-size-h5() {
+    font-size: $m-font-size--h5;
+
+    @media (max-width: $m-mq--max--s) {
+        font-size: $m-font-size--mobile-h5;
+    }
+}
+
+@mixin m-font-size-h6() {
+    font-size: $m-font-size--h6;
+
+    @media (max-width: $m-mq--max--s) {
+        font-size: $m-font-size--mobile-h6;
+    }
+}
+
+@mixin m-titles-styles() {
     h1,
     h2,
     h3,
@@ -11,76 +66,49 @@
     .m-u--h4,
     .m-u--h5,
     .m-u--h6 {
-        font-family: $m-font-family;
-        font-weight: $m-font-weight--bold;
-        line-height: 1.1;
-    }
-
-    h4,
-    h5,
-    h6,
-    .m-u--h4,
-    .m-u--h5,
-    .m-u--h6 {
-        margin: $m-margin--l 0 0 0;
+        @include m-commons-title-styles();
     }
 
     h1,
     .m-u--h1 {
         margin: 0;
-        font-size: $m-font-size--h1;
 
-        @media (max-width: $m-mq--max--s) {
-            font-size: $m-font-size--mobile-h1;
-        }
+        @include m-font-size-h1();
     }
 
     h2,
     .m-u--h2 {
-        margin: $m-padding--l 0 0 0;
-        font-size: $m-font-size--h2;
+        margin: $m-spacing--l 0 0 0;
 
-        @media (max-width: $m-mq--max--s) {
-            font-size: $m-font-size--mobile-h2;
-        }
+        @include m-font-size-h2();
     }
 
     h3,
     .m-u--h3 {
-        margin: $m-padding--l 0 0 0;
-        font-size: $m-font-size--h3;
+        margin: $m-spacing--l 0 0 0;
 
-        @media (max-width: $m-mq--max--s) {
-            font-size: $m-font-size--mobile-h3;
-        }
+        @include m-font-size-h3();
     }
 
     h4,
     .m-u--h4 {
-        font-size: $m-font-size--h4;
+        margin: $m-spacing--m 0 0 0;
 
-        @media (max-width: $m-mq--max--s) {
-            font-size: $m-font-size--mobile-h4;
-            font-weight: $m-font-weight--black;
-        }
+        @include m-font-size-h4();
     }
 
     h5,
     .m-u--h5 {
-        font-size: $m-font-size--h5;
+        margin: $m-spacing--m 0 0 0;
 
-        @media (max-width: $m-mq--max--s) {
-            font-size: $m-font-size--mobile-h5;
-        }
+        @include m-font-size-h5();
     }
 
     h6,
     .m-u--h6 {
-        font-size: $m-font-size--h6;
+        margin: $m-spacing--m 0 0 0;
 
-        @media (max-width: $m-mq--max--s) {
-            font-size: $m-font-size--mobile-h6;
-        }
+        @include m-font-size-h6();
     }
 }
 
