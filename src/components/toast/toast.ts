@@ -13,13 +13,8 @@ import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import ModulPlugin from '../../utils/modul/modul';
 import PortalPlugin from 'portal-vue';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-
-export enum MToastState {
-    Confirmation = 'confirmation',
-    Information = 'information',
-    Warning = 'warning',
-    Error = 'error'
-}
+import { MLinkMode } from '../link/link';
+import { MMessageState } from '../message/message';
 
 export enum MToastPosition {
     TopLeft = 'top-left',
@@ -36,14 +31,14 @@ export enum MToastPosition {
 })
 export class MToast extends ModulVue implements PortalMixinImpl {
     @Prop({
-        default: MToastState.Confirmation,
+        default: MMessageState.Confirmation,
         validator: value =>
-            value === MToastState.Confirmation ||
-            value === MToastState.Information ||
-            value === MToastState.Warning ||
-            value === MToastState.Error
+            value === MMessageState.Confirmation ||
+            value === MMessageState.Information ||
+            value === MMessageState.Warning ||
+            value === MMessageState.Error
     })
-    public state: MToastState;
+    public state: MMessageState;
 
     @Prop({
         default: MToastPosition.BottomRight,
@@ -78,14 +73,11 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     })
     public offset: string;
 
-    @Prop({
-        default: false
-    })
-    public isSameLine: boolean;
-
     public $refs: {
         toast: HTMLElement
     };
+
+    private buttonMode: MLinkMode = MLinkMode.Button;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         if (value) {
@@ -130,19 +122,19 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     private get isStateInformation(): boolean {
-        return this.state === MToastState.Information;
+        return this.state === MMessageState.Information;
     }
 
     private get isStateWarning(): boolean {
-        return this.state === MToastState.Warning;
+        return this.state === MMessageState.Warning;
     }
 
     private get isStateError(): boolean {
-        return this.state === MToastState.Error;
+        return this.state === MMessageState.Error;
     }
 
     private get isStateConfirmation(): boolean {
-        return this.state === MToastState.Confirmation;
+        return this.state === MMessageState.Confirmation;
     }
 
     private get isTop(): boolean {
@@ -169,16 +161,16 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case MToastState.Confirmation:
+            case MMessageState.Confirmation:
                 icon = 'm-svg__confirmation';
                 break;
-            case MToastState.Information:
+            case MMessageState.Information:
                 icon = 'm-svg__information';
                 break;
-            case MToastState.Warning:
+            case MMessageState.Warning:
                 icon = 'm-svg__warning';
                 break;
-            case MToastState.Error:
+            case MMessageState.Error:
                 icon = 'm-svg__error';
                 break;
             default:

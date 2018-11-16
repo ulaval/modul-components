@@ -1,15 +1,16 @@
 import { Wrapper, createLocalVue, mount, TransitionStub } from '@vue/test-utils';
-import ToastPlugin, { MToast, MToastState, MToastPosition } from './toast';
+import ToastPlugin, { MToast, MToastPosition } from './toast';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalMixin, Portal } from '../../mixins/portal/portal';
 import { renderComponent, PortalStub } from '../../../tests/helpers/render';
+import { MMessageState } from '../message/message';
 
 let wrapper: Wrapper<MToast>;
 let localVue: VueConstructor<Vue>;
 
 // Props
-let state: MToastState;
+let state: MMessageState;
 let position: MToastPosition;
 let timeout: number;
 let open: boolean;
@@ -66,7 +67,7 @@ describe(`MToast`, () => {
             });
 
             it(`Should be in Confirmation state`, () => {
-                expect(wrapper.vm.state).toEqual(MToastState.Confirmation);
+                expect(wrapper.vm.state).toEqual(MMessageState.Confirmation);
             });
 
             it(`Should be in the bottom-right position`, () => {
@@ -83,10 +84,6 @@ describe(`MToast`, () => {
 
             it(`Should have an offset set to 0 as a string`, () => {
                 expect(wrapper.vm.offset).toEqual('0');
-            });
-
-            it(`Should not be set on the same line`, () => {
-                expect(wrapper.vm.isSameLine).toBeFalsy();
             });
         });
 

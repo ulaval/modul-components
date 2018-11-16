@@ -25,11 +25,8 @@
                     <div class="m-toast__text">
                         <slot></slot>
                     </div>
-                </div>
-                <div class="m-toast__actions"
-                    :class="{'m--is-same-line': isSameLine}">
-                    <div class="m-toast__primary-action" v-if="actionLabel">
-                        <m-button @click="onAction">{{ actionLabel }}</m-button>
+                    <div class="m-toast__actions" v-if="actionLabel">
+                        <m-link @click="onAction" :mode="buttonMode">{{ actionLabel }}</m-link>
                     </div>
                 </div>
                 <m-icon-button class="m-toast__close-button"
