@@ -24,21 +24,4 @@ describe('VueFroala', () => {
     it('should be empty', () => {
         expect(froala.isEmpty).toBeTruthy();
     });
-
-    describe('When adding value',() => {
-        const newValue: string = 'test';
-        beforeEach(() => {
-            wrapper.setProps({
-                value: newValue
-            });
-        });
-
-        it('should update the model', () => {
-            expect(froala.model).toEqual(newValue);
-        });
-
-        it('should not be empty', () => {
-            expect(froala.isEmpty).toBeFalsy();
-        });
-    });
 });

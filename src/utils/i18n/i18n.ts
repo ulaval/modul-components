@@ -107,7 +107,8 @@ export class Messages {
         params: any = [],
         nb?: number,
         modifier?: string,
-        htmlEncodeParams: boolean = true
+        htmlEncodeParams: boolean = true,
+        formatMode = this.formatMode
     ): string {
         if (!key) {
             throw new Error('The key is empty.');
@@ -121,7 +122,7 @@ export class Messages {
             }
         }
 
-        val = this.format(val, params);
+        val = this.format(val, params, formatMode);
 
         return val;
     }
@@ -131,8 +132,8 @@ export class Messages {
      * @param {string} val the string to format
      * @param {any[]} params the values to insert in string
      */
-    private format(val: string, params: any): string {
-        switch (this.formatMode) {
+    private format(val: string, params: any, formatMode: FormatMode): string {
+        switch (formatMode) {
             case FormatMode.Vsprintf:
                 return vsprintf(val, params);
             case FormatMode.Sprintf:

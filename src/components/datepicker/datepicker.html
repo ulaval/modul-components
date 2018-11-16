@@ -57,12 +57,12 @@
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="m-svg__chevron--left" @click="selectYear(selectedYear - 1)" :disabled="isMinYear">previous year</m-icon-button>
                 <button type="button" class="m-datepicker__years" @click="showYears" aria-live="polite">{{selectedYear}}</button>
-                <m-icon-button icon-name="m-svg__chevron" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
+                <m-icon-button icon-name="m-svg__chevron--right" @click="selectYear(selectedYear + 1)" :disabled="isMaxYear">next year</m-icon-button>
             </nav>
             <nav class="m-datepicker__header__nav">
                 <m-icon-button icon-name="m-svg__chevron--left" @click="selectMonth(selectedMonth - 1)" :disabled="isMinMonth">previous month</m-icon-button>
                 <button type="button" class="m-datepicker__months" @click="view = 'month'" aria-live="polite">{{ selectedMonthName }}</button>
-                <m-icon-button icon-name="m-svg__chevron" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
+                <m-icon-button icon-name="m-svg__chevron--right" @click="selectMonth(selectedMonth + 1)" :disabled="isMaxMonth">next month</m-icon-button>
             </nav>
         </div>
         <div :id="ariaControls2" class="m-datepicker__body" ref="body" :aria-labelledby="id" aria-live="polite">

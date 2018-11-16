@@ -119,7 +119,7 @@ $m-panel--screen--min: 640px;
     &__header,
     &__footer {
         &:not(.m--no-padding) {
-            padding: $m-padding--s;
+            padding: $m-padding $m-padding--s;
 
             @media (min-width: $m-mq--min--s) {
                 padding: $m-padding;

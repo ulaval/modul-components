@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
@@ -122,6 +121,10 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         }
     }
 
+    @Emit('click')
+    private clickEvent(event: Event): void {
+    }
+
     public get propDisabled(): boolean {
         return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
             this.disabled;
@@ -167,13 +170,13 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
             this.$refs.accordionHeader.blur();
             this.propOpen = !initialState;
-            this.$emit('click', event);
+            this.clickEvent(event);
         }
     }
 
     @Watch('open')
     private syncOpenProp(val: boolean): void {
-        this.internalPropOpen = val;
+        this.propOpen = val;
     }
 }
 

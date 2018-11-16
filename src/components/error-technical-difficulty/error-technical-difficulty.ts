@@ -6,10 +6,10 @@ import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import ErrorTemplatePlugin, { Link, MErrorTemplateSkin } from '../error-template/error-template';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import MessagePlugin from '../message/message';
+import MessagePlugin, { MMessageState } from '../message/message';
 import PanelPlugin from '../panel/panel';
 import WithRender from './error-technical-difficulty.html?style=./error-technical-difficulty.scss';
 
@@ -57,19 +57,22 @@ export class MErrorTechnicalDifficulty extends ModulVue {
     @Prop()
     public error?: Error;
 
-    public skin: string = MErrorTemplateSkin.Error;
+    public state: string = MMessageState.Error;
 
     public svgName: string = 'm-svg__error-technical-difficulty';
 
     /**
-     * Using the value of the props errorDate, generates an array with two values, the date in YYYY-MM-DD format and the time in HH:mm:ss format.
+     * Returns the formatted date for the value received as props (format = YYYY-MM-DD). Used to display the date when the error was generated.
      */
-    public get dateInfo(): string[] {
-        let result: string[] = [];
-        if (this.errorDate) {
-            result = [this.errorDate.format('YYYY-MM-DD'), this.errorDate.format('HH:mm:ss')];
-        }
-        return result;
+    public get formattedDate(): string {
+        return this.errorDate.format('YYYY-MM-DD');
+    }
+
+    /**
+     * Returns the formatted time for the value received as props (format = HH:mm:ss). Used to display the time when the error was generated.
+     */
+    public get formattedTime(): string {
+        return this.errorDate.format('HH:mm:ss');
     }
 
     /**
@@ -79,6 +82,9 @@ export class MErrorTechnicalDifficulty extends ModulVue {
         return this.showStackTrace && !!this.error;
     }
 
+    /**
+     * Returns the current userAgent string.
+     */
     public get userAgent(): string {
         return window.navigator.userAgent;
     }
@@ -93,7 +99,7 @@ const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
         v.use(LinkPlugin);
         v.use(MessagePlugin);
         v.use(PanelPlugin);
-        v.use(ErrorTemplatePlugin);
+        v.use(MessagePagePlugin);
         v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);
     }
 };

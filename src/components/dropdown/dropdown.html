@@ -59,10 +59,12 @@
              :enter="transitionEnter"
              :leave="transitionLeave"
              :padding="false"
-             :focus-management="isMqMaxS"
+             :focus-management="false"
              :close-on-backdrop="true"
              :preload="true"
-             :open-trigger="'mousedown'">
+             :open-trigger="'mousedown'"
+             :lazy="false"
+             @portal-content-mounted="portalContentMounted">
         <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
             <div class="m-dropdown__header__research" v-if="filterable">

@@ -2,6 +2,7 @@
     "extends": "tslint-config-standard",
     "rulesDirectory": ["./tslint"],
     "rules": {
+        "no-consecutive-blank-lines": false,
         "func-method-return-type": true,
         "await-promise": false,
         "no-use-before-declare": false,
@@ -11,7 +12,9 @@
         "strict-type-predicates": false,
         "indent": [true, "spaces"],
         "triple-equals": true,
-        "ter-indent": [true, 4, { "SwitchCase": 1 }],
+        "ter-indent": [true, 4, {
+            "SwitchCase": 1
+        }],
         "space-before-function-paren": [
             true,
             {

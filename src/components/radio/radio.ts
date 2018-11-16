@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
-
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -29,6 +28,7 @@ export interface RadioGroup {
     inline: boolean;
     radiosVerticalAlign: MRadioVerticalAlignement;
     radiosMarginTop: string;
+    readOnly: boolean;
     getValue(): string;
     updateValue(value: string): void;
 }
@@ -74,6 +74,8 @@ export class MRadio extends ModulVue {
     public radioVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radioMarginTop: string;
+    @Prop()
+    public readOnly: boolean;
 
     // ----- For Button Group -----
     @Prop()
@@ -94,6 +96,9 @@ export class MRadio extends ModulVue {
     private parentGroup: RadioGroup;
 
     private internalDisabled: boolean = false;
+
+    @Emit('change')
+    onChange(value: any): void { }
 
     public get propPosition(): MRadioPosition {
         return this.isGroup() ? this.parentGroup.radiosPosition : this.radioPosition;
@@ -142,7 +147,15 @@ export class MRadio extends ModulVue {
         if (this.isGroup()) {
             this.parentGroup.updateValue(value);
         } else {
-            this.$emit('change', value);
+            this.onChange(value);
+        }
+    }
+
+    public get propReadOnly(): boolean {
+        if (this.readOnly !== undefined) {
+            return this.readOnly;
+        } else {
+            return this.isGroup() ? (this.parentGroup as ButtonGroup).readOnly : false;
         }
     }
 

@@ -17,7 +17,7 @@
         overflow: hidden;
     }
 
-    &:not(.m--is-skin-tab-light):not(.m--is-skin-tab-dark) {
+    &:not(.m--is-skin-tab-light):not(.m--is-skin-tab-dark):not(.m--is-skin-plain) {
         .m-navbar__button {
             &.m--is-right {
                 button {
@@ -33,21 +33,13 @@
         }
     }
 
-    &.m--is-skin-nav-main {
-        background: $m-color--grey-darker;
-
+    &.m--is-skin-plain {
         .m-navbar__button {
-            &.m--is-right {
-                @include m-navbar-linear-gradient($m-color--grey-darker, left);
-            }
-
-            &.m--is-left {
-                @include m-navbar-linear-gradient($m-color--grey-darker, right);
-            }
+            background-color: currentColor;
         }
     }
 
-    &.m--is-skin-nav-sub {
+    &.m--is-skin-nav-main {
         background: $m-color--grey-darkest;
 
         .m-navbar__button {
@@ -57,6 +49,20 @@
 
             &.m--is-left {
                 @include m-navbar-linear-gradient($m-color--grey-darkest, right);
+            }
+        }
+    }
+
+    &.m--is-skin-nav-sub {
+        background: $m-color--grey-black;
+
+        .m-navbar__button {
+            &.m--is-right {
+                @include m-navbar-linear-gradient($m-color--grey-black, left);
+            }
+
+            &.m--is-left {
+                @include m-navbar-linear-gradient($m-color--grey-black, right);
             }
         }
     }

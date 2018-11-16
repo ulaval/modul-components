@@ -1,25 +1,63 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h2 class="m-u--no-margin">L'utilsation de v-html dans un bouton et d'un &lt;m-i18n &gt; dans un autre n'est pas compatible</h2>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        <a href="https://github.com/ulaval/modul-components/pull/536">PR-536</a> : Pour démontrer le bug qui force l'utilisation de key= lorsque l'on utilise des template voir <a href="https://fr.vuejs.org/v2/guide/conditional.html#Controle-des-elements-reutilisables-avec-key">(la doc officiel)</a>
+
     </p>
-    <m-button>Je suis un bouton</m-button>
 
-    <h1>Je suis un H1</h1>
-    <h2>Je suis un H2</h2>
-    <h3>Je suis un H3</h3>
-    <h4>Je suis un H4</h4>
-    <h5>Je suis un H5</h5>
-    <h6>Je suis un H6</h6>
 
-    <m-textarea value="Je suis un H1" tag-style="h1"></m-textarea><br>
-    <m-textarea value="Je suis un H2" tag-style="h2"></m-textarea><br>
-    <m-textarea value="Je suis un H3" tag-style="h3"></m-textarea><br>
-    <m-textarea value="Je suis un H4" tag-style="h4"></m-textarea><br>
-    <m-textarea value="Je suis un H5" tag-style="h5"></m-textarea><br>
-    <m-textarea value="Je suis un H6" tag-style="h6"></m-textarea><br>
+    <h2>Using key</h2>
+    <div class="m-u--margin-top">
+        <m-button v-html="libelle"
+                  @click="toogleAfficher()"
+                  v-if="afficherbouton1"
+                  key="username-input-2">
+        </m-button>
+        <m-button @click="toogleAfficher()"
+                  v-if="!afficherbouton1">
+            patate2
+        </m-button key="username-input">
+    </div>
+
+    <h2>Not using key</h2>
+    <div class="m-u--margin-top">
+        <m-button v-html="libelle"
+                  @click="toogleAfficher()"
+                  v-if="afficherbouton1">
+        </m-button>
+
+        <m-button @click="toogleAfficher()"
+                  v-if="!afficherbouton1">
+            patate2
+        </m-button>
+    </div>
+
+    <m-button class="m-u--margin-top--l">I am a button</m-button>
+
+    <h2>Title level</h2>
+    <div class="m-u--margin-top">
+        <h1>I am a H1</h1>
+        <h2>I am a H2</h2>
+        <h3>I am a H3</h3>
+        <h4>I am a H4</h4>
+        <h5>I am a H5</h5>
+        <h6>I am a H6</h6>
+    </div>
+
+    <h2>Title level in textfield</h2>
+    <div class="m-u--margin-top">
+        <m-textarea value="I am a H1"
+                    tag-style="h1"></m-textarea><br>
+        <m-textarea value="I am a H2"
+                    tag-style="h2"></m-textarea><br>
+        <m-textarea value="I am a H3"
+                    tag-style="h3"></m-textarea><br>
+        <m-textarea value="I am a H4"
+                    tag-style="h4"></m-textarea><br>
+        <m-textarea value="I am a H5"
+                    tag-style="h5"></m-textarea><br>
+        <m-textarea value="I am a H6"
+                    tag-style="h6"></m-textarea><br>
+    </div>
+
 </div>

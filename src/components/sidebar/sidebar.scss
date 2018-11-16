@@ -16,6 +16,7 @@
         align-items: center;
         outline: none;
         min-width: $m-min-width;
+        user-select: none;
 
         @include m-is-ie() {
             display: block;
@@ -23,6 +24,7 @@
 
         &.m--is-close-on-backdrop {
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         &.m--is-origin {
@@ -55,7 +57,7 @@
                     .m-sidebar__article {
                         transform: translate3d(0, calc(100% + #{ $m-touch-size }), 0);
                         bottom: 0;
-                        max-height: calc(100vh - #{ $m-padding--xl });
+                        max-height: calc(100% - #{ $m-padding--xl });
                     }
                 }
             }
@@ -182,6 +184,7 @@
         padding: $m-padding;
         flex: 1 1 auto;
         overflow: auto;
+        user-select: text;
 
         @include m-scrollbar();
     }

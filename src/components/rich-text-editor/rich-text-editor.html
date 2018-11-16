@@ -5,9 +5,7 @@
     'm--is-valid' : isValid,
     'm--is-focus' : isFocus,
     'm--has-icon' : hasIcon,
-    'm--has-label': hasLabel,
-    'm--is-desktop' : isEqMinXS,
-    'm--is-mobile' : isEqMaxXS  }"
+    'm--has-label': hasLabel  }"
     @click="onClick"
     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
@@ -18,10 +16,11 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :border-top="true"
+                   :border-top="!readonly"
                    :icon-name="iconName"
                    :required-marker="requiredMarker"
-                   :tag-style="tagStyle">
+                   :tag-style="tagStyle"
+                   :readonly="readonly">
         <froala :config="internalOptions"
             :value="value"
             @input="refreshModel"
@@ -33,7 +32,9 @@
             @keydown="onKeydown"
             @paste="onPaste"
             :disabled="disabled || waiting"
-            ref="input"></froala>
+            :custom-translations="customTranslations"
+            ref="input"
+            :readonly="readonly"></froala>
     </m-input-style>
     <div class="m-textfield__validation">
         <m-validation-message

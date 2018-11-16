@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { RADIO_GROUP_NAME } from '../component-names';
@@ -38,9 +37,16 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public radiosVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radiosMarginTop: string;
+    @Prop({
+        default: false
+    })
+    public readOnly: boolean;
 
     public name: string = uuid.generate();
     private internalValue: any | undefined = '';
+
+    @Emit('change')
+    onChange(value: any): void { }
 
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
@@ -81,7 +87,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     private set model(value: any) {
         this.internalValue = value;
-        this.$emit('change', value);
+        this.onChange(value);
     }
 }
 

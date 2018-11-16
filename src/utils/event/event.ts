@@ -1,6 +1,6 @@
-export const targetIsInput: (event: Event) => boolean = (event: Event): boolean => {
+export const targetIsInput: (element: HTMLElement, event: Event) => boolean = (element: HTMLElement, event: Event): boolean => {
     let recursiveElement: HTMLElement = event.target as HTMLElement;
-    while (recursiveElement && recursiveElement !== this.element) {
+    while (recursiveElement && recursiveElement !== element) {
         if (['INPUT', 'TEXTAREA'].find(elem => elem === recursiveElement.tagName) || recursiveElement.contentEditable === 'true') {
             return true;
         }

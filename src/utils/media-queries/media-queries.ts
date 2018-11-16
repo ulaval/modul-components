@@ -1,5 +1,5 @@
 import enquire from 'enquire.js/dist/enquire';
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 
 export enum MediaQueriesBpMin {
     XL = '(min-width: 1600px)',
@@ -23,69 +23,71 @@ export enum MediaQueriesBp {
     S = '(min-width: 480px) and (max-width: 767px)'
 }
 
-const MATCH: string = 'match-';
-const UNMATCH: string = 'unmatch-';
+export interface MediaQueriesStatus {
+    isMqMinXL: boolean;
+    isMqMinL: boolean;
+    isMqMinM: boolean;
+    isMqMinS: boolean;
+    isMqMinXS: boolean;
+
+    isMqMaxXL: boolean;
+    isMqMaxL: boolean;
+    isMqMaxM: boolean;
+    isMqMaxS: boolean;
+    isMqMaxXS: boolean;
+
+    isMqS: boolean;
+    isMqM: boolean;
+    isMqL: boolean;
+}
 
 export class MediaQueries {
-    private eventBus: Vue = new Vue();
+    public state: MediaQueriesStatus = {
+        isMqMinXL: false,
+        isMqMinL: false,
+        isMqMinM: false,
+        isMqMinS: false,
+        isMqMinXS: false,
+        isMqMaxXL: false,
+        isMqMaxL: false,
+        isMqMaxM: false,
+        isMqMaxS: false,
+        isMqMaxXS: false,
+        isMqS: false,
+        isMqM: false,
+        isMqL: false
+    };
 
     constructor() {
-        this.registerEnquire(MediaQueriesBpMin.XL);
-        this.registerEnquire(MediaQueriesBpMin.L);
-        this.registerEnquire(MediaQueriesBpMin.M);
-        this.registerEnquire(MediaQueriesBpMin.S);
-        this.registerEnquire(MediaQueriesBpMin.XS);
+        this.register(MediaQueriesBpMin.XL, () => this.state.isMqMinXL = true, () => this.state.isMqMinXL = false);
+        this.register(MediaQueriesBpMin.L, () => this.state.isMqMinL = true, () => this.state.isMqMinL = false);
+        this.register(MediaQueriesBpMin.M, () => this.state.isMqMinM = true, () => this.state.isMqMinM = false);
+        this.register(MediaQueriesBpMin.S, () => this.state.isMqMinS = true, () => this.state.isMqMinS = false);
+        this.register(MediaQueriesBpMin.XS, () => this.state.isMqMinXS = true, () => this.state.isMqMinXS = false);
 
-        this.registerEnquire(MediaQueriesBpMax.XL);
-        this.registerEnquire(MediaQueriesBpMax.L);
-        this.registerEnquire(MediaQueriesBpMax.M);
-        this.registerEnquire(MediaQueriesBpMax.S);
-        this.registerEnquire(MediaQueriesBpMax.XS);
+        this.register(MediaQueriesBpMax.XL, () => this.state.isMqMaxXL = true, () => this.state.isMqMaxXL = false);
+        this.register(MediaQueriesBpMax.L, () => this.state.isMqMaxL = true, () => this.state.isMqMaxL = false);
+        this.register(MediaQueriesBpMax.M, () => this.state.isMqMaxM = true, () => this.state.isMqMaxM = false);
+        this.register(MediaQueriesBpMax.S, () => this.state.isMqMaxS = true, () => this.state.isMqMaxS = false);
+        this.register(MediaQueriesBpMax.XS, () => this.state.isMqMaxXS = true, () => this.state.isMqMaxXS = false);
 
-        this.registerEnquire(MediaQueriesBp.L);
-        this.registerEnquire(MediaQueriesBp.M);
-        this.registerEnquire(MediaQueriesBp.S);
+        this.register(MediaQueriesBp.S, () => this.state.isMqS = true, () => this.state.isMqS = false);
+        this.register(MediaQueriesBp.M, () => this.state.isMqM = true, () => this.state.isMqM = false);
+        this.register(MediaQueriesBp.L, () => this.state.isMqL = true, () => this.state.isMqL = false);
     }
 
-    public register(breakingPoint: string, match: () => void, unmatch?: () => void): void {
-        this.eventBus.$on(MATCH + breakingPoint, match);
-        if (unmatch) {
-            this.eventBus.$on(UNMATCH + breakingPoint, unmatch);
-        }
-
-        // registration needed to be notified if breakpoint matches, always force unregister
-        this.registerEnquire(breakingPoint, true);
-    }
-
-    public unregister(breakingPoint: string, match: () => void, unmatch?: () => void): void {
-        this.eventBus.$off(MATCH + breakingPoint, match);
-        if (unmatch) {
-            this.eventBus.$off(UNMATCH + breakingPoint, unmatch);
-        }
-    }
-
-    private registerEnquire(breakingPoint: string, unregister?: boolean): void {
+    private register(breakingPoint: string, match: () => void, unmatch: () => void): void {
         let obj: any = {
-            match: () => this.notify(MATCH + breakingPoint),
-            unmatch: () => { if (!unregister) { this.notify(UNMATCH + breakingPoint); } }
+            match: () => match(),
+            unmatch: () => unmatch()
         };
 
-        // register needed in order to be notified if breakpoint matches.
         enquire.register(breakingPoint, obj);
-
-        // registration from external components will always be unregistered.
-        if (unregister) {
-            enquire.unregister(breakingPoint, obj);
-        }
-    }
-
-    private notify(breakingPoint: string): void {
-        this.eventBus.$emit(breakingPoint);
     }
 }
 
 const MediaQueriesPlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v): void {
         let mediaQueries: MediaQueries = new MediaQueries();
         (v.prototype as any).$mq = mediaQueries;
     }

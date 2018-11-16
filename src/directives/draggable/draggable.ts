@@ -1,5 +1,4 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-
 import { targetIsInput } from '../../utils/event/event';
 import { dragDropDelay, polyFillActive } from '../../utils/polyfills';
 import { clearUserSelection } from '../../utils/selection/selection';
@@ -97,11 +96,53 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         this.removeAllEvents();
     }
 
+    public onDragStart(event: DragEvent): void {
+        // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
+        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            return;
+        }
+
+        event.stopPropagation();
+        this.doCleanUp();
+        clearUserSelection();
+
+        MDraggable.currentDraggable = this;
+        this.element.classList.add(MDraggableClassNames.Dragging);
+        if (typeof this.options.dragData === 'object') {
+            event.dataTransfer.setData('application/json', JSON.stringify(this.options.dragData));
+        } else {
+            event.dataTransfer.setData('text', this.options.dragData);
+        }
+
+        this.setEventDragImage(event);
+        this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
+    }
+
+    public onDragEnd(event: DragEvent): void {
+        event.stopPropagation();
+        this.doCleanUp();
+
+        // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
+        // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
+        if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
+        if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
+        if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
+        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
+
+        this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
+
+        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
+        if (dragImage) { dragImage.hidden = true; }
+    }
+
     private setupGrabBehavior(): void {
         this.destroyGrabBehavior();
         this.grabEvents.forEach(eventName => this.removeEventListener(eventName));
         this.grabEvents.forEach(eventName => this.addEventListener(eventName, (event: MouseEvent) => {
-            if (targetIsInput(event)) {
+            if (targetIsInput(this.element, event) || (this.draggableHasHandle(this.element) && !this.isHandleUsedToDrag(event))) {
                 this.turnDragOff();
                 this.cancelGrabEvents.forEach(eventName => document.addEventListener(eventName, this.intputTouchUpListener));
             } else if (this.targetIsGrabbable(event)) {
@@ -111,7 +152,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                         this.element.classList.add(MDraggableClassNames.Grabbing);
                         this.forceCursorRefresh();
                     }
-                }, polyFillActive.dragDrop ? dragDropDelay : 0);
+                }, polyFillActive.dragDrop && !this.isMouseInitiatedDrag ? dragDropDelay : 0);
             }
         }));
     }
@@ -121,8 +162,8 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
-        this.addEventListener('touchmove', () => this.touchHasMoved = true);
-        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; });
+        this.addEventListener('touchmove', () => this.touchHasMoved = true, true); // here is it important to use capture on devices that supports mouse + touch events.
+        this.addEventListener('mousedown', () => { this.isMouseInitiatedDrag = true; }, true);
         this.setupGrabBehavior();
         MDOMPlugin.attach(MRemoveUserSelect, this.element, true);
     }
@@ -178,67 +219,44 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private attachDragImage(): void {
         const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
-        if (dragImage) {
-            const origin: number = -9999;
-            dragImage.style.left = `${origin}px`;
-            dragImage.style.top = `${origin}px`;
-            const computedWidth: string | null = window.getComputedStyle(dragImage).width;
-            dragImage.style.width = computedWidth && computedWidth !== 'auto' ? window.getComputedStyle(dragImage).width : '100%';
-            dragImage.style.position = 'absolute';
-            dragImage.style.overflow = 'hidden';
-            dragImage.style.zIndex = '1';
-            dragImage.hidden = true;
+        // We use this property to know if the dragImage was handled or not.
+        const dragImagePluginName: string = '__mdraggableimage__';
+        if (dragImage && !dragImage[dragImagePluginName]) {
+            const offsetWidth: number = dragImage.offsetWidth;
+
+            requestAnimationFrame(() => {
+                const origin: number = -9999;
+                dragImage.style.left = `${origin}px`;
+                dragImage.style.top = `${origin}px`;
+                dragImage.style.position = 'absolute';
+                dragImage.style.overflow = 'hidden';
+                dragImage.style.zIndex = '1';
+                dragImage.hidden = true;
+                dragImage[dragImagePluginName] = true;
+            });
         }
     }
 
-    private onDragEnd(event: DragEvent): void {
-        event.stopPropagation();
-        this.doCleanUp();
-
-        // Fix for IE / Edge.  clientX / clientY don't appear to be out of element on dragLeave.
-        // We can't detect whether we're leaving de droppable for real therefore we have to force leave onDragEnd.
-        if (MDroppable.currentHoverDroppable) { MDroppable.currentHoverDroppable.leaveDroppable(event); }
-        if (MSortable.activeSortContainer) { MSortable.activeSortContainer.doCleanUp(); }
-        if (MSortable.fromSortContainer) { MSortable.fromSortContainer.doCleanUp(); }
-        if (MDraggableAllowScroll.currentDraggableScroll) { MDraggableAllowScroll.currentDraggableScroll.doCleanUp(); }
-
-        this.dispatchEvent(event, MDraggableEventNames.OnDragEnd);
-
-        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
-        if (dragImage) { dragImage.hidden = true; }
-    }
-
-    private onDragStart(event: DragEvent): void {
-        // On some mobile devices dragStart will be triggered even though user has not moved / dragged yet.  We want to avoid that.
-        if (polyFillActive.dragDrop && (!this.touchHasMoved && !this.isMouseInitiatedDrag)) {
-            event.preventDefault();
-            event.stopPropagation();
-            event.stopImmediatePropagation();
-            return;
-        }
-
-        event.stopPropagation();
-        this.doCleanUp();
-        clearUserSelection();
-
-        MDraggable.currentDraggable = this;
-        this.element.classList.add(MDraggableClassNames.Dragging);
-        if (typeof this.options.dragData === 'object') {
-            event.dataTransfer.setData('application/json', JSON.stringify(this.options.dragData));
-        } else {
-            event.dataTransfer.setData('text', this.options.dragData);
-        }
-
-        this.setDragImage(event);
-        this.dispatchEvent(event, MDraggableEventNames.OnDragStart);
-    }
-
-    private setDragImage(event: DragEvent): void {
-        const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
+    private setEventDragImage(event: DragEvent): void {
+        const dragImage: HTMLElement | null = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         if (dragImage && event.dataTransfer.setDragImage) {
             dragImage.hidden = false;
-            event.dataTransfer.setDragImage(dragImage, 0, 0);
+            if (polyFillActive.dragDrop) {
+                event.dataTransfer.setDragImage(dragImage, 0, 0);
+            } else {
+                event.dataTransfer.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
+            }
         }
+    }
+
+    private calculateHorizontalCenterOffset(dragImage: HTMLElement): number {
+        const dragImageWidth: string | null = window.getComputedStyle(dragImage).width;
+        return dragImageWidth ? parseInt(dragImageWidth, 10) / 2 : 0;
+    }
+
+    private calculateVerticalCenterOffset(dragImage: HTMLElement): number {
+        const dragImageHeight: string | null = window.getComputedStyle(dragImage).height;
+        return dragImageHeight ? parseInt(dragImageHeight, 10) / 2 : 0;
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
@@ -257,6 +275,15 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     private cleanupCssClasses(): void {
         this.element.classList.remove(MDraggableClassNames.Dragging);
         this.element.classList.remove(MDraggableClassNames.Grabbing);
+    }
+
+    private draggableHasHandle(element: HTMLElement): boolean {
+        return element.getElementsByClassName('dragHandle').length > 0;
+    }
+
+    private isHandleUsedToDrag(event: MouseEvent): boolean {
+        let elementDragged: HTMLElement = event.target as HTMLElement;
+        return elementDragged.classList.contains('dragHandle');
     }
 }
 

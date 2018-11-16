@@ -1,0 +1,35 @@
+<div>
+    <!-- Sandbox template -->
+    <h3 ref="top">Test Scroll-to</h3>
+    <p class="m-u--margin-bottom">
+        Sandbox Parameters
+    </p>
+    <div>
+        Offset: <input type="text" v-model="offset" />
+        Duration: <select v-model="speed">
+            <option value="regular">Regular</option>
+            <option value="long">Long</option>
+        </select>
+    </div>
+
+    <p class="m-u--margin-bottom">
+        test directive m-scroll-to
+    </p>
+    <p>
+        <div>
+            <!-- <a href="#" v-m-scroll-to:blue>Scroll to blue</a>
+            <a href="#" v-m-scroll-to:red>Scroll to red</a> -->
+            <a href="#" v-m-scroll-to:green="getGlobalParameters()">Scroll to green</a>
+        </div>
+    </p>
+    <!-- Test case -->
+    <div ref="blue" style="height: 1000px; background-color: royalblue;"> 
+    </div>
+    <div ref="red" style="height: 1000px; background-color: red;">
+    </div>
+    <div ref="green" style="height: 1000px; background-color: green;">
+    </div>
+
+
+
+</div>

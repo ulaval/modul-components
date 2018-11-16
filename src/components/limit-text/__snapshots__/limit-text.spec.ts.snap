@@ -14,6 +14,6 @@ exports[`limit-text should render correctly 1`] = `
         ipsum aliqua nostrud. Proident aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat
         esse veniam. Ullamco labore do sit sit commodo.</div>
     <div aria-hidden="true" class="m-limit-text__testing-text" style="display:none;"></div>
-    <m-dynamic-template template="" style="display:none;"></m-dynamic-template>
+    <m-dynamic-template template="" class="m-limit-text__content" style="display:none;"></m-dynamic-template>
 </div>
 `;

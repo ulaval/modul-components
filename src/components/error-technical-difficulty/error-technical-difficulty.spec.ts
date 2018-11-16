@@ -2,8 +2,8 @@ import { shallow, Wrapper } from '@vue/test-utils';
 import moment from 'moment';
 import Vue from 'vue';
 
-import { ACCORDION_NAME, ERROR_TEMPLATE_NAME, I18N_NAME, PANEL_NAME } from '../component-names';
-import { Link } from '../error-template/error-template';
+import { ACCORDION_NAME, MESSAGE_PAGE_NAME, I18N_NAME, PANEL_NAME } from '../component-names';
+import { Link } from '../message-page/message-page';
 import { MErrorTechnicalDifficulty } from './error-technical-difficulty';
 
 // mock moment implementation to set the "present date/time" to a fixed value.
@@ -35,7 +35,7 @@ let showStack: boolean;
 
 const getStubs: any = () => {
     return {
-        [ERROR_TEMPLATE_NAME]: '<div><slot /></div>',
+        [MESSAGE_PAGE_NAME]: '<div><slot /></div>',
         [ACCORDION_NAME]: '<div id="accordionDiv"><slot /></div>',
         [I18N_NAME]: '<span>{{ $attrs["k"] }}</span>',
         [PANEL_NAME]: '<div id="panel"><slot /></div>'
@@ -100,10 +100,14 @@ describe(`MErrorTechnicalDifficulty - test`, () => {
         it('Should not show stacktrace', () => {
             expect(wrapper.vm.showStackTrace).toBeFalsy();
         });
-        describe('When accessing dateInfo', () => {
-            it('Should give default values (current date/time) with dateInfo in proper format', () => {
-                expect(wrapper.vm.dateInfo[0]).toEqual(mockCurrentDate);
-                expect(wrapper.vm.dateInfo[1]).toEqual(mockCurrentTime);
+        describe('When accessing formattedDate', () => {
+            it('Should give default values (current date) in proper format', () => {
+                expect(wrapper.vm.formattedDate).toEqual(mockCurrentDate);
+            });
+        });
+        describe('When accessing formattedTime', () => {
+            it('Should give default values (current time) in proper format', () => {
+                expect(wrapper.vm.formattedTime).toEqual(mockCurrentTime);
             });
         });
     });
