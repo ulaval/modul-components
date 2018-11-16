@@ -2,58 +2,54 @@
 
 .m-textfield-sandbox {
     &__light {
-        @include font-weight('light');
+        font-weight: $m-font-weight--light;
     }
 
     &__regular {
-        @include font-weight('regular');
+        font-weight: $m-font-weight--regular;
     }
 
     &__bold {
-        @include font-weight('bold');
+        font-weight: $m-font-weight--bold;
     }
 
     &__black {
-        @include font-weight('black');
+        font-weight: $m-font-weight--black;
     }
 
     &__111 {
-        @include font-weight(111);
+        font-weight: 111;
     }
 
     &__222 {
-        @include font-weight(222);
+        font-weight: 222;
     }
 
     &__333 {
-        @include font-weight(333);
+        font-weight: 333;
     }
 
     &__444 {
-        @include font-weight(444);
+        font-weight: 444;
     }
 
     &__555 {
-        @include font-weight(555);
+        font-weight: 555;
     }
 
     &__666 {
-        @include font-weight(666);
+        font-weight: 666;
     }
 
     &__777 {
-        @include font-weight(777);
+        font-weight: 777;
     }
 
     &__888 {
-        @include font-weight(888);
+        font-weight: 888;
     }
 
     &__999 {
-        @include font-weight(999);
-    }
-
-    &__none {
-        @include font-weight();
+        font-weight: 999;
     }
 }
