@@ -1,10 +1,10 @@
-import { Wrapper, createLocalVue, mount, TransitionStub } from '@vue/test-utils';
-import ToastPlugin, { MToast, MToastPosition } from './toast';
+import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { PortalMixin, Portal } from '../../mixins/portal/portal';
 import { PortalStub } from '../../../tests/helpers/render';
+import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import { MMessageState } from '../message/message';
+import ToastPlugin, { MToast, MToastPosition } from './toast';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -55,8 +55,7 @@ describe(`MToast`, () => {
     describe(`Given that no props have been passed`, async () => {
         beforeEach(async () => {
             initializeShallowWrapper();
-            wrapper.vm.$nextTick();
-            jest.runOnlyPendingTimers();
+            jest.runOnlyPendingTimers(); // wait for component to be instancialized
         });
 
         describe(`When the Toast is created`, () => {
@@ -100,8 +99,7 @@ describe(`MToast`, () => {
         beforeEach(() => {
             actionLabel = ACTION_LABEL;
             initializeShallowWrapper();
-            wrapper.vm.$nextTick();
-            jest.runOnlyPendingTimers();
+            jest.runOnlyPendingTimers(); // wait for component to be instancialized
         });
 
         describe(`When the Toast is created`, () => {
@@ -126,25 +124,39 @@ describe(`MToast`, () => {
     });
 
     describe(`Given that a timeout prop have been passed`, () => {
-        beforeEach(() => {
-            timeout = 5000;
-            initializeShallowWrapper();
-            wrapper.vm.$nextTick();
-            jest.runOnlyPendingTimers();
-        });
-
         describe(`When the Toast is created`, () => {
             it(`Should appear and then disappear`, () => {
+                timeout = 5000;
+                initializeShallowWrapper();
+                jest.runOnlyPendingTimers(); // wait for component to be instancialized
+
                 expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeTruthy();
                 expect(((wrapper.vm as unknown) as Portal).portalCreated).toBeTruthy();
                 expect(((wrapper.vm as unknown) as Portal).portalMounted).toBeTruthy();
 
-                jest.runOnlyPendingTimers();
+                jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over
 
                 expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeFalsy();
             });
-
         });
+    });
 
+    describe(`Givent that a open prop have been passed and variable is false`, () => {
+        beforeEach(() => {
+            open = false;
+            initializeShallowWrapper();
+            jest.runOnlyPendingTimers(); // wait for component to be instancialized
+        });
+        describe(`When the Toast is created`, () => {
+            it(`Should not appear`, () => {
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeFalsy();
+            });
+        });
+        describe(`When the variable is set to true`, () => {
+            it(`should appear`, () => {
+                wrapper.vm.$props.open = true;
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeTruthy();
+            });
+        });
     });
 });
