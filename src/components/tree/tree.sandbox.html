@@ -3,22 +3,25 @@
     <div style="width: 50%; float:left;">
         <h2>Selection disabled</h2>
         <p>
-                Selected file : none</br>
-                Open folder : Title 3
+            Selected file : none</br>
+            Open folder : Title 3
         </p>
         <p>
-            <m-tree :tree="tree" selection-mode="0" ></m-tree>
+            <m-tree :tree="tree"
+                    selection-mode="0"></m-tree>
         </p>
     </div>
 
     <div style="width: 50%; float:left;">
         <h2>Single node selection</h2>
         <p>
-                Selected file : /Title 1/Subtitle 1</br>
-                Open folder : Title 3
+            Selected file : /Title 1/Subtitle 1</br>
+            Open folder : Title 3
         </p>
         <p>
-            <m-tree :tree="tree" :selected-nodes="currentFile2" @select="onSelect"></m-tree>
+            <m-tree :tree="tree"
+                    :selected-nodes="currentFile2"
+                    @select="onSelect"></m-tree>
         </p>
     </div>
 
@@ -28,18 +31,24 @@
     <div style="width: 50%; float:left;">
         <h3>Selection disabled</h3>
         <p>
-            <m-tree :tree="fileTree" selection-mode="0" :icons="true"></m-tree>
+            <m-tree :tree="fileTree"
+                    selection-mode="0"
+                    :icons="true"></m-tree>
         </p>
     </div>
 
     <div style="width: 50%; float:left;">
         <h3>Single file selection</h3>
         <p>
-                Selected file : /folder 1/folder 2/index.html</br>
-                Open folder : none
+            Selected file : /folder 1/folder 2/index.html</br>
+            Open folder : none
         </p>
         <p>
-            <m-tree :tree="fileTree" selection-mode="1" :selected-nodes="currentFile" :icons="true" @select="onSelect"></m-tree>
+            <m-tree :tree="fileTree"
+                    selection-mode="1"
+                    :selected-nodes="currentFile"
+                    :icons="true"
+                    @select="onSelect"></m-tree>
         </p>
     </div>
 
@@ -67,8 +76,26 @@
         <h3>Selected node not found</h3>
         <span>Console error</span>
         <p>
-            <m-tree :tree="tree" :selected-nodes="wrongCurrentFile" @select="onSelect"></m-tree>
+            <m-tree :tree="tree"
+                    :selected-nodes="wrongCurrentFile"
+                    @select="onSelect"></m-tree>
         </p>
     </div>
+    <div style="width: 50%; float:left;">
+        <h3>Multiple nodes selection</h3>
+        <p>
+            Selected Nodes : {{currentNodes}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    selection-mode="2"
+                    :icons="true"
+                    :use-expand-icons="true"
+                    :show-checkboxes="true"
+                    :selected-nodes="currentNodes"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+    <div style="clear: both;"></div>
 
 </div>

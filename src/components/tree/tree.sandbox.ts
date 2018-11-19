@@ -1,6 +1,5 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
 import { TREE_NAME } from '../component-names';
 import { TreeNode } from './tree';
 import WithRender from './tree.sandbox.html';
@@ -18,6 +17,7 @@ export class MRootTreeSandbox extends Vue {
     public currentFile: string[] = ['/folder 1/folder 2/index.html'];
     public currentFile2: string[] = ['/1/2'];
     public wrongCurrentFile: string[] = ['/3/4'];
+    public currentNodes: string[] = [];
 
     public emptyTree: TreeNode[] = [];
 
@@ -256,8 +256,72 @@ export class MRootTreeSandbox extends Vue {
         }
     ];
 
+    public multiNodeTree: TreeNode[] = [
+        {
+            id: 'Title 1',
+            label: 'Title 1',
+            hasChildren: true,
+            children: [
+                {
+                    id: 'Subtitle 1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: 'Subtitle 2',
+                    label: 'Subtitle 2',
+                    children: [
+                        {
+                            id: 'Subtitle 1',
+                            label: 'Subtitle 1'
+                        },
+                        {
+                            id: 'Subtitle 2',
+                            label: 'Subtitle 2',
+                            hasChildren: true
+                        },
+                        {
+                            id: 'Subtitle 3',
+                            label: 'Subtitle 3'
+                        },
+                        {
+                            id: 'Subtitle 4',
+                            label: 'Subtitle 4'
+                        }
+                    ]
+                },
+                {
+                    id: 'Subtitle 3',
+                    label: 'Subtitle 3'
+                },
+                {
+                    id: 'Subtitle 4',
+                    label: 'Subtitle 4'
+                }
+            ]
+        },
+        {
+            id: 'Title 2',
+            label: 'Title 2'
+        },
+        {
+            id: 'Title 3',
+            label: 'Title 3',
+            open: true,
+            children: [
+                {
+                    id: 'Subtitle 1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: 'Subtitle 2',
+                    label: 'Subtitle 2'
+                }
+            ]
+        }
+    ];
+
     public onSelect(): void {
-        console.error('modUL - New file selected');
+        console.error('modUL - New node selected');
     }
 
 }

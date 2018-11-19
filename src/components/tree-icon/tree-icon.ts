@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { extractExtension } from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_ICON_NAME } from '../component-names';
@@ -20,6 +19,12 @@ export class MTreeIcon extends ModulVue {
 
     @Prop()
     public folder: boolean;
+
+    @Prop()
+    public useExpandIcons: boolean;
+
+    @Prop()
+    public uses: boolean;
 
     @Prop()
     public folderOpen: boolean;

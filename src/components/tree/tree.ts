@@ -1,13 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import TreeNodePlugin from '../tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
-
 export interface TreeNode {
     id: string;
     label?: string;
@@ -44,7 +42,14 @@ export class MTree extends ModulVue {
     @Prop()
     public icons: boolean;
 
+    @Prop()
+    public useExpandIcons: boolean;
+
+    @Prop()
+    public showCheckboxes: boolean;
+
     public propSelectedNodes: string[] = this.selectedNodes || [];
+
     public errorTree: boolean = false;
 
     private selectedNodesFound: string[] = [];
