@@ -1,0 +1,34 @@
+<div style="display: flex;">
+    <div style="width: 300px;">
+        <h4>Sortable - with handle</h4>
+        <ul v-m-sortable="true"
+            style="display: flex; flex-direction: column;"
+            :items="elementsSortableWithHandle"
+            @sortable:move="deplacerElementsWithHandle">
+
+            <li v-for="(element, index) in elementsSortableWithHandle"
+                style="max-width: 100px; padding: 10px; margin: 0 0 5px; color: #fff; font-weight: 600; background-color: #7cadf1;"
+                :key="element.cle">
+                <div class="dragHandle"
+                     style="width: 20px; height: 20px; background: #ccc; cursor: grab; margin: 0 0 8px;"></div>
+                {{ element.titre }}
+            </li>
+        </ul>
+    </div>
+
+    <div style="width: 300px;">
+        <h4>Sortable - without handle</h4>
+        <ul v-m-sortable="true"
+            style="display: flex; flex-direction: column;"
+            :items="elementsSortableWithoutHandle"
+            @sortable:move="deplacerElementsWithoutHandle">
+
+            <li v-for="(element, index) in elementsSortableWithoutHandle"
+                style="max-width: 100px; padding: 10px; margin: 0 0 5px; color: #fff; font-weight: 600; background-color: #7cadf1; cursor: grab;"
+                :key="element.cle">
+                {{ element.titre }}
+            </li>
+        </ul>
+    </div>
+
+</div>
