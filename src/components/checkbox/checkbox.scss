@@ -57,7 +57,7 @@ $m-checkbox--width: 16px;
             }
         }
 
-        &:not(.m--has-error):not(.m--is-valid) {
+        &:not(.m--has-error):not(.m--is-valid):not(.m--is-readonly) {
             .m-checkbox__wrap:hover,
             &.m--is-focus {
                 .m-checkbox {
