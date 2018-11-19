@@ -24,46 +24,6 @@ exports[`MDropdown should render correctly 1`] = `
 </div>
 `;
 
-exports[`MDropdown should render correctly when footer slot is set 1`] = `
-<div class="m-dropdown" style="width:100%;max-width:288px;">
-    <div class="m-input-style m--is-tag-default" style="width:100%;">
-        <div class="m-input-style__body">
-            <div class="m-input-style__body__left">
-                <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" value="" class="m-dropdown__input"> </div>
-            <div class="m-input-style__body__right">
-                <div class="m-dropdown__arrow">
-                    <svg aria-hidden="true" width="1em" height="1em" button-size="18px" icon-size="16px" class="m-icon m-dropdown__arrow__icon">
-                        <use aria-hidden="true"></use>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="m-validation-message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
-    <div class="m-popup">
-        <m-popper-mock placement="bottom-start" open-trigger="mousedown" enter="function boundFn(a) {
-    var l = arguments.length;
-    return l
-      ? l &gt; 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }" leave="function boundFn(a) {
-    var l = arguments.length;
-    return l
-      ? l &gt; 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }" padding-header="true" padding-body="true" padding-footer="true" preload="true" width="100%" background="true">
-            <div>footer-content</div>
-        </m-popper-mock>
-    </div>
-</div>
-`;
-
 exports[`MDropdown should render correctly when placeholder is set 1`] = `
 <div class="m-dropdown" style="width:100%;max-width:288px;">
     <div class="m-input-style m--is-tag-default" style="width:100%;">
