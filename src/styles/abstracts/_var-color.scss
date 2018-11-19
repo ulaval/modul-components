@@ -22,8 +22,8 @@ $m-color--grey-lightest: #f9f9f9 !default;
 //  General color
 // ======================================================================
 $m-color--black: #000;
-$m-color--text: $m-color--grey-darker;
-$m-color--text-light: $m-color--grey;
+$m-color--text: $m-color--black;
+$m-color--text-light: #757575 !default;
 $m-color--white: #fff;
 
 // ======================================================================
