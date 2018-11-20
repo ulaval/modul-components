@@ -94,9 +94,14 @@ $m-color--border-light: $m-color--grey-lighter !default;
 //  map variable to be used with m-color function
 // ======================================================================
 $m-color-map: (
-    text : $m-color--grey-darker,
+    black: $m-color--black,
+    white: $m-color--white,
+    text : (
+        base : $m-color--grey-darker,
+        light : $m-color--grey
+    ),
     grey : (
-        '' : $m-color--grey,
+        base : $m-color--grey,
         black : $m-color--grey-black,
         darkest : $m-color--grey-darkest,
         darker : $m-color--grey-darker,

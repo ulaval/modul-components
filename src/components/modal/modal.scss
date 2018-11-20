@@ -1,4 +1,5 @@
 @import '../../styles/abstracts/variables';
+
 $m-modal--max-width--l: $m-max-width !default;
 $m-modal--max-width: 600px !default;
 $m-modal--max-width--s: 420px !default;
@@ -200,4 +201,10 @@ $m-modal--max-width--s: 420px !default;
             z-index: 1;
         }
     }
+}
+
+.test2 {
+    background-color: m-color(black);
+    color: m-color(ul, blue);
+    padding: m-spacing(xl);
 }
