@@ -1,34 +1,80 @@
-<table class="m-table" :class="[ 'm--is-skin-' + skin]" cellspacing="0">
-    <slot name="header">
-        <thead>
+<div class="m-table">
+    <div class="m-table__header"
+         v-if="hasHeader"
+         ref="header">
+        <h2 class="m-u--no-margin"
+            v-if="title">{{ title }}</h2>
+        <div class="m-table__header__spacer"></div>
+        <slot name="search"></slot>
+        <m-link class="m-table__header__add"
+                :class="{'m--has-margin': $slots.search}"
+                v-if="addBtnLabel"
+                :icon="true"
+                icon-name="m-svg__add-circle-filled"
+                icon-size="22px"
+                mode="button"
+                @click="add"
+                ref="addBtn">{{ addBtnLabel }}</m-link>
+    </div>
+
+    <table class="m-table__table"
+           :class="['m--is-skin-' + skin, {'m--is-loading': loading}]"
+           cellspacing="0">
+        <slot name="header">
+            <thead>
+                <tr>
+                    <slot v-for="column in columns"
+                          :name="'header.' + column.dataProp">
+                        <th :style="columnWidth(column)"
+                            :key="column.id">{{ column.title }}</th>
+                    </slot>
+                </tr>
+            </thead>
+        </slot>
+
+        <slot name="body">
+            <tbody>
+                <tr class="m-table__table-message"
+                    v-if="isEmpty">
+                    <slot name="empty">
+                        <td :colspan="columns.length">
+                            <p>{{ i18nEmptyTable }}</p>
+                        </td>
+                    </slot>
+                </tr>
+                <template v-if="loading">
+                    <tr class="m-table__table-loading">
+                        <td :colspan="columns.length">
+                            <m-progress v-if="loading"
+                                        :indeterminate="true"
+                                        :border-radius="false"></m-progress>
+                        </td>
+                    </tr>
+                    <tr class="m-table__table-message">
+                        <slot name="loading">
+                            <td :colspan="columns.length">
+                                <p>{{ i18nLoading }}</p>
+                                <p class="m-table__table-message__precision">{{ i18nPleaseWait }}</p>
+                            </td>
+                        </slot>
+                    </tr>
+                </template>
+                <tr v-else
+                    v-for="(row, index) in rows"
+                    :key="index">
+                    <slot v-for="column in columns"
+                          :name="'body.' + column.dataProp"
+                          :data="row">
+                        <td :key="'body.' + column.id">{{ row[column.dataProp] }}</td>
+                    </slot>
+                </tr>
+            </tbody>
+        </slot>
+
+        <tfoot v-if="$slots.footer">
             <tr>
-                <slot v-for="column in columns" :name="'header.' + column.dataProp">
-                    <th :style="columnWidth(column)" :key="column.id">{{ column.title }}</th>
-                </slot>
+                <slot name="footer"></slot>
             </tr>
-        </thead>
-    </slot>
-
-    <slot name="body">
-        <tbody>
-            <tr v-if="isEmpty">
-                <slot name="empty">
-                    <td class="m-table--empty" :colspan="columns.length">
-                        <p>{{ i18nEmptyTable }}</p>
-                    </td>
-                </slot>
-            </tr>
-            <tr v-else v-for="(row, index) in rows" :key="index">
-                <slot v-for="column in columns" :name="'body.' + column.dataProp" :data="row">
-                    <td :key="'body.' + column.id" >{{ row[column.dataProp] }}</td>
-                </slot>
-            </tr>
-        </tbody>
-    </slot>
-
-    <tfoot v-if="$slots.footer">
-        <tr>
-            <slot name="footer"></slot>
-        </tr>
-    </tfoot>
-</table>
+        </tfoot>
+    </table>
+</div>

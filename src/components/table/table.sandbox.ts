@@ -1,9 +1,9 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
 import { TABLE_NAME } from '../component-names';
 import { MColumnTable } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
+
 
 @WithRender
 @Component
@@ -31,7 +31,8 @@ export class MTableSandbox extends Vue {
         {
             id: 'check',
             title: '',
-            dataProp: 'check'
+            dataProp: 'check',
+            width: '16px'
         },
         {
             id: 'name',
@@ -52,7 +53,7 @@ export class MTableSandbox extends Vue {
             id: 'menu',
             title: '',
             dataProp: 'menu',
-            width: '10%'
+            width: '33px'
         }
     ];
 

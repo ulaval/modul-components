@@ -1,10 +1,10 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
+
 
 export enum MTableSkin {
     Regular = 'regular'
@@ -26,22 +26,41 @@ export class MTable extends ModulVue {
         validator: value =>
             value === MTableSkin.Regular
     })
-    public skin: MTableSkin;
+    skin: MTableSkin;
 
-    @Prop()
+    @Prop({ default: () => [] })
     columns: MColumnTable[];
 
-    @Prop()
+    @Prop({ default: () => [] })
     rows: any[];
 
-    protected i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+    @Prop()
+    title: string;
 
-    public columnWidth(col: MColumnTable): { width: string } | '' {
-        return col.width ? { width:  col.width } : '';
+    @Prop()
+    addBtnLabel: string;
+
+    @Prop({ default: false })
+    loading: boolean;
+
+    i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+    i18nLoading: string = this.$i18n.translate('m-table:loading');
+    i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
+
+    columnWidth(col: MColumnTable): { width: string } | '' {
+        return col.width ? { width: col.width } : '';
     }
 
-    public get isEmpty(): boolean {
-        return !this.rows.length;
+    get hasHeader(): boolean {
+        return !!this.title || !!this.addBtnLabel || !!this.$slots.search;
+    }
+
+    get isEmpty(): boolean {
+        return this.rows.length === 0 && !this.loading;
+    }
+
+    add(): void {
+        this.$emit('add');
     }
 
 }
