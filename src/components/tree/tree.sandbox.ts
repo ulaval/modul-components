@@ -277,7 +277,42 @@ export class MRootTreeSandbox extends Vue {
                         {
                             id: 'Subtitle 2',
                             label: 'Subtitle 2',
-                            hasChildren: true
+                            children: [
+                                {
+                                    id: 'Subtitle 1',
+                                    label: 'Subtitle 1'
+                                },
+                                {
+                                    id: 'Subtitle 2',
+                                    label: 'Subtitle 2',
+                                },
+                                {
+                                    id: 'Subtitle 3',
+                                    label: 'Subtitle 3'
+                                },
+                                {
+                                    id: 'Subtitle 4',
+                                    label: 'Subtitle 4',
+                                    children: [
+                                        {
+                                            id: 'Subtitle 1',
+                                            label: 'Subtitle 1'
+                                        },
+                                        {
+                                            id: 'Subtitle 2',
+                                            label: 'Subtitle 2',
+                                        },
+                                        {
+                                            id: 'Subtitle 3',
+                                            label: 'Subtitle 3'
+                                        },
+                                        {
+                                            id: 'Subtitle 4',
+                                            label: 'Subtitle 4'
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             id: 'Subtitle 3',

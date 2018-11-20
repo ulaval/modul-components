@@ -40,7 +40,7 @@
                              :show-checkboxes="showCheckboxes"
                              :selected-nodes="selectedNodes"
                              :has-sibling="childHasSibling(index)"
-                             @checkboxChange='onCheckboxChange'
+                             @childrenCheckboxStateChange='onChildrenCheckboxStateChange'
                              @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>

@@ -51,17 +51,24 @@ export class MTreeNode extends ModulVue {
 
     public checkBoxState: string = MCheckboxState.Blank;
 
-    private childrenCheckCount: number = this.node.children ? this.node.children.length : 0;
+    private childrenCount: number = this.node.children ? this.node.children.length : 0;
+
+    private selectedChildrenCount: number = 0;
 
     @Watch('isSelected')
     public watchCheckboxes(): void {
         if (this.showCheckboxes) {
-            this.$emit('checkboxChange');
+            this.checkBoxState = this.isSelected ? MCheckboxState.Checked : MCheckboxState.Blank;
+            this.$emit('childrenCheckboxStateChange', this.isSelected);
         }
     }
 
-    public onCheckboxChange(): void {
-        this.$emit('checkboxChange');
+    // Updates parent's checkbox data
+    public onChildrenCheckboxStateChange(childrenNodeSelected: boolean): void {
+        this.selectedChildrenCount += childrenNodeSelected ? 1 : -1;
+        if (this.isFolder) {
+            this.updateFolderCheckboxState(this.selectedChildrenCount === this.childrenCount);
+        }
     }
 
     public onClick(): void {
@@ -70,25 +77,6 @@ export class MTreeNode extends ModulVue {
             this.$emit('update:open', this.internalOpen);
         } else if (this.selectable) {
             this.$emit('click', this.currentPath);
-        }
-    }
-
-    public onCheckboxClick(): void {
-        let childrenPaths: string[] = [];
-        if (this.isFolder) {
-            this.selectChildrenNodes(this.node, childrenPaths, this.path + '/' + this.node.id);
-            childrenPaths.forEach(path => {
-                if (this.checkBoxState === MCheckboxState.Blank) {
-                    if (this.selectedNodes.indexOf(path) === -1) {
-                        this.selectedNodes.push(path);
-                    }
-                } else {
-                    this.selectedNodes.splice(this.selectedNodes.indexOf(path), 1);
-                }
-            });
-            this.checkBoxState = (this.checkBoxState === MCheckboxState.Blank) ? MCheckboxState.Checked : MCheckboxState.Blank;
-        } else {
-            this.onClick();
         }
     }
 
@@ -103,17 +91,56 @@ export class MTreeNode extends ModulVue {
         return false;
     }
 
+    // Applies checkbox click to node. If node is a folder, updates each child's checkbox state
+    public onCheckboxClick(): void {
+        if (this.isFolder) {
+            let childrenPaths: string[] = [];
+            this.fetchSelectedChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id);
+            this.updateSelectedNodes(childrenPaths);
+        } else {
+            this.onClick();
+        }
+    }
+
     protected mounted(): void {
         this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
     }
 
-    private selectChildrenNodes(currentNode: TreeNode, childrenPath: string[], path: string): void {
+    // Adds or removes paths from the selectedNodes variable
+    private updateSelectedNodes(childrenPaths: string[] = []): void {
+        childrenPaths.forEach(path => {
+            let nodeFound: boolean = this.selectedNodes.indexOf(path) !== -1;
+            if (this.checkBoxState === MCheckboxState.Blank && !nodeFound) {
+                this.selectedNodes.push(path);
+            } else if (nodeFound) {
+                this.selectedNodes.splice(this.selectedNodes.indexOf(path), 1);
+            }
+        });
+    }
+
+    // Recursive function that fetches the paths of a node selected children
+    private fetchSelectedChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string): void {
         if (currentNode.children) {
             currentNode.children.forEach(child => {
-                this.selectChildrenNodes(child, childrenPath, path + '/' + child.id);
+                this.fetchSelectedChildrenPaths(child, childrenPath, path + '/' + child.id);
             });
         } else {
             childrenPath.push(path);
+        }
+    }
+
+    // Updates unselectable folder checkbox according to the quantity of selected children
+    private updateFolderCheckboxState(allChildrenSelected: boolean): void {
+        if (allChildrenSelected) {
+            this.checkBoxState = MCheckboxState.Checked;
+            this.$emit('childrenCheckboxStateChange', true);
+        } else if (this.selectedChildrenCount !== 0) {
+            if (this.checkBoxState === MCheckboxState.Checked) {
+                this.$emit('childrenCheckboxStateChange', false);
+            }
+            this.checkBoxState = MCheckboxState.Half;
+        } else {
+            this.checkBoxState = MCheckboxState.Blank;
         }
     }
 
