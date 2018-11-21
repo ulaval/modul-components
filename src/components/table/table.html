@@ -26,7 +26,8 @@
                     <slot v-for="column in columns"
                           :name="'header.' + column.dataProp">
                         <th :style="columnWidth(column)"
-                            :key="column.id">{{ column.title }}</th>
+                            :key="column.id"
+                            scope="col">{{ column.title }}</th>
                     </slot>
                 </tr>
             </thead>
