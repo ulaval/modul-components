@@ -61,6 +61,7 @@ export const RICH_TEXT_NAME: string = 'm-rich-text';
 export const RICH_TEXT_EDITOR_NAME: string = 'm-rich-text-editor';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
 export const SESSION_EXPIRED_NAME: string = 'm-session-expired';
+export const SHOW_MORE_NAME: string = 'm-show-more';
 export const SIDEBAR_NAME: string = 'm-sidebar';
 export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
