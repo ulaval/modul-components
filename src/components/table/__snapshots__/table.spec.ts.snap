@@ -9,8 +9,8 @@ exports[`MTable Given a search slot Then should render correctly 1`] = `
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@ exports[`MTable Given a table full of data When using a footer Then should rende
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -57,8 +57,8 @@ exports[`MTable Given a table full of data When using slot to replace a td Then 
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -81,7 +81,7 @@ exports[`MTable Given a table full of data When using slot to replace a th Then 
         <thead>
             <tr>
                 <th>SLOT TH</th>
-                <th>B</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -125,8 +125,8 @@ exports[`MTable Given a table full of data When using slot to replace the tbody 
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -143,8 +143,8 @@ exports[`MTable Given a table full of data When we don't use slots Then should r
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -166,8 +166,8 @@ exports[`MTable Given an empty table When a custom slot is given Then should ren
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -184,8 +184,8 @@ exports[`MTable Given an empty table When loading Then should render correctly 1
     <table cellspacing="0" class="m-table__table m--is-skin-regular m--is-loading">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
@@ -210,8 +210,8 @@ exports[`MTable Given an empty table When we use the default template Then shoul
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th style="width:10%;">A</th>
-                <th>B</th>
+                <th scope="col" style="width:10%;">A</th>
+                <th scope="col">B</th>
             </tr>
         </thead>
         <tbody>
