@@ -5,7 +5,7 @@ import { SORTABLE_NAME } from '../directive-names';
 import { MSortEvent } from './sortable';
 import WithRender from './sortable.sandbox.html?style=./sortable.scss';
 
-type ElementSortable = { cle: string, titre: string };
+export type ElementSortable = { cle: string, titre: string };
 
 @WithRender
 @Component
