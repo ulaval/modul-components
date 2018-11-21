@@ -1,7 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+
 import { Model, Prop, Watch } from 'vue-property-decorator';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
+
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CHECKBOX_NAME } from '../component-names';
@@ -35,6 +40,15 @@ export class MCheckbox extends ModulVue {
     private id: string = `mCheckbox-${uuid.generate()}`;
     private internalValue: boolean = false;
 
+    @Emit('change')
+    onChange(value: boolean): void { }
+
+    @Emit('click')
+    onClick(event: MouseEvent): void {
+        this.$emit('click', event);
+        this.$refs['checkbox']['blur']();
+    }
+
     @Watch('value')
     private onValueChange(value: boolean): void {
         this.internalValue = value;
@@ -45,13 +59,8 @@ export class MCheckbox extends ModulVue {
     }
 
     private set propValue(value: boolean) {
-        this.$emit('change', value);
+        this.onChange(value);
         this.internalValue = value;
-    }
-
-    private onClick(event: MouseEvent): void {
-        this.$emit('click', event);
-        this.$refs['checkbox']['blur']();
     }
 
     private setFocus(value: boolean): void {

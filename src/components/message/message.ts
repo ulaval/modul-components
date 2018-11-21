@@ -1,12 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { MESSAGE_NAME } from '../component-names';
-import MessagePagePlugin, { MMessagePageSkin } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
+import MessagePagePlugin, { MMessagePageSkin } from '../message-page/message-page';
 import WithRender from './message.html?style=./message.scss';
 
 export enum MMessageState {
@@ -61,6 +60,11 @@ export class MMessage extends Vue {
     private internalVisible: boolean = true;
     private animReady: boolean = false;
 
+    @Emit('close')
+    onClose(event: Event): void {
+        this.propVisible = false;
+    }
+
     protected mounted(): void {
         this.propVisible = this.visible;
         setTimeout(() => {
@@ -80,11 +84,6 @@ export class MMessage extends Vue {
     private set propVisible(visible: boolean) {
         this.internalVisible = visible === undefined ? true : visible;
         this.$emit('update:visible', this.internalVisible);
-    }
-
-    private onClose(event): void {
-        this.propVisible = false;
-        this.$emit('close', event);
     }
 
     private getIcon(): string {
