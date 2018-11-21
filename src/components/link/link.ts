@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
@@ -171,6 +170,10 @@ export class MLink extends ModulVue {
 
     private get routerLinkUrl(): string | Object {
         return !this.isObject(this.url) ? { path: this.url } : this.url;
+    }
+
+    private get routerEvent(): string {
+        return this.disabled ? '' : 'click';
     }
 
     private isObject(a): boolean {
