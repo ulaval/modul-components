@@ -1,5 +1,4 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -80,8 +79,6 @@ import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import TooltipPlugin from './tooltip/tooltip';
-import TreeIconPlugin from './tree-icon/tree-icon';
-import TreeNodePlugin from './tree-node/tree-node';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
@@ -176,8 +173,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
-        Vue.use(TreeIconPlugin);
-        Vue.use(TreeNodePlugin);
     }
 };
 

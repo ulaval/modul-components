@@ -4,7 +4,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
-import TreeNodePlugin from '../tree-node/tree-node';
+import TreeNodePlugin from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 export interface TreeNode {
     id: string;

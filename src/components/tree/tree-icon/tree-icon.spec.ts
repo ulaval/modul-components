@@ -1,6 +1,5 @@
 import { shallow, Wrapper } from '@vue/test-utils';
-
-import { TreeNode } from '../tree/tree';
+import { TreeNode } from '../tree';
 import { MTreeIcon } from './tree-icon';
 
 const TREE_NODE_FILE: TreeNode = {

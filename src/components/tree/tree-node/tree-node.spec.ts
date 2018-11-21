@@ -1,7 +1,6 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
-
-import { renderComponent } from '../../../tests/helpers/render';
-import { TreeNode } from '../tree/tree';
+import { renderComponent } from '../../../../tests/helpers/render';
+import { TreeNode } from '../tree';
 import { MTreeNode } from './tree-node';
 
 const CHILDREN: RefSelector = { ref: 'children' };

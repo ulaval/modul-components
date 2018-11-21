@@ -1,12 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { ModulVue } from '../../utils/vue/vue';
+import { ModulVue } from '../../../utils/vue/vue';
+import I18nPlugin from '../../i18n/i18n';
+import IconPlugin from '../../icon/icon';
 import { TREE_NODE_NAME } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
-import IconPlugin from '../icon/icon';
+import { TreeNode } from '../tree';
 import TreeIconPlugin from '../tree-icon/tree-icon';
-import { TreeNode } from '../tree/tree';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 export enum MCheckboxState {

@@ -114,6 +114,14 @@ $m-checkbox--width: 16px;
                 }
             }
         }
+
+        &.m--is-partially-checked {
+            .m-checkbox__input {
+                &__icon {
+                    background-color: red;
+                }
+            }
+        }
     }
 
     &.m--is-disabled {
