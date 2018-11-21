@@ -283,6 +283,7 @@ export class Portal extends ModulVue implements PortalMixin {
             this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
             this.portalTargetEl = document.createElement('div');
             this.portalTargetEl.setAttribute('id', this.propId);
+            this.portalTargetEl.classList.add('m-u--app-body');
             document.body.appendChild(this.portalTargetEl);
             this.portalTargetCreated = true;
 
