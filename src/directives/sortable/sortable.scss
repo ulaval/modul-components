@@ -1,0 +1,35 @@
+@import 'abstracts/variables';
+
+.m-sortable {
+    display: flex;
+
+    &__column {
+        width: 300px;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+
+            li {
+                max-width: 100px;
+                padding: 10px;
+                margin: 0 0 5px;
+                color: #fff;
+                font-weight: 600;
+                background-color: #7cadf1;
+
+                &.noHandle {
+                    cursor: grab;
+                }
+
+                .dragHandle {
+                    width: 25px;
+                    height: 25px;
+                    background: #ccc;
+                    cursor: grab;
+                    margin: 0 0 8px;
+                }
+            }
+        }
+    }
+}

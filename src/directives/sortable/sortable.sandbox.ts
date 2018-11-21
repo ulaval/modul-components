@@ -3,7 +3,7 @@ import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { SORTABLE_NAME } from '../directive-names';
 import { MSortEvent } from './sortable';
-import WithRender from './sortable.sandbox.html';
+import WithRender from './sortable.sandbox.html?style=./sortable.scss';
 
 type ElementSortable = { cle: string, titre: string };
 

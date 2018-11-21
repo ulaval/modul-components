@@ -282,8 +282,12 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private isHandleUsedToDrag(event: MouseEvent): boolean {
-        let elementDragged: HTMLElement = event.target as HTMLElement;
-        return elementDragged.classList.contains('dragHandle');
+        const dragHandle: HTMLElement | null = this.element.querySelector('.dragHandle');
+        if (dragHandle) {
+            return dragHandle.classList.contains('dragHandle') && dragHandle.contains(event.target as Node);
+        } else {
+            return false;
+        }
     }
 }
 
