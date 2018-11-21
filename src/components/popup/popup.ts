@@ -9,6 +9,7 @@ import PopperPlugin, { MPopper, MPopperPlacement } from '../popper/popper';
 import SidebarPlugin from '../sidebar/sidebar';
 import WithRender from './popup.html?style=./popup.scss';
 
+
 @WithRender
 @Component({
     mixins: [MediaQueries, OpenTrigger]
