@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
-
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -98,6 +97,9 @@ export class MRadio extends ModulVue {
 
     private internalDisabled: boolean = false;
 
+    @Emit('change')
+    onChange(value: any): void { }
+
     public get propPosition(): MRadioPosition {
         return this.isGroup() ? this.parentGroup.radiosPosition : this.radioPosition;
     }
@@ -145,7 +147,7 @@ export class MRadio extends ModulVue {
         if (this.isGroup()) {
             this.parentGroup.updateValue(value);
         } else {
-            this.$emit('change', value);
+            this.onChange(value);
         }
     }
 

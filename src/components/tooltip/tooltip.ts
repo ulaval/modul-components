@@ -31,7 +31,7 @@ export class MTooltip extends ModulVue {
             value === MTooltipMode.Icon ||
             value === MTooltipMode.Link
     })
-    public mode: string;
+    public mode: MTooltipMode;
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -75,7 +75,7 @@ export class MTooltip extends ModulVue {
     }
 
     private get propMode(): string {
-        return this.mode === MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
+        return this.mode;
     }
 
     private get propCloseButton(): boolean {

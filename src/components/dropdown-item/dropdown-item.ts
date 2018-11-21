@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { normalizeString } from '../../utils/str/str';
 import { ModulVue } from '../../utils/vue/vue';
@@ -35,6 +34,8 @@ export class MDropdownItem extends ModulVue {
     public value: any;
     @Prop()
     public disabled: boolean;
+    @Prop()
+    public readonly: boolean;
     @Prop()
     public nonFilterable: boolean;
 
@@ -85,11 +86,15 @@ export class MDropdownItem extends ModulVue {
     }
 
     private get selected(): boolean {
-        return (this.root as MDropdownInterface).model === this.value;
+        return (this.root as MDropdownInterface).model === this.value && !this.readonly;
     }
 
     private get focused(): boolean {
-        return (this.root as MDropdownInterface).focused === this.value;
+        return (this.root as MDropdownInterface).focused === this.value && !this.readonly;
+    }
+
+    private get tabindex(): number | undefined {
+        return this.disabled || this.readonly ? undefined : 0;
     }
 
     private onClick(): void {
