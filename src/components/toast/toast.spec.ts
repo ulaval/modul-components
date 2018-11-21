@@ -10,34 +10,16 @@ jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
 let localVue: VueConstructor<Vue>;
 
-// Props
-let state: MMessageState;
-let position: MToastPosition;
-let timeout: number;
-let open: boolean;
-let actionLabel: string;
-let icon: boolean;
-let offset: string;
-
 const defaultSlot: any = {
     default: `toast message content`
 };
 
 const ACTION_LABEL: string = 'Action';
 
-const initializeShallowWrapper: () => any = () => {
+const initializeWrapper: () => any = () => {
     wrapper = mount(MToast, {
         localVue: localVue,
         slots: defaultSlot,
-        propsData: {
-            state,
-            position,
-            timeout,
-            open,
-            actionLabel,
-            icon,
-            offset
-        },
         stubs: {
             transition: TransitionStub,
             portal: PortalStub
@@ -54,15 +36,15 @@ describe(`MToast`, () => {
 
     describe(`Given that no props have been passed`, async () => {
         beforeEach(async () => {
-            initializeShallowWrapper();
+            initializeWrapper();
             jest.runOnlyPendingTimers(); // wait for component to be instancialized
         });
 
         describe(`When the Toast is created`, () => {
             it(`Should automatically appear`, () => {
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeTruthy();
-                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBeTruthy();
-                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBeTruthy();
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBe(true);
+                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBe(true);
+                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBe(true);
             });
 
             it(`Should be in Confirmation state`, () => {
@@ -78,7 +60,7 @@ describe(`MToast`, () => {
             });
 
             it(`Should have an icon`, () => {
-                expect(wrapper.vm.icon).toBeTruthy();
+                expect(wrapper.vm.icon).toBe(true);
             });
 
             it(`Should have an offset set to 0 as a string`, () => {
@@ -97,9 +79,9 @@ describe(`MToast`, () => {
 
     describe(`Given that a custom action prop have been passed`, () => {
         beforeEach(() => {
-            actionLabel = ACTION_LABEL;
-            initializeShallowWrapper();
-            jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            wrapper.setProps({
+                actionLabel: ACTION_LABEL
+            });
         });
 
         describe(`When the Toast is created`, () => {
@@ -126,13 +108,15 @@ describe(`MToast`, () => {
     describe(`Given that a timeout prop have been passed`, () => {
         describe(`When the Toast is created`, () => {
             it(`Should appear and then disappear`, () => {
-                timeout = 5000;
-                initializeShallowWrapper();
+                initializeWrapper();
+                wrapper.setProps({
+                    timeout: 5000
+                });
                 jest.runOnlyPendingTimers(); // wait for component to be instancialized
 
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeTruthy();
-                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBeTruthy();
-                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBeTruthy();
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBe(true);
+                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBe(true);
+                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBe(true);
 
                 jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over
 
@@ -143,9 +127,9 @@ describe(`MToast`, () => {
 
     describe(`Givent that a open prop have been passed and variable is false`, () => {
         beforeEach(() => {
-            open = false;
-            initializeShallowWrapper();
-            jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            wrapper.setProps({
+                open: false
+            });
         });
         describe(`When the Toast is created`, () => {
             it(`Should not appear`, () => {
@@ -155,7 +139,7 @@ describe(`MToast`, () => {
         describe(`When the variable is set to true`, () => {
             it(`should appear`, () => {
                 wrapper.vm.$props.open = true;
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeTruthy();
+                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBe(true);
             });
         });
     });

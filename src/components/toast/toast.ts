@@ -1,20 +1,20 @@
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import ModulPlugin from '../../utils/modul/modul';
+import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
-import WithRender from './toast.html?style=./toast.scss';
-import { ModulVue } from '../../utils/vue/vue';
-import { PortalMixinImpl, BackdropMode, Portal, PortalMixin } from '../../mixins/portal/portal';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import ModulPlugin from '../../utils/modul/modul';
-import PortalPlugin from 'portal-vue';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { MLinkMode } from '../link/link';
 import { MMessageState } from '../message/message';
+import WithRender from './toast.html?style=./toast.scss';
+
 
 export enum MToastPosition {
     TopLeft = 'top-left',
@@ -27,7 +27,7 @@ export enum MToastPosition {
 
 @WithRender
 @Component({
-    mixins: [ MediaQueries, Portal]
+    mixins: [MediaQueries, Portal]
 })
 export class MToast extends ModulVue implements PortalMixinImpl {
     @Prop({
@@ -82,7 +82,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         if (value) {
             if (this.offset !== '0') {
-                this.getPortalElement().style.transform = `translateY(${ this.offset })`;
+                this.getPortalElement().style.transform = `translateY(${this.offset})`;
             }
 
             if (this.timeout) {
@@ -110,6 +110,10 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         if (this.open === undefined || this.open === true) {
             this.as<PortalMixin>().propOpen = true;
         }
+    }
+
+    @Emit('action-button')
+    private actionButton(event: Event): void {
     }
 
     private onAction($event): void {
