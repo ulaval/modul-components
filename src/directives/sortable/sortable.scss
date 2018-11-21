@@ -1,34 +1,30 @@
 @import 'abstracts/variables';
 
 .m-sortable {
-    display: flex;
+    ul {
+        display: flex;
+        flex-direction: column;
 
-    &__column {
-        width: 300px;
-
-        ul {
+        li {
+            padding: $m-padding;
+            margin-bottom: $m-margin--s;
+            color: #fff;
+            font-weight: $m-font-weight--black;
+            background-color: #7cadf1;
             display: flex;
-            flex-direction: column;
+            align-items: center;
 
-            li {
-                max-width: 100px;
-                padding: 10px;
-                margin: 0 0 5px;
-                color: #fff;
-                font-weight: 600;
-                background-color: #7cadf1;
+            &.noHandle {
+                cursor: grab;
+            }
 
-                &.noHandle {
-                    cursor: grab;
-                }
-
-                .dragHandle {
-                    width: 25px;
-                    height: 25px;
-                    background: #ccc;
-                    cursor: grab;
-                    margin: 0 0 8px;
-                }
+            .dragHandle {
+                flex: none;
+                width: 25px;
+                height: 25px;
+                background: $m-color--grey-light;
+                cursor: grab;
+                margin-right: $m-margin;
             }
         }
     }
