@@ -1,7 +1,6 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import qs from 'qs/lib';
 import { PluginObject } from 'vue';
-
 import { WindowErrorHandler } from '../errors/window-error-handler';
 import * as strUtils from '../str/str';
 import { RequestConfig, RestAdapter } from './rest';
@@ -41,9 +40,7 @@ export class HttpService implements RestAdapter {
                     protectedUrls.every(url => {
                         if (strUtils.startsWith(config.url, url)) {
                             let token: string = authFn();
-                            config.headers = Object.assign({
-                                [AUTHORIZATION_HEADER]: token
-                            });
+                            config.headers = Object.assign(config.headers || {}, { [AUTHORIZATION_HEADER]: token });
                             return false;
                         }
                         return true;

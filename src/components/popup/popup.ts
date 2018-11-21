@@ -81,12 +81,6 @@ export class MPopup extends ModulVue {
         return (this.$children[0] as any).popupBody;
     }
 
-    public update(): void {
-        if (this.$refs.popper) {
-            this.$refs.popper.update();
-        }
-    }
-
     private get propOpen(): boolean {
         return this.open === undefined ? this.internalOpen : this.open;
     }
@@ -114,6 +108,10 @@ export class MPopup extends ModulVue {
 
     private onClose(): void {
         this.$emit('close');
+    }
+
+    private onPortalContentVisible(): void {
+        this.$emit('portal-content-visible');
     }
 
     private get hasTriggerSlot(): boolean {

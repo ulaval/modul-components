@@ -1,12 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
-import { Model, Prop, Watch } from 'vue-property-decorator';
-import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
-
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
-
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CHECKBOX_NAME } from '../component-names';

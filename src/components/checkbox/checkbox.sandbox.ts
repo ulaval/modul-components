@@ -6,6 +6,8 @@ import WithRender from './checkbox.sandbox.html';
 @WithRender
 @Component
 export class MCheckboxSandbox extends Vue {
+    public disabledCheckboxValue: boolean = false;
+    public disabledCheckbox: boolean = false;
     public checkboxReadOnlyValue: boolean = true;
     public isReadOnly: boolean = true;
 }

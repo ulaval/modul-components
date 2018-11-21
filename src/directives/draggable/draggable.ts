@@ -112,9 +112,9 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         MDraggable.currentDraggable = this;
         this.element.classList.add(MDraggableClassNames.Dragging);
         if (typeof this.options.dragData === 'object') {
-            event.dataTransfer.setData('application/json', JSON.stringify(this.options.dragData));
+            event.dataTransfer!.setData('application/json', JSON.stringify(this.options.dragData));
         } else {
-            event.dataTransfer.setData('text', this.options.dragData);
+            event.dataTransfer!.setData('text', this.options.dragData);
         }
 
         this.setEventDragImage(event);
@@ -239,12 +239,12 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     private setEventDragImage(event: DragEvent): void {
         const dragImage: HTMLElement | null = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
-        if (dragImage && event.dataTransfer.setDragImage) {
+        if (dragImage && event.dataTransfer!.setDragImage) {
             dragImage.hidden = false;
             if (polyFillActive.dragDrop) {
-                event.dataTransfer.setDragImage(dragImage, 0, 0);
+                event.dataTransfer!.setDragImage(dragImage, 0, 0);
             } else {
-                event.dataTransfer.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
+                event.dataTransfer!.setDragImage(dragImage, this.calculateHorizontalCenterOffset(dragImage), this.calculateVerticalCenterOffset(dragImage));
             }
         }
     }
@@ -260,7 +260,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private dispatchEvent(event: DragEvent, name: string): void {
-        const data: any = this.options.dragData ? this.options.dragData : event.dataTransfer.getData('text');
+        const data: any = this.options.dragData ? this.options.dragData : event.dataTransfer!.getData('text');
         const dragInfo: MDragInfo = {
             action: this.options.action,
             grouping: this.options.grouping,
@@ -282,8 +282,12 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private isHandleUsedToDrag(event: MouseEvent): boolean {
-        let elementDragged: HTMLElement = event.target as HTMLElement;
-        return elementDragged.classList.contains('dragHandle');
+        const dragHandle: HTMLElement | null = this.element.querySelector('.dragHandle');
+        if (dragHandle) {
+            return dragHandle.classList.contains('dragHandle') && dragHandle.contains(event.target as Node);
+        } else {
+            return false;
+        }
     }
 }
 
