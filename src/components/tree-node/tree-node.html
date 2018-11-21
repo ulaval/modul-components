@@ -11,15 +11,12 @@
                      :filename="node.id"
                      :folder-open="internalOpen"
                      :folder="isFolder"></m-tree-icon>
-        <span class="m-tree-node__item__label"
-              v-if="showCheckboxes">
-            {{label}}
-            <m-checkbox :value="isSelected || checkBoxState == '2'"
-                        :class="{ 'm--partial-check': (checkBoxState == '1') }"
-                        @click="onCheckboxClick"></m-checkbox>
-        </span>
-        <span class="m-tree-node__item__label"
-              v-else>{{label}}</span>
+        <span class="m-tree-node__item__label">{{label}}</span>
+        <m-checkbox :value="isSelected || checkBoxState == '2'"
+                    class="m--can-be-partial"
+                    v-if="showCheckboxes"
+                    :class="{ 'm--is-partially-checked': (checkBoxState == '1') }"
+                    @click="onCheckboxClick"></m-checkbox>
     </div>
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">
@@ -41,6 +38,7 @@
                              :selected-nodes="selectedNodes"
                              :has-sibling="childHasSibling(index)"
                              @childrenCheckboxStateChange='onChildrenCheckboxStateChange'
+                             @folderCheckboxStateUpdate='onFolderCheckboxStateUpdate'
                              @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>

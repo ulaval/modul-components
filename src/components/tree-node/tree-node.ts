@@ -102,6 +102,14 @@ export class MTreeNode extends ModulVue {
         }
     }
 
+    // Sends children checkbox state to every parents. Half checkbox will affect all parents, blank will only affect parents with no children.
+    public onFolderCheckboxStateUpdate(state: MCheckboxState): void {
+        if (!this.isParentOfSelectedFile && state === MCheckboxState.Blank || state !== MCheckboxState.Blank) {
+            this.checkBoxState = state;
+        }
+        this.$emit('folderCheckboxStateUpdate', state);
+    }
+
     protected mounted(): void {
         this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
     }
@@ -138,9 +146,9 @@ export class MTreeNode extends ModulVue {
             if (this.checkBoxState === MCheckboxState.Checked) {
                 this.$emit('childrenCheckboxStateChange', false);
             }
-            this.checkBoxState = MCheckboxState.Half;
+            this.onFolderCheckboxStateUpdate(MCheckboxState.Half);
         } else {
-            this.checkBoxState = MCheckboxState.Blank;
+            this.onFolderCheckboxStateUpdate(MCheckboxState.Blank);
         }
     }
 
