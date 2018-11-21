@@ -299,7 +299,9 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
-    @Watch('open')
+    @Watch('open', {
+        immediate: true
+    })
     private openChanged(open: boolean): void {
         this.propOpen = open;
     }
