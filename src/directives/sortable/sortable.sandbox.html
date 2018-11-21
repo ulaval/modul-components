@@ -1,0 +1,26 @@
+<div class="m-sortable">
+    <h4>Sortable - with handle</h4>
+    <ul v-m-sortable="true"
+        :items="elementsSortableWithHandle"
+        @sortable:move="deplacerElementsWithHandle">
+
+        <li v-for="(element, index) in elementsSortableWithHandle"
+            :key="element.cle">
+            <div class="dragHandle"></div>
+            {{ element.titre }}
+        </li>
+    </ul>
+
+    <h4>Sortable - without handle</h4>
+    <ul v-m-sortable="true"
+        :items="elementsSortableWithoutHandle"
+        @sortable:move="deplacerElementsWithoutHandle">
+
+        <li v-for="(element, index) in elementsSortableWithoutHandle"
+            class="noHandle"
+            :key="element.cle">
+            {{ element.titre }}
+        </li>
+    </ul>
+
+</div>
