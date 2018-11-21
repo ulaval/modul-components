@@ -10,12 +10,12 @@
     </p>
 
     <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>Readonly</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        Un checkbox peut être en mode readonly. Il garde sa valeur.
+        </br>From <a href="https://github.com/ulaval/modul-components/pull/579"
+           target="blank">PR 579</a>
+
     </p>
     <p>
         <h3>Le crochet reste visible lorsque la case est désactivée</h3>
@@ -29,4 +29,9 @@
                         :disabled="disabledCheckbox"></m-checkbox>
             <m-button @click="disabledCheckbox = !disabledCheckbox">Désactiver/Activer le checkbox</m-button>
         </p>
+
+    <m-checkbox :readonly="isReadOnly"
+                v-model="checkboxReadOnlyValue">Readonly</m-checkbox><em>(Valeur checkbox: {{checkboxReadOnlyValue}})</em><br />
+    <m-button @click="isReadOnly = !isReadOnly">Activer/Désactiver ReadOnly</m-button>
+
 </div>

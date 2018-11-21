@@ -8,7 +8,7 @@ $m-checkbox--width: 16px;
     line-height: 1;
 
     &:not(.m--is-disabled) {
-        &:not(.m--has-error):not(.m--is-valid) {
+        &:not(.m--has-error):not(.m--is-valid):not(.m--is-readonly) {
             .m-checkbox__wrap:hover,
             &.m--is-focus {
                 .m-checkbox {
@@ -86,6 +86,25 @@ $m-checkbox--width: 16px;
 
             &__label {
                 color: $m-color--disabled;
+            }
+        }
+    }
+
+    &.m--is-readonly {
+        .m-checkbox {
+            &__wrap {
+                cursor: not-allowed;
+            }
+
+            &__input {
+                border-color: $m-color--disabled;
+
+                &__icon {
+                    &::before,
+                    &::after {
+                        background: $m-color--disabled;
+                    }
+                }
             }
         }
     }
