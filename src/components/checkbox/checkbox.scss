@@ -115,7 +115,7 @@ $m-checkbox--width: 16px;
             }
         }
 
-        &.m--is-partially-checked {
+        &.m--is-indeterminate {
             .m-checkbox__input {
                 &__icon {
                     background-color: red;

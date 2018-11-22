@@ -13,9 +13,8 @@
                      :folder="isFolder"></m-tree-icon>
         <span class="m-tree-node__item__label">{{label}}</span>
         <m-checkbox :value="isSelected || checkBoxState == '2'"
-                    class="m--can-be-partial"
                     v-if="showCheckboxes"
-                    :class="{ 'm--is-partially-checked': (checkBoxState == '1') }"
+                    :indeterminate="checkBoxState == '1'"
                     @click="onCheckboxClick"></m-checkbox>
     </div>
     <template v-if="isFolder">

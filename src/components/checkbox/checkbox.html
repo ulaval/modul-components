@@ -1,8 +1,9 @@
 <div class="m-checkbox"
-      :class="{ 'm--is-checkbox-left': hasCheckboxLeft,
+     :class="{ 'm--is-checkbox-left': hasCheckboxLeft,
                 'm--is-checkbox-right': !hasCheckboxLeft,
                 'm--is-checked': propValue,
                 'm--is-disabled': isDisabled,
+                'm--is-indeterminate': propIndeterminate,
                 'm--is-focus': isFocus,
                 'm--has-error': hasError,
                 'm--is-valid': isValid }">
@@ -10,24 +11,29 @@
            type="checkbox"
            :id="id"
            class="m-checkbox__hidden"
+           :indeterminate.prop="propIndeterminate"
            :disabled="isDisabled"
            v-model="propValue"
            @click="onClick"
            @focus="setFocus(true)"
            @blur="setFocus(false)">
-    <label class="m-checkbox__wrap" :for="id" :aria-hidden="!hasLabelSlot">
-        <span class="m-checkbox__input" aria-hidden="true">
+    <label class="m-checkbox__wrap"
+           :for="id"
+           :aria-hidden="!hasLabelSlot">
+        <span class="m-checkbox__input"
+              aria-hidden="true">
             <span class="m-checkbox__input__icon"></span>
         </span>
-        <span class="m-checkbox__label" v-if="hasLabelSlot">
+        <span class="m-checkbox__label"
+              v-if="hasLabelSlot">
             <slot></slot>
         </span>
     </label>
     <m-validation-message ref="validation"
-        class="m-checkbox__message"
-        :disabled="isDisabled"
-        :error="hasError"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
+                          class="m-checkbox__message"
+                          :disabled="isDisabled"
+                          :error="hasError"
+                          :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
 </div>

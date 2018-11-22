@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -24,6 +23,9 @@ export class MCheckbox extends ModulVue {
     @Prop()
     public value: boolean;
 
+    @Prop({ default: false })
+    public indeterminate: boolean;
+
     @Prop({
         default: MCheckboxPosition.Left,
         validator: value =>
@@ -31,10 +33,16 @@ export class MCheckbox extends ModulVue {
             value === MCheckboxPosition.Right
     })
     public position: MCheckboxPosition;
+    public propIndeterminate: boolean = this.indeterminate;
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
     private internalValue: boolean = false;
+
+    @Watch('indeterminate')
+    private onIndeterminateChange(value: boolean): void {
+        this.propIndeterminate = value;
+    }
 
     @Watch('value')
     private onValueChange(value: boolean): void {
@@ -48,6 +56,7 @@ export class MCheckbox extends ModulVue {
     private set propValue(value: boolean) {
         this.$emit('change', value);
         this.internalValue = value;
+        this.propIndeterminate = false;
     }
 
     private onClick(event: MouseEvent): void {
