@@ -43,6 +43,17 @@ exports[`MCheckbox should render correctly when position prop is right 1`] = `
 </div>
 `;
 
+exports[`MCheckbox should render correctly when readonly 1`] = `
+<div class="m-checkbox m--is-checkbox-left m--is-readonly">
+    <input type="hidden" id="mCheckbox-uuid">
+    <label aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
+    </label>
+    <div class="m-validation-message m-checkbox__message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
+</div>
+`;
+
 exports[`MCheckbox should render correctly when value prop is true 1`] = `
 <div class="m-checkbox m--is-checkbox-left m--is-checked">
     <input type="checkbox" id="mCheckbox-uuid" checked="checked" class="m-checkbox__hidden">

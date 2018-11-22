@@ -151,7 +151,7 @@ export class MLink extends ModulVue {
     private get propTarget(): string | undefined {
         return this.isButton ? undefined : this.target;
     }
-
+  
     private get propTabindex(): number {
         return this.disabled ? -1 : this.tabindex;
     }

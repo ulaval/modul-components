@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import { ModulVue } from '../../utils/vue/vue';
@@ -10,9 +9,10 @@ import PopperPlugin, { MPopper, MPopperPlacement } from '../popper/popper';
 import SidebarPlugin from '../sidebar/sidebar';
 import WithRender from './popup.html?style=./popup.scss';
 
+
 @WithRender
 @Component({
-    mixins: [ MediaQueries, OpenTrigger]
+    mixins: [MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -81,10 +81,6 @@ export class MPopup extends ModulVue {
         return (this.$children[0] as any).popupBody;
     }
 
-    public update(): void {
-        this.$refs.popper.update();
-    }
-
     private get propOpen(): boolean {
         return this.open === undefined ? this.internalOpen : this.open;
     }
@@ -112,6 +108,10 @@ export class MPopup extends ModulVue {
 
     private onClose(): void {
         this.$emit('close');
+    }
+
+    private onPortalContentVisible(): void {
+        this.$emit('portal-content-visible');
     }
 
     private get hasTriggerSlot(): boolean {

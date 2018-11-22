@@ -7,7 +7,8 @@ import WithRender from './link.sandbox.html';
 @WithRender
 @Component
 export class MLinkSandbox extends ModulVue {
-    private openWindow01: boolean = false;
+    public routerLinkDisabled: boolean = false;
+    public openWindow01: boolean = false;
 }
 
 const LinkSandboxPlugin: PluginObject<any> = {

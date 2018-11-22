@@ -4,7 +4,7 @@
     <portal :target-el="portalTargetSelector"
             v-if="portalCreated">
         <transition name="m--is">
-            <div class="m-dialog__wrap m-u--app-body"
+            <div class="m-dialog__wrap"
                  :class="[{ 'm--is-disabled': disabled }, className ]"
                  v-show="propOpen"
                  v-if="portalMounted"
