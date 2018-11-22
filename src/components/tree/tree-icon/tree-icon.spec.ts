@@ -1,4 +1,5 @@
 import { shallow, Wrapper } from '@vue/test-utils';
+import { renderComponent } from '../../../../tests/helpers/render';
 import { TreeNode } from '../tree';
 import { MTreeIcon } from './tree-icon';
 
@@ -18,6 +19,7 @@ const FOLDER_CLOSED: string = 'm-svg__folder';
 let file: TreeNode;
 let folderOpen: boolean = false;
 let folder: boolean = false;
+let useExpandIcons: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
@@ -26,7 +28,8 @@ const initializeShallowWrapper: any = () => {
         propsData: {
             file,
             folderOpen,
-            folder
+            folder,
+            useExpandIcons
         }
     });
 };
@@ -47,28 +50,50 @@ describe(`MTreeIcon`, () => {
             folder = true;
         });
 
-        describe(`When the folder is opened`, () => {
-
-            it(`Should be the right icon`, () => {
-                folderOpen = true;
-                initializeShallowWrapper();
-
-                expect(wrapper.vm.folderIcon).toEqual(FOLDER_OPEN);
+        describe(`When the node is expandable`, () => {
+            beforeEach(() => {
+                useExpandIcons = true;
             });
 
-        });
-
-        describe(`When the folder is closed`, () => {
-
-            it(`Should be the right icon`, () => {
-                folderOpen = false;
+            it(`Should render correctly`, () => {
                 initializeShallowWrapper();
 
-                expect(wrapper.vm.folderIcon).toEqual(FOLDER_CLOSED);
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
-
         });
 
+        describe(`When the node is not expandable`, () => {
+
+            beforeEach(() => {
+                useExpandIcons = false;
+            });
+
+            it(`Should render correctly`, () => {
+                initializeShallowWrapper();
+
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+
+            describe(`When the folder is opened`, () => {
+                it(`Should be the right icon`, () => {
+                    folderOpen = true;
+                    initializeShallowWrapper();
+
+                    expect(wrapper.vm.folderIcon).toEqual(FOLDER_OPEN);
+                });
+
+            });
+
+            describe(`When the folder is closed`, () => {
+
+                it(`Should be the right icon`, () => {
+                    folderOpen = false;
+                    initializeShallowWrapper();
+
+                    expect(wrapper.vm.folderIcon).toEqual(FOLDER_CLOSED);
+                });
+
+            });
+        });
     });
-
 });

@@ -2,7 +2,8 @@
         v-if="folder && !useExpandIcons"
         size="24px"
         :name="folderIcon"></m-icon>
-<m-plus class="m-accordion__header-icon"
+<m-plus ref="expandIcon"
+        class="m-accordion__header-icon"
         :class="{ 'm--is-left': 'true' }"
         v-else-if="folder && useExpandIcons"
         :open="folderOpen"
