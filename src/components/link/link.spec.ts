@@ -125,36 +125,33 @@ describe('MLink', () => {
             await renderAllIconStyle(link);
         });
 
-        it(`should assign router-link event correctly when disabled`, () => {
+        it(`should assign link event correctly when disabled`, () => {
             const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink,
+                    routerLink: true,
                     disabled: true
                 }
             });
 
-            const refRouter: Wrapper<Vue> = link.find({ ref: 'router' });
-
-            expect(refRouter.exists()).toBe(true);
-            expect(refRouter.props().event).toBe('');
+            expect(link.vm.isButton).toBe(true);
+            return expect(renderComponent(link.vm)).resolves.toMatchSnapshot();
         });
 
-        it(`should assign router-link event correctly when enabled`, () => {
+        it(`should assign link event correctly when enabled`, () => {
             const link: Wrapper<MLink> = mount(MLink, {
                 router: router,
                 localVue: localVue,
                 propsData: {
-                    mode: MLinkMode.RouterLink,
+                    url: '/',
+                    routerLink: true,
                     disabled: false
                 }
             });
 
-            const refRouter: Wrapper<Vue> = link.find({ ref: 'router' });
-
-            expect(refRouter.exists()).toBe(true);
-            expect(refRouter.props().event).toBe('click');
+            expect(link.vm.isButton).toBe(false);
+            return expect(renderComponent(link.vm)).resolves.toMatchSnapshot();
         });
     });
 

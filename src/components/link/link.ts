@@ -69,6 +69,22 @@ export class MLink extends ModulVue {
     @Prop({ default: 0 })
     public tabindex: number;
 
+    public get hasUrl(): boolean {
+        return !!this.url && !this.disabled;
+    }
+
+    public get isButton(): boolean {
+        return !this.hasUrl;
+    }
+
+    public get isRouterLink(): boolean {
+        return !this.isButton && this.routerLink;
+    }
+
+    public get isExternalLink(): boolean {
+        return !this.isButton && !this.routerLink;
+    }
+
     private onClick(event): void {
 
         if (this.isButton || this.disabled) {
@@ -78,22 +94,6 @@ export class MLink extends ModulVue {
             this.$emit('click', event);
             this.$el.blur();
         }
-    }
-
-    private get hasUrl(): boolean {
-        return !!this.url && !this.disabled;
-    }
-
-    private get isButton(): boolean {
-        return !this.hasUrl;
-    }
-
-    private get isRouterLink(): boolean {
-        return !this.isButton && this.routerLink;
-    }
-
-    private get isExternalLink(): boolean {
-        return !this.isButton && !this.routerLink;
     }
 
     private get buttonRole(): string | undefined {
@@ -151,7 +151,7 @@ export class MLink extends ModulVue {
     private get propTarget(): string | undefined {
         return this.isButton ? undefined : this.target;
     }
-  
+
     private get propTabindex(): number {
         return this.disabled ? -1 : this.tabindex;
     }
