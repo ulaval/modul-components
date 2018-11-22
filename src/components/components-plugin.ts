@@ -1,5 +1,4 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -158,8 +157,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RichTextPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
-        Vue.use(SidebarPlugin);
         Vue.use(ShowMorePlugin);
+        Vue.use(SidebarPlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);
         Vue.use(Status);
