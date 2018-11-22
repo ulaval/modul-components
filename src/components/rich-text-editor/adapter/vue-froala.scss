@@ -39,6 +39,20 @@
         .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
     }
 
+    &.m--is-disabled /deep/ {
+        .fr-wrapper {
+            cursor: not-allowed;
+        }
+
+        .fr-view {
+            color: $m-color--disabled;
+        }
+
+        .fr-toolbar {
+            display: none;
+        }
+    }
+
     &:not(.m--is-focus) {
         overflow: hidden;
 
