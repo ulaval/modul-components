@@ -1,0 +1,7 @@
+@import 'abstracts/variables';
+
+.m-step-transition {
+    position: relative;
+    transition: height $m-transition-duration--l ease;
+    overflow: hidden;
+}

@@ -1,0 +1,43 @@
+@import 'abstracts/variables';
+
+.m-step-transition-item {
+    > :first-child {
+        margin-top: 0;
+    }
+
+    &.m--is-enter-active,
+    &.m--is-leave-active {
+        cursor: not-allowed;
+    }
+
+    &.m--is-enter {
+        opacity: 0.3;
+        transform: translate3d(110%, 0, 0);
+    }
+
+    &.m--is-leave-to {
+        opacity: 0.3;
+        transform: translate3d(-110%, 0, 0);
+    }
+
+    &.m--is-enter-active {
+        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease $m-transition-duration--l;
+    }
+
+    &.m--is-leave-active {
+        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
+        position: absolute;
+    }
+}
+
+.m-step-transition {
+    &.m--is-left-to-right-transition .m-step-transition-item {
+        &.m--is-enter {
+            transform: translate3d(-110%, 0, 0);
+        }
+
+        &.m--is-leave-to {
+            transform: translate3d(110%, 0, 0);
+        }
+    }
+}

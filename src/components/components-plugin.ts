@@ -1,5 +1,4 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -68,6 +67,8 @@ import SidebarPlugin from './sidebar/sidebar';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
+import StepTransitionItemPlugin from './step-transition-item/step-transition-item';
+import StepTransitionPlugin from './step-transition/step-transition';
 import StepPlugin from './step/step';
 import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
@@ -163,6 +164,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SpinnerPlugin);
         Vue.use(Status);
         Vue.use(StepPlugin);
+        Vue.use(StepTransitionPlugin);
+        Vue.use(StepTransitionItemPlugin);
         Vue.use(SteppersPlugin);
         Vue.use(SteppersItemPlugin);
         Vue.use(SwitchPlugin);

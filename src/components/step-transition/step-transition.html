@@ -1,0 +1,10 @@
+<div class="m-step-transition"
+     :class="{'m--is-left-to-right-transition': isLeftToRightTransition}">
+    <transition-group name="m--is"
+                      @enter="transitionEnter"
+                      @afterEnter="transitionAfterEnter"
+                      @beforeLeave="transitionBeforeLeave"
+                      @afterLeave="transitionAfterLeave">
+        <slot></slot>
+    </transition-group>
+</div>
