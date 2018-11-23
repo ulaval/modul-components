@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
@@ -13,9 +12,9 @@ import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 
-export enum MTooltipMode {
-    Icon = 'icon',
-    Link = 'link'
+export enum MTooltipSize {
+    Default = 'default',
+    Large = 'large'
 }
 
 @WithRender
@@ -25,13 +24,6 @@ export enum MTooltipMode {
 export class MTooltip extends ModulVue {
     @Prop()
     public open: boolean;
-    @Prop({
-        default: MTooltipMode.Icon,
-        validator: value =>
-            value === MTooltipMode.Icon ||
-            value === MTooltipMode.Link
-    })
-    public mode: MTooltipMode;
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -51,14 +43,19 @@ export class MTooltip extends ModulVue {
     public placement: MPopperPlacement;
     @Prop({ default: true })
     public closeButton: boolean;
+    @Prop({
+        default: MTooltipSize.Default,
+        validator: value =>
+            value === MTooltipSize.Default ||
+            value === MTooltipSize.Large
+    })
+    public size: MTooltipSize;
     @Prop()
     public disabled: boolean;
     @Prop()
     public openTitle: string;
     @Prop()
     public closeTitle: string;
-    @Prop({ default: true })
-    public underline: boolean;
     @Prop()
     public className: string;
 
@@ -72,10 +69,6 @@ export class MTooltip extends ModulVue {
     @Watch('open')
     private openChanged(open: boolean): void {
         this.propOpen = open;
-    }
-
-    private get propMode(): string {
-        return this.mode;
     }
 
     private get propCloseButton(): boolean {

@@ -1,11 +1,11 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import TooltipPlugin, { MTooltip, MTooltipMode } from './tooltip';
+import TooltipPlugin, { MTooltip } from './tooltip';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -55,15 +55,12 @@ describe('tooltip', () => {
         return expect(renderComponent(tooltip.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when mode is link', () => {
+    it('should render correctly when mode is text', () => {
         const tooltip: Wrapper<MTooltip> = mount(MTooltip, {
             localVue: localVue,
-            propsData: {
-                mode: MTooltipMode.Link
-            },
             slots: {
                 default: 'Tooltip text',
-                link: 'Link'
+                text: 'Link'
             }
         });
 

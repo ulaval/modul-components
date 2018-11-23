@@ -1,5 +1,6 @@
 @import 'abstracts/variables';
 $m-tooltip--width: 320px !default;
+$m-tooltip--width--l: 540px !default;
 $m-tooltip--max-height: 280px !default;
 
 .m-tooltip {
@@ -43,28 +44,19 @@ $m-tooltip--max-height: 280px !default;
 
     &__close-button {
         position: absolute;
-        top: 1px; // Magic number: border-width
-        right: 1px; // Magic number: border-width
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: $m-touch-size;
-        height: $m-touch-size;
-        color: $m-color--interactive;
-        outline: none;
-        cursor: pointer;
-
-        &:hover,
-        &:focus {
-            color: $m-color--interactive-darker;
-        }
+        top: 0;
+        right: 0;
     }
 
     &__body {
-        padding: $m-padding;
+        padding: $m-spacing;
         background: $m-color--information;
         word-break: break-word;
         user-select: text;
+
+        > :first-child {
+            margin-top: 0;
+        }
 
         @media (max-width: $m-mq--max--s) {
             position: relative;
@@ -101,7 +93,15 @@ $m-tooltip--max-height: 280px !default;
                 position: relative;
 
                 .m-tooltip__body {
-                    padding-right: $m-padding--l;
+                    padding-right: $m-touch-size;
+                }
+            }
+
+            &.m--is-large-size {
+                .m-tooltip__body {
+                    @media (min-width: $m-mq--min--s) {
+                        width: $m-tooltip--width--l;
+                    }
                 }
             }
         }
