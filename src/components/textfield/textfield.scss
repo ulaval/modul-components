@@ -5,6 +5,11 @@
     display: inline-flex;
     flex-direction: column;
 
+    // créer un espace pour le label du input-style
+    & + & {
+        margin-top: $m-spacing--s;
+    }
+
     &.m--has-error {
         .m-textfield__validation {
             color: $m-color--error;
