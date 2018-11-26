@@ -1,17 +1,25 @@
-<div class="m-sidebar" ref="baseWindow">
+<div class="m-sidebar"
+     ref="baseWindow">
     <slot name="trigger"></slot>
-    <portal :target-el="portalTargetSelector" v-if="portalCreated">
+    <portal :target-el="portalTargetSelector"
+            v-if="portalCreated">
         <transition name="m--is">
-            <div v-show="propOpen" v-if="portalMounted"
-                class="m-sidebar__wrap m-u--app-body m--is-sidebar"
-                :class="[{ 'm--is-close-on-backdrop': closeOnBackdrop,
+            <div v-show="propOpen"
+                 v-if="portalMounted"
+                 class="m-sidebar__wrap"
+                 :class="[{ 'm--is-close-on-backdrop': closeOnBackdrop,
                            'm--is-disabled':disabled },
                            'm--is-origin-' + origin,
                            className ]"
-                @click.self="backdropClick"
-                ref="modalWrap">
-                <article class="m-sidebar__article" :style="{ width: propWidth, 'margin-left': marginLeft }" ref="article">
-                    <button type="button" @click="closeModal()" class="m-sidebar__close-button" v-if="closeButton && origin === 'bottom'">
+                 @click.self="backdropClick"
+                 ref="modalWrap">
+                <article class="m-sidebar__article"
+                         :style="{ width: propWidth, 'margin-left': marginLeft }"
+                         ref="article">
+                    <button type="button"
+                            @click="closeModal()"
+                            class="m-sidebar__close-button"
+                            v-if="closeButton && origin === 'bottom'">
                         <m-i18n k="m-sidebar:close"></m-i18n>
                     </button>
                     <header class="m-sidebar__header"
@@ -20,16 +28,25 @@
                                       'm--no-content': (!hasHeaderSlot || !hasTitle) && closeButton && origin !== 'bottom',
                                       'm--no-padding': !padding || !paddingHeader }"
                             v-if="hasHeader">
-                        <h2 class="m-sidebar__title" v-if="hasTitle">{{ title }}</h2>
+                        <h2 class="m-sidebar__title"
+                            v-if="hasTitle">{{ title }}</h2>
                         <slot name="header"></slot>
-                        <m-icon-button @click="closeModal" icon-name="m-svg__close-clear" class="m-sidebar__header__close-button" v-if="closeButton && origin !== 'bottom'">
+                        <m-icon-button @click="closeModal"
+                                       icon-name="m-svg__close-clear"
+                                       class="m-sidebar__header__close-button"
+                                       v-if="closeButton && origin !== 'bottom'">
                             <m-i18n k="m-sidebar:close"></m-i18n>
                         </m-icon-button>
                     </header>
-                    <div class="m-sidebar__body" :class="{ 'm--no-padding': !padding || !paddingBody }" v-if="hasDefaultSlot">
+                    <div class="m-sidebar__body"
+                         :class="{ 'm--no-padding': !padding || !paddingBody }"
+                         v-if="hasDefaultSlot"
+                         ref="body">
                         <slot></slot>
                     </div>
-                    <footer class="m-sidebar__footer" :class="{ 'm--no-padding': !padding || !paddingFooter }" v-if="hasFooterSlot">
+                    <footer class="m-sidebar__footer"
+                            :class="{ 'm--no-padding': !padding || !paddingFooter }"
+                            v-if="hasFooterSlot">
                         <slot name="footer"></slot>
                     </footer>
                 </article>

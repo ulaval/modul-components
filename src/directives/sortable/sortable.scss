@@ -1,0 +1,31 @@
+@import 'abstracts/variables';
+
+.m-sortable {
+    ul {
+        display: flex;
+        flex-direction: column;
+
+        li {
+            padding: $m-padding;
+            margin-bottom: $m-margin--s;
+            color: #fff;
+            font-weight: $m-font-weight--black;
+            background-color: #7cadf1;
+            display: flex;
+            align-items: center;
+
+            &.noHandle {
+                cursor: grab;
+            }
+
+            .dragHandle {
+                flex: none;
+                width: 25px;
+                height: 25px;
+                background: $m-color--grey-light;
+                cursor: grab;
+                margin-right: $m-margin;
+            }
+        }
+    }
+}
