@@ -45,9 +45,6 @@ export class MTreeNode extends ModulVue {
     public withCheckboxes: boolean;
 
     @Prop()
-    public parentSelectable: boolean;
-
-    @Prop()
     public disabledNodes: string[];
 
     @Prop()

@@ -1,5 +1,5 @@
 <div class="m-tree"
-     :class="{ 'm-tree--multiple-nodes' : selectionMode == '2' }">
+     :class="{ 'm-tree--multiple-node' : selectionMode == '2' }">
     <m-message v-if="errorTree"
                class="m-tree__error"
                state="warning"
@@ -18,7 +18,7 @@
                      v-for="node in tree"
                      :key="node.id"
                      :selectable="selectable"
-                     :open.sync="node.open"
+                     :open.sync="node.open || !autoSelect"
                      :node="node"
                      :selected-nodes="propSelectedNodes"
                      :disabled-nodes="disabledNodes"

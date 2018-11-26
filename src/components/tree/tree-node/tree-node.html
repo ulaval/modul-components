@@ -1,5 +1,5 @@
 <li class="m-tree-node"
-    :class="{ 'm--is-selected': isSelected, 'm--is-disabled' : isDisabled }">
+    :class="{ 'm--is-selected': isSelected || autoSelect && isSelectedParentNode, 'm--is-disabled' : isDisabled }">
     <div class="m-tree-node__item"
          role="button"
          :tabindex="isDisabled ? '-1' : 1"
@@ -31,11 +31,10 @@
                              :icons="icons"
                              :selectable="selectable"
                              :selected="isSelected"
-                             :open.sync="childNode.open"
+                             :open.sync="childNode.open || !autoSelect"
                              :node="childNode"
                              :use-accordion-icons="useAccordionIcons"
                              :with-checkboxes="withCheckboxes"
-                             :parent-selectable="parentSelectable"
                              :selected-nodes="selectedNodes"
                              :disabled-nodes="disabledNodes"
                              :selected-parent-nodes="selectedParentNodes"
