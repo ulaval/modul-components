@@ -59,8 +59,8 @@ export class MTable extends ModulVue {
         return this.rows.length === 0 && !this.loading;
     }
 
-    @Emit()
-    add(): void {
+    @Emit('add')
+    onAdd(): void {
     }
 
 }
