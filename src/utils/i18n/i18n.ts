@@ -138,11 +138,13 @@ export class Messages {
 
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
-        Object.keys(this.specialCharacterDict).forEach((key: string) => {
-            if (!params[key]) {
-                params[key] = this.specialCharacterDict[key];
-            }
-        });
+        if (FormatMode.Sprintf || FormatMode.Vsprintf) {
+            Object.keys(this.specialCharacterDict).forEach((key: string) => {
+                if (!params.hasOwnProperty(key)) {
+                    params[key] = this.specialCharacterDict[key];
+                }
+            });
+        }
 
         if (htmlEncodeParams && params.length) {
             for (let i: number = 0; i < params.length; ++i) {
