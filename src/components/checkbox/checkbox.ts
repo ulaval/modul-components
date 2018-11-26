@@ -56,7 +56,6 @@ export class MCheckbox extends ModulVue {
     private set propValue(value: boolean) {
         this.$emit('change', value);
         this.internalValue = value;
-        this.propIndeterminate = false;
     }
 
     private onClick(event: MouseEvent): void {

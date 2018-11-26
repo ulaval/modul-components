@@ -19,7 +19,7 @@ const FOLDER_CLOSED: string = 'm-svg__folder';
 let file: TreeNode;
 let folderOpen: boolean = false;
 let folder: boolean = false;
-let useExpandIcons: boolean = false;
+let useAccordionIcons: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
@@ -29,7 +29,7 @@ const initializeShallowWrapper: any = () => {
             file,
             folderOpen,
             folder,
-            useExpandIcons
+            useAccordionIcons
         }
     });
 };
@@ -50,9 +50,9 @@ describe(`MTreeIcon`, () => {
             folder = true;
         });
 
-        describe(`When the node is expandable`, () => {
+        describe(`When the node uses accordion icons`, () => {
             beforeEach(() => {
-                useExpandIcons = true;
+                useAccordionIcons = true;
             });
 
             it(`Should render correctly`, () => {
@@ -65,7 +65,7 @@ describe(`MTreeIcon`, () => {
         describe(`When the node is not expandable`, () => {
 
             beforeEach(() => {
-                useExpandIcons = false;
+                useAccordionIcons = false;
             });
 
             it(`Should render correctly`, () => {

@@ -20,9 +20,10 @@
                      :open.sync="node.open"
                      :node="node"
                      :selected-nodes="propSelectedNodes"
+                     :selected-parent-nodes="propSelectedParentNodes"
                      :icons="icons"
-                     :use-expand-icons="useExpandIcons"
-                     :show-checkboxes="showCheckboxes"
+                     :use-accordion-icons="useAccordionIcons"
+                     :with-checkboxes="withCheckboxes"
                      @click="onClick"></m-tree-node>
     </ul>
 </div>

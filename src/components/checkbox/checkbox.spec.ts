@@ -1,10 +1,10 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MValidationMessage } from '../validation-message/validation-message';
 import MCheckboxPlugin, { MCheckbox, MCheckboxPosition } from './checkbox';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -75,6 +75,16 @@ describe('MCheckbox', () => {
         chkbox.find('input').trigger('click');
 
         expect(chkbox.emitted('click')).toBeTruthy();
+    });
+
+    it('should should go from indeterminated when value is changed', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue
+        });
+
+        chkbox.find('input').trigger('click');
+
+        expect(chkbox.props('indeterminated') == false).toBeTruthy();
     });
 
     it('should flow down InputState mixin props to m-validation-message', () => {

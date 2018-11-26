@@ -40,15 +40,23 @@ export class MTree extends ModulVue {
     public selectedNodes: string[];
 
     @Prop()
+    public selectedParentNodes: string[];
+
+    @Prop()
     public icons: boolean;
 
     @Prop()
-    public useExpandIcons: boolean;
+    public useAccordionIcons: boolean;
 
     @Prop()
-    public showCheckboxes: boolean;
+    public withCheckboxes: boolean;
+
+    @Prop()
+    public parentSelectable: boolean;
 
     public propSelectedNodes: string[] = this.selectedNodes || [];
+
+    public propSelectedParentNodes: string[] = this.selectedParentNodes || [];
 
     public errorTree: boolean = false;
 

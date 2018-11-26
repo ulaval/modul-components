@@ -7,14 +7,14 @@
          ref="item">
         <m-tree-icon class="m-tree-icon"
                      v-if="icons"
-                     :use-expand-icons="useExpandIcons"
+                     :use-accordion-icons="useAccordionIcons"
                      :filename="node.id"
                      :folder-open="internalOpen"
                      :folder="isFolder"></m-tree-icon>
         <span class="m-tree-node__item__label">{{label}}</span>
-        <m-checkbox :value="isSelected || checkBoxState == '2'"
-                    v-if="showCheckboxes"
-                    :indeterminate="checkBoxState == '1'"
+        <m-checkbox :value="isSelected || isSelectedParentNode"
+                    v-if="withCheckboxes"
+                    :indeterminate="isParentOfSelectedFile && !isSelectedParentNode"
                     @click="onCheckboxClick"></m-checkbox>
     </div>
     <template v-if="isFolder">
@@ -32,12 +32,13 @@
                              :selected="isSelected"
                              :open.sync="childNode.open"
                              :node="childNode"
-                             :use-expand-icons="useExpandIcons"
-                             :show-checkboxes="showCheckboxes"
+                             :use-accordion-icons="useAccordionIcons"
+                             :with-checkboxes="withCheckboxes"
+                             :parent-selectable="parentSelectable"
                              :selected-nodes="selectedNodes"
+                             :selected-parent-nodes="selectedParentNodes"
                              :has-sibling="childHasSibling(index)"
-                             @childrenCheckboxStateChange='onChildrenCheckboxStateChange'
-                             @folderCheckboxStateUpdate='onFolderCheckboxStateUpdate'
+                             @child-checkbox-change="onChildCheckboxChange"
                              @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>

@@ -1,14 +1,14 @@
 <m-icon class="m-tree-icon"
-        v-if="folder && !useExpandIcons"
+        v-if="folder && !useAccordionIcons"
         size="24px"
         :name="folderIcon"></m-icon>
 <m-plus ref="expandIcon"
         class="m-accordion__header-icon"
         :class="{ 'm--is-left': 'true' }"
-        v-else-if="folder && useExpandIcons"
+        v-else-if="folder && useAccordionIcons"
         :open="folderOpen"
         :large="true"
         aria-hidden="true"></m-plus>
 <m-icon-file class="m-tree-icon"
-             v-else-if="!useExpandIcons"
+             v-else-if="!useAccordionIcons"
              :extension="extensionFile"></m-icon-file>

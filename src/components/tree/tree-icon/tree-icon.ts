@@ -21,7 +21,7 @@ export class MTreeIcon extends ModulVue {
     public folder: boolean;
 
     @Prop()
-    public useExpandIcons: boolean;
+    public useAccordionIcons: boolean;
 
     @Prop()
     public folderOpen: boolean;
