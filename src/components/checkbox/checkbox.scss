@@ -17,6 +17,16 @@ $m-checkbox--width: 16px;
                 border-color: $m-color--text;
                 color: $m-color--interactive;
 
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    background-color: $m-color--ul-blue;
+                    transform: scale(0);
+                    transition: transform $m-transition-duration ease;
+                }
+
                 &__icon {
                     position: relative;
                     top: -1px; // Magic number
@@ -39,7 +49,7 @@ $m-checkbox--width: 16px;
 
                     &::before {
                         bottom: 0;
-                        transition: width 0.1s ease;
+                        transition: width $m-transition-duration--xs ease;
                         transition-delay: 0;
                         transform: rotate(-20deg);
                         width: 0;
@@ -48,8 +58,8 @@ $m-checkbox--width: 16px;
 
                     &::after {
                         top: 0;
-                        transition: height 0.1s ease;
-                        transition-delay: 0.1s;
+                        transition: height $m-transition-duration--xs ease;
+                        transition-delay: $m-transition-duration--xs;
                         width: 2px;
                         height: 0;
                     }
@@ -117,8 +127,8 @@ $m-checkbox--width: 16px;
 
         &.m--is-partially-checked {
             .m-checkbox__input {
-                &__icon {
-                    background-color: red;
+                &::before {
+                    transform: scale(1);
                 }
             }
         }
