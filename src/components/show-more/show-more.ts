@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { FormatMode } from '../../../src/utils';
 import { ModulVue } from '../../utils/vue/vue';
 import { MButtonSkin } from '../button/button';
@@ -43,8 +43,8 @@ export class MShowMore extends ModulVue {
         return this.nbVisible < this.nbTotal;
     }
 
+    @Emit('click')
     showMore(): void {
-        this.$emit('click');
         this.$emit('update:loading', true);
     }
 }
