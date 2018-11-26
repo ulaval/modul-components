@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
@@ -59,8 +59,8 @@ export class MTable extends ModulVue {
         return this.rows.length === 0 && !this.loading;
     }
 
+    @Emit()
     add(): void {
-        this.$emit('add');
     }
 
 }
