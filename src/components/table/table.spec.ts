@@ -13,6 +13,7 @@ const SLOT_BODY: string = '<tbody><tr><td>SLOT BODY</td></tr></tbody>';
 const SLOT_TD: string = '<td>SLOT TD</td>';
 const SLOT_FOOTER: string = '<td>SLOT FOOTER</td>';
 const SLOT_SEARCH: string = '<div>SLOT SEARCH</div>';
+const SLOT_ADD: string = '<div>SLOT ADD</div>';
 
 let rows: any[] = [];
 
@@ -125,6 +126,17 @@ describe(`MTable`, () => {
         it(`Then should render correctly`, () => {
             slots = {
                 search: SLOT_SEARCH
+            };
+            initializeShallowWrapper();
+
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+    });
+
+    describe(`Given a add slot`, () => {
+        it(`Then should render correctly`, () => {
+            slots = {
+                add: SLOT_ADD
             };
             initializeShallowWrapper();
 

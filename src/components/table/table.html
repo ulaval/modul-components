@@ -6,15 +6,17 @@
             v-if="title">{{ title }}</h2>
         <div class="m-table__header__spacer"></div>
         <slot name="search"></slot>
-        <m-link class="m-table__header__add"
-                :class="{'m--has-margin': $slots.search}"
-                v-if="addBtnLabel"
-                :icon="true"
-                icon-name="m-svg__add-circle-filled"
-                icon-size="22px"
-                mode="button"
-                @click="add"
-                ref="addBtn">{{ addBtnLabel }}</m-link>
+        <slot name="add">
+            <m-link class="m-table__header__add"
+                    :class="{'m--has-margin': $slots.search}"
+                    v-if="addBtnLabel"
+                    :icon="true"
+                    icon-name="m-svg__add-circle-filled"
+                    icon-size="22px"
+                    mode="button"
+                    @click="add"
+                    ref="addBtn">{{ addBtnLabel }}</m-link>
+        </slot>
     </div>
 
     <table class="m-table__table"

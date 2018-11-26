@@ -52,7 +52,7 @@ export class MTable extends ModulVue {
     }
 
     get hasHeader(): boolean {
-        return !!this.title || !!this.addBtnLabel || !!this.$slots.search;
+        return !!this.title || !!this.addBtnLabel || !!this.$slots.search || !!this.$slots.add;
     }
 
     get isEmpty(): boolean {
