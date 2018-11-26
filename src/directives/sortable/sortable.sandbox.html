@@ -6,7 +6,11 @@
 
         <li v-for="(element, index) in elementsSortableWithHandle"
             :key="element.cle">
-            <div class="dragHandle"></div>
+            <div class="dragHandle">
+                <m-icon name="m-svg__drag-vertical"
+                        class="p-administration-menu__icone"
+                        size="28px"></m-icon>
+            </div>
             {{ element.titre }}
         </li>
     </ul>
