@@ -1,5 +1,5 @@
 <div class="m-tree"
-     :class="{ 'm-tree--multiple-node' : selectionMode == '2' }">
+     :class="{ 'm-tree--multiple-node-checkbox' : selectionMode == '2' && withCheckboxes }">
     <m-message v-if="errorTree"
                class="m-tree__error"
                state="warning"
@@ -18,13 +18,13 @@
                      v-for="node in tree"
                      :key="node.id"
                      :selectable="selectable"
-                     :open.sync="node.open || !autoSelect"
+                     :open.sync="node.open"
                      :node="node"
                      :selected-nodes="propSelectedNodes"
                      :disabled-nodes="disabledNodes"
                      :selected-parent-nodes="propSelectedParentNodes"
                      :icons="icons"
-                     :auto-select="autoSelect"
+                     :auto-select-checkboxes="autoSelectCheckboxes"
                      :use-accordion-icons="useAccordionIcons"
                      :with-checkboxes="withCheckboxes"
                      @click="onClick"></m-tree-node>

@@ -1,5 +1,5 @@
 <li class="m-tree-node"
-    :class="{ 'm--is-selected': isSelected || autoSelect && isSelectedParentNode, 'm--is-disabled' : isDisabled }">
+    :class="{ 'm--is-selected': isSelected || autoSelectCheckboxes && isSelectedParentNode, 'm--is-disabled' : isDisabled }">
     <div class="m-tree-node__item"
          role="button"
          :tabindex="isDisabled ? '-1' : 1"
@@ -14,7 +14,7 @@
         <span class="m-tree-node__item__label">{{label}}</span>
         <m-checkbox :value="isSelected || isSelectedParentNode"
                     v-if="withCheckboxes"
-                    :indeterminate="isParentOfSelectedFile && !isSelectedParentNode && autoSelect"
+                    :indeterminate="isParentOfSelectedFile && !isSelectedParentNode && autoSelectCheckboxes"
                     :disabled="isDisabled"
                     @click="onCheckboxClick"></m-checkbox>
     </div>
@@ -31,14 +31,14 @@
                              :icons="icons"
                              :selectable="selectable"
                              :selected="isSelected"
-                             :open.sync="childNode.open || !autoSelect"
+                             :open.sync="childNode.open"
                              :node="childNode"
                              :use-accordion-icons="useAccordionIcons"
                              :with-checkboxes="withCheckboxes"
                              :selected-nodes="selectedNodes"
                              :disabled-nodes="disabledNodes"
                              :selected-parent-nodes="selectedParentNodes"
-                             :auto-select="autoSelect"
+                             :auto-select-checkboxes="autoSelectCheckboxes"
                              :has-sibling="childHasSibling(index)"
                              @child-checkbox-change="onChildCheckboxChange"
                              @click="onChildClick"></m-tree-node>

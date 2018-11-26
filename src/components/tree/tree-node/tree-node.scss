@@ -62,13 +62,13 @@ $m-tree-node--line-width: 22px;
             line-height: $m-line-height;
             flex-grow: 1;
 
-            .m-tree--multiple-node & {
+            .m-tree--multiple-node-checkbox & {
                 color: $m-color--black;
             }
         }
 
         .m-tree-node__item__label:first-child {
-            .m-tree--multiple-node & {
+            .m-tree--multiple-node-checkbox & {
                 margin-left: $m-spacing--m;
             }
         }
@@ -81,7 +81,7 @@ $m-tree-node--line-width: 22px;
     &.m--is-selected > &__item {
         @include m-button--active();
 
-        .m-tree--multiple-node & {
+        .m-tree--multiple-node-checkbox & {
             background-color: $m-color--interactive-lightest;
         }
     }

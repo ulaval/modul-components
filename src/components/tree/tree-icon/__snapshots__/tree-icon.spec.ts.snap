@@ -3,3 +3,5 @@
 exports[`MTreeIcon When the node is a folder When the node is expandable Should render correctly 1`] = `<m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m--is-left"></m-plus>`;
 
 exports[`MTreeIcon When the node is a folder When the node is not expandable Should render correctly 1`] = `<span size="24px" name="m-svg__folder" class="m-tree-icon">m-icon</span>`;
+
+exports[`MTreeIcon When the node is a folder When the node uses accordion icons Should render correctly 1`] = `<m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m--is-left"></m-plus>`;

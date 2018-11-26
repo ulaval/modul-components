@@ -89,22 +89,22 @@
     <div style="clear: both;"></div>
 
     <div style="width: 50%; float:left;">
-        <h3>Multiple Nodes, Checkbox, Disabled Parent and No Auto-Select</h3>
+        <h3>Multiple Nodes, Checkbox, Disabled Parent and No auto-select-checkboxes</h3>
         <p>
-            Disabled Auto-Select allows parents to be fully independant from their children
+            Disabled auto-select-checkboxes allows parents to be fully independant from their children
         </p>
         <p>
-            Selected Nodes : {{currentNodesCheckboxesNoAutoSelect}}</br>
+            Selected Nodes : {{currentNodesCheckboxesNoautoSelectCheckboxes}}</br>
         </p>
         <p>
-            <m-tree :tree="multiNodeTreeCheckboxNoAutoSelect"
+            <m-tree :tree="multiNodeTreeCheckboxNoautoSelectCheckboxes"
                     selection-mode="2"
                     :icons="true"
                     :use-accordion-icons="true"
                     :with-checkboxes="true"
-                    :auto-select="false"
-                    :disabled-nodes="disabledNodesCheckboxesNoAutoSelect"
-                    :selected-nodes="currentNodesCheckboxesNoAutoSelect"
+                    :auto-select-checkboxes="false"
+                    :disabled-nodes="disabledNodesCheckboxesNoautoSelectCheckboxes"
+                    :selected-nodes="currentNodesCheckboxesNoautoSelectCheckboxes"
                     @select="onSelect"></m-tree>
         </p>
     </div>

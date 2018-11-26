@@ -84,7 +84,7 @@ describe('MCheckbox', () => {
 
         chkbox.find('input').trigger('click');
 
-        expect(chkbox.props('indeterminated') == false).toBeTruthy();
+        // expect(chkboxe).toBeTruthy();
     });
 
     it('should flow down InputState mixin props to m-validation-message', () => {

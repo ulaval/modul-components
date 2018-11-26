@@ -48,7 +48,7 @@ export class MTreeNode extends ModulVue {
     public disabledNodes: string[];
 
     @Prop()
-    public autoSelect: boolean;
+    public autoSelectCheckboxes: boolean;
 
     public selectedChildrenCount: number = 0;
 
@@ -56,7 +56,7 @@ export class MTreeNode extends ModulVue {
 
     @Watch('isSelected')
     public watchCheckboxes(): void {
-        if (this.withCheckboxes && this.autoSelect) {
+        if (this.withCheckboxes && this.autoSelectCheckboxes) {
             this.$emit('child-checkbox-change', this.isSelected);
         }
     }
@@ -94,11 +94,11 @@ export class MTreeNode extends ModulVue {
     }
 
     public onCheckboxClick(): void {
-        if (this.isFolder && this.autoSelect) {
+        if (this.isFolder && this.autoSelectCheckboxes) {
             let childrenPaths: string[] = [];
             this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id);
             this.updateSelectedNodes(childrenPaths, !this.isSelectedParentNode);
-        } else if (this.isFolder && !this.autoSelect) {
+        } else if (this.isFolder && !this.autoSelectCheckboxes) {
             this.$emit('click', this.currentPath);
         } else {
             this.onClick();

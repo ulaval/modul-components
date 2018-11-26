@@ -19,8 +19,8 @@ export class MRootTreeSandbox extends Vue {
     public wrongCurrentFile: string[] = ['/3/4'];
     public currentNodesBasic: string[] = [];
     public currentNodesCheckboxes: string[] = [];
-    public currentNodesCheckboxesNoAutoSelect: string[] = [];
-    public disabledNodesCheckboxesNoAutoSelect: string[] = ['/Title 3'];
+    public currentNodesCheckboxesNoautoSelectCheckboxes: string[] = ['/1/11/444/1111'];
+    public disabledNodesCheckboxesNoautoSelectCheckboxes: string[] = ['/Title 3'];
 
     public emptyTree: TreeNode[] = [];
 
@@ -493,64 +493,75 @@ export class MRootTreeSandbox extends Vue {
         }
     ];
 
-    public multiNodeTreeCheckboxNoAutoSelect: TreeNode[] = [
+    public multiNodeTreeCheckboxNoautoSelectCheckboxes: TreeNode[] = [
         {
-            id: 'Title 1',
-            label: 'Title 1',
+            id: '1',
+            label: 'UL - Université Laval',
             hasChildren: true,
             children: [
                 {
-                    id: 'Subtitle 1',
-                    label: 'Subtitle 1'
-                },
-                {
-                    id: 'Subtitle 2',
-                    label: 'Subtitle 2',
+                    id: '11',
+                    label: 'FSG - Faculté de Sciences et Génie',
                     children: [
                         {
-                            id: 'Subtitle 1',
-                            label: 'Subtitle 1'
+                            id: '111',
+                            label: 'ACT - Actuariat'
                         },
                         {
-                            id: 'Subtitle 2',
-                            label: 'Subtitle 2'
+                            id: '222',
+                            label: 'BIO - Biologie'
                         },
                         {
-                            id: 'Subtitle 3',
-                            label: 'Subtitle 3'
+                            id: '333',
+                            label: 'CHM - Chimie'
                         },
                         {
-                            id: 'Subtitle 4',
-                            label: 'Subtitle 4'
+                            id: '444',
+                            label: 'GMCN - Génie Mécanique',
+                            children: [
+                                {
+                                    id: '1111',
+                                    label: 'PRS - Personne'
+                                },
+                                {
+                                    id: '2222',
+                                    label: 'SMT - Something'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    id: 'Subtitle 3',
-                    label: 'Subtitle 3'
-                },
-                {
-                    id: 'Subtitle 4',
-                    label: 'Subtitle 4'
+                    id: '22',
+                    label: 'LLI - Lettres et sciences humaines',
+                    children: [
+                        {
+                            id: '111',
+                            label: 'JPN - Japonais'
+                        },
+                        {
+                            id: '222',
+                            label: 'EN - Anglais'
+                        }
+                    ]
                 }
             ]
         },
         {
-            id: 'Title 2',
-            label: 'Title 2'
+            id: '2',
+            label: 'CSF - Cégep Sainte-Foy'
         },
         {
-            id: 'Title 3',
-            label: 'Title 3',
-            open: true,
+            id: '3',
+            label: 'UQAM - Université du Québec à Montréal',
             children: [
                 {
-                    id: 'Subtitle 1',
-                    label: 'Subtitle 1'
+                    id: '11',
+                    label: 'CHM - Chimie'
                 },
                 {
-                    id: 'Subtitle 2',
-                    label: 'Subtitle 2'
+                    id: '22',
+                    label: 'GMCN - Génie Mécanique'
                 }
             ]
         }
