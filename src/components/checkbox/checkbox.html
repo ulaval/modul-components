@@ -3,7 +3,7 @@
                 'm--is-checkbox-right': !hasCheckboxLeft,
                 'm--is-checked': propValue,
                 'm--is-disabled': isDisabled,
-                'm--is-indeterminate': propIndeterminate,
+                'm--is-indeterminate': propIndeterminate && !propValue,
                 'm--is-focus': isFocus,
                 'm--has-error': hasError,
                 'm--is-valid': isValid }">
@@ -11,7 +11,7 @@
            type="checkbox"
            :id="id"
            class="m-checkbox__hidden"
-           :indeterminate.prop="propIndeterminate"
+           :indeterminate.prop="propIndeterminate && !propValue"
            :disabled="isDisabled"
            v-model="propValue"
            @click="onClick"

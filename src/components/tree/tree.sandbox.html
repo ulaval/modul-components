@@ -54,6 +54,63 @@
 
     <div style="clear: both;"></div>
 
+    <h2>Multiple Nodes Selection</h2>
+
+    <div style="width: 50%; float:left;">
+        <h3>Basic Multiple Nodes</h3>
+        <p>
+            Selected Nodes : {{currentNodesBasic}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTreeCheckbox"
+                    selection-mode="2"
+                    :icons="true"
+                    :selected-nodes="currentNodesBasic"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Multiple Nodes and Checkboxes</h3>
+        <p>
+            Selected Nodes : {{currentNodesCheckboxes}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTreeCheckboxNoAutoSelect"
+                    selection-mode="2"
+                    :icons="true"
+                    :use-accordion-icons="true"
+                    :with-checkboxes="true"
+                    :selected-nodes="currentNodesCheckboxes"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Multiple Nodes, Checkbox, Disabled Parent and No Auto-Select</h3>
+        <p>
+            Disabled Auto-Select allows parents to be fully independant from their children
+        </p>
+        <p>
+            Selected Nodes : {{currentNodesCheckboxesNoAutoSelect}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    selection-mode="2"
+                    :icons="true"
+                    :use-accordion-icons="true"
+                    :with-checkboxes="true"
+                    :auto-select="false"
+                    :disabled-nodes="disabledNodesCheckboxesNoAutoSelect"
+                    :selected-nodes="currentNodesCheckboxesNoAutoSelect"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="clear: both;"></div>
+
     <h2>Other cases</h2>
 
     <div style="width: 50%; float:left;">
@@ -78,21 +135,6 @@
         <p>
             <m-tree :tree="tree"
                     :selected-nodes="wrongCurrentFile"
-                    @select="onSelect"></m-tree>
-        </p>
-    </div>
-    <div style="width: 50%; float:left;">
-        <h3>Multiple nodes selection</h3>
-        <p>
-            Selected Nodes : {{currentNodes}}</br>
-        </p>
-        <p>
-            <m-tree :tree="multiNodeTree"
-                    selection-mode="2"
-                    :icons="true"
-                    :use-accordion-icons="true"
-                    :with-checkboxes="true"
-                    :selected-nodes="currentNodes"
                     @select="onSelect"></m-tree>
         </p>
     </div>

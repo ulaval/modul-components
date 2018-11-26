@@ -54,6 +54,12 @@ export class MTree extends ModulVue {
     @Prop()
     public parentSelectable: boolean;
 
+    @Prop()
+    public disabledNodes: string[];
+
+    @Prop({ default: true })
+    public autoSelect: boolean;
+
     public propSelectedNodes: string[] = this.selectedNodes || [];
 
     public propSelectedParentNodes: string[] = this.selectedParentNodes || [];

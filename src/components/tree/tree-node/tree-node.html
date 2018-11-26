@@ -14,7 +14,8 @@
         <span class="m-tree-node__item__label">{{label}}</span>
         <m-checkbox :value="isSelected || isSelectedParentNode"
                     v-if="withCheckboxes"
-                    :indeterminate="isParentOfSelectedFile && !isSelectedParentNode"
+                    :indeterminate="isParentOfSelectedFile && !isSelectedParentNode && autoSelect"
+                    :disabled="isDisabled"
                     @click="onCheckboxClick"></m-checkbox>
     </div>
     <template v-if="isFolder">
@@ -36,7 +37,9 @@
                              :with-checkboxes="withCheckboxes"
                              :parent-selectable="parentSelectable"
                              :selected-nodes="selectedNodes"
+                             :disabled-nodes="disabledNodes"
                              :selected-parent-nodes="selectedParentNodes"
+                             :auto-select="autoSelect"
                              :has-sibling="childHasSibling(index)"
                              @child-checkbox-change="onChildCheckboxChange"
                              @click="onChildClick"></m-tree-node>

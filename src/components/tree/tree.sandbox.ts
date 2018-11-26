@@ -17,7 +17,10 @@ export class MRootTreeSandbox extends Vue {
     public currentFile: string[] = ['/folder 1/folder 2/index.html'];
     public currentFile2: string[] = ['/1/2'];
     public wrongCurrentFile: string[] = ['/3/4'];
-    public currentNodes: string[] = [];
+    public currentNodesBasic: string[] = [];
+    public currentNodesCheckboxes: string[] = [];
+    public currentNodesCheckboxesNoAutoSelect: string[] = [];
+    public disabledNodesCheckboxesNoAutoSelect: string[] = ['/Title 3'];
 
     public emptyTree: TreeNode[] = [];
 
@@ -257,6 +260,240 @@ export class MRootTreeSandbox extends Vue {
     ];
 
     public multiNodeTree: TreeNode[] = [
+        {
+            id: 'Title 1',
+            label: 'Title 1',
+            hasChildren: true,
+            children: [
+                {
+                    id: 'Subtitle 1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: 'Subtitle 2',
+                    label: 'Subtitle 2',
+                    children: [
+                        {
+                            id: 'Subtitle 1',
+                            label: 'Subtitle 1'
+                        },
+                        {
+                            id: 'Subtitle 2',
+                            label: 'Subtitle 2',
+                            children: [
+                                {
+                                    id: 'Subtitle 1',
+                                    label: 'Subtitle 1'
+                                },
+                                {
+                                    id: 'Subtitle 2',
+                                    label: 'Subtitle 2'
+                                },
+                                {
+                                    id: 'Subtitle 3',
+                                    label: 'Subtitle 3',
+                                    children: [
+                                        {
+                                            id: 'Subtitle 1',
+                                            label: 'Subtitle 1'
+                                        },
+                                        {
+                                            id: 'Subtitle 2',
+                                            label: 'Subtitle 2'
+                                        },
+                                        {
+                                            id: 'Subtitle 3',
+                                            label: 'Subtitle 3'
+                                        },
+                                        {
+                                            id: 'Subtitle 4',
+                                            label: 'Subtitle 4'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'Subtitle 4',
+                                    label: 'Subtitle 4',
+                                    children: [
+                                        {
+                                            id: 'Subtitle 1',
+                                            label: 'Subtitle 1'
+                                        },
+                                        {
+                                            id: 'Subtitle 2',
+                                            label: 'Subtitle 2'
+                                        },
+                                        {
+                                            id: 'Subtitle 3',
+                                            label: 'Subtitle 3'
+                                        },
+                                        {
+                                            id: 'Subtitle 4',
+                                            label: 'Subtitle 4'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'Subtitle 3',
+                            label: 'Subtitle 3'
+                        },
+                        {
+                            id: 'Subtitle 4',
+                            label: 'Subtitle 4'
+                        }
+                    ]
+                },
+                {
+                    id: 'Subtitle 3',
+                    label: 'Subtitle 3'
+                },
+                {
+                    id: 'Subtitle 4',
+                    label: 'Subtitle 4'
+                }
+            ]
+        },
+        {
+            id: 'Title 2',
+            label: 'Title 2'
+        },
+        {
+            id: 'Title 3',
+            label: 'Title 3',
+            open: true,
+            children: [
+                {
+                    id: 'Subtitle 1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: 'Subtitle 2',
+                    label: 'Subtitle 2'
+                }
+            ]
+        }
+    ];
+
+    public multiNodeTreeCheckbox: TreeNode[] = [
+        {
+            id: 'Title 1',
+            label: 'Title 1',
+            hasChildren: true,
+            children: [
+                {
+                    id: 'Subtitle 1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: 'Subtitle 2',
+                    label: 'Subtitle 2',
+                    children: [
+                        {
+                            id: 'Subtitle 1',
+                            label: 'Subtitle 1'
+                        },
+                        {
+                            id: 'Subtitle 2',
+                            label: 'Subtitle 2',
+                            children: [
+                                {
+                                    id: 'Subtitle 1',
+                                    label: 'Subtitle 1'
+                                },
+                                {
+                                    id: 'Subtitle 2',
+                                    label: 'Subtitle 2'
+                                },
+                                {
+                                    id: 'Subtitle 3',
+                                    label: 'Subtitle 3',
+                                    children: [
+                                        {
+                                            id: 'Subtitle 1',
+                                            label: 'Subtitle 1'
+                                        },
+                                        {
+                                            id: 'Subtitle 2',
+                                            label: 'Subtitle 2'
+                                        },
+                                        {
+                                            id: 'Subtitle 3',
+                                            label: 'Subtitle 3'
+                                        },
+                                        {
+                                            id: 'Subtitle 4',
+                                            label: 'Subtitle 4'
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 'Subtitle 4',
+                                    label: 'Subtitle 4',
+                                    children: [
+                                        {
+                                            id: 'Subtitle 1',
+                                            label: 'Subtitle 1'
+                                        },
+                                        {
+                                            id: 'Subtitle 2',
+                                            label: 'Subtitle 2'
+                                        },
+                                        {
+                                            id: 'Subtitle 3',
+                                            label: 'Subtitle 3'
+                                        },
+                                        {
+                                            id: 'Subtitle 4',
+                                            label: 'Subtitle 4'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            id: 'Subtitle 3',
+                            label: 'Subtitle 3'
+                        },
+                        {
+                            id: 'Subtitle 4',
+                            label: 'Subtitle 4'
+                        }
+                    ]
+                },
+                {
+                    id: 'Subtitle 3',
+                    label: 'Subtitle 3'
+                },
+                {
+                    id: 'Subtitle 4',
+                    label: 'Subtitle 4'
+                }
+            ]
+        },
+        {
+            id: 'Title 2',
+            label: 'Title 2'
+        },
+        {
+            id: 'Title 3',
+            label: 'Title 3',
+            open: true,
+            children: [
+                {
+                    id: 'Subtitle 1',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: 'Subtitle 2',
+                    label: 'Subtitle 2'
+                }
+            ]
+        }
+    ];
+
+    public multiNodeTreeCheckboxNoAutoSelect: TreeNode[] = [
         {
             id: 'Title 1',
             label: 'Title 1',

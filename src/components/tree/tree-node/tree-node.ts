@@ -47,13 +47,19 @@ export class MTreeNode extends ModulVue {
     @Prop()
     public parentSelectable: boolean;
 
+    @Prop()
+    public disabledNodes: string[];
+
+    @Prop()
+    public autoSelect: boolean;
+
     public selectedChildrenCount: number = 0;
 
     public internalOpen: boolean = false;
 
     @Watch('isSelected')
     public watchCheckboxes(): void {
-        if (this.withCheckboxes) {
+        if (this.withCheckboxes && this.autoSelect) {
             this.$emit('child-checkbox-change', this.isSelected);
         }
     }
@@ -90,22 +96,23 @@ export class MTreeNode extends ModulVue {
         return false;
     }
 
-    // Applies checkbox click to node. If node is a folder, updates each child's checkbox state
     public onCheckboxClick(): void {
-        if (this.isFolder) {
+        if (this.isFolder && this.autoSelect) {
             let childrenPaths: string[] = [];
             this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id);
             this.updateSelectedNodes(childrenPaths, !this.isSelectedParentNode);
+        } else if (this.isFolder && !this.autoSelect) {
+            this.$emit('click', this.currentPath);
         } else {
             this.onClick();
         }
+
     }
 
     protected mounted(): void {
         this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
     }
 
-    // Adds or removes paths from the selectedNodes
     private updateSelectedNodes(childrenPaths: string[] = [], addNode: boolean): void {
         childrenPaths.forEach(path => {
             let nodeFound: boolean = this.selectedNodes.indexOf(path) !== -1;
@@ -125,7 +132,6 @@ export class MTreeNode extends ModulVue {
         nodeArray.splice(nodeArray.indexOf(path), 1);
     }
 
-    // Recursive function that fetches children paths
     private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string): void {
         if (currentNode.children) {
             currentNode.children.forEach(child => {
@@ -164,7 +170,12 @@ export class MTreeNode extends ModulVue {
     }
 
     public get isDisabled(): boolean {
-        return !this.selectable && !this.isFolder;
+        let isDisabled: boolean = false;
+        if (!this.selectable && !this.isFolder || (this.disabledNodes && this.disabledNodes.indexOf(this.currentPath) !== -1)) {
+            isDisabled = true;
+        }
+
+        return isDisabled;
     }
 
     public get isSelected(): boolean {
