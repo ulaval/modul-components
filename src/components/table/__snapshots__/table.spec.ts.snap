@@ -87,15 +87,11 @@ exports[`MTable Given a table full of data When using slot to replace a td Then 
         </thead>
         <tbody>
             <tr>
-                <td>
-                    <td>SLOT TD</td>
-                </td>
+                <td>SLOT TD</td>
                 <td>b1</td>
             </tr>
             <tr>
-                <td>
-                    <td>SLOT TD</td>
-                </td>
+                <td>SLOT TD</td>
                 <td>b2</td>
             </tr>
         </tbody>
@@ -108,9 +104,7 @@ exports[`MTable Given a table full of data When using slot to replace a th Then 
     <table cellspacing="0" class="m-table__table m--is-skin-regular">
         <thead>
             <tr>
-                <th scope="col" style="width:10%;">
-                    <th>SLOT TH</th>
-                </th>
+                <th scope="col" style="width:10%;">SLOT TH</th>
                 <th scope="col">B</th>
             </tr>
         </thead>
