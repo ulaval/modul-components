@@ -4,6 +4,10 @@ import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
+<<<<<<< HEAD
+=======
+import { Prop } from 'vue-property-decorator';
+>>>>>>> develop
 
 
 export enum MTableSkin {
@@ -47,8 +51,8 @@ export class MTable extends ModulVue {
     i18nLoading: string = this.$i18n.translate('m-table:loading');
     i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
 
-    columnWidth(col: MColumnTable): { width: string } | '' {
-        return col.width ? { width: col.width } : '';
+    @Emit('add')
+    onAdd(): void {
     }
 
     get hasHeader(): boolean {
@@ -59,10 +63,9 @@ export class MTable extends ModulVue {
         return this.rows.length === 0 && !this.loading;
     }
 
-    @Emit('add')
-    onAdd(): void {
+    columnWidth(col: MColumnTable): { width: string } | '' {
+        return col.width ? { width: col.width } : '';
     }
-
 }
 
 const TablePlugin: PluginObject<any> = {

@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import PopupPluginDirective from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
@@ -10,6 +9,7 @@ import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { normalizeString } from '../../utils/str/str';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import uuid from '../../utils/uuid/uuid';
 import ButtonPlugin from '../button/button';
 import { DROPDOWN_NAME } from '../component-names';
@@ -17,6 +17,7 @@ import { MDropdownGroup } from '../dropdown-group/dropdown-group';
 import DropdownItemPlugin, { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from '../dropdown-item/dropdown-item';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import PopupPlugin, { MPopup } from '../popup/popup';
+import { MSidebar } from '../sidebar/sidebar';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
@@ -70,6 +71,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalOpen: boolean = false;
     private dirty: boolean = false;
     private id: string = `mDropdown-${uuid.generate()}`;
+    private itemsHeightStyleInternal: number | object | undefined = {};
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -118,12 +120,45 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 }
                 this.focusSelected();
                 this.scrollToFocused();
+
                 this.$emit('open');
+                // Reset the height of the list before calculating its height
+                // (this code is executed before the method calculateFilterableListeHeight())
+                this.itemsHeightStyle = undefined;
             } else {
                 this.internalFilter = '';
                 this.$emit('close');
             }
         });
+    }
+
+    private set itemsHeightStyle(value: object | number | undefined) {
+        this.itemsHeightStyleInternal = value === undefined ? undefined : { height: value + 'px' };
+    }
+
+    private get itemsHeightStyle(): object | number | undefined {
+        return this.itemsHeightStyleInternal;
+    }
+
+    private calculateFilterableListeHeight(): void {
+        // To display the contents of the list above the device keyboard,
+        // fixed the height of the list when the dropdown is filterable and in mobile mode.
+        if (this.filterable && !UserAgentUtil.isAndroid() && this.as<MediaQueries>().isMqMaxS) {
+            this.$children.forEach((popup, index) => {
+
+                // Find the MPopup component that has the MSidebar child component
+                if (popup.$options.name === MPopup.name) {
+                    popup.$children.forEach((sidebar, index) => {
+                        if (sidebar.$options.name === MSidebar.name) {
+                            // Set height of the list with height of MSidebar body
+                            let sidebarComponent: MSidebar = sidebar as MSidebar;
+                            this.itemsHeightStyle = sidebarComponent.$refs.body.clientHeight;
+                            sidebarComponent.$refs.body.style.overflow = 'hidden';
+                        }
+                    });
+                }
+            });
+        }
     }
 
     @Watch('value')
@@ -187,7 +222,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     @Watch('isMqMaxS')
-    private onisMqMaxS(value: boolean, old: boolean): void {
+    private onIsMqMaxS(value: boolean, old: boolean): void {
         if (value !== old) {
             this.$nextTick(() => this.buildItemsMap());
         }
@@ -246,7 +281,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         });
         this.internalItems = items;
         this.internalNavigationItems = navigation;
-        this.$refs.popup.update();
         this.focusSelected();
     }
 

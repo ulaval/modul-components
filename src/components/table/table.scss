@@ -67,6 +67,10 @@
             p {
                 margin-top: 0;
             }
+
+            &:hover {
+                background-color: $m-color--interactive-lightest;
+            }
         }
     }
 }
