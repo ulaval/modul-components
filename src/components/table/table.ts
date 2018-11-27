@@ -4,11 +4,6 @@ import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
-<<<<<<< HEAD
-=======
-import { Prop } from 'vue-property-decorator';
->>>>>>> develop
-
 
 export enum MTableSkin {
     Regular = 'regular'
