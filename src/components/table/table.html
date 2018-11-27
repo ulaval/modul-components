@@ -25,14 +25,12 @@
         <slot name="header">
             <thead>
                 <tr>
-                    <th v-for="column in columns"
-                        :style="columnWidth(column)"
-                        :key="column.id"
-                        scope="col">
-                        <slot :name="'header.' + column.dataProp"
-                              :column="column">{{ column.title }}</slot>
-                    </th>
-
+                    <slot v-for="column in columns"
+                          :name="'header.' + column.dataProp">
+                        <th :style="columnWidth(column)"
+                            :key="column.id"
+                            scope="col">{{ column.title }}</th>
+                    </slot>
                 </tr>
             </thead>
         </slot>
@@ -67,11 +65,11 @@
                 <tr v-else
                     v-for="(row, index) in rows"
                     :key="index">
-                    <td v-for="column in columns"
-                        :key="'body.' + column.id">
-                        <slot :name="'body.' + column.dataProp"
-                              :data="row">{{ row[column.dataProp] }}</slot>
-                    </td>
+                    <slot v-for="column in columns"
+                          :name="'body.' + column.dataProp"
+                          :data="row">
+                        <td :key="'body.' + column.id">{{ row[column.dataProp] }}</td>
+                    </slot>
                 </tr>
             </tbody>
         </slot>

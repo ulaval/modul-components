@@ -27,28 +27,32 @@
     <m-table :columns="columns"
              :rows="rows">
         <template slot="header.age">
-            AGE
+            <th>AGE</th>
         </template>
         <template slot="body.age"
-                  slot-scope="{data}">
-            {{ data.age }} ans
+                  scope="{data}">
+            <td>{{ data.age }} ans</td>
         </template>
         <template slot="body.check"
-                  slot-scope="{data}">
-            <m-checkbox @change="onCheck(data.id)"></m-checkbox>
+                  scope="{data}">
+            <td>
+                <m-checkbox @change="onCheck(data.id)"></m-checkbox>
+            </td>
         </template>
         <template slot="body.menu"
-                  slot-scope="{data}">
-            <m-option size="33px">
-                <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
-            </m-option>
+                  scope="{data}">
+            <td>
+                <m-option size="33px">
+                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                </m-option>
+            </td>
         </template>
         <template slot="footer">
             <td class="m-table-sandbox__show-more"
                 colspan="4">
                 <m-button class="m-table-sandbox__show-more-button"
-                          @click="showMore()">
+                          @click="showMore">
                     <p>Show more results</p>
                     <span>1-5 of 45</span>
                 </m-button>

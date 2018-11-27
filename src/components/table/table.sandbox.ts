@@ -93,19 +93,19 @@ export class MTableSandbox extends Vue {
     emptyRows: any[] = [];
 
     editData(id: string): void {
-        alert('Edit data: ' + id);
+        console.error('Edit data: ' + id);
     }
 
     deleteData(id: string): void {
-        alert('Delete data: ' + id);
+        console.error('Delete data: ' + id);
     }
 
     showMore(): void {
-        alert('Show more');
+        console.error('Show more');
     }
 
     onCheck(id: string): void {
-        alert('Check: ' + id);
+        console.error('Check: ' + id);
     }
 }
 
