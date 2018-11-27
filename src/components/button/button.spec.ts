@@ -1,8 +1,10 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import MButtonPlugin, { MButton, MButtonIconPosition, MButtonSkin, MButtonType } from './button';
+
+
+const FORM_ID: string = 'My-form-id';
 
 describe('MButton', () => {
     let localVue: VueConstructor<Vue>;
@@ -98,6 +100,15 @@ describe('MButton', () => {
             }
         });
 
+        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should change html element based on form prop', () => {
+        const btn: Wrapper<MButton> = mount(MButton, {
+            localVue: localVue
+        });
+
+        btn.setProps({ form: FORM_ID });
         return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
