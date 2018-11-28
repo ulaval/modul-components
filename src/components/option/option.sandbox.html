@@ -8,7 +8,7 @@
         -->
     </p>
     <m-option>
-    <m-option-item-add @click="doAdd"></m-option-item-add>
+        <m-option-item-add @click="doAdd"></m-option-item-add>
         <m-option-item-edit></m-option-item-edit>
         <m-option-item-archive></m-option-item-archive>
         <m-option-item-delete :disabled="true"></m-option-item-delete>
@@ -26,4 +26,16 @@
         <m-option-item>Test 5</m-option-item>
         <m-option-item>Test 6</m-option-item>
     </m-option>
+
+    <div style="width: 100%; height: 700px;">Scroll down</div>
+
+    <m-overlay title="Titre">
+        <m-button slot="trigger">Ouvrir</m-button>
+        <m-option>
+            <m-option-item>Test 1</m-option-item>
+            <m-option-item>Test 2</m-option-item>
+        </m-option>
+
+    </m-overlay>
+
 </div>
