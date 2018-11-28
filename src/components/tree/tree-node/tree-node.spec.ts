@@ -5,11 +5,11 @@ import { MTreeNode } from './tree-node';
 
 const CHILDREN: RefSelector = { ref: 'children' };
 const ITEM: RefSelector = { ref: 'item' };
+const CHECKBOX: RefSelector = { ref: 'checkbox' };
 
 const NODE_ELEMENT_LABEL: string = 'Node 1';
 const NODE_ELEMENT_ID: string = 'Node 1';
 const PARENT_PATH: string = '/Parent 1';
-const SELECTION_ICON: string = 'information';
 
 const TREE_NODE_SELECTED: string[] = ['/Node 1'];
 const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
@@ -63,6 +63,10 @@ let selectedNodes: string[] = [];
 let selectable: boolean = true;
 let icons: boolean = false;
 let path: string = '';
+let disabledNodes: string[] = [];
+let withCheckbox: boolean = false;
+let usePlusIcons: boolean = false;
+let autoSelectCheckboxes: boolean = false;
 
 let wrapper: Wrapper<MTreeNode>;
 
@@ -74,7 +78,11 @@ const initializeShallowWrapper: any = () => {
             selectedNodes,
             selectable,
             icons,
-            path
+            path,
+            withCheckbox,
+            usePlusIcons,
+            disabledNodes,
+            autoSelectCheckboxes
         }
     });
 };
@@ -82,13 +90,87 @@ const initializeShallowWrapper: any = () => {
 const getStubs: any = () => {
     return {
         ['m-tree-icon']: '<div>m-tree-icon</div>',
-        ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>'
+        ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>',
+        ['m-checkbox']: 'allo'
     };
 };
 
 describe('MTreeNode', () => {
 
     describe(`Given a node`, () => {
+
+        describe(`When the node has a checkbox`, () => {
+
+            beforeEach(() => {
+                node = TREE_NODE_WITHOUT_CHILDREN;
+                withCheckbox = true;
+                initializeShallowWrapper();
+            });
+
+            it(`Should render properly`, () => {
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+
+            it(`Should be selected on checkbox click`, () => {
+                wrapper.find(CHECKBOX).trigger('click');
+                expect(wrapper.vm.isSelected).toBeTruthy();
+            });
+
+            describe(`and auto-select is on`, () => {
+
+                describe(`and given node is a parent`, () => {
+
+                    beforeEach(() => {
+                        node = TREE_NODE_WITH_CHILDREN;
+                        autoSelectCheckboxes = true;
+                        initializeShallowWrapper();
+                    });
+
+                    it(`Should select every children on checkbox click`, () => {
+
+                    });
+
+                });
+
+                describe(`and given node is a children`, () => {
+
+                    beforeEach(() => {
+                        node = TREE_NODE_WITHOUT_CHILDREN;
+                        initializeShallowWrapper();
+                    });
+
+                    it(`Should give the indeterminate prop to parent on click`, () => {
+
+                    });
+
+                    it(`Should give the selected status to parent on click when all siblings a selected`, () => {
+
+                    });
+
+                });
+
+            });
+
+            describe(`and auto-select is off`, () => {
+
+                describe(`and given node is a parent`, () => {
+
+                    it(`Should not select children on click`, () => {
+
+                    });
+
+                });
+
+                describe(`and given node is a children`, () => {
+
+                    it(`Should not change parent on click`, () => {
+
+                    });
+
+                });
+
+            });
+        });
 
         describe(`When the node can't have children`, () => {
 

@@ -7,12 +7,13 @@
          ref="item">
         <m-tree-icon class="m-tree-icon"
                      v-if="icons"
-                     :use-accordion-icons="useAccordionIcons"
+                     :use-plus-icons="usePlusIcons"
                      :filename="node.id"
                      :folder-open="internalOpen"
                      :folder="isFolder"></m-tree-icon>
         <span class="m-tree-node__item__label">{{label}}</span>
-        <m-checkbox :value="isSelected || isSelectedParentNode"
+        <m-checkbox ref="checkbox"
+                    :value="isSelected || isSelectedParentNode"
                     v-if="withCheckboxes"
                     :indeterminate="isParentOfSelectedFile && !isSelectedParentNode && autoSelectCheckboxes"
                     :disabled="isDisabled"
@@ -33,7 +34,7 @@
                              :selected="isSelected"
                              :open.sync="childNode.open"
                              :node="childNode"
-                             :use-accordion-icons="useAccordionIcons"
+                             :use-plus-icons="usePlusIcons"
                              :with-checkboxes="withCheckboxes"
                              :selected-nodes="selectedNodes"
                              :disabled-nodes="disabledNodes"

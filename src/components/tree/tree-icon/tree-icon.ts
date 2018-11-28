@@ -5,6 +5,7 @@ import { extractExtension } from '../../../utils/file/file';
 import { ModulVue } from '../../../utils/vue/vue';
 import IconFilePlugin from '../../icon-file/icon-file';
 import IconPlugin from '../../icon/icon';
+import PlusPlugin from '../../plus/plus';
 import { TREE_ICON_NAME } from '../component-names';
 import WithRender from './tree-icon.html?style=./tree-icon.scss';
 
@@ -21,7 +22,7 @@ export class MTreeIcon extends ModulVue {
     public folder: boolean;
 
     @Prop()
-    public useAccordionIcons: boolean;
+    public usePlusIcons: boolean;
 
     @Prop()
     public folderOpen: boolean;
@@ -40,6 +41,7 @@ const TreeIconPlugin: PluginObject<any> = {
         v.prototype.$log.debug(TREE_ICON_NAME, 'plugin.install');
         v.use(IconFilePlugin);
         v.use(IconPlugin);
+        v.use(PlusPlugin);
         v.component(TREE_ICON_NAME, MTreeIcon);
     }
 };

@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
 import { TreeNode } from '../tree';
 import { MTreeIcon } from './tree-icon';
@@ -15,11 +15,12 @@ const TREE_NODE_FOLDER: TreeNode = {
 
 const FOLDER_OPEN: string = 'm-svg__folder-open';
 const FOLDER_CLOSED: string = 'm-svg__folder';
+const PLUS: RefSelector = { ref: 'plus-icon' };
 
 let file: TreeNode;
 let folderOpen: boolean = false;
 let folder: boolean = false;
-let useAccordionIcons: boolean = false;
+let usePlusIcons: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
@@ -29,7 +30,7 @@ const initializeShallowWrapper: any = () => {
             file,
             folderOpen,
             folder,
-            useAccordionIcons
+            usePlusIcons
         }
     });
 };
@@ -50,31 +51,32 @@ describe(`MTreeIcon`, () => {
             folder = true;
         });
 
-        describe(`When the node uses accordion icons`, () => {
+        describe(`When the node uses plus icons`, () => {
             beforeEach(() => {
-                useAccordionIcons = true;
+                usePlusIcons = true;
+                initializeShallowWrapper();
             });
 
             it(`Should render correctly`, () => {
-                initializeShallowWrapper();
-
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
+
+            it('Should use the m-plus component', () => {
+                expect(wrapper.find(PLUS).exists()).toBeTruthy();
+            });
+
         });
 
-        describe(`When the node is not expandable`, () => {
+        describe(`When the node does not use plus icons`, () => {
 
-            beforeEach(() => {
-                useAccordionIcons = false;
-            });
-
-            it(`Should render correctly`, () => {
+            it('Should not use the m-plus component', () => {
+                usePlusIcons = false;
                 initializeShallowWrapper();
-
-                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+                expect(wrapper.find(PLUS).exists()).toBeFalsy();
             });
 
             describe(`When the folder is opened`, () => {
+
                 it(`Should be the right icon`, () => {
                     folderOpen = true;
                     initializeShallowWrapper();
@@ -94,6 +96,8 @@ describe(`MTreeIcon`, () => {
                 });
 
             });
+
         });
+
     });
 });

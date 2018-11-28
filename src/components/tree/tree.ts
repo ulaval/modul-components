@@ -46,7 +46,7 @@ export class MTree extends ModulVue {
     public icons: boolean;
 
     @Prop()
-    public useAccordionIcons: boolean;
+    public usePlusIcons: boolean;
 
     @Prop()
     public withCheckboxes: boolean;

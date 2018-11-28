@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
+import CheckboxPlugin from '../../checkbox/checkbox';
 import I18nPlugin from '../../i18n/i18n';
 import IconPlugin from '../../icon/icon';
 import { TREE_NODE_NAME } from '../component-names';
@@ -39,7 +40,7 @@ export class MTreeNode extends ModulVue {
     public hasSibling: boolean;
 
     @Prop()
-    public useAccordionIcons: boolean;
+    public usePlusIcons: boolean;
 
     @Prop()
     public withCheckboxes: boolean;
@@ -193,6 +194,7 @@ const TreeNodePlugin: PluginObject<any> = {
         v.prototype.$log.debug(TREE_NODE_NAME, 'plugin.install');
         v.use(TreeIconPlugin);
         v.use(IconPlugin);
+        v.use(CheckboxPlugin);
         v.use(I18nPlugin);
         v.component(TREE_NODE_NAME, MTreeNode);
     }
