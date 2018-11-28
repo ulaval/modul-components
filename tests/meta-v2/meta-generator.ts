@@ -1,14 +1,16 @@
 import * as fs from 'fs';
 import * as parser from 'node-html-parser';
 import Project, { ClassDeclaration, ClassInstanceMemberTypes, ClassInstancePropertyTypes, Decorator, Expression, LanguageService, MethodDeclaration, ObjectLiteralExpression, ParameterDeclaration, PropertyAssignment, SourceFile, StringLiteral, SyntaxKind, Type, TypeChecker } from 'ts-simple-ast';
-
 import { Meta, MetaComponent, MetaEvent, MetaProps, MetaSlot } from '../../src/meta/v2';
+
 
 const MIXINS_PROPERTY_NAME: string = 'mixins';
 const COMPONENT_DECORATOR_NAME: string = 'Component';
 const PROP_DECORATOR_NAME: string = 'Prop';
 const EMIT_DECORATOR_NAME: string = 'Emit';
 const DEFAULT_PROPERTY_NAME: string = 'default';
+
+const DEFAULT_ARROW_FUNCTION_VALUE: string = 'function()';
 
 /**
  * Extract static meta from a TS file using the typescript compiler API
@@ -35,7 +37,7 @@ export class MetaGenerator {
         //     tsConfigFilePath: './tsconfig.meta.json',
         //     addFilesFromTsConfig: false
         // });
-        // this.project.addExistingSourceFile('src/components/accordion/accordion.ts');
+        // this.project.addExistingSourceFile('src/components/datefields/datefields.ts');
 
         this.typeChecker = this.project.getTypeChecker();
         this.languageService = this.project.getLanguageService();
@@ -240,11 +242,15 @@ export class MetaGenerator {
                 if (arg.getProperty(DEFAULT_PROPERTY_NAME)) {
 
                     let initializer: Expression = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer();
-                    // we dont want arrow function here
-                    if (initializer.getKind() !== SyntaxKind.ArrowFunction) {
-                        _default = initializer.getText().split('.').pop();
+
+                    if (initializer.getKind() === SyntaxKind.ArrowFunction) {
+                        _default = DEFAULT_ARROW_FUNCTION_VALUE;                    // we dont want arrow function here
                     } else {
-                        _default = initializer.getText();
+                        if (initializer.getType().getNonNullableType()) {
+                            _default = this.getTypeValueAsString(initializer.getType().getNonNullableType().compilerType) ? this.getTypeValueAsString(initializer.getType().getNonNullableType().compilerType) : initializer.getText();
+                        } else {
+                            _default = initializer.getText();
+                        }
                     }
 
                 }
@@ -254,20 +260,15 @@ export class MetaGenerator {
         return _default;
     }
 
-    private getTypeAsString(type): string {
-
-        if (type.getSymbol()) {
-            return type.getSymbol().getName();
-        }
-        return type.intrinsicName;
-
-    }
-
     private getTypeTypesAsStrings(type): string[] {
         if (type.types) {
-            return type.types.map((type) => this.getTypeAsString(type));
+            return type.types.map((type) => type.value);
         }
         return [];
+    }
+
+    private getTypeValueAsString(type): string {
+        return type.value;
     }
 
 }

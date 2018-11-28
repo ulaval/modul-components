@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
-
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
@@ -117,13 +116,9 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
     public set propOpen(value) {
         if (value !== this.internalPropOpen) {
-            this.updateOpen(value);
+            this.internalPropOpen = value;
+            this.$emit('update:open', value);
         }
-    }
-
-    @Emit('update:open')
-    private updateOpen(value): void {
-        this.internalPropOpen = value;
     }
 
     @Emit('click')

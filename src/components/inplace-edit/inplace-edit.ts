@@ -1,13 +1,12 @@
 import Vue, { PluginObject } from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
-
+import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { INPLACE_EDIT_NAME } from '../component-names';
-import ModalPlugin from '../modal/modal';
 import IconButtonPlugin from '../icon-button/icon-button';
+import ModalPlugin from '../modal/modal';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 @WithRender
@@ -34,16 +33,25 @@ export class MInplaceEdit extends ModulVue {
     private internalEditMode: boolean = false;
     private mqMounted: boolean;
 
+    @Emit('ok')
+    onOk(): void { }
+
+    @Emit('cancel')
+    onCancel(): void { }
+
+    @Emit('click')
+    onClick(event: MouseEvent): void { }
+
     public confirm(event: Event): void {
         if (this.editMode) {
-            this.$emit('ok');
+            this.onOk();
         }
     }
 
     public cancel(event: Event): void {
         if (this.editMode) {
             this.propEditMode = false;
-            this.$emit('cancel');
+            this.onCancel();
         }
     }
 
@@ -72,10 +80,6 @@ export class MInplaceEdit extends ModulVue {
     private mounted(): void {
         // should be in next tick to skip the media query initial trigger on mounted
         this.$nextTick(() => this.mqMounted = true);
-    }
-
-    private onClick(event: MouseEvent): void {
-        this.$emit('click', event);
     }
 
     private get propEditMode(): boolean {
