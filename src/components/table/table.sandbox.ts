@@ -4,7 +4,6 @@ import { TABLE_NAME } from '../component-names';
 import { MColumnTable } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
-
 @WithRender
 @Component
 export class MTableSandbox extends Vue {

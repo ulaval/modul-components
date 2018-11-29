@@ -1,88 +1,66 @@
-<div class="m-table">
-    <div class="m-table__header"
-         v-if="hasHeader"
-         ref="header">
-        <h2 class="m-u--no-margin"
-            v-if="title">{{ title }}</h2>
-        <div class="m-table__header__spacer"></div>
-        <slot name="search"></slot>
-        <slot name="add">
-            <m-link class="m-table__header__add"
-                    :class="{'m--has-margin': $slots.search}"
-                    v-if="addBtnLabel"
-                    :icon="true"
-                    icon-name="m-svg__add-circle-filled"
-                    icon-size="22px"
-                    mode="button"
-                    @click="onAdd()"
-                    ref="addBtn">{{ addBtnLabel }}</m-link>
-        </slot>
-    </div>
-
-    <table class="m-table__table"
-           :class="['m--is-skin-' + skin, {'m--is-loading': loading}]"
-           cellspacing="0">
-        <slot name="header">
-            <thead>
-                <tr>
-                    <th v-for="column in columns"
-                        :style="columnWidth(column)"
-                        :key="column.id"
-                        scope="col">
-                        <slot :name="'header.' + column.dataProp"
-                              :column="column">{{ column.title }}</slot>
-                    </th>
-
-                </tr>
-            </thead>
-        </slot>
-
-        <slot name="body">
-            <tbody>
-                <tr class="m-table__table-message"
-                    v-if="isEmpty">
-                    <slot name="empty">
-                        <td :colspan="columns.length">
-                            <p>{{ i18nEmptyTable }}</p>
-                        </td>
-                    </slot>
-                </tr>
-                <template v-if="loading">
-                    <tr class="m-table__table-loading">
-                        <td :colspan="columns.length">
-                            <m-progress v-if="loading"
-                                        :indeterminate="true"
-                                        :border-radius="false"></m-progress>
-                        </td>
-                    </tr>
-                    <tr class="m-table__table-message">
-                        <slot name="loading">
-                            <td :colspan="columns.length">
-                                <p>{{ i18nLoading }}</p>
-                                <p class="m-table__table-message__precision">{{ i18nPleaseWait }}</p>
-                            </td>
-                        </slot>
-                    </tr>
-                </template>
-                <tr v-else
-                    v-for="(row, index) in rows"
-                    :key="index">
-                    <slot name="row"
-                          :data="row">
-                        <td v-for="column in columns"
-                            :key="'body.' + column.id">
-                            <slot :name="'body.' + column.dataProp"
-                                  :data="row">{{ row[column.dataProp] }}</slot>
-                        </td>
-                    </slot>
-                </tr>
-            </tbody>
-        </slot>
-
-        <tfoot v-if="$slots.footer">
+<table class="m-table"
+       :class="['m--is-skin-' + skin, {'m--is-loading': loading}]"
+       cellspacing="0">
+    <slot name="header">
+        <thead>
             <tr>
-                <slot name="footer"></slot>
+                <th v-for="column in columns"
+                    :style="columnWidth(column)"
+                    :key="column.id"
+                    scope="col">
+                    <slot :name="'header.' + column.dataProp"
+                          :column="column">{{ column.title }}</slot>
+                </th>
+
             </tr>
-        </tfoot>
-    </table>
-</div>
+        </thead>
+    </slot>
+
+    <slot name="body">
+        <tbody>
+            <tr class="m-table__message"
+                v-if="isEmpty">
+                <slot name="empty">
+                    <td :colspan="columns.length">
+                        <p>{{ i18nEmptyTable }}</p>
+                    </td>
+                </slot>
+            </tr>
+            <template v-if="loading">
+                <tr class="m-table__loading">
+                    <td :colspan="columns.length">
+                        <m-progress v-if="loading"
+                                    :indeterminate="true"
+                                    :border-radius="false"></m-progress>
+                    </td>
+                </tr>
+                <tr class="m-table__message">
+                    <slot name="loading">
+                        <td :colspan="columns.length">
+                            <p>{{ i18nLoading }}</p>
+                            <p class="m-table__message__precision">{{ i18nPleaseWait }}</p>
+                        </td>
+                    </slot>
+                </tr>
+            </template>
+            <tr v-else
+                v-for="(row, index) in rows"
+                :key="index">
+                <slot name="row"
+                      :data="row">
+                    <td v-for="column in columns"
+                        :key="'body.' + column.id">
+                        <slot :name="'body.' + column.dataProp"
+                              :data="row">{{ row[column.dataProp] }}</slot>
+                    </td>
+                </slot>
+            </tr>
+        </tbody>
+    </slot>
+
+    <tfoot v-if="$slots.footer">
+        <tr>
+            <slot name="footer"></slot>
+        </tr>
+    </tfoot>
+</table>

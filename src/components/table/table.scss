@@ -16,8 +16,14 @@
     tbody {
         color: $m-color--grey-darker;
 
-        tr:nth-child(even) {
-            background-color: $m-color--grey-lightest;
+        tr {
+            &:nth-child(even) {
+                background-color: $m-color--grey-lightest;
+            }
+
+            &:hover:not(.m-table__message):not(.m-table__loading) {
+                background-color: $m-color--interactive-lightest;
+            }
         }
     }
 
@@ -28,49 +34,26 @@
         word-break: break-word;
     }
 
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: $m-spacing;
-
-        &__spacer {
-            flex: 1 1 auto;
-        }
-
-        &__add.m--has-margin {
-            margin-left: $m-spacing;
-        }
+    &__loading td {
+        padding: 0;
+        height: auto;
     }
 
-    &__table {
-        width: 100%;
+    &__message {
+        background-color: $m-color--grey-lightest;
+        text-align: center;
+        height: 260px; // magic number
+        color: $m-color--grey;
+        font-size: $m-font-size--l;
+        font-weight: $m-font-weight--bold;
 
-        &-loading td {
-            padding: 0;
-            height: auto;
+        &__precision {
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--light;
         }
 
-        &-message {
-            background-color: $m-color--grey-lightest;
-            text-align: center;
-            height: 260px; // magic number
-            color: $m-color--grey;
-            font-size: $m-font-size--l;
-            font-weight: $m-font-weight--bold;
-
-            &__precision {
-                font-size: $m-font-size;
-                font-weight: $m-font-weight--light;
-            }
-
-            p {
-                margin-top: 0;
-            }
-
-            &:hover {
-                background-color: $m-color--interactive-lightest;
-            }
+        p {
+            margin-top: 0;
         }
     }
 }

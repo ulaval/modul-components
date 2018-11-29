@@ -1,9 +1,6 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { MColumnTable, MTable } from './table';
-
-const REF_HEADER: RefSelector = { ref: 'header' };
-const REF_ADD_BTN: RefSelector = { ref: 'addBtn' };
 
 let slots: any = {};
 const SLOT_EMPTY: string = '<td>EMPTY</td>';
@@ -12,8 +9,6 @@ const SLOT_TH: string = 'SLOT TH';
 const SLOT_BODY: string = '<tbody><tr><td>SLOT BODY</td></tr></tbody>';
 const SLOT_TD: string = 'SLOT TD';
 const SLOT_FOOTER: string = '<td>SLOT FOOTER</td>';
-const SLOT_SEARCH: string = '<div>SLOT SEARCH</div>';
-const SLOT_ADD: string = '<div>SLOT ADD</div>';
 
 let rows: any[] = [];
 
@@ -90,58 +85,6 @@ describe(`MTable`, () => {
             });
         });
 
-    });
-
-    describe(`Given a title`, () => {
-        it(`Then should show header with title`, () => {
-            const TITLE: string = 'TITRE';
-
-            initializeShallowWrapper();
-            wrapper.setProps({ title: TITLE });
-
-            expect(wrapper.find(REF_HEADER).text()).toBe(TITLE);
-        });
-    });
-
-    describe(`Given a add button label`, () => {
-        const ADD_BTN_LABEL: string = 'ADD';
-
-        beforeEach(() => {
-            initializeShallowWrapper();
-            wrapper.setProps({ addBtnLabel: ADD_BTN_LABEL });
-        });
-
-        it(`Then should show add button with label`, () => {
-            expect(wrapper.find(REF_ADD_BTN).text()).toBe(ADD_BTN_LABEL);
-        });
-
-        it(`Then should emit "add" event when clicked`, () => {
-            wrapper.find(REF_ADD_BTN).trigger('click');
-
-            expect(wrapper.emitted('add')).toBeTruthy();
-        });
-    });
-
-    describe(`Given a search slot`, () => {
-        it(`Then should render correctly`, () => {
-            slots = {
-                search: SLOT_SEARCH
-            };
-            initializeShallowWrapper();
-
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
-    });
-
-    describe(`Given a add slot`, () => {
-        it(`Then should render correctly`, () => {
-            slots = {
-                add: SLOT_ADD
-            };
-            initializeShallowWrapper();
-
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
     });
 
     describe(`Given a table full of data`, () => {

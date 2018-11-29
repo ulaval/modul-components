@@ -33,12 +33,6 @@ export class MTable extends ModulVue {
     @Prop({ default: () => [] })
     rows: any[];
 
-    @Prop()
-    title: string;
-
-    @Prop()
-    addBtnLabel: string;
-
     @Prop({ default: false })
     loading: boolean;
 
@@ -48,10 +42,6 @@ export class MTable extends ModulVue {
 
     @Emit('add')
     onAdd(): void {
-    }
-
-    get hasHeader(): boolean {
-        return !!this.title || !!this.addBtnLabel || !!this.$slots.search || !!this.$slots.add;
     }
 
     get isEmpty(): boolean {
