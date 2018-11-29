@@ -269,7 +269,6 @@ export class Modul {
             this.bodyStyle.bottom = '0'; // --- Added bug in IE11 --- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
             this.bodyStyle.height = '100%';
             this.htmlEl.style.overflow = 'hidden';
-            this.bodyStyle.overflow = 'hidden';
             this.bodyEl.scrollTop = this.stopScrollPosition; // Overflow hidden must be applied on <body> and the <html> before "scrollTop"
         }
         return uuid.generate();
