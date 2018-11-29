@@ -2,9 +2,10 @@ import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
-
+import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
@@ -15,6 +16,7 @@ import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './datepicker.html?style=./datepicker.scss';
+
 
 const VIEW_DAY: string = 'day';
 const VIEW_MONTH: string = 'month';
@@ -35,6 +37,8 @@ export interface DatepickerDate {
 @Component({
     mixins: [
         InputState,
+        InputWidth,
+        InputLabel,
         InputPopup,
         MediaQueries
     ]
@@ -74,6 +78,7 @@ export class MDatepicker extends ModulVue {
     protected created(): void {
         moment.locale([this.$i18n.currentLang(), 'en-ca']);
         this.selectedMomentDate = this.valueIsValid() ? moment(this.value) : moment();
+        this.formattedDate = this.selectedMomentDate.format(this.format);
     }
 
     private valueIsValid(): boolean {
@@ -102,6 +107,10 @@ export class MDatepicker extends ModulVue {
 
     private get weekdays(): string[] {
         return moment.weekdaysMin();
+    }
+
+    private inputOnKeydownDelete(): void {
+        this.$emit('change', '');
     }
 
     private getDaysOfPreviousMonth(): DatepickerDate[] {

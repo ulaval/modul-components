@@ -51,6 +51,7 @@ import OptionPlugin from './option/option';
 import Overlay from './overlay/overlay';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
+import PeriodpickerPlugin from './periodpicker/periodpicker';
 import PhoneNumberPlugin from './phone-number/phone-number';
 import PlusPlugin from './plus/plus';
 import PopperPlugin from './popper/popper';
@@ -86,6 +87,7 @@ import TreeIconPlugin from './tree-icon/tree-icon';
 import TreeNodePlugin from './tree-node/tree-node';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
+
 
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
@@ -147,6 +149,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(OptionItemPlugin);
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
+        Vue.use(PeriodpickerPlugin);
         Vue.use(PhoneNumberPlugin);
         Vue.use(PlusPlugin);
         Vue.use(PopperPlugin);

@@ -1,9 +1,9 @@
 import Component from 'vue-class-component';
-
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { InputState } from '../input-state/input-state';
 import { MediaQueries } from '../media-queries/media-queries';
+
 
 @Component({
     mixins: [
@@ -23,15 +23,14 @@ export class InputPopup extends ModulVue {
         $event.preventDefault();
     }
 
-    public inputOnKeydownEsc($event: KeyboardEvent): void {
-        this.open = false;
-        $event.preventDefault();
-    }
-
     public inputOnKeydownTab($event: KeyboardEvent): void {
         if (this.as<MediaQueries>().isMqMinS) {
             this.open = false;
         }
+    }
+
+    public inputOnKeydownDelete(): void {
+        this.internalValue = '';
     }
 
     public inputOnKeydown($event: KeyboardEvent): void {
