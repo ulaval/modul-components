@@ -16,6 +16,7 @@ const BACKDROP_STYLE_OPACITY_NOT_VISIBLE: string = '0';
 
 const Z_INDEZ_DEFAULT: number = 100;
 const DONE_EVENT_DURATION: number = 100;
+const APP_SCROLL: string = 'm-u--app-scroll';
 
 interface StackElement {
     stackIndex: number;
@@ -31,7 +32,6 @@ type StackMap = {
 export class Modul {
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public bodyEl: HTMLElement = document.querySelector('body') as HTMLElement;
-    public bodyStyle: any = this.bodyEl.style;
     public event = new Vue();
     public scrollPosition: number = 0;
     public stopScrollPosition: number = 0;
@@ -242,35 +242,39 @@ export class Modul {
     }
 
     private activeScrollBody(): void {
-        this.htmlEl.style.removeProperty('overflow');
-        this.bodyStyle.removeProperty('position');
-        this.bodyStyle.removeProperty('top');
-        this.bodyStyle.removeProperty('right');
-        this.bodyStyle.removeProperty('left');
-        this.bodyStyle.removeProperty('bottom');
-        this.bodyStyle.removeProperty('height');
-        this.bodyStyle.removeProperty('overflow');
+        let appScrollEl: HTMLElement = this.getAppScrollEl();
+        if (appScrollEl) {
+            appScrollEl.style.removeProperty('position');
+            appScrollEl.style.removeProperty('top');
+            appScrollEl.style.removeProperty('right');
+            appScrollEl.style.removeProperty('left');
+            appScrollEl.style.removeProperty('height');
+        }
+
         window.scrollTo(0, this.stopScrollPosition);
         this.stopScrollPosition = this.scrollPosition;
 
-        if (this.bodyStyle.length === 0) {
-            this.bodyEl.removeAttribute('style');
+        if (appScrollEl.style.length === 0) {
+            appScrollEl.removeAttribute('style');
         }
+    }
+
+    private getAppScrollEl(): HTMLElement {
+        return document.querySelector('.' + APP_SCROLL) as HTMLElement;
     }
 
     private stopScrollBody(viewportIsSmall: boolean): string {
         if (this.scrollActive) {
             this.scrollActive = false;
             this.stopScrollPosition = this.scrollPosition;
-            this.bodyStyle.position = 'fixed';
-            this.bodyStyle.top = '0'; // --> ENA2-767
-            this.bodyStyle.right = '0';
-            this.bodyStyle.left = '0';
-            this.bodyStyle.bottom = '0'; // --- Added bug in IE11 --- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
-            this.bodyStyle.height = '100%';
-            this.bodyStyle.overflow = 'hidden';
-            this.bodyEl.scrollTop = this.stopScrollPosition; // Overflow hidden must be applied on <body> and the <html> before "scrollTop"
-            this.htmlEl.style.overflow = 'hidden';
+            let appScrollEl: HTMLElement = this.getAppScrollEl();
+            if (appScrollEl) {
+                appScrollEl.style.position = 'fixed';
+                appScrollEl.style.top = '-' + this.stopScrollPosition + 'px';
+                appScrollEl.style.right = '0';
+                appScrollEl.style.left = '0';
+                appScrollEl.style.height = '100%';
+            }
         }
         return uuid.generate();
     }
