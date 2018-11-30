@@ -1,13 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../../mixins/portal/portal';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import { OVERLAY_NAME } from '../component-names';
 import WithRender from './overlay.html?style=./overlay.scss';
-import UserAgentUtil from '../../utils/user-agent/user-agent';
-import { targetIsInput } from 'src/utils/event/event';
+
 
 @WithRender
 @Component({

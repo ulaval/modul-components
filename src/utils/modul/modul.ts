@@ -46,7 +46,7 @@ export class Modul {
     private lastScrollPosition: number = 0;
     private doneScrollEvent: any;
     private doneResizeEvent: any;
-    private scrollActive: boolean = true;
+    private internalScrollActive: boolean = true;
 
     constructor() {
         this.scrollPosition = window.pageYOffset;
@@ -60,21 +60,24 @@ export class Modul {
     }
 
     public onScroll(event): void {
-        this.scrollPosition = window.pageYOffset;
-        if (this.lastScrollPosition > this.scrollPosition) {
-            this.scrollUp = true;
-            this.scrollDown = false;
-        } else {
-            this.scrollUp = false;
-            this.scrollDown = true;
-        }
-        this.lastScrollPosition = this.scrollPosition;
-        this.event.$emit('scroll', event);
+        if (this.scrollActive) {
+            this.scrollPosition = window.pageYOffset;
+            if (this.lastScrollPosition > this.scrollPosition) {
+                this.scrollUp = true;
+                this.scrollDown = false;
+            } else {
+                this.scrollUp = false;
+                this.scrollDown = true;
+            }
+            this.lastScrollPosition = this.scrollPosition;
+            this.event.$emit('scroll', event);
 
-        clearTimeout(this.doneScrollEvent);
-        this.doneScrollEvent = setTimeout(() => {
-            this.event.$emit('scrollDone', event);
-        }, DONE_EVENT_DURATION);
+            clearTimeout(this.doneScrollEvent);
+            this.doneScrollEvent = setTimeout(() => {
+                this.event.$emit('scrollDone', event);
+            }, DONE_EVENT_DURATION);
+
+        }
     }
 
     public onResize(event): void {
@@ -96,7 +99,8 @@ export class Modul {
         let scrollId: string | undefined = undefined;
 
         if (backdropMode !== BackdropMode.None) {
-            scrollId = this.stopScrollBody(viewportIsSmall);
+            this.scrollActive = false;
+            scrollId = uuid.generate();
         }
         if (backdropMode === BackdropMode.BackdropFast || backdropMode === BackdropMode.BackdropSlow) {
             backdropIndex = this.ensureBackdrop(viewportIsSmall);
@@ -209,7 +213,7 @@ export class Modul {
 
         if (!lastScrollId && !this.backdropElement) {
             this.scrollActive = true;
-            this.activeScrollBody();
+            // this.activeScrollBody();
         } else if (!lastBackdropIndex) {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
@@ -226,12 +230,6 @@ export class Modul {
                     if (b && b.parentNode) {
                         b.parentNode.removeChild(b);
                     }
-                    // if (!this.backdropElement) {
-                    //     this.activeScrollBody();
-                    // }
-                    if (!lastScrollId && this.scrollActive) {
-                        this.activeScrollBody();
-                    }
                 }, speed);
             }
         } else if (this.backdropElement) {
@@ -241,42 +239,29 @@ export class Modul {
         }
     }
 
-    private activeScrollBody(): void {
-        let appScrollEl: HTMLElement = this.getAppScrollEl();
-        if (appScrollEl) {
-            appScrollEl.style.removeProperty('position');
-            appScrollEl.style.removeProperty('top');
-            appScrollEl.style.removeProperty('right');
-            appScrollEl.style.removeProperty('left');
-            appScrollEl.style.removeProperty('height');
-        }
-
-        window.scrollTo(0, this.stopScrollPosition);
-        this.stopScrollPosition = this.scrollPosition;
-
-        if (appScrollEl.style.length === 0) {
-            appScrollEl.removeAttribute('style');
-        }
-    }
-
-    private getAppScrollEl(): HTMLElement {
-        return document.querySelector('.' + APP_SCROLL) as HTMLElement;
-    }
-
-    private stopScrollBody(viewportIsSmall: boolean): string {
-        if (this.scrollActive) {
-            this.scrollActive = false;
+    public set scrollActive(scrollActive: boolean) {
+        if (scrollActive) {
+            this.htmlEl.style.removeProperty('position');
+            this.htmlEl.style.removeProperty('top');
+            this.htmlEl.style.removeProperty('right');
+            this.htmlEl.style.removeProperty('left');
+            this.htmlEl.style.removeProperty('bottom');
+            this.htmlEl.style.removeProperty('height');
+            window.scrollTo(0, this.stopScrollPosition);
+        } else {
             this.stopScrollPosition = this.scrollPosition;
-            let appScrollEl: HTMLElement = this.getAppScrollEl();
-            if (appScrollEl) {
-                appScrollEl.style.position = 'fixed';
-                appScrollEl.style.top = '-' + this.stopScrollPosition + 'px';
-                appScrollEl.style.right = '0';
-                appScrollEl.style.left = '0';
-                appScrollEl.style.height = '100%';
-            }
+            this.htmlEl.style.position = 'fixed';
+            this.htmlEl.style.top = `-${this.stopScrollPosition}px`;
+            this.htmlEl.style.right = '0';
+            this.htmlEl.style.left = '0';
+            this.htmlEl.style.bottom = '0';
+            this.htmlEl.style.height = '100%';
         }
-        return uuid.generate();
+        this.internalScrollActive = scrollActive;
+    }
+
+    public get scrollActive(): boolean {
+        return this.internalScrollActive;
     }
 }
 
