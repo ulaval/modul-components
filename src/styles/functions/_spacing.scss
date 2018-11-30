@@ -9,8 +9,8 @@
             }
 
             @each $size, $spacing in $m-spacing-map {
-                @if ( $size == '') {
-                    &--#{$prop}#{$direction}#{$size} {
+                @if ( $size == 'base') {
+                    &--#{$prop}#{$direction} {
                         #{$prop}#{$direction}: $spacing;
                     }
                 }
@@ -25,7 +25,7 @@
     }
 }
 
-@function m-spacing($size: '') {
+@function m-spacing($size: 'base') {
     $m-map: $m-spacing-map;
 
     @if map-has-key($m-map, $size) {
