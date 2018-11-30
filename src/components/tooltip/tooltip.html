@@ -40,8 +40,14 @@
          class="m-tooltip__body-container"
          :class="{ 'm--has-close-button': propCloseButton }"
          :aria-labelledby="id">
-        <div class="m-tooltip__close-button" tabindex="0"  @keyup.enter="close" @click="close" v-if="propCloseButton">
-            <m-icon name="m-svg__close-clear" size="12px" :svg-tile="getCloseTitle"></m-icon>
+        <div class="m-tooltip__close-button"
+             tabindex="0"
+             @keyup.enter="close"
+             @click="close"
+             v-if="propCloseButton">
+            <m-icon name="m-svg__close-clear"
+                    size="12px"
+                    :svg-tile="getCloseTitle()"></m-icon>
         </div>
         <div class="m-tooltip__body">
             <slot></slot>

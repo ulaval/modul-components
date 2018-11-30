@@ -20,7 +20,7 @@ pipeline {
 
                 script {
                     env.branch = env.BRANCH_NAME
-                    env.appName = env.branch.replace('/', '-');
+                    env.appName = env.branch.replace('/', '-').replace('_', '-').toLowerCase();
                 }
 
                 echo "BRANCH_NAME = ${env.BRANCH_NAME}"

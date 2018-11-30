@@ -1,7 +1,9 @@
-<div class="m-popup" :class="{ 'm--is-inline': hasTriggerSlot }">
+<div class="m-popup"
+     :class="{ 'm--is-inline': hasTriggerSlot }">
     <m-popper :open.sync="propOpen"
               @open="onOpen()"
               @close="onClose()"
+              @portal-content-visible="onPortalContentVisible"
               :disabled="disabled"
               :id="id"
               ref="popper"
@@ -32,13 +34,16 @@
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <slot name="header" slot="header"></slot>
+        <slot name="header"
+              slot="header"></slot>
         <slot></slot>
-        <slot name="footer" slot="footer" ></slot>
+        <slot name="footer"
+              slot="footer"></slot>
     </m-popper>
     <m-sidebar :open.sync="propOpen"
                @open="onOpen()"
                @close="onClose()"
+               @portal-content-visible="onPortalContentVisible"
                :close-on-backdrop="closeOnBackdrop"
                :disabled="disabled"
                :focus-management="focusManagement"
@@ -58,8 +63,10 @@
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
         </div>
-        <slot name="header" slot="header"></slot>
+        <slot name="header"
+              slot="header"></slot>
         <slot></slot>
-        <slot name="footer" slot="footer" ></slot>
+        <slot name="footer"
+              slot="footer"></slot>
     </m-sidebar>
 </div>

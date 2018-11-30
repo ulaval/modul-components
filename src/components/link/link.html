@@ -11,12 +11,19 @@
                  :target="target"
                  v-if="isRouterLink"
                  :tabindex="disabled ? '-1' : tabindex"
-                 ref="router">
-        <m-icon :name="propIconName" :size="iconSize" class="m-link__icon" v-if="hasIcon" aria-hidden="true"></m-icon>
+                 ref="router"
+                 :event="routerEvent">
+        <m-icon :name="propIconName"
+                :size="iconSize"
+                class="m-link__icon"
+                v-if="hasIcon"
+                aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
         </span>
-        <m-i18n class="m-link__hidden" v-if="isTargetBlank" k="m-link:open-new-tab"></m-i18n>
+        <m-i18n class="m-link__hidden"
+                v-if="isTargetBlank"
+                k="m-link:open-new-tab"></m-i18n>
     </router-link>
     <a class="m-link"
        :class="{ 'm--is-unvisited': isUnvisited,
@@ -34,10 +41,16 @@
        @keyup="onKeyup"
        :tabindex="disabled ? '-1' : tabindex"
        ref="link">
-        <m-icon class="m-link__icon" :name="propIconName" :size="iconSize" v-if="hasIcon" aria-hidden="true"></m-icon>
+        <m-icon class="m-link__icon"
+                :name="propIconName"
+                :size="iconSize"
+                v-if="hasIcon"
+                aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
         </span>
-        <m-i18n class="m-link__hidden" v-if="isTargetBlank" k="m-link:open-new-tab"></m-i18n>
+        <m-i18n class="m-link__hidden"
+                v-if="isTargetBlank"
+                k="m-link:open-new-tab"></m-i18n>
     </a>
 </transition>

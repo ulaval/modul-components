@@ -57,7 +57,6 @@
                     .m-sidebar__article {
                         transform: translate3d(0, calc(100% + #{ $m-touch-size }), 0);
                         bottom: 0;
-                        max-height: calc(100% - #{ $m-padding--xl });
                     }
                 }
             }

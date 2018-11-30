@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { ICON_NAME } from '../component-names';
 import WithRender from './icon.html?style=./icon.scss';
 
@@ -15,6 +14,12 @@ export class MIcon extends Vue {
     @Prop({ default: '1em' })
     public size: string;
 
+    @Emit('click')
+    onClick(event: Event): void { }
+
+    @Emit('keydown')
+    onKeydown(event: Event): void { }
+
     private get hasSvgTitle(): boolean {
         return !!this.svgTitle;
     }
@@ -27,14 +32,6 @@ export class MIcon extends Vue {
         } else if (this.name) {
             Vue.prototype.$log.warn('"' + this.name + '" is not a valid svg id. Make sure that the sprite has been loaded via the $svg instance service.');
         }
-    }
-
-    private onClick(event): void {
-        this.$emit('click', event);
-    }
-
-    private onKeydown(event): void {
-        this.$emit('keydown', event);
     }
 }
 

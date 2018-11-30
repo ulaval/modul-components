@@ -526,7 +526,7 @@
             }
 
             &:first-child {
-                border-left: 1px solid $m-color--grey-light;
+                border-left: 1px solid $m-color--grey-lighter;
 
                 .m-navbar-item__contents::before {
                     left: -1px;
@@ -534,7 +534,7 @@
             }
 
             &:last-child {
-                border-right: 1px solid $m-color--grey-light;
+                border-right: 1px solid $m-color--grey-lighter;
 
                 .m-navbar-item__contents::before {
                     right: -1px;
@@ -546,19 +546,19 @@
             .m-navbar-item__contents {
                 &:hover,
                 &:focus {
-                    background: $m-color--grey-lighter;
+                    background: $m-color--grey-light;
                 }
             }
         }
 
         &.m--is-disabled {
             .m-navbar-item__contents {
-                color: $m-color--grey-lighter;
+                color: $m-color--grey-light;
             }
         }
 
         &__contents {
-            background: $m-color--grey-light;
+            background: $m-color--grey-lighter;
             color: $m-color--text;
         }
     }
