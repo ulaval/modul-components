@@ -66,14 +66,16 @@ export class MTree extends ModulVue {
     private selectedNodesFound: string[] = [];
 
     public onClick(path: string): void {
-        if (this.propSelectedNodes.indexOf(path) === -1) {
-            if (this.selectionMode === MSelectionMode.Multiple) {
-                this.propSelectedNodes.push(path);
-            } else {
-                this.propSelectedNodes = [path];
+        if (!this.pathIsDisabled(path)) {
+            if (this.propSelectedNodes.indexOf(path) === -1) {
+                if (this.selectionMode === MSelectionMode.Multiple) {
+                    this.propSelectedNodes.push(path);
+                } else {
+                    this.propSelectedNodes = [path];
+                }
+            } else if (this.selectionMode === MSelectionMode.Multiple) {
+                this.propSelectedNodes.splice(this.propSelectedNodes.indexOf(path), 1);
             }
-        } else if (this.selectionMode === MSelectionMode.Multiple) {
-            this.propSelectedNodes.splice(this.propSelectedNodes.indexOf(path), 1);
         }
         this.$emit('select', path);
     }
@@ -101,6 +103,10 @@ export class MTree extends ModulVue {
                 console.error(`modUL - The selected node was not found: "${selectedNode}"`);
             }
         });
+    }
+
+    private pathIsDisabled(path: string): boolean {
+        return this.disabledNodes && this.disabledNodes.indexOf(path) !== -1;
     }
 
     private browseNode(node: TreeNode, path: string = ''): void {

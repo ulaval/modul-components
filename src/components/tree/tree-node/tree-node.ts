@@ -77,11 +77,11 @@ export class MTreeNode extends ModulVue {
 
     public onChildCheckboxChange(selected: boolean): void {
         this.selectedChildrenCount += selected ? 1 : -1;
-        let nodeFound: boolean = this.selectedParentNodes.indexOf(this.currentPath) !== -1;
-        if (this.node.children && this.selectedChildrenCount === this.node.children.length && !nodeFound) {
+        let nodeAlreadySelected: boolean = this.selectedParentNodes.indexOf(this.currentPath) !== -1;
+        if (this.node.children && this.selectedChildrenCount === this.node.children.length && !nodeAlreadySelected) {
             this.addNode(this.selectedParentNodes, this.currentPath);
             this.$emit('child-checkbox-change', true);
-        } else if (nodeFound) {
+        } else if (nodeAlreadySelected) {
             this.removeNode(this.selectedParentNodes, this.currentPath);
             this.$emit('child-checkbox-change', false);
         }
@@ -104,40 +104,49 @@ export class MTreeNode extends ModulVue {
         } else {
             this.onClick();
         }
-
     }
 
     protected mounted(): void {
         this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
     }
 
-    private updateSelectedNodes(childrenPaths: string[] = [], addNode: boolean): void {
-        childrenPaths.forEach(path => {
-            let nodeFound: boolean = this.selectedNodes.indexOf(path) !== -1;
-            if (addNode && !nodeFound) {
+    // Push or splice nodes in paths array
+    private updateSelectedNodes(paths: string[] = [], addNode: boolean): void {
+        paths.forEach(path => {
+            let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
+            if (addNode && !nodeAlreadySelected) {
                 this.addNode(this.selectedNodes, path);
-            } else if (!addNode && nodeFound) {
+            } else if (!addNode && nodeAlreadySelected) {
                 this.removeNode(this.selectedNodes, path);
             }
         });
     }
 
-    private addNode(nodeArray: string[], path: string): void {
-        nodeArray.push(path);
-    }
-
-    private removeNode(nodeArray: string[], path: string): void {
-        nodeArray.splice(nodeArray.indexOf(path), 1);
-    }
-
+    // Fetches every node under current parent
     private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string): void {
-        if (currentNode.children) {
+        if (currentNode.children && currentNode.children.length > 0) {
             currentNode.children.forEach(child => {
                 this.fetchChildrenPaths(child, childrenPath, path + '/' + child.id);
             });
         } else {
             childrenPath.push(path);
         }
+    }
+
+    // Push node to given array
+    private addNode(nodeArray: string[], path: string): void {
+        if (!this.pathIsDisabled(path)) {
+            nodeArray.push(path);
+        }
+    }
+
+    // Remove node from given array
+    private removeNode(nodeArray: string[], path: string): void {
+        nodeArray.splice(nodeArray.indexOf(path), 1);
+    }
+
+    private pathIsDisabled(path: string): boolean {
+        return this.disabledNodes && this.disabledNodes.indexOf(path) !== -1;
     }
 
     public get currentPath(): string {
@@ -178,6 +187,11 @@ export class MTreeNode extends ModulVue {
 
     public get isSelected(): boolean {
         return this.selectedNodes.indexOf(this.currentPath) !== -1;
+    }
+
+    // Partial checkbox selection state
+    public get isIndeterminated(): boolean {
+        return this.isParentOfSelectedFile && !this.isSelectedParentNode && this.autoSelectCheckboxes;
     }
 
     public get isSelectedParentNode(): boolean {

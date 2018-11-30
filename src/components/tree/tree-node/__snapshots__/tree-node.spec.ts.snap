@@ -41,6 +41,8 @@ exports[`MTreeNode Given a node When the node can't have children and the node i
 
 exports[`MTreeNode Given a node When the node has a checkbox Should render properly 1`] = `
 <li class="m-tree-node">
-    <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Node 1</span> </div>
+    <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Node 1</span>
+        <div>checkbox</div>
+    </div>
 </li>
 `;

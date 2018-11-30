@@ -1,5 +1,5 @@
 <li class="m-tree-node"
-    :class="{ 'm--is-selected': isSelected || autoSelectCheckboxes && isSelectedParentNode, 'm--is-disabled' : isDisabled }">
+    :class="{ 'm--is-selected': isSelected || isSelectedParentNode, 'm--is-disabled' : isDisabled }">
     <div class="m-tree-node__item"
          role="button"
          :tabindex="isDisabled ? '-1' : 1"
@@ -15,7 +15,7 @@
         <m-checkbox ref="checkbox"
                     :value="isSelected || isSelectedParentNode"
                     v-if="withCheckboxes"
-                    :indeterminate="isParentOfSelectedFile && !isSelectedParentNode && autoSelectCheckboxes"
+                    :indeterminate="isIndeterminated"
                     :disabled="isDisabled"
                     @click="onCheckboxClick"></m-checkbox>
     </div>

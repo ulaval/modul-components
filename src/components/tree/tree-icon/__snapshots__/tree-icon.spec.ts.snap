@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MTreeIcon When the node is a folder When the node uses accordion icons Should render correctly 1`] = `<m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m--is-left"></m-plus>`;
-
 exports[`MTreeIcon When the node is a folder When the node uses plus icons Should render correctly 1`] = `<m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m--is-left"></m-plus>`;

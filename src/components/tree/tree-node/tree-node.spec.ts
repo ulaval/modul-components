@@ -1,4 +1,4 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { mount, RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
 import { TreeNode } from '../tree';
 import { MTreeNode } from './tree-node';
@@ -10,10 +10,14 @@ const CHECKBOX: RefSelector = { ref: 'checkbox' };
 const NODE_ELEMENT_LABEL: string = 'Node 1';
 const NODE_ELEMENT_ID: string = 'Node 1';
 const PARENT_PATH: string = '/Parent 1';
+const CHECKBOX_PARENT: string = 'Parent 1';
+const CHECKBOX_CHILD: string = 'Child 1';
 
 const TREE_NODE_SELECTED: string[] = ['/Node 1'];
 const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
 const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
+const TREE_NODE_CHECKBOX_FIRST_CHILD: string[] = ['/Parent 1/Child 1'];
+const TREE_NODE_CHECKBOX_PARENT: string[] = ['/Parent 1'];
 
 const TREE_NODE_WITHOUT_CHILDREN: TreeNode = {
     label: NODE_ELEMENT_LABEL,
@@ -45,6 +49,23 @@ const TREE_NODE_WITH_CHILDREN: TreeNode = {
     ]
 };
 
+const TREE_NODE_WITH_TWO_CHILDREN: TreeNode = {
+    label: CHECKBOX_PARENT,
+    id: CHECKBOX_PARENT,
+    children: [
+        {
+            label: CHECKBOX_CHILD,
+            id: CHECKBOX_CHILD,
+            children: []
+        },
+        {
+            label: 'Node 5',
+            id: 'Node 5',
+            children: []
+        }
+    ]
+};
+
 const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode = {
     label: 'Node 3',
     id: '',
@@ -60,12 +81,12 @@ const TREE_NODE_WITH_CHILDREN_NOT_VALID: TreeNode = {
 
 let node: TreeNode;
 let selectedNodes: string[] = [];
+let selectedParentNodes: string[] = [];
 let selectable: boolean = true;
 let icons: boolean = false;
 let path: string = '';
 let disabledNodes: string[] = [];
-let withCheckbox: boolean = false;
-let usePlusIcons: boolean = false;
+let withCheckboxes: boolean = false;
 let autoSelectCheckboxes: boolean = false;
 
 let wrapper: Wrapper<MTreeNode>;
@@ -79,8 +100,23 @@ const initializeShallowWrapper: any = () => {
             selectable,
             icons,
             path,
-            withCheckbox,
-            usePlusIcons,
+            withCheckboxes,
+            disabledNodes,
+            autoSelectCheckboxes
+        }
+    });
+};
+
+const initializeMountWrapper: any = () => {
+    wrapper = mount(MTreeNode, {
+        propsData: {
+            node,
+            selectedNodes,
+            selectedParentNodes,
+            selectable,
+            icons,
+            path,
+            withCheckboxes,
             disabledNodes,
             autoSelectCheckboxes
         }
@@ -91,7 +127,7 @@ const getStubs: any = () => {
     return {
         ['m-tree-icon']: '<div>m-tree-icon</div>',
         ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>',
-        ['m-checkbox']: 'allo'
+        ['m-checkbox']: '<div @click="$emit(\'click\')">checkbox</div>'
     };
 };
 
@@ -99,11 +135,19 @@ describe('MTreeNode', () => {
 
     describe(`Given a node`, () => {
 
+        afterEach(() => {
+            withCheckboxes = false;
+            autoSelectCheckboxes = false;
+            selectedParentNodes = [];
+            disabledNodes = [];
+        });
+
         describe(`When the node has a checkbox`, () => {
 
             beforeEach(() => {
                 node = TREE_NODE_WITHOUT_CHILDREN;
-                withCheckbox = true;
+                selectedNodes = [];
+                withCheckboxes = true;
                 initializeShallowWrapper();
             });
 
@@ -111,9 +155,9 @@ describe('MTreeNode', () => {
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
 
-            it(`Should be selected on checkbox click`, () => {
+            it(`Should emit click on checkbox click`, () => {
                 wrapper.find(CHECKBOX).trigger('click');
-                expect(wrapper.vm.isSelected).toBeTruthy();
+                expect(wrapper.emitted('click')).toBeTruthy();
             });
 
             describe(`and auto-select is on`, () => {
@@ -121,30 +165,37 @@ describe('MTreeNode', () => {
                 describe(`and given node is a parent`, () => {
 
                     beforeEach(() => {
-                        node = TREE_NODE_WITH_CHILDREN;
+                        node = TREE_NODE_WITH_TWO_CHILDREN;
                         autoSelectCheckboxes = true;
-                        initializeShallowWrapper();
+                        withCheckboxes = true;
+                        selectedNodes = [];
+                        initializeMountWrapper();
                     });
 
                     it(`Should select every children on checkbox click`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.vm.selectedChildrenCount).toBe(2);
+                    });
 
+                    it(`Should make current node part of the selected parent nodes`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.vm.selectedParentNodes[0]).toBe(TREE_NODE_CHECKBOX_PARENT[0]);
                     });
 
                 });
 
-                describe(`and given node is a children`, () => {
+                describe(`and given node is the parent of a selected node and an unselected node`, () => {
 
                     beforeEach(() => {
-                        node = TREE_NODE_WITHOUT_CHILDREN;
+                        node = TREE_NODE_WITH_TWO_CHILDREN;
+                        selectedNodes = TREE_NODE_CHECKBOX_FIRST_CHILD;
+                        autoSelectCheckboxes = true;
+                        withCheckboxes = true;
                         initializeShallowWrapper();
                     });
 
-                    it(`Should give the indeterminate prop to parent on click`, () => {
-
-                    });
-
-                    it(`Should give the selected status to parent on click when all siblings a selected`, () => {
-
+                    it(`Should have isIndeterminated prop to true`, () => {
+                        expect(wrapper.vm.isIndeterminated).toBeTruthy();
                     });
 
                 });
@@ -153,18 +204,40 @@ describe('MTreeNode', () => {
 
             describe(`and auto-select is off`, () => {
 
+                beforeEach(() => {
+                    node = TREE_NODE_WITH_TWO_CHILDREN;
+                    autoSelectCheckboxes = false;
+                    withCheckboxes = true;
+                    selectedNodes = [];
+                    initializeMountWrapper();
+                });
+
                 describe(`and given node is a parent`, () => {
 
                     it(`Should not select children on click`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.vm.selectedChildrenCount).toBe(0);
+                    });
 
+                    it(`Should emit its path so parent adds it as selected nodes`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.emitted('click')[0][0]).toBe(TREE_NODE_CHECKBOX_PARENT[0]);
                     });
 
                 });
 
-                describe(`and given node is a children`, () => {
+                describe(`and given node is the parent of a selected node and an unselected node`, () => {
 
-                    it(`Should not change parent on click`, () => {
+                    beforeEach(() => {
+                        node = TREE_NODE_WITH_TWO_CHILDREN;
+                        selectedNodes = TREE_NODE_CHECKBOX_FIRST_CHILD;
+                        autoSelectCheckboxes = false;
+                        withCheckboxes = true;
+                        initializeShallowWrapper();
+                    });
 
+                    it(`Should have isIndeterminated prop to false`, () => {
+                        expect(wrapper.vm.isIndeterminated).toBeFalsy();
                     });
 
                 });
@@ -214,6 +287,20 @@ describe('MTreeNode', () => {
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
 
+        });
+
+        describe(`When the node's path is part of the disabled nodes`, () => {
+
+            beforeEach(() => {
+                node = TREE_NODE_WITHOUT_CHILDREN;
+                disabledNodes = TREE_NODE_SELECTED;
+                initializeShallowWrapper();
+            });
+
+            it(`Should be disabled`, () => {
+                wrapper.vm.onClick();
+                expect(wrapper.vm.isDisabled).toBeTruthy();
+            });
         });
 
         describe(`When the node can and has children`, () => {
