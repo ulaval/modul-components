@@ -249,6 +249,15 @@ export class Modul {
             this.htmlEl.style.removeProperty('height');
             this.bodyEl.style.removeProperty('margin-top');
             window.scrollTo(0, this.stopScrollPosition);
+
+            if (this.htmlEl.style.length === 0) {
+                this.htmlEl.removeAttribute('style');
+            }
+
+            if (this.bodyEl.style.length === 0) {
+                this.bodyEl.removeAttribute('style');
+            }
+
         } else {
             this.stopScrollPosition = this.scrollPosition;
             this.htmlEl.style.position = 'fixed';
