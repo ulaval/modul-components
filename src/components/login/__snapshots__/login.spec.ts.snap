@@ -4,7 +4,8 @@ exports[`MLogin when login should render correctly 1`] = `
 <form>
     <div class="m-textfield m--has-label m--is-type-text" style="width:100%;max-width:288px;">
         <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label for="mTextfield-uuid" class="m-input-style__label"><span>Username</span></label>
+            <label for="mTextfield-uuid" class="m-input-style__label"><span class="m-input-style__text"><span>Username</span></span>
+            </label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
                     <input id="mTextfield-uuid" maxlength="Infinity" type="text" value="" class="m-textfield__input"> </div>
@@ -18,7 +19,8 @@ exports[`MLogin when login should render correctly 1`] = `
     <br>
     <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
         <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label for="mTextfield-uuid" class="m-input-style__label"><span>Password</span></label>
+            <label for="mTextfield-uuid" class="m-input-style__label"><span class="m-input-style__text"><span>Password</span></span>
+            </label>
             <div class="m-input-style__body">
                 <div class="m-input-style__body__left">
                     <input id="mTextfield-uuid" maxlength="Infinity" type="password" value="" class="m-textfield__input"> </div>
