@@ -1,11 +1,5 @@
 @import 'abstracts/variables';
-$m-input-style--color-default-text: $m-color--disabled !default;
-$m-input-style--color-focus: $m-color--interactive !default;
-$m-input-style--color-error: $m-color--error !default;
-$m-input-style--color-valid: $m-color--success !default;
-$m-input-style--color-disabled: $m-color--disabled !default;
-$m-input-style--color-waiting: $m-color--active !default;
-$m-input-style--padding: $m-spacing !default;
+@import 'abstracts/var-input-style';
 
 .m-input-style {
     position: relative;
@@ -46,14 +40,8 @@ $m-input-style--padding: $m-spacing !default;
 
         .m-input-style {
             &__label {
-                transform: translate3d(0, -26px, 0) scale(0.8); // Magic number
+                transform: translate3d(0, -#{$m-input-style--label-offset}, 0) scale(0.8);
                 z-index: 1;
-            }
-
-            .m--has-word-wrap & {
-                &__label {
-                    transform: translate3d(0, 0, 0) scale(0.8);
-                }
             }
         }
     }
@@ -180,9 +168,13 @@ $m-input-style--padding: $m-spacing !default;
     }
 
     &__text {
-        background-color: $m-color--white;
         padding: 0 $m-spacing--xs;
         display: inline-block;
+        background-color: $m-color--white;
+
+        .m-inplace-edit & {
+            background-color: $m-color--information;
+        }
     }
 
     &__required-marker {
@@ -190,6 +182,7 @@ $m-input-style--padding: $m-spacing !default;
         font-size: inherit;
         font-weight: $m-font-weight--black;
         margin-left: 2px;
+        float: right;
     }
 
     &__body {
@@ -202,11 +195,12 @@ $m-input-style--padding: $m-spacing !default;
         text-decoration: none;
         background-color: $m-color--white;
 
+        .m-rich-text .m--is-label-up &,
         .m--has-word-wrap .m--is-label-up & {
             position: relative;
             width: 100%;
             bottom: unset;
-            margin-top: $m-spacing--s;
+            margin-top: -#{$m-input-style--label-offset};
         }
 
         .m--has-label & {
@@ -226,13 +220,6 @@ $m-input-style--padding: $m-spacing !default;
             min-height: 24px;
             flex: 1 1 auto;
             max-width: 100%;
-
-            .m--has-border-top & {
-                .m--is-focus & {
-                    padding-top: 4px;
-                    margin-top: 4px;
-                }
-            }
         }
 
         &__right {
