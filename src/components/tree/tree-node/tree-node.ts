@@ -58,7 +58,7 @@ export class MTreeNode extends ModulVue {
     @Watch('isSelected')
     public watchCheckboxes(): void {
         if (this.withCheckboxes && this.autoSelectCheckboxes) {
-            this.$emit('child-checkbox-change', this.isSelected);
+            this.$emit('auto-select-child-checkbox-change', this.isSelected);
         }
     }
 
@@ -71,19 +71,20 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    public onChildClick(path: string): void {
-        this.$emit('click', path);
+    public onChildClick(path: string, fromCheckbox: boolean = false): void {
+        this.$emit('click', path, fromCheckbox);
     }
 
-    public onChildCheckboxChange(selected: boolean): void {
+    // When auto-select is on, isSelected is watched and this function is called to keep track of parent's state
+    public onAutoSelectChildCheckboxChange(selected: boolean): void {
         this.selectedChildrenCount += selected ? 1 : -1;
         let nodeAlreadySelected: boolean = this.selectedParentNodes.indexOf(this.currentPath) !== -1;
         if (this.node.children && this.selectedChildrenCount === this.node.children.length && !nodeAlreadySelected) {
             this.addNode(this.selectedParentNodes, this.currentPath);
-            this.$emit('child-checkbox-change', true);
+            this.$emit('auto-select-child-checkbox-change', true);
         } else if (nodeAlreadySelected) {
             this.removeNode(this.selectedParentNodes, this.currentPath);
-            this.$emit('child-checkbox-change', false);
+            this.$emit('auto-select-child-checkbox-change', false);
         }
     }
 
@@ -99,10 +100,8 @@ export class MTreeNode extends ModulVue {
             let childrenPaths: string[] = [];
             this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id);
             this.updateSelectedNodes(childrenPaths, !this.isSelectedParentNode);
-        } else if (this.isFolder && !this.autoSelectCheckboxes) {
-            this.$emit('click', this.currentPath);
         } else {
-            this.onClick();
+            this.$emit('click', this.currentPath, true);
         }
     }
 

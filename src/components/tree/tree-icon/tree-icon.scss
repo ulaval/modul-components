@@ -2,4 +2,9 @@
 
 .m-tree-icon {
     margin-right: $m-spacing--s;
+    width: 32px;
+
+    /deep/ .m-svg__folder-open {
+        transform: scale(1.2) translateY(-2px);
+    }
 }

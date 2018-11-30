@@ -1,6 +1,7 @@
 <li class="m-tree-node"
     :class="{ 'm--is-selected': isSelected || isSelectedParentNode, 'm--is-disabled' : isDisabled }">
     <div class="m-tree-node__item"
+         :class="{ 'm-tree-node__item--no-hover': withCheckboxes && !isFolder }"
          role="button"
          :tabindex="isDisabled ? '-1' : 1"
          @click="onClick"
@@ -41,7 +42,7 @@
                              :selected-parent-nodes="selectedParentNodes"
                              :auto-select-checkboxes="autoSelectCheckboxes"
                              :has-sibling="childHasSibling(index)"
-                             @child-checkbox-change="onChildCheckboxChange"
+                             @auto-select-child-checkbox-change="onAutoSelectChildCheckboxChange"
                              @click="onChildClick"></m-tree-node>
             </ul>
         </m-accordion-transition>

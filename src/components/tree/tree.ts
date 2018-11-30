@@ -65,8 +65,9 @@ export class MTree extends ModulVue {
 
     private selectedNodesFound: string[] = [];
 
-    public onClick(path: string): void {
-        if (!this.pathIsDisabled(path)) {
+    public onClick(path: string, fromCheckbox: boolean = false): void {
+        // With checkboxes, nodes are pushed only on checkbox click
+        if (!this.pathIsDisabled(path) && (!this.withCheckboxes || (this.withCheckboxes && fromCheckbox))) {
             if (this.propSelectedNodes.indexOf(path) === -1) {
                 if (this.selectionMode === MSelectionMode.Multiple) {
                     this.propSelectedNodes.push(path);

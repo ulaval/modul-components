@@ -61,10 +61,6 @@ $m-tree-node--line-width: 22px;
             text-overflow: ellipsis;
             line-height: $m-line-height;
             flex-grow: 1;
-
-            .m-tree--multiple-node-checkbox & {
-                color: $m-color--black;
-            }
         }
 
         .m-tree-node__item__label:first-child {
@@ -80,16 +76,15 @@ $m-tree-node--line-width: 22px;
 
     &.m--is-selected > &__item {
         @include m-button--active();
-
-        .m-tree--multiple-node-checkbox & {
-            background-color: $m-color--interactive-lightest;
-        }
     }
 
     @media (min-width: $m-mq--min--s) {
-        &:not(.m--is-disabled):not(.m--is-selected) > &__item:hover {
+        &:not(.m--is-disabled):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover {
             @include m-button--hover();
+        }
 
+        &:not(.m--is-disabled) > &__item:hover,
+        .m--is-selected {
             .m-tree-icon::before,
             .m-tree-icon::after {
                 background-color: $m-color--white;
