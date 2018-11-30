@@ -247,15 +247,17 @@ export class Modul {
             this.htmlEl.style.removeProperty('left');
             this.htmlEl.style.removeProperty('bottom');
             this.htmlEl.style.removeProperty('height');
+            this.bodyEl.style.removeProperty('margin-top');
             window.scrollTo(0, this.stopScrollPosition);
         } else {
             this.stopScrollPosition = this.scrollPosition;
             this.htmlEl.style.position = 'fixed';
-            this.htmlEl.style.top = `-${this.stopScrollPosition}px`;
+            this.htmlEl.style.top = '0';
             this.htmlEl.style.right = '0';
             this.htmlEl.style.left = '0';
             this.htmlEl.style.bottom = '0';
             this.htmlEl.style.height = '100%';
+            this.bodyEl.style.marginTop = `-${this.stopScrollPosition}px`;
         }
         this.internalScrollActive = scrollActive;
     }
