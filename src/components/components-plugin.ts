@@ -63,6 +63,7 @@ import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text
 import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
+import ShowMorePlugin from './show-more/show-more';
 import SidebarPlugin from './sidebar/sidebar';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
@@ -158,6 +159,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RichTextPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
+        Vue.use(ShowMorePlugin);
         Vue.use(SidebarPlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);
