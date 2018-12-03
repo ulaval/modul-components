@@ -1,5 +1,4 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -73,6 +72,7 @@ import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
 import SwitchPlugin from './switch/switch';
 import TabPanelPlugin from './tab-panel/tab-panel';
+import TableHeaderPlugin from './table-header/table-header';
 import TablePlugin from './table/table';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
@@ -168,6 +168,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
         Vue.use(TablePlugin);
+        Vue.use(TableHeaderPlugin);
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);

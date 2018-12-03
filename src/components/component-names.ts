@@ -71,6 +71,7 @@ export const STEPPERS_ITEM_NAME: string = 'm-steppers-item';
 export const SWITCH_NAME: string = 'm-switch';
 export const TAB_PANEL_NAME: string = 'm-tab-panel';
 export const TABLE_NAME: string = 'm-table';
+export const TABLE_HEADER_NAME: string = 'm-table-header';
 export const TABS_NAME: string = 'm-tabs';
 export const TEMPLATE_NAME: string = 'm-template';
 export const TEXTAREA_NAME: string = 'm-textarea';
