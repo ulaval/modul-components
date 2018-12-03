@@ -278,13 +278,13 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private draggableHasHandle(element: HTMLElement): boolean {
-        return element.getElementsByClassName('dragHandle').length > 0;
+        return element.getElementsByClassName('drag-handle').length > 0;
     }
 
     private isHandleUsedToDrag(event: MouseEvent): boolean {
-        const dragHandle: HTMLElement | null = this.element.querySelector('.dragHandle');
+        const dragHandle: HTMLElement | null = this.element.querySelector('.drag-handle');
         if (dragHandle) {
-            return dragHandle.classList.contains('dragHandle') && dragHandle.contains(event.target as Node);
+            return dragHandle.classList.contains('drag-handle') && dragHandle.contains(event.target as Node);
         } else {
             return false;
         }
