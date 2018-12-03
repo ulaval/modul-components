@@ -526,7 +526,7 @@
             }
 
             &:first-child {
-                border-left: 1px solid $m-color--grey-lighter;
+                border-left: 1px solid $m-color--grey-light;
 
                 .m-navbar-item__contents::before {
                     left: -1px;
@@ -534,7 +534,7 @@
             }
 
             &:last-child {
-                border-right: 1px solid $m-color--grey-lighter;
+                border-right: 1px solid $m-color--grey-light;
 
                 .m-navbar-item__contents::before {
                     right: -1px;
