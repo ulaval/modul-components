@@ -3,9 +3,6 @@ import Vue, { VueConstructor } from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import MButtonPlugin, { MButton, MButtonIconPosition, MButtonSkin, MButtonType } from './button';
 
-
-const FORM_ID: string = 'My-form-id';
-
 describe('MButton', () => {
     let localVue: VueConstructor<Vue>;
 
