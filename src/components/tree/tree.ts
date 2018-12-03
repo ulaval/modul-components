@@ -21,6 +21,12 @@ export enum MSelectionMode {
     Multiple = '2'
 }
 
+export enum MAutoSelectCheckboxesMode {
+    None = '0',
+    Checkbox = '1',
+    Button = '2'
+}
+
 @WithRender
 @Component
 export class MTree extends ModulVue {
@@ -35,6 +41,15 @@ export class MTree extends ModulVue {
             value === MSelectionMode.Multiple
     })
     public selectionMode: MSelectionMode;
+
+    @Prop({
+        default: MAutoSelectCheckboxesMode.Checkbox,
+        validator: value =>
+            value === MAutoSelectCheckboxesMode.None ||
+            value === MAutoSelectCheckboxesMode.Checkbox ||
+            value === MAutoSelectCheckboxesMode.Button
+    })
+    public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
 
     @Prop()
     public selectedNodes: string[];

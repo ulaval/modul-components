@@ -71,7 +71,7 @@
     </div>
 
     <div style="width: 50%; float:left;">
-        <h3>Multiple Nodes and Checkboxes</h3>
+        <h3>Multiple Nodes, Checkboxes and Checkbox Auto-Select</h3>
         <p>
             Selected Nodes : {{currentNodesCheckboxes}}</br>
         </p>
@@ -89,25 +89,43 @@
     <div style="clear: both;"></div>
 
     <div style="width: 50%; float:left;">
+        <h3>Multiple Nodes, Checkboxes and Button Auto-Select</h3>
+        <p>
+            Selected Nodes : {{currentNodesCheckboxesButtonAutoselect}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTreeCheckboxButtonAutoSelectCheckboxes"
+                    selection-mode="2"
+                    auto-select-checkboxes-mode="2"
+                    :icons="true"
+                    :use-plus-icons="true"
+                    :with-checkboxes="true"
+                    :selected-nodes="currentNodesCheckboxesButtonAutoselect"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="width: 50%; float:left;">
         <h3>Multiple Nodes, Checkbox, Disabled Parent and No Auto-Select</h3>
         <p>
             Disabled auto-select-checkboxes allows parents to be fully independant from their children.
         </p>
         <p>
-            Selected Nodes : {{currentNodesCheckboxesNoautoSelectCheckboxes}}</br>
+            Selected Nodes : {{currentNodesCheckboxesNoAutoSelectCheckboxes}}</br>
         </p>
         <p>
-            <m-tree :tree="multiNodeTreeCheckboxNoautoSelectCheckboxes"
+            <m-tree :tree="multiNodeTreeCheckboxNoAutoSelectCheckboxes"
                     selection-mode="2"
+                    auto-select-checkboxes-mode="0"
                     :icons="true"
                     :use-plus-icons="true"
                     :with-checkboxes="true"
-                    :auto-select-checkboxes="false"
-                    :disabled-nodes="disabledNodesCheckboxesNoautoSelectCheckboxes"
-                    :selected-nodes="currentNodesCheckboxesNoautoSelectCheckboxes"
+                    :disabled-nodes="disabledNodesCheckboxesNoAutoSelectCheckboxes"
+                    :selected-nodes="currentNodesCheckboxesNoAutoSelectCheckboxes"
                     @select="onSelect"></m-tree>
         </p>
     </div>
+
 
     <div style="clear: both;"></div>
 

@@ -9,6 +9,13 @@ import { TREE_NODE_NAME } from '../component-names';
 import { TreeNode } from '../tree';
 import TreeIconPlugin from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
+
+export enum MAutoSelectCheckboxesMode {
+    None = '0',
+    Checkbox = '1',
+    Button = '2'
+}
+
 @WithRender
 @Component
 export class MTreeNode extends ModulVue {
@@ -23,6 +30,15 @@ export class MTreeNode extends ModulVue {
 
     @Prop({ default: [] })
     public selectedParentNodes: string[];
+
+    @Prop({
+        default: MAutoSelectCheckboxesMode.Checkbox,
+        validator: value =>
+            value === MAutoSelectCheckboxesMode.None ||
+            value === MAutoSelectCheckboxesMode.Checkbox ||
+            value === MAutoSelectCheckboxesMode.Button
+    })
+    public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
 
     @Prop()
     selectable: boolean;
@@ -48,16 +64,13 @@ export class MTreeNode extends ModulVue {
     @Prop()
     public disabledNodes: string[];
 
-    @Prop()
-    public autoSelectCheckboxes: boolean;
-
     public selectedChildrenCount: number = 0;
 
     public internalOpen: boolean = false;
 
     @Watch('isSelected')
     public watchCheckboxes(): void {
-        if (this.withCheckboxes && this.autoSelectCheckboxes) {
+        if (this.withCheckboxes && this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Checkbox) {
             this.$emit('auto-select-child-checkbox-change', this.isSelected);
         }
     }
@@ -96,7 +109,7 @@ export class MTreeNode extends ModulVue {
     }
 
     public onCheckboxClick(): void {
-        if (this.isFolder && this.autoSelectCheckboxes) {
+        if (this.isFolder && this.autoSelectCheckboxesMode !== MAutoSelectCheckboxesMode.None) {
             let childrenPaths: string[] = [];
             this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id);
             this.updateSelectedNodes(childrenPaths, !this.isSelectedParentNode);
@@ -190,7 +203,7 @@ export class MTreeNode extends ModulVue {
 
     // Partial checkbox selection state
     public get isIndeterminated(): boolean {
-        return this.isParentOfSelectedFile && !this.isSelectedParentNode && this.autoSelectCheckboxes;
+        return this.isParentOfSelectedFile && !this.isSelectedParentNode && this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Checkbox;
     }
 
     public get isSelectedParentNode(): boolean {
