@@ -43,9 +43,6 @@ export class MButton extends Vue {
     public skin: MButtonSkin;
 
     @Prop()
-    public form: string;
-
-    @Prop()
     public precision: string;
     @Prop()
     public disabled: boolean;

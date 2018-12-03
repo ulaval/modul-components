@@ -103,15 +103,6 @@ describe('MButton', () => {
         return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should change html element based on form prop', () => {
-        const btn: Wrapper<MButton> = mount(MButton, {
-            localVue: localVue
-        });
-
-        btn.setProps({ form: FORM_ID });
-        return expect(renderComponent(btn.vm)).resolves.toMatchSnapshot();
-    });
-
     it('should change html element based on type prop', () => {
         const btn: Wrapper<MButton> = mount(MButton, {
             localVue: localVue
