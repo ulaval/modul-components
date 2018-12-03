@@ -3,10 +3,8 @@ import { renderComponent } from '../../../tests/helpers/render';
 import { TABLE_HEADER_NAME } from '../component-names';
 import { MTableHeader } from './table-header';
 
-const TITLE: string = 'TITLE';
 const ADD_BTN_LABEL: string = 'ADD BUTTON';
 
-const REF_TITLE: RefSelector = { ref: 'title' };
 const REF_ADD_BTN: RefSelector = { ref: 'addBtn' };
 
 let slots: any = {};
@@ -30,28 +28,8 @@ describe(TABLE_HEADER_NAME, () => {
         expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
 
-    it(`Should have an empty title`, () => {
-        expect(wrapper.props().title).toBeUndefined();
-    });
-
     it(`Should have an empty add button label`, () => {
         expect(wrapper.props().addBtnLabel).toBeUndefined();
-    });
-
-    describe(`Given a title`, () => {
-        it(`Should render title from prop`, () => {
-            initializeShallowWrapper();
-            wrapper.setProps({ title: TITLE });
-
-            expect(wrapper.find(REF_TITLE).text()).toBe(TITLE);
-        });
-
-        it(`Should render title in h2 tag`, () => {
-            initializeShallowWrapper();
-            wrapper.setProps({ title: TITLE });
-
-            expect(wrapper.find(REF_TITLE).contains('h2')).toBeTruthy();
-        });
     });
 
     describe(`Given a add button label`, () => {
@@ -93,14 +71,14 @@ describe(TABLE_HEADER_NAME, () => {
         });
     });
 
-    describe(`Given a title, add button label, left and right slots`, () => {
+    describe(`Given a add button label, left and right slots`, () => {
         it(`Should render correctly`, () => {
             slots = {
                 left: SLOT_LEFT,
                 right: SLOT_RIGHT
             };
             initializeShallowWrapper();
-            wrapper.setProps({ title: TITLE, addBtnLabel: ADD_BTN_LABEL });
+            wrapper.setProps({ addBtnLabel: ADD_BTN_LABEL });
 
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });

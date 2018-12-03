@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`m-table-header Given a title, add button label, left and right slots Should render correctly 1`] = `
+exports[`m-table-header Given a add button label, left and right slots Should render correctly 1`] = `
 <div class="m-table-header">
-    <h2 class="m-table-header__title m--has-margin">TITLE</h2>
     <div>SLOT LEFT</div>
     <div class="m-table-header__spacer"></div>
     <div>SLOT RIGHT</div>

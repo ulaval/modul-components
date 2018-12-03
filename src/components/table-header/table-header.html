@@ -1,8 +1,4 @@
 <div class="m-table-header">
-    <h2 class="m-table-header__title"
-        :class="{'m--has-margin': $slots.left}"
-        v-if="title"
-        ref="title">{{ title }}</h2>
     <slot name="left"></slot>
     <div class="m-table-header__spacer"></div>
     <slot name="right"></slot>

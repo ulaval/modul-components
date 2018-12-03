@@ -10,9 +10,6 @@ import WithRender from './table-header.html?style=./table-header.scss';
 @Component
 export class MTableHeader extends ModulVue {
     @Prop()
-    title: string;
-
-    @Prop()
     addBtnLabel: string;
 
     addButtonSkin: MIconButtonSkin = MIconButtonSkin.Link;
