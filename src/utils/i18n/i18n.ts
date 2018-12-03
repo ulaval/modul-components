@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
-
 import { sprintf, vsprintf } from '../str/str';
+
 
 /**
  * This package provides language and locales utilities.
@@ -21,6 +21,12 @@ export const ENGLISH: string = 'en';
  */
 const FORMAT_REGEX: RegExp = /{\d+}/g;
 
+/**
+ * String used as a special characters wrapper
+ */
+const SPECIAL_CHARACTER_PREFIXE: string = '_';
+const SPECIAL_CHARACTER_SUFIXE: string = '_';
+
 export type MessageMap = {
     [key: string]: string;
 };
@@ -32,6 +38,20 @@ export type BundleMessagesMap = {
 type LanguageBundlesMap = {
     [language: string]: BundleMessagesMap;
 };
+
+type SpecialCharacterMap = {
+    [key: string]: SpecialCharacter
+};
+
+/**
+ * Special characters must be represented as their unicode equivalent \u00xxxx
+ */
+export enum SpecialCharacter {
+    NBSP = '\u00a0', // non-breaking space
+    NBHYPHEN = '\u002011', // non-breaking hyphen
+    EMDASH = '\u002014', // em dash
+    ENDASH = '\u002013' // en dash
+}
 
 export enum DebugMode {
     Throw,
@@ -55,6 +75,7 @@ export class Messages {
     private curLang: string = ENGLISH;
     private formatMode: FormatMode;
     private messages: LanguageBundlesMap = {};
+    private specialCharacterDict: SpecialCharacterMap = {};
 
     constructor(private options?: I18nPluginOptions) {
         if (options) {
@@ -65,6 +86,7 @@ export class Messages {
                 this.formatMode = options.formatMode;
             }
         }
+        this.initSpecialCharactersDict();
     }
 
     /**
@@ -115,6 +137,14 @@ export class Messages {
         }
 
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
+
+        if (FormatMode.Sprintf || FormatMode.Vsprintf) {
+            Object.keys(this.specialCharacterDict).forEach((key: string) => {
+                if (!params.hasOwnProperty(key)) {
+                    params[key] = this.specialCharacterDict[key];
+                }
+            });
+        }
 
         if (htmlEncodeParams && params.length) {
             for (let i: number = 0; i < params.length; ++i) {
@@ -216,6 +246,19 @@ export class Messages {
             return key;
         }
     }
+
+    /**
+     * Build the list of special characters that are automatically replaced to the desired pattern
+     *
+     * Example with '_' as PREFIXE and SUFIXE
+     * NBSP => _NBSP_ : '\xOA'
+     */
+    private initSpecialCharactersDict(): void {
+        Object.keys(SpecialCharacter).forEach((key: string) => {
+            this.specialCharacterDict[`${SPECIAL_CHARACTER_PREFIXE}${key}${SPECIAL_CHARACTER_SUFIXE}`] = SpecialCharacter[key];
+        });
+    }
+
 
     /**
      * Finds a key in the available messages or returns null.
