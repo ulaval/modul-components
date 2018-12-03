@@ -6,6 +6,7 @@ import TreeNodePlugin from './tree-node/tree-node';
 
 const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
 const ERROR_TREE_REF: RefSelector = { ref: 'error-tree-txt' };
+const CHECKBOX: RefSelector = { ref: 'checkbox' };
 
 const SELECTED_NODE: string[] = ['/medias/Videos'];
 const SELECTED_NODES: string[] = ['/index.html', '/medias/Videos'];
@@ -47,11 +48,40 @@ const TREE_WITH_INVALID_DATA: TreeNode[] = [
     }
 ];
 
-let wrapper: Wrapper<MTree>;
-
 let tree: TreeNode[] = TREE_WITH_DATA;
 let selectionMode: MSelectionMode = MSelectionMode.Single;
 let selectedNodes: string[] = SELECTED_NODE;
+let withCheckboxes: boolean = false;
+
+let wrapper: Wrapper<MTree>;
+
+const initializeShallowWrapper: any = () => {
+    wrapper = shallow(MTree, {
+        propsData: {
+            tree,
+            selectedNodes,
+            selectionMode
+        }
+    });
+};
+
+const initializeMountWrapper: any = () => {
+    wrapper = mount(MTree, {
+        stubs: getStubs(),
+        propsData: {
+            tree,
+            selectedNodes,
+            selectionMode,
+            withCheckboxes
+        }
+    });
+};
+
+const getStubs: any = () => {
+    return {
+        ['m-checkbox']: '<div @click="$emit(\'click\')">checkbox</div>'
+    };
+};
 
 describe(`MTree`, () => {
 
@@ -61,16 +91,6 @@ describe(`MTree`, () => {
             selectionMode = MSelectionMode.Single;
             selectedNodes = SELECTED_NODE;
         });
-
-        const initializeShallowWrapper: any = () => {
-            wrapper = shallow(MTree, {
-                propsData: {
-                    tree,
-                    selectedNodes,
-                    selectionMode
-                }
-            });
-        };
 
         describe(`Given an empty tree`, () => {
 
@@ -150,23 +170,13 @@ describe(`MTree`, () => {
         afterEach(() => {
             tree = [];
             selectedNodes = [];
-            selectionMode = MSelectionMode.Multiple;
+            withCheckboxes = false;
+            Vue.use(TreeNodePlugin);
         });
-
-        const initializeMountWrapper: any = () => {
-            wrapper = mount(MTree, {
-                propsData: {
-                    tree,
-                    selectedNodes,
-                    selectionMode
-                }
-            });
-        };
 
         describe(`Given a tree with no node selected`, () => {
 
             beforeEach(() => {
-                Vue.use(TreeNodePlugin);
                 tree = TREE_WITH_DATA;
                 selectedNodes = [];
                 selectionMode = MSelectionMode.Multiple;
@@ -178,15 +188,41 @@ describe(`MTree`, () => {
                 wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[1]);
                 expect(wrapper.vm.propSelectedNodes).toEqual(NEW_TREE_NODES_SELECTED);
             });
+
+            describe(`with checkboxes`, () => {
+
+                beforeEach(() => {
+                    tree = TREE_WITH_DATA;
+                    selectedNodes = [];
+                    selectionMode = MSelectionMode.Multiple;
+                    withCheckboxes = true;
+                    initializeMountWrapper();
+                });
+
+                it(`Should render correctly`, () => {
+                    expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+                });
+
+                it(`Should prevent node from being pushed to selectedNodes if click is not from checkbox`, () => {
+                    wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[0]);
+                    expect(wrapper.vm.propSelectedNodes.length).toEqual(0);
+                });
+
+                it(`Should allow node to be pushed to selectedNodes if click is from checkbox`, () => {
+                    wrapper.find(CHECKBOX).trigger('click');
+                    expect(wrapper.vm.propSelectedNodes.length).toEqual(0);
+                });
+            });
+
         });
 
         describe(`Given a tree with two nodes selected`, () => {
 
             beforeEach(() => {
-                Vue.use(TreeNodePlugin);
                 tree = TREE_WITH_DATA;
-                selectedNodes = SELECTED_NODES;
+                selectedNodes = [];
                 selectionMode = MSelectionMode.Multiple;
+                selectedNodes = SELECTED_NODES;
                 initializeMountWrapper();
             });
 

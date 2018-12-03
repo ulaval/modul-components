@@ -219,11 +219,6 @@ describe('MTreeNode', () => {
                         expect(wrapper.vm.selectedChildrenCount).toBe(0);
                     });
 
-                    it(`Should emit its path so parent adds it as selected nodes`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.emitted('click')[0][0]).toBe(TREE_NODE_CHECKBOX_PARENT[0]);
-                    });
-
                 });
 
                 describe(`and given node is the parent of a selected node and an unselected node`, () => {
