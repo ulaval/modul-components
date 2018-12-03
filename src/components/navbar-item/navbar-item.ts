@@ -1,12 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME } from '../component-names';
 import { BaseNavbar, Navbar } from '../navbar/navbar';
-import WithRender from './navbar-item.html?style=./navbar-item.scss';
 import NavbarItemHelper from './navbar-item-helper';
+import WithRender from './navbar-item.html?style=./navbar-item.scss';
+
 
 // must be sync with selected css class
 const FAKE_SELECTED_CLASS: string = 'm--is-fake-selected';
@@ -64,6 +64,15 @@ export class MNavbarItem extends ModulVue {
     @Watch('isMultiline')
     private isMultilineChanged(): void {
         this.setDimension();
+    }
+
+    @Watch('$route')
+    private routeChanged(): void {
+        this.$nextTick(() => {
+            if (this.parentNavbar && this.parentNavbar.autoSelect && NavbarItemHelper.isRouterLinkActive(this)) {
+                this.parentNavbar.updateValue(this.value);
+            }
+        });
     }
 
     private setDimension(): void {
