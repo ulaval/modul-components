@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
-import { FormatMode } from '../../../src/utils';
+import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { MButtonSkin } from '../button/button';
 import { SHOW_MORE_NAME } from '../component-names';
