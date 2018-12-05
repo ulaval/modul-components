@@ -18,7 +18,8 @@ export class MRootTreeSandbox extends Vue {
     public currentFile2: string[] = ['/1/2'];
     public wrongCurrentFile: string[] = ['/3/4'];
     public currentNodesBasic: string[] = [];
-    public currentNodesCheckboxes: string[] = ['/Title 3/Subtitle 2'];
+    public currentNodesCheckboxes: string[] = ['/3/11'];
+    public currentNodesCheckboxesDisabled: string[] = ['/3/11'];
     public currentNodesCheckboxesButtonAutoselect: string[] = [];
     public currentNodesCheckboxesNoAutoSelectCheckboxes: string[] = ['/1/11/444/1111'];
     public disabledNodesCheckboxesNoAutoSelectCheckboxes: string[] = ['/3', '/1/11/444/2222'];
@@ -262,116 +263,73 @@ export class MRootTreeSandbox extends Vue {
 
     public multiNodeTree: TreeNode[] = [
         {
-            id: 'Title 1',
-            label: 'Title 1',
+            id: '1',
+            label: 'UL - Université Laval',
             hasChildren: true,
             children: [
                 {
-                    id: 'Subtitle 1',
-                    label: 'Subtitle 1'
-                },
-                {
-                    id: 'Subtitle 2',
-                    label: 'Subtitle 2',
+                    id: '11',
+                    label: 'FSG - Faculté de Sciences et Génie',
                     children: [
                         {
-                            id: 'Subtitle 1',
-                            label: 'Subtitle 1'
+                            id: '111',
+                            label: 'ACT - Actuariat'
                         },
                         {
-                            id: 'Subtitle 2',
-                            label: 'Subtitle 2',
+                            id: '222',
+                            label: 'BIO - Biologie'
+                        },
+                        {
+                            id: '333',
+                            label: 'CHM - Chimie'
+                        },
+                        {
+                            id: '444',
+                            label: 'GMCN - Génie Mécanique',
                             children: [
                                 {
-                                    id: 'Subtitle 1',
-                                    label: 'Subtitle 1'
+                                    id: '1111',
+                                    label: 'PRS - Personne'
                                 },
                                 {
-                                    id: 'Subtitle 2',
-                                    label: 'Subtitle 2'
-                                },
-                                {
-                                    id: 'Subtitle 3',
-                                    label: 'Subtitle 3',
-                                    children: [
-                                        {
-                                            id: 'Subtitle 1',
-                                            label: 'Subtitle 1'
-                                        },
-                                        {
-                                            id: 'Subtitle 2',
-                                            label: 'Subtitle 2'
-                                        },
-                                        {
-                                            id: 'Subtitle 3',
-                                            label: 'Subtitle 3'
-                                        },
-                                        {
-                                            id: 'Subtitle 4',
-                                            label: 'Subtitle 4'
-                                        }
-                                    ]
-                                },
-                                {
-                                    id: 'Subtitle 4',
-                                    label: 'Subtitle 4',
-                                    children: [
-                                        {
-                                            id: 'Subtitle 1',
-                                            label: 'Subtitle 1'
-                                        },
-                                        {
-                                            id: 'Subtitle 2',
-                                            label: 'Subtitle 2'
-                                        },
-                                        {
-                                            id: 'Subtitle 3',
-                                            label: 'Subtitle 3'
-                                        },
-                                        {
-                                            id: 'Subtitle 4',
-                                            label: 'Subtitle 4'
-                                        }
-                                    ]
+                                    id: '2222',
+                                    label: 'SMT - Something'
                                 }
                             ]
-                        },
-                        {
-                            id: 'Subtitle 3',
-                            label: 'Subtitle 3'
-                        },
-                        {
-                            id: 'Subtitle 4',
-                            label: 'Subtitle 4'
                         }
                     ]
                 },
                 {
-                    id: 'Subtitle 3',
-                    label: 'Subtitle 3'
-                },
-                {
-                    id: 'Subtitle 4',
-                    label: 'Subtitle 4'
+                    id: '22',
+                    label: 'LLI - Lettres et sciences humaines',
+                    children: [
+                        {
+                            id: '111',
+                            label: 'JPN - Japonais'
+                        },
+                        {
+                            id: '222',
+                            label: 'EN - Anglais'
+                        }
+                    ]
                 }
             ]
         },
         {
-            id: 'Title 2',
-            label: 'Title 2'
+            id: '2',
+            label: 'CSF - Cégep Sainte-Foy'
         },
         {
-            id: 'Title 3',
-            label: 'Title 3',
-            open: true,
+            id: '3',
+            label: 'UQAM - Université du Québec à Montréal',
             children: [
                 {
-                    id: 'Subtitle 1',
-                    label: 'Subtitle 1'
+                    id: '11',
+                    label: 'CHM - Chimie'
                 },
                 {
-                    id: 'Subtitle 2',
-                    label: 'Subtitle 2'
+                    id: '22',
+                    label: 'GMCN - Génie Mécanique'
                 }
             ]
         }
@@ -379,116 +337,73 @@ export class MRootTreeSandbox extends Vue {
 
     public multiNodeTreeCheckbox: TreeNode[] = [
         {
-            id: 'Title 1',
-            label: 'Title 1',
+            id: '1',
+            label: 'UL - Université Laval',
             hasChildren: true,
             children: [
                 {
-                    id: 'Subtitle 1',
-                    label: 'Subtitle 1'
-                },
-                {
-                    id: 'Subtitle 2',
-                    label: 'Subtitle 2',
+                    id: '11',
+                    label: 'FSG - Faculté de Sciences et Génie',
                     children: [
                         {
-                            id: 'Subtitle 1',
-                            label: 'Subtitle 1'
+                            id: '111',
+                            label: 'ACT - Actuariat'
                         },
                         {
-                            id: 'Subtitle 2',
-                            label: 'Subtitle 2',
+                            id: '222',
+                            label: 'BIO - Biologie'
+                        },
+                        {
+                            id: '333',
+                            label: 'CHM - Chimie'
+                        },
+                        {
+                            id: '444',
+                            label: 'GMCN - Génie Mécanique',
                             children: [
                                 {
-                                    id: 'Subtitle 1',
-                                    label: 'Subtitle 1'
+                                    id: '1111',
+                                    label: 'PRS - Personne'
                                 },
                                 {
-                                    id: 'Subtitle 2',
-                                    label: 'Subtitle 2'
-                                },
-                                {
-                                    id: 'Subtitle 3',
-                                    label: 'Subtitle 3',
-                                    children: [
-                                        {
-                                            id: 'Subtitle 1',
-                                            label: 'Subtitle 1'
-                                        },
-                                        {
-                                            id: 'Subtitle 2',
-                                            label: 'Subtitle 2'
-                                        },
-                                        {
-                                            id: 'Subtitle 3',
-                                            label: 'Subtitle 3'
-                                        },
-                                        {
-                                            id: 'Subtitle 4',
-                                            label: 'Subtitle 4'
-                                        }
-                                    ]
-                                },
-                                {
-                                    id: 'Subtitle 4',
-                                    label: 'Subtitle 4',
-                                    children: [
-                                        {
-                                            id: 'Subtitle 1',
-                                            label: 'Subtitle 1'
-                                        },
-                                        {
-                                            id: 'Subtitle 2',
-                                            label: 'Subtitle 2'
-                                        },
-                                        {
-                                            id: 'Subtitle 3',
-                                            label: 'Subtitle 3'
-                                        },
-                                        {
-                                            id: 'Subtitle 4',
-                                            label: 'Subtitle 4'
-                                        }
-                                    ]
+                                    id: '2222',
+                                    label: 'SMT - Something'
                                 }
                             ]
-                        },
-                        {
-                            id: 'Subtitle 3',
-                            label: 'Subtitle 3'
-                        },
-                        {
-                            id: 'Subtitle 4',
-                            label: 'Subtitle 4'
                         }
                     ]
                 },
                 {
-                    id: 'Subtitle 3',
-                    label: 'Subtitle 3'
-                },
-                {
-                    id: 'Subtitle 4',
-                    label: 'Subtitle 4'
+                    id: '22',
+                    label: 'LLI - Lettres et sciences humaines',
+                    children: [
+                        {
+                            id: '111',
+                            label: 'JPN - Japonais'
+                        },
+                        {
+                            id: '222',
+                            label: 'EN - Anglais'
+                        }
+                    ]
                 }
             ]
         },
         {
-            id: 'Title 2',
-            label: 'Title 2'
+            id: '2',
+            label: 'CSF - Cégep Sainte-Foy'
         },
         {
-            id: 'Title 3',
-            label: 'Title 3',
-            open: true,
+            id: '3',
+            label: 'UQAM - Université du Québec à Montréal',
             children: [
                 {
-                    id: 'Subtitle 1',
-                    label: 'Subtitle 1'
+                    id: '11',
+                    label: 'CHM - Chimie'
                 },
                 {
-                    id: 'Subtitle 2',
-                    label: 'Subtitle 2'
+                    id: '22',
+                    label: 'GMCN - Génie Mécanique'
                 }
             ]
         }

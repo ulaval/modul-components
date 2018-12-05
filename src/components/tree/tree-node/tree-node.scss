@@ -80,6 +80,10 @@ $m-tree-node--line-width: 22px;
                 margin-left: $m-spacing--m;
             }
         }
+
+        /deep/ .m-checkbox__input {
+            margin-left: 8px;
+        }
     }
 
     &.m--is-disabled > &__item {

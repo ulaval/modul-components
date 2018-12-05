@@ -72,9 +72,9 @@ export class MTreeNode extends ModulVue {
         let isCheckboxAutoselect: boolean = this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Checkbox;
         let isButtonAutoselect: boolean = this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Button;
 
-        if (this.withCheckboxes && !this.isFolder && (isCheckboxAutoselect || isButtonAutoselect)) {
+        if (this.withCheckboxes && !this.hasChildren && (isCheckboxAutoselect || isButtonAutoselect)) {
             this.$emit('auto-select-child-checkbox-change', this.isSelected);
-        } else if (isButtonAutoselect && this.isFolder) {
+        } else if (isButtonAutoselect && this.hasChildren) {
             this.onAutoSelectChildCheckboxChange(this.isSelected, true);
         }
     }
@@ -91,7 +91,7 @@ export class MTreeNode extends ModulVue {
     public onAutoSelectButtonClick(): void {
         let childrenPaths: string[] = [];
         this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, true);
-        this.updateSelectedNodes(childrenPaths.concat(this.currentPath), !this.isSelected);
+        this.updateSelectedNodes(childrenPaths.concat(this.currentPath), !this.allChildrenAndSelfSelected);
     }
 
     public onChildClick(path: string, fromCheckbox: boolean = false): void {
@@ -121,7 +121,7 @@ export class MTreeNode extends ModulVue {
     }
 
     public onCheckboxClick(): void {
-        if (this.isFolder && this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Checkbox) {
+        if (this.hasChildren && this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Checkbox) {
             let childrenPaths: string[] = [];
             this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id);
             this.updateSelectedNodes(childrenPaths, !this.isSelected);
@@ -130,14 +130,7 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    protected mounted(): void {
-        this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
-        if (this.isSelected) {
-            this.notifyParentOfChildCheckboxState();
-        }
-    }
-
-    private updateSelectedNodes(paths: string[] = [], addNode: boolean): void {
+    public updateSelectedNodes(paths: string[] = [], addNode: boolean): void {
         paths.forEach(path => {
             let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
             if (addNode && !nodeAlreadySelected) {
@@ -146,6 +139,25 @@ export class MTreeNode extends ModulVue {
                 this.removeNode(path);
             }
         });
+    }
+
+    public addNode(path: string): void {
+        if (!this.pathIsDisabled(path)) {
+            this.selectedNodes.push(path);
+        }
+    }
+
+    public removeNode(path: string): void {
+        if (!this.pathIsDisabled(path)) {
+            this.selectedNodes.splice(this.selectedNodes.indexOf(path), 1);
+        }
+    }
+
+    protected mounted(): void {
+        this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
+        if (this.isSelected) {
+            this.notifyParentOfChildCheckboxState();
+        }
     }
 
     private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string, addFolder: boolean = false): void {
@@ -179,16 +191,6 @@ export class MTreeNode extends ModulVue {
             this.allChildrenAndSelfSelected = false;
             this.$emit('auto-select-child-checkbox-change', false);
         }
-    }
-
-    private addNode(path: string): void {
-        if (!this.pathIsDisabled(path)) {
-            this.selectedNodes.push(path);
-        }
-    }
-
-    private removeNode(path: string): void {
-        this.selectedNodes.splice(this.selectedNodes.indexOf(path), 1);
     }
 
     private pathIsDisabled(path: string): boolean {

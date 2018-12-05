@@ -3,8 +3,8 @@
 exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
     <ul class="m-tree__content">
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" selected-parent-nodes="" auto-select-checkboxes="true"></m-tree-node>
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" selected-parent-nodes="" auto-select-checkboxes="true"></m-tree-node>
+        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox"></m-tree-node>
+        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox"></m-tree-node>
     </ul>
 </div>
 `;
@@ -23,8 +23,8 @@ exports[`MTree Given a tree with multiple selection Given a tree with no node se
         <li class="m-tree-node">
             <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">index.html</span>
                 <div class="m-checkbox m--is-checkbox-left">
-                    <input type="checkbox" id="mCheckbox-ce08446a-0157-4fec-8dc2-204161706295" class="m-checkbox__hidden">
-                    <label for="mCheckbox-ce08446a-0157-4fec-8dc2-204161706295" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
+                    <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
+                    <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
                     </label>
                     <div class="m-validation-message m-checkbox__message">
                         <m-accordion-transition transition="true"></m-accordion-transition>
@@ -35,8 +35,8 @@ exports[`MTree Given a tree with multiple selection Given a tree with no node se
         <li class="m-tree-node">
             <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Medias</span>
                 <div class="m-checkbox m--is-checkbox-left">
-                    <input type="checkbox" id="mCheckbox-7ce8ae8f-97f4-465b-84b5-e9408945032c" class="m-checkbox__hidden">
-                    <label for="mCheckbox-7ce8ae8f-97f4-465b-84b5-e9408945032c" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
+                    <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
+                    <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
                     </label>
                     <div class="m-validation-message m-checkbox__message">
                         <m-accordion-transition transition="true"></m-accordion-transition>
@@ -48,8 +48,8 @@ exports[`MTree Given a tree with multiple selection Given a tree with no node se
                     <li class="m-tree-node m-tree-node__child">
                         <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">Videos</span>
                             <div class="m-checkbox m--is-checkbox-left">
-                                <input type="checkbox" id="mCheckbox-2c6cb885-0818-43e5-a70d-4f1bc5a5d2a2" class="m-checkbox__hidden">
-                                <label for="mCheckbox-2c6cb885-0818-43e5-a70d-4f1bc5a5d2a2" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
+                                <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
+                                <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
                                 </label>
                                 <div class="m-validation-message m-checkbox__message">
                                     <m-accordion-transition transition="true"></m-accordion-transition>

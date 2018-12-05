@@ -1,8 +1,12 @@
 import { mount, RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
+import uuid from '../../utils/uuid/uuid';
 import { MSelectionMode, MTree, TreeNode } from './tree';
 import TreeNodePlugin from './tree-node/tree-node';
+
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
 const ERROR_TREE_REF: RefSelector = { ref: 'error-tree-txt' };
@@ -67,7 +71,6 @@ const initializeShallowWrapper: any = () => {
 
 const initializeMountWrapper: any = () => {
     wrapper = mount(MTree, {
-        stubs: getStubs(),
         propsData: {
             tree,
             selectedNodes,
@@ -75,12 +78,6 @@ const initializeMountWrapper: any = () => {
             withCheckboxes
         }
     });
-};
-
-const getStubs: any = () => {
-    return {
-        ['m-checkbox']: '<div @click="$emit(\'click\')">checkbox</div>'
-    };
 };
 
 describe(`MTree`, () => {
@@ -204,13 +201,13 @@ describe(`MTree`, () => {
                 });
 
                 it(`Should prevent node from being pushed to selectedNodes if click is not from checkbox`, () => {
-                    wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[0]);
+                    wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[0], false);
                     expect(wrapper.vm.propSelectedNodes.length).toEqual(0);
                 });
 
                 it(`Should allow node to be pushed to selectedNodes if click is from checkbox`, () => {
-                    wrapper.find(CHECKBOX).trigger('click');
-                    expect(wrapper.vm.propSelectedNodes.length).toEqual(0);
+                    wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[0], true);
+                    expect(wrapper.vm.propSelectedNodes.length).toEqual(1);
                 });
             });
 

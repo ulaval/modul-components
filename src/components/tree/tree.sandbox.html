@@ -82,6 +82,7 @@
                     :use-plus-icons="true"
                     :with-checkboxes="true"
                     :selected-nodes="currentNodesCheckboxes"
+                    :disabled-nodes="currentNodesCheckboxesDisabled"
                     @select="onSelect"></m-tree>
         </p>
     </div>
@@ -98,7 +99,6 @@
                     selection-mode="2"
                     auto-select-checkboxes-mode="button"
                     :icons="true"
-                    :use-plus-icons="true"
                     :with-checkboxes="true"
                     :selected-nodes="currentNodesCheckboxesButtonAutoselect"
                     @select="onSelect"></m-tree>

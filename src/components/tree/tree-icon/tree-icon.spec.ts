@@ -73,6 +73,7 @@ describe(`MTreeIcon`, () => {
                 usePlusIcons = false;
                 initializeShallowWrapper();
                 expect(wrapper.find(PLUS).exists()).toBeFalsy();
+
             });
 
             describe(`When the folder is opened`, () => {
