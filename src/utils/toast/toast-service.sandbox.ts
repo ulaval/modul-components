@@ -16,6 +16,14 @@ export class MToastServiceSandbox extends ModulVue {
         actionLabel: 'txt'
     };
 
+    created(): void {
+        this.$toast.baseTopPosition = '60px';
+    }
+
+    destroy(): void {
+        this.clear();
+    }
+
     public init(): void {
         this.$toast.show(this.simpleToastParams);
     }

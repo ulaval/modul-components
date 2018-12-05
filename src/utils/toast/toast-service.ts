@@ -11,9 +11,13 @@ export interface ToastParams {
     timeout?: number;
     icon?: boolean;
 }
+const TIME_BEFORE_ANIMATION_IS_DONE: number = 2000;
+
 export class ToastService {
-    public activeToast: MToast;
+    public activeToast?: MToast;
     public toasts: MToast[] = [];
+    public baseTopPosition: string = '0';
+
     public show(params: ToastParams): void {
         const toast: MToast = this.createToast(params);
         this.toasts.push(toast);
@@ -23,14 +27,19 @@ export class ToastService {
         } else {
             this.activeToast.open = false;
             this.activeToast = this.toasts[1];
-            this.toasts.splice(0, 1);
+            const toastToDestroy: MToast = this.toasts.shift()!;
+            setTimeout(() => {
+                toastToDestroy.$destroy();
+            }, TIME_BEFORE_ANIMATION_IS_DONE);
         }
     }
 
     public clear(): void {
-        this.activeToast.open = false;
+        this.toasts.forEach((toast) => {
+            toast.$destroy();
+        });
         this.toasts = [];
-        delete (this.activeToast);
+        this.activeToast = undefined;
     }
 
     private createToast(params: ToastParams): MToast {
@@ -45,6 +54,10 @@ export class ToastService {
                 icon: params.icon
             }
         });
+
+        toast.$on('close', () => setTimeout(() => toast.$destroy(), TIME_BEFORE_ANIMATION_IS_DONE));
+
+        toast.offset = toast.isTop ? this.baseTopPosition : '0';
 
         const vnode: VNode = toast.$createElement('p', [params.text]);
         toast.$slots.default = [vnode];

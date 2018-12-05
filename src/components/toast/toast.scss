@@ -122,7 +122,7 @@ $m-toast-max-width: 768px;
     }
 
     &.m--is-top {
-        top: 60px;
+        top: 0;
 
         .m-toast__wrap {
             border-bottom: $m-border-width--l solid;

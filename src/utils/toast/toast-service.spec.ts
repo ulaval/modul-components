@@ -23,8 +23,9 @@ describe(`The Toast Manager`, () => {
         mockToast = {
             text: '1st',
             $createElement: jest.fn(),
-            $slots: {}
-
+            $slots: {},
+            $destroy: jest.fn(),
+            $on: jest.fn()
         };
         toastManager = new ToastService();
         mockCreateElement.mockClear();
@@ -73,15 +74,13 @@ describe(`The Toast Manager`, () => {
         });
 
         describe(`When the service is called to clear the toast`, () => {
-            it(`Should turn off the toast`, () => {
-                const toast: MToast = toastManager.activeToast;
-
+            it(`Should contain no toasts`, () => {
                 toastManager.clear();
 
-                expect(toast.open).toBe(false);
+                expect(toastManager.toasts.length).toBe(0);
             });
 
-            it(`Should contain no toast`, () => {
+            it(`Should contain no active toast`, () => {
                 toastManager.clear();
 
                 expect(toastManager.activeToast).toBeFalsy();

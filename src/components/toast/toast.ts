@@ -141,7 +141,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         return this.state === MMessageState.Confirmation;
     }
 
-    private get isTop(): boolean {
+    public get isTop(): boolean {
         return this.position === MToastPosition.TopLeft ||
             this.position === MToastPosition.TopCenter ||
             this.position === MToastPosition.TopRight;
