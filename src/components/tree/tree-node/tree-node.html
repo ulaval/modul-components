@@ -1,5 +1,5 @@
 <li class="m-tree-node"
-    :class="{ 'm--is-selected': isSelected || isSelectedParentNode, 'm--is-disabled' : isDisabled }">
+    :class="{ 'm--is-selected': isSelected, 'm--is-disabled' : isDisabled }">
     <div class="m-tree-node__item"
          :class="{ 'm-tree-node__item--no-hover': withCheckboxes && !isFolder }"
          role="button"
@@ -14,7 +14,7 @@
                      :folder="isFolder"></m-tree-icon>
         <span class="m-tree-node__item__label">{{label}}</span>
         <m-checkbox ref="checkbox"
-                    :value="isSelected || isSelectedParentNode"
+                    :value="isSelected"
                     v-if="withCheckboxes"
                     :indeterminate="isIndeterminated"
                     :disabled="isDisabled"
@@ -39,7 +39,6 @@
                              :with-checkboxes="withCheckboxes"
                              :selected-nodes="selectedNodes"
                              :disabled-nodes="disabledNodes"
-                             :selected-parent-nodes="selectedParentNodes"
                              :auto-select-checkboxes-mode="autoSelectCheckboxesMode"
                              :has-sibling="childHasSibling(index)"
                              @auto-select-child-checkbox-change="onAutoSelectChildCheckboxChange"
@@ -55,5 +54,10 @@
                 </li>
             </ul>
         </m-accordion-transition>
+    </template>
+    <template v-if="isFolder && autoSelectCheckboxesMode === 'button'">
+        <button class="m-tree-node__auto-select-button"
+                :class="{ 'm-tree-node__auto-select-button--selected': allChildrenAndSelfSelected}"
+                @click="onAutoSelectButtonClick"></button>
     </template>
 </li>

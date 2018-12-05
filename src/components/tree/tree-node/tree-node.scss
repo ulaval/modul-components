@@ -43,6 +43,18 @@ $m-tree-node--line-width: 22px;
         margin-top: $m-margin;
     }
 
+    &__auto-select-button {
+        position: absolute;
+        left: $m-min-width + 10px;
+        top: $m-tree-node--height / 4;
+        height: $m-tree-node--height / 2;
+        background: red;
+
+        &--selected {
+            background: blue;
+        }
+    }
+
     &__item {
         border-radius: $m-tree-node--height / 2;
         padding-left: 21px;
@@ -84,7 +96,7 @@ $m-tree-node--line-width: 22px;
         }
 
         &:not(.m--is-disabled) > &__item:hover,
-        .m--is-selected {
+        &.m--is-selected {
             .m-tree-icon::before,
             .m-tree-icon::after {
                 background-color: $m-color--white;

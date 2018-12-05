@@ -22,9 +22,9 @@ export enum MSelectionMode {
 }
 
 export enum MAutoSelectCheckboxesMode {
-    None = '0',
-    Checkbox = '1',
-    Button = '2'
+    None = 'none',
+    Checkbox = 'checkbox',
+    Button = 'button'
 }
 
 @WithRender
@@ -55,9 +55,6 @@ export class MTree extends ModulVue {
     public selectedNodes: string[];
 
     @Prop()
-    public selectedParentNodes: string[];
-
-    @Prop()
     public icons: boolean;
 
     @Prop()
@@ -73,8 +70,6 @@ export class MTree extends ModulVue {
     public autoSelectCheckboxes: boolean;
 
     public propSelectedNodes: string[] = this.selectedNodes || [];
-
-    public propSelectedParentNodes: string[] = this.selectedParentNodes || [];
 
     public errorTree: boolean = false;
 
