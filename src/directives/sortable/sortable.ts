@@ -1,6 +1,5 @@
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { PluginObject } from 'vue/types/plugin';
-
 import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
 import { SORTABLE_NAME } from '../directive-names';
 import { DomPlugin, MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';

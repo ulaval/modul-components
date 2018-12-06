@@ -1,12 +1,12 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_NAME } from '../component-names';
 import NavbarItemPlugin, { MNavbarItem } from '../navbar-item/navbar-item';
 import WithRender from './navbar.html?style=./navbar.scss';
+
 
 const OVERFLOWOFFSET: number = 20;
 

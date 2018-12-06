@@ -1,0 +1,177 @@
+@import 'abstracts/variables';
+
+$m-toast-icon-size: 32px;
+$m-toast-min-width: 340px;
+$m-toast-max-width: 768px;
+
+@mixin m-toast-skin-default($color, $background-color) {
+    .m-toast {
+        &__wrap {
+            border-color: $color;
+            background: $background-color;
+        }
+
+        &__icon {
+            color: $color;
+        }
+    }
+}
+
+.m-toast {
+    text-align: left;
+    position: fixed;
+    z-index: 2;
+
+    &__wrap {
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+    }
+
+    &__icon {
+        display: flex;
+        padding: $m-padding 0 $m-padding $m-padding;
+
+        .m-icon {
+            font-size: $m-toast-icon-size;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex: 1 0 50%;
+        flex-flow: wrap;
+        padding: $m-padding;
+    }
+
+    &__actions {
+        display: flex;
+        flex: 1 0 100%;
+        padding: $m-margin 0 0;
+        text-transform: uppercase;
+    }
+
+    &__text {
+        display: flex;
+        flex: 1 0 100%;
+    }
+
+    &__close-button {
+        align-self: flex-start;
+        margin: $m-padding--xs $m-padding--xs 0 0;
+
+        .m-button__icon .m-icon {
+            font-size: $m-font-size--s;
+            height: $m-font-size--s;
+            color: $m-color--interactive-light;
+        }
+    }
+
+    &.m--is-enter-active,
+    &.m--is-leave-active {
+        transition: background linear;
+    }
+
+    &.m--is-enter-active {
+        .m-toast__wrap {
+            transition: $m-transition-duration--xl;
+            transition-timing-function: ease-out;
+        }
+    }
+
+    &.m--is-leave-active {
+        &,
+        .m-toast__wrap {
+            transition: $m-transition-duration--s;
+            transition-timing-function: ease-in;
+        }
+    }
+
+    &.m--is-desktop {
+        min-width: $m-toast-min-width;
+        max-width: $m-toast-min-width;
+
+        &.m--is-left {
+            left: 1%;
+        }
+
+        &.m--is-center {
+            max-width: $m-toast-max-width;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+
+        &.m--is-right {
+            right: 1%;
+        }
+
+        &.m--is-bottom {
+            bottom: 5%;
+        }
+    }
+
+    &.m--is-mobile {
+        left: 1vw;
+        right: 1vw;
+
+        &.m--is-bottom {
+            bottom: 2vh;
+        }
+    }
+
+    &.m--is-top {
+        top: 60px;
+
+        .m-toast__wrap {
+            border-bottom: $m-border-width--l solid;
+        }
+
+        &.m--is-enter-active {
+            .m-toast__wrap {
+                transform: translateY(-130%);
+            }
+        }
+
+        &.m--is-leave-active {
+            .m-toast__wrap {
+                transform: translateY(-130%);
+            }
+        }
+    }
+
+    &.m--is-bottom {
+        .m-toast__wrap {
+            border-top: $m-border-width--l solid;
+        }
+
+        &.m--is-enter-active {
+            .m-toast__wrap {
+                transform: translateY(130%);
+            }
+        }
+
+        &.m--is-leave-active {
+            .m-toast__wrap {
+                transform: translateY(130%);
+            }
+        }
+    }
+
+    &.m--is-state-confirmation {
+        @include m-toast-skin-default($m-color--success, $m-color--success-lightest);
+    }
+
+    &.m--is-state-information {
+        @include m-toast-skin-default($m-color--interactive, $m-color--interactive-lightest);
+    }
+
+    &.m--is-state-warning {
+        @include m-toast-skin-default($m-color--warning, $m-color--warning-lightest);
+    }
+
+    &.m--is-state-error {
+        @include m-toast-skin-default($m-color--error, $m-color--error-lightest);
+    }
+}

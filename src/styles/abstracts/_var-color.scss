@@ -89,3 +89,79 @@ $m-color--scrollbar-light: $m-color--grey-light !default;
 $m-color--border-dark: $m-color--grey-dark !default;
 $m-color--border: $m-color--grey-light !default;
 $m-color--border-light: $m-color--grey-lighter !default;
+
+// ======================================================================
+//  map variable to be used with m-color function
+//  all colors must have a base value.
+// ======================================================================
+$m-color-map: (
+    black : (
+        base : $m-color--black
+    ),
+    white : (
+        base : $m-color--white
+    ),
+    active : (
+        base : $m-color--active
+    ),
+    text : (
+        base : $m-color--grey-darker,
+        light : $m-color--grey
+    ),
+    grey : (
+        base : $m-color--grey,
+        black : $m-color--grey-black,
+        darkest : $m-color--grey-darkest,
+        darker : $m-color--grey-darker,
+        light : $m-color--grey-light,
+        lighter : $m-color--grey-lighter,
+        lightest : $m-color--grey-lightest
+    ),
+    ul : (
+        blue : $m-color--ul-blue,
+        yellow : $m-color--ul-yellow,
+        red : $m-color--ul-red
+    ),
+    success : (
+        base : $m-color--success,
+        dark : $m-color--success-dark,
+        light : $m-color--success-light,
+        lightest : $m-color--success-lightest
+    ),
+    disabled : (
+        base : $m-color--disabled,
+        light : $m-color--disabled-light
+    ),
+    warning : (
+        base : $m-color--warning,
+        lightest : $m-color--warning-lightest
+    ),
+    scrollbar : (
+        base : $m-color--scrollbar,
+        light : $m-color--scrollbar-light
+    ),
+    border : (
+        base : $m-color--border,
+        dark : $m-color--border-dark,
+        light : $m-color--border-light
+    ),
+    error : (
+        base : $m-color--warning,
+        dark : $m-color--error-dark,
+        lightest : $m-color--error-lightest
+    ),
+    interactive : (
+        base : $m-color--interactive,
+        darker : $m-color--interactive-darker,
+        dark : $m-color--interactive-dark,
+        light : $m-color--interactive-light,
+        lighter : $m-color--interactive-lighter,
+        lightest : $m-color--interactive-lightest
+    ),
+    accent : (
+        base : $m-color--accent,
+        dark : $m-color--accent-dark,
+        light : $m-color--accent-light,
+        lightest : $m-color--accent-lightest
+    )
+);

@@ -114,7 +114,7 @@ $m-switch-size: 23px;
     }
 
     &.m--is-switch-right {
-        .m-switch__wrap {
+        .m-switch__body {
             flex-direction: row-reverse;
         }
 

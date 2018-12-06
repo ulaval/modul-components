@@ -179,7 +179,7 @@ describe('draggable', () => {
         describe(`Given a draggable element with handle`, () => {
             describe(`When ${eventName} and the handle is not used`, () => {
                 it(`Then it should not apply grabbing class to parent draggable`, () => {
-                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="dragHandle">Handle</div><div class="draggableContent">draggable content</div>');
+                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="drag-handle">Handle</div><div class="draggableContent">draggable content</div>');
                     const draggableContent: Wrapper<Vue> = draggable.find('.draggableContent');
 
                     draggableContent.trigger(eventName);
@@ -193,8 +193,8 @@ describe('draggable', () => {
         describe(`Given a draggable element with handle`, () => {
             describe(`When ${eventName} and the handle is used`, () => {
                 it(`Then it should apply grabbing class to parent draggable`, () => {
-                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="dragHandle">Handle</div><div class="draggableContent">draggable content</div>');
-                    const draggableHandle: Wrapper<Vue> = draggable.find('.dragHandle');
+                    const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, '<div class="drag-handle">Handle</div><div class="draggableContent">draggable content</div>');
+                    const draggableHandle: Wrapper<Vue> = draggable.find('.drag-handle');
 
                     draggableHandle.trigger(eventName);
                     jest.runOnlyPendingTimers();

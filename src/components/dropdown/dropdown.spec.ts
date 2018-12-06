@@ -1,12 +1,12 @@
 import { createLocalVue, mount, Slots, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
 import { getDefaultMock } from '../../../tests/helpers/mock';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DropdownPlugin, { MDropdown } from './dropdown';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -48,17 +48,17 @@ describe('MDropdown', () => {
         return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when footer slot is set', () => {
-        Vue.component('m-popper', mockPopper);
-        const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
-            mocks: getDefaultMock(),
-            localVue: localVue,
-            slots: {
-                footer: '<div>footer-content</div>'
-            }
-        });
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
-    });
+    // it('should render correctly when footer slot is set', () => {
+    //     Vue.component('m-popper', mockPopper);
+    //     const dropdown: Wrapper<MDropdown> = mount(MDropdown, {
+    //         mocks: getDefaultMock(),
+    //         localVue: localVue,
+    //         slots: {
+    //             footer: '<div>footer-content</div>'
+    //         }
+    //     });
+    //     return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+    // });
 
     // Need to be improve
     // it('should render correctly when its open', () => {

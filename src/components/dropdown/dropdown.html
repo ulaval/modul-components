@@ -34,22 +34,33 @@
                @keydown.tab="onKeydownTab"
                @focus="inputOnFocus"
                v-model="selectedText">
-        <template slot="adjust-width-auto" v-if="width === 'auto'">{{ selectedText }}</template>
-        <div slot="right-content" class="m-dropdown__arrow" :class="{ 'm--is-open': open }" v-if="active">
-            <m-icon class="m-dropdown__arrow__icon" ref="arrow" name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" :disabled="!active" @keydown.enter.prevent="open = active">
-                <m-i18n k="m-dropdown:open" v-if="!open"></m-i18n>
-                <m-i18n k="m-dropdown:close" v-if="open"></m-i18n>
+        <template slot="adjust-width-auto"
+                  v-if="width === 'auto'">{{ selectedText }}</template>
+        <div class="m-dropdown__arrow"
+             :class="{ 'm--is-open': open }"
+             v-if="active"
+             slot="right-content">
+            <m-icon class="m-dropdown__arrow__icon"
+                    ref="arrow"
+                    name="m-svg__arrow-head-filled--down"
+                    button-size="18px"
+                    icon-size="16px"
+                    :disabled="!active"
+                    @keydown.enter.prevent="open = active">
+                <m-i18n k="m-dropdown:open"
+                        v-if="!open"></m-i18n>
+                <m-i18n k="m-dropdown:close"
+                        v-if="open"></m-i18n>
             </m-icon>
         </div>
     </m-input-style>
-    <m-validation-message
-        :disabled="isDisabled"
-        :waiting="isWaiting"
-        :error="hasError"
-        :valid="isValid"
-        :error-message="errorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
+    <m-validation-message :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasError"
+                          :valid="isValid"
+                          :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
 
     <m-popup ref="popup"
              width="100%"
@@ -64,16 +75,22 @@
              :preload="true"
              :open-trigger="'mousedown'"
              :lazy="false"
+             @portal-content-visible="calculateFilterableListeHeight"
              @portal-content-mounted="portalContentMounted">
-        <template slot="header" v-if="isMqMaxS && (hasLabel || filterable)">
-            <h2 class="m-dropdown__header__label" v-if="hasLabel">{{ label }}</h2>
-            <div class="m-dropdown__header__research" v-if="filterable">
+        <template slot="header"
+                  v-if="isMqMaxS && (hasLabel || filterable)">
+            <h2 class="m-dropdown__header__label"
+                v-if="hasLabel">{{ label }}</h2>
+            <div class="m-dropdown__header__research"
+                 v-if="filterable">
                 <input class="m-dropdown__header__research-input"
-                        type="text"
-                        placeholder="Recherche"
-                        ref="researchInput"
-                        v-model="selectedText">
-                <m-icon-button class="m-dropdown__header__research-button" icon-name="m-svg__search" @click="focusOnResearchInput">
+                       type="text"
+                       placeholder="Recherche"
+                       ref="researchInput"
+                       v-model="selectedText">
+                <m-icon-button class="m-dropdown__header__research-button"
+                               icon-name="m-svg__search"
+                               @click="focusOnResearchInput">
                     <m-i18n k="m-dropdown:research"></m-i18n>
                 </m-icon-button>
             </div>
@@ -81,14 +98,18 @@
         <ul :id="ariaControls"
             class="m-dropdown__list"
             ref="items"
+            :style="itemsHeightStyle"
             :aria-labelledby="id"
             aria-live="polite">
             <slot></slot>
-            <m-dropdown-item v-if="!hasItems && !dirty">{{ propTextNoData }}</m-dropdown-item>
-            <m-dropdown-item v-if="!hasItems && dirty">{{ propTextNoMatch }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && !dirty"
+                             :readonly="true">{{ propTextNoData }}</m-dropdown-item>
+            <m-dropdown-item v-if="!hasItems && dirty"
+                             :readonly="true">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
 
-        <template slot="footer" v-if="hasFooterSlot">
+        <template slot="footer"
+                  v-if="hasFooterSlot">
             <slot name="footer"></slot>
         </template>
     </m-popup>

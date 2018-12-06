@@ -1,0 +1,14 @@
+<div class="m-table-header">
+    <slot name="left"></slot>
+    <div class="m-table-header__spacer"></div>
+    <slot name="right"></slot>
+    <m-link class="m-table-header__add-btn"
+            :class="{'m--has-margin': $slots.right}"
+            v-if="addBtnLabel"
+            :icon="true"
+            icon-name="m-svg__add-circle-filled"
+            icon-size="22px"
+            mode="button"
+            @click="add"
+            ref="addBtn">{{ addBtnLabel }}</m-link>
+</div>

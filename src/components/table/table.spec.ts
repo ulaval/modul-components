@@ -1,17 +1,16 @@
 import { shallow, Wrapper } from '@vue/test-utils';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import { MColumnTable, MTable } from './table';
 
 let slots: any = {};
 const SLOT_EMPTY: string = '<td>EMPTY</td>';
 const SLOT_HEADER: string = '<thead><tr><th>SLOT THEAD</th></tr></thead>';
-const SLOT_TH: string = '<th>SLOT TH</th>';
+const SLOT_TH: string = 'SLOT TH';
 const SLOT_BODY: string = '<tbody><tr><td>SLOT BODY</td></tr></tbody>';
-const SLOT_TD: string = '<td>SLOT TD</td>';
+const SLOT_TD: string = 'SLOT TD';
 const SLOT_FOOTER: string = '<td>SLOT FOOTER</td>';
 
-let rows: any [] = [];
+let rows: any[] = [];
 
 const columns: MColumnTable[] = [
     { id: 'a', title: 'A', dataProp: 'a', width: '10%' },
@@ -48,6 +47,22 @@ describe(`MTable`, () => {
             initializeShallowWrapper();
 
             expect(wrapper.vm.isEmpty).toBeTruthy();
+        });
+
+        describe(`When loading`, () => {
+            beforeEach(() => {
+                initializeShallowWrapper();
+                wrapper.setProps({ loading: true });
+            });
+
+            it(`Then should not be empty`, () => {
+                expect(wrapper.vm.isEmpty).toBeFalsy();
+            });
+
+            it(`Then should render correctly`, () => {
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+
         });
 
         describe(`When a custom slot is given`, () => {

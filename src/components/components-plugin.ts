@@ -1,5 +1,4 @@
 import Vue, { PluginObject } from 'vue';
-
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -64,6 +63,7 @@ import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text
 import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
+import ShowMorePlugin from './show-more/show-more';
 import SidebarPlugin from './sidebar/sidebar';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
@@ -73,12 +73,14 @@ import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
 import SwitchPlugin from './switch/switch';
 import TabPanelPlugin from './tab-panel/tab-panel';
+import TableHeaderPlugin from './table-header/table-header';
 import TablePlugin from './table/table';
 import TabsPlugin from './tabs/tabs';
 import TemplatePlugin from './template/template';
 import TextareaPlugin from './textarea/textarea';
 import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
+import ToastPlugin from './toast/toast';
 import TooltipPlugin from './tooltip/tooltip';
 import TreeIconPlugin from './tree-icon/tree-icon';
 import TreeNodePlugin from './tree-node/tree-node';
@@ -157,6 +159,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(RichTextPlugin);
         Vue.use(ScrollTopPlugin);
         Vue.use(SessionExpiredPlugin);
+        Vue.use(ShowMorePlugin);
         Vue.use(SidebarPlugin);
         Vue.use(SliderPlugin);
         Vue.use(SpinnerPlugin);
@@ -167,11 +170,13 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
         Vue.use(TablePlugin);
+        Vue.use(TableHeaderPlugin);
         Vue.use(TabsPlugin);
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
         Vue.use(TextfieldPlugin);
         Vue.use(TimepickerPlugin);
+        Vue.use(ToastPlugin);
         Vue.use(TooltipPlugin);
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
