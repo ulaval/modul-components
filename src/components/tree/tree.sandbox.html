@@ -73,6 +73,17 @@
     <div style="width: 50%; float:left;">
         <h3>Multiple Nodes, Checkboxes and Checkbox Auto-Select</h3>
         <p>
+            Checkboxes tree in which the state of parents depends on children.
+            <strong>Parent controls children with its checkbox.</strong>
+        </p>
+        <h4>Sample Tree Props: </h4>
+        <ul>
+            <li>:use-plus-icons="true"</li>
+            <li>:icons="true"</li>
+            <li>:with-checkboxes="true"</li>
+            <li>selection-mode="2"</li>
+        </ul>
+        <p>
             Selected Nodes : {{currentNodesCheckboxes}}</br>
         </p>
         <p>
@@ -92,8 +103,16 @@
     <div style="width: 50%; float:left;">
         <h3>Multiple Nodes, Checkboxes and Button Auto-Select</h3>
         <p>
-            Selected Nodes : {{currentNodesCheckboxesButtonAutoselect}}</br>
+            Checkboxes tree in which parents and children can be auto-selected with a button.
         </p>
+        <h4>Sample Tree Props: </h4>
+        <ul>
+            <li>auto-select-checkboxes-mode="button"</li>
+            <li>:icons="true"</li>
+            <li>:with-checkboxes="true"</li>
+            <li>selection-mode="2"</li>
+        </ul>
+        <p>Selected Nodes : {{currentNodesCheckboxesButtonAutoselect}}</p>
         <p>
             <m-tree :tree="multiNodeTreeCheckboxButtonAutoSelectCheckboxes"
                     selection-mode="2"
@@ -108,8 +127,16 @@
     <div style="width: 50%; float:left;">
         <h3>Multiple Nodes, Checkbox, Disabled Parent and No Auto-Select</h3>
         <p>
-            Disabled auto-select-checkboxes allows parents to be fully independant from their children.
+            Checkboxes tree in which every elements are fully independent.
         </p>
+        <h4>Sample Tree Props: </h4>
+        <ul>
+            <li>auto-select-checkboxes-mode="none"</li>
+            <li>:use-plus-icons="true"</li>
+            <li>:icons="true"</li>
+            <li>:with-checkboxes="true"</li>
+            <li>selection-mode="2"</li>
+        </ul>
         <p>
             Selected Nodes : {{currentNodesCheckboxesNoAutoSelectCheckboxes}}</br>
         </p>

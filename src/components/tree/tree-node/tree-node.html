@@ -55,9 +55,10 @@
             </ul>
         </m-accordion-transition>
     </template>
-    <template v-if="isFolder && autoSelectCheckboxesMode === 'button'">
+    <template v-if="hasChildren && autoSelectCheckboxesMode === 'button'">
         <button class="m-tree-node__auto-select-button"
                 :class="{ 'm-tree-node__auto-select-button--selected': allChildrenAndSelfSelected}"
+                ref="autoSelectButton"
                 @click="onAutoSelectButtonClick"></button>
     </template>
 </li>
