@@ -6,12 +6,13 @@ import { MToast, MToastPosition } from '../../components/toast/toast';
 export interface ToastParams {
     text: string;
     actionLabel?: string;
+    action?: (event: Event) => any;
     state?: MMessageState;
     position?: MToastPosition;
     timeout?: number;
     icon?: boolean;
 }
-const TIME_BEFORE_ANIMATION_IS_DONE: number = 2000;
+const TIME_BEFORE_ANIMATION_IS_OVER: number = 200;
 
 export class ToastService {
     public activeToast?: MToast;
@@ -22,22 +23,19 @@ export class ToastService {
         const toast: MToast = this.createToast(params);
         this.toasts.push(toast);
 
-        if (!this.activeToast) {
-            this.activeToast = this.toasts[0];
-        } else {
+        if (this.activeToast) {
             this.activeToast.open = false;
             this.activeToast = this.toasts[1];
-            const toastToDestroy: MToast = this.toasts.shift()!;
-            setTimeout(() => {
-                toastToDestroy.$destroy();
-            }, TIME_BEFORE_ANIMATION_IS_DONE);
+            this.toasts.splice(0, 1);
+        } else {
+            this.activeToast = this.toasts[0];
         }
     }
 
-    public clear(): void {
-        this.toasts.forEach((toast) => {
-            toast.$destroy();
-        });
+    public async clear(): Promise<any> {
+        if (this.activeToast) {
+            this.activeToast.open = false;
+        }
         this.toasts = [];
         this.activeToast = undefined;
     }
@@ -55,7 +53,12 @@ export class ToastService {
             }
         });
 
-        toast.$on('close', () => setTimeout(() => toast.$destroy(), TIME_BEFORE_ANIMATION_IS_DONE));
+        toast.$on('close', () => setTimeout(() => toast.$destroy(), TIME_BEFORE_ANIMATION_IS_OVER));
+        if (params.action) {
+            toast.$on('action-button', (event: Event) => {
+                params.action!(event);
+            });
+        }
 
         toast.offset = toast.isTop ? this.baseTopPosition : '0';
 

@@ -13,7 +13,8 @@ import WithRender from './toast-service.sandbox.html';
 export class MToastServiceSandbox extends ModulVue {
     public simpleToastParams: ToastParams = {
         text: 'A simple toast with text',
-        actionLabel: 'txt'
+        actionLabel: 'txt',
+        action: this.action
     };
 
     created(): void {
@@ -31,7 +32,8 @@ export class MToastServiceSandbox extends ModulVue {
     public otherToast(): void {
         this.$toast.show({
             text: 'Other toast',
-            actionLabel: 'Action'
+            actionLabel: 'Action',
+            action: this.action
         });
     }
 
@@ -43,11 +45,16 @@ export class MToastServiceSandbox extends ModulVue {
         this.$toast.show({
             position: MToastPosition.TopCenter,
             actionLabel: 'ACTION',
+            action: this.action,
             icon: true,
             state: MMessageState.Warning,
             timeout: 2000,
             text: 'Test of a Toast'
         });
+    }
+
+    public action(event: Event): void {
+        alert(`Type of event ${event.type}`);
     }
 }
 
