@@ -3,8 +3,8 @@
 exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
     <ul class="m-tree__content">
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox"></m-tree-node>
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox"></m-tree-node>
+        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox" icons-set="folder"></m-tree-node>
+        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox" icons-set="folder"></m-tree-node>
     </ul>
 </div>
 `;

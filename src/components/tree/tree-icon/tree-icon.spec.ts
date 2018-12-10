@@ -3,11 +3,6 @@ import { renderComponent } from '../../../../tests/helpers/render';
 import { TreeNode } from '../tree';
 import { MTreeIcon } from './tree-icon';
 
-const TREE_NODE_FILE: TreeNode = {
-    label: 'Node 1.jpg',
-    id: 'Node 1.jpg'
-};
-
 const TREE_NODE_FOLDER: TreeNode = {
     label: 'Node 2',
     id: '/Node 2'
@@ -20,7 +15,7 @@ const PLUS: RefSelector = { ref: 'plus-icon' };
 let file: TreeNode;
 let isFolderOpen: boolean = false;
 let isFolder: boolean = false;
-let usePlusIcons: boolean = false;
+let iconsSet: string;
 let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
@@ -30,7 +25,7 @@ const initializeShallowWrapper: any = () => {
             file,
             isFolderOpen,
             isFolder,
-            usePlusIcons
+            iconsSet
         }
     });
 };
@@ -53,7 +48,7 @@ describe(`MTreeIcon`, () => {
 
         describe(`When the node uses plus icons`, () => {
             beforeEach(() => {
-                usePlusIcons = true;
+                iconsSet = 'plus';
                 initializeShallowWrapper();
             });
 
@@ -70,7 +65,7 @@ describe(`MTreeIcon`, () => {
         describe(`When the node does not use plus icons`, () => {
 
             it('Should not use the m-plus component', () => {
-                usePlusIcons = false;
+                iconsSet = 'folder';
                 initializeShallowWrapper();
                 expect(wrapper.find(PLUS).exists()).toBeFalsy();
 

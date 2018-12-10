@@ -24,6 +24,7 @@ export enum MSelectionMode {
 export enum MAutoSelectCheckboxesMode {
     None = 'none',
     Checkbox = 'checkbox',
+    ParentCheckbox = 'parent-checkbox', // Allows only for children to be selected by parent's checkbox
     Button = 'button'
 }
 
@@ -52,6 +53,7 @@ export class MTree extends ModulVue {
         validator: value =>
             value === MAutoSelectCheckboxesMode.None ||
             value === MAutoSelectCheckboxesMode.Checkbox ||
+            value === MAutoSelectCheckboxesMode.ParentCheckbox ||
             value === MAutoSelectCheckboxesMode.Button
     })
     public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;

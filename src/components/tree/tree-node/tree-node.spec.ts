@@ -19,7 +19,8 @@ const TREE_NODE_SELECTED: string[] = ['/Node 1'];
 const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
 const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
 const TREE_NODE_CHECKBOX_FIRST_CHILD: string[] = ['/Parent 1/Child 1'];
-const TREE_NODE_CHECKBOX_ALL_CHILDREN: string[] = ['/Parent 1/Child 1', '/Parent 1', '/Parent 1/Child 2'];
+const TREE_NODE_CHECKBOX_ALL_CHILDREN: string[] = ['/Parent 1/Child 1', '/Parent 1/Child 2'];
+const TREE_NODE_CHECKBOX_ALL_NODES: string[] = ['/Parent 1/Child 1', '/Parent 1', '/Parent 1/Child 2'];
 
 const TREE_NODE_WITHOUT_CHILDREN: TreeNode = {
     label: NODE_ELEMENT_LABEL,
@@ -146,6 +147,43 @@ describe('MTreeNode', () => {
                 expect(wrapper.emitted('click')).toBeTruthy();
             });
 
+            describe(`and auto-select is on for parent checkboxes`, () => {
+                describe(`and given node is a parent with two children and none selected`, () => {
+
+                    beforeEach(() => {
+                        node = TREE_NODE_WITH_TWO_CHILDREN;
+                        selectedNodes = [];
+                        withCheckboxes = true;
+                        autoSelectCheckboxesMode = 'parent-checkbox';
+                        initializeMountWrapper();
+                    });
+
+                    it(`Should select every children and self on checkbox click`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.vm.selectedNodes.length).toBe(3);
+                    });
+
+                    it(`Should unselect every children and self on second checkbox click`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.vm.selectedNodes.length).toBe(0);
+                    });
+
+                    it(`Should not unselect checked parent when all children are selected and one goes to unselected state`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x).concat(PARENT_PATH) });
+                        expect(wrapper.vm.selectedNodes.length).toBe(2);
+                    });
+
+                    it(`Should not select parent when all children are selected`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
+                        expect(wrapper.vm.selectedNodes.length).toBe(2);
+                    });
+
+                });
+            });
+
             describe(`and auto-select is on for checkboxes`, () => {
 
                 describe(`and given node is a parent with two children and none selected`, () => {
@@ -176,7 +214,7 @@ describe('MTreeNode', () => {
                     });
 
                     it(`Should unselect every children on checkbox click if all nodes are preselected`, () => {
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
+                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_NODES.map(x => x) });
                         wrapper.find(CHECKBOX).trigger('click');
                         expect(wrapper.vm.selectedNodes.length).toBe(0);
                     });
@@ -195,6 +233,17 @@ describe('MTreeNode', () => {
                         wrapper.find(CHECKBOX).trigger('click');
                         wrapper.find(CHECKBOX).trigger('click');
                         expect(wrapper.vm.selectedNodes.length).toBe(1);
+                    });
+
+                    it(`Should unselect checked parent when all children are selected and one goes to unselected state`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x).concat(PARENT_PATH) });
+                        expect(wrapper.vm.selectedNodes.length).toBe(1);
+                    });
+
+                    it(`Should select parent when all children are selected`, () => {
+                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
+                        expect(wrapper.vm.selectedNodes.length).toBe(3);
                     });
 
                 });
@@ -514,6 +563,55 @@ describe('MTreeNode', () => {
 
                 expect(wrapper.vm.currentPath).toEqual(PARENT_PATH + '/' + NODE_ELEMENT_ID);
             });
+        });
+
+    });
+
+    describe(`When nodes are added and removed`, () => {
+
+        beforeEach(() => {
+            node = TREE_NODE_WITHOUT_CHILDREN;
+            selectedNodes = [];
+            initializeShallowWrapper();
+        });
+
+        it(`Should be possible to add a single node`, () => {
+            wrapper.vm.addNode(TREE_NODE_SELECTED[0]);
+            expect(wrapper.vm.selectedNodes).toContain(TREE_NODE_SELECTED[0]);
+            expect(wrapper.vm.selectedNodes.length).toBe(1);
+        });
+
+        it(`Should be possible to remove a single node`, () => {
+            wrapper.setProps({ selectedNodes: TREE_NODE_SELECTED.map(x => x) });
+            wrapper.vm.removeNode(TREE_NODE_SELECTED[0]);
+            expect(wrapper.vm.selectedNodes.length).toBe(0);
+        });
+
+        describe(`When nodes are added or removed as an array`, () => {
+
+            it(`Should be possible to add an array of nodes`, () => {
+                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, true);
+                expect(wrapper.vm.selectedNodes).toEqual(TREE_NODE_CHECKBOX_ALL_NODES);
+            });
+
+            it(`Should be possible to remove an array of selected nodes`, () => {
+                wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_NODES.map(x => x) });
+                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, false);
+                expect(wrapper.vm.selectedNodes.length).toBe(0);
+            });
+
+            it(`Should be impossible to add the same nodes twice`, () => {
+                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, true);
+                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, true);
+                expect(wrapper.vm.selectedNodes.length).toBe(3);
+            });
+
+            it(`Should remove existing nodes and ignore non-existing ones`, () => {
+                wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
+                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, false);
+                expect(wrapper.vm.selectedNodes.length).toBe(0);
+            });
+
         });
 
     });
