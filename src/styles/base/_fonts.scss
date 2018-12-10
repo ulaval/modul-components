@@ -6,26 +6,26 @@
 
 @font-face {
     font-family: 'Source Sans Variable';
-    src: url('../assets/fonts/SourceSansVariable-Roman.otf');
+    src: url('#{$m-font-path}SourceSansVariable-Roman.otf');
     src:
-        url('../assets/fonts/SourceSansVariable-Roman.otf.woff') format('woff'),
-        url('../assets/fonts/SourceSansVariable-Roman.otf.woff2') format('woff2'),
-        url('../assets/fonts/SourceSansVariable-Roman.ttf') format('truetype'),
-        url('../assets/fonts/SourceSansVariable-Roman.ttf.woff') format('woff'),
-        url('../assets/fonts/SourceSansVariable-Roman.ttf.woff2') format('woff2');
+        url('#{$m-font-path}SourceSansVariable-Roman.otf.woff') format('woff'),
+        url('#{$m-font-path}SourceSansVariable-Roman.otf.woff2') format('woff2'),
+        url('#{$m-font-path}SourceSansVariable-Roman.ttf') format('truetype'),
+        url('#{$m-font-path}SourceSansVariable-Roman.ttf.woff') format('woff'),
+        url('#{$m-font-path}SourceSansVariable-Roman.ttf.woff2') format('woff2');
     font-weight: 1 999;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Source Sans Variable';
-    src: url('../assets/fonts/SourceSansVariable-Italic.otf');
+    src: url('#{$m-font-path}SourceSansVariable-Italic.otf');
     src:
-        url('../assets/fonts/SourceSansVariable-Italic.otf.woff') format('woff'),
-        url('../assets/fonts/SourceSansVariable-Italic.otf.woff2') format('woff2'),
-        url('../assets/fonts/SourceSansVariable-Italic.ttf') format('truetype'),
-        url('../assets/fonts/SourceSansVariable-Italic.ttf.woff') format('woff'),
-        url('../assets/fonts/SourceSansVariable-Italic.ttf.woff2') format('woff2');
+        url('#{$m-font-path}SourceSansVariable-Italic.otf.woff') format('woff'),
+        url('#{$m-font-path}SourceSansVariable-Italic.otf.woff2') format('woff2'),
+        url('#{$m-font-path}SourceSansVariable-Italic.ttf') format('truetype'),
+        url('#{$m-font-path}SourceSansVariable-Italic.ttf.woff') format('woff'),
+        url('#{$m-font-path}SourceSansVariable-Italic.ttf.woff2') format('woff2');
     font-weight: 1 999;
     font-style: italic;
 }
