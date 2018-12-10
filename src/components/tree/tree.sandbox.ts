@@ -20,7 +20,7 @@ export class MRootTreeSandbox extends Vue {
     public currentNodesBasic: string[] = [];
     public currentNodesCheckboxes: string[] = ['/3/11'];
     public disabledNodesCheckboxes: string[] = ['/3/11'];
-    public currentNodesCheckboxesChildren: string[] = [];
+    public currentNodesCheckboxesParent: string[] = [];
     public currentNodesCheckboxesButtonAutoselect: string[] = [];
     public currentNodesCheckboxesNone: string[] = ['/1/11/444/1111'];
     public disabledNodesCheckboxesNone: string[] = ['/3', '/1/11/444/2222'];

@@ -22,10 +22,10 @@ export enum MSelectionMode {
 }
 
 export enum MAutoSelectCheckboxesMode {
-    None = 'none',
-    Checkbox = 'checkbox',
-    ParentCheckbox = 'parent-checkbox', // Allows only for children to be selected by parent's checkbox
-    Button = 'button'
+    None = 'none', // Fully independant
+    Button = 'button', // Fully independant, but a button can handle mass-selection
+    Checkbox = 'checkbox', // Selection of parents is 100% related to children
+    ParentCheckbox = 'parent-checkbox' // Children can be selected by parent & children can unselect parent
 }
 
 export enum MIconsSet {

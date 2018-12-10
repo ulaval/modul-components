@@ -60,13 +60,15 @@ export class MTreeNode extends ModulVue {
 
     @Watch('isSelected')
     public notifyParentOfChildCheckboxState(): void {
-        let isCheckboxAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
-        let isButtonAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Button]);
+        if (this.withCheckboxes) {
+            let isCheckboxParentAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
+            let isCheckboxButtonAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Button]);
 
-        if (this.withCheckboxes && !this.hasChildren && (isCheckboxAutoSelect || isButtonAutoselect)) {
-            this.$emit('auto-select-child-checkbox-change', this.isSelected);
-        } else if (isButtonAutoselect && this.hasChildren) {
-            this.onAutoSelectChildCheckboxChange(this.isSelected, true);
+            if (!this.hasChildren || isCheckboxParentAutoSelect) {
+                this.$emit('auto-select-child-checkbox-change', this.isSelected);
+            } else if (isCheckboxButtonAutoSelect && this.hasChildren) {
+                this.onAutoSelectChildCheckboxChange(this.isSelected, true);
+            }
         }
     }
 
@@ -79,14 +81,14 @@ export class MTreeNode extends ModulVue {
         }
     }
 
+    public onChildClick(path: string, fromCheckbox: boolean = false): void {
+        this.$emit('click', path, fromCheckbox);
+    }
+
     public onAutoSelectButtonClick(): void {
         let childrenPaths: string[] = [];
         this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, true);
         this.updateSelectedNodes(childrenPaths.concat(this.currentPath), !this.allChildrenAndSelfSelected);
-    }
-
-    public onChildClick(path: string, fromCheckbox: boolean = false): void {
-        this.$emit('click', path, fromCheckbox);
     }
 
     public onAutoSelectChildCheckboxChange(selected: boolean, ignoreCount: boolean = false): void {
@@ -95,11 +97,11 @@ export class MTreeNode extends ModulVue {
         }
         let allChildrenSelected: boolean = this.selectedChildrenCount === (this.node.children ? this.node.children.length : -1);
         let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox]);
-        let isParentAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
+        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
 
-        if (isCheckboxAutoselect || (isParentAutoselect && !selected)) {
+        if (isCheckboxAutoselect || (isParentCheckboxAutoselect && !selected)) {
             this.updateAutoselectCheckboxParentNode(allChildrenSelected);
-        } else if (!isParentAutoselect) {
+        } else if (!isParentCheckboxAutoselect) {
             this.updateAutoselectButtonParentNode(allChildrenSelected, selected);
         }
 
@@ -114,11 +116,11 @@ export class MTreeNode extends ModulVue {
 
     public onCheckboxClick(): void {
         let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
-        let isParentAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
+        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
 
         if (this.hasChildren && isCheckboxAutoselect) {
             let childrenPaths: string[] = [];
-            this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, isParentAutoselect);
+            this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, isParentCheckboxAutoselect);
             this.updateSelectedNodes(childrenPaths, !this.isSelected);
         } else {
             this.$emit('click', this.currentPath, true);

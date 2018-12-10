@@ -100,7 +100,7 @@
     <div style="width: 50%; float:left;">
         <h3>Checkboxes + AutoSelectMode = ParentCheckbox</h3>
         <p>
-            Children can be selected by parent checkbox, but not the other way around.
+            Children can be selected by parent checkbox and children can unselect parent.
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
@@ -111,7 +111,7 @@
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
-            Selected Nodes : {{multiNodeTreeCheckboxAutoChildren}}</br>
+            Selected Nodes : {{currentNodesCheckboxesParent}}</br>
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
@@ -120,7 +120,7 @@
                     icons-set="plus"
                     :icons="true"
                     :with-checkboxes="true"
-                    :selected-nodes="multiNodeTreeCheckboxAutoChildren"
+                    :selected-nodes="currentNodesCheckboxesParent"
                     @select="onSelect"></m-tree>
         </p>
     </div>
@@ -154,7 +154,7 @@
     <div style="width: 50%; float:left;">
         <h3>Checkboxes + AutoSelectMode = None, disabled nodes sample</h3>
         <p>
-            Checkboxes tree in which every elements are fully independent.
+            Checkboxes tree in which every elements are fully independant.
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
