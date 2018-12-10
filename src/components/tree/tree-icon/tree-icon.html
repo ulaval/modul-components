@@ -1,6 +1,7 @@
 <m-icon class="m-tree-icon"
         v-if="propIconsSet === 'folder' && isFolder"
         size="24px"
+        :showNameAsClass=true
         :name="folderIcon"></m-icon>
 <m-icon-file class="m-tree-icon"
              v-else-if="propIconsSet === 'folder'"

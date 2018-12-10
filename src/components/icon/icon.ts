@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ICON_NAME } from '../component-names';
 import WithRender from './icon.html?style=./icon.scss';
 
@@ -14,6 +13,9 @@ export class MIcon extends Vue {
     public svgTitle: string;
     @Prop({ default: '1em' })
     public size: string;
+
+    @Prop({ default: false })
+    public showNameAsClass;
 
     private get hasSvgTitle(): boolean {
         return !!this.svgTitle;
