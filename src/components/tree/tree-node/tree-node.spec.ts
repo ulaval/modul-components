@@ -169,10 +169,10 @@ describe('MTreeNode', () => {
                         expect(wrapper.vm.selectedNodes.length).toBe(0);
                     });
 
-                    it(`Should not unselect checked parent when all children are selected and one goes to unselected state`, () => {
+                    it(`Should unselect checked parent when all children are selected and one goes to unselected state`, () => {
                         wrapper.find(CHECKBOX).trigger('click');
                         wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x).concat(PARENT_PATH) });
-                        expect(wrapper.vm.selectedNodes.length).toBe(2);
+                        expect(wrapper.vm.selectedNodes.length).toBe(1);
                     });
 
                     it(`Should not select parent when all children are selected`, () => {

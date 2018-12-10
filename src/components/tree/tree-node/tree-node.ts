@@ -60,7 +60,7 @@ export class MTreeNode extends ModulVue {
 
     @Watch('isSelected')
     public notifyParentOfChildCheckboxState(): void {
-        let isCheckboxAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox]);
+        let isCheckboxAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
         let isButtonAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Button]);
 
         if (this.withCheckboxes && !this.hasChildren && (isCheckboxAutoSelect || isButtonAutoselect)) {
@@ -94,11 +94,12 @@ export class MTreeNode extends ModulVue {
             this.selectedChildrenCount += selected ? 1 : -1;
         }
         let allChildrenSelected: boolean = this.selectedChildrenCount === (this.node.children ? this.node.children.length : -1);
-        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
+        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox]);
+        let isParentAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
 
-        if (isCheckboxAutoselect) {
+        if (isCheckboxAutoselect || (isParentAutoselect && !selected)) {
             this.updateAutoselectCheckboxParentNode(allChildrenSelected);
-        } else {
+        } else if (!isParentAutoselect) {
             this.updateAutoselectButtonParentNode(allChildrenSelected, selected);
         }
 
