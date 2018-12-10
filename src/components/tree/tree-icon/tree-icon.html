@@ -1,14 +1,14 @@
 <m-icon class="m-tree-icon"
-        v-if="folder && !usePlusIcons"
+        v-if="propIconsSet === 'folder' && isFolder"
         size="24px"
         :name="folderIcon"></m-icon>
+<m-icon-file class="m-tree-icon"
+             v-else-if="propIconsSet === 'folder'"
+             :extension="extensionFile"></m-icon-file>
 <m-plus ref="plus-icon"
+        v-else-if="propIconsSet === 'plus' && isFolder"
         class="m-accordion__header-icon"
         :class="{ 'm--is-left': 'true' }"
-        v-else-if="folder && usePlusIcons"
-        :open="folderOpen"
+        :open="isFolderOpen"
         :large="true"
         aria-hidden="true"></m-plus>
-<m-icon-file class="m-tree-icon"
-             v-else-if="!usePlusIcons"
-             :extension="extensionFile"></m-icon-file>

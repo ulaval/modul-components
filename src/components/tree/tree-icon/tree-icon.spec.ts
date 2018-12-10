@@ -18,8 +18,8 @@ const FOLDER_CLOSED: string = 'm-svg__folder';
 const PLUS: RefSelector = { ref: 'plus-icon' };
 
 let file: TreeNode;
-let folderOpen: boolean = false;
-let folder: boolean = false;
+let isFolderOpen: boolean = false;
+let isFolder: boolean = false;
 let usePlusIcons: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
 
@@ -28,8 +28,8 @@ const initializeShallowWrapper: any = () => {
         stubs: getStubs(),
         propsData: {
             file,
-            folderOpen,
-            folder,
+            isFolderOpen,
+            isFolder,
             usePlusIcons
         }
     });
@@ -48,7 +48,7 @@ describe(`MTreeIcon`, () => {
 
         beforeEach(() => {
             file = TREE_NODE_FOLDER;
-            folder = true;
+            isFolder = true;
         });
 
         describe(`When the node uses plus icons`, () => {
@@ -79,7 +79,7 @@ describe(`MTreeIcon`, () => {
             describe(`When the folder is opened`, () => {
 
                 it(`Should be the right icon`, () => {
-                    folderOpen = true;
+                    isFolderOpen = true;
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.folderIcon).toEqual(FOLDER_OPEN);
@@ -90,7 +90,7 @@ describe(`MTreeIcon`, () => {
             describe(`When the folder is closed`, () => {
 
                 it(`Should be the right icon`, () => {
-                    folderOpen = false;
+                    isFolderOpen = false;
                     initializeShallowWrapper();
 
                     expect(wrapper.vm.folderIcon).toEqual(FOLDER_CLOSED);

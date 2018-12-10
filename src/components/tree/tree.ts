@@ -27,6 +27,11 @@ export enum MAutoSelectCheckboxesMode {
     Button = 'button'
 }
 
+export enum MIconsSet {
+    Folder = 'folder',
+    Plus = 'plus'
+}
+
 @WithRender
 @Component
 export class MTree extends ModulVue {
@@ -50,6 +55,14 @@ export class MTree extends ModulVue {
             value === MAutoSelectCheckboxesMode.Button
     })
     public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
+
+    @Prop({
+        default: MIconsSet.Folder,
+        validator: value =>
+            value === MIconsSet.Folder ||
+            value === MIconsSet.Plus
+    })
+    public iconsSet: MIconsSet;
 
     @Prop()
     public selectedNodes: string[];

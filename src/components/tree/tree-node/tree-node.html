@@ -8,10 +8,10 @@
          ref="item">
         <m-tree-icon class="m-tree-icon"
                      v-if="icons"
-                     :use-plus-icons="usePlusIcons"
+                     :icons-set="propIconsSet"
                      :filename="node.id"
-                     :folder-open="internalOpen"
-                     :folder="isFolder"></m-tree-icon>
+                     :is-folder-open="internalOpen"
+                     :is-folder="isFolder"></m-tree-icon>
         <span class="m-tree-node__item__label">{{label}}</span>
         <m-checkbox ref="checkbox"
                     :value="isSelected"
@@ -35,7 +35,7 @@
                              :selected="isSelected"
                              :open.sync="childNode.open"
                              :node="childNode"
-                             :use-plus-icons="usePlusIcons"
+                             :icons-set="propIconsSet"
                              :with-checkboxes="withCheckboxes"
                              :selected-nodes="selectedNodes"
                              :disabled-nodes="disabledNodes"

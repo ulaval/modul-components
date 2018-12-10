@@ -6,15 +6,9 @@ import CheckboxPlugin from '../../checkbox/checkbox';
 import I18nPlugin from '../../i18n/i18n';
 import IconPlugin from '../../icon/icon';
 import { TREE_NODE_NAME } from '../component-names';
-import { TreeNode } from '../tree';
+import { MAutoSelectCheckboxesMode, MIconsSet, TreeNode } from '../tree';
 import TreeIconPlugin from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
-
-export enum MAutoSelectCheckboxesMode {
-    None = 'none',
-    Checkbox = 'checkbox',
-    Button = 'button'
-}
 
 @WithRender
 @Component
@@ -28,14 +22,11 @@ export class MTreeNode extends ModulVue {
     @Prop({ default: [] })
     public selectedNodes: string[];
 
-    @Prop({
-        default: MAutoSelectCheckboxesMode.Checkbox,
-        validator: value =>
-            value === MAutoSelectCheckboxesMode.None ||
-            value === MAutoSelectCheckboxesMode.Checkbox ||
-            value === MAutoSelectCheckboxesMode.Button
-    })
+    @Prop()
     public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
+
+    @Prop()
+    public iconsSet: MIconsSet;
 
     @Prop()
     selectable: boolean;
@@ -195,6 +186,14 @@ export class MTreeNode extends ModulVue {
 
     private pathIsDisabled(path: string): boolean {
         return this.disabledNodes && this.disabledNodes.indexOf(path) !== -1;
+    }
+
+    public get propIconsSet(): MIconsSet {
+        return this.iconsSet || MIconsSet.Folder;
+    }
+
+    public get propAutoSelectCheckboxesMode(): MAutoSelectCheckboxesMode {
+        return this.autoSelectCheckboxesMode || MAutoSelectCheckboxesMode.Checkbox;
     }
 
     public get currentPath(): string {

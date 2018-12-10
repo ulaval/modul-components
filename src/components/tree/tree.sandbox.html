@@ -57,12 +57,12 @@
     <h2>Multiple Nodes Selection</h2>
 
     <div style="width: 50%; float:left;">
-        <h3>Basic Multiple Nodes</h3>
+        <h3>Basic</h3>
         <p>
             Selected Nodes : {{currentNodesBasic}}</br>
         </p>
         <p>
-            <m-tree :tree="multiNodeTreeCheckbox"
+            <m-tree :tree="multiNodeTree"
                     selection-mode="2"
                     :icons="true"
                     :selected-nodes="currentNodesBasic"
@@ -71,17 +71,16 @@
     </div>
 
     <div style="width: 50%; float:left;">
-        <h3>Multiple Nodes, Checkboxes and Checkbox Auto-Select</h3>
+        <h3>Checkboxes + AutoSelectMode = Checkbox, disabled and checked node sample</h3>
         <p>
-            Checkboxes tree in which the state of parents depends on children.
-            <strong>Parent controls children with its checkbox.</strong>
+            Selecting all children selects parent, parent checkbox selects children.
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
-            <li>:use-plus-icons="true"</li>
+            <li>selection-mode="2"</li>
+            <li>icons-set="plus"</li>
             <li>:icons="true"</li>
             <li>:with-checkboxes="true"</li>
-            <li>selection-mode="2"</li>
         </ul>
         <p>
             Selected Nodes : {{currentNodesCheckboxes}}</br>
@@ -89,32 +88,56 @@
         <p>
             <m-tree :tree="multiNodeTree"
                     selection-mode="2"
+                    icons-set="plus"
                     :icons="true"
-                    :use-plus-icons="true"
                     :with-checkboxes="true"
                     :selected-nodes="currentNodesCheckboxes"
-                    :disabled-nodes="currentNodesCheckboxesDisabled"
+                    :disabled-nodes="disabledNodesCheckboxes"
                     @select="onSelect"></m-tree>
         </p>
     </div>
 
-    <div style="clear: both;"></div>
-
     <div style="width: 50%; float:left;">
-        <h3>Multiple Nodes, Checkboxes and Button Auto-Select</h3>
+        <h3>Checkboxes + AutoSelectMode = ParentCheckbox</h3>
         <p>
-            Checkboxes tree in which parents and children can be auto-selected with a button.
+            Children can be selected by parent checkbox, but not the other way around.
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
+            <li>selection-mode="2"</li>
+            <li>icons-set="plus"</li>
+            <li>:icons="true"</li>
+            <li>:with-checkboxes="true"</li>
+        </ul>
+        <p>
+            Selected Nodes : {{multiNodeTreeCheckboxAutoChildren}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    selection-mode="2"
+                    icons-set="plus"
+                    :icons="true"
+                    :with-checkboxes="true"
+                    :selected-nodes="multiNodeTreeCheckboxAutoChildren"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Checkboxes + AutoSelectMode = Button</h3>
+        <p>
+            Checkboxes tree in which parents and children can be auto-selected with a button (currently a placeholder).
+        </p>
+        <h5>Sample Tree Props: </h5>
+        <ul>
+            <li>selection-mode="2"</li>
             <li>auto-select-checkboxes-mode="button"</li>
             <li>:icons="true"</li>
             <li>:with-checkboxes="true"</li>
-            <li>selection-mode="2"</li>
         </ul>
         <p>Selected Nodes : {{currentNodesCheckboxesButtonAutoselect}}</p>
         <p>
-            <m-tree :tree="multiNodeTreeCheckboxButtonAutoSelectCheckboxes"
+            <m-tree :tree="multiNodeTree"
                     selection-mode="2"
                     auto-select-checkboxes-mode="button"
                     :icons="true"
@@ -124,35 +147,36 @@
         </p>
     </div>
 
+    <div style="clear: both;"></div>
+
     <div style="width: 50%; float:left;">
-        <h3>Multiple Nodes, Checkbox, Disabled Parent and No Auto-Select</h3>
+        <h3>Checkboxes + AutoSelectMode = None, disabled nodes sample</h3>
         <p>
             Checkboxes tree in which every elements are fully independent.
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
+            <li>selection-mode="2"</li>
             <li>auto-select-checkboxes-mode="none"</li>
-            <li>:use-plus-icons="true"</li>
+            <li>icons-set="plus"</li>
             <li>:icons="true"</li>
             <li>:with-checkboxes="true"</li>
-            <li>selection-mode="2"</li>
         </ul>
         <p>
-            Selected Nodes : {{currentNodesCheckboxesNoAutoSelectCheckboxes}}</br>
+            Selected Nodes : {{currentNodesCheckboxesNone}}</br>
         </p>
         <p>
-            <m-tree :tree="multiNodeTreeCheckboxNoAutoSelectCheckboxes"
+            <m-tree :tree="multiNodeTree"
                     selection-mode="2"
                     auto-select-checkboxes-mode="none"
+                    icons-set="plus"
                     :icons="true"
-                    :use-plus-icons="true"
                     :with-checkboxes="true"
-                    :disabled-nodes="disabledNodesCheckboxesNoAutoSelectCheckboxes"
-                    :selected-nodes="currentNodesCheckboxesNoAutoSelectCheckboxes"
+                    :disabled-nodes="disabledNodesCheckboxesNone"
+                    :selected-nodes="currentNodesCheckboxesNone"
                     @select="onSelect"></m-tree>
         </p>
     </div>
-
 
     <div style="clear: both;"></div>
 

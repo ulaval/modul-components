@@ -7,6 +7,7 @@ import IconFilePlugin from '../../icon-file/icon-file';
 import IconPlugin from '../../icon/icon';
 import PlusPlugin from '../../plus/plus';
 import { TREE_ICON_NAME } from '../component-names';
+import { MIconsSet } from '../tree';
 import WithRender from './tree-icon.html?style=./tree-icon.scss';
 
 const FOLDER_OPEN: string = 'm-svg__folder-open';
@@ -19,16 +20,20 @@ export class MTreeIcon extends ModulVue {
     public filename: string;
 
     @Prop()
-    public folder: boolean;
+    public isFolder: boolean;
 
     @Prop()
-    public usePlusIcons: boolean;
+    public isFolderOpen: boolean;
 
     @Prop()
-    public folderOpen: boolean;
+    public iconsSet: MIconsSet;
+
+    public get propIconsSet(): MIconsSet {
+        return this.iconsSet || MIconsSet.Folder;
+    }
 
     public get folderIcon(): string {
-        return this.folderOpen ? FOLDER_OPEN : FOLDER_CLOSED;
+        return this.isFolderOpen ? FOLDER_OPEN : FOLDER_CLOSED;
     }
 
     public get extensionFile(): string {
