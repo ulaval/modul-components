@@ -69,7 +69,6 @@ describe('MCheckbox', () => {
         return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
-
     it('should render correctly when a label is provided', () => {
         const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
