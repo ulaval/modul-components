@@ -109,7 +109,7 @@
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-disabled;
-            cursor: not-allowed;
+            cursor: initial;
             user-select: none;
         }
     }

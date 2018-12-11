@@ -48,6 +48,10 @@
                                @click="togglePasswordVisibility"
                                :icon-name="iconNamePassword"
                                v-if="propPasswordIcon && hasValue"></m-icon-button>
+                <m-icon class="m-textfield__icon-search"
+                        name="m-svg__search"
+                        size="18px"
+                        v-if="isTypeSearch"></m-icon>
             </transition>
         </template>
         <textarea ref="input"

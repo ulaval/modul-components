@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -16,12 +15,14 @@ import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
 
+
 export enum MTextfieldType {
     Text = 'text',
     Password = 'password',
     Email = 'email',
     Url = 'url',
-    Telephone = 'tel'
+    Telephone = 'tel',
+    Search = 'search'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
@@ -45,7 +46,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Password ||
             value === MTextfieldType.Telephone ||
             value === MTextfieldType.Text ||
-            value === MTextfieldType.Url
+            value === MTextfieldType.Url ||
+            value === MTextfieldType.Search
     })
     public type: MTextfieldType;
     @Prop({ default: true })
@@ -142,6 +144,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get isTextfieldValid(): boolean {
         return this.as<InputState>().isValid;
+    }
+
+    private get isTypeSearch(): boolean {
+        return this.type === MTextfieldType.Search;
     }
 
     private get hasCounterTransition(): boolean {
