@@ -33,16 +33,10 @@ export class MCheckbox extends ModulVue {
             value === MCheckboxPosition.Right
     })
     public position: MCheckboxPosition;
-    public propIndeterminate: boolean = this.indeterminate;
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
     private internalValue: boolean = false;
-
-    @Watch('indeterminate')
-    private onIndeterminateChange(value: boolean): void {
-        this.propIndeterminate = value;
-    }
 
     @Watch('value')
     private onValueChange(value: boolean): void {
@@ -65,6 +59,14 @@ export class MCheckbox extends ModulVue {
 
     private setFocus(value: boolean): void {
         this.isFocus = value;
+    }
+
+    public get propIndeterminate(): boolean {
+        return this.indeterminate && !this.propValue ? true : false;
+    }
+
+    public set propIndeterminate(newValue: boolean) {
+        this.indeterminate = newValue;
     }
 
     private get hasCheckboxLeft(): boolean {
