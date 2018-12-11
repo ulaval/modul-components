@@ -54,12 +54,12 @@
 
     <div style="clear: both;"></div>
 
-    <h2>Multiple Nodes Selection</h2>
+    <h2>Multiple Leaves (nodes) Selection</h2>
 
     <div style="width: 50%; float:left;">
         <h3>Basic</h3>
         <p>
-            Selected Nodes : {{currentNodesBasic}}</br>
+            Selected Leaves : {{currentNodesBasic}}</br>
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
@@ -71,7 +71,7 @@
     </div>
 
     <div style="width: 50%; float:left;">
-        <h3>Checkboxes + AutoSelectMode = Checkbox, disabled and checked node sample</h3>
+        <h3>Checkboxes + AutoSelectMode = Checkbox, disabled and checked leaves sample</h3>
         <p>
             Selecting all children selects parent, parent checkbox selects children.
         </p>
@@ -83,7 +83,7 @@
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
-            Selected Nodes : {{currentNodesCheckboxes}}</br>
+            Selected Leaves : {{currentNodesCheckboxes}}</br>
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
@@ -111,7 +111,7 @@
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
-            Selected Nodes : {{currentNodesCheckboxesParent}}</br>
+            Selected Leaves : {{currentNodesCheckboxesParent}}</br>
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
@@ -137,7 +137,7 @@
             <li>:icons="true"</li>
             <li>:with-checkboxes="true"</li>
         </ul>
-        <p>Selected Nodes : {{currentNodesCheckboxesButtonAutoselect}}</p>
+        <p>Selected Leaves : {{currentNodesCheckboxesButtonAutoselect}}</p>
         <p>
             <m-tree :tree="multiNodeTree"
                     selection-mode="2"
@@ -152,7 +152,7 @@
     <div style="clear: both;"></div>
 
     <div style="width: 50%; float:left;">
-        <h3>Checkboxes + AutoSelectMode = None, disabled nodes sample</h3>
+        <h3>Checkboxes + AutoSelectMode = None, disabled leaves sample</h3>
         <p>
             Checkboxes tree in which every elements are fully independant.
         </p>
@@ -165,7 +165,7 @@
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
-            Selected Nodes : {{currentNodesCheckboxesNone}}</br>
+            Selected Leaves : {{currentNodesCheckboxesNone}}</br>
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
