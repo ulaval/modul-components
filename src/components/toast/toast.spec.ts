@@ -55,8 +55,8 @@ describe(`MToast`, () => {
                 expect(wrapper.vm.position).toEqual(MToastPosition.BottomRight);
             });
 
-            it(`Should have a timeout set to 0`, () => {
-                expect(wrapper.vm.timeout).toEqual(0);
+            it(`Should have a timeout set to none`, () => {
+                expect(wrapper.vm.timeout).toEqual('none');
             });
 
             it(`Should have an icon`, () => {
@@ -110,7 +110,7 @@ describe(`MToast`, () => {
             it(`Should appear and then disappear`, () => {
                 initializeWrapper();
                 wrapper.setProps({
-                    timeout: 5000
+                    timeout: 'short'
                 });
                 jest.runOnlyPendingTimers(); // wait for component to be instancialized
 
