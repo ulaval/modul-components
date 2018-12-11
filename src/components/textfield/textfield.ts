@@ -100,14 +100,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     public get inputType(): MTextfieldType {
-        let type: MTextfieldType = MTextfieldType.Text;
-        if (this.type === MTextfieldType.Password && this.passwordAsText) {
-            type = MTextfieldType.Text;
-        } else if (this.type === MTextfieldType.Password || this.type === MTextfieldType.Email || this.type === MTextfieldType.Url ||
-            this.type === MTextfieldType.Telephone) {
-            type = this.type;
-        }
-        return type;
+        return !this.passwordAsText ? this.type : MTextfieldType.Text;
     }
 
     private get iconNamePassword(): string {
