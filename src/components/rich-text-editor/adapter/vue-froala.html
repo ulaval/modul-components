@@ -1,15 +1,17 @@
 <div class="vue-froala"
-    @click.stop
-    @mousedown.capture="isDirty = true"
-    @touchstart.capture="isDirty = true"
-    :class="{
+     @click.stop
+     @mousedown.capture="isDirty = !disabled"
+     @touchstart.capture="isDirty = !disabled"
+     :class="{
         'm--is-focus': isFocused,
         'm--is-collapsed': collapsed,
         'm--is-anim-ready': isInitialized,
         'm--is-dirty': isDirty,
         'm--is-desktop' : isEqMinXS,
         'm--is-mobile' : isEqMaxXS,
-        'm--is-readonly' : readonly
+        'm--is-readonly' : readonly,
+        'm--is-disabled' : disabled
     }">
-    <component ref="editor" :is="tag"></component>
+    <component ref="editor"
+               :is="tag"></component>
 </div>

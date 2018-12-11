@@ -18,11 +18,8 @@
                 cursor: grab;
             }
 
-            .dragHandle {
+            .drag-handle {
                 flex: none;
-                width: 25px;
-                height: 25px;
-                background: $m-color--grey-light;
                 cursor: grab;
                 margin-right: $m-margin;
             }

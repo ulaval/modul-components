@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`m-table-header Given a add button label, left and right slots Should render correctly 1`] = `
+<div class="m-table-header">
+    <div>SLOT LEFT</div>
+    <div class="m-table-header__spacer"></div>
+    <div>SLOT RIGHT</div>
+    <m-link icon="true" icon-name="m-svg__add-circle-filled" icon-size="22px" mode="button" class="m-table-header__add-btn m--has-margin">ADD BUTTON</m-link>
+</div>
+`;
+
+exports[`m-table-header Given content in left slot Should render correctly 1`] = `
+<div class="m-table-header">
+    <div>SLOT LEFT</div>
+    <div class="m-table-header__spacer"></div>
+</div>
+`;
+
+exports[`m-table-header Given content in right slot Should render correctly 1`] = `
+<div class="m-table-header">
+    <div class="m-table-header__spacer"></div>
+    <div>SLOT RIGHT</div>
+</div>
+`;
+
+exports[`m-table-header Should render correctly 1`] = `
+<div class="m-table-header">
+    <div class="m-table-header__spacer"></div>
+</div>
+`;

@@ -1,5 +1,4 @@
 import { PluginObject } from 'vue';
-
 import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
 
 const FrenchPlugin: PluginObject<any> = {
@@ -45,6 +44,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/tree/tree.lang.fr.json'),
                 require('../components/scroll-top/scroll-top.lang.fr.json'),
                 require('../components/session-expired/session-expired.lang.fr.json'),
+                require('../components/show-more/show-more.lang.fr.json'),
                 require('../components/sidebar/sidebar.lang.fr.json'),
                 require('../components/spinner/spinner.lang.fr.json'),
                 require('../components/switch/switch.lang.fr.json'),
