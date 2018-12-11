@@ -12,12 +12,28 @@ export interface ToastParams {
     timeout?: number;
     icon?: boolean;
 }
-const TIME_BEFORE_ANIMATION_IS_OVER: number = 200;
+
+export interface ToastErrorParams {
+    text: string;
+    actionLabel?: string;
+    action?: (event: Event) => any;
+    position?: MToastPosition;
+    timeout?: number;
+    icon?: boolean;
+}
+
+const TIME_BEFORE_ANIMATION_IS_OVER: number = 300;
 
 export class ToastService {
     public activeToast?: MToast;
     public toasts: MToast[] = [];
     public baseTopPosition: string = '0';
+
+    public error(errorParams: ToastErrorParams): void {
+        let params: ToastParams = { ...errorParams };
+        params.state = MMessageState.Error;
+        this.show(params);
+    }
 
     public show(params: ToastParams): void {
         const toast: MToast = this.createToast(params);
@@ -32,7 +48,7 @@ export class ToastService {
         }
     }
 
-    public async clear(): Promise<any> {
+    public clear(): void {
         if (this.activeToast) {
             this.activeToast.open = false;
         }

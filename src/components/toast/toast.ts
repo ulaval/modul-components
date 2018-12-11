@@ -15,6 +15,11 @@ import { MLinkMode } from '../link/link';
 import { MMessageState } from '../message/message';
 import WithRender from './toast.html?style=./toast.scss';
 
+export enum MToastTimeout {
+    none = 'none',
+    short = 'short',
+    long = 'long'
+}
 
 export enum MToastPosition {
     TopLeft = 'top-left',
@@ -53,9 +58,13 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     public position: MToastPosition;
 
     @Prop({
-        default: 0
+        default: MToastTimeout.none,
+        validator: value =>
+            value === MToastTimeout.none ||
+            value === MToastTimeout.short ||
+            value === MToastTimeout.long
     })
-    public timeout: number;
+    public timeout: MToastTimeout;
 
     @Prop()
     public open: boolean;
@@ -78,6 +87,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     };
 
     private buttonMode: MLinkMode = MLinkMode.Button;
+    private internalTimeout: number;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         if (value) {
@@ -85,10 +95,12 @@ export class MToast extends ModulVue implements PortalMixinImpl {
                 this.getPortalElement().style.transform = `translateY(${this.offset})`;
             }
 
-            if (this.timeout) {
+            this.internalTimeout = this.convertTimeout(this.timeout);
+
+            if (this.internalTimeout > 0) {
                 setTimeout(() => {
                     this.onClose();
-                }, this.timeout);
+                }, this.internalTimeout);
             }
         }
         return true;
@@ -114,6 +126,18 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 
     @Emit('action-button')
     private actionButton(event: Event): void {
+    }
+
+    private convertTimeout(timeout: MToastTimeout): number {
+        switch (timeout) {
+            case 'long':
+                return 15000;
+            case 'short':
+                return 5000;
+            case 'none':
+            default:
+                return 0;
+        }
     }
 
     private onAction($event): void {

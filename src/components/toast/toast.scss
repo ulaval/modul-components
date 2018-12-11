@@ -68,23 +68,11 @@ $m-toast-max-width: 768px;
         }
     }
 
-    &.m--is-enter-active,
-    &.m--is-leave-active {
-        transition: background linear;
-    }
-
-    &.m--is-enter-active {
-        .m-toast__wrap {
-            transition: $m-transition-duration--xl;
-            transition-timing-function: ease-out;
-        }
-    }
-
     &.m--is-leave-active {
         &,
         .m-toast__wrap {
-            transition: $m-transition-duration--s;
-            transition-timing-function: ease-in;
+            opacity: 0;
+            transition: opacity $m-transition-duration ease-in-out;
         }
     }
 
@@ -133,12 +121,6 @@ $m-toast-max-width: 768px;
                 transform: translateY(-130%);
             }
         }
-
-        &.m--is-leave-active {
-            .m-toast__wrap {
-                transform: translateY(-130%);
-            }
-        }
     }
 
     &.m--is-bottom {
@@ -147,12 +129,6 @@ $m-toast-max-width: 768px;
         }
 
         &.m--is-enter-active {
-            .m-toast__wrap {
-                transform: translateY(130%);
-            }
-        }
-
-        &.m--is-leave-active {
             .m-toast__wrap {
                 transform: translateY(130%);
             }

@@ -53,6 +53,15 @@ export class MToastServiceSandbox extends ModulVue {
         });
     }
 
+    public error(): void {
+        this.$toast.error({
+            text: 'You have an error',
+            actionLabel: 'retry',
+            action: this.action,
+            icon: true
+        });
+    }
+
     public action(event: Event): void {
         alert(`Type of event ${event.type}`);
     }
