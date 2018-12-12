@@ -50,14 +50,24 @@ $m-tooltip--max-height: 280px !default;
         justify-content: center;
         width: $m-touch-size;
         height: $m-touch-size;
-        color: $m-color--interactive;
-        outline: none;
-        cursor: pointer;
+        transition: color $m-transition-duration--s ease;
+
+        &:not(.m--is-link) {
+            color: $m-color--interactive;
+
+            &:hover,
+            &:focus {
+                color: $m-color--interactive-darker;
+            }
+        }
 
         &:hover,
         &:focus {
-            color: $m-color--interactive-darker;
+            color: $m-color--black;
         }
+
+        outline: none;
+        cursor: pointer;
     }
 
     &__body {
@@ -65,6 +75,10 @@ $m-tooltip--max-height: 280px !default;
         background: $m-color--information;
         word-break: break-word;
         user-select: text;
+
+        &.m--is-link {
+            background: $m-color--white;
+        }
 
         @media (max-width: $m-mq--max--s) {
             position: relative;
@@ -85,7 +99,11 @@ $m-tooltip--max-height: 280px !default;
             max-height: $m-tooltip--max-height;
             overflow-x: hidden;
             overflow-y: auto;
-            border: 1px solid $m-color--interactive;
+
+            &:not(.m--is-link) {
+                border: 1px solid $m-color--interactive;
+            }
+
             border-radius: $m-border-radius--s;
         }
 
@@ -105,5 +123,9 @@ $m-tooltip--max-height: 280px !default;
                 }
             }
         }
+    }
+
+    &__link {
+        border-bottom: 2px dotted currentColor;
     }
 }
