@@ -1,7 +1,8 @@
 import Vue from 'vue';
-import I18nPlugin, { Messages, ENGLISH, I18nPluginOptions, FormatMode } from './i18n';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
+import I18nPlugin, { ENGLISH, FormatMode, I18nPluginOptions, Messages, SpecialCharacter } from './i18n';
+
 
 describe('i18n plugin', () => {
     describe('when not installed', () => {
@@ -89,6 +90,136 @@ describe('i18n plugin', () => {
         });
         it(`calling translate with params modifier should return the string with the params applied`, () => {
             expect(Vue.prototype.$i18n.translate('exemples_avec_parametres:decompte_athletes_olympiques_pays', { nbAthletes: 2925, nbPays: 93 })).toEqual('Il y a 2925 athlètes olympiques et 93 pays participants.');
+        });
+    });
+
+    describe(`When special character`, () => {
+        describe(`in Vsprintf mode`, () => {
+            beforeEach(() => {
+                let options: I18nPluginOptions = {
+                    formatMode: FormatMode.Vsprintf
+                };
+
+                resetModulPlugins();
+                Vue.use(I18nPlugin, options);
+                addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+            });
+            describe(`Non-breaking space is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada', { nbMedailles: 30 });
+                    expect(translation.indexOf(SpecialCharacter.NBSP)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_NBSP_')).toBe(-1);
+                });
+            });
+
+            describe(`Non-breaking hypen is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada_usa', { nieme: 3 });
+                    expect(translation.indexOf(SpecialCharacter.NBHYPHEN)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_NBHYPHEN_')).toBe(-1);
+                });
+            });
+
+            describe(`Em-Dash is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques', { nbMedailles: 3 });
+                    expect(translation.indexOf(SpecialCharacter.EMDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_EMDASH_')).toBe(-1);
+                });
+            });
+
+            describe(`En-Dash is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:olympiques_rivalite', {});
+                    expect(translation.indexOf(SpecialCharacter.ENDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_ENDASH_')).toBe(-1);
+
+                });
+            });
+        });
+        describe(`in Sprintf mode`, () => {
+            beforeEach(() => {
+                let options: I18nPluginOptions = {
+                    formatMode: FormatMode.Sprintf
+                };
+
+                resetModulPlugins();
+                Vue.use(I18nPlugin, options);
+                addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+            });
+            describe(`Non-breaking space is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada', { nbMedailles: 30 });
+                    expect(translation.indexOf(SpecialCharacter.NBSP)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_NBSP_')).toBe(-1);
+                });
+            });
+
+            describe(`Non-breaking hypen is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada_usa', { nieme: 3 });
+                    expect(translation.indexOf(SpecialCharacter.NBHYPHEN)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_NBHYPHEN_')).toBe(-1);
+                });
+            });
+
+            describe(`Em-Dash is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques', { nbMedailles: 3 });
+                    expect(translation.indexOf(SpecialCharacter.EMDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_EMDASH_')).toBe(-1);
+                });
+            });
+
+            describe(`En-Dash is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:olympiques_rivalite', {});
+                    expect(translation.indexOf(SpecialCharacter.ENDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf('_ENDASH_')).toBe(-1);
+                });
+            });
+        });
+        describe(`in Default mode`, () => {
+            beforeEach(() => {
+                let options: I18nPluginOptions = {
+                    formatMode: FormatMode.Default
+                };
+
+                resetModulPlugins();
+                Vue.use(I18nPlugin, options);
+                addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
+            });
+            describe(`Non-breaking space is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada', { nbMedailles: 30 });
+                    expect(translation.indexOf(SpecialCharacter.NBSP)).toBe(-1);
+                    expect(translation.indexOf('_NBSP_')).toBeGreaterThan(-1);
+                });
+            });
+
+            describe(`Non-breaking hypen is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada_usa', { nieme: 3 });
+                    expect(translation.indexOf(SpecialCharacter.NBHYPHEN)).toBe(-1);
+                    expect(translation.indexOf('_NBHYPHEN_')).toBeGreaterThan(-1);
+                });
+            });
+
+            describe(`Em-Dash is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques', { nbMedailles: 3 });
+                    expect(translation.indexOf(SpecialCharacter.EMDASH)).toBe(-1);
+                    expect(translation.indexOf('_EMDASH_')).toBeGreaterThan(-1);
+                });
+            });
+
+            describe(`En-Dash is used`, () => {
+                it(`then will be replaced in translation`, () => {
+                    const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:olympiques_rivalite', {});
+                    expect(translation.indexOf(SpecialCharacter.ENDASH)).toBe(-1);
+                    expect(translation.indexOf('_ENDASH_')).toBeGreaterThan(-1);
+                });
+            });
         });
     });
 

@@ -49,9 +49,6 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
             <div class="m-input-style__body__right">
                 <m-icon-button icon-name="m-svg__clock" disabled="disabled" button-size="22px" aria-controls="mTimepicker-uuid"><span class="m-i18n">Open time selector</span> </m-icon-button>
             </div>
-            <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-input-style__disabled-icon">
-                <use aria-hidden="true"></use>
-            </svg>
         </div>
     </div>
     <div class="m-validation-message">

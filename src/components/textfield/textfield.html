@@ -38,7 +38,8 @@
                v-model="model"
                v-if="!hasWordWrap"
                :type="inputType">
-        <template slot="right-content" v-if="!hasWordWrap">
+        <template slot="right-content"
+                  v-if="!hasWordWrap">
             <transition name="m--is">
                 <m-icon-button class="m-textfield__icon-password"
                                button-size="22px"
@@ -47,38 +48,45 @@
                                @click="togglePasswordVisibility"
                                :icon-name="iconNamePassword"
                                v-if="propPasswordIcon && hasValue"></m-icon-button>
+                <m-icon class="m-textfield__icon-search"
+                        name="m-svg__search"
+                        size="18px"
+                        v-if="isTypeSearch"></m-icon>
             </transition>
         </template>
         <textarea ref="input"
-                :id="id"
-                class="m-textfield__input"
-                :disabled="!active"
-                :placeholder="placeholder"
-                :readonly="readonly"
-                rows="1"
-                @focus="onFocus"
-                @blur="onBlur"
-                @change="onChange"
-                @keypress.enter.prevent
-                @keyup="onKeyup"
-                @keydown="onKeydown"
-                @paste="onPaste"
-                :autocomplete="autocomplete"
-                v-model="model"
-                v-m-textarea-auto-height
-                v-if="hasWordWrap">
+                  :id="id"
+                  class="m-textfield__input"
+                  :disabled="!active"
+                  :placeholder="placeholder"
+                  :readonly="readonly"
+                  rows="1"
+                  @focus="onFocus"
+                  @blur="onBlur"
+                  @change="onChange"
+                  @keypress.enter.prevent
+                  @keyup="onKeyup"
+                  @keydown="onKeydown"
+                  @paste="onPaste"
+                  :autocomplete="autocomplete"
+                  v-model="model"
+                  v-m-textarea-auto-height
+                  v-if="hasWordWrap">
         </textarea>
     </m-input-style>
     <div class="m-textfield__validation">
-        <m-validation-message
-            class="m-textfield__validation__message"
-            :disabled="isDisabled"
-            :waiting="isWaiting"
-            :error="hasTextfieldError"
-            :error-message="errorMessage"
-            :valid="isTextfieldValid"
-            :valid-message="validMessage"
-            :helper-message="helperMessage"></m-validation-message>
-        <m-character-count v-if="characterCount" :value-length="valueLength" :max-length="maxLength" :threshold="characterCountThreshold" :transition="hasCounterTransition"></m-character-count>
+        <m-validation-message class="m-textfield__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasTextfieldError"
+                              :error-message="errorMessage"
+                              :valid="isTextfieldValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+        <m-character-count v-if="characterCount"
+                           :value-length="valueLength"
+                           :max-length="maxLength"
+                           :threshold="characterCountThreshold"
+                           :transition="hasCounterTransition"></m-character-count>
     </div>
 </div>

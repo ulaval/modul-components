@@ -1,9 +1,12 @@
 <div class="m-table-sandbox">
     <h2>Classic table</h2>
-    <m-table :columns="simpleColumns" :rows="rows"></m-table>
+    <m-table :columns="simpleColumns"
+             :rows="rows"></m-table>
 
     <h2>Semi-complex table</h2>
-    <m-table :columns="columns" :rows="rows" style="width:30%;">
+    <m-table :columns="columns"
+             :rows="rows"
+             style="width:30%;">
         <thead slot="header">
             <tr>
                 <th colspan="2">NAME, USERNAME</th>
@@ -12,25 +15,57 @@
         </thead>
 
         <tbody slot="body">
-            <tr v-for="(row, index) in rows" :key="index">
+            <tr v-for="(row, index) in rows"
+                :key="index">
                 <td colspan="2">{{ row.name }} - {{ row.username }}</td>
                 <td>{{ row.age }}</td>
             </tr>
         </tbody>
     </m-table>
 
-    <h2>Complex table</h2>
-    <m-table :columns="columns" :rows="rows">
+    <h2>Complex table with custom cell</h2>
+    <m-table :columns="columns"
+             :rows="rows">
         <template slot="header.age">
-            <th>AGE</th>
+            AGE
         </template>
-        <template slot="body.age" scope="{data}">
-            <td>{{ data.age }} ans</td>
+        <template slot="body.age"
+                  slot-scope="{data}">
+            {{ data.age }} ans
         </template>
-        <template slot="body.check" scope="{data}">
-            <td><m-checkbox @change="onCheck(data.id)"></m-checkbox></td>
+        <template slot="body.check"
+                  slot-scope="{data}">
+            <m-checkbox @change="onCheck(data.id)"></m-checkbox>
         </template>
-        <template slot="body.menu" scope="{data}">
+        <template slot="body.menu"
+                  slot-scope="{data}">
+            <m-option size="33px">
+                <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
+                <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+            </m-option>
+        </template>
+        <template slot="footer">
+            <td class="m-table-sandbox__show-more"
+                colspan="4">
+                <m-button class="m-table-sandbox__show-more-button"
+                          @click="showMore()">
+                    <p>Show more results</p>
+                    <span>1-5 of 45</span>
+                </m-button>
+            </td>
+        </template>
+    </m-table>
+
+    <h2>Complex table with custom row</h2>
+    <m-table :columns="columns"
+             :rows="rows">
+        <template slot="row"
+                  slot-scope="{data}">
+            <td> </td>
+            <td> {{ data.name }}</td>
+            <td colspan="2">
+                {{ data.age }} ans - {{ data.username }}
+            </td>
             <td>
                 <m-option size="33px">
                     <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
@@ -39,8 +74,10 @@
             </td>
         </template>
         <template slot="footer">
-            <td class="m-table-sandbox__show-more" colspan="4">
-                <m-button class="m-table-sandbox__show-more-button" @click="showMore">
+            <td class="m-table-sandbox__show-more"
+                colspan="4">
+                <m-button class="m-table-sandbox__show-more-button"
+                          @click="showMore()">
                     <p>Show more results</p>
                     <span>1-5 of 45</span>
                 </m-button>
@@ -49,14 +86,50 @@
     </m-table>
 
     <h2>Empty table - default slot</h2>
-    <m-table :columns="columns" :rows="emptyRows"></m-table>
+    <m-table :columns="columns"
+             :rows="emptyRows"></m-table>
 
     <h2>Empty table - custom slot</h2>
-    <m-table class="m-table-sandbox__empty" :columns="columns" :rows="emptyRows">
+    <m-table class="m-table-sandbox__empty"
+             :columns="columns"
+             :rows="emptyRows">
         <template slot="empty">
-            <td class="m-table-sandbox__empty__cell" :colspan="columns.length">
+            <td class="m-table-sandbox__empty__cell"
+                :colspan="columns.length">
                 Empty table
             </td>
         </template>
+    </m-table>
+
+    <h2>With title</h2>
+    <m-table :columns="columns"
+             :rows="rows"
+             title="Title">
+    </m-table>
+
+    <h2>Search slot</h2>
+    <m-table :columns="columns"
+             :rows="rows">
+        <m-textfield slot="search"></m-textfield>
+    </m-table>
+
+    <h2>Add button</h2>
+    <m-table :columns="columns"
+             :rows="rows"
+             add-btn-label="Add label">
+    </m-table>
+
+    <h2>Full header</h2>
+    <m-table :columns="columns"
+             :rows="rows"
+             title="Title"
+             add-btn-label="Add label">
+        <m-textfield slot="search"></m-textfield>
+    </m-table>
+
+    <h2>Loading</h2>
+    <m-table :columns="columns"
+             :rows="rows"
+             :loading="true">
     </m-table>
 </div>
