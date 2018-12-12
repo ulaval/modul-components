@@ -35,7 +35,7 @@
 
     <h3 class="m-u--h6">Type courriel</h3>
     <m-textfield label="Adresse de courriel"
-                 type="mail"></m-textfield>
+                 type="email"></m-textfield>
 
     <h3 class="m-u--h6">Type url</h3>
     <m-textfield label="URL"
@@ -43,7 +43,7 @@
 
     <h3 class="m-u--h6">Type téléphone</h3>
     <m-textfield label="Téléphone"
-                 type="phone"></m-textfield>
+                 type="tel"></m-textfield>
 
 
     <h2>Test 2 : Compteur de caractères</h2>
@@ -160,6 +160,8 @@
     <p>Le wordwrap est bien appliqué car le textfield est de type text.</p>
     <m-textfield class="m-u--margin-top"
                  :word-wrap="true"
+                 type="text"
+                 label="Textarea"
                  value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
 
     <h3 class="m-u--h6">Champ de saisie de type courriel et word-wrap à true</h3>
@@ -174,4 +176,20 @@
                  type="password"
                  label="Password"
                  placeholder="Enter your password"></m-textfield>
+
+
+    <h2>Test 6: Search</h2>
+    <m-textfield class="m-u--margin-top"
+                 type="search"
+                 label="search"
+                 placeholder="what are you searching for today...">
+    </m-textfield>
+
+    <h2>Test 7: icon</h2>
+    <m-textfield class="m-u--margin-top"
+                 icon-name="m-svg__attachment"
+                 label="A pretty neat textfield with a nice icon"
+                 placeholder="isn't it ?">
+    </m-textfield>
+
 </div>

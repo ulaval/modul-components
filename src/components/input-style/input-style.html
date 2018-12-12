@@ -1,5 +1,5 @@
 <div class="m-input-style"
-    :class="[{ 'm--is-focus' : isFocus,
+     :class="[{ 'm--is-focus' : isFocus,
               'm--is-readonly': readonly,
               'm--is-label-up': labelIsUp,
               'm--is-disabled' : isDisabled,
@@ -8,24 +8,41 @@
               'm--is-valid' : isValid,
               'm--has-label': hasLabel,
               'm--has-value': hasValue,
-              'm--has-border-top': borderTop,
               'm--is-anim-ready': animReady },
               'm--is-tag-' + tagStyle]"
-    @click="onClick"
-    @mousedown="onMousedown"
-    @mouseup="onMouseup"
-    :style="{ width: width }">
-    <label class="m-input-style__label" ref="label" :for="labelFor" v-if="hasLabel"><m-icon :name="iconName" v-if="hasIcon"></m-icon><span v-if="hasLabelText">{{ label }}</span><sup class="m-input-style__required-marker" v-if="requiredMarker">*</sup></label>
+     @click="onClick"
+     @mousedown="onMousedown"
+     @mouseup="onMouseup"
+     :style="{ width: width }">
+    <label class="m-input-style__label"
+           ref="label"
+           :for="labelFor"
+           v-if="hasLabel">
+        <span class="m-input-style__text">
+            <m-icon :name="iconName"
+                    v-if="hasIcon"></m-icon><span v-if="hasLabelText">{{ label }}</span><sup class="m-input-style__required-marker"
+                 v-if="requiredMarker">*</sup>
+        </span>
+    </label>
     <div class="m-input-style__body">
         <div class="m-input-style__body__left">
             <slot></slot>
-            <m-i18n k="m-input-style:empty-value" class="m-input-style__body__transparent-text" aria-hidden="true" v-if="!hasDefaultSlot"></m-i18n>
-            <div class="m-input-style__body__adjust-width-auto" ref="adjustWidthAuto" aria-hidden="true" v-if="hasAdjustWidthAutoSlot"><slot name="adjust-width-auto"></slot></div>
+            <m-i18n k="m-input-style:empty-value"
+                    class="m-input-style__body__transparent-text"
+                    aria-hidden="true"
+                    v-if="!hasDefaultSlot"></m-i18n>
+            <div class="m-input-style__body__adjust-width-auto"
+                 ref="adjustWidthAuto"
+                 aria-hidden="true"
+                 v-if="hasAdjustWidthAutoSlot">
+                <slot name="adjust-width-auto"></slot>
+            </div>
         </div>
         <div class="m-input-style__body__right">
             <slot name="right-content"></slot>
         </div>
-        <m-spinner size="small" class="m-input-style__spinner" v-if="isWaiting"></m-spinner>
-        <m-icon class="m-input-style__disabled-icon" name="m-svg__not-allowed" v-if="isDisabled"></m-icon>
+        <m-spinner size="small"
+                   class="m-input-style__spinner"
+                   v-if="isWaiting"></m-spinner>
     </div>
 </div>

@@ -1,41 +1,16 @@
 @import 'abstracts/variables';
-$m-input-style--color-default-text: $m-color--disabled !default;
-$m-input-style--color-focus: $m-color--interactive !default;
-$m-input-style--color-error: $m-color--error !default;
-$m-input-style--color-valid: $m-color--success !default;
-$m-input-style--color-disabled: $m-color--disabled !default;
-$m-input-style--color-waiting: $m-color--active !default;
-$m-input-style--padding: 4px !default;
+@import 'abstracts/var-input-style';
 
 .m-input-style {
     position: relative;
     display: inline-flex;
     flex-direction: column;
     outline: none;
-
-    &::before,
-    &::after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 2;
-        content: '';
-        display: block;
-    }
-
-    &::before {
-        transition: border-color $m-transition-duration ease;
-        width: 100%;
-        border-bottom: 1px solid $m-color--grey;
-    }
-
-    &::after {
-        transition: width $m-transition-duration--l ease-in-out;
-        width: 0;
-        height: 2px;
-        background: $m-input-style--color-focus;
-    }
+    border: 1px solid $m-color--grey-light;
+    border-radius: 3px;
+    padding: $m-input-style--padding;
+    transition: border-color $m-transition-duration--l ease-in-out;
+    margin-top: $m-spacing--s;
 
     &:hover:not(.m--is-focus),
     &.m--has-value {
@@ -50,13 +25,9 @@ $m-input-style--padding: 4px !default;
         }
     }
 
-    &.m--is-focus:not(.m--is-readonly) {
-        &::after {
-            width: 100%;
-        }
-    }
-
     &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
+        border-color: $m-input-style--color-focus;
+
         .m-input-style__label,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
@@ -69,9 +40,8 @@ $m-input-style--padding: 4px !default;
 
         .m-input-style {
             &__label {
-                transform: translate3d(0, -3px, 0) scale(0.8); // Magic number
+                transform: translate3d(0, -#{$m-input-style--label-offset}, 0) scale(0.8);
                 z-index: 1;
-                width: 100%;
             }
         }
     }
@@ -83,13 +53,7 @@ $m-input-style--padding: 4px !default;
     }
 
     &.m--has-error {
-        &::before {
-            border-color: $m-input-style--color-error;
-        }
-
-        &::after {
-            background: $m-input-style--color-error;
-        }
+        border-color: $m-input-style--color-error;
 
         .m-input-style__label,
         .m-icon-button.m-icon-button,
@@ -116,15 +80,7 @@ $m-input-style--padding: 4px !default;
 
     &.m--is-disabled,
     &.m--is-waiting {
-        &::before {
-            border-bottom-style: dashed;
-            border-color: $m-input-style--color-disabled;
-        }
-
-        &::after {
-            width: 0;
-            background: $m-input-style--color-disabled;
-        }
+        border-style: dashed;
 
         .m-input-style__label,
         .m-input-style__body,
@@ -153,7 +109,7 @@ $m-input-style--padding: 4px !default;
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             color: $m-input-style--color-disabled;
-            cursor: not-allowed;
+            cursor: initial;
             user-select: none;
         }
     }
@@ -170,12 +126,6 @@ $m-input-style--padding: 4px !default;
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
             cursor: wait;
-        }
-    }
-
-    &.m--has-label {
-        .m-input-style__body {
-            margin-top: -12px; // Magic number
         }
     }
 
@@ -204,11 +154,8 @@ $m-input-style--padding: 4px !default;
         left: 0;
         z-index: 1;
         transform-origin: 0 0;
-        transform: translate3d(0, 12px, 0); // Magic number
-        display: inline-flex;
+        transform: translate3d(0, 0, 0); // Magic number
         align-items: center;
-        width: 100%;
-        margin-bottom: 4px; // Magic number
         font-size: $m-font-size;
         font-weight: $m-font-weight;
         color: $m-color--text-light;
@@ -220,15 +167,25 @@ $m-input-style--padding: 4px !default;
         }
     }
 
+    &__text {
+        padding: 0 $m-spacing--xs;
+        display: inline-block;
+        background-color: $m-color--white;
+
+        .m-inplace-edit & {
+            background-color: $m-color--information;
+        }
+    }
+
     &__required-marker {
         color: $m-color--accent;
         font-size: inherit;
         font-weight: $m-font-weight--black;
         margin-left: 2px;
+        float: right;
     }
 
     &__body {
-        position: relative;
         z-index: 3;
         display: flex;
         align-items: center;
@@ -236,11 +193,20 @@ $m-input-style--padding: 4px !default;
         width: 100%;
         font-weight: $m-font-weight;
         text-decoration: none;
-        padding-bottom: $m-input-style--padding;
         background-color: $m-color--white;
 
-        .m--has-border-top.m--is-focus & {
-            padding-bottom: $m-input-style--padding / 2;
+        .m-rich-text .m--is-label-up &,
+        .m--has-word-wrap .m--is-label-up & {
+            position: relative;
+            width: 100%;
+            bottom: unset;
+            margin-top: -#{$m-input-style--label-offset};
+        }
+
+        .m--has-label & {
+            position: absolute;
+            bottom: $m-input-style--padding;
+            width: calc(100% - #{$m-input-style--padding * 2});
         }
 
         &,
@@ -254,57 +220,6 @@ $m-input-style--padding: 4px !default;
             min-height: 24px;
             flex: 1 1 auto;
             max-width: 100%;
-
-            .m--has-border-top & {
-                .m--is-focus & {
-                    padding-top: 4px;
-                    margin-top: 4px;
-                }
-
-                &::before,
-                &::after {
-                    top: 0;
-                    content: "";
-                    position: absolute;
-                    display: block;
-                    transition: background-color $m-transition-duration--l ease-in-out, width $m-transition-duration--l ease-in-out;
-                }
-
-                &::before {
-                    width: 100%;
-                    height: 2px;
-
-                    .m--is-focus & {
-                        background-color: $m-color--interactive;
-                    }
-
-                    .m--is-focus.m--is-valid & {
-                        background-color: $m-input-style--color-valid;
-                    }
-
-                    .m--is-focus.m--has-error & {
-                        background-color: $m-input-style--color-error;
-                    }
-                }
-
-                &::after {
-                    width: 0;
-                    height: 4px;
-
-                    .m--is-focus & {
-                        width: 100%;
-                        background-color: $m-color--interactive;
-                    }
-
-                    .m--is-focus.m--is-valid & {
-                        background-color: $m-input-style--color-valid;
-                    }
-
-                    .m--is-focus.m--has-error & {
-                        background-color: $m-input-style--color-error;
-                    }
-                }
-            }
         }
 
         &__right {
@@ -371,10 +286,7 @@ $m-input-style--padding: 4px !default;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
         line-height: $m-line-height;
-
-        @include m-is-ie() {
-            vertical-align: middle;
-        }
+        vertical-align: middle;
 
         &::-ms-clear,
         &::-ms-reveal {
@@ -493,3 +405,4 @@ $m-input-style--padding: 4px !default;
         }
     }
 }
+
