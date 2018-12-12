@@ -1,34 +1,49 @@
 <div>
     <h2 class="m-u--no-margin">Champ texte de base</h2>
-    <m-textfield label="Titre" value=""></m-textfield>
+    <m-textfield label="Titre"
+                 value=""></m-textfield>
 
     <h3 class="m-u--h6">Champ obligatoire</h3>
-    <m-textfield :required-marker="true" label="Nom" value="" error-message="Ce champ est obligatoire."></m-textfield>
+    <m-textfield :required-marker="true"
+                 label="Nom"
+                 value=""
+                 error-message="Ce champ est obligatoire."></m-textfield>
 
     <h3 class="m-u--h6">Champ désactivé</h3>
-    <m-textfield :disabled="true" label="Titre" value="text"></m-textfield>
+    <m-textfield :disabled="true"
+                 label="Titre"
+                 value="text"></m-textfield>
 
     <h3 class="m-u--h6">Champ lecture seule</h3>
-    <m-textfield :readonly="true" label="Titre"></m-textfield>
-    <m-textfield :readonly="true" label="Titre" value="texte"></m-textfield>
+    <m-textfield :readonly="true"
+                 label="Titre"></m-textfield>
+    <m-textfield :readonly="true"
+                 label="Titre"
+                 value="texte"></m-textfield>
 
     <h2>Test 1 : input type</h2>
     <p class="m-u--margin-bottom">Le clavier sur mobile doit s'ajuster en fonction du type défini sur le textfield.</p>
 
     <h3 class="m-u--h6">Type text</h3>
-    <m-textfield label="Titre" type="text"></m-textfield>
+    <m-textfield label="Titre"
+                 type="text"></m-textfield>
 
     <h3 class="m-u--h6">Type password</h3>
-    <m-textfield label="Mot de passe" type="password" password-icon="true"></m-textfield>
+    <m-textfield label="Mot de passe"
+                 type="password"
+                 password-icon="true"></m-textfield>
 
     <h3 class="m-u--h6">Type courriel</h3>
-    <m-textfield label="Adresse de courriel" type="mail"></m-textfield>
+    <m-textfield label="Adresse de courriel"
+                 type="mail"></m-textfield>
 
     <h3 class="m-u--h6">Type url</h3>
-    <m-textfield label="URL" type="url"></m-textfield>
+    <m-textfield label="URL"
+                 type="url"></m-textfield>
 
     <h3 class="m-u--h6">Type téléphone</h3>
-    <m-textfield label="Téléphone" type="phone"></m-textfield>
+    <m-textfield label="Téléphone"
+                 type="phone"></m-textfield>
 
 
     <h2>Test 2 : Compteur de caractères</h2>
@@ -38,9 +53,16 @@
         <li>Affichage du compteur : en tout temps</li>
     </ul>
 
-    <m-textfield label="Dépassement autorisé : Oui" :character-count="true" max-length="20" :length-overflow="true"></m-textfield>
+    <m-textfield label="Dépassement autorisé : Oui"
+                 :character-count="true"
+                 max-length="20"
+                 :length-overflow="true"></m-textfield>
     <br>
-    <m-textfield class="m-u--margin-top" label="Dépassement autorisé : Non" :character-count="true" max-length="20" :length-overflow="false"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 label="Dépassement autorisé : Non"
+                 :character-count="true"
+                 max-length="20"
+                 :length-overflow="false"></m-textfield>
 
     <h3>Seuil d'affichage</h3>
     <ul>
@@ -50,15 +72,40 @@
 
     <h6>Affichage du compteur :</h6>
 
-    <m-textfield class="m-u--margin-top" label="À partir de 25 caractères" :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="25"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 label="À partir de 25 caractères"
+                 :character-count="true"
+                 max-length="30"
+                 :length-overflow="true"
+                 character-count-threshold="25"></m-textfield>
     <br>
-    <m-textfield class="m-u--margin-top" label="À partir de 0 caractère (en tout temps)" :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="0"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 label="À partir de 0 caractère (en tout temps)"
+                 :character-count="true"
+                 max-length="30"
+                 :length-overflow="true"
+                 character-count-threshold="0"></m-textfield>
     <br>
-    <m-textfield class="m-u--margin-top" label="À partir de 30 caractères (une fois la limite atteinte)" :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="30"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 label="À partir de 30 caractères (une fois la limite atteinte)"
+                 :character-count="true"
+                 max-length="30"
+                 :length-overflow="true"
+                 character-count-threshold="30"></m-textfield>
     <br>
-    <m-textfield class="m-u--margin-top" label="À partir de 35 caractères (seuil supérieur à la limite)" :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="35"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 label="À partir de 35 caractères (seuil supérieur à la limite)"
+                 :character-count="true"
+                 max-length="30"
+                 :length-overflow="true"
+                 character-count-threshold="35"></m-textfield>
     <br>
-    <m-textfield class="m-u--margin-top" label="À partir de -5 caractères (seuil inférieur à 0)" :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="-5"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 label="À partir de -5 caractères (seuil inférieur à 0)"
+                 :character-count="true"
+                 max-length="30"
+                 :length-overflow="true"
+                 character-count-threshold="-5"></m-textfield>
 
     <h3>Affichage d'un message d'erreur</h3>
     <ul>
@@ -67,8 +114,12 @@
         <li>Affichage du compteur : en tout temps</li>
     </ul>
 
-    <m-textfield class="m-u--margin-top" :character-count="true" max-length="20" :length-overflow="true" value="L'utilisateur a saisi 35 caractères"
-        error-message="Ce champ ne peut comporter plus de 20 caractères.">
+    <m-textfield class="m-u--margin-top"
+                 :character-count="true"
+                 max-length="20"
+                 :length-overflow="true"
+                 value="L'utilisateur a saisi 35 caractères"
+                 error-message="Ce champ ne peut comporter plus de 20 caractères.">
     </m-textfield>
 
     <h3>Sous-titre dans un module d'aprentissage (Prisme)</h3>
@@ -80,8 +131,15 @@
 
     <p class="m-u--typo--precision">176 car. : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus ex, dignissim scelerisque vehicula, mempor. Saisir quelques caractères pour faire apparaître le compteur...</p>
 
-    <m-textfield class="m-u--margin-top" placeholder="Je suis un sous-titre" :character-count="true" max-length="200" character-count-threshold="180" max-width="medium"
-        :length-overflow="true" v-model="test4Model" :error="test4Model.length > 200 ? true : false">
+    <m-textfield class="m-u--margin-top"
+                 placeholder="Je suis un sous-titre"
+                 :character-count="true"
+                 max-length="200"
+                 character-count-threshold="180"
+                 max-width="medium"
+                 :length-overflow="true"
+                 v-model="test4Model"
+                 :error="test4Model.length > 200 ? true : false">
     </m-textfield>
 
     <h3>Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h3>
@@ -89,20 +147,31 @@
         Lorsque qu'on ajoute un compteur sur un champ sans limite de caractère, le compteur doit être masqué. Nous n'avons pas de cas d'utilisation de compteur de mots sans imposer de limite.
     </p>
 
-    <m-textfield class="m-u--margin-top" :character-count="true" character-counter-threshold="20"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 :character-count="true"
+                 character-counter-threshold="20"></m-textfield>
 
     <h2>Test 3 : Retour à la ligne automatique (word-wrap)</h2>
     <p>Le texte qui "dépasse" du champ de saisi doit revenir à la ligne automatiquement lorsque la ropriété word-wrap est activée (plutôt que de cacher le texte en surplus).
-        <br>From <a href="https://github.com/ulaval/modul-components/pull/260" target="blank">PR-260</a></p>
+        <br>From <a href="https://github.com/ulaval/modul-components/pull/260"
+           target="blank">PR-260</a></p>
 
     <h3 class="m-u--h6">Champ de saisie de type text et word-wrap à true</h3>
     <p>Le wordwrap est bien appliqué car le textfield est de type text.</p>
-    <m-textfield class="m-u--margin-top" :word-wrap="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 :word-wrap="true"
+                 value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></m-textfield>
 
     <h3 class="m-u--h6">Champ de saisie de type courriel et word-wrap à true</h3>
     <p>Le wordwrap n'est pas appliqué car le textfield n'est pas de type text. Envoie également une erreur dans la console.</p>
-    <m-textfield class="m-u--margin-top" type="email" word-wrap="true" value="Lorsque le type du champ de saisie est différent de text, ici courriel, le word-wrap ne doit pas s'activer."></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 type="email"
+                 word-wrap="true"
+                 value="Lorsque le type du champ de saisie est différent de text, ici courriel, le word-wrap ne doit pas s'activer."></m-textfield>
 
     <h2>Test 5: Password</h2>
-    <m-textfield class="m-u--margin-top" type="password" label="Password" placeholder="Enter your password"></m-textfield>
+    <m-textfield class="m-u--margin-top"
+                 type="password"
+                 label="Password"
+                 placeholder="Enter your password"></m-textfield>
 </div>

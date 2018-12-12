@@ -211,7 +211,7 @@ $m-input-style--padding: 4px !default;
         margin-bottom: 4px; // Magic number
         font-size: $m-font-size;
         font-weight: $m-font-weight;
-        color: $m-color--grey-darker;
+        color: $m-color--text-light;
         cursor: pointer;
 
         .m-icon {
@@ -369,7 +369,7 @@ $m-input-style--padding: 4px !default;
         width: 100%;
         padding: 0;
         font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight;
         line-height: $m-line-height;
 
         @include m-is-ie() {
@@ -419,7 +419,7 @@ $m-input-style--padding: 4px !default;
         textarea,
         ::placeholder,
         .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h1;
+            @include m-h1-font-style();
         }
     }
 
@@ -432,7 +432,7 @@ $m-input-style--padding: 4px !default;
         textarea,
         ::placeholder,
         .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h2;
+            @include m-h2-font-style();
         }
     }
 
@@ -445,7 +445,7 @@ $m-input-style--padding: 4px !default;
         textarea,
         ::placeholder,
         .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h3;
+            @include m-h3-font-style();
         }
     }
 
@@ -458,7 +458,7 @@ $m-input-style--padding: 4px !default;
         textarea,
         ::placeholder,
         .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h4;
+            @include m-h4-font-style();
         }
     }
 
@@ -471,7 +471,7 @@ $m-input-style--padding: 4px !default;
         textarea,
         ::placeholder,
         .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h5;
+            @include m-h5-font-style();
         }
     }
 
@@ -480,7 +480,7 @@ $m-input-style--padding: 4px !default;
         textarea,
         ::placeholder,
         .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h6;
+            @include m-h6-font-style();
         }
     }
 

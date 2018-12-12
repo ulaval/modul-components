@@ -139,7 +139,7 @@
     }
 
     /deep/ {
-        @include commonsFroalaStyles();
+        @include m-commons-froala-styles();
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
             background: rgba($m-color--white, 0);

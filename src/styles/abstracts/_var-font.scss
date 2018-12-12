@@ -1,8 +1,9 @@
 // ======================================================================
 //  Fonts property
 // ======================================================================
-$m-font-name: 'Source Sans Pro' !default;
-$m-font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif !default;
+$m-font-path: '../assets/fonts/' !default;
+$m-font-name: 'Source Sans Variable' !default;
+$m-font-family: 'Source Sans Variable', Arial, sans-serif !default;
 
 // ======================================================================
 //  App font size
@@ -22,13 +23,19 @@ $m-font-size--h4: 24px !default;
 $m-font-size--h5: 20px !default;
 $m-font-size--h6: 16px !default;
 
+$m-font-size--mobile-h1: 28px !default;
+$m-font-size--mobile-h2: 24px !default;
+$m-font-size--mobile-h3: 20px !default;
+$m-font-size--mobile-h4: 16px !default;
+$m-font-size--mobile-h5: 16px !default;
+$m-font-size--mobile-h6: 16px !default;
+
 // ======================================================================
 //  Font weight
 // ======================================================================
 $m-font-weight--black: 600 !default;
-$m-font-weight--bold: 400 !default;
-$m-font-weight: 300 !default;
-$m-font-weight--regular: 300 !default;
+$m-font-weight--bold: 500 !default;
+$m-font-weight: 350 !default;
 $m-font-weight--light: 200 !default;
 
 // ======================================================================
