@@ -14,14 +14,23 @@
             :name="iconName"
             :size="iconSize"
             v-if="hasIconLeft"></m-icon>
-    <m-spinner aria-hidden="true" class="m-button__icon m--is-left" skin="lighter" size="small" v-if="hasWaitingIconLeft"></m-spinner>
+    <m-spinner aria-hidden="true"
+               class="m-button__icon m--is-left"
+               skin="lighter"
+               size="small"
+               v-if="hasWaitingIconLeft"></m-spinner>
     <span class="m-button__text">
         <slot></slot>
-        <span class="m-button__precision" v-if="hasPrecision">
+        <span class="m-button__precision"
+              v-if="hasPrecision">
             <slot name="precision"></slot><template v-if="precision"></template>{{precision}}
         </span>
     </span>
-    <m-spinner aria-hidden="true" class="m-button__icon m--is-right" skin="lighter" size="small" v-if="hasWaitingIconRight"></m-spinner>
+    <m-spinner aria-hidden="true"
+               class="m-button__icon m--is-right"
+               skin="lighter"
+               size="small"
+               v-if="hasWaitingIconRight"></m-spinner>
     <m-icon aria-hidden="true"
             class="m-button__icon m--is-right"
             :name="iconName"
