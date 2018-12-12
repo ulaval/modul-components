@@ -62,7 +62,7 @@ export class MCheckbox extends ModulVue {
     }
 
     public get propIndeterminate(): boolean {
-        return this.indeterminate && !this.propValue ? true : false;
+        return this.indeterminate && !this.propValue;
     }
 
     public set propIndeterminate(newValue: boolean) {

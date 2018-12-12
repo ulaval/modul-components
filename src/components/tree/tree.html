@@ -1,19 +1,19 @@
 <div class="m-tree"
-     :class="{ 'm-tree--multiple-node-checkbox' : selectionMode == '2' && withCheckboxes }">
-    <m-message v-if="errorTree"
-               class="m-tree__error"
+     :class="{ 'm-tree--multiple-node-checkbox' : isMultipleSelectWithCheckboxes }">
+    <m-message class="m-tree__error"
+               v-if="errorTree"
                state="warning"
                skin="light"
                ref="error-tree-txt">
         {{'m-tree:error' | f-m-i18n}}
     </m-message>
-    <p v-if="propTreeEmpty"
-       class="m-tree__empty"
+    <p class="m-tree__empty"
+       v-if="propTreeEmpty"
        ref="empty-tree-txt">
         {{'m-tree:empty' | f-m-i18n}}
     </p>
-    <ul v-else
-        class="m-tree__content">
+    <ul class="m-tree__content"
+        v-else>
         <m-tree-node ref="tree-node"
                      v-for="node in tree"
                      :key="node.id"
@@ -22,9 +22,8 @@
                      :node="node"
                      :selected-nodes="propSelectedNodes"
                      :disabled-nodes="disabledNodes"
-                     :icons="icons"
                      :auto-select-checkboxes-mode="autoSelectCheckboxesMode"
-                     :icons-set="iconsSet"
+                     :use-files-icons="useFilesIcons"
                      :with-checkboxes="withCheckboxes"
                      @click="onClick"></m-tree-node>
     </ul>

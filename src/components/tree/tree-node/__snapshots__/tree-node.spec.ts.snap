@@ -2,11 +2,13 @@
 
 exports[`MTreeNode Given a node When the node can and has children and the node is valid Should render correctly 1`] = `
 <li class="m-tree-node">
-    <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Node 3</span> </div>
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 3" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 3</span> </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
             <li class="m-tree-node m-tree-node__child">
-                <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Node 4</span> </div>
+                <div role="button" tabindex="1" class="m-tree-node__item">
+                    <m-tree-icon filename="Node 4" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Node 4</span> </div>
                 <m-accordion-transition>
                     <ul class="m-tree-node__children" style="display:none;">
                         <li class="m-tree-node__child-empty">
@@ -22,7 +24,8 @@ exports[`MTreeNode Given a node When the node can and has children and the node 
 
 exports[`MTreeNode Given a node When the node can have children but don't have any Should render correctly 1`] = `
 <li class="m-tree-node">
-    <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Node 2</span> </div>
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 2" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 2</span> </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
             <li class="m-tree-node__child-empty">
@@ -35,13 +38,15 @@ exports[`MTreeNode Given a node When the node can have children but don't have a
 
 exports[`MTreeNode Given a node When the node can't have children and the node is valid Should render correctly 1`] = `
 <li class="m-tree-node">
-    <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Node 1</span> </div>
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 1" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 1</span> </div>
 </li>
 `;
 
 exports[`MTreeNode Given a node When the node has a checkbox Should render properly 1`] = `
 <li class="m-tree-node">
-    <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">Node 1</span>
+    <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover">
+        <div filename="Node 1" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 1</span>
         <div>checkbox</div>
     </div>
 </li>
@@ -49,13 +54,15 @@ exports[`MTreeNode Given a node When the node has a checkbox Should render prope
 
 exports[`MTreeNode Given a node When the node has a checkbox and auto-select is in button mode while current node is a parent and no node are selected Should render properly 1`] = `
 <li class="m-tree-node">
-    <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Parent 1</span>
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <m-tree-icon filename="Parent 1" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Parent 1</span>
         <m-checkbox></m-checkbox>
     </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
             <li class="m-tree-node m-tree-node__child">
-                <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Child 1</span>
+                <div role="button" tabindex="1" class="m-tree-node__item">
+                    <m-tree-icon filename="Child 1" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Child 1</span>
                     <m-checkbox></m-checkbox>
                 </div>
                 <m-accordion-transition>
@@ -67,7 +74,8 @@ exports[`MTreeNode Given a node When the node has a checkbox and auto-select is 
                 </m-accordion-transition>
             </li>
             <li class="m-tree-node m-tree-node__child">
-                <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Child 2</span>
+                <div role="button" tabindex="1" class="m-tree-node__item">
+                    <m-tree-icon filename="Child 2" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Child 2</span>
                     <m-checkbox></m-checkbox>
                 </div>
                 <m-accordion-transition>

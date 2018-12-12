@@ -8,7 +8,7 @@
         </p>
         <p>
             <m-tree :tree="tree"
-                    selection-mode="0"></m-tree>
+                    selection-mode="none"></m-tree>
         </p>
     </div>
 
@@ -32,8 +32,8 @@
         <h3>Selection disabled</h3>
         <p>
             <m-tree :tree="fileTree"
-                    selection-mode="0"
-                    :icons="true"></m-tree>
+                    selection-mode="none"
+                    :use-files-icons="true"></m-tree>
         </p>
     </div>
 
@@ -45,9 +45,9 @@
         </p>
         <p>
             <m-tree :tree="fileTree"
-                    selection-mode="1"
+                    selection-mode="single"
                     :selected-nodes="currentFile"
-                    :icons="true"
+                    :use-files-icons="true"
                     @select="onSelect"></m-tree>
         </p>
     </div>
@@ -63,8 +63,8 @@
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
-                    selection-mode="2"
-                    :icons="true"
+                    selection-mode="multiple"
+                    :use-files-icons="true"
                     :selected-nodes="currentNodesBasic"
                     @select="onSelect"></m-tree>
         </p>
@@ -77,9 +77,7 @@
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
-            <li>selection-mode="2"</li>
-            <li>icons-set="plus"</li>
-            <li>:icons="true"</li>
+            <li>selection-mode="multiple"</li>
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
@@ -87,9 +85,7 @@
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
-                    selection-mode="2"
-                    icons-set="plus"
-                    :icons="true"
+                    selection-mode="multiple"
                     :with-checkboxes="true"
                     :selected-nodes="currentNodesCheckboxes"
                     :disabled-nodes="disabledNodesCheckboxes"
@@ -104,10 +100,8 @@
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
-            <li>selection-mode="2"</li>
+            <li>selection-mode="multiple"</li>
             <li>auto-select-checkboxes-mode="parent-checkbox"</li>
-            <li>icons-set="plus"</li>
-            <li>:icons="true"</li>
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
@@ -116,9 +110,7 @@
         <p>
             <m-tree :tree="multiNodeTree"
                     auto-select-checkboxes-mode="parent-checkbox"
-                    selection-mode="2"
-                    icons-set="plus"
-                    :icons="true"
+                    selection-mode="multiple"
                     :with-checkboxes="true"
                     :selected-nodes="currentNodesCheckboxesParent"
                     @select="onSelect"></m-tree>
@@ -132,17 +124,17 @@
         </p>
         <h5>Sample Tree Props: </h5>
         <ul>
-            <li>selection-mode="2"</li>
+            <li>selection-mode="multiple"</li>
             <li>auto-select-checkboxes-mode="button"</li>
-            <li>:icons="true"</li>
+            <li>:use-files-icons="true"</li>
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>Selected Leaves : {{currentNodesCheckboxesButtonAutoselect}}</p>
         <p>
             <m-tree :tree="multiNodeTree"
-                    selection-mode="2"
+                    selection-mode="multiple"
                     auto-select-checkboxes-mode="button"
-                    :icons="true"
+                    :use-files-icons="true"
                     :with-checkboxes="true"
                     :selected-nodes="currentNodesCheckboxesButtonAutoselect"
                     @select="onSelect"></m-tree>
@@ -158,10 +150,8 @@
         </p>
         <h4>Sample Tree Props: </h4>
         <ul>
-            <li>selection-mode="2"</li>
+            <li>selection-mode="multiple"</li>
             <li>auto-select-checkboxes-mode="none"</li>
-            <li>icons-set="plus"</li>
-            <li>:icons="true"</li>
             <li>:with-checkboxes="true"</li>
         </ul>
         <p>
@@ -169,10 +159,8 @@
         </p>
         <p>
             <m-tree :tree="multiNodeTree"
-                    selection-mode="2"
+                    selection-mode="multiple"
                     auto-select-checkboxes-mode="none"
-                    icons-set="plus"
-                    :icons="true"
                     :with-checkboxes="true"
                     :disabled-nodes="disabledNodesCheckboxesNone"
                     :selected-nodes="currentNodesCheckboxesNone"

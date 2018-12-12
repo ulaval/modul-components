@@ -15,7 +15,7 @@ export class MIcon extends Vue {
     public size: string;
 
     @Prop({ default: false })
-    public showNameAsClass;
+    public showNameAsClass: boolean;
 
     private get hasSvgTitle(): boolean {
         return !!this.svgTitle;
@@ -29,6 +29,10 @@ export class MIcon extends Vue {
         } else if (this.name) {
             Vue.prototype.$log.warn('"' + this.name + '" is not a valid svg id. Make sure that the sprite has been loaded via the $svg instance service.');
         }
+    }
+
+    private get showNameAsClassInHtml(): string {
+        return this.showNameAsClass ? name : '';
     }
 
     private onClick(event): void {

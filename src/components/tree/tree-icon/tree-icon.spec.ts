@@ -1,5 +1,4 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
-import { renderComponent } from '../../../../tests/helpers/render';
 import { TreeNode } from '../tree';
 import { MTreeIcon } from './tree-icon';
 
@@ -15,7 +14,7 @@ const PLUS: RefSelector = { ref: 'plus-icon' };
 let file: TreeNode;
 let isFolderOpen: boolean = false;
 let isFolder: boolean = false;
-let iconsSet: string;
+let useFilesIcons: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
@@ -25,7 +24,7 @@ const initializeShallowWrapper: any = () => {
             file,
             isFolderOpen,
             isFolder,
-            iconsSet
+            useFilesIcons
         }
     });
 };
@@ -43,17 +42,15 @@ describe(`MTreeIcon`, () => {
 
         beforeEach(() => {
             file = TREE_NODE_FOLDER;
+            useFilesIcons = false;
+            isFolderOpen = false;
             isFolder = true;
         });
 
-        describe(`When the node uses plus icons`, () => {
+        describe(`When the node uses the plus icon (not the folder icon)`, () => {
             beforeEach(() => {
-                iconsSet = 'plus';
+                useFilesIcons = false;
                 initializeShallowWrapper();
-            });
-
-            it(`Should render correctly`, () => {
-                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
 
             it('Should use the m-plus component', () => {
@@ -62,10 +59,10 @@ describe(`MTreeIcon`, () => {
 
         });
 
-        describe(`When the node does not use plus icons`, () => {
+        describe(`When the node uses the folder icon`, () => {
 
-            it('Should not use the m-plus component', () => {
-                iconsSet = 'folder';
+            it('Should not include the m-plus component', () => {
+                useFilesIcons = true;
                 initializeShallowWrapper();
                 expect(wrapper.find(PLUS).exists()).toBeFalsy();
 

@@ -39,7 +39,6 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/phone-number/phone-number.lang.fr.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.fr.json'),
                 require('../components/table/table.lang.fr.json'),
-                require('../components/tree/tree-node/tree-node.lang.fr.json'),
                 require('../components/tree/tree.lang.fr.json'),
                 require('../components/scroll-top/scroll-top.lang.fr.json'),
                 require('../components/session-expired/session-expired.lang.fr.json'),

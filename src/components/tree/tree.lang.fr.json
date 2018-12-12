@@ -2,5 +2,8 @@
     "m-tree": {
         "empty": "Aucun contenu",
         "error": "Certains éléments n'ont pas pu être affichés dû à un problème technique."
+    },
+    "m-tree-node": {
+        "empty": "Aucun contenu"
     }
 }

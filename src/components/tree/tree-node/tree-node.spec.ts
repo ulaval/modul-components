@@ -259,7 +259,7 @@ describe('MTreeNode', () => {
                     });
 
                     it(`Should have isIndeterminated prop to true`, () => {
-                        expect(wrapper.vm.isIndeterminated).toBeTruthy();
+                        expect(wrapper.vm.isIndeterminate).toBeTruthy();
                     });
 
                 });
@@ -340,7 +340,7 @@ describe('MTreeNode', () => {
                     });
 
                     it(`Should have isIndeterminated prop to false`, () => {
-                        expect(wrapper.vm.isIndeterminated).toBeFalsy();
+                        expect(wrapper.vm.isIndeterminate).toBeFalsy();
                     });
 
                 });

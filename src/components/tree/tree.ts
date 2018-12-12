@@ -4,7 +4,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
-import TreeNodePlugin from './tree-node/tree-node';
+import { MTreeNode } from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 export interface TreeNode {
     id: string;
@@ -16,9 +16,9 @@ export interface TreeNode {
 }
 
 export enum MSelectionMode {
-    None = '0',
-    Single = '1',
-    Multiple = '2'
+    None = 'none',
+    Single = 'single',
+    Multiple = 'multiple'
 }
 
 export enum MAutoSelectCheckboxesMode {
@@ -27,14 +27,10 @@ export enum MAutoSelectCheckboxesMode {
     Checkbox = 'checkbox', // Selection of parents is 100% related to children
     ParentCheckbox = 'parent-checkbox' // Children can be selected by parent & children can unselect parent
 }
-
-export enum MIconsSet {
-    Folder = 'folder',
-    Plus = 'plus'
-}
-
 @WithRender
-@Component
+@Component({
+    components: { MTreeNode }
+})
 export class MTree extends ModulVue {
     @Prop()
     public tree: TreeNode[];
@@ -58,22 +54,11 @@ export class MTree extends ModulVue {
     })
     public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
 
-    @Prop({
-        default: MIconsSet.Folder,
-        validator: value =>
-            value === MIconsSet.Folder ||
-            value === MIconsSet.Plus
-    })
-    public iconsSet: MIconsSet;
-
     @Prop()
     public selectedNodes: string[];
 
     @Prop()
-    public icons: boolean;
-
-    @Prop()
-    public usePlusIcons: boolean;
+    public useFilesIcons: boolean;
 
     @Prop()
     public withCheckboxes: boolean;
@@ -149,12 +134,15 @@ export class MTree extends ModulVue {
             });
         }
     }
+
+    private get isMultipleSelectWithCheckboxes(): boolean {
+        return this.selectionMode === MSelectionMode.Multiple && this.withCheckboxes;
+    }
 }
 
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NAME, 'plugin.install');
-        v.use(TreeNodePlugin);
         v.use(I18nPlugin);
         v.component(TREE_NAME, MTree);
     }

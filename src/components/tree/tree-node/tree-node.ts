@@ -1,17 +1,18 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
 import CheckboxPlugin from '../../checkbox/checkbox';
 import I18nPlugin from '../../i18n/i18n';
-import IconPlugin from '../../icon/icon';
 import { TREE_NODE_NAME } from '../component-names';
-import { MAutoSelectCheckboxesMode, MIconsSet, TreeNode } from '../tree';
-import TreeIconPlugin from '../tree-icon/tree-icon';
+import { MAutoSelectCheckboxesMode, TreeNode } from '../tree';
+import { MTreeIcon } from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
-@Component
+@Component({
+    components: { MTreeIcon, MTreeNode }
+})
 export class MTreeNode extends ModulVue {
     @Prop()
     public node: TreeNode;
@@ -26,13 +27,10 @@ export class MTreeNode extends ModulVue {
     public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
 
     @Prop()
-    public iconsSet: MIconsSet;
-
-    @Prop()
     selectable: boolean;
 
     @Prop()
-    public icons: boolean;
+    public useFilesIcons: boolean;
 
     @Prop({ default: '' })
     public path: string;
@@ -42,9 +40,6 @@ export class MTreeNode extends ModulVue {
 
     @Prop()
     public hasSibling: boolean;
-
-    @Prop()
-    public usePlusIcons: boolean;
 
     @Prop()
     public withCheckboxes: boolean;
@@ -81,8 +76,9 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    public onChildClick(path: string, fromCheckbox: boolean = false): void {
-        this.$emit('click', path, fromCheckbox);
+    @Emit('click')
+    public onChildClick(path: string, fromCheckbox: boolean = false): Array<string | boolean> {
+        return [path, fromCheckbox];
     }
 
     public onAutoSelectButtonClick(): void {
@@ -194,7 +190,7 @@ export class MTreeNode extends ModulVue {
         return this.disabledNodes && this.disabledNodes.indexOf(path) !== -1;
     }
 
-    private validateAutoSelectMode(modes: Array<string>): boolean {
+    private validateAutoSelectMode(modes: string[]): boolean {
         let isValid: boolean = false;
         modes.forEach(mode => {
             if (mode === this.autoSelectCheckboxesMode) {
@@ -205,20 +201,24 @@ export class MTreeNode extends ModulVue {
         return isValid;
     }
 
-    public get propIconsSet(): MIconsSet {
-        return this.iconsSet || MIconsSet.Folder;
-    }
-
-    public get propAutoSelectCheckboxesMode(): MAutoSelectCheckboxesMode {
-        return this.autoSelectCheckboxesMode || MAutoSelectCheckboxesMode.Checkbox;
-    }
-
     public get currentPath(): string {
         return this.path + '/' + this.node.id;
     }
 
     public get label(): string {
         return this.node.label || this.node.id;
+    }
+
+    private get propAutoSelectCheckboxesMode(): MAutoSelectCheckboxesMode {
+        return this.autoSelectCheckboxesMode || MAutoSelectCheckboxesMode.Checkbox;
+    }
+
+    private get moveSelectionZoneToCheckbox(): boolean {
+        return this.withCheckboxes && !this.isFolder;
+    }
+
+    private get displaySelectionButton(): boolean {
+        return this.hasChildren && this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Button && this.withCheckboxes;
     }
 
     private get isParentOfSelectedFile(): boolean {
@@ -253,7 +253,7 @@ export class MTreeNode extends ModulVue {
         return this.selectedNodes.indexOf(this.currentPath) !== -1;
     }
 
-    public get isIndeterminated(): boolean {
+    public get isIndeterminate(): boolean {
         let autoSelectCheckboxes: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
         return autoSelectCheckboxes && this.isParentOfSelectedFile && !this.isSelected;
     }
@@ -266,8 +266,6 @@ export class MTreeNode extends ModulVue {
 const TreeNodePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NODE_NAME, 'plugin.install');
-        v.use(TreeIconPlugin);
-        v.use(IconPlugin);
         v.use(CheckboxPlugin);
         v.use(I18nPlugin);
         v.component(TREE_NODE_NAME, MTreeNode);
