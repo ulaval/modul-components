@@ -4,32 +4,52 @@
         <a href="https://github.com/ulaval/modul-components/pull/536">PR-536</a> : Pour démontrer le bug qui force l'utilisation de key= lorsque l'on utilise des template voir <a href="https://fr.vuejs.org/v2/guide/conditional.html#Controle-des-elements-reutilisables-avec-key">(la doc officiel)</a>
 
     </p>
+    <p>
+        <div>
+            using key
 
-    <h2>Using key</h2>
-    <div class="m-u--margin-top">
-        <m-button v-html="libelle"
-                  @click="toogleAfficher()"
-                  v-if="afficherbouton1"
-                  key="username-input-2">
-        </m-button>
-        <m-button @click="toogleAfficher()"
-                  v-if="!afficherbouton1">
-            patate2
-        </m-button key="username-input">
-    </div>
+            <m-button v-html="libelle"
+                      @click="toogleAfficher()"
+                      v-if="afficherbouton1"
+                      key="username-input-2">
+            </m-button>
 
-    <h2>Not using key</h2>
-    <div class="m-u--margin-top">
-        <m-button v-html="libelle"
-                  @click="toogleAfficher()"
-                  v-if="afficherbouton1">
-        </m-button>
+            <m-button @click="toogleAfficher()"
+                      v-if="!afficherbouton1">
+                patate2
+            </m-button key="username-input">
 
-        <m-button @click="toogleAfficher()"
-                  v-if="!afficherbouton1">
-            patate2
-        </m-button>
-    </div>
 
-    <m-button class="m-u--margin-top--l">I am a button</m-button>
+            not using key
+
+
+            <m-button v-html="libelle"
+                      @click="toogleAfficher()"
+                      v-if="afficherbouton1">
+            </m-button>
+
+            <m-button @click="toogleAfficher()"
+                      v-if="!afficherbouton1">
+                patate2
+            </m-button>
+        </div>
+
+    </p>
+    <h3>L'utilisation d'un bouton à l'extérieur d'un formulaire pour faire le submit ou le reset</h3>
+    <code><pre>&lt;form id="my-form"></pre></code>
+    <form id="my-form"
+          @submit.prevent="submit"
+          @reset.prevent="reset">
+        <input type="text"
+               placeholder="Votre message"
+               name="message"
+               v-model="message" />
+    </form>
+    <code><pre>&lt;/form></pre></code>
+
+    <m-button type="submit"
+              form="my-form">Submit button</m-button>
+    <m-button type="reset"
+              form="my-form">Reset button</m-button>
+
 </div>
