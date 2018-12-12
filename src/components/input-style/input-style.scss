@@ -10,7 +10,7 @@
     border-radius: 3px;
     padding: $m-input-style--padding;
     transition: border-color $m-transition-duration--l ease-in-out;
-    margin-top: $m-spacing--s;
+    margin-top: $m-input-style--padding;
 
     &:hover:not(.m--is-focus),
     &.m--has-value {
@@ -217,7 +217,6 @@
 
         &__left {
             position: relative;
-            min-height: 24px;
             flex: 1 1 auto;
             max-width: 100%;
         }
@@ -316,83 +315,11 @@
         input,
         textarea,
         ::placeholder,
+        .m-input-style__label,
         .m-input-style__body__transparent-text {
+            font-size: inherit;
             font-family: $m-font-family;
             font-weight: $m-font-weight--bold;
-        }
-    }
-
-    &.m--is-tag-h1 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 38px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h1;
-        }
-    }
-
-    &.m--is-tag-h2 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 33px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h2;
-        }
-    }
-
-    &.m--is-tag-h3 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 28px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h3;
-        }
-    }
-
-    &.m--is-tag-h4 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 23px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h4;
-        }
-    }
-
-    &.m--is-tag-h5 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 18px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h5;
-        }
-    }
-
-    &.m--is-tag-h6 {
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            font-size: $m-font-size--h6;
         }
     }
 
@@ -400,9 +327,34 @@
         input,
         textarea,
         ::placeholder,
+        .m-input-style__label,
         .m-input-style__body__transparent-text {
             font-weight: $m-font-weight;
         }
+    }
+
+    &.m--is-tag-h1 {
+        font-size: $m-font-size--h1;
+    }
+
+    &.m--is-tag-h2 {
+        font-size: $m-font-size--h2;
+    }
+
+    &.m--is-tag-h3 {
+        font-size: $m-font-size--h3;
+    }
+
+    &.m--is-tag-h4 {
+        font-size: $m-font-size--h4;
+    }
+
+    &.m--is-tag-h5 {
+        font-size: $m-font-size--h5;
+    }
+
+    &.m--is-tag-h6 {
+        font-size: $m-font-size--h6;
     }
 }
 

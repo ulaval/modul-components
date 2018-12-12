@@ -66,7 +66,7 @@ export class MInputStyle extends ModulVue {
     protected created(): void {
         setTimeout(() => {
             this.animReady = true;
-            this.setInputWidth();
+            // this.setInputWidth();
         }, 0);
     }
 
