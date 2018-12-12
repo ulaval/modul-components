@@ -60,67 +60,9 @@
                 @if $size == '' {
                     @return $m-margin;
                 }
-
-                @else if $size == '--xs' {
-                    @return $m-margin--xs;
-                }
-
-                @else if $size == '--s' {
-                    @return $m-margin--s;
-                }
-
-                @else if $size == '--l' {
-                    @return $m-margin--l;
-                }
-
-                @else if $size == '--xl' {
-                    @return $m-margin--xl;
-                }
-            }
-
-            @else if $prop == 'padding' {
-                @if $size == '' {
-                    @return $m-padding;
-                }
-
-                @else if $size == '--xs' {
-                    @return $m-padding--xs;
-                }
-
-                @else if $size == '--s' {
-                    @return $m-padding--s;
-                }
-
-                @else if $size == '--l' {
-                    @return $m-padding--l;
-                }
-
-                @else if $size == '--xl' {
-                    @return $m-padding--xl;
-                }
             }
         }
 
-        @mixin m-margin-padding() {
-            $m-props: 'margin', 'padding';
-            $m-directions: '', '-top', '-right', '-bottom', '-left';
-            $m-sizes: '--xs', '--s', '', '--l', '--xl';
-
-            @each $prop in $m-props {
-                @each $direction in $m-directions {
-                    &--no-#{$prop}#{$direction} {
-                        #{$prop}#{$direction}: 0;
-                    }
-
-                    @each $size in $m-sizes {
-                        &--#{$prop}#{$direction}#{$size} {
-                            #{$prop}#{$direction}: get-margin-padding-value(#{$prop}, #{$size});
-                        }
-                    }
-                }
-            }
-        }
-
-        @include m-margin-padding();
+        @include m-spacing-factory();
     }
 }

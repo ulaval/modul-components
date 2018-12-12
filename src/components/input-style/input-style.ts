@@ -1,13 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
+
 
 @WithRender
 @Component({
@@ -30,8 +30,6 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
-    @Prop({ default: false })
-    public borderTop: boolean;
 
     private animReady: boolean = false;
 

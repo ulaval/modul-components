@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
@@ -25,7 +25,7 @@ export class MTable extends ModulVue {
         validator: value =>
             value === MTableSkin.Regular
     })
-    public skin: MTableSkin;
+    skin: MTableSkin;
 
     @Prop({ default: () => [] })
     columns: MColumnTable[];
@@ -33,16 +33,24 @@ export class MTable extends ModulVue {
     @Prop({ default: () => [] })
     rows: any[];
 
-    protected i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+    @Prop({ default: false })
+    loading: boolean;
 
-    public columnWidth(col: MColumnTable): { width: string } | '' {
+    i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+    i18nLoading: string = this.$i18n.translate('m-table:loading');
+    i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
+
+    @Emit('add')
+    onAdd(): void {
+    }
+
+    get isEmpty(): boolean {
+        return this.rows.length === 0 && !this.loading;
+    }
+
+    columnWidth(col: MColumnTable): { width: string } | '' {
         return col.width ? { width: col.width } : '';
     }
-
-    public get isEmpty(): boolean {
-        return !this.rows.length;
-    }
-
 }
 
 const TablePlugin: PluginObject<any> = {

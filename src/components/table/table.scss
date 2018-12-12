@@ -1,72 +1,59 @@
 @import '../../styles/abstracts/variables';
 
-$m-table--row-min-height: 64px;
-
-@mixin m-table--skin-regular() {
-    thead tr th,
-    tbody tr td {
-        padding-top: $m-spacing;
-        padding-bottom: $m-spacing;
-        height: $m-table--row-min-height;
-    }
-
+.m-table {
     thead {
         text-align: left;
 
         tr {
             background-color: rgba($m-color--grey-light, 0.3);
+        }
 
-            th {
-                opacity: 1;
-                color: $m-color--grey;
-
-                &:first-child {
-                    padding-left: $m-spacing;
-                }
-
-                &:last-child {
-                    padding-right: $m-spacing;
-                }
-            }
+        th {
+            color: $m-color--grey;
         }
     }
 
     tbody {
+        color: $m-color--grey-darker;
+
         tr {
             &:nth-child(even) {
-                background: $m-color--grey-lightest;
+                background-color: $m-color--grey-lightest;
             }
 
-            td {
-                color: $m-color--grey-darker;
-
-                &.m-table--empty {
-                    background-color: $m-color--grey-lightest;
-                    text-align: center;
-                    min-height: 161px; // Magic number
-                    color: $m-color--grey;
-
-                    p {
-                        margin-top: 0;
-                    }
-                }
-
-                &:first-child {
-                    padding-left: $m-spacing;
-                }
-
-                &:last-child {
-                    padding-right: $m-spacing;
-                }
-            }
-
-            &:hover {
+            &:hover:not(.m-table__message):not(.m-table__loading) {
                 background-color: $m-color--interactive-lightest;
             }
         }
     }
-}
 
-.m-table.m--is-skin-regular {
-    @include m-table--skin-regular();
+    th,
+    td {
+        padding: $m-spacing;
+        box-sizing: content-box;
+        word-break: break-word;
+    }
+
+    &__loading td {
+        padding: 0;
+        height: auto;
+    }
+
+    &__message {
+        background-color: $m-color--grey-lightest;
+        text-align: center;
+        height: 260px; // magic number
+        color: $m-color--grey;
+        font-size: $m-font-size--l;
+        font-weight: $m-font-weight--bold;
+
+        &__precision {
+            font-size: $m-font-size;
+            font-weight: $m-font-weight--light;
+        }
+
+        p {
+            margin-top: 0;
+        }
+    }
 }
