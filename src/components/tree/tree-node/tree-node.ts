@@ -94,10 +94,10 @@ export class MTreeNode extends ModulVue {
         let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect]);
         let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
 
-        if (isCheckboxAutoselect || (isParentCheckboxAutoselect && !selected)) {
-            this.updateAutoselectCheckboxParentNode(allChildrenSelected);
+        if (isCheckboxAutoselect || (isParentCheckboxAutoselect && !selected)) { // Parent checkbox mode does not select parent by itself
+            this.updateCheckboxParentNode(allChildrenSelected);
         } else if (!isParentCheckboxAutoselect) {
-            this.updateAutoselectButtonParentNode(allChildrenSelected, selected);
+            this.updateButtonParentNode(allChildrenSelected, selected);
         }
 
     }
@@ -123,6 +123,7 @@ export class MTreeNode extends ModulVue {
     }
 
     public updateSelectedNodes(paths: string[] = [], addNode: boolean): void {
+        paths = Array.from(new Set(paths));
         paths.forEach(path => {
             let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
             if ((addNode && !nodeAlreadySelected) || (!addNode && nodeAlreadySelected)) {
@@ -151,23 +152,23 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    private updateAutoselectCheckboxParentNode(allChildrenSelected: boolean): void {
+    private updateCheckboxParentNode(allChildrenSelected: boolean): void {
         if (allChildrenSelected && !this.isSelected) {
-            this.$emit('click', this.currentPath);
+            this.$emit('click', this.currentPath); // Auto-push current, emit to parent for recursivity
             this.$emit('auto-select-child-checkbox-change', true);
         } else if (this.isSelected) {
             this.$emit('click', this.currentPath);
-            this.$emit('auto-select-child-checkbox-change', false);
+            this.$emit('auto-select-child-checkbox-change', false); // Not all children are selected, stop recursivity
         }
     }
 
-    private updateAutoselectButtonParentNode(allChildrenSelected: boolean, selected: boolean): void {
-        if (allChildrenSelected && selected && this.isSelected) {
+    private updateButtonParentNode(allChildrenSelected: boolean, selected: boolean): void {
+        if (allChildrenSelected && selected && this.isSelected) { // New element selected was added, current and all children are selected
             this.allChildrenAndSelfSelected = true;
-            this.$emit('auto-select-child-checkbox-change', true);
-        } else if (this.allChildrenAndSelfSelected) {
+            this.$emit('auto-select-child-checkbox-change', true); // Notifies immidiate parent's button that current button is on
+        } else if (this.allChildrenAndSelfSelected) { // Button was on, but something was removed.
             this.allChildrenAndSelfSelected = false;
-            this.$emit('auto-select-child-checkbox-change', false);
+            this.$emit('auto-select-child-checkbox-change', false); // Something was removed so every parent buttons must know
         }
     }
 

@@ -1,4 +1,4 @@
-import { mount, RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
 import { MCheckboxes, TreeNode } from '../tree';
 import { MTreeNode } from './tree-node';
@@ -20,7 +20,6 @@ const TREE_NODE_SELECTED_2: string[] = ['/Node 2'];
 const TREE_NODE_SELECTED_3: string[] = ['/Node 3/Node 4'];
 const TREE_NODE_CHECKBOX_FIRST_CHILD: string[] = ['/Parent 1/Child 1'];
 const TREE_NODE_CHECKBOX_ALL_CHILDREN: string[] = ['/Parent 1/Child 1', '/Parent 1/Child 2'];
-const TREE_NODE_CHECKBOX_ALL_NODES: string[] = ['/Parent 1/Child 1', '/Parent 1', '/Parent 1/Child 2'];
 
 const TREE_NODE_WITHOUT_CHILDREN: TreeNode = {
     label: NODE_ELEMENT_LABEL,
@@ -94,25 +93,11 @@ const initializeShallowWrapper: any = () => {
     });
 };
 
-const initializeMountWrapper: any = () => {
-    wrapper = mount(MTreeNode, {
-        propsData: {
-            node,
-            selectedNodes,
-            selectable,
-            icons,
-            path,
-            disabledNodes,
-            checkboxes
-        }
-    });
-};
-
 const getStubs: any = () => {
     return {
         ['m-tree-icon']: '<div>m-tree-icon</div>',
         ['m-link']: '<a @click="$emit(\'click\')"><slot /></a>',
-        ['m-checkbox']: '<div @click="$emit(\'click\')">checkbox</div>'
+        ['m-checkbox']: '<div @click="$emit(\'change\')">checkbox</div>'
     };
 };
 
@@ -148,199 +133,117 @@ describe('MTreeNode', () => {
                 expect(wrapper.emitted('click')).toBeFalsy();
             });
 
+            describe(`and the node is the parent of two nodes`, () => {
 
-            describe(`and auto-select is on for parent checkboxes`, () => {
-                describe(`and given node is a parent with two children and none selected`, () => {
+                describe(`and auto-select is on`, () => {
 
-                    beforeEach(() => {
-                        node = TREE_NODE_WITH_TWO_CHILDREN;
-                        selectedNodes = [];
-                        checkboxes = MCheckboxes.WithParentAutoSelect;
-                        initializeMountWrapper();
-                    });
+                    describe(`for checkboxes`, () => {
 
-                    it(`Should select every children and self on checkbox click`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(3);
-                    });
-
-                    it(`Should unselect every children and self on second checkbox click`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(0);
-                    });
-
-                    it(`Should unselect checked parent when all children are selected and one goes to unselected state`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x).concat(PARENT_PATH) });
-                        expect(wrapper.vm.selectedNodes.length).toBe(1);
-                    });
-
-                    it(`Should not select parent when all children are selected`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
-                        expect(wrapper.vm.selectedNodes.length).toBe(2);
-                    });
-
-                });
-            });
-
-            describe(`and auto-select is on for checkboxes`, () => {
-
-                describe(`and given node is a parent with two children and none selected`, () => {
-
-                    beforeEach(() => {
-                        node = TREE_NODE_WITH_TWO_CHILDREN;
-                        selectedNodes = [];
-                        checkboxes = MCheckboxes.WithCheckboxAutoSelect;
-                        initializeMountWrapper();
-                    });
-
-                    it(`Should select every children and self on checkbox click`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(3);
-                    });
-
-                    it(`Should unselect every children and self on second checkbox click`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(0);
-                    });
-
-                    it(`Should select every children if parent's state is undeterminated`, () => {
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x) });
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(3);
-                    });
-
-                    it(`Should unselect every children on checkbox click if all nodes are preselected`, () => {
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_NODES.map(x => x) });
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(0);
-                    });
-
-                    it(`Should be unable to select disabled node (and parent)`, () => {
-                        wrapper.setProps({ disabledNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x) });
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(1);
-                    });
-
-                    it(`Should be unable to unselect disabled node`, () => {
-                        wrapper.setProps({
-                            selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x),
-                            disabledNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
+                        beforeEach(() => {
+                            node = TREE_NODE_WITH_TWO_CHILDREN;
+                            selectedNodes = [];
+                            checkboxes = MCheckboxes.WithCheckboxAutoSelect;
+                            initializeShallowWrapper();
                         });
-                        wrapper.find(CHECKBOX).trigger('click');
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(1);
+
+                        it(`Should have inderminate prop to true when children are selected`, () => {
+                            wrapper.setProps({
+                                selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
+                            });
+                            expect(wrapper.vm.isIndeterminate).toBeTruthy();
+                        });
+
+                        it(`Should auto-select parent when children are selected`, () => {
+                            wrapper.setProps({
+                                selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x)
+                            });
+                            expect(wrapper.emitted('click').length).toBe(1);
+                        });
+
                     });
 
-                    it(`Should unselect checked parent when all children are selected and one goes to unselected state`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x).concat(PARENT_PATH) });
-                        expect(wrapper.vm.selectedNodes.length).toBe(1);
+                    describe(`for parents`, () => {
+
+                        beforeEach(() => {
+                            node = TREE_NODE_WITH_TWO_CHILDREN;
+                            selectedNodes = [];
+                            checkboxes = MCheckboxes.WithParentAutoSelect;
+                            initializeShallowWrapper();
+                        });
+
+                        it(`Should have inderminate prop to true when children are selected`, () => {
+                            wrapper.setProps({
+                                selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
+                            });
+                            expect(wrapper.vm.isIndeterminate).toBeTruthy();
+                        });
+
+                        it(`Should select every children and self on click`, () => {
+                            wrapper.find(CHECKBOX).trigger('click');
+                            expect(wrapper.emitted('click').length).toBe(3);
+                        });
+
+                        it(`Should not auto-select parent when children are selected`, () => {
+                            wrapper.setProps({
+                                selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x)
+                            });
+                            expect(wrapper.emitted('click')).toBeFalsy();
+                        });
+
+
                     });
 
-                    it(`Should select parent when all children are selected`, () => {
-                        wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
-                        expect(wrapper.vm.selectedNodes.length).toBe(3);
+                    describe(`for buttons`, () => {
+
+                        beforeEach(() => {
+                            node = TREE_NODE_WITH_TWO_CHILDREN;
+                            selectedNodes = [];
+                            checkboxes = MCheckboxes.WithButtonAutoSelect;
+                            initializeShallowWrapper();
+                        });
+
+                        it(`Should have inderminate prop to false when children are selected`, () => {
+                            wrapper.setProps({
+                                selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
+                            });
+                            expect(wrapper.vm.isIndeterminate).toBeFalsy();
+                        });
+
+                        it(`Should render properly`, () => {
+                            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+                        });
+
+                        it(`Should select every children and self on button click`, () => {
+                            wrapper.find(AUTOSELECTBUTTON).trigger('click');
+                            expect(wrapper.emitted('click').length).toBe(3);
+                        });
+
                     });
 
                 });
 
-                describe(`and given node is the parent of a selected node and an unselected node`, () => {
+                describe(`and auto-select is off`, () => {
 
                     beforeEach(() => {
                         node = TREE_NODE_WITH_TWO_CHILDREN;
-                        selectedNodes = TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x);
-                        checkboxes = MCheckboxes.WithCheckboxAutoSelect;
-                        initializeShallowWrapper();
-                    });
-
-                    it(`Should have isIndeterminated prop to true`, () => {
-                        expect(wrapper.vm.isIndeterminate).toBeTruthy();
-                    });
-
-                });
-
-            });
-
-            describe(`and auto-select is in button mode while current node is a parent and no node are selected`, () => {
-
-                beforeEach(() => {
-                    node = TREE_NODE_WITH_TWO_CHILDREN;
-                    selectedNodes = [];
-                    checkboxes = MCheckboxes.WithButtonAutoSelect;
-                    initializeMountWrapper();
-                });
-
-                it(`Should render properly`, () => {
-                    expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-                });
-
-                it(`Should be unable to unselect disabled node`, () => {
-                    wrapper.setProps({
-                        selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x),
-                        disabledNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
-                    });
-                    wrapper.find(AUTOSELECTBUTTON).trigger('click');
-                    wrapper.find(AUTOSELECTBUTTON).trigger('click');
-                    expect(wrapper.vm.selectedNodes.length).toBe(1);
-                });
-
-                it(`Should be unable to select disabled node`, () => {
-                    wrapper.setProps({
-                        disabledNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
-                    });
-                    wrapper.find(AUTOSELECTBUTTON).trigger('click');
-                    expect(wrapper.vm.selectedNodes.length).toBe(2);
-                });
-
-                it(`Should select every children and self on button click`, () => {
-                    wrapper.find(AUTOSELECTBUTTON).trigger('click');
-                    expect(wrapper.vm.selectedNodes.length).toBe(3);
-                });
-
-            });
-
-            describe(`and auto-select is off`, () => {
-
-                describe(`and given node is a parent`, () => {
-
-                    beforeEach(() => {
-                        node = TREE_NODE_WITH_TWO_CHILDREN;
-                        checkboxes = MCheckboxes.True;
                         selectedNodes = [];
-                        initializeMountWrapper();
-                    });
-
-                    it(`Should not select children on click`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(0);
-                    });
-
-                    it(`Should emit click so parent component (tree) adds it to selected nodes`, () => {
-                        wrapper.find(CHECKBOX).trigger('click');
-                        expect(wrapper.vm.selectedNodes.length).toBe(0);
-                    });
-
-                });
-
-                describe(`and given node is the parent of a selected node and an unselected node`, () => {
-
-                    beforeEach(() => {
-                        node = TREE_NODE_WITH_TWO_CHILDREN;
-                        selectedNodes = TREE_NODE_CHECKBOX_FIRST_CHILD;
                         checkboxes = MCheckboxes.True;
                         initializeShallowWrapper();
                     });
 
-                    it(`Should have isIndeterminated prop to false`, () => {
+                    it(`Should have inderminate prop to false when children are selected`, () => {
+                        wrapper.setProps({
+                            selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
+                        });
                         expect(wrapper.vm.isIndeterminate).toBeFalsy();
                     });
 
-                });
+                    it(`Should select select self (parent) on click`, () => {
+                        wrapper.find(CHECKBOX).trigger('click');
+                        expect(wrapper.emitted('click').length).toBe(1);
+                    });
 
+                });
             });
         });
 

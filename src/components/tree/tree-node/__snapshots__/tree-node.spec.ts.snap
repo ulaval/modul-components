@@ -52,11 +52,11 @@ exports[`MTreeNode Given a node When the node has a checkbox Should render prope
 </li>
 `;
 
-exports[`MTreeNode Given a node When the node has a checkbox and auto-select is in button mode while current node is a parent and no node are selected Should render properly 1`] = `
+exports[`MTreeNode Given a node When the node has a checkbox and the node is the parent of two nodes and auto-select is on for buttons Should render properly 1`] = `
 <li class="m-tree-node">
     <div role="button" tabindex="1" class="m-tree-node__item">
-        <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Parent 1</span>
-        <m-checkbox></m-checkbox>
+        <div filename="Parent 1" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Parent 1</span>
+        <div>checkbox</div>
     </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">

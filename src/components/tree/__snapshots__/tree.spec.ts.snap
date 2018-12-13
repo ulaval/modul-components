@@ -14,33 +14,6 @@ exports[`MTree Given a single node selection Given an empty tree Should render c
 </div>
 `;
 
-exports[`MTree Given a tree with multiple selection Given a tree with no node selected with checkboxes Should render correctly 1`] = `
-<div class="m-tree m-tree--multiple-node-checkbox">
-    <ul class="m-tree__content">
-        <li class="m-tree-node">
-            <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">index.html</span>
-                <m-checkbox></m-checkbox>
-            </div>
-        </li>
-        <li class="m-tree-node">
-            <div role="button" tabindex="1" class="m-tree-node__item">
-                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span>
-                <m-checkbox></m-checkbox>
-            </div>
-            <m-accordion-transition>
-                <ul class="m-tree-node__children" style="display:none;">
-                    <li class="m-tree-node m-tree-node__child">
-                        <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">Videos</span>
-                            <m-checkbox></m-checkbox>
-                        </div>
-                    </li>
-                </ul>
-            </m-accordion-transition>
-        </li>
-    </ul>
-</div>
-`;
-
 exports[`MTree Given a tree with multiple selection Given a tree with two nodes selected Should render correctly 1`] = `
 <div class="m-tree">
     <ul class="m-tree__content">
