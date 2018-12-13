@@ -17,13 +17,12 @@ A set of VueJS components for MOD**UL** web applications (beta release).
 - vue
 - vue-router
 - webpack
+- typescript
 - sass
 
 ### Start a new modul application and webpack configuration
 
-Please refer to [this repository](https://github.com/simardo/vuejs-typescript-template) for a template of a modul project using vue-cli 2.x
-
-You can also check [this repository](https://github.com/chuckmah/my-cli-module-project) for an example of a modul project using vue-cli 3+
+Please refer to [this repository](https://github.com/ulaval/modul-typescript-template) for a template of a modul project.
 
 ## Contributing
 
