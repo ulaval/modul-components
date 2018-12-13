@@ -87,12 +87,14 @@ export class MTreeNode extends ModulVue {
     }
 
     public onAutoSelectChildCheckboxChange(selected: boolean, ignoreCount: boolean = false): void {
+        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect]);
+        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
+
         if (!ignoreCount) {
             this.selectedChildrenCount += selected ? 1 : -1;
         }
+
         let allChildrenSelected: boolean = this.selectedChildrenCount === (this.node.children ? this.node.children.length : -1);
-        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect]);
-        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
 
         if (isCheckboxAutoselect || (isParentCheckboxAutoselect && !selected)) { // Parent checkbox mode does not select parent by itself
             this.updateCheckboxParentNode(allChildrenSelected);
@@ -122,11 +124,11 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    public updateSelectedNodes(paths: string[] = [], addNode: boolean): void {
+    public updateSelectedNodes(paths: string[] = [], addNodesToSelected: boolean): void {
         paths = Array.from(new Set(paths));
         paths.forEach(path => {
             let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
-            if ((addNode && !nodeAlreadySelected) || (!addNode && nodeAlreadySelected)) {
+            if ((addNodesToSelected && !nodeAlreadySelected) || (!addNodesToSelected && nodeAlreadySelected)) { // Prevent nodes to be pushed twice or unselected nodes to be removed
                 this.$emit('click', path);
             }
         });
@@ -139,12 +141,12 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string, addFolder: boolean = false): void {
+    private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string, includeParent: boolean = false): void {
         if (currentNode.children && currentNode.children.length > 0) {
             currentNode.children.forEach(child => {
-                this.fetchChildrenPaths(child, childrenPath, path + '/' + child.id, addFolder);
+                this.fetchChildrenPaths(child, childrenPath, path + '/' + child.id, includeParent);
             });
-            if (addFolder) {
+            if (includeParent) {
                 childrenPath.push(path);
             }
         } else {
