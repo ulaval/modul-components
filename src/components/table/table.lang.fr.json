@@ -1,5 +1,7 @@
 {
     "m-table": {
-        "empty-table": "Aucun élément à afficher"
+        "empty-table": "Aucune donnée à afficher",
+        "loading": "Chargement en cours",
+        "please-wait": "Veuillez patienter svp."
     }
 }

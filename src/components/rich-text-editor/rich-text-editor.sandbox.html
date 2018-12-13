@@ -5,22 +5,34 @@
     <div class="m-u--margin-bottom">
         <div><button @click="focus = !focus">Change focus (now: {{ focus }})</button></div>
         <div>
-            Error message: <input type="text" v-model="errorMessage" />
+            Error message: <input type="text"
+                   v-model="errorMessage" />
         </div>
         <div>
-            Valid message: <input type="text" v-model="validMessage" />
+            Valid message: <input type="text"
+                   v-model="validMessage" />
         </div>
         <div>
-            Helper message: <input type="text" v-model="helperMessage" />
+            Helper message: <input type="text"
+                   v-model="helperMessage" />
         </div>
         <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
         <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
         <div><button @click="readonly = !readonly">ReadOnly (now: {{ readonly }})</button></div>
     </div>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" :label="'texte riche'" :max-width="'large'"
-            :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
-            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled" :readonly="readonly"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model"
+                            :label="'texte riche'"
+                            :max-width="'large'"
+                            :placeholder="'some placeholder'"
+                            :focus="focus"
+                            :error="error"
+                            :error-message="errorMessage"
+                            :valid-message="validMessage"
+                            :helper-message="helperMessage"
+                            :waiting="waiting"
+                            :disabled="disabled"
+                            :readonly="readonly"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
@@ -30,9 +42,18 @@
     </div>
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="initializedModel" :toolbar-sticky-offset="58" :label="'texte riche'"
-            :max-width="'large'" :placeholder="'some placeholder'" :focus="focus" :error="error" :error-message="errorMessage"
-            :valid-message="validMessage" :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="initializedModel"
+                            :toolbar-sticky-offset="58"
+                            :label="'texte riche'"
+                            :max-width="'large'"
+                            :placeholder="'some placeholder'"
+                            :focus="focus"
+                            :error="error"
+                            :error-message="errorMessage"
+                            :valid-message="validMessage"
+                            :helper-message="helperMessage"
+                            :waiting="waiting"
+                            :disabled="disabled"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
@@ -43,23 +64,37 @@
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>
         <button @click="afficherFormulairePleinePage = !afficherFormulairePleinePage">Afficher formulaire pleine page</button>
-        <m-overlay id="overlayPleinePage" :open.sync="afficherFormulairePleinePage" @cancel="resetModelPleinePage()">
+        <m-overlay id="overlayPleinePage"
+                   :open.sync="afficherFormulairePleinePage"
+                   @cancel="resetModelPleinePage()">
             <template slot="header">
                 <span class="m-u--h2 m-u--font-weight--bold">
                     <m-i18n k="texte:texte"></m-i18n>
                 </span>
             </template>
             <div>
-                <m-rich-text-editor class="p-formulaire-texte__textearea" scrollable-container="#overlayPleinePage .m-overlay__body"
-                    :label="'texte riche'" tag-style="p" max-width="720px" v-model="fullScreenFormModel"></m-rich-text-editor>
+                <m-rich-text-editor class="p-formulaire-texte__textearea"
+                                    scrollable-container="#overlayPleinePage .m-overlay__body"
+                                    :label="'texte riche'"
+                                    tag-style="p"
+                                    max-width="720px"
+                                    v-model="fullScreenFormModel"></m-rich-text-editor>
             </div>
         </m-overlay>
     </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
-            :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage"
-            :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model"
+                            :toolbar-sticky-offset="58"
+                            :label="'texte riche'"
+                            :max-width="'large'"
+                            :focus="focus"
+                            :error="error"
+                            :error-message="errorMessage"
+                            :valid-message="validMessage"
+                            :helper-message="helperMessage"
+                            :waiting="waiting"
+                            :disabled="disabled"></m-rich-text-editor>
     </div>
 
     <h5 class="m-u--margin-bottom">peut focuser avec une fonction (à partir de input management, sans prop)</h5>
@@ -67,35 +102,57 @@
         <button @click="focusEditor">Focus the editor</button>
     </p>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="model" ref="rteTestFocus"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model"
+                            ref="rteTestFocus"></m-rich-text-editor>
     </div>
 
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
-        <m-rich-text-editor v-model="linksOpenInNewWindowModel" :toolbar-sticky-offset="58" :label="'texte riche'"
-            :max-width="'large'" :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage"
-            :helper-message="helperMessage" :waiting="waiting" :disabled="disabled" :placeholder="'some placeholder'"></m-rich-text-editor>
+        <m-rich-text-editor v-model="linksOpenInNewWindowModel"
+                            :toolbar-sticky-offset="58"
+                            :label="'texte riche'"
+                            :max-width="'large'"
+                            :focus="focus"
+                            :error="error"
+                            :error-message="errorMessage"
+                            :valid-message="validMessage"
+                            :helper-message="helperMessage"
+                            :waiting="waiting"
+                            :disabled="disabled"
+                            :placeholder="'some placeholder'"></m-rich-text-editor>
     </div>
     <h5 class="m-u--margin-bottom">peut focuser / clicker différents éléments à la suite du rich-text après avoir focus
         le rich-text</h5>
     <div class="m-u--margin-bottom">
         <div>
             <select v-model="inputFocusTestInputType">
-                <option v-if="!inputFocusTestInputType" value="">Choisir un élément à tester</option>
+                <option v-if="!inputFocusTestInputType"
+                        value="">Choisir un élément à tester</option>
                 <option value="radio">Radio</option>
                 <option value="textfield">Textfield</option>
                 <option value="textarea">Textarea</option>
                 <option value="button">Button</option>
             </select>
         </div>
-        <m-rich-text-editor v-model="model" :toolbar-sticky-offset="58" :label="'texte riche'" :max-width="'large'"
-            :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage"
-            :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+        <m-rich-text-editor v-model="model"
+                            :toolbar-sticky-offset="58"
+                            :label="'texte riche'"
+                            :max-width="'large'"
+                            :focus="focus"
+                            :error="error"
+                            :error-message="errorMessage"
+                            :valid-message="validMessage"
+                            :helper-message="helperMessage"
+                            :waiting="waiting"
+                            :disabled="disabled"></m-rich-text-editor>
         <div>
             <m-radio v-if="inputFocusTestInputType === 'radio'">radio</m-radio>
-            <m-textfield v-if="inputFocusTestInputType === 'textfield'" placeholder="textfield"></m-textfield>
-            <m-textarea v-if="inputFocusTestInputType === 'textarea'" placeholder="textarea"></m-textarea>
-            <m-button v-if="inputFocusTestInputType === 'button'" @click="alertTestSuccess('The button was clicked')">Button</m-button>
+            <m-textfield v-if="inputFocusTestInputType === 'textfield'"
+                         placeholder="textfield"></m-textfield>
+            <m-textarea v-if="inputFocusTestInputType === 'textarea'"
+                        placeholder="textarea"></m-textarea>
+            <m-button v-if="inputFocusTestInputType === 'button'"
+                      @click="alertTestSuccess('The button was clicked')">Button</m-button>
         </div>
 
         <p>Ce test nécéssite beaucoup de contenu à la suite du rich-text. Ne pas enlever svp.</p>
@@ -161,12 +218,21 @@
         </ul>
 
         <div>
-            <m-rich-text-editor v-model="currentTodo.todo" :toolbar-sticky-offset="58" :label="'Todo'"
-                :max-width="'large'" :focus="focus" :error="error" :error-message="errorMessage" :valid-message="validMessage"
-                :helper-message="helperMessage" :waiting="waiting" :disabled="disabled"></m-rich-text-editor>
+            <m-rich-text-editor v-model="currentTodo.todo"
+                                :toolbar-sticky-offset="58"
+                                :label="'Todo'"
+                                :max-width="'large'"
+                                :focus="focus"
+                                :error="error"
+                                :error-message="errorMessage"
+                                :valid-message="validMessage"
+                                :helper-message="helperMessage"
+                                :waiting="waiting"
+                                :disabled="disabled"></m-rich-text-editor>
             <br>
-            <button @click="addTodo">Add todo</button><input type="text" placeholder="Valeur à affecter au RTE lors de la réinitialisation"
-                v-model="resetValue">
+            <button @click="addTodo">Add todo</button><input type="text"
+                   placeholder="Valeur à affecter au RTE lors de la réinitialisation"
+                   v-model="resetValue">
         </div>
     </div>
 </div>

@@ -35,6 +35,7 @@ $m-padding--xs: 4px !default;
 // ======================================================================
 //  spacing
 // ======================================================================
+
 $m-spacing--xxxxl: 64px !default;
 $m-spacing--xxxl: 56px !default;
 $m-spacing--xxl: 48px !default;
@@ -44,3 +45,18 @@ $m-spacing--m: 24px !default;
 $m-spacing: 16px !default;
 $m-spacing--s: 8px !default;
 $m-spacing--xs: 4px !default;
+
+// ======================================================================
+//  map variable to be used with m-spacing function
+// ======================================================================
+$m-spacing-map: (
+    xxxxl: $m-spacing--xxxxl,
+    xxxl: $m-spacing--xxxl,
+    xxl: $m-spacing--xxl,
+    xl: $m-spacing--xl,
+    l: $m-spacing--l,
+    m: $m-spacing--m,
+    base : $m-spacing,
+    s: $m-spacing--s,
+    xs: $m-spacing--xs
+);

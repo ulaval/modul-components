@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
-
 import { MediaQueriesTest } from './media-queries/media-queries';
 import { getComponentsNames, getDirectiveNames, getFiltersNames, getUtilsNames } from './names-loader';
 import { Navigation } from './navigation/navigation';
+import { TypoAndStylesTest } from './typo-and-styles/typo-and-styles';
 import { Viewer } from './viewer/viewer';
+
 
 Vue.use(Router);
 
@@ -17,6 +18,10 @@ const routerFactory: () => Router = () => {
         {
             path: '/media-queries',
             component: MediaQueriesTest
+        },
+        {
+            path: '/typo-and-styles',
+            component: TypoAndStylesTest
         }
     ];
 

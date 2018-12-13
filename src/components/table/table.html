@@ -1,26 +1,58 @@
-<table class="m-table" :class="[ 'm--is-skin-' + skin]" cellspacing="0">
+<table class="m-table"
+       :class="['m--is-skin-' + skin, {'m--is-loading': loading}]"
+       cellspacing="0">
     <slot name="header">
         <thead>
             <tr>
-                <slot v-for="column in columns" :name="'header.' + column.dataProp">
-                    <th :style="columnWidth(column)" :key="column.id">{{ column.title }}</th>
-                </slot>
+                <th v-for="column in columns"
+                    :style="columnWidth(column)"
+                    :key="column.id"
+                    scope="col">
+                    <slot :name="'header.' + column.dataProp"
+                          :column="column">{{ column.title }}</slot>
+                </th>
+
             </tr>
         </thead>
     </slot>
 
     <slot name="body">
         <tbody>
-            <tr v-if="isEmpty">
+            <tr class="m-table__message"
+                v-if="isEmpty">
                 <slot name="empty">
-                    <td class="m-table--empty" :colspan="columns.length">
+                    <td :colspan="columns.length">
                         <p>{{ i18nEmptyTable }}</p>
                     </td>
                 </slot>
             </tr>
-            <tr v-else v-for="(row, index) in rows" :key="index">
-                <slot v-for="column in columns" :name="'body.' + column.dataProp" :data="row">
-                    <td :key="'body.' + column.id" >{{ row[column.dataProp] }}</td>
+            <template v-if="loading">
+                <tr class="m-table__loading">
+                    <td :colspan="columns.length">
+                        <m-progress v-if="loading"
+                                    :indeterminate="true"
+                                    :border-radius="false"></m-progress>
+                    </td>
+                </tr>
+                <tr class="m-table__message">
+                    <slot name="loading">
+                        <td :colspan="columns.length">
+                            <p>{{ i18nLoading }}</p>
+                            <p class="m-table__message__precision">{{ i18nPleaseWait }}</p>
+                        </td>
+                    </slot>
+                </tr>
+            </template>
+            <tr v-else
+                v-for="(row, index) in rows"
+                :key="index">
+                <slot name="row"
+                      :data="row">
+                    <td v-for="column in columns"
+                        :key="'body.' + column.id">
+                        <slot :name="'body.' + column.dataProp"
+                              :data="row">{{ row[column.dataProp] }}</slot>
+                    </td>
                 </slot>
             </tr>
         </tbody>

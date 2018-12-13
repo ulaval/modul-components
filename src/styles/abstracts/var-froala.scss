@@ -1,6 +1,6 @@
-@mixin commonsFroalaStyles() {
-    @include titleStyles();
-    @include textStyles();
+@mixin m-commons-froala-styles() {
+    @include m-titles-styles();
+    @include m-text-styles();
 
     ul,
     ol,
