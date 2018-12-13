@@ -1,16 +1,12 @@
 import { mount, RefSelector, shallow, Wrapper } from '@vue/test-utils';
-import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import { MSelectionMode, MTree, TreeNode } from './tree';
-import TreeNodePlugin from './tree-node/tree-node';
+import { MCheckboxes, MSelectionMode, MTree, TreeNode } from './tree';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 
-const TREE_NODE_REF: RefSelector = { ref: 'tree-node' };
 const ERROR_TREE_REF: RefSelector = { ref: 'error-tree-txt' };
-const CHECKBOX: RefSelector = { ref: 'checkbox' };
 
 const SELECTED_NODE: string[] = ['/medias/Videos'];
 const SELECTED_NODES: string[] = ['/index.html', '/medias/Videos'];
@@ -55,7 +51,7 @@ const TREE_WITH_INVALID_DATA: TreeNode[] = [
 let tree: TreeNode[] = TREE_WITH_DATA;
 let selectionMode: MSelectionMode = MSelectionMode.Single;
 let selectedNodes: string[] = SELECTED_NODE;
-let withCheckboxes: boolean = false;
+let checkboxes: MCheckboxes;
 
 let wrapper: Wrapper<MTree>;
 
@@ -75,7 +71,7 @@ const initializeMountWrapper: any = () => {
             tree,
             selectedNodes,
             selectionMode,
-            withCheckboxes
+            checkboxes
         }
     });
 };
@@ -126,13 +122,6 @@ describe(`MTree`, () => {
                     wrapper.vm.onClick(NEW_TREE_NODE_SELECTED[0]);
                 });
 
-                it(`Call onClick`, () => {
-                    wrapper.setMethods({ onClick: jest.fn() });
-                    wrapper.find(TREE_NODE_REF).trigger('click');
-
-                    expect(wrapper.vm.onClick).toHaveBeenCalled();
-                });
-
                 it(`Emit select`, () => {
                     expect(wrapper.emitted('select')).toBeTruthy();
                 });
@@ -167,8 +156,7 @@ describe(`MTree`, () => {
         afterEach(() => {
             tree = [];
             selectedNodes = [];
-            withCheckboxes = false;
-            Vue.use(TreeNodePlugin);
+            checkboxes = MCheckboxes.False;
         });
 
         describe(`Given a tree with no node selected`, () => {
@@ -192,7 +180,7 @@ describe(`MTree`, () => {
                     tree = TREE_WITH_DATA;
                     selectedNodes = [];
                     selectionMode = MSelectionMode.Multiple;
-                    withCheckboxes = true;
+                    checkboxes = MCheckboxes.True;
                     initializeMountWrapper();
                 });
 

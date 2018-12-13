@@ -1,6 +1,6 @@
 import { mount, RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
-import { TreeNode } from '../tree';
+import { MCheckboxes, TreeNode } from '../tree';
 import { MTreeNode } from './tree-node';
 
 const CHILDREN: RefSelector = { ref: 'children' };
@@ -75,8 +75,7 @@ let selectable: boolean = true;
 let icons: boolean = false;
 let path: string = '';
 let disabledNodes: string[] = [];
-let withCheckboxes: boolean = false;
-let autoSelectCheckboxesMode: string = '';
+let checkboxes: MCheckboxes = MCheckboxes.False;
 
 let wrapper: Wrapper<MTreeNode>;
 
@@ -89,9 +88,8 @@ const initializeShallowWrapper: any = () => {
             selectable,
             icons,
             path,
-            withCheckboxes,
             disabledNodes,
-            autoSelectCheckboxesMode
+            checkboxes
         }
     });
 };
@@ -104,9 +102,8 @@ const initializeMountWrapper: any = () => {
             selectable,
             icons,
             path,
-            withCheckboxes,
             disabledNodes,
-            autoSelectCheckboxesMode
+            checkboxes
         }
     });
 };
@@ -124,8 +121,7 @@ describe('MTreeNode', () => {
     describe(`Given a node`, () => {
 
         afterEach(() => {
-            withCheckboxes = false;
-            autoSelectCheckboxesMode = 'none';
+            checkboxes = MCheckboxes.False;
             disabledNodes = [];
         });
 
@@ -134,7 +130,7 @@ describe('MTreeNode', () => {
             beforeEach(() => {
                 node = TREE_NODE_WITHOUT_CHILDREN;
                 selectedNodes = [];
-                withCheckboxes = true;
+                checkboxes = MCheckboxes.True;
                 initializeShallowWrapper();
             });
 
@@ -153,8 +149,7 @@ describe('MTreeNode', () => {
                     beforeEach(() => {
                         node = TREE_NODE_WITH_TWO_CHILDREN;
                         selectedNodes = [];
-                        withCheckboxes = true;
-                        autoSelectCheckboxesMode = 'parent-checkbox';
+                        checkboxes = MCheckboxes.WithParentAutoSelect;
                         initializeMountWrapper();
                     });
 
@@ -191,8 +186,7 @@ describe('MTreeNode', () => {
                     beforeEach(() => {
                         node = TREE_NODE_WITH_TWO_CHILDREN;
                         selectedNodes = [];
-                        withCheckboxes = true;
-                        autoSelectCheckboxesMode = 'checkbox';
+                        checkboxes = MCheckboxes.WithCheckboxAutoSelect;
                         initializeMountWrapper();
                     });
 
@@ -253,8 +247,7 @@ describe('MTreeNode', () => {
                     beforeEach(() => {
                         node = TREE_NODE_WITH_TWO_CHILDREN;
                         selectedNodes = TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x);
-                        autoSelectCheckboxesMode = 'checkbox';
-                        withCheckboxes = true;
+                        checkboxes = MCheckboxes.WithCheckboxAutoSelect;
                         initializeShallowWrapper();
                     });
 
@@ -271,8 +264,7 @@ describe('MTreeNode', () => {
                 beforeEach(() => {
                     node = TREE_NODE_WITH_TWO_CHILDREN;
                     selectedNodes = [];
-                    withCheckboxes = true;
-                    autoSelectCheckboxesMode = 'button';
+                    checkboxes = MCheckboxes.WithButtonAutoSelect;
                     initializeMountWrapper();
                 });
 
@@ -311,8 +303,7 @@ describe('MTreeNode', () => {
 
                     beforeEach(() => {
                         node = TREE_NODE_WITH_TWO_CHILDREN;
-                        autoSelectCheckboxesMode = 'none';
-                        withCheckboxes = true;
+                        checkboxes = MCheckboxes.True;
                         selectedNodes = [];
                         initializeMountWrapper();
                     });
@@ -334,8 +325,7 @@ describe('MTreeNode', () => {
                     beforeEach(() => {
                         node = TREE_NODE_WITH_TWO_CHILDREN;
                         selectedNodes = TREE_NODE_CHECKBOX_FIRST_CHILD;
-                        autoSelectCheckboxesMode = 'none';
-                        withCheckboxes = true;
+                        checkboxes = MCheckboxes.True;
                         initializeShallowWrapper();
                     });
 

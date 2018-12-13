@@ -4,14 +4,16 @@ import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
 import CheckboxPlugin from '../../checkbox/checkbox';
 import I18nPlugin from '../../i18n/i18n';
-import { TREE_NODE_NAME } from '../component-names';
-import { MAutoSelectCheckboxesMode, TreeNode } from '../tree';
+import { TREE_ICON_NAME, TREE_NODE_NAME } from '../component-names';
+import { MCheckboxes, TreeNode } from '../tree';
 import { MTreeIcon } from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
 @Component({
-    components: { MTreeIcon, MTreeNode }
+    components: {
+        [TREE_ICON_NAME]: MTreeIcon
+    }
 })
 export class MTreeNode extends ModulVue {
     @Prop()
@@ -24,10 +26,10 @@ export class MTreeNode extends ModulVue {
     public selectedNodes: string[];
 
     @Prop()
-    public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
+    public checkboxes: MCheckboxes;
 
     @Prop()
-    selectable: boolean;
+    public selectable: boolean;
 
     @Prop()
     public useFilesIcons: boolean;
@@ -42,22 +44,19 @@ export class MTreeNode extends ModulVue {
     public hasSibling: boolean;
 
     @Prop()
-    public withCheckboxes: boolean;
-
-    @Prop()
     public disabledNodes: string[];
-
-    public selectedChildrenCount: number = 0;
 
     public internalOpen: boolean = false;
 
     public allChildrenAndSelfSelected: boolean = false;
 
+    private selectedChildrenCount: number = 0;
+
     @Watch('isSelected')
     public notifyParentOfChildCheckboxState(): void {
         if (this.withCheckboxes) {
-            let isCheckboxParentAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
-            let isCheckboxButtonAutoSelect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Button]);
+            let isCheckboxParentAutoSelect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
+            let isCheckboxButtonAutoSelect: boolean = this.validateAutoSelectMode([MCheckboxes.WithButtonAutoSelect]);
 
             if (!this.hasChildren || isCheckboxParentAutoSelect) {
                 this.$emit('auto-select-child-checkbox-change', this.isSelected);
@@ -92,8 +91,8 @@ export class MTreeNode extends ModulVue {
             this.selectedChildrenCount += selected ? 1 : -1;
         }
         let allChildrenSelected: boolean = this.selectedChildrenCount === (this.node.children ? this.node.children.length : -1);
-        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox]);
-        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
+        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect]);
+        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
 
         if (isCheckboxAutoselect || (isParentCheckboxAutoselect && !selected)) {
             this.updateAutoselectCheckboxParentNode(allChildrenSelected);
@@ -111,8 +110,8 @@ export class MTreeNode extends ModulVue {
     }
 
     public onCheckboxClick(): void {
-        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
-        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.ParentCheckbox]);
+        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect, MCheckboxes.WithParentAutoSelect]);
+        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
 
         if (this.hasChildren && isCheckboxAutoselect) {
             let childrenPaths: string[] = [];
@@ -193,7 +192,7 @@ export class MTreeNode extends ModulVue {
     private validateAutoSelectMode(modes: string[]): boolean {
         let isValid: boolean = false;
         modes.forEach(mode => {
-            if (mode === this.autoSelectCheckboxesMode) {
+            if (mode === this.checkboxes) {
                 isValid = true;
             }
         });
@@ -209,23 +208,23 @@ export class MTreeNode extends ModulVue {
         return this.node.label || this.node.id;
     }
 
-    private get propAutoSelectCheckboxesMode(): MAutoSelectCheckboxesMode {
-        return this.autoSelectCheckboxesMode || MAutoSelectCheckboxesMode.Checkbox;
+    public get propCheckboxes(): MCheckboxes {
+        return this.checkboxes || MCheckboxes.False;
     }
 
-    private get moveSelectionZoneToCheckbox(): boolean {
+    public get moveSelectionZoneToCheckbox(): boolean {
         return this.withCheckboxes && !this.isFolder;
     }
 
-    private get displaySelectionButton(): boolean {
-        return this.hasChildren && this.autoSelectCheckboxesMode === MAutoSelectCheckboxesMode.Button && this.withCheckboxes;
+    public get displaySelectionButton(): boolean {
+        return this.hasChildren && this.checkboxes === MCheckboxes.WithButtonAutoSelect;
     }
 
-    private get isParentOfSelectedFile(): boolean {
+    public get isParentOfSelectedFile(): boolean {
         let pathMatchesSelectedNode: boolean = false;
         this.selectedNodes.forEach(selectedNode => {
-            let reg: RegExp = new RegExp(`${this.currentPath}\/`);
-            if (reg.test(selectedNode) || pathMatchesSelectedNode) {
+            let parentPath: string = this.currentPath + '/';
+            if (selectedNode.indexOf(parentPath) !== -1) {
                 pathMatchesSelectedNode = true;
             }
         });
@@ -254,13 +253,18 @@ export class MTreeNode extends ModulVue {
     }
 
     public get isIndeterminate(): boolean {
-        let autoSelectCheckboxes: boolean = this.validateAutoSelectMode([MAutoSelectCheckboxesMode.Checkbox, MAutoSelectCheckboxesMode.ParentCheckbox]);
+        let autoSelectCheckboxes: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect, MCheckboxes.WithParentAutoSelect]);
         return autoSelectCheckboxes && this.isParentOfSelectedFile && !this.isSelected;
     }
 
     public get emptyContentMessage(): string {
         return this.placeholder || this.$i18n.translate('m-tree-node:empty');
     }
+
+    public get withCheckboxes(): boolean {
+        return this.checkboxes !== MCheckboxes.False;
+    }
+
 }
 
 const TreeNodePlugin: PluginObject<any> = {

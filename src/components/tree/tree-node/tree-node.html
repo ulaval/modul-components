@@ -34,10 +34,9 @@
                              :open.sync="childNode.open"
                              :node="childNode"
                              :use-files-icons="useFilesIcons"
-                             :with-checkboxes="withCheckboxes"
                              :selected-nodes="selectedNodes"
                              :disabled-nodes="disabledNodes"
-                             :auto-select-checkboxes-mode="autoSelectCheckboxesMode"
+                             :checkboxes="checkboxes"
                              :has-sibling="childHasSibling(index)"
                              @auto-select-child-checkbox-change="onAutoSelectChildCheckboxChange"
                              @click="onChildClick"></m-tree-node>

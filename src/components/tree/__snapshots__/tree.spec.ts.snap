@@ -2,10 +2,7 @@
 
 exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content">
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox"></m-tree-node>
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos" auto-select-checkboxes-mode="checkbox"></m-tree-node>
-    </ul>
+    <ul class="m-tree__content"></ul>
 </div>
 `;
 
@@ -22,39 +19,19 @@ exports[`MTree Given a tree with multiple selection Given a tree with no node se
     <ul class="m-tree__content">
         <li class="m-tree-node">
             <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">index.html</span>
-                <div class="m-checkbox m--is-checkbox-left">
-                    <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
-                    <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
-                    </label>
-                    <div class="m-validation-message m-checkbox__message">
-                        <m-accordion-transition transition="true"></m-accordion-transition>
-                    </div>
-                </div>
+                <m-checkbox></m-checkbox>
             </div>
         </li>
         <li class="m-tree-node">
-            <div role="button" tabindex="1" class="m-tree-node__item"><span aria-hidden="true" class="m-plus m-accordion__header-icon m-tree-icon m--is-skin-default m--is-large m--is-left"></span> <span class="m-tree-node__item__label">Medias</span>
-                <div class="m-checkbox m--is-checkbox-left">
-                    <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
-                    <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
-                    </label>
-                    <div class="m-validation-message m-checkbox__message">
-                        <m-accordion-transition transition="true"></m-accordion-transition>
-                    </div>
-                </div>
+            <div role="button" tabindex="1" class="m-tree-node__item">
+                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span>
+                <m-checkbox></m-checkbox>
             </div>
             <m-accordion-transition>
                 <ul class="m-tree-node__children" style="display:none;">
                     <li class="m-tree-node m-tree-node__child">
                         <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover"> <span class="m-tree-node__item__label">Videos</span>
-                            <div class="m-checkbox m--is-checkbox-left">
-                                <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
-                                <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
-                                </label>
-                                <div class="m-validation-message m-checkbox__message">
-                                    <m-accordion-transition transition="true"></m-accordion-transition>
-                                </div>
-                            </div>
+                            <m-checkbox></m-checkbox>
                         </div>
                     </li>
                 </ul>
@@ -71,7 +48,8 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
             <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">index.html</span> </div>
         </li>
         <li class="m-tree-node">
-            <div role="button" tabindex="1" class="m-tree-node__item"><span aria-hidden="true" class="m-plus m-accordion__header-icon m-tree-icon m--is-skin-default m--is-large m--is-left"></span> <span class="m-tree-node__item__label">Medias</span> </div>
+            <div role="button" tabindex="1" class="m-tree-node__item">
+                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span> </div>
             <m-accordion-transition>
                 <ul class="m-tree-node__children" style="display:none;">
                     <li class="m-tree-node m-tree-node__child m--is-selected">

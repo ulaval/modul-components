@@ -1,9 +1,10 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TREE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import { TREE_NODE_NAME } from './component-names';
 import { MTreeNode } from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 export interface TreeNode {
@@ -21,15 +22,18 @@ export enum MSelectionMode {
     Multiple = 'multiple'
 }
 
-export enum MAutoSelectCheckboxesMode {
-    None = 'none', // Fully independant
-    Button = 'button', // Fully independant, but a button can handle mass-selection
-    Checkbox = 'checkbox', // Selection of parents is 100% related to children
-    ParentCheckbox = 'parent-checkbox' // Children can be selected by parent & children can unselect parent
+export enum MCheckboxes {
+    True = 'true', // Fully independant checkbox selection
+    False = 'false', // No Checkboxes
+    WithButtonAutoSelect = 'with-button-auto-select', // Fully independat, but a button can handle mass-selection
+    WithCheckboxAutoSelect = 'with-checkbox-auto-select', // Selection of parents is 100% related to children
+    WithParentAutoSelect = 'with-parent-auto-select' // Children can be selected by parent & children can unselect parent
 }
 @WithRender
 @Component({
-    components: { MTreeNode }
+    components: {
+        [TREE_NODE_NAME]: MTreeNode
+    }
 })
 export class MTree extends ModulVue {
     @Prop()
@@ -45,14 +49,15 @@ export class MTree extends ModulVue {
     public selectionMode: MSelectionMode;
 
     @Prop({
-        default: MAutoSelectCheckboxesMode.Checkbox,
+        default: MCheckboxes.False,
         validator: value =>
-            value === MAutoSelectCheckboxesMode.None ||
-            value === MAutoSelectCheckboxesMode.Checkbox ||
-            value === MAutoSelectCheckboxesMode.ParentCheckbox ||
-            value === MAutoSelectCheckboxesMode.Button
+            value === MCheckboxes.False ||
+            value === MCheckboxes.True ||
+            value === MCheckboxes.WithButtonAutoSelect ||
+            value === MCheckboxes.WithCheckboxAutoSelect ||
+            value === MCheckboxes.WithParentAutoSelect
     })
-    public autoSelectCheckboxesMode: MAutoSelectCheckboxesMode;
+    public checkboxes: MCheckboxes;
 
     @Prop()
     public selectedNodes: string[];
@@ -61,21 +66,16 @@ export class MTree extends ModulVue {
     public useFilesIcons: boolean;
 
     @Prop()
-    public withCheckboxes: boolean;
-
-    @Prop()
     public disabledNodes: string[];
 
-    @Prop({ default: true })
-    public autoSelectCheckboxes: boolean;
+    private propSelectedNodes: string[] = this.selectedNodes || [];
 
-    public propSelectedNodes: string[] = this.selectedNodes || [];
-
-    public errorTree: boolean = false;
+    private errorTree: boolean = false;
 
     private selectedNodesFound: string[] = [];
 
-    public onClick(path: string, fromCheckbox: boolean = false): void {
+    @Emit('select')
+    public onClick(path: string, fromCheckbox: boolean = false): string {
         // With checkboxes, nodes are pushed only on checkbox click
         if (!this.pathIsDisabled(path) && (!this.withCheckboxes || (this.withCheckboxes && fromCheckbox))) {
             if (this.propSelectedNodes.indexOf(path) === -1) {
@@ -88,15 +88,7 @@ export class MTree extends ModulVue {
                 this.propSelectedNodes.splice(this.propSelectedNodes.indexOf(path), 1);
             }
         }
-        this.$emit('select', path);
-    }
-
-    public get propTreeEmpty(): boolean {
-        return !this.tree.length;
-    }
-
-    public get selectable(): boolean {
-        return this.selectionMode !== MSelectionMode.None;
+        return path;
     }
 
     protected created(): void {
@@ -135,8 +127,20 @@ export class MTree extends ModulVue {
         }
     }
 
-    private get isMultipleSelectWithCheckboxes(): boolean {
+    public get propTreeEmpty(): boolean {
+        return !this.tree.length;
+    }
+
+    public get selectable(): boolean {
+        return this.selectionMode !== MSelectionMode.None;
+    }
+
+    public get isMultipleSelectWithCheckboxes(): boolean {
         return this.selectionMode === MSelectionMode.Multiple && this.withCheckboxes;
+    }
+
+    public get withCheckboxes(): boolean {
+        return this.checkboxes !== MCheckboxes.False;
     }
 }
 

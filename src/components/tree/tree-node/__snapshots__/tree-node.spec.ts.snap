@@ -8,7 +8,7 @@ exports[`MTreeNode Given a node When the node can and has children and the node 
         <ul class="m-tree-node__children" style="display:none;">
             <li class="m-tree-node m-tree-node__child">
                 <div role="button" tabindex="1" class="m-tree-node__item">
-                    <m-tree-icon filename="Node 4" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Node 4</span> </div>
+                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Node 4</span> </div>
                 <m-accordion-transition>
                     <ul class="m-tree-node__children" style="display:none;">
                         <li class="m-tree-node__child-empty">
@@ -55,14 +55,14 @@ exports[`MTreeNode Given a node When the node has a checkbox Should render prope
 exports[`MTreeNode Given a node When the node has a checkbox and auto-select is in button mode while current node is a parent and no node are selected Should render properly 1`] = `
 <li class="m-tree-node">
     <div role="button" tabindex="1" class="m-tree-node__item">
-        <m-tree-icon filename="Parent 1" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Parent 1</span>
+        <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Parent 1</span>
         <m-checkbox></m-checkbox>
     </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
             <li class="m-tree-node m-tree-node__child">
                 <div role="button" tabindex="1" class="m-tree-node__item">
-                    <m-tree-icon filename="Child 1" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Child 1</span>
+                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Child 1</span>
                     <m-checkbox></m-checkbox>
                 </div>
                 <m-accordion-transition>
@@ -75,7 +75,7 @@ exports[`MTreeNode Given a node When the node has a checkbox and auto-select is 
             </li>
             <li class="m-tree-node m-tree-node__child">
                 <div role="button" tabindex="1" class="m-tree-node__item">
-                    <m-tree-icon filename="Child 2" is-folder="true" class="m-tree-icon"></m-tree-icon> <span class="m-tree-node__item__label">Child 2</span>
+                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Child 2</span>
                     <m-checkbox></m-checkbox>
                 </div>
                 <m-accordion-transition>
