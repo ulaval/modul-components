@@ -16,7 +16,6 @@ const BACKDROP_STYLE_OPACITY_NOT_VISIBLE: string = '0';
 
 const Z_INDEZ_DEFAULT: number = 100;
 const DONE_EVENT_DURATION: number = 100;
-const APP_SCROLL: string = 'm-u--app-scroll';
 
 interface StackElement {
     stackIndex: number;
@@ -213,7 +212,6 @@ export class Modul {
 
         if (!lastScrollId && !this.backdropElement) {
             this.scrollActive = true;
-            // this.activeScrollBody();
         } else if (!lastBackdropIndex) {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
