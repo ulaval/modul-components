@@ -2,13 +2,14 @@
      :class="{ 'm--is-checkbox-left': hasCheckboxLeft,
                 'm--is-checkbox-right': !hasCheckboxLeft,
                 'm--is-checked': propValue,
-                'm--is-disabled': isDisabled && !propValue,
-                'm--is-disabled-and-checked': isDisabled && propValue,
+                'm--is-disabled': isDisabled,
                 'm--is-indeterminate': propIndeterminate,
+                'm--is-readonly': readonly,
                 'm--is-focus': isFocus,
                 'm--has-error': hasError,
                 'm--is-valid': isValid }">
     <input class="m-checkbox__hidden"
+           v-if="!readonly"
            ref="checkbox"
            type="checkbox"
            :id="id"
@@ -18,6 +19,10 @@
            @click="onClick"
            @focus="setFocus(true)"
            @blur="setFocus(false)">
+    <input v-if="readonly"
+           type="hidden"
+           :id="id"
+           :value="propValue" />
     <label class="m-checkbox__wrap"
            :for="id"
            :aria-hidden="!hasLabelSlot">

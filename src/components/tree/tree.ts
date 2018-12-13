@@ -68,16 +68,15 @@ export class MTree extends ModulVue {
     @Prop()
     public disabledNodes: string[];
 
-    private propSelectedNodes: string[] = this.selectedNodes || [];
+    public propSelectedNodes: string[] = this.selectedNodes || [];
 
-    private errorTree: boolean = false;
+    public errorTree: boolean = false;
 
     private selectedNodesFound: string[] = [];
 
     @Emit('select')
-    public onClick(path: string, fromCheckbox: boolean = false): string {
-        // With checkboxes, nodes are pushed only on checkbox click
-        if (!this.pathIsDisabled(path) && (!this.withCheckboxes || (this.withCheckboxes && fromCheckbox))) {
+    public onClick(path: string): string {
+        if (!this.pathIsDisabled(path)) {
             if (this.propSelectedNodes.indexOf(path) === -1) {
                 if (this.selectionMode === MSelectionMode.Multiple) {
                     this.propSelectedNodes.push(path);
@@ -109,7 +108,7 @@ export class MTree extends ModulVue {
     }
 
     private pathIsDisabled(path: string): boolean {
-        return this.disabledNodes && this.disabledNodes.indexOf(path) !== -1;
+        return this.propDisabledNodes.indexOf(path) !== -1;
     }
 
     private browseNode(node: TreeNode, path: string = ''): void {
@@ -129,6 +128,10 @@ export class MTree extends ModulVue {
 
     public get propTreeEmpty(): boolean {
         return !this.tree.length;
+    }
+
+    public get propDisabledNodes(): string[] {
+        return this.disabledNodes || [];
     }
 
     public get selectable(): boolean {

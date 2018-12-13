@@ -173,32 +173,6 @@ describe(`MTree`, () => {
                 wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[1]);
                 expect(wrapper.vm.propSelectedNodes).toEqual(NEW_TREE_NODES_SELECTED);
             });
-
-            describe(`with checkboxes`, () => {
-
-                beforeEach(() => {
-                    tree = TREE_WITH_DATA;
-                    selectedNodes = [];
-                    selectionMode = MSelectionMode.Multiple;
-                    checkboxes = MCheckboxes.True;
-                    initializeMountWrapper();
-                });
-
-                it(`Should render correctly`, () => {
-                    expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-                });
-
-                it(`Should prevent node from being pushed to selectedNodes if click is not from checkbox`, () => {
-                    wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[0], false);
-                    expect(wrapper.vm.propSelectedNodes.length).toEqual(0);
-                });
-
-                it(`Should allow node to be pushed to selectedNodes if click is from checkbox`, () => {
-                    wrapper.vm.onClick(NEW_TREE_NODES_SELECTED[0], true);
-                    expect(wrapper.vm.propSelectedNodes.length).toEqual(1);
-                });
-            });
-
         });
 
         describe(`Given a tree with two nodes selected`, () => {

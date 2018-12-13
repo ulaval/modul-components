@@ -143,6 +143,12 @@ describe('MTreeNode', () => {
                 expect(wrapper.emitted('click')).toBeTruthy();
             });
 
+            it(`Should not emit a click when click is somewhere else`, () => {
+                wrapper.find(ITEM).trigger('click');
+                expect(wrapper.emitted('click')).toBeFalsy();
+            });
+
+
             describe(`and auto-select is on for parent checkboxes`, () => {
                 describe(`and given node is a parent with two children and none selected`, () => {
 
@@ -556,54 +562,4 @@ describe('MTreeNode', () => {
         });
 
     });
-
-    describe(`When nodes are added and removed`, () => {
-
-        beforeEach(() => {
-            node = TREE_NODE_WITHOUT_CHILDREN;
-            selectedNodes = [];
-            initializeShallowWrapper();
-        });
-
-        it(`Should be possible to add a single node`, () => {
-            wrapper.vm.addNode(TREE_NODE_SELECTED[0]);
-            expect(wrapper.vm.selectedNodes).toContain(TREE_NODE_SELECTED[0]);
-            expect(wrapper.vm.selectedNodes.length).toBe(1);
-        });
-
-        it(`Should be possible to remove a single node`, () => {
-            wrapper.setProps({ selectedNodes: TREE_NODE_SELECTED.map(x => x) });
-            wrapper.vm.removeNode(TREE_NODE_SELECTED[0]);
-            expect(wrapper.vm.selectedNodes.length).toBe(0);
-        });
-
-        describe(`When nodes are added or removed as an array`, () => {
-
-            it(`Should be possible to add an array of nodes`, () => {
-                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, true);
-                expect(wrapper.vm.selectedNodes).toEqual(TREE_NODE_CHECKBOX_ALL_NODES);
-            });
-
-            it(`Should be possible to remove an array of selected nodes`, () => {
-                wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_NODES.map(x => x) });
-                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, false);
-                expect(wrapper.vm.selectedNodes.length).toBe(0);
-            });
-
-            it(`Should be impossible to add the same nodes twice`, () => {
-                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, true);
-                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, true);
-                expect(wrapper.vm.selectedNodes.length).toBe(3);
-            });
-
-            it(`Should remove existing nodes and ignore non-existing ones`, () => {
-                wrapper.setProps({ selectedNodes: TREE_NODE_CHECKBOX_ALL_CHILDREN.map(x => x) });
-                wrapper.vm.updateSelectedNodes(TREE_NODE_CHECKBOX_ALL_NODES, false);
-                expect(wrapper.vm.selectedNodes.length).toBe(0);
-            });
-
-        });
-
-    });
-
 });

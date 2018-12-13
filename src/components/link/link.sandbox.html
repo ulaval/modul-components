@@ -31,4 +31,12 @@
             <m-icon class="m-u--link-icon-right" name="m-svg__clock"></m-icon>
         </a>
     </p>
+    <h2>Lien de type RouterLink n'est pas fonctionnel en mode disabled (MODUL-561)</h2>
+    <p>
+        <m-link icon-name="m-svg__clock"
+                :disabled="routerLinkDisabled">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link>
+    </p>
+    <p>
+        <m-button @click="routerLinkDisabled = !routerLinkDisabled">Désactiver/Activer le lien</m-button>
+    </p>
 </div>

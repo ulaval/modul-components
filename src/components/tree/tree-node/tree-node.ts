@@ -70,14 +70,14 @@ export class MTreeNode extends ModulVue {
         if (this.isFolder) {
             this.internalOpen = !this.internalOpen;
             this.$emit('update:open', this.internalOpen);
-        } else if (this.selectable) {
+        } else if (this.selectable && !this.withCheckboxes) { // Clicks are emitted from checkboxes when true
             this.$emit('click', this.currentPath);
         }
     }
 
     @Emit('click')
-    public onChildClick(path: string, fromCheckbox: boolean = false): Array<string | boolean> {
-        return [path, fromCheckbox];
+    public onChildClick(path: string): string {
+        return path;
     }
 
     public onAutoSelectButtonClick(): void {
@@ -118,31 +118,17 @@ export class MTreeNode extends ModulVue {
             this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, isParentCheckboxAutoselect);
             this.updateSelectedNodes(childrenPaths, !this.isSelected);
         } else {
-            this.$emit('click', this.currentPath, true);
+            this.$emit('click', this.currentPath);
         }
     }
 
     public updateSelectedNodes(paths: string[] = [], addNode: boolean): void {
         paths.forEach(path => {
             let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
-            if (addNode && !nodeAlreadySelected) {
-                this.addNode(path);
-            } else if (!addNode && nodeAlreadySelected) {
-                this.removeNode(path);
+            if ((addNode && !nodeAlreadySelected) || (!addNode && nodeAlreadySelected)) {
+                this.$emit('click', path);
             }
         });
-    }
-
-    public addNode(path: string): void {
-        if (!this.pathIsDisabled(path)) {
-            this.selectedNodes.push(path);
-        }
-    }
-
-    public removeNode(path: string): void {
-        if (!this.pathIsDisabled(path)) {
-            this.selectedNodes.splice(this.selectedNodes.indexOf(path), 1);
-        }
     }
 
     protected mounted(): void {
@@ -167,10 +153,10 @@ export class MTreeNode extends ModulVue {
 
     private updateAutoselectCheckboxParentNode(allChildrenSelected: boolean): void {
         if (allChildrenSelected && !this.isSelected) {
-            this.addNode(this.currentPath);
+            this.$emit('click', this.currentPath);
             this.$emit('auto-select-child-checkbox-change', true);
         } else if (this.isSelected) {
-            this.removeNode(this.currentPath);
+            this.$emit('click', this.currentPath);
             this.$emit('auto-select-child-checkbox-change', false);
         }
     }
@@ -183,10 +169,6 @@ export class MTreeNode extends ModulVue {
             this.allChildrenAndSelfSelected = false;
             this.$emit('auto-select-child-checkbox-change', false);
         }
-    }
-
-    private pathIsDisabled(path: string): boolean {
-        return this.disabledNodes && this.disabledNodes.indexOf(path) !== -1;
     }
 
     private validateAutoSelectMode(modes: string[]): boolean {

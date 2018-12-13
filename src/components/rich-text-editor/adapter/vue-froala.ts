@@ -217,7 +217,7 @@ export enum FroalaStatus {
     }
 
     protected get collapsed(): boolean {
-        return this.isInitialized && !this.isFocused && (this.isEmpty || this.disabled);
+        return !this.isFocused && this.isEmpty;
     }
 
     protected onResize(): void {
@@ -281,6 +281,12 @@ export enum FroalaStatus {
                 [froalaEvents.Initialized]: (_e, editor) => {
                     this.froalaEditor = editor;
                     this.isInitialized = true;
+
+                    // We have to delay the initialization of disabled until the rich text is initialized.
+                    // It will remain glitchy otherwise when combined with init on click.
+                    // See comment https://github.com/froala/angular-froala-wysiwyg/issues/75#issuecomment-310709095
+                    this.isDisabled = this.disabled;
+
                     this.manageInitialFocus(editor);
                 },
                 [froalaEvents.ContentChanged]: (_e, _editor) => {
@@ -315,6 +321,7 @@ export enum FroalaStatus {
                                 this.isDirty = false;
                                 this.unblockMobileBlur();
                                 this.internalReadonly = false;
+                                this.isDisabled = this.disabled;
                             }
                         }, 150);
                     }
@@ -360,6 +367,28 @@ export enum FroalaStatus {
         this.registerEvents();
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+        }
+    }
+
+    @Watch('disabled')
+    private setDisabled(): void {
+        // We have to delay the initialization of disabled until the rich text is initialized.
+        // It will remain glitchy otherwise when combined with init on click.
+        // See comment https://github.com/froala/angular-froala-wysiwyg/issues/75#issuecomment-310709095
+        if (this.isInitialized) {
+            this.isDisabled = this.disabled;
+        }
+    }
+
+    private get isDisabled(): boolean {
+        return this.disabled;
+    }
+
+    private set isDisabled(value: boolean) {
+        if (value) {
+            this.froalaEditor.edit.off();
+        } else {
+            this.froalaEditor.edit.on();
         }
     }
 

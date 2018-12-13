@@ -17,7 +17,7 @@
                     :value="isSelected"
                     :indeterminate="isIndeterminate"
                     :disabled="isDisabled"
-                    @click="onCheckboxClick"></m-checkbox>
+                    @change="onCheckboxClick"></m-checkbox>
     </div>
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">
