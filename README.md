@@ -32,7 +32,7 @@ Please refer to [this repository](https://github.com/ulaval/modul-typescript-tem
 2. Run npm run setup
 3. Run npm run dev
 
-### Deployment for local usage
+### Deployment for local usage in your project
 
 1. Run npm pack
 2. Add the dependency in your package.json ("@ulaval/modul-components": "file://&lt;path-to&gt;\\ulaval-modul-components-&lt;version&gt;.tgz")
