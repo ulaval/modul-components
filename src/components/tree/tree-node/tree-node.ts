@@ -55,12 +55,9 @@ export class MTreeNode extends ModulVue {
     @Watch('isSelected')
     public notifyParentOfChildCheckboxState(): void {
         if (this.withCheckboxes) {
-            let isCheckboxParentAutoSelect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
-            let isCheckboxButtonAutoSelect: boolean = this.validateAutoSelectMode([MCheckboxes.WithButtonAutoSelect]);
-
-            if (!this.hasChildren || isCheckboxParentAutoSelect) {
+            if (!this.hasChildren) {
                 this.$emit('auto-select-child-checkbox-change', this.isSelected);
-            } else if (isCheckboxButtonAutoSelect && this.hasChildren) {
+            } else if (this.isButtonAutoSelect && this.hasChildren) {
                 this.onAutoSelectChildCheckboxChange(this.isSelected, true);
             }
         }
@@ -87,21 +84,16 @@ export class MTreeNode extends ModulVue {
     }
 
     public onAutoSelectChildCheckboxChange(selected: boolean, ignoreCount: boolean = false): void {
-        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect]);
-        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
-
         if (!ignoreCount) {
             this.selectedChildrenCount += selected ? 1 : -1;
         }
-
         let allChildrenSelected: boolean = this.selectedChildrenCount === (this.node.children ? this.node.children.length : -1);
 
-        if (isCheckboxAutoselect || (isParentCheckboxAutoselect && !selected)) { // Parent checkbox mode does not select parent by itself
+        if (this.isCheckboxAutoSelect || (this.isParentAutoSelect && !selected)) { // Parent checkbox mode does not select parent by itself
             this.updateCheckboxParentNode(allChildrenSelected);
-        } else if (!isParentCheckboxAutoselect) {
+        } else if (this.isButtonAutoSelect) {
             this.updateButtonParentNode(allChildrenSelected, selected);
         }
-
     }
 
     public childHasSibling(index: number): boolean {
@@ -112,12 +104,9 @@ export class MTreeNode extends ModulVue {
     }
 
     public onCheckboxClick(): void {
-        let isCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect, MCheckboxes.WithParentAutoSelect]);
-        let isParentCheckboxAutoselect: boolean = this.validateAutoSelectMode([MCheckboxes.WithParentAutoSelect]);
-
-        if (this.hasChildren && isCheckboxAutoselect) {
+        if (this.hasChildren && (this.isCheckboxAutoSelect || this.isParentAutoSelect)) {
             let childrenPaths: string[] = [];
-            this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, isParentCheckboxAutoselect);
+            this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, this.isParentAutoSelect);
             this.updateSelectedNodes(childrenPaths, !this.isSelected);
         } else {
             this.$emit('click', this.currentPath);
@@ -174,15 +163,24 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    private validateAutoSelectMode(modes: string[]): boolean {
-        let isValid: boolean = false;
-        modes.forEach(mode => {
-            if (mode === this.checkboxes) {
-                isValid = true;
+    public get isParentOfSelectedFile(): boolean {
+        let pathMatchesSelectedNode: boolean = false;
+        this.selectedNodes.forEach(selectedNode => {
+            let parentPath: string = this.currentPath + '/';
+            if (selectedNode.indexOf(parentPath) !== -1) {
+                pathMatchesSelectedNode = true;
             }
         });
+        return pathMatchesSelectedNode;
+    }
 
-        return isValid;
+    public get isDisabled(): boolean {
+        let isDisabled: boolean = false;
+        let inDisabledNodes: boolean = this.disabledNodes && this.disabledNodes.indexOf(this.currentPath) !== -1;
+        if (!this.selectable && !this.isFolder || inDisabledNodes) {
+            isDisabled = true;
+        }
+        return isDisabled;
     }
 
     public get currentPath(): string {
@@ -205,17 +203,6 @@ export class MTreeNode extends ModulVue {
         return this.hasChildren && this.checkboxes === MCheckboxes.WithButtonAutoSelect;
     }
 
-    public get isParentOfSelectedFile(): boolean {
-        let pathMatchesSelectedNode: boolean = false;
-        this.selectedNodes.forEach(selectedNode => {
-            let parentPath: string = this.currentPath + '/';
-            if (selectedNode.indexOf(parentPath) !== -1) {
-                pathMatchesSelectedNode = true;
-            }
-        });
-        return pathMatchesSelectedNode;
-    }
-
     public get hasChildren(): boolean {
         return !!this.node.children && this.node.children.length > 0;
     }
@@ -224,22 +211,12 @@ export class MTreeNode extends ModulVue {
         return this.node.hasChildren || !!this.node.children;
     }
 
-    public get isDisabled(): boolean {
-        let isDisabled: boolean = false;
-        let inDisabledNodes: boolean = this.disabledNodes && this.disabledNodes.indexOf(this.currentPath) !== -1;
-        if (!this.selectable && !this.isFolder || inDisabledNodes) {
-            isDisabled = true;
-        }
-        return isDisabled;
-    }
-
     public get isSelected(): boolean {
         return this.selectedNodes.indexOf(this.currentPath) !== -1;
     }
 
     public get isIndeterminate(): boolean {
-        let autoSelectCheckboxes: boolean = this.validateAutoSelectMode([MCheckboxes.WithCheckboxAutoSelect, MCheckboxes.WithParentAutoSelect]);
-        return autoSelectCheckboxes && this.isParentOfSelectedFile && !this.isSelected;
+        return (this.isCheckboxAutoSelect || this.isParentAutoSelect) && this.isParentOfSelectedFile && !this.isSelected;
     }
 
     public get emptyContentMessage(): string {
@@ -250,6 +227,17 @@ export class MTreeNode extends ModulVue {
         return this.checkboxes !== MCheckboxes.False;
     }
 
+    private get isParentAutoSelect(): boolean {
+        return this.checkboxes === MCheckboxes.WithParentAutoSelect;
+    }
+
+    private get isButtonAutoSelect(): boolean {
+        return this.checkboxes === MCheckboxes.WithButtonAutoSelect;
+    }
+
+    private get isCheckboxAutoSelect(): boolean {
+        return this.checkboxes === MCheckboxes.WithCheckboxAutoSelect;
+    }
 }
 
 const TreeNodePlugin: PluginObject<any> = {
