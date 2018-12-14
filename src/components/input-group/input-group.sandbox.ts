@@ -2,17 +2,15 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { InputMaxWidth } from '../../mixins';
 import { INPUT_GROUP_NAME } from '../component-names';
+import { MRichTextEditor } from '../rich-text-editor/rich-text-editor';
 import WithRender from './input-group.sandbox.html?style=./input-group.sandbox.scss';
 
 
 @WithRender
-@Component
+@Component({
+    components: { MRichTextEditor }
+})
 export class MInputGroupSandbox extends Vue {
-
-    errors: string[] = [
-        'First error',
-        'Second error'
-    ];
 
     validMessage: string = '';
     errorMessage: string = '';
@@ -27,6 +25,9 @@ export class MInputGroupSandbox extends Vue {
     nom: string = '';
     prenom: string = '';
     initiale: string = '';
+
+    texteRiche: string = '';
+    legumes: string = '';
 
     get xSmallFormWidth(): string {
         return InputMaxWidth.XSmall;

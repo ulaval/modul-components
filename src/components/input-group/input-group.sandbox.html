@@ -87,4 +87,59 @@
             </div>
         </m-input-group>
     </p>
+    <h3>Utilisation avec des champs variés (m-textfield)</h3>
+    <p class="m-u--margin-bottom">
+        Un exemple de validation de données est inclut
+    </p>
+    <p>
+        <m-input-group legend="Gestion de champs de texte"
+                       :error-message="errorMessage"
+                       :error="hasError"
+                       :valid-message="validMessage"
+                       :valid="isValid"
+                       :helper-message="helperMessage"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+                <m-rich-text-editor v-model="texteRiche"
+                                    :label="'texte riche'"
+                                    :max-width="'large'"
+                                    :placeholder="'some placeholder'"
+                                    :error="error"
+                                    :valid="valid"
+                                    :waiting="waiting"
+                                    :disabled="disabled"
+                                    :readonly="readonly"></m-rich-text-editor>
+                <hr />
+                <m-radio-group :error="error"
+                               :valid="valid"
+                               :read-only="readonly"
+                               :disabled="disabled || waiting">
+                    <m-radio value="1">1</m-radio>
+                    <m-radio value="2">2</m-radio>
+                    <m-radio value="3">3</m-radio>
+                </m-radio-group>
+                <hr />
+                <m-dropdown label="Légume"
+                            v-model="legumes"
+                            :error="error"
+                            :valid="valid"
+                            :waiting="waiting"
+                            :disabled="disabled"
+                            :readonly="readonly">
+                    <m-dropdown-item value="6a"
+                                     label="Asperge"></m-dropdown-item>
+                    <m-dropdown-item value="6b"
+                                     label="Brocoli"></m-dropdown-item>
+                    <m-dropdown-item value="6c"
+                                     label="Carotte"></m-dropdown-item>
+                    <m-dropdown-item value="6d"
+                                     label="Daikon"></m-dropdown-item>
+                    <m-dropdown-item value="6e"
+                                     label="Épinard"></m-dropdown-item>
+                </m-dropdown>
+            </div>
+        </m-input-group>
+    </p>
 </div>
