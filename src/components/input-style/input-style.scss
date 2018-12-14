@@ -1,5 +1,4 @@
 @import 'abstracts/variables';
-@import 'abstracts/var-input-style';
 
 .m-input-style {
     position: relative;
@@ -10,7 +9,7 @@
     border-radius: 3px;
     padding: $m-input-style--padding;
     transition: border-color $m-transition-duration--l ease-in-out;
-    margin-top: $m-spacing--s;
+    margin-top: 0.6em;
 
     &:hover:not(.m--is-focus),
     &.m--has-value {
@@ -38,10 +37,14 @@
     &.m--is-label-up {
         cursor: text;
 
-        .m-input-style {
-            &__label {
-                transform: translate3d(0, -#{$m-input-style--label-offset}, 0) scale(0.8);
-                z-index: 1;
+        .m-input-style__label {
+            z-index: 1;
+            transform: translate3d(0, calc((-50% * 0.8) - #{$m-input-style--padding}), 0) scale(0.8);
+
+            .m-textarea &,
+            .m-rich-text &,
+            .m--has-word-wrap & {
+                margin-bottom: -1em; // to negate the space occupied by the label
             }
         }
     }
@@ -150,11 +153,9 @@
 
     &__label {
         position: relative;
-        top: 0;
-        left: 0;
         z-index: 1;
         transform-origin: 0 0;
-        transform: translate3d(0, 0, 0); // Magic number
+        transform: translate3d(0, 0, 0);
         align-items: center;
         font-size: $m-font-size;
         font-weight: $m-font-weight;
@@ -195,29 +196,29 @@
         text-decoration: none;
         background-color: $m-color--white;
 
-        .m-rich-text .m--is-label-up &,
-        .m--has-word-wrap .m--is-label-up & {
-            position: relative;
-            width: 100%;
-            bottom: unset;
-            margin-top: -#{$m-input-style--label-offset};
-        }
-
-        .m--has-label & {
-            position: absolute;
-            bottom: $m-input-style--padding;
-            width: calc(100% - #{$m-input-style--padding * 2});
-        }
-
         &,
         div,
         span {
             cursor: text;
         }
 
+        .m--has-label & {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            width: calc(100% - #{$m-input-style--padding * 2});
+        }
+
+        .m-textarea .m--is-label-up &,
+        .m-rich-text .m--is-label-up &,
+        .m--has-word-wrap .m--is-label-up & {
+            position: relative;
+            width: 100%;
+            bottom: unset;
+        }
+
         &__left {
             position: relative;
-            min-height: 24px;
             flex: 1 1 auto;
             max-width: 100%;
         }
@@ -243,7 +244,7 @@
         .m-icon.m-icon {
             position: relative;
             z-index: 0;
-            font-size: 16px; // Magic number
+            font-size: 16px;
             color: $m-color--grey-darker;
         }
 
@@ -293,6 +294,11 @@
             display: none;
         }
 
+        &[type="search"]::-webkit-search-decoration,
+        &[type="search"]::-webkit-search-cancel-button,
+        &[type="search"]::-webkit-search-results-button,
+        &[type="search"]::-webkit-search-results-decoration { display: none; }
+
         &:-webkit-autofill {
             background: rgba($m-color--white, 0);
             -webkit-box-shadow: 0 0 0 1000px $m-color--white inset !important;
@@ -316,83 +322,11 @@
         input,
         textarea,
         ::placeholder,
+        .m-input-style__label,
         .m-input-style__body__transparent-text {
+            font-size: inherit;
             font-family: $m-font-family;
             font-weight: $m-font-weight--bold;
-        }
-    }
-
-    &.m--is-tag-h1 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 38px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            @include m-h1-font-style();
-        }
-    }
-
-    &.m--is-tag-h2 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 33px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            @include m-h2-font-style();
-        }
-    }
-
-    &.m--is-tag-h3 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 28px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            @include m-h3-font-style();
-        }
-    }
-
-    &.m--is-tag-h4 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 23px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            @include m-h4-font-style();
-        }
-    }
-
-    &.m--is-tag-h5 {
-        &:not(.m--is-label-up) .m-input-style__label {
-            transform: translate3d(0, 18px, 0); // Magic number
-        }
-
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            @include m-h5-font-style();
-        }
-    }
-
-    &.m--is-tag-h6 {
-        input,
-        textarea,
-        ::placeholder,
-        .m-input-style__body__transparent-text {
-            @include m-h6-font-style();
         }
     }
 
@@ -400,9 +334,38 @@
         input,
         textarea,
         ::placeholder,
+        .m-input-style__label,
         .m-input-style__body__transparent-text {
             font-weight: $m-font-weight;
         }
+    }
+
+    &.m--is-tag-h1 {
+        font-size: $m-font-size--h1;
+    }
+
+    &.m--is-tag-h2 {
+        font-size: $m-font-size--h2;
+    }
+
+    &.m--is-tag-h3 {
+        font-size: $m-font-size--h3;
+    }
+
+    &.m--is-tag-h4 {
+        font-size: $m-font-size--h4;
+    }
+
+    &.m--is-tag-h5 {
+        font-size: $m-font-size--h5;
+    }
+
+    &.m--is-tag-h6 {
+        font-size: $m-font-size--h6;
+    }
+
+    &__icon {
+        background-color: red;
     }
 }
 

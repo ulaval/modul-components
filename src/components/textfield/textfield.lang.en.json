@@ -1,6 +1,7 @@
 {
     "m-textfield": {
         "show-password": "Display password",
-        "hide-password": "Hide password"
+        "hide-password": "Hide password",
+        "search": "Search"
     }
 }

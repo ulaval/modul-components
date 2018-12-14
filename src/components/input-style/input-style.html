@@ -19,8 +19,8 @@
            :for="labelFor"
            v-if="hasLabel">
         <span class="m-input-style__text">
-            <m-icon :name="iconName"
-                    v-if="hasIcon"></m-icon><span v-if="hasLabelText">{{ label }}</span><sup class="m-input-style__required-marker"
+            <span>{{ label }}</span>
+            <sup class="m-input-style__required-marker"
                  v-if="requiredMarker">*</sup>
         </span>
     </label>
