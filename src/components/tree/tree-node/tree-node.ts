@@ -78,9 +78,7 @@ export class MTreeNode extends ModulVue {
     }
 
     public onAutoSelectButtonClick(): void {
-        let childrenPaths: string[] = [];
-        this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, true);
-        this.updateSelectedNodes(childrenPaths.concat(this.currentPath), !this.allChildrenAndSelfSelected);
+        this.recursiveSelect();
     }
 
     public onAutoSelectChildCheckboxChange(selected: boolean, ignoreCount: boolean = false): void {
@@ -105,9 +103,7 @@ export class MTreeNode extends ModulVue {
 
     public onCheckboxClick(): void {
         if (this.hasChildren && (this.isCheckboxAutoSelect || this.isParentAutoSelect)) {
-            let childrenPaths: string[] = [];
-            this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, this.isParentAutoSelect);
-            this.updateSelectedNodes(childrenPaths, !this.isSelected);
+            this.recursiveSelect();
         } else {
             this.$emit('click', this.currentPath);
         }
@@ -128,6 +124,23 @@ export class MTreeNode extends ModulVue {
         if (this.isSelected) {
             this.notifyParentOfChildCheckboxState();
         }
+    }
+
+    private recursiveSelect(): void {
+        let childrenPaths: string[] = [];
+        let addNodesToSelected: boolean = false;
+
+        if (this.isButtonAutoSelect) {
+            childrenPaths.concat(this.currentPath);
+            if (!this.allChildrenAndSelfSelected) {
+                addNodesToSelected = true;
+            }
+        } else if (!this.isButtonAutoSelect && !this.isSelected) {
+            addNodesToSelected = true;
+        }
+
+        this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, (this.isParentAutoSelect || this.isButtonAutoSelect));
+        this.updateSelectedNodes(childrenPaths, addNodesToSelected);
     }
 
     private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string, includeParent: boolean = false): void {
