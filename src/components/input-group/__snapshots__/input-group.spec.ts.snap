@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MInputGroup with errors will render correctly 1`] = `
+<fieldset class="m-input-group">
+    <div class="m-input-group__validation">
+        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+    </div>
+</fieldset>
+`;
+
+exports[`MInputGroup with legend will render correctly 1`] = `
+<fieldset class="m-input-group">
+    <legend class="m-input-group__legend">Some legend</legend>
+    <div class="m-input-group__validation">
+        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+    </div>
+</fieldset>
+`;
+
+exports[`MInputGroup without content will render correctly 1`] = `
+<fieldset class="m-input-group">
+    <div class="m-input-group__validation">
+        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+    </div>
+</fieldset>
+`;

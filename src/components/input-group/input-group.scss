@@ -1,0 +1,21 @@
+.m-input-group {
+    border-color: hotpink;
+    border-width: 3px;
+    background-color: lightpink;
+    outline-width: 0;
+
+    &__legend {
+        border: 3px solid deepskyblue;
+        background-color: lightblue;
+    }
+
+    &__validation {
+        border: 3px solid orange;
+        background-color: lightgoldenrodyellow;
+    }
+
+    &__error {
+        background-color: red;
+        margin-bottom: 3px;
+    }
+}

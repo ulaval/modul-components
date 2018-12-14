@@ -1,0 +1,90 @@
+<div>
+    <!-- Sandbox template -->
+    <h3>Tools</h3>
+
+    <m-textfield label="Message valide"
+                 v-model="validMessage"></m-textfield><br /><br />
+    <m-textfield label="Message d'erreur"
+                 v-model="errorMessage"></m-textfield><br /><br />
+    <m-textfield label="Message d'aide"
+                 v-model="helperMessage"></m-textfield><br /><br />
+    <button @click="isDisabled = !isDisabled">Toogle disabled (current value: {{ !!isDisabled }}) </button><br />
+    <button @click="isWaiting = !isWaiting">Toogle waiting (current value: {{ !!isWaiting }}) </button><br />
+    <button @click="isReadonly = !isReadonly">Toogle readonly (current value: {{ !!isReadonly }}) </button><br />
+    <button @click="isValid = !isValid">Toogle valid (current value: {{ !!isValid }}) </button><br />
+    <button @click="hasError = !hasError">Toogle error (current value: {{ !!hasError }}) </button><br />
+
+    <h3>Propriétés ré-exposées par le composant</h3>
+    <p class="m-u--margin-bottom">
+        Les propriétés ré-exposées peuvent être assignées aux objets passés par la slot
+    </p>
+    <p>
+        <m-input-group legend="Propriétés exposées"
+                       :display-validation="false"
+                       :error-message="errorMessage"
+                       :error="hasError"
+                       :valid-message="validMessage"
+                       :valid="isValid"
+                       :helper-message="helperMessage"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+                <dl>
+                    <dt>disabled</dt>
+                    <dd :class="{ stronger : disabled }">{{ disabled }}</dd>
+                    <dt>waiting</dt>
+                    <dd :class="{ stronger : waiting }">{{ waiting }}</dd>
+                    <dt>readonly</dt>
+                    <dd :class="{ stronger : readonly }">{{ readonly }}</dd>
+                    <dt>valid</dt>
+                    <dd :class="{ stronger : valid }">{{ valid }} -- Cette propriété réagit au message valide</dd>
+                    <dt>error</dt>
+                    <dd :class="{ stronger : error }">{{ error }} -- Cette propriété réagit au message d'erreur</dd>
+                </dl>
+            </div>
+        </m-input-group>
+    </p>
+    <h3>Utilisation avec des champs textes (m-textfield)</h3>
+    <p class="m-u--margin-bottom">
+        Un exemple de validation de données est inclut
+    </p>
+    <p>
+        <m-input-group legend="Gestion de champs de texte"
+                       :error-message="errorMessage"
+                       :error="hasError"
+                       :valid-message="validMessage"
+                       :valid="isValid"
+                       :helper-message="helperMessage"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+                <m-textfield label="Prénom"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             v-model="prenom"
+                             @input="valider"></m-textfield>
+                <m-textfield label="initiale"
+                             :max-width="xSmallFormWidth"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             v-model="initiale"></m-textfield>
+                <m-textfield label="Nom de famille"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             v-model="nom"
+                             @input="valider"></m-textfield>
+            </div>
+        </m-input-group>
+    </p>
+</div>
