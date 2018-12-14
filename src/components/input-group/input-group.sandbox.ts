@@ -32,6 +32,21 @@ export class MInputGroupSandbox extends Vue {
     get xSmallFormWidth(): string {
         return InputMaxWidth.XSmall;
     }
+
+    get errorMessageNom(): string {
+        if (!this.nom) {
+            return 'Le nom est obligatoire';
+        }
+        return '';
+    }
+
+    get errorMessagePrenom(): string {
+        if (!this.prenom) {
+            return 'Le prénom est obligatoire';
+        }
+        return '';
+    }
+
     valider(): void {
         this.errorMessage = '';
         this.validerNom();
@@ -39,15 +54,11 @@ export class MInputGroupSandbox extends Vue {
     }
 
     validerNom(): void {
-        if (!this.nom) {
-            this.errorMessage = 'Le nom est obligatoire';
-        }
+        this.errorMessage = (this.errorMessageNom) ? this.errorMessageNom : this.errorMessage;
     }
 
     validerPrenom(): void {
-        if (!this.prenom) {
-            this.errorMessage = 'Le prénom est obligatoire';
-        }
+        this.errorMessage = (this.errorMessagePrenom) ? this.errorMessagePrenom : this.errorMessage;
     }
 }
 
