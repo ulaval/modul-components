@@ -1,11 +1,8 @@
 <div>
-    <fieldset>
-        <legend>patate</legend>
-        <m-datepicker :label="'Du'"
-                      v-model="from"></m-datepicker>
-        <m-datepicker :label="'Au'"
-                      v-model="to"></m-datepicker>
-    </fieldset>
-    <p>from is: {{ from }}</p>
-    <p>to is: {{ to }}</p>
+    <slot name="first"
+          :props="firstInputState.props"
+          :handlers="firstInputState.handlers"></slot>
+    <slot name="second"
+          :props="secondInputState.props"
+          :handlers="secondInputState.handlers"></slot>
 </div>

@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -15,6 +14,7 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
+
 
 export enum MTextfieldType {
     Text = 'text',
@@ -146,6 +146,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
+    }
+
+    private resetModel(): void {
+        this.$emit('input', '');
     }
 }
 

@@ -1,6 +1,7 @@
 import Component from 'vue-class-component';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
+import { InputManagement } from '../input-management/input-management';
 import { InputState } from '../input-state/input-state';
 import { MediaQueries } from '../media-queries/media-queries';
 
@@ -49,13 +50,9 @@ export class InputPopup extends ModulVue {
     }
 
     public get isEmpty(): boolean {
-        return this.hasValue() || (this.hasPlaceholder() && this.open) ? false : true;
+        return this.as<InputManagement>().hasValue || (this.hasPlaceholder() && this.open) ? false : true;
     }
 
-    public hasValue(): boolean {
-        // undefined, null and empty string return false
-        return !!(this.internalValue || '').toString().trim();
-    }
 
     public hasPlaceholder(): boolean {
         return this.placeholder !== undefined && this.placeholder !== '';

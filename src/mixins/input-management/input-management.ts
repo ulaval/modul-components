@@ -58,6 +58,10 @@ export class InputManagement extends ModulVue
         }
     }
 
+    public get hasValue(): boolean {
+        return !!(this.model || '').toString().trim();
+    }
+
     private beforeMount(): void {
         // Don't use this.model because we don't want to emit 'input' when the component isn't Mount
         this.internalValue = this.getTrimValue(this.value ? this.value : '');
@@ -139,10 +143,6 @@ export class InputManagement extends ModulVue
 
     private get model(): string {
         return this.internalValue;
-    }
-
-    private get hasValue(): boolean {
-        return !!(this.model || '').toString().trim();
     }
 
     private get isEmpty(): boolean {
