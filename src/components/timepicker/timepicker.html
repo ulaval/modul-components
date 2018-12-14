@@ -8,7 +8,6 @@
                    :error="timeError"
                    :valid="isValid"
                    :width="width"
-                   :icon-name="iconName"
                    v-m-popup:popup>
         <input :id="id"
                type="text"
@@ -32,36 +31,63 @@
                        button-size="22px"
                        :aria-controls="id"
                        @keydown.enter.prevent="open = !isDisabled">
-            <m-i18n k="m-timepicker:open" v-if="!open"></m-i18n>
-            <m-i18n k="m-timepicker:close" v-if="open"></m-i18n>
+            <m-i18n k="m-timepicker:open"
+                    v-if="!open"></m-i18n>
+            <m-i18n k="m-timepicker:close"
+                    v-if="open"></m-i18n>
         </m-icon-button>
     </m-input-style>
-    <m-validation-message
-        :disabled="isDisabled"
-        :waiting="isWaiting"
-        :error="timeError"
-        :error-message="timeErrorMessage"
-        :valid-message="validMessage"
-        :helper-message="helperMessage"></m-validation-message>
+    <m-validation-message :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="timeError"
+                          :error-message="timeErrorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
     <m-popup ref="popup"
              :open.sync="open"
              :disabled="!active"
              :padding="false"
              :focus-management="isMqMaxS">
-        <div slot="header" class="m-timepicker__header">
-            <m-i18n k="m-timepicker:hours" class="m-timepicker__header__hours"></m-i18n>:
-            <m-i18n k="m-timepicker:minutes" class="m-timepicker__header__minutes"></m-i18n>
+        <div slot="header"
+             class="m-timepicker__header">
+            <m-i18n k="m-timepicker:hours"
+                    class="m-timepicker__header__hours"></m-i18n>:
+            <m-i18n k="m-timepicker:minutes"
+                    class="m-timepicker__header__minutes"></m-i18n>
         </div>
-        <div :id="ariaControls" class="m-timepicker__body" :aria-labelledby="id">
-            <ul class="m-timepicker__body__hours" ref="hours" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li role="option" v-for="(h, i) in hours"><a href role="option" :aria-selected="i == tempHour" class="m-timepicker__body__hours-item" :class="{'m--is-selected': i == tempHour}" @click.stop.prevent="selectHour(i)">{{formatHour(i)}}</a></li>
+        <div :id="ariaControls"
+             class="m-timepicker__body"
+             :aria-labelledby="id">
+            <ul class="m-timepicker__body__hours"
+                ref="hours"
+                @scroll="onScroll"
+                @mousedown="onMousedown"
+                @mouseup="onMouseup">
+                <li role="option"
+                    v-for="(h, i) in hours"><a href
+                       role="option"
+                       :aria-selected="i == tempHour"
+                       class="m-timepicker__body__hours-item"
+                       :class="{'m--is-selected': i == tempHour}"
+                       @click.stop.prevent="selectHour(i)">{{formatHour(i)}}</a></li>
             </ul>
-            <ul class="m-timepicker__body__minutes" ref="minutes" @scroll="onScroll" @mousedown="onMousedown" @mouseup="onMouseup">
-                <li v-for="m in minutes"><a href role="option" :aria-selected="m == tempMinute" class="m-timepicker__body__minutes-item" :class="{'m--is-selected': m == tempMinute}" @click.stop.prevent="selectMinute(m)">{{formatMinute(m)}}</a></li>
+            <ul class="m-timepicker__body__minutes"
+                ref="minutes"
+                @scroll="onScroll"
+                @mousedown="onMousedown"
+                @mouseup="onMouseup">
+                <li v-for="m in minutes"><a href
+                       role="option"
+                       :aria-selected="m == tempMinute"
+                       class="m-timepicker__body__minutes-item"
+                       :class="{'m--is-selected': m == tempMinute}"
+                       @click.stop.prevent="selectMinute(m)">{{formatMinute(m)}}</a></li>
             </ul>
         </div>
-        <div slot="footer" class="m-timepicker__footer">
-            <m-link mode="button" @click="onOk">{{okButtonText}}</m-link>
+        <div slot="footer"
+             class="m-timepicker__footer">
+            <m-link mode="button"
+                    @click="onOk">{{okButtonText}}</m-link>
         </div>
     </m-popup>
 </div>

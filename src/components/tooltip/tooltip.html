@@ -31,14 +31,13 @@
             :aria-expanded="propOpen"
             slot="trigger"
             mode="button"
-            :underline="underline"
+            :underline="false"
             :disabled="disabled"
             v-if="propMode !== 'icon'">
         <slot name="link"></slot>
     </m-link>
     <div :id="ariaControls"
          class="m-tooltip__body-container"
-         :class="{ 'm--has-close-button': propCloseButton }"
          :aria-labelledby="id">
         <div class="m-tooltip__close-button"
              tabindex="0"
@@ -49,7 +48,8 @@
                     size="12px"
                     :svg-tile="getCloseTitle()"></m-icon>
         </div>
-        <div class="m-tooltip__body">
+        <div class="m-tooltip__body"
+             :class="{ 'm--is-link': propMode === 'link' }">
             <slot></slot>
         </div>
     </div>

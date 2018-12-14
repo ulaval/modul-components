@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
@@ -12,6 +11,7 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
 import WithRender from './tooltip.html?style=./tooltip.scss';
+
 
 export enum MTooltipMode {
     Icon = 'icon',
@@ -57,8 +57,6 @@ export class MTooltip extends ModulVue {
     public openTitle: string;
     @Prop()
     public closeTitle: string;
-    @Prop({ default: true })
-    public underline: boolean;
     @Prop()
     public className: string;
 
