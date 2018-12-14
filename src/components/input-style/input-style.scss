@@ -1,5 +1,4 @@
 @import 'abstracts/variables';
-@import 'abstracts/var-input-style';
 
 .m-input-style {
     position: relative;
@@ -41,6 +40,12 @@
         .m-input-style__label {
             z-index: 1;
             transform: translate3d(0, calc((-50% * 0.8) - #{$m-input-style--padding}), 0) scale(0.8);
+
+            .m-textarea &,
+            .m-rich-text &,
+            .m--has-word-wrap & {
+                margin-bottom: -1em; // to negate the space occupied by the label
+            }
         }
     }
 
@@ -148,8 +153,6 @@
 
     &__label {
         position: relative;
-        top: 0;
-        left: 0;
         z-index: 1;
         transform-origin: 0 0;
         transform: translate3d(0, 0, 0);
@@ -201,7 +204,8 @@
 
         .m--has-label & {
             position: absolute;
-            bottom: $m-input-style--padding;
+            bottom: 0;
+            top: 0;
             width: calc(100% - #{$m-input-style--padding * 2});
         }
 
@@ -290,6 +294,11 @@
             display: none;
         }
 
+        &[type="search"]::-webkit-search-decoration,
+        &[type="search"]::-webkit-search-cancel-button,
+        &[type="search"]::-webkit-search-results-button,
+        &[type="search"]::-webkit-search-results-decoration { display: none; }
+
         &:-webkit-autofill {
             background: rgba($m-color--white, 0);
             -webkit-box-shadow: 0 0 0 1000px $m-color--white inset !important;
@@ -353,6 +362,10 @@
 
     &.m--is-tag-h6 {
         font-size: $m-font-size--h6;
+    }
+
+    &__icon {
+        background-color: red;
     }
 }
 
