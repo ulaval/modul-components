@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
+import { Model, Prop, Watch } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -15,6 +15,7 @@ import { DATEPICKER_NAME } from '../component-names';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import { InputManagement } from './../../mixins/input-management/input-management';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 
 
@@ -24,14 +25,19 @@ const VIEW_YEAR: string = 'year';
 const NB_YEARS_PER_ROW: number = 5;
 const ITEM_DIMENSION: number = 40;
 
-export interface DatepickerDate {
-    date: number;
-    month: number;
-    year: number;
+interface DatepickerDateDisplay extends DatepickerDate {
     isDisabled: boolean;
     isToday: boolean;
     isSelected: boolean;
 }
+
+interface DatepickerDate {
+    date: number;
+    month: number;
+    year: number;
+}
+
+export type DatePickerSupportedTypes = moment.Moment | Date | string | undefined;
 
 @WithRender
 @Component({
@@ -40,6 +46,7 @@ export interface DatepickerDate {
         InputWidth,
         InputLabel,
         InputPopup,
+        InputManagement,
         MediaQueries
     ]
 })
@@ -47,7 +54,7 @@ export class MDatepicker extends ModulVue {
 
     @Model('change')
     @Prop()
-    public value: moment.Moment | Date;
+    public value: DatePickerSupportedTypes;
     @Prop()
     public label: string;
     @Prop()
@@ -57,16 +64,17 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: 'YYYY/MM/DD' })
     public format: string;
     @Prop({ default: () => { return moment().subtract(10, 'year'); } })
-    public min: moment.Moment | Date;
+    public min: DatePickerSupportedTypes;
     @Prop({ default: () => { return moment().add(10, 'year'); } })
-    public max: moment.Moment | Date;
+    public max: DatePickerSupportedTypes;
+    @Prop({ default: () => (Vue.prototype as any).$i18n.translate('m-datepicker:placeholder') })
+    public placeholder: string;
 
-    public placeholder: string = this.$i18n.translate('m-datepicker:placeholder');
     private internalOpen: boolean = false;
     private view: string = 'day';
-    private previousDays: DatepickerDate[] = [];
-    private days: DatepickerDate[] = [];
-    private nextDays: DatepickerDate[] = [];
+    private previousDays: DatepickerDateDisplay[] = [];
+    private days: DatepickerDateDisplay[] = [];
+    private nextDays: DatepickerDateDisplay[] = [];
     private selectedYear: number = 0;
     private selectedMonth: number = 0;
     private selectedDay: number = 0;
@@ -77,12 +85,10 @@ export class MDatepicker extends ModulVue {
 
     protected created(): void {
         moment.locale([this.$i18n.currentLang(), 'en-ca']);
-        this.selectedMomentDate = this.valueIsValid() ? moment(this.value) : moment();
-        this.formattedDate = this.selectedMomentDate.format(this.format);
     }
 
     private valueIsValid(): boolean {
-        return this.value && moment(this.value).isValid() && moment(this.value).isBetween(this.min, this.max, 'day', '[]');
+        return !!this.value && moment(this.value).isValid() && moment(this.value).isBetween(this.min, this.max, 'day', '[]');
     }
 
     private get years(): number[] {
@@ -113,9 +119,9 @@ export class MDatepicker extends ModulVue {
         this.$emit('change', '');
     }
 
-    private getDaysOfPreviousMonth(): DatepickerDate[] {
+    private getDaysOfPreviousMonth(): DatepickerDateDisplay[] {
         let monthStartsAt: number = moment(this.selectedMomentDate).startOf('month').weekday();
-        let days: DatepickerDate[] = [];
+        let days: DatepickerDateDisplay[] = [];
 
         for (let index: number = monthStartsAt; index > 0; index--) {
             let date: moment.Moment = moment(this.selectedMomentDate).startOf('month').subtract(index, 'days');
@@ -131,9 +137,9 @@ export class MDatepicker extends ModulVue {
         return days;
     }
 
-    private getDaysOfCurrentMonth(): DatepickerDate[] {
+    private getDaysOfCurrentMonth(): DatepickerDateDisplay[] {
         let lastDayOfMonth: number = this.selectedMomentDate.daysInMonth();
-        let days: DatepickerDate[] = [];
+        let days: DatepickerDateDisplay[] = [];
 
         for (let index: number = 1; index <= lastDayOfMonth; index++) {
             let date: any = { year: this.selectedMomentDate.year(), month: this.selectedMomentDate.month(), date: index };
@@ -141,15 +147,15 @@ export class MDatepicker extends ModulVue {
                 ...date,
                 isDisabled: moment(date).isBefore(this.min, 'day') || moment(date).isAfter(this.max, 'day'),
                 isToday: moment().isSame(date, 'day'),
-                isSelected: this.selectedMomentDate.isSame(date, 'day')
+                isSelected: this.value && this.selectedMomentDate.isSame(date, 'day')
             });
         }
         return days;
     }
 
-    private getDaysOfNextMonth(): DatepickerDate[] {
+    private getDaysOfNextMonth(): DatepickerDateDisplay[] {
         let daysToDisplayFromNextMonth: number = 6 - moment(this.selectedMomentDate).endOf('month').weekday();
-        let days: DatepickerDate[] = [];
+        let days: DatepickerDateDisplay[] = [];
 
         for (let index: number = 1; index <= daysToDisplayFromNextMonth; index++) {
             let date: moment.Moment = moment(this.selectedMomentDate).endOf('month').add(index, 'days');
@@ -181,21 +187,11 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.internalCalandarErrorMessage || !this.value ? this.as<InputPopup>().internalValue : moment(this.value).format(this.format);
-    }
-
-    private set formattedDate(value: string) {
-        this.as<InputPopup>().internalValue = value;
+        return this.value ? moment(this.value).format(this.format) : '';
     }
 
     private get selectedMomentDate(): moment.Moment {
-        return this.selectedDay ? moment({ year: this.selectedYear, month: this.selectedMonth, day: this.selectedDay }) : moment();
-    }
-
-    private set selectedMomentDate(value: moment.Moment) {
-        this.selectedYear = value.year();
-        this.selectedMonth = value.month();
-        this.selectedDay = value.date();
+        return moment({ year: this.selectedYear, month: this.selectedMonth, day: this.selectedDay });
     }
 
     private get isMinYear(): boolean {
@@ -218,7 +214,7 @@ export class MDatepicker extends ModulVue {
         return moment().month(this.selectedMonth).format('MMM');
     }
 
-    private get daysOfMonth(): DatepickerDate[] {
+    private get daysOfMonth(): DatepickerDateDisplay[] {
         this.previousDays = this.getDaysOfPreviousMonth();
         this.days = this.getDaysOfCurrentMonth();
         this.nextDays = this.getDaysOfNextMonth();
@@ -245,13 +241,19 @@ export class MDatepicker extends ModulVue {
         return this.id + '-controls-2';
     }
 
+    @Watch('focus')
+    private updateFocus(): void {
+        this.open = this.as<InputManagement>().focus;
+    }
+
     private set open(open: boolean) {
         this.internalOpen = open;
         this.$nextTick(() => {
             if (this.internalOpen) {
                 let inputEl: any = this.$refs.input;
                 inputEl.focus();
-                inputEl.setSelectionRange(0, this.formattedDate.length);
+                inputEl.setSelectionRange(0, (this.formattedDate).length);
+                this.setSelectionToCurrentValue();
                 this.$emit('open');
             } else {
                 this.$emit('close');
@@ -261,7 +263,6 @@ export class MDatepicker extends ModulVue {
 
     private validateDate(event): void {
         if (event.target.value === '') {
-            this.selectedMomentDate = moment();
             if (this.required) {
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
             } else {
@@ -271,26 +272,14 @@ export class MDatepicker extends ModulVue {
         } else if (moment(event.target.value, this.format).isValid()) {
             let newDate: moment.Moment = moment(event.target.value, this.format);
             if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
-                this.selectedMomentDate = newDate;
-                this.formattedDate = this.selectedMomentDate.format(this.format);
                 this.$emit('change', newDate);
                 this.internalCalandarErrorMessage = '';
             } else {
-                this.formattedDate = newDate.format(this.format);
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
             }
         } else {
             this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
         }
-    }
-
-    private keepDateInRange(date: moment.Moment): moment.Moment {
-        if (date.isBefore(this.min, 'day')) {
-            return moment(this.min);
-        } else if (date.isAfter(this.max, 'day')) {
-            return moment(this.max);
-        }
-        return date;
     }
 
     private showYears(): void {
@@ -302,32 +291,73 @@ export class MDatepicker extends ModulVue {
     }
 
     private selectYear(year: number, showMonths: boolean = false): void {
-        this.selectedMomentDate = this.keepDateInRange(moment(this.selectedMomentDate).year(year));
+        this.selectedYear = year;
         if (showMonths) {
             this.view = VIEW_MONTH;
         }
     }
 
     private selectMonth(month: number, showDays: boolean = false): void {
-        this.selectedMomentDate = this.keepDateInRange(moment(this.selectedMomentDate).month(month));
+        if (month === 12) {
+            this.selectedMonth = 0;
+            this.selectedYear++;
+        } else {
+            this.selectedMonth = month;
+        }
+
         if (showDays) {
             this.view = VIEW_DAY;
         }
     }
 
-    private selectDate(selectedDate: DatepickerDate): void {
+    private selectDate(selectedDate: DatepickerDateDisplay): void {
         if (!selectedDate.isDisabled) {
-            this.selectedMomentDate = moment(selectedDate);
             this.internalCalandarErrorMessage = '';
-            this.formattedDate = this.selectedMomentDate.format(this.format);
-            this.$emit('change', this.value instanceof Date ? this.selectedMomentDate.toDate() : this.selectedMomentDate);
+            this.$emit('change', this.createModelUpdateValue(selectedDate));
             this.open = false;
+        }
+    }
+
+    private createModelUpdateValue(newValue: DatepickerDate): DatePickerSupportedTypes {
+        if (this.value instanceof Date) {
+            return new Date(newValue.year, newValue.month, newValue.date);
+        } else if (this.value instanceof moment) {
+            return moment({ year: this.selectedYear, month: this.selectedMonth, day: this.selectedDay });
+        } else {
+            return new Date(newValue.year, newValue.month, newValue.date).toISOString();
+        }
+    }
+
+    private setSelectionToCurrentValue(): void {
+        const value: DatePickerSupportedTypes = this.value || this.getDefaultCurrentValue();
+
+        if (value instanceof Date) {
+            this.selectedYear = value.getFullYear();
+            this.selectedMonth = value.getMonth();
+            this.selectedDay = value.getDate();
+        } else if (value instanceof moment) {
+            this.selectedYear = moment(value).get('year');
+            this.selectedMonth = moment(value).get('month');
+            this.selectedDay = moment(value).get('day');
+        } else {
+            const dateValue: Date = new Date(value as string);
+            this.selectedYear = dateValue.getFullYear();
+            this.selectedMonth = dateValue.getMonth();
+            this.selectedDay = dateValue.getDate();
+        }
+    }
+
+    private getDefaultCurrentValue(): DatePickerSupportedTypes {
+        if (moment(this.min).isAfter(moment(new Date()))) {
+            return this.min;
+        } else {
+            return new Date();
         }
     }
 }
 
 const DatepickerPlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v): void {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
         v.use(PopupPlugin);
