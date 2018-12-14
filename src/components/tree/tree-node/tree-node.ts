@@ -1,10 +1,7 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
-import CheckboxPlugin from '../../checkbox/checkbox';
-import I18nPlugin from '../../i18n/i18n';
-import { TREE_ICON_NAME, TREE_NODE_NAME } from '../component-names';
+import { TREE_ICON_NAME } from '../component-names';
 import { MCheckboxes, TreeNode } from '../tree';
 import { MTreeIcon } from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
@@ -109,16 +106,6 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    public updateSelectedNodes(paths: string[] = [], addNodesToSelected: boolean): void {
-        paths = Array.from(new Set(paths));
-        paths.forEach(path => {
-            let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
-            if ((addNodesToSelected && !nodeAlreadySelected) || (!addNodesToSelected && nodeAlreadySelected)) { // Prevent nodes to be pushed twice or unselected nodes to be removed
-                this.$emit('click', path);
-            }
-        });
-    }
-
     protected mounted(): void {
         this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
         if (this.isSelected) {
@@ -141,6 +128,16 @@ export class MTreeNode extends ModulVue {
 
         this.fetchChildrenPaths(this.node, childrenPaths, this.path + '/' + this.node.id, (this.isParentAutoSelect || this.isButtonAutoSelect));
         this.updateSelectedNodes(childrenPaths, addNodesToSelected);
+    }
+
+    private updateSelectedNodes(paths: string[] = [], addNodesToSelected: boolean): void {
+        paths = Array.from(new Set(paths));
+        paths.forEach(path => {
+            let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
+            if ((addNodesToSelected && !nodeAlreadySelected) || (!addNodesToSelected && nodeAlreadySelected)) { // Prevent nodes to be pushed twice or unselected nodes to be removed
+                this.$emit('click', path);
+            }
+        });
     }
 
     private fetchChildrenPaths(currentNode: TreeNode, childrenPath: string[], path: string, includeParent: boolean = false): void {
@@ -252,14 +249,3 @@ export class MTreeNode extends ModulVue {
         return this.checkboxes === MCheckboxes.WithCheckboxAutoSelect;
     }
 }
-
-const TreeNodePlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.debug(TREE_NODE_NAME, 'plugin.install');
-        v.use(CheckboxPlugin);
-        v.use(I18nPlugin);
-        v.component(TREE_NODE_NAME, MTreeNode);
-    }
-};
-
-export default TreeNodePlugin;
