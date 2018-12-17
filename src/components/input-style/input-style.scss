@@ -146,6 +146,11 @@
         }
     }
 
+    &__label,
+    &__body__adjust-width-auto {
+        padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
+    }
+
     &__label {
         position: relative;
         z-index: 1;
