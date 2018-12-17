@@ -28,6 +28,13 @@ describe(SHOW_MORE_NAME, () => {
         });
     });
 
+    describe(`With nbTotal equals to 0`, () => {
+        it(`Should not render anything`, () => {
+            initializeShallowWrapper();
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+    });
+
     describe(`Given nbVisible and nbTotal`, () => {
         beforeEach(() => {
             initializeShallowWrapper();
