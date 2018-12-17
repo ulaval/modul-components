@@ -66,8 +66,7 @@ $m-dropdown--margin: $m-padding--xs !default;
     }
 
     &__arrow {
-        min-width: 22px;
-        text-align: right;
+        display: inherit;
 
         &__icon {
             transition: transform $m-transition-duration ease, color $m-transition-duration ease !important;
