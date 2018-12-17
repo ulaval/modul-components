@@ -2,27 +2,27 @@
 
 .m-scroll-top {
     &__button {
-        &:not(.m--is-relative) {
-            position: fixed;
-            right: $m-padding;
-            bottom: $m-padding;
+        display: flex;
 
-            @media (min-width: $m-mq--min--s) {
-                right: $m-padding--l;
-                bottom: $m-padding--l;
+        &.m--is-position-fixed {
+            position: fixed;
+            right: $m-padding--l;
+            bottom: $m-padding--l;
+            z-index: 1;
+
+            @media (max-width: $m-mq--min--s) {
+                display: none;
             }
         }
 
-        display: flex;
         align-items: center;
         justify-content: center;
         width: 28px;
         height: 28px;
-        padding: 0;
         background-color: $m-color--grey-darker;
         border: none;
         border-radius: $m-border-radius--s;
-        opacity: 0.3;
+        opacity: 0.5;
         cursor: pointer;
         transition: transform 0.3s ease, opacity 0.3s ease;
         transform: rotate(0) scale(1);
