@@ -15,6 +15,7 @@
      @mouseup="onMouseup"
      :style="{ width: width }">
     <label class="m-input-style__label"
+           :style="{'padding-right': rightContentWidth}"
            ref="label"
            :for="labelFor"
            v-if="hasLabel">
@@ -38,7 +39,8 @@
                 <slot name="adjust-width-auto"></slot>
             </div>
         </div>
-        <div class="m-input-style__body__right">
+        <div ref="rightContent"
+             class="m-input-style__body__right">
             <slot name="right-content"></slot>
         </div>
         <m-spinner size="small"

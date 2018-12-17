@@ -146,11 +146,6 @@
         }
     }
 
-    &__label,
-    &__body__adjust-width-auto {
-        padding-right: $m-padding;
-    }
-
     &__label {
         position: relative;
         z-index: 1;
@@ -238,6 +233,7 @@
             opacity: 0;
             user-select: none;
             white-space: nowrap;
+            padding-right: $m-input-style--padding;
         }
 
         .m-icon-button.m-icon-button,

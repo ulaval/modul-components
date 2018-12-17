@@ -32,9 +32,11 @@ export class MInputStyle extends ModulVue {
 
     public $refs: {
         label: HTMLElement,
-        adjustWidthAuto: HTMLElement
+        adjustWidthAuto: HTMLElement,
+        rightContent: HTMLElement
     };
 
+    public rightContentWidth: string = '';
     private animReady: boolean = false;
 
     public setInputWidth(): void {
@@ -74,6 +76,10 @@ export class MInputStyle extends ModulVue {
         }, 0);
     }
 
+    protected mounted(): void {
+        this.rightContentWidth = this.$refs.rightContent ? this.$refs.rightContent.clientWidth + 'px' : '0';
+    }
+
     private get hasValue(): boolean {
         return this.hasDefaultSlot && !this.empty;
     }
@@ -99,6 +105,13 @@ export class MInputStyle extends ModulVue {
     private get hasAdjustWidthAutoSlot(): boolean {
         return !!this.$slots['adjust-width-auto'];
     }
+
+    // private get getRightContentWidth(): string {
+    //     return this.$refs.rightContent.clientWidth + 'px';
+
+    //     setTimeout(() => {
+    //     }, 0);
+    // }
 
     private onClick(event): void {
         this.$emit('click', event);
