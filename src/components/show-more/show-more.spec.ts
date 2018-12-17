@@ -31,6 +31,8 @@ describe(SHOW_MORE_NAME, () => {
     describe(`With nbTotal equals to 0`, () => {
         it(`Should not render anything`, () => {
             initializeShallowWrapper();
+            wrapper.setProps({ nbVisible: 0, nbTotal: 0 });
+
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
     });
