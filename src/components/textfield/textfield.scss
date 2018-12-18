@@ -22,11 +22,13 @@
         }
     }
 
-    &__icon-password,
-    &__icon-search {
-        margin-left: $m-margin--s;
+    &__reset,
+    &__search-icon,
+    &__icon-password {
+        margin-left: $m-spacing;
     }
 
+    &__reset,
     &__icon-password {
         &.m--is-enter-active,
         &.m--is-leave-active {

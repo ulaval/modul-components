@@ -1,12 +1,17 @@
 <div>
-    <h3 class="m-u--no-margin">Zone de texte de base</h3>
-    <m-textarea label="Titre" value=""></m-textarea>
+    <m-textarea label="Titre"
+                value=""></m-textarea>
 
     <h4 class="m-u--h6">Champ obligatoire</h4>
-    <m-textarea :required-marker="true" label="Nom" value="" error-message="Ce champ est obligatoire."></m-textarea>
+    <m-textarea :required-marker="true"
+                label="Nom"
+                value=""
+                error-message="Ce champ est obligatoire."></m-textarea>
 
     <h4 class="m-u--h6">Champ désactivé</h4>
-    <m-textarea :disabled="true" label="Titre" value="text"></m-textarea>
+    <m-textarea :disabled="true"
+                label="Titre"
+                value="text"></m-textarea>
 
     <h3>
         Test 1 : Compteur de caractères
@@ -20,12 +25,17 @@
     </ul>
     <h6>Dépassement autorisé : Oui</h6>
     <br>
-    <m-textarea :character-count="true" max-length="20" :length-overflow="true" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
+    <m-textarea :character-count="true"
+                max-length="20"
+                :length-overflow="true"
+                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
     </m-textarea>
 
     <h6>Dépassement autorisé : Non</h6>
     <br>
-    <m-textarea :character-count="true" max-length="20" :length-overflow="false">
+    <m-textarea :character-count="true"
+                max-length="20"
+                :length-overflow="false">
     </m-textarea>
 
     <h4>
@@ -36,26 +46,43 @@
         <li>Dépassement autorisé : Oui</li>
     </ul>
     <h6>Affichage du compteur : à partir de 25 caractères</h6>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="25" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
+    <m-textarea :character-count="true"
+                max-length="30"
+                :length-overflow="true"
+                character-count-threshold="25"
+                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 0 caractère (en tout temps)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="0">
+    <m-textarea :character-count="true"
+                max-length="30"
+                :length-overflow="true"
+                character-count-threshold="0">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 30 caractères (une fois la limite atteinte)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="30" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
+    <m-textarea :character-count="true"
+                max-length="30"
+                :length-overflow="true"
+                character-count-threshold="30"
+                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de 35 caractères (seuil supérieur à la limite)</h6>
     <br>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="35">
+    <m-textarea :character-count="true"
+                max-length="30"
+                :length-overflow="true"
+                character-count-threshold="35">
     </m-textarea>
 
     <h6>Affichage du compteur : à partir de -5 caractères (seuil inférieur à 0)</h6>
-    <m-textarea :character-count="true" max-length="30" :length-overflow="true" character-count-threshold="-5">
+    <m-textarea :character-count="true"
+                max-length="30"
+                :length-overflow="true"
+                character-count-threshold="-5">
     </m-textarea>
 
     <h4>
@@ -67,7 +94,11 @@
         <li>Affichage du compteur : en tout temps</li>
     </ul>
     <br>
-    <m-textarea :character-count="true" max-length="20" :length-overflow="true" value="L'utilisateur a saisi 35 caractères" error-message="Ce champ ne peut comporter plus de 20 caractères.">
+    <m-textarea :character-count="true"
+                max-length="20"
+                :length-overflow="true"
+                value="L'utilisateur a saisi 35 caractères"
+                error-message="Ce champ ne peut comporter plus de 20 caractères.">
     </m-textarea>
 
     <h4>
@@ -80,8 +111,14 @@
     </ul>
     <p class="m-u--typo--precision">176 car. : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus ex, dignissim scelerisque vehicula, mempor. Saisir quelques caractères pour faire apparaître le compteur...</p>
     <br>
-    <m-textarea placeholder="Je suis un sous-titre" :character-count="true" max-length="200" character-count-threshold="180" max-width="medium"
-        :length-overflow="true" v-model="test4Model" :error="test4Model.length > 200 ? true : false">
+    <m-textarea placeholder="Je suis un sous-titre"
+                :character-count="true"
+                max-length="200"
+                character-count-threshold="180"
+                max-width="medium"
+                :length-overflow="true"
+                v-model="test4Model"
+                :error="test4Model.length > 200 ? true : false">
     </m-textarea>
 
     <h4>Ne pas afficher un compteur sur un champ de saisie sans limite de caractères</h4>
@@ -89,7 +126,8 @@
         Lorsque qu'on ajoute un compteur sur un champ sans limite de caractère, le compteur doit être masqué. Nous n'avons pas de cas d'utilisation de compteur de mots sans imposer de limite.
     </p>
     <p>
-        <m-textarea :character-count="true" character-counter-threshold="20">
+        <m-textarea :character-count="true"
+                    character-counter-threshold="20">
         </m-textarea>
     </p>
 

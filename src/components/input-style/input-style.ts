@@ -8,7 +8,6 @@ import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
-
 @WithRender
 @Component({
     mixins: [InputState]
@@ -31,14 +30,19 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public readonly: boolean;
 
+    public $refs: {
+        label: HTMLElement,
+        adjustWidthAuto: HTMLElement
+    };
+
     private animReady: boolean = false;
 
     public setInputWidth(): void {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
         this.$nextTick(() => {
-            let labelEl: HTMLElement = this.$refs.label as HTMLElement;
+            let labelEl: HTMLElement = this.$refs.label;
             let inputEl: HTMLElement | undefined = this.as<InputState>().getInput();
-            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
+            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto;
             if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
                 setTimeout(() => {
                     if (inputEl !== undefined) {
@@ -79,10 +83,6 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return this.hasIcon || this.hasLabelText;
-    }
-
-    private get hasLabelText(): boolean {
         return !!this.label && this.label !== '';
     }
 
@@ -90,10 +90,6 @@ export class MInputStyle extends ModulVue {
         let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
-    }
-
-    private get hasIcon(): boolean {
-        return !!this.iconName && this.iconName !== '';
     }
 
     private get hasDefaultSlot(): boolean {

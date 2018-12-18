@@ -3,7 +3,6 @@
                 'm--is-waiting' : isWaiting,
                 'm--has-error' : hasTextfieldError,
                 'm--is-valid' : isTextfieldValid,
-                'm--has-icon' : hasIcon,
                 'm--has-label': hasLabel,
                 'm--has-word-wrap':  hasWordWrap},
                 'm--is-type-' + inputType ]"
@@ -19,7 +18,6 @@
                    :empty="isEmpty"
                    :readonly="readonly"
                    :required-marker="requiredMarker"
-                   :icon-name="iconName"
                    :tag-style="tagStyle">
         <input ref="input"
                :id="id"
@@ -40,19 +38,33 @@
                :type="inputType">
         <template slot="right-content"
                   v-if="!hasWordWrap">
-            <transition name="m--is">
+            <transition-group name="m--is">
                 <m-icon-button class="m-textfield__icon-password"
+                               key="passwordIcon"
                                button-size="22px"
                                :aria-controls="id"
-                               :title="iconDescriptionPassword"
+                               :title="passwordIconDescription"
                                @click="togglePasswordVisibility"
-                               :icon-name="iconNamePassword"
-                               v-if="propPasswordIcon && hasValue"></m-icon-button>
-                <m-icon class="m-textfield__icon-search"
-                        name="m-svg__search"
-                        size="18px"
-                        v-if="isTypeSearch"></m-icon>
-            </transition>
+                               :icon-name="passwordIconName"
+                               v-if="passwordIcon && hasValue"></m-icon-button>
+                <m-icon-button class="m-textfield__reset"
+                               key="resetIcon"
+                               button-size="1em"
+                               icon-size="11px"
+                               :aria-controls="id"
+                               @click="reset"
+                               icon-name="m-svg__close-clear"
+                               v-if="isTypeSearch && hasValue"></m-icon-button>
+                <m-icon-button class="m-textfield__search-icon"
+                               key="searchIcon"
+                               button-size="22px"
+                               :aria-controls="id"
+                               :title="searchIconDescription"
+                               :disabled="!hasValue"
+                               icon-name="m-svg__search"
+                               @click="search"
+                               v-if="isTypeSearch && searchIcon"></m-icon-button>
+            </transition-group>
         </template>
         <textarea ref="input"
                   :id="id"
