@@ -51,7 +51,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     })
     public type: MTextfieldType;
     @Prop({ default: true })
-    public passwordIcon: boolean;
+    public icon: boolean;
     @Prop({ default: false })
     public wordWrap: boolean;
     @Prop()
@@ -65,9 +65,14 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     readonly internalValue: string;
 
+    public $refs: {
+        input: HTMLInputElement
+    };
+
     private passwordAsText: boolean = false;
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
+    private searchIconDescription: string = this.$i18n.translate('m-textfield:search');
     private id: string = `mTextfield-${uuid.generate()}`;
 
     protected created(): void {
@@ -99,20 +104,32 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
+    private search(): void {
+        this.$emit('search');
+    }
+
+    private reset(): void {
+        this.$emit('input', '');
+    }
+
     public get inputType(): MTextfieldType {
         return !this.passwordAsText ? this.type : MTextfieldType.Text;
     }
 
-    private get iconNamePassword(): string {
+    private get passwordIcon(): boolean {
+        return this.icon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    }
+
+    private get passwordIconName(): string {
         return this.passwordAsText ? ICON_NAME_PASSWORD_HIDDEN : ICON_NAME_PASSWORD_VISIBLE;
     }
 
-    private get iconDescriptionPassword(): string {
+    private get passwordIconDescription(): string {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
     }
 
-    private get propPasswordIcon(): boolean {
-        return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    private get searchIcon(): boolean {
+        return this.icon && this.type === MTextfieldType.Search;
     }
 
     private get hasWordWrap(): boolean {
