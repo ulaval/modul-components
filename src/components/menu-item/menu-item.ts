@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
+import { Location } from 'vue-router';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionTransitionPlugin from '../accordion/accordion-transition';
@@ -30,7 +30,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     @Prop()
     public label: string;
     @Prop()
-    public url: string;
+    public url: string | Location;
     @Prop()
     public iconName: string;
     @Prop()
