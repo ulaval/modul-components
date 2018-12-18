@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
-
 import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
@@ -84,6 +83,10 @@ export class FileService {
         storeName?: string
     ): Promise<AxiosResponse<T>> {
         return this.getStore(storeName).upload<T>(fileuid, options);
+    }
+
+    public uploadTemp(files: MFile[], storeName?: string): void {
+        this.getStore(storeName).uploadTemp(files);
     }
 
     public cancelUpload(fileuid: string, storeName?: string): void {
@@ -236,6 +239,15 @@ class FileStore {
                 delete this.cancelTokens[fileuid];
                 return value;
             });
+    }
+
+    public uploadTemp(files: MFile[]): void {
+        files.forEach(file => {
+            let storeFile: MFile = this.getFile(file.uid);
+            storeFile.url = URL.createObjectURL(file.file);
+            storeFile.status = MFileStatus.COMPLETED;
+            storeFile.progress = 100;
+        });
     }
 
     public cancelUpload(fileuid: string): void {

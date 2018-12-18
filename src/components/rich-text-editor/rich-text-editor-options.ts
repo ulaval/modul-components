@@ -3,7 +3,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public iconsTemplate: string = 'font_awesome_5';
     public charCounterCount: boolean = false;
     public tableInsertHelper: boolean = false;
-    public lineBreakerTags: string [] = [];
+    public lineBreakerTags: string[] = [];
     public zIndex: number = 200;
     public toolbarSticky: boolean = true;
     public scrollableContainer: string | undefined;
@@ -30,4 +30,12 @@ export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOption
     public linkInsertButtons: string[] = [];
 
     constructor(key: string, language?: string | undefined) { super(key, language); }
+}
+
+export class MRichTextEditorMediaOptions extends MRichTextEditorStandardOptions {
+    constructor(key: string, language?: string | undefined) {
+        super(key, language);
+        this.pluginsEnabled.push('image');
+        this.toolbarButtons.push('insertImage');
+    }
 }

@@ -275,6 +275,7 @@
             &[data-cmd*="-sub-menu"],
             &[data-cmd="fullscreen"],
             &[data-cmd="insertLink"],
+            &[data-cmd="insertImage"],
             &[data-cmd="specialCharacters"] {
                 display: inline-block;
             }

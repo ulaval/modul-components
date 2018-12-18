@@ -1,6 +1,7 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
+import { MFile } from 'src/utils';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
@@ -8,6 +9,7 @@ import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
+import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
 import { PopupPlugin } from './popup-plugin';
 import SubMenuPlugin from './submenu-plugin';
@@ -32,7 +34,8 @@ enum froalaEvents {
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
     CommandAfter = 'froalaEditor.commands.after',
     CommandBefore = 'froalaEditor.commands.before',
-    ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
+    ShowLinkInsert = 'froalaEditor.popups.show.link.insert',
+    ImageRemoved = 'froalaEditor.image.removed'
 }
 
 enum FroalaElements {
@@ -91,6 +94,10 @@ export enum FroalaStatus {
 
     protected isDirty: boolean = false;
     protected status: FroalaStatus = FroalaStatus.Blurred;
+
+    protected isFileUploadOpen: boolean = false;
+
+    protected fileUploadStoreName = uuid.generate();
 
     private clickedInsideEditor: boolean = false;
 
@@ -160,7 +167,7 @@ export enum FroalaStatus {
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters', 'insertImage']);
     }
 
     protected addSubMenus(): void {
@@ -186,6 +193,36 @@ export enum FroalaStatus {
                 // we'll use this submenu when we'll support images,tables,...
                 // this.froalaEditor.insertionsSubMenu.hideSubMenu();
             }
+        });
+    }
+
+    protected addImageButton(): void {
+        const classInstance: VueFroala = this;
+
+        $.FroalaEditor.RegisterCommand('insertImage', {
+            title: this.$i18n.translate('m-rich-text-editor:insert-image'),
+            undo: true,
+            focus: true,
+            showOnMobile: true,
+            callback: () => {
+                classInstance.isFileUploadOpen = true;
+            }
+        });
+    }
+
+    protected filesReady(files: MFile[]): void {
+        this.$emit('image-ready', files[0], this.fileUploadStoreName);
+    }
+
+    protected onClose(): void {
+        setTimeout(() => {
+            this.froalaEditor.events.focus();
+        }, 300);
+    }
+
+    protected filesAdded(files: MFile[]): void {
+        this.$emit('image-added', files[0], (file: MFile, id: string) => {
+            this.froalaEditor.image.insert(file.url, false, { id });
         });
     }
 
@@ -241,6 +278,7 @@ export enum FroalaStatus {
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertImage"]`).show();
             // show submit buttons (ex: link insertion submit button)
             this.froalaEditor.$tb.find(`.fr-submit`).show();
         }
@@ -267,6 +305,10 @@ export enum FroalaStatus {
 
         this.addCustomIcons();
         this.addSubMenus();
+
+        if (this.config.pluginsEnabled.indexOf('image') !== -1) {
+            this.addImageButton();
+        }
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
@@ -358,6 +400,9 @@ export enum FroalaStatus {
                 },
                 [froalaEvents.ShowLinkInsert]: (_e, editor) => {
                     this.manageLinkInsert(editor);
+                },
+                [froalaEvents.ImageRemoved]: (_e, _editor, img) => {
+                    this.$emit('image-removed', img[0].dataset.id, this.fileUploadStoreName);
                 }
             }
         });
