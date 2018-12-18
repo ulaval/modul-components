@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`m-scroll-top When loading with position fixed. Should render correctly 1`] = `<div class="m-scroll-top m--is-position-fixed"></div>`;
+exports[`m-scroll-top When loading with position fixed. Should render correctly. 1`] = `<div class="m-scroll-top m--is-position-fixed"></div>`;
 
-exports[`m-scroll-top When loading with position relative. Should render correctly 1`] = `
+exports[`m-scroll-top When loading with position relative. Should render correctly. 1`] = `
 <div class="m-scroll-top m--is-position-relative">
     <button name="m--is" class="m-scroll-top__button">
         <m-icon name="m-svg__chevron--right" size="16px"></m-icon>

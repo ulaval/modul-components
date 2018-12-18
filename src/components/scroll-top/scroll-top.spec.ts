@@ -40,22 +40,21 @@ describe(SCROLL_TOP_NAME, () => {
             scrollBreakPoint = -1;
             initializeShallowWrapper();
         });
-        it(`Should render correctly`, () => {
+        it(`Should render correctly.`, () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
         it(`Then the position is fixed.`, () => {
             expect(wrapper.vm.isPositionFixed).toBeTruthy();
         });
-        it(`Then scroll button is hidden`, () => {
+        it(`Then scroll button is hidden.`, () => {
             expect(wrapper.find(REF_SCROLL_BUTTON).exists()).toBeFalsy();
         });
-        describe(`When calling event of scroll`, () => {
+        describe(`When calling event of scroll.`, () => {
             beforeEach(() => {
-                wrapper.setProps({ scrollBreakPoint: -1 });
                 wrapper.vm.onScroll();
                 wrapper.vm.$nextTick();
             });
-            it(`Then scroll button is show`, () => {
+            it(`Then scroll button is show.`, () => {
                 expect(wrapper.find(REF_SCROLL_BUTTON).exists()).toBeTruthy();
             });
         });
@@ -66,23 +65,23 @@ describe(SCROLL_TOP_NAME, () => {
             position = MScrollTopPosition.Relative;
             initializeShallowWrapper();
         });
-        it('Should render correctly', () => {
+        it('Should render correctly.', () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
-        it(`Then position is relative`, () => {
+        it(`Then position is relative.`, () => {
             expect(wrapper.vm.isPositionFixed).toBeFalsy();
         });
 
-        it(`Then scroll button is show`, () => {
+        it(`Then scroll button is show.`, () => {
             expect(wrapper.find(REF_SCROLL_BUTTON)).toBeTruthy();
         });
 
-        describe(`When scroll button is clicked `, () => {
+        describe(`When scroll button is clicked. `, () => {
             beforeEach(() => {
                 wrapper.find(REF_SCROLL_BUTTON).trigger('click');
             });
-            it(`TESTE!`, () => {
+            it(`Then action goToTop is call with an animation of regular duration.`, () => {
                 expect(wrapper.vm.$scrollTo.goToTop).toHaveBeenLastCalledWith(ScrollToDuration.Regular);
             });
 
@@ -91,7 +90,7 @@ describe(SCROLL_TOP_NAME, () => {
                     wrapper.setProps({ duration: ScrollToDuration.Long });
                     wrapper.find(REF_SCROLL_BUTTON).trigger('click');
                 });
-                it(`TESTE!`, () => {
+                it(`Then action goToTop is call with an animation of long duration.`, () => {
                     expect(wrapper.vm.$scrollTo.goToTop).toHaveBeenLastCalledWith(ScrollToDuration.Long);
                 });
             });
