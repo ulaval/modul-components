@@ -3,6 +3,7 @@ export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
+export const CALENDAR_NAME: string = 'm-calendar';
 export const CAROUSEL_NAME: string = 'm-carousel';
 export const CAROUSEL_ITEM_NAME: string = 'm-carousel-item';
 export const CHARACTER_COUNT_NAME: string = 'm-character-count';

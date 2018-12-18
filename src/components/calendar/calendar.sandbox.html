@@ -1,0 +1,9 @@
+<div>
+    <h3>Calendar</h3>
+    <p>Date courante: {{ singleDate }}</p>
+    <m-calendar v-model="singleDate"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :months-names="['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']"
+                :days-names="['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']"></m-calendar>
+</div>

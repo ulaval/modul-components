@@ -4,6 +4,7 @@ import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
+import CalendarPlugin from './calendar/calendar';
 import CarouselItemPlugin from './carousel-item/carousel-item';
 import CarouselPlugin from './carousel/carousel';
 import CharacterCountPlugin from './character-count/character-count';
@@ -103,6 +104,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
+        Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);
         Vue.use(CarouselItemPlugin);
         Vue.use(CharacterCountPlugin);
