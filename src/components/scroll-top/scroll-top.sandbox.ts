@@ -10,8 +10,6 @@ import WithRender from './scroll-top.sandbox.html?style=./scroll-top.sandbox.scs
 export class MScrollTopSandbox extends Vue {
     public scrollTopPositionFixed: string = MScrollTopPosition.Fixed;
     public scrollTopPositionRelative: string = MScrollTopPosition.Relative;
-
-    // public scrollTopDurationLong: ScrollToDuration = ScrollToDuration.Long;
 }
 
 const ScrollTopSandboxPlugin: PluginObject<any> = {
