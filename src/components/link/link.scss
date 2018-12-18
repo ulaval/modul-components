@@ -34,6 +34,8 @@
     }
 
     &:not(.m--is-disabled) {
+        cursor: pointer;
+
         &:not(.m--no-underline) {
             &:hover,
             &:focus {

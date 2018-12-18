@@ -33,8 +33,7 @@
                                 <template slot="precision"
                                           v-if="hasOkPrecision">{{ okPrecision }}</template>
                             </m-button>
-                            <m-link mode="button"
-                                    @click="onCancel()"
+                            <m-link @click="onCancel()"
                                     v-if="negativeLink">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else

@@ -1,10 +1,8 @@
-import '../../utils/polyfills';
-
 import { mount, Slots, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
+import '../../utils/polyfills';
 import uuid from '../../utils/uuid/uuid';
 import { MAccordion, MAccordionSkin } from '../accordion/accordion';
 import AccordionGroupPlugin, { MAccordionGroup } from './accordion-group';
@@ -86,7 +84,7 @@ describe('MAcordionGroup', () => {
         const acn: Wrapper<MAccordionGroup> = mountGroup();
         acn.update();
 
-        acn.find('.m-accordion-group__header a').trigger('click');
+        acn.find({ ref: 'buttonAllOpen' }).trigger('click');
 
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
@@ -108,7 +106,7 @@ describe('MAcordionGroup', () => {
         });
         acn.update();
 
-        acn.find('.m-accordion-group__header a').trigger('click');
+        acn.find({ ref: 'buttonAllClose' }).trigger('click');
 
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);

@@ -11,7 +11,6 @@ import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
-import { MLinkMode } from '../link/link';
 import { MMessageState } from '../message/message';
 import WithRender from './toast.html?style=./toast.scss';
 
@@ -76,8 +75,6 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     public $refs: {
         toast: HTMLElement
     };
-
-    private buttonMode: MLinkMode = MLinkMode.Button;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         if (value) {
