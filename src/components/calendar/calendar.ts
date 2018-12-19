@@ -169,7 +169,9 @@ export class MCalendar extends ModulVue {
             this.currentMaxDate = this.calculateYearOffset(this.now, MAX_DATE_OFFSET, OffsetLocation.AFTER);
         }
 
-        this.updateCurrentlyDisplayedDate(this.now.getFullYear(), this.now.getMonth(), this.now.getDate());
+        if (!this.currentDate) {
+            this.updateCurrentlyDisplayedDate(this.now.getFullYear(), this.now.getMonth(), this.now.getDate());
+        }
     }
 
     nextMonth(): void {
@@ -198,10 +200,10 @@ export class MCalendar extends ModulVue {
 
     showYears(): void {
         this.pickerMode = PickerMode.YEAR;
-        let scrollTop: number = (Math.floor((this.currentMaxDate.getFullYear() - this.currentlyDisplayedDate.getFullYear()) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
+        /*let scrollTop: number = (Math.floor((this.currentMaxDate.getFullYear() - this.currentlyDisplayedDate.getFullYear()) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
         setTimeout(() => {
             (this.$refs.body as Element).scrollTo(0, scrollTop);
-        }, 10);
+        }, 10);*/
     }
 
     selectYear(year: number, showMonths: boolean = false): void {
@@ -312,14 +314,6 @@ export class MCalendar extends ModulVue {
     private daysInMonth(date: Date): number {
         const dateLastOfMonth: Date = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         return dateLastOfMonth.getDate();
-    }
-
-    private substractDays(date: Date, numberOfDays: number): Date {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate() - numberOfDays);
-    }
-
-    private addDays(date: Date, numberOfDays: number): Date {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate() + numberOfDays);
     }
 
     private isBetween(lowerBound: Date, higherBound: Date, comparedDate: Date, precision: DatePrecision): boolean {
