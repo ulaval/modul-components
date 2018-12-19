@@ -1,13 +1,11 @@
-import { PluginObject } from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import Vue, { PluginObject } from 'vue';
+import { Component, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { CALENDAR_NAME } from '../component-names';
 import MediaQueriesPlugin from './../../utils/media-queries/media-queries';
 import { ModulVue } from './../../utils/vue/vue';
 import WithRender from './calendar.html?style=./calendar.scss';
-
-const DATE_FORMAT: string = 'YYYY/MM/DD';
 
 const MAX_DATE_OFFSET: number = 10;
 const MIN_DATE_OFFSET: number = 10;
@@ -19,6 +17,36 @@ const LAST_DAY_OF_WEEK_INDEX: number = 6;
 
 const NB_YEARS_PER_ROW: number = 5;
 const ITEM_DIMENSION: number = 40;
+
+const TRANSLATION_ROOT: string = CALENDAR_NAME + ':';
+const TRANSLATION_MONTHS: string = TRANSLATION_ROOT + 'month';
+const TRANSLATION_WEEKDAYS: string = TRANSLATION_ROOT + 'weekday';
+const TRANSLATION_SUFFIXE: string = '.short';
+
+enum MonthsNames {
+    JANUARY = 'january',
+    FEBRUARY = 'february',
+    MARCH = 'march',
+    APRIL = 'april',
+    MAY = 'may',
+    JUNE = 'june',
+    JULY = 'july',
+    AUGUST = 'august',
+    SEPTEMBER = 'september',
+    OCTOBER = 'october',
+    NOVEMBER = 'november',
+    DECEMBER = 'december'
+}
+
+enum WeekdayNames {
+    SUNDAY = 'sunday',
+    MONDAY = 'monday',
+    TUESDAY = 'tuesday',
+    WEDNESDAY = 'wednesday',
+    THURSDAY = 'thursday',
+    FRIDAY = 'friday',
+    SATURDAY = 'saturday'
+}
 
 enum PickerMode {
     DAY = 'day',
@@ -60,37 +88,69 @@ interface DatepickerDateDisplay {
 export class MCalendar extends ModulVue {
 
     @Prop()
-    public value: string;
-
-    @Prop({ default: DATE_FORMAT })
-    public format: string;
+    value: string;
 
     @Prop()
-    public minDate: string;
+    minDate: string;
 
     @Prop()
-    public maxDate: string;
+    maxDate: string;
 
-    @Prop({ default: () => [] })
-    public monthsNames: string[];
+    @Prop({
+        default: () => {
+            return Object.keys(MonthsNames).map((key: string) => {
+                return Vue.prototype.$i18n.translate(
+                    `${TRANSLATION_MONTHS}.${MonthsNames[key]}${TRANSLATION_SUFFIXE}`
+                );
+            });
+        }
+    })
+    monthsNames: string[];
 
-    @Prop({ default: () => [] })
-    public daysNames: string[];
+    @Prop({
+        default: () => {
+            return Object.keys(MonthsNames).map((key: string) => {
+                return Vue.prototype.$i18n.translate(
+                    `${TRANSLATION_MONTHS}.${MonthsNames[key]}`
+                );
+            });
+        }
+    })
+    monthsNamesLong: string[];
 
-    public currentlyDisplayedDate: Date = new Date();
+    @Prop({
+        default: () => {
+            return Object.keys(WeekdayNames).map((key: string) => {
+                return Vue.prototype.$i18n.translate(
+                    `${TRANSLATION_WEEKDAYS}.${WeekdayNames[key]}${TRANSLATION_SUFFIXE}`
+                );
+            });
+        }
+    })
+    daysNames: string[];
+
+    id: string = `m-calendar-${uuid.generate()}`;
 
     private currentDate: Date = new Date();
+    private now: Date = new Date();
+
+    private currentlyDisplayedDate: Date = new Date();
     private currentMinDate: Date = new Date();
     private currentMaxDate: Date = new Date();
 
     private pickerMode: PickerMode = PickerMode.DAY;
 
-    private id: string = `m-calendar-${uuid.generate()}`;
-    private now: Date = new Date();
-
     created(): void {
+        this.initDates();
+    }
 
-        this.currentDate = new Date(this.value as string);
+    @Watch('value')
+    refreshValue(): void {
+        this.initDates();
+    }
+
+    initDates(): void {
+        this.currentDate = (this.value) ? new Date(this.value) : new Date();
 
         this.currentMinDate = new Date(this.minDate as string);
         if (!this.minDate) {
@@ -105,9 +165,7 @@ export class MCalendar extends ModulVue {
         this.updateCurrentlyDisplayedDate(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDay());
     }
 
-    get weekdaysLabels(): string[] {
-        return this.daysNames.map((day) => day.toLowerCase());
-    }
+
 
     setPickerMode(mode: PickerMode): void {
         this.pickerMode = mode;
@@ -150,15 +208,14 @@ export class MCalendar extends ModulVue {
     }
 
     selectYear(year: number, showMonths: boolean = false): void {
-        this.updateCurrentlyDisplayedDate(year, this.currentlyDisplayedMonth, this.currentlyDisplayedDay);
+        this.updateCurrentlyDisplayedDate(year, this.currentlyDisplayedMonth, 1);
         if (showMonths) {
             this.pickerMode = PickerMode.MONTH;
         }
     }
 
     selectMonth(month: number, showDays: boolean = false): void {
-        this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month, this.currentlyDisplayedDay);
-
+        this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month, 1);
         if (showDays) {
             this.pickerMode = PickerMode.DAY;
         }
@@ -184,19 +241,11 @@ export class MCalendar extends ModulVue {
     }
 
     get currentlyDisplayedMonthName(): string {
-        return this.monthsNames[this.currentlyDisplayedMonth];
+        return this.monthsNamesLong[this.currentlyDisplayedMonth];
     }
 
-    get isPickerModeYear(): boolean {
-        return this.pickerMode === PickerMode.YEAR;
-    }
-
-    get isPickerModeMonth(): boolean {
-        return this.pickerMode === PickerMode.MONTH;
-    }
-
-    get isPickerModeDay(): boolean {
-        return this.pickerMode === PickerMode.DAY;
+    get weekdaysLabels(): string[] {
+        return this.daysNames.map((day) => day.toLowerCase());
     }
 
     get years(): number[] {
@@ -221,6 +270,20 @@ export class MCalendar extends ModulVue {
         return this.prepareDataForTableLayout(months, 3);
     }
 
+
+    get isPickerModeYear(): boolean {
+        return this.pickerMode === PickerMode.YEAR;
+    }
+
+    get isPickerModeMonth(): boolean {
+        return this.pickerMode === PickerMode.MONTH;
+    }
+
+    get isPickerModeDay(): boolean {
+        return this.pickerMode === PickerMode.DAY;
+    }
+
+
     get isMinYear(): boolean {
         return this.isSameOrBefore(this.currentMinDate, this.currentlyDisplayedDate, DatePrecision.YEAR);
     }
@@ -238,7 +301,6 @@ export class MCalendar extends ModulVue {
     }
 
     get daysOfMonth(): DatepickerDateDisplay[] {
-        this.buildDaysList();
         return this.prepareDataForTableLayout(this.buildDaysList(), 7);
     }
 
@@ -364,6 +426,14 @@ export class MCalendar extends ModulVue {
         return new Date(date.getFullYear() + (offset * offsetModifier[location]), date.getMonth(), date.getDate());
     }
 
+    /**
+     * Updates the date used to display the calendar. If it's lower than the minimum date authorized, it's set to the minimum.
+     * If it's higher than the maximum date authorized, it's set to the maximum
+     *
+     * @param year new value
+     * @param month new value
+     * @param day new value
+     */
     private updateCurrentlyDisplayedDate(year: number, month: number, day: number): void {
         this.currentlyDisplayedDate = new Date(year, month, day);
 
@@ -374,20 +444,15 @@ export class MCalendar extends ModulVue {
         if (this.isBefore(this.currentMinDate, this.currentlyDisplayedDate, DatePrecision.DAY)) {
             this.currentlyDisplayedDate = new Date(this.currentMinDate);
         }
-
         this.$log.info(this.currentlyDisplayedDate);
     }
 
     private buildDaysList(): DatepickerDateDisplay[] {
+        const startDate: Date = this.calculateStartDate(this.currentlyDisplayedDate);
+        const endDate: Date = this.calculateEndDate(this.currentlyDisplayedDate);
+        const numberOfDays: number = this.deltaInDays(startDate, endDate);
+
         let days: DatepickerDateDisplay[] = [];
-
-        const startOffset: number = this.weekdayIndexOfFirstDayOfMonth(this.currentlyDisplayedDate);
-        const endOffset: number = LAST_DAY_OF_WEEK_INDEX - this.weekdayIndexOfLastDayOfMonth(this.currentlyDisplayedDate);
-        const startDate: Date = new Date(this.currentlyDisplayedDate.getFullYear(), this.currentlyDisplayedDate.getMonth(), 1 - startOffset);
-        const endDate: Date = new Date(this.currentlyDisplayedDate.getFullYear(), this.currentlyDisplayedDate.getMonth(), this.daysInMonth(this.currentlyDisplayedDate) + endOffset);
-
-        const numberOfDays: number = Math.ceil(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
-
         let date: Date;
         for (let index: number = 0; index <= numberOfDays; index++) {
             date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + index);
@@ -401,6 +466,20 @@ export class MCalendar extends ModulVue {
             });
         }
         return days;
+    }
+
+    private calculateStartDate(date: Date): Date {
+        const startOffset: number = this.weekdayIndexOfFirstDayOfMonth(date);
+        return new Date(date.getFullYear(), date.getMonth(), 1 - startOffset);
+    }
+
+    private calculateEndDate(date: Date): Date {
+        const endOffset: number = LAST_DAY_OF_WEEK_INDEX - this.weekdayIndexOfLastDayOfMonth(date);
+        return new Date(date.getFullYear(), date.getMonth(), this.daysInMonth(date) + endOffset);
+    }
+
+    private deltaInDays(startDate: Date, endDate: Date): number {
+        return Math.round(Math.abs(endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
     }
 
     private prepareDataForTableLayout(data: any[], nbItemPerRow: number): any[] {
@@ -419,12 +498,12 @@ export class MCalendar extends ModulVue {
     }
 
     /**
-     * Force date to follow ISO8601 without localization
+     * Format date to follow ISO8601
      *
      * @param date to format
      */
     private dateToISOString(date: Date): string {
-        return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}T00:00:00Z`;
+        return date.toISOString();
     }
 
 }

@@ -7,7 +7,8 @@ import WithRender from './calendar.sandbox.html';
 @WithRender
 @Component
 export class MCalendarSandbox extends Vue {
-    public singleDate: string = '2018/12/10';
+    public singleDate: string = '';
+    public startDate: string = '2019-01-01';
 
     private now: Date = new Date();
 

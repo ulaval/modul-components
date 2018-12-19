@@ -1,4 +1,12 @@
 <div>
+    <m-textfield v-model="singleDate"
+                 placeholder="Date simple">
+    </m-textfield>
+
+    <h3>Calendar (default values only)</h3>
+    <p>Date courante: {{ singleDate }}</p>
+    <m-calendar v-model="singleDate"></m-calendar>
+
     <h3>Calendar</h3>
     <p>Date courante: {{ singleDate }}</p>
     <m-calendar v-model="singleDate"
