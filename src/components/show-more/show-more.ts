@@ -20,7 +20,7 @@ export class MShowMore extends ModulVue {
     loading: boolean;
 
     get isVisible(): boolean {
-        return this.nbTotal !== undefined && this.nbTotal !== 0;
+        return this.nbTotal !== undefined && this.nbTotal > 0;
     }
 
     get status(): string {
