@@ -200,10 +200,6 @@ export class MCalendar extends ModulVue {
 
     showYears(): void {
         this.pickerMode = PickerMode.YEAR;
-        /*let scrollTop: number = (Math.floor((this.currentMaxDate.getFullYear() - this.currentlyDisplayedDate.getFullYear()) / NB_YEARS_PER_ROW)) * ITEM_DIMENSION - (3 * ITEM_DIMENSION);
-        setTimeout(() => {
-            (this.$refs.body as Element).scrollTo(0, scrollTop);
-        }, 10);*/
     }
 
     selectYear(year: number, showMonths: boolean = false): void {
