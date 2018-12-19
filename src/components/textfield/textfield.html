@@ -3,7 +3,6 @@
                 'm--is-waiting' : isWaiting,
                 'm--has-error' : hasTextfieldError,
                 'm--is-valid' : isTextfieldValid,
-                'm--has-icon' : hasIcon,
                 'm--has-label': hasLabel,
                 'm--has-word-wrap':  hasWordWrap},
                 'm--is-type-' + inputType ]"
@@ -19,7 +18,6 @@
                    :empty="isEmpty"
                    :readonly="readonly"
                    :required-marker="requiredMarker"
-                   :icon-name="iconName"
                    :tag-style="tagStyle">
         <input ref="input"
                :id="id"
@@ -38,47 +36,69 @@
                v-model="model"
                v-if="!hasWordWrap"
                :type="inputType">
-        <template slot="right-content" v-if="!hasWordWrap">
-            <transition name="m--is">
+        <template slot="right-content"
+                  v-if="!hasWordWrap">
+            <transition-group name="m--is">
                 <m-icon-button class="m-textfield__icon-password"
+                               key="passwordIcon"
                                button-size="22px"
                                :aria-controls="id"
-                               :title="iconDescriptionPassword"
+                               :title="passwordIconDescription"
                                @click="togglePasswordVisibility"
-                               :icon-name="iconNamePassword"
-                               v-if="propPasswordIcon && hasValue"></m-icon-button>
-            </transition>
+                               :icon-name="passwordIconName"
+                               v-if="passwordIcon && hasValue"></m-icon-button>
+                <m-icon-button class="m-textfield__reset"
+                               key="resetIcon"
+                               button-size="1em"
+                               icon-size="11px"
+                               :aria-controls="id"
+                               @click="reset"
+                               icon-name="m-svg__close-clear"
+                               v-if="isTypeSearch && hasValue"></m-icon-button>
+                <m-icon-button class="m-textfield__search-icon"
+                               key="searchIcon"
+                               button-size="22px"
+                               :aria-controls="id"
+                               :title="searchIconDescription"
+                               :disabled="!hasValue"
+                               icon-name="m-svg__search"
+                               @click="search"
+                               v-if="isTypeSearch && searchIcon"></m-icon-button>
+            </transition-group>
         </template>
         <textarea ref="input"
-                :id="id"
-                class="m-textfield__input"
-                :disabled="!active"
-                :placeholder="placeholder"
-                :readonly="readonly"
-                rows="1"
-                @focus="onFocus"
-                @blur="onBlur"
-                @change="onChange"
-                @keypress.enter.prevent
-                @keyup="onKeyup"
-                @keydown="onKeydown"
-                @paste="onPaste"
-                :autocomplete="autocomplete"
-                v-model="model"
-                v-m-textarea-auto-height
-                v-if="hasWordWrap">
+                  :id="id"
+                  class="m-textfield__input"
+                  :disabled="!active"
+                  :placeholder="placeholder"
+                  :readonly="readonly"
+                  rows="1"
+                  @focus="onFocus"
+                  @blur="onBlur"
+                  @change="onChange"
+                  @keypress.enter.prevent
+                  @keyup="onKeyup"
+                  @keydown="onKeydown"
+                  @paste="onPaste"
+                  :autocomplete="autocomplete"
+                  v-model="model"
+                  v-m-textarea-auto-height
+                  v-if="hasWordWrap">
         </textarea>
     </m-input-style>
     <div class="m-textfield__validation">
-        <m-validation-message
-            class="m-textfield__validation__message"
-            :disabled="isDisabled"
-            :waiting="isWaiting"
-            :error="hasTextfieldError"
-            :error-message="errorMessage"
-            :valid="isTextfieldValid"
-            :valid-message="validMessage"
-            :helper-message="helperMessage"></m-validation-message>
-        <m-character-count v-if="characterCount" :value-length="valueLength" :max-length="maxLength" :threshold="characterCountThreshold" :transition="hasCounterTransition"></m-character-count>
+        <m-validation-message class="m-textfield__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasTextfieldError"
+                              :error-message="errorMessage"
+                              :valid="isTextfieldValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+        <m-character-count v-if="characterCount"
+                           :value-length="valueLength"
+                           :max-length="maxLength"
+                           :threshold="characterCountThreshold"
+                           :transition="hasCounterTransition"></m-character-count>
     </div>
 </div>

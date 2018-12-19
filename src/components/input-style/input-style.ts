@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
@@ -30,17 +29,20 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
-    @Prop({ default: false })
-    public borderTop: boolean;
+
+    public $refs: {
+        label: HTMLElement,
+        adjustWidthAuto: HTMLElement
+    };
 
     private animReady: boolean = false;
 
     public setInputWidth(): void {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
         this.$nextTick(() => {
-            let labelEl: HTMLElement = this.$refs.label as HTMLElement;
+            let labelEl: HTMLElement = this.$refs.label;
             let inputEl: HTMLElement | undefined = this.as<InputState>().getInput();
-            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
+            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto;
             if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
                 setTimeout(() => {
                     if (inputEl !== undefined) {
@@ -81,10 +83,6 @@ export class MInputStyle extends ModulVue {
     }
 
     private get hasLabel(): boolean {
-        return this.hasIcon || this.hasLabelText;
-    }
-
-    private get hasLabelText(): boolean {
         return !!this.label && this.label !== '';
     }
 
@@ -92,10 +90,6 @@ export class MInputStyle extends ModulVue {
         let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
-    }
-
-    private get hasIcon(): boolean {
-        return !!this.iconName && this.iconName !== '';
     }
 
     private get hasDefaultSlot(): boolean {

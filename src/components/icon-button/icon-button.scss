@@ -111,7 +111,7 @@
         &.m--is-skin-light,
         &.m--is-skin-link,
         &.m--is-skin-dark {
-            cursor: not-allowed;
+            cursor: inherit;
             color: $m-color--disabled;
         }
 
