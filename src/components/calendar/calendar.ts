@@ -456,7 +456,6 @@ export class MCalendar extends ModulVue {
         if (this.isBefore(this.currentMinDate, this.currentlyDisplayedDate, DatePrecision.DAY)) {
             this.currentlyDisplayedDate = new Date(this.currentMinDate);
         }
-        this.$log.info(this.currentlyDisplayedDate);
     }
 
     private buildDaysList(): DatepickerDateDisplay[] {
