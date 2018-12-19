@@ -514,7 +514,7 @@ export class MCalendar extends ModulVue {
      * @param date to format
      */
     private dateToISOString(date: Date): string {
-        return date.toISOString(); // .split('T')[0] + 'T00:00.000Z';
+        return date.toISOString();
     }
 
 }
