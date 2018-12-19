@@ -131,7 +131,12 @@ export class MCalendar extends ModulVue {
 
     id: string = `m-calendar-${uuid.generate()}`;
 
-    private currentDate: Date = new Date();
+    previousMonthLabel: string = this.$i18n.translate('m-calendar:previous.month');
+    nextMonthLabel: string = this.$i18n.translate('m-calendar:next.month');
+    previousYearLabel: string = this.$i18n.translate('m-calendar:previous.year');
+    nextYearLabel: string = this.$i18n.translate('m-calendar:next.year');
+
+    private currentDate: Date;
     private now: Date = new Date();
 
     private currentlyDisplayedDate: Date = new Date();
@@ -150,37 +155,21 @@ export class MCalendar extends ModulVue {
     }
 
     initDates(): void {
-        if (!this.value) {
-            const bufferDate: Date = new Date();
-            this.selectDate({
-                year: bufferDate.getFullYear(),
-                month: bufferDate.getMonth(),
-                date: bufferDate.getDate(),
-                isDisabled: false,
-                isToday: true,
-                isSelected: true
-            });
-        } else {
+        if (this.value) {
             this.currentDate = new Date(this.value);
         }
 
         this.currentMinDate = new Date(this.minDate as string);
         if (!this.minDate) {
-            this.currentMinDate = this.calculateYearOffset(this.currentDate, MIN_DATE_OFFSET, OffsetLocation.BEFORE);
+            this.currentMinDate = this.calculateYearOffset(this.now, MIN_DATE_OFFSET, OffsetLocation.BEFORE);
         }
 
         this.currentMaxDate = new Date(this.maxDate as string);
         if (!this.maxDate) {
-            this.currentMaxDate = this.calculateYearOffset(this.currentDate, MAX_DATE_OFFSET, OffsetLocation.AFTER);
+            this.currentMaxDate = this.calculateYearOffset(this.now, MAX_DATE_OFFSET, OffsetLocation.AFTER);
         }
 
-        this.updateCurrentlyDisplayedDate(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate());
-    }
-
-
-
-    setPickerMode(mode: PickerMode): void {
-        this.pickerMode = mode;
+        this.updateCurrentlyDisplayedDate(this.now.getFullYear(), this.now.getMonth(), this.now.getDate());
     }
 
     nextMonth(): void {
@@ -197,10 +186,6 @@ export class MCalendar extends ModulVue {
 
     previousYear(): void {
         this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear - 1, this.currentlyDisplayedMonth, this.currentlyDisplayedDay);
-    }
-
-    showDayPicker(): void {
-        this.pickerMode = PickerMode.DAY;
     }
 
     showMonthPicker(): void {
@@ -257,7 +242,7 @@ export class MCalendar extends ModulVue {
     }
 
     get weekdaysLabels(): string[] {
-        return this.daysNames.map((day) => day.toLowerCase());
+        return this.daysNames;
     }
 
     get years(): number[] {
@@ -282,7 +267,6 @@ export class MCalendar extends ModulVue {
         return this.prepareDataForTableLayout(months, 3);
     }
 
-
     get isPickerModeYear(): boolean {
         return this.pickerMode === PickerMode.YEAR;
     }
@@ -294,7 +278,6 @@ export class MCalendar extends ModulVue {
     get isPickerModeDay(): boolean {
         return this.pickerMode === PickerMode.DAY;
     }
-
 
     get isMinYear(): boolean {
         return this.isSameOrBefore(this.currentMinDate, this.currentlyDisplayedDate, DatePrecision.YEAR);
@@ -473,7 +456,7 @@ export class MCalendar extends ModulVue {
                 year: date.getFullYear(),
                 isDisabled: this.isBefore(this.currentMinDate, date, DatePrecision.DAY) || this.isAfter(this.currentMaxDate, date, DatePrecision.DAY),
                 isToday: this.isSame(this.now, date, DatePrecision.DAY),
-                isSelected: this.isSame(date, this.currentDate, DatePrecision.DAY)
+                isSelected: this.currentDate && this.isSame(date, this.currentDate, DatePrecision.DAY)
             });
         }
         return days;
@@ -516,7 +499,6 @@ export class MCalendar extends ModulVue {
     private dateToISOString(date: Date): string {
         return date.toISOString();
     }
-
 }
 
 const CalendarPlugin: PluginObject<any> = {

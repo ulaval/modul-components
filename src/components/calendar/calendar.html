@@ -4,26 +4,26 @@
         <nav class="m-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left"
                            @click="previousYear()"
-                           :disabled="isMinYear">previous year</m-icon-button>
+                           :disabled="isMinYear">{{ previousYearLabel }}</m-icon-button>
             <button type="button"
                     class="m-calendar__years"
                     @click="showYearPicker()"
                     aria-live="polite">{{ currentlyDisplayedYear }}</button>
             <m-icon-button icon-name="m-svg__chevron--right"
                            @click="nextYear()"
-                           :disabled="isMaxYear">next year</m-icon-button>
+                           :disabled="isMaxYear">{{ nextYearLabel }}</m-icon-button>
         </nav>
         <nav class="m-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left"
                            @click="previousMonth()"
-                           :disabled="isMinMonth">previous month</m-icon-button>
+                           :disabled="isMinMonth">{{ previousMonthLabel }}</m-icon-button>
             <button type="button"
                     class="m-calendar__months"
                     @click="showMonthPicker()"
                     aria-live="polite">{{ currentlyDisplayedMonthName }}</button>
             <m-icon-button icon-name="m-svg__chevron--right"
                            @click="nextMonth()"
-                           :disabled="isMaxMonth">next month</m-icon-button>
+                           :disabled="isMaxMonth">{{ nextMonthLabel }}</m-icon-button>
         </nav>
     </div>
     <div class="m-calendar__body"

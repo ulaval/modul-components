@@ -1,5 +1,9 @@
 {
     "m-calendar": {
+        "previous.month": "Mois précédent",
+        "previous.year": "Année précédente",
+        "next.month": "Mois suivant",
+        "next.year": "Année suivante",
         "month.january": "Janvier",
         "month.february": "Février",
         "month.march": "Mars",
