@@ -150,7 +150,19 @@ export class MCalendar extends ModulVue {
     }
 
     initDates(): void {
-        this.currentDate = (this.value) ? new Date(this.value) : new Date();
+        if (!this.value) {
+            const bufferDate: Date = new Date();
+            this.selectDate({
+                year: bufferDate.getFullYear(),
+                month: bufferDate.getMonth(),
+                date: bufferDate.getDate(),
+                isDisabled: false,
+                isToday: true,
+                isSelected: true
+            });
+        } else {
+            this.currentDate = new Date(this.value);
+        }
 
         this.currentMinDate = new Date(this.minDate as string);
         if (!this.minDate) {
@@ -162,7 +174,7 @@ export class MCalendar extends ModulVue {
             this.currentMaxDate = this.calculateYearOffset(this.currentDate, MAX_DATE_OFFSET, OffsetLocation.AFTER);
         }
 
-        this.updateCurrentlyDisplayedDate(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDay());
+        this.updateCurrentlyDisplayedDate(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate());
     }
 
 
@@ -208,14 +220,14 @@ export class MCalendar extends ModulVue {
     }
 
     selectYear(year: number, showMonths: boolean = false): void {
-        this.updateCurrentlyDisplayedDate(year, this.currentlyDisplayedMonth, 1);
+        this.updateCurrentlyDisplayedDate(year, this.currentlyDisplayedMonth, this.currentlyDisplayedDay);
         if (showMonths) {
             this.pickerMode = PickerMode.MONTH;
         }
     }
 
     selectMonth(month: number, showDays: boolean = false): void {
-        this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month, 1);
+        this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month, this.currentlyDisplayedDay);
         if (showDays) {
             this.pickerMode = PickerMode.DAY;
         }
@@ -503,7 +515,7 @@ export class MCalendar extends ModulVue {
      * @param date to format
      */
     private dateToISOString(date: Date): string {
-        return date.toISOString();
+        return date.toISOString(); // .split('T')[0] + 'T00:00.000Z';
     }
 
 }
