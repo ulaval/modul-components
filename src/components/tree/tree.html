@@ -1,12 +1,29 @@
-<div class="m-tree">
-    <m-message v-if="errorTree" class="m-tree__error" state="warning" skin="light" ref="error-tree-txt">
+<div class="m-tree"
+     :class="{ 'm-tree--multiple-node-checkbox' : isMultipleSelectWithCheckboxes }">
+    <m-message class="m-tree__error"
+               v-if="errorTree"
+               state="warning"
+               skin="light"
+               ref="error-tree-txt">
         {{'m-tree:error' | f-m-i18n}}
     </m-message>
-    <p v-if="propTreeEmpty" class="m-tree__empty" ref="empty-tree-txt">
+    <p class="m-tree__empty"
+       v-if="propTreeEmpty"
+       ref="empty-tree-txt">
         {{'m-tree:empty' | f-m-i18n}}
     </p>
-    <ul v-else class="m-tree__content">
-        <m-tree-node ref="tree-node" v-for="node in tree" :key="node.id" :selectable="selectable" :open.sync="node.open" :node="node" :selected-nodes="propSelectedNodes"
-            :icons="icons" @click="onClick"></m-tree-node>
+    <ul class="m-tree__content"
+        v-else>
+        <m-tree-node ref="tree-node"
+                     v-for="node in tree"
+                     :key="node.id"
+                     :selectable="selectable"
+                     :open.sync="node.open"
+                     :node="node"
+                     :selected-nodes="propSelectedNodes"
+                     :disabled-nodes="disabledNodes"
+                     :checkboxes="checkboxes"
+                     :use-files-icons="useFilesIcons"
+                     @click="onClick"></m-tree-node>
     </ul>
 </div>

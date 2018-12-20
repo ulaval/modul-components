@@ -8,7 +8,66 @@ $m-checkbox--width: 16px;
     line-height: 1;
 
     &:not(.m--is-disabled) {
-        &:not(.m--has-error):not(.m--is-valid):not(.m--is-readonly) {
+        .m-checkbox {
+            &__wrap {
+                cursor: pointer;
+            }
+
+            &__input {
+                border-color: $m-color--text;
+                color: $m-color--interactive;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    background-color: $m-color--ul-blue;
+                    transform: scale(0);
+                    transition: transform $m-transition-duration ease;
+                }
+
+                &__icon {
+                    position: relative;
+                    top: -1px; // Magic number
+                    left: 1px; // Magic number
+                    width: 10px;
+                    height: 5px;
+                    transform: rotate(-32deg);
+
+                    &::before,
+                    &::after {
+                        transition: background $m-transition-duration ease;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        content: '';
+                        width: 0;
+                        background: $m-color--interactive;
+                        border-radius: 2px;
+                    }
+
+                    &::before {
+                        bottom: 0;
+                        transition: width $m-transition-duration--xs ease;
+                        transition-delay: 0;
+                        transform: rotate(-20deg);
+                        width: 0;
+                        height: 2px;
+                    }
+
+                    &::after {
+                        top: 0;
+                        transition: height $m-transition-duration--xs ease;
+                        transition-delay: $m-transition-duration--xs;
+                        width: 2px;
+                        height: 0;
+                    }
+                }
+            }
+        }
+
+        &:not(.m--has-error):not(.m--is-valid):not(.m--is-disabled-and-checked):not(.m--is-readonly) {
             .m-checkbox__wrap:hover,
             &.m--is-focus {
                 .m-checkbox {
@@ -63,6 +122,23 @@ $m-checkbox--width: 16px;
                     transition-delay: 0;
                     height: 6px;
                 }
+            }
+        }
+    }
+
+    &.m--is-indeterminate {
+        .m-checkbox__input {
+            &::before {
+                transform: scale(1);
+            }
+        }
+    }
+
+    &.m--is-disabled-and-checked {
+        .m-checkbox__input__icon {
+            &::after,
+            &::before {
+                background: $m-color--disabled;
             }
         }
     }

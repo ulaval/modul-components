@@ -1,0 +1,16 @@
+<m-icon class="m-tree-icon"
+        v-if="showFolderIcon"
+        size="24px"
+        :showNameAsClass="true"
+        :name="folderIcon"></m-icon>
+<m-icon-file class="m-tree-icon"
+             v-else-if="useFilesIcons"
+             :name="extensionFile"
+             :extension="extensionFile"></m-icon-file>
+<m-plus class="m-accordion__header-icon"
+        v-else-if="isFolder"
+        ref="plus-icon"
+        :class="{ 'm--is-left': 'true' }"
+        :open="isFolderOpen"
+        :large="true"
+        aria-hidden="true"></m-plus>

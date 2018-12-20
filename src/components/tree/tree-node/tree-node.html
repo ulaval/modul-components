@@ -1,0 +1,61 @@
+<li class="m-tree-node"
+    :class="{ 'm--is-selected': isSelected && !isDisabled, 'm--is-disabled' : isDisabled }">
+    <div class="m-tree-node__item"
+         ref="item"
+         role="button"
+         :class="{ 'm-tree-node__item--no-hover': moveSelectionZoneToCheckbox }"
+         :tabindex="isDisabled ? '-1' : 1"
+         @click="onClick">
+        <m-tree-icon class="m-tree-icon"
+                     :filename="node.id"
+                     :is-folder-open="internalOpen"
+                     :use-files-icons="useFilesIcons"
+                     :is-folder="isFolder"></m-tree-icon>
+        <span class="m-tree-node__item__label">{{label}}</span>
+        <m-checkbox v-if="withCheckboxes"
+                    ref="checkbox"
+                    :value="isSelected"
+                    :indeterminate="isIndeterminate"
+                    :disabled="isDisabled"
+                    @change="onCheckboxClick"></m-checkbox>
+    </div>
+    <template v-if="isFolder">
+        <m-accordion-transition v-if="hasChildren">
+            <ul class="m-tree-node__children"
+                ref="children"
+                v-show="internalOpen"
+                :class="{'m-tree-node__line-extension' : hasSibling}">
+                <m-tree-node class="m-tree-node__child"
+                             v-for="(childNode, index) in node.children"
+                             :key="childNode.id"
+                             :path="currentPath"
+                             :selectable="selectable"
+                             :selected="isSelected"
+                             :open.sync="childNode.open"
+                             :node="childNode"
+                             :use-files-icons="useFilesIcons"
+                             :selected-nodes="selectedNodes"
+                             :disabled-nodes="disabledNodes"
+                             :checkboxes="checkboxes"
+                             :has-sibling="childHasSibling(index)"
+                             @auto-select-child-checkbox-change="onAutoSelectChildCheckboxChange"
+                             @click="onChildClick"></m-tree-node>
+            </ul>
+        </m-accordion-transition>
+        <m-accordion-transition v-else>
+            <ul class="m-tree-node__children"
+                v-show="internalOpen"
+                :class="{'m-tree-node__line-extension' : hasSibling}">
+                <li class="m-tree-node__child-empty">
+                    {{emptyContentMessage}}
+                </li>
+            </ul>
+        </m-accordion-transition>
+    </template>
+    <template v-if="displaySelectionButton">
+        <button class="m-tree-node__auto-select-button"
+                ref="autoSelectButton"
+                :class="{ 'm-tree-node__auto-select-button--selected': allChildrenAndSelfSelected}"
+                @click="onAutoSelectButtonClick"></button>
+    </template>
+</li>
