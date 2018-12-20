@@ -54,40 +54,9 @@ export class Modul {
         window.addEventListener('resize', (e) => this.onResize(e));
     }
 
-    public onClick(event: MouseEvent): void {
-        this.event.$emit('click', event);
-    }
-
-    public onScroll(event): void {
-        if (this.scrollActive) {
-            this.scrollPosition = window.pageYOffset;
-            if (this.lastScrollPosition > this.scrollPosition) {
-                this.scrollUp = true;
-                this.scrollDown = false;
-            } else {
-                this.scrollUp = false;
-                this.scrollDown = true;
-            }
-            this.lastScrollPosition = this.scrollPosition;
-            this.event.$emit('scroll', event);
-
-            clearTimeout(this.doneScrollEvent);
-            this.doneScrollEvent = setTimeout(() => {
-                this.event.$emit('scrollDone', event);
-            }, DONE_EVENT_DURATION);
-
-        }
-    }
-
-    public onResize(event): void {
-        this.event.$emit('resize', event);
-
-        clearTimeout(this.doneResizeEvent);
-        this.doneResizeEvent = setTimeout(() => {
-            this.event.$emit('resizeDone', event);
-        }, DONE_EVENT_DURATION);
-    }
-
+    /**
+     * @deprecated Don't use this function to emit events between two components
+     */
     public updateAfterResize(): void {
         this.event.$emit('updateAfterResize');
     }
@@ -148,6 +117,40 @@ export class Modul {
 
     public peekElement(): string | undefined {
         return this.windowStack.length > 0 ? this.windowStack[this.windowStack.length - 1] : undefined;
+    }
+
+    private onClick(event: MouseEvent): void {
+        this.event.$emit('click', event);
+    }
+
+    private onScroll(event): void {
+        if (this.scrollActive) {
+            this.scrollPosition = window.pageYOffset;
+            if (this.lastScrollPosition > this.scrollPosition) {
+                this.scrollUp = true;
+                this.scrollDown = false;
+            } else {
+                this.scrollUp = false;
+                this.scrollDown = true;
+            }
+            this.lastScrollPosition = this.scrollPosition;
+            this.event.$emit('scroll', event);
+
+            clearTimeout(this.doneScrollEvent);
+            this.doneScrollEvent = setTimeout(() => {
+                this.event.$emit('scrollDone', event);
+            }, DONE_EVENT_DURATION);
+
+        }
+    }
+
+    private onResize(event): void {
+        this.event.$emit('resize', event);
+
+        clearTimeout(this.doneResizeEvent);
+        this.doneResizeEvent = setTimeout(() => {
+            this.event.$emit('resizeDone', event);
+        }, DONE_EVENT_DURATION);
     }
 
     private ensureBackdrop(viewportIsSmall: boolean): number {
@@ -237,7 +240,7 @@ export class Modul {
         }
     }
 
-    public set scrollActive(scrollActive: boolean) {
+    private set scrollActive(scrollActive: boolean) {
         if (scrollActive) {
             this.htmlEl.style.removeProperty('position');
             this.htmlEl.style.removeProperty('top');
@@ -269,7 +272,7 @@ export class Modul {
         this.internalScrollActive = scrollActive;
     }
 
-    public get scrollActive(): boolean {
+    private get scrollActive(): boolean {
         return this.internalScrollActive;
     }
 }
