@@ -159,6 +159,10 @@ $m-datepicker--item-dimension: $m-touch-size !default;
                 color: $m-color--text;
             }
         }
+
+        &.m--is-hidden {
+            display: none;
+        }
     }
 
     .m--is-disabled {

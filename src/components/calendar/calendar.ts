@@ -60,6 +60,23 @@ enum DatePrecision {
     DAY = 'day'
 }
 
+
+
+enum DaysMonthBeforeAfter {
+    SHOW = 'show',
+    HIDE = 'hide'
+}
+
+enum DateSelectionMode {
+    SINGLE = 'single',
+    RANGE = 'range'
+}
+
+enum DateRangePosition {
+    BEGIN = 'begin',
+    END = 'end'
+}
+
 enum OffsetLocation {
     BEFORE = 'before',
     AFTER = 'after'
@@ -70,6 +87,18 @@ const offsetModifier: { [name: string]: number } = {
     [OffsetLocation.AFTER]: 1
 };
 
+type CalendarModel = string | CalendarRange;
+
+export interface CalendarRange {
+    begin: string;
+    end: string;
+}
+
+interface CalendarRangeInternalModel {
+    begin: Date | undefined;
+    end: Date | undefined;
+}
+
 interface DatepickerDateDisplay {
     date: number;
     month: number;
@@ -77,6 +106,7 @@ interface DatepickerDateDisplay {
     isDisabled: boolean;
     isToday: boolean;
     isSelected: boolean;
+    isHidden: boolean;
 }
 
 @WithRender
@@ -88,13 +118,19 @@ interface DatepickerDateDisplay {
 export class MCalendar extends ModulVue {
 
     @Prop()
-    value: string;
+    value: CalendarModel;
 
     @Prop()
     minDate: string;
 
     @Prop()
     maxDate: string;
+
+    @Prop({ default: DateSelectionMode.SINGLE })
+    dateSelectionMode: DateSelectionMode;
+
+    @Prop({ default: DaysMonthBeforeAfter.SHOW })
+    showMonthBeforeAfter: DaysMonthBeforeAfter;
 
     @Prop({
         default: () => {
@@ -136,7 +172,8 @@ export class MCalendar extends ModulVue {
     previousYearLabel: string = this.$i18n.translate('m-calendar:previous.year');
     nextYearLabel: string = this.$i18n.translate('m-calendar:next.year');
 
-    private currentDate: Date;
+    private currentDate: Date | CalendarRangeInternalModel;
+
     private now: Date = new Date();
 
     private currentlyDisplayedDate: Date = new Date();
@@ -156,7 +193,7 @@ export class MCalendar extends ModulVue {
 
     initDates(): void {
         if (this.value) {
-            this.currentDate = new Date(this.value);
+            this.initInternalModel(this.value);
         }
 
         this.currentMinDate = new Date(this.minDate as string);
@@ -218,8 +255,22 @@ export class MCalendar extends ModulVue {
 
     selectDate(selectedDate: DatepickerDateDisplay): void {
         if (!selectedDate.isDisabled) {
-            this.currentDate = new Date(selectedDate.year, selectedDate.month, selectedDate.date);
-            this.$emit('input', this.dateToISOString(this.currentDate));
+            const newDate: Date = new Date(selectedDate.year, selectedDate.month, selectedDate.date);
+            switch (this.dateSelectionMode) {
+                case DateSelectionMode.SINGLE:
+                    this.currentDate = newDate;
+                    this.$emit('input', this.dateToISOString(this.currentDate));
+                    break;
+                case DateSelectionMode.RANGE:
+                    this.currentDate = this.updateRangeModel(this.currentDate as CalendarRangeInternalModel, newDate);
+                    this.currentDate = this.reOrderRangeDates(this.currentDate);
+
+                    this.$emit('input', {
+                        begin: this.currentDate.begin ? this.dateToISOString(this.currentDate.begin) : '',
+                        end: this.currentDate.end ? this.dateToISOString(this.currentDate.end) : ''
+                    });
+                    break;
+            }
         }
     }
 
@@ -259,7 +310,7 @@ export class MCalendar extends ModulVue {
             months.push({
                 index,
                 name: this.monthsNames[index],
-                isDisabled: !this.isBetween(this.currentMinDate, this.currentMaxDate, date, DatePrecision.MONTH)
+                isDisabled: !this.isBetweenStrict(this.currentMinDate, this.currentMaxDate, date, DatePrecision.MONTH)
             });
         }
         return this.prepareDataForTableLayout(months, 3);
@@ -297,6 +348,48 @@ export class MCalendar extends ModulVue {
         return this.prepareDataForTableLayout(this.buildDaysList(), 7);
     }
 
+    private initInternalModel(value: CalendarModel): void {
+        switch (this.dateSelectionMode) {
+            case DateSelectionMode.SINGLE:
+                this.currentDate = new Date(value as string);
+                break;
+            case DateSelectionMode.RANGE:
+                this.currentDate = {
+                    begin: this.initDateRange(value as CalendarRange, DateRangePosition.BEGIN),
+                    end: this.initDateRange(value as CalendarRange, DateRangePosition.END)
+                };
+                break;
+        }
+    }
+
+    private initDateRange(dates: CalendarRange, position: DateRangePosition): Date | undefined {
+        return (dates[position]) ? new Date(dates[position]) : undefined;
+    }
+
+    private updateRangeModel(range: CalendarRangeInternalModel, date: Date): CalendarRangeInternalModel {
+        if (range.end) {
+            range.end = undefined;
+            range.begin = date;
+        } else if (range.begin) {
+            range.end = date;
+        } else {
+            range.begin = date;
+        }
+        return range;
+    }
+
+    private reOrderRangeDates(range: CalendarRangeInternalModel): CalendarRangeInternalModel {
+        if (range.begin
+            && range.end
+            && this.isBefore(range.begin as Date, range.end as Date, DatePrecision.DAY)
+        ) {
+            const temp: Date = range.begin;
+            range.begin = range.end;
+            range.end = temp;
+        }
+        return range;
+    }
+
     private weekdayIndexOfFirstDayOfMonth(date: Date): number {
         const dateFirstOfMonth: Date = new Date(date.getFullYear(), date.getMonth(), 1);
         return dateFirstOfMonth.getDay();
@@ -312,7 +405,27 @@ export class MCalendar extends ModulVue {
         return dateLastOfMonth.getDate();
     }
 
+    /**
+     * Bounds are INCLUDED from comparison
+     *
+     * @param lowerBound minimum date
+     * @param higherBound maximum date
+     * @param comparedDate date under test
+     * @param precision level for comparison (Year, Year + month, Year + month + day)
+     */
     private isBetween(lowerBound: Date, higherBound: Date, comparedDate: Date, precision: DatePrecision): boolean {
+        return this.isSameOrAfter(lowerBound, comparedDate, precision) && this.isSameOrBefore(higherBound, comparedDate, precision);
+    }
+
+    /**
+     * Bounds are EXCLUDED from comparison
+     *
+     * @param lowerBound minimum date
+     * @param higherBound maximum date
+     * @param comparedDate date under test
+     * @param precision level for comparison (Year, Year + month, Year + month + day)
+     */
+    private isBetweenStrict(lowerBound: Date, higherBound: Date, comparedDate: Date, precision: DatePrecision): boolean {
         return this.isAfter(lowerBound, comparedDate, precision) && this.isBefore(higherBound, comparedDate, precision);
     }
 
@@ -444,12 +557,38 @@ export class MCalendar extends ModulVue {
                 date: date.getDate(),
                 month: date.getMonth(),
                 year: date.getFullYear(),
-                isDisabled: this.isBefore(this.currentMinDate, date, DatePrecision.DAY) || this.isAfter(this.currentMaxDate, date, DatePrecision.DAY),
-                isToday: this.isSame(this.now, date, DatePrecision.DAY),
-                isSelected: this.currentDate && this.isSame(date, this.currentDate, DatePrecision.DAY)
+                isDisabled: this.isDayDisabled(date),
+                isToday: this.isDayToday(date),
+                isSelected: this.isDaySelected(date),
+                isHidden: this.isDayHidden(date)
             });
         }
         return days;
+    }
+
+    private isDayDisabled(date: Date): boolean {
+        return this.isBefore(this.currentMinDate, date, DatePrecision.DAY) || this.isAfter(this.currentMaxDate, date, DatePrecision.DAY);
+    }
+
+    private isDayToday(date: Date): boolean {
+        return this.isSame(this.now, date, DatePrecision.DAY);
+    }
+
+    private isDaySelected(date: Date): boolean {
+        switch (this.dateSelectionMode) {
+            case DateSelectionMode.SINGLE:
+                const dateModel: Date = this.currentDate as Date;
+                return dateModel && this.isSame(date, dateModel, DatePrecision.DAY);
+            case DateSelectionMode.RANGE:
+                const rangeModel: CalendarRangeInternalModel = this.currentDate as CalendarRangeInternalModel;
+                return (!!rangeModel.begin && !!rangeModel.end && this.isBetween(rangeModel.begin, rangeModel.end, date, DatePrecision.DAY))
+                    || (!!rangeModel.begin && this.isSame(rangeModel.begin, date, DatePrecision.DAY))
+                    || (!!rangeModel.end && this.isSame(rangeModel.end, date, DatePrecision.DAY));
+        }
+    }
+
+    private isDayHidden(date: Date): boolean {
+        return !(date.getMonth() === this.currentlyDisplayedMonth || this.showMonthBeforeAfter === DaysMonthBeforeAfter.SHOW);
     }
 
     private calculateStartDate(date: Date): Date {

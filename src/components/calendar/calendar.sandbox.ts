@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { CALENDAR_NAME } from '../component-names';
+import { CalendarRange } from './calendar';
 import WithRender from './calendar.sandbox.html';
 
 
@@ -9,6 +10,7 @@ import WithRender from './calendar.sandbox.html';
 export class MCalendarSandbox extends Vue {
     public singleDate: string = '';
     public singleDateOptions: string = '';
+    public rangeDate: CalendarRange = { begin: '', end: '' };
 
     private now: Date = new Date();
 

@@ -12,6 +12,12 @@
     <m-calendar v-model="singleDateOptions"
                 :min-date="minDate"
                 :max-date="maxDate"
+                show-month-before-after="hide"
                 :months-names="['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']"
                 :days-names="['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']"></m-calendar>
+
+    <h3>Calendar - date range</h3>
+    <p>Date courante: {{ rangeDate.begin }} - {{ rangeDate.end }}</p>
+    <m-calendar v-model="rangeDate"
+                date-selection-mode="range"></m-calendar>
 </div>
