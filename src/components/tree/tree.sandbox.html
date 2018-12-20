@@ -3,22 +3,25 @@
     <div style="width: 50%; float:left;">
         <h2>Selection disabled</h2>
         <p>
-                Selected file : none</br>
-                Open folder : Title 3
+            Selected file : none</br>
+            Open folder : Title 3
         </p>
         <p>
-            <m-tree :tree="tree" selection-mode="0" ></m-tree>
+            <m-tree :tree="tree"
+                    selection-mode="none"></m-tree>
         </p>
     </div>
 
     <div style="width: 50%; float:left;">
         <h2>Single node selection</h2>
         <p>
-                Selected file : /Title 1/Subtitle 1</br>
-                Open folder : Title 3
+            Selected file : /Title 1/Subtitle 1</br>
+            Open folder : Title 3
         </p>
         <p>
-            <m-tree :tree="tree" :selected-nodes="currentFile2" @select="onSelect"></m-tree>
+            <m-tree :tree="tree"
+                    :selected-nodes="currentFile2"
+                    @select="onSelect"></m-tree>
         </p>
     </div>
 
@@ -28,18 +31,134 @@
     <div style="width: 50%; float:left;">
         <h3>Selection disabled</h3>
         <p>
-            <m-tree :tree="fileTree" selection-mode="0" :icons="true"></m-tree>
+            <m-tree :tree="fileTree"
+                    selection-mode="none"
+                    :use-files-icons="true"></m-tree>
         </p>
     </div>
 
     <div style="width: 50%; float:left;">
         <h3>Single file selection</h3>
         <p>
-                Selected file : /folder 1/folder 2/index.html</br>
-                Open folder : none
+            Selected file : /folder 1/folder 2/index.html</br>
+            Open folder : none
         </p>
         <p>
-            <m-tree :tree="fileTree" selection-mode="1" :selected-nodes="currentFile" :icons="true" @select="onSelect"></m-tree>
+            <m-tree :tree="fileTree"
+                    selection-mode="single"
+                    :selected-nodes="currentFile"
+                    :use-files-icons="true"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <h2>Multiple Leaves (nodes) Selection</h2>
+
+    <div style="width: 50%; float:left;">
+        <h3>Basic</h3>
+        <p>
+            Selected Leaves : {{currentNodesBasic}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    selection-mode="multiple"
+                    :use-files-icons="true"
+                    :selected-nodes="currentNodesBasic"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Checkboxes + Checkbox AutoSelect</h3>
+        <p>
+            Selecting all children selects parent, parent checkbox selects children.
+        </p>
+        <h4>Sample Tree Props: </h4>
+        <ul>
+            <li>selection-mode="multiple"</li>
+            <li>checkboxes="with-checkbox-auto-select"</li>
+        </ul>
+        <p>
+            Selected Leaves : {{currentNodesCheckboxes}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    checkboxes="with-checkbox-auto-select"
+                    selection-mode="multiple"
+                    :selected-nodes="currentNodesCheckboxes"
+                    :disabled-nodes="disabledNodesCheckboxes"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Checkboxes + Parent AutoSelect</h3>
+        <p>
+            Children can be selected by parent checkbox and children can unselect parent.
+        </p>
+        <h4>Sample Tree Props: </h4>
+        <ul>
+            <li>selection-mode="multiple"</li>
+            <li>checkboxes="with-parent-auto-select"</li>
+        </ul>
+        <p>
+            Selected Leaves : {{currentNodesCheckboxesParent}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    checkboxes="with-parent-auto-select"
+                    selection-mode="multiple"
+                    :selected-nodes="currentNodesCheckboxesParent"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Checkboxes + AutoSelect Buttons</h3>
+        <p>
+            Checkboxes tree in which parents and children can be auto-selected with a button (currently a placeholder).
+        </p>
+        <h5>Sample Tree Props: </h5>
+        <ul>
+            <li>selection-mode="multiple"</li>
+            <li>checkboxes="with-button-auto-select"</li>
+            <li>:use-files-icons="true"</li>
+        </ul>
+        <p>Selected Leaves : {{currentNodesCheckboxesButtonAutoselect}}</p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    selection-mode="multiple"
+                    checkboxes="with-button-auto-select"
+                    :use-files-icons="true"
+                    :selected-nodes="currentNodesCheckboxesButtonAutoselect"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Checkboxes + disabled leaves sample</h3>
+        <p>
+            Checkboxes tree in which every elements are fully independant.
+        </p>
+        <h4>Sample Tree Props: </h4>
+        <ul>
+            <li>selection-mode="multiple"</li>
+            <li>checkboxes="true"</li>
+        </ul>
+        <p>
+            Selected Leaves : {{currentNodesCheckboxesNone}}</br>
+        </p>
+        <p>
+            <m-tree :tree="multiNodeTree"
+                    selection-mode="multiple"
+                    checkboxes="true"
+                    :disabled-nodes="disabledNodesCheckboxesNone"
+                    :selected-nodes="currentNodesCheckboxesNone"
+                    @select="onSelect"></m-tree>
         </p>
     </div>
 
@@ -67,8 +186,11 @@
         <h3>Selected node not found</h3>
         <span>Console error</span>
         <p>
-            <m-tree :tree="tree" :selected-nodes="wrongCurrentFile" @select="onSelect"></m-tree>
+            <m-tree :tree="tree"
+                    :selected-nodes="wrongCurrentFile"
+                    @select="onSelect"></m-tree>
         </p>
     </div>
+    <div style="clear: both;"></div>
 
 </div>

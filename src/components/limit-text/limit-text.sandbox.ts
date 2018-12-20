@@ -12,7 +12,7 @@ export class MLimitTextSandbox extends Vue {
     private texte = this.text1;
     private testOpen: boolean = false;
 
-    private vhtml: string = `<p>Test rawhtml Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut
+    private vhtml: string = `<p><br /></p><p><p>Test rawhtml Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut
             excepteur tempor ipsum qui</p><p> eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum ullamco
             sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat esse veniam. Ullamco labore
             do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident

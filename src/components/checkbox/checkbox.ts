@@ -23,6 +23,9 @@ export class MCheckbox extends ModulVue {
     @Prop()
     public value: boolean;
 
+    @Prop({ default: false })
+    public indeterminate: boolean;
+
     @Prop({
         default: MCheckboxPosition.Left,
         validator: value =>
@@ -60,6 +63,14 @@ export class MCheckbox extends ModulVue {
 
     private setFocus(value: boolean): void {
         this.isFocus = value;
+    }
+
+    public get propIndeterminate(): boolean {
+        return this.indeterminate && !this.propValue;
+    }
+
+    public set propIndeterminate(newValue: boolean) {
+        this.indeterminate = newValue;
     }
 
     private get hasCheckboxLeft(): boolean {

@@ -191,12 +191,13 @@ export class Portal extends ModulVue implements PortalMixin {
                     this.$modul.popElement(this.stackId);
 
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                        this.setFocusToTrigger();
+
                         setTimeout(() => {
                             // $emit update:open has been launched, animation already occurs
                             if (!this.opening) {
                                 this.portalTargetEl.style.position = '';
                             }
-                            this.setFocusToTrigger();
                         }, this.transitionDuration);
                     }
                 }

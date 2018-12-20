@@ -3,7 +3,14 @@ body.m-u--app-body {
 }
 
 .m-u--app-body {
-    font-family: $m-font-family;
+    @supports (font-variation-settings: normal) {
+        font-family: $m-font-family;
+    }
+
+    @supports not (font-variation-settings: normal) {
+        font-family: $m-font-family--fallback;
+    }
+
     font-weight: $m-font-weight;
     font-style: normal;
     font-size: $m-font-size;

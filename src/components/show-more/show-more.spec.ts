@@ -28,6 +28,38 @@ describe(SHOW_MORE_NAME, () => {
         });
     });
 
+    describe(`With nbTotal equals to 0`, () => {
+
+        beforeEach(() => {
+            initializeShallowWrapper();
+            wrapper.setProps({ nbVisible: 0, nbTotal: -2 });
+        });
+
+        it(`Should not render anything`, () => {
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should not be visible`, () => {
+            expect(wrapper.vm.isVisible).toBeFalsy();
+        });
+    });
+
+    describe(`With nbTotal inferior to 0`, () => {
+
+        beforeEach(() => {
+            initializeShallowWrapper();
+            wrapper.setProps({ nbVisible: 0, nbTotal: -2 });
+        });
+
+        it(`Should not render anything`, () => {
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should not be visible`, () => {
+            expect(wrapper.vm.isVisible).toBeFalsy();
+        });
+    });
+
     describe(`Given nbVisible and nbTotal`, () => {
         beforeEach(() => {
             initializeShallowWrapper();
@@ -58,6 +90,10 @@ describe(SHOW_MORE_NAME, () => {
 
         it(`Should render correctly`, () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should be visible`, () => {
+            expect(wrapper.vm.isVisible).toBeTruthy();
         });
 
         it(`Should render a button`, () => {
