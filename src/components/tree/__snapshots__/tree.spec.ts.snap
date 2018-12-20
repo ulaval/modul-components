@@ -1,18 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MTree Given a tree with some data Should render correctly 1`] = `
+exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content">
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos"></m-tree-node>
-        <m-tree-node selectable="true" node="[object Object]" selected-nodes="/medias/Videos"></m-tree-node>
-    </ul>
+    <ul class="m-tree__content"></ul>
 </div>
 `;
 
-exports[`MTree Given an empty tree Should render correctly 1`] = `
+exports[`MTree Given a single node selection Given an empty tree Should render correctly 1`] = `
 <div class="m-tree">
     <p class="m-tree__empty">
         m-tree:empty
     </p>
+</div>
+`;
+
+exports[`MTree Given a tree with multiple selection Given a tree with two nodes selected Should render correctly 1`] = `
+<div class="m-tree">
+    <ul class="m-tree__content">
+        <li class="m-tree-node m--is-selected">
+            <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">index.html</span> </div>
+        </li>
+        <li class="m-tree-node">
+            <div role="button" tabindex="1" class="m-tree-node__item">
+                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span> </div>
+            <m-accordion-transition>
+                <ul class="m-tree-node__children" style="display:none;">
+                    <li class="m-tree-node m-tree-node__child m--is-selected">
+                        <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">Videos</span> </div>
+                    </li>
+                </ul>
+            </m-accordion-transition>
+        </li>
+    </ul>
 </div>
 `;

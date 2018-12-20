@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTreeNode Given a node When the node can and has children and the node is valid Should render correctly 1`] = `
+<li class="m-tree-node">
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 3" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 3</span> </div>
+    <m-accordion-transition>
+        <ul class="m-tree-node__children" style="display:none;">
+            <li class="m-tree-node m-tree-node__child">
+                <div role="button" tabindex="1" class="m-tree-node__item">
+                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Node 4</span> </div>
+                <m-accordion-transition>
+                    <ul class="m-tree-node__children" style="display:none;">
+                        <li class="m-tree-node__child-empty">
+                            m-tree-node:empty
+                        </li>
+                    </ul>
+                </m-accordion-transition>
+            </li>
+        </ul>
+    </m-accordion-transition>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node can have children but don't have any Should render correctly 1`] = `
+<li class="m-tree-node">
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 2" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 2</span> </div>
+    <m-accordion-transition>
+        <ul class="m-tree-node__children" style="display:none;">
+            <li class="m-tree-node__child-empty">
+                m-tree-node:empty
+            </li>
+        </ul>
+    </m-accordion-transition>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node can't have children and the node is valid Should render correctly 1`] = `
+<li class="m-tree-node">
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 1" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 1</span> </div>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node has a checkbox Should render properly 1`] = `
+<li class="m-tree-node">
+    <div role="button" tabindex="1" class="m-tree-node__item m-tree-node__item--no-hover">
+        <div filename="Node 1" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 1</span>
+        <div>checkbox</div>
+    </div>
+</li>
+`;
+
+exports[`MTreeNode Given a node When the node has a checkbox and the node is the parent of two nodes and auto-select is on for buttons Should render properly 1`] = `
+<li class="m-tree-node">
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Parent 1" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Parent 1</span>
+        <div>checkbox</div>
+    </div>
+    <m-accordion-transition>
+        <ul class="m-tree-node__children" style="display:none;">
+            <li class="m-tree-node m-tree-node__child">
+                <div role="button" tabindex="1" class="m-tree-node__item">
+                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Child 1</span>
+                    <m-checkbox></m-checkbox>
+                </div>
+                <m-accordion-transition>
+                    <ul class="m-tree-node__children m-tree-node__line-extension" style="display:none;">
+                        <li class="m-tree-node__child-empty">
+                            m-tree-node:empty
+                        </li>
+                    </ul>
+                </m-accordion-transition>
+            </li>
+            <li class="m-tree-node m-tree-node__child">
+                <div role="button" tabindex="1" class="m-tree-node__item">
+                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Child 2</span>
+                    <m-checkbox></m-checkbox>
+                </div>
+                <m-accordion-transition>
+                    <ul class="m-tree-node__children" style="display:none;">
+                        <li class="m-tree-node__child-empty">
+                            m-tree-node:empty
+                        </li>
+                    </ul>
+                </m-accordion-transition>
+            </li>
+        </ul>
+    </m-accordion-transition>
+    <button class="m-tree-node__auto-select-button"></button>
+</li>
+`;
