@@ -32,7 +32,8 @@ export class MInputStyle extends ModulVue {
 
     public $refs: {
         label: HTMLElement,
-        adjustWidthAuto: HTMLElement
+        adjustWidthAuto: HTMLElement,
+        rightContent: HTMLElement
     };
 
     private animReady: boolean = false;

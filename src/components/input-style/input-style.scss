@@ -148,7 +148,7 @@
 
     &__label,
     &__body__adjust-width-auto {
-        padding-right: $m-padding;
+        padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
     }
 
     &__label {
@@ -238,6 +238,7 @@
             opacity: 0;
             user-select: none;
             white-space: nowrap;
+            padding-right: $m-input-style--padding;
         }
 
         .m-icon-button.m-icon-button,
