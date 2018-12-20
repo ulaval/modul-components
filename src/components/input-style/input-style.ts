@@ -36,7 +36,6 @@ export class MInputStyle extends ModulVue {
         rightContent: HTMLElement
     };
 
-    public rightContentWidth: string = '';
     private animReady: boolean = false;
 
     public setInputWidth(): void {
