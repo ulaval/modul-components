@@ -3,7 +3,9 @@
         "baseUrl": ".",
         "target": "es5",
         "lib": [
-            "es5", "es6", "dom"
+            "es5",
+            "es6",
+            "dom"
         ],
         "module": "es2015",
         "moduleResolution": "node",
@@ -19,6 +21,11 @@
             "node_modules/@types"
         ]
     },
+    "plugins": [
+        {
+            "name": "typescript-tslint-plugin"
+        }
+    ],
     "exclude": [
         "src/**/*.spec.*",
         "dist/**/*",

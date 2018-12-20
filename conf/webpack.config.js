@@ -107,7 +107,7 @@ module.exports = function (env) {
                 loader: 'tslint-loader',
                 include: [resolve('src'), resolve('test')],
                 options: {
-                    configFile: 'conf/tslint.json',
+                    configFile: 'tslint.json',
                     formatter: 'grouped',
                     formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
                     emitErrors: true,
@@ -126,10 +126,10 @@ module.exports = function (env) {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 query: {
-                  limit: 10000,
-                  name: path.posix.join('assets', 'fonts/[name].[hash:7].[ext]')
+                    limit: 10000,
+                    name: path.posix.join('assets', 'fonts/[name].[hash:7].[ext]')
                 }
-              }
+            }
             ]
         },
         plugins: [
