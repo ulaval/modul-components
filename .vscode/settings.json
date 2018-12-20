@@ -7,8 +7,7 @@
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
-    "tslint.configFile": "conf/tslint.json",
-    "tslint.autoFixOnSave": true,
+    "typescript.tsdk": "node_modules\\typescript\\lib",
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
