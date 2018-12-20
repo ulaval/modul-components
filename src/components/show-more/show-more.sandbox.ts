@@ -8,6 +8,8 @@ import WithRender from './show-more.sandbox.html';
 export class MShowMoreSandbox extends Vue {
     data: number[] = [];
     total: number = 20;
+    totalZero: number = 0;
+    totalUndefined: undefined = undefined;
     loading: boolean = false;
 
     fetchData(): void {
