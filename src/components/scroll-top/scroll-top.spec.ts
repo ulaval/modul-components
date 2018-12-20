@@ -11,7 +11,6 @@ let wrapper: Wrapper<MScrollTop>;
 
 let position: string;
 let duration: ScrollToDuration;
-let scrollBreakPoint: number;
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallow(MScrollTop, {
@@ -27,8 +26,7 @@ const initializeShallowWrapper: any = () => {
         },
         propsData: {
             position,
-            duration,
-            scrollBreakPoint
+            duration
         }
     });
 };
@@ -37,7 +35,6 @@ describe(SCROLL_TOP_NAME, () => {
 
     describe(`When loading with position fixed.`, () => {
         beforeEach(() => {
-            scrollBreakPoint = -1;
             initializeShallowWrapper();
         });
         it(`Should render correctly.`, () => {
@@ -51,10 +48,10 @@ describe(SCROLL_TOP_NAME, () => {
         });
         describe(`When calling event of scroll.`, () => {
             beforeEach(() => {
-                wrapper.vm.onScroll();
-                wrapper.vm.$nextTick();
+                wrapper.setData({ scrollTopBreakPoint: -1 });
             });
-            it(`Then scroll button is show.`, () => {
+            it(`Then scroll button is show.`, async () => {
+                await wrapper.vm.onScroll();
                 expect(wrapper.find(REF_SCROLL_BUTTON).exists()).toBeTruthy();
             });
         });

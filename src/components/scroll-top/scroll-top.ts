@@ -1,7 +1,7 @@
 import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ScrollToDuration } from '../../utils';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -13,10 +13,6 @@ import WithRender from './scroll-top.html?style=./scroll-top.scss';
 export enum MScrollTopPosition {
     Fixed = 'fixed',
     Relative = 'relative'
-}
-
-declare global {
-    interface Window { requestAnimFrame: any; }
 }
 
 @WithRender
@@ -37,31 +33,26 @@ export class MScrollTop extends ModulVue {
     })
     public duration: ScrollToDuration;
 
-    @Prop({ default: window.innerHeight * 0.2 })
-    public scrollBreakPoint: number;
-
     show: boolean = false;
+
+    scrollTopBreakPoint: number = window.innerHeight * 0.2;
+
+    @Emit('click')
+    public onClick(event: Event): void {
+        this.$scrollTo.goToTop(this.duration);
+    }
 
     created(): void {
         if (this.isPositionFixed) {
             this.$modul.event.$on('scroll', this.onScroll);
         } else {
-            this.$nextTick(() => {
-                this.show = true;
-            });
+            this.show = true;
         }
-    }
-
-    onClick(): void {
-        this.$scrollTo.goToTop(this.duration);
-        this.$emit('click');
     }
 
     onScroll(): void {
         let scrollPosition: number = window.pageYOffset;
-        this.$nextTick(() => {
-            this.show = scrollPosition > this.scrollBreakPoint;
-        });
+        this.show = scrollPosition > this.scrollTopBreakPoint;
     }
 
     get isPositionFixed(): boolean {
