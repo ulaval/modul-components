@@ -83,6 +83,8 @@ import TimepickerPlugin from './timepicker/timepicker';
 import ToastPlugin from './toast/toast';
 import TooltipPlugin from './tooltip/tooltip';
 import TreePlugin from './tree/tree';
+import TreeIconPlugin from './tree/tree-icon/tree-icon';
+import TreeNodePlugin from './tree/tree-node/tree-node';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
 export interface ComponentPluginOptions {
@@ -179,6 +181,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
+        Vue.use(TreeNodePlugin);
+        Vue.use(TreeIconPlugin);
     }
 };
 

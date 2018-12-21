@@ -11,7 +11,7 @@ import IconPlugin from '../icon/icon';
 import MessagePlugin from '../message/message';
 import PlusPlugin from '../plus/plus';
 import { TREE_NODE_NAME } from './component-names';
-import { MTreeNode } from './tree-node/tree-node';
+import TreeNodePlugin, { MTreeNode } from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 export interface TreeNode {
     id: string;
@@ -156,6 +156,7 @@ export class MTree extends ModulVue {
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NAME, 'plugin.install');
+        v.use(TreeNodePlugin);
         v.use(I18nPlugin);
         v.use(CheckboxPlugin);
         v.use(IconFilePlugin);

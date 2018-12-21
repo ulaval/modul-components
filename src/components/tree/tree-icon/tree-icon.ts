@@ -1,7 +1,11 @@
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { extractExtension } from '../../../utils/file/file';
 import { ModulVue } from '../../../utils/vue/vue';
+import IconFilePlugin from '../../icon-file/icon-file';
+import IconPlugin from '../../icon/icon';
+import { TREE_ICON_NAME } from '../component-names';
 import WithRender from './tree-icon.html?style=./tree-icon.scss';
 
 const FOLDER_OPEN: string = 'm-svg__folder-open';
@@ -34,4 +38,15 @@ export class MTreeIcon extends ModulVue {
         return this.isFolder && this.useFilesIcons;
     }
 }
+
+const TreeIconPlugin: PluginObject<any> = {
+    install(v, options): void {
+        v.prototype.$log.debug(TREE_ICON_NAME, 'plugin.install');
+        v.use(IconFilePlugin);
+        v.use(IconPlugin);
+        v.component(TREE_ICON_NAME, MTreeIcon);
+    }
+};
+
+export default TreeIconPlugin;
 
