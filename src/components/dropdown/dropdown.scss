@@ -67,6 +67,7 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     &__arrow {
         display: inherit;
+        cursor: pointer;
 
         &__icon {
             transition: transform $m-transition-duration ease, color $m-transition-duration ease !important;

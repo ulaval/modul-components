@@ -29,6 +29,8 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
+    @Prop({ default: false })
+    public cursorPointer: boolean;
 
     public $refs: {
         label: HTMLElement,
@@ -80,7 +82,7 @@ export class MInputStyle extends ModulVue {
     }
 
     private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
     }
 
     private get hasLabel(): boolean {
