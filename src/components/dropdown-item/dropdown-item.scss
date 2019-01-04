@@ -13,6 +13,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
     font-size: $m-font-size;
     text-decoration: none;
     outline: none;
+    line-height: 1.25;
 
     @include m-word-wrap();
 
