@@ -22,6 +22,9 @@
 @mixin m-bullet-list() {
     @include m-list();
 
+    margin-top: $m-spacing;
+    margin-bottom: 0;
+
     li {
         position: relative;
         list-style: none;

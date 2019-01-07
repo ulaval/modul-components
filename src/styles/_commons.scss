@@ -1,19 +1,24 @@
-@charset 'utf-8';
-
 // ======================================================================
-//  abstracts
+//  variables
 // ======================================================================
 @import
-    'commons';
+    'variables/var-font',
+    'variables/var-color',
+    'variables/var-layout',
+    'variables/var-decoration',
+    'variables/var-transition',
+    'variables/var-media-queries',
+    'variables/var-color-calendar',
+    'variables/var-input-style';
 
 // ======================================================================
-//  Base
+//  functions
 // ======================================================================
 @import
-    'base/base',
-    'base/animations';
+    'functions/functions';
 
 // ======================================================================
-//  utils
+//  mixins
 // ======================================================================
-@import 'utils/utils';
+@import
+    'mixins/mixins';
