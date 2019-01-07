@@ -1,19 +1,11 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
-import I18nPlugin from '../../i18n/i18n';
-import { TREE_ICON_NAME, TREE_NODE_NAME } from '../component-names';
 import { MCheckboxes, TreeNode } from '../tree';
-import TreeIconPlugin, { MTreeIcon } from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
-@Component({
-    components: {
-        [TREE_ICON_NAME]: MTreeIcon
-    }
-})
+@Component
 export class MTreeNode extends ModulVue {
     @Prop()
     public node: TreeNode;
@@ -251,14 +243,3 @@ export class MTreeNode extends ModulVue {
         return this.checkboxes === MCheckboxes.WithCheckboxAutoSelect;
     }
 }
-
-const TreeNodePlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.debug(TREE_NODE_NAME, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(TreeIconPlugin);
-        v.component(TREE_NODE_NAME, MTreeNode);
-    }
-};
-
-export default TreeNodePlugin;

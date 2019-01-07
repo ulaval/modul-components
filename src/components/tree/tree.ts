@@ -4,14 +4,15 @@ import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import CheckboxPlugin from '../checkbox/checkbox';
-import { TREE_NAME } from '../component-names';
+import { TREE_ICON_NAME, TREE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconFilePlugin from '../icon-file/icon-file';
 import IconPlugin from '../icon/icon';
 import MessagePlugin from '../message/message';
 import PlusPlugin from '../plus/plus';
 import { TREE_NODE_NAME } from './component-names';
-import TreeNodePlugin, { MTreeNode } from './tree-node/tree-node';
+import { MTreeIcon } from './tree-icon/tree-icon';
+import { MTreeNode } from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
 export interface TreeNode {
     id: string;
@@ -156,7 +157,6 @@ export class MTree extends ModulVue {
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TREE_NAME, 'plugin.install');
-        v.use(TreeNodePlugin);
         v.use(I18nPlugin);
         v.use(CheckboxPlugin);
         v.use(IconFilePlugin);
@@ -165,6 +165,8 @@ const TreePlugin: PluginObject<any> = {
         v.use(MessagePlugin);
         v.use(AccordionTransitionPlugin);
         v.component(TREE_NAME, MTree);
+        v.component(TREE_NODE_NAME, MTreeNode);
+        v.component(TREE_ICON_NAME, MTreeIcon);
     }
 };
 
