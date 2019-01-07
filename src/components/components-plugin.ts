@@ -85,6 +85,7 @@ import TooltipPlugin from './tooltip/tooltip';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
+
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
 }
