@@ -96,6 +96,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     private internalTimeout: number;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
+        el.style.position = 'absolute';
         if (value) {
             if (this.offset !== '0') {
                 this.getPortalElement().style.transform = `translateY(${this.offset})`;
