@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue/types/plugin';
 import { VNode } from 'vue/types/vnode';
 import { MMessageState } from '../../components/message/message';
-import { MToast, MToastPosition } from '../../components/toast/toast';
+import { MToast, MToastPosition, MToastTimeout } from '../../components/toast/toast';
 
 export interface ToastParams {
     text: string;
@@ -9,16 +9,7 @@ export interface ToastParams {
     action?: (event: Event) => any;
     state?: MMessageState;
     position?: MToastPosition;
-    timeout?: number;
-    icon?: boolean;
-}
-
-export interface ToastErrorParams {
-    text: string;
-    actionLabel?: string;
-    action?: (event: Event) => any;
-    position?: MToastPosition;
-    timeout?: number;
+    timeout?: MToastTimeout;
     icon?: boolean;
 }
 
@@ -28,12 +19,6 @@ export class ToastService {
     public activeToast?: MToast;
     public toasts: MToast[] = [];
     public baseTopPosition: string = '0';
-
-    public error(errorParams: ToastErrorParams): void {
-        let params: ToastParams = { ...errorParams };
-        params.state = MMessageState.Error;
-        this.show(params);
-    }
 
     public show(params: ToastParams): void {
         const toast: MToast = this.createToast(params);

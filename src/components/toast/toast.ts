@@ -124,24 +124,20 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         }
     }
 
-    @Emit('action-button')
-    private actionButton(event: Event): void {
-    }
-
     private convertTimeout(timeout: MToastTimeout): number {
         switch (timeout) {
-            case 'long':
+            case MToastTimeout.long:
                 return 15000;
-            case 'short':
+            case MToastTimeout.short:
                 return 5000;
-            case 'none':
+            case MToastTimeout.none:
             default:
                 return 0;
         }
     }
 
-    private onAction($event): void {
-        this.$emit('action-button', $event);
+    @Emit('action-button')
+    private onAction(event: Event): void {
         this.onClose();
     }
 
