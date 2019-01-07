@@ -32,7 +32,7 @@ export interface DayState {
     isDisabled: boolean;
     isToday: boolean;
     isSelected: boolean;
-    isHidden: boolean;
+    isInCurrentMonth: boolean;
     isHover: boolean;
 }
 

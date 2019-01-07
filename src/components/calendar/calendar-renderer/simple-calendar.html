@@ -71,8 +71,8 @@
                                 :class="{ 'm--is-selected': d.isSelected,
                                                 'm--is-today': d.isToday,
                                                 'm--is-disabled': d.isDisabled,
-                                                'm--is-hidden': d.isHidden,
-                                                'm--is-other-month': d.month !== currentlyDisplayedMonth }"
+                                                'm--is-hidden': hideDay(d.isInCurrentMonth),
+                                                'm--is-other-month': !d.isInCurrentMonth }"
                                 @click.stop="onDateSelect(d)"
                                 @mouseenter="onDateMouseEnter(d)"
                                 @mouseleave="onDateMouseLeave(d)">

@@ -1,6 +1,6 @@
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import DateUtil from '../../../utils/date-util/date-util';
+import DateUtil, { DatePrecision } from '../../../utils/date-util/date-util';
 import { CalendarEvent } from '../calendar-renderer/abstract-calendar-renderer';
 import { Calendar, CalendarEvents, DayState, MAbstractCalendarState, MonthState, YearState } from './abstract-calendar-state';
 
@@ -11,32 +11,6 @@ const FIRST_MONTH_INDEX: number = 0;
 const LAST_MONTH_INDEX: number = 11;
 
 const LAST_DAY_OF_WEEK_INDEX: number = 6;
-
-enum DatePrecision {
-    YEAR = 'year',
-    MONTH = 'month',
-    DAY = 'day'
-}
-
-enum DaysMonthBeforeAfter {
-    SHOW = 'show',
-    HIDE = 'hide'
-}
-
-enum DateRangePosition {
-    BEGIN = 'begin',
-    END = 'end'
-}
-
-enum OffsetLocation {
-    BEFORE = 'before',
-    AFTER = 'after'
-}
-
-const offsetModifier: { [name: string]: number } = {
-    [OffsetLocation.BEFORE]: -1,
-    [OffsetLocation.AFTER]: 1
-};
 
 
 @Component
@@ -50,9 +24,6 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
 
     @Prop()
     maxDate: string;
-
-    @Prop({ default: DaysMonthBeforeAfter.SHOW })
-    showMonthBeforeAfter: DaysMonthBeforeAfter;
 
     private currentDate: DateUtil;
 
@@ -115,12 +86,12 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
 
         this.currentMinDate = new DateUtil(this.minDate as string);
         if (!this.minDate) {
-            this.currentMinDate = this.calculateYearOffset(this.now, MIN_DATE_OFFSET, OffsetLocation.BEFORE);
+            this.currentMinDate = this.calculateYearOffset(this.now, MIN_DATE_OFFSET * -1);
         }
 
         this.currentMaxDate = new DateUtil(this.maxDate as string);
         if (!this.maxDate) {
-            this.currentMaxDate = this.calculateYearOffset(this.now, MAX_DATE_OFFSET, OffsetLocation.AFTER);
+            this.currentMaxDate = this.calculateYearOffset(this.now, MAX_DATE_OFFSET);
         }
 
         if (!this.currentDate) {
@@ -215,8 +186,8 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
     }
 
 
-    private calculateYearOffset(date: DateUtil, offset: number, location: OffsetLocation): DateUtil {
-        return new DateUtil(date.fullYear() + (offset * offsetModifier[location]), date.month(), date.day());
+    private calculateYearOffset(date: DateUtil, offset: number): DateUtil {
+        return new DateUtil(date.fullYear() + (offset), date.month(), date.day());
     }
 
     /**
@@ -256,7 +227,7 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
                 isDisabled: this.isDayDisabled(date),
                 isToday: this.isDayToday(date),
                 isSelected: this.isDaySelected(date),
-                isHidden: this.isDayHidden(date),
+                isInCurrentMonth: this.isInCurrentMonth(date),
                 isHover: false
             });
         }
@@ -275,8 +246,8 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
         return date.isSame(this.currentDate, DatePrecision.DAY);
     }
 
-    private isDayHidden(date: DateUtil): boolean {
-        return !(date.month() === this.currentlyDisplayedMonth || this.showMonthBeforeAfter === DaysMonthBeforeAfter.SHOW);
+    private isInCurrentMonth(date: DateUtil): boolean {
+        return date.month() === this.currentlyDisplayedMonth;
     }
 
     private calculateStartDate(date: DateUtil): DateUtil {

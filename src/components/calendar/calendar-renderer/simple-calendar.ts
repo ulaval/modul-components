@@ -53,6 +53,9 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
     @Prop({ default: PickerMode.DAY })
     initialPickerMode: PickerMode;
 
+    @Prop({ default: true })
+    showMonthBeforeAfter: boolean;
+
     @Prop({
         default: () => {
             return Object.keys(MonthsNames).map((key: string) => {
@@ -112,6 +115,10 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
     onMonthSelect(event: Event): void {
         this.currentPickerMode = PickerMode.DAY;
         super.onMonthSelect(event);
+    }
+
+    hideDay(isInCurrentMonth: boolean): boolean {
+        return !isInCurrentMonth && !this.showMonthBeforeAfter;
     }
 
 
