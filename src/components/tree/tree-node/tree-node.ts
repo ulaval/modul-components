@@ -1,11 +1,17 @@
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
+import { TREE_ICON_NAME } from '../../component-names';
 import { MCheckboxes, TreeNode } from '../tree';
+import { MTreeIcon } from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
 
 @WithRender
-@Component
+@Component({
+    components: {
+        [TREE_ICON_NAME]: MTreeIcon
+    }
+})
 export class MTreeNode extends ModulVue {
     @Prop()
     public node: TreeNode;
