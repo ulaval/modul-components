@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { CALENDAR_SINGLE_DATE_NAME } from '../../component-names';
+import { CALENDAR_SINGLE_DATE_NAME } from '../../../components/component-names';
 import WithRender from './calendar-single-date.sandbox.html';
 
 

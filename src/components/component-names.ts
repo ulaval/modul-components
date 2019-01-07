@@ -5,6 +5,7 @@ export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CALENDAR_NAME: string = 'm-calendar';
 export const CALENDAR_SINGLE_DATE_NAME: string = 'm-calendar-single-date';
+export const CALENDAR_RANGE_DATE_NAME: string = 'm-calendar-range-date';
 export const CAROUSEL_NAME: string = 'm-carousel';
 export const CAROUSEL_ITEM_NAME: string = 'm-carousel-item';
 export const CHARACTER_COUNT_NAME: string = 'm-character-count';

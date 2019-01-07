@@ -72,7 +72,8 @@
                                                 'm--is-today': d.isToday,
                                                 'm--is-disabled': d.isDisabled,
                                                 'm--is-hidden': hideDay(d.isInCurrentMonth),
-                                                'm--is-other-month': !d.isInCurrentMonth }"
+                                                'm--is-other-month': !d.isInCurrentMonth,
+                                                'm--is-highlighted': d.isHighlighted }"
                                 @click.stop="onDateSelect(d)"
                                 @mouseenter="onDateMouseEnter(d)"
                                 @mouseleave="onDateMouseLeave(d)">

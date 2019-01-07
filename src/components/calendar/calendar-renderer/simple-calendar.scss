@@ -134,7 +134,8 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         &:hover,
         &:focus,
         &.m--is-selected,
-        &.m--is-today {
+        &.m--is-today,
+        &.m--is-highlighted {
             &::after {
                 transform: translate3d(50%, 50%, 0) scale(1);
                 opacity: 1;

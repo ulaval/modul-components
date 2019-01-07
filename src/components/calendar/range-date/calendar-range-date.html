@@ -1,0 +1,13 @@
+<div class="m-calendar m-calendar-range-date">
+    <m-calendar-range-date-state v-model="innerValue"
+                                 :min-date="minDate"
+                                 :max-date="maxDate"
+                                 @input="onInput">
+        <div slot-scope="{ calendar, calendarEvents }"
+             class="m-calendar__render m-calendar-range-date__render">
+            <m-simple-calendar :calendar="calendar"
+                               :show-month-before-after="showMonthBeforeAfter"
+                               v-on="calendarEvents"></m-simple-calendar>
+        </div>
+    </m-calendar-range-date-state>
+</div>

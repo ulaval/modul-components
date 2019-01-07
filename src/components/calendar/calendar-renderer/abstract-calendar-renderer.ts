@@ -37,7 +37,6 @@ export abstract class MAbstractCalendarRenderer extends ModulVue {
     }
 
     onMonthNext(event: Event): void {
-        this.$log.log(event);
         this.$emit(CalendarEvent.MONTH_NEXT, event);
     }
 

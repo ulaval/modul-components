@@ -1,20 +1,20 @@
 import { PluginObject } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
-import { CALENDAR_SINGLE_DATE_NAME } from '../../component-names';
+import { CALENDAR_RANGE_DATE_NAME } from '../../component-names';
 import { MSimpleCalendar } from '../calendar-renderer/simple-calendar';
-import { MCalendarSingleDateState } from '../calendar-state/calendar-single-date-state';
-import WithRender from './calendar-single-date.html?style=./calendar-single-date.scss';
+import { MCalendarRangeDateState } from '../calendar-state/calendar-range-date-state';
+import WithRender from './calendar-range-date.html?style=./calendar-range-date.scss';
 
 
 @WithRender
 @Component({
     components: {
-        MCalendarSingleDateState,
+        MCalendarRangeDateState,
         MSimpleCalendar
     }
 })
-export class MCalendarSingleDate extends ModulVue {
+export class MCalendarRangeDate extends ModulVue {
 
     @Prop()
     value: string;
@@ -26,7 +26,7 @@ export class MCalendarSingleDate extends ModulVue {
     maxDate: string;
 
     @Prop({ default: true })
-    showMonthBeforeAfter: string;
+    showMonthBeforeAfter: boolean;
 
     innerValue: string = this.value;
 
@@ -40,11 +40,11 @@ export class MCalendarSingleDate extends ModulVue {
     }
 }
 
-const CalendarSingleDatePlugin: PluginObject<any> = {
+const CalendarRangeDatePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(CALENDAR_SINGLE_DATE_NAME + ' is not ready for production');
-        v.component(CALENDAR_SINGLE_DATE_NAME, MCalendarSingleDate);
+        v.prototype.$log.warn(CALENDAR_RANGE_DATE_NAME + ' is not ready for production');
+        v.component(CALENDAR_RANGE_DATE_NAME, MCalendarRangeDate);
     }
 };
 
-export default CalendarSingleDatePlugin;
+export default CalendarRangeDatePlugin;
