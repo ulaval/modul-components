@@ -1,0 +1,12 @@
+<div>
+    <h3>Calendar</h3>
+    <p>Date courante: {{ date }}</p>
+    <m-calendar-single-date v-model="date"></m-calendar-single-date>
+
+    <h3>Calendar (with min/max date)</h3>
+    <p>Date courante: {{ date }}</p>
+    <m-calendar-single-date v-model="date"
+                            min-date="2018-06-15"
+                            max-date="2025-02-20"
+                            show-month-before-after="false"></m-calendar-single-date>
+</div>

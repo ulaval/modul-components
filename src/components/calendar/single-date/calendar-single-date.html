@@ -1,0 +1,13 @@
+<div class="m-calendar m-calendar-single-date">
+    <m-calendar-single-date-state v-model="innerValue"
+                                  :min-date="minDate"
+                                  :max-date="maxDate"
+                                  :show-month-before-after="showMonthBeforeAfter"
+                                  @input="onInput">
+        <div slot-scope="{ calendar, calendarEvents }"
+             class="m-calendar__render m-calendar-single-date__render">
+            <m-simple-calendar :calendar="calendar"
+                               v-on="calendarEvents"></m-simple-calendar>
+        </div>
+    </m-calendar-single-date-state>
+</div>

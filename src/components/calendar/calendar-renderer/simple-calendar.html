@@ -1,0 +1,86 @@
+<div class="m-calendar m-calendar--simple"
+     :id="id">
+    <div class="m-calendar__header">
+        <nav class="m-calendar__nav">
+            <m-icon-button icon-name="m-svg__chevron--left"
+                           @click.stop="onYearPrevious()"
+                           :disabled="isMinYear">{{ previousYearLabel }}</m-icon-button>
+            <button type="button"
+                    class="m-calendar__years"
+                    @click.stop="onYearClick"
+                    aria-live="polite">{{ currentlyDisplayedYear }}</button>
+            <m-icon-button icon-name="m-svg__chevron--right"
+                           @click.stop="onYearNext()"
+                           :disabled="isMaxYear">{{ nextYearLabel }}</m-icon-button>
+        </nav>
+        <nav class="m-calendar__nav">
+            <m-icon-button icon-name="m-svg__chevron--left"
+                           @click.stop="onMonthPrevious()"
+                           :disabled="isMinMonth">{{ previousMonthLabel }}</m-icon-button>
+            <button type="button"
+                    class="m-calendar__months"
+                    @click.stop="onMonthClick"
+                    aria-live="polite">{{ currentlyDisplayedMonthName }}</button>
+            <m-icon-button icon-name="m-svg__chevron--right"
+                           @click.stop="onMonthNext()"
+                           :disabled="isMaxMonth">{{ nextMonthLabel }}</m-icon-button>
+        </nav>
+    </div>
+    <div class="m-calendar__body"
+         aria-live="polite">
+        <table class="m-calendar__body-table">
+            <template v-if="isPickerModeYear">
+                <tr v-for="yearRow in years">
+                    <td v-for="y in yearRow"
+                        class="m-calendar__body-cell"
+                        v-if="y !== undefined">
+                        <button type="button"
+                                class="m-calendar__item"
+                                :class="{'m--is-selected': y.isCurrent}"
+                                @click.stop="onYearSelect(y.year, true)">
+                            <span class="m-calendar__item__text">{{ y.year }}</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+            <template v-if="isPickerModeMonth">
+                <tr v-for="monthRow in months">
+                    <td v-for="m in monthRow"
+                        class="m-calendar__body-cell">
+                        <button type="button"
+                                class="m-calendar__item"
+                                :class="{'m--is-selected': currentlyDisplayedMonth === m.index,
+                                                'm--is-disabled': m.isDisabled}"
+                                :disabled="m.isDisabled"
+                                @click.stop="onMonthSelect(m.index, true)">
+                            <span class="m-calendar__item__text">{{ m.name }}</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+            <template v-if="isPickerModeDay">
+                <tr>
+                    <td v-for="w in weekdaysLabels"
+                        class="m-calendar__weekday">{{ w }}</td>
+                </tr>
+                <tr v-for="dayRow in daysOfMonth">
+                    <td v-for="d in dayRow"
+                        class="m-calendar__body-cell">
+                        <button type="button"
+                                class="m-calendar__item"
+                                :class="{ 'm--is-selected': d.isSelected,
+                                                'm--is-today': d.isToday,
+                                                'm--is-disabled': d.isDisabled,
+                                                'm--is-hidden': d.isHidden,
+                                                'm--is-other-month': d.month !== currentlyDisplayedMonth }"
+                                @click.stop="onDateSelect(d)"
+                                @mouseenter="onDateMouseEnter(d)"
+                                @mouseleave="onDateMouseLeave(d)">
+                            <span class="m-calendar__item__text">{{ d.day }}</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+        </table>
+    </div>
+</div>
