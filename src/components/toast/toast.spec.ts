@@ -3,8 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
-import { MMessageState } from '../message/message';
-import ToastPlugin, { MToast, MToastPosition } from './toast';
+import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -48,7 +47,7 @@ describe(`MToast`, () => {
             });
 
             it(`Should be in Confirmation state`, () => {
-                expect(wrapper.vm.state).toEqual(MMessageState.Confirmation);
+                expect(wrapper.vm.state).toEqual(MToastState.Confirmation);
             });
 
             it(`Should be in the bottom-right position`, () => {

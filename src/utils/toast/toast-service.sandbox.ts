@@ -1,8 +1,7 @@
 
 import { Component } from 'vue-property-decorator';
 import { PluginObject } from 'vue/types/plugin';
-import { MMessageState } from '../../components/message/message';
-import { MToastPosition, MToastTimeout } from '../../components/toast/toast';
+import { MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
 import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../utils-names';
 import { ToastParams } from './toast-service';
@@ -47,7 +46,7 @@ export class MToastServiceSandbox extends ModulVue {
             actionLabel: 'ACTION',
             action: this.action,
             icon: true,
-            state: MMessageState.Warning,
+            state: MToastState.Warning,
             timeout: MToastTimeout.short,
             text: 'Test of a Toast'
         });
@@ -59,7 +58,7 @@ export class MToastServiceSandbox extends ModulVue {
             actionLabel: 'retry',
             action: this.action,
             icon: true,
-            state: MMessageState.Error
+            state: MToastState.Error
         });
     }
 

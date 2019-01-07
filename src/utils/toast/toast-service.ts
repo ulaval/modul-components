@@ -1,13 +1,12 @@
 import { PluginObject } from 'vue/types/plugin';
 import { VNode } from 'vue/types/vnode';
-import { MMessageState } from '../../components/message/message';
-import { MToast, MToastPosition, MToastTimeout } from '../../components/toast/toast';
+import { MToast, MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
 
 export interface ToastParams {
     text: string;
     actionLabel?: string;
     action?: (event: Event) => any;
-    state?: MMessageState;
+    state?: MToastState;
     position?: MToastPosition;
     timeout?: MToastTimeout;
     icon?: boolean;
