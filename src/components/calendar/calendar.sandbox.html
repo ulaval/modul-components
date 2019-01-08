@@ -1,23 +1,27 @@
 <div>
-    <m-textfield v-model="singleDate"
-                 placeholder="Date simple">
-    </m-textfield>
-
-    <h3>Calendar (default values only)</h3>
-    <p>Date courante: {{ singleDate }}</p>
-    <m-calendar v-model="singleDate"></m-calendar>
-
+    <h2>Single date picker</h2>
     <h3>Calendar</h3>
-    <p>Date courante: {{ singleDateOptions }}</p>
-    <m-calendar v-model="singleDateOptions"
-                :min-date="minDate"
-                :max-date="maxDate"
-                show-month-before-after="hide"
-                :months-names="['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']"
-                :days-names="['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']"></m-calendar>
+    <p>Date courante: {{ date }}</p>
+    <m-calendar v-model="date"></m-calendar>
 
-    <h3>Calendar - date range</h3>
-    <p>Date courante: {{ rangeDate.begin }} - {{ rangeDate.end }}</p>
-    <m-calendar v-model="rangeDate"
-                date-selection-mode="range"></m-calendar>
+    <h3>Calendar (with min/max date, days from month before and after are hidden)</h3>
+    <p>Date courante: {{ date }}</p>
+    <m-calendar v-model="date"
+                min-date="2018-06-15"
+                max-date="2025-02-20"
+                :show-month-before-after="false"></m-calendar>
+
+    <h2>Date range picker</h2>
+    <h3>Calendar</h3>
+    <p>Date courante: {{ dateRange }}</p>
+    <m-calendar mode="date-range"
+                v-model="dateRange"></m-calendar>
+
+    <h3>Calendar (with min/max date, days from month before and after are hidden)</h3>
+    <p>Date courante: {{ dateRange }}</p>
+    <m-calendar mode="date-range"
+                v-model="dateRange"
+                min-date="2018-06-15"
+                max-date="2025-02-20"
+                :show-month-before-after="false"></m-calendar>
 </div>

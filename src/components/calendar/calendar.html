@@ -1,84 +1,31 @@
 <div class="m-calendar"
-     :id="id">
-    <div class="m-calendar__header">
-        <nav class="m-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left"
-                           @click="previousYear()"
-                           :disabled="isMinYear">{{ previousYearLabel }}</m-icon-button>
-            <button type="button"
-                    class="m-calendar__years"
-                    @click="showYearPicker()"
-                    aria-live="polite">{{ currentlyDisplayedYear }}</button>
-            <m-icon-button icon-name="m-svg__chevron--right"
-                           @click="nextYear()"
-                           :disabled="isMaxYear">{{ nextYearLabel }}</m-icon-button>
-        </nav>
-        <nav class="m-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left"
-                           @click="previousMonth()"
-                           :disabled="isMinMonth">{{ previousMonthLabel }}</m-icon-button>
-            <button type="button"
-                    class="m-calendar__months"
-                    @click="showMonthPicker()"
-                    aria-live="polite">{{ currentlyDisplayedMonthName }}</button>
-            <m-icon-button icon-name="m-svg__chevron--right"
-                           @click="nextMonth()"
-                           :disabled="isMaxMonth">{{ nextMonthLabel }}</m-icon-button>
-        </nav>
-    </div>
-    <div class="m-calendar__body"
-         aria-live="polite">
-        <table class="m-calendar__body-table">
-            <template v-if="isPickerModeYear">
-                <tr v-for="yearRow in years">
-                    <td v-for="y in yearRow"
-                        class="m-calendar__body-cell"
-                        v-if="y !== undefined">
-                        <button type="button"
-                                class="m-calendar__item"
-                                :class="{'m--is-selected': currentlyDisplayedYear === y}"
-                                @click.stop="selectYear(y, true)">
-                            <span class="m-calendar__item__text">{{ y }}</span>
-                        </button>
-                    </td>
-                </tr>
-            </template>
-            <template v-if="isPickerModeMonth">
-                <tr v-for="monthRow in months">
-                    <td v-for="m in monthRow"
-                        class="m-calendar__body-cell">
-                        <button type="button"
-                                class="m-calendar__item"
-                                :class="{'m--is-selected': currentlyDisplayedMonth === m.index,
-                                                'm--is-disabled': m.isDisabled}"
-                                :disabled="m.isDisabled"
-                                @click.stop="selectMonth(m.index, true)">
-                            <span class="m-calendar__item__text">{{ m.name }}</span>
-                        </button>
-                    </td>
-                </tr>
-            </template>
-            <template v-if="isPickerModeDay">
-                <tr>
-                    <td v-for="w in weekdaysLabels"
-                        class="m-calendar__weekday">{{ w }}</td>
-                </tr>
-                <tr v-for="dayRow in daysOfMonth">
-                    <td v-for="d in dayRow"
-                        class="m-calendar__body-cell">
-                        <button type="button"
-                                class="m-calendar__item"
-                                :class="{ 'm--is-selected': d.isSelected,
-                                                'm--is-today': d.isToday,
-                                                'm--is-disabled': d.isDisabled,
-                                                'm--is-hidden': d.isHidden,
-                                                'm--is-other-month': d.month !== currentlyDisplayedMonth }"
-                                @click.stop="selectDate(d)">
-                            <span class="m-calendar__item__text">{{ d.date }}</span>
-                        </button>
-                    </td>
-                </tr>
-            </template>
-        </table>
-    </div>
+     :class="{
+    'm-calendar-single-date': isSingleDate,
+    'm-calendar-date-range': isDateRange
+}">
+    <m-calendar-single-date-state v-if="isSingleDate"
+                                  v-model="innerValue"
+                                  :min-date="minDate"
+                                  :max-date="maxDate"
+                                  @input="onInput">
+        <div slot-scope="{ calendar, calendarEvents }"
+             class="m-calendar__render m-calendar-single-date__render">
+            <m-simple-calendar :calendar="calendar"
+                               :show-month-before-after="showMonthBeforeAfter"
+                               v-on="calendarEvents"></m-simple-calendar>
+        </div>
+    </m-calendar-single-date-state>
+
+    <m-calendar-range-date-state v-if="isDateRange"
+                                 v-model="innerValue"
+                                 :min-date="minDate"
+                                 :max-date="maxDate"
+                                 @input="onInput">
+        <div slot-scope="{ calendar, calendarEvents }"
+             class="m-calendar__render m-calendar-range-date__render">
+            <m-simple-calendar :calendar="calendar"
+                               :show-month-before-after="showMonthBeforeAfter"
+                               v-on="calendarEvents"></m-simple-calendar>
+        </div>
+    </m-calendar-range-date-state>
 </div>

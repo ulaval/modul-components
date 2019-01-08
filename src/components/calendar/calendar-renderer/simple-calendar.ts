@@ -164,7 +164,7 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
     }
 
     get weekdaysLabels(): string[] {
-        return ['di', 'lu', 'ma', 'me', 'je', 've', 'sa'];
+        return this.daysNames;// ['di', 'lu', 'ma', 'me', 'je', 've', 'sa'];
     }
 
     get years(): number[] {

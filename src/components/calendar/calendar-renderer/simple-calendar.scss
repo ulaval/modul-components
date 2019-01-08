@@ -1,7 +1,7 @@
 @import '../../../styles/abstracts/variables';
 $m-datepicker--item-dimension: $m-touch-size !default;
 
-.m-calendar {
+.m-simple-calendar {
     border: 5px solid hotpink;
     display: inline-flex;
     flex-direction: column;

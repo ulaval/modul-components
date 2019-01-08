@@ -110,7 +110,7 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
     }
 
     protected isDaySelected(date: DateUtil): boolean {
-        return date.isSame(this.currentDate, DatePrecision.DAY);
+        return this.currentDate && date.isSame(this.currentDate, DatePrecision.DAY);
     }
 
     protected isInCurrentMonth(date: DateUtil): boolean {

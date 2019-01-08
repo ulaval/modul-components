@@ -1,6 +1,5 @@
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import DateUtil, { DatePrecision } from '../../../utils/date-util/date-util';
-import { CalendarRange } from '../calendar';
 import { CalendarEvent } from '../calendar-renderer/abstract-calendar-renderer';
 import { Calendar, CalendarEvents, MAbstractCalendarState, RangeDate } from './abstract-calendar-state';
 
@@ -20,7 +19,7 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
     @Prop()
     value: RangeDate;
 
-    private currentDate: InnerModel;
+    private currentRange: InnerModel;
 
     private currentDateHiglighted: DateUtil = new DateUtil();
 
@@ -65,14 +64,14 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
     selectDate(selectedDate: any): void {
         if (!selectedDate.isDisabled) {
             const newDate: DateUtil = new DateUtil(selectedDate.year, selectedDate.month, selectedDate.day);
-            this.currentDate = this.updateRangeModel(this.currentDate as InnerModel, newDate);
-            this.currentDate = this.reOrderRangeDates(this.currentDate);
+            this.currentRange = this.updateRangeModel(this.currentRange as InnerModel, newDate);
+            this.currentRange = this.reOrderRangeDates(this.currentRange);
 
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
 
             this.$emit('input', {
-                begin: this.currentDate.begin ? this.currentDate.begin.toISO().split('T')[0] : '',
-                end: this.currentDate.end ? this.currentDate.end.toISO().split('T')[0] : ''
+                begin: this.currentRange.begin ? this.currentRange.begin.toISO().split('T')[0] : '',
+                end: this.currentRange.end ? this.currentRange.end.toISO().split('T')[0] : ''
             });
         }
     }
@@ -83,21 +82,21 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
 
     protected initCurrentDate(): void {
         if (this.value) {
-            this.currentDate = {
-                begin: this.initDateRange(this.value as CalendarRange, DateRangePosition.BEGIN),
-                end: this.initDateRange(this.value as CalendarRange, DateRangePosition.END)
+            this.currentRange = {
+                begin: this.initDateRange(this.value as RangeDate, DateRangePosition.BEGIN),
+                end: this.initDateRange(this.value as RangeDate, DateRangePosition.END)
             };
 
-            if (this.currentDate.begin) {
-                this.currentDateHiglighted = new DateUtil(this.currentDate.begin);
-            } else if (this.currentDate.end) {
-                this.currentDateHiglighted = new DateUtil(this.currentDate.end);
+            if (this.currentRange.begin) {
+                this.currentDateHiglighted = new DateUtil(this.currentRange.begin);
+            } else if (this.currentRange.end) {
+                this.currentDateHiglighted = new DateUtil(this.currentRange.end);
             }
         }
     }
 
     protected initCurrentlyDisplayedDate(): void {
-        if (!this.currentDate) {
+        if (!this.currentRange) {
             this.updateCurrentlyDisplayedDate(this.now.fullYear(), this.now.month(), this.now.day());
         }
     }
@@ -123,27 +122,27 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
     }
 
     protected isDaySelected(date: DateUtil): boolean {
-        return ((this.currentDate.begin && this.currentDate.end) && date.isBetween(this.currentDate.begin, this.currentDate.end, DatePrecision.DAY))
-            || (!!this.currentDate.begin && date.isSame(this.currentDate.begin, DatePrecision.DAY))
-            || (!!this.currentDate.end && date.isSame(this.currentDate.end, DatePrecision.DAY));
+        return ((this.currentRange.begin && this.currentRange.end) && date.isBetween(this.currentRange.begin, this.currentRange.end, DatePrecision.DAY))
+            || (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
+            || (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
     }
 
     protected isHighlighted(date: DateUtil): boolean {
-        return (!!this.currentDate.begin && !this.currentDate.end) && this.betweenBeginAndHightlight(date);
+        return (!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date);
     }
 
     private betweenBeginAndHightlight(date): boolean {
-        if (this.currentDate.begin) {
-            if (this.currentDateHiglighted.isBefore(this.currentDate.begin)) {
-                return date.isBetween(this.currentDateHiglighted, this.currentDate.begin, DatePrecision.DAY);
+        if (this.currentRange.begin) {
+            if (this.currentDateHiglighted.isBefore(this.currentRange.begin)) {
+                return date.isBetween(this.currentDateHiglighted, this.currentRange.begin, DatePrecision.DAY);
             } else {
-                return date.isBetween(this.currentDate.begin, this.currentDateHiglighted, DatePrecision.DAY);
+                return date.isBetween(this.currentRange.begin, this.currentDateHiglighted, DatePrecision.DAY);
             }
         }
         return false;
     }
 
-    private initDateRange(dates: CalendarRange, position: DateRangePosition): DateUtil | undefined {
+    private initDateRange(dates: RangeDate, position: DateRangePosition): DateUtil | undefined {
         return (dates[position]) ? new DateUtil(dates[position]) : undefined;
     }
 
