@@ -89,8 +89,8 @@ export default class DateUtil {
         return DateComparison.IS_EQUAL;
     }
 
-    public toISO(): string {
-        return this.innerDate.toISOString();
+    public toString(): string {
+        return this.innerDate.toISOString().split('T')[0];
     }
 
     public fullYear(): number {

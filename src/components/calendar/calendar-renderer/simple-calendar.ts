@@ -107,18 +107,35 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
         this.currentPickerMode = PickerMode.YEAR;
     }
 
-    onYearSelect(event: Event): void {
-        super.onYearSelect(event);
+    onYearSelect(year: YearState): void {
+        super.onYearSelect(year);
         this.currentPickerMode = PickerMode.MONTH;
     }
 
-    onMonthSelect(event: Event): void {
-        super.onMonthSelect(event);
+    onMonthSelect(month: MonthState): void {
+        super.onMonthSelect(month);
         this.currentPickerMode = PickerMode.DAY;
+    }
+
+    onDaySelect(day: DayState): void {
+        super.onDaySelect(day);
+        let self: Vue = this;
+        this.$nextTick(() => (self.$refs[this.buildRef(day)][0] as HTMLButtonElement).focus());
     }
 
     hideDay(isInCurrentMonth: boolean): boolean {
         return !isInCurrentMonth && !this.showMonthBeforeAfter;
+    }
+
+    buildRef(day: DayState): string {
+        if (!day) {
+            return '';
+        }
+        return `day${day.year}${day.month}${day.day}`;
+    }
+
+    monthIndexToShortName(index: number): string {
+        return this.monthsNames[index];
     }
 
     get currentlyDisplayedYear(): number {
@@ -130,7 +147,6 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
         const currentMonth: MonthState | undefined = this.calendar.months.find((month: MonthState) => month.isCurrent);
         return (currentMonth) ? currentMonth.month : this.now.month();
     }
-
 
     get currentYear(): number {
         const currentYear: YearState | undefined = this.calendar.years.find((year: YearState) => year.isCurrent);
@@ -151,7 +167,7 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
     }
 
     get weekdaysLabels(): string[] {
-        return this.daysNames;// ['di', 'lu', 'ma', 'me', 'je', 've', 'sa'];
+        return this.daysNames;
     }
 
     get years(): number[] {
@@ -162,21 +178,19 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
         return this.prepareDataForTableLayout(years, NB_YEARS_PER_ROW);
     }
 
-    get months(): any[] {
-        let months: any[] = [];
+    get months(): number[] {
+        let months: MonthState[] = [];
         let date: DateUtil;
         for (let index: number = FIRST_MONTH_INDEX; index <= LAST_MONTH_INDEX; index++) {
             date = new DateUtil(this.calendar.dates.current.fullYear(), index, 1);
             months.push({
-                index,
-                name: this.monthsNames[index],
+                month: index,
+                isCurrent: index === this.calendar.dates.current.month(),
                 isDisabled: !date.isBetweenStrict(this.calendar.dates.min, this.calendar.dates.max, DatePrecision.MONTH)
             });
         }
         return this.prepareDataForTableLayout(months, 3);
     }
-
-
 
     get isPickerModeYear(): boolean {
         return this.currentPickerMode === PickerMode.YEAR;

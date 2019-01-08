@@ -37,7 +37,7 @@
                         <button type="button"
                                 class="m-simple-calendar__item"
                                 :class="{'m--is-selected': y.isCurrent}"
-                                @click.stop="onYearSelect(y.year, true)">
+                                @click.stop="onYearSelect(y)">
                             <span class="m-simple-calendar__item__text">{{ y.year }}</span>
                         </button>
                     </td>
@@ -49,11 +49,11 @@
                         class="m-simple-calendar__body-cell">
                         <button type="button"
                                 class="m-simple-calendar__item"
-                                :class="{'m--is-selected': currentlyDisplayedMonth === m.index,
+                                :class="{'m--is-selected': m.isCurrent,
                                                 'm--is-disabled': m.isDisabled}"
                                 :disabled="m.isDisabled"
-                                @click.stop="onMonthSelect(m.index, true)">
-                            <span class="m-simple-calendar__item__text">{{ m.name }}</span>
+                                @click.stop="onMonthSelect(m)">
+                            <span class="m-simple-calendar__item__text">{{ monthIndexToShortName(m.month) }}</span>
                         </button>
                     </td>
                 </tr>
@@ -67,6 +67,7 @@
                     <td v-for="d in dayRow"
                         class="m-simple-calendar__body-cell">
                         <button type="button"
+                                :ref="buildRef(d)"
                                 class="m-simple-calendar__item"
                                 :class="{ 'm--is-selected': d.isSelected,
                                                 'm--is-today': d.isToday,
@@ -74,7 +75,7 @@
                                                 'm--is-hidden': hideDay(d.isInCurrentMonth),
                                                 'm--is-other-month': !d.isInCurrentMonth,
                                                 'm--is-highlighted': d.isHighlighted }"
-                                @click.stop="onDateSelect(d)"
+                                @click.stop="onDaySelect(d)"
                                 @mouseenter="onDateMouseEnter(d)"
                                 @mouseleave="onDateMouseLeave(d)">
                             <span class="m-simple-calendar__item__text">{{ d.day }}</span>

@@ -1,8 +1,7 @@
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import DateUtil, { DatePrecision } from '../../../utils/date-util/date-util';
-import { CalendarEvent } from '../calendar-renderer/abstract-calendar-renderer';
-import { Calendar, CalendarEvents, MAbstractCalendarState, SingleDate } from './abstract-calendar-state';
+import { MAbstractCalendarState, SingleDate } from './abstract-calendar-state';
 
 @Component
 export class MCalendarSingleDateState extends MAbstractCalendarState {
@@ -18,54 +17,26 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
 
     private currentDate: DateUtil;
 
-    private calendar: Calendar = {
-        dates: { min: new DateUtil(), current: new DateUtil(), max: new DateUtil() },
-        years: [],
-        months: [],
-        days: []
-    };
-
-    assembleCalendar(): Calendar {
-        this.calendar.dates = {
-            min: this.currentMinDate,
-            current: this.currentlyDisplayedDate,
-            max: this.currentMaxDate
-        };
-        this.calendar.years = this.years;
-        this.calendar.months = this.months;
-        this.calendar.days = this.daysOfMonth;
-        return this.calendar;
-    }
-
-    assembleCalendarEvents(): CalendarEvents {
-        return {
-            [CalendarEvent.DATE_SELECT]: this.selectDate,
-            [CalendarEvent.DATE_MOUSE_ENTER]: () => { },
-            [CalendarEvent.DATE_MOUSE_LEAVE]: () => { },
-            [CalendarEvent.MONTH_SELECT]: this.selectMonth,
-            [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth,
-            [CalendarEvent.MONTH_NEXT]: this.nextMonth,
-            [CalendarEvent.YEAR_SELECT]: this.selectYear,
-            [CalendarEvent.YEAR_PREVIOUS]: this.previousYear,
-            [CalendarEvent.YEAR_NEXT]: this.nextYear
-        };
+    @Watch('value')
+    refreshValue(): void {
+        super.refreshValue();
     }
 
     created(): void {
-        this.initDates();
+        super.created();
     }
 
-    @Watch('value')
-    refreshValue(): void {
-        this.initDates();
+    render(): any {
+        return super.render();
     }
 
-    selectDate(selectedDate: any): void {
-        if (!selectedDate.isDisabled) {
-            const newDate: DateUtil = new DateUtil(selectedDate.year, selectedDate.month, selectedDate.day);
+    selectDay(selectedDay: any): void {
+        super.selectDay(selectedDay);
+        if (!selectedDay.isDisabled) {
+            const newDate: DateUtil = this.selectedDayToDate(selectedDay);
             this.currentDate = newDate;
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
-            this.$emit('input', this.currentDate.toISO().split('T')[0]);
+            this.$emit('input', this.currentDate.toString().split('T')[0]);
         }
     }
 
@@ -102,7 +73,7 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
     }
 
     protected isDayDisabled(date: DateUtil): boolean {
-        return date.isBefore(this.currentMinDate, DatePrecision.DAY) || date.isAfter(this.currentMaxDate, DatePrecision.DAY);
+        return !date.isBetween(this.currentMinDate, this.currentMaxDate, DatePrecision.DAY);
     }
 
     protected isDayToday(date: DateUtil): boolean {
@@ -110,7 +81,7 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
     }
 
     protected isDaySelected(date: DateUtil): boolean {
-        return this.currentDate && date.isSame(this.currentDate, DatePrecision.DAY);
+        return !!this.currentDate && date.isSame(this.currentDate, DatePrecision.DAY);
     }
 
     protected isInCurrentMonth(date: DateUtil): boolean {

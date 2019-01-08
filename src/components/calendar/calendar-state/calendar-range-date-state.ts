@@ -1,7 +1,7 @@
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import DateUtil, { DatePrecision } from '../../../utils/date-util/date-util';
 import { CalendarEvent } from '../calendar-renderer/abstract-calendar-renderer';
-import { Calendar, CalendarEvents, MAbstractCalendarState, RangeDate } from './abstract-calendar-state';
+import { CalendarEvents, DayState, MAbstractCalendarState, RangeDate } from './abstract-calendar-state';
 
 enum DateRangePosition {
     BEGIN = 'begin',
@@ -23,61 +23,42 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
 
     private currentDateHiglighted: DateUtil = new DateUtil();
 
-    private calendar: Calendar = {
-        dates: { min: new DateUtil(), current: new DateUtil(), max: new DateUtil() },
-        years: [],
-        months: [],
-        days: []
-    };
-
     @Watch('value')
     refreshValue(): void {
-        this.initDates();
+        super.refreshValue();
     }
 
-    assembleCalendar(): Calendar {
-        this.calendar.dates = {
-            min: this.currentMinDate,
-            current: this.currentlyDisplayedDate,
-            max: this.currentMaxDate
-        };
-        this.calendar.years = this.years;
-        this.calendar.months = this.months;
-        this.calendar.days = this.daysOfMonth;
-        return this.calendar;
+    created(): void {
+        super.created();
     }
 
-    assembleCalendarEvents(): CalendarEvents {
-        return {
-            [CalendarEvent.DATE_SELECT]: this.selectDate,
-            [CalendarEvent.DATE_MOUSE_ENTER]: this.highlightDate,
-            [CalendarEvent.DATE_MOUSE_LEAVE]: () => { },
-            [CalendarEvent.MONTH_SELECT]: this.selectMonth,
-            [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth,
-            [CalendarEvent.MONTH_NEXT]: this.nextMonth,
-            [CalendarEvent.YEAR_SELECT]: this.selectYear,
-            [CalendarEvent.YEAR_PREVIOUS]: this.previousYear,
-            [CalendarEvent.YEAR_NEXT]: this.nextYear
-        };
+    render(): any {
+        return super.render();
     }
 
-    selectDate(selectedDate: any): void {
-        if (!selectedDate.isDisabled) {
-            const newDate: DateUtil = new DateUtil(selectedDate.year, selectedDate.month, selectedDate.day);
+    selectDay(selectedDay: DayState): void {
+        super.selectDay(selectedDay);
+        if (!selectedDay.isDisabled) {
+            const newDate: DateUtil = this.selectedDayToDate(selectedDay);
             this.currentRange = this.updateRangeModel(this.currentRange as InnerModel, newDate);
             this.currentRange = this.reOrderRangeDates(this.currentRange);
 
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
 
             this.$emit('input', {
-                begin: this.currentRange.begin ? this.currentRange.begin.toISO().split('T')[0] : '',
-                end: this.currentRange.end ? this.currentRange.end.toISO().split('T')[0] : ''
+                begin: this.currentRange.begin ? this.currentRange.begin.toString().split('T')[0] : '',
+                end: this.currentRange.end ? this.currentRange.end.toString().split('T')[0] : ''
             });
         }
     }
 
-    highlightDate(selectedDate: any): void {
-        this.currentDateHiglighted = new DateUtil(selectedDate.year, selectedDate.month, selectedDate.day);
+    highlightDate(selectedDay: DayState): void {
+        this.currentDateHiglighted = this.selectedDayToDate(selectedDay);
+    }
+
+    protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
+        events[CalendarEvent.DATE_MOUSE_ENTER] = this.highlightDate;
+        return events;
     }
 
     protected initCurrentDate(): void {

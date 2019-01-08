@@ -1,10 +1,10 @@
 import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils';
-import { Calendar } from '../calendar-state/abstract-calendar-state';
+import { Calendar, DayState, MonthState, YearState } from '../calendar-state/abstract-calendar-state';
 
 
 export enum CalendarEvent {
-    DATE_SELECT = 'date-select',
+    DAY_SELECT = 'day-select',
     DATE_MOUSE_ENTER = 'date-mouse-enter',
     DATE_MOUSE_LEAVE = 'date-mouse-leave',
     MONTH_SELECT = 'month-select',
@@ -17,23 +17,22 @@ export enum CalendarEvent {
 
 export abstract class MAbstractCalendarRenderer extends ModulVue {
     @Prop({ required: true })
-
     calendar: Calendar;
 
-    onDateSelect(event: Event): void {
-        this.$emit(CalendarEvent.DATE_SELECT, event);
+    onDaySelect(day: DayState): void {
+        this.$emit(CalendarEvent.DAY_SELECT, day);
     }
 
-    onDateMouseEnter(event: Event): void {
-        this.$emit(CalendarEvent.DATE_MOUSE_ENTER, event);
+    onDateMouseEnter(day: DayState): void {
+        this.$emit(CalendarEvent.DATE_MOUSE_ENTER, day);
     }
 
-    onDateMouseLeave(event: Event): void {
-        this.$emit(CalendarEvent.DATE_MOUSE_LEAVE, event);
+    onDateMouseLeave(day: DayState): void {
+        this.$emit(CalendarEvent.DATE_MOUSE_LEAVE, day);
     }
 
-    onMonthSelect(event: Event): void {
-        this.$emit(CalendarEvent.MONTH_SELECT, event);
+    onMonthSelect(month: MonthState): void {
+        this.$emit(CalendarEvent.MONTH_SELECT, month);
     }
 
     onMonthNext(event: Event): void {
@@ -44,8 +43,8 @@ export abstract class MAbstractCalendarRenderer extends ModulVue {
         this.$emit(CalendarEvent.MONTH_PREVIOUS, event);
     }
 
-    onYearSelect(event: Event): void {
-        this.$emit(CalendarEvent.YEAR_SELECT, event);
+    onYearSelect(year: YearState): void {
+        this.$emit(CalendarEvent.YEAR_SELECT, year);
     }
 
     onYearNext(event: Event): void {

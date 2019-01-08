@@ -1,4 +1,4 @@
-import { Component, Prop } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils';
 import DateUtil, { DatePrecision } from '../../../utils/date-util/date-util';
 import { CalendarEvent } from '../calendar-renderer/abstract-calendar-renderer';
@@ -43,6 +43,7 @@ export interface DayState {
     isSelected: boolean;
     isInCurrentMonth: boolean;
     isHighlighted: boolean;
+    hasFocus: boolean;
 }
 
 export type SingleDate = string;
@@ -52,19 +53,18 @@ export interface RangeDate {
 }
 
 export interface CalendarEvents {
-    [CalendarEvent.DATE_SELECT]: (event: Event) => void;
-    [CalendarEvent.DATE_MOUSE_ENTER]: (event: Event) => void;
-    [CalendarEvent.DATE_MOUSE_LEAVE]: (event: Event) => void;
-    [CalendarEvent.MONTH_SELECT]: (event: Event) => void;
+    [CalendarEvent.DAY_SELECT]: (event: DayState) => void;
+    [CalendarEvent.DATE_MOUSE_ENTER]: (event: DayState) => void;
+    [CalendarEvent.DATE_MOUSE_LEAVE]: (event: DayState) => void;
+    [CalendarEvent.MONTH_SELECT]: (event: MonthState) => void;
     [CalendarEvent.MONTH_PREVIOUS]: (event: Event) => void;
     [CalendarEvent.MONTH_NEXT]: (event: Event) => void;
-    [CalendarEvent.YEAR_SELECT]: (event: Event) => void;
+    [CalendarEvent.YEAR_SELECT]: (event: YearState) => void;
     [CalendarEvent.YEAR_PREVIOUS]: (event: Event) => void;
     [CalendarEvent.YEAR_NEXT]: (event: Event) => void;
 }
 
-@Component
-export class MAbstractCalendarState extends ModulVue {
+export abstract class MAbstractCalendarState extends ModulVue {
 
     @Prop()
     minDate: string;
@@ -78,6 +78,21 @@ export class MAbstractCalendarState extends ModulVue {
     protected currentMinDate: DateUtil = new DateUtil();
     protected currentMaxDate: DateUtil = new DateUtil();
 
+    private calendar: Calendar = {
+        dates: { min: new DateUtil(), current: new DateUtil(), max: new DateUtil() },
+        years: [],
+        months: [],
+        days: []
+    };
+
+    private events: CalendarEvents;
+
+    private lastSelectedDate: DateUtil;
+
+    refreshValue(): void {
+        this.initDates();
+    }
+
     render(): any {
         return this.$scopedSlots.default!({
             calendar: this.assembleCalendar(),
@@ -89,10 +104,40 @@ export class MAbstractCalendarState extends ModulVue {
         this.initDates();
     }
 
-    assembleCalendar(): Calendar { throw new Error('Not implemented '); }
-    assembleCalendarEvents(): CalendarEvents { throw new Error('Not implemented '); }
+    assembleCalendar(): Calendar {
+        this.calendar.dates = {
+            min: this.currentMinDate,
+            current: this.currentlyDisplayedDate,
+            max: this.currentMaxDate
+        };
+        this.calendar.years = this.years;
+        this.calendar.months = this.months;
+        this.calendar.days = this.daysOfMonth;
+        return this.calendar;
+    }
 
-    selectDate(selectedDate: any): void { throw new Error('Not implemented '); }
+    assembleCalendarEvents(): CalendarEvents {
+        if (!this.events) {
+            this.events = {
+                [CalendarEvent.DAY_SELECT]: this.selectDay.bind(this),
+                [CalendarEvent.DATE_MOUSE_ENTER]: () => { },
+                [CalendarEvent.DATE_MOUSE_LEAVE]: () => { },
+                [CalendarEvent.MONTH_SELECT]: this.selectMonth.bind(this),
+                [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth.bind(this),
+                [CalendarEvent.MONTH_NEXT]: this.nextMonth.bind(this),
+                [CalendarEvent.YEAR_SELECT]: this.selectYear.bind(this),
+                [CalendarEvent.YEAR_PREVIOUS]: this.previousYear.bind(this),
+                [CalendarEvent.YEAR_NEXT]: this.nextYear.bind(this)
+            };
+
+            this.events = this.overrideCalendarEvents(this.events);
+        }
+        return this.events;
+    }
+
+    selectDay(selectedDay: DayState): void {
+        this.lastSelectedDate = this.selectedDayToDate(selectedDay);
+    }
 
     initDates(): void {
         this.initCurrentDate();
@@ -126,12 +171,13 @@ export class MAbstractCalendarState extends ModulVue {
         this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear - 1, this.currentlyDisplayedMonth, this.currentlyDisplayedDay);
     }
 
-    selectYear(year: any): void {
-        this.updateCurrentlyDisplayedDate(year, this.currentlyDisplayedMonth, this.currentlyDisplayedDay);
+    selectYear(year: YearState): void {
+        this.updateCurrentlyDisplayedDate(year.year, this.currentlyDisplayedMonth, this.currentlyDisplayedDay);
     }
 
-    selectMonth(month: any): void {
-        this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month, this.currentlyDisplayedDay);
+    selectMonth(month: MonthState): void {
+        this.$log.log(month);
+        this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month.month, this.currentlyDisplayedDay);
     }
 
     get currentlyDisplayedYear(): number {
@@ -172,10 +218,19 @@ export class MAbstractCalendarState extends ModulVue {
         return this.buildDaysList();
     }
 
-    protected initCurrentDate(): void { throw new Error('Not implemented '); }
-    protected initCurrentlyDisplayedDate(): void { throw new Error('Not implemented '); }
 
-    protected updateCurrentlyDisplayedDate(year: number, month: number, day: number): void { throw new Error('Not implemented '); }
+    protected abstract initCurrentDate(): void;
+    protected abstract initCurrentlyDisplayedDate(): void;
+
+    protected abstract updateCurrentlyDisplayedDate(year: number, month: number, day: number): void;
+
+    protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
+        return events;
+    }
+
+    protected selectedDayToDate(selectedDay: DayState): DateUtil {
+        return new DateUtil(selectedDay.year, selectedDay.month, selectedDay.day);
+    }
 
     protected isDayDisabled(date: DateUtil): boolean {
         return date.isBefore(this.currentMinDate, DatePrecision.DAY) || date.isAfter(this.currentMaxDate, DatePrecision.DAY);
@@ -197,6 +252,10 @@ export class MAbstractCalendarState extends ModulVue {
         return false;
     }
 
+    protected hasFocus(date: DateUtil): boolean {
+        return this.lastSelectedDate && date.isSame(this.lastSelectedDate);
+    }
+
     private buildDaysList(): DayState[] {
         const startDate: DateUtil = this.calculateStartDate(this.currentlyDisplayedDate);
         const endDate: DateUtil = this.calculateEndDate(this.currentlyDisplayedDate);
@@ -214,7 +273,8 @@ export class MAbstractCalendarState extends ModulVue {
                 isToday: this.isDayToday(date),
                 isSelected: this.isDaySelected(date),
                 isInCurrentMonth: this.isInCurrentMonth(date),
-                isHighlighted: this.isHighlighted(date)
+                isHighlighted: this.isHighlighted(date),
+                hasFocus: this.hasFocus(date)
             });
         }
         return days;
