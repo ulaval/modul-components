@@ -9,9 +9,9 @@ function ajouterBillet(commitMsg, billet) {
     let auMoinsUnBillet = utils.billetRegex.exec(commitMsg) != null;
 
     if (auMoinsUnBillet) {
-        commitMsg = `${billet.toUpperCase()}, ${commitMsg}`;
+        commitMsg = `${billet}, ${commitMsg}`;
     } else {
-        commitMsg = `${billet.toUpperCase()} - ${commitMsg}`;
+        commitMsg = `${billet} - ${commitMsg}`;
     }
 
     modifierCommitMsg(commitMsg);
@@ -29,7 +29,7 @@ utils.getBranchname((err, stdout, stderr) => {
         const billetDeBrancheDejaDansCommitMsg = billetRegex.test(commitMsg);
 
         if (!billetDeBrancheDejaDansCommitMsg) {
-            ajouterBillet(commitMsg, numBilletDansBranche[0]);
+            ajouterBillet(commitMsg, numBilletDansBranche[0].toUpperCase());
         } else {
             console.log('Le message du commit ne nécessite pas de modification.');
         }
