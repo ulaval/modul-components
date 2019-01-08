@@ -96,7 +96,7 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
 
     id: string = `m-simple-calendar-${uuid.generate()}`;
 
-    private now: Date = new Date();
+    private now: DateUtil = new DateUtil();
     private currentPickerMode: PickerMode = this.initialPickerMode;
 
     onMonthClick(): void {
@@ -108,55 +108,42 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
     }
 
     onYearSelect(event: Event): void {
-        this.currentPickerMode = PickerMode.MONTH;
         super.onYearSelect(event);
+        this.currentPickerMode = PickerMode.MONTH;
     }
 
     onMonthSelect(event: Event): void {
-        this.currentPickerMode = PickerMode.DAY;
         super.onMonthSelect(event);
+        this.currentPickerMode = PickerMode.DAY;
     }
 
     hideDay(isInCurrentMonth: boolean): boolean {
         return !isInCurrentMonth && !this.showMonthBeforeAfter;
     }
 
-
     get currentlyDisplayedYear(): number {
         const currentYear: YearState | undefined = this.calendar.years.find((year: YearState) => year.isCurrent);
-        if (currentYear) {
-            return currentYear.year;
-        }
-        return this.now.getFullYear();
+        return (currentYear) ? currentYear.year : this.now.fullYear();
     }
 
     get currentlyDisplayedMonth(): number {
         const currentMonth: MonthState | undefined = this.calendar.months.find((month: MonthState) => month.isCurrent);
-        if (currentMonth) {
-            return currentMonth.month;
-        }
-        return this.now.getMonth();
+        return (currentMonth) ? currentMonth.month : this.now.month();
     }
 
 
     get currentYear(): number {
         const currentYear: YearState | undefined = this.calendar.years.find((year: YearState) => year.isCurrent);
-        if (currentYear) {
-            return currentYear.year;
-        }
-        return this.now.getFullYear();
+        return (currentYear) ? currentYear.year : this.now.fullYear();
     }
 
     get currentMonth(): number {
         const currentMonth: MonthState | undefined = this.calendar.months.find((month: MonthState) => month.isCurrent);
-        if (currentMonth) {
-            return currentMonth.month;
-        }
-        return this.now.getMonth();
+        return (currentMonth) ? currentMonth.month : this.now.month();
     }
 
     get currentlyDisplayedDay(): number {
-        return this.now.getDate();
+        return this.now.day();
     }
 
     get currentlyDisplayedMonthName(): string {

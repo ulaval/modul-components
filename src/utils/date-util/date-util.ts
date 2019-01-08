@@ -5,6 +5,12 @@ export enum DatePrecision {
     YEAR = 'year'
 }
 
+enum DateComparison {
+    IS_BEFORE = -1,
+    IS_EQUAL = 0,
+    IS_AFTER = 1
+}
+
 export default class DateUtil {
 
     private innerDate: Date;
@@ -76,11 +82,11 @@ export default class DateUtil {
         const other: number = this.toTime(date.innerDate, DatePrecision.DAY);
 
         if (current < other) {
-            return -1;
+            return DateComparison.IS_BEFORE;
         } else if (current > other) {
-            return 1;
+            return DateComparison.IS_AFTER;
         }
-        return 0;
+        return DateComparison.IS_EQUAL;
     }
 
     public toISO(): string {
@@ -155,9 +161,11 @@ export default class DateUtil {
             case DatePrecision.MONTH:
                 toTimeDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), 1);
                 break;
-            default: // DatePrecision.DAY
+            case DatePrecision.DAY:
                 toTimeDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
                 break;
+            default:
+                throw new Error('DateUtil: Unsupported DatePrecision');
         }
         return toTimeDate.getTime();
     }
