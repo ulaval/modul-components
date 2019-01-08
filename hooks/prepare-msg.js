@@ -25,8 +25,8 @@ utils.getBranchname((err, stdout, stderr) => {
         console.log('Le nom de votre branche ne permet pas de préparer le message du commit.');
         console.log('L\'identifiant de billet JIRA est introuvable.');
     } else {
-        const billetRegex = new RegExp(numBilletDansBranche[0]);
-        const billetDeBrancheDejaDansCommitMsg = billetRegex.test(commitMsg);
+        const billetRegex = new RegExp(numBilletDansBranche[0].toUpperCase());
+        const billetDeBrancheDejaDansCommitMsg = billetRegex.test(commitMsg.toUpperCase());
 
         if (!billetDeBrancheDejaDansCommitMsg) {
             ajouterBillet(commitMsg, numBilletDansBranche[0].toUpperCase());

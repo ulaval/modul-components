@@ -10,7 +10,7 @@ if (!commitMessage) {
 utils.getBranchname((err, stdout, stderr) => {
     const numBilletDansBranche = utils.billetRegex.exec(stdout);
 
-    if (numBilletDansBranche != null && !new RegExp(numBilletDansBranche[0].toUpperCase()).test(commitMessage)) {
+    if (numBilletDansBranche != null && !new RegExp(numBilletDansBranche[0].toUpperCase()).test(commitMessage.toUpperCase())) {
         console.log(`Le message du commit ne contient pas le numéro du billet Jira de la branche courante : ` + numBilletDansBranche[0]);
         process.exit(1);
     }
