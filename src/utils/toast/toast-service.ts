@@ -32,12 +32,15 @@ export class ToastService {
         }
     }
 
-    public clear(): void {
+    public async clear(): Promise<void> {
         if (this.activeToast) {
             this.activeToast.open = false;
         }
         this.toasts = [];
         this.activeToast = undefined;
+        return new Promise(resolve => {
+            setTimeout(() => resolve(), TIME_BEFORE_ANIMATION_IS_OVER);
+        }).then(() => { });
     }
 
     private createToast(params: ToastParams): MToast {

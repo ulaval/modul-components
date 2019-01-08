@@ -36,6 +36,14 @@ export class MToastServiceSandbox extends ModulVue {
         });
     }
 
+    public successToast(): void {
+        this.$toast.show({
+            text: 'success toast',
+            actionLabel: 'UNDO',
+            action: this.action
+        });
+    }
+
     public clear(): void {
         this.$toast.clear();
     }
