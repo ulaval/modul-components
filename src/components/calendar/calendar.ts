@@ -43,7 +43,12 @@ export class MCalendar extends ModulVue {
 
     @Watch('value')
     refreshValue(): void {
+        this.validateInputModel();
         this.innerValue = this.value;
+    }
+
+    created(): void {
+        this.validateInputModel();
     }
 
     onInput(): void {
@@ -56,6 +61,21 @@ export class MCalendar extends ModulVue {
 
     get isDateRange(): boolean {
         return this.mode === CalendarMode.DATE_RANGE;
+    }
+
+    private validateInputModel(): void {
+        switch (this.mode) {
+            case CalendarMode.SINGLE_DATE:
+                if (Object.keys(this.value).length > 0 || typeof this.value !== 'string') {
+                    throw new Error(`In '${CalendarMode.SINGLE_DATE}' mode, the model type should be a 'string'`);
+                }
+                break;
+            case CalendarMode.DATE_RANGE:
+                if (typeof this.value !== 'object') {
+                    throw new Error(`In '${CalendarMode.DATE_RANGE}' mode, the model type should be an 'object'`);
+                }
+                break;
+        }
     }
 }
 

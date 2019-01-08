@@ -9,7 +9,7 @@ import WithRender from './calendar.sandbox.html';
 @Component
 export class MCalendarSandbox extends Vue {
     date: string = '';
-    dateRange: RangeDate = {};
+    dateRange: RangeDate = { begin: '2019-01-15' };
 }
 
 const CalendarSandboxPlugin: PluginObject<any> = {
