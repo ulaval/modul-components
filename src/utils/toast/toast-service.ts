@@ -38,9 +38,9 @@ export class ToastService {
         }
         this.toasts = [];
         this.activeToast = undefined;
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             setTimeout(() => resolve(), TIME_BEFORE_ANIMATION_IS_OVER);
-        }).then(() => { });
+        });
     }
 
     private createToast(params: ToastParams): MToast {
