@@ -166,8 +166,7 @@
     "husky": {
         "hooks": {
             "commit-msg": "node hooks/commit-msg.js",
-            "prepare-commit-msg": "node hooks/branch-name.js && node hooks/prepare-msg.js",
-            "pre-push": "node hooks/branch-name.js"
+            "prepare-commit-msg": "node hooks/prepare-msg.js"
         }
     }
 }
