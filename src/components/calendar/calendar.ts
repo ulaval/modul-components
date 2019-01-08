@@ -66,7 +66,7 @@ export class MCalendar extends ModulVue {
     private validateInputModel(): void {
         switch (this.mode) {
             case CalendarMode.SINGLE_DATE:
-                if (Object.keys(this.value).length > 0 || typeof this.value !== 'string') {
+                if (typeof this.value !== 'string') {
                     throw new Error(`In '${CalendarMode.SINGLE_DATE}' mode, the model type should be a 'string'`);
                 }
                 break;
