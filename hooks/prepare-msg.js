@@ -9,9 +9,9 @@ function ajouterBillet(commitMsg, billet) {
     let auMoinsUnBillet = utils.billetRegex.exec(commitMsg) != null;
 
     if (auMoinsUnBillet) {
-        commitMsg = `${billet}, ${commitMsg}`;
+        commitMsg = `${billet.toUpperCase()}, ${commitMsg}`;
     } else {
-        commitMsg = `${billet} - ${commitMsg}`;
+        commitMsg = `${billet.toUpperCase()} - ${commitMsg}`;
     }
 
     modifierCommitMsg(commitMsg);
