@@ -146,11 +146,6 @@
         }
     }
 
-    &__label,
-    &__body__adjust-width-auto {
-        padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
-    }
-
     &__label {
         position: relative;
         z-index: 1;
@@ -182,8 +177,7 @@
         color: $m-color--accent;
         font-size: inherit;
         font-weight: $m-font-weight--black;
-        margin-left: 2px;
-        float: right;
+        vertical-align: baseline;
     }
 
     &__body {
@@ -370,3 +364,8 @@
     }
 }
 
+// reserve space for search icon
+.m--is-type-search .m-input-style__label,
+.m--is-type-search .m-input-style__body__adjust-width-auto {
+    padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
+}
