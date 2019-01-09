@@ -1,0 +1,56 @@
+// ======================================================================
+//  header (list, table)
+// ======================================================================
+.m-u--header {
+    font-size: $m-font-size--l;
+    font-weight: $m-font-weight--bold;
+    padding: $m-padding;
+    background-color: $m-color--grey-lighter;
+    position: relative;
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: $m-font-size--l;
+        font-weight: $m-font-weight--bold;
+    }
+
+    &.m-u--has-icon {
+        padding-right: $m-touch-size;
+
+        > :last-child {
+            width: $m-touch-size;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
+    }
+
+    &:not(.m-u--has-icon) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media screen and (max-width: $m-mq--max--s) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    & + ul {
+        margin-top: 0;
+    }
+
+    & + .m-u--table {
+        th {
+            padding-top: $m-padding;
+        }
+    }
+}

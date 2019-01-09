@@ -1,180 +1,10 @@
-@import
-    'bullet-list',
-    'button',
-    'link',
-    'table';
-
 .m-u--app-body {
-    .m-u {
-        // ======================================================================
-        //  border
-        // ======================================================================
-        &--border {
-            border: $m-border-width solid;
-
-            &--l {
-                border: $m-border-width--l solid;
-            }
-
-            &--s {
-                border: $m-border-width--s solid;
-            }
-
-            &-top {
-                border-top: $m-border-width solid;
-
-                &--l {
-                    border-top: $m-border-width--l solid;
-                }
-
-                &--s {
-                    border-top: $m-border-width--s solid;
-                }
-            }
-
-            &-right {
-                border-right: $m-border-width solid;
-
-                &--l {
-                    border-right: $m-border-width--l solid;
-                }
-
-                &--s {
-                    border-right: $m-border-width--s solid;
-                }
-            }
-
-            &-bottom {
-                border-bottom: $m-border-width solid;
-
-                &--l {
-                    border-bottom: $m-border-width--l solid;
-                }
-
-                &--s {
-                    border-bottom: $m-border-width--s solid;
-                }
-            }
-
-            &-left {
-                border-left: $m-border-width solid;
-
-                &--l {
-                    border-left: $m-border-width--l solid;
-                }
-
-                &--s {
-                    border-left: $m-border-width--s solid;
-                }
-            }
-
-            &-top-bottom {
-                border-top: $m-border-width solid;
-                border-bottom: $m-border-width solid;
-
-                &--l {
-                    border-top: $m-border-width--l solid;
-                    border-bottom: $m-border-width--l solid;
-                }
-
-                &--s {
-                    border-top: $m-border-width--s solid;
-                    border-bottom: $m-border-width--s solid;
-                }
-            }
-
-            &-right-left {
-                border-right: $m-border-width solid;
-                border-left: $m-border-width solid;
-
-                &--l {
-                    border-right: $m-border-width--l solid;
-                    border-left: $m-border-width--l solid;
-                }
-
-                &--s {
-                    border-right: $m-border-width--s solid;
-                    border-left: $m-border-width--s solid;
-                }
-            }
-        }
-
-        &--no-border {
-            border: none;
-
-            &-top {
-                border-top: none;
-            }
-
-            &-right {
-                border-right: none;
-            }
-
-            &-bottom {
-                border-bottom: none;
-            }
-
-            &-left {
-                border-left: none;
-            }
-
-            &-top-bottom {
-                border-top: none;
-                border-bottom: none;
-            }
-
-            &-right-left {
-                border-right: none;
-                border-left: none;
-            }
-        }
-        // ======================================================================
-        //  box-shadow
-        // ======================================================================
-        &--box-shadow {
-            box-shadow: $m-box-shadow;
-
-            &--l {
-                box-shadow: $m-box-shadow--l;
-            }
-
-            &--s {
-                box-shadow: $m-box-shadow--s;
-            }
-        }
-
-        &--no-box-shadow {
-            box-shadow: none;
-        }
-    }
-
-    // ======================================================================
-    //  Overflow
-    // ======================================================================
-    .m-u--overflow {
-        &,
-        &--auto,
-        &--scroll,
-        &--visible {
-            @include m-scrollbar();
-        }
-
-        &--auto {
-            overflow: auto;
-        }
-
-        &--scroll {
-            overflow: scroll;
-        }
-
-        &--visible {
-            overflow: visible;
-        }
-
-        &--hidden {
-            overflow: hidden;
-        }
-    }
+    @import
+        'button',
+        'header',
+        'typography',
+        'layout',
+        'link';
 
     // ======================================================================
     //  Visually hidden
@@ -184,68 +14,25 @@
     }
 
     // ======================================================================
+    //  list
+    // ======================================================================
+    .m-u--bullet-list {
+        @include m-bullet-list();
+    }
+
+    // ======================================================================
+    //  table
+    // ======================================================================
+    .m-u--table {
+        @include m-table();
+    }
+
+    // ======================================================================
     //  formulaire
     // ======================================================================
     .m-u--label {
         font-size: $m-font-size;
         font-weight: $m-font-weight--bold;
-    }
-
-    // ======================================================================
-    //  header (list, table)
-    // ======================================================================
-    .m-u--header {
-        font-size: $m-font-size--l;
-        font-weight: $m-font-weight--bold;
-        padding: $m-padding;
-        background-color: $m-color--grey-lighter;
-        position: relative;
-
-        p,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin-top: 0;
-            margin-bottom: 0;
-            font-size: $m-font-size--l;
-            font-weight: $m-font-weight--bold;
-        }
-
-        &.m-u--has-icon {
-            padding-right: $m-touch-size;
-
-            > :last-child {
-                width: $m-touch-size;
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                right: 0;
-            }
-        }
-
-        &:not(.m-u--has-icon) {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            @media screen and (max-width: $m-mq--max--s) {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        & + ul {
-            margin-top: 0;
-        }
-
-        & + .m-u--table {
-            th {
-                padding-top: $m-padding;
-            }
-        }
     }
 
     // ======================================================================

@@ -1,0 +1,60 @@
+.m-u {
+    // ======================================================================
+    //  margin, padding
+    // ======================================================================
+
+    @include m-spacing-factory();
+
+    // ======================================================================
+    //  Display
+    // ======================================================================
+    &--display {
+        &--block {
+            display: block;
+        }
+
+        &--flex {
+            display: flex;
+        }
+
+        &--inline {
+            display: inline;
+
+            &-block {
+                display: inline-block;
+            }
+
+            &-flex {
+                display: inline-flex;
+            }
+        }
+    }
+    // ======================================================================
+    //  Max and min width
+    // ======================================================================
+    &--max-width {
+        max-width: $m-max-width;
+
+        &--xs {
+            max-width: $m-max-width--xs;
+        }
+
+        &--s {
+            max-width: $m-max-width--s;
+        }
+
+        &--l {
+            max-width: $m-max-width--l;
+        }
+
+        &--text {
+            max-width: $m-max-width--text;
+            display: flex !important;
+        }
+    }
+
+    &--min-width {
+        min-width: $m-min-width;
+    }
+}
+

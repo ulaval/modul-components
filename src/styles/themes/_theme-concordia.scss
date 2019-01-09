@@ -1,7 +1,0 @@
-$m-color--primary: #922338;
-$m-color--secondary: #0072a8;
-$m-color--text: #fff;
-
-@import '_theme-components';
-
-@include my-comp-theme($m-color--primary, $m-color--secondary, $m-color--text);
