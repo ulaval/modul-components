@@ -5,6 +5,12 @@ function isFunction(functionToCheck) {
     return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
 }
 
+// Fonctionne avec les noms de branche suivantes
+/*
+feature/MODUL-9999
+bugfix/MODUL-9999
+MODUL-9999
+*/
 const billet = '(MODUL|modul)-[0-9]+';
 
 module.exports = {
