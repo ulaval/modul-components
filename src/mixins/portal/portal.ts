@@ -115,7 +115,10 @@ export class Portal extends ModulVue implements PortalMixin {
         return this.internalTrigger;
     }
 
-    public tryClose(): void {
+    public async tryClose(): Promise<void> {
+        if (this.$toast) {
+            await this.$toast.clear();
+        }
         if (this.$modul.peekElement() === this.stackId) {
             if (this.$listeners && this.$listeners.beforeClose) {
                 this.$emit('beforeClose', (close: boolean) => {

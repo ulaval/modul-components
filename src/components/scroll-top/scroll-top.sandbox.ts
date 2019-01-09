@@ -1,8 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { SCROLL_TOP_NAME } from '../component-names';
-import WithRender from './scroll-top.sandbox.html';
+import WithRender from './scroll-top.sandbox.html?style=./scroll-top.sandbox.scss';
+
 
 @WithRender
 @Component
