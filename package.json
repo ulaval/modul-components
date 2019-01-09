@@ -165,8 +165,8 @@
     "license": "Apache-2.0",
     "husky": {
         "hooks": {
-            "commit-msg": "node hooks/commit-msg.js",
-            "prepare-commit-msg": "node hooks/prepare-msg.js"
+            "commit-msg": "node conf/hooks/commit-msg.js",
+            "prepare-commit-msg": "node conf/hooks/prepare-msg.js"
         }
     }
 }
