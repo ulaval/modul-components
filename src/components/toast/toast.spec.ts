@@ -3,8 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
-import { MMessageState } from '../message/message';
-import ToastPlugin, { MToast, MToastPosition } from './toast';
+import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -48,15 +47,15 @@ describe(`MToast`, () => {
             });
 
             it(`Should be in Confirmation state`, () => {
-                expect(wrapper.vm.state).toEqual(MMessageState.Confirmation);
+                expect(wrapper.vm.state).toEqual(MToastState.Confirmation);
             });
 
             it(`Should be in the bottom-right position`, () => {
                 expect(wrapper.vm.position).toEqual(MToastPosition.BottomRight);
             });
 
-            it(`Should have a timeout set to 0`, () => {
-                expect(wrapper.vm.timeout).toEqual(0);
+            it(`Should have a timeout set to none`, () => {
+                expect(wrapper.vm.timeout).toEqual('none');
             });
 
             it(`Should have an icon`, () => {
@@ -110,7 +109,7 @@ describe(`MToast`, () => {
             it(`Should appear and then disappear`, () => {
                 initializeWrapper();
                 wrapper.setProps({
-                    timeout: 5000
+                    timeout: 'short'
                 });
                 jest.runOnlyPendingTimers(); // wait for component to be instancialized
 
