@@ -1,22 +1,15 @@
-<div class="m-scroll-top" :class="{'m--is-relative': position === 'relative' }" :aria-hidden="!defaultTargetElVisible">
-    <template v-if="defaultTargetElVisible">
-        <div class="m-scroll-top__body">
-            <slot></slot>
-        </div>
-        <div class="m-scroll-top__footer">
-            <div class="m-scroll-top__footer__content" v-if="hasFooterSlot">
-                <slot name="footer"></slot>
-            </div>
-            <div :id="scrollTopId" class="m-scroll-top__footer__button"></div>
-        </div>
-    </template>
-    <portal :target-el="'#'+ getScrollTopId()" v-if="visible">
-        <transition name="m--is">
-            <button ref="scrollButton" @click="onClick" class="m-scroll-top__button" :class="{'m--is-relative': position === 'relative' }"
+<div class="m-scroll-top"
+     :class="{'m--is-position-fixed': isPositionFixed , 'm--is-position-relative': !isPositionFixed}">
+    <transition name="m--is">
+        <button ref="scrollButton"
+                @click="onClick"
+                class="m-scroll-top__button"
+                :class="{'m--is-position-fixed': isPositionFixed}"
                 v-if="show">
-                <m-icon name="m-svg__chevron--right" size="16px"></m-icon>
-                <m-i18n class="m-scroll-top__hidden" k="m-scroll-top:top"></m-i18n>
-            </button>
-        </transition>
-    </portal>
+            <m-icon name="m-svg__chevron--right"
+                    size="16px"></m-icon>
+            <m-i18n class="m-scroll-top__hidden"
+                    k="m-scroll-top:top"></m-i18n>
+        </button>
+    </transition>
 </div>
