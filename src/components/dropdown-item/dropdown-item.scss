@@ -13,12 +13,12 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
     font-size: $m-font-size;
     text-decoration: none;
     outline: none;
-    line-height: 1.25;
 
     @include m-word-wrap();
 
     @media (min-width: $m-mq--min--s) {
         padding: $m-padding $m-padding--s;
+        line-height: 20px;
 
         &:not(.m--is-disabled) {
             &:not(.m--is-inactive):not(.m--is-readonly) {
