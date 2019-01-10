@@ -23,24 +23,24 @@
                         <slot></slot>
                     </div>
                     <footer class="m-dialog__footer">
-                        <slot name="footer"></slot>
-                        <nav class="m-dialog__footer__nav"
-                             v-if="!hasFooterSlot">
-                            <m-button @click="onOk()">
-                                <template v-if="hasOkLabel">{{ okLabel }}</template>
-                                <m-i18n v-else
-                                        k="m-dialog:ok"></m-i18n>
-                                <template slot="precision"
-                                          v-if="hasOkPrecision">{{ okPrecision }}</template>
-                            </m-button>
-                            <m-link mode="button"
-                                    @click="onCancel()"
-                                    v-if="negativeLink">
-                                <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
-                                <m-i18n v-else
-                                        k="m-dialog:cancel"></m-i18n>
-                            </m-link>
-                        </nav>
+                        <slot name="footer">
+                            <nav class="m-dialog__footer__nav">
+                                <m-button @click="onOk()">
+                                    <template v-if="hasOkLabel">{{ okLabel }}</template>
+                                    <m-i18n v-else
+                                            k="m-dialog:ok"></m-i18n>
+                                    <template slot="precision"
+                                              v-if="hasOkPrecision">{{ okPrecision }}</template>
+                                </m-button>
+                                <m-link mode="button"
+                                        @click="onCancel()"
+                                        v-if="negativeLink">
+                                    <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
+                                    <m-i18n v-else
+                                            k="m-dialog:cancel"></m-i18n>
+                                </m-link>
+                            </nav>
+                        </slot>
                     </footer>
                 </article>
             </div>
