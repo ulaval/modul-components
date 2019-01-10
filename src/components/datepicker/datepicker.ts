@@ -240,17 +240,19 @@ export class MDatepicker extends ModulVue {
     }
 
     private set open(open: boolean) {
-        this.internalOpen = open;
-        this.$nextTick(() => {
-            if (this.internalOpen) {
-                let inputEl: any = this.$refs.input;
-                inputEl.focus();
-                inputEl.setSelectionRange(0, this.formattedDate.length);
-                this.$emit('open');
-            } else {
-                this.$emit('close');
-            }
-        });
+        if (this.as<InputState>().active) {
+            this.internalOpen = open;
+            this.$nextTick(() => {
+                if (this.internalOpen) {
+                    let inputEl: any = this.$refs.input;
+                    inputEl.focus();
+                    inputEl.setSelectionRange(0, this.formattedDate.length);
+                    this.$emit('open');
+                } else {
+                    this.$emit('close');
+                }
+            });
+        }
     }
 
     private validateDate(event): void {

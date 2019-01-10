@@ -1,12 +1,16 @@
 <div>
     <h2>Default datepicker</h2>
-    <p>
-        <m-datepicker></m-datepicker>
-    </p>
+    <m-datepicker class="m-u--margint-top"></m-datepicker>
+
     <h2>Add error message on blur event</h2>
-    <p>
-        <m-datepicker @blur="addMessageError"
-                      :error-message="errorMessage">
-        </m-datepicker>
-    </p>
+    <m-datepicker class="m-u--margint-top"
+                  @blur="addMessageError"
+                  :error-message="errorMessage">
+    </m-datepicker>
+
+    <h2>Disabled</h2>
+    <m-datepicker class="m-u--margint-top"
+                  :disabled="true">
+    </m-datepicker>
+
 </div>
