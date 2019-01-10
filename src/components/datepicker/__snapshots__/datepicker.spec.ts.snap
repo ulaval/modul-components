@@ -11,7 +11,7 @@ exports[`MDatepicker should render correctly 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-datepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -31,7 +31,7 @@ exports[`MDatepicker should render correctly min/max time 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-datepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -51,7 +51,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-datepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -71,7 +71,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-datepicker__validation-message">
         <m-accordion-transition transition="true">
             <div class="m-validation-message__wrap">
                 <p class="m-validation-message__error">
@@ -99,7 +99,7 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-datepicker__validation-message">
         <m-accordion-transition transition="true">
             <div class="m-validation-message__wrap">
                 <p class="m-validation-message__valid">
@@ -130,7 +130,7 @@ exports[`MDatepicker should render correctly when waiting is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-datepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
