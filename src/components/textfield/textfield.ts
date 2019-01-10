@@ -104,6 +104,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
+    private onEnter(): void {
+        if (this.isTypeSearch) {
+            this.search();
+        }
+    }
+
     private search(): void {
         this.$emit('search');
     }
