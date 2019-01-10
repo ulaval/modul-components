@@ -1,0 +1,31 @@
+@mixin m-box-padding($topBottom: $m-spacing--xl, $rightLeft: $m-spacing--l, $topBottomMobile: $m-spacing--xl, $rightLeftMobile: $m-spacing) {
+    &:not(.m--no-padding) {
+        @media (max-width: $m-mq--max--s) {
+            padding: $topBottomMobile $rightLeftMobile;
+        }
+
+        @media (min-width: $m-mq--min--s) {
+            padding: $topBottom $rightLeft;
+        }
+    }
+}
+
+@mixin m-fixed-box-padding($topBottom: $m-spacing--xl, $rightLeft: $m-spacing--l, $topBottomMobile: $m-spacing--xl, $rightLeftMobile: $m-spacing) {
+    &:not(.m--no-padding) {
+        @media (max-width: $m-mq--max--s) {
+            padding: $topBottomMobile $rightLeftMobile 0;
+
+            > :last-child {
+                margin-bottom: $topBottomMobile;
+            }
+        }
+
+        @media (min-width: $m-mq--min--s) {
+            padding: $topBottom $rightLeft 0;
+
+            > :last-child {
+                margin-bottom: $topBottom;
+            }
+        }
+    }
+}

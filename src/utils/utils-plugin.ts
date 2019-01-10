@@ -1,7 +1,6 @@
 import { PortalPluginInstall } from 'portal-vue';
 import Vue, { PluginObject } from 'vue';
 import * as TouchPlugin from 'vue-touch';
-
 import AlertPlugin from './dialog/alert';
 import ConfirmPlugin from './dialog/confirm';
 import { WindowErrorHandler } from './errors/window-error-handler';
@@ -13,6 +12,7 @@ import MediaQueriesPlugin from './media-queries/media-queries';
 import ModulPlugin from './modul/modul';
 import ScrollToPlugin from './scroll-to/scroll-to';
 import SpritesPlugin from './svg/sprites';
+import ToastPlugin from './toast/toast-service';
 
 export interface UtilsPluginOptions {
     httpPluginOptions?: HttpPluginOptions;
@@ -47,6 +47,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(AlertPlugin);
         Vue.use(FilePlugin);
         Vue.use(ScrollToPlugin);
+        Vue.use(ToastPlugin);
     }
 };
 
