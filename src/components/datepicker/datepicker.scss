@@ -5,6 +5,12 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     display: inline-flex;
     flex-direction: column;
 
+    &.m--has-validation-message {
+        .m-datepicker__validation-message {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
     &__header,
     &__body {
         background: $m-color--white;
@@ -158,6 +164,10 @@ $m-datepicker--item-dimension: $m-touch-size !default;
                 color: $m-color--text;
             }
         }
+    }
+
+    &__validation-message {
+        transition: margin-top $m-transition-duration ease;
     }
 
     .m--is-disabled {

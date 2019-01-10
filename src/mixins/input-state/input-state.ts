@@ -31,6 +31,7 @@ export interface InputStateMixin {
     hasErrorMessage: boolean;
     hasValidMessage: boolean;
     hasHelperMessage: boolean;
+    hasValidationMessage: boolean;
 
     helperMessage: string;
     validMessage: string;
@@ -127,6 +128,10 @@ export class InputState extends ModulVue implements InputStateMixin {
 
     public get hasHelperMessage(): boolean {
         return (!!this.helperMessage || this.helperMessage === ' ') && !this.disabled && !this.waiting;
+    }
+
+    public get hasValidationMessage(): boolean {
+        return (this.hasErrorMessage || this.hasValidMessage || this.hasHelperMessage) && this.active;
     }
 
     public getInput(): HTMLElement | undefined {

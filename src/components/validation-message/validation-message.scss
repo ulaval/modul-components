@@ -7,7 +7,12 @@ $m-validation-message--color-helper: $m-color--text-light !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
+    line-height: 1.2;
+
     &__wrap {
+        display: flex;
+        flex-direction: column;
+
         &.m-accordion-enter,
         &.m-accordion-leave-to {
             p {
@@ -24,7 +29,7 @@ $m-validation-message--margin: $m-padding--xs !default;
 
     &__error,
     &__valid {
-        display: table-row;
+        display: inline-flex;
         align-items: flex-start;
 
         ~ .m-validation-message__helper {
@@ -32,12 +37,12 @@ $m-validation-message--margin: $m-padding--xs !default;
         }
 
         &__icon {
-            font-size: $m-font-size--xs;
-            margin-right: $m-padding--xs;
-            min-width: $m-font-size--xs;
             display: table-cell;
             position: relative;
             top: 1px; // Magic number
+            font-size: $m-font-size--s;
+            margin-right: $m-padding--xs;
+            min-width: $m-font-size--s;
         }
     }
 
@@ -54,7 +59,8 @@ $m-validation-message--margin: $m-padding--xs !default;
     }
 
     &__text {
+        position: relative;
+        top: 2px; // Magic number: align icon with text
         flex: 1 1 auto;
-        display: table-cell;
     }
 }

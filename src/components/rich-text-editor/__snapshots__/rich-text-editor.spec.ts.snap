@@ -5,8 +5,6 @@ exports[`MRichTextEditor should render correctly 1`] = `
     <m-input-style label-for="mrich-text-uuid" empty="true" border-top="true" tag-style="default">
         <froala config="[object Object]" value="" custom-translations="[object Object]"></froala>
     </m-input-style>
-    <div class="m-textfield__validation">
-        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
-    </div>
+    <m-validation-message class="m-rich-text__validation-message"></m-validation-message>
 </div>
 `;

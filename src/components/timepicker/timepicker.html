@@ -1,4 +1,6 @@
-<div class="m-timepicker">
+<div class="m-timepicker"
+     :class="{ 'm--is-disabled': isDisabled,
+               'm--has-validation-message': hasValidationMessage }">
     <m-input-style :label="label"
                    :label-for="id"
                    :disabled="isDisabled"
@@ -37,7 +39,8 @@
                     v-if="open"></m-i18n>
         </m-icon-button>
     </m-input-style>
-    <m-validation-message :disabled="isDisabled"
+    <m-validation-message class="m-timepicker__validation-message"
+                          :disabled="isDisabled"
                           :waiting="isWaiting"
                           :error="timeError"
                           :error-message="timeErrorMessage"

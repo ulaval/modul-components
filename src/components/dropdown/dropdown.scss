@@ -10,6 +10,12 @@ $m-dropdown--margin: $m-padding--xs !default;
     display: inline-flex;
     flex-direction: column;
 
+    &.m--has-validation-message {
+        .m-dropdown__validation-message {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
     &__header {
         &__label {
             margin: 0;
@@ -77,6 +83,10 @@ $m-dropdown--margin: $m-padding--xs !default;
                 transform: rotate(-180deg);
             }
         }
+    }
+
+    &__validation-message {
+        transition: margin-top $m-transition-duration ease;
     }
 
     .m-input-style {
