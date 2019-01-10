@@ -180,11 +180,13 @@ export class MRadio extends ModulVue {
         return this.isGroup() && this.parentGroup instanceof BaseButtonGroup;
     }
 
-    private onFocus(): void {
+    @Emit('focus')
+    private onFocus(event: Event): void {
         this.hasFocus = true;
     }
 
-    private onBlur(): void {
+    @Emit('blur')
+    private onBlur(event: Event): void {
         this.hasFocus = false;
     }
 
