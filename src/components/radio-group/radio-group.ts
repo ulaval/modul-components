@@ -48,6 +48,12 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     @Emit('change')
     onChange(value: any): void { }
 
+    @Emit('focus')
+    onFocus(event: Event): void { }
+
+    @Emit('blur')
+    onBlur(event: Event): void { }
+
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
     }
