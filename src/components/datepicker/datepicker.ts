@@ -15,7 +15,6 @@ import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 
-
 const VIEW_DAY: string = 'day';
 const VIEW_MONTH: string = 'month';
 const VIEW_YEAR: string = 'year';

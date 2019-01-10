@@ -4,7 +4,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import { InputState } from '../input-state/input-state';
 import { MediaQueries } from '../media-queries/media-queries';
 
-
 @Component({
     mixins: [
         InputState,
