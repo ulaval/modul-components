@@ -109,27 +109,35 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (value && value !== this.internalOpen) {
             this.focusedIndex = -1;
         }
-        this.internalOpen = value;
-        this.dirty = false;
-        this.$nextTick(() => {
-            let inputEl: any = this.$refs.input;
-            if (this.internalOpen) {
-                inputEl.focus();
-                if (this.filterable) {
-                    inputEl.setSelectionRange(0, this.selectedText.length);
-                }
-                this.focusSelected();
-                this.scrollToFocused();
+        if (this.as<InputState>().active) {
+            this.internalOpen = value;
 
-                this.$emit('open');
-                // Reset the height of the list before calculating its height
-                // (this code is executed before the method calculateFilterableListeHeight())
-                this.itemsHeightStyle = undefined;
-            } else {
-                this.internalFilter = '';
-                this.$emit('close');
-            }
-        });
+            this.dirty = false;
+            this.$nextTick(() => {
+                if (this.internalOpen) {
+                    let inputEl: any = this.$refs.input;
+                    setTimeout(() => { // Need timout to set focus on input
+                        inputEl.focus();
+                    });
+                    if (this.filterable) {
+                        inputEl.setSelectionRange(0, this.selectedText.length);
+                    }
+
+                    this.focusSelected();
+                    this.scrollToFocused();
+
+                    this.$emit('open');
+                    // Reset the height of the list before calculating its height
+                    // (this code is executed before the method calculateFilterableListeHeight())
+                    this.itemsHeightStyle = undefined;
+
+                } else {
+                    this.internalFilter = '';
+                    this.$emit('close');
+                    this.$emit('blur');
+                }
+            });
+        }
     }
 
     private set itemsHeightStyle(value: object | number | undefined) {
