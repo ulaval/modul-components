@@ -1,8 +1,7 @@
 import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
-
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -15,6 +14,7 @@ import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './datepicker.html?style=./datepicker.scss';
+
 
 const VIEW_DAY: string = 'day';
 const VIEW_MONTH: string = 'month';
@@ -70,6 +70,9 @@ export class MDatepicker extends ModulVue {
     private mouseIsDown: boolean = false;
     private internalCalandarErrorMessage: string = '';
     private id: string = `mDatepicker-${uuid.generate()}`;
+
+    @Emit('blur')
+    public onBlur(event: Event): void { }
 
     protected created(): void {
         moment.locale([this.$i18n.currentLang(), 'en-ca']);

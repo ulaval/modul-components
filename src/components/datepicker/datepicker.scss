@@ -165,4 +165,8 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         color: $m-color--grey-light;
         cursor: not-allowed;
     }
+
+    &__validation-message {
+        margin-top: $m-margin--xs;
+    }
 }

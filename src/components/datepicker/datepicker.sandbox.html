@@ -1,13 +1,12 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
+    <h2>Default datepicker</h2>
     <p>
-        <m-datepicker><!-- Test case --></m-datepicker>
+        <m-datepicker></m-datepicker>
+    </p>
+    <h2>Add error message on blur event</h2>
+    <p>
+        <m-datepicker @blur="addMessageError"
+                      :error-message="errorMessage">
+        </m-datepicker>
     </p>
 </div>
