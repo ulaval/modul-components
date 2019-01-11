@@ -33,6 +33,7 @@ export class MInputStyle extends ModulVue {
     public cursorPointer: boolean;
 
     public $refs: {
+        root: HTMLElement,
         label: HTMLElement,
         adjustWidthAuto: HTMLElement,
         rightContent: HTMLElement
@@ -81,7 +82,7 @@ export class MInputStyle extends ModulVue {
         return this.hasDefaultSlot && !this.empty;
     }
 
-    private get labelIsUp(): boolean {
+    public get labelIsUp(): boolean {
         return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
     }
 
