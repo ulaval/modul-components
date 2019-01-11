@@ -1,12 +1,13 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import MAccordionPlugin, { AccordionGateway, AccordionGroupGateway, MAccordionSkin } from '../accordion/accordion';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
+
 
 @WithRender
 @Component
@@ -109,6 +110,12 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
 
 const AccordionGroupPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./accordion-group.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./accordion-group.lang.en.json'));
+        }
         v.use(MAccordionPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);

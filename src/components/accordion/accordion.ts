@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
@@ -182,6 +183,13 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
 const AccordionPlugin: PluginObject<any> = {
     install(v, options): void {
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./accordion.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./accordion.lang.en.json'));
+        }
+
         v.use(I18nPlugin);
         v.use(AccordionTransitionPlugin);
         v.use(PlusPlugin);

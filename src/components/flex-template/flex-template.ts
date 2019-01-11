@@ -1,11 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { FLEX_TEMPLATE_NAME } from '../component-names';
 import WithRender from './flex-template.html?style=./flex-template.scss';
+
 
 export enum MFlexTemplateOrigin {
     Left = 'left',
@@ -252,7 +252,6 @@ export class MFlexTemplate extends ModulVue {
 
 const FlexTemplatePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(FLEX_TEMPLATE_NAME + ' is not ready for production');
         v.component(FLEX_TEMPLATE_NAME, MFlexTemplate);
     }
 };
