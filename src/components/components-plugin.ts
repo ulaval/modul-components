@@ -4,7 +4,6 @@ import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
-import CarouselItemPlugin from './carousel-item/carousel-item';
 import CarouselPlugin from './carousel/carousel';
 import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -104,7 +103,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
         Vue.use(CarouselPlugin);
-        Vue.use(CarouselItemPlugin);
         Vue.use(CharacterCountPlugin);
         Vue.use(CheckboxPlugin);
         Vue.use(DatefieldsPlugin);

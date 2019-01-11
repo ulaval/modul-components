@@ -1,8 +1,8 @@
-import { ModulVue } from 'src/utils/vue/vue';
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-
 import { ScrollTo, ScrollToDuration } from '../../utils';
+import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_TO_NAME } from '../directive-names';
+
 
 class ScrollToCallback {
 

@@ -42,7 +42,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
         Vue.use({ install: PortalPluginInstall });
         Vue.use(SpritesPlugin);
-        Vue.use(TouchPlugin, { name: 'v-touch' });
+        Vue.use(TouchPlugin, { name: 'v-touch' }); // @todo really needed? should be loaded only by slider component.
         Vue.use(ConfirmPlugin);
         Vue.use(AlertPlugin);
         Vue.use(FilePlugin);

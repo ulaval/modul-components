@@ -2,8 +2,8 @@
 import { Component } from 'vue-property-decorator';
 import { PluginObject } from 'vue/types/plugin';
 import { MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
-import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../utils-names';
+import { ModulVue } from '../vue/vue';
 import { ToastParams } from './toast-service';
 import WithRender from './toast-service.sandbox.html';
 

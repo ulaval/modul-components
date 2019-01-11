@@ -1,7 +1,7 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import ButtonSandboxPlugin from '../../src/components/button/button.sandbox';
+import CarouselSandboxPlugin from '../../src/components/carousel/carousel.sandbox';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(ButtonSandboxPlugin);
+Vue.use(CarouselSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);

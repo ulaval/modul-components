@@ -1,11 +1,10 @@
-import Vue, { PluginObject } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
-import { TOUCH_NAME } from '../component-names';
 import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import WithRender from './touch.html';
 import ZingTouchUtil, { MZingRegion } from './zingtouch';
+
 
 export enum MTouchSwipeDirection {
     horizontal = 'horizontal',
@@ -110,11 +109,3 @@ export class MTouch extends Vue {
     }
 }
 
-const TouchPlugin: PluginObject<any> = {
-    install(v): void {
-        v.prototype.$log.warn(TOUCH_NAME + ' is not ready for production');
-        v.component(TOUCH_NAME, MTouch);
-    }
-};
-
-export default TouchPlugin;

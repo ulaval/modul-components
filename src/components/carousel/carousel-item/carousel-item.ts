@@ -1,9 +1,7 @@
-import Vue, { PluginObject } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
-import * as TouchPlugin from 'vue-touch';
-
-import { CAROUSEL_ITEM_NAME } from '../component-names';
 import WithRender from './carousel-item.html?style=./carousel-item.scss';
+
 
 @WithRender
 @Component
@@ -38,12 +36,3 @@ export class MCarouselItem extends Vue {
     }
 }
 
-const CarouselItemPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.warn(CAROUSEL_ITEM_NAME + ' is not ready for production');
-        v.component(CAROUSEL_ITEM_NAME, MCarouselItem);
-        Vue.use(TouchPlugin, { name: 'v-touch' });
-    }
-};
-
-export default CarouselItemPlugin;
