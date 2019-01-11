@@ -54,8 +54,8 @@ export interface RangeDate {
 
 export interface CalendarEvents {
     [CalendarEvent.DAY_SELECT]: (event: DayState) => void;
-    [CalendarEvent.DATE_MOUSE_ENTER]: (event: DayState) => void;
-    [CalendarEvent.DATE_MOUSE_LEAVE]: (event: DayState) => void;
+    [CalendarEvent.DAY_MOUSE_ENTER]: (event: DayState) => void;
+    [CalendarEvent.DAY_MOUSE_LEAVE]: (event: DayState) => void;
     [CalendarEvent.MONTH_SELECT]: (event: MonthState) => void;
     [CalendarEvent.MONTH_PREVIOUS]: (event: Event) => void;
     [CalendarEvent.MONTH_NEXT]: (event: Event) => void;
@@ -120,8 +120,8 @@ export abstract class MAbstractCalendarState extends ModulVue {
         if (!this.events) {
             this.events = {
                 [CalendarEvent.DAY_SELECT]: this.selectDay.bind(this),
-                [CalendarEvent.DATE_MOUSE_ENTER]: () => { },
-                [CalendarEvent.DATE_MOUSE_LEAVE]: () => { },
+                [CalendarEvent.DAY_MOUSE_ENTER]: () => { },
+                [CalendarEvent.DAY_MOUSE_LEAVE]: () => { },
                 [CalendarEvent.MONTH_SELECT]: this.selectMonth.bind(this),
                 [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth.bind(this),
                 [CalendarEvent.MONTH_NEXT]: this.nextMonth.bind(this),
@@ -176,7 +176,6 @@ export abstract class MAbstractCalendarState extends ModulVue {
     }
 
     selectMonth(month: MonthState): void {
-        this.$log.log(month);
         this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear, month.month, this.currentlyDisplayedDay);
     }
 
@@ -208,7 +207,7 @@ export abstract class MAbstractCalendarState extends ModulVue {
             months.push({
                 month: index,
                 isCurrent: this.currentlyDisplayedMonth === index,
-                isDisabled: date.isBetweenStrict(this.currentMinDate, this.currentMaxDate, DatePrecision.MONTH)
+                isDisabled: !date.isBetweenStrict(this.currentMinDate, this.currentMaxDate, DatePrecision.MONTH)
             });
         }
         return months;

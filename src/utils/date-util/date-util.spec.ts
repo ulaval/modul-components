@@ -1,4 +1,4 @@
-import DateUtil, { DatePrecision } from './date-util';
+import DateUtil, { DateComparison, DatePrecision } from './date-util';
 
 
 const testSuiteRunner: (testSuite: any) => void = (testSuite) => {
@@ -19,11 +19,22 @@ const testSuiteRunner: (testSuite: any) => void = (testSuite) => {
 
 describe(`DateUtil`, () => {
     describe(`initialization`, () => {
-        describe(`from an empty string`, () => {
+        describe(`without params`, () => {
             it(`then is equal to today's date`, () => {
                 const dateUtil: DateUtil = new DateUtil();
 
                 const result: boolean = dateUtil.equals(new Date());
+
+                expect(result).toBe(true);
+            });
+        });
+
+        describe(`from a DateUtil object`, () => {
+            it(`then is equal to the provided date`, () => {
+                const originalDateUtil: DateUtil = new DateUtil('2018-01-01');
+                const dateUtil: DateUtil = new DateUtil(originalDateUtil);
+
+                const result: boolean = dateUtil.equals(originalDateUtil);
 
                 expect(result).toBe(true);
             });
@@ -50,41 +61,213 @@ describe(`DateUtil`, () => {
             });
         });
 
-        describe('from a string', () => {
-            let comparabledateUtil: DateUtil;
-            const date: string = '2018-01-01';
+        describe(`from an empty string`, () => {
+            it(`then is equal to today`, () => {
+                const dateUtil: DateUtil = new DateUtil('');
+                const now: DateUtil = new DateUtil();
 
-            beforeEach(() => {
-                comparabledateUtil = new DateUtil(date);
+                const result: boolean = dateUtil.equals(now);
+
+                expect(result).toBe(true);
             });
-            [{ date: '2018-01-01', expectedResult: true },
-            { date: '18-1-1', expectedResult: true },
-            { date: '2018/1/1', expectedResult: true },
-            { date: '18/1/1', expectedResult: true },
-            { date: '01-01-2018', expectedResult: true },
-            { date: '01/01/2018', expectedResult: true },
-            { date: '1/1/18', expectedResult: true }
-            ].forEach((testCase: any) => {
-                it(`then a date with format '${testCase.date}' is a date comparable with date '${date}'`, () => {
-                    const dateUtil: DateUtil = new DateUtil(testCase.date);
+        });
 
-                    const result: boolean = comparabledateUtil.equals(dateUtil);
+        describe('from a string', () => {
+            describe(`of a supported format`, () => {
+                [{ comparable: '2018-01-01', date: '2018-01-01', expectedResult: true },
+                { comparable: '2018-01-20', date: '18-20-1', expectedResult: true },
+                { comparable: '2018-01-03', date: '2018/1/3', expectedResult: true },
+                { comparable: '2018-01-01', date: '18/1/1', expectedResult: true },
+                { comparable: '2018-05-01', date: '01-05-2018', expectedResult: true },
+                { comparable: '2018-01-01', date: '01/01/2018', expectedResult: true },
+                { comparable: '2018-01-18', date: '18/1/18', expectedResult: true }
+                ].forEach((testCase: any) => {
+                    it(`then a date with format '${testCase.date}' is a date comparable with date '${testCase.comparable}'`, () => {
+                        const dateUtil: DateUtil = new DateUtil(testCase.date);
+                        const comparabledateUtil: DateUtil = new DateUtil(testCase.comparable);
 
-                    expect(result).toBe(testCase.expectedResult);
+                        const result: boolean = comparabledateUtil.equals(dateUtil);
+
+                        expect(dateUtil.toString()).toBe(testCase.comparable);
+                        expect(result).toBe(testCase.expectedResult);
+                    });
                 });
+            });
+
+            describe('of an unsupported format', () => {
+
+                [{ date: 'aaaaaa' },
+                { date: '13-13-13' },
+                { date: '2018-01-2018' }
+                ].forEach((testCase: any) => {
+                    it(`then a date with format '${testCase.date}' will throw an error'`, () => {
+                        const test: Function = () => {
+                            const date: DateUtil = new DateUtil(testCase.date);
+                        };
+
+                        expect(test).toThrow(Error);
+                    });
+                });
+            });
+        });
+
+        describe(`with an unsupported type`, () => {
+            it(`then is equal to today`, () => {
+                const dateUtil: DateUtil = new DateUtil({});
+                const now: DateUtil = new DateUtil();
+
+                const result: boolean = now.equals(dateUtil);
+
+                expect(result).toBe(true);
+            });
+        });
+
+        describe(`with date parts individually`, () => {
+            it(`then is equal to the provided date`, () => {
+                const date: DateUtil = new DateUtil(2019, 0, 15);
+                const comparableDateUtil: DateUtil = new DateUtil('2019-01-15');
+
+                const result: boolean = date.equals(comparableDateUtil);
+
+                expect(result).toBe(true);
             });
         });
     });
     describe(`serialization`, () => {
-        it(`of a date to ISO will match ISO format`, () => {
+        it(`of a date to string, will match the string format`, () => {
             const dateUtil: DateUtil = new DateUtil('2018-01-01');
 
-            const result: string = dateUtil.toISO();
+            const result: string = dateUtil.toString();
 
-            expect(result).toBe('2018-01-01T00:00:00.000Z');
+            expect(result).toBe('2018-01-01');
         });
     });
+
+    describe(`difference`, () => {
+        describe(`between two dates in days`, () => {
+            let firstDate: DateUtil;
+            let secondDate: DateUtil;
+
+            const expectedNumberOfDays: number = 26457;
+
+            beforeEach(() => {
+                firstDate = new DateUtil('1947-01-15');
+                secondDate = new DateUtil('2019-06-23');
+            });
+
+
+            it(`when dates are provided in chronological order, will calculate the number of days between dates`, () => {
+                const result: number = firstDate.deltaInDays(secondDate);
+
+                expect(result).toBe(expectedNumberOfDays);
+            });
+
+            it(`when dates are provided in reverse chronological order, will calculate the number of days between dates`, () => {
+                const result: number = secondDate.deltaInDays(firstDate);
+
+                expect(result).toBe(expectedNumberOfDays);
+            });
+        });
+    });
+
+    describe('getters', () => {
+        it(`can extract date components`, () => {
+            const date: DateUtil = new DateUtil('2019-01-15');
+
+            expect(date.fullYear()).toBe(2019);
+            expect(date.month()).toBe(0);
+            expect(date.day()).toBe(15);
+            expect(date.dayOfWeek()).toBe(2);
+
+        });
+    });
+
     describe(`comparison`, () => {
+
+        describe(`when checking for equality`, () => {
+            describe('with a javascript Date object', () => {
+                it(`will be equal if the dates are the same`, () => {
+                    const date: Date = new Date('2019-01-15');
+                    const dateUtil: DateUtil = new DateUtil('2019-01-15');
+
+                    const result: boolean = dateUtil.equals(date);
+
+                    expect(result).toBe(true);
+                });
+
+                it(`will not be equal if the dates are different`, () => {
+                    const date: Date = new Date('2019-01-15');
+                    const dateUtil: DateUtil = new DateUtil('2019-01-16');
+
+                    const result: boolean = dateUtil.equals(date);
+
+                    expect(result).toBe(false);
+                });
+            });
+
+            describe('with a DateUtil object', () => {
+                it(`will be equal if the dates are the same`, () => {
+                    const dateUtil: DateUtil = new DateUtil('2019-01-15');
+                    const otherDateUtil: DateUtil = new DateUtil('2019-01-15');
+
+                    const result: boolean = dateUtil.equals(otherDateUtil);
+
+                    expect(result).toBe(true);
+                });
+
+                it(`will not be equal if the dates are different`, () => {
+                    const dateUtil: DateUtil = new DateUtil('2019-01-15');
+                    const otherDateUtil: DateUtil = new DateUtil('2019-01-16');
+
+                    const result: boolean = dateUtil.equals(otherDateUtil);
+
+                    expect(result).toBe(false);
+                });
+            });
+
+            describe('with anything else', () => {
+                it(`will not be equal`, () => {
+                    const dateUtil: DateUtil = new DateUtil('2019-01-15');
+
+                    const result: boolean = dateUtil.equals('2019-01-15');
+
+                    expect(result).toBe(false);
+                });
+            });
+        });
+
+        describe(`when checking date chronology`, () => {
+            let testDate: DateUtil;
+
+            beforeEach(() => {
+                testDate = new DateUtil('2019-01-15');
+            });
+
+            it(`can determine if date comes before`, () => {
+                const date: DateUtil = new DateUtil('2019-01-14');
+
+                const result: DateComparison = date.compare(testDate);
+
+                expect(result).toBe(DateComparison.IS_BEFORE);
+            });
+
+            it(`can determine if date is the same`, () => {
+                const date: DateUtil = new DateUtil('2019-01-15');
+
+                const result: DateComparison = date.compare(testDate);
+
+                expect(result).toBe(DateComparison.IS_EQUAL);
+            });
+
+            it(`can determine if date comes after`, () => {
+                const date: DateUtil = new DateUtil('2019-01-16');
+
+                const result: DateComparison = date.compare(testDate);
+
+                expect(result).toBe(DateComparison.IS_AFTER);
+            });
+        });
+
         describe(`with a single date that is`, () => {
             const earlyDateUtil: DateUtil = new DateUtil('2018-05-31');
             const currentDateUtil: DateUtil = new DateUtil('2018-06-10');

@@ -1,4 +1,5 @@
-<div class="m-calendar"
+<div :id="id"
+     class="m-calendar"
      :class="{
     'm-calendar-single-date': isSingleDate,
     'm-calendar-date-range': isDateRange
@@ -7,10 +8,12 @@
                                   v-model="innerValue"
                                   :min-date="minDate"
                                   :max-date="maxDate"
-                                  @input="onInput">
+                                  @input="onInput"
+                                  ref="calendarState">
         <div slot-scope="{ calendar, calendarEvents }"
              class="m-calendar__render m-calendar-single-date__render">
             <m-simple-calendar :calendar="calendar"
+                               ref="calendarRenderer"
                                :show-month-before-after="showMonthBeforeAfter"
                                v-on="calendarEvents"></m-simple-calendar>
         </div>
@@ -20,10 +23,12 @@
                                  v-model="innerValue"
                                  :min-date="minDate"
                                  :max-date="maxDate"
-                                 @input="onInput">
+                                 @input="onInput"
+                                 ref="calendarState">
         <div slot-scope="{ calendar, calendarEvents }"
              class="m-calendar__render m-calendar-range-date__render">
             <m-simple-calendar :calendar="calendar"
+                               ref="calendarRenderer"
                                :show-month-before-after="showMonthBeforeAfter"
                                v-on="calendarEvents"></m-simple-calendar>
         </div>

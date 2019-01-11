@@ -46,8 +46,8 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
 
             this.$emit('input', {
-                begin: this.currentRange.begin ? this.currentRange.begin.toString().split('T')[0] : '',
-                end: this.currentRange.end ? this.currentRange.end.toString().split('T')[0] : ''
+                begin: this.currentRange.begin ? this.currentRange.begin.toString() : '',
+                end: this.currentRange.end ? this.currentRange.end.toString() : ''
             });
         }
     }
@@ -57,7 +57,7 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
     }
 
     protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
-        events[CalendarEvent.DATE_MOUSE_ENTER] = this.highlightDate;
+        events[CalendarEvent.DAY_MOUSE_ENTER] = this.highlightDate;
         return events;
     }
 

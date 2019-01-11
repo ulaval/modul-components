@@ -36,7 +36,7 @@ export class MCalendarSingleDateState extends MAbstractCalendarState {
             const newDate: DateUtil = this.selectedDayToDate(selectedDay);
             this.currentDate = newDate;
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
-            this.$emit('input', this.currentDate.toString().split('T')[0]);
+            this.$emit('input', this.currentDate.toString());
         }
     }
 

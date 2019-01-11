@@ -1,5 +1,6 @@
 import { PluginObject } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
+import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
 import { MSimpleCalendar } from './calendar-renderer/simple-calendar';
@@ -9,7 +10,7 @@ import { MCalendarSingleDateState } from './calendar-state/calendar-single-date-
 import WithRender from './calendar.html?style=./calendar.scss';
 
 
-enum CalendarMode {
+export enum CalendarMode {
     SINGLE_DATE = 'single-date',
     DATE_RANGE = 'date-range'
 }
@@ -40,6 +41,7 @@ export class MCalendar extends ModulVue {
     showMonthBeforeAfter: string;
 
     innerValue: SingleDate | RangeDate = this.value;
+    id: string = `m-calendar-${uuid.generate()}`;
 
     @Watch('value')
     refreshValue(): void {
@@ -63,7 +65,7 @@ export class MCalendar extends ModulVue {
         return this.mode === CalendarMode.DATE_RANGE;
     }
 
-    private validateInputModel(): void {
+    validateInputModel(): void {
         switch (this.mode) {
             case CalendarMode.SINGLE_DATE:
                 if (typeof this.value !== 'string') {

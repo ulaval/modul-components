@@ -1,11 +1,18 @@
 
+
+/**
+ * Level of precision required when comparing two dates
+ * Day: yyyy-mm-dd
+ * Month: yyyy-mm
+ * Year: yyyy
+ */
 export enum DatePrecision {
     DAY = 'day',
     MONTH = 'month',
     YEAR = 'year'
 }
 
-enum DateComparison {
+export enum DateComparison {
     IS_BEFORE = -1,
     IS_EQUAL = 0,
     IS_AFTER = 1
@@ -15,6 +22,22 @@ export default class DateUtil {
 
     private innerDate: Date;
 
+    /**
+     * A DateUtil can be constructed different ways
+     * new DateUtil() - defaults to today's date
+     * new DateUtil('') - defaults to today's date
+     * new DateUtil(<Date>) - from a javascript date object
+     * new DateUtil(<DateUtil>) - from a DateUtil date object
+     * new DateUtil(year, month, day) - Year and day represent their respective values, month is the index of the month (0: January, ..., 11: December)
+     * new DateUtil(<regex>) -  any format that matches:
+     *                          [{1, 4} digits] [separator] [{1, 2} digits] [separator] [{1, 4} digits] [separator].
+     *                          At least one of the {1, 4} blocks must have 4 digits
+     *
+     * @param value (optionnal) string | Date (JS date) | DateUtil (this class)
+     * @param year (optionnal) Year in format 2 or 4 digits
+     * @param month (optionnal) Month index (0: January, ..., 11: December)
+     * @param day (optionnal) Day of the month
+     */
     constructor(value?: any)
     constructor(year: number, month: number, day: number)
     constructor(year?: any, month?: any, day?: any) {
@@ -26,12 +49,9 @@ export default class DateUtil {
                 } else if (value instanceof Date) {
                     this.innerDate = new Date(value);
                 } else if (typeof (value) === 'string') {
-                    if (Date.parse(value)) {
-                        const tempDate: Date = new Date(Date.parse(value));
-                        this.innerDate = new Date(Date.UTC(tempDate.getUTCFullYear(), tempDate.getUTCMonth(), tempDate.getUTCDate()));
-                    } else {
-                        this.innerDate = this.convertDateString(value);
-                    }
+                    this.dateFromString(value);
+                } else {
+                    this.innerDate = new Date();
                 }
                 break;
             case 3:
@@ -40,43 +60,89 @@ export default class DateUtil {
             default:
                 this.innerDate = new Date();
         }
-
-        // Required to force UTC format
-        if (this.innerDate) {
-            this.innerDate = new Date(Date.UTC(this.innerDate.getUTCFullYear(), this.innerDate.getUTCMonth(), this.innerDate.getUTCDate()));
-        }
     }
 
+    /**
+     * Check if the current date is before or equal to the received date.
+     *
+     * @param otherDate date to be compared with
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isSameOrBefore(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) >= this.toTime(this.innerDate, precision);
     }
 
+    /**
+     * Check if the current date is strictly before to the received date.
+     *
+     * @param otherDate date to be compared with
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isBefore(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) > this.toTime(this.innerDate, precision);
     }
 
+    /**
+     * Check if the current date is equal to the received date.
+     *
+     * @param otherDate date to be compared with
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isSame(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) === this.toTime(this.innerDate, precision);
     }
 
+    /**
+     * Check if the current date is equal or after to the received date.
+     *
+     * @param otherDate date to be compared with
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isSameOrAfter(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) <= this.toTime(this.innerDate, precision);
     }
 
+    /**
+     * Check if the current date or after to the received date.
+     *
+     * @param otherDate date to be compared with
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isAfter(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) < this.toTime(this.innerDate, precision);
     }
 
+    /**
+     * Check if the current date is equal to one of the bounds or between them.
+     *
+     * @param lowerDate lower bound
+     * @param higherDate higher bound
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isBetween(lowerDate: DateUtil, higherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(lowerDate.innerDate, precision) <= this.toTime(this.innerDate, precision)
             && this.toTime(this.innerDate, precision) <= this.toTime(higherDate.innerDate, precision);
     }
 
+    /**
+     * Check if the current date is strictly between bounds them.
+     *
+     * @param lowerDate lower bound
+     * @param higherDate higher bound
+     * @param precision level of precision for comparison @see DatePrecision
+     */
     public isBetweenStrict(lowerDate: DateUtil, higherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(lowerDate.innerDate, precision) < this.toTime(this.innerDate, precision)
             && this.toTime(this.innerDate, precision) < this.toTime(higherDate.innerDate, precision);
     }
 
+    /**
+     * Compare the current date with the received date to determine if the current date is before, equal or after the
+     * received date
+     *
+     * @param date date to be compared with
+     * @returns @see DateComparison
+     */
     public compare(date: DateUtil): number {
         const current: number = this.toTime(this.innerDate, DatePrecision.DAY);
         const other: number = this.toTime(date.innerDate, DatePrecision.DAY);
@@ -89,22 +155,37 @@ export default class DateUtil {
         return DateComparison.IS_EQUAL;
     }
 
+    /**
+     * format date following the date part of the standard ISO-8601
+     */
     public toString(): string {
         return this.innerDate.toISOString().split('T')[0];
     }
 
+    /**
+     * Getter for the year value
+     */
     public fullYear(): number {
         return this.innerDate.getUTCFullYear();
     }
 
+    /**
+     * Getter for the month value
+     */
     public month(): number {
         return this.innerDate.getUTCMonth();
     }
 
+    /**
+     * Getter for the day of the month value
+     */
     public day(): number {
         return this.innerDate.getUTCDate();
     }
 
+    /**
+     * Getter for the day of the week value
+     */
     public dayOfWeek(): number {
         return this.innerDate.getUTCDay();
     }
@@ -114,7 +195,7 @@ export default class DateUtil {
      *
      * @param otherDate date to compare with
      */
-    public equals(otherDate: Date | DateUtil): boolean {
+    public equals(otherDate: any): boolean {
         if (otherDate instanceof Date) {
             return this.toTime(otherDate, DatePrecision.DAY) === this.toTime(this.innerDate, DatePrecision.DAY);
         } else if (otherDate instanceof DateUtil) {
@@ -123,29 +204,54 @@ export default class DateUtil {
         return false;
     }
 
+    /**
+     * Calculates the number of days between the current date and the received date.
+     *
+     * @param other
+     * @return Number of days in absolute format
+     */
     public deltaInDays(other: DateUtil): number {
         return Math.round(Math.abs(other.innerDate.getTime() - this.innerDate.getTime()) / (1000 * 3600 * 24));
     }
 
-    private convertDateString(value: string): Date {
-        const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4}))(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/;
-        const parts: string[] = dateFormat.exec(value) as string[];
-        if (parts.length >= 4) {
-            const first: string = parts[2];
-            const second: string = (parts[3] === '0') ? '1' : parts[3];
-            const third: string = parts[4];
-            let year: string;
-            let month: string;
-            let day: string;
-            year = (first.length > third.length) ? first : third;
-            month = this.padString(second);
-            day = this.padString((first.length > third.length) ? third : second);
-            if (year.length === 2) {
-                year = '20' + year;
-            }
-            return new Date(Date.parse(`${year}-${month}-${day}`));
+    private dateFromString(value: string): void {
+        if (value === '') {
+            this.innerDate = new Date();
+        } else {
+            this.innerDate = this.convertDateString(value);
         }
-        throw Error(`Date ${value} cannot be inferred from regEx pattern`);
+
+    }
+
+    private convertDateString(value: string): Date {
+        const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4}))$/;
+        const parts: string[] = dateFormat.exec(value) as string[];
+        if (!parts || parts.length < 4) {
+            throw Error(`Impossible to find date parts in date`);
+        }
+
+        let first: string = parts[2];
+        let second: string = parts[3];
+        let third: string = parts[4];
+
+        if (parseInt(first, 10) > 12 && parseInt(second, 10) > 12 && parseInt(third, 10) > 12) {
+            throw Error(`No suitable month value`);
+        } else if (parseInt(first, 10) > 31 && parseInt(third, 10) > 31) {
+            throw Error(`No suitable day of month value`);
+        }
+
+        if (third.length === 4 || third.length > first.length) {
+            third = [first, first = third][0];
+        }
+        const year: string = (first.length === 2) ? '20' + first : first;
+
+        if (parseInt(second, 10) > 12) {
+            third = [second, second = third][0];
+        }
+        const month: string = this.padString(second);
+        const day: string = this.padString(third);
+
+        return new Date(`${year}-${month}-${day}`);
     }
 
     private padString(input: string): string {
@@ -161,12 +267,10 @@ export default class DateUtil {
             case DatePrecision.MONTH:
                 toTimeDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), 1);
                 break;
-            case DatePrecision.DAY:
+            default: // DatePrecision.DAY:
                 toTimeDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-                break;
-            default:
-                throw new Error('DateUtil: Unsupported DatePrecision');
         }
         return toTimeDate.getTime();
     }
 }
+
