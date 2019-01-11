@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-
 import { AlertFunction } from '../dialog/alert';
 import { ConfirmFunction } from '../dialog/confirm';
 import { FileService } from '../file/file';
@@ -11,6 +10,7 @@ import { Logger } from '../logger/logger';
 import { MediaQueries } from '../media-queries/media-queries';
 import { Modul } from '../modul/modul';
 import { ScrollTo } from '../scroll-to/scroll-to';
+import { ToastService } from '../toast/toast-service';
 
 // TODO: explore usage of TS declare syntax
 // declare module 'vue/types/vue' {
@@ -31,6 +31,7 @@ export class ModulVue extends Vue {
     public $file: FileService;
     public $log: Logger;
     public $license: Licenses;
+    public $toast: ToastService;
 
     protected getParent<T extends Vue>(test: (obj: Vue) => boolean): T | undefined {
         let p: Vue = this.$parent;

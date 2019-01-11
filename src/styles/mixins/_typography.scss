@@ -1,3 +1,16 @@
+@mixin font-face($font-family, $url, $font-weight: normal, $font-style: normal) {
+    @font-face {
+        font-family: '#{$font-family}';
+        src:
+            url('#{$m-font-path}#{$url}.otf.woff') format('woff'),
+            url('#{$m-font-path}#{$url}.ttf.woff') format('woff'),
+            url('#{$m-font-path}#{$url}.otf.woff2') format('woff2'),
+            url('#{$m-font-path}#{$url}.ttf.woff2') format('woff2');
+        font-weight: $font-weight;
+        font-style: $font-style;
+    }
+}
+
 @mixin m-commons-title-styles() {
     font-weight: $m-font-weight--bold;
     line-height: 1.1;
@@ -139,4 +152,10 @@
         font-weight: $m-font-weight;
         color: $m-color--text;
     }
+}
+
+@mixin m-word-wrap() {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
 }

@@ -1,0 +1,24 @@
+@mixin m-scrollbar() {
+    scrollbar-face-color: $m-color--scrollbar;
+    scrollbar-shadow-color: $m-color--scrollbar;
+    scrollbar-highlight-color: $m-color--white;
+    scrollbar-darkshadow-color: $m-color--white;
+    scrollbar-track-color: $m-color--white;
+    scrollbar-arrow-color: $m-color--scrollbar;
+
+    &::-webkit-scrollbar {
+        width: $m-scrollbar-width;
+        height: $m-scrollbar-width;
+        background: none;
+
+        &-track-piece {
+            background: $m-color--scrollbar-light;
+        }
+
+        &-thumb {
+            background: $m-color--scrollbar;
+            border-radius: $m-scrollbar-width/2;
+            border: 1px solid $m-color--scrollbar-light;
+        }
+    }
+}

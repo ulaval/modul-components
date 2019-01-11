@@ -9,3 +9,4 @@ export const MODUL: string = 'modul';
 export const MQ: string = 'mq';
 export const SCROLL_TO: string = 'scrollTo';
 export const SVG: string = 'svg';
+export const TOAST: string = 'toast';
