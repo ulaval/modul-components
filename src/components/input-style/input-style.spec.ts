@@ -1,15 +1,11 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
-import uuid from '../../utils/uuid/uuid';
 import InputStylePlugin, { MInputStyle } from './input-style';
 
 const ROOT: RefSelector = { ref: 'root' };
 const CSSLABELUP: string = 'm--is-label-up';
 const CSSCURSOR: string = 'm--has-cursor-pointer';
-
-jest.mock('../../utils/uuid/uuid');
-(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 let wrapper: Wrapper<MInputStyle>;
 
