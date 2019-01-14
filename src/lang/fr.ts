@@ -17,7 +17,6 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/datefields/datefields.lang.fr.json'),
                 require('../components/datepicker/datepicker.lang.fr.json'),
                 require('../components/dropdown/dropdown.lang.fr.json'),
-                require('../components/dropdown-item/dropdown-item.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/overlay/overlay.lang.fr.json'),
                 require('../components/error-access-denied/error-access-denied.lang.fr.json'),

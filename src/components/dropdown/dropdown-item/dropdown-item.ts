@@ -1,11 +1,8 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { normalizeString } from '../../utils/str/str';
-import { ModulVue } from '../../utils/vue/vue';
-import { DROPDOWN_ITEM_NAME } from '../component-names';
-import RadioStylePlugin from '../radio-style/radio-style';
+import { MediaQueries } from '../../../mixins/media-queries/media-queries';
+import { normalizeString } from '../../../utils/str/str';
+import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './dropdown-item.html?style=./dropdown-item.scss';
 
 export interface MDropdownInterface {
@@ -103,12 +100,3 @@ export class MDropdownItem extends ModulVue {
         }
     }
 }
-
-const DropdownItemPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.use(RadioStylePlugin);
-        v.component(DROPDOWN_ITEM_NAME, MDropdownItem);
-    }
-};
-
-export default DropdownItemPlugin;

@@ -11,7 +11,6 @@ import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
 import DialogPlugin from './dialog/dialog';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
-import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
 import ErrorAccessDenied from './error-access-denied/error-access-denied';
@@ -109,7 +108,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(DatepickerPlugin);
         Vue.use(ModalPlugin);
         Vue.use(DropdownPlugin);
-        Vue.use(DropdownItemPlugin);
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(Overlay);
