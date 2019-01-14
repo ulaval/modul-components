@@ -252,6 +252,7 @@ export class MFlexTemplate extends ModulVue {
 
 const FlexTemplatePlugin: PluginObject<any> = {
     install(v, options): void {
+        console.error('MFlexTemplate will be deprecated in modul v.1.0');
         v.component(FLEX_TEMPLATE_NAME, MFlexTemplate);
     }
 };
