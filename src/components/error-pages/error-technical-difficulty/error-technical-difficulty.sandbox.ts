@@ -1,10 +1,14 @@
 import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
-import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import { Link } from '../message-page/message-page';
+import PopupDirectivePlugin from '../../../directives/popup/popup';
+import ButtonPlugin from '../../button/button';
+import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../../component-names';
+import DialogPlugin from '../../dialog/dialog';
+import { Link } from '../../message-page/message-page';
+import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty';
 import WithRender from './error-technical-difficulty.sandbox.html';
+
 
 @WithRender
 @Component
@@ -30,6 +34,10 @@ export class MErrorTechnicalDifficultySandbox extends Vue {
 
 const ErrorTechnicalDifficultySandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ButtonPlugin);
+        v.use(DialogPlugin);
+        v.use(PopupDirectivePlugin);
+        v.use(ErrorTechnicalDifficultyPlugin);
         v.component(`${ERROR_TECHNICAL_DIFFICULTY_NAME}-sandbox`, MErrorTechnicalDifficultySandbox);
     }
 };

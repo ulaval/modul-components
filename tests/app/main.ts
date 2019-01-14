@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
-import DynamicTemplateSandboxPlugin from '../../src/components/dynamic-template/dynamic-template.sandbox';
+import ErrorTechnicalDifficultyPlugin from '../../src/components/error-pages/error-technical-difficulty/error-technical-difficulty.sandbox';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
 import TemplatePlugin from '../../src/components/template/template';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(DynamicTemplateSandboxPlugin);
+Vue.use(ErrorTechnicalDifficultyPlugin);
 
 
 Vue.component('app-frame', AppFrame);

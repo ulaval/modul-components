@@ -1,11 +1,10 @@
 import { shallow, Wrapper } from '@vue/test-utils';
+import { renderComponent } from '../../../../tests/helpers/render';
+import { MESSAGE_PAGE_NAME } from '../../component-names';
+import { MErrorConfigNotSupported } from './error-config-not-supported';
 
-import { renderComponent } from '../../../tests/helpers/render';
-import { MESSAGE_PAGE_NAME } from '../component-names';
-import { Link } from '../message-page/message-page';
-import { MErrorAccessDenied } from './error-access-denied';
 
-let wrapper: Wrapper<MErrorAccessDenied>;
+let wrapper: Wrapper<MErrorConfigNotSupported>;
 
 const getStubs: any = () => {
     return {
@@ -13,10 +12,10 @@ const getStubs: any = () => {
     };
 };
 
-describe(`Page not found - test`, () => {
+describe(`Configuration not supported- test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
-            wrapper = shallow(MErrorAccessDenied, { stubs: getStubs() });
+            wrapper = shallow(MErrorConfigNotSupported, { stubs: getStubs() });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
@@ -25,14 +24,12 @@ describe(`Page not found - test`, () => {
         it(`Should render with custom values provided`, async () => {
             const A_CUSTOM_TITLE: string = 'An error title.';
             const A_HINT: string = 'aHint';
-            const A_LINK: Link = new Link('aLabel', 'anUrl');
 
-            wrapper = shallow(MErrorAccessDenied, {
+            wrapper = shallow(MErrorConfigNotSupported, {
                 stubs: getStubs(),
                 propsData: {
                     title: A_CUSTOM_TITLE,
-                    hints: [A_HINT],
-                    links: [A_LINK]
+                    hints: [A_HINT]
                 }
             });
 

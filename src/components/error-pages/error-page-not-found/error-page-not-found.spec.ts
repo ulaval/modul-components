@@ -1,11 +1,11 @@
 import { shallow, Wrapper } from '@vue/test-utils';
+import { renderComponent } from '../../../../tests/helpers/render';
+import { MESSAGE_PAGE_NAME } from '../../component-names';
+import { Link } from '../../message-page/message-page';
+import { MErrorPageNotFound } from './error-page-not-found';
 
-import { renderComponent } from '../../../tests/helpers/render';
-import { MESSAGE_PAGE_NAME } from '../component-names';
-import { Link } from '../message-page/message-page';
-import { MErrorCookiesNotSupported } from './error-cookies-not-supported';
 
-let wrapper: Wrapper<MErrorCookiesNotSupported>;
+let wrapper: Wrapper<MErrorPageNotFound>;
 
 const getStubs: any = () => {
     return {
@@ -13,10 +13,10 @@ const getStubs: any = () => {
     };
 };
 
-describe(`Cookies not supported - test`, () => {
+describe(`Page not found - test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
-            wrapper = shallow(MErrorCookiesNotSupported, { stubs: getStubs() });
+            wrapper = shallow(MErrorPageNotFound, { stubs: getStubs() });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
@@ -27,7 +27,7 @@ describe(`Cookies not supported - test`, () => {
             const A_HINT: string = 'aHint';
             const A_LINK: Link = new Link('aLabel', 'anUrl');
 
-            wrapper = shallow(MErrorCookiesNotSupported, {
+            wrapper = shallow(MErrorPageNotFound, {
                 stubs: getStubs(),
                 propsData: {
                     title: A_CUSTOM_TITLE,

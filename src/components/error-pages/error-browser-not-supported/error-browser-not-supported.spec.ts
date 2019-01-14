@@ -1,9 +1,9 @@
 import { shallow, Wrapper } from '@vue/test-utils';
-
-import { renderComponent } from '../../../tests/helpers/render';
-import { MESSAGE_PAGE_NAME } from '../component-names';
-import { Link } from '../message-page/message-page';
+import { renderComponent } from '../../../../tests/helpers/render';
+import { MESSAGE_PAGE_NAME } from '../../component-names';
+import { Link } from '../../message-page/message-page';
 import { MErrorBrowserNotSupported } from './error-browser-not-supported';
+
 
 let wrapper: Wrapper<MErrorBrowserNotSupported>;
 let isMobileDevice: boolean;
@@ -36,7 +36,7 @@ const initializeWrapperCustomValues: () => void = (): void => {
             hintsMobile: [A_HINT_MOBILE],
             linksDesktop: [A_LINK],
             linksMobile: [A_LINK_MOBILE]
-        }]
+        }
     });
 };
 

@@ -2,16 +2,17 @@ import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
-import { ModulVue } from '../../utils/vue/vue';
-import AccordionPlugin from '../accordion/accordion';
-import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import MessagePagePlugin, { Link } from '../message-page/message-page';
-import I18nPlugin from '../i18n/i18n';
-import LinkPlugin from '../link/link';
-import MessagePlugin, { MMessageState } from '../message/message';
-import PanelPlugin from '../panel/panel';
+import I18nFilterPlugin from '../../../filters/i18n/i18n';
+import { FRENCH, Messages } from '../../../utils/i18n/i18n';
+import { ModulVue } from '../../../utils/vue/vue';
+import AccordionPlugin from '../../accordion/accordion';
+import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../../component-names';
+import I18nPlugin from '../../i18n/i18n';
+import MessagePagePlugin, { Link } from '../../message-page/message-page';
+import { MMessageState } from '../../message/message';
+import PanelPlugin from '../../panel/panel';
 import WithRender from './error-technical-difficulty.html?style=./error-technical-difficulty.scss';
+
 
 @WithRender
 @Component
@@ -93,11 +94,15 @@ export class MErrorTechnicalDifficulty extends ModulVue {
 
 const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_TECHNICAL_DIFFICULTY_NAME, 'plugin.install');
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./error-technical-difficulty.lang.fr.json'));
+        }
+
         v.use(I18nPlugin);
+        v.use(I18nFilterPlugin);
         v.use(AccordionPlugin);
-        v.use(LinkPlugin);
-        v.use(MessagePlugin);
         v.use(PanelPlugin);
         v.use(MessagePagePlugin);
         v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);

@@ -1,20 +1,18 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import { ModulVue } from '../../utils/vue/vue';
-import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../component-names';
-import MessagePagePlugin, { Link } from '../message-page/message-page';
-import I18nPlugin from '../i18n/i18n';
-import LinkPlugin from '../link/link';
-import { MMessageState } from '../message/message';
+import { MediaQueries } from '../../../mixins/media-queries/media-queries';
+import { FRENCH, Messages } from '../../../utils/i18n/i18n';
+import { ModulVue } from '../../../utils/vue/vue';
+import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../../component-names';
+import MessagePagePlugin, { Link } from '../../message-page/message-page';
+import { MMessageState } from '../../message/message';
 import WithRender from './error-browser-not-supported.html';
+
 
 @WithRender
 @Component({
-    mixins: [ MediaQueries ]
+    mixins: [MediaQueries]
 })
 export class MErrorBrowserNotSupported extends ModulVue {
 
@@ -48,10 +46,11 @@ export class MErrorBrowserNotSupported extends ModulVue {
 
 const ErrorBrowserNotSupported: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_BROWSER_NOT_SUPPORTED_NAME, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(LinkPlugin);
-        v.use(MediaQueriesPlugin);
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./error-browser-not-supported.lang.fr.json'));
+        }
+
         v.use(MessagePagePlugin);
         v.component(ERROR_BROWSER_NOT_SUPPORTED_NAME, MErrorBrowserNotSupported);
     }

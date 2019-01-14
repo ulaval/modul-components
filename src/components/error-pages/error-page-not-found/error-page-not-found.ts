@@ -1,14 +1,13 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
-import { ModulVue } from '../../utils/vue/vue';
-import { ERROR_PAGE_NOT_FOUND_NAME } from '../component-names';
-import MessagePagePlugin, { Link } from '../message-page/message-page';
-import I18nPlugin from '../i18n/i18n';
-import LinkPlugin from '../link/link';
-import { MMessageState } from '../message/message';
+import { FRENCH, Messages } from '../../../utils/i18n/i18n';
+import { ModulVue } from '../../../utils/vue/vue';
+import { ERROR_PAGE_NOT_FOUND_NAME } from '../../component-names';
+import MessagePagePlugin, { Link } from '../../message-page/message-page';
+import { MMessageState } from '../../message/message';
 import WithRender from './error-page-not-found.html';
+
 
 @WithRender
 @Component
@@ -38,9 +37,12 @@ export class MErrorPageNotFound extends ModulVue {
 
 const ErrorPageNotFoundPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_PAGE_NOT_FOUND_NAME, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(LinkPlugin);
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./error-page-not-found.lang.fr.json'));
+        }
+
         v.use(MessagePagePlugin);
         v.component(ERROR_PAGE_NOT_FOUND_NAME, MErrorPageNotFound);
     }
