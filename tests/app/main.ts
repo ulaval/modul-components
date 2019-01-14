@@ -1,7 +1,7 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import MCharacterCountSandbox from '../../src/components/character-count/character-count.sandbox';
+import CheckboxSandboxPlugin from '../../src/components/checkbox/checkbox.sandbox';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(MCharacterCountSandbox);
+Vue.use(CheckboxSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);
