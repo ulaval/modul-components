@@ -1,7 +1,7 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import DatepickerSandboxPlugin from '../../src/components/datepicker/datepicker.sandbox';
+import DialogSandboxPlugin from '../../src/components/dialog/dialog.sandbox';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(DatepickerSandboxPlugin);
+Vue.use(DialogSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);
