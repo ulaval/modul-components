@@ -70,13 +70,13 @@
                     using key
 
                     <m-button v-html="libelle"
-                              @click="toogleAfficher()"
-                              v-if="afficherbouton1"
+                              @click="toggleDisplay()"
+                              v-if="displayButton1"
                               key="username-input-2">
                     </m-button>
 
-                    <m-button @click="toogleAfficher()"
-                              v-if="!afficherbouton1">
+                    <m-button @click="toggleDisplay()"
+                              v-if="!displayButton1">
                         text 2
                     </m-button key="username-input">
 
@@ -85,12 +85,12 @@
 
 
                     <m-button v-html="libelle"
-                              @click="toogleAfficher()"
-                              v-if="afficherbouton1">
+                              @click="toggleDisplay()"
+                              v-if="displayButton1">
                     </m-button>
 
-                    <m-button @click="toogleAfficher()"
-                              v-if="!afficherbouton1">
+                    <m-button @click="toggleDisplay()"
+                              v-if="!displayButton1">
                         text 2
                     </m-button>
                 </div>

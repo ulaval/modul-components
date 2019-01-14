@@ -8,16 +8,16 @@ import WithRender from './button.sandbox.html';
 @WithRender
 @Component
 export class MButtonSandbox extends Vue {
-    afficherbouton1: boolean = false;
-    messageInialValue: string = 'Mon message';
+    displayButton1: boolean = false;
+    messageInialValue: string = 'Your message';
     message: string = this.messageInialValue;
 
     private buttonType: MButtonType = MButtonType.Button;
     private buttonSkin: MButtonSkin = MButtonSkin.Primary;
     private buttonIconPosition: MButtonIconPosition = MButtonIconPosition.Left;
 
-    toogleAfficher(): void {
-        this.afficherbouton1 = !this.afficherbouton1;
+    toggleDisplay(): void {
+        this.displayButton1 = !this.displayButton1;
     }
 
     get libelle(): string {
