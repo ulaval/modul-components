@@ -1,9 +1,9 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin, { MButtonIconPosition, MButtonSkin } from '../button/button';
@@ -93,6 +93,12 @@ export class MFileSelect extends ModulVue {
 const FileSelectPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(FILE_SELECT_NAME, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./file-select.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./file-select.lang.en.json'));
+        }
+
         v.use(ButtonPlugin);
         v.use(ValidationMesagePlugin);
         v.use(FilePlugin);

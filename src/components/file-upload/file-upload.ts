@@ -1,24 +1,24 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MBadgeState } from '../../directives/badge/badge';
 import FileDropPlugin from '../../directives/file-drop/file-drop';
 import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { FILE_UPLOAD_NAME } from '../component-names';
-import ModalPlugin, { MModal } from '../modal/modal';
 import FileSelectPlugin from '../file-select/file-select';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
+import ModalPlugin, { MModal } from '../modal/modal';
 import ProgressPlugin, { MProgressState } from '../progress/progress';
 import WithRender from './file-upload.html?style=./file-upload.scss';
 
@@ -336,6 +336,13 @@ export class MFileUpload extends ModulVue {
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(FILE_UPLOAD_NAME, 'plugin.install');
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./file-upload.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./file-upload.lang.en.json'));
+        }
+
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);

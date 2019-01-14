@@ -2,9 +2,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
+import FileUploadPlugin from '../../src/components/file-upload/file-upload.sandbox';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
-import MessagePageSandboxPlugin from '../../src/components/message-page/message-page.sandbox';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
 import UtilsPlugin, { FRENCH, UtilsPluginOptions } from '../../src/utils';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(MessagePageSandboxPlugin);
+Vue.use(FileUploadPlugin);
 
 
 Vue.component('app-frame', AppFrame);
