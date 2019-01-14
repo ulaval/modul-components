@@ -2,7 +2,7 @@ import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
-
+import PopupDirectivePlugin from '../../directives/popup/popup';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -11,10 +11,12 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DATEPICKER_NAME } from '../component-names';
+import IconButtonPlugin from '../icon-button/icon-button';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './datepicker.html?style=./datepicker.scss';
+
 
 const VIEW_DAY: string = 'day';
 const VIEW_MONTH: string = 'month';
@@ -321,9 +323,11 @@ const DatepickerPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
+        v.use(IconButtonPlugin);
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
+        v.use(PopupDirectivePlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };
