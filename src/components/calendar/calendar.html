@@ -4,33 +4,16 @@
     'm-calendar-single-date': isSingleDate,
     'm-calendar-date-range': isDateRange
 }">
-    <m-calendar-single-date-state v-if="isSingleDate"
-                                  v-model="innerValue"
-                                  :min-date="minDate"
-                                  :max-date="maxDate"
-                                  @input="onInput"
-                                  ref="calendarState">
-        <div slot-scope="{ calendar, calendarEvents }"
-             class="m-calendar__render m-calendar-single-date__render">
-            <m-simple-calendar :calendar="calendar"
-                               ref="calendarRenderer"
-                               :show-month-before-after="showMonthBeforeAfter"
-                               v-on="calendarEvents"></m-simple-calendar>
-        </div>
-    </m-calendar-single-date-state>
-
-    <m-calendar-range-date-state v-if="isDateRange"
-                                 v-model="innerValue"
-                                 :min-date="minDate"
-                                 :max-date="maxDate"
-                                 @input="onInput"
-                                 ref="calendarState">
-        <div slot-scope="{ calendar, calendarEvents }"
-             class="m-calendar__render m-calendar-range-date__render">
-            <m-simple-calendar :calendar="calendar"
-                               ref="calendarRenderer"
-                               :show-month-before-after="showMonthBeforeAfter"
-                               v-on="calendarEvents"></m-simple-calendar>
-        </div>
-    </m-calendar-range-date-state>
+    <m-calendar-state-machine :mode="mode"
+                              :min-date="minDate"
+                              :max-date="maxDate"
+                              @input="onInput"
+                              v-model="innerValue"
+                              ref="calendarState">
+        <m-simple-calendar slot-scope="{ calendar, calendarEvents }"
+                           :calendar="calendar"
+                           ref="calendarRenderer"
+                           :show-month-before-after="showMonthBeforeAfter"
+                           v-on="calendarEvents"></m-simple-calendar>
+    </m-calendar-state-machine>
 </div>

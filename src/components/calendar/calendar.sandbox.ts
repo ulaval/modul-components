@@ -1,7 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { CALENDAR_NAME } from '../component-names';
-import { RangeDate } from './calendar-state/abstract-calendar-state';
+import { RangeDate } from './calendar-state/state/abstract-calendar-state';
 import WithRender from './calendar.sandbox.html';
 
 

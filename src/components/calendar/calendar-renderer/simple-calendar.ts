@@ -1,7 +1,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { DatePrecision } from '../../../utils/date-util/date-util';
 import uuid from '../../../utils/uuid/uuid';
-import { DayState, MonthState, YearState } from '../calendar-state/abstract-calendar-state';
+import { DayState, MonthState, YearState } from '../calendar-state/state/calendar-state';
 import { MAbstractCalendarRenderer } from './abstract-calendar-renderer';
 import WithRender from './simple-calendar.html?style=./simple-calendar.scss';
 
@@ -46,7 +46,7 @@ export enum PickerMode {
 
 @WithRender
 @Component
-export class MSimpleCalendar extends MAbstractCalendarRenderer {
+export default class MSimpleCalendar extends MAbstractCalendarRenderer {
 
     @Prop({ default: PickerMode.DAY })
     initialPickerMode: PickerMode;
@@ -146,8 +146,8 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
         super.onDayMouseLeave(day);
     }
 
-    hideDay(isInCurrentMonth: boolean): boolean {
-        return !isInCurrentMonth && !this.showMonthBeforeAfter;
+    hideDay(day: DayState): boolean {
+        return (day.isInNextMonth || day.isInPreviousMonth) && !this.showMonthBeforeAfter;
     }
 
     buildRef(prefix: string, state: DayState | MonthState | YearState): string {
@@ -207,11 +207,11 @@ export class MSimpleCalendar extends MAbstractCalendarRenderer {
     }
 
     get isMinYear(): boolean {
-        return this.currentYear === Math.max(...this.calendar.years.map((year: YearState) => year.year));
+        return this.currentYear === Math.min(...this.calendar.years.map((year: YearState) => year.year));
     }
 
     get isMaxYear(): boolean {
-        return this.currentYear === Math.min(...this.calendar.years.map((year: YearState) => year.year));
+        return this.currentYear === Math.max(...this.calendar.years.map((year: YearState) => year.year));
     }
 
     get isMinMonth(): boolean {

@@ -3,10 +3,9 @@ import { Component, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
-import { MSimpleCalendar } from './calendar-renderer/simple-calendar';
-import { RangeDate, SingleDate } from './calendar-state/abstract-calendar-state';
-import { MCalendarRangeDateState } from './calendar-state/calendar-range-date-state';
-import { MCalendarSingleDateState } from './calendar-state/calendar-single-date-state';
+import MSimpleCalendar from './calendar-renderer/simple-calendar';
+import MCalendarStateMachine from './calendar-state/calendar-state-machine';
+import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
 import WithRender from './calendar.html?style=./calendar.scss';
 
 
@@ -18,8 +17,7 @@ export enum CalendarMode {
 @WithRender
 @Component({
     components: {
-        MCalendarSingleDateState,
-        MCalendarRangeDateState,
+        MCalendarStateMachine,
         MSimpleCalendar
     }
 })

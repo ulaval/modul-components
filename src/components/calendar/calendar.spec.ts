@@ -3,10 +3,7 @@ import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { CalendarMode, MCalendar } from './calendar';
-import { RangeDate, SingleDate } from './calendar-state/abstract-calendar-state';
-
-console.error = err => { throw new Error(err); };
-console.warn = warning => { throw new Error(warning); };
+import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
 
 const SIMPLE_CALENDAR_COMPONENT: string = 'm-simple-calendar';
 const DATE_RANGE_STATE_COMPONENT: string = 'm-calendar-date-range-state';

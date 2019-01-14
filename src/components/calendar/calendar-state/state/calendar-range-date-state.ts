@@ -1,7 +1,6 @@
-import { Component, Prop, Watch } from 'vue-property-decorator';
-import DateUtil, { DatePrecision } from '../../../utils/date-util/date-util';
-import { CalendarEvent } from '../calendar-renderer/abstract-calendar-renderer';
-import { CalendarEvents, DayState, MAbstractCalendarState, RangeDate } from './abstract-calendar-state';
+import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
+import AbstractCalendarState, { RangeDate, SingleDate } from './abstract-calendar-state';
+import { CalendarEvent, CalendarEvents, DayState } from './calendar-state';
 
 enum DateRangePosition {
     BEGIN = 'begin',
@@ -13,28 +12,10 @@ interface InnerModel {
     end: DateUtil | undefined;
 }
 
-@Component
-export class MCalendarRangeDateState extends MAbstractCalendarState {
-
-    @Prop()
-    value: RangeDate;
+export default class CalendarRangeDateState extends AbstractCalendarState {
 
     private currentRange: InnerModel;
-
     private currentDateHiglighted: DateUtil = new DateUtil();
-
-    @Watch('value')
-    refreshValue(): void {
-        super.refreshValue();
-    }
-
-    created(): void {
-        super.created();
-    }
-
-    render(): any {
-        return super.render();
-    }
 
     selectDay(selectedDay: DayState): void {
         super.selectDay(selectedDay);
@@ -45,27 +26,31 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
 
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
 
-            this.$emit('input', {
+            this.daySelectCallback({
                 begin: this.currentRange.begin ? this.currentRange.begin.toString() : '',
                 end: this.currentRange.end ? this.currentRange.end.toString() : ''
             });
         }
     }
 
-    highlightDate(selectedDay: DayState): void {
+    updateValue(value: SingleDate): void {
+        this.initDates(value);
+    }
+
+    protected highlightDate(selectedDay: DayState): void {
         this.currentDateHiglighted = this.selectedDayToDate(selectedDay);
     }
 
     protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
-        events[CalendarEvent.DAY_MOUSE_ENTER] = this.highlightDate;
+        events[CalendarEvent.DAY_MOUSE_ENTER] = this.highlightDate.bind(this);
         return events;
     }
 
-    protected initCurrentDate(): void {
-        if (this.value) {
+    protected initCurrentValue(value: RangeDate): void {
+        if (value) {
             this.currentRange = {
-                begin: this.initDateRange(this.value as RangeDate, DateRangePosition.BEGIN),
-                end: this.initDateRange(this.value as RangeDate, DateRangePosition.END)
+                begin: this.initDateRange(value as RangeDate, DateRangePosition.BEGIN),
+                end: this.initDateRange(value as RangeDate, DateRangePosition.END)
             };
 
             if (this.currentRange.begin) {
@@ -73,32 +58,14 @@ export class MCalendarRangeDateState extends MAbstractCalendarState {
             } else if (this.currentRange.end) {
                 this.currentDateHiglighted = new DateUtil(this.currentRange.end);
             }
+        } else {
+            this.currentRange = { begin: undefined, end: undefined };
         }
     }
 
     protected initCurrentlyDisplayedDate(): void {
         if (!this.currentRange) {
             this.updateCurrentlyDisplayedDate(this.now.fullYear(), this.now.month(), this.now.day());
-        }
-    }
-
-    /**
-     * Updates the date used to display the calendar. If it's lower than the minimum date authorized, it's set to the minimum.
-     * If it's higher than the maximum date authorized, it's set to the maximum
-     *
-     * @param year new value
-     * @param month new value
-     * @param day new value
-     */
-    protected updateCurrentlyDisplayedDate(year: number, month: number, day: number): void {
-        this.currentlyDisplayedDate = new DateUtil(year, month, day);
-
-        if (this.currentlyDisplayedDate.isAfter(this.currentMaxDate, DatePrecision.DAY)) {
-            this.currentlyDisplayedDate = new DateUtil(this.currentMaxDate);
-        }
-
-        if (this.currentlyDisplayedDate.isBefore(this.currentMinDate, DatePrecision.DAY)) {
-            this.currentlyDisplayedDate = new DateUtil(this.currentMinDate);
         }
     }
 

@@ -1,19 +1,6 @@
 import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils';
-import { Calendar, DayState, MonthState, YearState } from '../calendar-state/abstract-calendar-state';
-
-
-export enum CalendarEvent {
-    DAY_SELECT = 'day-select',
-    DAY_MOUSE_ENTER = 'day-mouse-enter',
-    DAY_MOUSE_LEAVE = 'day-mouse-leave',
-    MONTH_SELECT = 'month-select',
-    MONTH_NEXT = 'month-next',
-    MONTH_PREVIOUS = 'month-previous',
-    YEAR_SELECT = 'year-select',
-    YEAR_NEXT = 'year-next',
-    YEAR_PREVIOUS = 'year-previous'
-}
+import { Calendar, CalendarEvent, DayState, MonthState, YearState } from '../calendar-state/state/calendar-state';
 
 export abstract class MAbstractCalendarRenderer extends ModulVue {
     @Prop({ required: true })

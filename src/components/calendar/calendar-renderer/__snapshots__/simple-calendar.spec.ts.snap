@@ -30,7 +30,7 @@ exports[`Simple calendar in day picker mode should render a calendar 1`] = `
                     <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">30</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button>
+                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
                     <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">1</span></button>
@@ -131,7 +131,7 @@ exports[`Simple calendar in day picker mode should render a calendar 1`] = `
                     <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">30</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button>
+                    <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
                     <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">1</span></button>
@@ -175,7 +175,7 @@ exports[`Simple calendar in day picker mode when hiding days from previous and f
                     <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">30</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button>
+                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
                     <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">1</span></button>
@@ -276,7 +276,7 @@ exports[`Simple calendar in day picker mode when hiding days from previous and f
                     <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">30</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button>
+                    <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button>
                 </td>
                 <td class="m-simple-calendar__body-cell">
                     <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">1</span></button>

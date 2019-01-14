@@ -4,9 +4,8 @@ import { addMessages } from '../../../../tests/helpers/lang';
 import { renderComponent } from '../../../../tests/helpers/render';
 import DateUtil from '../../../utils/date-util/date-util';
 import uuid from '../../../utils/uuid/uuid';
-import { Calendar, YearState } from '../calendar-state/abstract-calendar-state';
-import { CalendarEvent } from './abstract-calendar-renderer';
-import { MSimpleCalendar, PickerMode } from './simple-calendar';
+import { Calendar, CalendarEvent, YearState } from '../calendar-state/state/calendar-state';
+import MSimpleCalendar, { PickerMode } from './simple-calendar';
 
 jest.mock('../../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -110,7 +109,8 @@ const initCalendar: Function = (): Calendar => {
                 isDisabled: day === DISABLED_DAY,
                 isToday: day === CURRENT_DAY,
                 isSelected: day === SELECTED_DAY,
-                isInCurrentMonth: currentMonth === 0,
+                isInPreviousMonth: currentMonthOffset < 0,
+                isInNextMonth: currentMonthOffset > 0,
                 isHighlighted: HIGHLIGHTED_DAYS.filter((hiDay: number) => hiDay === day).length > 0,
                 hasFocus: day === FOCUSED_DAY
             };
@@ -398,7 +398,7 @@ describe('Simple calendar', () => {
 
             beforeEach(() => {
                 initialiserWrapper();
-                year = calendar.years.find((value: YearState) => value.year === CURRENT_YEAR);
+                year = calendar.years.find((value: YearState) => value.year === CURRENT_YEAR)!;
             });
 
             it(`will call event handler`, () => {
