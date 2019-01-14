@@ -1,13 +1,86 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>No context</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        Basic behavior
     </p>
     <p>
-        <m-list-item><!-- Test case --></m-list-item>
+        <m-list-item>
+            Item 1
+        </m-list-item>
+        <m-list-item>
+            Item 2
+        </m-list-item>
+    </p>
+
+    <hr />
+
+    <h3>
+        With border at
+        &nbsp;<m-button @click="borderPositionTop = !borderPositionTop">{{borderPositionTop ? 'top' : 'bottom'}}</m-button>
+    </h3>
+    <p class="m-u--margin-bottom">
+        Add a border at the {{borderPositionTop ? 'top' : 'bottom'}} of the item
+    </p>
+    <p>
+        <m-list-item :border-top="borderPositionTop"
+                     :border-bottom="!borderPositionTop">
+            Item 1
+        </m-list-item>
+        <m-list-item :border-top="borderPositionTop"
+                     :border-bottom="!borderPositionTop">
+            Item 2
+        </m-list-item>
+    </p>
+
+    <hr />
+
+    <h3>
+        With icon
+    </h3>
+    <p class="m-u--margin-bottom">
+        Display an icon on the right end
+    </p>
+    <p>
+        <m-list-item icon-name="m-svg__edit">
+            Item 1
+        </m-list-item>
+        <m-list-item icon-name="m-svg__calendar">
+            Item 2
+        </m-list-item>
+    </p>
+
+    <hr />
+
+    <h3>
+        Waiting
+    </h3>
+    <p class="m-u--margin-bottom">
+        Display a spinning icon when waiting for a process to be done
+    </p>
+    <p>
+        <m-list-item waiting="true">
+            Item 1
+        </m-list-item>
+        <m-list-item waiting="true">
+            Item 2
+        </m-list-item>
+    </p>
+
+    <hr />
+
+    <h3>
+        List item
+        &nbsp;<m-button @click="disabled = !disabled">{{disabled ? 'disabled' : 'enabled'}}</m-button>
+    </h3>
+    <p class="m-u--margin-bottom">
+        {{disabled? 'Disabled' : 'Enabled'}}
+    </p>
+    <p>
+        <m-list-item :disabled="disabled">
+            Item 1
+        </m-list-item>
+        <m-list-item :disabled="disabled">
+            Item 2
+        </m-list-item>
     </p>
 </div>
