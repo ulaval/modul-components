@@ -1,21 +1,28 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import I18nPlugin from '../../components/i18n/i18n';
+import FileDropPlugin from '../../directives/file-drop/file-drop';
 import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileStatus, MFileValidationOptions } from '../../utils/file/file';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import ModulPlugin from '../../utils/modul/modul';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import FileSelectPlugin from '../file-select/file-select';
 import IconButtonPlugin from '../icon-button/icon-button';
+import IconPlugin from '../icon/icon';
+import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
+import ModalPlugin from '../modal/modal';
+import ProgressPlugin from '../progress/progress';
 import { FileService } from './../../utils/file/file';
-import FileUploadPlugin, { MFileUpload } from './file-upload';
+import { MFileUpload } from './file-upload';
+
 
 const BTN_REPLACE_FILE: string = 'Replace';
 const TITLE_REPLACE_FILE: string = 'Replace file';
@@ -37,6 +44,19 @@ describe('MFileUpload', () => {
         Vue.use(FilePlugin);
         Vue.use(I18nPlugin);
         Vue.use(MediaQueriesPlugin);
+        Vue.use(ModulPlugin);
+        Vue.use(ButtonPlugin);
+
+        Vue.use(FileDropPlugin);
+        Vue.use(FileSelectPlugin);
+        Vue.use(ModalPlugin);
+        Vue.use(ProgressPlugin);
+        Vue.use(IconPlugin);
+
+        Vue.use(IconButtonPlugin);
+
+        Vue.use(MessagePlugin);
+        Vue.use(LinkPlugin);
 
         addMessages(Vue, ['components/file-upload/file-upload.lang.en.json']);
         addMessages(Vue, ['filters/filesize/filesize.lang.en.json']);
