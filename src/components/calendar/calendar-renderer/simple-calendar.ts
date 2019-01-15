@@ -134,8 +134,7 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
         super.onDaySelect(day);
 
         // TODO when there will be a directive to manage focus, replace this behaviour with it
-        let self: Vue = this;
-        this.$nextTick(() => (self.$refs[this.buildRef('day', day)][0] as HTMLButtonElement).focus());
+        this.$nextTick(() => (this.$refs[this.buildRef('day', day)][0] as HTMLButtonElement).focus());
     }
 
     onDayMouseEnter(day: DayState): void {
