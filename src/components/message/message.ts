@@ -1,6 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
+import I18nFilterPlugin from '../../filters/i18n/i18n';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { MESSAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -154,10 +156,15 @@ export class MMessage extends Vue {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(MESSAGE_NAME, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./message.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./message.lang.en.json'));
+        }
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
         v.use(MessagePagePlugin);
+        v.use(I18nFilterPlugin);
         v.use(I18nPlugin);
         v.component(MESSAGE_NAME, MMessage);
     }
