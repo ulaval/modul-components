@@ -2,13 +2,13 @@ import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
+import I18nFilterPlugin from '../../filters/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../component-names';
-import MessagePagePlugin, { Link } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import MessagePlugin, { MMessageState } from '../message/message';
 import PanelPlugin from '../panel/panel';
 import WithRender from './error-technical-difficulty.html?style=./error-technical-difficulty.scss';
@@ -100,6 +100,7 @@ const ErrorTechnicalDifficultyPlugin: PluginObject<any> = {
         v.use(MessagePlugin);
         v.use(PanelPlugin);
         v.use(MessagePagePlugin);
+        Vue.use(I18nFilterPlugin);
         v.component(ERROR_TECHNICAL_DIFFICULTY_NAME, MErrorTechnicalDifficulty);
     }
 };
