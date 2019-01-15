@@ -1,14 +1,14 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { ERROR_ACCESS_DENIED_NAME } from '../component-names';
-import MessagePagePlugin, { Link } from '../message-page/message-page';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePagePlugin, { Link } from '../message-page/message-page';
 import { MMessageState } from '../message/message';
 import WithRender from './error-access-denied.html';
+
 
 @WithRender
 @Component

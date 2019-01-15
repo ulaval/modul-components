@@ -1,35 +1,37 @@
 <div>
-    <h5>default</h5>
+    <h2>No context</h2>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
         <m-error-config-not-supported></m-error-config-not-supported>
     </div>
 
-    <br />
+    <hr />
 
-    <h5>With custom title</h5>
+    <h2>With custom title</h2>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
         <m-error-config-not-supported :title="title"></m-error-config-not-supported>
     </div>
 
-    <br />
+    <hr />
 
-    <h5>With many custom hints</h5>
+    <h2>With many custom hints</h2>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
         <m-error-config-not-supported :hints="manyHints"></m-error-config-not-supported>
     </div>
 
-    <br />
+    <hr />
 
-    <h5>With many custom links</h5>
+    <h2>With many custom links</h2>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
         <m-error-config-not-supported :links="manyLinks"></m-error-config-not-supported>
     </div>
 
-    <br />
+    <hr />
 
-    <h5>Unexpected error popup</h5>
-    <m-button v-m-popup:errorpopup>pop me an error</m-button>
-    <m-dialog ref="errorpopup" :negativeLink="false" ok-label="Fermer">
-            <m-error-config-not-supported ></m-error-config-not-supported>
+    <h2>Error popup</h2>
+    <m-button v-m-popup:errorpopup>try me</m-button>
+    <m-dialog ref="errorpopup"
+              :negativeLink="false"
+              ok-label="Fermer">
+        <m-error-config-not-supported></m-error-config-not-supported>
     </m-dialog>
 </div>
