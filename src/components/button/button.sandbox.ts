@@ -1,22 +1,37 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Emit } from 'vue-property-decorator';
 import { BUTTON_NAME } from '../component-names';
+import { MButtonIconPosition, MButtonSkin, MButtonType } from './button';
 import WithRender from './button.sandbox.html';
 
 @WithRender
 @Component
 export class MButtonSandbox extends Vue {
-    afficherbouton1: boolean = false;
-    messageInialValue: string = 'Mon message';
+    displayButton1: boolean = false;
+    messageInialValue: string = 'Your message';
     message: string = this.messageInialValue;
+    buttonType: MButtonType = MButtonType.Button;
+    buttonSkin: MButtonSkin = MButtonSkin.Primary;
+    buttonIconPosition: MButtonIconPosition = MButtonIconPosition.Left;
 
-
-    toogleAfficher(): void {
-        this.afficherbouton1 = !this.afficherbouton1;
+    toggleDisplay(): void {
+        this.displayButton1 = !this.displayButton1;
     }
 
     get libelle(): string {
-        return 'patate';
+        return 'text 1';
+    }
+
+    get buttonTypeToArray(): any {
+        return MButtonType;
+    }
+
+    get buttonSkinToArray(): any {
+        return MButtonSkin;
+    }
+
+    get buttonIconPositionToArray(): any {
+        return MButtonIconPosition;
     }
 
     @Emit('submit')

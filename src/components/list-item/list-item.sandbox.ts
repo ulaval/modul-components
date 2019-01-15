@@ -1,12 +1,14 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { LIST_ITEM_NAME } from '../component-names';
 import WithRender from './list-item.sandbox.html';
+
 
 @WithRender
 @Component
 export class MListItemSandbox extends Vue {
+    borderPositionTop = true;
+    disabled = true;
 }
 
 const ListItemSandboxPlugin: PluginObject<any> = {

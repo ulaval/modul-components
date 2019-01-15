@@ -1,55 +1,115 @@
 <div>
-    <h2 class="m-u--no-margin">L'utilsation de v-html dans un bouton et d'un &lt;m-i18n &gt; dans un autre n'est pas compatible</h2>
-    <p class="m-u--margin-bottom">
-        <a href="https://github.com/ulaval/modul-components/pull/536">PR-536</a> : Pour démontrer le bug qui force l'utilisation de key= lorsque l'on utilise des template voir <a href="https://fr.vuejs.org/v2/guide/conditional.html#Controle-des-elements-reutilisables-avec-key">(la doc officiel)</a>
+    <h2>No context</h2>
 
-    </p>
-    <p>
-        <div>
-            using key
+    <p>Default behavior</p>
 
-            <m-button v-html="libelle"
-                      @click="toogleAfficher()"
-                      v-if="afficherbouton1"
-                      key="username-input-2">
-            </m-button>
+    <m-button>Try me</m-button>
 
-            <m-button @click="toogleAfficher()"
-                      v-if="!afficherbouton1">
-                patate2
-            </m-button key="username-input">
+    <hr />
 
-
-            not using key
-
-
-            <m-button v-html="libelle"
-                      @click="toogleAfficher()"
-                      v-if="afficherbouton1">
-            </m-button>
-
-            <m-button @click="toogleAfficher()"
-                      v-if="!afficherbouton1">
-                patate2
-            </m-button>
-        </div>
-
-    </p>
-    <h3>L'utilisation d'un bouton à l'extérieur d'un formulaire pour faire le submit ou le reset</h3>
+    <h2>You can use the <i>submit</i> or <i>reset</i> type to affect form when the button isn't in the form's scope</h2>
+    <small>Type <i>button</i> won't affect the form in this case</small>
     <code><pre>&lt;form id="my-form"></pre></code>
     <form id="my-form"
           @submit.prevent="submit"
           @reset.prevent="reset">
         <input type="text"
-               placeholder="Votre message"
+               placeholder="Your message"
                name="message"
                v-model="message" />
     </form>
     <code><pre>&lt;/form></pre></code>
+    <div>
+        <m-button :type="buttonType"
+                  form="my-form">
+            My type is "{{buttonType}}"
+        </m-button>
 
-    <m-button type="submit"
-              form="my-form">Submit button</m-button>
-    <m-button type="reset"
-              form="my-form">Reset button</m-button>
+        <label>Type</label>
+        <select v-model="buttonType">
+            <option v-for="(element, i) in buttonTypeToArray"
+                    :value="element"
+                    :selected="element === buttonType"
+                    :key="i">{{element}}</option>
+        </select>
+    </div>
 
+    <hr />
+
+    <h2>Available skins &nbsp;
+        <select v-model="buttonSkin">
+            <option v-for="(element, i) in buttonSkinToArray"
+                    :value="element"
+                    :selected="element === buttonType"
+                    :key="i">{{element}}</option>
+        </select>
+    </h2>
+
+    <p>Change the skin of the button</p>
+
+    <m-button :skin="buttonSkin">
+        Try me
+    </m-button>
+
+    <hr />
+
+    <h2>Available icon position &nbsp;
+        <select v-model="buttonIconPosition">
+            <option v-for="(element, i) in buttonIconPositionToArray"
+                    :value="element"
+                    :selected="element === buttonType"
+                    :key="i">{{element}}</option>
+        </select>
+    </h2>
+
+    <p>Change the position of the icon</p>
+
+    <m-button :icon-position="buttonIconPosition"
+              icon-name="m-svg__file-image">
+        Try me
+    </m-button>
+
+    <hr />
+
+    <h2>Other cases</h2>
+    <ul>
+        <li>
+            <h4 class="
+              m-u--no-margin">Use of v-html in a button and use of &lt;m-i18n &gt; in another is not compatible</h4>
+            <p class="m-u--margin-bottom">
+                <a href="https://github.com/ulaval/modul-components/pull/536">PR-536</a> : Pour démontrer le bug qui force l'utilisation de key= lorsque l'on utilise des template voir <a href="https://fr.vuejs.org/v2/guide/conditional.html#Controle-des-elements-reutilisables-avec-key">(la doc officiel)</a>
+
+            </p>
+            <p>
+                <div>
+                    using key
+
+                    <m-button v-html="libelle"
+                              @click="toggleDisplay()"
+                              v-if="displayButton1"
+                              key="username-input-2">
+                    </m-button>
+
+                    <m-button @click="toggleDisplay()"
+                              v-if="!displayButton1">
+                        text 2
+                    </m-button key="username-input">
+
+
+                    not using key
+
+
+                    <m-button v-html="libelle"
+                              @click="toggleDisplay()"
+                              v-if="displayButton1">
+                    </m-button>
+
+                    <m-button @click="toggleDisplay()"
+                              v-if="!displayButton1">
+                        text 2
+                    </m-button>
+                </div>
+            </p>
+        </li>
+    </ul>
 </div>

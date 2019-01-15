@@ -1,13 +1,77 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>No context</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        Basic behavior
     </p>
-    <p>
-        <m-icon-button><!-- Test case --></m-icon-button>
+    <m-icon-button>
+    </m-icon-button>
+
+    <hr />
+
+    <h3>With context icon</h3>
+    <p class="m-u--margin-bottom">
+        Will display the icon passed
     </p>
+    <m-icon-button icon-name="m-svg__edit">
+    </m-icon-button>
+
+    <hr />
+
+    <h3>
+        With button size
+        &nbsp;<select v-model="buttonSize">
+            <option value="44px"
+                    :selected="'44px' === buttonSize">44px</option>
+            <option value="50px"
+                    :selected="'50px' === buttonSize">50px</option>
+            <option value="60px"
+                    :selected="'60px' === buttonSize">60px</option>
+        </select>
+    </h3>
+    <p class="m-u--margin-bottom">
+        Will adjust the button size in px
+    </p>
+    <m-icon-button :button-size="buttonSize"
+                   :skin="mIconButtonSkin.Primary">
+    </m-icon-button>
+
+    <hr />
+
+    <h3>
+        With icon size
+        &nbsp;<select v-model="iconSize">
+            <option value="20px"
+                    :selected="'20px' === iconSize">20px</option>
+            <option value="30px"
+                    :selected="'30px' === iconSize">30px</option>
+            <option value="40px"
+                    :selected="'60px' === iconSize">40px</option>
+        </select>
+    </h3>
+
+    <p class="m-u--margin-bottom">
+        Will adjust the icon size in px
+    </p>
+
+    <m-icon-button :icon-size="iconSize"
+                   :skin="mIconButtonSkin.Primary">
+    </m-icon-button>
+
+    <hr />
+
+    <h3>
+        Available Skins
+        &nbsp;<select v-model="iconButtonSkin">
+            <option v-for="(element, i) in iconButtonSkinAsArray"
+                    :value="element"
+                    :selected="element === iconButtonSkin"
+                    :key="i">{{element}}</option>
+        </select>
+    </h3>
+    <p class="m-u--margin-bottom">
+        Change the icon button skin
+    </p>
+    <m-icon-button :skin="iconButtonSkin"
+                   title="allo">
+    </m-icon-button>
 </div>
