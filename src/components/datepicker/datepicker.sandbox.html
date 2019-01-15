@@ -1,13 +1,57 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>No context</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        Basic behavior
     </p>
     <p>
-        <m-datepicker><!-- Test case --></m-datepicker>
+        <m-datepicker>
+        </m-datepicker>
     </p>
+
+    <hr />
+
+    <h3>Custom label</h3>
+    <p class="m-u--margin-bottom">
+        Will display a custom label
+    </p>
+    <p>
+        <m-datepicker label="A custom label">
+        </m-datepicker>
+    </p>
+
+    <hr />
+
+    <h3>Icon</h3>
+    <p class="m-u--margin-bottom">
+        Will display an icon
+    </p>
+    <p>
+        <m-datepicker icon-name="m-svg__clock">
+        </m-datepicker>
+    </p>
+
+    <hr />
+
+    <h3>Required</h3>
+    <p class="m-u--margin-bottom">
+        Will mark as required
+    </p>
+    <p>
+        <m-datepicker :required="true">
+        </m-datepicker>
+    </p>
+
+    <hr />
+
+    <h3>Min/Max dates</h3>
+    <p class="m-u--margin-bottom">
+        Will retrain date options (yesterday to tomorow as example)
+    </p>
+    <p>
+        <m-datepicker :min="dateMin"
+                      :max="dateMax">
+        </m-datepicker>
+    </p>
+
+    <hr />
 </div>
