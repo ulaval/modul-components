@@ -5,6 +5,7 @@ import { MFile } from 'src/utils';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
+import imageRemoveIcon from '../../../assets/icons/svg/Froala-image-remove.svg';
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
@@ -35,7 +36,8 @@ enum froalaEvents {
     CommandAfter = 'froalaEditor.commands.after',
     CommandBefore = 'froalaEditor.commands.before',
     ShowLinkInsert = 'froalaEditor.popups.show.link.insert',
-    ImageRemoved = 'froalaEditor.image.removed'
+    ImageRemoved = 'froalaEditor.image.removed',
+    ImageInserted = 'froalaEditor.image.inserted'
 }
 
 enum FroalaElements {
@@ -96,9 +98,11 @@ export enum FroalaStatus {
     protected status: FroalaStatus = FroalaStatus.Blurred;
 
     protected isFileUploadOpen: boolean = false;
+    protected fileUploadStoreName: string = uuid.generate();
+    protected selectedImage: HTMLElement | undefined;
+    protected allowedExtensions: string[] = [];
 
-    protected fileUploadStoreName = uuid.generate();
-
+    private imageExtensions: string[] = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'bmp'];
     private clickedInsideEditor: boolean = false;
 
     @Watch('value')
@@ -160,6 +164,7 @@ export enum FroalaStatus {
         }
         $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
         $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('imageRemove', { SVG: (imageRemoveIcon as string), template: 'custom-icons' });
     }
 
     protected addPopups(): void {
@@ -197,15 +202,34 @@ export enum FroalaStatus {
     }
 
     protected addImageButton(): void {
-        const classInstance: VueFroala = this;
+        const EDITOR_INSTANCE: VueFroala = this;
 
         $.FroalaEditor.RegisterCommand('insertImage', {
             title: this.$i18n.translate('m-rich-text-editor:insert-image'),
             undo: true,
             focus: true,
             showOnMobile: true,
-            callback: () => {
-                classInstance.isFileUploadOpen = true;
+            callback: function(): void {
+                EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
+                EDITOR_INSTANCE.isFileUploadOpen = true;
+                EDITOR_INSTANCE.selectedImage = undefined;
+            }
+        });
+
+        $.FroalaEditor.RegisterCommand('imageReplace', {
+            title: this.$i18n.translate('m-rich-text-editor:insert-image'),
+            undo: true,
+            focus: true,
+            showOnMobile: true,
+            callback: function(): void {
+                EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
+                EDITOR_INSTANCE.isFileUploadOpen = true;
+            },
+            refresh: function(): void {
+                const selectedElement: HTMLElement = this.selection.element();
+                if (selectedElement.tagName === 'IMG') {
+                    EDITOR_INSTANCE.selectedImage = selectedElement;
+                }
             }
         });
     }
@@ -215,14 +239,16 @@ export enum FroalaStatus {
     }
 
     protected onClose(): void {
-        setTimeout(() => {
-            this.froalaEditor.events.focus();
-        }, 300);
+        this.froalaEditor.events.focus();
     }
 
     protected filesAdded(files: MFile[]): void {
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
-            this.froalaEditor.image.insert(file.url, false, { id });
+            if (this.selectedImage) {
+                this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage));
+            } else {
+                this.froalaEditor.image.insert(file.url, false, { id });
+            }
         });
     }
 
@@ -347,7 +373,7 @@ export enum FroalaStatus {
                     }
                 },
                 [froalaEvents.Blur]: (_e, editor) => {
-                    if (!editor.fullscreen.isActive() && !this.clickedInsideEditor) {
+                    if (!editor.fullscreen.isActive() && !this.clickedInsideEditor && !this.isFileUploadOpen) {
                         // this timeout is used to avoid the "undetected click" bug
                         // that happens sometimes due to the hideToolbar animation
                         this.status = FroalaStatus.Blurring;
@@ -403,6 +429,11 @@ export enum FroalaStatus {
                 },
                 [froalaEvents.ImageRemoved]: (_e, _editor, img) => {
                     this.$emit('image-removed', img[0].dataset.id, this.fileUploadStoreName);
+                    this.updateModel();
+                },
+                [froalaEvents.ImageInserted]: (_e, _editor, img) => {
+                    img[0].alt = '';
+                    this.updateModel();
                 }
             }
         });

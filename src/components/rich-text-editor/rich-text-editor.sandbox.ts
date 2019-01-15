@@ -14,6 +14,7 @@ import WithRender from './rich-text-editor.sandbox.html';
 })
 export class MRichTextEditorSandBox extends ModulVue {
     public model: string = '';
+    public mediaModel: string = '';
     public focus: boolean = false;
     public error: boolean = false;
     public errorMessage: string = '';

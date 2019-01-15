@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
@@ -51,6 +50,9 @@ export class MFileSelect extends ModulVue {
     @Prop({ default: false })
     public keepStore: boolean;
 
+    @Prop({ default: () => [] })
+    public allowedExtensions: string[];
+
     $refs: {
         inputFile: HTMLInputElement;
     };
@@ -87,6 +89,10 @@ export class MFileSelect extends ModulVue {
 
     private get hasLabel(): boolean {
         return !!this.label;
+    }
+
+    get extensions(): string {
+        return this.allowedExtensions.map((ext: string) => '.' + ext).join(', ');
     }
 }
 

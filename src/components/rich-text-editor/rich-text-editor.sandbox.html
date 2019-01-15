@@ -58,7 +58,8 @@
     </div>
     <div class="m-u--margin-bottom">
         <h5>Mode media</h5>
-        <m-rich-text-editor :mode="mode"
+        <m-rich-text-editor v-model="mediaModel"
+                            :mode="mode"
                             label="texte riche"
                             max-width="large"
                             @image-ready="imageReady"
