@@ -1,12 +1,9 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
-import uuid from '../../utils/uuid/uuid';
-import { ModulVue } from '../../utils/vue/vue';
-import AccordionTransitionPlugin from '../accordion/accordion-transition';
-import { MENU_ITEM_NAME } from '../component-names';
-import { BaseMenu, Menu } from '../menu/menu';
+import uuid from '../../../utils/uuid/uuid';
+import { ModulVue } from '../../../utils/vue/vue';
+import { BaseMenu, Menu } from '../menu';
 import WithRender from './menu-item.html?style=./menu-item.scss';
 
 export abstract class BaseMenuItem extends ModulVue {
@@ -111,11 +108,3 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     }
 }
 
-const MenuPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.use(AccordionTransitionPlugin);
-        v.component(MENU_ITEM_NAME, MMenuItem);
-    }
-};
-
-export default MenuPlugin;

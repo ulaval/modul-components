@@ -1,6 +1,6 @@
 @import 'commons';
-@import '../components/menu/menu-skins';
-@import '../accordion/accordion-transition.scss';
+@import '../menu-skins';
+@import '../../accordion/accordion-transition.scss';
 
 .m-menu.m--is-skin-light {
     .m-menu-item {
@@ -174,4 +174,3 @@
         list-style: none;
     }
 }
-

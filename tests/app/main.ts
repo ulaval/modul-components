@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
-import ListItemSandboxPlugin from '../../src/components/list-item/list-item.sandbox';
+import MenuSandboxPlugin from '../../src/components/menu/menu.sandbox';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
 import UtilsPlugin, { FRENCH, UtilsPluginOptions } from '../../src/utils';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(ListItemSandboxPlugin);
+Vue.use(MenuSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);

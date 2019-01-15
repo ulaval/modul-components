@@ -33,7 +33,6 @@ import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
 import LoginPlugin from './login/login';
-import MenuItemPlugin from './menu-item/menu-item';
 import MenuPlugin from './menu/menu';
 import MessagePagePlugin from './message-page/message-page';
 import MessagePlugin from './message/message';
@@ -137,7 +136,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(NavbarItemPlugin);
         Vue.use(OptionPlugin);
         Vue.use(MenuPlugin);
-        Vue.use(MenuItemPlugin);
         Vue.use(OptionItemAddPlugin);
         Vue.use(OptionItemArchivePlugin);
         Vue.use(OptionItemDeletePlugin);
