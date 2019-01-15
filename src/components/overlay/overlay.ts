@@ -5,7 +5,9 @@ import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../
 import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
 import { OVERLAY_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
 import WithRender from './overlay.html?style=./overlay.scss';
 
 @WithRender
@@ -107,6 +109,8 @@ const OverlayPlugin: PluginObject<any> = {
             i18n.addMessages(ENGLISH, require('./overlay.lang.en.json'));
         }
 
+        v.use(ButtonPlugin);
+        v.use(I18nPlugin);
         v.component(OVERLAY_NAME, MOverlay);
     }
 };
