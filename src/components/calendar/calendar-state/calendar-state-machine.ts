@@ -1,5 +1,5 @@
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils';
 import { RangeDate, SingleDate } from './state/abstract-calendar-state';
 import CalendarRangeDateState from './state/calendar-range-date-state';
@@ -55,7 +55,7 @@ export default class MCalendarStateMachine extends ModulVue {
         this.calendarState.updateValue(value);
     }
 
+    @Emit('input')
     private dateSelectCallBack(date: SingleDate | RangeDate): void {
-        this.$emit('input', date);
     }
 }

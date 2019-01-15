@@ -1,5 +1,5 @@
 import { PluginObject } from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
+import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
@@ -51,8 +51,9 @@ export class MCalendar extends ModulVue {
         this.validateInputModel();
     }
 
-    onInput(): void {
-        this.$emit('input', this.innerValue);
+    @Emit('input')
+    onInput(): SingleDate | RangeDate {
+        return this.innerValue;
     }
 
     get isSingleDate(): boolean {
