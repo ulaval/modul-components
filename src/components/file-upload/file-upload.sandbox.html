@@ -1,56 +1,108 @@
 <div>
-    <h2>File-upload</h2>
+    <h2>No context</h2>
 
-        <div class="m-u--margin-bottom">
-            <h5>No extension specified</h5>
-            <m-file-upload><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <p class="m-u--margin-bottom">
+        <h2>No extension specified</h2>
+        <m-file-upload>
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
 
-        <div class="m-u--margin-bottom">
-            <h5>Allowed extensions only</h5>
-            <span>Allowed extensions: jpg, jpeg, png</span>
-            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <hr />
 
-        <div class="m-u--margin-bottom">
-            <h5>Rejected extensions only</h5>
-            <span>Rejected extensions: jpg, jpeg, png</span>
-            <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <h2>Allowed extensions only</h2>
 
-        <div class="m-u--margin-bottom">
-            <h5>Allowed and rejected extensions</h5>
-            <span>Allowed extensions: jpg, jpeg, png, mp4</span>
-            <br>
-            <span>Rejected extensions: jpg, jpeg</span>
-            <m-file-upload :rejected-extensions="['jpg', 'jpeg']" :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <p>Allowed extensions: jpg, jpeg, png</p>
 
-        <div class="m-u--margin-bottom">
-            <h5>Single file upload</h5>
-            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="1"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <p>
+        <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
 
-        <div class="m-u--margin-bottom">
-            <h5>Multiple files upload</h5>
-            <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']" :max-files="5"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <hr />
 
-        <div class="m-u--margin-bottom">
-            <h5>Replacement file</h5>
-            <span>Prop max-files: 1</span>
-            <m-file-upload :file-replacement="true" :max-files="1"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <h2>Rejected extensions only</h2>
 
-        <div class="m-u--margin-bottom">
-            <h5>Replacement file</h5>
-            <span>Prop max-files: 10 - should allowed only one</span>
-            <m-file-upload :file-replacement="true" :max-files="10"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <p>Rejected extensions: jpg, jpeg, png</p>
 
-        <div class="m-u--margin-bottom">
-            <h5>Replacement file</h5>
-            <span>Prop max-files: undefined</span>
-            <m-file-upload :file-replacement="true"><m-button>File upload</m-button></m-file-upload>
-        </div>
+    <p>
+        <m-file-upload :rejected-extensions="['jpg', 'jpeg', 'png']">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
+
+    <hr />
+
+    <h2>Allowed and rejected extensions</h2>
+
+    <p>Allowed extensions: jpg, jpeg, png, mp4</p>
+    <p>Rejected extensions: jpg, jpeg</p>
+
+    <p>
+        <m-file-upload :rejected-extensions="['jpg', 'jpeg']"
+                       :allowed-extensions="['jpg', 'jpeg', 'png', 'mp4']">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
+
+    <hr />
+
+    <h2>Single file upload</h2>
+
+    <p>
+        <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"
+                       :max-files="1">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
+
+    <hr />
+
+    <h2>Multiple files upload</h2>
+
+    <p>
+        <m-file-upload :allowed-extensions="['jpg', 'jpeg', 'png']"
+                       :max-files="5">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
+
+    <hr />
+
+    <h2>Replacement file</h2>
+
+    <p>Prop max-files: 1</p>
+
+    <p>
+        <m-file-upload :file-replacement="true"
+                       :max-files="1">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
+
+    <hr />
+
+    <h2>Replacement file</h2>
+
+    <p>Prop max-files: 10 - should allowed only one</p>
+
+    <p>
+        <m-file-upload :file-replacement="true"
+                       :max-files="10">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
+
+    <hr />
+
+    <h2>Replacement file</h2>
+
+    <p>Prop max-files: undefined</p>
+
+    <p>
+        <m-file-upload :file-replacement="true">
+            <m-button>File upload</m-button>
+        </m-file-upload>
+    </p>
 </div>
