@@ -1,0 +1,23 @@
+@mixin m-commons-froala-styles() {
+    @include m-titles-styles();
+    @include m-text-styles();
+
+    ul,
+    ol,
+    table {
+        margin-top: $m-margin;
+        margin-bottom: 0;
+    }
+
+    ul {
+        @include m-bullet-list();
+    }
+
+    ol {
+        @include m-number-list();
+    }
+
+    table {
+        @include m-table();
+    }
+}

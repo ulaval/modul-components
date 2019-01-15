@@ -3,26 +3,28 @@
                 'm--is-checkbox-right': !hasCheckboxLeft,
                 'm--is-checked': propValue,
                 'm--is-disabled': isDisabled,
+                'm--is-indeterminate': propIndeterminate,
                 'm--is-readonly': readonly,
                 'm--is-focus': isFocus,
                 'm--has-error': hasError,
                 'm--is-valid': isValid }">
-    <input v-if="!readonly"
+    <input class="m-checkbox__hidden"
+           v-if="!readonly"
            ref="checkbox"
            type="checkbox"
            :id="id"
-           class="m-checkbox__hidden"
+           :indeterminate.prop="propIndeterminate"
            :disabled="isDisabled"
            v-model="propValue"
            @click="onClick"
            @focus="setFocus(true)"
-           @blur="setFocus(false)" />
+           @blur="setFocus(false)">
     <input v-if="readonly"
            type="hidden"
            :id="id"
            :value="propValue" />
     <label class="m-checkbox__wrap"
-           :for="forId"
+           :for="id"
            :aria-hidden="!hasLabelSlot">
         <span class="m-checkbox__input"
               aria-hidden="true">
@@ -33,8 +35,8 @@
             <slot></slot>
         </span>
     </label>
-    <m-validation-message ref="validation"
-                          class="m-checkbox__message"
+    <m-validation-message class="m-checkbox__message"
+                          ref="validation"
                           :disabled="isDisabled"
                           :error="hasError"
                           :error-message="errorMessage"

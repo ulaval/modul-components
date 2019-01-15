@@ -1,4 +1,4 @@
-@import '../../styles/abstracts/variables';
+@import 'commons';
 
 .m-overlay {
     &__wrap {
@@ -79,7 +79,7 @@
 
     &__header {
         color: $m-color--white;
-        background-color: var(--m-color--header-dark);
+        background-color: $m-color--grey-black;
 
         h1,
         h2,

@@ -4,18 +4,13 @@
 //  abstracts
 // ======================================================================
 @import
-    'abstracts/variables',
-    'abstracts/custom-properties',
-    'abstracts/var-color-calendar';
+    'commons';
 
 // ======================================================================
 //  Base
 // ======================================================================
 @import
-    'base/fonts',
     'base/base',
-    'base/typography',
-    'base/layout',
     'base/animations';
 
 // ======================================================================

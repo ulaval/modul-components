@@ -1,6 +1,5 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
 import { TREE_NAME } from '../component-names';
 import { TreeNode } from './tree';
 import WithRender from './tree.sandbox.html';
@@ -18,6 +17,13 @@ export class MRootTreeSandbox extends Vue {
     public currentFile: string[] = ['/folder 1/folder 2/index.html'];
     public currentFile2: string[] = ['/1/2'];
     public wrongCurrentFile: string[] = ['/3/4'];
+    public currentNodesBasic: string[] = [];
+    public currentNodesCheckboxes: string[] = ['/3/11'];
+    public disabledNodesCheckboxes: string[] = ['/3/11'];
+    public currentNodesCheckboxesParent: string[] = [];
+    public currentNodesCheckboxesButtonAutoselect: string[] = [];
+    public currentNodesCheckboxesNone: string[] = ['/1/11/444/1111'];
+    public disabledNodesCheckboxesNone: string[] = ['/3', '/1/11/444/2222'];
 
     public emptyTree: TreeNode[] = [];
 
@@ -256,8 +262,82 @@ export class MRootTreeSandbox extends Vue {
         }
     ];
 
+    public multiNodeTree: TreeNode[] = [
+        {
+            id: '1',
+            label: 'UL - Université Laval',
+            hasChildren: true,
+            children: [
+                {
+                    id: '11',
+                    label: 'FSG - Faculté de Sciences et Génie',
+                    children: [
+                        {
+                            id: '111',
+                            label: 'ACT - Actuariat'
+                        },
+                        {
+                            id: '222',
+                            label: 'BIO - Biologie'
+                        },
+                        {
+                            id: '333',
+                            label: 'CHM - Chimie'
+                        },
+                        {
+                            id: '444',
+                            label: 'GMCN - Génie Mécanique',
+                            children: [
+                                {
+                                    id: '1111',
+                                    label: 'PRS - Personne'
+                                },
+                                {
+                                    id: '2222',
+                                    label: 'SMT - Something'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: '22',
+                    label: 'LLI - Lettres et sciences humaines',
+                    children: [
+                        {
+                            id: '111',
+                            label: 'JPN - Japonais'
+                        },
+                        {
+                            id: '222',
+                            label: 'EN - Anglais'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: '2',
+            label: 'CSF - Cégep Sainte-Foy'
+        },
+        {
+            id: '3',
+            label: 'UQAM - Université du Québec à Montréal',
+            children: [
+                {
+                    id: '11',
+                    label: 'CHM - Chimie'
+                },
+                {
+                    id: '22',
+                    label: 'GMCN - Génie Mécanique'
+                }
+            ]
+        }
+    ];
+
     public onSelect(): void {
-        console.error('modUL - New file selected');
+        console.error('modUL - New node selected');
     }
 
 }

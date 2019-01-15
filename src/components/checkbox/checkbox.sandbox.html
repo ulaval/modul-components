@@ -6,7 +6,10 @@
     <p>
         <m-checkbox error-message="Enim ipsum qui consectetur ea in non.">Choix de réponse 1</m-checkbox><br>
         <m-checkbox>Choix de réponse 2</m-checkbox><br>
-        <m-checkbox error-message="Enim ipsum qui consectetur ea in non.">Choix de réponse 3</m-checkbox>
+        <m-checkbox error-message="Enim ipsum qui consectetur ea in non.">Choix de réponse 3</m-checkbox><br>
+        <m-checkbox :disabled="true">Choix invalide</m-checkbox><br>
+        <m-checkbox :indeterminate="true">État <a target="_blank"
+               href="https://developer.mozilla.org/fr/docs/Web/CSS/:indeterminate">indéterminé</a></m-checkbox>
     </p>
 
     <!-- Sandbox template -->
@@ -22,16 +25,17 @@
         <p class="m-u--margin-bottom">
 
             <!-- if relevant, add link to PR
-                </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank" label="PR description</a>
+            </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank" label="PR description</a>
 
-            </p>-->
+        </p>-->
             <m-checkbox v-model="disabledCheckboxValue"
                         :disabled="disabledCheckbox"></m-checkbox>
             <m-button @click="disabledCheckbox = !disabledCheckbox">Désactiver/Activer le checkbox</m-button>
         </p>
 
-    <m-checkbox :readonly="isReadOnly"
-                v-model="checkboxReadOnlyValue">Readonly</m-checkbox><em>(Valeur checkbox: {{checkboxReadOnlyValue}})</em><br />
-    <m-button @click="isReadOnly = !isReadOnly">Activer/Désactiver ReadOnly</m-button>
+        <m-checkbox :readonly="isReadOnly"
+                    v-model="checkboxReadOnlyValue">Readonly</m-checkbox><em>(Valeur checkbox: {{checkboxReadOnlyValue}})</em><br />
+        <m-button @click="isReadOnly = !isReadOnly">Activer/Désactiver ReadOnly</m-button>
 
+    </p>
 </div>

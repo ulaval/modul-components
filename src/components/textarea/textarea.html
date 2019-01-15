@@ -4,7 +4,6 @@
                'm--has-error' : hasTextareaError,
                'm--is-valid' : isTextareaValid,
                'm--is-focus' : isFocus,
-               'm--has-icon' : hasIcon,
                'm--has-label': hasLabel }"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
@@ -16,7 +15,6 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :icon-name="iconName"
                    :readonly="readonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
@@ -40,15 +38,18 @@
         </textarea>
     </m-input-style>
     <div class="m-textarea__validation">
-        <m-validation-message
-            class="m-textarea__validation__message"
-            :disabled="isDisabled"
-            :waiting="isWaiting"
-            :error="hasTextareaError"
-            :error-message="errorMessage"
-            :valid="isTextareaValid"
-            :valid-message="validMessage"
-            :helper-message="helperMessage"></m-validation-message>
-        <m-character-count v-if="characterCount" :value-length="valueLength" :max-length="maxLength" :threshold="characterCountThreshold" :transition="hasCounterTransition"></m-character-count>
+        <m-validation-message class="m-textarea__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasTextareaError"
+                              :error-message="errorMessage"
+                              :valid="isTextareaValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+        <m-character-count v-if="characterCount"
+                           :value-length="valueLength"
+                           :max-length="maxLength"
+                           :threshold="characterCountThreshold"
+                           :transition="hasCounterTransition"></m-character-count>
     </div>
 </div>

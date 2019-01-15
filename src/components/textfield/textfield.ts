@@ -21,7 +21,8 @@ export enum MTextfieldType {
     Password = 'password',
     Email = 'email',
     Url = 'url',
-    Telephone = 'tel'
+    Telephone = 'tel',
+    Search = 'search'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
@@ -45,11 +46,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Password ||
             value === MTextfieldType.Telephone ||
             value === MTextfieldType.Text ||
-            value === MTextfieldType.Url
+            value === MTextfieldType.Url ||
+            value === MTextfieldType.Search
     })
     public type: MTextfieldType;
     @Prop({ default: true })
-    public passwordIcon: boolean;
+    public icon: boolean;
     @Prop({ default: false })
     public wordWrap: boolean;
     @Prop()
@@ -63,9 +65,14 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     readonly internalValue: string;
 
+    public $refs: {
+        input: HTMLInputElement
+    };
+
     private passwordAsText: boolean = false;
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
+    private searchIconDescription: string = this.$i18n.translate('m-textfield:search');
     private id: string = `mTextfield-${uuid.generate()}`;
 
     protected created(): void {
@@ -97,27 +104,32 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    public get inputType(): MTextfieldType {
-        let type: MTextfieldType = MTextfieldType.Text;
-        if (this.type === MTextfieldType.Password && this.passwordAsText) {
-            type = MTextfieldType.Text;
-        } else if (this.type === MTextfieldType.Password || this.type === MTextfieldType.Email || this.type === MTextfieldType.Url ||
-            this.type === MTextfieldType.Telephone) {
-            type = this.type;
-        }
-        return type;
+    private search(): void {
+        this.$emit('search');
     }
 
-    private get iconNamePassword(): string {
+    private reset(): void {
+        this.$emit('input', '');
+    }
+
+    public get inputType(): MTextfieldType {
+        return !this.passwordAsText ? this.type : MTextfieldType.Text;
+    }
+
+    private get passwordIcon(): boolean {
+        return this.icon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    }
+
+    private get passwordIconName(): string {
         return this.passwordAsText ? ICON_NAME_PASSWORD_HIDDEN : ICON_NAME_PASSWORD_VISIBLE;
     }
 
-    private get iconDescriptionPassword(): string {
+    private get passwordIconDescription(): string {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
     }
 
-    private get propPasswordIcon(): boolean {
-        return this.passwordIcon && this.type === MTextfieldType.Password && this.as<InputState>().active;
+    private get searchIcon(): boolean {
+        return this.icon && this.type === MTextfieldType.Search;
     }
 
     private get hasWordWrap(): boolean {
@@ -142,6 +154,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get isTextfieldValid(): boolean {
         return this.as<InputState>().isValid;
+    }
+
+    private get isTypeSearch(): boolean {
+        return this.type === MTextfieldType.Search;
     }
 
     private get hasCounterTransition(): boolean {

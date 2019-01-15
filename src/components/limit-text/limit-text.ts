@@ -1,7 +1,6 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
@@ -10,6 +9,7 @@ import { LIMIT_TEXT_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './limit-text.html?style=./limit-text.scss';
+
 
 @WithRender
 @Component({
@@ -83,7 +83,7 @@ export class MLimitText extends ModulVue {
             // Generate the full content - Add the close link if an HTML tag is present
             if (this.testingContent.match('</')) {
                 let tagIndex: number = this.testingContent.lastIndexOf('</');
-                this.fullContent = this.testingContent.substring(0,tagIndex) + this.closeLink + this.testingContent.substring(tagIndex);
+                this.fullContent = this.testingContent.substring(0, tagIndex) + this.closeLink + this.testingContent.substring(tagIndex);
             } else {
                 this.fullContent = this.testingContent + this.closeLink;
             }
@@ -147,9 +147,7 @@ export class MLimitText extends ModulVue {
                         }
                         tag += '>';
                         // Do not keep the tag if it is a "self closing" tag
-                        if (/<\/(area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)$/.test(closingTag)) {
-                            closingTag = closingTag.slice(tag.length);
-                        } else {
+                        if (!/<\/(area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)>$/.test(tag)) {
                             closingTag = tag + closingTag;
                         }
                         break;
@@ -183,17 +181,17 @@ export class MLimitText extends ModulVue {
 
     private get openLinkOriginal(): string {
         return this.openLabel ? `...&nbsp;<m-link style="font-weight:400;" mode="button" title="` + this.getOpenLabelTitle + `" hiddenText="` + this.getOpenLabelTitle + `" :underline="false">[` + this.openLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
-                                `...&nbsp;<m-link style="font-weight:400;" mode="button" title="` + this.getOpenLabelTitle + `" hiddenText="` + this.getOpenLabelTitle + `" :underline="false">[` + '\xa0+\xa0' + `]</m-link>`;
+            `...&nbsp;<m-link style="font-weight:400;" mode="button" title="` + this.getOpenLabelTitle + `" hiddenText="` + this.getOpenLabelTitle + `" :underline="false">[` + '\xa0+\xa0' + `]</m-link>`;
     }
 
     private get openLink(): string {
         return this.openLabel ? `...&nbsp;<m-link mode="button" title="` + this.openLabel.replace(/\s/g, '\xa0') + `" hiddenText="` + this.openLabel.replace(/\s/g, '\xa0') + `" :underline="false">[` + this.openLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
-                                `...&nbsp;<m-link mode="button" title="` + this.$i18n.translate('m-limit-text:open') + `" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + '\xa0+\xa0' + `]</m-link>`;
+            `...&nbsp;<m-link mode="button" title="` + this.$i18n.translate('m-limit-text:open') + `" hiddenText="` + this.$i18n.translate('m-limit-text:open') + `" :underline="false">[` + '\xa0+\xa0' + `]</m-link>`;
     }
 
     private get closeLink(): string {
         return this.closeLabel ? `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + this.closeLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
-                                 `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + '\xa0-\xa0' + `]</m-link>`;
+            `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + '\xa0-\xa0' + `]</m-link>`;
     }
 
     private get getOpenLabelTitle(): string {

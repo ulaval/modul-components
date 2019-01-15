@@ -85,5 +85,5 @@ export const TOUCH_NAME: string = 'm-touch';
 export const TOOLTIP_NAME: string = 'm-tooltip';
 export const TREE_NAME: string = 'm-tree';
 export const TREE_ICON_NAME: string = 'm-tree-icon';
-export const TREE_NODE_NAME: string = 'm-tree-node';
+export const TREE_NAME_NODE: string = 'm-tree-node';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';

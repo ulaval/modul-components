@@ -31,7 +31,6 @@ type StackMap = {
 export class Modul {
     public htmlEl: HTMLElement = document.querySelector('html') as HTMLElement;
     public bodyEl: HTMLElement = document.querySelector('body') as HTMLElement;
-    public bodyStyle: any = this.bodyEl.style;
     public event = new Vue();
     public scrollPosition: number = 0;
     public stopScrollPosition: number = 0;
@@ -46,7 +45,7 @@ export class Modul {
     private lastScrollPosition: number = 0;
     private doneScrollEvent: any;
     private doneResizeEvent: any;
-    private scrollActive: boolean = true;
+    private internalScrollActive: boolean = true;
 
     constructor() {
         this.scrollPosition = window.pageYOffset;
@@ -55,37 +54,9 @@ export class Modul {
         window.addEventListener('resize', (e) => this.onResize(e));
     }
 
-    public onClick(event: MouseEvent): void {
-        this.event.$emit('click', event);
-    }
-
-    public onScroll(event): void {
-        this.scrollPosition = window.pageYOffset;
-        if (this.lastScrollPosition > this.scrollPosition) {
-            this.scrollUp = true;
-            this.scrollDown = false;
-        } else {
-            this.scrollUp = false;
-            this.scrollDown = true;
-        }
-        this.lastScrollPosition = this.scrollPosition;
-        this.event.$emit('scroll', event);
-
-        clearTimeout(this.doneScrollEvent);
-        this.doneScrollEvent = setTimeout(() => {
-            this.event.$emit('scrollDone', event);
-        }, DONE_EVENT_DURATION);
-    }
-
-    public onResize(event): void {
-        this.event.$emit('resize', event);
-
-        clearTimeout(this.doneResizeEvent);
-        this.doneResizeEvent = setTimeout(() => {
-            this.event.$emit('resizeDone', event);
-        }, DONE_EVENT_DURATION);
-    }
-
+    /**
+     * @deprecated Don't use this function to emit events between two components
+     */
     public updateAfterResize(): void {
         this.event.$emit('updateAfterResize');
     }
@@ -96,7 +67,8 @@ export class Modul {
         let scrollId: string | undefined = undefined;
 
         if (backdropMode !== BackdropMode.None) {
-            scrollId = this.stopScrollBody(viewportIsSmall);
+            this.scrollActive = false;
+            scrollId = uuid.generate();
         }
         if (backdropMode === BackdropMode.BackdropFast || backdropMode === BackdropMode.BackdropSlow) {
             backdropIndex = this.ensureBackdrop(viewportIsSmall);
@@ -145,6 +117,40 @@ export class Modul {
 
     public peekElement(): string | undefined {
         return this.windowStack.length > 0 ? this.windowStack[this.windowStack.length - 1] : undefined;
+    }
+
+    private onClick(event: MouseEvent): void {
+        this.event.$emit('click', event);
+    }
+
+    private onScroll(event): void {
+        if (this.scrollActive) {
+            this.scrollPosition = window.pageYOffset;
+            if (this.lastScrollPosition > this.scrollPosition) {
+                this.scrollUp = true;
+                this.scrollDown = false;
+            } else {
+                this.scrollUp = false;
+                this.scrollDown = true;
+            }
+            this.lastScrollPosition = this.scrollPosition;
+            this.event.$emit('scroll', event);
+
+            clearTimeout(this.doneScrollEvent);
+            this.doneScrollEvent = setTimeout(() => {
+                this.event.$emit('scrollDone', event);
+            }, DONE_EVENT_DURATION);
+
+        }
+    }
+
+    private onResize(event): void {
+        this.event.$emit('resize', event);
+
+        clearTimeout(this.doneResizeEvent);
+        this.doneResizeEvent = setTimeout(() => {
+            this.event.$emit('resizeDone', event);
+        }, DONE_EVENT_DURATION);
     }
 
     private ensureBackdrop(viewportIsSmall: boolean): number {
@@ -209,7 +215,6 @@ export class Modul {
 
         if (!lastScrollId && !this.backdropElement) {
             this.scrollActive = true;
-            this.activeScrollBody();
         } else if (!lastBackdropIndex) {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
@@ -226,12 +231,6 @@ export class Modul {
                     if (b && b.parentNode) {
                         b.parentNode.removeChild(b);
                     }
-                    // if (!this.backdropElement) {
-                    //     this.activeScrollBody();
-                    // }
-                    if (!lastScrollId && this.scrollActive) {
-                        this.activeScrollBody();
-                    }
                 }, speed);
             }
         } else if (this.backdropElement) {
@@ -241,37 +240,40 @@ export class Modul {
         }
     }
 
-    private activeScrollBody(): void {
-        this.htmlEl.style.removeProperty('overflow');
-        this.bodyStyle.removeProperty('position');
-        this.bodyStyle.removeProperty('top');
-        this.bodyStyle.removeProperty('right');
-        this.bodyStyle.removeProperty('left');
-        this.bodyStyle.removeProperty('bottom');
-        this.bodyStyle.removeProperty('height');
-        this.bodyStyle.removeProperty('overflow');
-        window.scrollTo(0, this.stopScrollPosition);
-        this.stopScrollPosition = this.scrollPosition;
+    private set scrollActive(scrollActive: boolean) {
+        if (scrollActive) {
+            this.htmlEl.style.removeProperty('position');
+            this.htmlEl.style.removeProperty('top');
+            this.htmlEl.style.removeProperty('right');
+            this.htmlEl.style.removeProperty('left');
+            this.htmlEl.style.removeProperty('bottom');
+            this.htmlEl.style.removeProperty('height');
+            this.bodyEl.style.removeProperty('margin-top');
+            window.scrollTo(0, this.stopScrollPosition);
 
-        if (this.bodyStyle.length === 0) {
-            this.bodyEl.removeAttribute('style');
+            if (this.htmlEl.style.length === 0) {
+                this.htmlEl.removeAttribute('style');
+            }
+
+            if (this.bodyEl.style.length === 0) {
+                this.bodyEl.removeAttribute('style');
+            }
+
+        } else {
+            this.stopScrollPosition = this.scrollPosition;
+            this.htmlEl.style.position = 'fixed';
+            this.htmlEl.style.top = '0';
+            this.htmlEl.style.right = '0';
+            this.htmlEl.style.left = '0';
+            this.htmlEl.style.bottom = '0';
+            this.htmlEl.style.height = '100%';
+            this.bodyEl.style.marginTop = `-${this.stopScrollPosition}px`;
         }
+        this.internalScrollActive = scrollActive;
     }
 
-    private stopScrollBody(viewportIsSmall: boolean): string {
-        if (this.scrollActive) {
-            this.scrollActive = false;
-            this.stopScrollPosition = this.scrollPosition;
-            this.bodyStyle.position = 'fixed';
-            this.bodyStyle.top = '0'; // --> ENA2-767
-            this.bodyStyle.right = '0';
-            this.bodyStyle.left = '0';
-            this.bodyStyle.bottom = '0'; // --- Added bug in IE11 --- Added to fix edge case where showed contents through popper/portal are hidden when page content isn't high enough to stretch the body.
-            this.bodyStyle.height = '100%';
-            this.htmlEl.style.overflow = 'hidden';
-            this.bodyEl.scrollTop = this.stopScrollPosition; // Overflow hidden must be applied on <body> and the <html> before "scrollTop"
-        }
-        return uuid.generate();
+    private get scrollActive(): boolean {
+        return this.internalScrollActive;
     }
 }
 

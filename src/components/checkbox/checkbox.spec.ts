@@ -57,6 +57,18 @@ describe('MCheckbox', () => {
         return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly when disabled and checked', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                disabled: true,
+                value: true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
     it('should render correctly when readonly', () => {
         const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
@@ -85,6 +97,28 @@ describe('MCheckbox', () => {
         chkbox.find('input').trigger('click');
 
         expect(chkbox.emitted('click')).toBeTruthy();
+    });
+
+    it('should render correctly when indeterminated (with correct classes)', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                'indeterminate': true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should should have the indeterminated prop when indeterminated', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                'indeterminate': true
+            }
+        });
+
+        return expect(chkbox.find('input').element.indeterminate).toBeTruthy(); // TODO: Add prop to linter?
     });
 
     it('should flow down InputState mixin props to m-validation-message', () => {

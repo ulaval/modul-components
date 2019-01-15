@@ -1,13 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+import { Location } from 'vue-router';
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME } from '../component-names';
 import { BaseNavbar, Navbar } from '../navbar/navbar';
 import NavbarItemHelper from './navbar-item-helper';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
-
-
 // must be sync with selected css class
 const FAKE_SELECTED_CLASS: string = 'm--is-fake-selected';
 
@@ -20,7 +19,7 @@ export class MNavbarItem extends ModulVue {
     @Prop()
     public disabled: boolean;
     @Prop()
-    public url: string;
+    public url: string | Location;
     @Prop()
     public ariaHaspopup: boolean;
     @Prop()
@@ -150,6 +149,7 @@ export class MNavbarItem extends ModulVue {
             this.$emit('mouseleave', event);
         }
     }
+
 }
 
 const NavbarItemPlugin: PluginObject<any> = {

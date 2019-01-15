@@ -12,9 +12,13 @@ import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import { MLinkMode } from '../link/link';
-import { MMessageState } from '../message/message';
 import WithRender from './toast.html?style=./toast.scss';
 
+export enum MToastTimeout {
+    none = 'none',
+    short = 'short',
+    long = 'long'
+}
 
 export enum MToastPosition {
     TopLeft = 'top-left',
@@ -25,20 +29,27 @@ export enum MToastPosition {
     BottomRight = 'bottom-right'
 }
 
+export enum MToastState {
+    Confirmation = 'confirmation',
+    Information = 'information',
+    Warning = 'warning',
+    Error = 'error'
+}
+
 @WithRender
 @Component({
     mixins: [MediaQueries, Portal]
 })
 export class MToast extends ModulVue implements PortalMixinImpl {
     @Prop({
-        default: MMessageState.Confirmation,
+        default: MToastState.Confirmation,
         validator: value =>
-            value === MMessageState.Confirmation ||
-            value === MMessageState.Information ||
-            value === MMessageState.Warning ||
-            value === MMessageState.Error
+            value === MToastState.Confirmation ||
+            value === MToastState.Information ||
+            value === MToastState.Warning ||
+            value === MToastState.Error
     })
-    public state: MMessageState;
+    public state: MToastState;
 
     @Prop({
         default: MToastPosition.BottomRight,
@@ -53,9 +64,13 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     public position: MToastPosition;
 
     @Prop({
-        default: 0
+        default: MToastTimeout.none,
+        validator: value =>
+            value === MToastTimeout.none ||
+            value === MToastTimeout.short ||
+            value === MToastTimeout.long
     })
-    public timeout: number;
+    public timeout: MToastTimeout;
 
     @Prop()
     public open: boolean;
@@ -78,17 +93,21 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     };
 
     private buttonMode: MLinkMode = MLinkMode.Button;
+    private internalTimeout: number;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
+        el.style.position = 'absolute';
         if (value) {
             if (this.offset !== '0') {
                 this.getPortalElement().style.transform = `translateY(${this.offset})`;
             }
 
-            if (this.timeout) {
+            this.internalTimeout = this.convertTimeout(this.timeout);
+
+            if (this.internalTimeout > 0) {
                 setTimeout(() => {
                     this.onClose();
-                }, this.timeout);
+                }, this.internalTimeout);
             }
         }
         return true;
@@ -112,12 +131,20 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         }
     }
 
-    @Emit('action-button')
-    private actionButton(event: Event): void {
+    private convertTimeout(timeout: MToastTimeout): number {
+        switch (timeout) {
+            case MToastTimeout.long:
+                return 15000;
+            case MToastTimeout.short:
+                return 5000;
+            case MToastTimeout.none:
+            default:
+                return 0;
+        }
     }
 
-    private onAction($event): void {
-        this.$emit('action-button', $event);
+    @Emit('action-button')
+    private onAction(event: Event): void {
         this.onClose();
     }
 
@@ -126,22 +153,22 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     private get isStateInformation(): boolean {
-        return this.state === MMessageState.Information;
+        return this.state === MToastState.Information;
     }
 
     private get isStateWarning(): boolean {
-        return this.state === MMessageState.Warning;
+        return this.state === MToastState.Warning;
     }
 
     private get isStateError(): boolean {
-        return this.state === MMessageState.Error;
+        return this.state === MToastState.Error;
     }
 
     private get isStateConfirmation(): boolean {
-        return this.state === MMessageState.Confirmation;
+        return this.state === MToastState.Confirmation;
     }
 
-    private get isTop(): boolean {
+    public get isTop(): boolean {
         return this.position === MToastPosition.TopLeft ||
             this.position === MToastPosition.TopCenter ||
             this.position === MToastPosition.TopRight;
@@ -165,16 +192,16 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     private getIcon(): string {
         let icon: string = '';
         switch (this.state) {
-            case MMessageState.Confirmation:
+            case MToastState.Confirmation:
                 icon = 'm-svg__confirmation';
                 break;
-            case MMessageState.Information:
+            case MToastState.Information:
                 icon = 'm-svg__information';
                 break;
-            case MMessageState.Warning:
+            case MToastState.Warning:
                 icon = 'm-svg__warning';
                 break;
-            case MMessageState.Error:
+            case MToastState.Error:
                 icon = 'm-svg__error';
                 break;
             default:
