@@ -1,11 +1,11 @@
-import { createLocalVue, mount, Wrapper, shallow } from '@vue/test-utils';
+import { createLocalVue, mount, shallow, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
-import { renderComponent } from '../../../tests/helpers/render';
-import ModulPlugin from '../../utils/modul/modul';
-import NavbarItemPlugin, { MNavbarItem } from './navbar-item';
-import { MNavbar } from '../navbar/navbar';
+import { renderComponent } from '../../../../tests/helpers/render';
+import ModulPlugin from '../../../utils/modul/modul';
+import { MNavbar } from '../../navbar/navbar';
+import { MNavbarItem } from './navbar-item';
 import NavbarItemHelper from './navbar-item-helper';
+
 let mockIsRouterLinkActive: boolean = false;
 
 jest.mock('./navbar-item-helper', () => ({
@@ -20,24 +20,24 @@ describe('MNavbarItem', () => {
         mockIsRouterLinkActive = false;
         Vue.use(ModulPlugin);
         localVue = createLocalVue();
-        localVue.use(NavbarItemPlugin);
+        //  localVue.component(Nav);
         parentNavbar = shallow(MNavbar);
     });
 
     const initializeWrapper: (initialPropValues: any)
-    => Wrapper<MNavbarItem> = (initialPropValues: any = {}) => {
-        document.querySelector = () => true;
-        wrapper = shallow(MNavbarItem, {
-            methods: {
-                getParent(): MNavbar {
-                    return parentNavbar.vm;
-                }
-            },
-            propsData: initialPropValues
-        });
+        => Wrapper<MNavbarItem> = (initialPropValues: any = {}) => {
+            document.querySelector = () => true;
+            wrapper = shallow(MNavbarItem, {
+                methods: {
+                    getParent(): MNavbar {
+                        return parentNavbar.vm;
+                    }
+                },
+                propsData: initialPropValues
+            });
 
-        return wrapper;
-    };
+            return wrapper;
+        };
 
     const defaultSlot: any = {
         default: `navbar item content`

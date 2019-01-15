@@ -3,8 +3,9 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { ModulVue } from '../../utils/vue/vue';
-import { NAVBAR_NAME } from '../component-names';
-import NavbarItemPlugin, { MNavbarItem } from '../navbar-item/navbar-item';
+import { NAVBAR_ITEM_NAME, NAVBAR_NAME } from '../component-names';
+import IconButtonPlugin from '../icon-button/icon-button';
+import { MNavbarItem } from './navbar-item/navbar-item';
 import WithRender from './navbar.html?style=./navbar.scss';
 
 
@@ -314,8 +315,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
 const NavbarPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(NAVBAR_NAME + ' is not ready for production');
-        v.use(NavbarItemPlugin);
+        v.use(IconButtonPlugin);
+        v.component(NAVBAR_ITEM_NAME, MNavbarItem);
         v.component(NAVBAR_NAME, MNavbar);
     }
 };

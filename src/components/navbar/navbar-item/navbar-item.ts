@@ -1,12 +1,11 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
-import { ModulVue } from '../../utils/vue/vue';
-import { NAVBAR_ITEM_NAME } from '../component-names';
-import { BaseNavbar, Navbar } from '../navbar/navbar';
+import { ModulVue } from '../../../utils/vue/vue';
+import { BaseNavbar, Navbar } from '../../navbar/navbar';
 import NavbarItemHelper from './navbar-item-helper';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
+
 // must be sync with selected css class
 const FAKE_SELECTED_CLASS: string = 'm--is-fake-selected';
 
@@ -152,11 +151,4 @@ export class MNavbarItem extends ModulVue {
 
 }
 
-const NavbarItemPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.warn(NAVBAR_ITEM_NAME + ' is not ready for production');
-        v.component(NAVBAR_ITEM_NAME, MNavbarItem);
-    }
-};
 
-export default NavbarItemPlugin;

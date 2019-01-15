@@ -37,7 +37,6 @@ import MenuPlugin from './menu/menu';
 import MessagePagePlugin from './message-page/message-page';
 import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
-import NavbarItemPlugin from './navbar-item/navbar-item';
 import NavbarPlugin from './navbar/navbar';
 import OptionItemPlugin from './option-item/option-item';
 import OptionItemAddPlugin from './option-item/option-item-add';
@@ -133,7 +132,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(MessagePlugin);
         Vue.use(DialogPlugin);
         Vue.use(NavbarPlugin);
-        Vue.use(NavbarItemPlugin);
         Vue.use(OptionPlugin);
         Vue.use(MenuPlugin);
         Vue.use(OptionItemAddPlugin);
