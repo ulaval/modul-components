@@ -186,7 +186,6 @@ export class MLink extends ModulVue {
 
 const LinkPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(LINK_NAME, 'plugin.install');
         const i18n: Messages = (v.prototype as any).$i18n;
         if (i18n) {
             i18n.addMessages(FRENCH, require('./link.lang.fr.json'));
