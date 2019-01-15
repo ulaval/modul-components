@@ -3,12 +3,13 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_TEXT_NAME } from '../component-names';
+import DynamicTemplatePlugin from '../dynamic-template/dynamic-template';
 import I18nPlugin from '../i18n/i18n';
-import LinkPlugin from '../link/link';
 import WithRender from './limit-text.html?style=./limit-text.scss';
+
 
 
 @WithRender
@@ -241,9 +242,14 @@ export class MLimitText extends ModulVue {
 const LimitTextPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(LIMIT_TEXT_NAME + 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./limit-text.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./limit-text.lang.en.json'));
+        }
+
         v.use(I18nPlugin);
-        v.use(LinkPlugin);
-        v.use(MediaQueriesPlugin);
+        v.use(DynamicTemplatePlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);
     }
 };
