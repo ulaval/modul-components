@@ -1,18 +1,11 @@
-import { PortalPluginInstall } from 'portal-vue';
 import Vue, { PluginObject } from 'vue';
-import * as TouchPlugin from 'vue-touch';
-import AlertPlugin from './dialog/alert';
-import ConfirmPlugin from './dialog/confirm';
 import { WindowErrorHandler } from './errors/window-error-handler';
-import FilePlugin from './file/file';
 import HttpPlugin, { HttpPluginOptions } from './http/http';
 import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 import MediaQueriesPlugin from './media-queries/media-queries';
-import ModulPlugin from './modul/modul';
-import ScrollToPlugin from './scroll-to/scroll-to';
 import SpritesPlugin from './svg/sprites';
-import ToastPlugin from './toast/toast-service';
+
 
 export interface UtilsPluginOptions {
     httpPluginOptions?: HttpPluginOptions;
@@ -36,18 +29,21 @@ const UtilsPlugin: PluginObject<any> = {
             v.prototype.$log.setConsoleOptions(options.consoleOptions);
         }
 
-        Vue.use(MediaQueriesPlugin);
-        Vue.use(ModulPlugin);
         Vue.use(I18nPlugin, options ? options.i18PluginOptions : undefined);
         Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
-        Vue.use({ install: PortalPluginInstall });
+        Vue.use(MediaQueriesPlugin);
         Vue.use(SpritesPlugin);
-        Vue.use(TouchPlugin, { name: 'v-touch' }); // @todo really needed? should be loaded only by slider component.
-        Vue.use(ConfirmPlugin);
-        Vue.use(AlertPlugin);
-        Vue.use(FilePlugin);
-        Vue.use(ScrollToPlugin);
-        Vue.use(ToastPlugin);
+
+        //    Vue.use(ConfirmPlugin);
+        //    Vue.use(AlertPlugin);
+
+        // those plugin should be optional
+        // Vue.use(PortalPlugin);
+
+        // Vue.use(ModulPlugin);
+        // Vue.use(FilePlugin);
+        // Vue.use(ScrollToPlugin);
+        // Vue.use(ToastPlugin);
     }
 };
 

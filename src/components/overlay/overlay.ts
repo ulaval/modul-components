@@ -1,3 +1,4 @@
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -9,7 +10,6 @@ import ButtonPlugin from '../button/button';
 import { OVERLAY_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import WithRender from './overlay.html?style=./overlay.scss';
-
 @WithRender
 @Component({
     mixins: [Portal]
@@ -108,7 +108,7 @@ const OverlayPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('./overlay.lang.fr.json'));
             i18n.addMessages(ENGLISH, require('./overlay.lang.en.json'));
         }
-
+        v.use(PortalPlugin);
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.component(OVERLAY_NAME, MOverlay);

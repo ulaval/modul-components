@@ -52,6 +52,7 @@ const MScrollTo: DirectiveOptions = {
 
 const ScrollToPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ScrollToPlugin);
         v.directive(SCROLL_TO_NAME, MScrollTo);
     }
 };

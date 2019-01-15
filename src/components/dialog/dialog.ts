@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
@@ -114,6 +115,7 @@ const DialogPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
+        v.use(ModulPlugin);
         v.use(PortalPlugin);
         v.component(DIALOG_NAME, MDialog);
     }

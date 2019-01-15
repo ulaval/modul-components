@@ -3,6 +3,8 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { ScrollToDuration } from '../../utils';
+import ModulPlugin from '../../utils/modul/modul';
+import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { SCROLL_TOP_NAME } from '../component-names';
@@ -67,7 +69,9 @@ const ScrollTopPlugin: PluginObject<any> = {
         v.use(IconPlugin);
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
+        v.use(ModulPlugin);
         v.use(PortalPlugin);
+        v.use(ScrollToPlugin);
         v.component(SCROLL_TOP_NAME, MScrollTop);
     }
 };

@@ -1,3 +1,4 @@
+import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -147,7 +148,7 @@ const ModalPlugin: PluginObject<any> = {
             i18n.addMessages(FRENCH, require('./modal.lang.fr.json'));
             i18n.addMessages(ENGLISH, require('./modal.lang.en.json'));
         }
-
+        v.use(PortalPlugin);
         v.use(IconButtonPlugin);
         v.component(MODAL_NAME, MModal);
     }

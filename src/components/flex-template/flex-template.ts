@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
+import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { FLEX_TEMPLATE_NAME } from '../component-names';
 import WithRender from './flex-template.html?style=./flex-template.scss';
@@ -253,6 +254,7 @@ export class MFlexTemplate extends ModulVue {
 const FlexTemplatePlugin: PluginObject<any> = {
     install(v, options): void {
         console.error('MFlexTemplate will be deprecated in modul v.1.0');
+        v.use(ModulPlugin);
         v.component(FLEX_TEMPLATE_NAME, MFlexTemplate);
     }
 };

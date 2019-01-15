@@ -2,6 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
+import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { NAVBAR_ITEM_NAME, NAVBAR_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
@@ -315,6 +316,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
 const NavbarPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ModulPlugin);
         v.use(IconButtonPlugin);
         v.component(NAVBAR_ITEM_NAME, MNavbarItem);
         v.component(NAVBAR_NAME, MNavbar);
