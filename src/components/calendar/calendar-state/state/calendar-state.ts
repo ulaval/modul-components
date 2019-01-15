@@ -13,9 +13,11 @@ export enum CalendarEvent {
     YEAR_PREVIOUS = 'year-previous'
 }
 
+export type DaySelectCallBack = (date: SingleDate | RangeDate) => void;
+
 export default interface CalendarState {
     buildCurrentCalendar(): CalendarCurrentState;
-    onDateSelect(callback: (date: SingleDate | RangeDate) => void): void;
+    onDateSelect(callback: DaySelectCallBack): void;
     updateValue(value: SingleDate | RangeDate): void;
 }
 
@@ -25,6 +27,7 @@ export interface CalendarCurrentState {
 }
 
 export interface Calendar {
+    value?: SingleDate | RangeDate;
     dates: { min: DateUtil, current: DateUtil, max: DateUtil };
     years: YearState[];
     months: MonthState[];

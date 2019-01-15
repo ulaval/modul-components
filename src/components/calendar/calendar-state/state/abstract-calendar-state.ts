@@ -1,5 +1,5 @@
 import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
-import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, DayState, MonthState, YearState } from './calendar-state';
+import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, DaySelectCallBack, DayState, MonthState, YearState } from './calendar-state';
 
 export const MAX_DATE_OFFSET: number = 10;
 export const MIN_DATE_OFFSET: number = 10;
@@ -52,12 +52,18 @@ export default abstract class AbstractCalendarState implements CalendarState {
         };
     }
 
-    onDateSelect(callback: Function): void {
+    onDateSelect(callback: DaySelectCallBack): void {
         this.daySelectCallback = callback;
     }
 
     protected abstract initCurrentValue(value?: SingleDate | RangeDate): void;
     protected abstract initCurrentlyDisplayedDate(): void;
+
+    protected emitUpdate(data: SingleDate | RangeDate): void {
+        if (this.daySelectCallback) {
+            this.daySelectCallback(data);
+        }
+    }
 
     /**
      * Updates the date used to display the calendar. If it's lower than the minimum date authorized, it's set to the minimum.
@@ -115,6 +121,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
     }
 
     protected assembleCalendar(): Calendar {
+        this.calendar.value = this.assembleValue();
         this.calendar.dates = {
             min: this.currentMinDate,
             current: this.currentlyDisplayedDate,
@@ -145,6 +152,8 @@ export default abstract class AbstractCalendarState implements CalendarState {
         return this.events;
     }
 
+    protected abstract assembleValue(): SingleDate | RangeDate | undefined;
+
     protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
         return events;
     }
@@ -169,7 +178,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         return date.isAfter(this.currentlyDisplayedDate, DatePrecision.MONTH);
     }
 
-    protected isDaySelected(date: DateUtil): boolean {
+    protected isDaySelected(_date: DateUtil): boolean {
         return false;
     }
 
@@ -178,7 +187,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
     }
 
     protected hasFocus(date: DateUtil): boolean {
-        return this.lastSelectedDate && date.isSame(this.lastSelectedDate);
+        return !!this.lastSelectedDate && date.isSame(this.lastSelectedDate);
     }
 
     protected currentlyDisplayedYear(): number {

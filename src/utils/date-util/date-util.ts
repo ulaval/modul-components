@@ -51,14 +51,16 @@ export default class DateUtil {
                 } else if (typeof (value) === 'string') {
                     this.dateFromString(value);
                 } else {
-                    this.innerDate = new Date();
+                    const date: Date = new Date();
+                    this.innerDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
                 }
                 break;
             case 3:
                 this.innerDate = new Date(year, month, day);
                 break;
             default:
-                this.innerDate = new Date();
+                const date: Date = new Date();
+                this.innerDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
         }
     }
 
@@ -250,6 +252,7 @@ export default class DateUtil {
         }
         const month: string = this.padString(second);
         const day: string = this.padString(third);
+        const date: Date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
 
         return new Date(`${year}-${month}-${day}`);
     }

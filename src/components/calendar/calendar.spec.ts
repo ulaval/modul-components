@@ -247,6 +247,16 @@ describe(`Calendar`, () => {
         });
 
         describe(`will be enforced for`, () => {
+            let errorHandler: (err: Error, vm: Vue, info: string) => void;
+
+            beforeEach(() => {
+                errorHandler = Vue.config.errorHandler;
+            });
+
+            afterEach(() => {
+                Vue.config.errorHandler = errorHandler;
+            });
+
             describe(`single-date mode`, () => {
 
                 beforeEach(() => {
@@ -255,12 +265,14 @@ describe(`Calendar`, () => {
 
                 it(`when model is valid`, () => {
                     value = SINGLE_DATE;
-                    expect(() => { initialiserWrapper(); }).not.toThrow(Error);
+                    expect(() => { initialiserWrapper(); }).not.toThrow();
                 });
 
                 it(`when model is a date range model`, () => {
                     value = DATE_RANGE;
-                    expect(() => { initialiserWrapper(); }).toThrow(Error);
+                    Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
+
+                    initialiserWrapper();
                 });
             });
 
@@ -272,12 +284,14 @@ describe(`Calendar`, () => {
 
                 it(`when model is valid`, () => {
                     value = DATE_RANGE;
-                    expect(() => { initialiserWrapper(); }).not.toThrow(Error);
+                    expect(() => { initialiserWrapper(); }).not.toThrow();
                 });
 
                 it(`when model is a single date model`, () => {
                     value = SINGLE_DATE;
-                    expect(() => { initialiserWrapper(); }).toThrow(Error);
+                    Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
+
+                    initialiserWrapper();
                 });
             });
         });

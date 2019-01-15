@@ -44,6 +44,8 @@ export class MCalendar extends ModulVue {
     @Watch('value')
     refreshValue(): void {
         this.validateInputModel();
+        console.log(this.mode);
+        console.log(this.value);
         this.innerValue = this.value;
     }
 

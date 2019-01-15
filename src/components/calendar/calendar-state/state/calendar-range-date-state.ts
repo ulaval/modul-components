@@ -1,5 +1,5 @@
 import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
-import AbstractCalendarState, { RangeDate, SingleDate } from './abstract-calendar-state';
+import AbstractCalendarState, { RangeDate } from './abstract-calendar-state';
 import { CalendarEvent, CalendarEvents, DayState } from './calendar-state';
 
 enum DateRangePosition {
@@ -17,7 +17,18 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     private currentRange: InnerModel;
     private currentDateHiglighted: DateUtil = new DateUtil();
 
-    selectDay(selectedDay: DayState): void {
+    updateValue(value: RangeDate): void {
+        this.initDates(value);
+    }
+
+    protected assembleValue(): RangeDate {
+        return {
+            begin: this.currentRange.begin ? this.currentRange.begin.toString() : '',
+            end: this.currentRange.end ? this.currentRange.end.toString() : ''
+        };
+    }
+
+    protected selectDay(selectedDay: DayState): void {
         super.selectDay(selectedDay);
         if (!selectedDay.isDisabled) {
             const newDate: DateUtil = this.selectedDayToDate(selectedDay);
@@ -26,15 +37,8 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
 
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
 
-            this.daySelectCallback({
-                begin: this.currentRange.begin ? this.currentRange.begin.toString() : '',
-                end: this.currentRange.end ? this.currentRange.end.toString() : ''
-            });
+            this.emitUpdate(this.assembleValue());
         }
-    }
-
-    updateValue(value: SingleDate): void {
-        this.initDates(value);
     }
 
     protected highlightDate(selectedDay: DayState): void {
@@ -47,6 +51,7 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     }
 
     protected initCurrentValue(value: RangeDate): void {
+        const rangeCache: InnerModel = Object.assign({}, this.currentRange);
         if (value) {
             this.currentRange = {
                 begin: this.initDateRange(value as RangeDate, DateRangePosition.BEGIN),
@@ -64,7 +69,11 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     }
 
     protected initCurrentlyDisplayedDate(): void {
-        if (!this.currentRange) {
+        if (this.currentRange.begin) {
+            this.updateCurrentlyDisplayedDate(this.currentRange.begin.fullYear(), this.currentRange.begin.month(), this.currentRange.begin.day());
+        } else if (this.currentRange.end) {
+            this.updateCurrentlyDisplayedDate(this.currentRange.end.fullYear(), this.currentRange.end.month(), this.currentRange.end.day());
+        } else {
             this.updateCurrentlyDisplayedDate(this.now.fullYear(), this.now.month(), this.now.day());
         }
     }

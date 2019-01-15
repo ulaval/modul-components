@@ -256,7 +256,7 @@ describe(`Calendar state machine`, () => {
         describe(`refreshing value`, () => {
             it(`will pass the new value to state`, () => {
                 initialiserWrapper();
-                wrapper.setProps({ value: { begin: '2019-10-10', end: '2020-01-01' });
+                wrapper.setProps({ value: { begin: '2019-10-10', end: '2020-01-01' } });
 
                 const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];
 

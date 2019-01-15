@@ -12,6 +12,7 @@
                               ref="calendarState">
         <m-simple-calendar slot-scope="{ calendar, calendarEvents }"
                            :calendar="calendar"
+                           class="m-calendar__renderer"
                            ref="calendarRenderer"
                            :show-month-before-after="showMonthBeforeAfter"
                            v-on="calendarEvents"></m-simple-calendar>

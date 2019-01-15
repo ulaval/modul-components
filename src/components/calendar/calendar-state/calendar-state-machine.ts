@@ -46,7 +46,6 @@ export default class MCalendarStateMachine extends ModulVue {
     }
 
     render(): any {
-        console.log(this.calendarState.buildCurrentCalendar());
         return this.$scopedSlots.default!(
             this.calendarState.buildCurrentCalendar()
         );
