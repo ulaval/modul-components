@@ -1,12 +1,12 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import ButtonPlugin from '../button/button';
 import { INPLACE_EDIT_NAME } from '../component-names';
-import IconButtonPlugin from '../icon-button/icon-button';
-import ModalPlugin from '../modal/modal';
+import OverlayPlugin from '../overlay/overlay';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 @WithRender
@@ -94,11 +94,16 @@ export class MInplaceEdit extends ModulVue {
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(INPLACE_EDIT_NAME + ' is not ready for production');
-        v.use(MediaQueriesPlugin);
-        v.use(IconButtonPlugin);
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./inplace-edit.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./inplace-edit.lang.en.json'));
+        }
+
+        v.use(AccordionTransitionPlugin);
+        v.use(OverlayPlugin);
         v.use(ButtonPlugin);
-        v.use(ModalPlugin);
         v.component(INPLACE_EDIT_NAME, MInplaceEdit);
     }
 };

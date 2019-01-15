@@ -3,7 +3,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
-import IconFileSandboxPlugin from '../../src/components/icon-file/icon-file.sandbox';
+import InplaceEditSandboxPlugin from '../../src/components/inplace-edit/inplace-edit.sandbox';
 import LinkPlugin from '../../src/components/link/link';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(IconFileSandboxPlugin);
+Vue.use(InplaceEditSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);
