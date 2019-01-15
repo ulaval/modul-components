@@ -14,7 +14,6 @@ import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
     mixins: [MediaQueries]
 })
 export class MInplaceEdit extends ModulVue {
-
     @Prop()
     public editMode: boolean;
     @Prop()

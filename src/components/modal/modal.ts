@@ -1,13 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
+import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import { MODAL_NAME } from '../component-names';
-import UserAgentUtil from '../../utils/user-agent/user-agent';
 import WithRender from './modal.html?style=./modal.scss';
+
 
 export enum MModalSize {
     FullScreen = 'full-screen',

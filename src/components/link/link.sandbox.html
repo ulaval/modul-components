@@ -1,68 +1,88 @@
 <div>
-    <h2>Utilisation du composant m-link</h2>
-    <p>
-        <m-link>Bonjour</m-link>
-    </p>
+    <h2>No context</h2>
 
-    <h2>Icon name "m-svg__clock"</h2>
-    <p>
-        <m-link icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link>
-    </p>
+    <p>Default behavior</p>
 
-    <p>
-        <m-link icon-name="m-svg__clock"
-                :disabled="true">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link>
-    </p>
+    <m-link>Try me</m-link>
 
-    <h2>Skin text</h2>
-    <p>
-        <m-link skin="text"
-                icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link>
-    </p>
-    <div class="m-u--margin-top--l"
-         style="background: grey; padding: 16px;">
-        <h2 class="m-u--no-margin">Skin light</h2>
-        <p>
-            <m-link skin="light"
-                    icon-name="m-svg__clock">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link>
-        </p>
-    </div>
-    <h2>Utilisation de la classe .m-u--link</h2>
-    <p>
-        <a href="#"
-           class="m-u--link">
-            <span class="m-u--link-text">Lien (.m-u--link)</span>
-        </a>
-    </p>
-    <p>
-        <a href="#"
-           class="m-u--link">
-            <m-icon class="m-u--link-icon-left"
-                    name="m-svg__clock"></m-icon>
-            <span class="m-u--link-text">Icône à gauche (.m-u--link-icon-left)</span>
-        </a>
-    </p>
-    <p>
-        <a href="#"
-           class="m-u--link">
-            <span class="m-u--link-text">Icône à droite (.m-u--link-icon-right)</span>
-            <m-icon class="m-u--link-icon-right"
-                    name="m-svg__clock"></m-icon>
-        </a>
-    </p>
-    <h2>Lien de type RouterLink n'est pas fonctionnel en mode disabled (MODUL-561)</h2>
-    <p>
-        <m-link icon-name="m-svg__clock"
-                :disabled="routerLinkDisabled">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius reiciendis tempore modi rerum beatae. Placeat nam iure cupiditate ipsum non ipsa! Sequi enim ab, est tenetur a aliquam officiis cupiditate!</m-link>
-    </p>
-    <p>
-        <m-button @click="routerLinkDisabled = !routerLinkDisabled">Désactiver/Activer le lien</m-button>
-    </p>
+    <hr />
+
+    <h2>With icon</h2>
+
+    <p>Display an icon at the beginning of the link</p>
+
+    <m-link icon-name="m-svg__clock">I have an icon</m-link>
+
+    <hr />
+
+    <h2>Disabled</h2>
+
+    <p>A disabled link (will no redirect)</p>
+
+    <m-link :disabled="true">Try me</m-link>
+
+    <hr />
+
+    <h2>
+        Available skins
+        &nbsp;<select v-model="linkSkin">
+            <option v-for="(element, i) in linkSkinAsArray"
+                    :value="element"
+                    :selected="element === linkSkin"
+                    :key="i">{{element}}</option>
+        </select>
+    </h2>
+
+
+    <m-link :skin="linkSkin"
+            icon-name="m-svg__clock">my skin is {{linkSkin}}</m-link>
+
+    <hr />
+
+    <h2>
+        Specials css classes
+    </h2>
+
+    <p>Use with a native <i>a</i> element and <i>m-icon</i></p>
+
+    <a href="javascript:void(0)"
+       class="m-u--link">
+        <span class="m-u--link">Lien (.m-u--link)</span>
+    </a>
+
+    <a href="javascript:void(0)"
+       class="m-u--link">
+        <span class="m-u--link-text">Lien (.m-u--link-text)</span>
+    </a>
+    <a href="javascript:void(0)"
+       class="m-u--link">
+        <m-icon class="m-u--link-icon-left"
+                name="m-svg__clock"></m-icon>
+        <span class="m-u--link-text">Icône à gauche (.m-u--link-icon-left)</span>
+    </a>
+    <a href="#"
+       class="m-u--link">
+        <span class="m-u--link-text">Icône à droite (.m-u--link-icon-right)</span>
+        <m-icon class="m-u--link-icon-right"
+                name="m-svg__clock"></m-icon>
+    </a>
+
+    <hr />
+
+    <h2>
+        RouterLink not functional when disabled (MODUL-561)
+        &nbsp;<m-button @click="routerLinkDisabled = !routerLinkDisabled">{{routerLinkDisabled ? 'Disabled' : 'Enabled'}}</m-button>
+    </h2>
+
+    <m-link icon-name="m-svg__clock"
+            :disabled="routerLinkDisabled">Disabled link</m-link>
+
+    <hr />
+
     <h2>Support for vue-router named route (MODUL-616)</h2>
-    <p>
-        <m-link mode="router-link"
-                :url="components/m-link">a normal path</m-link>
-        <m-link mode="router-link"
-                :url="{path: components/m-link, query : {patate: 1}}">a-named-route with Location object</m-link>
-    </p>
+
+    <m-link mode="router-link"
+            :url="components/m-link">a normal path</m-link>
+    <m-link mode="router-link"
+            :url="{path: components/m-link, query : {patate: 1}}">a-named-route with Location object</m-link>
 </div>

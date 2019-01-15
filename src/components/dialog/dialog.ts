@@ -2,7 +2,6 @@ import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -10,6 +9,7 @@ import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './dialog.html?style=./dialog.scss';
+
 
 export enum MDialogWidth {
     Default = 'default',

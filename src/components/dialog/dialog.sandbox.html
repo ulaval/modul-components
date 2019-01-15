@@ -1,13 +1,67 @@
 <div>
-    <h2 class="m-u--no-margin">Width default</h2>
-    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre">
-        <m-button slot="trigger">Ouvrir la fenêtre</m-button>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero id!
+    <h2>No context</h2>
+
+    <p>Basic behavior</p>
+
+    <m-dialog>
+        A basic dialog window
+        <m-button slot="trigger"
+                  skin="secondary">Try me</m-button>
     </m-dialog>
 
-    <h2>Width large</h2>
-    <m-dialog class="m-u--margin-top" title="Titre de la fenêtre" width="large">
-        <m-button slot="trigger">Ouvrir la fenêtre</m-button>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero id!
+    <hr />
+
+    <h2>With title</h2>
+
+    <p>Will display a custom title</p>
+
+    <m-dialog title="My custom title">
+        Custom title
+        <m-button slot="trigger"
+                  skin="secondary">Try me</m-button>
+    </m-dialog>
+
+    <hr />
+
+    <h2>With message</h2>
+
+    <p>Will display a custom message</p>
+
+    <m-dialog message="My custom message">
+        Custom message
+        <m-button slot="trigger"
+                  skin="secondary">Try me</m-button>
+    </m-dialog>
+
+    <hr />
+
+    <h2>
+        Available width
+        &nbsp;<m-button @click="dialogWidth === 'default' ? dialogWidth = 'large' : dialogWidth = 'default'">
+            {{dialogWidth}}
+        </m-button>
+
+    </h2>
+
+    <p>Change the width of the dialog</p>
+
+    <m-dialog :width="dialogWidth">
+        {{dialogWidth}} dialog
+        <m-button slot="trigger"
+                  skin="secondary">Try me</m-button>
+    </m-dialog>
+
+    <hr />
+
+    <h2>
+        Cancel label
+    </h2>
+
+    <p>Custom cancel message</p>
+
+    <m-dialog cancel-label="cancel me">
+        Custom cancel label
+        <m-button slot="trigger"
+                  skin="secondary">Try me</m-button>
     </m-dialog>
 </div>

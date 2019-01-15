@@ -1,12 +1,18 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { LINK_NAME } from '../component-names';
+import { MLinkSkin } from './link';
 import WithRender from './link.sandbox.html';
 
 @WithRender
 @Component
 export class MLinkSandbox extends Vue {
     public routerLinkDisabled: boolean = false;
+    public linkSkin: MLinkSkin = MLinkSkin.Default;
+
+    get linkSkinAsArray(): any {
+        return MLinkSkin;
+    }
 }
 
 const LinkSandboxPlugin: PluginObject<any> = {

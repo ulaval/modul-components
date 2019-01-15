@@ -1,4 +1,11 @@
 <div>
+    <h2>No context</h2>
+
+    <p>Basic behavior</p>
+
+    <m-accordion></m-accordion>
+
+    <hr />
 
     <h2>Toggles</h2>
 
@@ -8,8 +15,11 @@
     <m-accordion icon-position="right">
         <div slot="header">
             <div style="display: flex; align-items: center; justify-content: space-between;">
-                <a @click="doSomething('funny')" href="https://www.google.ca/" target="_blank">Link</a>
-                <m-link @click="doSomething('funny')" href="patate">m-link</m-link>
+                <a @click="doSomething('funny')"
+                   href="https://www.google.ca/"
+                   target="_blank">Link</a>
+                <m-link @click="doSomething('funny')"
+                        href="patate">m-link</m-link>
                 <m-option>
                     <m-option-item>Menu 1</m-option-item>
                     <m-option-item>Menu 2</m-option-item>
@@ -21,10 +31,17 @@
                 <m-checkbox>m-checkbox</m-checkbox>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between;">
-                <input type="text" placeholder="input">
-                <textarea placeholder="textarea" name="" id="" cols="30" rows="1"></textarea>
-                <m-textfield label="m-textfiled" value="Lorem ipsum dolor sit"></m-textfield>
-                <m-textarea label="m-textarea"  value="Lorem ipsum dolor sit"></m-textarea>
+                <input type="text"
+                       placeholder="input">
+                <textarea placeholder="textarea"
+                          name=""
+                          id=""
+                          cols="30"
+                          rows="1"></textarea>
+                <m-textfield label="m-textfiled"
+                             value="Lorem ipsum dolor sit"></m-textfield>
+                <m-textarea label="m-textarea"
+                            value="Lorem ipsum dolor sit"></m-textarea>
             </div>
 
         </div>
@@ -58,16 +75,20 @@
     </p>
     <br>
     <m-button @click="toggleAccordion()">toggle</m-button>
-    <m-accordion icon-position="right" :open.sync="accordionOpen" @update:open="onAccordionOpen($event)" @click="onClick">
+    <m-accordion icon-position="right"
+                 :open.sync="accordionOpen"
+                 @update:open="onAccordionOpen($event)"
+                 @click="onClick">
         <div slot="header">
             <div>Accordion header</div>
         </div>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
-    <br>
-    <br>
+
+    <hr />
 
     <h2>Border-top</h2>
+
     <p>
         when open, hide border-top on the next accordion
     </p>
@@ -84,26 +105,38 @@
         <div slot="header">Accordion title</div>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
-    <br>
-    <m-accordion icon-position="right" skin="dark">
-            <div slot="header">Accordion title</div>
-            <p class="m-u--no-margin">Accordion content</p>
-        </m-accordion>
-        <m-accordion icon-position="right" skin="dark">
-            <div slot="header">Accordion title</div>
-            <p class="m-u--no-margin">Accordion content</p>
-        </m-accordion>
-        <m-accordion icon-position="right" skin="dark">
-            <div slot="header">Accordion title</div>
-            <p class="m-u--no-margin">Accordion content</p>
-        </m-accordion>
+
+    <br />
+
+    <m-accordion icon-position="right"
+                 skin="dark">
+        <div slot="header">Accordion title</div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
+
+    <m-accordion icon-position="right"
+                 skin="dark">
+        <div slot="header">Accordion title</div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
+
+    <m-accordion icon-position="right"
+                 skin="dark">
+        <div slot="header">Accordion title</div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
+
+    <hr />
 
     <h2>Heading</h2>
     <p>
         Allow heading inside accordion header
     </p>
-    <br>
-    <m-accordion icon-position="right" skin="dark">
+
+    <br />
+
+    <m-accordion icon-position="right"
+                 skin="dark">
         <div slot="header">
             <h1>h1</h1>
             <h2>h2</h2>
@@ -116,28 +149,26 @@
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
 
+    <hr />
+
+    <h2>
+        Available skins
+        <select v-model="accordionSkin">
+            <option v-for="(element, i) in accordionSkinAsArray"
+                    :value="element"
+                    :selected="element === accordionSkin">{{element}}</option>
+        </select>
+    </h2>
+
+    <p>
+        Change the accordion skin
+    </p>
+
     <h2>Skin default</h2>
-    <m-accordion class="m-u--margin-top" skin="default">
-        <h3 class="m-u--no-margin" slot="header">Skin default</h3>
-        <p class="m-u--no-margin">Accordion content</p>
-    </m-accordion>
-
-    <h2>Skin dark</h2>
-    <m-accordion class="m-u--margin-top" skin="dark">
-        <h3 class="m-u--no-margin" slot="header">Skin dark</h3>
-        <p class="m-u--no-margin">Accordion content</p>
-    </m-accordion>
-
-    <h2>Skin light</h2>
-    <m-accordion class="m-u--margin-top" skin="light">
-        <h3 class="m-u--no-margin" slot="header">Skin light</h3>
-        <p class="m-u--no-margin">Accordion content</p>
-    </m-accordion>
-
-
-    <h2>Skin plain</h2>
-    <m-accordion class="m-u--margin-top" skin="plain">
-        <h3 class="m-u--no-margin" slot="header">Skin plain</h3>
+    <m-accordion class="m-u--margin-top"
+                 :skin="accordionSkin">
+        <h3 class="m-u--no-margin"
+            slot="header">Skin default</h3>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
 </div>

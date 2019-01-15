@@ -3,13 +3,13 @@ import { Component, Emit } from 'vue-property-decorator';
 import { BUTTON_NAME } from '../component-names';
 import WithRender from './button.sandbox.html';
 
-
 @WithRender
 @Component
 export class MButtonSandbox extends Vue {
     afficherbouton1: boolean = false;
     messageInialValue: string = 'Mon message';
     message: string = this.messageInialValue;
+
 
     toogleAfficher(): void {
         this.afficherbouton1 = !this.afficherbouton1;

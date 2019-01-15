@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ICON_BUTTON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './icon-button.html?style=./icon-button.scss';
+
 
 export enum MIconButtonSkin {
     Light = 'light',

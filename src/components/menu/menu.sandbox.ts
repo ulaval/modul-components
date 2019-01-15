@@ -1,12 +1,14 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { MENU_NAME } from '../component-names';
+import { MMenuSkin } from './menu';
 import WithRender from './menu.sandbox.html';
+
 
 @WithRender
 @Component
 export class MMenuSandbox extends Vue {
+    menuSkin: MMenuSkin = MMenuSkin.Dark;
 
     private selectedItem: string = 'item2';
     private selectedItemLight: string = 'subitem1';
@@ -34,6 +36,10 @@ export class MMenuSandbox extends Vue {
 
     private toggleItemGroup1LightSkin(): void {
         this.openItemGroup1LightSkin = !this.openItemGroup1LightSkin;
+    }
+
+    get menuSkinAsArray(): any {
+        return MMenuSkin;
     }
 }
 

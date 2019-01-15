@@ -1,17 +1,19 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { INPLACE_EDIT_NAME } from '../component-names';
 import WithRender from './inplace-edit.sandbox.html';
+
 
 @WithRender
 @Component
 export class MInplaceEditSandbox extends Vue {
-    private value1: string = 'a default value';
-    private editMode1: boolean = false;
-    private editMode2: boolean = false;
-    private editMode3: boolean = false;
-    private editMode4: boolean = false;
+    value1: string = 'a default value';
+    editMode1: boolean = false;
+    editMode2: boolean = false;
+    editMode3: boolean = false;
+    editMode4: boolean = false;
+    editorPadding: number = 10;
+    editorEditModePadding: number = 10;
 
     private click1(): void {
         this.editMode1 = true;

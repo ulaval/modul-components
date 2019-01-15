@@ -1,56 +1,86 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Trigger the modal</h3>
-    <p class="m-u--margin-bottom">Basic demo</p>
-    <m-modal title="Modal title">
-        <m-button slot="trigger">Open the modal</m-button>
-        <p>Native input</p>
-        <input type="text">
-        <input type="text">
-        <p class="m-u--margin-top--l">modUL input</p>
-        <p style="margin:0;">
-            <m-textfield label="Lorem ipsum dolor sit amet"></m-textfield>
-        </p>
-        <p style="margin:0;">
-            <m-textfield label="Lorem ipsum dolor sit amet"></m-textfield>
-        </p>
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
+    <h2>No context</h2>
+
+    <p>Basic behavior</p>
+
+    <m-modal>
+        <m-button skin="secondary"
+                  slot="trigger">Try me</m-button>
+    </m-modal>
+
+    <hr />
+
+    <h2>With title</h2>
+
+    <p>Add a custom title to the modal</p>
+
+    <m-modal title="A custom title">
+        <m-button skin="secondary"
+                  slot="trigger">Try me</m-button>
+    </m-modal>
+
+    <hr />
+
+    <h2>With content</h2>
+
+    <p>Add a custom title to the modal</p>
+
+    <m-modal>
+        <m-button skin="secondary"
+                  slot="trigger">Try me</m-button>
+        <div>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Consequatur assumenda saepe praesentium amet dolores obcaecati
+            tempora eligendi quia similique necessitatibus ratione blanditiis
+            iusto nesciunt eveniet ipsum officiis, eius porro inventore.
+        </div>
+    </m-modal>
+
+    <hr />
+
+    <h2>Available sizes
+        &nbsp;<select v-model="modalSize">
+            <option v-for="(element, i ) in modalSizeAsArray"
+                    :value="element"
+                    :selected="element === modalSize"
+                    :key="i">{{element}}</option>
+        </select>
+    </h2>
+
+    <p>Change the size of the modal</p>
+
+    <m-modal :size="modalSize">
+        <m-button skin="secondary"
+                  slot="trigger">Try me</m-button>
+    </m-modal>
+
+    <hr />
+
+    <h2>Available options
+        <br />
+        <m-button @click="modalCloseOnBackdrop = !modalCloseOnBackdrop">{{modalCloseOnBackdrop? 'Close on backdrop' : 'Do not close on backdrop'}}</m-button>
+        <m-button @click="modalHasPadding = !modalHasPadding">{{modalHasPadding? 'Have padding' : 'Do not have padding'}}</m-button>
+        <m-button @click="modalHasBodyPadding = !modalHasBodyPadding">{{modalHasBodyPadding? 'Have body padding' : 'Do not have body padding'}}</m-button>
+        <m-button @click="modalHasFooterPadding = !modalHasFooterPadding">{{modalHasFooterPadding? 'Have footer padding' : 'Do not have footer padding'}}</m-button>
+        <m-button @click="modalHasHeaderPadding = !modalHasHeaderPadding">{{modalHasHeaderPadding? 'Have header padding' : 'Do not have header padding'}}</m-button>
+        <m-button @click="modalHasBodyMaxWidth = !modalHasBodyMaxWidth">{{modalHasBodyMaxWidth? 'Have body max width' : 'Do not have body max width'}}</m-button>
+    </h2>
+
+    <p>Change the size of the modal</p>
+
+    <m-modal title="title"
+             footer="footer"
+             :close-on-backdrop="modalCloseOnBackdrop"
+             :body-max-width="modalHasBodyMaxWidth"
+             :padding="modalHasPadding"
+             :padding-header="modalHasHeaderPadding"
+             :padding-body="modalHasBodyPadding"
+             :padding-footer="modalHasFooterPadding">
+        <m-button slot="trigger">Try me</m-button>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. In non impedit
+        exercitationem iure maiores nisi magnam! Modi ipsum sequi totam omnis.
+        Ex possimus incidunt aliquid, et minus reiciendis reprehenderit modi.
         <div slot="footer">Footer</div>
     </m-modal>
 
-    <p class="m-u--margin-bottom">Long text demo</p>
-    <m-modal title="Modal title">
-        <m-button slot="trigger">Open the modal</m-button>
-        <p>Native input</p>
-        <input type="text">
-        <input type="text">
-        <p class="m-u--margin-top--l">modUL input</p>
-        <p style="margin:0;">
-            <m-textfield label="Lorem ipsum dolor sit amet"></m-textfield>
-        </p>
-        <p style="margin:0;">
-            <m-textfield label="Lorem ipsum dolor sit amet"></m-textfield>
-        </p>
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis magni reiciendis iste nulla eum velit error
-            nihil corrupti. At culpa accusamus autem dignissimos aliquid quae ratione ipsa, reiciendis quod vero?
-        </p>
-        <div slot="footer">Pied de page</div>
-    </m-modal>
 </div>
