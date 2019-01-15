@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
-import NavbarSandboxPlugin from '../../src/components/navbar/navbar.sandbox';
+import OptionPlugin from '../../src/components/option/option.sandbox';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
 import UtilsPlugin, { FRENCH, UtilsPluginOptions } from '../../src/utils';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(NavbarSandboxPlugin);
+Vue.use(OptionPlugin);
 
 
 Vue.component('app-frame', AppFrame);

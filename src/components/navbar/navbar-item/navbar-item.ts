@@ -2,7 +2,7 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import { ModulVue } from '../../../utils/vue/vue';
-import { BaseNavbar, Navbar } from '../../navbar/navbar';
+import { BaseNavbar, Navbar } from '../navbar';
 import NavbarItemHelper from './navbar-item-helper';
 import WithRender from './navbar-item.html?style=./navbar-item.scss';
 

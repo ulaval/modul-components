@@ -1,12 +1,9 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
-import { ModulVue } from '../../utils/vue/vue';
-import { OPTION_ITEM_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
-import { BaseOption, MOptionInterface } from '../option/option';
+import { ModulVue } from '../../../utils/vue/vue';
+import { BaseOption, MOptionInterface } from '../option';
 import WithRender from './option-item.html?style=./option-item.scss';
+
 
 @WithRender
 @Component
@@ -58,12 +55,3 @@ export class MOptionItem extends ModulVue {
         return !!this.$slots.default;
     }
 }
-
-const OptionItemPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.use(IconPlugin);
-        v.component(OPTION_ITEM_NAME, MOptionItem);
-    }
-};
-
-export default OptionItemPlugin;

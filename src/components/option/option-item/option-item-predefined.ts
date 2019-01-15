@@ -1,8 +1,8 @@
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
-import { ModulVue } from '../../utils/vue/vue';
+import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './option-item-predefined.html';
+
 
 @Component
 @WithRender

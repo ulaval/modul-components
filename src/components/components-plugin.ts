@@ -38,11 +38,6 @@ import MessagePagePlugin from './message-page/message-page';
 import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
 import NavbarPlugin from './navbar/navbar';
-import OptionItemPlugin from './option-item/option-item';
-import OptionItemAddPlugin from './option-item/option-item-add';
-import OptionItemArchivePlugin from './option-item/option-item-archive';
-import OptionItemDeletePlugin from './option-item/option-item-delete';
-import OptionItemEditPlugin from './option-item/option-item-edit';
 import OptionPlugin from './option/option';
 import Overlay from './overlay/overlay';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
@@ -80,6 +75,7 @@ import ToastPlugin from './toast/toast';
 import TooltipPlugin from './tooltip/tooltip';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
+
 
 
 export interface ComponentPluginOptions {
@@ -134,11 +130,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(NavbarPlugin);
         Vue.use(OptionPlugin);
         Vue.use(MenuPlugin);
-        Vue.use(OptionItemAddPlugin);
-        Vue.use(OptionItemArchivePlugin);
-        Vue.use(OptionItemDeletePlugin);
-        Vue.use(OptionItemEditPlugin);
-        Vue.use(OptionItemPlugin);
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
         Vue.use(PhoneNumberPlugin);
