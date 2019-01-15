@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
@@ -186,6 +187,12 @@ export class MLink extends ModulVue {
 const LinkPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(LINK_NAME, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./link.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./link.lang.en.json'));
+        }
+
         v.use(IconPlugin);
         v.use(I18nPlugin);
         v.component(LINK_NAME, MLink);
