@@ -1,13 +1,21 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>No context</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        Default behavior
     </p>
     <p>
-        <m-file-select><!-- Test case --></m-file-select>
+        <m-file-select>
+        </m-file-select>
     </p>
+    <hr />
+    <h3>Multiple</h3>
+    <p class="m-u--margin-bottom">
+        Allow to select many files
+    </p>
+    <p>
+        <m-file-select :multiple="true">
+        </m-file-select>
+    </p>
+    <hr />
+    <small>This component include the <i>button</i> api to style, position icon, change label, etc. of the select button</small>
 </div>
