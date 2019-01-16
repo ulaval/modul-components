@@ -10,6 +10,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { SPINNER_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import WithRender from './spinner.html?style=./spinner.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+
 
 export enum MSpinnerStyle {
     Dark = 'dark',
@@ -141,7 +143,13 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(SPINNER_NAME, 'plugin.install');
+
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./spinner.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./spinner.lang.en.json'));
+        }
+
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.use(I18nPlugin);

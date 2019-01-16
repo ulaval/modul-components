@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
-import SidebarSandboxPlugin from '../../src/components/sidebar/sidebar.sandbox';
+import SteppersSandboxPlugin from '../../src/components/steppers/steppers.sandbox';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
 import UtilsPlugin, { FRENCH, UtilsPluginOptions } from '../../src/utils';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(SidebarSandboxPlugin);
+Vue.use(SteppersSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);

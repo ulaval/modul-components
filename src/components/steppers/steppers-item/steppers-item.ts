@@ -2,9 +2,9 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 
-import { ModulVue } from '../../utils/vue/vue';
-import { STEPPERS_ITEM_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
+import { ModulVue } from '../../../utils/vue/vue';
+import { STEPPERS_ITEM_NAME } from '../../component-names';
+import IconPlugin from '../../icon/icon';
 import WithRender from './steppers-item.html?style=./steppers-item.scss';
 
 export enum MSteppersItemState {
@@ -89,11 +89,4 @@ export class MSteppersItem extends ModulVue {
 
 }
 
-const SteppersItemPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.use(IconPlugin);
-        v.component(STEPPERS_ITEM_NAME, MSteppersItem);
-    }
-};
 
-export default SteppersItemPlugin;
