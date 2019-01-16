@@ -56,6 +56,5 @@ export default class MCalendarStateMachine extends ModulVue {
     }
 
     @Emit('input')
-    private dateSelectCallBack(date: SingleDate | RangeDate): void {
-    }
+    private dateSelectCallBack(date: SingleDate | RangeDate): void { }
 }

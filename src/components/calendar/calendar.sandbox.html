@@ -11,6 +11,13 @@
                 max-date="2025-02-20"
                 :show-month-before-after="false"></m-calendar>
 
+    <h3>Calendar (with min/max date, days from month before and after are explicitly shown)</h3>
+    <p>Date courante: {{ date }}</p>
+    <m-calendar v-model="date"
+                min-date="2018-06-15"
+                max-date="2025-02-20"
+                :show-month-before-after="true"></m-calendar>
+
     <h2>Date range picker</h2>
     <h3>Calendar</h3>
     <p>Date courante: {{ dateRange }}</p>

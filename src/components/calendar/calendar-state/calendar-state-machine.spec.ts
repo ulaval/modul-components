@@ -8,24 +8,6 @@ import CalendarSingleDateState from './state/calendar-single-date-state';
 
 jest.mock('./state/calendar-single-date-state');
 jest.mock('./state/calendar-range-date-state');
-/* jest.mock('./state/calendar-single-date-state', () => {
-    return jest.fn().mockImplementation(() => {
-        return {
-            updateValue: jest.fn(),
-            onDateSelect: jest.fn(),
-            buildCurrentCalendarState: jest.fn()
-        };
-    });
-});
-jest.mock('./state/calendar-range-date-state', () => {
-    return jest.fn().mockImplementation(() => {
-        return {
-            updateValue: jest.fn(),
-            onDateSelect: jest.fn(),
-            buildCurrentCalendarState: jest.fn()
-        };
-    });
-});*/
 
 let wrapper: Wrapper<MCalendarStateMachine>;
 let value: any;

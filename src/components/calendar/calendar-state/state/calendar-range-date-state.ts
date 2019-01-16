@@ -88,7 +88,7 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         return (!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date);
     }
 
-    private betweenBeginAndHightlight(date): boolean {
+    private betweenBeginAndHightlight(date: DateUtil): boolean {
         if (this.currentRange.begin) {
             if (this.currentDateHiglighted.isBefore(this.currentRange.begin)) {
                 return date.isBetween(this.currentDateHiglighted, this.currentRange.begin, DatePrecision.DAY);
@@ -120,9 +120,7 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
             && range.end
             && range.end.isBefore(range.begin, DatePrecision.DAY)
         ) {
-            const temp: DateUtil = range.begin;
-            range.begin = range.end;
-            range.end = temp;
+            range.end = [range.begin, range.begin = range.end][0];
         }
         return range;
     }
