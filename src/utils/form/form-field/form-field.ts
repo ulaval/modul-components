@@ -1,4 +1,4 @@
-import { FormFieldState } from "../form-field-state/form-field-state";
+import { FormFieldState } from '../form-field-state/form-field-state';
 
 /**
  * Form Field Class

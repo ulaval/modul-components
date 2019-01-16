@@ -1,4 +1,5 @@
-<form @submit.prevent="onSubmit"
+<form :id="form.id"
+      @submit.prevent="onSubmit"
       @reset.prevent="onReset">
     <m-message class="m-u--margin-bottom--l"
                v-if="hasErrors"

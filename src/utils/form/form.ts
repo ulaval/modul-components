@@ -1,14 +1,19 @@
-import { FormField } from "./form-field/form-field";
+import uuid from '../uuid/uuid';
+import { FormField } from './form-field/form-field';
 
 /**
  * Form Class
  */
 export class Form {
+    public id: string;
+
     /**
      *
      * @param fields fields that are in the form
      */
-    constructor(public fields: FormField<any>[]) { }
+    constructor(public fields: FormField<any>[]) {
+        this.id = uuid.generate();
+    }
 
     /**
      * Number of fields that have errors
