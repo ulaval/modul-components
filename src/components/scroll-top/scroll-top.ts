@@ -11,6 +11,7 @@ import { SCROLL_TOP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
 import WithRender from './scroll-top.html?style=./scroll-top.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 export enum MScrollTopPosition {
     Fixed = 'fixed',
@@ -65,9 +66,13 @@ export class MScrollTop extends ModulVue {
 
 const ScrollTopPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(SCROLL_TOP_NAME + ' is not ready for production');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./scroll-top.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./scroll-top.lang.en.json'));
+        }
+
         v.use(IconPlugin);
-        v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.use(ModulPlugin);
         v.use(PortalPlugin);

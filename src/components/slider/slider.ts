@@ -94,7 +94,8 @@ export class MSlider extends ModulVue {
 
 const SliderPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(SLIDER_NAME + ' is not ready for production');
+        console.error('MSlider will be deprecated in modul v.1.0');
+
         v.use(TouchPlugin, { name: 'v-touch' }); // @todo really needed? should be loaded only by slider component.
         v.component(SLIDER_NAME, MSlider);
     }
