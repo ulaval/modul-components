@@ -6,6 +6,9 @@ import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDur
 import { ModulVue } from '../../utils/vue/vue';
 import { SIDEBAR_NAME } from '../component-names';
 import WithRender from './sidebar.html?style=./sidebar.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+import I18nPlugin from '../i18n/i18n';
+import IconButtonPlugin from '../icon-button/icon-button';
 
 export enum MSidebarOrigin {
     Top = 'top',
@@ -140,6 +143,13 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
 
 const SidebarPlugin: PluginObject<any> = {
     install(v, options): void {
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./sidebar.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./sidebar.lang.en.json'));
+        }
+        v.use(IconButtonPlugin);
+        v.use(I18nPlugin);
         v.use(PortalPlugin);
         v.component(SIDEBAR_NAME, MSidebar);
     }
