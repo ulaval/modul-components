@@ -81,21 +81,21 @@ export class MProgress extends ModulVue {
     }
 
     private get propState(): MProgressState {
-        return this.state ? this.state : this.value >= 100 ? MProgressState.Completed : MProgressState.InProgress ;
+        return this.state ? this.state : this.value >= 100 ? MProgressState.Completed : MProgressState.InProgress;
     }
 
     private get radiusSize(): string {
         return this.circle || !this.borderRadius ? 'initial' : this.size / 2 + 'px';
     }
 
-    private get styleObject(): { [name: string ]: string } {
+    private get styleObject(): { [name: string]: string } {
         return {
             height: this.propSize,
             borderRadius: this.radiusSize
         };
     }
 
-    private get barStyleObject(): { [name: string ]: string } {
+    private get barStyleObject(): { [name: string]: string } {
         return this.value >= 100 ? {
             width: this.stringValue,
             borderRadius: this.radiusSize
@@ -158,7 +158,7 @@ export class MProgress extends ModulVue {
     //     return false;
     // }
 
-    private get progressClasses(): { [name: string ]: boolean } {
+    private get progressClasses(): { [name: string]: boolean } {
         let animationClass: string = 'm-progress-spinner-indeterminate';
 
         // if (this.isIE) {
@@ -175,7 +175,7 @@ export class MProgress extends ModulVue {
         return `0 0 ${this.diameter} ${this.diameter}`;
     }
 
-    private get svgStyles(): { [name: string ]: string } {
+    private get svgStyles(): { [name: string]: string } {
         const circleSize: string = `${this.diameter}px`;
 
         return {
@@ -184,7 +184,7 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get circleStyles(): { [name: string ]: number | string } {
+    private get circleStyles(): { [name: string]: number | string } {
         return {
             'stroke-dashoffset': this.circleStrokeDashOffset,
             'stroke-dasharray': this.circleStrokeDashArray,
@@ -193,7 +193,7 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get backgroundCircleStyles(): { [name: string ]: string } {
+    private get backgroundCircleStyles(): { [name: string]: string } {
         return {
             'stroke-dasharray': this.circleStrokeDashArray,
             'stroke-width': this.circleStrokeWidth,
@@ -230,7 +230,7 @@ export class MProgress extends ModulVue {
 
 const ProgressPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(PROGRESS_NAME, 'plugin.install');
+
         v.component(PROGRESS_NAME, MProgress);
     }
 };

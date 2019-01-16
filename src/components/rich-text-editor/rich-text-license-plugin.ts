@@ -2,6 +2,9 @@ import { PluginObject } from 'vue';
 
 import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
+import InputStylePlugin from '../input-style/input-style';
+import ValidationMessagePlugin from '../validation-message/validation-message';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 export interface RichTextLicensePluginOptions {
     key: string;
@@ -11,7 +14,15 @@ const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
 export class RichTextLicensePlugin implements PluginObject<RichTextLicensePluginOptions | undefined> {
     install(v, options: RichTextLicensePluginOptions | undefined = { key: '' }): void {
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./rich-text-editor.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./rich-text-editor.lang.en.json'));
+        }
+
         v.use(LicensePlugin);
+        v.use(InputStylePlugin);
+        v.use(ValidationMessagePlugin);
         if (options.key) {
             (v.prototype as ModulVue).$license.addLicense(RICH_TEXT_LICENSE_KEY, options.key);
         }

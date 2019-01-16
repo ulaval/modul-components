@@ -5,6 +5,7 @@ import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 import MediaQueriesPlugin from './media-queries/media-queries';
 import SpritesPlugin from './svg/sprites';
+import ModulPlugin from './modul/modul';
 
 
 export interface UtilsPluginOptions {
@@ -34,12 +35,12 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(MediaQueriesPlugin);
         Vue.use(SpritesPlugin);
 
+
         //    Vue.use(ConfirmPlugin);
         //    Vue.use(AlertPlugin);
 
         // those plugin should be optional
         // Vue.use(PortalPlugin);
-
         // Vue.use(ModulPlugin);
         // Vue.use(FilePlugin);
         // Vue.use(ScrollToPlugin);
