@@ -14,6 +14,7 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 
 export enum MTextfieldType {
@@ -167,6 +168,13 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
 const TextfieldPlugin: PluginObject<any> = {
     install(v, options): void {
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./textfield.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./textfield.lang.en.json'));
+        }
+
+
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(TextareaAutoHeightPlugin);

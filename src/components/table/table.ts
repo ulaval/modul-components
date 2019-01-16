@@ -4,6 +4,9 @@ import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import WithRender from './table.html?style=./table.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+import ProgressPlugin from '../progress/progress';
+
 
 export enum MTableSkin {
     Regular = 'regular'
@@ -55,7 +58,13 @@ export class MTable extends ModulVue {
 
 const TablePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(TABLE_NAME, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./table.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./table.lang.en.json'));
+        }
+
+        v.use(ProgressPlugin);
         v.component(TABLE_NAME, MTable);
     }
 };
