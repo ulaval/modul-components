@@ -14,6 +14,7 @@ import { TREE_NODE_NAME } from './component-names';
 import { MTreeIcon } from './tree-icon/tree-icon';
 import { MTreeNode } from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 export interface TreeNode {
     id: string;
     label?: string;
@@ -156,7 +157,12 @@ export class MTree extends ModulVue {
 
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(TREE_NAME, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./tree.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./tree.lang.en.json'));
+        }
+
         v.use(I18nPlugin);
         v.use(CheckboxPlugin);
         v.use(IconFilePlugin);

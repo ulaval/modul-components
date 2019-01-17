@@ -7,6 +7,7 @@ import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { VALIDATION_MESSAGE_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './validation-message.html?style=./validation-message.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 @WithRender
 @Component({
@@ -26,7 +27,13 @@ export class MValidationMessage extends ModulVue {
 
 const ValidationMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(VALIDATION_MESSAGE_NAME, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./validation-message.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./validation-message.lang.en.json'));
+        }
+
+
         v.use(IconPlugin);
         v.use(AccordionTransitionPlugin);
         v.component(VALIDATION_MESSAGE_NAME, MValidationMessage);

@@ -11,7 +11,10 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
 import WithRender from './tooltip.html?style=./tooltip.scss';
-
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+import PopupPlugin from '../popup/popup';
+import IconPlugin from '../icon/icon';
+import IconButtonPlugin from '../icon-button/icon-button';
 
 export enum MTooltipMode {
     Icon = 'icon',
@@ -119,8 +122,15 @@ export class MTooltip extends ModulVue {
 
 const TooltipPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(TOOLTIP_NAME + ' is not ready for production');
-        v.use(ButtonPlugin);
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./tooltip.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./tooltip.lang.en.json'));
+        }
+
+        v.use(PopupPlugin);
+        v.use(IconPlugin);
+        v.use(IconButtonPlugin);
         v.use(LinkPlugin);
         v.use(I18nPlugin);
         v.use(MediaQueriesPlugin);

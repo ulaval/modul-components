@@ -97,12 +97,6 @@ describe(`MToast`, () => {
         });
 
         describe(`When the action button is clicked`, () => {
-
-            it(`should match snapshot`, () => {
-                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-            });
-
-
             it(`Should emit a action event`, () => {
                 wrapper.find('.m-toast__actions').find('.m-link').trigger('click');
 
