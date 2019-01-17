@@ -91,6 +91,14 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         return !!this.label;
     }
 
+    public get idLabel(): string | undefined {
+        return this.hasLabel ? uuid.generate() : undefined;
+    }
+
+    private get idValidationMessage(): string | undefined {
+        return this.as<InputState>().errorMessage || this.as<InputState>().validMessage || this.as<InputState>().helperMessage ? uuid.generate() : undefined;
+    }
+
     private set model(value: any) {
         this.internalValue = value;
         this.onChange(value);

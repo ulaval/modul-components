@@ -10,7 +10,7 @@ export class MRadioSandbox extends ModulVue {
     public someData: number = 1;
 
     private onBlur(): void {
-        this.$log.log('onBlur');
+        this.$log.log('$emit(\'blur\') m-radio');
     }
 }
 
