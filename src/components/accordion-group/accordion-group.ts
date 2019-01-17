@@ -110,12 +110,6 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
 
 const AccordionGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./accordion-group.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./accordion-group.lang.en.json'));
-        }
         v.use(MAccordionPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);

@@ -143,13 +143,6 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./spinner.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./spinner.lang.en.json'));
-        }
-
         v.use(PortalPlugin);
         v.use(ModulPlugin);
         v.use(I18nPlugin);

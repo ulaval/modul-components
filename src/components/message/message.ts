@@ -156,11 +156,6 @@ export class MMessage extends Vue {
 
 const MessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./message.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./message.lang.en.json'));
-        }
         v.use(IconPlugin);
         v.use(IconButtonPlugin);
         v.use(MessagePagePlugin);

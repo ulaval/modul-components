@@ -103,11 +103,6 @@ export class MOverlay extends ModulVue {
 
 const OverlayPlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./overlay.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./overlay.lang.en.json'));
-        }
         v.use(PortalPlugin);
         v.use(ButtonPlugin);
         v.use(I18nPlugin);

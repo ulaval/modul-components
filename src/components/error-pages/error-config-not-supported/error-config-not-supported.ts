@@ -35,11 +35,6 @@ export class MErrorConfigNotSupported extends ModulVue {
 
 const ErrorConfigNotSupportedPlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./error-config-not-supported.lang.fr.json'));
-        }
-
         v.use(MessagePagePlugin);
         v.component(ERROR_CONFIG_NOT_SUPPORTED_NAME, MErrorConfigNotSupported);
     }

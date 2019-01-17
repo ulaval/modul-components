@@ -94,13 +94,6 @@ export class MInplaceEdit extends ModulVue {
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./inplace-edit.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./inplace-edit.lang.en.json'));
-        }
-
         v.use(AccordionTransitionPlugin);
         v.use(OverlayPlugin);
         v.use(ButtonPlugin);

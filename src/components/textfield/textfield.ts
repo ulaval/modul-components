@@ -168,13 +168,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
 const TextfieldPlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./textfield.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./textfield.lang.en.json'));
-        }
-
-
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(TextareaAutoHeightPlugin);

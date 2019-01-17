@@ -335,14 +335,6 @@ export class MFileUpload extends ModulVue {
 
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(FILE_UPLOAD_NAME, 'plugin.install');
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./file-upload.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./file-upload.lang.en.json'));
-        }
-
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);

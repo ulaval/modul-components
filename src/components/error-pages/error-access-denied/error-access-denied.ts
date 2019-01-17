@@ -34,12 +34,6 @@ export class MErrorAccessDenied extends ModulVue {
 
 const ErrorAccessDeniedPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./error-access-denied.lang.fr.json'));
-        }
-
         v.use(MessagePagePlugin);
         v.component(ERROR_ACCESS_DENIED_NAME, MErrorAccessDenied);
     }

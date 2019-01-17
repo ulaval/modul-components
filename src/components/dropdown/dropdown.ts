@@ -460,11 +460,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./dropdown.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./dropdown.lang.fr.json'));
-        }
         Vue.use(RadioStylePlugin);
         Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);

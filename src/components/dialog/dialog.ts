@@ -105,13 +105,6 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
 const DialogPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./dialog.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./dialog.lang.fr.json'));
-        }
-
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);

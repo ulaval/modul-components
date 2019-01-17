@@ -93,13 +93,6 @@ export class MFileSelect extends ModulVue {
 
 const FileSelectPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(FILE_SELECT_NAME, 'plugin.install');
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./file-select.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./file-select.lang.en.json'));
-        }
-
         v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(ValidationMesagePlugin);

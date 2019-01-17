@@ -143,11 +143,6 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
 
 const SidebarPlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./sidebar.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./sidebar.lang.en.json'));
-        }
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
         v.use(PortalPlugin);

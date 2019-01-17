@@ -27,13 +27,6 @@ export class MValidationMessage extends ModulVue {
 
 const ValidationMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./validation-message.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./validation-message.lang.en.json'));
-        }
-
-
         v.use(IconPlugin);
         v.use(AccordionTransitionPlugin);
         v.component(VALIDATION_MESSAGE_NAME, MValidationMessage);

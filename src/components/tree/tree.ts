@@ -157,12 +157,6 @@ export class MTree extends ModulVue {
 
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./tree.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./tree.lang.en.json'));
-        }
-
         v.use(I18nPlugin);
         v.use(CheckboxPlugin);
         v.use(IconFilePlugin);

@@ -117,12 +117,6 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./input-style.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./input-style.lang.en.json'));
-        }
-
         v.use(I18nPlugin);
         v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);

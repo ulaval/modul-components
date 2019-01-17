@@ -14,12 +14,6 @@ const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
 export class RichTextLicensePlugin implements PluginObject<RichTextLicensePluginOptions | undefined> {
     install(v, options: RichTextLicensePluginOptions | undefined = { key: '' }): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./rich-text-editor.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./rich-text-editor.lang.en.json'));
-        }
-
         v.use(LicensePlugin);
         v.use(InputStylePlugin);
         v.use(ValidationMessagePlugin);

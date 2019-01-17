@@ -241,13 +241,6 @@ export class MLimitText extends ModulVue {
 
 const LimitTextPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(LIMIT_TEXT_NAME + 'plugin.install');
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./limit-text.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./limit-text.lang.en.json'));
-        }
-
         v.use(I18nPlugin);
         v.use(DynamicTemplatePlugin);
         v.component(LIMIT_TEXT_NAME, MLimitText);

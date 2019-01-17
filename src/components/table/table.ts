@@ -58,12 +58,6 @@ export class MTable extends ModulVue {
 
 const TablePlugin: PluginObject<any> = {
     install(v, options): void {
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./table.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./table.lang.en.json'));
-        }
-
         v.use(ProgressPlugin);
         v.component(TABLE_NAME, MTable);
     }

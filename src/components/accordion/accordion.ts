@@ -183,13 +183,6 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
 const AccordionPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        const i18n: Messages = (v.prototype as any).$i18n;
-        if (i18n) {
-            i18n.addMessages(FRENCH, require('./accordion.lang.fr.json'));
-            i18n.addMessages(ENGLISH, require('./accordion.lang.en.json'));
-        }
-
         v.use(I18nPlugin);
         v.use(AccordionTransitionPlugin);
         v.use(PlusPlugin);
