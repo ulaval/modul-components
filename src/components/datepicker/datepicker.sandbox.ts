@@ -13,6 +13,14 @@ export class MDatepickerSandbox extends ModulVue {
     private addMessageError(): void {
         this.errorMessage = 'Datepicker error';
     }
+
+    private onOpen(): void {
+        this.$log.log('$emit(\'open\') datepicker');
+    }
+
+    private onClose(): void {
+        this.$log.log('$emit(\'close\') datepicker');
+    }
 }
 
 const DatepickerSandboxPlugin: PluginObject<any> = {
