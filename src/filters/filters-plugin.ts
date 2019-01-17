@@ -7,6 +7,8 @@ import DateFilterPlugin from './date/date';
 const FiltersPlugin: PluginObject<any> = {
     install(v, options): void {
 
+        console.error('FiltersPlugin will be deprecated in modul v.1.0, filter should now be installed separately');
+
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin);
         }
