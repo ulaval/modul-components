@@ -83,7 +83,7 @@ describe(`Calendar`, () => {
             maxDate = '2025-01-01';
         });
 
-        it(`with default values`, () => {
+        it(`without values, will delegate it's default values`, () => {
             initializeWrapper();
 
             const calendarRenderer: Wrapper<Vue> = wrapper.find(CALENDAR_RENDERER_REF);
@@ -94,7 +94,7 @@ describe(`Calendar`, () => {
             expect(calendarRenderer.props().maxDate).toBeUndefined();
         });
 
-        it(`with specific values`, () => {
+        it(`with specific values, will delegate these values`, () => {
             showMonthBeforeAfter = false;
             initializeWrapper();
 
@@ -142,7 +142,7 @@ describe(`Calendar`, () => {
                 showMonthBeforeAfter = false;
             });
 
-            it(`with default values`, () => {
+            it(`without values, will delegate it's default values`, () => {
                 initializeWrapper();
 
                 const calendarState: Wrapper<Vue> = wrapper.find(CALENDAR_STATE_REF);
@@ -153,7 +153,7 @@ describe(`Calendar`, () => {
                 expect(calendarState.props().maxDate).toBeUndefined();
             });
 
-            it(`with specific values`, () => {
+            it(`with specific values, will delegate these values`, () => {
                 minDate = '2005-10-01';
                 maxDate = '2025-10-01';
                 initializeWrapper();
@@ -203,7 +203,7 @@ describe(`Calendar`, () => {
                 showMonthBeforeAfter = false;
             });
 
-            it(`with default values`, () => {
+            it(`without values, will delegate it's default values`, () => {
                 initializeWrapper();
 
                 const calendarState: Wrapper<Vue> = wrapper.find(CALENDAR_STATE_REF);
@@ -214,7 +214,7 @@ describe(`Calendar`, () => {
                 expect(calendarState.props().maxDate).toBeUndefined();
             });
 
-            it(`with specific values`, () => {
+            it(`with specific values, will dele gate these values`, () => {
                 minDate = '2005-10-01';
                 maxDate = '2025-10-01';
                 initializeWrapper();
