@@ -4,17 +4,17 @@
     'm-calendar-single-date': isSingleDate,
     'm-calendar-date-range': isDateRange
 }">
-    <m-calendar-state-machine :mode="mode"
+    <m-calendar-state-machine v-model="innerValue"
+                              @input="onInput"
+                              :mode="mode"
                               :min-date="minDate"
                               :max-date="maxDate"
-                              @input="onInput"
-                              v-model="innerValue"
                               ref="calendarState">
         <m-simple-calendar slot-scope="{ calendar, calendarEvents }"
+                           v-on="calendarEvents"
                            :calendar="calendar"
                            class="m-calendar__renderer"
                            ref="calendarRenderer"
-                           :show-month-before-after="showMonthBeforeAfter"
-                           v-on="calendarEvents"></m-simple-calendar>
+                           :show-month-before-after="showMonthBeforeAfter"></m-simple-calendar>
     </m-calendar-state-machine>
 </div>

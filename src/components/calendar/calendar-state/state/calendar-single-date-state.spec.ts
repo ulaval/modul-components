@@ -1,12 +1,20 @@
-import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
+import ModulDate, { DatePrecision } from '../../../../utils/modul-date/modul-date';
 import { MAX_DATE_OFFSET, MIN_DATE_OFFSET } from './abstract-calendar-state';
 import abstractCalendarStateTests from './abstract-calendar-state.spec.base';
 import CalendarSingleDateState from './calendar-single-date-state';
 import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, DaySelectCallBack, DayState } from './calendar-state';
 
-const NOW: DateUtil = new DateUtil();
+const NOW: ModulDate = new ModulDate();
 
 const CURRENT_VALUE: string = '2019-03-15';
+const CURRENT_VALUE_NEAR_MIN: string = '2018-01-30';
+const CURRENT_VALUE_NEAR_MAX: string = '2020-01-01';
+
+const MIN_DATE: string = '2018-01-15';
+const MAX_DATE: string = '2020-01-15';
+
+const NEW_DATE: string = '2019-06-03';
+
 const NEW_DAY_STATE: DayState = {
     day: 3, month: 5, year: 2019,
     isDisabled: false, isHighlighted: false,
@@ -14,8 +22,7 @@ const NEW_DAY_STATE: DayState = {
     isSelected: false, isToday: false,
     hasFocus: false
 };
-const MIN_DATE: string = '2018-01-01';
-const MAX_DATE: string = '2020-01-01';
+
 
 const DAY_SELECT_CALLBACK: DaySelectCallBack = jest.fn() as DaySelectCallBack;
 
@@ -42,13 +49,13 @@ describe(`A single date state`, () => {
             });
 
             it(`then the minimum date will be today minus ${MIN_DATE_OFFSET} years`, () => {
-                const nowMinusOffset: DateUtil = new DateUtil(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowMinusOffset: ModulDate = new ModulDate(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.min.isSame(nowMinusOffset, DatePrecision.DAY)).toBe(true);
             });
 
             it(`then the maximum date will be today plus ${MAX_DATE_OFFSET} years`, () => {
-                const nowPlusOffset: DateUtil = new DateUtil(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowPlusOffset: ModulDate = new ModulDate(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.max.isSame(nowPlusOffset, DatePrecision.DAY)).toBe(true);
             });
@@ -77,11 +84,11 @@ describe(`A single date state`, () => {
             });
 
             it(`then the minimum date will be ${MIN_DATE}`, () => {
-                expect(calendar.dates.min.isSame(new DateUtil(MIN_DATE), DatePrecision.DAY)).toBe(true);
+                expect(calendar.dates.min.isSame(new ModulDate(MIN_DATE), DatePrecision.DAY)).toBe(true);
             });
 
             it(`then the maximum date will be ${MAX_DATE}`, () => {
-                expect(calendar.dates.max.isSame(new DateUtil(MAX_DATE), DatePrecision.DAY)).toBe(true);
+                expect(calendar.dates.max.isSame(new ModulDate(MAX_DATE), DatePrecision.DAY)).toBe(true);
             });
 
             it(`then current value will be defined`, () => {
@@ -91,38 +98,38 @@ describe(`A single date state`, () => {
             });
 
             it(`dates before the minumum will be disabled`, () => {
-                const calendar: Calendar = new CalendarSingleDateState('2019-01-05', '2019-01-04', MAX_DATE).buildCurrentCalendar().calendar;
+                const calendar: Calendar = new CalendarSingleDateState(CURRENT_VALUE_NEAR_MIN, MIN_DATE, MAX_DATE).buildCurrentCalendar().calendar;
 
                 const disabledDays: DayState[] = calendar.days.filter((day: DayState) => day.isDisabled);
 
-                expect(disabledDays).toHaveLength(5);
+                expect(disabledDays).toHaveLength(15);
             });
 
             it(`dates after the maximu will be disabled`, () => {
-                const calendar: Calendar = new CalendarSingleDateState('2019-01-05', MIN_DATE, '2019-01-15').buildCurrentCalendar().calendar;
+                const calendar: Calendar = new CalendarSingleDateState(CURRENT_VALUE_NEAR_MAX, MIN_DATE, MAX_DATE).buildCurrentCalendar().calendar;
 
                 const disabledDays: DayState[] = calendar.days.filter((day: DayState) => day.isDisabled);
 
-                expect(disabledDays).toHaveLength(18);
+                expect(disabledDays).toHaveLength(17);
             });
         });
     });
 
     describe(`when updating value`, () => {
         it(`will update current date through callback`, () => {
-            calendarSingleDateState.updateValue('2019-06-03');
+            calendarSingleDateState.updateValue(NEW_DATE);
 
             const calendar: Calendar = calendarSingleDateState.buildCurrentCalendar().calendar;
 
-            expect(calendar.value).toBe('2019-06-03');
+            expect(calendar.value).toBe(NEW_DATE);
         });
 
         it(`will update the currently displayed date`, () => {
-            calendarSingleDateState.updateValue('2019-06-03');
+            calendarSingleDateState.updateValue(NEW_DATE);
 
             const currentDate: string = calendarSingleDateState.buildCurrentCalendar().calendar.dates.current.toString();
 
-            expect(currentDate).toBe('2019-06-03');
+            expect(currentDate).toBe(NEW_DATE);
         });
     });
 
@@ -163,7 +170,7 @@ describe(`A single date state`, () => {
                 });
 
                 it(`will update current date through callback`, () => {
-                    calendarSingleDateState.onDateSelect((date: string) => expect(date).toBe('2019-06-03'));
+                    calendarSingleDateState.onDateSelect((date: string) => expect(date).toBe(NEW_DATE));
                     calendarEvents[CalendarEvent.DAY_SELECT](NEW_DAY_STATE);
                 });
 
@@ -172,7 +179,7 @@ describe(`A single date state`, () => {
 
                     const currentDate: string = calendarSingleDateState.buildCurrentCalendar().calendar.dates.current.toString();
 
-                    expect(currentDate).toBe('2019-06-03');
+                    expect(currentDate).toBe(NEW_DATE);
                 });
 
                 it(`will do nothing if day is disabled`, () => {

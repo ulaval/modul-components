@@ -2,14 +2,13 @@ import { mount, RefSelector, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { addMessages } from '../../../../tests/helpers/lang';
 import { renderComponent } from '../../../../tests/helpers/render';
-import DateUtil from '../../../utils/date-util/date-util';
+import ModulDate from '../../../utils/modul-date/modul-date';
 import uuid from '../../../utils/uuid/uuid';
 import { Calendar, CalendarEvent, YearState } from '../calendar-state/state/calendar-state';
 import MSimpleCalendar, { PickerMode } from './simple-calendar';
 
 jest.mock('../../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
-
 
 const MIN_YEAR: number = 2015;
 const MAX_YEAR: number = 2023;
@@ -36,7 +35,6 @@ const padString: Function = (value: any): string => {
     return ('000' + value).slice(-2);
 };
 
-
 const SELECTABLE_DAY_REF: RefSelector = { ref: `day${CURRENT_YEAR}${padString(CURRENT_MONTH_INDEX + 1)}${padString(CURRENT_DAY)}` };
 const SELECTABLE_MONTH_REF: RefSelector = { ref: `month${padString(CURRENT_MONTH_INDEX + 1)}` };
 const SELECTABLE_YEAR_REF: RefSelector = { ref: `year${CURRENT_YEAR}` };
@@ -49,7 +47,7 @@ let monthsNames: any;
 let monthsNamesLong: any;
 let daysNames: any;
 
-const initialiserWrapper: Function = (): void => {
+const initializeWrapper: Function = (): void => {
     wrapper = mount(MSimpleCalendar, {
         localVue: Vue,
         propsData: {
@@ -68,9 +66,9 @@ const initCalendar: Function = (): Calendar => {
 
     return {
         dates: {
-            min: new DateUtil(`${MIN_YEAR}-01-15`),
-            current: new DateUtil('2019-01-15'),
-            max: new DateUtil(`${MAX_YEAR}-01-15`)
+            min: new ModulDate(`${MIN_YEAR}-01-15`),
+            current: new ModulDate('2019-01-15'),
+            max: new ModulDate(`${MAX_YEAR}-01-15`)
         },
         years: range(MIN_YEAR, MAX_YEAR).map((year: number) => {
             return {
@@ -142,19 +140,19 @@ describe('Simple calendar', () => {
         });
 
         it(`should render a calendar`, async () => {
-            initialiserWrapper();
+            initializeWrapper();
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         it(`when hiding days from previous and following month, these days should be hidden`, async () => {
             showMonthBeforeAfter = false;
-            initialiserWrapper();
+            initializeWrapper();
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
         describe(`event handling`, () => {
 
             beforeEach(() => {
-                initialiserWrapper();
+                initializeWrapper();
             });
 
             describe(`when selecting a day`, () => {
@@ -345,13 +343,13 @@ describe('Simple calendar', () => {
         });
 
         it(`should render a list of months`, async () => {
-            initialiserWrapper();
+            initializeWrapper();
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         describe(`when selecting a month`, () => {
             beforeEach(() => {
-                initialiserWrapper();
+                initializeWrapper();
             });
 
             it(`will call event handler`, () => {
@@ -389,7 +387,7 @@ describe('Simple calendar', () => {
         });
 
         it(`should render a list of years`, async () => {
-            initialiserWrapper();
+            initializeWrapper();
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
@@ -397,8 +395,8 @@ describe('Simple calendar', () => {
             let year: YearState;
 
             beforeEach(() => {
-                initialiserWrapper();
-                year = calendar.years.find((value: YearState) => value.year === CURRENT_YEAR)!;
+                initializeWrapper();
+                year = calendar.years.find((value: YearState) => value.year === CURRENT_YEAR);
             });
 
             it(`will call event handler`, () => {
@@ -429,6 +427,4 @@ describe('Simple calendar', () => {
             });
         });
     });
-
-
 });

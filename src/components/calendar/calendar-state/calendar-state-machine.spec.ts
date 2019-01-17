@@ -5,9 +5,14 @@ import MCalendarStateMachine, { CalendarMode } from './calendar-state-machine';
 import CalendarRangeDateState from './state/calendar-range-date-state';
 import CalendarSingleDateState from './state/calendar-single-date-state';
 
-
 jest.mock('./state/calendar-single-date-state');
 jest.mock('./state/calendar-range-date-state');
+
+const EMPTY_VALUE: string = '';
+const UNDEFINED_MIN_DATE: string = undefined;
+const UNDEFINED_MAX_DATE: string = undefined;
+
+const DEFAULT_DATE_VALUE: string = '2019-01-01';
 
 let wrapper: Wrapper<MCalendarStateMachine>;
 let value: any;
@@ -15,7 +20,7 @@ let mode: any;
 let minDate: any;
 let maxDate: any;
 
-const initialiserWrapper: Function = (): void => {
+const initializeWrapper: Function = (): void => {
     wrapper = mount(MCalendarStateMachine, {
         propsData: {
             value, mode, minDate, maxDate
@@ -42,14 +47,14 @@ describe(`Calendar state machine`, () => {
 
     describe(`without parameters`, () => {
         it(`will default to single date state`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             expect(CalendarSingleDateState).toHaveBeenCalledTimes(1);
             expect(CalendarRangeDateState).not.toHaveBeenCalled();
         });
 
         it(`will assign date select callback`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
 
@@ -57,12 +62,12 @@ describe(`Calendar state machine`, () => {
         });
 
         it(`should not render anything`, async () => {
-            initialiserWrapper();
+            initializeWrapper();
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         it(`should call build method on state on render`, async () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
             renderComponent(wrapper.vm).then(
@@ -77,14 +82,14 @@ describe(`Calendar state machine`, () => {
         });
 
         it(`will create single date state`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             expect(CalendarSingleDateState).toHaveBeenCalledTimes(1);
             expect(CalendarRangeDateState).not.toHaveBeenCalled();
         });
 
         it(`will assign date select callback`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
 
@@ -93,50 +98,50 @@ describe(`Calendar state machine`, () => {
 
         describe(`with value`, () => {
             beforeEach(() => {
-                value = '2019-01-01';
+                value = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
-                expect(CalendarSingleDateState).toHaveBeenCalledWith(value, undefined, undefined);
+                expect(CalendarSingleDateState).toHaveBeenCalledWith(value, UNDEFINED_MIN_DATE, UNDEFINED_MAX_DATE);
             });
 
         });
 
         describe(`with min date`, () => {
             beforeEach(() => {
-                minDate = '2019-01-01';
+                minDate = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
-                expect(CalendarSingleDateState).toHaveBeenCalledWith('', minDate, undefined);
+                expect(CalendarSingleDateState).toHaveBeenCalledWith(EMPTY_VALUE, minDate, UNDEFINED_MAX_DATE);
             });
         });
 
         describe(`with max date`, () => {
             beforeEach(() => {
-                maxDate = '2019-01-01';
+                maxDate = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
-                expect(CalendarSingleDateState).toHaveBeenCalledWith('', undefined, maxDate);
+                expect(CalendarSingleDateState).toHaveBeenCalledWith(EMPTY_VALUE, UNDEFINED_MIN_DATE, maxDate);
             });
         });
 
         describe(`with all parameters`, () => {
             beforeEach(() => {
-                value = '2019-01-01';
-                maxDate = '2019-01-01';
-                minDate = '2019-01-01';
+                value = DEFAULT_DATE_VALUE;
+                maxDate = DEFAULT_DATE_VALUE;
+                minDate = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 expect(CalendarSingleDateState).toHaveBeenCalledWith(value, minDate, maxDate);
             });
@@ -144,7 +149,7 @@ describe(`Calendar state machine`, () => {
 
         describe(`refreshing value`, () => {
             it(`will pass the new value to state`, () => {
-                initialiserWrapper();
+                initializeWrapper();
                 wrapper.setProps({ value: '2019-10-10' });
 
                 const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
@@ -155,7 +160,7 @@ describe(`Calendar state machine`, () => {
 
         describe(`updating value`, () => {
             it(`will pass the new value to state`, () => {
-                initialiserWrapper();
+                initializeWrapper();
                 wrapper.vm.onInput('2019-10-10');
 
                 const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
@@ -171,14 +176,14 @@ describe(`Calendar state machine`, () => {
         });
 
         it(`will create date range state`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             expect(CalendarSingleDateState).not.toHaveBeenCalled();
             expect(CalendarRangeDateState).toHaveBeenCalledTimes(1);
         });
 
         it(`will assign date select callback`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];
 
@@ -187,11 +192,11 @@ describe(`Calendar state machine`, () => {
 
         describe(`with value`, () => {
             beforeEach(() => {
-                value = { begin: '2019-01-01', end: undefined };
+                value = { begin: DEFAULT_DATE_VALUE, end: undefined };
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 expect(CalendarRangeDateState).toHaveBeenCalledWith(value, undefined, undefined);
             });
@@ -199,11 +204,11 @@ describe(`Calendar state machine`, () => {
 
         describe(`with min date`, () => {
             beforeEach(() => {
-                minDate = '2019-01-01';
+                minDate = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 expect(CalendarRangeDateState).toHaveBeenCalledWith('', minDate, undefined);
             });
@@ -211,11 +216,11 @@ describe(`Calendar state machine`, () => {
 
         describe(`with max date`, () => {
             beforeEach(() => {
-                maxDate = '2019-01-01';
+                maxDate = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 expect(CalendarRangeDateState).toHaveBeenCalledWith('', undefined, maxDate);
             });
@@ -223,13 +228,13 @@ describe(`Calendar state machine`, () => {
 
         describe(`with all parameters`, () => {
             beforeEach(() => {
-                value = '2019-01-01';
-                maxDate = '2019-01-01';
-                minDate = '2019-01-01';
+                value = DEFAULT_DATE_VALUE;
+                maxDate = DEFAULT_DATE_VALUE;
+                minDate = DEFAULT_DATE_VALUE;
             });
 
             it(`will use value on creation`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 expect(CalendarRangeDateState).toHaveBeenCalledWith(value, minDate, maxDate);
             });
@@ -237,7 +242,7 @@ describe(`Calendar state machine`, () => {
 
         describe(`refreshing value`, () => {
             it(`will pass the new value to state`, () => {
-                initialiserWrapper();
+                initializeWrapper();
                 wrapper.setProps({ value: { begin: '2019-10-10', end: '2020-01-01' } });
 
                 const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];
@@ -248,7 +253,7 @@ describe(`Calendar state machine`, () => {
 
         describe(`updating value`, () => {
             it(`will pass the new value to state`, () => {
-                initialiserWrapper();
+                initializeWrapper();
                 wrapper.vm.onInput({ begin: '2019-10-10', end: '2020-01-01' });
 
                 const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];

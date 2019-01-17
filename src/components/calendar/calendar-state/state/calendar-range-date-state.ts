@@ -1,4 +1,4 @@
-import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
+import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import AbstractCalendarState, { RangeDate } from './abstract-calendar-state';
 import { CalendarEvent, CalendarEvents, DayState } from './calendar-state';
 
@@ -8,14 +8,14 @@ enum DateRangePosition {
 }
 
 interface InnerModel {
-    begin: DateUtil | undefined;
-    end: DateUtil | undefined;
+    begin: ModulDate | undefined;
+    end: ModulDate | undefined;
 }
 
 export default class CalendarRangeDateState extends AbstractCalendarState {
 
     private currentRange: InnerModel;
-    private currentDateHiglighted: DateUtil = new DateUtil();
+    private currentDateHiglighted: ModulDate = new ModulDate();
 
     updateValue(value: RangeDate): void {
         this.initDates(value);
@@ -31,7 +31,7 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     protected selectDay(selectedDay: DayState): void {
         super.selectDay(selectedDay);
         if (!selectedDay.isDisabled) {
-            const newDate: DateUtil = this.selectedDayToDate(selectedDay);
+            const newDate: ModulDate = this.selectedDayToDate(selectedDay);
             this.currentRange = this.updateRangeModel(this.currentRange as InnerModel, newDate);
             this.currentRange = this.reOrderRangeDates(this.currentRange);
 
@@ -54,14 +54,14 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         const rangeCache: InnerModel = Object.assign({}, this.currentRange);
         if (value) {
             this.currentRange = {
-                begin: this.initDateRange(value as RangeDate, DateRangePosition.BEGIN),
-                end: this.initDateRange(value as RangeDate, DateRangePosition.END)
+                begin: this.initDateRange(value, DateRangePosition.BEGIN),
+                end: this.initDateRange(value, DateRangePosition.END)
             };
 
             if (this.currentRange.begin) {
-                this.currentDateHiglighted = new DateUtil(this.currentRange.begin);
+                this.currentDateHiglighted = new ModulDate(this.currentRange.begin);
             } else if (this.currentRange.end) {
-                this.currentDateHiglighted = new DateUtil(this.currentRange.end);
+                this.currentDateHiglighted = new ModulDate(this.currentRange.end);
             }
         } else {
             this.currentRange = { begin: undefined, end: undefined };
@@ -78,17 +78,17 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         }
     }
 
-    protected isDaySelected(date: DateUtil): boolean {
+    protected isDaySelected(date: ModulDate): boolean {
         return ((this.currentRange.begin && this.currentRange.end) && date.isBetween(this.currentRange.begin, this.currentRange.end, DatePrecision.DAY))
             || (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
             || (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
     }
 
-    protected isHighlighted(date: DateUtil): boolean {
+    protected isHighlighted(date: ModulDate): boolean {
         return (!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date);
     }
 
-    private betweenBeginAndHightlight(date: DateUtil): boolean {
+    private betweenBeginAndHightlight(date: ModulDate): boolean {
         if (this.currentRange.begin) {
             if (this.currentDateHiglighted.isBefore(this.currentRange.begin)) {
                 return date.isBetween(this.currentDateHiglighted, this.currentRange.begin, DatePrecision.DAY);
@@ -99,11 +99,11 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         return false;
     }
 
-    private initDateRange(dates: RangeDate, position: DateRangePosition): DateUtil | undefined {
-        return (dates[position]) ? new DateUtil(dates[position]) : undefined;
+    private initDateRange(dates: RangeDate, position: DateRangePosition): ModulDate | undefined {
+        return (dates[position]) ? new ModulDate(dates[position]) : undefined;
     }
 
-    private updateRangeModel(range: InnerModel, date: DateUtil): InnerModel {
+    private updateRangeModel(range: InnerModel, date: ModulDate): InnerModel {
         if (range.end) {
             range.end = undefined;
             range.begin = date;

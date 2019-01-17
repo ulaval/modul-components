@@ -18,7 +18,7 @@ export enum DateComparison {
     IS_AFTER = 1
 }
 
-export default class DateUtil {
+export default class ModulDate {
 
     private innerDate: Date;
 
@@ -43,8 +43,8 @@ export default class DateUtil {
     constructor(year?: any, month?: any, day?: any) {
         switch (arguments.length) {
             case 1:
-                const value: DateUtil | Date | String = arguments[0];
-                if (value instanceof DateUtil) {
+                const value: ModulDate | Date | String = arguments[0];
+                if (value instanceof ModulDate) {
                     this.innerDate = new Date(value.fullYear(), value.month(), value.day());
                 } else if (value instanceof Date) {
                     this.innerDate = new Date(value);
@@ -70,7 +70,7 @@ export default class DateUtil {
      * @param otherDate date to be compared with
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isSameOrBefore(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isSameOrBefore(otherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) >= this.toTime(this.innerDate, precision);
     }
 
@@ -80,7 +80,7 @@ export default class DateUtil {
      * @param otherDate date to be compared with
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isBefore(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isBefore(otherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) > this.toTime(this.innerDate, precision);
     }
 
@@ -90,7 +90,7 @@ export default class DateUtil {
      * @param otherDate date to be compared with
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isSame(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isSame(otherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) === this.toTime(this.innerDate, precision);
     }
 
@@ -100,7 +100,7 @@ export default class DateUtil {
      * @param otherDate date to be compared with
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isSameOrAfter(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isSameOrAfter(otherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) <= this.toTime(this.innerDate, precision);
     }
 
@@ -110,7 +110,7 @@ export default class DateUtil {
      * @param otherDate date to be compared with
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isAfter(otherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isAfter(otherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(otherDate.innerDate, precision) < this.toTime(this.innerDate, precision);
     }
 
@@ -121,7 +121,7 @@ export default class DateUtil {
      * @param higherDate higher bound
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isBetween(lowerDate: DateUtil, higherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isBetween(lowerDate: ModulDate, higherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(lowerDate.innerDate, precision) <= this.toTime(this.innerDate, precision)
             && this.toTime(this.innerDate, precision) <= this.toTime(higherDate.innerDate, precision);
     }
@@ -133,7 +133,7 @@ export default class DateUtil {
      * @param higherDate higher bound
      * @param precision level of precision for comparison @see DatePrecision
      */
-    public isBetweenStrict(lowerDate: DateUtil, higherDate: DateUtil, precision: DatePrecision = DatePrecision.DAY): boolean {
+    public isBetweenStrict(lowerDate: ModulDate, higherDate: ModulDate, precision: DatePrecision = DatePrecision.DAY): boolean {
         return this.toTime(lowerDate.innerDate, precision) < this.toTime(this.innerDate, precision)
             && this.toTime(this.innerDate, precision) < this.toTime(higherDate.innerDate, precision);
     }
@@ -145,7 +145,7 @@ export default class DateUtil {
      * @param date date to be compared with
      * @returns @see DateComparison
      */
-    public compare(date: DateUtil): number {
+    public compare(date: ModulDate): number {
         const current: number = this.toTime(this.innerDate, DatePrecision.DAY);
         const other: number = this.toTime(date.innerDate, DatePrecision.DAY);
 
@@ -200,7 +200,7 @@ export default class DateUtil {
     public equals(otherDate: any): boolean {
         if (otherDate instanceof Date) {
             return this.toTime(otherDate, DatePrecision.DAY) === this.toTime(this.innerDate, DatePrecision.DAY);
-        } else if (otherDate instanceof DateUtil) {
+        } else if (otherDate instanceof ModulDate) {
             return this.toTime(otherDate.innerDate, DatePrecision.DAY) === this.toTime(this.innerDate, DatePrecision.DAY);
         }
         return false;
@@ -212,7 +212,7 @@ export default class DateUtil {
      * @param other
      * @return Number of days in absolute format
      */
-    public deltaInDays(other: DateUtil): number {
+    public deltaInDays(other: ModulDate): number {
         return Math.round(Math.abs(other.innerDate.getTime() - this.innerDate.getTime()) / (1000 * 3600 * 24));
     }
 

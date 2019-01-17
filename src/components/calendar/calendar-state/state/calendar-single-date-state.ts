@@ -1,9 +1,9 @@
-import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
+import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import AbstractCalendarState, { SingleDate } from './abstract-calendar-state';
 
 export default class CalendarSingleDateState extends AbstractCalendarState {
 
-    private currentDate: DateUtil;
+    private currentDate: ModulDate;
 
     updateValue(value: SingleDate): void {
         this.initDates(value);
@@ -16,7 +16,7 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
     protected selectDay(selectedDay: any): void {
         super.selectDay(selectedDay);
         if (!selectedDay.isDisabled) {
-            const newDate: DateUtil = this.selectedDayToDate(selectedDay);
+            const newDate: ModulDate = this.selectedDayToDate(selectedDay);
             this.currentDate = newDate;
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());
 
@@ -26,7 +26,7 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
 
     protected initCurrentValue(value: SingleDate): void {
         if (value) {
-            this.currentDate = new DateUtil(value);
+            this.currentDate = new ModulDate(value);
         }
     }
 
@@ -38,7 +38,7 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
         }
     }
 
-    protected isDaySelected(date: DateUtil): boolean {
+    protected isDaySelected(date: ModulDate): boolean {
         return !!this.currentDate && date.isSame(this.currentDate, DatePrecision.DAY);
     }
 }

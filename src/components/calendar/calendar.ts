@@ -1,12 +1,13 @@
-import { PluginObject } from 'vue';
+import Vue, { PluginObject } from 'vue';
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
+import IconButtonPlugin from '../icon-button/icon-button';
 import MSimpleCalendar from './calendar-renderer/simple-calendar';
 import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
-import WithRender from './calendar.html?style=./calendar.scss';
+import WithRender from './calendar.html';
 
 
 export enum CalendarMode {
@@ -83,6 +84,7 @@ export class MCalendar extends ModulVue {
 const CalendarPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.warn(CALENDAR_NAME + ' is not ready for production');
+        Vue.use(IconButtonPlugin);
         v.component(CALENDAR_NAME, MCalendar);
     }
 };

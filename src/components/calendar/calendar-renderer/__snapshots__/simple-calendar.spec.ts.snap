@@ -5,12 +5,12 @@ exports[`Simple calendar in day picker mode should render a calendar 1`] = `
     <div class="m-simple-calendar__header">
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__years">2019</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
         </nav>
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__months">January</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
         </nav>
     </div>
@@ -150,12 +150,12 @@ exports[`Simple calendar in day picker mode when hiding days from previous and f
     <div class="m-simple-calendar__header">
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__years">2019</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
         </nav>
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__months">January</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
         </nav>
     </div>
@@ -295,12 +295,12 @@ exports[`Simple calendar in month picker mode should render a list of months 1`]
     <div class="m-simple-calendar__header">
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__years">2019</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
         </nav>
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__months">January</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
         </nav>
     </div>
@@ -360,12 +360,12 @@ exports[`Simple calendar in year picker mode should render a list of years 1`] =
     <div class="m-simple-calendar__header">
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__years">2019</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
         </nav>
         <nav class="m-simple-calendar__nav">
             <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button type="button" aria-live="polite" class="m-simple-calendar__months">January</button>
+            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
             <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
         </nav>
     </div>

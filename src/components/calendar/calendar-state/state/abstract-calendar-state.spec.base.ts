@@ -3,6 +3,8 @@ import CalendarState, { Calendar, CalendarEvent, CalendarEvents, DayState, Month
 const MIN_DATE: string = '2017-06-15';
 const MAX_DATE: string = '2021-08-13';
 const CURRENT_VALUE: string = '2019-12-14';
+const CURRENT_VALUE_NEAR_MIN_DATE: string = '2017-06-20';
+const CURRENT_VALUE_NEAR_MAX_DATE: string = '21-08-01';
 
 const NEW_DAY_STATE: Partial<DayState> = {
     day: 3,
@@ -48,7 +50,7 @@ const abstractCalendarStateTests: Function = (stateBuilder: (currentValue: strin
                 });
 
                 it(`when selecting a month before the minimum date, the current month will be set to the minimum`, () => {
-                    calendarState = stateBuilder('2019-06-15', '2019-06-01', MAX_DATE);
+                    calendarState = stateBuilder(CURRENT_VALUE_NEAR_MIN_DATE, MIN_DATE, MAX_DATE);
                     calendarEvents[CalendarEvent.MONTH_SELECT]({ month: 1, isDisabled: false, isCurrent: false } as MonthState);
 
                     const calendar: Calendar = calendarState.buildCurrentCalendar().calendar;
@@ -57,12 +59,12 @@ const abstractCalendarStateTests: Function = (stateBuilder: (currentValue: strin
                 });
 
                 it(`when selecting a month after the maximum date, the current month will be set to the maximum`, () => {
-                    calendarState = stateBuilder('2019-06-15', MIN_DATE, '2019-06-01');
+                    calendarState = stateBuilder(CURRENT_VALUE_NEAR_MAX_DATE, MIN_DATE, MAX_DATE);
                     calendarEvents[CalendarEvent.MONTH_SELECT]({ month: 11, isDisabled: false, isCurrent: false } as MonthState);
 
                     const calendar: Calendar = calendarState.buildCurrentCalendar().calendar;
 
-                    expect(calendar.dates.current.month()).toEqual(5);
+                    expect(calendar.dates.current.month()).toEqual(7);
                 });
             });
 

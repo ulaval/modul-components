@@ -1,4 +1,4 @@
-import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
+import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, DaySelectCallBack, DayState, MonthState, YearState } from './calendar-state';
 
 export const MAX_DATE_OFFSET: number = 10;
@@ -17,11 +17,11 @@ export interface RangeDate {
 
 export default abstract class AbstractCalendarState implements CalendarState {
 
-    protected now: DateUtil = new DateUtil();
+    protected now: ModulDate = new ModulDate();
 
-    protected currentlyDisplayedDate: DateUtil = new DateUtil();
-    protected currentMinDate: DateUtil;
-    protected currentMaxDate: DateUtil;
+    protected currentlyDisplayedDate: ModulDate = new ModulDate();
+    protected currentMinDate: ModulDate;
+    protected currentMaxDate: ModulDate;
 
     protected minDate: string;
     protected maxDate: string;
@@ -29,7 +29,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
     protected daySelectCallback: Function;
 
     private calendar: Calendar = {
-        dates: { min: new DateUtil(), current: new DateUtil(), max: new DateUtil() },
+        dates: { min: new ModulDate(), current: new ModulDate(), max: new ModulDate() },
         years: [],
         months: [],
         days: []
@@ -37,7 +37,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
 
     private events: CalendarEvents;
 
-    private lastSelectedDate: DateUtil;
+    private lastSelectedDate: ModulDate;
 
     constructor(value?: SingleDate | RangeDate, minDate?: string, maxDate?: string) {
         this.initDates(value, minDate, maxDate);
@@ -74,14 +74,14 @@ export default abstract class AbstractCalendarState implements CalendarState {
      * @param day new value
      */
     protected updateCurrentlyDisplayedDate(year: number, month: number, day: number): void {
-        this.currentlyDisplayedDate = new DateUtil(year, month, day);
+        this.currentlyDisplayedDate = new ModulDate(year, month, day);
 
         if (this.currentlyDisplayedDate.isAfter(this.currentMaxDate, DatePrecision.DAY)) {
-            this.currentlyDisplayedDate = new DateUtil(this.currentMaxDate);
+            this.currentlyDisplayedDate = new ModulDate(this.currentMaxDate);
         }
 
         if (this.currentlyDisplayedDate.isBefore(this.currentMinDate, DatePrecision.DAY)) {
-            this.currentlyDisplayedDate = new DateUtil(this.currentMinDate);
+            this.currentlyDisplayedDate = new ModulDate(this.currentMinDate);
         }
     }
 
@@ -158,35 +158,35 @@ export default abstract class AbstractCalendarState implements CalendarState {
         return events;
     }
 
-    protected selectedDayToDate(selectedDay: DayState): DateUtil {
-        return new DateUtil(selectedDay.year, selectedDay.month, selectedDay.day);
+    protected selectedDayToDate(selectedDay: DayState): ModulDate {
+        return new ModulDate(selectedDay.year, selectedDay.month, selectedDay.day);
     }
 
-    protected isDayDisabled(date: DateUtil): boolean {
+    protected isDayDisabled(date: ModulDate): boolean {
         return !date.isBetween(this.currentMinDate, this.currentMaxDate, DatePrecision.DAY);
     }
 
-    protected isDayToday(date: DateUtil): boolean {
+    protected isDayToday(date: ModulDate): boolean {
         return date.isSame(this.now, DatePrecision.DAY);
     }
 
-    protected isInPreviousMonth(date: DateUtil): boolean {
+    protected isInPreviousMonth(date: ModulDate): boolean {
         return date.isBefore(this.currentlyDisplayedDate, DatePrecision.MONTH);
     }
 
-    protected isInNextMonth(date: DateUtil): boolean {
+    protected isInNextMonth(date: ModulDate): boolean {
         return date.isAfter(this.currentlyDisplayedDate, DatePrecision.MONTH);
     }
 
-    protected isDaySelected(_date: DateUtil): boolean {
+    protected isDaySelected(_date: ModulDate): boolean {
         return false;
     }
 
-    protected isHighlighted(_date: DateUtil): boolean {
+    protected isHighlighted(_date: ModulDate): boolean {
         return false;
     }
 
-    protected hasFocus(date: DateUtil): boolean {
+    protected hasFocus(date: ModulDate): boolean {
         return !!this.lastSelectedDate && date.isSame(this.lastSelectedDate);
     }
 
@@ -212,9 +212,9 @@ export default abstract class AbstractCalendarState implements CalendarState {
 
     private months(): MonthState[] {
         let months: MonthState[] = [];
-        let date: DateUtil;
+        let date: ModulDate;
         for (let index: number = FIRST_MONTH_INDEX; index <= LAST_MONTH_INDEX; index++) {
-            date = new DateUtil(this.currentlyDisplayedDate.fullYear(), index, 1);
+            date = new ModulDate(this.currentlyDisplayedDate.fullYear(), index, 1);
             months.push({
                 month: index,
                 isCurrent: this.currentlyDisplayedMonth() === index,
@@ -232,7 +232,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         if (this.currentMaxDate) { return; }
 
         if (maxDate) {
-            this.currentMaxDate = new DateUtil(maxDate);
+            this.currentMaxDate = new ModulDate(maxDate);
         } else {
             this.currentMaxDate = this.calculateYearOffset(this.now, MAX_DATE_OFFSET);
         }
@@ -242,21 +242,21 @@ export default abstract class AbstractCalendarState implements CalendarState {
         if (this.currentMinDate) { return; }
 
         if (minDate) {
-            this.currentMinDate = new DateUtil(minDate);
+            this.currentMinDate = new ModulDate(minDate);
         } else {
             this.currentMinDate = this.calculateYearOffset(this.now, MIN_DATE_OFFSET * -1);
         }
     }
 
     private buildDaysList(): DayState[] {
-        const startDate: DateUtil = this.calculateStartDate(this.currentlyDisplayedDate);
-        const endDate: DateUtil = this.calculateEndDate(this.currentlyDisplayedDate);
+        const startDate: ModulDate = this.calculateStartDate(this.currentlyDisplayedDate);
+        const endDate: ModulDate = this.calculateEndDate(this.currentlyDisplayedDate);
         const numberOfDays: number = startDate.deltaInDays(endDate);
 
         let days: DayState[] = [];
-        let date: DateUtil;
+        let date: ModulDate;
         for (let index: number = 0; index <= numberOfDays; index++) {
-            date = new DateUtil(startDate.fullYear(), startDate.month(), startDate.day() + index);
+            date = new ModulDate(startDate.fullYear(), startDate.month(), startDate.day() + index);
             days.push({
                 day: date.day(),
                 month: date.month(),
@@ -273,32 +273,32 @@ export default abstract class AbstractCalendarState implements CalendarState {
         return days;
     }
 
-    private calculateStartDate(date: DateUtil): DateUtil {
+    private calculateStartDate(date: ModulDate): ModulDate {
         const startOffset: number = this.weekdayIndexOfFirstDayOfMonth(date);
-        return new DateUtil(date.fullYear(), date.month(), 1 - startOffset);
+        return new ModulDate(date.fullYear(), date.month(), 1 - startOffset);
     }
 
-    private calculateEndDate(date: DateUtil): DateUtil {
+    private calculateEndDate(date: ModulDate): ModulDate {
         const endOffset: number = LAST_DAY_OF_WEEK_INDEX - this.weekdayIndexOfLastDayOfMonth(date);
-        return new DateUtil(date.fullYear(), date.month(), this.daysInMonth(date) + endOffset);
+        return new ModulDate(date.fullYear(), date.month(), this.daysInMonth(date) + endOffset);
     }
 
-    private weekdayIndexOfFirstDayOfMonth(date: DateUtil): number {
+    private weekdayIndexOfFirstDayOfMonth(date: ModulDate): number {
         const dateFirstOfMonth: Date = new Date(date.fullYear(), date.month(), 1);
         return dateFirstOfMonth.getDay();
     }
 
-    private weekdayIndexOfLastDayOfMonth(date: DateUtil): number {
+    private weekdayIndexOfLastDayOfMonth(date: ModulDate): number {
         const dateLastOfMonth: Date = new Date(date.fullYear(), date.month() + 1, 0);
         return dateLastOfMonth.getDay();
     }
 
-    private daysInMonth(date: DateUtil): number {
+    private daysInMonth(date: ModulDate): number {
         const dateLastOfMonth: Date = new Date(date.fullYear(), date.month() + 1, 0);
         return dateLastOfMonth.getDate();
     }
 
-    private calculateYearOffset(date: DateUtil, offset: number): DateUtil {
-        return new DateUtil(date.fullYear() + (offset), date.month(), date.day());
+    private calculateYearOffset(date: ModulDate, offset: number): ModulDate {
+        return new ModulDate(date.fullYear() + (offset), date.month(), date.day());
     }
 }

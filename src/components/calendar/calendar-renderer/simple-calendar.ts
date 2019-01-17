@@ -1,7 +1,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { DatePrecision } from '../../../utils/date-util/date-util';
 import uuid from '../../../utils/uuid/uuid';
 import { DayState, MonthState, YearState } from '../calendar-state/state/calendar-state';
+import { DatePrecision } from './../../../utils/modul-date/modul-date';
 import { MAbstractCalendarRenderer } from './abstract-calendar-renderer';
 import WithRender from './simple-calendar.html?style=./simple-calendar.scss';
 

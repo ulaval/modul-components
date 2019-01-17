@@ -4,7 +4,6 @@ import { CALENDAR_NAME } from '../component-names';
 import { RangeDate } from './calendar-state/state/abstract-calendar-state';
 import WithRender from './calendar.sandbox.html';
 
-
 @WithRender
 @Component
 export class MCalendarSandbox extends Vue {

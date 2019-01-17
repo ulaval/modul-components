@@ -1,15 +1,23 @@
-import DateUtil, { DatePrecision } from '../../../../utils/date-util/date-util';
+import ModulDate, { DatePrecision } from '../../../../utils/modul-date/modul-date';
 import { MAX_DATE_OFFSET, MIN_DATE_OFFSET, RangeDate, SingleDate } from './abstract-calendar-state';
 import abstractCalendarStateTests from './abstract-calendar-state.spec.base';
 import CalendarRangeDateState from './calendar-range-date-state';
 import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, DaySelectCallBack, DayState } from './calendar-state';
 
-
-const NOW: DateUtil = new DateUtil();
+const NOW: ModulDate = new ModulDate();
 
 const CURRENT_VALUE_BEGIN: RangeDate = { begin: '2019-03-15' };
 const CURRENT_VALUE_END: RangeDate = { end: '2019-04-16' };
 const CURRENT_VALUE_BOTH: RangeDate = { begin: '2019-03-15', end: '2019-04-16' };
+
+const CURRENT_DATE_NEAR_MIN_DATE: string = '2018-01-30';
+const CURRENT_DATE_NEAR_MAX_DATE: string = '2020-01-01';
+
+const FIRST_DATE_PICKED: string = '2019-06-03';
+const SECOND_DATE_PICKED: string = '2019-06-06';
+
+const MIN_DATE: string = '2018-01-15';
+const MAX_DATE: string = '2020-01-15';
 
 const FIRST_DAY_STATE: DayState = {
     day: 3, month: 5, year: 2019,
@@ -26,9 +34,6 @@ const SECOND_DAY_STATE: DayState = {
     isSelected: false, isToday: false,
     hasFocus: false
 };
-
-const MIN_DATE: string = '2018-01-01';
-const MAX_DATE: string = '2020-01-01';
 
 const DAY_SELECT_CALLBACK: DaySelectCallBack = jest.fn() as DaySelectCallBack;
 
@@ -54,13 +59,13 @@ describe(`A range date state`, () => {
             });
 
             it(`then the minimum date will be today minus ${MIN_DATE_OFFSET} years`, () => {
-                const nowMinusOffset: DateUtil = new DateUtil(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowMinusOffset: ModulDate = new ModulDate(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.min.isSame(nowMinusOffset, DatePrecision.DAY)).toBe(true);
             });
 
             it(`then the maximum date will be today plus ${MAX_DATE_OFFSET} years`, () => {
-                const nowPlusOffset: DateUtil = new DateUtil(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowPlusOffset: ModulDate = new ModulDate(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.max.isSame(nowPlusOffset, DatePrecision.DAY)).toBe(true);
             });
@@ -89,13 +94,13 @@ describe(`A range date state`, () => {
             });
 
             it(`then the minimum date will be today minus ${MIN_DATE_OFFSET} years`, () => {
-                const nowMinusOffset: DateUtil = new DateUtil(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowMinusOffset: ModulDate = new ModulDate(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.min.isSame(nowMinusOffset, DatePrecision.DAY)).toBe(true);
             });
 
             it(`then the maximum date will be today plus ${MAX_DATE_OFFSET} years`, () => {
-                const nowPlusOffset: DateUtil = new DateUtil(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowPlusOffset: ModulDate = new ModulDate(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.max.isSame(nowPlusOffset, DatePrecision.DAY)).toBe(true);
             });
@@ -118,13 +123,13 @@ describe(`A range date state`, () => {
             });
 
             it(`then the minimum date will be today minus ${MIN_DATE_OFFSET} years`, () => {
-                const nowMinusOffset: DateUtil = new DateUtil(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowMinusOffset: ModulDate = new ModulDate(NOW.fullYear() - MIN_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.min.isSame(nowMinusOffset, DatePrecision.DAY)).toBe(true);
             });
 
             it(`then the maximum date will be today plus ${MAX_DATE_OFFSET} years`, () => {
-                const nowPlusOffset: DateUtil = new DateUtil(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
+                const nowPlusOffset: ModulDate = new ModulDate(NOW.fullYear() + MAX_DATE_OFFSET, NOW.month(), NOW.day());
 
                 expect(calendar.dates.max.isSame(nowPlusOffset, DatePrecision.DAY)).toBe(true);
             });
@@ -147,11 +152,11 @@ describe(`A range date state`, () => {
             });
 
             it(`then the minimum date will be ${MIN_DATE}`, () => {
-                expect(calendar.dates.min.isSame(new DateUtil(MIN_DATE), DatePrecision.DAY)).toBe(true);
+                expect(calendar.dates.min.isSame(new ModulDate(MIN_DATE), DatePrecision.DAY)).toBe(true);
             });
 
             it(`then the maximum date will be ${MAX_DATE}`, () => {
-                expect(calendar.dates.max.isSame(new DateUtil(MAX_DATE), DatePrecision.DAY)).toBe(true);
+                expect(calendar.dates.max.isSame(new ModulDate(MAX_DATE), DatePrecision.DAY)).toBe(true);
             });
 
             it(`then current value will be defined`, () => {
@@ -161,19 +166,19 @@ describe(`A range date state`, () => {
             });
 
             it(`dates before the minumum will be disabled`, () => {
-                const calendar: Calendar = new CalendarRangeDateState({ begin: '2019-01-05', end: '2019-01-10' }, '2019-01-04', MAX_DATE).buildCurrentCalendar().calendar;
+                const calendar: Calendar = new CalendarRangeDateState({ begin: CURRENT_DATE_NEAR_MIN_DATE, end: SECOND_DATE_PICKED }, MIN_DATE, MAX_DATE).buildCurrentCalendar().calendar;
 
                 const disabledDays: DayState[] = calendar.days.filter((day: DayState) => day.isDisabled);
 
-                expect(disabledDays).toHaveLength(5);
+                expect(disabledDays).toHaveLength(15);
             });
 
-            it(`dates after the maximu will be disabled`, () => {
-                const calendar: Calendar = new CalendarRangeDateState({ begin: '2019-01-05', end: '2019-01-10' }, MIN_DATE, '2019-01-15').buildCurrentCalendar().calendar;
+            it(`dates after the maximum will be disabled`, () => {
+                const calendar: Calendar = new CalendarRangeDateState({ begin: CURRENT_DATE_NEAR_MAX_DATE, end: SECOND_DATE_PICKED }, MIN_DATE, MAX_DATE).buildCurrentCalendar().calendar;
 
                 const disabledDays: DayState[] = calendar.days.filter((day: DayState) => day.isDisabled);
 
-                expect(disabledDays).toHaveLength(18);
+                expect(disabledDays).toHaveLength(17);
             });
         });
     });
@@ -182,31 +187,31 @@ describe(`A range date state`, () => {
         describe(`without prior value`, () => {
             it(`will update begin value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-03', end: '' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: '' });
 
             });
 
             it(`will update end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: '', end: FIRST_DATE_PICKED });
 
             });
 
             it(`will update both values`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: '2019-06-01', end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-01', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
             });
         });
@@ -220,28 +225,28 @@ describe(`A range date state`, () => {
 
             it(`when updating begin value, will replace begin value and clear end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-03', end: '' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: '' });
 
             });
 
             it(`when updating end value, will clear begin value and replace end value`, () => {
-                calendarRangeDateState.updateValue({ end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: '', end: FIRST_DATE_PICKED });
             });
 
             it(`when updating both values, will replace both values`, () => {
-                calendarRangeDateState.updateValue({ begin: '2019-06-01', end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-01', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
             });
 
             it(`when updating with nothing, will clear both values`, () => {
@@ -262,28 +267,28 @@ describe(`A range date state`, () => {
 
             it(`when updating begin value, will replace begin value and clear end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-03', end: '' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: '' });
 
             });
 
             it(`when updating end value, will clear begin value and replace end value`, () => {
-                calendarRangeDateState.updateValue({ end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: '', end: FIRST_DATE_PICKED });
             });
 
             it(`when updating both values, will replace both values`, () => {
-                calendarRangeDateState.updateValue({ begin: '2019-06-01', end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-01', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
             });
 
             it(`when updating with nothing, will clear both values`, () => {
@@ -304,28 +309,28 @@ describe(`A range date state`, () => {
 
             it(`when updating begin value, will replace begin value and clear end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-03', end: '' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: '' });
 
             });
 
             it(`when updating end value, will clear begin value and replace end value`, () => {
-                calendarRangeDateState.updateValue({ end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: '', end: FIRST_DATE_PICKED });
             });
 
             it(`when updating both values, will replace both values`, () => {
-                calendarRangeDateState.updateValue({ begin: '2019-06-01', end: '2019-06-03' });
+                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
-                expect(calendar.value).toEqual({ begin: '2019-06-01', end: '2019-06-03' });
+                expect(calendar.value).toEqual({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
             });
 
             it(`when updating with nothing, will clear both values`, () => {
@@ -411,7 +416,7 @@ describe(`A range date state`, () => {
                 });
 
                 it(`will update current date through callback`, () => {
-                    calendarRangeDateState.onDateSelect((date: string) => expect(date).toEqual({ begin: '2019-06-03', end: '' }));
+                    calendarRangeDateState.onDateSelect((date: string) => expect(date).toEqual({ begin: FIRST_DATE_PICKED, end: '' }));
                     calendarEvents[CalendarEvent.DAY_SELECT](FIRST_DAY_STATE);
 
                 });
@@ -421,7 +426,7 @@ describe(`A range date state`, () => {
 
                     const currentDate: string = calendarRangeDateState.buildCurrentCalendar().calendar.dates.current.toString();
 
-                    expect(currentDate).toBe('2019-06-03');
+                    expect(currentDate).toBe(FIRST_DATE_PICKED);
                 });
 
                 it(`will do nothing if day is disabled`, () => {
@@ -436,7 +441,7 @@ describe(`A range date state`, () => {
 
             describe(`${CalendarEvent.DAY_MOUSE_ENTER}`, () => {
                 it(`when a first date is selected, will highlight dates in interval, up to second date`, () => {
-                    calendarRangeDateState = new CalendarRangeDateState({ begin: '2019-06-03' }, MIN_DATE, MAX_DATE);
+                    calendarRangeDateState = new CalendarRangeDateState({ begin: FIRST_DATE_PICKED }, MIN_DATE, MAX_DATE);
                     const calendarState: CalendarCurrentState = calendarRangeDateState.buildCurrentCalendar();
                     const events: CalendarEvents = calendarState.calendarEvents;
                     events[CalendarEvent.DAY_MOUSE_ENTER](SECOND_DAY_STATE);

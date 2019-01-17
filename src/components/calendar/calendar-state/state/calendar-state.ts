@@ -1,4 +1,4 @@
-import DateUtil from '../../../../utils/date-util/date-util';
+import ModulDate from 'src/utils/modul-date/modul-date';
 import { RangeDate, SingleDate } from './abstract-calendar-state';
 
 export enum CalendarEvent {
@@ -28,7 +28,7 @@ export interface CalendarCurrentState {
 
 export interface Calendar {
     value?: SingleDate | RangeDate;
-    dates: { min: DateUtil, current: DateUtil, max: DateUtil };
+    dates: { min: ModulDate, current: ModulDate, max: ModulDate };
     years: YearState[];
     months: MonthState[];
     days: DayState[];
