@@ -1,4 +1,4 @@
-import ModulDate from 'src/utils/modul-date/modul-date';
+import ModulDate from './../../../../utils/modul-date/modul-date';
 import { RangeDate, SingleDate } from './abstract-calendar-state';
 
 export enum CalendarEvent {
