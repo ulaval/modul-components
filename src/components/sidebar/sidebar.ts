@@ -1,4 +1,3 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -145,7 +144,6 @@ const SidebarPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
-        v.use(PortalPlugin);
         v.component(SIDEBAR_NAME, MSidebar);
     }
 };

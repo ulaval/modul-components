@@ -4,6 +4,7 @@ import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { DRAGGABLE_NAME } from '../directive-names';
 import WithRender from './draggable.sandbox.html';
+import DragAndDropPlugin from './drag-and-drop-plugin';
 
 @WithRender
 @Component
@@ -18,6 +19,7 @@ export class MDraggableSandbox extends ModulVue {
 
 const DraggableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(DragAndDropPlugin);
         v.component(`${DRAGGABLE_NAME}-sandbox`, MDraggableSandbox);
     }
 };

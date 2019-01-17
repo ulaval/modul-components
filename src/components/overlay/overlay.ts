@@ -1,4 +1,3 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -103,7 +102,6 @@ export class MOverlay extends ModulVue {
 
 const OverlayPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(PortalPlugin);
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.component(OVERLAY_NAME, MOverlay);

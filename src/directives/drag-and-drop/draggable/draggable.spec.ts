@@ -1,9 +1,9 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-import { resetModulPlugins } from './../../../tests/helpers/component';
-import { polyFillActive } from './../../utils/polyfills';
-import { MDOMPlugin } from './../domPlugin';
-import { MRemoveUserSelect } from './../user-select/remove-user-select';
+import { resetModulPlugins } from './../../../../tests/helpers/component';
+import { polyFillActive } from './../../../utils/polyfills';
+import { MDOMPlugin } from './../../domPlugin';
+import { MRemoveUserSelect } from './../../user-select/remove-user-select';
 import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames, MDraggableOptions } from './draggable';
 
 jest.useFakeTimers();

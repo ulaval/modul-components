@@ -1,3 +1,4 @@
+import PortalPlugin from 'portal-vue';
 import Vue, { PluginObject } from 'vue';
 import { BackdropMode } from '../../mixins/portal/portal';
 import uuid from '../uuid/uuid';
@@ -279,6 +280,7 @@ export class Modul {
 
 const ModulPlugin: PluginObject<any> = {
     install(v, options): void {
+        Vue.use(PortalPlugin);
         let modul: Modul = new Modul();
         (v.prototype as any).$modul = modul;
     }

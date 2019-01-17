@@ -1,13 +1,13 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-import { targetIsInput } from '../../utils/event/event';
-import { dragDropDelay, polyFillActive } from '../../utils/polyfills';
-import { clearUserSelection } from '../../utils/selection/selection';
-import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
-import { DRAGGABLE_NAME } from '../directive-names';
-import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { targetIsInput } from '../../../utils/event/event';
+import { dragDropDelay, polyFillActive } from '../../../utils/polyfills';
+import { clearUserSelection } from '../../../utils/selection/selection';
+import { dispatchEvent, getVNodeAttributeValue } from '../../../utils/vue/directive';
+import { DRAGGABLE_NAME } from '../../directive-names';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../../domPlugin';
 import { MDroppable } from '../droppable/droppable';
-import { MSortable } from '../sortable/sortable';
-import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
+import { MSortable } from '../../sortable/sortable';
+import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../../user-select/remove-user-select';
 import { MDraggableAllowScroll } from './draggable-allow-scroll';
 
 export enum MDraggableClassNames {

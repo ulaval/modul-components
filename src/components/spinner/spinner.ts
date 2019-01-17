@@ -1,4 +1,3 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
@@ -143,8 +142,6 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(PortalPlugin);
-        v.use(ModulPlugin);
         v.use(I18nPlugin);
         v.component(SPINNER_NAME, MSpinner);
     }

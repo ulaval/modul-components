@@ -1,4 +1,3 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
@@ -68,8 +67,6 @@ const ScrollTopPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(IconPlugin);
         v.use(I18nPlugin);
-        v.use(ModulPlugin);
-        v.use(PortalPlugin);
         v.use(ScrollToPlugin);
         v.component(SCROLL_TOP_NAME, MScrollTop);
     }

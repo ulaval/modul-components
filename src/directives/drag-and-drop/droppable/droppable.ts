@@ -1,13 +1,13 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 
-import { targetIsInput } from '../../utils/event/event';
-import { isInElement } from '../../utils/mouse/mouse';
-import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
-import { DROPPABLE_NAME } from '../directive-names';
-import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
+import { targetIsInput } from '../../../utils/event/event';
+import { isInElement } from '../../../utils/mouse/mouse';
+import { dispatchEvent, getVNodeAttributeValue } from '../../../utils/vue/directive';
+import { DROPPABLE_NAME } from '../../directive-names';
+import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../../domPlugin';
 import { MDraggable } from '../draggable/draggable';
-import { MSortable, MSortableAction } from '../sortable/sortable';
-import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../user-select/remove-user-select';
+import { MSortable, MSortableAction } from '../../sortable/sortable';
+import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../../user-select/remove-user-select';
 
 export enum MDroppableClassNames {
     Droppable = 'm--is-droppable',

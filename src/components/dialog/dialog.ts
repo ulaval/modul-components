@@ -1,4 +1,4 @@
-import PortalPlugin from 'portal-vue';
+
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -108,8 +108,6 @@ const DialogPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
-        v.use(ModulPlugin);
-        v.use(PortalPlugin);
         v.component(DIALOG_NAME, MDialog);
     }
 };

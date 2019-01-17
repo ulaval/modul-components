@@ -6,6 +6,7 @@ import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 import MediaQueriesPlugin from './media-queries/media-queries';
 import SpritesPlugin from './svg/sprites';
 import ModulPlugin from './modul/modul';
+import ScrollToPlugin from './scroll-to/scroll-to';
 
 
 export interface UtilsPluginOptions {
@@ -34,17 +35,8 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
         Vue.use(MediaQueriesPlugin);
         Vue.use(SpritesPlugin);
-
-
-        //    Vue.use(ConfirmPlugin);
-        //    Vue.use(AlertPlugin);
-
-        // those plugin should be optional
-        // Vue.use(PortalPlugin);
-        // Vue.use(ModulPlugin);
-        // Vue.use(FilePlugin);
-        // Vue.use(ScrollToPlugin);
-        // Vue.use(ToastPlugin);
+        Vue.use(ModulPlugin); // portal service
+        Vue.use(ScrollToPlugin);
     }
 };
 

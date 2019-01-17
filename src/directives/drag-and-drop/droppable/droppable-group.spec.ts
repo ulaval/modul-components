@@ -1,9 +1,9 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 
-import { resetModulPlugins } from '../../../tests/helpers/component';
-import { ModulVue } from '../../utils/vue/vue';
-import { MDOMPlugin } from '../domPlugin';
+import { resetModulPlugins } from '../../../../tests/helpers/component';
+import { ModulVue } from '../../../utils/vue/vue';
+import { MDOMPlugin } from '../../domPlugin';
 import DroppableGroupPlugin, { MDroppableGroup } from '../droppable/droppable-group';
 
 describe('droppable-group', () => {

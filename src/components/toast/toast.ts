@@ -1,11 +1,9 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
@@ -217,8 +215,6 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 const ToastPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(I18nFilterPlugin);
-        v.use(ModulPlugin);
-        v.use(PortalPlugin);
         v.use(IconPlugin);
         v.use(LinkPlugin);
         v.use(IconButtonPlugin);
