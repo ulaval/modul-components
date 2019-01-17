@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
-import SortablePlugin from '../../src/directives/sortable/sortable.sandbox';
+import DateSandboxPlugin from '../../src/filters/date/date.sandbox';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
 import UtilsPlugin, { FRENCH, UtilsPluginOptions, ENGLISH } from '../../src/utils';
@@ -46,7 +46,7 @@ Vue.use(TemplatePlugin);
 // Vue.use(getSandboxPlugin());
 
 
-Vue.use(SortablePlugin);
+Vue.use(DateSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);

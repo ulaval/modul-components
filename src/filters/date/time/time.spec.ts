@@ -1,8 +1,8 @@
 import Vue from 'vue';
 
-import { addMessages } from '../../../tests/helpers/lang';
-import { NBSP } from '../../utils/str/str';
-import { TIME_NAME } from '../filter-names';
+import { addMessages } from '../../../../tests/helpers/lang';
+import { NBSP } from '../../../utils/str/str';
+import { TIME_NAME } from '../../filter-names';
 import { timeFilter } from './time';
 
 describe(TIME_NAME, () => {

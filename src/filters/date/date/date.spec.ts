@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
-import { addMessages } from '../../../tests/helpers/lang';
-import { DATE_NAME } from '../filter-names';
+import { addMessages } from '../../../../tests/helpers/lang';
+import { DATE_NAME } from '../../filter-names';
 import { dateFilter } from './date';
 
 describe(DATE_NAME, () => {

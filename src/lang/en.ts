@@ -42,9 +42,9 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/tooltip/tooltip.lang.en.json'),
                 require('../components/validation-message/validation-message.lang.en.json'),
                 require('../filters/filesize/filesize.lang.en.json'),
-                require('../filters/date/date.lang.en.json'),
-                require('../filters/time/time.lang.en.json'),
-                require('../filters/date-time/date-time.lang.en.json')
+                require('../filters/date/date/date.lang.en.json'),
+                require('../filters/date/time/time.lang.en.json'),
+                require('../filters/date/date-time/date-time.lang.en.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(ENGLISH, msgs));

@@ -51,9 +51,9 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/tooltip/tooltip.lang.fr.json'),
                 require('../components/validation-message/validation-message.lang.fr.json'),
                 require('../filters/filesize/filesize.lang.fr.json'),
-                require('../filters/date/date.lang.fr.json'),
-                require('../filters/time/time.lang.fr.json'),
-                require('../filters/date-time/date-time.lang.fr.json')
+                require('../filters/date/date/date.lang.fr.json'),
+                require('../filters/date/time/time.lang.fr.json'),
+                require('../filters/date/date-time/date-time.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));
