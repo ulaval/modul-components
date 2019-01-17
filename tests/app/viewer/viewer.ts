@@ -16,10 +16,11 @@ export class Viewer extends Vue {
 
     @Watch('$route')
     private buildTag(): void {
-        if (this.$options && this.$options.components && !this.$options.components[`${this.$route.meta}-sandbox`]) {
-            this.tag = '<div>No sandbox yet for this component.  Come back later.</div>';
-        } else {
-            this.tag = `<${this.$route.meta}-sandbox></${this.$route.meta}-sandbox>`;
-        }
+
+        // if (this.$options && this.$options.components && !this.$options.components[`${this.$route.meta}-sandbox`]) {
+        //     this.tag = '<div>No sandbox yet for this component.  Come back later.</div>';
+        // } else {
+        this.tag = `<m-${this.$route.meta}-sandbox></m-${this.$route.meta}-sandbox>`;
+        // }
     }
 }

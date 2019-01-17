@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { ModulVue } from '../../../src/utils/vue/vue';
 import { getComponentsNames, getDirectiveNames, getFiltersNames, getUtilsNames } from '../names-loader';
 import WithRender from './navigation.html?style=./navigation.scss';
+import { getSandboxesNames } from '../sandbox-loader';
 
 @WithRender
 @Component
@@ -18,7 +19,7 @@ export class Navigation extends ModulVue {
 
     protected mounted(): void {
 
-        this.componentsTag = getComponentsNames();
+        this.componentsTag = getSandboxesNames();
         this.directivesName = getDirectiveNames();
         this.filtersName = getFiltersNames();
         this.utilsNames = getUtilsNames();

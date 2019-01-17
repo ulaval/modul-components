@@ -44,7 +44,7 @@ export class MDateSandbox extends Vue {
 
 const DateSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${DATE_NAME}-sandbox`, MDateSandbox);
+        v.component(`m-date-sandbox`, MDateSandbox);
         v.use(TextfieldPlugin);
         v.use(DateFilterPlugin);
     }

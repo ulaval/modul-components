@@ -13,6 +13,7 @@ import LinkPlugin, { MLinkMode } from '../link/link';
 import WithRender from './toast.html?style=./toast.scss';
 import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import I18nFilterPlugin from '../../filters/i18n/i18n';
+import ToastServicePlugin from '../../utils/toast/toast-service';
 
 export enum MToastTimeout {
     none = 'none',
@@ -220,6 +221,7 @@ const ToastPlugin: PluginObject<any> = {
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
         v.use(MediaQueriesPlugin);
+        v.use(ToastServicePlugin);
         v.component(TOAST, MToast);
     }
 };
