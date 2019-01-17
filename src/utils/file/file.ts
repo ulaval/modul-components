@@ -8,6 +8,11 @@ import { ModulVue } from '../vue/vue';
 
 export const DEFAULT_STORE_NAME: string = 'DEFAULT';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $file: FileService;
+    }
+}
 export interface MFile {
     uid: string;
     name: string;
