@@ -96,6 +96,11 @@ describe(`Calendar state machine`, () => {
             expect(mockCalendarSingleDateState.onDateSelect).toHaveBeenCalledTimes(1);
         });
 
+        it(`should not render anything`, async () => {
+            initializeWrapper();
+            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
         describe(`with value`, () => {
             beforeEach(() => {
                 value = DEFAULT_DATE_VALUE;
@@ -188,6 +193,11 @@ describe(`Calendar state machine`, () => {
             const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];
 
             expect(mockCalendarRangeDateState.onDateSelect).toHaveBeenCalledTimes(1);
+        });
+
+        it(`should not render anything`, async () => {
+            initializeWrapper();
+            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         describe(`with value`, () => {
