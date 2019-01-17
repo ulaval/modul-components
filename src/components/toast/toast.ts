@@ -11,8 +11,10 @@ import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
-import { MLinkMode } from '../link/link';
+import LinkPlugin, { MLinkMode } from '../link/link';
 import WithRender from './toast.html?style=./toast.scss';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+import I18nFilterPlugin from '../../filters/i18n/i18n';
 
 export enum MToastTimeout {
     none = 'none',
@@ -214,10 +216,17 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 
 const ToastPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(TOAST, 'plugin.install');
+        const i18n: Messages = (v.prototype as any).$i18n;
+        if (i18n) {
+            i18n.addMessages(FRENCH, require('./toast.lang.fr.json'));
+            i18n.addMessages(ENGLISH, require('./toast.lang.en.json'));
+        }
+
+        v.use(I18nFilterPlugin);
         v.use(ModulPlugin);
         v.use(PortalPlugin);
         v.use(IconPlugin);
+        v.use(LinkPlugin);
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
         v.use(MediaQueriesPlugin);

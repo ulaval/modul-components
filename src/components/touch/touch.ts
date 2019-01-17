@@ -1,9 +1,10 @@
-import Vue from 'vue';
+import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import WithRender from './touch.html';
 import ZingTouchUtil, { MZingRegion } from './zingtouch';
+import { TOUCH_NAME } from '../component-names';
 
 
 export enum MTouchSwipeDirection {
@@ -107,5 +108,13 @@ export class MTouch extends Vue {
         // Since we reemit the event, we stop event propagation.  Event whould be handled twice from each listener otherwise.
         event.stopPropagation();
     }
+
 }
 
+const TouchPlugin: PluginObject<any> = {
+    install(v, options): void {
+        v.component(TOUCH_NAME, MTouch);
+    }
+};
+
+export default TouchPlugin;

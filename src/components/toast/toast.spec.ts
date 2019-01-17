@@ -1,7 +1,7 @@
 import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { PortalStub } from '../../../tests/helpers/render';
+import { PortalStub, renderComponent } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 
@@ -41,9 +41,9 @@ describe(`MToast`, () => {
 
         describe(`When the Toast is created`, () => {
             it(`Should automatically appear`, () => {
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBe(true);
-                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBe(true);
-                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBe(true);
+                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
             });
 
             it(`Should be in Confirmation state`, () => {
@@ -83,6 +83,7 @@ describe(`MToast`, () => {
             });
         });
 
+
         describe(`When the Toast is created`, () => {
             it(`Should have an action label`, () => {
                 expect(wrapper.vm.actionLabel).toBe(ACTION_LABEL);
@@ -96,8 +97,14 @@ describe(`MToast`, () => {
         });
 
         describe(`When the action button is clicked`, () => {
+
+            it(`should match snapshot`, () => {
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+
+
             it(`Should emit a action event`, () => {
-                wrapper.find('.m-toast__actions').find('m-link').trigger('click');
+                wrapper.find('.m-toast__actions').find('.m-link').trigger('click');
 
                 expect(wrapper.emitted('action-button')).toBeTruthy();
             });
@@ -113,13 +120,13 @@ describe(`MToast`, () => {
                 });
                 jest.runOnlyPendingTimers(); // wait for component to be instancialized
 
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBe(true);
-                expect(((wrapper.vm as unknown) as Portal).portalCreated).toBe(true);
-                expect(((wrapper.vm as unknown) as Portal).portalMounted).toBe(true);
+                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
 
                 jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over
 
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeFalsy();
+                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
             });
         });
     });
@@ -132,13 +139,13 @@ describe(`MToast`, () => {
         });
         describe(`When the Toast is created`, () => {
             it(`Should not appear`, () => {
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBeFalsy();
+                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
             });
         });
         describe(`When the variable is set to true`, () => {
             it(`should appear`, () => {
                 wrapper.vm.$props.open = true;
-                expect(((wrapper.vm as unknown) as PortalMixin).propOpen).toBe(true);
+                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
             });
         });
     });

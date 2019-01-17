@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic-template';
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
-import TextfieldSandboxPlugin from '../../src/components/textfield/textfield.sandbox';
+import CarouselSandboxPlugin from '../../src/components/carousel/carousel.sandbox';
 import TemplatePlugin from '../../src/components/template/template';
 import '../../src/styles/main.scss';
 import UtilsPlugin, { FRENCH, UtilsPluginOptions } from '../../src/utils';
@@ -43,7 +43,7 @@ Vue.use(TemplatePlugin);
 // initialize all sandboxes
 // Vue.use(getSandboxPlugin());
 
-Vue.use(TextfieldSandboxPlugin);
+Vue.use(CarouselSandboxPlugin);
 
 
 Vue.component('app-frame', AppFrame);

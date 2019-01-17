@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MToast Given that a custom action prop have been passed When the action button is clicked should match snapshot 1`] = `
+<div name="m--is" target-el="#mPortal-640c0448-08bc-4263-93b8-35a4ec2b94d5" open-trigger="manual" class="m-toast m--is-state-confirmation m--is-bottom m--is-right m--is-desktop" style="display:none;">
+    <div class="m-toast__wrap">
+        <div class="m-toast__icon">
+            <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+                <use aria-hidden="true"></use>
+            </svg>
+        </div>
+        <div class="m-toast__body">
+            <div class="m-toast__text">toast message content</div>
+            <div class="m-toast__actions">
+                <a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text">Action</span> </a>
+            </div>
+        </div>
+        <button type="button" class="m-icon-button m-toast__close-button m--is-skin-link m--has-ripple" style="width:44px;height:44px;font-size:20px;">
+            <m-icon name="m-svg__close-clear" class="m-icon-button__icon"></m-icon>
+        </button>
+    </div>
+</div>
+`;
