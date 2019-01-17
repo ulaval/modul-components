@@ -28,7 +28,7 @@ let minDate: any;
 let maxDate: any;
 let showMonthBeforeAfter: any;
 
-const obtenirStubs: Function = (): { [cle: string]: any } => {
+const buildStubs: Function = (): { [cle: string]: any } => {
     return {
         [SIMPLE_CALENDAR_COMPONENT]: {
             template: `
@@ -46,10 +46,10 @@ const obtenirStubs: Function = (): { [cle: string]: any } => {
     };
 };
 
-const initialiserWrapper: Function = (methods: any = {}): void => {
+const initializeWrapper: Function = (methods: any = {}): void => {
     wrapper = mount(MCalendar, {
         localVue: Vue,
-        stubs: obtenirStubs(),
+        stubs: buildStubs(),
         propsData: {
             value,
             mode,
@@ -72,7 +72,7 @@ describe(`Calendar`, () => {
 
     describe(`with default values`, () => {
         it(`should render default view`, async () => {
-            initialiserWrapper();
+            initializeWrapper();
             return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
     });
@@ -84,7 +84,7 @@ describe(`Calendar`, () => {
         });
 
         it(`with default values`, () => {
-            initialiserWrapper();
+            initializeWrapper();
 
             const calendarRenderer: Wrapper<Vue> = wrapper.find(CALENDAR_RENDERER_REF);
 
@@ -96,7 +96,7 @@ describe(`Calendar`, () => {
 
         it(`with specific values`, () => {
             showMonthBeforeAfter = false;
-            initialiserWrapper();
+            initializeWrapper();
 
             const calendarRenderer: Wrapper<Vue> = wrapper.find(CALENDAR_RENDERER_REF);
 
@@ -111,7 +111,7 @@ describe(`Calendar`, () => {
         beforeEach(() => {
             mode = CalendarMode.SINGLE_DATE;
             value = '';
-            initialiserWrapper();
+            initializeWrapper();
         });
 
         it(`should render single dates view`, async () => {
@@ -143,7 +143,7 @@ describe(`Calendar`, () => {
             });
 
             it(`with default values`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 const calendarState: Wrapper<Vue> = wrapper.find(CALENDAR_STATE_REF);
 
@@ -156,7 +156,7 @@ describe(`Calendar`, () => {
             it(`with specific values`, () => {
                 minDate = '2005-10-01';
                 maxDate = '2025-10-01';
-                initialiserWrapper();
+                initializeWrapper();
 
                 const calendarState: Wrapper<Vue> = wrapper.find(CALENDAR_STATE_REF);
 
@@ -172,7 +172,7 @@ describe(`Calendar`, () => {
         beforeEach(() => {
             mode = CalendarMode.DATE_RANGE;
             value = {};
-            initialiserWrapper();
+            initializeWrapper();
         });
 
         it(`should render date range view`, async () => {
@@ -204,7 +204,7 @@ describe(`Calendar`, () => {
             });
 
             it(`with default values`, () => {
-                initialiserWrapper();
+                initializeWrapper();
 
                 const calendarState: Wrapper<Vue> = wrapper.find(CALENDAR_STATE_REF);
 
@@ -217,7 +217,7 @@ describe(`Calendar`, () => {
             it(`with specific values`, () => {
                 minDate = '2005-10-01';
                 maxDate = '2025-10-01';
-                initialiserWrapper();
+                initializeWrapper();
 
                 const calendarState: Wrapper<Vue> = wrapper.find(CALENDAR_STATE_REF);
 
@@ -232,14 +232,14 @@ describe(`Calendar`, () => {
     describe(`model consistency`, () => {
         it(`on creation will validate data model`, () => {
             value = SINGLE_DATE;
-            initialiserWrapper({ validateInputModel: validateInputModelMock });
+            initializeWrapper({ validateInputModel: validateInputModelMock });
 
             expect(validateInputModelMock).toHaveBeenCalledTimes(1);
         });
 
         it(`on value refresh, will validate data model`, () => {
             value = SINGLE_DATE;
-            initialiserWrapper();
+            initializeWrapper();
             wrapper.setMethods({ validateInputModel: validateInputModelMock });
             wrapper.setProps({ value: SINGLE_DATE });
 
@@ -265,14 +265,14 @@ describe(`Calendar`, () => {
 
                 it(`when model is valid`, () => {
                     value = SINGLE_DATE;
-                    expect(() => { initialiserWrapper(); }).not.toThrow();
+                    expect(() => { initializeWrapper(); }).not.toThrow();
                 });
 
                 it(`when model is a date range model`, () => {
                     value = DATE_RANGE;
                     Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
 
-                    initialiserWrapper();
+                    initializeWrapper();
                 });
             });
 
@@ -284,14 +284,14 @@ describe(`Calendar`, () => {
 
                 it(`when model is valid`, () => {
                     value = DATE_RANGE;
-                    expect(() => { initialiserWrapper(); }).not.toThrow();
+                    expect(() => { initializeWrapper(); }).not.toThrow();
                 });
 
                 it(`when model is a single date model`, () => {
                     value = SINGLE_DATE;
                     Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
 
-                    initialiserWrapper();
+                    initializeWrapper();
                 });
             });
         });
