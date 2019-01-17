@@ -6,6 +6,7 @@ import { getDefaultMock } from '../../../tests/helpers/mock';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DropdownPlugin, { MDropdown } from './dropdown';
+import ModulPlugin from '../../utils/modul/modul';
 
 
 jest.mock('../../utils/uuid/uuid');
@@ -18,6 +19,7 @@ describe('MDropdown', () => {
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
+        localVue.use(ModulPlugin);
         localVue.use(DropdownPlugin);
         mockPopper = localVue.component('m-popper', {
             template: '<m-popper-mock><slot name="footer"></slot></m-popper-mock>'

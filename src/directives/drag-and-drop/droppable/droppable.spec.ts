@@ -10,9 +10,9 @@ import { MRemoveUserSelect } from '../../user-select/remove-user-select';
 import { MDraggableEventNames } from './../draggable/draggable';
 import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppableEventNames, MDroppableOptions } from './droppable';
 
-jest.mock('../../utils/mouse/mouse');
+jest.mock('../../../utils/mouse/mouse');
 let mockTargetIsInput: boolean = false;
-jest.mock('../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+jest.mock('../../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
 
 beforeEach(() => {
     mockTargetIsInput = false;

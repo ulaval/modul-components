@@ -9,7 +9,7 @@ import DraggablePlugin, { MDraggable, MDraggableClassNames, MDraggableEventNames
 jest.useFakeTimers();
 let mockTargetIsInput: boolean = false;
 
-jest.mock('../../utils/event/event', () => ({
+jest.mock('../../../utils/event/event', () => ({
     targetIsInput(): boolean { return mockTargetIsInput; }
 }));
 

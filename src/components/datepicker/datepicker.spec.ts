@@ -5,6 +5,7 @@ import { resetModulPlugins } from '../../../tests/helpers/component';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DatepickerPlugin, { MDatepicker } from './datepicker';
+import ModulPlugin from '../../utils/modul/modul';
 
 
 jest.mock('../../utils/uuid/uuid');
@@ -18,6 +19,7 @@ describe('MDatepicker', () => {
         resetModulPlugins();
         localVue = createLocalVue();
         Vue.use(DatepickerPlugin);
+        Vue.use(ModulPlugin);
     });
 
     it('should render correctly', () => {

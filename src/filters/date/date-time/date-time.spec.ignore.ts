@@ -1,16 +1,16 @@
 import Vue from 'vue';
 
-import { addMessages } from '../../../tests/helpers/lang';
-import { NBSP } from '../../utils/str/str';
-import { DATE_TIME_NAME } from '../filter-names';
+import { addMessages } from '../../../../tests/helpers/lang';
+import { NBSP } from '../../../utils/str/str';
+import { DATE_TIME_NAME } from '../../filter-names';
 import { dateTimeFilter } from './date-time';
 
 describe(DATE_TIME_NAME, () => {
     beforeEach(() => {
         addMessages(Vue, [
-            'filters/date/date.lang.en.json',
-            'filters/time/time.lang.en.json',
-            'filters/date-time/date-time.lang.en.json'
+            '../date/date.lang.en.json',
+            '../time/time.lang.en.json',
+            './date-time.lang.en.json'
         ]);
     });
 

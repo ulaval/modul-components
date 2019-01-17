@@ -4,6 +4,7 @@ import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub, renderComponent } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
+import ModulPlugin from '../../utils/modul/modul';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -30,6 +31,7 @@ describe(`MToast`, () => {
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
+        localVue.use(ModulPlugin);
         localVue.use(ToastPlugin);
     });
 
