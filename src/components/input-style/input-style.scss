@@ -59,13 +59,23 @@
     }
 
     &.m--is-label-up {
-        .m-input-style__label {
-            transform: translate3d(0, calc((-50% * 0.8) - #{$m-input-style--padding}), 0) scale(0.8);
+        .m-input-style {
+            &__label {
+                transform: translate3d(0, calc((-50% * 0.8) - #{$m-input-style--padding}), 0) scale(0.8);
 
-            .m-textarea &,
-            .m-rich-text &,
-            .m--has-word-wrap & {
-                margin-bottom: -1em; // to negate the space occupied by the label
+                .m-textarea &,
+                .m-rich-text &,
+                .m--has-word-wrap & {
+                    margin-bottom: -1em; // to negate the space occupied by the label
+                }
+            }
+
+            &__text {
+                background: $m-color--white;
+
+                .m-inplace-edit & {
+                    background: $m-color--information;
+                }
             }
         }
     }
@@ -155,13 +165,9 @@
     }
 
     &__text {
+        transition: background $m-transition-duration ease;
         padding: 0 $m-spacing--xs;
         display: inline-block;
-        background-color: $m-color--white;
-
-        .m-inplace-edit & {
-            background-color: $m-color--information;
-        }
     }
 
     &__required-marker {

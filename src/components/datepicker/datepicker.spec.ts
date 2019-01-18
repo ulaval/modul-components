@@ -1,13 +1,12 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
 import moment from 'moment';
-
+import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import { MIconButton } from '../icon-button/icon-button';
 import DatepickerPlugin, { MDatepicker } from './datepicker';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');

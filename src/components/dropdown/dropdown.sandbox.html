@@ -599,14 +599,14 @@
 
 
 
-        <h3>Dropdown error</h3>
-        <m-dropdown label="Dropdown error"
-                    v-model="numValue"
-                    error-message="Dropdown error">
-            <m-dropdown-item v-for="item of numItems"
-                             :value="item"
-                             :label="item"></m-dropdown-item>
-        </m-dropdown>
+    <h3>Dropdown error</h3>
+    <m-dropdown label="Dropdown error"
+                v-model="numValue"
+                error-message="Dropdown error">
+        <m-dropdown-item v-for="item of numItems"
+                         :value="item"
+                         :label="item"></m-dropdown-item>
+    </m-dropdown>
 
     <h3>Dropdown-item with a numeric value</h3>
     <p class="m-u--margin-bottom">
@@ -625,5 +625,12 @@
                          :label="item"></m-dropdown-item>
     </m-dropdown>
 
-
+    <h3>Dropdown @emit('close')</h3>
+    <m-dropdown @open="onOpen"
+                @close="onClose"
+                label="Dropdown @emit('close')">
+        <m-dropdown-item v-for="item of numItems"
+                         :value="item"
+                         :label="item"></m-dropdown-item>
+    </m-dropdown>
 </div>
