@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MForm When the form has no required fields, then it should not show a required label 1`] = `<form id="uuid"> </form>`;
+
+exports[`MForm When the form has required fields, then it should show a required label 1`] = `
+<form id="uuid">
+    <p class="m-u--require"><span class="m-u--asterisk">*</span> <span class="m-u--typo--precision">m-form:required</span></p>
+</form>
+`;
+
+exports[`MForm should render correctly 1`] = `
+<form id="uuid">
+    <p class="m-u--require"><span class="m-u--asterisk">*</span> <span class="m-u--typo--precision">m-form:required</span></p>
+</form>
+`;

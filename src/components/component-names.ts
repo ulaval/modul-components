@@ -25,6 +25,7 @@ export const ERROR_TECHNICAL_DIFFICULTY_NAME: string = 'm-error-technical-diffic
 export const MESSAGE_PAGE_NAME: string = 'm-message-page';
 export const FILE_SELECT_NAME: string = 'm-file-select';
 export const FILE_UPLOAD_NAME: string = 'm-file-upload';
+export const FORM: string = 'm-form';
 export const OVERLAY_NAME: string = 'm-overlay';
 export const FLEX_TEMPLATE_NAME: string = 'm-flex-template';
 export const I18N_NAME: string = 'm-i18n';

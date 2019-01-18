@@ -1,0 +1,48 @@
+<div>
+    <m-form :form="form"
+            :has-required-fields="true"
+            @submit="submit">
+        <m-textfield v-model.trim="titleField.value"
+                     label="Title"
+                     :max-width="inputMaxWidthSmall"
+                     :required-marker="true"
+                     :error="titleField.hasError"
+                     :error-message="titleField.errorMessage"
+                     :character-count="true"
+                     :max-length="maxTitleLength"
+                     :character-count-threshold="thresholdTitle"
+                     ref="title"></m-textfield>
+
+        <m-textarea v-model.trim="descriptionField.value"
+                    label="Description"
+                    :max-width="inputMaxWidthLarge"
+                    :error="descriptionField.hasError"
+                    :error-message="descriptionField.errorMessage"
+                    :character-count="true"
+                    :max-length="maxDescriptionLength"
+                    :character-count-threshold="thresholdDescription"
+                    ref="description">
+        </m-textarea>
+
+        <m-textarea v-model.trim="locationField.value"
+                    label="Location"
+                    :max-width="inputMaxWidthLarge"
+                    :required-marker="true"
+                    :error="locationField.hasError"
+                    :error-message="locationField.errorMessage"
+                    :character-count="true"
+                    :max-length="maxLocationLength"
+                    :character-count-threshold="thresholdLocation"
+                    ref="location">
+        </m-textarea>
+    </m-form>
+    <m-button type="submit"
+              :form="form.id">Submit</m-button>
+    <m-button type="reset"
+              skin="secondary"
+              :form="form.id">Reset</m-button>
+
+    <p>
+        Form sent: {{ formSent }}
+    </p>
+</div>

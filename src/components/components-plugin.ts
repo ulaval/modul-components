@@ -26,6 +26,7 @@ import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-t
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
+import FormPlugin from './form/form';
 import I18nPlugin from './i18n/i18n';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
@@ -126,6 +127,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
+        Vue.use(FormPlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
