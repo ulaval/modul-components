@@ -598,6 +598,16 @@
 
 
 
+
+        <h3>Dropdown error</h3>
+        <m-dropdown label="Dropdown error"
+                    v-model="numValue"
+                    error-message="Dropdown error">
+            <m-dropdown-item v-for="item of numItems"
+                             :value="item"
+                             :label="item"></m-dropdown-item>
+        </m-dropdown>
+
     <h3>Dropdown-item with a numeric value</h3>
     <p class="m-u--margin-bottom">
         From <a href="https://github.com/ulaval/modul-components/pull/458"
@@ -614,5 +624,6 @@
                          :value="item"
                          :label="item"></m-dropdown-item>
     </m-dropdown>
+
 
 </div>

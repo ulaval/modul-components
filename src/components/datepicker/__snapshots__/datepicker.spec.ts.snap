@@ -61,7 +61,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when error is set 1`] = `
-<div class="m-datepicker m--has-error">
+<div class="m-datepicker m--has-error m--has-validation-message">
     <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -89,7 +89,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when valid is set 1`] = `
-<div class="m-datepicker m--is-valid">
+<div class="m-datepicker m--is-valid m--has-validation-message">
     <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">

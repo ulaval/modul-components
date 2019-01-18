@@ -11,7 +11,7 @@ exports[`MTimepicker should render correctly 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-timepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -31,7 +31,7 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-timepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -41,7 +41,7 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when disabled is set 1`] = `
-<div class="m-timepicker">
+<div class="m-timepicker m--is-disabled">
     <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -51,7 +51,7 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-timepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -61,7 +61,7 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when error is set 1`] = `
-<div class="m-timepicker">
+<div class="m-timepicker m--has-validation-message">
     <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -71,7 +71,7 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-timepicker__validation-message">
         <m-accordion-transition transition="true">
             <div class="m-validation-message__wrap">
                 <p class="m-validation-message__error">
@@ -89,7 +89,7 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when valid is set 1`] = `
-<div class="m-timepicker">
+<div class="m-timepicker m--has-validation-message">
     <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -99,7 +99,7 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-timepicker__validation-message">
         <m-accordion-transition transition="true">
             <div class="m-validation-message__wrap">
                 <p class="m-validation-message__valid">
@@ -130,7 +130,7 @@ exports[`MTimepicker should render correctly when waiting is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-timepicker__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">

@@ -1,5 +1,9 @@
 <div class="m-dropdown"
-     :class="{ 'm--is-open': open, 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
+     :class="{ 'm--is-open': open,
+               'm--is-disabled': isDisabled,
+               'm--is-waiting': isWaiting,
+               'm--is-filterable': filterable,
+               'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
      ref="mDropdown">
     <m-input-style ref="mInputStyle"
@@ -55,7 +59,8 @@
             </m-icon>
         </div>
     </m-input-style>
-    <m-validation-message :disabled="isDisabled"
+    <m-validation-message class="m-dropdown__validation-message"
+                          :disabled="isDisabled"
                           :waiting="isWaiting"
                           :error="hasError"
                           :valid="isValid"

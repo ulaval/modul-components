@@ -5,9 +5,10 @@
     display: inline-flex;
     flex-direction: column;
 
-    // créer un espace pour le label du input-style
-    & + & {
-        margin-top: $m-spacing--s;
+    &.m--has-validation-message {
+        .m-textfield__validation {
+            margin-top: $m-spacing--xs;
+        }
     }
 
     &.m--has-error {
@@ -42,11 +43,16 @@
     }
 
     &__validation {
+        transition: margin-top $m-transition-duration ease;
         display: flex;
         justify-content: flex-end;
 
         &__message {
             flex: 1 1 auto;
+        }
+
+        &__character-count {
+            flex-shrink: 0;
         }
     }
 }

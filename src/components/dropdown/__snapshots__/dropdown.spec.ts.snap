@@ -15,7 +15,7 @@ exports[`MDropdown should render correctly 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-dropdown__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
@@ -39,7 +39,7 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
             </div>
         </div>
     </div>
-    <div class="m-validation-message">
+    <div class="m-validation-message m-dropdown__validation-message">
         <m-accordion-transition transition="true"></m-accordion-transition>
     </div>
     <div class="m-popup">
