@@ -18,6 +18,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
 
     @media (min-width: $m-mq--min--s) {
         padding: $m-padding $m-padding--s;
+        line-height: 20px;
 
         &:not(.m--is-disabled) {
             &:not(.m--is-inactive):not(.m--is-readonly) {
