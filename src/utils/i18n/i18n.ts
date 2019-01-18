@@ -143,7 +143,7 @@ export class Messages {
         }
 
         if (htmlEncodeParams && params.length) {
-            Object.keys(params).forEach((key: any) => params[key] = htmlEncode(params[key].toString()));
+            Object.keys(params).forEach((key: any) => { params[key] = htmlEncode(params[key].toString(); });)
         }
 
         val = this.format(val, params, formatMode);
