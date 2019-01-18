@@ -5,6 +5,12 @@
     display: inline-flex;
     flex-direction: column;
 
+    &.m--has-validation-message {
+        .m-textarea__validation {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
     &.m--has-error {
         .m-textarea__validation {
             color: $m-color--error;
@@ -17,17 +23,22 @@
         }
     }
 
+    &__label {
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--bold;
+    }
+
     &__validation {
+        transition: margin-top $m-transition-duration ease;
         display: flex;
         justify-content: flex-end;
 
         &__message {
             flex: 1 1 auto;
         }
-    }
 
-    &__label {
-        font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
+        &__character-count {
+            flex-shrink: 0;
+        }
     }
 }

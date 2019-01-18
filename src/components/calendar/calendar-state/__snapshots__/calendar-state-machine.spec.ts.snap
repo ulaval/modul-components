@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar state machine with date range mode should not render anything 1`] = `""`;
+
+exports[`Calendar state machine with single date mode should not render anything 1`] = `""`;
+
+exports[`Calendar state machine without parameters should not render anything 1`] = `""`;
