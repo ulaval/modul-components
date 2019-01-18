@@ -3,7 +3,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public iconsTemplate: string = 'font_awesome_5';
     public charCounterCount: boolean = false;
     public tableInsertHelper: boolean = false;
-    public lineBreakerTags: string [] = [];
+    public lineBreakerTags: string[] = [];
     public zIndex: number = 200;
     public toolbarSticky: boolean = true;
     public scrollableContainer: string | undefined;
@@ -13,6 +13,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public initOnClick: boolean = true;
     public wordPasteKeepFormatting: boolean = false;
     public placeholderText: string = '';
+    public listAdvancedTypes: boolean = false;
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {

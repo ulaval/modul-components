@@ -496,6 +496,19 @@
     </p>
 
     <p>
+        <h3>Without scroll</h3>
+        <m-dropdown :filterable="false"
+                    label="Légume"
+                    v-model="undefinedValue1">
+            <m-dropdown-item value="1a"
+                             label="Asperge"></m-dropdown-item>
+            <m-dropdown-item value="1b"
+                             label="Brocoli"></m-dropdown-item>
+            <m-dropdown-item value="1c"
+                             label="Carotte"></m-dropdown-item>
+            <m-dropdown-item value="1d"
+                             label="Daikon"></m-dropdown-item>
+        </m-dropdown>
         <h3>Undefined and null model value</h3>
         <p class="m-u--margin-bottom">
 

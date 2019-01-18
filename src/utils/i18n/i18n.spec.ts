@@ -190,7 +190,7 @@ describe('i18n plugin', () => {
                 addMessages(Vue, ['utils/i18n/i18n.spec.lang.fr.json']);
             });
             describe(`Non-breaking space is used`, () => {
-                it(`then will be replaced in translation`, () => {
+                it(`then will not be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada', { nbMedailles: 30 });
                     expect(translation.indexOf(SpecialCharacter.NBSP)).toBe(-1);
                     expect(translation.indexOf('_NBSP_')).toBeGreaterThan(-1);
@@ -198,7 +198,7 @@ describe('i18n plugin', () => {
             });
 
             describe(`Non-breaking hypen is used`, () => {
-                it(`then will be replaced in translation`, () => {
+                it(`then will not be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada_usa', { nieme: 3 });
                     expect(translation.indexOf(SpecialCharacter.NBHYPHEN)).toBe(-1);
                     expect(translation.indexOf('_NBHYPHEN_')).toBeGreaterThan(-1);
@@ -206,7 +206,7 @@ describe('i18n plugin', () => {
             });
 
             describe(`Em-Dash is used`, () => {
-                it(`then will be replaced in translation`, () => {
+                it(`then will not be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques', { nbMedailles: 3 });
                     expect(translation.indexOf(SpecialCharacter.EMDASH)).toBe(-1);
                     expect(translation.indexOf('_EMDASH_')).toBeGreaterThan(-1);
@@ -214,7 +214,7 @@ describe('i18n plugin', () => {
             });
 
             describe(`En-Dash is used`, () => {
-                it(`then will be replaced in translation`, () => {
+                it(`then will not be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:olympiques_rivalite', {});
                     expect(translation.indexOf(SpecialCharacter.ENDASH)).toBe(-1);
                     expect(translation.indexOf('_ENDASH_')).toBeGreaterThan(-1);
