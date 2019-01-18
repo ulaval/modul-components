@@ -19,6 +19,7 @@ import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import PopupPlugin, { MPopup } from '../popup/popup';
 import { MSidebar } from '../sidebar/sidebar';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import { InputManagement } from './../../mixins/input-management/input-management';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
@@ -30,6 +31,7 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
         InputState,
         InputPopup,
         MediaQueries,
+        InputManagement,
         InputWidth,
         InputLabel
     ]
@@ -252,7 +254,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get isEmpty(): boolean {
-        return (this.filterable && this.open) || this.as<InputPopup>().hasValue() || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
+        return (this.filterable && this.open) || this.as<InputManagement>().hasValue || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
     }
 
     private buildItemsMap(): void {

@@ -20,12 +20,12 @@
                :aria-expanded="open"
                :disabled="!active"
                :placeholder="placeholder"
+               @keydown.delete="inputOnKeydownDelete"
                @keydown.enter="inputOnKeydownEnter"
                @keydown.return="inputOnKeydownEnter"
                @keydown.esc="inputOnKeydownEsc"
                @keydown.tab="inputOnKeydownTab"
                @keydown="inputOnKeydown"
-               @focus="inputOnFocus"
                @change="validateDate"
                v-model="formattedDate">
         <m-icon-button slot="right-content"
