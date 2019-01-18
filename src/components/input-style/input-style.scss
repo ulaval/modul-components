@@ -1,5 +1,17 @@
 @import 'commons';
 
+@mixin input-style-cursor($cursor: default) {
+    &,
+    .m-input-style__label,
+    .m-input-style__body,
+    .m-input-style__body input,
+    .m-input-style__body textarea {
+        cursor: $cursor;
+
+        @content;
+    }
+}
+
 .m-input-style {
     position: relative;
     display: inline-flex;
@@ -10,6 +22,8 @@
     padding: $m-input-style--padding;
     transition: border-color $m-transition-duration--l ease-in-out;
     margin-top: 0.6em;
+
+    @include input-style-cursor(text);
 
     &:hover:not(.m--is-focus),
     &.m--has-value {
@@ -34,11 +48,18 @@
         }
     }
 
-    &.m--is-label-up {
-        cursor: text;
+    &.m--has-cursor-pointer {
+        @include input-style-cursor(pointer);
+    }
 
+    &.m--has-label:not(.m--is-label-up) {
+        .m-input-style__body__left {
+            opacity: 0;
+        }
+    }
+
+    &.m--is-label-up {
         .m-input-style__label {
-            z-index: 1;
             transform: translate3d(0, calc((-50% * 0.8) - #{$m-input-style--padding}), 0) scale(0.8);
 
             .m-textarea &,
@@ -46,12 +67,6 @@
             .m--has-word-wrap & {
                 margin-bottom: -1em; // to negate the space occupied by the label
             }
-        }
-    }
-
-    &:not(.m--is-label-up) {
-        &.m--has-label .m-input-style__body__left {
-            opacity: 0;
         }
     }
 
@@ -101,35 +116,18 @@
     }
 
     &.m--is-disabled {
-        &,
-        .m-input-style__label,
-        .m-input-style__body,
-        .m-input-style__body__left,
-        .m-input-style__body__right,
-        .m-input-style__body input,
-        .m-input-style__body div,
-        .m-input-style__body span,
-        .m-icon-button.m-icon-button,
-        .m-icon.m-icon {
+        @include input-style-cursor() {
             color: $m-input-style--color-disabled;
-            cursor: initial;
             user-select: none;
         }
     }
 
     &.m--is-waiting {
-        &,
-        .m-input-style__label,
-        .m-input-style__body,
-        .m-input-style__body__left,
-        .m-input-style__body__right,
-        .m-input-style__body input,
-        .m-input-style__body div,
-        .m-input-style__body span,
-        .m-icon-button.m-icon-button,
-        .m-icon.m-icon {
-            cursor: wait;
-        }
+        @include input-style-cursor(wait);
+    }
+
+    &.m--is-readonly {
+        @include input-style-cursor();
     }
 
     &.m--is-anim-ready {
@@ -160,7 +158,6 @@
         font-size: $m-font-size;
         font-weight: $m-font-weight;
         color: $m-color--text-light;
-        cursor: pointer;
 
         .m-icon {
             font-size: 85%;
@@ -187,7 +184,6 @@
     }
 
     &__body {
-        z-index: 3;
         display: flex;
         align-items: center;
         flex: 1 1 auto;
@@ -195,12 +191,6 @@
         font-weight: $m-font-weight;
         text-decoration: none;
         background-color: $m-color--white;
-
-        &,
-        div,
-        span {
-            cursor: text;
-        }
 
         .m--has-label & {
             position: absolute;
@@ -259,10 +249,6 @@
         }
     }
 
-    div {
-        outline: none;
-    }
-
     ::placeholder {
         color: $m-color--disabled;
     }
@@ -281,7 +267,6 @@
 
     input,
     textarea {
-        cursor: text;
         overflow: hidden;
         width: 100%;
         padding: 0;
@@ -303,10 +288,6 @@
         &:-webkit-autofill {
             background: rgba($m-color--white, 0);
             -webkit-box-shadow: 0 0 0 1000px $m-color--white inset !important;
-        }
-
-        &[readonly=readonly] {
-            cursor: pointer;
         }
     }
 
@@ -364,9 +345,4 @@
     &.m--is-tag-h6 {
         font-size: $m-font-size--h6;
     }
-
-    &__icon {
-        background-color: red;
-    }
 }
-

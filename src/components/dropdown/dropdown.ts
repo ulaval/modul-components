@@ -456,6 +456,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
         });
     }
+
+    private get hasPointer(): boolean {
+        return !this.filterable || (this.filterable && !this.open);
+    }
+
 }
 
 const DropdownPlugin: PluginObject<any> = {
