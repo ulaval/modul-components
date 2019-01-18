@@ -6,23 +6,28 @@ import { renderComponent } from '../../../tests/helpers/render';
 import { Form } from '../../utils/form/form';
 import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
 import { FormField } from '../../utils/form/form-field/form-field';
+import uuid from '../../utils/uuid/uuid';
 import FormPlugin, { MForm } from './form';
 
-const FORM_ID: string = 'form-id';
+jest.mock('../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
+
 const ERROR_MESSAGE: string = 'ERROR';
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR MESSAGE SUMMARY';
 const REF_SUMMARY: RefSelector = { ref: 'summary' };
+const FORM: Form = new Form([
+    new FormField((): string => '', (): FormFieldState => new FormFieldState())
+]);
 
 describe(`MForm`, () => {
     let wrapper: Wrapper<MForm>;
     let localVue: VueConstructor<Vue>;
-    let idForm: string = FORM_ID;
 
     const initialiserWrapper: Function = (): void => {
         wrapper = mount(MForm, {
             localVue: localVue,
             propsData: {
-                'id': idForm
+                form: FORM
             }
         });
     };
@@ -37,13 +42,13 @@ describe(`MForm`, () => {
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 
-    it(`When the form has no optional fields, then it should show a required label`, async () => {
-        wrapper.setProps({ hasOptionalFields: false });
+    it(`When the form has required fields, then it should show a required label`, async () => {
+        wrapper.setProps({ hasRequiredFields: true });
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 
-    it(`When the form has optional fields, then it should not show a required label`, async () => {
-        wrapper.setProps({ hasOptionalFields: true });
+    it(`When the form has no required fields, then it should not show a required label`, async () => {
+        wrapper.setProps({ hasRequiredFields: false });
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 

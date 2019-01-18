@@ -43,8 +43,8 @@ export class MFormSandbox extends Vue {
 }
 
 class ValidationSandbox {
-    static readonly maxTitleLength: number = 10;
-    static readonly thresholdTitle: number = 8;
+    static readonly maxTitleLength: number = 8;
+    static readonly thresholdTitle: number = 6;
     static readonly maxDescriptionLength: number = 20;
     static readonly thresholdDescription: number = 16;
     static readonly minLocationLength: number = 10;

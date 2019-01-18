@@ -1,4 +1,4 @@
-import { FormFieldState } from "./form-field-state";
+import { FormFieldState } from './form-field-state';
 
 describe(`FormFieldState`, () => {
     it(`Default parameters are setup`, () => {

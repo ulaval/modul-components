@@ -1,5 +1,5 @@
-import { FormFieldState } from "../form-field-state/form-field-state";
-import { FormField } from "./form-field";
+import { FormFieldState } from '../form-field-state/form-field-state';
+import { FormField } from './form-field';
 
 let validationState: FormFieldState;
 let formField: FormField<string>;

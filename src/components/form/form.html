@@ -1,6 +1,6 @@
 <form :id="form.id"
-      @submit.prevent="onSubmit"
-      @reset.prevent="onReset">
+      @submit.prevent="submit"
+      @reset.prevent="reset">
     <m-message class="m-u--margin-bottom--l"
                v-if="hasErrors"
                :state="messageStateEror"
@@ -11,7 +11,7 @@
     </m-message>
 
     <p class="m-u--require"
-       v-if="!hasOptionalFields">
+       v-if="hasRequiredFields">
         <span class="m-u--asterisk">*</span>
         <span class="m-u--typo--precision">{{ 'm-form:required' | f-m-i18n }}</span>
     </p>
