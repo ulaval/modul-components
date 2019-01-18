@@ -59,8 +59,7 @@
             "<rootDir>/tests/polyfills.js",
             "<rootDir>/tests/setup.ts"
         ],
-        "coverageDirectory": "<rootDir>/reports/coverage",
-        "testURL": "http://localhost/"
+        "coverageDirectory": "<rootDir>/reports/coverage"
     },
     "jest-junit": {
         "output": "reports/junit/js-test-results.xml"
