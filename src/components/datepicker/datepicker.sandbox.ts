@@ -8,10 +8,11 @@ import WithRender from './datepicker.sandbox.html';
 @WithRender
 @Component
 export class MDatepickerSandbox extends ModulVue {
+    private model: string = '';
     private errorMessage: string = '';
 
     private addMessageError(): void {
-        this.errorMessage = 'Datepicker error';
+        this.errorMessage = 'Datepicker error on blur';
     }
 
     private onOpen(): void {

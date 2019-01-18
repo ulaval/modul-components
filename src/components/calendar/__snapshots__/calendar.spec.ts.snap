@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar in date range mode should render date range view 1`] = `
+<div id="m-calendar-uuid" class="m-calendar m-calendar-date-range">
+    <div class="m-simple-calendar m-calendar__renderer"></div>
+</div>
+`;
+
+exports[`Calendar in single date mode should render single dates view 1`] = `
+<div id="m-calendar-uuid" class="m-calendar m-calendar-single-date">
+    <div class="m-simple-calendar m-calendar__renderer"></div>
+</div>
+`;
+
+exports[`Calendar with default values should render default view 1`] = `
+<div id="m-calendar-uuid" class="m-calendar m-calendar-single-date">
+    <div class="m-simple-calendar m-calendar__renderer"></div>
+</div>
+`;

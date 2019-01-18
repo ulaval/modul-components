@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MInputStyle should render correctly 1`] = `
+<div class="m-input-style m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__body">
+        <div class="m-input-style__body__left"> </div>
+        <div class="m-input-style__body__right"></div>
+    </div>
+</div>
+`;
