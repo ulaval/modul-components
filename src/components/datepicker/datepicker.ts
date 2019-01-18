@@ -1,7 +1,7 @@
 import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -82,6 +82,9 @@ export class MDatepicker extends ModulVue {
     private mouseIsDown: boolean = false;
     private internalCalandarErrorMessage: string = '';
     private id: string = `mDatepicker-${uuid.generate()}`;
+
+    @Emit('blur')
+    public onBlur(event: Event): void { }
 
     protected created(): void {
         moment.locale([this.$i18n.currentLang(), 'en-ca']);
@@ -247,19 +250,27 @@ export class MDatepicker extends ModulVue {
     }
 
     private set open(open: boolean) {
-        this.internalOpen = open;
-        this.$nextTick(() => {
-            if (this.internalOpen) {
-                let inputEl: any = this.$refs.input;
-                inputEl.focus();
-                inputEl.setSelectionRange(0, (this.formattedDate).length);
-                this.setSelectionToCurrentValue();
-                this.$emit('open');
-            } else {
-                this.$emit('close');
-            }
-        });
+        if (this.as<InputState>().active) {
+            this.internalOpen = open;
+            this.$nextTick(() => {
+                if (this.internalOpen) {
+                    let inputEl: any = this.$refs.input;
+                    inputEl.focus();
+                    inputEl.setSelectionRange(0, this.formattedDate.length);
+                    this.setSelectionToCurrentValue();
+                    this.onOpen();
+                } else {
+                    this.onClose();
+                }
+            });
+        }
     }
+
+    @Emit('open')
+    private onOpen(): void { }
+
+    @Emit('close')
+    private onClose(): void { }
 
     private validateDate(event): void {
         if (event.target.value === '') {

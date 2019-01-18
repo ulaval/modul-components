@@ -27,6 +27,9 @@
                @keydown.tab="inputOnKeydownTab"
                @keydown="inputOnKeydown"
                @change="validateDate"
+               @focus="inputOnFocus"
+               @blur="onBlur"
+               @click.stop
                v-model="formattedDate">
         <m-icon-button slot="right-content"
                        icon-name="m-svg__calendar"
@@ -40,7 +43,8 @@
                     v-if="open"></m-i18n>
         </m-icon-button>
     </m-input-style>
-    <m-validation-message :disabled="isDisabled"
+    <m-validation-message class="m-datepicker__validation-message"
+                          :disabled="isDisabled"
                           :waiting="isWaiting"
                           :error="calandarError"
                           :error-message="calandarErrorMessage"
