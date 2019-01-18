@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import PopupPluginDirective from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
@@ -111,28 +111,41 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (value && value !== this.internalOpen) {
             this.focusedIndex = -1;
         }
-        this.internalOpen = value;
-        this.dirty = false;
-        this.$nextTick(() => {
-            let inputEl: any = this.$refs.input;
-            if (this.internalOpen) {
-                inputEl.focus();
-                if (this.filterable) {
-                    inputEl.setSelectionRange(0, this.selectedText.length);
-                }
-                this.focusSelected();
-                this.scrollToFocused();
+        if (this.as<InputState>().active) {
+            this.internalOpen = value;
 
-                this.$emit('open');
-                // Reset the height of the list before calculating its height
-                // (this code is executed before the method calculateFilterableListeHeight())
-                this.itemsHeightStyle = undefined;
-            } else {
-                this.internalFilter = '';
-                this.$emit('close');
-            }
-        });
+            this.dirty = false;
+            this.$nextTick(() => {
+                if (this.internalOpen) {
+                    let inputEl: any = this.$refs.input;
+                    setTimeout(() => { // Need timeout to set focus on input
+                        inputEl.focus();
+                    });
+                    if (this.filterable) {
+                        inputEl.setSelectionRange(0, this.selectedText.length);
+                    }
+
+                    this.focusSelected();
+                    this.scrollToFocused();
+
+                    this.onOpen();
+                    // Reset the height of the list before calculating its height
+                    // (this code is executed before the method calculateFilterableListeHeight())
+                    this.itemsHeightStyle = undefined;
+
+                } else {
+                    this.internalFilter = '';
+                    this.onClose();
+                }
+            });
+        }
     }
+
+    @Emit('open')
+    private onOpen(): void { }
+
+    @Emit('close')
+    private onClose(): void { }
 
     private set itemsHeightStyle(value: object | number | undefined) {
         this.itemsHeightStyleInternal = value === undefined ? undefined : { height: value + 'px' };
