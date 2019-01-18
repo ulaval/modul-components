@@ -10,6 +10,12 @@ $m-dropdown--margin: $m-padding--xs !default;
     display: inline-flex;
     flex-direction: column;
 
+    &:not(.m--is-disabled) {
+        .m-dropdown__arrow {
+            cursor: pointer;
+        }
+    }
+
     &__header {
         &__label {
             margin: 0;

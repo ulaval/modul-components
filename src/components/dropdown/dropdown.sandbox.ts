@@ -1,11 +1,12 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
+import { ModulVue } from '../../utils/vue/vue';
 import { DROPDOWN_NAME } from '../component-names';
 import WithRender from './dropdown.sandbox.html';
 
 @WithRender
 @Component
-export class MDropdownSandbox extends Vue {
+export class MDropdownSandbox extends ModulVue {
     public nullValue1: string = '4a';
     public nullValue2: string = '5a';
     public nullValue3: string = '6a';

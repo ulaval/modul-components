@@ -32,6 +32,7 @@
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
                @keydown.tab="onKeydownTab"
+               @keydown="inputOnKeydown"
                @focus="inputOnFocus"
                v-model="selectedText">
         <template slot="adjust-width-auto"
@@ -50,7 +51,7 @@
                 <m-i18n k="m-dropdown:open"
                         v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close"
-                        v-if="open"></m-i18n>
+                        v-else></m-i18n>
             </m-icon>
         </div>
     </m-input-style>
