@@ -81,13 +81,7 @@
     }
 
     &.m--is-valid {
-        &::before {
-            border-color: $m-input-style--color-valid;
-        }
-
-        &::after {
-            background: $m-input-style--color-valid;
-        }
+        border-color: $m-input-style--color-valid;
 
         .m-input-style__label,
         .m-icon-button.m-icon-button,
