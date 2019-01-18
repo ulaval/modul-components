@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
-
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { BUTTON_GROUP_NAME } from '../component-names';
 import RadioPlugin, { BaseButtonGroup, ButtonGroup, MRadioPosition, MRadioVerticalAlignement } from '../radio/radio';
@@ -46,6 +45,12 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
     public name: string = uuid.generate();
     private internalValue: string = '';
+
+    @Emit('focus')
+    onFocus(event: Event): void { }
+
+    @Emit('blur')
+    onBlur(event: Event): void { }
 
     public getValue(): string {
         return this.model;

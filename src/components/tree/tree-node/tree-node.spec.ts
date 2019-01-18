@@ -190,6 +190,15 @@ describe('MTreeNode', () => {
                             expect(wrapper.emitted('click')).toBeFalsy();
                         });
 
+                        it(`Should unselect parent when all children were selected but one changed`, () => {
+                            wrapper.find(CHECKBOX).trigger('click');
+                            expect(wrapper.vm.isIndeterminate).toBeFalsy();
+                            wrapper.setProps({
+                                selectedNodes: TREE_NODE_CHECKBOX_FIRST_CHILD.map(x => x)
+                            });
+                            expect(wrapper.vm.isIndeterminate).toBeTruthy();
+                        });
+
 
                     });
 

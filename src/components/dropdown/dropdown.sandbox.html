@@ -1,9 +1,9 @@
 <div>
-    <h3>Liste déroulante filtrable</h3>
+    <h3>Filtrable dropdown</h3>
     <m-dropdown class="m-u--margin-top"
                 :filterable="true"
-                label="Pays"
-                placeholder="Choisir un pays">
+                label="Country"
+                placeholder="Choose a country">
         <m-dropdown-item value="AF"
                          label="AFGHANISTAN"></m-dropdown-item>
         <m-dropdown-item value="ZA"
@@ -502,9 +502,9 @@
     </p>-->
     <h4>Undefined</h4>
     <m-dropdown :filterable="false"
-                label="Légume"
+                label="Vegetable"
                 v-model="undefinedValue1"
-                helperMessage="Non filtrable, sans placeholder">
+                helperMessage="Not filterable, without placeholder">
         <m-dropdown-item value="1a"
                          label="Asperge"></m-dropdown-item>
         <m-dropdown-item value="1b"
@@ -517,10 +517,10 @@
                          label="Épinard"></m-dropdown-item>
     </m-dropdown>
     <m-dropdown :filterable="false"
-                label="Légume"
-                placeholder="Choisir un légume"
+                label="Vegetable"
+                placeholder="Choose a vegetable"
                 v-model="undefinedValue2"
-                helperMessage="Non filtrable, avec placeholder">
+                helperMessage="Not filterable, with placeholder">
         <m-dropdown-item value="2a"
                          label="Asperge"></m-dropdown-item>
         <m-dropdown-item value="2b"
@@ -533,9 +533,9 @@
                          label="Épinard"></m-dropdown-item>
     </m-dropdown>
     <m-dropdown :filterable="true"
-                label="Légume"
+                label="Vegetable"
                 v-model="undefinedValue3"
-                helperMessage="Filtrable, sans placeholder">
+                helperMessage="Filterable, without placeholder">
         <m-dropdown-item value="3a"
                          label="Asperge"></m-dropdown-item>
         <m-dropdown-item value="3b"
@@ -550,9 +550,9 @@
 
     <h4>Null</h4>
     <m-dropdown :filterable="false"
-                label="Légume"
+                label="Vegetable"
                 v-model="nullValue1"
-                helperMessage="Non filtrable, sans placeholder">
+                helperMessage="Not filterable, without placeholder">
         <m-dropdown-item value="4a"
                          label="Asperge"></m-dropdown-item>
         <m-dropdown-item value="4b"
@@ -565,10 +565,10 @@
                          label="Épinard"></m-dropdown-item>
     </m-dropdown>
     <m-dropdown :filterable="false"
-                label="Légume"
+                label="Vegetable"
                 placeholder="Choisir un légume"
                 v-model="nullValue2"
-                helperMessage="Non filtrable, avec placeholder">
+                helperMessage="Not filterable, with placeholder">
         <m-dropdown-item value="5a"
                          label="Asperge"></m-dropdown-item>
         <m-dropdown-item value="5b"
@@ -581,9 +581,9 @@
                          label="Épinard"></m-dropdown-item>
     </m-dropdown>
     <m-dropdown :filterable="true"
-                label="Légume"
+                label="Vegetable"
                 v-model="nullValue3"
-                helperMessage="Filtrable, sans placeholder">
+                helperMessage="Filterable, without placeholder">
         <m-dropdown-item value="6a"
                          label="Asperge"></m-dropdown-item>
         <m-dropdown-item value="6b"
@@ -598,7 +598,7 @@
 
 
 
-    <h3>Dropdown-item avec une value numerique</h3>
+    <h3>Dropdown-item with a numeric value</h3>
     <p class="m-u--margin-bottom">
         From <a href="https://github.com/ulaval/modul-components/pull/458"
            target="blank">PR #458</a> : It's impossible to select a dropdown option when it is a numeric value
@@ -608,27 +608,11 @@
     </p>
 
     <m-dropdown :filterable="false"
-                label="Item à valeur numérique"
+                label="Item with numeric value"
                 v-model="numValue">
         <m-dropdown-item v-for="item of numItems"
                          :value="item"
                          :label="item"></m-dropdown-item>
     </m-dropdown>
 
-
-    <!-- Sandbox template
-    <br><br><br><br><br>
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank" label="PR description</a>
-
-    </p>
-    <p>
-        <m-dropdown>
-            <m-dropdown-item value="" label=""></m-dropdown-item>
-        </m-dropdown>
-    </p>
-    -->
 </div>

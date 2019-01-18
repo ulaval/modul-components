@@ -30,6 +30,7 @@
                @blur="onBlur"
                @keyup="onKeyup"
                @keydown="onKeydown"
+               @keydown.enter="onEnter"
                @change="onChange"
                @paste="onPaste"
                :autocomplete="autocomplete"
@@ -101,4 +102,5 @@
                            :threshold="characterCountThreshold"
                            :transition="hasCounterTransition"></m-character-count>
     </div>
+    <button @click="resetModel">TEST</button>
 </div>
