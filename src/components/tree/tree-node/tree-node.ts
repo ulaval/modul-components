@@ -52,7 +52,7 @@ export class MTreeNode extends ModulVue {
     @Watch('isSelected')
     public notifyParentOfChildCheckboxState(): void {
         if (this.withCheckboxes) {
-            if (!this.hasChildren) {
+            if (!this.hasChildren || this.isParentAutoSelect) {
                 this.$emit('auto-select-child-checkbox-change', this.isSelected);
             } else if (this.isButtonAutoSelect && this.hasChildren) {
                 this.onAutoSelectChildCheckboxChange(this.isSelected, true);
