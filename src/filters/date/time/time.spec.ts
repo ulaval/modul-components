@@ -7,7 +7,7 @@ import { timeFilter } from './time';
 
 describe(TIME_NAME, () => {
     beforeEach(() => {
-        addMessages(Vue, ['./time.lang.en.json']);
+        addMessages(Vue, ['filters/date/time/time.lang.en.json']);
     });
 
     it(`should return formatted time with minutes`, () => {

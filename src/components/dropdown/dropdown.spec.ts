@@ -19,8 +19,8 @@ describe('MDropdown', () => {
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
-        localVue.use(ModulPlugin);
-        localVue.use(DropdownPlugin);
+        // localVue.use(ModulPlugin);
+        // localVue.use(DropdownPlugin);
         mockPopper = localVue.component('m-popper', {
             template: '<m-popper-mock><slot name="footer"></slot></m-popper-mock>'
         });

@@ -8,9 +8,9 @@ import { dateTimeFilter } from './date-time';
 describe(DATE_TIME_NAME, () => {
     beforeEach(() => {
         addMessages(Vue, [
-            '../date/date.lang.en.json',
-            '../time/time.lang.en.json',
-            './date-time.lang.en.json'
+            'filters/date/date/date.lang.en.json',
+            'filters/date/time/time.lang.en.json',
+            'filters/date/date-time/date-time.lang.en.json'
         ]);
     });
 
