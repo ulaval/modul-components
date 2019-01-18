@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 $m-dropdown--color-hover: $m-color--grey-lightest !default;
 $m-dropdown--color-select: $m-color--grey-lighter !default;
 $m-dropdown--color-focus: $m-color--interactive-lightest !default;
@@ -67,6 +67,7 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     &__arrow {
         display: inherit;
+        cursor: pointer;
 
         &__icon {
             transition: transform $m-transition-duration ease, color $m-transition-duration ease !important;

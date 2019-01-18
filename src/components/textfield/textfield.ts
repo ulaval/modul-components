@@ -163,6 +163,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
     }
+
+    private resetModel(): void {
+        this.$emit('input', '');
+    }
 }
 
 const TextfieldPlugin: PluginObject<any> = {

@@ -2,7 +2,7 @@
 
 exports[`MTimepicker should render correctly 1`] = `
 <div class="m-timepicker">
-    <div class="m-input-style m--has-value m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
                 <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
@@ -22,7 +22,7 @@ exports[`MTimepicker should render correctly 1`] = `
 
 exports[`MTimepicker should render correctly min/max time 1`] = `
 <div class="m-timepicker">
-    <div class="m-input-style m--has-value m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
                 <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="7:00"> </div>
@@ -42,7 +42,7 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
 
 exports[`MTimepicker should render correctly when disabled is set 1`] = `
 <div class="m-timepicker">
-    <div class="m-input-style m--is-disabled m--has-value m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
                 <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
@@ -62,7 +62,7 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
 
 exports[`MTimepicker should render correctly when error is set 1`] = `
 <div class="m-timepicker">
-    <div class="m-input-style m--has-error m--has-value m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
                 <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
@@ -90,7 +90,7 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
 
 exports[`MTimepicker should render correctly when valid is set 1`] = `
 <div class="m-timepicker">
-    <div class="m-input-style m--is-valid m--has-value m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
                 <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
@@ -118,7 +118,7 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
 
 exports[`MTimepicker should render correctly when waiting is set 1`] = `
 <div class="m-timepicker">
-    <div class="m-input-style m--is-waiting m--has-value m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
                 <input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>

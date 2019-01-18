@@ -78,7 +78,7 @@ export class InputState extends ModulVue implements InputStateMixin {
     public readonly: boolean;
 
     public get active(): boolean {
-        return !this.isDisabled && !this.isWaiting;
+        return !this.isDisabled && !this.isWaiting && !this.readonly;
     }
 
     public get isDisabled(): boolean {
