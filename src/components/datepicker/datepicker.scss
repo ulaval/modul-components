@@ -167,6 +167,7 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     }
 
     &__validation-message {
+        margin-top: $m-margin--xs;
         transition: margin-top $m-transition-duration ease;
     }
 
@@ -174,9 +175,5 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         background-color: none;
         color: $m-color--grey-light;
         cursor: not-allowed;
-    }
-
-    &__validation-message {
-        margin-top: $m-margin--xs;
     }
 }

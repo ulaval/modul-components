@@ -10,13 +10,12 @@ $m-dropdown--margin: $m-padding--xs !default;
     display: inline-flex;
     flex-direction: column;
 
-
     &.m--has-validation-message {
         .m-dropdown__validation-message {
             margin-top: $m-spacing--xs;
         }
     }
-  
+
     &:not(.m--is-disabled) {
         .m-dropdown__arrow {
             cursor: pointer;
