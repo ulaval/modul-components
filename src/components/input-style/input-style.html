@@ -4,6 +4,7 @@
               'm--is-label-up': labelIsUp,
               'm--is-disabled' : isDisabled,
               'm--is-waiting' : isWaiting,
+              'm--has-cursor-pointer' : cursorPointer,
               'm--has-error' : hasError,
               'm--is-valid' : isValid,
               'm--has-label': hasLabel,
@@ -13,14 +14,14 @@
      @click="onClick"
      @mousedown="onMousedown"
      @mouseup="onMouseup"
+     ref="root"
      :style="{ width: width }">
     <label class="m-input-style__label"
            ref="label"
            :for="labelFor"
            v-if="hasLabel">
         <span class="m-input-style__text">
-            <span>{{ label }}</span>
-            <sup class="m-input-style__required-marker"
+            <span>{{ label }}</span>&nbsp;<sup class="m-input-style__required-marker"
                  v-if="requiredMarker">*</sup>
         </span>
     </label>

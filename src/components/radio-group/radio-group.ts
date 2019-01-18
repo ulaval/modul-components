@@ -48,6 +48,12 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     @Emit('change')
     onChange(value: any): void { }
 
+    @Emit('focus')
+    onFocus(event: Event): void { }
+
+    @Emit('blur')
+    onBlur(event: Event): void { }
+
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
     }
@@ -83,6 +89,14 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
     private get hasLabel(): boolean {
         return !!this.label;
+    }
+
+    public get idLabel(): string | undefined {
+        return this.hasLabel ? uuid.generate() : undefined;
+    }
+
+    private get idValidationMessage(): string | undefined {
+        return this.as<InputState>().errorMessage || this.as<InputState>().validMessage || this.as<InputState>().helperMessage ? uuid.generate() : undefined;
     }
 
     private set model(value: any) {

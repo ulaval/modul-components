@@ -30,8 +30,11 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
+    @Prop({ default: false })
+    public cursorPointer: boolean;
 
     public $refs: {
+        root: HTMLElement,
         label: HTMLElement,
         adjustWidthAuto: HTMLElement,
         rightContent: HTMLElement
@@ -80,8 +83,8 @@ export class MInputStyle extends ModulVue {
         return this.hasDefaultSlot && !this.empty;
     }
 
-    private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+    public get labelIsUp(): boolean {
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
     }
 
     private get hasLabel(): boolean {

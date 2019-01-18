@@ -4,6 +4,7 @@ import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
+import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
 import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -23,6 +24,7 @@ import ErrorTechnicalDifficultyPlugin from './error-pages/error-technical-diffic
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
+import FormPlugin from './form/form';
 import I18nPlugin from './i18n/i18n';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
@@ -42,6 +44,7 @@ import OptionPlugin from './option/option';
 import Overlay from './overlay/overlay';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
+import PeriodpickerPlugin from './periodpicker/periodpicker';
 import PhoneNumberPlugin from './phone-number/phone-number';
 import PlusPlugin from './plus/plus';
 import PopperPlugin from './popper/popper';
@@ -94,6 +97,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
+        Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);
         Vue.use(CharacterCountPlugin);
         Vue.use(CheckboxPlugin);
@@ -115,6 +119,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
+        Vue.use(FormPlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
@@ -131,6 +136,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(MenuPlugin);
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
+        Vue.use(PeriodpickerPlugin);
         Vue.use(PhoneNumberPlugin);
         Vue.use(PlusPlugin);
         Vue.use(PopperPlugin);

@@ -1,0 +1,20 @@
+<form :id="form.id"
+      @submit.prevent="submit"
+      @reset.prevent="reset">
+    <m-message class="m-u--margin-bottom--l"
+               v-if="hasErrors"
+               :state="messageStateEror"
+               ref="summary">
+        <ul class="m-u--no-margin">
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </m-message>
+
+    <p class="m-u--require"
+       v-if="hasRequiredFields">
+        <span class="m-u--asterisk">*</span>
+        <span class="m-u--typo--precision">{{ 'm-form:required' | f-m-i18n }}</span>
+    </p>
+
+    <slot></slot>
+</form>

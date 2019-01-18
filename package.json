@@ -72,17 +72,17 @@
         "axios": "^0.17.1",
         "css-element-queries": "^0.4.0",
         "enquire.js": "^2.1.6",
-        "froala-editor": "^2.8.5",
-        "jquery": "^3.3.1",
         "es6-promise": "^4.1.1",
+        "filesize": "^3.6.0",
+        "froala-editor": "2.9.1",
+        "jquery": "^3.3.1",
         "mobile-drag-drop": "^2.3.0-rc.1",
         "moment": "^2.19.3",
+        "popper.js": "^1.12.9",
         "portal-vue": "~1.1.1",
         "sprintf-js": "^1.1.1",
-        "zingtouch": "^1.0.6",
-        "popper.js": "^1.12.9",
-        "filesize": "^3.6.0",
-        "vue-touch": "^2.0.0-beta.4"
+        "vue-touch": "^2.0.0-beta.4",
+        "zingtouch": "^1.0.6"
     },
     "peerDependencies": {
         "vue": "^2.5.9",

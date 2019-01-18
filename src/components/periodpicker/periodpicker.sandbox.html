@@ -1,0 +1,39 @@
+<div>
+    <h3>Devrait fonctionner à partir d'un modèle vide</h3>
+    <p class="m-u--margin-bottom">
+        Quand un modèle vide est fourni (dateTo, dateFrom à undefined), il est possible de sélectionner 2 nouvelles valeurs.
+    </p>
+    <p>
+        <m-button @click="emptyModel(undefined)">Vider le modèle (undefined)</m-button>
+        <m-button @click="emptyModel({})">Vider le modèle (Objet vide)</m-button>
+        <m-periodpicker v-model="model">
+            <m-datepicker slot="first"
+                          slot-scope="{ props, handlers }"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+            <m-datepicker slot="second"
+                          slot-scope="{ props, handlers }"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+        </m-periodpicker>
+    </p>
+    <p>Valeur sélectionnée: {{ model }}</p>
+    <h3>Devrait limiter correctement la sélection avec min et max</h3>
+    <p class="m-u--margin-bottom">
+        Dans ce cas on ne devrait plus pouvoir sélectionner une date en dehors du mois courant.
+    </p>
+    <p>
+        <m-periodpicker v-model="model"
+                        :min="min"
+                        :max="max">
+            <m-datepicker slot="first"
+                          slot-scope="{ props, handlers }"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+            <m-datepicker slot="second"
+                          slot-scope="{ props, handlers }"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+        </m-periodpicker>
+    </p>
+</div>

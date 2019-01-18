@@ -105,6 +105,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
+    private onEnter(): void {
+        if (this.isTypeSearch) {
+            this.search();
+        }
+    }
+
     private search(): void {
         this.$emit('search');
     }
@@ -163,6 +169,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
+    }
+
+    private resetModel(): void {
+        this.$emit('input', '');
     }
 }
 

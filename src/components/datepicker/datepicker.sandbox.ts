@@ -8,6 +8,7 @@ import WithRender from './datepicker.sandbox.html';
 @WithRender
 @Component
 export class MDatepickerSandbox extends Vue {
+    model: string = '';
 }
 
 const DatepickerSandboxPlugin: PluginObject<any> = {
