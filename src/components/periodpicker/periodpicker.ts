@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import DatepickerPlugin, { DatePickerSupportedTypes } from '../datepicker/datepicker';
@@ -27,7 +27,8 @@ export class MPeriodPicker extends ModulVue {
 
     get firstInputState(): any {
         return {
-            props: { label: 'Du', value: this.internalValue.from, min: this.min, max: this.max },
+            // TODO : Put back label when the bug is gone
+            props: { /* label: 'Du', */value: this.internalValue.from, min: this.min, max: this.max },
             handlers: {
                 change: (newValue: string) => this.onDateFromChange(newValue),
                 open: () => this.onDateFromOpen()
@@ -37,7 +38,8 @@ export class MPeriodPicker extends ModulVue {
 
     get secondInputState(): any {
         return {
-            props: { label: 'Au', focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
+            // TODO : Put back label when the bug is gone
+            props: { /*label: 'Au', */focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
             handlers: {
                 change: (newValue: string) => this.onDateToChange(newValue),
                 close: () => this.onDateToClose()
@@ -55,18 +57,28 @@ export class MPeriodPicker extends ModulVue {
 
     onDateFromChange(newValue: any): void {
         if (newValue) {
-            const dateTo: DatePickerSupportedTypes = newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to;
-
-            this.$emit('input', Object.assign({}, this.internalValue, { from: newValue, to: dateTo }));
             this.toIsFocused = true;
+            this.emitNewValue(Object.assign({}, this.internalValue, {
+                from: newValue,
+                to: newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to
+            }));
+        } else {
+            this.emitNewValue({ from: undefined, to: this.internalValue.to });
         }
     }
 
     onDateToChange(newValue: any): void {
         if (newValue) {
             this.toIsFocused = false;
-            this.$emit('input', Object.assign({}, this.internalValue, { to: newValue }));
+            this.emitNewValue(Object.assign({}, this.internalValue, { to: newValue }));
+        } else {
+            this.emitNewValue({ from: this.internalValue.from, to: undefined });
         }
+    }
+
+    @Emit('input')
+    emitNewValue(newValue: MDateRange): MDateRange {
+        return newValue;
     }
 
     onDateFromOpen(): void {
