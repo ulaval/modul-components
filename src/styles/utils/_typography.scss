@@ -13,13 +13,6 @@
         &--xs {
             font-size: $m-font-size--xs;
         }
-
-        &,
-        &--l,
-        &--s,
-        &--xs {
-            font-family: $m-font-family;
-        }
     }
 
     &-style {
@@ -29,13 +22,6 @@
 
         &--italic {
             font-style: italic;
-        }
-
-        &,
-        &--l,
-        &--s,
-        &--xs {
-            font-family: $m-font-family;
         }
     }
 
@@ -51,13 +37,6 @@
         &--normal {
             font-weight: $m-font-weight;
         }
-
-        &,
-        &--l,
-        &--s,
-        &--xs {
-            font-family: $m-font-family;
-        }
     }
 }
 
@@ -65,7 +44,6 @@
     &--precision {
         &,
         &-italic {
-            font-family: $m-font-family;
             font-size: $m-font-size--s;
             color: $m-color--text-light;
         }
@@ -77,7 +55,6 @@
 
     &--highlighting {
         display: inline;
-        font-family: $m-font-family;
         font-size: $m-font-size--s;
         font-weight: $m-font-weight--bold;
         background: $m-color--warning-lightest;
