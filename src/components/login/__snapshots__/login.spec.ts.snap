@@ -15,7 +15,6 @@ exports[`MLogin when login should render correctly 1`] = `
         <div class="m-textfield__validation">
             <div class="m-validation-message m-textfield__validation__message"></div>
         </div>
-        <button>TEST</button>
     </div>
     <br>
     <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
@@ -31,7 +30,6 @@ exports[`MLogin when login should render correctly 1`] = `
         <div class="m-textfield__validation">
             <div class="m-validation-message m-textfield__validation__message"></div>
         </div>
-        <button>TEST</button>
     </div>
     <br>
     <button type="submit" class="m-button m--is-skin-primary"> <span class="m-button__text"><span class="m-i18n">Login</span> </span>
