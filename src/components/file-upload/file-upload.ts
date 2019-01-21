@@ -6,7 +6,6 @@ import FileDropPlugin from '../../directives/file-drop/file-drop';
 import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileRejectionCause, MFileStatus } from '../../utils/file/file';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
@@ -32,7 +31,7 @@ interface MFileExt extends MFile {
 const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    e.dataTransfer.dropEffect = 'none';
+    e.dataTransfer!.dropEffect = 'none';
 };
 
 @WithRender

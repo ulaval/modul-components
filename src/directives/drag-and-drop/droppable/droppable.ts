@@ -1,13 +1,13 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-
 import { targetIsInput } from '../../../utils/event/event';
 import { isInElement } from '../../../utils/mouse/mouse';
 import { dispatchEvent, getVNodeAttributeValue } from '../../../utils/vue/directive';
 import { DROPPABLE_NAME } from '../../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../../domPlugin';
-import { MDraggable } from '../draggable/draggable';
 import { MSortable, MSortableAction } from '../../sortable/sortable';
 import RemoveUserSelectPlugin, { MRemoveUserSelect } from '../../user-select/remove-user-select';
+import { MDraggable } from '../draggable/draggable';
+
 
 export enum MDroppableClassNames {
     Droppable = 'm--is-droppable',
@@ -170,10 +170,10 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
         let className: string;
         if (this.canDrop()) {
             event.preventDefault();
-            event.dataTransfer.dropEffect = MDropEffect.MMove;
+            event.dataTransfer!.dropEffect = MDropEffect.MMove;
             className = MDroppableClassNames.CanDrop;
         } else {
-            event.dataTransfer.dropEffect = MDropEffect.MNone;
+            event.dataTransfer!.dropEffect = MDropEffect.MNone;
             className = MDroppableClassNames.CantDrop;
         }
 
@@ -209,7 +209,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private extractDropInfo(event: DragEvent): MDropInfo {
-        const data: any = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer.getData('text') : undefined;
+        const data: any = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.dragData || event.dataTransfer!.getData('text') : undefined;
         const action: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.action : DEFAULT_ACTION;
         const grouping: string = MDraggable.currentDraggable ? MDraggable.currentDraggable.options.grouping : undefined;
         return {
