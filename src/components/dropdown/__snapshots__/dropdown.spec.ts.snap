@@ -9,9 +9,8 @@ exports[`MDropdown should render correctly 1`] = `
                 <m-i18n k="m-dropdown:open"></m-i18n>
             </m-icon>
         </div>
-<<<<<<< HEAD
     </m-input-style>
-    <m-validation-message></m-validation-message>
+    <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
     <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
     var l = arguments.length;
     return l
@@ -31,15 +30,6 @@ exports[`MDropdown should render correctly 1`] = `
             <m-dropdown-item readonly="readonly">No data</m-dropdown-item>
         </ul>
     </m-popup>
-=======
-    </div>
-    <div class="m-validation-message m-dropdown__validation-message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
-    <div class="m-popup">
-        <div class="m-popper"> </div>
-    </div>
->>>>>>> develop
 </div>
 `;
 
@@ -52,9 +42,8 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
                 <m-i18n k="m-dropdown:open"></m-i18n>
             </m-icon>
         </div>
-<<<<<<< HEAD
     </m-input-style>
-    <m-validation-message></m-validation-message>
+    <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
     <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
     var l = arguments.length;
     return l
@@ -74,14 +63,5 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
             <m-dropdown-item readonly="readonly">No data</m-dropdown-item>
         </ul>
     </m-popup>
-=======
-    </div>
-    <div class="m-validation-message m-dropdown__validation-message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
-    <div class="m-popup">
-        <div class="m-popper"> </div>
-    </div>
->>>>>>> develop
 </div>
 `;
