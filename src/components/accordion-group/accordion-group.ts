@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import MAccordionPlugin, { AccordionGateway, AccordionGroupGateway, MAccordionSkin } from '../accordion/accordion';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';

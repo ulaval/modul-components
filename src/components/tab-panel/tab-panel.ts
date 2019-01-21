@@ -50,7 +50,7 @@ export class MTabPanel extends ModulVue {
 
 const TabPannePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MTabPanel will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MTabPanel will be deprecated in modul v.1.0');
 
         v.component(TAB_PANEL_NAME, MTabPanel);
     }

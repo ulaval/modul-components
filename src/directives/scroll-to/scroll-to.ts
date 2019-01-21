@@ -52,7 +52,7 @@ const MScrollTo: DirectiveOptions = {
 
 const ScrollToPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('ScrollToDirective will be deprecated in modul v.1.0');
+        v.prototype.$log.error('ScrollToDirective will be deprecated in modul v.1.0');
 
         v.use(ScrollToPlugin);
         v.directive(SCROLL_TO_NAME, MScrollTo);

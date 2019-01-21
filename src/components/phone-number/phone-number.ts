@@ -62,7 +62,7 @@ export class MPhoneNumber extends ModulVue {
 
 const PhoneNumberPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MPhoneNumber will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MPhoneNumber will be deprecated in modul v.1.0');
 
         v.component(PHONE_NUMBER_NAME, MPhoneNumber);
     }

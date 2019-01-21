@@ -63,6 +63,12 @@ export class Logger {
             console.info(message, ...optionalParams);
         }
     }
+
+    error(message?: any, ...optionalParams: any[]): void {
+        if (!this.hideAll) {
+            console.error(message, ...optionalParams);
+        }
+    }
 }
 
 const LoggerPlugin: PluginObject<any> = {

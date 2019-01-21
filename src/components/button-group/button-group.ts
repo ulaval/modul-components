@@ -78,8 +78,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
 const ButtonGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MButtonGroup will be deprecated in modul v.1.0');
-
+        v.prototype.$log.error('MButtonGroup will be deprecated in modul v.1.0');
         v.use(RadioPlugin);
         v.component(BUTTON_GROUP_NAME, MButtonGroup);
     }

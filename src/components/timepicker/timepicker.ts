@@ -240,7 +240,7 @@ export class MTimepicker extends ModulVue {
 
 const TimepickerPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MTimepicker will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MTimepicker will be deprecated in modul v.1.0');
 
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);

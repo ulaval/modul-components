@@ -86,12 +86,12 @@ export interface ComponentPluginOptions {
 
 const ComponentsPlugin: PluginObject<any> = {
     install(v, options: ComponentPluginOptions = {}): void {
-
-        console.error('ComponentsPlugin will be deprecated in modul v.1.0, components should now be installed separately');
-
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin);
         }
+
+        v.prototype.$log.error('ComponentsPlugin will be deprecated in modul v.1.0, components should now be installed separately');
+
 
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);

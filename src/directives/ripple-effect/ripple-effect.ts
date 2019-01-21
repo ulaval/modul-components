@@ -32,7 +32,7 @@ const MRippleEffect: DirectiveOptions = {
 
 const RippleEffectPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('RippleEffectBinding will be deprecated in modul v.1.0');
+        v.prototype.$log.error('RippleEffectBinding will be deprecated in modul v.1.0');
 
         v.directive(RIPPLE_EFFECT_NAME, MRippleEffect);
     }

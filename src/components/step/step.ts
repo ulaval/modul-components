@@ -135,7 +135,7 @@ export class MStep extends ModulVue {
 const StepPlugin: PluginObject<any> = {
     install(v, options): void {
 
-        console.error('MStep will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MStep will be deprecated in modul v.1.0');
 
         v.use(IconPlugin);
         v.use(LinkPlugin);

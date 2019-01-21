@@ -15,12 +15,11 @@ import DragAndDropPlugin from './drag-and-drop/drag-and-drop-plugin';
 
 const DirectivesPlugin: PluginObject<any> = {
     install(v, options): void {
-
-        console.error('DirectivesPlugin will be deprecated in modul v.1.0, directive should now be installed separately');
-
         if (!v.prototype.$log) {
             Vue.use(LoggerPlugin);
         }
+
+        v.prototype.$log.error('DirectivesPlugin will be deprecated in modul v.1.0, directive should now be installed separately');
 
         Vue.use(BadgePlugin);
         Vue.use(DragAndDropPlugin);

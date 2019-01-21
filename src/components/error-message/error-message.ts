@@ -51,7 +51,7 @@ export class MErrorMessage extends ModulVue {
 
 const ErrorMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MErrorMessage will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MErrorMessage will be deprecated in modul v.1.0');
 
         v.use(I18nPlugin);
         v.use(AccordionPlugin);

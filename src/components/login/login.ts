@@ -39,9 +39,8 @@ export class MLogin extends ModulVue {
 
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MLogin will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MLogin will be deprecated in modul v.1.0');
 
-        v.prototype.$log.debug(LOGIN_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);

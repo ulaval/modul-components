@@ -149,7 +149,7 @@ export class MDatefields extends ModulVue {
 
 const DatefieldsPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MDatefields will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MDatefields will be deprecated in modul v.1.0');
 
         Vue.use(DropdownPlugin);
         Vue.use(I18nPlugin);

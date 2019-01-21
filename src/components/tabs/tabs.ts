@@ -30,7 +30,7 @@ export class MTabs extends BaseTabs implements MTabsInterface {
 
 const TabsPlugin: PluginObject<any> = {
     install(v, options): void {
-        console.error('MTabs will be deprecated in modul v.1.0');
+        v.prototype.$log.error('MTabs will be deprecated in modul v.1.0');
 
         v.component(TABS_NAME, MTabs);
     }
