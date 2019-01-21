@@ -15,7 +15,13 @@ exports[`MDatepicker should render correctly 1`] = `
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="m-validation-message"></div>
+=======
+    <div class="m-validation-message m-datepicker__validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
+>>>>>>> develop
     <div class="m-popup">
         <div class="m-popper"> </div>
     </div>
@@ -37,7 +43,13 @@ exports[`MDatepicker should render correctly min/max time 1`] = `
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="m-validation-message"></div>
+=======
+    <div class="m-validation-message m-datepicker__validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
+>>>>>>> develop
     <div class="m-popup">
         <div class="m-popper"> </div>
     </div>
@@ -59,7 +71,13 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="m-validation-message"></div>
+=======
+    <div class="m-validation-message m-datepicker__validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
+>>>>>>> develop
     <div class="m-popup">
         <div class="m-popper"> </div>
     </div>
@@ -67,7 +85,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when error is set 1`] = `
-<div class="m-datepicker m--has-error">
+<div class="m-datepicker m--has-error m--has-validation-message">
     <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -81,6 +99,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="m-validation-message">
         <div class="m-validation-message__wrap">
             <p class="m-validation-message__error">
@@ -89,6 +108,18 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
                     <use aria-hidden="true"></use>
                 </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
         </div>
+=======
+    <div class="m-validation-message m-datepicker__validation-message">
+        <m-accordion-transition transition="true">
+            <div class="m-validation-message__wrap">
+                <p class="m-validation-message__error">
+                    <svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
+                        <title>m-validation-message:title-error-icon</title>
+                        <use aria-hidden="true"></use>
+                    </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+            </div>
+        </m-accordion-transition>
+>>>>>>> develop
     </div>
     <div class="m-popup">
         <div class="m-popper"> </div>
@@ -97,7 +128,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when valid is set 1`] = `
-<div class="m-datepicker m--is-valid">
+<div class="m-datepicker m--is-valid m--has-validation-message">
     <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -111,6 +142,7 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="m-validation-message">
         <div class="m-validation-message__wrap">
             <p class="m-validation-message__valid">
@@ -119,6 +151,18 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
                     <use aria-hidden="true"></use>
                 </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
         </div>
+=======
+    <div class="m-validation-message m-datepicker__validation-message">
+        <m-accordion-transition transition="true">
+            <div class="m-validation-message__wrap">
+                <p class="m-validation-message__valid">
+                    <svg width="1em" height="1em" class="m-icon m-validation-message__valid__icon">
+                        <title>m-validation-message:title-valid-icon</title>
+                        <use aria-hidden="true"></use>
+                    </svg> <span class="m-validation-message__text">Nostrud laboris quis velit voluptate aute elit elit non.</span></p>
+            </div>
+        </m-accordion-transition>
+>>>>>>> develop
     </div>
     <div class="m-popup">
         <div class="m-popper"> </div>
@@ -144,7 +188,13 @@ exports[`MDatepicker should render correctly when waiting is set 1`] = `
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="m-validation-message"></div>
+=======
+    <div class="m-validation-message m-datepicker__validation-message">
+        <m-accordion-transition transition="true"></m-accordion-transition>
+    </div>
+>>>>>>> develop
     <div class="m-popup">
         <div class="m-popper"> </div>
     </div>

@@ -86,8 +86,10 @@ export class MPopup extends ModulVue {
     }
 
     private set propOpen(value: boolean) {
-        this.internalOpen = value;
-        this.$emit('update:open', value);
+        if (!this.disabled) {
+            this.internalOpen = value;
+            this.$emit('update:open', value);
+        }
     }
 
     public get propOpenTrigger(): MOpenTrigger {

@@ -5,24 +5,9 @@
     display: inline-flex;
     flex-direction: column;
 
-    &.m--has-error {
-        .m-rich-text__validation {
-            color: $m-color--error;
-        }
-    }
-
-    &.m--is-valid {
-        .m-rich-text__validation {
-            color: $m-color--success;
-        }
-    }
-
-    &__validation {
-        display: flex;
-        justify-content: flex-end;
-
-        &__message {
-            flex: 1 1 auto;
+    &.m--has-validation-message {
+        .m-rich-text__validation-message {
+            margin-top: $m-spacing--xs;
         }
     }
 
@@ -47,5 +32,9 @@
             opacity: 0;
             word-wrap: break-word;
         }
+    }
+
+    &__validation-message {
+        transition: margin-top $m-transition-duration ease;
     }
 }

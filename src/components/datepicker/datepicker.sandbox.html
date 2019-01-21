@@ -1,15 +1,22 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-datepicker v-model="model"></m-datepicker>
-    </p>
-    <p>Valeur sélectionnée: {{ model }}</p>
+    <h2>Default datepicker</h2>
+    <m-datepicker class="m-u--margint-top"></m-datepicker>
 
+    <h2>Add error message on blur event</h2>
+    <m-datepicker class="m-u--margint-top"
+                  @blur="addMessageError"
+                  @open="onOpen"
+                  @close="onClose"
+                  :error-message="errorMessage">
+    </m-datepicker>
+
+    <h2>Disabled</h2>
+    <m-datepicker class="m-u--margint-top"
+                  :disabled="true">
+    </m-datepicker>
+
+    <h2>Selected value</h2>
+    <m-datepicker class="m-u--margint-top"
+                  v-model="model"></m-datepicker>
+    <p>Selected value: {{ model }}</p>
 </div>

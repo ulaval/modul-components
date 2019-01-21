@@ -1,10 +1,11 @@
 <div class="m-textfield"
-     :class="[{ 'm--is-disabled' : isDisabled,
-                'm--is-waiting' : isWaiting,
-                'm--has-error' : hasTextfieldError,
-                'm--is-valid' : isTextfieldValid,
+     :class="[{ 'm--is-disabled': isDisabled,
+                'm--is-waiting': isWaiting,
+                'm--has-error': hasTextfieldError,
+                'm--is-valid': isTextfieldValid,
                 'm--has-label': hasLabel,
-                'm--has-word-wrap':  hasWordWrap},
+                'm--has-word-wrap': hasWordWrap,
+                'm--has-validation-message': hasValidationMessage },
                 'm--is-type-' + inputType ]"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
@@ -96,7 +97,8 @@
                               :valid="isTextfieldValid"
                               :valid-message="validMessage"
                               :helper-message="helperMessage"></m-validation-message>
-        <m-character-count v-if="characterCount"
+        <m-character-count class="m-textfield__validation__character-count"
+                           v-if="characterCount"
                            :value-length="valueLength"
                            :max-length="maxLength"
                            :threshold="characterCountThreshold"
