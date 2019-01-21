@@ -20,7 +20,6 @@ describe('MNavbarItem', () => {
         mockIsRouterLinkActive = false;
         Vue.use(ModulPlugin);
         localVue = createLocalVue();
-        //  localVue.component(Nav);
         parentNavbar = shallow(MNavbar);
     });
 
