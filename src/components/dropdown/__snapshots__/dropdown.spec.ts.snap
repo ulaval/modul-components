@@ -12,14 +12,14 @@ exports[`MDropdown should render correctly 1`] = `
         </div>
     </m-input-style>
     <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
-    <m-popup width="100%" placement="bottom-start" enter="function boundFn(a) {
+    <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
     var l = arguments.length;
     return l
       ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" leave="function boundFn(a) {
+  }" leave="function boundFn (a) {
     var l = arguments.length;
     return l
       ? l > 1
@@ -49,14 +49,14 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
         </div>
     </m-input-style>
     <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
-    <m-popup width="100%" placement="bottom-start" enter="function boundFn(a) {
+    <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
     var l = arguments.length;
     return l
       ? l > 1
         ? fn.apply(ctx, arguments)
         : fn.call(ctx, a)
       : fn.call(ctx)
-  }" leave="function boundFn(a) {
+  }" leave="function boundFn (a) {
     var l = arguments.length;
     return l
       ? l > 1
