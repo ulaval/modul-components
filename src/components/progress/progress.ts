@@ -1,16 +1,21 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { PROGRESS_NAME } from '../component-names';
 import WithRender from './progress.html?style=./progress.scss';
 import INDETERMINATE_ANIMATION_TEMPLATE from './progressSpinnerAnimation';
 
+
 export enum MProgressState {
     Completed = 'completed',
     InProgress = 'in-progress',
     Error = 'error'
+}
+
+export enum MProgressSkin {
+    Default = 'default',
+    Monochrome = 'monochrome'
 }
 
 @WithRender
@@ -37,6 +42,8 @@ export class MProgress extends ModulVue {
     public state: MProgressState;
     @Prop({ default: true })
     public borderRadius: boolean;
+    @Prop({ default: MProgressSkin.Default })
+    public skin: MProgressSkin;
 
     private mode: string;
     private styleTag: HTMLElement | null;
@@ -81,21 +88,21 @@ export class MProgress extends ModulVue {
     }
 
     private get propState(): MProgressState {
-        return this.state ? this.state : this.value >= 100 ? MProgressState.Completed : MProgressState.InProgress ;
+        return this.state ? this.state : this.value >= 100 ? MProgressState.Completed : MProgressState.InProgress;
     }
 
     private get radiusSize(): string {
         return this.circle || !this.borderRadius ? 'initial' : this.size / 2 + 'px';
     }
 
-    private get styleObject(): { [name: string ]: string } {
+    private get styleObject(): { [name: string]: string } {
         return {
             height: this.propSize,
             borderRadius: this.radiusSize
         };
     }
 
-    private get barStyleObject(): { [name: string ]: string } {
+    private get barStyleObject(): { [name: string]: string } {
         return this.value >= 100 ? {
             width: this.stringValue,
             borderRadius: this.radiusSize
@@ -158,7 +165,7 @@ export class MProgress extends ModulVue {
     //     return false;
     // }
 
-    private get progressClasses(): { [name: string ]: boolean } {
+    private get progressClasses(): { [name: string]: boolean } {
         let animationClass: string = 'm-progress-spinner-indeterminate';
 
         // if (this.isIE) {
@@ -175,7 +182,7 @@ export class MProgress extends ModulVue {
         return `0 0 ${this.diameter} ${this.diameter}`;
     }
 
-    private get svgStyles(): { [name: string ]: string } {
+    private get svgStyles(): { [name: string]: string } {
         const circleSize: string = `${this.diameter}px`;
 
         return {
@@ -184,7 +191,7 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get circleStyles(): { [name: string ]: number | string } {
+    private get circleStyles(): { [name: string]: number | string } {
         return {
             'stroke-dashoffset': this.circleStrokeDashOffset,
             'stroke-dasharray': this.circleStrokeDashArray,
@@ -193,7 +200,7 @@ export class MProgress extends ModulVue {
         };
     }
 
-    private get backgroundCircleStyles(): { [name: string ]: string } {
+    private get backgroundCircleStyles(): { [name: string]: string } {
         return {
             'stroke-dasharray': this.circleStrokeDashArray,
             'stroke-width': this.circleStrokeWidth,
@@ -226,6 +233,9 @@ export class MProgress extends ModulVue {
         return '0px';
     }
 
+    private get isMonochrome(): boolean {
+        return this.skin === MProgressSkin.Monochrome;
+    }
 }
 
 const ProgressPlugin: PluginObject<any> = {
