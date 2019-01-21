@@ -1,10 +1,9 @@
 import { PluginObject } from 'vue';
-
 import LicensePlugin from '../../utils/license/license';
 import { ModulVue } from '../../utils/vue/vue';
 import InputStylePlugin from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+
 
 export interface RichTextLicensePluginOptions {
     key: string;

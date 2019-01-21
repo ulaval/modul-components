@@ -3,9 +3,8 @@ import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
-import WithRender from './table.html?style=./table.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import ProgressPlugin from '../progress/progress';
+import WithRender from './table.html?style=./table.scss';
 
 
 export enum MTableSkin {

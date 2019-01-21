@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin, { MButtonIconPosition, MButtonSkin } from '../button/button';

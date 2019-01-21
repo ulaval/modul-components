@@ -7,7 +7,6 @@ import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { normalizeString } from '../../utils/str/str';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
@@ -20,8 +19,8 @@ import PopupPlugin, { MPopup } from '../popup/popup';
 import RadioStylePlugin from '../radio-style/radio-style';
 import { MSidebar } from '../sidebar/sidebar';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from './dropdown-item/dropdown-item';
 import { InputManagement } from './../../mixins/input-management/input-management';
+import { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from './dropdown-item/dropdown-item';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)

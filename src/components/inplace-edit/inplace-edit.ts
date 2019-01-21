@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import ButtonPlugin from '../button/button';

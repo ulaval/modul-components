@@ -5,16 +5,14 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
 import { TOOLTIP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import IconButtonPlugin from '../icon-button/icon-button';
+import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
-import WithRender from './tooltip.html?style=./tooltip.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import PopupPlugin from '../popup/popup';
-import IconPlugin from '../icon/icon';
-import IconButtonPlugin from '../icon-button/icon-button';
+import WithRender from './tooltip.html?style=./tooltip.scss';
 
 export enum MTooltipMode {
     Icon = 'icon',

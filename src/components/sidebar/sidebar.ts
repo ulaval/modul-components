@@ -4,10 +4,9 @@ import { Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import { SIDEBAR_NAME } from '../component-names';
-import WithRender from './sidebar.html?style=./sidebar.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
+import WithRender from './sidebar.html?style=./sidebar.scss';
 
 export enum MSidebarOrigin {
     Top = 'top',

@@ -7,7 +7,6 @@ import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { VALIDATION_MESSAGE_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './validation-message.html?style=./validation-message.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 @WithRender
 @Component({

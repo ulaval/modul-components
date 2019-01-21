@@ -14,7 +14,6 @@ import { TREE_NODE_NAME } from './component-names';
 import { MTreeIcon } from './tree-icon/tree-icon';
 import { MTreeNode } from './tree-node/tree-node';
 import WithRender from './tree.html?style=./tree.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 export interface TreeNode {
     id: string;
     label?: string;

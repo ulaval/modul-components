@@ -1,14 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { SWITCH_NAME } from '../component-names';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './switch.html?style=./switch.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+
 
 export enum MSwitchPosition {
     Left = 'left',

@@ -1,9 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import I18nFilterPlugin from '../../filters/i18n/i18n';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import ToastServicePlugin from '../../utils/toast/toast-service';
 import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
@@ -11,9 +13,6 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import LinkPlugin, { MLinkMode } from '../link/link';
 import WithRender from './toast.html?style=./toast.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
-import I18nFilterPlugin from '../../filters/i18n/i18n';
-import ToastServicePlugin from '../../utils/toast/toast-service';
 
 export enum MToastTimeout {
     none = 'none',

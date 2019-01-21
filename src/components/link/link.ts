@@ -2,7 +2,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';

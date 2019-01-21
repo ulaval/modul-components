@@ -14,7 +14,6 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 
 export enum MTextfieldType {

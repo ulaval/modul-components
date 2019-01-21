@@ -2,7 +2,6 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import I18nFilterPlugin from '../../filters/i18n/i18n';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { MESSAGE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';

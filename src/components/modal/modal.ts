@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import { MODAL_NAME } from '../component-names';

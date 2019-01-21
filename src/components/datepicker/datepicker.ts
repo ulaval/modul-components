@@ -1,14 +1,13 @@
 import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import PopupDirectivePlugin from '../../directives/popup/popup';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
+import PopupDirectivePlugin from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';

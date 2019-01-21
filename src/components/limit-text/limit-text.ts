@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_TEXT_NAME } from '../component-names';
 import DynamicTemplatePlugin from '../dynamic-template/dynamic-template';

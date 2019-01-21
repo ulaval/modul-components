@@ -2,7 +2,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';

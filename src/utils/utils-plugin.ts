@@ -4,9 +4,9 @@ import HttpPlugin, { HttpPluginOptions } from './http/http';
 import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from './logger/logger';
 import MediaQueriesPlugin from './media-queries/media-queries';
-import SpritesPlugin from './svg/sprites';
 import ModulPlugin from './modul/modul';
 import ScrollToPlugin from './scroll-to/scroll-to';
+import SpritesPlugin from './svg/sprites';
 
 
 export interface UtilsPluginOptions {

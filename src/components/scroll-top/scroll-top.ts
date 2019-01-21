@@ -2,15 +2,12 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { ScrollToDuration } from '../../utils';
-import ModulPlugin from '../../utils/modul/modul';
 import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
 import { SCROLL_TOP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
 import WithRender from './scroll-top.html?style=./scroll-top.scss';
-import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
 
 export enum MScrollTopPosition {
     Fixed = 'fixed',
