@@ -5,14 +5,14 @@ import DynamicTemplatePlugin from '../../src/components/dynamic-template/dynamic
 import FlexTemplatePlugin from '../../src/components/flex-template/flex-template';
 import LinkPlugin from '../../src/components/link/link';
 import TemplatePlugin from '../../src/components/template/template';
+import FrenchPlugin from '../../src/lang/fr';
 import '../../src/styles/main.scss';
-import UtilsPlugin, { FRENCH, UtilsPluginOptions, ENGLISH } from '../../src/utils';
+import UtilsPlugin, { FRENCH, UtilsPluginOptions } from '../../src/utils';
 import '../../src/utils/polyfills';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 import { AppFrame } from './app-frame/app-frame';
 import MetaFactory from './meta-init';
 import routerFactory from './router';
-import FrenchPlugin from '../../src/lang/fr';
 import { getSandboxPlugin } from './sandbox-loader';
 
 
@@ -38,11 +38,6 @@ Vue.use(DynamicTemplatePlugin);
 Vue.use(TemplatePlugin);
 
 // initialize all sandboxes
-// Vue.use(getSandboxPlugin());
-// Vue.use(FrenchPlugin);
-// Vue.use(DefaultSpritesPlugin);
-// Vue.use(ComponentsPlugin, { richTextOptions: { key: 'test' } }); // Fake key to avoid error in test pages.
-
 Vue.use(getSandboxPlugin());
 
 Vue.component('app-frame', AppFrame);

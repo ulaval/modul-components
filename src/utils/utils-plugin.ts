@@ -35,7 +35,7 @@ const UtilsPlugin: PluginObject<any> = {
         Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
         Vue.use(MediaQueriesPlugin);
         Vue.use(SpritesPlugin);
-        Vue.use(ModulPlugin); // portal service
+        Vue.use(ModulPlugin);
         Vue.use(ScrollToPlugin);
     }
 };
