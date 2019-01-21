@@ -35,7 +35,7 @@ describe('MDropdown', () => {
             localVue: localVue
         });
 
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     it('should render correctly when placeholder is set', () => {
@@ -47,7 +47,7 @@ describe('MDropdown', () => {
             }
         });
 
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     // it('should render correctly when footer slot is set', () => {
