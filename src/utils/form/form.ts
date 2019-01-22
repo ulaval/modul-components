@@ -35,9 +35,7 @@ export class Form {
      * return true if the form contains no field with errors
      */
     get isValid(): boolean {
-        return this.nbFieldsThatHasError === 0
-            &&
-            this.nbOfFormErrors === 0;
+        return this.nbFieldsThatHasError === 0 && this.nbOfFormErrors === 0;
     }
 
     /**
@@ -73,9 +71,5 @@ export class Form {
         this.fields.forEach((field: FormField<any>) => {
             field.validate();
         });
-    }
-
-    private validate(): void {
-
     }
 }
