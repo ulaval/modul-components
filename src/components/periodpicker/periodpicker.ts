@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import DatepickerPlugin, { DatePickerSupportedTypes } from '../datepicker/datepicker';
@@ -12,7 +13,9 @@ export class MDateRange {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [MediaQueries]
+})
 export class MPeriodPicker extends ModulVue {
     @Prop()
     value: MDateRange;
@@ -57,7 +60,10 @@ export class MPeriodPicker extends ModulVue {
 
     onDateFromChange(newValue: any): void {
         if (newValue) {
-            this.toIsFocused = true;
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                this.toIsFocused = true;
+            }
+
             this.emitNewValue(Object.assign({}, this.internalValue, {
                 from: newValue,
                 to: newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to
