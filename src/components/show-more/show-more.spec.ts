@@ -1,6 +1,6 @@
 import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
-import { FormatMode } from '../../utils';
+import { FormatMode } from '../../utils/i18n/i18n';
 import { MButtonSkin } from '../button/button';
 import { SHOW_MORE_NAME } from '../component-names';
 import { MShowMore } from './show-more';

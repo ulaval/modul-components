@@ -2,6 +2,12 @@ import Vue, { PluginObject } from 'vue';
 import { sprintf, vsprintf } from '../str/str';
 
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $i18n: Messages;
+    }
+}
+
 /**
  * This package provides language and locales utilities.
  */

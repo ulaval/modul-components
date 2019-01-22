@@ -3,6 +3,16 @@ import Vue, { PluginObject } from 'vue';
 import { BackdropMode } from '../../mixins/portal/portal';
 import uuid from '../uuid/uuid';
 
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $modul: Modul;
+    }
+}
+
 const BACKDROP_ID: string = 'mBackdropID';
 const BACKDROP_CLASS_NAME: string = 'm-backdrop';
 const BACKDROP_STYLE_TRANSITION: string = 'opacity ease';

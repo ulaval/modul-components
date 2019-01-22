@@ -1,6 +1,15 @@
 /* tslint:disable:no-console */
 import { PluginObject } from 'vue';
 
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $log: Logger;
+    }
+}
 export interface ConsoleOptions {
     displayLogs?: boolean;
     displayWarnings?: boolean;

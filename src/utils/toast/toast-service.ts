@@ -2,6 +2,7 @@ import { PluginObject } from 'vue/types/plugin';
 import { VNode } from 'vue/types/vnode';
 import { MToast, MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
 
+
 declare module 'vue/types/vue' {
     interface Vue {
         $toast: ToastService;
