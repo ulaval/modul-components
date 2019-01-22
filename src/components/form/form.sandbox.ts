@@ -4,7 +4,7 @@ import { InputMaxWidth } from '../..';
 import { Form, FormValidationCallback } from '../../utils/form/form';
 import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
 import { FormField } from '../../utils/form/form-field/form-field';
-import { FormState } from '../../utils/form/form-state/form-state';
+import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { FORM } from '../component-names';
 import WithRender from './form.sandbox.html';
 
@@ -90,11 +90,11 @@ class ValidationSandbox {
     }
 
     static validatePasswordMatch(password: FormField<string>, confirmPassword: FormField<string>): FormValidationCallback {
-        return (): FormState => {
+        return (): FormValidation => {
             if (password.value !== confirmPassword.value) {
-                return new FormState(true, 'Passwords must match');
+                return new FormValidation(true, 'Passwords must match');
             }
-            return new FormState();
+            return new FormValidation();
         };
     }
 }

@@ -3,7 +3,7 @@
 import { Form } from './form';
 import { FormFieldState } from './form-field-state/form-field-state';
 import { FormField } from './form-field/form-field';
-import { FormState } from './form-state/form-state';
+import { FormValidation } from './form-validation/form-validation';
 
 let validationState: FormFieldState;
 let formField: FormField<string>;
@@ -48,7 +48,7 @@ describe(`Form`, () => {
 
     describe(`When the form contains no error`, () => {
         beforeEach(() => {
-            form = new Form([], [() => new FormState()]);
+            form = new Form([], [() => new FormValidation()]);
         });
 
         it(`Then the form is valid`, () => {
@@ -58,7 +58,8 @@ describe(`Form`, () => {
 
     describe(`When the form has error`, () => {
         beforeEach(() => {
-            form = new Form([], [() => new FormState(true, ERROR_MESSAGE_SUMMARY)]);
+            form = new Form([], [() => new FormValidation(true, ERROR_MESSAGE_SUMMARY)]);
+            form.validateAll();
         });
 
         it(`Then the form is invalid`, () => {

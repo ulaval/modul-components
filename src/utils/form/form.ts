@@ -1,14 +1,18 @@
 import uuid from '../uuid/uuid';
 import { FormField } from './form-field/form-field';
 import { FormState } from './form-state/form-state';
+import { FormValidation } from './form-validation/form-validation';
 
-export type FormValidationCallback = () => FormState;
+export type FormValidationCallback = () => FormValidation;
 
 /**
  * Form Class
  */
 export class Form {
     public id: string;
+
+    private internalState: FormState;
+
     /**
      *
      * @param fields fields that are in the form
@@ -16,6 +20,7 @@ export class Form {
      */
     constructor(public fields: FormField<any>[], private validationCallbacks: FormValidationCallback[] = []) {
         this.id = uuid.generate();
+        this.internalState = new FormState();
     }
 
     /**
@@ -26,9 +31,7 @@ export class Form {
     }
 
     get nbOfFormErrors(): number {
-        return this.validationCallbacks
-            .filter((validationCallback: FormValidationCallback) => validationCallback().hasError)
-            .length;
+        return this.internalState.errorMessages.length;
     }
 
     /**
@@ -45,6 +48,8 @@ export class Form {
         this.fields.forEach((field: FormField<any>) => {
             field.reset();
         });
+
+        this.internalState = new FormState();
     }
 
     /**
@@ -54,15 +59,9 @@ export class Form {
         return this.fields
             .filter((field: FormField<any>) => field.errorMessageSummary !== '')
             .map((field: FormField<any>) => field.errorMessageSummary)
-            .concat(this.getFormErrors());
+            .concat(this.internalState.errorMessages);
     }
 
-    getFormErrors(): string[] {
-        return this.validationCallbacks
-            .map((validationCallback: FormValidationCallback): FormState => validationCallback())
-            .filter((formState: FormState) => formState.hasError)
-            .map((formState: FormState) => formState.errorMessage);
-    }
 
     /**
      * validate all fields in the form
@@ -71,5 +70,19 @@ export class Form {
         this.fields.forEach((field: FormField<any>) => {
             field.validate();
         });
+
+        this.internalState = new FormState();
+        this.validationCallbacks.forEach((validationCallback: FormValidationCallback) => {
+            this.changeState(validationCallback());
+        });
+    }
+
+    private changeState(formValidation: FormValidation): void {
+        if (!formValidation.hasError) {
+            return;
+        }
+
+        this.internalState.hasErrors = true;
+        this.internalState.errorMessages.push(formValidation.errorMessage);
     }
 }
