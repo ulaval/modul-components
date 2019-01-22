@@ -9,7 +9,6 @@ export type FormValidationCallback = () => FormState;
  */
 export class Form {
     public id: string;
-
     /**
      *
      * @param fields fields that are in the form
@@ -26,14 +25,19 @@ export class Form {
         return this.fields.filter((field: FormField<any>) => field.hasError).length;
     }
 
+    get nbOfFormErrors(): number {
+        return this.validationCallbacks
+            .filter((validationCallback: FormValidationCallback) => validationCallback().hasError)
+            .length;
+    }
+
     /**
      * return true if the form contains no field with errors
      */
     get isValid(): boolean {
         return this.nbFieldsThatHasError === 0
             &&
-            !this.validationCallbacks
-                .find((el: FormValidationCallback): boolean => el().hasError === true);
+            this.nbOfFormErrors === 0;
     }
 
     /**
@@ -52,12 +56,14 @@ export class Form {
         return this.fields
             .filter((field: FormField<any>) => field.errorMessageSummary !== '')
             .map((field: FormField<any>) => field.errorMessageSummary)
-            .concat(
-                this.validationCallbacks
-                    .map((el: FormValidationCallback) => el())
-                    .filter((el: FormState) => el.hasError)
-                    .map((el: FormState) => el.errorMessage)
-            );
+            .concat(this.getFormErrors());
+    }
+
+    getFormErrors(): string[] {
+        return this.validationCallbacks
+            .map((validationCallback: FormValidationCallback): FormState => validationCallback())
+            .filter((formState: FormState) => formState.hasError)
+            .map((formState: FormState) => formState.errorMessage);
     }
 
     /**
@@ -67,5 +73,9 @@ export class Form {
         this.fields.forEach((field: FormField<any>) => {
             field.validate();
         });
+    }
+
+    private validate(): void {
+
     }
 }

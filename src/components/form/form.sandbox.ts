@@ -21,6 +21,7 @@ export class MFormSandbox extends Vue {
     locationField: FormField<string> = new FormField((): string => this.location, ValidationSandbox.validateLocation);
     passwordField: FormField<string> = new FormField((): string => '');
     confirmPasswordField: FormField<string> = new FormField((): string => '');
+
     form: Form = new Form([this.titleField, this.descriptionField, this.locationField, this.passwordField, this.confirmPasswordField], [
         ValidationSandbox.validatePasswordMatch(this.passwordField, this.confirmPasswordField)
     ]);

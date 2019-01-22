@@ -6,7 +6,6 @@ import { FormField } from './form-field/form-field';
 import { FormState } from './form-state/form-state';
 
 let validationState: FormFieldState;
-let formState: FormState;
 let formField: FormField<string>;
 let form: Form;
 
@@ -49,7 +48,6 @@ describe(`Form`, () => {
 
     describe(`When the form contains no error`, () => {
         beforeEach(() => {
-            formState = new FormState();
             form = new Form([], [() => new FormState()]);
         });
 
@@ -60,7 +58,6 @@ describe(`Form`, () => {
 
     describe(`When the form has error`, () => {
         beforeEach(() => {
-            formState = new FormState();
             form = new Form([], [() => new FormState(true, ERROR_MESSAGE_SUMMARY)]);
         });
 

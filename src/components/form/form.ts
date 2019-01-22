@@ -35,9 +35,9 @@ export class MForm extends ModulVue {
             this.errors = [];
             this.form.validateAll();
 
-            if (this.form.nbFieldsThatHasError === 0) {
+            if (this.form.nbFieldsThatHasError === 0 && this.form.nbOfFormErrors === 0) {
                 this.onSubmit();
-            } else if (this.form.nbFieldsThatHasError === 1) {
+            } else if (this.form.nbFieldsThatHasError === 1 && this.form.nbOfFormErrors === 0) {
                 setTimeout(() => {
                     let fieldWithError: HTMLElement | null = this.$el.querySelector('.m--has-error input, .m--has-error textarea');
                     if (fieldWithError) {
