@@ -3,8 +3,10 @@
 import { Form } from './form';
 import { FormFieldState } from './form-field-state/form-field-state';
 import { FormField } from './form-field/form-field';
+import { FormState } from './form-state/form-state';
 
 let validationState: FormFieldState;
+let formState: FormState;
 let formField: FormField<string>;
 let form: Form;
 
@@ -45,6 +47,32 @@ describe(`Form`, () => {
         });
     });
 
+    describe(`When the form contains no error`, () => {
+        beforeEach(() => {
+            formState = new FormState();
+            form = new Form([], [() => new FormState()]);
+        });
+
+        it(`Then the form is valid`, () => {
+            expect(form.isValid).toBeTruthy();
+        });
+    });
+
+    describe(`When the form contains has error`, () => {
+        beforeEach(() => {
+            formState = new FormState();
+            form = new Form([], [() => new FormState(true, ERROR_MESSAGE_SUMMARY)]);
+        });
+
+        it(`Then the form is invalid`, () => {
+            expect(form.isValid).toBeFalsy();
+        });
+
+        it(`getErrors returns 1 error message`, () => {
+            expect(form.getErrorsForSummary()).toEqual([ERROR_MESSAGE_SUMMARY]);
+        });
+    });
+
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
             validationState = new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
@@ -78,6 +106,7 @@ describe(`Form`, () => {
             });
         });
     });
+
 
     describe(`When we reset the form`, () => {
         it(`Then each fields are reset`, () => {

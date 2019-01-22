@@ -24,6 +24,22 @@
                     ref="description">
         </m-textarea>
 
+        <m-textarea v-model.trim="passwordField.value"
+                    label="Password"
+                    :max-width="inputMaxWidthLarge"
+                    :error="passwordField.hasError"
+                    :error-message="passwordField.errorMessage"
+                    ref="password">
+        </m-textarea>
+
+        <m-textarea v-model.trim="confirmPasswordField.value"
+                    label="Confirm password"
+                    :max-width="inputMaxWidthLarge"
+                    :error="confirmPasswordField.hasError"
+                    :error-message="confirmPasswordField.errorMessage"
+                    ref="confirmPassword">
+        </m-textarea>
+
         <m-textarea v-model.trim="locationField.value"
                     label="Location"
                     :max-width="inputMaxWidthLarge"

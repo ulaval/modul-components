@@ -1,9 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { InputMaxWidth } from '../..';
-import { Form } from '../../utils/form/form';
+import { Form, FormValidationCallback } from '../../utils/form/form';
 import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
 import { FormField } from '../../utils/form/form-field/form-field';
+import { FormState } from '../../utils/form/form-state/form-state';
 import { FORM } from '../component-names';
 import WithRender from './form.sandbox.html';
 
@@ -18,7 +19,11 @@ export class MFormSandbox extends Vue {
     titleField: FormField<string> = new FormField((): string => this.title, ValidationSandbox.validateTitle);
     descriptionField: FormField<string> = new FormField((): string => this.description, ValidationSandbox.validateDescription);
     locationField: FormField<string> = new FormField((): string => this.location, ValidationSandbox.validateLocation);
-    form: Form = new Form([this.titleField, this.descriptionField, this.locationField]);
+    passwordField: FormField<string> = new FormField((): string => '');
+    confirmPasswordField: FormField<string> = new FormField((): string => '');
+    form: Form = new Form([this.titleField, this.descriptionField, this.locationField, this.passwordField, this.confirmPasswordField], [
+        ValidationSandbox.validatePasswordMatch(this.passwordField, this.confirmPasswordField)
+    ]);
 
     maxTitleLength: number = ValidationSandbox.maxTitleLength;
     thresholdTitle: number = ValidationSandbox.thresholdTitle;
@@ -80,6 +85,15 @@ class ValidationSandbox {
             return new FormFieldState(true, error, error);
         }
         return new FormFieldState();
+    }
+
+    static validatePasswordMatch(password: FormField<string>, confirmPassword: FormField<string>): FormValidationCallback {
+        return (): FormState => {
+            if (password.value !== confirmPassword.value) {
+                return new FormState(true, 'Passwords must match');
+            }
+            return new FormState();
+        };
     }
 }
 
