@@ -5,7 +5,6 @@ import I18nFilterPlugin from '../../filters/i18n/i18n';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import ToastServicePlugin from '../../utils/toast/toast-service';
 import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
@@ -220,7 +219,6 @@ const ToastPlugin: PluginObject<any> = {
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
         v.use(MediaQueriesPlugin);
-        v.use(ToastServicePlugin);
         v.component(TOAST, MToast);
     }
 };

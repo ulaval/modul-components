@@ -1,5 +1,5 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-import { ScrollTo, ScrollToDuration } from '../../utils';
+import { ScrollTo, ScrollToDuration } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_TO_NAME } from '../directive-names';
 
