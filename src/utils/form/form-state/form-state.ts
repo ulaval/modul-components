@@ -4,8 +4,8 @@
 export class FormState {
     /**
      *
-     * @param hasError the field has (at least one) error
-     * @param errorMessage message to show next to the field
+     * @param hasError The form has (at least one) error
+     * @param errorMessage Message to show in summary
      */
     constructor(public hasError: boolean = false, public errorMessage: string = '') { }
 }

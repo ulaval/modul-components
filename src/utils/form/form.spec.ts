@@ -58,7 +58,7 @@ describe(`Form`, () => {
         });
     });
 
-    describe(`When the form contains has error`, () => {
+    describe(`When the form has error`, () => {
         beforeEach(() => {
             formState = new FormState();
             form = new Form([], [() => new FormState(true, ERROR_MESSAGE_SUMMARY)]);
