@@ -41,7 +41,8 @@ export class MFormSandbox extends Vue {
         const data: any = {
             title: this.titleField.value,
             description: this.descriptionField.value,
-            location: this.locationField.value
+            location: this.locationField.value,
+            password: this.passwordField.value
         };
         this.$emit('submit', data);
         this.formSent = data;

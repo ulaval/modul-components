@@ -21,7 +21,7 @@ export class MForm extends ModulVue {
     errors: string[] = [];
 
     get hasErrors(): boolean {
-        return this.errors.length > 1;
+        return this.errors.length > 0;
     }
 
     @Emit('submit')
