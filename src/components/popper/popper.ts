@@ -1,5 +1,4 @@
 import Popper from 'popper.js';
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -282,8 +281,6 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 
 const PopperPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(PortalPlugin);
-        v.use(ModulPlugin);
         v.component(POPPER_NAME, MPopper);
     }
 };

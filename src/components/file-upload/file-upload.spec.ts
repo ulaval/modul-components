@@ -1,6 +1,5 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
 import { addMessages } from '../../../tests/helpers/lang';
@@ -12,10 +11,12 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import { MESSAGE_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
-import MessagePlugin from '../message/message';
+import { MMessage } from '../message/message';
 import { FileService } from './../../utils/file/file';
-import FileUploadPlugin, { MFileUpload } from './file-upload';
+import ModulPlugin from './../../utils/modul/modul';
+import { MFileUpload } from './file-upload';
 
 const BTN_REPLACE_FILE: string = 'Replace';
 const TITLE_REPLACE_FILE: string = 'Replace file';
@@ -33,6 +34,7 @@ let mockIsDesktopValue: boolean = true;
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();
+        Vue.use(ModulPlugin);
         Vue.use(FileSizeFilterPlugin);
         Vue.use(FilePlugin);
         Vue.use(I18nPlugin);
@@ -188,7 +190,8 @@ describe('MFileUpload', () => {
             };
 
             beforeEach(() => {
-                Vue.use(MessagePlugin);
+                Vue.use(IconButtonPlugin);
+                Vue.component(MESSAGE_NAME, MMessage);
                 addMessages(Vue, ['components/message/message.lang.en.json']);
 
                 fupd = mount(MFileUpload, {

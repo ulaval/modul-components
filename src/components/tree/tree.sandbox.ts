@@ -1,7 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { TREE_NAME } from '../component-names';
-import { TreeNode } from './tree';
+import TreePlugin, { TreeNode } from './tree';
 import WithRender from './tree.sandbox.html';
 
 export class Tree {
@@ -344,6 +344,7 @@ export class MRootTreeSandbox extends Vue {
 
 const RootTreeSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(TreePlugin);
         v.component(`${TREE_NAME}-sandbox`, MRootTreeSandbox);
     }
 };

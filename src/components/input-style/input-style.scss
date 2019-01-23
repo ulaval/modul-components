@@ -246,7 +246,7 @@
     textarea {
         outline: none;
         text-overflow: ellipsis;
-        font-family: $m-font-family;
+        font-family: inherit;
         text-align: left;
         background: none;
         border: none;
@@ -295,7 +295,6 @@
         .m-input-style__label,
         .m-input-style__body__transparent-text {
             font-size: inherit;
-            font-family: $m-font-family;
             font-weight: $m-font-weight--bold;
         }
     }

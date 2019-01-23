@@ -119,7 +119,6 @@ export class MPanel extends Vue {
 
 const PanelPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(PANEL_NAME, 'plugin.install');
         v.component(PANEL_NAME, MPanel);
     }
 };

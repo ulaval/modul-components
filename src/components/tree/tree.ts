@@ -156,7 +156,6 @@ export class MTree extends ModulVue {
 
 const TreePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(TREE_NAME, 'plugin.install');
         v.use(I18nPlugin);
         v.use(CheckboxPlugin);
         v.use(IconFilePlugin);

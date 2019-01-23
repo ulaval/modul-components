@@ -116,8 +116,8 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     public async tryClose(): Promise<void> {
-        if (this.$toast) {
-            await this.$toast.clear();
+        if ((this as any).$toast) {
+            await (this as any).$toast.clear(); // @todo Portal should not know toast
         }
         if (this.$modul.peekElement() === this.stackId) {
             if (this.$listeners && this.$listeners.beforeClose) {

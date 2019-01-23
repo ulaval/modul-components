@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { DATEPICKER_NAME } from '../component-names';
+import DatepickerPlugin from './datepicker';
 import WithRender from './datepicker.sandbox.html';
 
 
@@ -26,6 +27,7 @@ export class MDatepickerSandbox extends ModulVue {
 
 const DatepickerSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(DatepickerPlugin);
         v.component(`${DATEPICKER_NAME}-sandbox`, MDatepickerSandbox);
     }
 };

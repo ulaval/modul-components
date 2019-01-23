@@ -43,7 +43,6 @@ export class MCheckbox extends ModulVue {
 
     @Emit('click')
     onClick(event: MouseEvent): void {
-        this.$emit('click', event);
         this.$refs['checkbox']['blur']();
     }
 

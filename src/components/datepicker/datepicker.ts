@@ -2,6 +2,7 @@ import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
+import PopupDirectivePlugin from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -12,6 +13,7 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DATEPICKER_NAME } from '../component-names';
+import IconButtonPlugin from '../icon-button/icon-button';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -371,9 +373,11 @@ const DatepickerPlugin: PluginObject<any> = {
     install(v): void {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
+        v.use(IconButtonPlugin);
         v.use(PopupPlugin);
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
+        v.use(PopupDirectivePlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };

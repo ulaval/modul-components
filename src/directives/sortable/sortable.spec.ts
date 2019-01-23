@@ -4,10 +4,10 @@ import Vue from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { polyFillActive } from '../../utils/polyfills';
 import { MDOMPlugin } from '../domPlugin';
-import { MDraggableEventNames, MDraggableOptions } from '../draggable/draggable';
-import { MDroppable, MDroppableClassNames } from '../droppable/droppable';
-import DroppableGroupPlugin from '../droppable/droppable-group';
-import { MDraggable } from './../draggable/draggable';
+import { MDraggableEventNames, MDraggableOptions } from '../drag-and-drop/draggable/draggable';
+import { MDroppable, MDroppableClassNames } from '../drag-and-drop/droppable/droppable';
+import DroppableGroupPlugin from '../drag-and-drop/droppable/droppable-group';
+import { MDraggable } from './../drag-and-drop/draggable/draggable';
 import { MSortableDefaultInsertionMarkerBehavior } from './insertion-behavior';
 import SortablePlugin, { MSortable, MSortableAction, MSortableClassNames, MSortableEventNames, MSortableOptions, MSortInsertPositions } from './sortable';
 
@@ -27,49 +27,49 @@ describe('sortable', () => {
 
     const emptyPlaceholderTemplate: string = `<li v-for="item in items" v-if="items.length">Item #{{ $index }}</li>`;
     const getSortableDirective: (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => Wrapper<Vue> =
-    (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => {
-        const innerHTML: string = `${innerHtml || emptyPlaceholderTemplate}`;
-        let template: string;
-        if (options) {
-            template = bindingValue === undefined ? `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''} :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`
+        (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => {
+            const innerHTML: string = `${innerHtml || emptyPlaceholderTemplate}`;
+            let template: string;
+            if (options) {
+                template = bindingValue === undefined ? `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''} :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`
                     : `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''}="${bindingValue}" :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`;
-        } else {
-            template = bindingValue === undefined ? `<ul v-m-sortable>${innerHTML}</ul>`
-                : `<ul v-m-sortable="${bindingValue}">${innerHTML}</ul>`;
-        }
+            } else {
+                template = bindingValue === undefined ? `<ul v-m-sortable>${innerHTML}</ul>`
+                    : `<ul v-m-sortable="${bindingValue}">${innerHTML}</ul>`;
+            }
 
-        let directive: Wrapper<Vue>;
-        directive = mount({
-            template,
-            data: () => options || {}
-        }, { localVue: Vue });
+            let directive: Wrapper<Vue>;
+            directive = mount({
+                template,
+                data: () => options || {}
+            }, { localVue: Vue });
 
-        Object.keys(MSortableEventNames).forEach(key => directive.vm.$listeners[MSortableEventNames[key]] = () => {});
-        return directive;
-    };
+            Object.keys(MSortableEventNames).forEach(key => directive.vm.$listeners[MSortableEventNames[key]] = () => { });
+            return directive;
+        };
 
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
-    (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
-        let directive: Wrapper<Vue>;
-        if (options) {
-            directive = mount({
-                template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping"></div>`
-                    : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping"></div>`,
-                data: () => options
-            }, { localVue: Vue });
-        } else {
-            directive = mount({
-                template: bindingValue === undefined ? `<div v-m-draggable></div>`
-                    : `<div v-m-draggable="${bindingValue}"></div>`
-            }, { localVue: Vue });
-        }
+        (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => {
+            let directive: Wrapper<Vue>;
+            if (options) {
+                directive = mount({
+                    template: bindingValue === undefined ? `<div v-m-draggable :action="action" :drag-data="dragData" :grouping="grouping"></div>`
+                        : `<div v-m-draggable="${bindingValue}" :action="action" :drag-data="dragData" :grouping="grouping"></div>`,
+                    data: () => options
+                }, { localVue: Vue });
+            } else {
+                directive = mount({
+                    template: bindingValue === undefined ? `<div v-m-draggable></div>`
+                        : `<div v-m-draggable="${bindingValue}"></div>`
+                }, { localVue: Vue });
+            }
 
-        Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => {});
-        return directive;
-    };
+            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
+            return directive;
+        };
 
     const getEventDummy: () => any = () => {
-        return { preventDefault: () => {}, stopPropagation: () => {}, dataTransfer: { setData: () => {}, setDragImage: () => {}, getData: () => {} } };
+        return { preventDefault: () => { }, stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
     };
 
     [true, undefined].forEach(param => {

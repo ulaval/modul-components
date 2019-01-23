@@ -234,7 +234,7 @@
             textarea {
                 transition: border-color $m-transition-duration ease;
                 position: relative;
-                font-family: $m-font-family;
+                font-family: inherit;
                 font-size: $m-font-size;
                 font-weight: $m-font-weight--bold;
                 color: $m-color--text;

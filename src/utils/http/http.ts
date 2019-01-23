@@ -7,6 +7,15 @@ import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $http: HttpService;
+    }
+}
 export interface HttpPluginOptions {
     protectedUrls?: string[];
     authorizationFn?: () => string;
