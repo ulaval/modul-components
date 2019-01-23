@@ -1,10 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+
 import { Emit, Model, Prop } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { BUTTON_GROUP_NAME } from '../component-names';
 import RadioPlugin, { BaseButtonGroup, ButtonGroup, MRadioPosition, MRadioVerticalAlignement } from '../radio/radio';
 import WithRender from './button-group.html?style=./button-group.scss';
+
 
 @WithRender
 @Component
@@ -76,7 +78,7 @@ export class MButtonGroup extends BaseButtonGroup implements ButtonGroup {
 
 const ButtonGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(BUTTON_GROUP_NAME + ' is not ready for production');
+        v.prototype.$log.error('MButtonGroup will be deprecated in modul v.1.0');
         v.use(RadioPlugin);
         v.component(BUTTON_GROUP_NAME, MButtonGroup);
     }

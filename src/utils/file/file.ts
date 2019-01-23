@@ -1,10 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
 import Vue, { PluginObject } from 'vue';
-
 import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import uuid from '../uuid/uuid';
 import { ModulVue } from '../vue/vue';
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $file: FileService;
+    }
+}
 
 export const DEFAULT_STORE_NAME: string = 'DEFAULT';
 

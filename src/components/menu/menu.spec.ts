@@ -1,11 +1,10 @@
 import { createLocalVue, mount, Slots, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import VueRouter from 'vue-router';
-
-import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import MenuPlugin, { MMenu, MMenuSkin } from './menu';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -17,7 +16,6 @@ describe('MMenu', () => {
         Vue.use(VueRouter);
         localVue = createLocalVue();
         localVue.use(MenuPlugin);
-        addMessages(localVue, ['components/menu/menu.lang.en.json']);
     });
 
     describe('Menu', () => {

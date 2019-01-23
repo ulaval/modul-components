@@ -51,7 +51,7 @@ export class MShowMore extends ModulVue {
 
 const ShowMorePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(SHOW_MORE_NAME, 'plugin.install');
+
         v.component(SHOW_MORE_NAME, MShowMore);
     }
 };

@@ -1,14 +1,14 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
-import AccordionPlugin from '../accordion/accordion';
 import { MESSAGE_PAGE_NAME } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
+import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import { MMessageState } from '../message/message';
+import ModalPlugin from '../modal/modal';
 import WithRender from './message-page.html?style=./message-page.scss';
+
 
 /**
  * Utility class to manage the properties related to the link displayed in the error pages.
@@ -88,7 +88,7 @@ export class MMessagePage extends ModulVue {
         return this.links.length > 0;
     }
 
-    public get styleObject(): { [name: string ]: string } {
+    public get styleObject(): { [name: string]: string } {
         return {
             width: this.propImageSize
         };
@@ -102,7 +102,7 @@ export class MMessagePage extends ModulVue {
     }
 
     public isTargetExternal(isExternal: boolean): string {
-        return isExternal ? '_blank' : '' ;
+        return isExternal ? '_blank' : '';
     }
 
     protected created(): void {
@@ -149,13 +149,13 @@ export class MMessagePage extends ModulVue {
         } else {
             switch (this.state) {
                 case MMessageState.Confirmation:
-                    return'm-svg__confirmation';
+                    return 'm-svg__confirmation';
                 case MMessageState.Information:
-                    return'm-svg__information';
+                    return 'm-svg__information';
                 case MMessageState.Warning:
                     return 'm-svg__warning';
                 default:
-                    return'm-svg__error';
+                    return 'm-svg__error';
             }
         }
     }
@@ -164,9 +164,9 @@ export class MMessagePage extends ModulVue {
 const MessagePagePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(MESSAGE_PAGE_NAME, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(AccordionPlugin);
         v.use(LinkPlugin);
+        v.use(IconPlugin);
+        v.use(ModalPlugin);
         v.component(MESSAGE_PAGE_NAME, MMessagePage);
     }
 };

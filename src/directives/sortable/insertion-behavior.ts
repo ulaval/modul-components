@@ -1,5 +1,5 @@
 import { mousePositionElement, RelativeMousePos } from '../../utils/mouse/mouse';
-import { MDropEvent, MDroppable } from '../droppable/droppable';
+import { MDropEvent, MDroppable } from '../drag-and-drop/droppable/droppable';
 import { MSortInsertPositions } from './sortable';
 
 export interface MSortableInsertionMarkerBehavior {

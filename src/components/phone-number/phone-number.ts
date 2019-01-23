@@ -1,9 +1,9 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { PHONE_NUMBER_NAME } from '../component-names';
 import WithRender from './phone-number.html?style=./phone-number.scss';
+
 
 @WithRender
 @Component
@@ -62,7 +62,8 @@ export class MPhoneNumber extends ModulVue {
 
 const PhoneNumberPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(PHONE_NUMBER_NAME + ' is not ready for production');
+        v.prototype.$log.error('MPhoneNumber will be deprecated in modul v.1.0');
+
         v.component(PHONE_NUMBER_NAME, MPhoneNumber);
     }
 };

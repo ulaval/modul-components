@@ -10,7 +10,7 @@
         "reset": "rmdir /S /Q node_modules",
         "dev": "rimraf dist/**/* && webpack-dev-server --config conf/webpack.config.js --content-base src --colors --port 8082 --open --history-api-fallback",
         "buildWebpack": "webpack --config conf/webpack.config.js --colors --env.buildonly",
-        "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagen && npm run metagenv2",
+        "build": "tsc && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagenv2",
         "buildlib": "webpack --config conf/webpack.config.js --colors --env.lib",
         "dtsToDist": "copyfiles -f \"./src/**/*.d.ts\" dist",
         "scssToDist": "copyfiles -u 1 \"./src/styles/**/*.scss\" dist && copyfiles -u 1 \"./src/styles/**/*.css\" dist",
@@ -127,10 +127,10 @@
         "ts-jest": "^22.4.6",
         "ts-node": "^7.0.1",
         "ts-simple-ast": "^15.1.0",
-        "tslint": "^5.8.0",
-        "tslint-config-standard": "^7.0.0",
+        "tslint": "^5.12.0",
+        "tslint-config-standard": "^8.0.1",
         "tslint-loader": "^3.5.3",
-        "typescript": "^2.6.2",
+        "typescript": "^3.2.2",
         "url-loader": "^0.6.2",
         "vue": "^2.5.13",
         "vue-class-component": "^6.1.1",
@@ -160,8 +160,6 @@
         "src/**/*.ts",
         "dist"
     ],
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
     "license": "Apache-2.0",
     "husky": {
         "hooks": {

@@ -1,11 +1,13 @@
 import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
+import PopupDirectivePlugin from '../../directives/popup/popup';
+import ButtonPlugin from '../button/button';
 import { MESSAGE_PAGE_NAME } from '../component-names';
-import MessagePlugin, { MMessageState } from '../message/message';
-import { Link } from './message-page';
+import { MMessageState } from '../message/message';
+import MessagePagePlugin, { Link } from './message-page';
 import WithRender from './message-page.sandbox.html';
+
 
 @WithRender
 @Component
@@ -26,6 +28,9 @@ export class MMessagePageSandbox extends Vue {
 
 const MessagePageSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ButtonPlugin);
+        v.use(PopupDirectivePlugin);
+        v.use(MessagePagePlugin);
         v.component(`${MESSAGE_PAGE_NAME}-sandbox`, MMessagePageSandbox);
     }
 };

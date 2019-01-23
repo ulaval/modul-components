@@ -15,16 +15,15 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/datefields/datefields.lang.fr.json'),
                 require('../components/datepicker/datepicker.lang.fr.json'),
                 require('../components/dropdown/dropdown.lang.fr.json'),
-                require('../components/dropdown-item/dropdown-item.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/overlay/overlay.lang.fr.json'),
-                require('../components/error-access-denied/error-access-denied.lang.fr.json'),
-                require('../components/error-browser-not-supported/error-browser-not-supported.lang.fr.json'),
-                require('../components/error-config-not-supported/error-config-not-supported.lang.fr.json'),
-                require('../components/error-cookies-not-supported/error-cookies-not-supported.lang.fr.json'),
+                require('../components/error-pages/error-access-denied/error-access-denied.lang.fr.json'),
+                require('../components/error-pages/error-browser-not-supported/error-browser-not-supported.lang.fr.json'),
+                require('../components/error-pages/error-config-not-supported/error-config-not-supported.lang.fr.json'),
+                require('../components/error-pages/error-cookies-not-supported/error-cookies-not-supported.lang.fr.json'),
                 require('../components/error-message/error-message.lang.fr.json'),
-                require('../components/error-page-not-found/error-page-not-found.lang.fr.json'),
-                require('../components/error-technical-difficulty/error-technical-difficulty.lang.fr.json'),
+                require('../components/error-pages/error-page-not-found/error-page-not-found.lang.fr.json'),
+                require('../components/error-pages/error-technical-difficulty/error-technical-difficulty.lang.fr.json'),
                 require('../components/file-select/file-select.lang.fr.json'),
                 require('../components/file-upload/file-upload.lang.fr.json'),
                 require('../components/form/form.lang.fr.json'),
@@ -54,9 +53,9 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/tooltip/tooltip.lang.fr.json'),
                 require('../components/validation-message/validation-message.lang.fr.json'),
                 require('../filters/filesize/filesize.lang.fr.json'),
-                require('../filters/date/date.lang.fr.json'),
-                require('../filters/time/time.lang.fr.json'),
-                require('../filters/date-time/date-time.lang.fr.json')
+                require('../filters/date/date/date.lang.fr.json'),
+                require('../filters/date/time/time.lang.fr.json'),
+                require('../filters/date/date-time/date-time.lang.fr.json')
             ];
 
             msgs.forEach(msgs => i18n.addMessages(FRENCH, msgs));

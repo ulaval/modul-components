@@ -1,19 +1,24 @@
-import { PortalPluginInstall } from 'portal-vue';
 import Vue, { PluginObject } from 'vue';
-import * as TouchPlugin from 'vue-touch';
-import AlertPlugin from './dialog/alert';
-import ConfirmPlugin from './dialog/confirm';
 import { WindowErrorHandler } from './errors/window-error-handler';
-import FilePlugin from './file/file';
-import HttpPlugin, { HttpPluginOptions } from './http/http';
-import I18nPlugin, { I18nPluginOptions } from './i18n/i18n';
-import LoggerPlugin, { ConsoleOptions } from './logger/logger';
-import MediaQueriesPlugin from './media-queries/media-queries';
-import ModulPlugin from './modul/modul';
-import ScrollToPlugin from './scroll-to/scroll-to';
-import SpritesPlugin from './svg/sprites';
-import ToastPlugin from './toast/toast-service';
+import HttpPlugin, { HttpPluginOptions, HttpService } from './http/http';
+import I18nPlugin, { I18nPluginOptions, Messages } from './i18n/i18n';
+import LoggerPlugin, { ConsoleOptions, Logger } from './logger/logger';
+import MediaQueriesPlugin, { MediaQueries } from './media-queries/media-queries';
+import ModulPlugin, { Modul } from './modul/modul';
+import ScrollToPlugin, { ScrollTo } from './scroll-to/scroll-to';
+import SpritesPlugin, { SpritesService } from './svg/sprites';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $modul: Modul;
+        $log: Logger;
+        $i18n: Messages;
+        $http: HttpService;
+        $mq: MediaQueries;
+        $svg: SpritesService;
+        $scrollTo: ScrollTo;
+    }
+}
 export interface UtilsPluginOptions {
     httpPluginOptions?: HttpPluginOptions;
     consoleOptions?: ConsoleOptions;
@@ -36,18 +41,12 @@ const UtilsPlugin: PluginObject<any> = {
             v.prototype.$log.setConsoleOptions(options.consoleOptions);
         }
 
-        Vue.use(MediaQueriesPlugin);
-        Vue.use(ModulPlugin);
         Vue.use(I18nPlugin, options ? options.i18PluginOptions : undefined);
         Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
-        Vue.use({ install: PortalPluginInstall });
+        Vue.use(MediaQueriesPlugin);
         Vue.use(SpritesPlugin);
-        Vue.use(TouchPlugin, { name: 'v-touch' });
-        Vue.use(ConfirmPlugin);
-        Vue.use(AlertPlugin);
-        Vue.use(FilePlugin);
+        Vue.use(ModulPlugin);
         Vue.use(ScrollToPlugin);
-        Vue.use(ToastPlugin);
     }
 };
 

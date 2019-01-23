@@ -12,14 +12,15 @@ import { normalizeString } from '../../utils/str/str';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import uuid from '../../utils/uuid/uuid';
 import ButtonPlugin from '../button/button';
-import { DROPDOWN_NAME } from '../component-names';
+import { DROPDOWN_ITEM_NAME, DROPDOWN_NAME } from '../component-names';
 import { MDropdownGroup } from '../dropdown-group/dropdown-group';
-import DropdownItemPlugin, { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from '../dropdown-item/dropdown-item';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import PopupPlugin, { MPopup } from '../popup/popup';
+import RadioStylePlugin from '../radio-style/radio-style';
 import { MSidebar } from '../sidebar/sidebar';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import { InputManagement } from './../../mixins/input-management/input-management';
+import { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from './dropdown-item/dropdown-item';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
@@ -478,13 +479,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options): void {
-        Vue.use(DropdownItemPlugin);
+        Vue.use(RadioStylePlugin);
         Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);
         Vue.use(PopupPlugin);
         Vue.use(PopupPluginDirective);
         Vue.use(ValidationMessagePlugin);
         Vue.use(MediaQueriesPlugin);
+        v.component(DROPDOWN_ITEM_NAME, MDropdownItem);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

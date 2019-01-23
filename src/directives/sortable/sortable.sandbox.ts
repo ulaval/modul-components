@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { SORTABLE_NAME } from '../directive-names';
-import { MSortEvent } from './sortable';
+import SortablePlugin, { MSortEvent } from './sortable';
 import WithRender from './sortable.sandbox.html?style=./sortable.scss';
 
 export type ElementSortable = { cle: string, titre: string };
@@ -44,6 +44,7 @@ export class MSortableSandbox extends ModulVue {
 
 const SortableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(SortablePlugin);
         v.component(`${SORTABLE_NAME}-sandbox`, MSortableSandbox);
     }
 };
