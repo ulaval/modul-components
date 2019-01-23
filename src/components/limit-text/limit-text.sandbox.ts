@@ -1,8 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
+import ButtonPlugin from '../button/button';
 import { LIMIT_TEXT_NAME } from '../component-names';
+import LimitTextPlugin from './limit-text';
 import WithRender from './limit-text.sandbox.html';
+
 
 @WithRender
 @Component
@@ -47,6 +49,8 @@ export class MLimitTextSandbox extends Vue {
 
 const LimitTextSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(LimitTextPlugin);
+        v.use(ButtonPlugin);
         v.component(`${LIMIT_TEXT_NAME}-sandbox`, MLimitTextSandbox);
     }
 };

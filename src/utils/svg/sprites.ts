@@ -1,6 +1,12 @@
 import { PluginObject } from 'vue';
 import uuid from '../uuid/uuid';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $svg: SpritesService;
+    }
+}
+
 export class SpritesService {
     public addSprites(sprites: string): string {
         let div: HTMLDivElement = document.createElement('div');

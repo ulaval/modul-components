@@ -1,12 +1,12 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import MAccordionPlugin, { AccordionGateway, AccordionGroupGateway, MAccordionSkin } from '../accordion/accordion';
 import { ACCORDION_GROUP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './accordion-group.html?style=./accordion-group.scss';
+
 
 @WithRender
 @Component

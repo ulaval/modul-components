@@ -30,7 +30,7 @@ declare module '*.css' {
     export = withRender;
 }
 
-declare module "*.svg" {
+declare module '*.svg' {
     const content: any;
     export default content;
-  }
+}

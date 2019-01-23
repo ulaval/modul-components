@@ -1,5 +1,10 @@
 import { PluginObject } from 'vue';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $license: Licenses;
+    }
+}
 export class Licenses {
     protected static licenses: { [key: string]: any } = {};
 

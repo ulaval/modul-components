@@ -2,70 +2,52 @@
 
     <h2>Toggles</h2>
 
-    <p>
-        Clicks from those children elements shouldn't toggle the accordion
-    </p>
-    <m-accordion icon-position="right">
-        <div slot="header">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <a @click="doSomething('funny')" href="https://www.google.ca/" target="_blank">Link</a>
-                <m-link @click="doSomething('funny')" href="patate">m-link</m-link>
-                <m-option>
-                    <m-option-item>Menu 1</m-option-item>
-                    <m-option-item>Menu 2</m-option-item>
-                    <m-option-item>Menu 3</m-option-item>
-                </m-option>
-                <button @click="doSomething('funny')">Button</button>
-                <m-button>m-button</span></m-button>
-                <m-radio>m-radio</m-radio>
-                <m-checkbox>m-checkbox</m-checkbox>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <input type="text" placeholder="input">
-                <textarea placeholder="textarea" name="" id="" cols="30" rows="1"></textarea>
-                <m-textfield label="m-textfiled" value="Lorem ipsum dolor sit"></m-textfield>
-                <m-textarea label="m-textarea"  value="Lorem ipsum dolor sit"></m-textarea>
-            </div>
-
-        </div>
-        <p class="m-u--no-margin">Accordion content</p>
-    </m-accordion>
-    <br>
+    <br />
     <p>
         Generic html elements with custom vuejs events aren't trapped and still should be use with a <b>@click.stop</b> modifier.
     </p>
-    <br>
+
+    <br />
     <m-accordion icon-position="right">
         <div slot="header">
             <div @click.stop="doSomething('not ideal but ok')">generic element with custom event</div>
         </div>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
-    <br>
+
+    <br />
     <p>
         without a @click.stop modifier.
     </p>
-    <br>
+
+    <br />
     <m-accordion icon-position="right">
         <div slot="header">
             <div @click="doSomething('not funny')">generic element with custom event</div>
         </div>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
-    <br>
+
+    <br />
     <p>
         accordion opening / closing can be trigger using the prop open.
     </p>
-    <br>
+
+    <br />
     <m-button @click="toggleAccordion()">toggle</m-button>
-    <m-accordion icon-position="right" :open.sync="accordionOpen" @update:open="onAccordionOpen($event)" @click="onClick">
+    <m-accordion icon-position="right"
+                 :open.sync="accordionOpen"
+                 @update:open="onAccordionOpen($event)"
+                 @click="onClick">
         <div slot="header">
             <div>Accordion header</div>
         </div>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
-    <br>
-    <br>
+
+    <br />
+
+    <br />
 
     <h2>Border-top</h2>
     <p>
@@ -84,26 +66,32 @@
         <div slot="header">Accordion title</div>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
-    <br>
-    <m-accordion icon-position="right" skin="dark">
-            <div slot="header">Accordion title</div>
-            <p class="m-u--no-margin">Accordion content</p>
-        </m-accordion>
-        <m-accordion icon-position="right" skin="dark">
-            <div slot="header">Accordion title</div>
-            <p class="m-u--no-margin">Accordion content</p>
-        </m-accordion>
-        <m-accordion icon-position="right" skin="dark">
-            <div slot="header">Accordion title</div>
-            <p class="m-u--no-margin">Accordion content</p>
-        </m-accordion>
+
+    <br />
+    <m-accordion icon-position="right"
+                 skin="dark">
+        <div slot="header">Accordion title</div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
+    <m-accordion icon-position="right"
+                 skin="dark">
+        <div slot="header">Accordion title</div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
+    <m-accordion icon-position="right"
+                 skin="dark">
+        <div slot="header">Accordion title</div>
+        <p class="m-u--no-margin">Accordion content</p>
+    </m-accordion>
 
     <h2>Heading</h2>
     <p>
         Allow heading inside accordion header
     </p>
-    <br>
-    <m-accordion icon-position="right" skin="dark">
+
+    <br />
+    <m-accordion icon-position="right"
+                 skin="dark">
         <div slot="header">
             <h1>h1</h1>
             <h2>h2</h2>
@@ -117,27 +105,35 @@
     </m-accordion>
 
     <h2>Skin default</h2>
-    <m-accordion class="m-u--margin-top" skin="default">
-        <h3 class="m-u--no-margin" slot="header">Skin default</h3>
+    <m-accordion class="m-u--margin-top"
+                 skin="default">
+        <h3 class="m-u--no-margin"
+            slot="header">Skin default</h3>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
 
     <h2>Skin dark</h2>
-    <m-accordion class="m-u--margin-top" skin="dark">
-        <h3 class="m-u--no-margin" slot="header">Skin dark</h3>
+    <m-accordion class="m-u--margin-top"
+                 skin="dark">
+        <h3 class="m-u--no-margin"
+            slot="header">Skin dark</h3>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
 
     <h2>Skin light</h2>
-    <m-accordion class="m-u--margin-top" skin="light">
-        <h3 class="m-u--no-margin" slot="header">Skin light</h3>
+    <m-accordion class="m-u--margin-top"
+                 skin="light">
+        <h3 class="m-u--no-margin"
+            slot="header">Skin light</h3>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
 
 
     <h2>Skin plain</h2>
-    <m-accordion class="m-u--margin-top" skin="plain">
-        <h3 class="m-u--no-margin" slot="header">Skin plain</h3>
+    <m-accordion class="m-u--margin-top"
+                 skin="plain">
+        <h3 class="m-u--no-margin"
+            slot="header">Skin plain</h3>
         <p class="m-u--no-margin">Accordion content</p>
     </m-accordion>
 </div>

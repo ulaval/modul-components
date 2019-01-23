@@ -1,49 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MDropdown should render correctly 1`] = `
-<div class="m-dropdown" style="width:100%;max-width:288px;">
-    <div class="m-input-style m--has-cursor-pointer m--is-tag-default" style="width:100%;">
-        <div class="m-input-style__body">
-            <div class="m-input-style__body__left">
-                <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" value="" class="m-dropdown__input"> </div>
-            <div class="m-input-style__body__right">
-                <div class="m-dropdown__arrow">
-                    <svg aria-hidden="true" width="1em" height="1em" button-size="18px" icon-size="16px" class="m-icon m-dropdown__arrow__icon">
-                        <use aria-hidden="true"></use>
-                    </svg>
-                </div>
-            </div>
+<div class="m-dropdown" style="width: 100%; max-width: 288px;">
+    <m-input-style label-for="mDropdown-uuid" empty="true" cursor-pointer="true" width="100%" tag-style="default">
+        <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" class="m-dropdown__input">
+        <!---->
+        <div slot="right-content" class="m-dropdown__arrow">
+            <m-icon name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" class="m-dropdown__arrow__icon">
+                <m-i18n k="m-dropdown:open"></m-i18n>
+            </m-icon>
         </div>
-    </div>
-    <div class="m-validation-message m-dropdown__validation-message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
-    <div class="m-popup">
-        <div class="m-popper"> </div>
-    </div>
+    </m-input-style>
+    <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
+    <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" leave="function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" close-on-backdrop="true" preload="true" open-trigger="mousedown">
+        <!---->
+        <ul id="mDropdown-uuid-controls" aria-labelledby="mDropdown-uuid" aria-live="polite" class="m-dropdown__list">
+            <m-dropdown-item readonly="readonly">No data</m-dropdown-item>
+            <!---->
+        </ul>
+        <!---->
+    </m-popup>
 </div>
 `;
 
 exports[`MDropdown should render correctly when placeholder is set 1`] = `
-<div class="m-dropdown" style="width:100%;max-width:288px;">
-    <div class="m-input-style m--has-cursor-pointer m--is-tag-default" style="width:100%;">
-        <div class="m-input-style__body">
-            <div class="m-input-style__body__left">
-                <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" placeholder="placeholder test" value="" class="m-dropdown__input"> </div>
-            <div class="m-input-style__body__right">
-                <div class="m-dropdown__arrow">
-                    <svg aria-hidden="true" width="1em" height="1em" button-size="18px" icon-size="16px" class="m-icon m-dropdown__arrow__icon">
-                        <use aria-hidden="true"></use>
-                    </svg>
-                </div>
-            </div>
+<div class="m-dropdown" style="width: 100%; max-width: 288px;">
+    <m-input-style label-for="mDropdown-uuid" empty="true" cursor-pointer="true" width="100%" tag-style="default">
+        <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" placeholder="placeholder test" class="m-dropdown__input">
+        <!---->
+        <div slot="right-content" class="m-dropdown__arrow">
+            <m-icon name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" class="m-dropdown__arrow__icon">
+                <m-i18n k="m-dropdown:open"></m-i18n>
+            </m-icon>
         </div>
-    </div>
-    <div class="m-validation-message m-dropdown__validation-message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
-    <div class="m-popup">
-        <div class="m-popper"> </div>
-    </div>
+    </m-input-style>
+    <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
+    <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" leave="function boundFn (a) {
+    var l = arguments.length;
+    return l
+      ? l > 1
+        ? fn.apply(ctx, arguments)
+        : fn.call(ctx, a)
+      : fn.call(ctx)
+  }" close-on-backdrop="true" preload="true" open-trigger="mousedown">
+        <!---->
+        <ul id="mDropdown-uuid-controls" aria-labelledby="mDropdown-uuid" aria-live="polite" class="m-dropdown__list">
+            <m-dropdown-item readonly="readonly">No data</m-dropdown-item>
+            <!---->
+        </ul>
+        <!---->
+    </m-popup>
 </div>
 `;

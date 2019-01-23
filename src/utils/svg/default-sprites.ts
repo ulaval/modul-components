@@ -9,7 +9,7 @@ const DefaultSpritesPlugin: PluginObject<any> = {
         if (svg) {
             svg.addSprites(require('../../assets/icons/sprites-default.svg'));
         } else {
-            console.error(
+            v.prototype.$log.error(
                 'DefaultSpritesPlugin.install -> You must use the svg plugin.'
             );
         }

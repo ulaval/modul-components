@@ -1,8 +1,7 @@
 import moment from 'moment';
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import AccordionPlugin from '../accordion/accordion';
@@ -12,6 +11,7 @@ import LinkPlugin from '../link/link';
 import MessagePlugin from '../message/message';
 import PanelPlugin from '../panel/panel';
 import WithRender from './error-message.html?style=./error-message.scss';
+
 
 @WithRender
 @Component
@@ -51,7 +51,8 @@ export class MErrorMessage extends ModulVue {
 
 const ErrorMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ERROR_MESSAGE_NAME, 'plugin.install');
+        v.prototype.$log.error('MErrorMessage will be deprecated in modul v.1.0');
+
         v.use(I18nPlugin);
         v.use(AccordionPlugin);
         v.use(LinkPlugin);

@@ -6,7 +6,6 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RADIO_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
-import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './radio.html?style=./radio.scss';
 
 export enum MRadioPosition {
@@ -209,9 +208,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(RADIO_NAME, 'plugin.install');
         v.use(IconPlugin);
-        v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);
     }
 };

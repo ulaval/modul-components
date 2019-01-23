@@ -1,12 +1,12 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './login.html';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
+import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import TextFieldPlugin from '../textfield/textfield';
-import { ModulVue } from '../../utils/vue/vue';
-import I18nPlugin from '../i18n/i18n';
+import WithRender from './login.html';
 
 const LOGIN_NAME: string = 'm-login';
 export type LoginFn = (username: string, password: string) => Promise<any>;
@@ -39,7 +39,8 @@ export class MLogin extends ModulVue {
 
 const LoginPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(LOGIN_NAME, 'plugin.install');
+        v.prototype.$log.error('MLogin will be deprecated in modul v.1.0');
+
         v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(IconButtonPlugin);
