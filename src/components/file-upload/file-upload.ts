@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { MBadgeState } from '../../directives/badge/badge';
+import BadgePlugin, { MBadgeState } from '../../directives/badge/badge';
 import FileDropPlugin from '../../directives/file-drop/file-drop';
 import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -347,6 +347,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
         v.use(FileSizeFilterPlugin);
+        v.use(BadgePlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };
