@@ -249,12 +249,10 @@ class FileStore {
     }
 
     private validate(file: MFile): void {
+        this.validateExtension(file);
+
         if (!this.options) {
             return;
-        }
-
-        if (this.options.rejectedExtensions || this.options.allowedExtensions) {
-            this.validateExtension(file);
         }
 
         if (this.options.maxSizeKb) {
