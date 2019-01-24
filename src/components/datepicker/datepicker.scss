@@ -1,9 +1,15 @@
-@import '../../styles/abstracts/variables';
+@import 'commons';
 $m-datepicker--item-dimension: $m-touch-size !default;
 
 .m-datepicker {
     display: inline-flex;
     flex-direction: column;
+
+    &.m--has-validation-message {
+        .m-datepicker__validation-message {
+            margin-top: $m-spacing--xs;
+        }
+    }
 
     &__header,
     &__body {
@@ -158,6 +164,11 @@ $m-datepicker--item-dimension: $m-touch-size !default;
                 color: $m-color--text;
             }
         }
+    }
+
+    &__validation-message {
+        margin-top: $m-margin--xs;
+        transition: margin-top $m-transition-duration ease;
     }
 
     .m--is-disabled {

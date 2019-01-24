@@ -2,6 +2,12 @@ import Vue, { PluginObject } from 'vue';
 import { sprintf, vsprintf } from '../str/str';
 
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $i18n: Messages;
+    }
+}
+
 /**
  * This package provides language and locales utilities.
  */
@@ -130,7 +136,7 @@ export class Messages {
         nb?: number,
         modifier?: string,
         htmlEncodeParams: boolean = true,
-        formatMode = this.formatMode
+        formatMode: FormatMode = this.formatMode
     ): string {
         if (!key) {
             throw new Error('The key is empty.');
@@ -138,18 +144,12 @@ export class Messages {
 
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
-        if (FormatMode.Sprintf || FormatMode.Vsprintf) {
-            Object.keys(this.specialCharacterDict).forEach((key: string) => {
-                if (!params.hasOwnProperty(key)) {
-                    params[key] = this.specialCharacterDict[key];
-                }
-            });
+        if (formatMode === FormatMode.Sprintf || formatMode === FormatMode.Vsprintf) {
+            params = Object.assign(this.specialCharacterDict, params);
         }
 
         if (htmlEncodeParams && params.length) {
-            for (let i: number = 0; i < params.length; ++i) {
-                params[i] = htmlEncode(params[i].toString());
-            }
+            Object.keys(params).forEach((key: any) => { params[key] = htmlEncode(params[key].toString()); });
         }
 
         val = this.format(val, params, formatMode);

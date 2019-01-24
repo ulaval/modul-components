@@ -18,6 +18,7 @@
         "**/.github/": true,
     },
     "search.exclude": {
+        "**/reports/": true,
         "package-lock.json": true,
     },
     "html.format.wrapLineLength": 0,

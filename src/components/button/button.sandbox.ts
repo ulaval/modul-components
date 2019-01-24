@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Emit } from 'vue-property-decorator';
 import { BUTTON_NAME } from '../component-names';
+import ButtonPlugin from './button';
 import WithRender from './button.sandbox.html';
 
 
@@ -32,6 +33,7 @@ export class MButtonSandbox extends Vue {
 
 const ButtonSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ButtonPlugin);
         v.component(`${BUTTON_NAME}-sandbox`, MButtonSandbox);
     }
 };

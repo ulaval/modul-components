@@ -4,7 +4,7 @@ import { Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
+import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
@@ -29,10 +29,14 @@ export class MInputStyle extends ModulVue {
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
+    @Prop({ default: false })
+    public cursorPointer: boolean;
 
     public $refs: {
+        root: HTMLElement,
         label: HTMLElement,
-        adjustWidthAuto: HTMLElement
+        adjustWidthAuto: HTMLElement,
+        rightContent: HTMLElement
     };
 
     private animReady: boolean = false;
@@ -78,8 +82,8 @@ export class MInputStyle extends ModulVue {
         return this.hasDefaultSlot && !this.empty;
     }
 
-    private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+    public get labelIsUp(): boolean {
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
     }
 
     private get hasLabel(): boolean {
@@ -115,7 +119,7 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(IconPlugin);
+        v.use(I18nPlugin);
         v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);
     }

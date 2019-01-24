@@ -14,6 +14,7 @@ import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
+import CharacterCountPlugin from '../character-count/character-count';
 
 @WithRender
 @Component({
@@ -44,7 +45,7 @@ export class MTextarea extends ModulVue implements InputManagementData {
     }
 
     private get maxLengthNumber(): number {
-        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity ;
+        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity;
     }
 
     private get hasTextareaError(): boolean {
@@ -62,10 +63,10 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
 const TextareaPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(TEXTAREA_NAME + ' is not ready for production');
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(TextareaAutoHeightPlugin);
+        v.use(CharacterCountPlugin);
         v.component(TEXTAREA_NAME, MTextarea);
     }
 };

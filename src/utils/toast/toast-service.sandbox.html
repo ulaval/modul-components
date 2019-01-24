@@ -1,0 +1,30 @@
+<div>
+    <h3>Toast Manager</h3>
+    <p class="m-u--margin-bottom">
+        Sandbox Parameters
+    </p>
+    <div>
+        <m-button @click="init()">Show toast</m-button>
+        <m-button @click="otherToast()">Show other toast</m-button>
+        <m-button @click="complex()">Show a complex toast</m-button>
+        <m-button @click="error()">Show an error toast</m-button>
+    </div>
+    <p class="m-u--margin-bottom">
+        Show toast over a modal/overlay
+    </p>
+    <div>
+        <m-overlay title="Overlay">
+            <m-button slot="trigger">Open the Overlay</m-button>
+            <m-button @click="successToast()">Do Action</m-button>
+        </m-overlay>
+
+        <m-modal title="Modal">
+            <m-button slot="trigger">Open the modal</m-button>
+            <m-button @click="successToast()">Do Action</m-button>
+        </m-modal>
+    </div>
+    <p class="m-u--margin-bottom">
+        Remove active toast
+    </p>
+    <m-button @click="clear()">Clear</m-button>
+</div>

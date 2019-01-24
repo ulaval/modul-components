@@ -1,6 +1,17 @@
 import enquire from 'enquire.js/dist/enquire';
 import { PluginObject } from 'vue';
 
+
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $mq: MediaQueries;
+    }
+}
+
 export enum MediaQueriesBpMin {
     XL = '(min-width: 1600px)',
     L = '(min-width: 1200px)',

@@ -1,7 +1,7 @@
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
-import { TREE_ICON_NAME } from '../component-names';
+import { TREE_ICON_NAME } from '../../component-names';
 import { MCheckboxes, TreeNode } from '../tree';
 import { MTreeIcon } from '../tree-icon/tree-icon';
 import WithRender from './tree-node.html?style=./tree-node.scss';
@@ -52,7 +52,7 @@ export class MTreeNode extends ModulVue {
     @Watch('isSelected')
     public notifyParentOfChildCheckboxState(): void {
         if (this.withCheckboxes) {
-            if (!this.hasChildren) {
+            if (!this.hasChildren || this.isParentAutoSelect) {
                 this.$emit('auto-select-child-checkbox-change', this.isSelected);
             } else if (this.isButtonAutoSelect && this.hasChildren) {
                 this.onAutoSelectChildCheckboxChange(this.isSelected, true);

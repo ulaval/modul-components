@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '../../../node_modules/@vue/test-utils';
+import { shallow, Wrapper, mount } from '../../../node_modules/@vue/test-utils';
 import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
@@ -17,10 +17,10 @@ let defaultOptions: MRichTextEditorStandardOptions;
 describe('MRichTextEditor', () => {
     beforeEach(() => {
         Vue.use(RichTextLicensePlugin, { key: froalaLicenseKey });
-        wrapper = shallow(MRichTextEditor,
+        wrapper = mount(MRichTextEditor,
             {
                 stubs: {
-                    froala : '<froala></froala>'
+                    froala: '<froala></froala>'
                 }
             });
         richTextEditor = wrapper.vm;

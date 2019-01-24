@@ -1,8 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { TABLE_NAME } from '../component-names';
-import { MColumnTable } from './table';
+import TablePlugin, { MColumnTable } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
+import OptionPlugin from '../option/option';
+import ButtonPlugin from '../button/button';
+import CheckboxPlugin from '../checkbox/checkbox';
 
 @WithRender
 @Component
@@ -110,6 +113,10 @@ export class MTableSandbox extends Vue {
 
 const TableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(TablePlugin);
+        v.use(OptionPlugin);
+        v.use(ButtonPlugin);
+        v.use(CheckboxPlugin);
         v.component(`${TABLE_NAME}-sandbox`, MTableSandbox);
     }
 };

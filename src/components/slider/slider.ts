@@ -1,10 +1,10 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch, Model } from 'vue-property-decorator';
-import WithRender from './slider.html?style=./slider.scss';
+import { Model, Prop, Watch } from 'vue-property-decorator';
+import * as TouchPlugin from 'vue-touch';
+import { ModulVue } from '../../utils/vue/vue';
 import { SLIDER_NAME } from '../component-names';
-
+import WithRender from './slider.html?style=./slider.scss';
 @WithRender
 @Component
 export class MSlider extends ModulVue {
@@ -94,7 +94,9 @@ export class MSlider extends ModulVue {
 
 const SliderPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(SLIDER_NAME + ' is not ready for production');
+        v.prototype.$log.error('MSlider will be deprecated in modul v.1.0');
+
+        v.use(TouchPlugin, { name: 'v-touch' }); // @todo really needed? should be loaded only by slider component.
         v.component(SLIDER_NAME, MSlider);
     }
 };

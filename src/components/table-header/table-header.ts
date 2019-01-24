@@ -5,6 +5,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_HEADER_NAME } from '../component-names';
 import { MIconButtonSkin } from '../icon-button/icon-button';
 import WithRender from './table-header.html?style=./table-header.scss';
+import LinkPlugin from '../link/link';
 
 @WithRender
 @Component
@@ -21,7 +22,7 @@ export class MTableHeader extends ModulVue {
 
 const TableHeaderPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(TABLE_HEADER_NAME, 'plugin.install');
+        v.use(LinkPlugin);
         v.component(TABLE_HEADER_NAME, MTableHeader);
     }
 };

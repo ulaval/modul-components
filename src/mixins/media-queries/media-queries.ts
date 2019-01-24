@@ -1,9 +1,9 @@
 import Component from 'vue-class-component';
-
+import { MediaQueriesStatus } from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
-import { MediaQueriesStatus } from './../../utils/media-queries/media-queries';
 
-export interface MediaQueriesMixin extends MediaQueriesStatus {}
+
+export interface MediaQueriesMixin extends MediaQueriesStatus { }
 @Component
 export class MediaQueries extends ModulVue implements MediaQueriesStatus {
     public mqState: MediaQueriesStatus = this.$mq ? this.$mq.state : undefined as any;

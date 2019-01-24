@@ -4,7 +4,8 @@
     'm--has-error' : hasError,
     'm--is-valid' : isValid,
     'm--is-focus' : isFocus,
-    'm--has-label': hasLabel  }"
+    'm--has-label': hasLabel,
+    'm--has-validation-message': hasValidationMessage  }"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
@@ -34,14 +35,13 @@
                 ref="input"
                 :readonly="readonly"></froala>
     </m-input-style>
-    <div class="m-textfield__validation">
-        <m-validation-message class="m-textfield__validation__message"
-                              :disabled="isDisabled"
-                              :waiting="isWaiting"
-                              :error="hasError"
-                              :error-message="errorMessage"
-                              :valid="isValid"
-                              :valid-message="validMessage"
-                              :helper-message="helperMessage"></m-validation-message>
-    </div>
+
+    <m-validation-message class="m-rich-text__validation-message"
+                          :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasError"
+                          :error-message="errorMessage"
+                          :valid="isValid"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
 </div>

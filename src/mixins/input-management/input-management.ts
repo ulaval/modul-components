@@ -1,8 +1,8 @@
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { InputStateMixin } from '../input-state/input-state';
+
 
 export interface InputManagementProps {
     value: string;
@@ -56,6 +56,10 @@ export class InputManagement extends ModulVue
         if (inputEl) {
             inputEl.focus();
         }
+    }
+
+    public get hasValue(): boolean {
+        return !!(this.model || '').toString().trim();
     }
 
     private beforeMount(): void {
@@ -139,10 +143,6 @@ export class InputManagement extends ModulVue
 
     private get model(): string {
         return this.internalValue;
-    }
-
-    private get hasValue(): boolean {
-        return this.model !== '';
     }
 
     private get isEmpty(): boolean {
