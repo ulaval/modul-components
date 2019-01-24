@@ -236,12 +236,12 @@ describe('FileService', () => {
             rejectionCause: MFileRejectionCause
         ) => {
 
-                expect(readyFiles().length).toEqual(expectedNbReadyFiles);
-                expect(rejectedFiles().length).toEqual(1);
-                expect(rejectedFiles()[0].name).toEqual('invalid.mov');
-                expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
-                expect(rejectedFiles()[0].rejection).toEqual(rejectionCause);
-            };
+            expect(readyFiles().length).toEqual(expectedNbReadyFiles);
+            expect(rejectedFiles().length).toEqual(1);
+            expect(rejectedFiles()[0].name).toEqual('invalid.mov');
+            expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+            expect(rejectedFiles()[0].rejection).toEqual(rejectionCause);
+        };
 
         const readyFiles: () => MFile[] = () => {
             return filesvc.files().filter(f => f.status === MFileStatus.READY);
