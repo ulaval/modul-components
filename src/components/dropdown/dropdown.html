@@ -81,6 +81,8 @@
              :preload="true"
              :open-trigger="'mousedown'"
              :lazy="false"
+             @open="onOpen"
+             @close="onClose"
              @portal-content-visible="calculateFilterableListeHeight"
              @portal-content-mounted="portalContentMounted">
         <template slot="header"

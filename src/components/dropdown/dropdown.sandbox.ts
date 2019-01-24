@@ -15,8 +15,20 @@ export class MDropdownSandbox extends ModulVue {
     public undefinedValue2: string = '';
     public undefinedValue3: string = '';
     public numValue: number = 2000;
+    public dropdownOpen: boolean = false;
 
     public numItems: number[] = [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007];
+
+    private onOpen(): void {
+        this.$log.log('$(\'open\') dropdown');
+        this.dropdownOpen = true;
+
+    }
+
+    private onClose(): void {
+        this.$log.log('$(\'close\') dropdown');
+        this.dropdownOpen = false;
+    }
 }
 
 const DropdownSandboxPlugin: PluginObject<any> = {

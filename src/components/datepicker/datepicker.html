@@ -57,7 +57,9 @@
              :close-on-backdrop="true"
              :focus-management="isMqMaxS"
              :padding="false"
-             placement="bottom">
+             placement="bottom"
+             @open="onOpen"
+             @close="onClose">
         <div :id="ariaControls1"
              class="m-datepicker__header"
              :aria-labelledby="id"
