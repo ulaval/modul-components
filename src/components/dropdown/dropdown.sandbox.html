@@ -625,9 +625,15 @@
                          :label="item"></m-dropdown-item>
     </m-dropdown>
 
-    <h3>Dropdown @emit('close')</h3>
+    <h3>Dropdown @emit('open')</h3>
     <m-dropdown @open="onOpen"
-                @close="onClose"
+                label="Dropdown @emit('open')">
+        <m-dropdown-item v-for="item of numItems"
+                         :value="item"
+                         :label="item"></m-dropdown-item>
+    </m-dropdown>
+    <h3>Dropdown @emit('close')</h3>
+    <m-dropdown @close="onClose"
                 label="Dropdown @emit('close')">
         <m-dropdown-item v-for="item of numItems"
                          :value="item"
