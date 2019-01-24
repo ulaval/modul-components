@@ -80,7 +80,7 @@ export class MLink extends ModulVue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
-    @Prop({ default: '1' })
+    @Prop({ default: '0' })
     public tabindex: string;
 
     protected mounted(): void {
