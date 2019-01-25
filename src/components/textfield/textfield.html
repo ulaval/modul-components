@@ -37,7 +37,8 @@
                :autocomplete="autocomplete"
                v-model="model"
                v-if="!hasWordWrap"
-               :type="inputType">
+               :type="inputType"
+               v-m-mask="mask">
         <template slot="right-content"
                   v-if="!hasWordWrap">
             <transition-group name="m--is">

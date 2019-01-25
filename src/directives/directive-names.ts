@@ -5,6 +5,7 @@ export const DROPPABLE_GROUP_NAME: string = 'm-droppable-group';
 export const DROPPABLE_NAME: string = 'm-droppable';
 export const FILE_DROP_NAME: string = 'm-file-drop';
 export const I18N_NAME: string = 'm-i18n';
+export const MASK_NAME: string = 'm-mask';
 export const POPUP_NAME: string = 'm-popup';
 export const REMOVE_USER_SELECT_NAME: string = 'm-remove-user-select';
 export const RIPPLE_EFFECT_NAME: string = 'm-ripple-effect';
