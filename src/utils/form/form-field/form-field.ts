@@ -1,9 +1,12 @@
+import { InputManagement } from '../../../mixins/input-management/input-management';
 import { FormFieldState } from '../form-field-state/form-field-state';
+import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 
 export interface FormFieldOptions {
     messageAfterTouched?: boolean;
 }
 
+export type FieldValidationCallback = (value: any, params?: any) => FormFieldValidation;
 /**
  * Form Field Class
  */
@@ -13,13 +16,15 @@ export class FormField<T> {
     private internalState: FormFieldState;
     private messageAfterTouched: boolean = true;
     private touched: boolean = false;
+    private internalParams: any;
 
     /**
      *
      * @param accessCallback function called to initialize the value of a field
-     * @param validationCallback function called to validate
+     * @param htmlReference function called to get HTML Element
+     * @param validationCallback Array of functions called to validate
      */
-    constructor(public accessCallback: () => T, public validationCallback?: (value: T) => FormFieldState, options?: FormFieldOptions) {
+    constructor(public accessCallback: () => T, public htmlReference: () => HTMLElement, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
 
@@ -61,28 +66,54 @@ export class FormField<T> {
      * message to show under the form field
      */
     get errorMessage(): string {
-        let errorMessage: string = '';
+        let errorMessageToShow: string = '';
 
         if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)) {
-            errorMessage = this.internalState.errorMessage;
+            errorMessageToShow = this.internalState.errorMessages[0];
         }
 
-        return errorMessage;
+        return errorMessageToShow;
     }
 
     /**
      * message to show in the error summary
      */
-    get errorMessageSummary(): string {
-        return this.internalState.errorMessageSummary;
+    get errorMessageSummary(): string[] {
+        return this.internalState.errorMessagesSummary;
+    }
+
+    get htmlReferenceAsInput(): InputManagement {
+        return this.htmlReference() as any as InputManagement;
+    }
+
+    /**
+     * Focuses this field if it's an InputManagement
+     */
+    focusThisField(): void {
+        if (this.htmlReferenceAsInput && typeof this.htmlReferenceAsInput.focusInput === 'function') {
+            this.htmlReferenceAsInput.focusInput();
+        }
     }
 
     /**
      * execute validations
      */
     validate(): void {
-        if (this.validationCallback) {
-            this.changeState(this.validationCallback(this.internalValue));
+        if (this.validationCallback.length > 0) {
+            let nouvelEtat: FormFieldState = new FormFieldState();
+            this.validationCallback.forEach((validationFunction) => {
+                let validation: FormFieldValidation = validationFunction(this.internalValue, this.internalParams);
+                if (validation.isError) {
+                    nouvelEtat.hasError = true;
+                }
+                if (validation.errorMessage) {
+                    nouvelEtat.errorMessages.push(validation.errorMessage);
+                }
+                if (validation.errorMessageSummary) {
+                    nouvelEtat.errorMessagesSummary.push(validation.errorMessageSummary);
+                }
+            });
+            this.changeState(nouvelEtat);
         }
     }
 
@@ -118,7 +149,7 @@ export class FormField<T> {
 
     private changeState(etat: FormFieldState): void {
         this.internalState.hasError = etat.hasError;
-        this.internalState.errorMessage = etat.errorMessage;
-        this.internalState.errorMessageSummary = etat.errorMessageSummary;
+        this.internalState.errorMessages = etat.errorMessages;
+        this.internalState.errorMessagesSummary = etat.errorMessagesSummary;
     }
 }

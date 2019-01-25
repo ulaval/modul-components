@@ -77,10 +77,22 @@ export class Form {
      * returns all the messages that must be shown in the summary
      */
     getErrorsForSummary(): string[] {
-        return this.fields
-            .filter((field: FormField<any>) => field.errorMessageSummary !== '')
-            .map((field: FormField<any>) => field.errorMessageSummary)
-            .concat(this.internalState.errorMessages);
+
+        let errorsSummary: string[] = this.internalState.errorMessages;
+        this.fields.forEach((field: FormField<any>) => {
+            errorsSummary = errorsSummary.concat(field.errorMessageSummary[0]);
+        });
+        return errorsSummary;
+    }
+
+    focusFirstFieldWithError(): void {
+        let fieldWithError: FormField<any> | undefined = this.fields.find(field => {
+            return field.hasError;
+        });
+
+        if (fieldWithError) {
+            fieldWithError.focusThisField();
+        }
     }
 
 

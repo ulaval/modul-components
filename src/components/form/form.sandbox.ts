@@ -2,7 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { Form } from '../../utils/form/form';
-import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
+import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { FORM } from '../component-names';
@@ -18,15 +18,14 @@ export class MFormSandbox extends Vue {
     formSent: any = '';
 
     form: Form = new Form({
-        'titleField': new FormField<string>((): string => this.title, ValidationSandbox.validateTitle),
-        'descriptionField': new FormField<string>((): string => this.description, ValidationSandbox.validateDescription),
-        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation),
-        'passwordField': new FormField<string>((): string => ''),
-        'confirmPasswordField': new FormField<string>((): string => '')
+        'titleField': new FormField<string>((): string => this.title, () => this.$refs.title as HTMLElement, [ValidationSandbox.validateRequired, ValidationSandbox.validateMaxLength]),
+        'descriptionField': new FormField<string>((): string => this.description, () => this.$refs.description as HTMLElement, [ValidationSandbox.validateMaxLength]),
+        'locationField': new FormField<string>((): string => this.location, () => this.$refs.location as HTMLElement, [ValidationSandbox.validateRequired, ValidationSandbox.validateMaxLength, ValidationSandbox.validateMinLength]),
+        'passwordField': new FormField<string>((): string => '', () => this.$refs.password as HTMLElement),
+        'confirmPasswordField': new FormField<string>((): string => '', () => this.$refs.confirmPassword as HTMLElement)
     }, [
-        ValidationSandbox.validatePasswordMatch
-    ]);
-
+            ValidationSandbox.validatePasswordMatch
+        ]);
 
     maxTitleLength: number = ValidationSandbox.maxTitleLength;
     thresholdTitle: number = ValidationSandbox.thresholdTitle;
@@ -61,35 +60,27 @@ class ValidationSandbox {
     static readonly maxLocationLength: number = 40;
     static readonly thresholdLocation: number = 30;
 
-    static validateTitle(title: string): FormFieldState {
-        if (!title) {
-            return new FormFieldState(true, 'Title is required.', 'This field is required.');
-        } else if (title.length > ValidationSandbox.maxTitleLength) {
-            let error: string = `Title can be at most ${ValidationSandbox.maxTitleLength} characters.`;
-            return new FormFieldState(true, error, error);
+    static validateRequired(value: any, params: { fieldName: string }): FormFieldValidation {
+        if (!value) {
+            return new FormFieldValidation(true, `${params.fieldName} is required.`, 'This field is required.');
         }
-        return new FormFieldState();
+        return new FormFieldValidation();
     }
 
-    static validateDescription(description: string): FormFieldState {
-        if (description.length > ValidationSandbox.maxDescriptionLength) {
-            let error: string = `Description can be at most ${ValidationSandbox.maxDescriptionLength} characters.`;
-            return new FormFieldState(true, error, error);
+    static validateMaxLength(value: any, params: { maxLength: number, fieldName: string }): FormFieldValidation {
+        if (value.length > params.maxLength) {
+            let error: string = `${params.fieldName} can be at most ${params.maxLength} characters.`;
+            return new FormFieldValidation(true, error, error);
         }
-        return new FormFieldState();
+        return new FormFieldValidation();
     }
 
-    static validateLocation(location: string): FormFieldState {
-        if (!location) {
-            return new FormFieldState(true, 'Location is required.', 'Title is required.');
-        } else if (location.length < ValidationSandbox.minLocationLength) {
-            let error: string = `Location can be at least ${ValidationSandbox.minLocationLength} characters.`;
-            return new FormFieldState(true, error, error);
-        } else if (location.length > ValidationSandbox.maxLocationLength) {
-            let error: string = `Location can be at most ${ValidationSandbox.maxLocationLength} characters.`;
-            return new FormFieldState(true, error, error);
+    static validateMinLength(value: any, params: { minLength: number, fieldName: string }): FormFieldValidation {
+        if (value.length < params.minLength) {
+            let error: string = `${params.fieldName} can be at least ${params.minLength} characters.`;
+            return new FormFieldValidation(true, error, error);
         }
-        return new FormFieldState();
+        return new FormFieldValidation();
     }
 
     static validatePasswordMatch(form: Form): FormValidation {

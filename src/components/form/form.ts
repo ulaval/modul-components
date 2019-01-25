@@ -37,6 +37,7 @@ export class MForm extends ModulVue {
 
             if (this.form.nbFieldsThatHasError === 0 && this.form.nbOfErrors === 0) {
                 this.onSubmit();
+<<<<<<< HEAD
             } else if (this.form.nbFieldsThatHasError === 1 && this.form.nbOfErrors === 0) {
                 setTimeout(() => {
                     let fieldWithError: HTMLElement | null = this.$el.querySelector('.m--has-error input, .m--has-error textarea');
@@ -44,6 +45,10 @@ export class MForm extends ModulVue {
                         (fieldWithError).focus();
                     }
                 });
+=======
+            } else if (this.form.nbFieldsThatHasError === 1) {
+                this.form.focusFirstFieldWithError();
+>>>>>>> ENA2-4264 - Add multiple validators
             } else {
                 this.errors = this.form.getErrorsForSummary();
             }
