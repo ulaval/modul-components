@@ -9,8 +9,8 @@ jest.mock('./state/calendar-single-date-state');
 jest.mock('./state/calendar-range-date-state');
 
 const EMPTY_VALUE: string = '';
-const UNDEFINED_MIN_DATE: string = undefined;
-const UNDEFINED_MAX_DATE: string = undefined;
+const UNDEFINED_MIN_DATE: string | undefined = undefined;
+const UNDEFINED_MAX_DATE: string | undefined = undefined;
 
 const DEFAULT_DATE_VALUE: string = '2019-01-01';
 

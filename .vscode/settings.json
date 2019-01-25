@@ -7,14 +7,12 @@
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
-    "typescript.tsdk": "node_modules\\typescript\\lib",
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
     },
     "files.exclude": {
-        "**/.circleci/": true,
         "**/.github/": true,
     },
     "search.exclude": {

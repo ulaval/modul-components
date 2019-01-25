@@ -3,7 +3,9 @@
         "baseUrl": ".",
         "target": "es5",
         "lib": [
-            "es5", "es6", "dom"
+            "es5",
+            "es6",
+            "dom"
         ],
         "module": "commonjs",
         "moduleResolution": "node",
@@ -17,7 +19,6 @@
         "typeRoots": [
             "node_modules/@types"
         ],
-
     },
     "include": [
         "src/**/*.ts"

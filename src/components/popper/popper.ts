@@ -173,7 +173,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
             this.update();
         });
         if (this.$refs.popper) {
-            this.observer.observe(this.$refs.popper as HTMLElement, { subtree: true, childList: true });
+            this.observer.observe(this.$refs.popper, { subtree: true, childList: true });
         }
     }
 

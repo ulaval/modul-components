@@ -433,7 +433,7 @@ describe(`A range date state`, () => {
                     const newDay: DayState = Object.assign(FIRST_DAY_STATE, { isDisabled: true });
                     calendarEvents[CalendarEvent.DAY_SELECT](newDay);
 
-                    const currentDate: SingleDate | RangeDate = calendarRangeDateState.buildCurrentCalendar().calendar.value;
+                    const currentDate: SingleDate | RangeDate | undefined = calendarRangeDateState.buildCurrentCalendar().calendar.value;
 
                     expect(currentDate).toEqual(CURRENT_VALUE_BOTH);
                 });

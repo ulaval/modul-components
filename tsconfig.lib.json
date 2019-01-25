@@ -1,6 +1,11 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        "outDir": "dist",
+        "rootDir": "src",
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
         "target": "es5",
         "lib": [
             "es5",
@@ -26,10 +31,11 @@
             "name": "typescript-tslint-plugin"
         }
     ],
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
         "src/**/*.spec.*",
-        "dist/**/*",
-        "lib/**/*",
-        "tests/**/*"
+        "src/**/*.sandbox.*"
     ]
 }

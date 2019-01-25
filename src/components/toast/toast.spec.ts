@@ -1,10 +1,10 @@
 import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { PortalStub, renderComponent } from '../../../tests/helpers/render';
+import { PortalStub } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
-import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 import ModulPlugin from '../../utils/modul/modul';
+import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -16,8 +16,10 @@ const defaultSlot: any = {
 
 const ACTION_LABEL: string = 'Action';
 
+export const mountWithStub: any = mount;
+
 const initializeWrapper: () => any = () => {
-    wrapper = mount(MToast, {
+    wrapper = mountWithStub(MToast, {
         localVue: localVue,
         slots: defaultSlot,
         stubs: {

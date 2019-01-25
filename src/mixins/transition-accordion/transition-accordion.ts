@@ -12,6 +12,8 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
     public accordionAnim: boolean;
 
     private setTransitionStart(el: HTMLElement): void {
+
+        // tslint:disable-next-line: deprecation
         el.style.webkitTransition = ACCORDION_STYLE_TRANSITION;
         el.style.transition = ACCORDION_STYLE_TRANSITION;
         el.style.height = 'auto';

@@ -232,6 +232,7 @@ export class MFlexTemplate extends ModulVue {
             menuContent.focus();
         }
         this.menuOpenCount++;
+        // tslint:disable-next-line: deprecation
         this.$modul.updateAfterResize();
     }
 
@@ -244,6 +245,7 @@ export class MFlexTemplate extends ModulVue {
             pageContainer.style.removeProperty('width');
         }
         setTimeout(() => {
+            // tslint:disable-next-line: deprecation
             this.$modul.updateAfterResize();
             done();
         }, 450);

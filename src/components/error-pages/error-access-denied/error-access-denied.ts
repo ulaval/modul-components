@@ -14,7 +14,7 @@ import WithRender from './error-access-denied.html';
 export class MErrorAccessDenied extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-error-access-denied:title')
+        default: () => (Vue.prototype).$i18n.translate('m-error-access-denied:title')
     })
     public title: string;
 
@@ -23,7 +23,7 @@ export class MErrorAccessDenied extends ModulVue {
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-error-access-denied:hint.primary')]
+            (Vue.prototype).$i18n.translate('m-error-access-denied:hint.primary')]
     })
     public hints: string[];
 

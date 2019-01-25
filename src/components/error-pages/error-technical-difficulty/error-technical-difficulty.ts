@@ -19,20 +19,20 @@ import WithRender from './error-technical-difficulty.html?style=./error-technica
 export class MErrorTechnicalDifficulty extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:title')
+        default: () => (Vue.prototype).$i18n.translate('m-error-technical-difficulty:title')
     })
     public title: string;
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:home-label'), '\\')]
+            new Link((Vue.prototype).$i18n.translate('m-error-technical-difficulty:home-label'), '\\')]
     })
     public links: Link[];
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:hint.primary'),
-            (Vue.prototype as any).$i18n.translate('m-error-technical-difficulty:hint.secondary')]
+            (Vue.prototype).$i18n.translate('m-error-technical-difficulty:hint.primary'),
+            (Vue.prototype).$i18n.translate('m-error-technical-difficulty:hint.secondary')]
     })
     public hints: string[];
 

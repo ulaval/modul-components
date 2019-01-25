@@ -106,7 +106,7 @@ export class MLimitText extends ModulVue {
 
     private isContentTooTall(update: boolean): boolean {
         if (update) { this.updateContent(this.reduceContent, this.el); }
-        let currentHeight: number = (this.el as HTMLElement).clientHeight;
+        let currentHeight: number = (this.el).clientHeight;
         return (currentHeight > this.maxHeight);
     }
 

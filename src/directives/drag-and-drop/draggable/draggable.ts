@@ -195,7 +195,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 targetGrabbable = false;
             }
 
-            recursiveElement = recursiveElement!.parentElement;
+            recursiveElement = recursiveElement.parentElement;
         }
 
         return targetGrabbable;
