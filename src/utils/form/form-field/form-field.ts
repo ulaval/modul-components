@@ -7,6 +7,8 @@ export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
+    private messageAfterTouched: boolean = true;
+    private touched: boolean = false;
 
     /**
      *
@@ -25,8 +27,18 @@ export class FormField<T> {
         return this.internalValue;
     }
 
+    /**
+     * set the value of the field
+     */
     set value(newValue: T) {
         this.change(newValue);
+    }
+
+    /**
+     * determine if the message should be available only when field has been touched
+     */
+    set isMessageAfterTouched(value: boolean) {
+        this.messageAfterTouched = value;
     }
 
     /**
@@ -37,10 +49,21 @@ export class FormField<T> {
     }
 
     /**
+     * indicates if the field is touched
+     */
+    get isTouched(): boolean {
+        return this.touched;
+    }
+
+    /**
      * message to show under the form field
      */
     get errorMessage(): string {
-        return this.internalState.errorMessage;
+        if (this.messageAfterTouched && this.touched && this.hasError) {
+            return this.internalState.errorMessage;
+        }
+
+        return '';
     }
 
     /**
@@ -66,6 +89,15 @@ export class FormField<T> {
         this.internalValue = this.accessCallback();
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
+        this.touched = false;
+    }
+
+    /**
+     * Mark the field as touched
+     */
+    markAsTouched(): void {
+        this.touched = true;
+        this.validate();
     }
 
     /**
