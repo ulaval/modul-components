@@ -25,6 +25,9 @@ export class FormField<T> {
         return this.internalValue;
     }
 
+    /**
+     * Set the value of the field
+     */
     set value(newValue: T) {
         this.change(newValue);
     }

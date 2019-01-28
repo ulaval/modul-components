@@ -30,6 +30,9 @@ export class Form {
         return this.fields.filter((field: FormField<any>) => field.hasError).length;
     }
 
+    /**
+     * Number of form errors
+     */
     get nbOfFormErrors(): number {
         return this.internalState.errorMessages.length;
     }
