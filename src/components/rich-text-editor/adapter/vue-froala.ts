@@ -22,6 +22,7 @@ enum froalaEvents {
     InitializationDelayed = 'froalaEditor.initializationDelayed',
     ContentChanged = 'froalaEditor.contentChanged',
     Focus = 'froalaEditor.focus',
+    Blur = 'froalaEditor.blur',
     KeyUp = 'froalaEditor.keyup',
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
@@ -197,17 +198,7 @@ export enum FroalaStatus {
 
     protected mouseupListener(event: MouseEvent): void {
         if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement)) {
-            this.status = FroalaStatus.Blurring;
-            window.addEventListener('resize', this.onResize);
-            this.$emit('blur');
-            this.hideToolbar();
-
-            this.isFocused = false;
-            this.status = FroalaStatus.Blurred;
-
-            this.isDirty = false;
-            this.internalReadonly = false;
-            this.isDisabled = this.disabled;
+            this.closeEditor();
         }
     }
 
@@ -322,6 +313,12 @@ export enum FroalaStatus {
                         this.internalReadonly = this.readonly;
                     }
                 },
+                [froalaEvents.Blur]: (_e, _editor) => {
+                    if (this.mousedownInsideEditor) {
+                        // iOS keyboard closed
+                        this.closeEditor();
+                    }
+                },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
                     if (this.currentConfig.immediateVueModelUpdate) {
                         this.updateModel();
@@ -354,6 +351,20 @@ export enum FroalaStatus {
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
         }
+    }
+
+    private closeEditor(): void {
+        this.status = FroalaStatus.Blurring;
+        window.addEventListener('resize', this.onResize);
+        this.$emit('blur');
+        this.hideToolbar();
+
+        this.isFocused = false;
+        this.status = FroalaStatus.Blurred;
+
+        this.isDirty = false;
+        this.internalReadonly = false;
+        this.isDisabled = this.disabled;
     }
 
     @Watch('disabled')
