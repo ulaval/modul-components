@@ -11,7 +11,7 @@ jest.mock('./form-field/form-field', () => {
         FormField: jest.fn().mockImplementation(() => {
             return mockFormField;
         })
-    }
+    };
 });
 
 let fieldValidation: FormFieldValidation;
@@ -42,7 +42,7 @@ describe(`Form`, () => {
             focusThisField: jest.fn()
         };
         ((FormField as unknown) as jest.Mock).mockClear();
-    })
+    });
 
     describe(`When the form contains no fields with errors`, () => {
         beforeEach(() => {

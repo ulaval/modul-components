@@ -14,7 +14,7 @@ jest.mock('../../utils/form/form', () => {
         Form: jest.fn().mockImplementation(() => {
             return mockForm;
         })
-    }
+    };
 });
 
 let HTML_ELEMENT: HTMLElement;
@@ -27,7 +27,7 @@ let FORM: Form;
 let formHasError: boolean = false;
 let nbFieldsThatHasError: number = 0;
 let fieldHasError: boolean = false;
-let mockGetErrorsForSummary = jest.fn();
+let mockGetErrorsForSummary: jest.Mock = jest.fn();
 
 describe(`MForm`, () => {
     let wrapper: Wrapper<MForm>;
@@ -55,7 +55,7 @@ describe(`MForm`, () => {
             ]);
         }
 
-    }
+    };
 
     beforeEach(() => {
         localVue = createLocalVue();
@@ -134,7 +134,7 @@ describe(`MForm`, () => {
                 nbFieldsThatHasError = 2;
                 mockGetErrorsForSummary = jest.fn(() => {
                     return [ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE_SUMMARY];
-                })
+                });
                 initialiseForm(true);
                 initialiserWrapper();
                 wrapper.trigger('submit');

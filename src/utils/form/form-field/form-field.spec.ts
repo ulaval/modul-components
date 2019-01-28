@@ -2,7 +2,7 @@ import { InputManagement } from '../../../mixins/input-management/input-manageme
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from './form-field';
 
-let mockFocus = jest.fn();
+let mockFocus: jest.Mock = jest.fn();
 jest.mock('../../../mixins/input-management/input-management', () => {
     return {
         InputManagement: jest.fn().mockImplementation(() => {
@@ -10,7 +10,7 @@ jest.mock('../../../mixins/input-management/input-management', () => {
                 focusInput: mockFocus
             };
         })
-    }
+    };
 });
 
 let validationState: FormFieldValidation;
