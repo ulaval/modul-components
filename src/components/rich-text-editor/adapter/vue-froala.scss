@@ -60,6 +60,10 @@
 
         .fr-view {
             color: $m-color--disabled;
+
+            /deep/ a {
+                color: $m-color--disabled;
+            }
         }
 
         .fr-toolbar {
