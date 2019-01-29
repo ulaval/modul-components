@@ -11,7 +11,6 @@
                      :max-length="maxTitleLength"
                      :character-count-threshold="thresholdTitle"
                      @blur="titleField.touch()"
-                     v-m-form-field=titleField
                      ref="title"></m-textfield>
 
         <m-textarea v-model.trim="descriptionField.value"
