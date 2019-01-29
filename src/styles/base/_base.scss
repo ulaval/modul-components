@@ -11,12 +11,10 @@
 @include font-face('Source Sans Variable', 'source-sans-variable/SourceSansVariable-Italic', $m-font-weight-range, italic);
 
 .m-u--app-body {
+    font-family: $m-font-family--fallback;
+
     @supports (font-variation-settings: normal) {
         font-family: $m-font-family;
-    }
-
-    @supports not (font-variation-settings: normal) {
-        font-family: $m-font-family--fallback;
     }
 
     @at-root {

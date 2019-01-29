@@ -8,7 +8,7 @@
     user-select: none;
     text-decoration: none;
     line-height: 1;
-    font-family: $m-font-family;
+    font-family: inherit;
 }
 
 @mixin m-button--primary() {

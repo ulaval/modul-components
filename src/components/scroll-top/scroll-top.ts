@@ -1,10 +1,8 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
-import { ScrollToDuration } from '../../utils';
+import ScrollToPlugin, { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
 import { SCROLL_TOP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
@@ -63,11 +61,9 @@ export class MScrollTop extends ModulVue {
 
 const ScrollTopPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(SCROLL_TOP_NAME + ' is not ready for production');
         v.use(IconPlugin);
-        v.use(ButtonPlugin);
         v.use(I18nPlugin);
-        v.use(PortalPlugin);
+        v.use(ScrollToPlugin);
         v.component(SCROLL_TOP_NAME, MScrollTop);
     }
 };

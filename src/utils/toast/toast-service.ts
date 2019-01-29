@@ -2,6 +2,13 @@ import { PluginObject } from 'vue/types/plugin';
 import { VNode } from 'vue/types/vnode';
 import { MToast, MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
 
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $toast: ToastService;
+    }
+}
+
 export interface ToastParams {
     text: string;
     actionLabel?: string;
@@ -71,11 +78,11 @@ export class ToastService {
     }
 }
 
-const ToastPlugin: PluginObject<any> = {
+const ToastServicePlugin: PluginObject<any> = {
     install(v): void {
         let toast: ToastService = new ToastService();
         (v.prototype as any).$toast = toast;
     }
 };
 
-export default ToastPlugin;
+export default ToastServicePlugin;

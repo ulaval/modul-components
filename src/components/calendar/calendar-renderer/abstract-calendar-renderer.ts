@@ -1,5 +1,5 @@
 import { Emit, Prop } from 'vue-property-decorator';
-import { ModulVue } from '../../../utils';
+import { ModulVue } from '../../../utils/vue/vue';
 import { Calendar, CalendarEvent, DayState, MonthState, YearState } from '../calendar-state/state/calendar-state';
 
 export abstract class MAbstractCalendarRenderer extends ModulVue {

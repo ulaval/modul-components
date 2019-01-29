@@ -2,9 +2,9 @@
 import { Component } from 'vue-property-decorator';
 import { PluginObject } from 'vue/types/plugin';
 import { MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
-import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../utils-names';
-import { ToastParams } from './toast-service';
+import { ModulVue } from '../vue/vue';
+import ToastServicePlugin, { ToastParams } from './toast-service';
 import WithRender from './toast-service.sandbox.html';
 
 @WithRender
@@ -77,7 +77,8 @@ export class MToastServiceSandbox extends ModulVue {
 
 const MToastServiceSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${TOAST}-sandbox`, MToastServiceSandbox);
+        v.use(ToastServicePlugin);
+        v.component(`m-toast-service-sandbox`, MToastServiceSandbox);
     }
 };
 

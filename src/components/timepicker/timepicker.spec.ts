@@ -8,6 +8,7 @@ import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MIconButton } from '../icon-button/icon-button';
 import TimepickerPlugin, { MTimepicker } from './timepicker';
+import ModulPlugin from '../../utils/modul/modul';
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -20,6 +21,7 @@ describe('MTimepicker', () => {
         resetModulPlugins();
         localVue = createLocalVue();
         Vue.use(TimepickerPlugin);
+        Vue.use(ModulPlugin);
         addMessages(Vue, [
             'components/timepicker/timepicker.lang.en.json'
         ]);

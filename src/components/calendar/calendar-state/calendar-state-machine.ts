@@ -1,6 +1,6 @@
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
-import { ModulVue } from '../../../utils';
+import { ModulVue } from '../../../utils/vue/vue';
 import { RangeDate, SingleDate } from './state/abstract-calendar-state';
 import CalendarRangeDateState from './state/calendar-range-date-state';
 import CalendarSingleDateState from './state/calendar-single-date-state';

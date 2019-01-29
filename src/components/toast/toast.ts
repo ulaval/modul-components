@@ -1,17 +1,16 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import I18nFilterPlugin from '../../filters/i18n/i18n';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { TOAST } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
-import { MLinkMode } from '../link/link';
+import LinkPlugin, { MLinkMode } from '../link/link';
 import WithRender from './toast.html?style=./toast.scss';
 
 export enum MToastTimeout {
@@ -214,10 +213,9 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 
 const ToastPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(TOAST, 'plugin.install');
-        v.use(ModulPlugin);
-        v.use(PortalPlugin);
+        v.use(I18nFilterPlugin);
         v.use(IconPlugin);
+        v.use(LinkPlugin);
         v.use(IconButtonPlugin);
         v.use(I18nPlugin);
         v.use(MediaQueriesPlugin);

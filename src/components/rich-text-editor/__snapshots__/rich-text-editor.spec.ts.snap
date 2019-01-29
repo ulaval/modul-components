@@ -2,9 +2,14 @@
 
 exports[`MRichTextEditor should render correctly 1`] = `
 <div class="m-rich-text" style="width:100%;max-width:288px;">
-    <m-input-style label-for="mrich-text-uuid" empty="true" border-top="true" tag-style="default">
-        <froala config="[object Object]" value="" custom-translations="[object Object]"></froala>
-    </m-input-style>
-    <m-validation-message class="m-rich-text__validation-message"></m-validation-message>
+    <div border-top="true" class="m-input-style m--is-tag-default" style="width:undefined;">
+        <div class="m-input-style__body">
+            <div class="m-input-style__body__left">
+                <froala config="[object Object]" value="" custom-translations="[object Object]"></froala>
+            </div>
+            <div class="m-input-style__body__right"></div>
+        </div>
+    </div>
+    <div class="m-validation-message m-rich-text__validation-message"></div>
 </div>
 `;

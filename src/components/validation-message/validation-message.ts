@@ -1,11 +1,12 @@
-import { ModulVue } from '../../utils/vue/vue';
 import { PluginObject } from 'vue';
-import { Prop } from 'vue-property-decorator';
 import Component from 'vue-class-component';
-import WithRender from './validation-message.html?style=./validation-message.scss';
-import { VALIDATION_MESSAGE_NAME } from '../component-names';
+import { Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
+import { ModulVue } from '../../utils/vue/vue';
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
+import { VALIDATION_MESSAGE_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import WithRender from './validation-message.html?style=./validation-message.scss';
 
 @WithRender
 @Component({
@@ -25,8 +26,8 @@ export class MValidationMessage extends ModulVue {
 
 const ValidationMessagePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(VALIDATION_MESSAGE_NAME, 'plugin.install');
         v.use(IconPlugin);
+        v.use(AccordionTransitionPlugin);
         v.component(VALIDATION_MESSAGE_NAME, MValidationMessage);
     }
 };

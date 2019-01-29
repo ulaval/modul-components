@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { DROPDOWN_NAME } from '../component-names';
+import DropdownPlugin from './dropdown';
 import WithRender from './dropdown.sandbox.html';
 
 @WithRender
@@ -20,6 +21,7 @@ export class MDropdownSandbox extends ModulVue {
 
 const DropdownSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(DropdownPlugin);
         v.component(`${DROPDOWN_NAME}-sandbox`, MDropdownSandbox);
     }
 };
