@@ -33,7 +33,7 @@ export class Form {
     /**
      * Number of form errors
      */
-    get nbOfFormErrors(): number {
+    get nbOfErrors(): number {
         return this.internalState.errorMessages.length;
     }
 
@@ -41,7 +41,7 @@ export class Form {
      * return true if the form contains no field with errors
      */
     get isValid(): boolean {
-        return this.nbFieldsThatHasError === 0 && this.nbOfFormErrors === 0;
+        return this.nbFieldsThatHasError === 0 && this.nbOfErrors === 0;
     }
 
     /**
