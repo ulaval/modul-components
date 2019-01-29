@@ -93,7 +93,7 @@ export class FormField<T> {
     }
 
     /**
-     * Mark the field as touched and trigger validation
+     * mark the field as touched and trigger validation
      */
     touch(): void {
         this.touched = true;
