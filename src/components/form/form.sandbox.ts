@@ -17,7 +17,7 @@ export class MFormSandbox extends Vue {
     formSent: any = '';
 
     titleField: FormField<string> = new FormField((): string => this.title, ValidationSandbox.validateTitle);
-    descriptionField: FormField<string> = new FormField((): string => this.description, ValidationSandbox.validateDescription);
+    descriptionField: FormField<string> = new FormField((): string => this.description, ValidationSandbox.validateDescription, { messageAfterTouched: false });
     locationField: FormField<string> = new FormField((): string => this.location, ValidationSandbox.validateLocation);
     form: Form = new Form([this.titleField, this.descriptionField, this.locationField]);
 

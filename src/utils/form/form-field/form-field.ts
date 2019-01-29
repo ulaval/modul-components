@@ -1,5 +1,9 @@
 import { FormFieldState } from '../form-field-state/form-field-state';
 
+export interface FormFieldOptions {
+    messageAfterTouched?: boolean;
+}
+
 /**
  * Form Field Class
  */
@@ -15,9 +19,14 @@ export class FormField<T> {
      * @param value function called to initialize the value of a field
      * @param validationCallback function called to validate
      */
-    constructor(public accessCallback: () => T, public validationCallback?: (value: T) => FormFieldState) {
+    constructor(public accessCallback: () => T, public validationCallback?: (value: T) => FormFieldState, options?: FormFieldOptions) {
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
+
+        if (options) {
+            this.messageAfterTouched = typeof options.messageAfterTouched === undefined ?
+                this.messageAfterTouched : !!options.messageAfterTouched;
+        }
     }
 
     /**
@@ -32,13 +41,6 @@ export class FormField<T> {
      */
     set value(newValue: T) {
         this.change(newValue);
-    }
-
-    /**
-     * determine if the message should be available only when field has been touched
-     */
-    set isMessageAfterTouched(value: boolean) {
-        this.messageAfterTouched = value;
     }
 
     /**
@@ -59,7 +61,15 @@ export class FormField<T> {
      * message to show under the form field
      */
     get errorMessage(): string {
-        if (this.messageAfterTouched && this.touched && this.hasError) {
+        if (
+            this.hasError
+            &&
+            (
+                (this.messageAfterTouched && this.touched)
+                ||
+                !this.messageAfterTouched
+            )
+        ) {
             return this.internalState.errorMessage;
         }
 
