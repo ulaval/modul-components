@@ -26,8 +26,8 @@ const VALIDATING_FUNCTION: FieldValidationCallback = (): FormFieldValidation => 
 
 const mockFieldValidationWithError: FormFieldValidation = {
     isError: true,
-    errorMessage: 'errorMessage',
-    errorMessageSummary: 'errorMessageSummary'
+    errorMessages: ['errorMessage'],
+    errorMessagesSummary: ['errorMessageSummary']
 };
 let errorFormField: FormField<string>;
 let formFieldSummaryErrors: string[];

@@ -65,7 +65,7 @@ describe(`FormField`, () => {
 
         describe(`When we validate an invalid field`, () => {
             beforeEach(() => {
-                validationState = new FormFieldValidation(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
+                validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
                 formField.validate();
             });
 
@@ -83,20 +83,20 @@ describe(`FormField`, () => {
         describe(`When we validate an invalid field with messageAfterTouched = true`, () => {
             beforeEach(() => {
                 formField = new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, VALIDATION_FUNCTION, { messageAfterTouched: true });
-                validationState = new FormFieldValidation(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
+                validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
             });
 
             it(`Then the state of the field contains no errors if not touched`, () => {
                 formField.validate();
                 expect(formField.hasError).toBe(true);
-                expect(formField.errorMessageSummary).toBe(ERROR_MESSAGE_SUMMARY);
+                expect(formField.errorMessageSummary).toEqual(ERROR_MESSAGE_SUMMARY);
                 expect(formField.errorMessage).toBe('');
             });
 
             it(`Then the state of the field contains errors if touched`, () => {
                 formField.touch();
                 expect(formField.hasError).toBe(true);
-                expect(formField.errorMessageSummary).toBe(ERROR_MESSAGE_SUMMARY);
+                expect(formField.errorMessageSummary).toEqual(ERROR_MESSAGE_SUMMARY);
                 expect(formField.errorMessage).toBe(ERROR_MESSAGE);
             });
         });
@@ -120,7 +120,7 @@ describe(`FormField`, () => {
 
         describe(`When we change the value for an invalid value`, () => {
             beforeEach(() => {
-                validationState = new FormFieldValidation(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
+                validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
                 formField.value = NEW_FIELD_VALUE;
             });
 

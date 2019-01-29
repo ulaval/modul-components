@@ -6,7 +6,7 @@ export interface FormFieldOptions {
     messageAfterTouched?: boolean;
 }
 
-export type FieldValidationCallback = (value: any, params?: any) => FormFieldValidation;
+export type FieldValidationCallback = (value: any) => FormFieldValidation;
 /**
  * Form Field Class
  */
@@ -16,7 +16,6 @@ export class FormField<T> {
     private internalState: FormFieldState;
     private messageAfterTouched: boolean = true;
     private touched: boolean = false;
-    private internalParams: any;
 
     /**
      *
@@ -25,6 +24,7 @@ export class FormField<T> {
      * @param validationCallback Array of functions called to validate
      */
     constructor(public accessCallback: () => T, public htmlReference: () => HTMLElement, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
+
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
 
@@ -102,15 +102,15 @@ export class FormField<T> {
         if (this.validationCallback.length > 0) {
             let nouvelEtat: FormFieldState = new FormFieldState();
             this.validationCallback.forEach((validationFunction) => {
-                let validation: FormFieldValidation = validationFunction(this.internalValue, this.internalParams);
+                let validation: FormFieldValidation = validationFunction(this.internalValue);
                 if (validation.isError) {
                     nouvelEtat.hasError = true;
                 }
-                if (validation.errorMessage) {
-                    nouvelEtat.errorMessages.push(validation.errorMessage);
+                if (validation.errorMessages.length > 0) {
+                    nouvelEtat.errorMessages = nouvelEtat.errorMessages.concat(validation.errorMessages);
                 }
-                if (validation.errorMessageSummary) {
-                    nouvelEtat.errorMessagesSummary.push(validation.errorMessageSummary);
+                if (validation.errorMessagesSummary.length > 0) {
+                    nouvelEtat.errorMessagesSummary = nouvelEtat.errorMessagesSummary.concat(validation.errorMessagesSummary);
                 }
             });
             this.changeState(nouvelEtat);
