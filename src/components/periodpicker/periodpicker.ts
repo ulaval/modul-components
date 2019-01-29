@@ -12,6 +12,35 @@ export class MDateRange {
     to: DatePickerSupportedTypes;
 }
 
+interface MPeriodPickerFromProps {
+    label: string;
+    value: DatePickerSupportedTypes;
+    min: DatePickerSupportedTypes;
+    max: DatePickerSupportedTypes;
+}
+
+interface MPeriodPickerFromHandlers {
+    change(newValue: string): void;
+    open(): void;
+}
+
+export interface MPeriodPickerFromComponentState extends MPeriodPickerFromProps, MPeriodPickerFromHandlers { }
+
+interface MPeriodPickerToProps {
+    label: string;
+    focus: boolean;
+    value: DatePickerSupportedTypes;
+    min: DatePickerSupportedTypes;
+    max: DatePickerSupportedTypes;
+}
+
+interface MPeriodPickerToHandlers {
+    change(newValue: string): void;
+    close(): void;
+}
+
+export interface MPeriodPickerToComponentState extends MPeriodPickerToProps, MPeriodPickerToHandlers { }
+
 @WithRender
 @Component({
     mixins: [MediaQueries]
@@ -28,10 +57,10 @@ export class MPeriodPicker extends ModulVue {
 
     toIsFocused: boolean = false;
 
-    get firstInputState(): any {
+    get firstInputState(): { props: MPeriodPickerFromProps, handlers: MPeriodPickerFromHandlers } {
         return {
             // TODO : Put back label when the bug is gone
-            props: { /* label: 'Du', */value: this.internalValue.from, min: this.min, max: this.max },
+            props: { label: '', value: this.internalValue.from, min: this.min, max: this.max },
             handlers: {
                 change: (newValue: string) => this.onDateFromChange(newValue),
                 open: () => this.onDateFromOpen()
@@ -39,10 +68,10 @@ export class MPeriodPicker extends ModulVue {
         };
     }
 
-    get secondInputState(): any {
+    get secondInputState(): { props: MPeriodPickerToProps, handlers: MPeriodPickerToHandlers } {
         return {
             // TODO : Put back label when the bug is gone
-            props: { /*label: 'Au', */focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
+            props: { label: '', focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
             handlers: {
                 change: (newValue: string) => this.onDateToChange(newValue),
                 close: () => this.onDateToClose()
@@ -58,7 +87,7 @@ export class MPeriodPicker extends ModulVue {
         return this.internalValue.from ? this.internalValue.from : this.min;
     }
 
-    onDateFromChange(newValue: any): void {
+    onDateFromChange(newValue: DatePickerSupportedTypes): void {
         if (newValue) {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 this.toIsFocused = true;
@@ -73,7 +102,7 @@ export class MPeriodPicker extends ModulVue {
         }
     }
 
-    onDateToChange(newValue: any): void {
+    onDateToChange(newValue: DatePickerSupportedTypes): void {
         if (newValue) {
             this.toIsFocused = false;
             this.emitNewValue(Object.assign({}, this.internalValue, { to: newValue }));

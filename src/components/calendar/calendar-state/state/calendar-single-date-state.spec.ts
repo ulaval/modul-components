@@ -117,7 +117,7 @@ describe(`A single date state`, () => {
 
     describe(`when updating value`, () => {
         it(`will update current date through callback`, () => {
-            calendarSingleDateState.updateValue(NEW_DATE);
+            calendarSingleDateState.updateState(NEW_DATE);
 
             const calendar: Calendar = calendarSingleDateState.buildCurrentCalendar().calendar;
 
@@ -125,7 +125,7 @@ describe(`A single date state`, () => {
         });
 
         it(`will update the currently displayed date`, () => {
-            calendarSingleDateState.updateValue(NEW_DATE);
+            calendarSingleDateState.updateState(NEW_DATE);
 
             const currentDate: string = calendarSingleDateState.buildCurrentCalendar().calendar.dates.current.toString();
 

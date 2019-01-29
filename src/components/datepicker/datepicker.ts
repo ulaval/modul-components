@@ -11,6 +11,7 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import CalendarPlugin from '../calendar/calendar';
 import { DATEPICKER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import InputStylePlugin from '../input-style/input-style';
@@ -68,8 +69,6 @@ export class MDatepicker extends ModulVue {
     }
 
     private inputOnKeydownDelete(): void {
-        // tslint:disable-next-line:no-console
-        console.log('HEHEHEHEHE');
         this.$emit('change', '');
     }
 
@@ -202,6 +201,7 @@ const DatepickerPlugin: PluginObject<any> = {
         v.use(ValidationMessagePlugin);
         v.use(MediaQueriesPlugin);
         v.use(PopupDirectivePlugin);
+        v.use(CalendarPlugin);
         v.component(DATEPICKER_NAME, MDatepicker);
     }
 };
