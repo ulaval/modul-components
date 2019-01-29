@@ -25,7 +25,7 @@ export class FormField<T> {
 
         if (options) {
             this.messageAfterTouched = typeof options.messageAfterTouched === undefined ?
-                this.messageAfterTouched : !!options.messageAfterTouched;
+                this.messageAfterTouched : options.messageAfterTouched!;
         }
     }
 
