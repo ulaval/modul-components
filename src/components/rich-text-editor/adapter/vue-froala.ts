@@ -85,6 +85,7 @@ export enum FroalaStatus {
     protected isDirty: boolean = false;
     protected status: FroalaStatus = FroalaStatus.Blurred;
 
+    private mousedownTriggered: boolean = false;
     private mousedownInsideEditor: boolean = false;
 
     @Watch('value')
@@ -189,6 +190,7 @@ export enum FroalaStatus {
     }
 
     protected mousedownListener(event: MouseEvent): void {
+        this.mousedownTriggered = true;
         if (this.$el.contains(event.target as HTMLElement) || $('.fr-modal.fr-active').length > 0) {
             this.mousedownInsideEditor = true;
         } else {
@@ -197,6 +199,7 @@ export enum FroalaStatus {
     }
 
     protected mouseupListener(event: MouseEvent): void {
+        this.mousedownTriggered = false;
         if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement)) {
             this.closeEditor();
         }
@@ -313,9 +316,8 @@ export enum FroalaStatus {
                         this.internalReadonly = this.readonly;
                     }
                 },
-                [froalaEvents.Blur]: (_e, _editor) => {
-                    if (this.mousedownInsideEditor) {
-                        // iOS keyboard closed
+                [froalaEvents.Blur]: () => {
+                    if (!this.mousedownTriggered || this.mousedownInsideEditor) {
                         this.closeEditor();
                     }
                 },
