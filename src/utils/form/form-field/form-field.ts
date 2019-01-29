@@ -61,19 +61,14 @@ export class FormField<T> {
      * message to show under the form field
      */
     get errorMessage(): string {
-        if (
-            this.hasError
-            &&
-            (
-                (this.messageAfterTouched && this.touched)
-                ||
-                !this.messageAfterTouched
-            )
+        let errorMessage: string = '';
+
+        if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)
         ) {
-            return this.internalState.errorMessage;
+            errorMessage = this.internalState.errorMessage;
         }
 
-        return '';
+        return errorMessage;
     }
 
     /**
