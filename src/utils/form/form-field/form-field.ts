@@ -93,6 +93,14 @@ export class FormField<T> {
     }
 
     /**
+     * Mark the field as touched and trigger validation
+     */
+    touch(): void {
+        this.touched = true;
+        this.validate();
+    }
+
+    /**
      * reset the field without validating
      */
     reset(): void {
@@ -100,14 +108,6 @@ export class FormField<T> {
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
         this.touched = false;
-    }
-
-    /**
-     * Mark the field as touched and trigger validation
-     */
-    touch(): void {
-        this.touched = true;
-        this.validate();
     }
 
     /**
