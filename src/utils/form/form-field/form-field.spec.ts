@@ -12,7 +12,7 @@ const FONCTION_VALIDATION: () => FormFieldState = (): FormFieldState => validati
 describe(`FormField`, () => {
     describe(`When we create a new instance with a value and a validating function`, () => {
         beforeEach(() => {
-            formField = new FormField((): string => FIELD_VALUE, FONCTION_VALIDATION);
+            formField = new FormField((): string => FIELD_VALUE, FONCTION_VALIDATION, { messageAfterTouched: false });
         });
 
         it(`Then the value is the field is the one passed`, () => {
@@ -53,6 +53,27 @@ describe(`FormField`, () => {
             });
 
             it(`Then the state of the field contains errors`, () => {
+                expect(formField.hasError).toBeTruthy();
+                expect(formField.errorMessageSummary).toBe(ERROR_MESSAGE_SUMMARY);
+                expect(formField.errorMessage).toBe(ERROR_MESSAGE);
+            });
+        });
+
+        describe(`When we validate an invalid field with messageAfterTouched = true`, () => {
+            beforeEach(() => {
+                formField = new FormField((): string => FIELD_VALUE, FONCTION_VALIDATION, { messageAfterTouched: true });
+                validationState = new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
+            });
+
+            it(`Then the state of the field contains no errors if not touched`, () => {
+                formField.validate();
+                expect(formField.hasError).toBeTruthy();
+                expect(formField.errorMessageSummary).toBe(ERROR_MESSAGE_SUMMARY);
+                expect(formField.errorMessage).toBe('');
+            });
+
+            it(`Then the state of the field contains errors if touched`, () => {
+                formField.touch();
                 expect(formField.hasError).toBeTruthy();
                 expect(formField.errorMessageSummary).toBe(ERROR_MESSAGE_SUMMARY);
                 expect(formField.errorMessage).toBe(ERROR_MESSAGE);

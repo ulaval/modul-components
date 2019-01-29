@@ -10,7 +10,8 @@
                      :character-count="true"
                      :max-length="maxTitleLength"
                      :character-count-threshold="thresholdTitle"
-                     @blur="titleField.markAsTouched()"
+                     @blur="titleField.touch()"
+                     v-m-form-field=titleField
                      ref="title"></m-textfield>
 
         <m-textarea v-model.trim="descriptionField.value"
@@ -20,7 +21,7 @@
                     :character-count="true"
                     :max-length="maxDescriptionLength"
                     :character-count-threshold="thresholdDescription"
-                    @blur="descriptionField.markAsTouched()"
+                    @blur="descriptionField.touch()"
                     ref="description">
         </m-textarea>
 
@@ -32,7 +33,7 @@
                     :character-count="true"
                     :max-length="maxLocationLength"
                     :character-count-threshold="thresholdLocation"
-                    @blur="locationField.markAsTouched()"
+                    @blur="locationField.touch()"
                     ref="location">
         </m-textarea>
     </m-form>

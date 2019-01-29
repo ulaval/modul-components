@@ -103,9 +103,9 @@ export class FormField<T> {
     }
 
     /**
-     * Mark the field as touched
+     * Mark the field as touched and trigger validation
      */
-    markAsTouched(): void {
+    touch(): void {
         this.touched = true;
         this.validate();
     }
