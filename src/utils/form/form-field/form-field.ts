@@ -63,8 +63,7 @@ export class FormField<T> {
     get errorMessage(): string {
         let errorMessage: string = '';
 
-        if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)
-        ) {
+        if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)) {
             errorMessage = this.internalState.errorMessage;
         }
 
