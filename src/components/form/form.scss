@@ -1,0 +1,26 @@
+@import 'commons';
+
+.m-form {
+    &__message-summary {
+        margin-bottom: $m-margin--l;
+
+        ul {
+            margin: 0;
+        }
+    }
+
+    &__required {
+        margin-top: -$m-spacing !important;
+        float: right;
+
+        &__marker {
+            color: $m-color--accent;
+            font-weight: $m-font-weight--black;
+        }
+
+        &__label {
+            font-size: $m-font-size--s;
+            color: $m-color--text-light;
+        }
+    }
+}
