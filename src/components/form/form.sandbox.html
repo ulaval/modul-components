@@ -10,7 +10,7 @@
                      :character-count="true"
                      :max-length="maxTitleLength"
                      :character-count-threshold="thresholdTitle"
-                     @blur="titleField.touch()"
+                     @blur="form.get('titleField').touch()"
                      ref="title"></m-textfield>
 
         <m-textarea v-model.trim="form.get('descriptionField').value"
@@ -20,14 +20,14 @@
                     :character-count="true"
                     :max-length="maxDescriptionLength"
                     :character-count-threshold="thresholdDescription"
-                    @blur="descriptionField.touch()"
+                    @blur="form.get('descriptionField').touch()"
                     ref="description">
         </m-textarea>
 
         <m-textarea v-model.trim="form.get('passwordField').value"
                     label="Password"
                     :max-width="inputMaxWidthLarge"
-                    :error-message="passwordField.errorMessage"
+                    :error-message="form.get('passwordField').errorMessage"
                     @blur="form.get('passwordField').touch()"
                     ref="password">
         </m-textarea>
