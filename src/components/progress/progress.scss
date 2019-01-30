@@ -10,6 +10,10 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
         display: block;
         background: $m-color--grey-light;
 
+        &.m--is-monochrome {
+            background: $m-color--grey-lightest;
+        }
+
         &.m--is-determinate {
             &.m--is-enter-active .m-progress__bar {
                 width: 0 !important;
@@ -35,35 +39,50 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
             &.m--is-error .m-progress__bar {
                 background: $m-color--error;
             }
+
+            &.m--is-monochrome .m-progress__bar {
+                background: $m-color--grey-darker;
+            }
         }
 
-        &.m--is-indeterminate .m-progress__bar {
-            background: $m-color--ul-yellow;
+        &.m--is-indeterminate {
+            .m-progress__bar {
+                background: $m-color--ul-yellow;
 
-            &::before {
-                content: '';
-                position: absolute;
-                background-color: inherit;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                border-radius: $m-border-radius;
-                will-change: left, right;
-                animation: indeterminate $m-loading-speed-indeterminate cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    background-color: inherit;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    border-radius: $m-border-radius;
+                    will-change: left, right;
+                    animation: indeterminate $m-loading-speed-indeterminate cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    background-color: inherit;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    border-radius: $m-border-radius;
+                    will-change: left, right;
+                    animation: indeterminate-short $m-loading-speed-indeterminate cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+                    -webkit-animation-delay: 1.15s;
+                    animation-delay: 1.15s;
+                }
             }
 
-            &::after {
-                content: '';
-                position: absolute;
-                background-color: inherit;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                border-radius: $m-border-radius;
-                will-change: left, right;
-                animation: indeterminate-short $m-loading-speed-indeterminate cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-                -webkit-animation-delay: 1.15s;
-                animation-delay: 1.15s;
+            &.m--is-monochrome .m-progress__bar {
+                background: $m-color--grey-lightest;
+
+                &::before,
+                &::after {
+                    background-color: $m-color--grey-darker;
+                }
             }
         }
     }
@@ -72,12 +91,20 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
         display: inline-flex;
         position: relative;
 
-        &.m--is-indeterminate .m-progress__wrap {
-            animation: m-progress-spinner-rotate 2s linear infinite;
+        &.m--is-indeterminate {
+            .m-progress__wrap {
+                animation: m-progress-spinner-rotate 2s linear infinite;
 
-            .m-progress__circle {
-                stroke: $m-color--ul-yellow;
-                animation: 4s infinite $m-circle-transition-speed;
+                .m-progress__circle {
+                    stroke: $m-color--ul-yellow;
+                    animation: 4s infinite $m-circle-transition-speed;
+                }
+            }
+
+            &.m--is-monochrome .m-progress__wrap {
+                .m-progress__circle {
+                    stroke: $m-color--grey-darker;
+                }
             }
         }
 
@@ -119,6 +146,12 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
             &.m--is-error {
                 .m-progress__circle {
                     stroke: $m-color--error;
+                }
+            }
+
+            &.m--is-monochrome {
+                .m-progress__circle {
+                    stroke: $m-color--grey-darker;
                 }
             }
         }

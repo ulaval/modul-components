@@ -72,6 +72,7 @@ export class MSlider extends ModulVue {
     }
 
     private onKeydown(event: KeyboardEvent): void {
+        // tslint:disable-next-line: deprecation
         switch (event.keyCode) {
             case 37:
                 this.decrement(this.step);

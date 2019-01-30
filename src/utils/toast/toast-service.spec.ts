@@ -11,6 +11,7 @@ jest.mock('../../components/toast/toast', () => {
 });
 
 const mockCreateElement: jest.Mock = jest.fn();
+// tslint:disable-next-line: deprecation
 document.createElement = mockCreateElement;
 
 const simpleToastParams: ToastParams = {
@@ -42,7 +43,10 @@ describe(`The Toast Manager`, () => {
             toastManager.show(simpleToastParams);
 
             expect(toastManager.activeToast).toBeTruthy();
+
+            // tslint:disable-next-line: deprecation
             expect(document.createElement).toHaveBeenCalledTimes(1);
+            // tslint:disable-next-line: deprecation
             expect(document.createElement).toHaveBeenCalledWith('div');
         });
 
@@ -68,7 +72,7 @@ describe(`The Toast Manager`, () => {
             it(`should change the toast`, () => {
                 toastManager.show(secondToastParams);
 
-                const secondToast: MToast = toastManager.activeToast;
+                const secondToast: MToast = toastManager.activeToast!;
                 expect(firstToast).not.toBe(secondToast);
             });
         });

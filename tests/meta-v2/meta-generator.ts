@@ -52,7 +52,7 @@ export class MetaGenerator {
         this.project.getSourceFiles().forEach((sourceFile: SourceFile) => {
             let classDeclarations: ClassDeclaration[] = sourceFile.getClasses();
             classDeclarations.forEach((classDeclaration: ClassDeclaration) => {
-                let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+                let componentDecorator: Decorator | undefined = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
 
                 // If the class has the @Component decorator
                 if (componentDecorator) {
@@ -67,11 +67,12 @@ export class MetaGenerator {
 
     private getTemplateAsString(filePath: string): string {
         // get the template
-        let template: string;
+        let template: string = '';
         try {
             template = fs.readFileSync(filePath, {
                 encoding: 'utf8'
             });
+
         } catch (err) { }
         return template;
     }
@@ -82,10 +83,10 @@ export class MetaGenerator {
     private generateComponentMeta(classDeclaration: ClassDeclaration, template: string): MetaComponent {
         // extract component name
         let output: MetaComponent = {
-            componentName: classDeclaration.getName()
+            componentName: classDeclaration.getName()!
         };
 
-        let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+        let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME)!;
 
         output.mixins = this.extractorMixinsFromComponentDecorator(componentDecorator);
 
@@ -104,8 +105,8 @@ export class MetaGenerator {
 
         decorator.getArguments().forEach((argument) => {
             if (argument instanceof ObjectLiteralExpression) {
-                if ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME)) {
-                    let mixins: string = ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME) as PropertyAssignment).getInitializer().getText();
+                if ((argument).getProperty(MIXINS_PROPERTY_NAME)) {
+                    let mixins: string = ((argument).getProperty(MIXINS_PROPERTY_NAME) as PropertyAssignment).getInitializer()!.getText();
                     if (mixins) {
                         result = mixins.replace(/\[?\]?\r?\n?/g, '').split(',').map((str) => str.trim());
                     }
@@ -176,12 +177,12 @@ export class MetaGenerator {
     }
 
     private extractMetaPropFromPropertyTypes(classInstancePropertyTypes: ClassInstancePropertyTypes): MetaProps {
-        let name: string = classInstancePropertyTypes.getName();
+        let name: string = classInstancePropertyTypes.getName()!;
         let type: Type = classInstancePropertyTypes.getType();
 
         let output: MetaProps = {
             name: name,
-            type: type.getNonNullableType().getText().split('.').pop(),
+            type: type.getNonNullableType().getText().split('.').pop()!,
             optional: type.isNullable()
         };
 
@@ -190,7 +191,7 @@ export class MetaGenerator {
             output.values = this.getTypeTypesAsStrings(type.getNonNullableType().compilerType);
         }
 
-        let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME);
+        let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME)!;
         if (propDecorator.isDecoratorFactory()) {
             let defaultValue: string = this.extractDefaultValueFromPropDecorator(propDecorator);
             if (defaultValue) {
@@ -207,7 +208,7 @@ export class MetaGenerator {
             name: ''
         };
 
-        let metaDecorator: Decorator = methodDeclaration.getDecorator(EMIT_DECORATOR_NAME);
+        let metaDecorator: Decorator = methodDeclaration.getDecorator(EMIT_DECORATOR_NAME)!;
 
         // extract the name of event.
         if (metaDecorator.isDecoratorFactory() && metaDecorator.getArguments().length === 1) {
@@ -221,12 +222,12 @@ export class MetaGenerator {
         if (methodDeclaration.getParameters() && methodDeclaration.getParameters().length > 0) {
             output.arguments = methodDeclaration.getParameters().map((parameterDeclaration: ParameterDeclaration) => {
 
-                let name: string = parameterDeclaration.getName();
+                let name: string = parameterDeclaration.getName()!;
                 let type: Type = parameterDeclaration.getType();
 
                 return {
-                    name: parameterDeclaration.getName(),
-                    type: type.getNonNullableType().getText().split('.').pop()
+                    name,
+                    type: type.getNonNullableType().getText().split('.').pop()!
                 };
             });
         }
@@ -238,10 +239,10 @@ export class MetaGenerator {
         let _default: string = '';
         propDecorator.getArguments().forEach((argument) => {
             if (argument instanceof ObjectLiteralExpression) {
-                let arg: ObjectLiteralExpression = argument as ObjectLiteralExpression;
+                let arg: ObjectLiteralExpression = argument;
                 if (arg.getProperty(DEFAULT_PROPERTY_NAME)) {
 
-                    let initializer: Expression = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer();
+                    let initializer: Expression = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer()!;
 
                     if (initializer.getKind() === SyntaxKind.ArrowFunction) {
                         _default = DEFAULT_ARROW_FUNCTION_VALUE;                    // we dont want arrow function here

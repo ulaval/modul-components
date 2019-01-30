@@ -31,6 +31,8 @@ jest.mock('../../utils/user-agent/user-agent', () => ({
 let mockIsDesktopValue: boolean = true;
 (UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => mockIsDesktopValue);
 
+
+
 describe('MFileUpload', () => {
     beforeEach(() => {
         resetModulPlugins();

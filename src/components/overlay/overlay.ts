@@ -42,7 +42,7 @@ export class MOverlay extends ModulVue {
     }
 
     private get popupBody(): any {
-        return (this.$refs.article as Element).querySelector('.m-popup__body');
+        return (this.$refs.article).querySelector('.m-popup__body');
     }
 
     private get isAndroid(): boolean {

@@ -101,35 +101,15 @@
         </template>
     </m-table>
 
-    <h2>With title</h2>
-    <m-table :columns="columns"
-             :rows="rows"
-             title="Title">
-    </m-table>
-
-    <h2>Search slot</h2>
-    <m-table :columns="columns"
-             :rows="rows">
-        <m-textfield slot="search"></m-textfield>
-    </m-table>
-
-    <h2>Add button</h2>
-    <m-table :columns="columns"
-             :rows="rows"
-             add-btn-label="Add label">
-    </m-table>
-
-    <h2>Full header</h2>
-    <m-table :columns="columns"
-             :rows="rows"
-             title="Title"
-             add-btn-label="Add label">
-        <m-textfield slot="search"></m-textfield>
-    </m-table>
-
     <h2>Loading</h2>
     <m-table :columns="columns"
              :rows="rows"
              :loading="true">
+    </m-table>
+
+    <h2>Content wrapping</h2>
+    <m-table :columns="columnsOverflow"
+             :rows="rowsOverflow"
+             style="max-width: 320px;">
     </m-table>
 </div>

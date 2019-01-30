@@ -1,9 +1,9 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import { MTouch, MTouchSwipeDirection, MTouchSwipeOptions } from './touch';
 import ZingTouchUtil, { MZingGesture, MZingGestureCallback, MZingRegion } from './zingtouch';
+
 
 let mockZingRegion: MZingRegion = { bind: jest.fn(), unbind: jest.fn() };
 jest.mock('./zingtouch', () => ({
@@ -16,9 +16,9 @@ jest.mock('./zingtouch', () => ({
 }));
 
 describe('MTouch', () => {
-    let wrapper: Wrapper<MTouch> = undefined;
+    let wrapper: Wrapper<MTouch> | undefined = undefined;
     let localVue: VueConstructor<Vue>;
-    let swipeOptions: MTouchSwipeOptions = undefined;
+    let swipeOptions: MTouchSwipeOptions | undefined = undefined;
 
     let mountComponent: () => void = () => {
         wrapper = mount(MTouch, {
@@ -41,7 +41,7 @@ describe('MTouch', () => {
 
         mountComponent();
 
-        expect(ZingTouchUtil.setupRegion).toHaveBeenCalledWith(wrapper.vm.$el, false, false);
+        expect(ZingTouchUtil.setupRegion).toHaveBeenCalledWith(wrapper!.vm.$el, false, false);
     });
 
     it('should bind swipe correctly when mounting when swipe options are provided', () => {
@@ -52,7 +52,7 @@ describe('MTouch', () => {
         mountComponent();
 
         expect(ZingTouchUtil.GestureFactory.getGesture).toHaveBeenCalledWith(MZingTouchGestures.Swipe, swipeOptions);
-        expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper.vm.$el, 'swipeGesture', expect.anything());
+        expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper!.vm.$el, 'swipeGesture', expect.anything());
     });
 
     it('should bind swipe correctly when mounting when swipe options are not provided', () => {
@@ -65,7 +65,7 @@ describe('MTouch', () => {
 
         const expectedSwipeOptions: MTouchSwipeOptions = { angleThreshold: 20, direction: MTouchSwipeDirection.both, velocity: 0.3 };
         expect(ZingTouchUtil.GestureFactory.getGesture).toHaveBeenCalledWith(MZingTouchGestures.Swipe, expectedSwipeOptions);
-        expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper.vm.$el, 'swipeGesture', expect.anything());
+        expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper!.vm.$el, 'swipeGesture', expect.anything());
     });
 
     it('should bind tap correctly when mounting', () => {
@@ -76,11 +76,11 @@ describe('MTouch', () => {
         mountComponent();
 
         expect(ZingTouchUtil.GestureFactory.getGesture).toHaveBeenCalledWith(MZingTouchGestures.Tap);
-        expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper.vm.$el, 'tapGesture', expect.anything());
+        expect(mockZingRegion.bind).toHaveBeenCalledWith(wrapper!.vm.$el, 'tapGesture', expect.anything());
     });
 
     describe('swipe', () => {
-        let swipeCallback: MZingGestureCallback;
+        let swipeCallback: MZingGestureCallback | undefined;
         beforeEach(() => {
             swipeCallback = undefined;
             (ZingTouchUtil.GestureFactory.getGesture as jest.Mock).mockImplementation((gesture: string) => {
@@ -98,46 +98,54 @@ describe('MTouch', () => {
             it(`should handle swipe${direction} when provided swipe direction is both`, () => {
                 const fakeEventObject: any = { detail: 'someDetail', stopPropagation: jest.fn() };
                 jest.spyOn(fakeEventObject, 'stopPropagation');
-                swipeOptions.direction = MTouchSwipeDirection.both;
+                swipeOptions!.direction = MTouchSwipeDirection.both;
                 (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => direction);
 
                 mountComponent();
-                swipeCallback(fakeEventObject as any);
+                if (swipeCallback) {
+                    swipeCallback(fakeEventObject);
+                }
 
-                expect(wrapper.emitted(`swipe${direction}`.toLowerCase())[0][0]).toBeDefined();
+
+                expect(wrapper!.emitted(`swipe${direction}`.toLowerCase())[0][0]).toBeDefined();
                 expect(fakeEventObject.stopPropagation).toHaveBeenCalled();
             });
 
             it(`should handle swipe${direction} when provided swipe direction is horizontal`, () => {
                 const fakeEventObject: any = { detail: 'someDetail', stopPropagation: jest.fn() };
                 jest.spyOn(fakeEventObject, 'stopPropagation');
-                swipeOptions.direction = MTouchSwipeDirection.horizontal;
+                swipeOptions!.direction = MTouchSwipeDirection.horizontal;
                 (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => direction);
 
                 mountComponent();
-                swipeCallback(fakeEventObject as any);
+                if (swipeCallback) {
+                    swipeCallback(fakeEventObject);
+                }
 
-                expect(wrapper.emitted(`swipe${direction}`.toLowerCase())[0][0]).toBeDefined();
+
+                expect(wrapper!.emitted(`swipe${direction}`.toLowerCase())[0][0]).toBeDefined();
                 expect(fakeEventObject.stopPropagation).toHaveBeenCalled();
             });
 
             it(`should handle swipe${direction} when provided swipe direction is vertical`, () => {
                 const fakeEventObject: any = { detail: 'someDetail', stopPropagation: jest.fn() };
                 jest.spyOn(fakeEventObject, 'stopPropagation');
-                swipeOptions.direction = MTouchSwipeDirection.vertical;
+                swipeOptions!.direction = MTouchSwipeDirection.vertical;
                 (ZingTouchUtil.detectDirection as jest.Mock).mockImplementation(() => direction);
 
                 mountComponent();
-                swipeCallback(fakeEventObject as any);
+                if (swipeCallback) {
+                    swipeCallback(fakeEventObject);
+                }
 
-                expect(wrapper.emitted(`swipe${direction}`.toLowerCase())).toBeUndefined();
+                expect(wrapper!.emitted(`swipe${direction}`.toLowerCase())).toBeUndefined();
                 expect(fakeEventObject.stopPropagation).not.toHaveBeenCalled();
             });
         });
     });
 
     describe('tap', () => {
-        let tapcallback: MZingGestureCallback;
+        let tapcallback: MZingGestureCallback | undefined;
         beforeEach(() => {
             tapcallback = undefined;
             (ZingTouchUtil.GestureFactory.getGesture as jest.Mock).mockImplementation((gesture: string) => {
@@ -157,9 +165,12 @@ describe('MTouch', () => {
             (ZingTouchUtil.detectTap as jest.Mock).mockImplementation(() => MZingTapInteractions.Tap);
 
             mountComponent();
-            tapcallback(fakeEventObject as any);
+            if (tapcallback) {
+                tapcallback(fakeEventObject);
+            }
 
-            expect(wrapper.emitted('tap')).toBeDefined();
+
+            expect(wrapper!.emitted('tap')).toBeDefined();
             expect(fakeEventObject.stopPropagation).toHaveBeenCalled();
         });
 
@@ -169,9 +180,11 @@ describe('MTouch', () => {
             (ZingTouchUtil.detectTap as jest.Mock).mockImplementation(() => MZingTapInteractions.Click);
 
             mountComponent();
-            tapcallback(fakeEventObject as any);
+            if (tapcallback) {
+                tapcallback(fakeEventObject);
+            }
 
-            expect(wrapper.emitted('click')).toBeDefined();
+            expect(wrapper!.emitted('click')).toBeDefined();
             expect(fakeEventObject.stopPropagation).toHaveBeenCalled();
         });
     });

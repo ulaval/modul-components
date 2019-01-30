@@ -78,6 +78,7 @@ $m-tooltip--max-height: 280px !default;
 
         &.m--is-link {
             background: $m-color--white;
+            border: 1px solid $m-color--grey-lighter;
         }
 
         @media (max-width: $m-mq--max--s) {

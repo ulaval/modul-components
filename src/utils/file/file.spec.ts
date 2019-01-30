@@ -375,7 +375,7 @@ describe('FileService', () => {
                     .spyOn(axios.CancelToken, 'source')
                     .mockReturnValue(cancelerMock);
 
-                return cancelerMock as any;
+                return cancelerMock;
             };
 
             beforeEach(() => {

@@ -32,7 +32,7 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         super.selectDay(selectedDay);
         if (!selectedDay.isDisabled) {
             const newDate: ModulDate = this.selectedDayToDate(selectedDay);
-            this.currentRange = this.updateRangeModel(this.currentRange as InnerModel, newDate);
+            this.currentRange = this.updateRangeModel(this.currentRange, newDate);
             this.currentRange = this.reOrderRangeDates(this.currentRange);
 
             this.updateCurrentlyDisplayedDate(newDate.fullYear(), newDate.month(), newDate.day());

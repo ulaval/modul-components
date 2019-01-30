@@ -81,7 +81,7 @@ export class ToastService {
 const ToastServicePlugin: PluginObject<any> = {
     install(v): void {
         let toast: ToastService = new ToastService();
-        (v.prototype as any).$toast = toast;
+        (v.prototype).$toast = toast;
     }
 };
 

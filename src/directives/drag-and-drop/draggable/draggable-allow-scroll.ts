@@ -1,10 +1,10 @@
 import { DirectiveOptions, PluginObject, VNodeDirective } from 'vue';
-
 import { mousePositionElement } from '../../../utils/mouse/mouse';
 import { polyFillActive } from '../../../utils/polyfills';
 import { DRAGGABLE_ALLOW_SCROLL_NAME } from '../../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../../domPlugin';
 import { CancelableScrollTo, ScrollTo, ScrollToDuration } from '../../scroll-to/scroll-to-lib';
+
 
 export enum MDraggableAllowScrollDirection {
     Top = 'top',
@@ -93,9 +93,12 @@ export class MDraggableAllowScroll extends MElementDomPlugin<MDraggableAllowScro
     private activateScroll(): void {
         switch (this.options.scrollDirection) {
             case MDraggableAllowScrollDirection.Top:
+
+                // tslint:disable-next-line: deprecation
                 this.activeScroll = new ScrollTo().scrollToTop(document.documentElement, ScrollToDuration.Slower);
                 break;
             case MDraggableAllowScrollDirection.Bottom:
+                // tslint:disable-next-line: deprecation
                 this.activeScroll = new ScrollTo().scrollToBottom(document.documentElement, ScrollToDuration.Slower);
                 break;
             default: throw new Error(`Unhandled value for scrollDirection: ${this.options.scrollDirection}`);

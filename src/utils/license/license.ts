@@ -19,7 +19,7 @@ export class Licenses {
 
 const LicensePlugin: PluginObject<any> = {
     install(v): void {
-        (v.prototype as any).$license = new Licenses();
+        (v.prototype).$license = new Licenses();
     }
 };
 
