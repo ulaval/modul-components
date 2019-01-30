@@ -5,6 +5,7 @@ import { Form } from '../../utils/form/form';
 import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { FORM } from '../component-names';
+import FormPlugin from './form';
 import WithRender from './form.sandbox.html';
 
 @WithRender
@@ -86,6 +87,7 @@ class ValidationSandbox {
 
 const MFormSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(FormPlugin);
         v.component(`${FORM}-sandbox`, MFormSandbox);
     }
 };

@@ -1,5 +1,9 @@
 import { FormFieldState } from '../form-field-state/form-field-state';
 
+export interface FormFieldOptions {
+    messageAfterTouched?: boolean;
+}
+
 /**
  * Form Field Class
  */
@@ -7,15 +11,22 @@ export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
+    private messageAfterTouched: boolean = true;
+    private touched: boolean = false;
 
     /**
      *
      * @param value function called to initialize the value of a field
      * @param validationCallback function called to validate
      */
-    constructor(public accessCallback: () => T, public validationCallback?: (value: T) => FormFieldState) {
+    constructor(public accessCallback: () => T, public validationCallback?: (value: T) => FormFieldState, options?: FormFieldOptions) {
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
+
+        if (options) {
+            this.messageAfterTouched = typeof options.messageAfterTouched === undefined ?
+                this.messageAfterTouched : options.messageAfterTouched!;
+        }
     }
 
     /**
@@ -25,6 +36,9 @@ export class FormField<T> {
         return this.internalValue;
     }
 
+    /**
+     * set the value of the field
+     */
     set value(newValue: T) {
         this.change(newValue);
     }
@@ -37,10 +51,24 @@ export class FormField<T> {
     }
 
     /**
+     * indicates if the field is touched
+     */
+    get isTouched(): boolean {
+        return this.touched;
+    }
+
+    /**
      * message to show under the form field
      */
     get errorMessage(): string {
-        return this.internalState.errorMessage;
+        let errorMessage: string = '';
+
+        if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)
+        ) {
+            errorMessage = this.internalState.errorMessage;
+        }
+
+        return errorMessage;
     }
 
     /**
@@ -60,12 +88,21 @@ export class FormField<T> {
     }
 
     /**
+     * mark the field as touched and trigger validation
+     */
+    touch(): void {
+        this.touched = true;
+        this.validate();
+    }
+
+    /**
      * reset the field without validating
      */
     reset(): void {
         this.internalValue = this.accessCallback();
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
+        this.touched = false;
     }
 
     /**

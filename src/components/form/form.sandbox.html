@@ -6,21 +6,21 @@
                      label="Title"
                      :max-width="inputMaxWidthSmall"
                      :required-marker="true"
-                     :error="form.get('titleField').hasError"
                      :error-message="form.get('titleField').errorMessage"
                      :character-count="true"
                      :max-length="maxTitleLength"
                      :character-count-threshold="thresholdTitle"
+                     @blur="titleField.touch()"
                      ref="title"></m-textfield>
 
         <m-textarea v-model.trim="form.get('descriptionField').value"
                     label="Description"
                     :max-width="inputMaxWidthLarge"
-                    :error="form.get('descriptionField').hasError"
                     :error-message="form.get('descriptionField').errorMessage"
                     :character-count="true"
                     :max-length="maxDescriptionLength"
                     :character-count-threshold="thresholdDescription"
+                    @blur="descriptionField.touch()"
                     ref="description">
         </m-textarea>
 
@@ -28,11 +28,11 @@
                     label="Location"
                     :max-width="inputMaxWidthLarge"
                     :required-marker="true"
-                    :error="form.get('locationField').hasError"
                     :error-message="form.get('locationField').errorMessage"
                     :character-count="true"
                     :max-length="maxLocationLength"
                     :character-count-threshold="thresholdLocation"
+                    @blur="locationField.touch()"
                     ref="location">
         </m-textarea>
     </m-form>
