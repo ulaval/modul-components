@@ -1,8 +1,8 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
-import ProgressPlugin, { MProgress } from './progress';
+import ProgressPlugin, { MProgress, MProgressSkin } from './progress';
+
 
 describe('MProgress', () => {
     let localVue: VueConstructor<Vue>;
@@ -68,4 +68,18 @@ describe('MProgress', () => {
             return expect(renderComponent(pgr.vm)).resolves.toMatchSnapshot();
         });
     });
+
+    describe('monochrome skin', () => {
+        it('should render correctly', () => {
+            const pgr: Wrapper<MProgress> = mount(MProgress, {
+                localVue: localVue,
+                propsData: {
+                    skin: MProgressSkin.Monochrome
+                }
+            });
+
+            return expect(renderComponent(pgr.vm)).resolves.toMatchSnapshot();
+        });
+    });
+
 });
