@@ -92,6 +92,52 @@ export class MTableSandbox extends Vue {
         }
     ];
 
+    columnsOverflow: MColumnTable[] = [
+        {
+            id: 'name',
+            title: 'Name',
+            dataProp: 'name'
+        },
+        {
+            id: 'email',
+            title: 'Email',
+            dataProp: 'email'
+        },
+        {
+            id: 'address',
+            title: 'Address',
+            dataProp: 'address'
+        }
+    ];
+
+    rowsOverflow: any[] = [
+        {
+            name: 'Jonathan',
+            email: 'gasdghfhagsdlhfagldshf@ashdhgflasdf.com',
+            address: '1234 fasjdfje iawueriajsdfahsdfahsdfhfhasjdhf'
+        },
+        {
+            name: 'Carl',
+            email: 'asghfksda@asdfasdf.com',
+            address: '23874 da sdkajsd kjashd'
+        },
+        {
+            name: 'Jacob',
+            email: 'weoirfksdbnsd@asdfjasbd.com',
+            address: '123 sad sdasdasd'
+        },
+        {
+            name: 'Vincent',
+            email: 'owiefkjsd893@asduahdwu.com',
+            address: '1 dsakjda'
+        },
+        {
+            name: 'Manon',
+            email: 'iewf@asda.com',
+            address: '120 ddqawdw'
+        }
+    ];
+
     emptyRows: any[] = [];
 
     editData(id: string): void {

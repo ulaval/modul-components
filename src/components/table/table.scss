@@ -1,6 +1,9 @@
 @import 'commons';
 
 .m-table {
+    table-layout: fixed;
+    width: 100%;
+
     thead {
         text-align: left;
 
@@ -31,7 +34,7 @@
     td {
         padding: $m-spacing;
         box-sizing: content-box;
-        word-break: break-word;
+        word-wrap: break-word;
     }
 
     &__loading td {
