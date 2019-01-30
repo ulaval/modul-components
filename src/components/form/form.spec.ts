@@ -15,9 +15,9 @@ jest.mock('../../utils/uuid/uuid');
 const ERROR_MESSAGE: string = 'ERROR';
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR MESSAGE SUMMARY';
 const REF_SUMMARY: RefSelector = { ref: 'summary' };
-const FORM: Form = new Form([
-    new FormField((): string => '', (): FormFieldState => new FormFieldState())
-]);
+const FORM: Form = new Form({
+    'a-field': new FormField<string>((): string => '', (): FormFieldState => new FormFieldState())
+});
 
 describe(`MForm`, () => {
     let wrapper: Wrapper<MForm>;
@@ -67,9 +67,9 @@ describe(`MForm`, () => {
         describe(`When there is one error`, () => {
             beforeEach(() => {
                 wrapper.setProps({
-                    form: new Form([
-                        new FormField((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE))
-                    ])
+                    form: new Form({
+                        'a-field': new FormField<string>((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE))
+                    })
                 });
                 wrapper.trigger('submit');
             });
@@ -86,10 +86,10 @@ describe(`MForm`, () => {
         describe(`When there are multiple errors`, () => {
             beforeEach(() => {
                 wrapper.setProps({
-                    form: new Form([
-                        new FormField((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE)),
-                        new FormField((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE))
-                    ])
+                    form: new Form({
+                        'a-field': new FormField<string>((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE)),
+                        'another-field': new FormField<string>((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE))
+                    })
                 });
                 wrapper.trigger('submit');
             });
