@@ -89,7 +89,7 @@ export class Form {
      */
     validateAll(): void {
         this.fields.forEach((field: FormField<any>) => {
-            field.validate();
+            field.touch();
         });
 
         this.internalState = new FormState();
