@@ -345,3 +345,16 @@
 .m--is-type-search .m-input-style__body__adjust-width-auto {
     padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }
+
+.m--is-type-number .m-textfield__input {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+}
