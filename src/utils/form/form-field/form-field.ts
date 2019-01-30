@@ -16,7 +16,7 @@ export class FormField<T> {
 
     /**
      *
-     * @param value function called to initialize the value of a field
+     * @param accessCallback function called to initialize the value of a field
      * @param validationCallback function called to validate
      */
     constructor(public accessCallback: () => T, public validationCallback?: (value: T) => FormFieldState, options?: FormFieldOptions) {

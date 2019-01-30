@@ -4,6 +4,7 @@ import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { Form } from '../../utils/form/form';
 import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
 import { FormField } from '../../utils/form/form-field/form-field';
+import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { FORM } from '../component-names';
 import FormPlugin from './form';
 import WithRender from './form.sandbox.html';
@@ -19,8 +20,13 @@ export class MFormSandbox extends Vue {
     form: Form = new Form({
         'titleField': new FormField<string>((): string => this.title, ValidationSandbox.validateTitle),
         'descriptionField': new FormField<string>((): string => this.description, ValidationSandbox.validateDescription),
-        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation)
-    });
+        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation),
+        'passwordField': new FormField<string>((): string => ''),
+        'confirmPasswordField': new FormField<string>((): string => '')
+    }, [
+        ValidationSandbox.validatePasswordMatch
+    ]);
+
 
     maxTitleLength: number = ValidationSandbox.maxTitleLength;
     thresholdTitle: number = ValidationSandbox.thresholdTitle;
@@ -37,8 +43,10 @@ export class MFormSandbox extends Vue {
         const data: any = {
             title: this.form.get('titleField')!.value,
             description: this.form.get('descriptionField')!.value,
-            location: this.form.get('locationField')!.value
+            location: this.form.get('locationField')!.value,
+            password: this.form.get('passwordField')!.value
         };
+
         this.$emit('submit', data);
         this.formSent = data;
     }
@@ -82,6 +90,13 @@ class ValidationSandbox {
             return new FormFieldState(true, error, error);
         }
         return new FormFieldState();
+    }
+
+    static validatePasswordMatch(form: Form): FormValidation {
+        if (form.get('passwordField')!.value !== form.get('confirmPasswordField')!.value) {
+            return new FormValidation(true, 'Passwords must match');
+        }
+        return new FormValidation();
     }
 }
 

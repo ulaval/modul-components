@@ -3,6 +3,7 @@
 import { Form } from './form';
 import { FormFieldState } from './form-field-state/form-field-state';
 import { FormField } from './form-field/form-field';
+import { FormValidation } from './form-validation/form-validation';
 
 let validationState: FormFieldState;
 let formField: FormField<string>;
@@ -46,6 +47,31 @@ describe(`Form`, () => {
         });
     });
 
+    describe(`When the form contains no error`, () => {
+        beforeEach(() => {
+            form = new Form([], [() => new FormValidation()]);
+        });
+
+        it(`Then the form is valid`, () => {
+            expect(form.isValid).toBeTruthy();
+        });
+    });
+
+    describe(`When the form has error`, () => {
+        beforeEach(() => {
+            form = new Form([], [() => new FormValidation(true, ERROR_MESSAGE_SUMMARY)]);
+            form.validateAll();
+        });
+
+        it(`Then the form is invalid`, () => {
+            expect(form.isValid).toBeFalsy();
+        });
+
+        it(`getErrors returns 1 error message`, () => {
+            expect(form.getErrorsForSummary()).toEqual([ERROR_MESSAGE_SUMMARY]);
+        });
+    });
+
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
             validationState = new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
@@ -80,6 +106,7 @@ describe(`Form`, () => {
             });
         });
     });
+
 
     describe(`When we reset the form`, () => {
         it(`Then each fields are reset`, () => {
