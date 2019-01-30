@@ -15,7 +15,6 @@ jest.mock('./form-field/form-field', () => {
 });
 
 let fieldValidation: FormFieldValidation;
-let formField: FormField<string>;
 let form: Form;
 let formFieldHasError: boolean = false;
 
@@ -141,7 +140,7 @@ describe(`Form`, () => {
             it(`Then the form can focus the first field in error`, () => {
                 form.focusFirstFieldWithError();
 
-                expect(errorFormField.focusThisField).toHaveBeenCalledTimes(1);
+                expect(mockFormField.focusThisField).toHaveBeenCalledTimes(1);
             });
         });
     });
@@ -152,7 +151,7 @@ describe(`Form`, () => {
                 'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION]),
                 'another-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION])
             });
-            const spy: jest.SpyInstance = jest.spyOn(formField, 'reset');
+            const spy: jest.SpyInstance = jest.spyOn(mockFormField, 'reset');
 
             form.reset();
 

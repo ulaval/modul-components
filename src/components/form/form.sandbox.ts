@@ -35,9 +35,7 @@ export class MFormSandbox extends Vue {
         'locationField': new FormField<string>((): string => this.location, () => this.$refs.location as HTMLElement, ValidationSandbox.validateLocation()),
         'passwordField': new FormField<string>((): string => '', () => this.$refs.password as HTMLElement),
         'confirmPasswordField': new FormField<string>((): string => '', () => this.$refs.confirmPassword as HTMLElement)
-    }, [
-            ValidationSandbox.validatePasswordMatch
-        ]);
+    }, [ValidationSandbox.validatePasswordMatch]);
 
     submit(): void {
         const data: any = {

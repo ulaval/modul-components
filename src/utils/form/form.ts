@@ -116,6 +116,6 @@ export class Form {
         }
 
         this.internalState.hasErrors = true;
-        this.internalState.errorMessages.push(formValidation.errorMessage);
+        this.internalState.errorMessages = this.internalState.errorMessages.concat(formValidation.errorMessage);
     }
 }

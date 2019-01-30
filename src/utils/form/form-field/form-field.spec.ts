@@ -89,14 +89,14 @@ describe(`FormField`, () => {
             it(`Then the state of the field contains no errors if not touched`, () => {
                 formField.validate();
                 expect(formField.hasError).toBe(true);
-                expect(formField.errorMessageSummary).toEqual(ERROR_MESSAGE_SUMMARY);
+                expect(formField.errorMessageSummary).toEqual([ERROR_MESSAGE_SUMMARY]);
                 expect(formField.errorMessage).toBe('');
             });
 
             it(`Then the state of the field contains errors if touched`, () => {
                 formField.touch();
                 expect(formField.hasError).toBe(true);
-                expect(formField.errorMessageSummary).toEqual(ERROR_MESSAGE_SUMMARY);
+                expect(formField.errorMessageSummary).toEqual([ERROR_MESSAGE_SUMMARY]);
                 expect(formField.errorMessage).toBe(ERROR_MESSAGE);
             });
         });

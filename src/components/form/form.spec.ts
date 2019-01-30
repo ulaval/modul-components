@@ -26,8 +26,8 @@ let fieldValidation: FormFieldValidation;
 let FORM: Form;
 let formHasError: boolean = false;
 let nbFieldsThatHasError: number = 0;
-let fieldHasError: boolean = false;
-let mockGetErrorsForSummary: jest.Mock = jest.fn();
+let nbOfErrors: number = 0;
+let mockGetErrorsForSummary: jest.Mock = jest.fn(() => []);
 
 describe(`MForm`, () => {
     let wrapper: Wrapper<MForm>;
@@ -45,16 +45,15 @@ describe(`MForm`, () => {
     const initialiseForm: Function = (multiple: boolean): void => {
         const VALIDATION_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
         if (multiple) {
-            FORM = new Form([
-                new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION]),
-                new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION])
-            ]);
+            FORM = new Form({
+                'a-field': new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION]),
+                'another-field': new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION])
+            });
         } else {
-            FORM = new Form([
-                new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION])
-            ]);
+            FORM = new Form({
+                'a-field': new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION])
+            });
         }
-
     };
 
     beforeEach(() => {
@@ -65,6 +64,7 @@ describe(`MForm`, () => {
             hasError: formHasError,
             reset: jest.fn(),
             nbFieldsThatHasError,
+            nbOfErrors,
             getErrorsForSummary: mockGetErrorsForSummary,
             focusFirstFieldWithError: jest.fn(),
             validateAll: jest.fn()
