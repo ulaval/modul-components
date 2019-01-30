@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { SHOW_MORE_NAME } from '../component-names';
+import ShowMorePlugin from './show-more';
 import WithRender from './show-more.sandbox.html';
 
 @WithRender
@@ -24,6 +25,7 @@ export class MShowMoreSandbox extends Vue {
 
 const ShowMoreSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ShowMorePlugin);
         v.component(`${SHOW_MORE_NAME}-sandbox`, MShowMoreSandbox);
     }
 };
