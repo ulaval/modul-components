@@ -21,7 +21,8 @@ export class Form {
      * return the form formfields
      */
     get fields(): FormField<any>[] {
-        return Object.keys(this.fieldGroup).map(key => this.fieldGroup[key]);
+        return Object.keys(this.fieldGroup)
+            .map((name: string): FormField<any> => this.fieldGroup[name]);
     }
 
     /**
