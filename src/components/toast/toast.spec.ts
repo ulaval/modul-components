@@ -16,15 +16,13 @@ const defaultSlot: any = {
 
 const ACTION_LABEL: string = 'Action';
 
-export const mountWithStub: any = mount;
-
 const initializeWrapper: () => any = () => {
-    wrapper = mountWithStub(MToast, {
+    wrapper = mount(MToast, {
         localVue: localVue,
         slots: defaultSlot,
         stubs: {
-            transition: TransitionStub,
-            portal: PortalStub
+            transition: TransitionStub as any,
+            portal: PortalStub as any
         }
     });
 };

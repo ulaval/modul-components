@@ -5,9 +5,6 @@ import { PortalStub, renderComponent } from '../../../tests/helpers/render';
 import SpinnerPlugin, { MSpinner, MSpinnerSize, MSpinnerStyle } from './spinner';
 
 
-
-export const mountWithStub: any = mount;
-
 describe('MSpinner', () => {
     let localVue: VueConstructor<Vue>;
 
@@ -18,11 +15,11 @@ describe('MSpinner', () => {
     });
 
     const createSpinner: () => Wrapper<MSpinner> = () => {
-        const spinner: Wrapper<MSpinner> = mountWithStub(MSpinner, {
+        const spinner: Wrapper<MSpinner> = mount(MSpinner, {
             localVue: localVue,
             stubs: {
-                transition: TransitionStub,
-                portal: PortalStub
+                transition: TransitionStub as any,
+                portal: PortalStub as any
             }
         });
 

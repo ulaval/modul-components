@@ -31,8 +31,7 @@ jest.mock('../../utils/user-agent/user-agent', () => ({
 let mockIsDesktopValue: boolean = true;
 (UserAgentUtil.isDesktop as jest.Mock).mockImplementation(() => mockIsDesktopValue);
 
-// this used is to make typescript happy
-export const mountWithStub: any = mount;
+
 
 describe('MFileUpload', () => {
     beforeEach(() => {
@@ -443,7 +442,7 @@ describe('MFileUpload', () => {
         });
 
         it('should render uploading files', () => {
-            const fupd: Wrapper<MFileUpload> = mountWithStub(MFileUpload, {
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 stubs: {
                     'transition-group': WrapChildrenStub('ul')
                 },
@@ -482,7 +481,7 @@ describe('MFileUpload', () => {
         });
 
         it('should render completed files', () => {
-            const fupd: Wrapper<MFileUpload> = mountWithStub(MFileUpload, {
+            const fupd: Wrapper<MFileUpload> = mount(MFileUpload, {
                 stubs: {
                     'transition-group': WrapChildrenStub('ul')
                 },

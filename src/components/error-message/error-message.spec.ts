@@ -10,9 +10,6 @@ import ErrorMessagePlugin, { MErrorMessage } from './error-message';
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 
-// this used is to make typescript happy
-export const mountWithStub: any = mount;
-
 describe('MErrorMessage', () => {
     let userAgent: string = window.navigator.userAgent;
     beforeEach(() => {
@@ -36,7 +33,7 @@ describe('MErrorMessage', () => {
     });
 
     it('should render correctly expanded', () => {
-        const error: Wrapper<MErrorMessage> = mountWithStub(MErrorMessage, {
+        const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
             localVue: Vue,
             propsData: {
                 date: moment('2018-01-02T00:01:02'),
@@ -53,7 +50,7 @@ describe('MErrorMessage', () => {
 
     describe('given error', () => {
         it('should render correctly expanded', () => {
-            const error: Wrapper<MErrorMessage> = mountWithStub(MErrorMessage, {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
                     date: moment('2018-01-02T00:01:02'),
@@ -72,7 +69,7 @@ describe('MErrorMessage', () => {
         });
 
         it('should render correctly expanded with stack trace on', () => {
-            const error: Wrapper<MErrorMessage> = mountWithStub(MErrorMessage, {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
                     date: moment('2018-01-02T00:01:02'),
@@ -94,7 +91,7 @@ describe('MErrorMessage', () => {
 
     describe('given error with stack trace', () => {
         it('should render correctly expanded', () => {
-            const error: Wrapper<MErrorMessage> = mountWithStub(MErrorMessage, {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
                     date: moment('2018-01-02T00:01:02'),
@@ -114,7 +111,7 @@ describe('MErrorMessage', () => {
         });
 
         it('should render correctly expanded with stack trace on', () => {
-            const error: Wrapper<MErrorMessage> = mountWithStub(MErrorMessage, {
+            const error: Wrapper<MErrorMessage> = mount(MErrorMessage, {
                 localVue: Vue,
                 propsData: {
                     date: moment('2018-01-02T00:01:02'),

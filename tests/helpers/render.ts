@@ -14,7 +14,7 @@ export const PortalStub = {
     }
 };
 
-export const WrapChildrenStub = (rootTag: string) => {
+export const WrapChildrenStub = (rootTag: string): any => {
     return {
         render(h): void {
             let children = this.$options._renderChildren;
