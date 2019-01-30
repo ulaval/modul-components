@@ -3,8 +3,9 @@ import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
-import { MButtonSkin } from '../button/button';
+import ButtonPlugin, { MButtonSkin } from '../button/button';
 import { SHOW_MORE_NAME } from '../component-names';
+import ProgressPlugin from '../progress/progress';
 import WithRender from './show-more.html?style=./show-more.scss';
 
 @WithRender
@@ -51,7 +52,8 @@ export class MShowMore extends ModulVue {
 
 const ShowMorePlugin: PluginObject<any> = {
     install(v, options): void {
-
+        v.use(ButtonPlugin);
+        v.use(ProgressPlugin);
         v.component(SHOW_MORE_NAME, MShowMore);
     }
 };
