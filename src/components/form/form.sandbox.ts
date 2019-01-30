@@ -63,7 +63,7 @@ class ValidationSandbox {
 
     static validateTitle(title: string): FormFieldState {
         if (!title) {
-            return new FormFieldState(true, 'Title is required.', 'This field is required.');
+            return new FormFieldState(true, '<strong>Title</strong> is required.', 'This field is required.');
         } else if (title.length > ValidationSandbox.maxTitleLength) {
             let error: string = `Title can be at most ${ValidationSandbox.maxTitleLength} characters.`;
             return new FormFieldState(true, error, error);

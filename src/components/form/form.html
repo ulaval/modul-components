@@ -7,7 +7,8 @@
                :state="messageStateEror"
                ref="summary">
         <ul>
-            <li v-for="error in errors">{{ error }}</li>
+            <li v-for="error in errors"
+                v-html="error"></li>
         </ul>
     </m-message>
 
