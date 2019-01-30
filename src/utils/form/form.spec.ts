@@ -49,7 +49,7 @@ describe(`Form`, () => {
 
     describe(`When the form contains no error`, () => {
         beforeEach(() => {
-            form = new Form([], [() => new FormValidation()]);
+            form = new Form({}, [() => new FormValidation()]);
         });
 
         it(`Then the form is valid`, () => {
@@ -59,7 +59,7 @@ describe(`Form`, () => {
 
     describe(`When the form has error`, () => {
         beforeEach(() => {
-            form = new Form([], [() => new FormValidation(true, ERROR_MESSAGE_SUMMARY)]);
+            form = new Form({}, [() => new FormValidation(true, ERROR_MESSAGE_SUMMARY)]);
             form.validateAll();
         });
 
