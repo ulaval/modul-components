@@ -1,6 +1,6 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
+import { ModulVue } from '../../utils/vue/vue';
 import { POPUP_NAME } from '../component-names';
 import WithRender from './popup.sandbox.html';
 import PopupPlugin from './popup';
@@ -9,7 +9,11 @@ import ButtonPlugin from '../button/button';
 
 @WithRender
 @Component
-export class MPopupSandbox extends Vue {
+export class MPopupSandbox extends ModulVue {
+
+    private onClose(): void {
+        this.$log.log('$emit(\'close\') popup');
+    }
 }
 
 const PopupSandboxPlugin: PluginObject<any> = {

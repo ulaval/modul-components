@@ -6,7 +6,6 @@ import PopupDirectivePlugin from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
-import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
@@ -45,7 +44,6 @@ export type DatePickerSupportedTypes = moment.Moment | Date | string | undefined
 @Component({
     mixins: [
         InputState,
-        InputWidth,
         InputLabel,
         InputPopup,
         InputManagement,
@@ -254,22 +252,17 @@ export class MDatepicker extends ModulVue {
     private set open(open: boolean) {
         if (this.as<InputState>().active) {
             this.internalOpen = open;
-            this.$nextTick(() => {
-                if (this.internalOpen) {
-                    let inputEl: any = this.$refs.input;
-                    inputEl.focus();
-                    inputEl.setSelectionRange(0, this.formattedDate.length);
-                    this.setSelectionToCurrentValue();
-                    this.onOpen();
-                } else {
-                    this.onClose();
-                }
-            });
         }
     }
 
     @Emit('open')
-    private onOpen(): void { }
+    private async onOpen(): Promise<void> {
+        await this.$nextTick();
+        let inputEl: any = this.$refs.input;
+        inputEl.focus();
+        inputEl.setSelectionRange(0, this.formattedDate.length);
+        this.setSelectionToCurrentValue();
+    }
 
     @Emit('close')
     private onClose(): void { }
