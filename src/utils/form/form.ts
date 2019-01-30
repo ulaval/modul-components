@@ -1,6 +1,8 @@
 import uuid from '../uuid/uuid';
 import { FormField } from './form-field/form-field';
 
+export type FormFieldGroup = { [name: string]: FormField<any>; };
+
 /**
  * Form Class
  */
@@ -9,10 +11,17 @@ export class Form {
 
     /**
      *
-     * @param fields fields that are in the form
+     * @param fieldGroup the group of field that populate the form
      */
-    constructor(public fields: FormField<any>[]) {
+    constructor(private fieldGroup: FormFieldGroup) {
         this.id = uuid.generate();
+    }
+
+    /**
+     * return the form formfields
+     */
+    get fields(): FormField<any>[] {
+        return Object.keys(this.fieldGroup).map(key => this.fieldGroup[key]);
     }
 
     /**
@@ -27,6 +36,15 @@ export class Form {
      */
     get isValid(): boolean {
         return this.nbFieldsThatHasError === 0;
+    }
+
+    /**
+     * Return the formField with the coresponding name
+     *
+     * @param formFieldName the name of the formfield to access
+     */
+    get(formFieldName: string): FormField<any> | undefined {
+        return this.fieldGroup[formFieldName];
     }
 
     /**

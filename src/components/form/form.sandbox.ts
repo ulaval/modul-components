@@ -15,10 +15,11 @@ export class MFormSandbox extends Vue {
     location: string = '';
     formSent: any = '';
 
-    titleField: FormField<string> = new FormField((): string => this.title, ValidationSandbox.validateTitle);
-    descriptionField: FormField<string> = new FormField((): string => this.description, ValidationSandbox.validateDescription);
-    locationField: FormField<string> = new FormField((): string => this.location, ValidationSandbox.validateLocation);
-    form: Form = new Form([this.titleField, this.descriptionField, this.locationField]);
+    form: Form = new Form({
+        'titleField': new FormField<string>((): string => this.title, ValidationSandbox.validateTitle),
+        'descriptionField': new FormField<string>((): string => this.description, ValidationSandbox.validateDescription),
+        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation)
+    });
 
     maxTitleLength: number = ValidationSandbox.maxTitleLength;
     thresholdTitle: number = ValidationSandbox.thresholdTitle;
@@ -33,9 +34,9 @@ export class MFormSandbox extends Vue {
 
     submit(): void {
         const data: any = {
-            title: this.titleField.value,
-            description: this.descriptionField.value,
-            location: this.locationField.value
+            title: this.form.get('titleField')!.value,
+            description: this.form.get('descriptionField')!.value,
+            location: this.form.get('locationField')!.value
         };
         this.$emit('submit', data);
         this.formSent = data;

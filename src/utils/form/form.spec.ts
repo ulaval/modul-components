@@ -17,8 +17,9 @@ describe(`Form`, () => {
     describe(`When the form contains no fields with errors`, () => {
         beforeEach(() => {
             validationState = new FormFieldState();
-            formField = new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION);
-            form = new Form([formField]);
+            form = new Form({
+                'a-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION)
+            });
         });
 
         it(`Then the form is valid`, () => {
@@ -48,8 +49,9 @@ describe(`Form`, () => {
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
             validationState = new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
-            formField = new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION);
-            form = new Form([formField]);
+            form = new Form({
+                'a-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION)
+            });
         });
 
         it(`Then the form is valid at first`, () => {
@@ -81,9 +83,12 @@ describe(`Form`, () => {
 
     describe(`When we reset the form`, () => {
         it(`Then each fields are reset`, () => {
-            formField = new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION);
-            form = new Form([formField, formField]);
             FormField.prototype.reset = jest.fn();
+
+            form = new Form({
+                'a-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION),
+                'another-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION)
+            });
 
             form.reset();
 
