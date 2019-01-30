@@ -18,7 +18,7 @@ export class Form {
     }
 
     /**
-     * return the form formfields
+     * return the form fields
      */
     get fields(): FormField<any>[] {
         return Object.keys(this.fieldGroup)
