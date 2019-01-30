@@ -229,7 +229,7 @@ export class ScrollTo {
 const ScrollToPlugin: PluginObject<any> = {
     install(v): void {
         let scrollTo: ScrollTo = new ScrollTo();
-        (v.prototype as any).$scrollTo = scrollTo;
+        (v.prototype).$scrollTo = scrollTo;
     }
 };
 

@@ -4,7 +4,7 @@ import { BundleMessagesMap, ENGLISH, Messages } from '../utils/i18n/i18n';
 const EnglishPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug('EnglishPlugin', 'plugin.install');
-        const i18n: Messages = (v.prototype as any).$i18n;
+        const i18n: Messages = (v.prototype).$i18n;
         if (i18n) {
             const msgs: BundleMessagesMap[] = [
                 require('../components/accordion/accordion.lang.en.json'),

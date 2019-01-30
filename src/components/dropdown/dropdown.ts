@@ -429,6 +429,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             setTimeout(() => {
                 if (this.as<MediaQueriesMixin>().isMqMinS) {
                     let height: number = el.clientHeight;
+                    // tslint:disable-next-line: deprecation
                     el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
                     el.style.transition = DROPDOWN_STYLE_TRANSITION;
                     el.style.overflowY = 'hidden';

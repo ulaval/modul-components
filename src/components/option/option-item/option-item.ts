@@ -31,7 +31,7 @@ export class MOptionItem extends ModulVue {
     private onClick(event: MouseEvent): void {
         if (!this.disabled) {
             if (this.hasRoot) {
-                (this.root as MOptionInterface).close();
+                (this.root).close();
                 this.$emit('click', event);
             }
         } else {
@@ -45,8 +45,8 @@ export class MOptionItem extends ModulVue {
 
     private get hasIcon(): boolean {
         if (this.hasRoot) {
-            (this.root as MOptionInterface).checkIcon(this.hasIconNameProp);
-            return (this.root as MOptionInterface).hasIcon;
+            (this.root).checkIcon(this.hasIconNameProp);
+            return (this.root).hasIcon;
         }
         return false;
     }

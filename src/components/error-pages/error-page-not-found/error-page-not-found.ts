@@ -14,19 +14,19 @@ import WithRender from './error-page-not-found.html';
 export class MErrorPageNotFound extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-error-page-not-found:title')
+        default: () => (Vue.prototype).$i18n.translate('m-error-page-not-found:title')
     })
     public title: string;
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-page-not-found:home-label'), `\\`)]
+            new Link((Vue.prototype).$i18n.translate('m-error-page-not-found:home-label'), `\\`)]
     })
     public links: Link[];
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-error-page-not-found:hint.primary')]
+            (Vue.prototype).$i18n.translate('m-error-page-not-found:hint.primary')]
     })
     public hints: string[];
 

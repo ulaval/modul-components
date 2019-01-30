@@ -1,9 +1,9 @@
 import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { PortalStub, renderComponent } from '../../../tests/helpers/render';
 import SpinnerPlugin, { MSpinner, MSpinnerSize, MSpinnerStyle } from './spinner';
+
 
 describe('MSpinner', () => {
     let localVue: VueConstructor<Vue>;
@@ -18,8 +18,8 @@ describe('MSpinner', () => {
         const spinner: Wrapper<MSpinner> = mount(MSpinner, {
             localVue: localVue,
             stubs: {
-                transition: TransitionStub,
-                portal: PortalStub
+                transition: TransitionStub as any,
+                portal: PortalStub as any
             }
         });
 

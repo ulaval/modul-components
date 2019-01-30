@@ -330,7 +330,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
-        (v.prototype as any).$i18n = msg;
+        (v.prototype).$i18n = msg;
     }
 };
 

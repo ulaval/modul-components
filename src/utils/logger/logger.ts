@@ -85,7 +85,7 @@ const LoggerPlugin: PluginObject<any> = {
         let logger: Logger = new Logger(options);
         logger.debug('$logger', 'plugin.install');
 
-        (v.prototype as any).$log = logger;
+        (v.prototype).$log = logger;
 
     }
 };

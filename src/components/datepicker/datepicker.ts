@@ -67,7 +67,7 @@ export class MDatepicker extends ModulVue {
     public min: DatePickerSupportedTypes;
     @Prop({ default: () => { return moment().add(10, 'year'); } })
     public max: DatePickerSupportedTypes;
-    @Prop({ default: () => (Vue.prototype as any).$i18n.translate('m-datepicker:placeholder') })
+    @Prop({ default: () => Vue.prototype.$i18n.translate('m-datepicker:placeholder') })
     public placeholder: string;
 
     private internalOpen: boolean = false;

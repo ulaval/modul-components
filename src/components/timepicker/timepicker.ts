@@ -2,7 +2,6 @@ import moment from 'moment';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -15,6 +14,7 @@ import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './timepicker.html?style=./timepicker.scss';
+
 
 @WithRender
 @Component({
@@ -188,7 +188,10 @@ export class MTimepicker extends ModulVue {
         if (!this.isMousedown) {
             clearTimeout(this.scrollTimeout);
             this.scrollTimeout = setTimeout(() => {
+
+                // tslint:disable-next-line: deprecation
                 if (event.srcElement) {
+                    // tslint:disable-next-line: deprecation
                     this.positionScroll(event.srcElement);
                 }
             }, 300);
@@ -201,7 +204,9 @@ export class MTimepicker extends ModulVue {
 
     private onMouseup(event: Event): void {
         this.isMousedown = false;
+        // tslint:disable-next-line: deprecation
         if (event.srcElement) {
+            // tslint:disable-next-line: deprecation
             this.positionScroll(event.srcElement);
         }
     }

@@ -68,14 +68,14 @@ describe('draggable', () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, grouping: userDefinedGrouping });
 
             expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
-            expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
-            expect(MDOMPlugin.get(MDraggable, draggable.element).options.dragData).toBe(userDefinedData);
+            expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.action).toBe(userDefinedAction);
+            expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.dragData).toBe(userDefinedData);
             expect(draggable.element.draggable).toBe(true);
             expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
         });
         it(`it should default action correctly when binding ${param} is provided and action is not user defined`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(param);
-            expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe('any');
+            expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.action).toBe('any');
         });
     });
 
@@ -234,11 +234,16 @@ describe('draggable', () => {
         it('should clean up events correctly', () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, dragImageTemplate);
             const element: HTMLElement = draggable.element;
-            const draggablePlugin: MDraggable = MDOMPlugin.get(MDraggable, element);
-            jest.spyOn(draggablePlugin, 'removeAllEvents');
-            draggable.destroy();
 
-            expect(draggablePlugin.removeAllEvents).toHaveBeenCalled();
+            const draggablePlugin: MDraggable | undefined = MDOMPlugin.get(MDraggable, element);
+            if (draggablePlugin) {
+                jest.spyOn(draggablePlugin, 'removeAllEvents');
+                draggable.destroy();
+
+                expect(draggablePlugin.removeAllEvents).toHaveBeenCalled();
+            } else {
+                fail('draggablePlugin is undefined');
+            }
         });
     });
 
