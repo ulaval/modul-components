@@ -5,7 +5,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin, { MMessageState } from '../message/message';
-import WithRender from './form.html';
+import WithRender from './form.html?style=./form.scss';
 
 @WithRender
 @Component
