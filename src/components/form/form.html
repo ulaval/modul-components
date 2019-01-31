@@ -13,7 +13,7 @@
     </m-message>
 
     <p class="m-form__required"
-       v-if="hasRequiredFields">
+       v-if="requiredMarker">
         <span class="m-form__required__marker">*</span>
         <span class="m-form__required__label">{{ 'm-form:required' | f-m-i18n }}</span>
     </p>

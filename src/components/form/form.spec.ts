@@ -80,12 +80,12 @@ describe(`MForm`, () => {
     });
 
     it(`When the form has required fields, then it should show a required label`, async () => {
-        wrapper.setProps({ hasRequiredFields: true });
+        wrapper.setProps({ requiredMarker: true });
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 
     it(`When the form has no required fields, then it should not show a required label`, async () => {
-        wrapper.setProps({ hasRequiredFields: false });
+        wrapper.setProps({ requiredMarker: false });
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 

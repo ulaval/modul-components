@@ -13,8 +13,8 @@ export class MForm extends ModulVue {
     @Prop()
     form: Form;
 
-    @Prop({ default: true })
-    hasRequiredFields: boolean;
+    @Prop()
+    requiredMarker: boolean;
 
     messageStateEror: MMessageState = MMessageState.Error;
 
