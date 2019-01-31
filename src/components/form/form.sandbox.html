@@ -10,8 +10,8 @@
                      :character-count="true"
                      :max-length="maxTitleLength"
                      :character-count-threshold="thresholdTitle"
-                     @blur="form.get('titleField').touch()"
-                     ref="title"></m-textfield>
+                     v-m-form-field="form.get('titleField')">
+        </m-textfield>
 
         <m-textarea v-model.trim="form.get('descriptionField').value"
                     label="Description"
@@ -21,24 +21,21 @@
                     :character-count="true"
                     :max-length="maxDescriptionLength"
                     :character-count-threshold="thresholdDescription"
-                    @blur="form.get('descriptionField').touch()"
-                    ref="description">
+                    v-m-form-field="form.get('descriptionField')">
         </m-textarea>
 
         <m-textarea v-model.trim="form.get('passwordField').value"
                     label="Password"
                     :max-width="inputMaxWidthLarge"
                     :error-message="form.get('passwordField').errorMessage"
-                    @blur="form.get('passwordField').touch()"
-                    ref="password">
+                    v-m-form-field="form.get('passwordField')">
         </m-textarea>
 
         <m-textarea v-model.trim="form.get('confirmPasswordField').value"
                     label="Confirm password"
                     :max-width="inputMaxWidthLarge"
                     :error-message="form.get('confirmPasswordField').errorMessage"
-                    @blur="form.get('confirmPasswordField').touch()"
-                    ref="confirmPassword">
+                    v-m-form-field="form.get('confirmPasswordField')">
         </m-textarea>
 
         <m-textarea v-model.trim="form.get('locationField').value"
@@ -49,8 +46,7 @@
                     :character-count="true"
                     :max-length="maxLocationLength"
                     :character-count-threshold="thresholdLocation"
-                    @blur="form.get('locationField').touch()"
-                    ref="location">
+                    v-m-form-field="form.get('locationField')">
         </m-textarea>
     </m-form>
     <m-button type="submit"

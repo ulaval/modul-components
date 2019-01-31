@@ -18,7 +18,6 @@ let fieldValidation: FormFieldValidation;
 let form: Form;
 let formFieldHasError: boolean = false;
 
-let HTML_ELEMENT: HTMLElement;
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR SUMMARY';
 const FIELD_VALUE: string = 'VALUE';
 const VALIDATING_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
@@ -39,7 +38,8 @@ describe(`Form`, () => {
             errorMessageSummary: formFieldSummaryErrors,
             validate: jest.fn(),
             focusThisField: jest.fn(),
-            touch: jest.fn()
+            touch: jest.fn(),
+            shouldFocus: false
         };
         ((FormField as unknown) as jest.Mock).mockClear();
     });
@@ -47,7 +47,7 @@ describe(`Form`, () => {
     describe(`When the form contains no fields with errors`, () => {
         beforeEach(() => {
             form = new Form({
-                'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION])
+                'a-field': new FormField((): string => FIELD_VALUE, [VALIDATING_FUNCTION])
             });
         });
 
@@ -103,7 +103,7 @@ describe(`Form`, () => {
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
             form = new Form({
-                'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [() => mockFieldValidationWithError])
+                'a-field': new FormField((): string => FIELD_VALUE, [() => mockFieldValidationWithError])
             });
         });
 
@@ -141,7 +141,7 @@ describe(`Form`, () => {
             it(`Then the form can focus the first field in error`, () => {
                 form.focusFirstFieldWithError();
 
-                expect(mockFormField.focusThisField).toHaveBeenCalledTimes(1);
+                expect(mockFormField.shouldFocus).toBe(true);
             });
         });
     });
@@ -149,8 +149,8 @@ describe(`Form`, () => {
     describe(`When we reset the form`, () => {
         it(`Then each fields are reset`, () => {
             form = new Form({
-                'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION]),
-                'another-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION])
+                'a-field': new FormField((): string => FIELD_VALUE, [VALIDATING_FUNCTION]),
+                'another-field': new FormField((): string => FIELD_VALUE, [VALIDATING_FUNCTION])
             });
             const spy: jest.SpyInstance = jest.spyOn(mockFormField, 'reset');
 

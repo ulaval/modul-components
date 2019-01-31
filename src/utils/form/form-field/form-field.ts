@@ -1,4 +1,3 @@
-import { InputManagement } from '../../../mixins/input-management/input-management';
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 
@@ -16,15 +15,15 @@ export class FormField<T> {
     private internalState: FormFieldState;
     private messageAfterTouched: boolean = true;
     private touched: boolean = false;
+    private shouldFocusInternal: boolean = false;
 
     /**
      *
      * @param accessCallback function called to initialize the value of a field
      * @param validationCallback function called to validate
-     * @param htmlReference function called to get HTML Element
      * @param options options for the field
      */
-    constructor(public accessCallback: () => T, public htmlReference: () => HTMLElement, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
+    constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
 
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
@@ -63,6 +62,24 @@ export class FormField<T> {
         return this.touched;
     }
 
+    set isTouched(value: boolean) {
+        this.touched = value;
+    }
+
+    /**
+     * if the field should focus
+     */
+    get shouldFocus(): boolean {
+        return this.shouldFocusInternal;
+    }
+
+    /**
+     * set should focus on field
+     */
+    set shouldFocus(value: boolean) {
+        this.shouldFocusInternal = value;
+    }
+
     /**
      * message to show under the form field
      */
@@ -81,19 +98,6 @@ export class FormField<T> {
      */
     get errorMessageSummary(): string[] {
         return this.internalState.errorMessagesSummary;
-    }
-
-    get htmlReferenceAsInput(): InputManagement {
-        return this.htmlReference() as any as InputManagement;
-    }
-
-    /**
-     * Focuses this field if it's an InputManagement
-     */
-    focusThisField(): void {
-        if (this.htmlReferenceAsInput && typeof this.htmlReferenceAsInput.focusInput === 'function') {
-            this.htmlReferenceAsInput.focusInput();
-        }
     }
 
     /**

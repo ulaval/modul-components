@@ -30,11 +30,11 @@ export class MFormSandbox extends Vue {
     inputMaxWidthSmall: InputMaxWidth = InputMaxWidth.Small;
 
     form: Form = new Form({
-        'titleField': new FormField<string>((): string => this.title, () => this.$refs.title as HTMLElement, [ValidationSandbox.validateRequired('Title'), ValidationSandbox.validateMaxLength('Title', this.maxTitleLength)]),
-        'descriptionField': new FormField<string>((): string => this.description, () => this.$refs.description as HTMLElement, [ValidationSandbox.validateRequired('Description'), ValidationSandbox.validateMinLength('Description', this.minDescriptionLength), ValidationSandbox.validateMaxLength('Description', this.maxDescriptionLength)]),
-        'locationField': new FormField<string>((): string => this.location, () => this.$refs.location as HTMLElement, ValidationSandbox.validateLocation()),
-        'passwordField': new FormField<string>((): string => '', () => this.$refs.password as HTMLElement),
-        'confirmPasswordField': new FormField<string>((): string => '', () => this.$refs.confirmPassword as HTMLElement)
+        'titleField': new FormField<string>((): string => this.title, [ValidationSandbox.validateRequired('Title'), ValidationSandbox.validateMaxLength('Title', this.maxTitleLength)]),
+        'descriptionField': new FormField<string>((): string => this.description, [ValidationSandbox.validateRequired('Description'), ValidationSandbox.validateMinLength('Description', this.minDescriptionLength), ValidationSandbox.validateMaxLength('Description', this.maxDescriptionLength)]),
+        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation()),
+        'passwordField': new FormField<string>((): string => ''),
+        'confirmPasswordField': new FormField<string>((): string => '')
     }, [ValidationSandbox.validatePasswordMatch]);
 
     submit(): void {

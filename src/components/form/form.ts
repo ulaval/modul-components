@@ -1,5 +1,6 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
+import FormFieldDirectivePlugin from '../../directives/form-field/form-field';
 import { Form } from '../../utils/form/form';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
@@ -67,6 +68,7 @@ const FormPlugin: PluginObject<any> = {
         v.prototype.$log.debug(FORM, 'plugin.install');
         v.use(I18nPlugin);
         v.use(MessagePlugin);
+        v.use(FormFieldDirectivePlugin);
         v.component(FORM, MForm);
     }
 };
