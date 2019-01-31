@@ -62,10 +62,6 @@ export class FormField<T> {
         return this.touched;
     }
 
-    set isTouched(value: boolean) {
-        this.touched = value;
-    }
-
     /**
      * if the field should focus
      */
