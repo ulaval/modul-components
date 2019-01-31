@@ -1,25 +1,53 @@
 // tslint:disable:no-identical-functions no-big-function
 
 import { Form } from './form';
-import { FormFieldState } from './form-field-state/form-field-state';
-import { FormField } from './form-field/form-field';
+import { FormFieldValidation } from './form-field-validation/form-field-validation';
+import { FieldValidationCallback, FormField } from './form-field/form-field';
 import { FormValidation } from './form-validation/form-validation';
 
-let validationState: FormFieldState;
-let formField: FormField<string>;
-let form: Form;
+let mockFormField: any = {};
+jest.mock('./form-field/form-field', () => {
+    return {
+        FormField: jest.fn().mockImplementation(() => {
+            return mockFormField;
+        })
+    };
+});
 
-const ERROR_MESSAGE: string = 'ERROR';
+let fieldValidation: FormFieldValidation;
+let form: Form;
+let formFieldHasError: boolean = false;
+
+let HTML_ELEMENT: HTMLElement;
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR SUMMARY';
 const FIELD_VALUE: string = 'VALUE';
-const VALIDATING_FUNCTION: () => FormFieldState = (): FormFieldState => validationState;
+const VALIDATING_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
+
+const mockFieldValidationWithError: FormFieldValidation = {
+    isError: true,
+    errorMessages: ['errorMessage'],
+    errorMessagesSummary: ['errorMessageSummary']
+};
+let errorFormField: FormField<string>;
+let formFieldSummaryErrors: string[];
 
 describe(`Form`, () => {
+    beforeEach(() => {
+        mockFormField = {
+            hasError: formFieldHasError,
+            reset: jest.fn(),
+            errorMessageSummary: formFieldSummaryErrors,
+            validate: jest.fn(),
+            focusThisField: jest.fn(),
+            touch: jest.fn()
+        };
+        ((FormField as unknown) as jest.Mock).mockClear();
+    });
+
     describe(`When the form contains no fields with errors`, () => {
         beforeEach(() => {
-            validationState = new FormFieldState();
             form = new Form({
-                'a-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION)
+                'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION])
             });
         });
 
@@ -74,9 +102,8 @@ describe(`Form`, () => {
 
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
-            validationState = new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE);
             form = new Form({
-                'a-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION)
+                'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [() => mockFieldValidationWithError])
             });
         });
 
@@ -90,36 +117,46 @@ describe(`Form`, () => {
 
         describe(`When we validate all fields`, () => {
             beforeEach(() => {
+                formFieldHasError = true;
+                formFieldSummaryErrors = [ERROR_MESSAGE_SUMMARY];
                 form.validateAll();
             });
 
-            it(`Then the form is invalid`, () => {
-                expect(form.isValid).toBeFalsy();
+            it(`validates each fields`, () => {
+                expect(mockFormField.touch).toHaveBeenCalledTimes(1);
+            });
+
+            it(`getErrorsForSummary returns 1 error message`, () => {
+                expect(form.getErrorsForSummary()).toEqual([ERROR_MESSAGE_SUMMARY]);
             });
 
             it(`nbFieldsThatHasError returns 1`, () => {
                 expect(form.nbFieldsThatHasError).toBe(1);
             });
 
-            it(`getErrorsForSummary returns 1 error message`, () => {
-                expect(form.getErrorsForSummary()).toEqual([ERROR_MESSAGE_SUMMARY]);
+            it(`Then the form is invalid`, () => {
+                expect(form.isValid).toBeFalsy();
+            });
+
+            it(`Then the form can focus the first field in error`, () => {
+                form.focusFirstFieldWithError();
+
+                expect(mockFormField.focusThisField).toHaveBeenCalledTimes(1);
             });
         });
     });
 
-
     describe(`When we reset the form`, () => {
         it(`Then each fields are reset`, () => {
-            FormField.prototype.reset = jest.fn();
-
             form = new Form({
-                'a-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION),
-                'another-field': new FormField((): string => FIELD_VALUE, VALIDATING_FUNCTION)
+                'a-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION]),
+                'another-field': new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, [VALIDATING_FUNCTION])
             });
+            const spy: jest.SpyInstance = jest.spyOn(mockFormField, 'reset');
 
             form.reset();
 
-            expect(FormField.prototype.reset).toHaveBeenCalledTimes(form.fields.length);
+            expect(spy).toHaveBeenCalledTimes(form.fields.length);
         });
     });
 });

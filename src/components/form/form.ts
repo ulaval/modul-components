@@ -41,13 +41,7 @@ export class MForm extends ModulVue {
                 if (this.form.nbOfErrors > 0) {
                     this.errors = this.form.getErrorsForSummary();
                 }
-
-                setTimeout(() => {
-                    let fieldWithError: HTMLElement | null = this.$el.querySelector('.m--has-error input, .m--has-error textarea');
-                    if (fieldWithError) {
-                        (fieldWithError).focus();
-                    }
-                });
+                this.form.focusFirstFieldWithError();
             } else {
                 this.errors = this.form.getErrorsForSummary();
             }

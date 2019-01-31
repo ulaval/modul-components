@@ -15,6 +15,7 @@
 
         <m-textarea v-model.trim="form.get('descriptionField').value"
                     label="Description"
+                    :required-marker="true"
                     :max-width="inputMaxWidthLarge"
                     :error-message="form.get('descriptionField').errorMessage"
                     :character-count="true"
