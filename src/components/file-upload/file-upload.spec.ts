@@ -110,9 +110,6 @@ describe('MFileUpload', () => {
             });
 
             await Vue.nextTick(() => {
-                const test: any = fupd;
-                const test2: any = newAcceptedExtensions;
-                const test4: any = newRejectedExtensions;
                 expect(filesvc.setValidationOptions).toHaveBeenCalledWith(
                     newValidationOpts,
                     DEFAULT_STORE_NAME

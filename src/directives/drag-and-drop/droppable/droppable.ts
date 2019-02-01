@@ -192,7 +192,6 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private onDrop(event: DragEvent): void {
-        const test: any = event.stopPropagation;
         event.stopPropagation();
 
         // Important for firefox as it tries to open dropped content as URL by default.
