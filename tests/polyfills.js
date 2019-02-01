@@ -35,12 +35,11 @@ const {
     getComputedStyle
 } = window
 window.getComputedStyle = function getComputedStyleStub(el) {
-    return {
-        ...getComputedStyle(el),
+    return Object.assign({}, getComputedStyle(el), {
         transitionDelay: '',
         transitionDuration: '',
         animationDelay: '',
         animationDuration: '',
-        getPropertyValue: getComputedStyle(el).getPropertyValue,
-    }
+        getPropertyValue: getComputedStyle(el).getPropertyValue
+    });
 }
