@@ -39,7 +39,7 @@ describe('form-field', () => {
             touch: jest.fn()
         };
 
-        let formField: FormField<string>;
+        let formField: FormField<any>;
         let form: Form;
 
         beforeEach(() => {
