@@ -61,7 +61,6 @@ export class MPeriodPicker extends ModulVue {
 
     get firstInputState(): MPeriodPickerFromSlotProps {
         return {
-            // TODO : Put back label when the bug is gone
             props: { value: this.internalValue.from, min: this.min, max: this.max },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
@@ -72,7 +71,6 @@ export class MPeriodPicker extends ModulVue {
 
     get secondInputState(): MPeriodPickerToSlotProps {
         return {
-            // TODO : Put back label when the bug is gone
             props: { focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),

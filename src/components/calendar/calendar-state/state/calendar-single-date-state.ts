@@ -26,6 +26,8 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
     protected initCurrentValue(value: SingleDate): void {
         if (value) {
             this.currentDate = new ModulDate(value);
+        } else {
+            this.currentDate = undefined as any;
         }
     }
 

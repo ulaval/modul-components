@@ -131,6 +131,14 @@ describe(`A single date state`, () => {
 
             expect(currentDate).toBe(NEW_DATE);
         });
+
+        it(`will update current date when new value is undefined`, () => {
+            calendarSingleDateState.updateState(undefined as any);
+
+            const calendar: Calendar = calendarSingleDateState.buildCurrentCalendar().calendar;
+
+            expect(calendar.value).toBe('');
+        });
     });
 
     describe('calendar events', () => {
