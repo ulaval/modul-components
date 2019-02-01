@@ -21,7 +21,7 @@
     border-radius: 3px;
     padding: $m-input-style--padding;
     transition: border-color $m-transition-duration--l ease-in-out;
-    margin-top: 0.6em;
+    transition: margin-top $m-transition-duration ease;
 
     @include input-style-cursor(text);
 

@@ -8,6 +8,9 @@ import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
+// const cssScaleTransform: number = 0.8;
+export const CSSLABELDEFAULTMARGIN: number = 10;
+
 @WithRender
 @Component({
     mixins: [InputState]
@@ -40,6 +43,18 @@ export class MInputStyle extends ModulVue {
     };
 
     private animReady: boolean = false;
+    private labelOffset: any = CSSLABELDEFAULTMARGIN + 'px';
+
+    protected created(): void {
+        setTimeout(() => {
+            this.animReady = true;
+            this.setInputWidth();
+        }, 0);
+    }
+
+    protected mounted(): void {
+        this.calcLabelOffset(this.isLabelUp);
+    }
 
     public setInputWidth(): void {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
@@ -55,7 +70,7 @@ export class MInputStyle extends ModulVue {
                             if (inputEl !== null) {
                                 let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
                                 if (this.hasLabel) {
-                                    width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                                    width = !this.isLabelUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
                                 }
                                 inputEl!.style.width = width + 'px';
                             }
@@ -71,19 +86,26 @@ export class MInputStyle extends ModulVue {
         });
     }
 
-    protected created(): void {
-        setTimeout(() => {
-            this.animReady = true;
-            this.setInputWidth();
-        }, 0);
+    private calcLabelOffset(value: boolean): void {
+        if (value) {
+            let label: HTMLElement | null = this.$refs.label;
+            if (label) {
+                let labelOffset: number = label.clientHeight / 2;
+                this.labelOffset = labelOffset > CSSLABELDEFAULTMARGIN ? labelOffset + 'px' : CSSLABELDEFAULTMARGIN + 'px';
+            }
+        } else {
+            this.labelOffset = CSSLABELDEFAULTMARGIN + 'px';
+        }
+    }
+
+    public get isLabelUp(): boolean {
+        let isLabelUp: boolean = (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
+        this.calcLabelOffset(isLabelUp);
+        return isLabelUp;
     }
 
     private get hasValue(): boolean {
         return this.hasDefaultSlot && !this.empty;
-    }
-
-    public get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
     }
 
     private get hasLabel(): boolean {
