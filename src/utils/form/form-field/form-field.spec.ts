@@ -2,17 +2,6 @@ import { InputManagement } from '../../../mixins/input-management/input-manageme
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from './form-field';
 
-let mockFocus: jest.Mock = jest.fn();
-jest.mock('../../../mixins/input-management/input-management', () => {
-    return {
-        InputManagement: jest.fn().mockImplementation(() => {
-            return {
-                focusInput: mockFocus
-            };
-        })
-    };
-});
-
 let validationState: FormFieldValidation;
 let formField: FormField<string>;
 let HTML_ELEMENT: HTMLElement = new InputManagement() as any as HTMLElement;
@@ -25,7 +14,7 @@ const VALIDATION_FUNCTION: FieldValidationCallback[] = [(): FormFieldValidation 
 describe(`FormField`, () => {
     describe(`When we create a new instance with a value and a validating function`, () => {
         beforeEach(() => {
-            formField = new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, VALIDATION_FUNCTION, { messageAfterTouched: false });
+            formField = new FormField((): string => FIELD_VALUE, VALIDATION_FUNCTION, { messageAfterTouched: false });
         });
 
         it(`Then the value is the field is the one passed`, () => {
@@ -36,14 +25,6 @@ describe(`FormField`, () => {
             expect(formField.hasError).toBeFalsy();
             expect(formField.errorMessageSummary).toEqual([]);
             expect(formField.errorMessage).toBe('');
-        });
-
-        describe(`When the field is an input`, () => {
-            it(`can be focused`, () => {
-                formField.focusThisField();
-
-                expect(mockFocus).toHaveBeenCalledTimes(1);
-            });
         });
 
         describe(`When we validate a valid field`, () => {
@@ -82,7 +63,7 @@ describe(`FormField`, () => {
 
         describe(`When we validate an invalid field with messageAfterTouched = true`, () => {
             beforeEach(() => {
-                formField = new FormField((): string => FIELD_VALUE, () => HTML_ELEMENT, VALIDATION_FUNCTION, { messageAfterTouched: true });
+                formField = new FormField((): string => FIELD_VALUE, VALIDATION_FUNCTION, { messageAfterTouched: true });
                 validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
             });
 

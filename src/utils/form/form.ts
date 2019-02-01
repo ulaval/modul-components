@@ -92,7 +92,7 @@ export class Form {
         });
 
         if (fieldWithError) {
-            fieldWithError.focusThisField();
+            fieldWithError.shouldFocus = true;
         }
     }
 

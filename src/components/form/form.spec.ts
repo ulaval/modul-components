@@ -47,12 +47,12 @@ describe(`MForm`, () => {
         const VALIDATION_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
         if (multiple) {
             FORM = new Form({
-                'a-field': new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION]),
-                'another-field': new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION])
+                'a-field': new FormField((): string => '', [VALIDATION_FUNCTION]),
+                'another-field': new FormField((): string => '', [VALIDATION_FUNCTION])
             });
         } else {
             FORM = new Form({
-                'a-field': new FormField((): string => '', () => HTML_ELEMENT, [VALIDATION_FUNCTION])
+                'a-field': new FormField((): string => '', [VALIDATION_FUNCTION])
             });
         }
     };

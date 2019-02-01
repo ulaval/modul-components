@@ -1,11 +1,12 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
+import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
 import { ModulVue } from '../../utils/vue/vue';
-import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin, { MMessageState } from '../message/message';
+import { FormFieldDirective } from './form-field';
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender
@@ -68,7 +69,7 @@ const FormPlugin: PluginObject<any> = {
         v.prototype.$log.debug(FORM, 'plugin.install');
         v.use(I18nPlugin);
         v.use(MessagePlugin);
-        v.use(AccordionTransitionPlugin);
+        v.directive(FORM_FIELD_NAME, FormFieldDirective);
         v.component(FORM, MForm);
     }
 };
