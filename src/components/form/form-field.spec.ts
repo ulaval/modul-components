@@ -1,12 +1,13 @@
-import { mount, Wrapper } from '@vue/test-utils';
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import TextfieldPlugin from '../../components/textfield/textfield';
+import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { ModulVue } from '../../utils/vue/vue';
-import FormFieldDirective from './form-field';
+import TextfieldPlugin from '../textfield/textfield';
+import { FormFieldDirective } from './form-field';
 
 let mockFormField: any = {};
 
@@ -24,8 +25,9 @@ describe('form-field', () => {
 
     beforeEach(() => {
         resetModulPlugins();
-        Vue.use(FormFieldDirective);
-        Vue.use(TextfieldPlugin);
+        localVue = createLocalVue();
+        localVue.directive(FORM_FIELD_NAME, FormFieldDirective);
+        localVue.use(TextfieldPlugin);
     });
 
     describe(`The form validate its fields`, () => {
@@ -33,14 +35,15 @@ describe('form-field', () => {
             shouldFocus: false,
             isTouched: false,
             hasError: true,
-            touched: false
+            touched: false,
+            touch: jest.fn()
         };
 
         let formField: FormField<string>;
         let form: Form;
 
         beforeEach(() => {
-            formField = new FormField<string | undefined>(() => undefined, [(value: any) => {
+            formField = new FormField(() => undefined, [(value: any) => {
                 return new FormFieldValidation(true, [''], ['']);
             }]);
 
@@ -50,20 +53,34 @@ describe('form-field', () => {
 
             element = mount(
                 {
-                    template: `<m-textfield v-m-form-field="form.get('a-field')">`,
+                    template: `<input v-m-form-field="form.get('a-field')" ref="field"></input>`,
                     data(): any {
                         return {
                             form: form
                         };
                     }
                 },
-                { localVue: Vue }
+                { localVue: localVue }
             );
         });
 
         it(`the element should have the focus if first invalid`, () => {
+            jest.spyOn(element.find({ ref: 'field' }).element, 'focus');
+
             form.focusFirstFieldWithError();
+
             expect(mockFormField.shouldFocus).toBe(true);
+
+            expect(element.find({ ref: 'field' }).element.focus).toHaveBeenCalled();
+        });
+
+        it(`it should touch the form field on blur`, () => {
+            const spy: any = jest.spyOn(mockFormField, 'touch');
+
+            element.find({ ref: 'field' }).element.focus();
+            element.find({ ref: 'field' }).element.blur();
+
+            expect(spy).toBeCalled();
         });
     });
 });
