@@ -122,8 +122,8 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
                     onUpdate: (data: Popper.Data) => {
                         this.isHidden = data.hide;
                     },
-                    modifiers: { // Modifier used to prevent the popper from being positioned outside the boundary.
-                        preventOverflow: { enabled: false } // MODUL-711
+                    modifiers: {
+                        preventOverflow: { enabled: false } // Modifier used to prevent the popper from being positioned outside the boundary.
                     }
                 };
                 let reference: Element = this.as<PortalMixin>().getTrigger() as Element;
