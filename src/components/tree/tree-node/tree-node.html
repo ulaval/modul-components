@@ -1,5 +1,5 @@
 <li class="m-tree-node"
-    :class="{ 'm--is-selected': isSelected && !isDisabled, 'm--is-disabled' : isDisabled }">
+    :class="{ 'm--is-selected': isSelected && !isDisabled, 'm--is-disabled' : isDisabled, 'm-tree-node__has-children' : hasChildren }">
     <div class="m-tree-node__item"
          ref="item"
          role="button"
