@@ -2,9 +2,11 @@ import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { Form } from '../../utils/form/form';
-import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
-import { FormField } from '../../utils/form/form-field/form-field';
+import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
+import { FieldValidationCallback, FormField } from '../../utils/form/form-field/form-field';
+import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { FORM } from '../component-names';
+import FormPlugin from './form';
 import WithRender from './form.sandbox.html';
 
 @WithRender
@@ -15,15 +17,11 @@ export class MFormSandbox extends Vue {
     location: string = '';
     formSent: any = '';
 
-    titleField: FormField<string> = new FormField((): string => this.title, ValidationSandbox.validateTitle);
-    descriptionField: FormField<string> = new FormField((): string => this.description, ValidationSandbox.validateDescription);
-    locationField: FormField<string> = new FormField((): string => this.location, ValidationSandbox.validateLocation);
-    form: Form = new Form([this.titleField, this.descriptionField, this.locationField]);
-
     maxTitleLength: number = ValidationSandbox.maxTitleLength;
     thresholdTitle: number = ValidationSandbox.thresholdTitle;
     maxDescriptionLength: number = ValidationSandbox.maxDescriptionLength;
     thresholdDescription: number = ValidationSandbox.thresholdDescription;
+    minDescriptionLength: number = ValidationSandbox.minDescriptionLength;
     minLocationLength: number = ValidationSandbox.minLocationLength;
     maxLocationLength: number = ValidationSandbox.maxLocationLength;
     thresholdLocation: number = ValidationSandbox.thresholdLocation;
@@ -31,12 +29,22 @@ export class MFormSandbox extends Vue {
     inputMaxWidthLarge: InputMaxWidth = InputMaxWidth.Large;
     inputMaxWidthSmall: InputMaxWidth = InputMaxWidth.Small;
 
+    form: Form = new Form({
+        'titleField': new FormField<string>((): string => this.title, [ValidationSandbox.validateRequired('Title'), ValidationSandbox.validateMaxLength('Title', this.maxTitleLength)]),
+        'descriptionField': new FormField<string>((): string => this.description, [ValidationSandbox.validateRequired('Description'), ValidationSandbox.validateMinLength('Description', this.minDescriptionLength), ValidationSandbox.validateMaxLength('Description', this.maxDescriptionLength)]),
+        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation()),
+        'passwordField': new FormField<string>((): string => ''),
+        'confirmPasswordField': new FormField<string>((): string => '')
+    }, [ValidationSandbox.validatePasswordMatch]);
+
     submit(): void {
         const data: any = {
-            title: this.titleField.value,
-            description: this.descriptionField.value,
-            location: this.locationField.value
+            title: this.form.get('titleField').value,
+            description: this.form.get('descriptionField').value,
+            location: this.form.get('locationField').value,
+            password: this.form.get('passwordField').value
         };
+
         this.$emit('submit', data);
         this.formSent = data;
     }
@@ -45,46 +53,82 @@ export class MFormSandbox extends Vue {
 class ValidationSandbox {
     static readonly maxTitleLength: number = 8;
     static readonly thresholdTitle: number = 6;
+    static readonly minDescriptionLength: number = 10;
     static readonly maxDescriptionLength: number = 20;
     static readonly thresholdDescription: number = 16;
-    static readonly minLocationLength: number = 10;
+    static readonly minLocationLength: number = 16;
     static readonly maxLocationLength: number = 40;
     static readonly thresholdLocation: number = 30;
 
-    static validateTitle(title: string): FormFieldState {
-        if (!title) {
-            return new FormFieldState(true, 'Title is required.', 'This field is required.');
-        } else if (title.length > ValidationSandbox.maxTitleLength) {
-            let error: string = `Title can be at most ${ValidationSandbox.maxTitleLength} characters.`;
-            return new FormFieldState(true, error, error);
-        }
-        return new FormFieldState();
+
+    static validateRequired(fieldName: string): FieldValidationCallback {
+        return (value: any) => {
+            if (!value) {
+                return new FormFieldValidation(true, [`${fieldName} is required.`], ['This field is required.']);
+            }
+            return new FormFieldValidation();
+        };
     }
 
-    static validateDescription(description: string): FormFieldState {
-        if (description.length > ValidationSandbox.maxDescriptionLength) {
-            let error: string = `Description can be at most ${ValidationSandbox.maxDescriptionLength} characters.`;
-            return new FormFieldState(true, error, error);
-        }
-        return new FormFieldState();
+    static validateMaxLength(fieldName: string, maxLength: number): FieldValidationCallback {
+        return (value: any) => {
+            if (value.length > maxLength) {
+                let error: string = `<strong>${fieldName}</strong> can be at most ${maxLength} characters.`;
+                return new FormFieldValidation(true, [error], [error]);
+            }
+            return new FormFieldValidation();
+        };
     }
 
-    static validateLocation(location: string): FormFieldState {
-        if (!location) {
-            return new FormFieldState(true, 'Location is required.', 'Title is required.');
-        } else if (location.length < ValidationSandbox.minLocationLength) {
-            let error: string = `Location can be at least ${ValidationSandbox.minLocationLength} characters.`;
-            return new FormFieldState(true, error, error);
-        } else if (location.length > ValidationSandbox.maxLocationLength) {
-            let error: string = `Location can be at most ${ValidationSandbox.maxLocationLength} characters.`;
-            return new FormFieldState(true, error, error);
+    static validateMinLength(fieldName: string, minLength: number): FieldValidationCallback {
+        return (value: any) => {
+            if (value.length < minLength) {
+                let error: string = `<strong>${fieldName}</strong> can be at least ${minLength} characters.`;
+                return new FormFieldValidation(true, [error], [error]);
+            }
+            return new FormFieldValidation();
+        };
+    }
+
+    // Other pattern
+    static validateLocation(): FieldValidationCallback[] {
+        return [(value: any) => {
+            let validation: FormFieldValidation = new FormFieldValidation();
+            if (!value) {
+                validation.isError = true;
+                validation.errorMessages = ['This field is required.'];
+                validation.errorMessagesSummary = [`Location is required.`];
+            }
+
+            if (value.length < this.minLocationLength) {
+                let error: string = `<strong>Location</strong> can be at least ${this.minLocationLength} characters.`;
+                validation.isError = true;
+                validation.errorMessages = validation.errorMessages.concat([error]);
+                validation.errorMessagesSummary = validation.errorMessagesSummary.concat([error]);
+            }
+
+            if (value.length > this.maxLocationLength) {
+                validation.isError = true;
+                let error: string = `<strong>Location</strong> can be at most ${this.maxLocationLength} characters.`;
+                validation.errorMessages = validation.errorMessages.concat([error]);
+                validation.errorMessagesSummary = validation.errorMessagesSummary.concat([error]);
+            }
+
+            return validation;
+        }];
+    }
+
+    static validatePasswordMatch(form: Form): FormValidation {
+        if (form.get('passwordField').value !== form.get('confirmPasswordField').value) {
+            return new FormValidation(true, 'Passwords must match');
         }
-        return new FormFieldState();
+        return new FormValidation();
     }
 }
 
 const MFormSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(FormPlugin);
         v.component(`${FORM}-sandbox`, MFormSandbox);
     }
 };
