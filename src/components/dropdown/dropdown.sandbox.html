@@ -634,12 +634,11 @@
                          :label="item"></m-dropdown-item>
     </m-dropdown>
 
-    <h3>Dropdown-item inside m-modal (with prevent-overflow-enable = 'true')</h3>
+    <h3>Dropdown-item inside m-modal </h3>
     <m-modal title="Modal title" >
         <m-button slot="trigger">Open the modal</m-button>
         <m-dropdown class="m-u--margin-top"
                     :filterable="true"
-                    :prevent-overflow-enable="false"
                     label="Country"
                     placeholder="Choose a country">
             <m-dropdown-item value="AF"

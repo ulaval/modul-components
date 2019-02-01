@@ -53,8 +53,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public listMinWidth: string;
     @Prop()
     public focus: boolean;
-    @Prop({ default: true })
-    public preventOverflowEnable: boolean;
 
     public $refs: {
         popup: MPopup;

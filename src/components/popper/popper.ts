@@ -65,8 +65,6 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     public background: boolean;
     @Prop({ default: 'auto' })
     public width: string;
-    @Prop({ default: true })
-    public preventOverflowEnable: boolean;
 
     @Prop()
     public beforeEnter: any;
@@ -124,8 +122,8 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
                     onUpdate: (data: Popper.Data) => {
                         this.isHidden = data.hide;
                     },
-                    modifiers: {
-                        preventOverflow: { enabled: this.preventOverflowEnable }
+                    modifiers: { // Modifier used to prevent the popper from being positioned outside the boundary.
+                        preventOverflow: { enabled: false } // MODUL-711
                     }
                 };
                 let reference: Element = this.as<PortalMixin>().getTrigger() as Element;
