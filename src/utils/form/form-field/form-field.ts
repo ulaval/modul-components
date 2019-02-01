@@ -101,20 +101,20 @@ export class FormField<T> {
      */
     validate(): void {
         if (this.validationCallback.length > 0) {
-            let nouvelEtat: FormFieldState = new FormFieldState();
+            let newState: FormFieldState = new FormFieldState();
             this.validationCallback.forEach((validationFunction) => {
                 let validation: FormFieldValidation = validationFunction(this.internalValue);
                 if (validation.isError) {
-                    nouvelEtat.hasError = true;
+                    newState.hasError = true;
                 }
                 if (validation.errorMessages.length > 0) {
-                    nouvelEtat.errorMessages = nouvelEtat.errorMessages.concat(validation.errorMessages);
+                    newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
                 }
                 if (validation.errorMessagesSummary.length > 0) {
-                    nouvelEtat.errorMessagesSummary = nouvelEtat.errorMessagesSummary.concat(validation.errorMessagesSummary);
+                    newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
                 }
             });
-            this.changeState(nouvelEtat);
+            this.changeState(newState);
         }
     }
 

@@ -5,10 +5,11 @@
     <m-accordion-transition>
         <m-message class="m-form__message-summary"
                    v-if="hasErrors"
-                   :state="messageStateEror"
+                   :state="messageStateError"
                    ref="summary">
             <ul>
-                <li v-for="error in errors"
+                <li v-for="(error, index) in errors"
+                    :key="index"
                     v-html="error"></li>
             </ul>
         </m-message>

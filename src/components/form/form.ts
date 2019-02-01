@@ -17,7 +17,7 @@ export class MForm extends ModulVue {
     @Prop()
     public requiredMarker: boolean;
 
-    public messageStateEror: MMessageState = MMessageState.Error;
+    public messageStateError: MMessageState = MMessageState.Error;
 
     public errors: string[] = [];
 

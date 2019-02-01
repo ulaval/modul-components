@@ -77,11 +77,12 @@ export class Form {
      * returns all the messages that must be shown in the summary
      */
     getErrorsForSummary(): string[] {
-
         let errorsSummary: string[] = this.internalState.errorMessages;
+
         this.fields.forEach((field: FormField<any>) => {
-            errorsSummary = errorsSummary.concat(field.errorMessageSummary[0]);
+            errorsSummary.push(field.errorMessageSummary[0]);
         });
+
         return errorsSummary;
     }
 
