@@ -64,14 +64,17 @@ describe('form-field', () => {
             );
         });
 
-        it(`the element should have the focus if first invalid`, () => {
-            jest.spyOn(element.find({ ref: 'field' }).element, 'focus');
-
+        it(`the element should have the focus if first invalid`, async () => {
+            const spy: any = jest.spyOn(element.find({ ref: 'field' }).element, 'focus');
             form.focusFirstFieldWithError();
-
             expect(mockFormField.shouldFocus).toBe(true);
 
-            expect(element.find({ ref: 'field' }).element.focus).toHaveBeenCalled();
+            element.vm.$forceUpdate();
+
+            await setTimeout(() => { }, 100);
+
+            expect(mockFormField.shouldFocus).toBe(false);
+            expect(spy).toHaveBeenCalled();
         });
 
         it(`it should touch the form field on blur`, () => {

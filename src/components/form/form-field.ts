@@ -22,11 +22,15 @@ export const FormFieldDirective: DirectiveOptions = {
         const formField: FormField<any> = binding.value;
 
         if (formField.shouldFocus) {
-            const selector: string = 'input, textarea, [contenteditable=true]';
-            const elements: NodeListOf<Element> = el.querySelectorAll(selector);
+            if (el instanceof HTMLInputElement) {
+                el.focus();
+            } else {
+                const selector: string = 'input, textarea, [contenteditable=true]';
+                const elements: NodeListOf<Element> = el.querySelectorAll(selector);
 
-            if (elements.length > 0) {
-                (elements[0] as HTMLElement).focus();
+                if (elements.length > 0) {
+                    (elements[0] as HTMLInputElement).focus();
+                }
             }
 
             formField.shouldFocus = false;
