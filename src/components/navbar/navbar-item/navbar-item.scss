@@ -34,7 +34,7 @@
 
     &.m--is-disabled {
         .m-navbar-item__contents {
-            cursor: not-allowed;
+            cursor: default;
             color: $m-color--disabled;
         }
     }

@@ -96,7 +96,7 @@ $m-radio--color-disabled: $m-color--disabled !default;
         &.m--is-disabled {
             .m-radio {
                 &__wrap {
-                    cursor: not-allowed;
+                    cursor: default;
                 }
 
                 &__input {
