@@ -69,10 +69,7 @@ describe('form-field', () => {
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
 
-            element.vm.$forceUpdate();
-
-            // give time to vue to go around concerned life cycles on directive
-            await setTimeout(() => { }, 100);
+            await element.vm.$forceUpdate();
 
             expect(mockFormField.shouldFocus).toBe(false);
             expect(spy).toHaveBeenCalled();
