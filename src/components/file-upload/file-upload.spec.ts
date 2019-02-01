@@ -70,7 +70,7 @@ describe('MFileUpload', () => {
         });
 
         fupd.vm.$file.add(
-            createMockFileList([createMockFile('file')]),
+            createMockFileList([createMockFile('file.jpg')]),
             'unique-name'
         );
         await Vue.nextTick();
@@ -309,7 +309,7 @@ describe('MFileUpload', () => {
         it('should emit files-ready event when $file managed files change', async () => {
             const fupd: Wrapper<MFileUpload> = mount(MFileUpload);
 
-            fupd.vm.$file.add(createMockFileList([createMockFile('new-file')]));
+            fupd.vm.$file.add(createMockFileList([createMockFile('new-file.jpg')]));
             await Vue.nextTick();
 
             expect(fupd.emitted('files-ready')[0][0]).toEqual([
