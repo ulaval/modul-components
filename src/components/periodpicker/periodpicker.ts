@@ -13,21 +13,19 @@ export class MDateRange {
 }
 
 interface MPeriodPickerFromProps {
-    label: string;
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
     max: DatePickerSupportedTypes;
 }
 
 interface MPeriodPickerFromHandlers {
-    change(newValue: string): void;
+    change(newValue: DatePickerSupportedTypes): void;
     open(): void;
 }
 
-export interface MPeriodPickerFromComponentState extends MPeriodPickerFromProps, MPeriodPickerFromHandlers { }
+export interface MPeriodPickerFromComponentVue extends MPeriodPickerFromProps, MPeriodPickerFromHandlers { }
 
 interface MPeriodPickerToProps {
-    label: string;
     focus: boolean;
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
@@ -35,11 +33,15 @@ interface MPeriodPickerToProps {
 }
 
 interface MPeriodPickerToHandlers {
-    change(newValue: string): void;
+    change(newValue: DatePickerSupportedTypes): void;
     close(): void;
 }
 
-export interface MPeriodPickerToComponentState extends MPeriodPickerToProps, MPeriodPickerToHandlers { }
+export interface MPeriodPickerToComponentVue extends MPeriodPickerToProps, MPeriodPickerToHandlers { }
+
+export type MPeriodPickerFromSlotProps = { props: MPeriodPickerFromProps, handlers: MPeriodPickerFromHandlers };
+
+export type MPeriodPickerToSlotProps = { props: MPeriodPickerToProps, handlers: MPeriodPickerToHandlers };
 
 @WithRender
 @Component({
@@ -57,23 +59,23 @@ export class MPeriodPicker extends ModulVue {
 
     toIsFocused: boolean = false;
 
-    get firstInputState(): { props: MPeriodPickerFromProps, handlers: MPeriodPickerFromHandlers } {
+    get firstInputState(): MPeriodPickerFromSlotProps {
         return {
             // TODO : Put back label when the bug is gone
-            props: { label: '', value: this.internalValue.from, min: this.min, max: this.max },
+            props: { value: this.internalValue.from, min: this.min, max: this.max },
             handlers: {
-                change: (newValue: string) => this.onDateFromChange(newValue),
+                change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
                 open: () => this.onDateFromOpen()
             }
         };
     }
 
-    get secondInputState(): { props: MPeriodPickerToProps, handlers: MPeriodPickerToHandlers } {
+    get secondInputState(): MPeriodPickerToSlotProps {
         return {
             // TODO : Put back label when the bug is gone
-            props: { label: '', focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
+            props: { focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
             handlers: {
-                change: (newValue: string) => this.onDateToChange(newValue),
+                change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),
                 close: () => this.onDateToClose()
             }
         };
@@ -104,7 +106,7 @@ export class MPeriodPicker extends ModulVue {
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
         if (newValue) {
-            this.toIsFocused = false;
+            this.unfocusDateToField();
             this.emitNewValue(Object.assign({}, this.internalValue, { to: newValue }));
         } else {
             this.emitNewValue({ from: this.internalValue.from, to: undefined });
@@ -117,13 +119,15 @@ export class MPeriodPicker extends ModulVue {
     }
 
     onDateFromOpen(): void {
-        this.toIsFocused = false;
+        this.unfocusDateToField();
     }
 
     onDateToClose(): void {
-        if (this.toIsFocused) {
-            this.toIsFocused = false;
-        }
+        this.unfocusDateToField();
+    }
+
+    unfocusDateToField(): void {
+        this.toIsFocused = false;
     }
 }
 
