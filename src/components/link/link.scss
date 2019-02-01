@@ -59,7 +59,7 @@
 
     &.m--is-disabled {
         color: $m-color--disabled;
-        cursor: not-allowed;
+        cursor: default;
     }
 
     &.m--is-skin-text {

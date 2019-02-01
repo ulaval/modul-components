@@ -91,7 +91,7 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
                 }
 
                 &.m--is-selected {
-                    cursor: not-allowed;
+                    cursor: default;
                     background: $m-timepicker--color-select;
                 }
             }

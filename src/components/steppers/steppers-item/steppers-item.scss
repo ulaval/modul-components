@@ -41,7 +41,7 @@ $m-steppers--badge--size: 14px;
     &.m--is-disabled {
         .m-steppers-item__button {
             user-select: none;
-            cursor: not-allowed;
+            cursor: default;
         }
 
         .m-steppers-item {

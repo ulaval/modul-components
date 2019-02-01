@@ -169,7 +169,7 @@ $m-checkbox--width: 16px;
     &.m--is-readonly {
         .m-checkbox {
             &__wrap {
-                cursor: not-allowed;
+                cursor: default;
             }
 
             &__input {
