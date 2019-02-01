@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
 import { ModulVue } from '../../utils/vue/vue';
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin, { MMessageState } from '../message/message';
@@ -11,26 +12,26 @@ import WithRender from './form.html?style=./form.scss';
 @Component
 export class MForm extends ModulVue {
     @Prop()
-    form: Form;
+    public form: Form;
 
     @Prop()
-    requiredMarker: boolean;
+    public requiredMarker: boolean;
 
-    messageStateEror: MMessageState = MMessageState.Error;
+    public messageStateEror: MMessageState = MMessageState.Error;
 
-    errors: string[] = [];
+    public errors: string[] = [];
 
-    get hasErrors(): boolean {
+    @Emit('submit')
+    public onSubmit(): void { }
+
+    @Emit('reset')
+    public onReset(): void { }
+
+    public get hasErrors(): boolean {
         return this.errors.length > 0;
     }
 
-    @Emit('submit')
-    onSubmit(): void { }
-
-    @Emit('reset')
-    onReset(): void { }
-
-    submit(): void {
+    public submit(): void {
         if (this.form) {
             this.errors = [];
             this.form.validateAll();
@@ -50,7 +51,7 @@ export class MForm extends ModulVue {
         }
     }
 
-    reset(): void {
+    public reset(): void {
         this.errors = [];
 
         if (this.form) {
@@ -67,6 +68,7 @@ const FormPlugin: PluginObject<any> = {
         v.prototype.$log.debug(FORM, 'plugin.install');
         v.use(I18nPlugin);
         v.use(MessagePlugin);
+        v.use(AccordionTransitionPlugin);
         v.component(FORM, MForm);
     }
 };

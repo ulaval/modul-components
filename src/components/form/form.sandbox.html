@@ -1,6 +1,6 @@
 <div>
     <m-form :form="form"
-            :has-required-fields="true"
+            :required-marker="true"
             @submit="submit">
         <m-textfield v-model.trim="form.get('titleField').value"
                      label="Title"

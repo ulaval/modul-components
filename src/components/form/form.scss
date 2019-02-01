@@ -1,11 +1,14 @@
 @import 'commons';
+@import '../accordion/accordion-transition';
 
 .m-form {
     &__message-summary {
-        margin-bottom: $m-margin--l;
+        margin-bottom: $m-spacing--m;
 
         ul {
             margin: 0;
+            padding: 0;
+            list-style: none;
         }
     }
 

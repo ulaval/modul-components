@@ -1,17 +1,18 @@
-<form class="m-form"
-      :id="form.id"
+<form :id="form.id"
+      class="m-form"
       @submit.prevent="submit"
       @reset.prevent="reset">
-    <m-message class="m-form__message-summary"
-               v-if="hasErrors"
-               :state="messageStateEror"
-               ref="summary">
-        <ul>
-            <li v-for="error in errors"
-                v-html="error"></li>
-        </ul>
-    </m-message>
-
+    <m-accordion-transition>
+        <m-message class="m-form__message-summary"
+                   v-if="hasErrors"
+                   :state="messageStateEror"
+                   ref="summary">
+            <ul>
+                <li v-for="error in errors"
+                    v-html="error"></li>
+            </ul>
+        </m-message>
+    </m-accordion-transition>
     <p class="m-form__required"
        v-if="requiredMarker">
         <span class="m-form__required__marker">*</span>
