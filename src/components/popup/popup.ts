@@ -44,6 +44,8 @@ export class MPopup extends ModulVue {
     public paddingFooter: boolean;
     @Prop({ default: true })
     public background: boolean;
+    @Prop({ default: true })
+    public preventOverflowEnable: boolean;
     @Prop()
     public beforeEnter: any;
     @Prop()

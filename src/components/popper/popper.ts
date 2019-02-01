@@ -3,7 +3,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { POPPER_NAME } from '../component-names';
 import WithRender from './popper.html?style=./popper.scss';
@@ -66,6 +65,8 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
     public background: boolean;
     @Prop({ default: 'auto' })
     public width: string;
+    @Prop({ default: true })
+    public preventOverflowEnable: boolean;
 
     @Prop()
     public beforeEnter: any;
@@ -122,6 +123,9 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
                     eventsEnabled: true,
                     onUpdate: (data: Popper.Data) => {
                         this.isHidden = data.hide;
+                    },
+                    modifiers: {
+                        preventOverflow: { enabled: this.preventOverflowEnable }
                     }
                 };
                 let reference: Element = this.as<PortalMixin>().getTrigger() as Element;
