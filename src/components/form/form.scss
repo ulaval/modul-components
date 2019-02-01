@@ -10,19 +10,19 @@
             list-style: none;
         }
     }
+}
 
-    &__required {
-        margin: 0;
-        text-align: right;
+.required {
+    margin: 0;
+    text-align: right;
 
-        &__marker {
-            color: $m-color--accent;
-            font-weight: $m-font-weight--black;
-        }
+    &__marker {
+        color: $m-color--accent;
+        font-weight: $m-font-weight--black;
+    }
 
-        &__label {
-            font-size: $m-font-size--s;
-            color: $m-color--text-light;
-        }
+    &__label {
+        font-size: $m-font-size--s;
+        color: $m-color--text-light;
     }
 }

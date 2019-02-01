@@ -39,10 +39,10 @@ export class MFormSandbox extends Vue {
 
     submit(): void {
         const data: any = {
-            title: this.form.get('titleField')!.value,
-            description: this.form.get('descriptionField')!.value,
-            location: this.form.get('locationField')!.value,
-            password: this.form.get('passwordField')!.value
+            title: this.form.get('titleField').value,
+            description: this.form.get('descriptionField').value,
+            location: this.form.get('locationField').value,
+            password: this.form.get('passwordField').value
         };
 
         this.$emit('submit', data);
@@ -119,7 +119,7 @@ class ValidationSandbox {
     }
 
     static validatePasswordMatch(form: Form): FormValidation {
-        if (form.get('passwordField')!.value !== form.get('confirmPasswordField')!.value) {
+        if (form.get('passwordField').value !== form.get('confirmPasswordField').value) {
             return new FormValidation(true, 'Passwords must match');
         }
         return new FormValidation();

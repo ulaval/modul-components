@@ -58,7 +58,13 @@ export class Form {
      *
      * @param formFieldName the name of the formfield to access
      */
-    get(formFieldName: string): FormField<any> | undefined {
+    get(formFieldName: string): FormField<any> {
+        let formField: FormField<any> = this.fieldGroup[formFieldName];
+
+        if (!formField) {
+            throw new Error('Trying to access an non existing form field');
+        }
+
         return this.fieldGroup[formFieldName];
     }
 
