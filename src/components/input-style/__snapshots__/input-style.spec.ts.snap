@@ -3,7 +3,9 @@
 exports[`MInputStyle should render correctly 1`] = `
 <div class="m-input-style m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__body">
-        <div class="m-input-style__body__left"> </div>
+        <div class="m-input-style__body__left">
+            <m-i18n-stub k="m-input-style:empty-value" params="" htmlEncode="true" aria-hidden="true" class="m-input-style__body__transparent-text"></m-i18n-stub>
+        </div>
         <div class="m-input-style__body__right"></div>
     </div>
 </div>

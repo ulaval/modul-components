@@ -38,7 +38,7 @@ exports[`MButton should render correctly when skin is secondary 1`] = `<button t
 
 exports[`MButton should render correctly when waiting 1`] = `
 <button disabled="disabled" type="button" class="m-button m--is-skin-primary m--is-waiting">
-    <div aria-hidden="true" class="m-spinner m-button__icon m--is-left">
+    <div appear="true" aria-hidden="true" class="m-spinner m-button__icon m--is-left">
         <div></div>
     </div> <span class="m-button__text"> </span> </button>
 `;

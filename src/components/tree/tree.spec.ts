@@ -1,4 +1,4 @@
-import { mount, RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { mount, RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MCheckboxes, MSelectionMode, MTree, TreeNode } from './tree';
@@ -56,7 +56,7 @@ let checkboxes: MCheckboxes;
 let wrapper: Wrapper<MTree>;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MTree, {
+    wrapper = shallowMount(MTree, {
         propsData: {
             tree,
             selectedNodes,

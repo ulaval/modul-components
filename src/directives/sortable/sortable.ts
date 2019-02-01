@@ -1,13 +1,14 @@
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { PluginObject } from 'vue/types/plugin';
-import { dispatchEvent, getVNodeAttributeValue } from '../../utils/vue/directive';
+import { getVNodeAttributeValue } from '../../utils/vue/directive';
+import { dispatchEvent } from '../../utils/vue/events';
 import { SORTABLE_NAME } from '../directive-names';
 import { DomPlugin, MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../domPlugin';
-import DraggablePlugin, { MDraggable, MDraggableEventNames, MDraggableOptions } from '../drag-and-drop/draggable/draggable';
-import DroppablePlugin, { MDropEvent, MDroppable, MDroppableEventNames, MDroppableOptions } from '../drag-and-drop/droppable/droppable';
+import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin';
+import { MDraggable, MDraggableEventNames, MDraggableOptions } from '../drag-and-drop/draggable/draggable';
+import { MDropEvent, MDroppable, MDroppableEventNames, MDroppableOptions } from '../drag-and-drop/droppable/droppable';
 import { MDroppableGroup } from '../drag-and-drop/droppable/droppable-group';
 import { MSortableDefaultInsertionMarkerBehavior, MSortableInsertionMarkerBehavior } from './insertion-behavior';
-import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin';
 
 export interface MSortableOptions {
     items: any[];

@@ -1,4 +1,4 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { TABLE_HEADER_NAME } from '../component-names';
 import { MTableHeader } from './table-header';
@@ -14,7 +14,7 @@ const SLOT_RIGHT: string = '<div>SLOT RIGHT</div>';
 let wrapper: Wrapper<MTableHeader>;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MTableHeader, {
+    wrapper = shallowMount(MTableHeader, {
         slots
     });
 };

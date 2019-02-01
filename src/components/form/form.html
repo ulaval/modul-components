@@ -1,19 +1,23 @@
 <form :id="form.id"
+      class="m-form"
       @submit.prevent="submit"
       @reset.prevent="reset">
-    <m-message class="m-u--margin-bottom--l"
-               v-if="hasErrors"
-               :state="messageStateEror"
-               ref="summary">
-        <ul class="m-u--no-margin">
-            <li v-for="error in errors">{{ error }}</li>
-        </ul>
-    </m-message>
-
-    <p class="m-u--require"
-       v-if="hasRequiredFields">
-        <span class="m-u--asterisk">*</span>
-        <span class="m-u--typo--precision">{{ 'm-form:required' | f-m-i18n }}</span>
+    <m-accordion-transition>
+        <m-message class="m-form__message-summary"
+                   v-if="hasErrors"
+                   :state="messageStateError"
+                   ref="summary">
+            <ul>
+                <li v-for="(error, index) in errors"
+                    :key="index"
+                    v-html="error"></li>
+            </ul>
+        </m-message>
+    </m-accordion-transition>
+    <p class="required"
+       v-if="requiredMarker">
+        <span class="required__marker">*</span>
+        <span class="required__label">{{ 'm-form:required' | f-m-i18n }}</span>
     </p>
 
     <slot></slot>
