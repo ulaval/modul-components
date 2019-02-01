@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
 import { MESSAGE_PAGE_NAME } from '../../component-names';
 import { Link } from '../../message-page/message-page';
@@ -20,14 +20,14 @@ const getStubs: any = () => {
 };
 
 const initializeWrapperDefaultValues: () => void = (): void => {
-    wrapper = shallow(MErrorBrowserNotSupported, {
+    wrapper = shallowMount(MErrorBrowserNotSupported, {
         mocks: { $mq: { state: { isMqMinS: isMobileDevice ? false : true } } },
         stubs: getStubs()
     });
 };
 
 const initializeWrapperCustomValues: () => void = (): void => {
-    wrapper = shallow(MErrorBrowserNotSupported, {
+    wrapper = shallowMount(MErrorBrowserNotSupported, {
         mocks: { $mq: { state: { isMqMinS: isMobileDevice ? false : true } } },
         stubs: getStubs(),
         propsData: {

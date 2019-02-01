@@ -1,11 +1,10 @@
-import { mount, Wrapper, shallow } from '@vue/test-utils';
+import { shallowMount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import TooltipPlugin, { MTooltip, MTooltipMode } from './tooltip';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -19,7 +18,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: Vue
         });
 
@@ -29,7 +28,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly when is open', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: Vue,
             propsData: {
                 open: true
@@ -42,7 +41,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly with default slot', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: localVue,
             slots: {
                 default: 'Tooltip text'
@@ -53,7 +52,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly when mode is link', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: localVue,
             propsData: {
                 mode: MTooltipMode.Link
@@ -68,7 +67,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly when disabled', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: localVue,
             propsData: {
                 disabled: true
@@ -79,7 +78,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly when close-button is false', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: localVue,
             propsData: {
                 closeButton: false
@@ -90,7 +89,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly when open title is set', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: localVue,
             propsData: {
                 openTitle: 'test_open'
@@ -101,7 +100,7 @@ describe('tooltip', () => {
     });
 
     it('should render correctly when close title is set', () => {
-        const tooltip: Wrapper<MTooltip> = shallow(MTooltip, {
+        const tooltip: Wrapper<MTooltip> = shallowMount(MTooltip, {
             localVue: localVue,
             propsData: {
                 open: true,

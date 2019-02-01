@@ -2,7 +2,10 @@
 
 exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content"></ul>
+    <ul class="m-tree__content">
+        <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
+        <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
+    </ul>
 </div>
 `;
 

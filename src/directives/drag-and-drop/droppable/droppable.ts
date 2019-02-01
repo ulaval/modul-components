@@ -1,7 +1,8 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { targetIsInput } from '../../../utils/event/event';
 import { isInElement } from '../../../utils/mouse/mouse';
-import { dispatchEvent, getVNodeAttributeValue } from '../../../utils/vue/directive';
+import { getVNodeAttributeValue } from '../../../utils/vue/directive';
+import { dispatchEvent } from '../../../utils/vue/events';
 import { DROPPABLE_NAME } from '../../directive-names';
 import { MDOMPlugin, MElementDomPlugin, MountFunction, RefreshFunction } from '../../domPlugin';
 import { MSortable, MSortableAction } from '../../sortable/sortable';
@@ -191,6 +192,7 @@ export class MDroppable extends MElementDomPlugin<MDroppableOptions> {
     }
 
     private onDrop(event: DragEvent): void {
+        const test: any = event.stopPropagation;
         event.stopPropagation();
 
         // Important for firefox as it tries to open dropped content as URL by default.

@@ -5,7 +5,7 @@ exports[`MRichTextEditor should render correctly 1`] = `
     <div border-top="true" class="m-input-style m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
-                <froala config="[object Object]" value="" custom-translations="[object Object]"></froala>
+                <div config="[object Object]" value="" custom-translations="[object Object]"></div>
             </div>
             <div class="m-input-style__body__right"></div>
         </div>
