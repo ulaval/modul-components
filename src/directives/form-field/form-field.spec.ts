@@ -36,13 +36,8 @@ describe('form-field', () => {
             touched: false
         };
 
-        let formField: FormField<string> = new FormField<string | undefined>(() => undefined, [(value: any) => {
-            return new FormFieldValidation(true, [''], ['']);
-        }]);
-
-        let form: Form = new Form({
-            'a-field': formField
-        });
+        let formField: FormField<string>;
+        let form: Form;
 
         beforeEach(() => {
             formField = new FormField<string | undefined>(() => undefined, [(value: any) => {
@@ -55,7 +50,7 @@ describe('form-field', () => {
 
             element = mount(
                 {
-                    template: `<m-textfield v-model.trim="form.get('a-field').value" v-m-form-field="form.get('a-field')">`,
+                    template: `<m-textfield v-m-form-field="form.get('a-field')">`,
                     data(): any {
                         return {
                             form: form
