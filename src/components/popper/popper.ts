@@ -3,7 +3,6 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
-import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { POPPER_NAME } from '../component-names';
 import WithRender from './popper.html?style=./popper.scss';
@@ -122,6 +121,9 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
                     eventsEnabled: true,
                     onUpdate: (data: Popper.Data) => {
                         this.isHidden = data.hide;
+                    },
+                    modifiers: {
+                        preventOverflow: { enabled: false } // Modifier used to prevent the popper from being positioned outside the boundary.
                     }
                 };
                 let reference: Element = this.as<PortalMixin>().getTrigger() as Element;

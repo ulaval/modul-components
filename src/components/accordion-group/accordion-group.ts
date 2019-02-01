@@ -108,10 +108,10 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
 }
 
 const AccordionGroupPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.use(MAccordionPlugin);
-        v.use(I18nPlugin);
+    install(v): void {
         v.use(LinkPlugin);
+        v.use(I18nPlugin);
+        v.use(MAccordionPlugin);
         v.component(ACCORDION_GROUP_NAME, MAccordionGroup);
     }
 };

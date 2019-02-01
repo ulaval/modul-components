@@ -1,39 +1,52 @@
 <div>
     <m-form :form="form"
-            :has-required-fields="true"
+            :required-marker="true"
             @submit="submit">
-        <m-textfield v-model.trim="titleField.value"
+        <m-textfield v-model.trim="form.get('titleField').value"
                      label="Title"
                      :max-width="inputMaxWidthSmall"
                      :required-marker="true"
-                     :error="titleField.hasError"
-                     :error-message="titleField.errorMessage"
+                     :error-message="form.get('titleField').errorMessage"
                      :character-count="true"
                      :max-length="maxTitleLength"
                      :character-count-threshold="thresholdTitle"
-                     ref="title"></m-textfield>
+                     v-m-form-field="form.get('titleField')">
+        </m-textfield>
 
-        <m-textarea v-model.trim="descriptionField.value"
+        <m-textarea v-model.trim="form.get('descriptionField').value"
                     label="Description"
+                    :required-marker="true"
                     :max-width="inputMaxWidthLarge"
-                    :error="descriptionField.hasError"
-                    :error-message="descriptionField.errorMessage"
+                    :error-message="form.get('descriptionField').errorMessage"
                     :character-count="true"
                     :max-length="maxDescriptionLength"
                     :character-count-threshold="thresholdDescription"
-                    ref="description">
+                    v-m-form-field="form.get('descriptionField')">
         </m-textarea>
 
-        <m-textarea v-model.trim="locationField.value"
+        <m-textarea v-model.trim="form.get('passwordField').value"
+                    label="Password"
+                    :max-width="inputMaxWidthLarge"
+                    :error-message="form.get('passwordField').errorMessage"
+                    v-m-form-field="form.get('passwordField')">
+        </m-textarea>
+
+        <m-textarea v-model.trim="form.get('confirmPasswordField').value"
+                    label="Confirm password"
+                    :max-width="inputMaxWidthLarge"
+                    :error-message="form.get('confirmPasswordField').errorMessage"
+                    v-m-form-field="form.get('confirmPasswordField')">
+        </m-textarea>
+
+        <m-textarea v-model.trim="form.get('locationField').value"
                     label="Location"
                     :max-width="inputMaxWidthLarge"
                     :required-marker="true"
-                    :error="locationField.hasError"
-                    :error-message="locationField.errorMessage"
+                    :error-message="form.get('locationField').errorMessage"
                     :character-count="true"
                     :max-length="maxLocationLength"
                     :character-count-threshold="thresholdLocation"
-                    ref="location">
+                    v-m-form-field="form.get('locationField')">
         </m-textarea>
     </m-form>
     <m-button type="submit"

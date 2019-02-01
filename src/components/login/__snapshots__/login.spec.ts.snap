@@ -2,37 +2,12 @@
 
 exports[`MLogin when login should render correctly 1`] = `
 <form>
-    <div class="m-textfield m--has-label m--is-type-text" style="width:100%;max-width:288px;">
-        <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label for="mTextfield-uuid" class="m-input-style__label"><span class="m-input-style__text"><span>Username</span> </span>
-            </label>
-            <div class="m-input-style__body">
-                <div class="m-input-style__body__left">
-                    <input id="mTextfield-uuid" maxlength="Infinity" type="text" value="" class="m-textfield__input"> </div>
-                <div class="m-input-style__body__right"><span></span></div>
-            </div>
-        </div>
-        <div class="m-textfield__validation">
-            <div class="m-validation-message m-textfield__validation__message"></div>
-        </div>
-    </div>
+    <m-textfield-stub type="text" icon="true" maxLength="0" lengthOverflow="true" characterCountThreshold="0" label="Username" focus="true"></m-textfield-stub>
     <br>
-    <div class="m-textfield m--has-label m--is-type-password" style="width:100%;max-width:288px;">
-        <div class="m-input-style m--has-label m--is-tag-default" style="width:undefined;">
-            <label for="mTextfield-uuid" class="m-input-style__label"><span class="m-input-style__text"><span>Password</span> </span>
-            </label>
-            <div class="m-input-style__body">
-                <div class="m-input-style__body__left">
-                    <input id="mTextfield-uuid" maxlength="Infinity" type="password" value="" class="m-textfield__input"> </div>
-                <div class="m-input-style__body__right"><span></span></div>
-            </div>
-        </div>
-        <div class="m-textfield__validation">
-            <div class="m-validation-message m-textfield__validation__message"></div>
-        </div>
-    </div>
+    <m-textfield-stub type="password" icon="true" maxLength="0" lengthOverflow="true" characterCountThreshold="0" label="Password"></m-textfield-stub>
     <br>
-    <button type="submit" class="m-button m--is-skin-primary"> <span class="m-button__text"><span class="m-i18n">Login</span> </span>
-    </button>
+    <m-button-stub type="submit" skin="primary" iconPosition="left" iconSize="12px">
+        <m-i18n-stub k="m-login:login" params="" htmlEncode="true"></m-i18n-stub>
+    </m-button-stub>
     <br> </form>
 `;

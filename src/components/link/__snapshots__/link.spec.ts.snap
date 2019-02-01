@@ -1,34 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MLink Button mode should render correctly 1`] = `<a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"></span> </a>`;
+exports[`MLink Button mode should render correctly 1`] = `<a href="#" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link mode should render content correctly 1`] = `<a href="/" tabindex="1" class="m-link"> <span class="m-link__text">Link</span> </a>`;
+exports[`MLink Link mode should render content correctly 1`] = `<a href="/" tabindex="0" class="m-link"> <span class="m-link__text">Link</span> </a>`;
 
-exports[`MLink Link mode should render correctly 1`] = `<a href="/" tabindex="1" class="m-link"> <span class="m-link__text"></span> </a>`;
+exports[`MLink Link mode should render correctly 1`] = `<a href="/" tabindex="0" class="m-link"> <span class="m-link__text"></span> </a>`;
 
 exports[`MLink Link mode should render correctly all icon style: left 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-left-icon">
+<a href="/" tabindex="0" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink Link mode should render correctly all icon style: name 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-left-icon">
+<a href="/" tabindex="0" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink Link mode should render correctly all icon style: right 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-right-icon">
+<a href="/" tabindex="0" class="m-link m--has-right-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink Link mode should render correctly all icon style: size 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-left-icon">
+<a href="/" tabindex="0" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="24px" height="24px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
@@ -36,43 +36,43 @@ exports[`MLink Link mode should render correctly all icon style: size 1`] = `
 
 exports[`MLink Link mode should render correctly all link status: disabled 1`] = `<a tabindex="-1" class="m-link m--is-disabled"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link mode should render correctly all link status: underline 1`] = `<a href="/" tabindex="1" class="m-link m--no-underline"> <span class="m-link__text"></span> </a>`;
+exports[`MLink Link mode should render correctly all link status: underline 1`] = `<a href="/" tabindex="0" class="m-link m--no-underline"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link mode should render correctly all link status: unvisited 1`] = `<a href="/" tabindex="1" class="m-link m--is-unvisited"> <span class="m-link__text"></span> </a>`;
+exports[`MLink Link mode should render correctly all link status: unvisited 1`] = `<a href="/" tabindex="0" class="m-link m--is-unvisited"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link mode should render link target when prop is set 1`] = `<a href="/" target="_self" tabindex="1" class="m-link"> <span class="m-link__text"></span> </a>`;
+exports[`MLink Link mode should render link target when prop is set 1`] = `<a href="/" target="_self" tabindex="0" class="m-link"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink Link mode should render open in new tab hidden text when target is _blank 1`] = `<a href="/" target="_blank" tabindex="1" class="m-link"> <span class="m-link__text"></span> <span class="m-i18n m-link__hidden">This hyperlink will open in a new tab.</span></a>`;
+exports[`MLink Link mode should render open in new tab hidden text when target is _blank 1`] = `<a href="/" target="_blank" tabindex="0" class="m-link"> <span class="m-link__text"></span> <span class="m-i18n m-link__hidden">This hyperlink will open in a new tab.</span></a>`;
 
-exports[`MLink RouterLink mode should pass route values to router-link using url prop 1`] = `<a href="/named/123" tabindex="1" class="m-link"> <span class="m-link__text"></span> </a>`;
+exports[`MLink RouterLink mode should pass route values to router-link using url prop 1`] = `<a href="/named/123" tabindex="0" class="m-link"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink RouterLink mode should render content correctly 1`] = `<a href="/" tabindex="1" class="m-link router-link-active"> <span class="m-link__text">Link</span> </a>`;
+exports[`MLink RouterLink mode should render content correctly 1`] = `<a href="/" tabindex="0" class="m-link router-link-active"> <span class="m-link__text">Link</span> </a>`;
 
-exports[`MLink RouterLink mode should render correctly 1`] = `<a href="/" tabindex="1" class="m-link router-link-active"> <span class="m-link__text"></span> </a>`;
+exports[`MLink RouterLink mode should render correctly 1`] = `<a href="/" tabindex="0" class="m-link router-link-active"> <span class="m-link__text"></span> </a>`;
 
 exports[`MLink RouterLink mode should render correctly all icon style: left 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-left-icon">
+<a href="/" tabindex="0" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink RouterLink mode should render correctly all icon style: name 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-left-icon">
+<a href="/" tabindex="0" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink RouterLink mode should render correctly all icon style: right 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-right-icon">
+<a href="/" tabindex="0" class="m-link m--has-right-icon">
     <svg aria-hidden="true" width="12px" height="12px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
 `;
 
 exports[`MLink RouterLink mode should render correctly all icon style: size 1`] = `
-<a href="/" tabindex="1" class="m-link m--has-left-icon">
+<a href="/" tabindex="0" class="m-link m--has-left-icon">
     <svg aria-hidden="true" width="24px" height="24px" class="m-icon m-link__icon">
         <use aria-hidden="true"></use>
     </svg> <span class="m-link__text"></span> </a>
@@ -80,12 +80,12 @@ exports[`MLink RouterLink mode should render correctly all icon style: size 1`] 
 
 exports[`MLink RouterLink mode should render correctly all link status: disabled 1`] = `<a href="/" tabindex="-1" class="m-link router-link-active m--is-disabled"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink RouterLink mode should render correctly all link status: underline 1`] = `<a href="/" tabindex="1" class="m-link router-link-active m--no-underline"> <span class="m-link__text"></span> </a>`;
+exports[`MLink RouterLink mode should render correctly all link status: underline 1`] = `<a href="/" tabindex="0" class="m-link router-link-active m--no-underline"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink RouterLink mode should render correctly all link status: unvisited 1`] = `<a href="/" tabindex="1" class="m-link router-link-active m--is-unvisited"> <span class="m-link__text"></span> </a>`;
+exports[`MLink RouterLink mode should render correctly all link status: unvisited 1`] = `<a href="/" tabindex="0" class="m-link router-link-active m--is-unvisited"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink RouterLink mode should render correctly when url prop is a string 1`] = `<a href="/test" tabindex="1" class="m-link"> <span class="m-link__text"></span> </a>`;
+exports[`MLink RouterLink mode should render correctly when url prop is a string 1`] = `<a href="/test" tabindex="0" class="m-link"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink RouterLink mode should render link target when prop is set 1`] = `<a href="/" target="_self" tabindex="1" class="m-link router-link-active"> <span class="m-link__text"></span> </a>`;
+exports[`MLink RouterLink mode should render link target when prop is set 1`] = `<a href="/" target="_self" tabindex="0" class="m-link router-link-active"> <span class="m-link__text"></span> </a>`;
 
-exports[`MLink RouterLink mode should render open in new tab hidden text when target is _blank 1`] = `<a href="/" target="_blank" tabindex="1" class="m-link router-link-active"> <span class="m-link__text"></span> <span class="m-i18n m-link__hidden">This hyperlink will open in a new tab.</span></a>`;
+exports[`MLink RouterLink mode should render open in new tab hidden text when target is _blank 1`] = `<a href="/" target="_blank" tabindex="0" class="m-link router-link-active"> <span class="m-link__text"></span> <span class="m-i18n m-link__hidden">This hyperlink will open in a new tab.</span></a>`;

@@ -1,14 +1,23 @@
 <article class="m-accordion-group">
-    <div class="m-accordion-group__header" :class="{ 'm--no-title' : !hasTitleSlot }" v-if="hasTitleSlot || !concurrent">
-        <div class="m-accordion-group__header__title" v-if="hasTitleSlot">
+    <div class="m-accordion-group__header"
+         :class="{ 'm--no-title' : !hasTitleSlot }"
+         v-if="hasTitleSlot || !concurrent">
+        <div class="m-accordion-group__header__title"
+             v-if="hasTitleSlot">
             <slot name="title"></slot>
         </div>
         <div v-if="!concurrent && !disabled">
-            <m-link mode="button" @click="openAllAccordions" v-if="!propAllOpen">
+            <m-link mode="button"
+                    @click="openAllAccordions"
+                    v-if="!propAllOpen"
+                    ref="openAllButton">
                 <m-i18n k="m-accordion-group:open-all"></m-i18n>
             </m-link>
             <template v-if="!propAllOpen && !propAllClosed">&nbsp;&nbsp;|&nbsp;&nbsp;</template>
-            <m-link mode="button" @click="closeAllAccordions" v-if="!propAllClosed">
+            <m-link mode="button"
+                    @click="closeAllAccordions"
+                    v-if="!propAllClosed"
+                    ref="closeAllButton">
                 <m-i18n k="m-accordion-group:close-all"></m-i18n>
             </m-link>
         </div>

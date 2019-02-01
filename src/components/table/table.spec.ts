@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { MColumnTable, MTable } from './table';
 
@@ -26,7 +26,7 @@ const DATA: any[] = [
 let wrapper: Wrapper<MTable>;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MTable, {
+    wrapper = shallowMount(MTable, {
         propsData: {
             rows,
             columns

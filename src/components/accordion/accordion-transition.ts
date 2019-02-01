@@ -1,6 +1,6 @@
 import Vue, { PluginObject, VNode, VNodeData, VueConstructor } from 'vue';
-
 import { ACCORDION_TRANSITION_NAME } from '../component-names';
+
 
 interface MAccordionTransitionProps {
     heightDelta?: number;
@@ -35,7 +35,7 @@ export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
                     el.style.removeProperty('height');
                 },
                 beforeLeave(el: HTMLElement): void {
-                    el.style.height = el.scrollHeight + 'px';
+                    el.style.height = parseInt((window.getComputedStyle(el).height as string), 10) + 'px';
                     if (props.transition === false && el.classList.contains(CLASS_HAS_TRANSITION)) {
                         el.classList.remove(CLASS_HAS_TRANSITION);
                     }
