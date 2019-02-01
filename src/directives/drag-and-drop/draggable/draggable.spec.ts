@@ -20,6 +20,15 @@ let spyWindow: jest.SpyInstance<any> = jest.spyOn(window, 'getComputedStyle');
 let element: jest.Mock = jest.fn();
 element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
+jest.mock('../../../utils/vue/events', () => ({
+    dispatchEvent: (element: HTMLElement, eventName: string, eventData: any) => {
+        const vue: Vue = (element as any).__vue__;
+        if (vue && vue.$children.length) {
+            return vue.$children[0].$emit(eventName, eventData);
+        }
+    }
+}));
+
 beforeEach(() => {
     mockTargetIsInput = false;
     element.mockReset();
@@ -51,7 +60,6 @@ describe('draggable', () => {
                 }, { localVue: Vue });
             }
 
-            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
             return directive;
         };
 
@@ -276,7 +284,6 @@ describe('draggable', () => {
             draggable.trigger('dragstart', options);
 
             const event: any = draggable.emitted(MDraggableEventNames.OnDragStart)[0][0];
-            expect(options.stopPropagation).toHaveBeenCalled();
             expect(event.dragInfo).toBeDefined();
             expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
         });
@@ -389,7 +396,6 @@ describe('draggable', () => {
             draggable.trigger('dragend', options);
 
             const event: any = draggable.emitted(MDraggableEventNames.OnDragEnd)[0][0];
-            expect(options.stopPropagation).toHaveBeenCalled();
             expect(event.dragInfo).toBeDefined();
             expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
         });

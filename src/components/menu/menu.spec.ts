@@ -31,8 +31,6 @@ describe('MMenu', () => {
             skin: MMenuSkin.Dark
         });
 
-        menu.update();
-
         return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
     });
 
@@ -40,8 +38,6 @@ describe('MMenu', () => {
         const menu: Wrapper<MMenu> = mountGroup({
             skin: MMenuSkin.Light
         });
-
-        menu.update();
 
         return expect(renderComponent(menu.vm)).resolves.toMatchSnapshot();
     });

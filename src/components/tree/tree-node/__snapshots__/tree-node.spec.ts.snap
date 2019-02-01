@@ -6,17 +6,7 @@ exports[`MTreeNode Given a node When the node can and has children and the node 
         <div filename="Node 3" is-folder="true" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 3</span> </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
-            <li class="m-tree-node m-tree-node__child">
-                <div role="button" tabindex="1" class="m-tree-node__item">
-                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Node 4</span> </div>
-                <m-accordion-transition>
-                    <ul class="m-tree-node__children" style="display:none;">
-                        <li class="m-tree-node__child-empty">
-                            m-tree-node:empty
-                        </li>
-                    </ul>
-                </m-accordion-transition>
-            </li>
+            <m-tree-node-stub node="[object Object]" selectedNodes="" checkboxes="false" selectable="true" path="/Node 3" disabledNodes="" class="m-tree-node__child"></m-tree-node-stub>
         </ul>
     </m-accordion-transition>
 </li>
@@ -60,32 +50,8 @@ exports[`MTreeNode Given a node When the node has a checkbox and the node is the
     </div>
     <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
-            <li class="m-tree-node m-tree-node__child">
-                <div role="button" tabindex="1" class="m-tree-node__item">
-                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Child 1</span>
-                    <m-checkbox></m-checkbox>
-                </div>
-                <m-accordion-transition>
-                    <ul class="m-tree-node__children m-tree-node__line-extension" style="display:none;">
-                        <li class="m-tree-node__child-empty">
-                            m-tree-node:empty
-                        </li>
-                    </ul>
-                </m-accordion-transition>
-            </li>
-            <li class="m-tree-node m-tree-node__child">
-                <div role="button" tabindex="1" class="m-tree-node__item">
-                    <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Child 2</span>
-                    <m-checkbox></m-checkbox>
-                </div>
-                <m-accordion-transition>
-                    <ul class="m-tree-node__children" style="display:none;">
-                        <li class="m-tree-node__child-empty">
-                            m-tree-node:empty
-                        </li>
-                    </ul>
-                </m-accordion-transition>
-            </li>
+            <m-tree-node-stub node="[object Object]" selectedNodes="" checkboxes="with-button-auto-select" selectable="true" path="/Parent 1" hasSibling="true" disabledNodes="" class="m-tree-node__child"></m-tree-node-stub>
+            <m-tree-node-stub node="[object Object]" selectedNodes="" checkboxes="with-button-auto-select" selectable="true" path="/Parent 1" disabledNodes="" class="m-tree-node__child"></m-tree-node-stub>
         </ul>
     </m-accordion-transition>
     <button class="m-tree-node__auto-select-button"></button>

@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
 import { MESSAGE_PAGE_NAME } from '../../component-names';
 import { Link } from '../../message-page/message-page';
@@ -16,7 +16,7 @@ const getStubs: any = () => {
 describe(`Page not found - test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
-            wrapper = shallow(MErrorPageNotFound, { stubs: getStubs() });
+            wrapper = shallowMount(MErrorPageNotFound, { stubs: getStubs() });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
@@ -27,7 +27,7 @@ describe(`Page not found - test`, () => {
             const A_HINT: string = 'aHint';
             const A_LINK: Link = new Link('aLabel', 'anUrl');
 
-            wrapper = shallow(MErrorPageNotFound, {
+            wrapper = shallowMount(MErrorPageNotFound, {
                 stubs: getStubs(),
                 propsData: {
                     title: A_CUSTOM_TITLE,
