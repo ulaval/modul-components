@@ -146,7 +146,7 @@ $m-checkbox--width: 16px;
     &.m--is-disabled {
         .m-checkbox {
             &__wrap {
-                cursor: not-allowed;
+                cursor: default;
             }
 
             &__input {
