@@ -17,4 +17,8 @@
         margin-top: 0;
         margin-bottom: 0;
     }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled > .m-tree-node__item {
+        cursor: pointer;
+    }
 }
