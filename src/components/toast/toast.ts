@@ -113,7 +113,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     public getPortalElement(): HTMLElement {
-        return this.$refs.toast as HTMLElement;
+        return this.$refs.toast;
     }
 
     public getBackdropMode(): BackdropMode {

@@ -4,20 +4,31 @@ import { createLocalVue, mount, RefSelector, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import { Form } from '../../utils/form/form';
-import { FormFieldState } from '../../utils/form/form-field-state/form-field-state';
-import { FormField } from '../../utils/form/form-field/form-field';
-import uuid from '../../utils/uuid/uuid';
+import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
+import { FieldValidationCallback, FormField } from '../../utils/form/form-field/form-field';
 import FormPlugin, { MForm } from './form';
 
-jest.mock('../../utils/uuid/uuid');
-(uuid.generate as jest.Mock).mockReturnValue('uuid');
+let mockForm: any = {};
+jest.mock('../../utils/form/form', () => {
+    return {
+        Form: jest.fn().mockImplementation(() => {
+            return mockForm;
+        })
+    };
+});
 
+let HTML_ELEMENT: HTMLElement;
 const ERROR_MESSAGE: string = 'ERROR';
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR MESSAGE SUMMARY';
 const REF_SUMMARY: RefSelector = { ref: 'summary' };
-const FORM: Form = new Form([
-    new FormField((): string => '', (): FormFieldState => new FormFieldState())
-]);
+
+let fieldValidation: FormFieldValidation;
+
+let FORM: Form;
+let formHasError: boolean = false;
+let nbFieldsThatHasError: number = 0;
+let nbOfErrors: number = 0;
+let mockGetErrorsForSummary: jest.Mock = jest.fn(() => []);
 
 describe(`MForm`, () => {
     let wrapper: Wrapper<MForm>;
@@ -32,9 +43,35 @@ describe(`MForm`, () => {
         });
     };
 
+    const initialiseForm: Function = (multiple: boolean): void => {
+        const VALIDATION_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
+        if (multiple) {
+            FORM = new Form({
+                'a-field': new FormField((): string => '', [VALIDATION_FUNCTION]),
+                'another-field': new FormField((): string => '', [VALIDATION_FUNCTION])
+            });
+        } else {
+            FORM = new Form({
+                'a-field': new FormField((): string => '', [VALIDATION_FUNCTION])
+            });
+        }
+    };
+
     beforeEach(() => {
         localVue = createLocalVue();
         localVue.use(FormPlugin);
+        mockForm = {
+            id: 'uuid',
+            hasError: formHasError,
+            reset: jest.fn(),
+            nbFieldsThatHasError,
+            nbOfErrors,
+            getErrorsForSummary: mockGetErrorsForSummary,
+            focusFirstFieldWithError: jest.fn(),
+            validateAll: jest.fn()
+        };
+        ((Form as unknown) as jest.Mock).mockClear();
+        initialiseForm();
         initialiserWrapper();
     });
 
@@ -43,12 +80,12 @@ describe(`MForm`, () => {
     });
 
     it(`When the form has required fields, then it should show a required label`, async () => {
-        wrapper.setProps({ hasRequiredFields: true });
+        wrapper.setProps({ requiredMarker: true });
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 
     it(`When the form has no required fields, then it should not show a required label`, async () => {
-        wrapper.setProps({ hasRequiredFields: false });
+        wrapper.setProps({ requiredMarker: false });
         expect(await renderComponent(wrapper.vm)).toMatchSnapshot();
     });
 
@@ -66,31 +103,41 @@ describe(`MForm`, () => {
 
         describe(`When there is one error`, () => {
             beforeEach(() => {
-                wrapper.setProps({
-                    form: new Form([
-                        new FormField((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE))
-                    ])
+                nbFieldsThatHasError = 1;
+                mockGetErrorsForSummary = jest.fn(() => {
+                    return [ERROR_MESSAGE_SUMMARY];
                 });
-                wrapper.trigger('submit');
-            });
-
-            it(`Then the submit event is not sent to the parent`, () => {
-                expect(wrapper.emitted('submit')).toBeFalsy();
+                initialiseForm();
+                initialiserWrapper();
             });
 
             it(`Then the summary of errors is not shown`, async () => {
+                wrapper.trigger('submit');
+
                 expect(wrapper.find(REF_SUMMARY).exists()).toBeFalsy();
+            });
+
+            it(`Then it focuses on the first error`, () => {
+                wrapper.trigger('submit');
+
+                expect(mockForm.focusFirstFieldWithError).toHaveBeenCalledTimes(1);
+            });
+
+            it(`Then the submit event is not sent to the parent`, () => {
+                wrapper.trigger('submit');
+
+                expect(wrapper.emitted('submit')).toBeFalsy();
             });
         });
 
         describe(`When there are multiple errors`, () => {
             beforeEach(() => {
-                wrapper.setProps({
-                    form: new Form([
-                        new FormField((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE)),
-                        new FormField((): string => '', (): FormFieldState => new FormFieldState(true, ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE))
-                    ])
+                nbFieldsThatHasError = 2;
+                mockGetErrorsForSummary = jest.fn(() => {
+                    return [ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE_SUMMARY];
                 });
+                initialiseForm(true);
+                initialiserWrapper();
                 wrapper.trigger('submit');
             });
 

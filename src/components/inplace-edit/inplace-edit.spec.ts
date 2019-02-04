@@ -1,11 +1,10 @@
-import { mount, shallow, Wrapper } from '@vue/test-utils';
+import { mount, shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
-import { ModulVue } from '../../utils/vue/vue';
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
+
 
 let propsData: { propsData: { editMode: boolean } };
 
@@ -14,7 +13,7 @@ let wrapper: Wrapper<MInplaceEdit>;
 
 const CANCEL_EVENT: string = 'cancel';
 const CONFIRM_EVENT: string = 'ok';
-const REF_OVERLAY: object = { ref : 'overlay' };
+const REF_OVERLAY: object = { ref: 'overlay' };
 
 const READ_SLOT_CLASS: string = 'readSlot';
 const READ_SLOT: string = '<div class="' + READ_SLOT_CLASS + '">readSlot</div>';
@@ -36,13 +35,13 @@ describe('Component inplace-edit - Element wrapper edition inline with default v
         expect(inplaceEdit.editMode).toBeFalsy();
     });
 
-    it('must use default value for modal title',() => {
+    it('must use default value for modal title', () => {
 
         expect(inplaceEdit.title).toEqual(inplaceEdit.$i18n.translate('m-inplace-edit:modify'));
     });
 
     describe('when defining title prop', () => {
-        it('must use props value for modal title',() => {
+        it('must use props value for modal title', () => {
             let titleProp: string = 'myTitle';
             inplaceEdit.title = titleProp;
 
@@ -81,11 +80,11 @@ describe('Component inplace-edit - Element wrapper edition inline set to read mo
 });
 
 describe('Component inplace-edit - Element wrapper edition inline set to edit mode', () => {
-    describe('and valide input',() => {
+    describe('and valide input', () => {
 
         beforeEach(() => {
             Vue.use(MediaQueriesPlugin);
-            propsData = { propsData: {  editMode: true } };
+            propsData = { propsData: { editMode: true } };
             inplaceEdit = new MInplaceEdit(propsData);
         });
 
@@ -110,11 +109,11 @@ describe('Component inplace-edit - Element wrapper edition inline set to edit mo
         });
     });
 
-    describe('and invalide input',() => {
+    describe('and invalide input', () => {
 
         beforeEach(() => {
             Vue.use(MediaQueriesPlugin);
-            propsData = { propsData: {  editMode: true } };
+            propsData = { propsData: { editMode: true } };
             inplaceEdit = new MInplaceEdit(propsData);
         });
 
@@ -175,19 +174,19 @@ describe('Component inplace-edit - Complete component by default', () => {
             let slotFound: Wrapper<Vue> = wrapper.find('.' + EDIT_SLOT_CLASS);
             expect(slotFound.is('input')).toBe(true);
         });
-        describe('when clicking on the confirm button',() => {
+        describe('when clicking on the confirm button', () => {
             it('should emit confirm event', () => {
 
-                wrapper.find({ ref : 'confirm-control' }).trigger('click');
+                wrapper.find({ ref: 'confirm-control' }).trigger('click');
 
                 expect(wrapper.emitted(CONFIRM_EVENT)).toBeTruthy();
             });
         });
 
-        describe('when clicking on the cancel button',() => {
+        describe('when clicking on the cancel button', () => {
             it('should emit cancel event', () => {
 
-                wrapper.find({ ref : 'cancel-control' }).trigger('click');
+                wrapper.find({ ref: 'cancel-control' }).trigger('click');
 
                 expect(wrapper.emitted(CANCEL_EVENT)).toBeTruthy();
             });
@@ -203,7 +202,7 @@ describe('Component inplace-edit - Complete component mobile', () => {
 
         addMessages(Vue, ['components/inplace-edit/inplace-edit.lang.en.json']);
 
-        wrapper = shallow(MInplaceEdit, {
+        wrapper = shallowMount(MInplaceEdit, {
             localVue: Vue,
             mocks: { $mq: { state: { isMqMinS: false } } },
             slots: {

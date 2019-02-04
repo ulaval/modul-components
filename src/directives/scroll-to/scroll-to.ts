@@ -9,7 +9,7 @@ class ScrollToCallback {
     constructor(private speed: ScrollToDuration, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
-        let scrollTo: ScrollTo = (Vue.prototype as ModulVue).$scrollTo as ScrollTo;
+        let scrollTo: ScrollTo = (Vue.prototype as ModulVue).$scrollTo;
 
         scrollTo.goTo(this.target, this.offset, this.speed);
     }

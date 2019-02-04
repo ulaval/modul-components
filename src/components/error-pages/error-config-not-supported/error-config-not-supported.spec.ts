@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../../tests/helpers/render';
 import { MESSAGE_PAGE_NAME } from '../../component-names';
 import { MErrorConfigNotSupported } from './error-config-not-supported';
@@ -15,7 +15,7 @@ const getStubs: any = () => {
 describe(`Configuration not supported- test`, () => {
     describe(`Given default values`, () => {
         it(`Should render with default values`, async () => {
-            wrapper = shallow(MErrorConfigNotSupported, { stubs: getStubs() });
+            wrapper = shallowMount(MErrorConfigNotSupported, { stubs: getStubs() });
 
             await expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
@@ -25,7 +25,7 @@ describe(`Configuration not supported- test`, () => {
             const A_CUSTOM_TITLE: string = 'An error title.';
             const A_HINT: string = 'aHint';
 
-            wrapper = shallow(MErrorConfigNotSupported, {
+            wrapper = shallowMount(MErrorConfigNotSupported, {
                 stubs: getStubs(),
                 propsData: {
                     title: A_CUSTOM_TITLE,

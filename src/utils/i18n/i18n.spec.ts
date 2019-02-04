@@ -107,7 +107,7 @@ describe('i18n plugin', () => {
             describe(`Non-breaking space is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada', { nbMedailles: 30 });
-                    expect(translation.indexOf(SpecialCharacter.NBSP)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.NBSP, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_NBSP_')).toBe(-1);
                 });
             });
@@ -115,7 +115,7 @@ describe('i18n plugin', () => {
             describe(`Non-breaking hypen is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada_usa', { nieme: 3 });
-                    expect(translation.indexOf(SpecialCharacter.NBHYPHEN)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.NBHYPHEN, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_NBHYPHEN_')).toBe(-1);
                 });
             });
@@ -123,7 +123,7 @@ describe('i18n plugin', () => {
             describe(`Em-Dash is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques', { nbMedailles: 3 });
-                    expect(translation.indexOf(SpecialCharacter.EMDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.EMDASH, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_EMDASH_')).toBe(-1);
                 });
             });
@@ -131,7 +131,7 @@ describe('i18n plugin', () => {
             describe(`En-Dash is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:olympiques_rivalite', {});
-                    expect(translation.indexOf(SpecialCharacter.ENDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.ENDASH, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_ENDASH_')).toBe(-1);
 
                 });
@@ -150,7 +150,7 @@ describe('i18n plugin', () => {
             describe(`Non-breaking space is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada', { nbMedailles: 30 });
-                    expect(translation.indexOf(SpecialCharacter.NBSP)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.NBSP, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_NBSP_')).toBe(-1);
                 });
             });
@@ -158,7 +158,7 @@ describe('i18n plugin', () => {
             describe(`Non-breaking hypen is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques_canada_usa', { nieme: 3 });
-                    expect(translation.indexOf(SpecialCharacter.NBHYPHEN)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.NBHYPHEN, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_NBHYPHEN_')).toBe(-1);
                 });
             });
@@ -166,7 +166,7 @@ describe('i18n plugin', () => {
             describe(`Em-Dash is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:decompte_medailles_olympiques', { nbMedailles: 3 });
-                    expect(translation.indexOf(SpecialCharacter.EMDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.EMDASH, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_EMDASH_')).toBe(-1);
                 });
             });
@@ -174,7 +174,7 @@ describe('i18n plugin', () => {
             describe(`En-Dash is used`, () => {
                 it(`then will be replaced in translation`, () => {
                     const translation: string = Vue.prototype.$i18n.translate('exemples_avec_characteres_speciaux:olympiques_rivalite', {});
-                    expect(translation.indexOf(SpecialCharacter.ENDASH)).toBeGreaterThan(-1);
+                    expect(translation.indexOf(String.fromCharCode(parseInt(SpecialCharacter.ENDASH, 10)))).toBeGreaterThan(-1);
                     expect(translation.indexOf('_ENDASH_')).toBe(-1);
                 });
             });

@@ -1,10 +1,10 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../../tests/helpers/component';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MDOMPlugin } from '../../domPlugin';
 import DroppableGroupPlugin, { MDroppableGroup } from '../droppable/droppable-group';
+
 
 describe('droppable-group', () => {
     let localVue: VueConstructor<ModulVue>;
@@ -23,6 +23,6 @@ describe('droppable-group', () => {
                 </div>`
         }, { localVue: Vue });
         const childElement: Wrapper<Vue> = droppableGroup.find('.someChild');
-        expect(MDOMPlugin.getRecursive(MDroppableGroup, droppableGroup.element).options).toBe(childGroup);
+        expect(MDOMPlugin.getRecursive(MDroppableGroup, droppableGroup.element)!.options).toBe(childGroup);
     });
 });

@@ -55,11 +55,16 @@
 
     &.m--is-disabled /deep/ {
         .fr-wrapper {
-            cursor: not-allowed;
+            cursor: default;
         }
 
         .fr-view {
             color: $m-color--disabled;
+
+            /deep/ a {
+                color: $m-color--disabled;
+                cursor: default;
+            }
         }
 
         .fr-toolbar {

@@ -1,11 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { TABLE_NAME } from '../component-names';
-import TablePlugin, { MColumnTable } from './table';
-import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
-import OptionPlugin from '../option/option';
 import ButtonPlugin from '../button/button';
 import CheckboxPlugin from '../checkbox/checkbox';
+import { TABLE_NAME } from '../component-names';
+import OptionPlugin from '../option/option';
+import TablePlugin, { MColumnTable } from './table';
+import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
 @Component

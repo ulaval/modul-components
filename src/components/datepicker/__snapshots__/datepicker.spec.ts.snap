@@ -23,7 +23,7 @@ exports[`MDatepicker should render correctly 1`] = `
 `;
 
 exports[`MDatepicker should render correctly min/max time 1`] = `
-<div class="m-datepicker">
+<div duration="true" class="m-datepicker">
     <div class="m-input-style m--is-tag-default" style="width:undefined;">
         <div class="m-input-style__body">
             <div class="m-input-style__body__left">
@@ -139,7 +139,7 @@ exports[`MDatepicker should render correctly when waiting is set 1`] = `
                     </svg>
                 </button>
             </div>
-            <div class="m-spinner m-input-style__spinner">
+            <div appear="true" class="m-spinner m-input-style__spinner">
                 <div></div>
             </div>
         </div>

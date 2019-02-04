@@ -46,7 +46,7 @@ $m-option-item--color-active: $m-color--grey-lightest !default;
     }
 
     &.m--is-disabled {
-        cursor: not-allowed;
+        cursor: default;
 
         .m-option-item {
             &__text,

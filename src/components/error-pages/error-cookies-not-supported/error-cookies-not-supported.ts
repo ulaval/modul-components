@@ -14,19 +14,19 @@ import WithRender from './error-cookies-not-supported.html';
 export class MErrorCookiesNotSupported extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-error-cookies-not-supported:title')
+        default: () => (Vue.prototype).$i18n.translate('m-error-cookies-not-supported:title')
     })
     public title: string;
 
     @Prop({
         default: () => [
-            new Link((Vue.prototype as any).$i18n.translate('m-error-cookies-not-supported:home-label'), '\\')]
+            new Link((Vue.prototype).$i18n.translate('m-error-cookies-not-supported:home-label'), '\\')]
     })
     public links: Link[];
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-error-cookies-not-supported:hint.primary')]
+            (Vue.prototype).$i18n.translate('m-error-cookies-not-supported:hint.primary')]
     })
     public hints: string[];
 

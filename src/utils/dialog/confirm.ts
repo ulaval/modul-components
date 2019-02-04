@@ -75,7 +75,7 @@ const ConfirmPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.error('ConfirmPlugin will be deprecated in modul v.1.0');
 
-        (v.prototype as any).$confirm = confirmFunction;
+        (v.prototype).$confirm = confirmFunction;
     }
 };
 

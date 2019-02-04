@@ -25,7 +25,7 @@ export class MInplaceEdit extends ModulVue {
     @Prop()
     public editModePadding: string;
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-inplace-edit:modify')
+        default: () => (Vue.prototype).$i18n.translate('m-inplace-edit:modify')
     })
     public title: string;
 

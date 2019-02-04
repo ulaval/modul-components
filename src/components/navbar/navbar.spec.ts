@@ -16,7 +16,6 @@ describe('MNavbar', () => {
     });
 
     it('should render correctly', () => {
-
         const wrapper: Wrapper<Vue> = mount({
             template: `
                 <m-navbar selected='item1'>

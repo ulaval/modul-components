@@ -1,4 +1,4 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import '../../utils/polyfills';
 import { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
@@ -13,7 +13,7 @@ let position: string;
 let duration: ScrollToDuration;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MScrollTop, {
+    wrapper = shallowMount(MScrollTop, {
         mocks: {
             $modul: {
                 event: {

@@ -17,8 +17,6 @@ require('froala-editor/js/froala_editor.pkgd.min');
 require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
 
-const INNER_HTML_ATTR: string = 'innerHTML';
-
 enum froalaEvents {
     Initialized = 'froalaEditor.initialized',
     InitializationDelayed = 'froalaEditor.initializationDelayed',
@@ -28,17 +26,12 @@ enum froalaEvents {
     KeyUp = 'froalaEditor.keyup',
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
-    PasteBeforeCleanup = 'froalaEditor.paste.beforeCleanup',
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
-    CommandAfter = 'froalaEditor.commands.after',
-    CommandBefore = 'froalaEditor.commands.before',
     ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
 }
 
 enum FroalaElements {
-    TOOLBAR = '.fr-toolbar',
-    TOOLBAR_ACTIVE_BUTTON = '.fr-active',
-    EDITABLE_ELEMENT = '.fr-element'
+    TOOLBAR = '.fr-toolbar'
 }
 
 export enum FroalaStatus {
@@ -92,7 +85,8 @@ export enum FroalaStatus {
     protected isDirty: boolean = false;
     protected status: FroalaStatus = FroalaStatus.Blurred;
 
-    private clickedInsideEditor: boolean = false;
+    private mousedownTriggered: boolean = false;
+    private mousedownInsideEditor: boolean = false;
 
     @Watch('value')
     public refreshValue(): void {
@@ -190,7 +184,25 @@ export enum FroalaStatus {
     }
 
     protected created(): void {
+        document.addEventListener('mousedown', this.mousedownListener);
+        document.addEventListener('mouseup', this.mouseupListener);
         this.currentTag = this.tag || this.currentTag;
+    }
+
+    protected mousedownListener(event: MouseEvent): void {
+        this.mousedownTriggered = true;
+        if (this.$el.contains(event.target as HTMLElement) || $('.fr-modal.fr-active').length > 0) {
+            this.mousedownInsideEditor = true;
+        } else {
+            this.mousedownInsideEditor = false;
+        }
+    }
+
+    protected mouseupListener(event: MouseEvent): void {
+        this.mousedownTriggered = false;
+        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement)) {
+            this.closeEditor();
+        }
     }
 
     protected mounted(): void {
@@ -209,7 +221,8 @@ export enum FroalaStatus {
 
     protected destroyed(): void {
         window.removeEventListener('resize', this.onResize);
-        this.unblockMobileBlur();
+        document.removeEventListener('mousedown', this.mousedownListener);
+        document.removeEventListener('mouseup', this.mouseupListener);
     }
 
     protected beforeDestroy(): void {
@@ -295,7 +308,6 @@ export enum FroalaStatus {
                 [froalaEvents.Focus]: (_e) => {
                     if (!this.disabled) {
                         window.removeEventListener('resize', this.onResize);
-                        this.unblockMobileBlur();
 
                         if (this.isInitialized) { this.$emit('focus'); }
                         this.showToolbar();
@@ -304,26 +316,9 @@ export enum FroalaStatus {
                         this.internalReadonly = this.readonly;
                     }
                 },
-                [froalaEvents.Blur]: (_e, editor) => {
-                    if (!editor.fullscreen.isActive() && !this.clickedInsideEditor) {
-                        // this timeout is used to avoid the "undetected click" bug
-                        // that happens sometimes due to the hideToolbar animation
-                        this.status = FroalaStatus.Blurring;
-                        setTimeout(() => {
-                            if (this.status === FroalaStatus.Blurring) {
-                                window.addEventListener('resize', this.onResize);
-                                this.$emit('blur');
-                                this.hideToolbar();
-
-                                this.isFocused = false;
-                                this.status = FroalaStatus.Blurred;
-
-                                this.isDirty = false;
-                                this.unblockMobileBlur();
-                                this.internalReadonly = false;
-                                this.isDisabled = this.disabled;
-                            }
-                        }, 150);
+                [froalaEvents.Blur]: () => {
+                    if (!this.mousedownTriggered || this.mousedownInsideEditor) {
+                        this.closeEditor();
                     }
                 },
                 [froalaEvents.KeyUp]: (_e, _editor) => {
@@ -346,16 +341,6 @@ export enum FroalaStatus {
                         return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
-                [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
-                    if (cmd === 'fullscreen') {
-                        this.blockMobileBlur(); // On iphone the input blur when going full screen and become invisible.
-                    }
-                },
-                [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
-                    if (cmd === 'fullscreen') {
-                        this.unblockMobileBlur();
-                    }
-                },
                 [froalaEvents.ShowLinkInsert]: (_e, editor) => {
                     this.manageLinkInsert(editor);
                 }
@@ -368,6 +353,20 @@ export enum FroalaStatus {
         if (this._$element.froalaEditor) {
             this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
         }
+    }
+
+    private closeEditor(): void {
+        this.status = FroalaStatus.Blurring;
+        window.addEventListener('resize', this.onResize);
+        this.$emit('blur');
+        this.hideToolbar();
+
+        this.isFocused = false;
+        this.status = FroalaStatus.Blurred;
+
+        this.isDirty = false;
+        this.internalReadonly = false;
+        this.isDisabled = this.disabled;
     }
 
     @Watch('disabled')
@@ -446,14 +445,6 @@ export enum FroalaStatus {
         if (!urlField.value) {
             (popup.querySelector(`[name="target"]`) as HTMLInputElement).checked = true;
         }
-    }
-
-    private blockMobileBlur(): void {
-        this.clickedInsideEditor = true;
-    }
-
-    private unblockMobileBlur(): void {
-        this.clickedInsideEditor = false;
     }
 
     private hideToolbar(): void {

@@ -29,7 +29,7 @@
 }
 
 @mixin m-button--disabled() {
-    cursor: not-allowed;
+    cursor: pointer;
     color: $m-color--disabled;
     background: $m-color--white;
     border-color: $m-color--disabled;

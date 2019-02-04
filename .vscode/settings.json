@@ -7,15 +7,12 @@
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
-    "tslint.configFile": "conf/tslint.json",
-    "tslint.autoFixOnSave": true,
     "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.organizeImports": true
     },
     "files.exclude": {
-        "**/.circleci/": true,
         "**/.github/": true,
     },
     "search.exclude": {

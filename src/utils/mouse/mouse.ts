@@ -27,7 +27,7 @@ const getRelativeMousePos: (event: MouseEvent | CustomEvent, reference: HTMLElem
         }
 
         // Fix for firefox.
-        let recursiveElement: HTMLElement = el as HTMLElement;
+        let recursiveElement: HTMLElement = el;
         while (recursiveElement.nodeType === Node.TEXT_NODE) {
             recursiveElement = recursiveElement.parentElement as HTMLElement;
         }
@@ -36,9 +36,9 @@ const getRelativeMousePos: (event: MouseEvent | CustomEvent, reference: HTMLElem
         while (recursiveElement) {
             (recursiveElement as any).mouseX = pos.x || 0;
             (recursiveElement as any).mouseY = pos.y || 0;
-            pos.x += (recursiveElement as HTMLElement).offsetLeft || 0;
-            pos.y += (recursiveElement as HTMLElement).offsetTop || 0;
-            recursiveElement = (recursiveElement as HTMLElement).offsetParent as HTMLElement;
+            pos.x += (recursiveElement).offsetLeft || 0;
+            pos.y += (recursiveElement).offsetTop || 0;
+            recursiveElement = (recursiveElement).offsetParent as HTMLElement;
         }
 
         // Look for the coordinates starting from the reference element.

@@ -1,10 +1,10 @@
 import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { PortalStub, renderComponent } from '../../../tests/helpers/render';
+import { PortalStub } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
-import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 import ModulPlugin from '../../utils/modul/modul';
+import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -21,11 +21,15 @@ const initializeWrapper: () => any = () => {
         localVue: localVue,
         slots: defaultSlot,
         stubs: {
-            transition: TransitionStub,
-            portal: PortalStub
+            transition: TransitionStub as any,
+            portal: PortalStub as any
         }
     });
 };
+
+beforeEach(() => {
+    wrapper = undefined as any;
+});
 
 describe(`MToast`, () => {
     beforeEach(() => {
@@ -38,7 +42,6 @@ describe(`MToast`, () => {
     describe(`Given that no props have been passed`, async () => {
         beforeEach(async () => {
             initializeWrapper();
-            jest.runOnlyPendingTimers(); // wait for component to be instancialized
         });
 
         describe(`When the Toast is created`, () => {
@@ -79,7 +82,10 @@ describe(`MToast`, () => {
     });
 
     describe(`Given that a custom action prop have been passed`, () => {
-        beforeEach(() => {
+        beforeEach(async () => {
+            initializeWrapper();
+            await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+
             wrapper.setProps({
                 actionLabel: ACTION_LABEL
             });
@@ -91,7 +97,7 @@ describe(`MToast`, () => {
                 expect(wrapper.vm.actionLabel).toBe(ACTION_LABEL);
             });
 
-            it(`Should show a button with the label on it`, () => {
+            it(`Should show a button with the label on it`, async () => {
                 const label: string = wrapper.find('.m-toast__actions').html();
 
                 expect(label).toContain(ACTION_LABEL);
@@ -128,7 +134,9 @@ describe(`MToast`, () => {
     });
 
     describe(`Givent that a open prop have been passed and variable is false`, () => {
-        beforeEach(() => {
+        beforeEach(async () => {
+            initializeWrapper();
+            await jest.runOnlyPendingTimers();
             wrapper.setProps({
                 open: false
             });

@@ -139,7 +139,7 @@ exports[`MTimepicker should render correctly when waiting is set 1`] = `
                     </svg>
                 </button>
             </div>
-            <div class="m-spinner m-input-style__spinner">
+            <div appear="true" class="m-spinner m-input-style__spinner">
                 <div></div>
             </div>
         </div>
