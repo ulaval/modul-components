@@ -78,6 +78,16 @@ export class MInputGroup extends ModulVue {
     get helperMessageInputGroup(): string {
         return this.helperMessage;
     }
+
+    get classes(): { [name: string]: boolean } {
+        return {
+            'm--is-readonly': this.isReadonly,
+            'm--is-disabled': this.isDisabled,
+            'm--is-waiting': this.isWaiting,
+            'm--has-error': this.hasError,
+            'm--is-valid': this.isValid
+        };
+    }
 }
 
 

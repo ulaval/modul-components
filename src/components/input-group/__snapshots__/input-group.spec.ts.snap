@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MInputGroup with errors will render correctly 1`] = `
-<fieldset class="m-input-group">
+<fieldset errors="first error,second error" class="m-input-group">
     <div class="m-input-group__validation">
         <m-validation-message class="m-textfield__validation__message"></m-validation-message>
     </div>
