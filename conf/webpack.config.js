@@ -31,7 +31,7 @@ module.exports = function (env) {
 
     var config = {
         entry: {
-            app: [isLib ? './lib/lib.ts' : './tests/app/main.ts']
+            app: [isLib ? './src/lib.ts' : './tests/app/main.ts']
         },
 
         externals: externalsObj,
@@ -98,16 +98,15 @@ module.exports = function (env) {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader',
                 options: {
-                    configFileName: resolve('tsconfig.dev.json')
+                    configFileName: isLib ? resolve('tsconfig.lib.json') : resolve('tsconfig.json')
                 }
             },
             {
                 test: /\.ts$/,
                 enforce: 'pre',
                 loader: 'tslint-loader',
-                include: [resolve('src'), resolve('test')],
                 options: {
-                    configFile: 'conf/tslint.json',
+                    tsConfigFile: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
                     formatter: 'grouped',
                     formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
                     emitErrors: true,
@@ -126,10 +125,10 @@ module.exports = function (env) {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 loader: 'url-loader',
                 query: {
-                  limit: 10000,
-                  name: path.posix.join('assets', 'fonts/[name].[hash:7].[ext]')
+                    limit: 10000,
+                    name: path.posix.join('assets', 'fonts/[name].[hash:7].[ext]')
                 }
-              }
+            }
             ]
         },
         plugins: [

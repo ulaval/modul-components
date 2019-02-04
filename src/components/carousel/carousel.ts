@@ -1,11 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
-import { MCarouselItem } from '../carousel-item/carousel-item';
-import { CAROUSEL_NAME } from '../component-names';
-import TouchPlugin from '../touch/touch';
+import { CAROUSEL_ITEM_NAME, CAROUSEL_NAME, TOUCH_NAME } from '../component-names';
+import { MCarouselItem } from './carousel-item/carousel-item';
 import WithRender from './carousel.html?style=./carousel.scss';
+import TouchPlugin from '../touch/touch';
+
 
 @WithRender
 @Component
@@ -159,8 +159,8 @@ export class MCarousel extends Vue {
 
 const CarouselPlugin: PluginObject<any> = {
     install(v): void {
-        v.prototype.$log.warn(CAROUSEL_NAME + ' is not ready for production');
         v.use(TouchPlugin);
+        v.component(CAROUSEL_ITEM_NAME, MCarouselItem);
         v.component(CAROUSEL_NAME, MCarousel);
     }
 };

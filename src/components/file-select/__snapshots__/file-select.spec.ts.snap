@@ -6,8 +6,6 @@ exports[`file-select should render correctly 1`] = `
     <label for="mFileSelect-uuid" class="m-file-select__hidden"><span class="m-i18n">Browse</span></label>
     <button type="button" aria-hidden="true" class="m-button m--is-skin-secondary"> <span class="m-button__text"><span class="m-i18n">Browse</span> </span>
     </button>
-    <div class="m-validation-message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message"></div>
 </div>
 `;

@@ -1,8 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
+import ButtonPlugin from '../button/button';
 import { LIMIT_TEXT_NAME } from '../component-names';
+import LimitTextPlugin from './limit-text';
 import WithRender from './limit-text.sandbox.html';
+
 
 @WithRender
 @Component
@@ -12,7 +14,7 @@ export class MLimitTextSandbox extends Vue {
     private texte = this.text1;
     private testOpen: boolean = false;
 
-    private vhtml: string = `<p>Test rawhtml Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut
+    private vhtml: string = `<p><br /></p><p><p>Test rawhtml Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor ut
             excepteur tempor ipsum qui</p><p> eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum ullamco
             sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat esse veniam. Ullamco labore
             do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident
@@ -47,6 +49,8 @@ export class MLimitTextSandbox extends Vue {
 
 const LimitTextSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(LimitTextPlugin);
+        v.use(ButtonPlugin);
         v.component(`${LIMIT_TEXT_NAME}-sandbox`, MLimitTextSandbox);
     }
 };

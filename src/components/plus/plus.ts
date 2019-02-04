@@ -1,10 +1,10 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { PLUS_NAME } from '../component-names';
 import WithRender from './plus.html?style=./plus.scss';
+
 
 export enum MPlusSkin {
     Default = 'default',
@@ -46,7 +46,6 @@ export class MPlus extends ModulVue {
 
 const PlusPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(PLUS_NAME, 'plugin.install');
         v.component(PLUS_NAME, MPlus);
     }
 };

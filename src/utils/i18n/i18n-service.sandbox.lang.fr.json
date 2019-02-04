@@ -1,0 +1,9 @@
+{
+    "i18n-service-sandbox": {
+        "control": "Exemple sans espace insécable et sans trait d'union-insécable.",
+        "with-nbsp": "Exemple avec un espace%(_NBSP_)sinsécable.",
+        "with-nbhyphen": "Exemple avec un trait d'union%(_NBHYPHEN_)sinsécable.",
+        "with-endash": "Exemple avec un tiret demi-cadratin (%(_ENDASH_)s)",
+        "with-emdash": "Exemple avec un tiret cadratin (%(_EMDASH_)s)"
+    }
+}

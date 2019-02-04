@@ -8,7 +8,7 @@ let filesizeSymbols: { [name: string]: string } | undefined = undefined;
 
 export const fileSize: (bytes: number) => string = (bytes) => {
     if (!filesizeSymbols) {
-        const i18n: Messages = (Vue.prototype as any).$i18n;
+        const i18n: Messages = (Vue.prototype).$i18n;
         filesizeSymbols = {
             B: i18n.translate('f-m-filesize:size-b'),
             KB: i18n.translate('f-m-filesize:size-kb'),

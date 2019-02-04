@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "dist",
+        "rootDir": "src",
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "target": "es5",
+        "lib": [
+            "es5",
+            "es6",
+            "dom"
+        ],
+        "module": "es2015",
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "strictNullChecks": true,
+        "types": [
+            "node",
+            "jest",
+            "webpack-env"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ]
+    },
+    "plugins": [
+        {
+            "name": "typescript-tslint-plugin"
+        }
+    ],
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "src/**/*.spec.*",
+        "src/**/*.sandbox.*"
+    ]
+}

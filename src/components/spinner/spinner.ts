@@ -1,15 +1,14 @@
-import PortalPlugin from 'portal-vue';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { BackdropMode } from '../../mixins/portal/portal';
-import ModulPlugin from '../../utils/modul/modul';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { SPINNER_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import WithRender from './spinner.html?style=./spinner.scss';
+
+
 
 export enum MSpinnerStyle {
     Dark = 'dark',
@@ -141,9 +140,6 @@ export class MSpinner extends ModulVue {
 
 const SpinnerPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(SPINNER_NAME, 'plugin.install');
-        v.use(PortalPlugin);
-        v.use(ModulPlugin);
         v.use(I18nPlugin);
         v.component(SPINNER_NAME, MSpinner);
     }

@@ -1,12 +1,12 @@
 import { createLocalVue, mount, Slots, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import VueRouter from 'vue-router';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MPopperPlacement } from '../popper/popper';
 import OptionPlugin, { MOption, MOptionsSkin } from './option';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -64,8 +64,6 @@ describe('MOption', () => {
             skin: MOptionsSkin.Dark
         });
 
-        option.update();
-
         return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
@@ -74,8 +72,6 @@ describe('MOption', () => {
             skin: MOptionsSkin.Light
         });
 
-        option.update();
-
         return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
@@ -83,8 +79,6 @@ describe('MOption', () => {
         const option: Wrapper<MOption> = mountGroup({
             openTitle: 'Title open'
         });
-
-        option.update();
 
         return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
@@ -95,8 +89,6 @@ describe('MOption', () => {
             open: true
         });
 
-        option.update();
-
         return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });
 
@@ -104,8 +96,6 @@ describe('MOption', () => {
         const option: Wrapper<MOption> = mountGroup({
             size: '200px'
         });
-
-        option.update();
 
         return expect(renderComponent(option.vm)).resolves.toMatchSnapshot();
     });

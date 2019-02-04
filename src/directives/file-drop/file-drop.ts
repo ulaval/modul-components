@@ -1,8 +1,8 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-
 import FilePlugin, { DEFAULT_STORE_NAME, FileService } from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import { FILE_DROP_NAME } from '../directive-names';
+
 
 interface MFileDropElement extends HTMLElement {
     cleanupMFileDropDirective(): any;
@@ -33,7 +33,7 @@ const MFileDropDirective: DirectiveOptions = {
             el.classList.remove('m--is-drag-over');
             e.preventDefault();
             $file.add(
-                e.dataTransfer.files,
+                e.dataTransfer!.files,
                 binding.value ? binding.value : DEFAULT_STORE_NAME
             );
         };

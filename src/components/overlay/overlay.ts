@@ -1,14 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { BackdropMode, Portal, PortalMixin, PortalTransitionDuration } from '../../mixins/portal/portal';
-import { ModulVue } from '../../utils/vue/vue';
-import { OVERLAY_NAME } from '../component-names';
-import WithRender from './overlay.html?style=./overlay.scss';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
-import { targetIsInput } from 'src/utils/event/event';
-
+import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { OVERLAY_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
+import WithRender from './overlay.html?style=./overlay.scss';
 @WithRender
 @Component({
     mixins: [Portal]
@@ -43,7 +42,7 @@ export class MOverlay extends ModulVue {
     }
 
     private get popupBody(): any {
-        return (this.$refs.article as Element).querySelector('.m-popup__body');
+        return (this.$refs.article).querySelector('.m-popup__body');
     }
 
     private get isAndroid(): boolean {
@@ -102,6 +101,8 @@ export class MOverlay extends ModulVue {
 
 const OverlayPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ButtonPlugin);
+        v.use(I18nPlugin);
         v.component(OVERLAY_NAME, MOverlay);
     }
 };

@@ -2,6 +2,12 @@ import Vue, { PluginObject } from 'vue';
 import { sprintf, vsprintf } from '../str/str';
 
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $i18n: Messages;
+    }
+}
+
 /**
  * This package provides language and locales utilities.
  */
@@ -47,10 +53,10 @@ type SpecialCharacterMap = {
  * Special characters must be represented as their unicode equivalent \u00xxxx
  */
 export enum SpecialCharacter {
-    NBSP = '\u00a0', // non-breaking space
-    NBHYPHEN = '\u002011', // non-breaking hyphen
-    EMDASH = '\u002014', // em dash
-    ENDASH = '\u002013' // en dash
+    NBSP = '160', // non-breaking space equivalent to HTML entity : &nbsp; => ()
+    NBHYPHEN = '8209', // non-breaking hyphen equivalent to unicode : \u002011, HTML entity : &#8209; => (‑)
+    EMDASH = '8212', // em dash equivalent to unicode :\u002014, HTML entity : &mdash; => (—)
+    ENDASH = '8211' // en dash equivalent to unicode :\u002013, HTML entity : &#ndash; => (–)
 }
 
 export enum DebugMode {
@@ -130,7 +136,7 @@ export class Messages {
         nb?: number,
         modifier?: string,
         htmlEncodeParams: boolean = true,
-        formatMode = this.formatMode
+        formatMode: FormatMode = this.formatMode
     ): string {
         if (!key) {
             throw new Error('The key is empty.');
@@ -138,18 +144,12 @@ export class Messages {
 
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
-        if (FormatMode.Sprintf || FormatMode.Vsprintf) {
-            Object.keys(this.specialCharacterDict).forEach((key: string) => {
-                if (!params.hasOwnProperty(key)) {
-                    params[key] = this.specialCharacterDict[key];
-                }
-            });
+        if (htmlEncodeParams && params.length) {
+            Object.keys(params).forEach((key: any) => { params[key] = htmlEncode(params[key].toString()); });
         }
 
-        if (htmlEncodeParams && params.length) {
-            for (let i: number = 0; i < params.length; ++i) {
-                params[i] = htmlEncode(params[i].toString());
-            }
+        if (formatMode === FormatMode.Sprintf || formatMode === FormatMode.Vsprintf) {
+            params = Object.assign(this.specialCharacterDict, params);
         }
 
         val = this.format(val, params, formatMode);
@@ -255,7 +255,7 @@ export class Messages {
      */
     private initSpecialCharactersDict(): void {
         Object.keys(SpecialCharacter).forEach((key: string) => {
-            this.specialCharacterDict[`${SPECIAL_CHARACTER_PREFIXE}${key}${SPECIAL_CHARACTER_SUFIXE}`] = SpecialCharacter[key];
+            this.specialCharacterDict[`${SPECIAL_CHARACTER_PREFIXE}${key}${SPECIAL_CHARACTER_SUFIXE}`] = String.fromCharCode(SpecialCharacter[key]) as SpecialCharacter;
         });
     }
 
@@ -330,7 +330,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
-        (v.prototype as any).$i18n = msg;
+        (v.prototype).$i18n = msg;
     }
 };
 

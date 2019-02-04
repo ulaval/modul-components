@@ -1,5 +1,11 @@
 import { PluginObject } from 'vue';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $scrollTo: ScrollTo;
+    }
+}
+
 export enum ScrollToDuration {
     Regular = 'regular',
     Long = 'long'
@@ -223,7 +229,7 @@ export class ScrollTo {
 const ScrollToPlugin: PluginObject<any> = {
     install(v): void {
         let scrollTo: ScrollTo = new ScrollTo();
-        (v.prototype as any).$scrollTo = scrollTo;
+        (v.prototype).$scrollTo = scrollTo;
     }
 };
 

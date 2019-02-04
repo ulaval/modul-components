@@ -1,10 +1,10 @@
 import { createLocalVue, mount, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import ModulPlugin from '../../utils/modul/modul';
-import { MNavbarItem } from '../navbar-item/navbar-item';
 import NavbarPlugin from './navbar';
+import { MNavbarItem } from './navbar-item/navbar-item';
+
 
 describe('MNavbar', () => {
     let localVue: VueConstructor<Vue>;
@@ -16,7 +16,6 @@ describe('MNavbar', () => {
     });
 
     it('should render correctly', () => {
-
         const wrapper: Wrapper<Vue> = mount({
             template: `
                 <m-navbar selected='item1'>
@@ -37,7 +36,7 @@ describe('MNavbar', () => {
                     <m-navbar-item value="item2"></m-navbar-item>
                     <m-navbar-item value="item3"></m-navbar-item>
                 </m-navbar>` },
-        { localVue: localVue });
+            { localVue: localVue });
 
         const selectedItem: WrapperArray<MNavbarItem> = wrapper.findAll<MNavbarItem>({ name: 'MNavbarItem' });
         expect(selectedItem.at(0).vm.isSelected).toEqual(false);

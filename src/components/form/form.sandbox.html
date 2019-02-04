@@ -1,0 +1,61 @@
+<div>
+    <m-form :form="form"
+            :required-marker="true"
+            @submit="submit">
+        <m-textfield v-model.trim="form.get('titleField').value"
+                     label="Title"
+                     :max-width="inputMaxWidthSmall"
+                     :required-marker="true"
+                     :error-message="form.get('titleField').errorMessage"
+                     :character-count="true"
+                     :max-length="maxTitleLength"
+                     :character-count-threshold="thresholdTitle"
+                     v-m-form-field="form.get('titleField')">
+        </m-textfield>
+
+        <m-textarea v-model.trim="form.get('descriptionField').value"
+                    label="Description"
+                    :required-marker="true"
+                    :max-width="inputMaxWidthLarge"
+                    :error-message="form.get('descriptionField').errorMessage"
+                    :character-count="true"
+                    :max-length="maxDescriptionLength"
+                    :character-count-threshold="thresholdDescription"
+                    v-m-form-field="form.get('descriptionField')">
+        </m-textarea>
+
+        <m-textarea v-model.trim="form.get('passwordField').value"
+                    label="Password"
+                    :max-width="inputMaxWidthLarge"
+                    :error-message="form.get('passwordField').errorMessage"
+                    v-m-form-field="form.get('passwordField')">
+        </m-textarea>
+
+        <m-textarea v-model.trim="form.get('confirmPasswordField').value"
+                    label="Confirm password"
+                    :max-width="inputMaxWidthLarge"
+                    :error-message="form.get('confirmPasswordField').errorMessage"
+                    v-m-form-field="form.get('confirmPasswordField')">
+        </m-textarea>
+
+        <m-textarea v-model.trim="form.get('locationField').value"
+                    label="Location"
+                    :max-width="inputMaxWidthLarge"
+                    :required-marker="true"
+                    :error-message="form.get('locationField').errorMessage"
+                    :character-count="true"
+                    :max-length="maxLocationLength"
+                    :character-count-threshold="thresholdLocation"
+                    v-m-form-field="form.get('locationField')">
+        </m-textarea>
+    </m-form>
+    <m-button type="submit"
+              :form="form.id">Submit</m-button>
+    <m-button type="reset"
+              skin="secondary"
+              :form="form.id">Reset</m-button>
+
+    <p>
+        Form sent: {{ formSent }}
+    </p>
+</div>

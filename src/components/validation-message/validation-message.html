@@ -1,7 +1,7 @@
 <div class="m-validation-message">
     <m-accordion-transition :transition="transition">
         <div class="m-validation-message__wrap"
-             v-if="(hasErrorMessage || hasValidMessage || hasHelperMessage) && active"
+             v-if="hasValidationMessage"
              @click="onClick">
             <p class="m-validation-message__error"
                v-if="hasErrorMessage && hasError">

@@ -4,7 +4,8 @@
                'm--has-error' : hasTextareaError,
                'm--is-valid' : isTextareaValid,
                'm--is-focus' : isFocus,
-               'm--has-label': hasLabel }"
+               'm--has-label': hasLabel,
+               'm--has-validation-message': hasValidationMessage }"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
@@ -46,7 +47,8 @@
                               :valid="isTextareaValid"
                               :valid-message="validMessage"
                               :helper-message="helperMessage"></m-validation-message>
-        <m-character-count v-if="characterCount"
+        <m-character-count class="m-textarea__validation__character-count"
+                           v-if="characterCount"
                            :value-length="valueLength"
                            :max-length="maxLength"
                            :threshold="characterCountThreshold"

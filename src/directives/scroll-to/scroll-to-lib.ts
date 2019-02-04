@@ -90,52 +90,56 @@ export class ScrollTo {
             return x * x * (3 - 2 * x);
         };
 
-        return { promise: new Promise((resolve, reject) => {
-            // This is to keep track of where the element's scrollTop is
-            // supposed to be, based on what we're doing
-            let previousTop: number = window.pageYOffset;
+        return {
+            promise: new Promise((resolve, reject) => {
+                // This is to keep track of where the element's scrollTop is
+                // supposed to be, based on what we're doing
+                let previousTop: number = window.pageYOffset;
 
-            // This is like a think function from a game loop
-            let scrollFrame: () => void = () => {
-                if (window.pageYOffset !== previousTop || cancelled) {
-                    resolve();
-                    return;
-                }
+                // This is like a think function from a game loop
+                let scrollFrame: () => void = () => {
+                    if (window.pageYOffset !== previousTop || cancelled) {
+                        resolve();
+                        return;
+                    }
 
-                // set the scrollTop for this frame
-                let now: number = Date.now();
-                let point: number = smoothStep(startTime, endTime, now);
-                let frameTop: number = Math.round(startTop + distance * point);
-                window.scrollTo(0, frameTop);
+                    // set the scrollTop for this frame
+                    let now: number = Date.now();
+                    let point: number = smoothStep(startTime, endTime, now);
+                    let frameTop: number = Math.round(startTop + distance * point);
+                    window.scrollTo(0, frameTop);
 
-                // check if we're done!
-                if (now >= endTime) {
-                    resolve();
-                    return;
-                }
+                    // check if we're done!
+                    if (now >= endTime) {
+                        resolve();
+                        return;
+                    }
 
-                // If we were supposed to scroll but didn't, then we
-                // probably hit the limit, so consider it done; not
-                // interrupted.
-                if (
-                    window.pageYOffset === previousTop &&
-                    window.pageYOffset !== frameTop
-                ) {
-                    resolve();
-                    return;
-                }
-                previousTop = window.pageYOffset;
+                    // If we were supposed to scroll but didn't, then we
+                    // probably hit the limit, so consider it done; not
+                    // interrupted.
+                    if (
+                        window.pageYOffset === previousTop &&
+                        window.pageYOffset !== frameTop
+                    ) {
+                        resolve();
+                        return;
+                    }
+                    previousTop = window.pageYOffset;
 
-                // schedule next frame for execution
+                    // schedule next frame for execution
+                    currentFrame = requestAnimationFrame(scrollFrame);
+                };
+
+                // boostrap the animation process
                 currentFrame = requestAnimationFrame(scrollFrame);
-            };
-
-            // boostrap the animation process
-            currentFrame = requestAnimationFrame(scrollFrame);
-        }), cancel: () => cancel()};
+            }), cancel: () => cancel()
+        };
     }
 }
 
+
+// tslint:disable-next-line: deprecation
 const ScrollToLib: ScrollTo = new ScrollTo();
 
 export default ScrollToLib;

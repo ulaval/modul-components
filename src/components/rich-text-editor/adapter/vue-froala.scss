@@ -1,5 +1,4 @@
-@import 'abstracts/variables';
-@import '../../../styles/abstracts/var-froala';
+@import 'commons';
 @import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css"); /* FA CSS import */
 
 .vue-froala {
@@ -56,11 +55,16 @@
 
     &.m--is-disabled /deep/ {
         .fr-wrapper {
-            cursor: not-allowed;
+            cursor: default;
         }
 
         .fr-view {
             color: $m-color--disabled;
+
+            /deep/ a {
+                color: $m-color--disabled;
+                cursor: default;
+            }
         }
 
         .fr-toolbar {
@@ -235,7 +239,7 @@
             textarea {
                 transition: border-color $m-transition-duration ease;
                 position: relative;
-                font-family: $m-font-family;
+                font-family: inherit;
                 font-size: $m-font-size;
                 font-weight: $m-font-weight--bold;
                 color: $m-color--text;

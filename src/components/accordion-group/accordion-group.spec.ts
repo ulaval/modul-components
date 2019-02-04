@@ -1,13 +1,13 @@
-import '../../utils/polyfills';
-
 import { mount, Slots, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
+import '../../utils/polyfills';
 import uuid from '../../utils/uuid/uuid';
 import { MAccordion, MAccordionSkin } from '../accordion/accordion';
 import AccordionGroupPlugin, { MAccordionGroup } from './accordion-group';
+
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -67,6 +67,7 @@ describe('MAcordionGroup', () => {
         return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
     });
 
+
     it('should not render both close all and open all link when state is mixed', () => {
         const acn: Wrapper<MAccordionGroup> = mount(MAccordionGroup, {
             slots: {
@@ -82,11 +83,11 @@ describe('MAcordionGroup', () => {
         return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should open all accordions when open all is clicked', () => {
+    it('should open all accordions when open all is clicked', async () => {
         const acn: Wrapper<MAccordionGroup> = mountGroup();
-        acn.update();
 
-        acn.find('.m-accordion-group__header a').trigger('click');
+        await acn.vm.$nextTick();
+        acn.find({ ref: 'openAllButton' }).vm.$emit('click');
 
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);
@@ -95,7 +96,7 @@ describe('MAcordionGroup', () => {
         }
     });
 
-    it('should close all accordions when close all is clicked', () => {
+    it('should close all accordions when close all is clicked', async () => {
         const acn: Wrapper<MAccordionGroup> = mount(MAccordionGroup, {
             slots: {
                 default: `<m-accordion id="a" :open="true">
@@ -106,9 +107,9 @@ describe('MAcordionGroup', () => {
                             </m-accordion>'`
             }
         });
-        acn.update();
 
-        acn.find('.m-accordion-group__header a').trigger('click');
+        await acn.vm.$nextTick();
+        acn.find('.m-accordion-group__header a').vm.$emit('click');
 
         const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         expect(acrds.length).toBeGreaterThan(0);

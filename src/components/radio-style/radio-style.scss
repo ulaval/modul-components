@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 $m-radio--width: 17px !default;
 $m-radio--color-disabled: $m-color--grey-darker !default;
 $m-radio--color-disabled-light: $m-color--grey !default;
@@ -39,7 +39,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
     }
 
     &.m--is-disabled {
-        cursor: not-allowed;
+        cursor: default;
 
         .m-radio-style {
             &__input {

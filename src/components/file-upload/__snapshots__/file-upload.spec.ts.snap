@@ -29,9 +29,10 @@ exports[`MFileUpload completed should render completed files 1`] = `
         <div style="display:flex;">
             <m-button class="m-file-upload__footer-add">Add
                 <span slot="precision">1
-                    <span class="m-i18n">file</span></span>
+                    <m-i18n-stub k="m-file-upload:file" params="" nb="1" htmlEncode="true"></m-i18n-stub></span></m-button>
+            <m-button skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
-            <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
 </m-modal>
@@ -43,7 +44,9 @@ exports[`MFileUpload should render correctly 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
+                    <m-i18n-stub k="m-file-upload:title" params="" htmlEncode="true"></m-i18n-stub>
+                </h3>
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
@@ -52,9 +55,10 @@ exports[`MFileUpload should render correctly 1`] = `
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
-                    <span class="m-i18n">file</span></span>
+                    <m-i18n-stub k="m-file-upload:file" params="" nb="0" htmlEncode="true"></m-i18n-stub></span></m-button>
+            <m-button skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
-            <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
 </m-modal>
@@ -66,7 +70,9 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your file here or</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
+                    <m-i18n-stub k="m-file-upload:title" params="" htmlEncode="true"></m-i18n-stub>
+                </h3>
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
@@ -75,9 +81,10 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
-                    <span class="m-i18n">file</span></span>
+                    <m-i18n-stub k="m-file-upload:file" params="" nb="0" htmlEncode="true"></m-i18n-stub></span></m-button>
+            <m-button skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
-            <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
 </m-modal>
@@ -89,8 +96,9 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
         <div class="m-file-upload__no-drop-zone">
             <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
         </div>
-        <h3 class="m-file-upload__title"><span class="m-i18n">Uploading</span> (1
-            <span class="m-i18n">file</span>)
+        <h3 class="m-file-upload__title">
+            <m-i18n-stub k="m-file-upload:import" params="" htmlEncode="true"></m-i18n-stub> (1
+            <m-i18n-stub k="m-file-upload:file" params="" nb="1" htmlEncode="true"></m-i18n-stub>)
         </h3>
         <div class="m-file-upload__import-list">
             <ul name="m--is" tag="ul" class="m-file-upload__import-list__wrap">
@@ -118,9 +126,10 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
-                    <span class="m-i18n">file</span></span>
+                    <m-i18n-stub k="m-file-upload:file" params="" nb="0" htmlEncode="true"></m-i18n-stub></span></m-button>
+            <m-button skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
-            <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
 </m-modal>
@@ -132,19 +141,24 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon> <span class="m-i18n">Drop your files here or</span></h3>
+                    <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
+                    <m-i18n-stub k="m-file-upload:title" params="" nb="5" htmlEncode="true"></m-i18n-stub>
+                </h3>
                 <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
-            <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
+            <p class="m-file-upload__drop-zone__format">
+                <m-i18n-stub k="m-file-upload:format" params="" nb="3" htmlEncode="true" class="m-file-upload__drop-zone__format__label"></m-i18n-stub>: jpg, png, mp4
+            </p>
         </div>
     </div>
     <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
-                    <span class="m-i18n">file</span></span>
+                    <m-i18n-stub k="m-file-upload:file" params="" nb="0" htmlEncode="true"></m-i18n-stub></span></m-button>
+            <m-button skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
-            <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
 </m-modal>
@@ -153,60 +167,53 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
 exports[`MFileUpload validation validation messages should render rejected files in dialog 1`] = `
 <m-modal title="Upload files"><span slot="trigger"></span>
     <div class="m-file-upload">
-        <div class="m-message m-file-upload__error-message m--is-state-error m--is-skin-default">
-            <div class="m-message__wrap">
-                <div class="m-message__icon">
-                    <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                        <use aria-hidden="true"></use>
-                    </svg>
-                </div>
-                <div class="m-message__body m--has-close-button">
-                    <div class="m-message__text">
-                        <p class="m-file-upload__error-message__title"><span class="m-i18n">The following files can not be added.</span></p>
-                        <ul class="m-file-upload__error-message__list">
-                            <li>
-                                <p class="m-file-upload__error-message__file-name">invalid-extensions</p>
-                                <p class="m-file-upload__error-message__error"><span class="m-i18n">The file extension is not accepted.</span></p>
-                            </li>
-                            <li>
-                                <p class="m-file-upload__error-message__file-name">invalid-size.jpg</p>
-                                <p class="m-file-upload__error-message__error"><span class="m-i18n">File is denied because its size exceeds the allowable limit</span> (1 Kb).
-                                </p>
-                            </li>
-                            <li>
-                                <p class="m-file-upload__error-message__file-name">max-files.jpg</p>
-                                <p class="m-file-upload__error-message__error"><span class="m-i18n">The maximum number of files that can be added simultaneously is reached</span> (5
-                                    <span class="m-i18n">files</span>)
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;">
-                    <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
-                        <use aria-hidden="true"></use>
-                    </svg>
-                </button>
-            </div>
-        </div>
+        <m-message-stub state="error" skin="default" icon="true" closeButton="true" visible="visible" class="m-file-upload__error-message">
+            <p class="m-file-upload__error-message__title">
+                <m-i18n-stub k="m-file-upload:rejectFileMsg" params="" nb="3" htmlEncode="true"></m-i18n-stub>
+            </p>
+            <ul class="m-file-upload__error-message__list">
+                <li>
+                    <p class="m-file-upload__error-message__file-name">invalid-extensions</p>
+                    <p class="m-file-upload__error-message__error">
+                        <m-i18n-stub k="m-file-upload:extensionFileMsg" params="" htmlEncode="true"></m-i18n-stub>
+                    </p>
+                </li>
+                <li>
+                    <p class="m-file-upload__error-message__file-name">invalid-size.jpg</p>
+                    <p class="m-file-upload__error-message__error">
+                        <m-i18n-stub k="m-file-upload:maxSizeMsg" params="" htmlEncode="true"></m-i18n-stub> (1 Kb).
+                    </p>
+                </li>
+                <li>
+                    <p class="m-file-upload__error-message__file-name">max-files.jpg</p>
+                    <p class="m-file-upload__error-message__error">
+                        <m-i18n-stub k="m-file-upload:maxNumberMsg" params="" htmlEncode="true"></m-i18n-stub> (5
+                        <m-i18n-stub k="m-file-upload:file" params="" nb="5" htmlEncode="true"></m-i18n-stub>)
+                    </p>
+                </li>
+            </ul>
+        </m-message-stub>
         <div class="m-file-upload__drop-zone">
             <div class="m-file-upload__drop-zone__instructions">
                 <h3 class="m-file-upload__drop-zone__instructions__title">
-                    <svg aria-hidden="true" width="32px" height="32px" class="m-icon">
-                        <use aria-hidden="true"></use>
-                    </svg> <span class="m-i18n">Drop your files here or</span></h3>
+                    <m-icon-stub name="m-svg__arrow--down" size="32px"></m-icon-stub>
+                    <m-i18n-stub k="m-file-upload:title" params="" nb="5" htmlEncode="true"></m-i18n-stub>
+                </h3>
                 <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
-            <p class="m-file-upload__drop-zone__format"><span class="m-i18n m-file-upload__drop-zone__format__label">Accepted formats</span>: jpg, png, mp4</p>
+            <p class="m-file-upload__drop-zone__format">
+                <m-i18n-stub k="m-file-upload:format" params="" nb="3" htmlEncode="true" class="m-file-upload__drop-zone__format__label"></m-i18n-stub>: jpg, png, mp4
+            </p>
         </div>
     </div>
     <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
-                    <span class="m-i18n">file</span></span>
+                    <m-i18n-stub k="m-file-upload:file" params="" nb="0" htmlEncode="true"></m-i18n-stub></span></m-button>
+            <m-button skin="secondary" class="m-file-upload__footer-cancel">
+                <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
-            <m-button skin="secondary" class="m-file-upload__footer-cancel"><span class="m-i18n">Cancel</span></m-button>
         </div>
     </template>
 </m-modal>

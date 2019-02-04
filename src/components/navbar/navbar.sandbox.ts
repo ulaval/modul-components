@@ -1,8 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
+import ButtonPlugin from '../button/button';
 import { NAVBAR_NAME } from '../component-names';
+import NavbarPlugin from './navbar';
 import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
+
 
 @WithRender
 @Component
@@ -37,6 +40,9 @@ export class MNavbarSandbox extends Vue {
 
 const NavbarSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(AccordionTransitionPlugin);
+        v.use(ButtonPlugin);
+        v.use(NavbarPlugin);
         v.component(`${NAVBAR_NAME}-sandbox`, MNavbarSandbox);
     }
 };

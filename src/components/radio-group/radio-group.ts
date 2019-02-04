@@ -48,6 +48,12 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     @Emit('change')
     onChange(value: any): void { }
 
+    @Emit('focus')
+    onFocus(event: Event): void { }
+
+    @Emit('blur')
+    onBlur(event: Event): void { }
+
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
     }
@@ -85,6 +91,14 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         return !!this.label;
     }
 
+    public get idLabel(): string | undefined {
+        return this.hasLabel ? uuid.generate() : undefined;
+    }
+
+    private get idValidationMessage(): string | undefined {
+        return this.as<InputState>().errorMessage || this.as<InputState>().validMessage || this.as<InputState>().helperMessage ? uuid.generate() : undefined;
+    }
+
     private set model(value: any) {
         this.internalValue = value;
         this.onChange(value);
@@ -93,7 +107,7 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
 
 const RadioGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(RADIO_GROUP_NAME, 'plugin.install');
+
         v.use(RadioPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);

@@ -2,9 +2,11 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
-import { STEPPERS_NAME } from '../component-names';
-import NavBarItemPlugin, { BaseSteppers, MSteppersItemState } from '../steppers-item/steppers-item';
+import { STEPPERS_NAME, STEPPERS_ITEM_NAME } from '../component-names';
+import { MSteppersItem, BaseSteppers, MSteppersItemState } from './steppers-item/steppers-item';
 import WithRender from './steppers.html?style=./steppers.scss';
+import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import IconPlugin from '../icon/icon';
 
 @WithRender
 @Component({
@@ -25,7 +27,7 @@ export class MSteppers extends BaseSteppers {
         let rightSpacing: number = 0;
         let hasFindFirst: Boolean = false;
 
-        for (let i: number = 0 ; i <= this.$children.length - 1; i++) {
+        for (let i: number = 0; i <= this.$children.length - 1; i++) {
             if (i === 0 && this.$children.length >= 1) {
                 leftSpacing = this.$children[i].$el.clientWidth / 2;
             }
@@ -121,6 +123,9 @@ export class MSteppers extends BaseSteppers {
 
 const SteppersPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(MediaQueriesPlugin);
+        v.use(IconPlugin);
+        v.component(STEPPERS_ITEM_NAME, MSteppersItem);
         v.component(STEPPERS_NAME, MSteppers);
     }
 };

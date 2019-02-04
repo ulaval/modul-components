@@ -50,7 +50,8 @@ export class MStatus extends Vue {
 
 const Status: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(STATUS_NAME + ' is not ready for production');
+        v.prototype.$log.error('MStatus will be deprecated in modul v.1.0');
+
         v.use(IconPlugin);
         v.component(STATUS_NAME, MStatus);
     }
