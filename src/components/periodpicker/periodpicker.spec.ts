@@ -29,7 +29,7 @@ const initializeWrapper: () => Wrapper<MPeriodPicker> = () => {
             },
             second(props: MPeriodPickerToSlotProps): void {
                 currentToScopeProps = props;
-            },
+            }
         },
         computed: {
             isMqMinS: { get(): boolean { return isMqMinSValue; } }
