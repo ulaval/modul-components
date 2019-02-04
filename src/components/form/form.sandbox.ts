@@ -86,7 +86,16 @@ export class MFormSandbox extends Vue {
                 }
                 return new FormFieldValidation();
             }], { messageAfterTouched: false })
-        })
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => 'a value', []),
+            'field-2': new FormField<string>((): string => 'a different value', [])
+        }, [(form: Form): FormValidation => {
+            if (form.get('field-1').value !== form.get('field-2').value) {
+                return new FormValidation(true, 'Fields must match');
+            }
+            return new FormValidation();
+        }])
     ];
 
     submit(formIndex: number): void {
