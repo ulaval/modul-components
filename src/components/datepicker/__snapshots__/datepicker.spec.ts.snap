@@ -7,7 +7,7 @@ exports[`MDatepicker should render correctly 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
-                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
+                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                         <use aria-hidden="true"></use>
                     </svg>
@@ -29,7 +29,7 @@ exports[`MDatepicker should render correctly min/max time 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
-                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
+                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                         <use aria-hidden="true"></use>
                     </svg>
@@ -51,7 +51,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
-                <button disabled="disabled" type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;font-size:20px;">
+                <button disabled="disabled" type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;font-size:20px;">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                         <use aria-hidden="true"></use>
                     </svg>
@@ -73,7 +73,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
-                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
+                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                         <use aria-hidden="true"></use>
                     </svg>
@@ -103,7 +103,7 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
-                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
+                <button type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple" style="width:22px;height:22px;font-size:20px;">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                         <use aria-hidden="true"></use>
                     </svg>
@@ -133,7 +133,7 @@ exports[`MDatepicker should render correctly when waiting is set 1`] = `
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
-                <button disabled="disabled" type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;font-size:20px;">
+                <button disabled="disabled" type="button" aria-controls="mDatepicker-uuid" class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;font-size:20px;">
                     <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
                         <use aria-hidden="true"></use>
                     </svg>
