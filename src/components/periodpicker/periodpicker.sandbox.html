@@ -9,10 +9,12 @@
         <m-periodpicker v-model="model">
             <m-datepicker slot="first"
                           slot-scope="{ props, handlers }"
+                          label="From"
                           v-on="handlers"
                           v-bind="props"></m-datepicker>
             <m-datepicker slot="second"
                           slot-scope="{ props, handlers }"
+                          label="To"
                           v-on="handlers"
                           v-bind="props"></m-datepicker>
         </m-periodpicker>
@@ -30,6 +32,49 @@
                           slot-scope="{ props, handlers }"
                           v-on="handlers"
                           v-bind="props"></m-datepicker>
+            <m-datepicker slot="second"
+                          slot-scope="{ props, handlers }"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+        </m-periodpicker>
+    </p>
+    <h3>Gère correctement les états</h3>
+    <p class="m-u--margin-bottom">
+        Tous les états de base des inputs doivent être gérés
+    </p>
+    <div class="m-u--margin-bottom">
+        <div>
+            Error message: <input type="text"
+                   v-model="errorMessage" />
+        </div>
+        <div>
+            Valid message: <input type="text"
+                   v-model="validMessage" />
+        </div>
+        <div>
+            Helper message: <input type="text"
+                   v-model="helperMessage" />
+        </div>
+        <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
+        <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
+        <div><button @click="readonly = !readonly">ReadOnly (now: {{ readonly }})</button></div>
+    </div>
+    <p>
+        <m-periodpicker v-model="model"
+                        :min="min"
+                        :max="max"
+                        :error="error"
+                        :error-message="errorMessage"
+                        :valid-message="validMessage"
+                        :helper-message="helperMessage"
+                        :waiting="waiting"
+                        :disabled="disabled"
+                        :readonly="readonly">
+            <m-datepicker slot="first"
+                          slot-scope="{ props, handlers }"
+                          v-on="handlers"
+                          v-bind="props">
+            </m-datepicker>
             <m-datepicker slot="second"
                           slot-scope="{ props, handlers }"
                           v-on="handlers"

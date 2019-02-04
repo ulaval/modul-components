@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
@@ -16,6 +17,11 @@ interface MPeriodPickerFromProps {
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
     max: DatePickerSupportedTypes;
+    disabled: boolean;
+    waiting: boolean;
+    error: boolean;
+    valid: boolean;
+    readonly: boolean;
 }
 
 interface MPeriodPickerFromHandlers {
@@ -30,6 +36,11 @@ interface MPeriodPickerToProps {
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
     max: DatePickerSupportedTypes;
+    disabled: boolean;
+    waiting: boolean;
+    error: boolean;
+    valid: boolean;
+    readonly: boolean;
 }
 
 interface MPeriodPickerToHandlers {
@@ -45,7 +56,7 @@ export type MPeriodPickerToSlotProps = { props: MPeriodPickerToProps, handlers: 
 
 @WithRender
 @Component({
-    mixins: [MediaQueries]
+    mixins: [MediaQueries, InputState]
 })
 export class MPeriodPicker extends ModulVue {
     @Prop()
@@ -61,7 +72,16 @@ export class MPeriodPicker extends ModulVue {
 
     get firstInputState(): MPeriodPickerFromSlotProps {
         return {
-            props: { value: this.internalValue.from, min: this.min, max: this.max },
+            props: {
+                value: this.internalValue.from,
+                min: this.min,
+                max: this.max,
+                disabled: this.as<InputState>().isDisabled,
+                waiting: this.as<InputState>().isWaiting,
+                error: this.as<InputState>().hasError,
+                valid: this.as<InputState>().isValid,
+                readonly: this.as<InputState>().readonly
+            },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
                 open: () => this.onDateFromOpen()
@@ -71,7 +91,17 @@ export class MPeriodPicker extends ModulVue {
 
     get secondInputState(): MPeriodPickerToSlotProps {
         return {
-            props: { focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
+            props: {
+                focus: this.toIsFocused,
+                value: this.internalValue.to,
+                min: this.minDateTo,
+                max: this.max,
+                disabled: this.as<InputState>().isDisabled,
+                waiting: this.as<InputState>().isWaiting,
+                error: this.as<InputState>().hasError,
+                valid: this.as<InputState>().isValid,
+                readonly: this.as<InputState>().readonly
+            },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),
                 close: () => this.onDateToClose()
@@ -85,6 +115,14 @@ export class MPeriodPicker extends ModulVue {
 
     get minDateTo(): DatePickerSupportedTypes {
         return this.internalValue.from ? this.internalValue.from : this.min;
+    }
+
+    get hasTextfieldError(): boolean {
+        return this.as<InputState>().hasError;
+    }
+
+    get isTextfieldValid(): boolean {
+        return this.as<InputState>().isValid;
     }
 
     onDateFromChange(newValue: DatePickerSupportedTypes): void {

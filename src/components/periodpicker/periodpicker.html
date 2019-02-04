@@ -5,4 +5,14 @@
     <slot name="second"
           :props="secondInputState.props"
           :handlers="secondInputState.handlers"></slot>
+    <div class="m-textfield__validation">
+        <m-validation-message class="m-textfield__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasTextfieldError"
+                              :error-message="errorMessage"
+                              :valid="isTextfieldValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
 </div>

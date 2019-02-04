@@ -9,6 +9,13 @@ import WithRender from './periodpicker.sandbox.html';
 export class MPeriodpickerSandbox extends Vue {
     from: any = undefined;
     to: any = undefined;
+    errorMessage: string = '';
+    validMessage: string = '';
+    helperMessage: string = '';
+    waiting: boolean = false;
+    disabled: boolean = false;
+    readonly: boolean = false;
+    error: boolean = false;
 
     model: MDateRange = { to: this.to, from: this.from };
 
