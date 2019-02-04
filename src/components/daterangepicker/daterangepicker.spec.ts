@@ -24,7 +24,7 @@ const initializeWrapper: () => Wrapper<MDaterangepicker> = () => {
     });
 
     return wrapper;
-}
+};
 
 beforeEach(() => {
     wrapper = undefined as any;
