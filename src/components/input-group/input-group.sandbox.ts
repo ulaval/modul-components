@@ -1,8 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { InputMaxWidth } from '../../mixins';
+import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { INPUT_GROUP_NAME } from '../component-names';
 import { MRichTextEditor } from '../rich-text-editor/rich-text-editor';
+import TextfieldPlugin from '../textfield/textfield';
+import InputGroupPlugin from './input-group';
 import WithRender from './input-group.sandbox.html?style=./input-group.sandbox.scss';
 
 
@@ -65,6 +67,8 @@ export class MInputGroupSandbox extends Vue {
 const InputGroupSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
         v.component(`${INPUT_GROUP_NAME}-sandbox`, MInputGroupSandbox);
+        v.use(InputGroupPlugin);
+        v.use(TextfieldPlugin);
     }
 };
 
