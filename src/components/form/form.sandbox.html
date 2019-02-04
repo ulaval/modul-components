@@ -138,13 +138,11 @@
                 @submit="submit(5)">
             <m-textfield v-model.trim="forms[5].get('field-1').value"
                          label="A field"
-                         :required-marker="true"
                          :error-message="forms[5].get('field-1').errorMessage"
                          v-m-form-field="forms[5].get('field-1')">
             </m-textfield>
             <m-textfield v-model.trim="forms[5].get('field-2').value"
                          label="A field"
-                         :required-marker="true"
                          :error-message="forms[5].get('field-2').errorMessage"
                          v-m-form-field="forms[5].get('field-2')">
             </m-textfield>
@@ -155,6 +153,36 @@
             <m-button type="reset"
                       skin="secondary"
                       :form="forms[5].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Message error after field is touch vs live</h3>
+    <p class="m-u--margin-bottom">
+        field 1 is after field touch field 2 is live
+    </p>
+    <p>
+        <m-form :form="forms[6]"
+                @reset="reset(6)"
+                @submit="submit(6)">
+            <m-textfield v-model.trim="forms[6].get('field-1').value"
+                         label="Field 1"
+                         :required-marker="true"
+                         :error-message="forms[6].get('field-1').errorMessage"
+                         v-m-form-field="forms[6].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[6].get('field-2').value"
+                         label="Field 2"
+                         :required-marker="true"
+                         :error-message="forms[6].get('field-2').errorMessage"
+                         v-m-form-field="forms[6].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[6].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[6].id">Reset</m-button>
         </p>
     </p>
     <hr />

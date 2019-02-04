@@ -72,6 +72,20 @@ export class MFormSandbox extends Vue {
                 }
                 return new FormFieldValidation();
             }])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
+                if (value.length < 5) {
+                    return new FormFieldValidation(true, [`the field-1 should be 5 letter at least`], ['this field should be 5 letter at least']);
+                }
+                return new FormFieldValidation();
+            }]),
+            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
+                if (value.length < 5) {
+                    return new FormFieldValidation(true, [`the field-2 should be 5 letter at least`], ['this field should be 5 letter at least']);
+                }
+                return new FormFieldValidation();
+            }], { messageAfterTouched: false })
         })
     ];
 
