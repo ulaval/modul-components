@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`m-periodpicker should render correctly 1`] = `
+<div>
+    <div class="m-textfield__validation">
+        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+    </div>
+</div>
+`;

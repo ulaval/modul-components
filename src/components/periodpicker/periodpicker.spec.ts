@@ -1,5 +1,6 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
+import { renderComponent } from '../../../tests/helpers/render';
 import { DatePickerSupportedTypes } from './../datepicker/datepicker';
 import PeriodpickerPlugin, { MPeriodPicker, MPeriodPickerFromSlotProps, MPeriodPickerToSlotProps } from './periodpicker';
 
@@ -54,6 +55,12 @@ beforeEach(() => {
 });
 
 describe(`m-periodpicker`, () => {
+    it(`should render correctly`, () => {
+        initializeWrapper();
+
+        expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+    });
+
     describe(`given no props are provided`, () => {
         it(`should pass down empty data to the first date`, () => {
             initializeWrapper();

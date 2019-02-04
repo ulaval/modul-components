@@ -5,7 +5,7 @@ import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
-import DatepickerPlugin, { DatePickerSupportedTypes } from '../datepicker/datepicker';
+import { DatePickerSupportedTypes } from '../datepicker/datepicker';
 import WithRender from './periodpicker.html';
 
 export class MDateRange {
@@ -54,11 +54,17 @@ export type MPeriodPickerFromSlotProps = { props: MPeriodPickerFromProps, handle
 
 export type MPeriodPickerToSlotProps = { props: MPeriodPickerToProps, handlers: MPeriodPickerToHandlers };
 
+export class MPeriodPickerProps {
+    constructor(public value: MDateRange = { from: undefined, to: undefined },
+        public min: DatePickerSupportedTypes = '',
+        public max: DatePickerSupportedTypes = '') { }
+}
+
 @WithRender
 @Component({
     mixins: [MediaQueries, InputState]
 })
-export class MPeriodPicker extends ModulVue {
+export class MPeriodPicker extends ModulVue implements MPeriodPickerProps {
     @Prop()
     value: MDateRange;
 
@@ -169,7 +175,6 @@ export class MPeriodPicker extends ModulVue {
 
 const PeriodpickerPlugin: PluginObject<any> = {
     install(v): void {
-        v.use(DatepickerPlugin);
         v.component(PERIODPICKER_NAME, MPeriodPicker);
     }
 };

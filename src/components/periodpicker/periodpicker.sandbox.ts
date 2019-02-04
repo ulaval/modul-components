@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { PERIODPICKER_NAME } from '../component-names';
+import DatepickerPlugin from '../datepicker/datepicker';
 import PeriodpickerPlugin, { MDateRange } from './periodpicker';
 import WithRender from './periodpicker.sandbox.html';
 
@@ -36,6 +37,7 @@ export class MPeriodpickerSandbox extends Vue {
 
 const PeriodpickerSandboxPlugin: PluginObject<any> = {
     install(v): void {
+        v.use(DatepickerPlugin);
         v.use(PeriodpickerPlugin);
         v.component(`${PERIODPICKER_NAME}-sandbox`, MPeriodpickerSandbox);
     }
