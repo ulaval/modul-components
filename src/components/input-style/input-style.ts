@@ -16,11 +16,11 @@ export const CSSLABELDEFAULTMARGIN: number = 10;
     mixins: [InputState]
 })
 export class MInputStyle extends ModulVue {
-    @Prop()
+    @Prop({ default: '' })
     public label: string;
     @Prop()
     public labelFor: string;
-    @Prop()
+    @Prop({ default: false })
     public focus: boolean;
     @Prop({ default: true })
     public empty: boolean;
@@ -42,8 +42,8 @@ export class MInputStyle extends ModulVue {
         rightContent: HTMLElement
     };
 
+    public labelOffset: string = CSSLABELDEFAULTMARGIN + 'px';
     private animReady: boolean = false;
-    private labelOffset: any = CSSLABELDEFAULTMARGIN + 'px';
 
     protected created(): void {
         setTimeout(() => {

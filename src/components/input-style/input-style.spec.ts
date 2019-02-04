@@ -12,7 +12,7 @@ let wrapper: Wrapper<MInputStyle>;
 describe('MInputStyle', () => {
     beforeEach(() => {
         Vue.use(InputStylePlugin);
-        wrapper = shallow(MInputStyle, {
+        wrapper = shallowMount(MInputStyle, {
             slots: {
                 default: '<input ref="input" type="text"/>'
             }
@@ -41,18 +41,22 @@ describe('MInputStyle', () => {
     describe('If isLabelUp', () => {
         beforeEach(() => {
             wrapper.setProps({
-                label: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus aspernatur, nihil sed reprehenderit quaerat labore laborum',
+                label: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, laborum labore ipsa iure sapiente tenetur corporis iusto dicta. Autem itaque quaerat porro explicabo illum vero a rem nemo odit distinctio?',
                 width: '200px',
                 focus: true,
-                empty: false
+                empty: false,
+                readonly: false
             });
         });
-        it('true', () => {
-
-            // let labeloffset: number = wrapper.find('.m-input-style__label').as<HTMLElement>.clientHeight / 2;
-            let labeloffset: number = wrapper.vm.$refs.label.clientHeight / 2;
+        it('true', async () => {
 
             expect(wrapper.vm.isLabelUp).toBe(true);
+            expect(wrapper.vm.focus).toBe(true);
+            expect(wrapper.vm.empty).toBe(false);
+            expect(wrapper.vm.readonly).toBe(false);
+            expect(wrapper.vm.label).toBe('Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, laborum labore ipsa iure sapiente tenetur corporis iusto dicta. Autem itaque quaerat porro explicabo illum vero a rem nemo odit distinctio?');
+            await wrapper.vm.$nextTick();
+            let labeloffset: number = wrapper.vm.$refs.label.clientHeight / 2;
             expect(wrapper.attributes().style).toContain('margin-top: ' + labeloffset + 'px');
         });
     });
