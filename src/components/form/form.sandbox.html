@@ -1,5 +1,81 @@
 <div>
-    <m-form :form="form"
+    <h3>Basic form</h3>
+    <p class="m-u--margin-bottom">
+
+    </p>
+    <p>
+        <m-form :form="forms[0]"
+                @reset="reset(0)"
+                @submit="submit(0)">
+            <m-textfield v-model.trim="forms[0].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[0].get('field-1').errorMessage"
+                         v-m-form-field="forms[0].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[0].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[0].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with 1 field with validation</h3>
+    <p class="m-u--margin-bottom">
+        the summary message won't display if only one field has error
+    </p>
+    <p>
+        <m-form :form="forms[1]"
+                @reset="reset(1)"
+                @submit="submit(1)">
+            <m-textfield v-model.trim="forms[1].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[1].get('field-1').errorMessage"
+                         v-m-form-field="forms[1].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[1].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[1].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with 2 field with validation</h3>
+    <p class="m-u--margin-bottom">
+    </p>
+    <p>
+        <m-form :form="forms[2]"
+                @reset="reset(2)"
+                @submit="submit(2)">
+            <m-textfield v-model.trim="forms[2].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[2].get('field-1').errorMessage"
+                         v-m-form-field="forms[2].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[2].get('field-2').value"
+                         label="Another field"
+                         :required-marker="true"
+                         :error-message="forms[2].get('field-2').errorMessage"
+                         v-m-form-field="forms[2].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[2].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[2].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <!-- <m-form :form="form"
             :required-marker="true"
             @submit="submit">
         <m-textfield v-model.trim="form.get('titleField').value"
@@ -53,9 +129,9 @@
               :form="form.id">Submit</m-button>
     <m-button type="reset"
               skin="secondary"
-              :form="form.id">Reset</m-button>
+              :form="form.id">Reset</m-button> -->
 
-    <p>
+    <!-- <p>
         Form sent: {{ formSent }}
-    </p>
+    </p> -->
 </div>

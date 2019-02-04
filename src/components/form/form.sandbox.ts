@@ -1,6 +1,5 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from '../../utils/form/form-field/form-field';
@@ -12,42 +11,77 @@ import WithRender from './form.sandbox.html';
 @WithRender
 @Component
 export class MFormSandbox extends Vue {
-    title: string = '';
-    description: string = '';
-    location: string = '';
-    formSent: any = '';
+    forms: Form[] = [
+        new Form({
+            'field-1': new FormField<string>((): string => '', [])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
+                if (!value) {
+                    return new FormFieldValidation(true, ['this field-1 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
+                if (!value) {
+                    return new FormFieldValidation(true, ['this field-1 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }]),
+            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
+                if (!value) {
+                    return new FormFieldValidation(true, ['this field-2 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }])
+        })
+    ];
 
-    maxTitleLength: number = ValidationSandbox.maxTitleLength;
-    thresholdTitle: number = ValidationSandbox.thresholdTitle;
-    maxDescriptionLength: number = ValidationSandbox.maxDescriptionLength;
-    thresholdDescription: number = ValidationSandbox.thresholdDescription;
-    minDescriptionLength: number = ValidationSandbox.minDescriptionLength;
-    minLocationLength: number = ValidationSandbox.minLocationLength;
-    maxLocationLength: number = ValidationSandbox.maxLocationLength;
-    thresholdLocation: number = ValidationSandbox.thresholdLocation;
-
-    inputMaxWidthLarge: InputMaxWidth = InputMaxWidth.Large;
-    inputMaxWidthSmall: InputMaxWidth = InputMaxWidth.Small;
-
-    form: Form = new Form({
-        'titleField': new FormField<string>((): string => this.title, [ValidationSandbox.validateRequired('Title'), ValidationSandbox.validateMaxLength('Title', this.maxTitleLength)]),
-        'descriptionField': new FormField<string>((): string => this.description, [ValidationSandbox.validateRequired('Description'), ValidationSandbox.validateMinLength('Description', this.minDescriptionLength), ValidationSandbox.validateMaxLength('Description', this.maxDescriptionLength)]),
-        'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation()),
-        'passwordField': new FormField<string>((): string => ''),
-        'confirmPasswordField': new FormField<string>((): string => '')
-    }, [ValidationSandbox.validatePasswordMatch]);
-
-    submit(): void {
-        const data: any = {
-            title: this.form.get('titleField').value,
-            description: this.form.get('descriptionField').value,
-            location: this.form.get('locationField').value,
-            password: this.form.get('passwordField').value
-        };
-
-        this.$emit('submit', data);
-        this.formSent = data;
+    submit(formIndex: number): void {
     }
+
+    reset(formIndex: number): void {
+    }
+
+
+    // title: string = '';
+    // description: string = '';
+    // location: string = '';
+    // formSent: any = '';
+
+    // maxTitleLength: number = ValidationSandbox.maxTitleLength;
+    // thresholdTitle: number = ValidationSandbox.thresholdTitle;
+    // maxDescriptionLength: number = ValidationSandbox.maxDescriptionLength;
+    // thresholdDescription: number = ValidationSandbox.thresholdDescription;
+    // minDescriptionLength: number = ValidationSandbox.minDescriptionLength;
+    // minLocationLength: number = ValidationSandbox.minLocationLength;
+    // maxLocationLength: number = ValidationSandbox.maxLocationLength;
+    // thresholdLocation: number = ValidationSandbox.thresholdLocation;
+
+    // inputMaxWidthLarge: InputMaxWidth = InputMaxWidth.Large;
+    // inputMaxWidthSmall: InputMaxWidth = InputMaxWidth.Small;
+
+    // form: Form = new Form({
+    //     'titleField': new FormField<string>((): string => this.title, [ValidationSandbox.validateRequired('Title'), ValidationSandbox.validateMaxLength('Title', this.maxTitleLength)]),
+    //     'descriptionField': new FormField<string>((): string => this.description, [ValidationSandbox.validateRequired('Description'), ValidationSandbox.validateMinLength('Description', this.minDescriptionLength), ValidationSandbox.validateMaxLength('Description', this.maxDescriptionLength)]),
+    //     'locationField': new FormField<string>((): string => this.location, ValidationSandbox.validateLocation()),
+    //     'passwordField': new FormField<string>((): string => ''),
+    //     'confirmPasswordField': new FormField<string>((): string => '')
+    // }, [ValidationSandbox.validatePasswordMatch]);
+
+    // submit(): void {
+    //     const data: any = {
+    //         title: this.form.get('titleField').value,
+    //         description: this.form.get('descriptionField').value,
+    //         location: this.form.get('locationField').value,
+    //         password: this.form.get('passwordField').value
+    //     };
+
+    //     this.$emit('submit', data);
+    //     this.formSent = data;
+    // }
 }
 
 class ValidationSandbox {
