@@ -56,8 +56,8 @@ export type MPeriodPickerToSlotProps = { props: MPeriodPickerToProps, handlers: 
 
 export class MPeriodPickerProps {
     constructor(public value: MDateRange = { from: undefined, to: undefined },
-        public min: DatePickerSupportedTypes = '',
-        public max: DatePickerSupportedTypes = '') { }
+        public min: DatePickerSupportedTypes = undefined,
+        public max: DatePickerSupportedTypes = undefined) { }
 }
 
 @WithRender
