@@ -75,6 +75,89 @@
         </p>
     </p>
     <hr />
+    <h3>Form with predefined value</h3>
+    <p class="m-u--margin-bottom">
+    </p>
+    <p>
+        <m-form :form="forms[3]"
+                @reset="reset(3)"
+                @submit="submit(3)">
+            <m-textfield v-model.trim="forms[3].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[3].get('field-1').errorMessage"
+                         v-m-form-field="forms[3].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[3].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[3].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Will give focus to the only field that has error</h3>
+    <p class="m-u--margin-bottom">
+        Just click submit to test
+    </p>
+    <p>
+        <m-form :form="forms[4]"
+                @reset="reset(4)"
+                @submit="submit(4)">
+            <m-textfield v-model.trim="forms[4].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[4].get('field-1').errorMessage"
+                         v-m-form-field="forms[4].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[4].get('field-2').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[4].get('field-2').errorMessage"
+                         v-m-form-field="forms[4].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[4].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[4].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Allow to pass html to summary errors</h3>
+    <p class="m-u--margin-bottom">
+        Just click submit to test
+    </p>
+    <p>
+        <m-form :form="forms[5]"
+                @reset="reset(5)"
+                @submit="submit(5)">
+            <m-textfield v-model.trim="forms[5].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[5].get('field-1').errorMessage"
+                         v-m-form-field="forms[5].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[5].get('field-2').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[5].get('field-2').errorMessage"
+                         v-m-form-field="forms[5].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[5].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[5].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
     <!-- <m-form :form="form"
             :required-marker="true"
             @submit="submit">
