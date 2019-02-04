@@ -99,7 +99,7 @@ export class MInputStyle extends ModulVue {
     }
 
     public get isLabelUp(): boolean {
-        let isLabelUp: boolean = (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
+        let isLabelUp: boolean = (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
         this.calcLabelOffset(isLabelUp);
         return isLabelUp;
     }
