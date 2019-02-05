@@ -13,6 +13,8 @@
     <button @click="isReadonly = !isReadonly">Toogle readonly (current value: {{ !!isReadonly }}) </button><br />
     <button @click="isValid = !isValid">Toogle valid (current value: {{ !!isValid }}) </button><br />
     <button @click="hasError = !hasError">Toogle error (current value: {{ !!hasError }}) </button><br />
+    <button @click="visible = !visible">Toogle fieldset visiblity (current value: {{ !!visible }}) </button><br />
+
 
     <h3>Propriétés ré-exposées par le composant</h3>
     <p class="m-u--margin-bottom">
@@ -20,6 +22,7 @@
     </p>
     <p>
         <m-input-group legend="Propriétés exposées"
+                       :visible="visible"
                        :display-validation="false"
                        :error-message="errorMessage"
                        :error="hasError"
@@ -29,7 +32,8 @@
                        :disabled="isDisabled"
                        :waiting="isWaiting"
                        :readonly="isReadonly">
-            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error, validationMessage }">
+                {{ test }}
                 <dl>
                     <dt>disabled</dt>
                     <dd :class="{ stronger : disabled }">{{ disabled }}</dd>
@@ -41,6 +45,8 @@
                     <dd :class="{ stronger : valid }">{{ valid }} -- Cette propriété réagit au message valide</dd>
                     <dt>error</dt>
                     <dd :class="{ stronger : error }">{{ error }} -- Cette propriété réagit au message d'erreur</dd>
+                    <dt>validationMessage</dt>
+                    <dd :class="{ stronger : validationMessage }">{{ validationMessage }} -- Cette propriété réagit aux messages (help, valid, error)</dd>
                 </dl>
             </div>
         </m-input-group>
@@ -51,6 +57,7 @@
     </p>
     <p>
         <m-input-group legend="Gestion de champs de texte"
+                       :visible="visible"
                        :error-message="errorMessage"
                        :error="hasError"
                        :valid-message="validMessage"
@@ -93,6 +100,7 @@
     </p>
     <p>
         <m-input-group legend="Gestion de champs de texte"
+                       :visible="visible"
                        :error="hasError"
                        :valid="isValid"
                        :disabled="isDisabled"
@@ -137,6 +145,7 @@
     <h3>Utilisation avec des champs variés (m-textfield)</h3>
     <p>
         <m-input-group legend="Gestion de champs de texte"
+                       :visible="visible"
                        :error-message="errorMessage"
                        :error="hasError"
                        :valid-message="validMessage"

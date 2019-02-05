@@ -1,26 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MInputGroup with errors will render correctly 1`] = `
-<fieldset errors="first error,second error" class="m-input-group">
+exports[`MInputGroup with all props defined when removing legend will render correctly 1`] = `
+<fieldset class="m-input-group m--is-readonly m--is-disabled m--is-waiting m--has-error m--is-valid m--has-validation-message">
+    <div>true true true true true</div>
     <div class="m-input-group__validation">
-        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+        <m-validation-message disabled="disabled" waiting="true" error="true" error-message="Some error message" valid="true" valid-message="Some valid message" helper-message="Some helper message" class="m-input-group__validation__message"></m-validation-message>
     </div>
 </fieldset>
 `;
 
-exports[`MInputGroup with legend will render correctly 1`] = `
-<fieldset class="m-input-group">
+exports[`MInputGroup with all props defined when setting visiblity to false will render correctly 1`] = `
+<fieldset class="m-input-group m--is-readonly m--is-disabled m--is-waiting m--has-error m--is-valid m--has-validation-message m--border-hidden">
+    <div>true true true true true</div>
+</fieldset>
+`;
+
+exports[`MInputGroup with all props defined will render correctly 1`] = `
+<fieldset class="m-input-group m--is-readonly m--is-disabled m--is-waiting m--has-error m--is-valid m--has-validation-message">
     <legend class="m-input-group__legend">Some legend</legend>
+    <div>true true true true true</div>
     <div class="m-input-group__validation">
-        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+        <m-validation-message disabled="disabled" waiting="true" error="true" error-message="Some error message" valid="true" valid-message="Some valid message" helper-message="Some helper message" class="m-input-group__validation__message"></m-validation-message>
     </div>
 </fieldset>
 `;
 
-exports[`MInputGroup without content will render correctly 1`] = `
+exports[`MInputGroup with default values will render correctly 1`] = `
 <fieldset class="m-input-group">
+    <div>false false false false false</div>
     <div class="m-input-group__validation">
-        <m-validation-message class="m-textfield__validation__message"></m-validation-message>
+        <m-validation-message class="m-input-group__validation__message"></m-validation-message>
     </div>
 </fieldset>
 `;

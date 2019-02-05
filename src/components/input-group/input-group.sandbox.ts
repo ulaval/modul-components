@@ -23,6 +23,7 @@ export class MInputGroupSandbox extends Vue {
     isWaiting: boolean = false;
     isValid: boolean = false;
     hasError: boolean = false;
+    visible: boolean = true;
 
     nom: string = '';
     prenom: string = '';

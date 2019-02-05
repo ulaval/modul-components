@@ -17,6 +17,9 @@ import WithRender from './input-group.html?style=./input-group.scss';
 })
 export class MInputGroup extends ModulVue {
 
+    @Prop({ default: true })
+    visible: boolean;
+
     @Prop()
     legend: string;
 
@@ -79,13 +82,21 @@ export class MInputGroup extends ModulVue {
         return this.helperMessage;
     }
 
+    get hasValidationMessage(): boolean {
+        return !!this.errorMessageInputGroup
+            || !!this.validMessageInputGroup
+            || !!this.helperMessage;
+    }
+
     get classes(): { [name: string]: boolean } {
         return {
             'm--is-readonly': this.isReadonly,
             'm--is-disabled': this.isDisabled,
             'm--is-waiting': this.isWaiting,
             'm--has-error': this.hasError,
-            'm--is-valid': this.isValid
+            'm--is-valid': this.isValid,
+            'm--has-validation-message': this.hasValidationMessage,
+            'm--border-hidden': !this.visible
         };
     }
 }

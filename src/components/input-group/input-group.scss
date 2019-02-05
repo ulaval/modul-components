@@ -5,6 +5,10 @@
     border: 1px solid $m-color--grey-light;
     border-radius: 3px;
 
+    &.m--border-hidden {
+        border-width: 0;
+    }
+
     &__legend {
         color: $m-color--text-light;
     }
@@ -35,6 +39,12 @@
 
         .m-input-group__legend {
             color: $m-input-style--color-error;
+        }
+    }
+
+    &.m--has-validation-message {
+        .m-input-group__validation {
+            margin-top: $m-spacing--xs;
         }
     }
 }
