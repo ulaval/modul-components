@@ -144,7 +144,7 @@ export class MTree extends ModulVue {
     }
 
     public get selectable(): boolean {
-        return this.selectionMode !== MSelectionMode.None && this.selectionMode !== MSelectionMode.Readonly;
+        return this.selectionMode !== MSelectionMode.None && !this.isReadonly;
     }
 
     public get isReadonly(): boolean {

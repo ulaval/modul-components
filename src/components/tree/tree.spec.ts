@@ -198,7 +198,6 @@ describe(`MTree`, () => {
 
             beforeEach(() => {
                 tree = TREE_WITH_DATA;
-                selectedNodes = [];
                 selectionMode = MSelectionMode.Readonly;
                 selectedNodes = SELECTED_NODES;
                 initializeMountWrapper();
