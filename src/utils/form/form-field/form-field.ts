@@ -141,7 +141,7 @@ export class FormField<T> {
      * @param value the new value of the field
      */
     private change(value: T): void {
-        if (value !== this.oldValue) {
+        if (value !== this.oldValue || typeof value === 'object') {
             this.internalValue = value;
             this.oldValue = this.internalValue;
             this.validate();
