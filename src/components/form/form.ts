@@ -1,49 +1,49 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
+import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin, { MMessageState } from '../message/message';
-import WithRender from './form.html';
+import { FormFieldDirective } from './form-field';
+import WithRender from './form.html?style=./form.scss';
 
 @WithRender
 @Component
 export class MForm extends ModulVue {
     @Prop()
-    form: Form;
+    public form: Form;
 
-    @Prop({ default: true })
-    hasRequiredFields: boolean;
+    @Prop()
+    public requiredMarker: boolean;
 
-    messageStateEror: MMessageState = MMessageState.Error;
+    public messageStateError: MMessageState = MMessageState.Error;
 
-    errors: string[] = [];
-
-    get hasErrors(): boolean {
-        return this.errors.length > 1;
-    }
+    public errors: string[] = [];
 
     @Emit('submit')
-    onSubmit(): void { }
+    public onSubmit(): void { }
 
     @Emit('reset')
-    onReset(): void { }
+    public onReset(): void { }
 
-    submit(): void {
+    public get hasErrors(): boolean {
+        return this.errors.length > 0;
+    }
+
+    public submit(): void {
         if (this.form) {
             this.errors = [];
             this.form.validateAll();
 
-            if (this.form.nbFieldsThatHasError === 0) {
+            if (this.form.nbFieldsThatHasError === 0 && this.form.nbOfErrors === 0) {
                 this.onSubmit();
             } else if (this.form.nbFieldsThatHasError === 1) {
-                setTimeout(() => {
-                    let fieldWithError: HTMLElement | null = this.$el.querySelector('.m--has-error input, .m--has-error textarea');
-                    if (fieldWithError) {
-                        (fieldWithError).focus();
-                    }
-                });
+                if (this.form.nbOfErrors > 0) {
+                    this.errors = this.form.getErrorsForSummary();
+                }
+                this.form.focusFirstFieldWithError();
             } else {
                 this.errors = this.form.getErrorsForSummary();
             }
@@ -52,7 +52,7 @@ export class MForm extends ModulVue {
         }
     }
 
-    reset(): void {
+    public reset(): void {
         this.errors = [];
 
         if (this.form) {
@@ -69,6 +69,7 @@ const FormPlugin: PluginObject<any> = {
         v.prototype.$log.debug(FORM, 'plugin.install');
         v.use(I18nPlugin);
         v.use(MessagePlugin);
+        v.directive(FORM_FIELD_NAME, FormFieldDirective);
         v.component(FORM, MForm);
     }
 };

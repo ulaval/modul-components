@@ -2,7 +2,10 @@
 
 exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content"></ul>
+    <ul class="m-tree__content">
+        <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
+        <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
+    </ul>
 </div>
 `;
 
@@ -20,7 +23,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
         <li class="m-tree-node m--is-selected">
             <div role="button" tabindex="1" class="m-tree-node__item"> <span class="m-tree-node__item__label">index.html</span> </div>
         </li>
-        <li class="m-tree-node">
+        <li class="m-tree-node m-tree-node__has-children">
             <div role="button" tabindex="1" class="m-tree-node__item">
                 <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span> </div>
             <m-accordion-transition>

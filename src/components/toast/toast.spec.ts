@@ -27,6 +27,10 @@ const initializeWrapper: () => any = () => {
     });
 };
 
+beforeEach(() => {
+    wrapper = undefined as any;
+});
+
 describe(`MToast`, () => {
     beforeEach(() => {
         resetModulPlugins();
@@ -38,7 +42,6 @@ describe(`MToast`, () => {
     describe(`Given that no props have been passed`, async () => {
         beforeEach(async () => {
             initializeWrapper();
-            jest.runOnlyPendingTimers(); // wait for component to be instancialized
         });
 
         describe(`When the Toast is created`, () => {
@@ -79,7 +82,10 @@ describe(`MToast`, () => {
     });
 
     describe(`Given that a custom action prop have been passed`, () => {
-        beforeEach(() => {
+        beforeEach(async () => {
+            initializeWrapper();
+            await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+
             wrapper.setProps({
                 actionLabel: ACTION_LABEL
             });
@@ -91,7 +97,7 @@ describe(`MToast`, () => {
                 expect(wrapper.vm.actionLabel).toBe(ACTION_LABEL);
             });
 
-            it(`Should show a button with the label on it`, () => {
+            it(`Should show a button with the label on it`, async () => {
                 const label: string = wrapper.find('.m-toast__actions').html();
 
                 expect(label).toContain(ACTION_LABEL);
@@ -128,7 +134,9 @@ describe(`MToast`, () => {
     });
 
     describe(`Givent that a open prop have been passed and variable is false`, () => {
-        beforeEach(() => {
+        beforeEach(async () => {
+            initializeWrapper();
+            await jest.runOnlyPendingTimers();
             wrapper.setProps({
                 open: false
             });

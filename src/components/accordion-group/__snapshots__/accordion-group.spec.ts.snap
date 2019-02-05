@@ -4,7 +4,7 @@ exports[`MAcordionGroup should not render both close all and open all link when 
 <article class="m-accordion-group">
     <div class="m-accordion-group__header m--no-title">
         <div>
-            <a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            <a href="#" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
             </a>
         </div>
     </div>
@@ -28,7 +28,7 @@ exports[`MAcordionGroup should not render close all link when all accordions are
 <article class="m-accordion-group">
     <div class="m-accordion-group__header m--no-title">
         <div>
-            <a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Close all</span></span>
+            <a href="#" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Close all</span></span>
             </a>
         </div>
     </div>
@@ -56,7 +56,7 @@ exports[`MAcordionGroup should not render open all link when all accordions are 
 <article class="m-accordion-group">
     <div class="m-accordion-group__header m--no-title">
         <div>
-            <a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            <a href="#" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
             </a>
         </div>
     </div>
@@ -90,7 +90,7 @@ exports[`MAcordionGroup should render correctly 1`] = `
 <article class="m-accordion-group">
     <div class="m-accordion-group__header m--no-title">
         <div>
-            <a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            <a href="#" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
             </a>
         </div>
     </div>
@@ -111,7 +111,7 @@ exports[`MAcordionGroup should render correctly with title 1`] = `
     <div class="m-accordion-group__header">
         <div class="m-accordion-group__header__title">title</div>
         <div>
-            <a href="#" tabindex="1" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
+            <a href="#" tabindex="0" class="m-link m--is-unvisited m--is-button"> <span class="m-link__text"><span class="m-i18n">Open all</span></span>
             </a>
         </div>
     </div>

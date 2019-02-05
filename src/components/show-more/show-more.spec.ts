@@ -1,4 +1,4 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { MButtonSkin } from '../button/button';
@@ -15,7 +15,7 @@ const NB_VISIBLE: number = 10;
 const NB_TOTAL: number = 50;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MShowMore);
+    wrapper = shallowMount(MShowMore);
 
     wrapper.vm.$i18n.translate = jest.fn((key: string) => key);
 };

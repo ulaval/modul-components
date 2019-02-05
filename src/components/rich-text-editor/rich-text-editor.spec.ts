@@ -1,4 +1,4 @@
-import { shallow, Wrapper, mount } from '../../../node_modules/@vue/test-utils';
+import { mount, shallowMount, Wrapper } from '../../../node_modules/@vue/test-utils';
 import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
@@ -20,7 +20,7 @@ describe('MRichTextEditor', () => {
         wrapper = mount(MRichTextEditor,
             {
                 stubs: {
-                    froala: '<froala></froala>'
+                    froala: '<div></div>'
                 }
             });
         richTextEditor = wrapper.vm;
@@ -64,13 +64,13 @@ describe('MRichTextEditor', () => {
         describe(`with props in error`, () => {
             it('the component should throw an error', () => {
                 expect(() => {
-                    wrapper = shallow(MRichTextEditor, {
+                    wrapper = shallowMount(MRichTextEditor, {
                         propsData: { scrollableContainer: '#container' }
                     });
                 }).toThrow(richTextEditor.getSelectorErrorMsg('scrollable-container'));
 
                 expect(() => {
-                    wrapper = shallow(MRichTextEditor, {
+                    wrapper = shallowMount(MRichTextEditor, {
                         propsData: { toolbarStickyOffset: '#header' }
                     });
                 }).toThrow(richTextEditor.getSelectorErrorMsg('toolbar-sticky-offset'));

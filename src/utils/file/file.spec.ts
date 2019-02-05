@@ -1,16 +1,17 @@
 import axios, { AxiosRequestConfig, CancelTokenSource } from 'axios';
 import Vue from 'vue';
-
 import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
 import { HttpService } from '../http/http';
 import { RequestConfig } from '../http/rest';
 import { ModulVue } from '../vue/vue';
 import { extractExtension, FileService, MFile, MFileRejectionCause, MFileStatus } from './file';
 
+
 jest.mock('../http/http');
 
 const FILENAME_POSITION_1: string = 'file.jpg';
 const FILENAME_POSITION_2: string = 'file.mov';
+const FILENAME_POSITION_3: string = 'file';
 
 describe('FileService', () => {
     let filesvc: FileService;
@@ -82,6 +83,23 @@ describe('FileService', () => {
     });
 
     describe('validations', () => {
+
+        describe(`No mather what`, () => {
+            it(`should not accept a file without an extension`, () => {
+
+                filesvc.add(
+                    createMockFileList([
+                        createMockFile(FILENAME_POSITION_3)
+                    ])
+                );
+
+                expect(readyFiles().length).toEqual(0);
+                expect(rejectedFiles().length).toEqual(1);
+                expect(rejectedFiles()[0].name).toEqual(FILENAME_POSITION_3);
+                expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+                expect(rejectedFiles()[0].rejection).toEqual(MFileRejectionCause.FILE_TYPE);
+            });
+        });
 
         describe(`When there is only accepted extensions`, () => {
             it(`should accept the right file`, () => {

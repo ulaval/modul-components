@@ -269,10 +269,12 @@ describe(`Calendar`, () => {
                 });
 
                 it(`when model is a date range model`, () => {
-                    value = DATE_RANGE;
-                    Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
+                    try {
+                        value = DATE_RANGE;
+                        Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
 
-                    initializeWrapper();
+                        initializeWrapper();
+                    } catch { }
                 });
             });
 
@@ -288,10 +290,12 @@ describe(`Calendar`, () => {
                 });
 
                 it(`when model is a single date model`, () => {
-                    value = SINGLE_DATE;
-                    Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
+                    try {
+                        value = SINGLE_DATE;
+                        Vue.config.errorHandler = (err, _vm, _info) => expect(err).toBeTruthy();
 
-                    initializeWrapper();
+                        initializeWrapper();
+                    } catch { }
                 });
             });
         });
