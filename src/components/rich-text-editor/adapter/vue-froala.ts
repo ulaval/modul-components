@@ -5,8 +5,11 @@ import { MFile } from 'src/utils';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
-import imageRemoveIcon from '../../../assets/icons/svg/Froala-image-remove.svg';
+import imageAlignCenterIcon from '../../../assets/icons/svg/Froala-image-align-center.svg';
+import imageAlignLeftIcon from '../../../assets/icons/svg/Froala-image-align-left.svg';
+import imageAlignRightIcon from '../../../assets/icons/svg/Froala-image-align-right.svg';
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
+import replaceIcon from '../../../assets/icons/svg/Froala-replace.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
@@ -164,7 +167,6 @@ export enum FroalaStatus {
         }
         $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
         $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('imageRemove', { SVG: (imageRemoveIcon as string), template: 'custom-icons' });
     }
 
     protected addPopups(): void {
@@ -216,8 +218,9 @@ export enum FroalaStatus {
             }
         });
 
+        $.FroalaEditor.DefineIcon('imageReplace', { SVG: (replaceIcon as string), template: 'custom-icons' });
         $.FroalaEditor.RegisterCommand('imageReplace', {
-            title: this.$i18n.translate('m-rich-text-editor:insert-image'),
+            title: this.$i18n.translate('m-rich-text-editor:replace-image'),
             undo: true,
             focus: true,
             showOnMobile: true,
@@ -232,6 +235,10 @@ export enum FroalaStatus {
                 }
             }
         });
+
+        $.FroalaEditor.DefineIcon('image-align-center', { SVG: (imageAlignCenterIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('image-align-left', { SVG: (imageAlignLeftIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('image-align-right', { SVG: (imageAlignRightIcon as string), template: 'custom-icons' });
     }
 
     protected filesReady(files: MFile[]): void {
@@ -411,7 +418,7 @@ export enum FroalaStatus {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return _editor.clean.html(data, ['table', 'img', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+                        return this.removeEmptyHTML(data);
                     }
                 },
                 [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
@@ -580,9 +587,7 @@ export enum FroalaStatus {
     }
 
     private removeEmptyHTML(value: string): string {
-        const div: HTMLElement = document.createElement('div');
-        div.innerHTML = value;
-        return ((div.textContent || div.innerText || '').trim().length > 0) ? value : '';
+        return this.froalaEditor.clean.html(value, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
     }
 
     private registerEvent(element: any, eventName: any, callback: any): void {
