@@ -52,7 +52,7 @@ describe(`MInputGroup`, () => {
                 default: '<div slot-scope="result">{{ result.disabled }} {{ result.error }} {{ result.valid }} {{ result.readonly }} {{ result.validationMessage }}</div>'
             }
         });
-    }
+    };
 
     describe(`with default values`, () => {
         beforeEach(() => {
