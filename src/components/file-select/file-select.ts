@@ -93,7 +93,7 @@ export class MFileSelect extends ModulVue {
     }
 
     get extensions(): string {
-        return this.allowedExtensions.map((ext: string) => '.' + ext).join(', ');
+        return this.allowedExtensions.map((ext: string) => (ext.startsWith('.') ? '' : '.') + ext).join(', ');
     }
 }
 
