@@ -10,11 +10,20 @@ import TextfieldPlugin from '../textfield/textfield';
 import { FormFieldDirective } from './form-field';
 
 let mockFormField: any = {};
+let mockScrollTo: any = {};
 
 jest.mock('../../utils/form/form-field/form-field', () => {
     return {
         FormField: jest.fn().mockImplementation(() => {
             return mockFormField;
+        })
+    };
+});
+
+jest.mock('../../utils/scroll-to/scroll-to', () => {
+    return {
+        ScrollTo: jest.fn().mockImplementation(() => {
+            return mockScrollTo;
         })
     };
 });
@@ -37,6 +46,9 @@ describe('form-field', () => {
             hasError: true,
             touched: false,
             touch: jest.fn()
+        };
+        mockScrollTo = {
+            goTo: jest.fn()
         };
 
         let formField: FormField<any>;
@@ -64,7 +76,17 @@ describe('form-field', () => {
             );
         });
 
-        it(`the element should have the focus if first invalid`, async () => {
+        it(`the element should be scrolled to`, async () => {
+            const spy: jest.SpyInstance = jest.spyOn(mockScrollTo, 'goTo');
+            form.focusFirstFieldWithError();
+            expect(mockFormField.shouldFocus).toBe(true);
+
+            await element.vm.$forceUpdate();
+
+            expect(spy).toHaveBeenCalledWith(element.element, -200);
+        });
+
+        it(`the element should be focused`, async () => {
             const spy: any = jest.spyOn(element.find({ ref: 'field' }).element, 'focus');
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
