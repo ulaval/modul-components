@@ -1,4 +1,4 @@
-import { MFile } from 'src/utils';
+import { MFile } from 'src/utils/file/file';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';

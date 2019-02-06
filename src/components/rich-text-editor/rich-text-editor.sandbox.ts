@@ -1,17 +1,17 @@
-import { InputManagement } from 'src/mixins';
-import { MFile } from 'src/utils';
+import { InputManagement } from 'src/mixins/input-management/input-management';
+import { MFile } from 'src/utils/file/file';
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import { MRichText } from '../rich-text/rich-text';
-import { MRichTextEditor, MRichTextEditorMode } from './rich-text-editor';
-import WithRender from './rich-text-editor.sandbox.html';
-import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-license-plugin';
 import ButtonPlugin from '../button/button';
 import OverlayPlugin from '../overlay/overlay';
-import TextfieldPlugin from '../textfield/textfield';
 import RadioPlugin from '../radio/radio';
+import { MRichText } from '../rich-text/rich-text';
+import TextfieldPlugin from '../textfield/textfield';
+import { MRichTextEditor, MRichTextEditorMode } from './rich-text-editor';
+import WithRender from './rich-text-editor.sandbox.html';
+import RichTextLicensePlugin from './rich-text-license-plugin';
 
 @WithRender
 @Component({
