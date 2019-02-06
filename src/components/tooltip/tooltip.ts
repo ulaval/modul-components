@@ -19,6 +19,11 @@ export enum MTooltipMode {
     Link = 'link'
 }
 
+export enum MTooltipSize {
+    Default = 'default',
+    Large = 'large'
+}
+
 @WithRender
 @Component({
     mixins: [MediaQueries]
@@ -60,6 +65,13 @@ export class MTooltip extends ModulVue {
     public closeTitle: string;
     @Prop()
     public className: string;
+    @Prop({
+        default: MTooltipSize.Default,
+        validator: value =>
+            value === MTooltipSize.Large ||
+            value === MTooltipSize.Default
+    })
+    public size: MTooltipSize;
 
     private propOpen: boolean = false;
     private id: string = `mTooltip-${uuid.generate()}`;
