@@ -339,7 +339,7 @@ export enum FroalaStatus {
         this.addCustomIcons();
         this.addSubMenus();
 
-        if (this.config.pluginsEnabled.indexOf('image') !== -1) {
+        if (this.config && this.config.pluginsEnabled.indexOf('image') !== -1) {
             this.addImageButton();
         }
 
