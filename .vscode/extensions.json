@@ -3,7 +3,7 @@
         "msjsdiag.debugger-for-chrome",
         "eamodio.gitlens",
         "shinnn.stylelint",
-        "eg2.tslint",
+        "ms-vscode.vscode-typescript-tslint-plugin",
         "Orta.vscode-jest",
         "MS-vsliveshare.vsliveshare",
         "mkaufman.htmlhint",

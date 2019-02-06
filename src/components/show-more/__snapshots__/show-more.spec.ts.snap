@@ -15,4 +15,8 @@ exports[`m-show-more Given nbVisible == nbTotal Should render correctly 1`] = `
 </div>
 `;
 
+exports[`m-show-more With nbTotal equals to 0 Should not render anything 1`] = `""`;
+
+exports[`m-show-more With nbTotal inferior to 0 Should not render anything 1`] = `""`;
+
 exports[`m-show-more Without nbTotal specified Should not render anything 1`] = `""`;

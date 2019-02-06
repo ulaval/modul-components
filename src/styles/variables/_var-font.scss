@@ -1,0 +1,46 @@
+// ======================================================================
+//  Fonts property
+// ======================================================================
+$m-font-path: '../assets/fonts/' !default;
+$m-font-name: 'Source Sans Variable' !default;
+$m-font-family: 'Source Sans Variable', Arial, sans-serif !default;
+$m-font-family--fallback: 'Source Sans Pro', Arial, sans-serif !default;
+
+// ======================================================================
+//  App font size
+// ======================================================================
+$m-font-size--l: 18px !default;
+$m-font-size: 16px !default;
+$m-font-size--s: 14px !default;
+$m-font-size--xs: 12px !default;
+
+// ======================================================================
+//  Titles font size
+// ======================================================================
+$m-font-size--h1: 36px !default;
+$m-font-size--h2: 32px !default;
+$m-font-size--h3: 28px !default;
+$m-font-size--h4: 24px !default;
+$m-font-size--h5: 20px !default;
+$m-font-size--h6: 16px !default;
+
+$m-font-size--mobile-h1: 28px !default;
+$m-font-size--mobile-h2: 24px !default;
+$m-font-size--mobile-h3: 20px !default;
+$m-font-size--mobile-h4: 16px !default;
+$m-font-size--mobile-h5: 16px !default;
+$m-font-size--mobile-h6: 16px !default;
+
+// ======================================================================
+//  Font weight
+// ======================================================================
+$m-font-weight-range: 200 900;
+$m-font-weight--black: 600 !default;
+$m-font-weight--bold: 500 !default;
+$m-font-weight: 350 !default;
+$m-font-weight--light: 300 !default;
+
+// ======================================================================
+//  Line height
+// ======================================================================
+$m-line-height: 1.3 !default;

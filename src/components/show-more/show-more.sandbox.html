@@ -1,5 +1,22 @@
-<m-show-more :nb-visible="data.length"
-             :nb-total="total"
-             :loading.sync="loading"
-             @click="fetchData">
-</m-show-more>
+<div>
+    <h3>m-show-more - With nbTotal > 0</h3>
+    <m-show-more :nb-visible="data.length"
+                 :nb-total="total"
+                 :loading.sync="loading"
+                 @click="fetchData">
+    </m-show-more>
+
+    <h3>m-show-more - With nbTotal = undefined</h3>
+    <m-show-more :nb-visible="totalZero"
+                 :nb-total="totalUndefined"
+                 :loading.sync="loading"
+                 @click="fetchData">
+    </m-show-more>
+
+    <h3>m-show-more - With nbTotal = 0</h3>
+    <m-show-more :nb-visible="totalZero"
+                 :nb-total="totalZero"
+                 :loading.sync="loading"
+                 @click="fetchData">
+    </m-show-more>
+</div>

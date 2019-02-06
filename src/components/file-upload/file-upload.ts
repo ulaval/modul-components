@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { MBadgeState } from '../../directives/badge/badge';
+import BadgePlugin, { MBadgeState } from '../../directives/badge/badge';
 import FileDropPlugin from '../../directives/file-drop/file-drop';
 import FileSizeFilterPlugin from '../../filters/filesize/filesize';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -31,7 +31,7 @@ export interface MFileExt extends MFile {
 const defaultDragEvent: (e: DragEvent) => void = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    e.dataTransfer.dropEffect = 'none';
+    e.dataTransfer!.dropEffect = 'none';
 };
 
 @WithRender
@@ -334,7 +334,6 @@ export class MFileUpload extends ModulVue {
 
 const FileUploadPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(FILE_UPLOAD_NAME, 'plugin.install');
         v.use(FilePlugin);
         v.use(FileDropPlugin);
         v.use(FileSelectPlugin);
@@ -348,6 +347,7 @@ const FileUploadPlugin: PluginObject<any> = {
         v.use(LinkPlugin);
         v.use(MediaQueriesPlugin);
         v.use(FileSizeFilterPlugin);
+        v.use(BadgePlugin);
         v.component(FILE_UPLOAD_NAME, MFileUpload);
     }
 };

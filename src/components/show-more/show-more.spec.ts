@@ -1,6 +1,6 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
-import { FormatMode } from '../../utils';
+import { FormatMode } from '../../utils/i18n/i18n';
 import { MButtonSkin } from '../button/button';
 import { SHOW_MORE_NAME } from '../component-names';
 import { MShowMore } from './show-more';
@@ -15,7 +15,7 @@ const NB_VISIBLE: number = 10;
 const NB_TOTAL: number = 50;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MShowMore);
+    wrapper = shallowMount(MShowMore);
 
     wrapper.vm.$i18n.translate = jest.fn((key: string) => key);
 };
@@ -25,6 +25,38 @@ describe(SHOW_MORE_NAME, () => {
         it(`Should not render anything`, () => {
             initializeShallowWrapper();
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+    });
+
+    describe(`With nbTotal equals to 0`, () => {
+
+        beforeEach(() => {
+            initializeShallowWrapper();
+            wrapper.setProps({ nbVisible: 0, nbTotal: -2 });
+        });
+
+        it(`Should not render anything`, () => {
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should not be visible`, () => {
+            expect(wrapper.vm.isVisible).toBeFalsy();
+        });
+    });
+
+    describe(`With nbTotal inferior to 0`, () => {
+
+        beforeEach(() => {
+            initializeShallowWrapper();
+            wrapper.setProps({ nbVisible: 0, nbTotal: -2 });
+        });
+
+        it(`Should not render anything`, () => {
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should not be visible`, () => {
+            expect(wrapper.vm.isVisible).toBeFalsy();
         });
     });
 
@@ -58,6 +90,10 @@ describe(SHOW_MORE_NAME, () => {
 
         it(`Should render correctly`, () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should be visible`, () => {
+            expect(wrapper.vm.isVisible).toBeTruthy();
         });
 
         it(`Should render a button`, () => {

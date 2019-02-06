@@ -18,7 +18,8 @@
                    state="error"
                    v-if="hasRejectedFiles"
                    :close-button="true"
-                   @close="onMessageClose">
+                   @close="onMessageClose"
+                   ref="message">
             <p class="m-file-upload__error-message__title">
                 <m-i18n :nb="rejectedFiles.length"
                         k="m-file-upload:rejectFileMsg"></m-i18n>
@@ -122,7 +123,8 @@
                                            icon-name="m-svg__close-clear"
                                            button-size="32px"
                                            icon-size="12px"
-                                           @click="onUploadCancel(file)"></m-icon-button>
+                                           @click="onUploadCancel(file)"
+                                           ref="cancelUploadButton"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -159,7 +161,8 @@
                                            icon-name="m-svg__delete"
                                            button-size="32px"
                                            icon-size="20px"
-                                           @click="onFileRemove(file)"></m-icon-button>
+                                           @click="onFileRemove(file)"
+                                           ref="removeButton"></m-icon-button>
                         </div>
                     </div>
                 </li>
@@ -171,7 +174,8 @@
         <div :style="buttonCompletedStyle">
             <m-button @click="onAddClick"
                       :disabled="!isAddBtnEnabled"
-                      class="m-file-upload__footer-add">{{ buttonAdd }}
+                      class="m-file-upload__footer-add"
+                      ref="modalConfirmButton">{{ buttonAdd }}
                 <span slot="precision"
                       v-show="completedFiles.length > 0">{{completedFiles.length}}
                     <m-i18n :nb="completedFiles.length"
@@ -180,7 +184,8 @@
             </m-button>
             <m-button @click="onCancelClick"
                       skin="secondary"
-                      class="m-file-upload__footer-cancel">
+                      class="m-file-upload__footer-cancel"
+                      ref="modalCancelButton">
                 <m-i18n k="m-file-upload:cancel"></m-i18n>
             </m-button>
         </div>

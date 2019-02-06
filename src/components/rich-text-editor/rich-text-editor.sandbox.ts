@@ -7,6 +7,11 @@ import { ModulVue } from '../../utils/vue/vue';
 import { MRichText } from '../rich-text/rich-text';
 import { MRichTextEditor, MRichTextEditorMode } from './rich-text-editor';
 import WithRender from './rich-text-editor.sandbox.html';
+import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-license-plugin';
+import ButtonPlugin from '../button/button';
+import OverlayPlugin from '../overlay/overlay';
+import TextfieldPlugin from '../textfield/textfield';
+import RadioPlugin from '../radio/radio';
 
 @WithRender
 @Component({
@@ -73,6 +78,11 @@ export class MRichTextEditorSandBox extends ModulVue {
 }
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {
     install(v): void {
+        v.use(ButtonPlugin);
+        v.use(OverlayPlugin);
+        v.use(TextfieldPlugin);
+        v.use(RadioPlugin);
+        v.use(RichTextLicensePlugin, { key: `test` });
         v.component(`m-rich-text-editor-sandbox`, MRichTextEditorSandBox);
     }
 };

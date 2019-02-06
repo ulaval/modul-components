@@ -1,14 +1,14 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { createMockFile, createMockFileList } from '../../../tests/helpers/file';
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import { DEFAULT_STORE_NAME } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
-import { MButton } from '../button/button';
+import { MButton, MButtonType } from '../button/button';
 import FileSelectPlugin, { MFileSelect } from './file-select';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -43,7 +43,9 @@ describe('file-select', () => {
             fullSize: true,
             iconName: 'icon-name',
             iconPosition: 'right',
-            iconSize: '24px'
+            iconSize: '24px',
+            precision: undefined,
+            type: MButtonType.Button
         };
 
         const fileSelect: Wrapper<MFileSelect> = mount(MFileSelect, {

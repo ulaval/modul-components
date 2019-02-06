@@ -7,7 +7,8 @@
     </p>
     <p class="m-u--margin-bottom">Progress to 100% on 20 sec </p>
     <p>
-        <m-progress :value="Count" :circle="true"></m-progress>
+        <m-progress :value="Count"
+                    :circle="true"></m-progress>
     </p>
     <h3>Progress Bar 50%</h3>
     <p class="m-u--margin-bottom">Progress bar at 50%, all props default</p>
@@ -22,52 +23,69 @@
     <h3>Progress Bar 50%, 10px size</h3>
     <p class="m-u--margin-bottom">Progress bar at 50%, with 10px height</p>
     <p>
-        <m-progress size="10" value="50"></m-progress>
+        <m-progress size="10"
+                    value="50"></m-progress>
     </p>
     <h3>Progress Bar 50%, no border radius</h3>
     <p class="m-u--margin-bottom">Progress bar at 50%, no border radius</p>
     <p>
-        <m-progress value="50" :border-radius="false"></m-progress>
+        <m-progress value="50"
+                    :border-radius="false"></m-progress>
     </p>
     <h3>Progress Bar in circle mode</h3>
     <p class="m-u--margin-bottom">Progress bar in circle mode</p>
     <p>
-        <m-progress :circle="true" value="50"></m-progress>
+        <m-progress :circle="true"
+                    value="50"></m-progress>
     </p>
     <h3>Progress Bar in circle mode, indeterminate</h3>
     <p class="m-u--margin-bottom">Progress bar in circle mode and indeterminate mode </p>
     <p>
-        <m-progress :circle="true" :indeterminate="true"></m-progress>
+        <m-progress :circle="true"
+                    :indeterminate="true"></m-progress>
     </p>
     <h3>Progress Bar in circle mode, stroke 10px</h3>
     <p class="m-u--margin-bottom">Progress bar in circle mode, stroke of 10px</p>
     <p>
-        <m-progress :circle="true" value="50" stroke="10"></m-progress>
+        <m-progress :circle="true"
+                    value="50"
+                    stroke="10"></m-progress>
     </p>
     <h3>Progress Bar in circle mode, diameter 100px</h3>
     <p class="m-u--margin-bottom">Progress bar in circle mode, diameter of 100px</p>
     <p>
-        <m-progress :circle="true" value="50" diameter="100"></m-progress>
+        <m-progress :circle="true"
+                    value="50"
+                    diameter="100"></m-progress>
     </p>
     <h3>Progress Bar states</h3>
     <p class="m-u--margin-bottom">Progress bar in normal mode and circle mode, each state</p>
     <p>
-        <m-progress value="50" state="completed"></m-progress>
+        <m-progress value="50"
+                    state="completed"></m-progress>
     </p>
     <p>
-        <m-progress value="50" state="in-progress"></m-progress>
+        <m-progress value="50"
+                    state="in-progress"></m-progress>
     </p>
     <p>
-        <m-progress value="50" state="error"></m-progress>
+        <m-progress value="50"
+                    state="error"></m-progress>
     </p>
     <p>
-        <m-progress value="50" state="completed" :circle="true"></m-progress>
+        <m-progress value="50"
+                    state="completed"
+                    :circle="true"></m-progress>
     </p>
     <p>
-        <m-progress value="50" state="in-progress" :circle="true"></m-progress>
+        <m-progress value="50"
+                    state="in-progress"
+                    :circle="true"></m-progress>
     </p>
     <p>
-        <m-progress value="50" state="error" :circle="true"></m-progress>
+        <m-progress value="50"
+                    state="error"
+                    :circle="true"></m-progress>
     </p>
     <h3>Progress Bar no state (value commands state)</h3>
     <p class="m-u--margin-bottom">Progress bar in normal mode, differents value</p>
@@ -86,6 +104,28 @@
         <m-progress value="99"></m-progress>
     </p>
     <p>
-        <m-progress value="99" :circle="true"></m-progress>
+        <m-progress value="99"
+                    :circle="true"></m-progress>
+    </p>
+    <h3>Progress Bar with monochrome skin</h3>
+    <p class="m-u--margin-bottom">Progress bar with monochrome skin, 50%</p>
+    <p>
+        <m-progress value="50"
+                    skin="monochrome"></m-progress>
+    </p>
+    <p>
+        <m-progress value="50"
+                    :circle="true"
+                    skin="monochrome"></m-progress>
+    </p>
+    <p class="m-u--margin-bottom">Progress bar with monochrome skin and indeterminate mode</p>
+    <p>
+        <m-progress :indeterminate="true"
+                    skin="monochrome"></m-progress>
+    </p>
+    <p>
+        <m-progress :indeterminate="true"
+                    :circle="true"
+                    skin="monochrome"></m-progress>
     </p>
 </div>

@@ -1,10 +1,10 @@
-import { mount, shallow, Wrapper, WrapperArray } from '@vue/test-utils';
+import { mount, shallowMount, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import { ICON_NAME, LINK_NAME } from '../component-names';
-import MessagePlugin, { MMessageState } from '../message/message';
-import MessagePagePlugin, { Link, MMessagePage } from './message-page';
+import { MMessageState } from '../message/message';
+import { Link, MMessagePage } from './message-page';
+
 
 let wrapper: Wrapper<MMessagePage>;
 
@@ -35,7 +35,7 @@ const getStubs: any = () => {
 };
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MMessagePage, {
+    wrapper = shallowMount(MMessagePage, {
         stubs: getStubs(),
         propsData: {
             state: state,

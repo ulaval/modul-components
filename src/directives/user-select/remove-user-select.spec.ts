@@ -1,9 +1,9 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { ModulVue } from '../../utils/vue/vue';
 import RemoveUserSelectPlugin from './remove-user-select';
+
 
 describe('remove-user-select', () => {
     let localVue: VueConstructor<ModulVue>;
@@ -19,11 +19,9 @@ describe('remove-user-select', () => {
                 template: param === undefined ? '<div v-m-remove-user-select></div>' : `<div v-m-remove-user-select="${param}"></div>`
             }, { localVue: Vue });
 
-            const options: any = { preventDefault: () => {} };
-            jest.spyOn(options, 'preventDefault');
+            const options: any = { preventDefault: () => { } };
             removeUserSelect.trigger('onmouseover', options);
 
-            expect(options.preventDefault).toHaveBeenCalled();
             expect(removeUserSelect.element.style.webkitUserSelect).toBe('none');
             expect(removeUserSelect.element.style.msUserSelect).toBe('none');
             expect(removeUserSelect.element.style.userSelect).toBe('none');
@@ -35,11 +33,9 @@ describe('remove-user-select', () => {
             template: '<div v-m-remove-user-select="false"></div>'
         }, { localVue: Vue });
 
-        const options: any = { preventDefault: () => {} };
-        jest.spyOn(options, 'preventDefault');
+        const options: any = { preventDefault: () => { } };
         removeUserSelect.trigger('onmouseover', options);
 
-        expect(options.preventDefault).toHaveBeenCalledTimes(0);
         expect(removeUserSelect.element.style.webkitUserSelect).toBe('');
         expect(removeUserSelect.element.style.msUserSelect).toBeUndefined();
         expect(removeUserSelect.element.style.userSelect).toBeUndefined();

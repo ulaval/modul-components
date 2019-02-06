@@ -9,6 +9,7 @@ import PlusPlugin from '../plus/plus';
 import AccordionTransitionPlugin from './accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
 
+
 export enum MAccordionSkin {
     Default = 'default',
     Dark = 'dark',

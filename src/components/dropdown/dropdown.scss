@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 $m-dropdown--color-hover: $m-color--grey-lightest !default;
 $m-dropdown--color-select: $m-color--grey-lighter !default;
 $m-dropdown--color-focus: $m-color--interactive-lightest !default;
@@ -9,6 +9,18 @@ $m-dropdown--margin: $m-padding--xs !default;
     position: relative;
     display: inline-flex;
     flex-direction: column;
+
+    &.m--has-validation-message {
+        .m-dropdown__validation-message {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
+    &:not(.m--is-disabled) {
+        .m-dropdown__arrow {
+            cursor: pointer;
+        }
+    }
 
     &__header {
         &__label {
@@ -66,8 +78,8 @@ $m-dropdown--margin: $m-padding--xs !default;
     }
 
     &__arrow {
-        min-width: 22px;
-        text-align: right;
+        display: inherit;
+        cursor: pointer;
 
         &__icon {
             transition: transform $m-transition-duration ease, color $m-transition-duration ease !important;
@@ -78,6 +90,10 @@ $m-dropdown--margin: $m-padding--xs !default;
                 transform: rotate(-180deg);
             }
         }
+    }
+
+    &__validation-message {
+        transition: margin-top $m-transition-duration ease;
     }
 
     .m-input-style {

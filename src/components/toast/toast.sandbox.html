@@ -9,10 +9,11 @@
 
     <h3>Toast with timeout</h3>
     <p class="m-u--margin-bottom">
-        A toast with a 2 seconds timeout.
+        A toast with a 5 seconds timeout.
     </p>
     <m-button @click="testOpenTimeout = !testOpenTimeout">Toggle Toast</m-button>
-    <m-toast :timeout="2000" :open.sync="testOpenTimeout">This toast lasts 2 seconds</m-toast>
+    <m-toast timeout="short"
+             :open.sync="testOpenTimeout">This toast lasts 5 seconds (fast)</m-toast>
 
     <h3>Automatic Toast</h3>
     <p class="m-u--margin-bottom">
@@ -25,35 +26,56 @@
         Multiple positions are available: top-right, top-center, top-left, bottom-left, bottom-center, bottom-right
     </p>
     <m-button @click="positionOpen = !positionOpen">Toggle Toast</m-button>
-    <m-toast position="top-right" :open.sync="positionOpen">This toast has position: top right</m-toast>
-    <m-toast position="top-center" :open.sync="positionOpen">This toast has position: top center</m-toast>
-    <m-toast position="top-left" :open.sync="positionOpen">This toast has position: top left</m-toast>
-    <m-toast position="bottom-left" :open.sync="positionOpen">This toast has position: bottom left</m-toast>
-    <m-toast position="bottom-center" :open.sync="positionOpen">This toast has position: bottom center</m-toast>
-    <m-toast position="bottom-right" :open.sync="positionOpen">This toast has position: bottom right</m-toast>
+    <m-toast position="top-right"
+             :open.sync="positionOpen">This toast has position: top right</m-toast>
+    <m-toast position="top-center"
+             :open.sync="positionOpen">This toast has position: top center</m-toast>
+    <m-toast position="top-left"
+             :open.sync="positionOpen">This toast has position: top left</m-toast>
+    <m-toast position="bottom-left"
+             :open.sync="positionOpen">This toast has position: bottom left</m-toast>
+    <m-toast position="bottom-center"
+             :open.sync="positionOpen">This toast has position: bottom center</m-toast>
+    <m-toast position="bottom-right"
+             :open.sync="positionOpen">This toast has position: bottom right</m-toast>
 
     <h3>Toast with offsets</h3>
     <p class="m-u--margin-bottom">
         Toast have a offset Prop that can be used to stack multiple toasts.
     </p>
     <m-button @click="offSetOpen = !offSetOpen">Toggle Toast</m-button>
-    <m-toast state="information" position="bottom-right" :open.sync="offSetOpen">First message</m-toast>
-    <m-toast state="information" position="bottom-right" :open.sync="offSetOpen" offset="-80px">Second message</m-toast>
-    <m-toast state="information" position="bottom-right" :open.sync="offSetOpen" offset="-160px">Third message</m-toast>
+    <m-toast state="information"
+             position="bottom-right"
+             :open.sync="offSetOpen">First message</m-toast>
+    <m-toast state="information"
+             position="bottom-right"
+             :open.sync="offSetOpen"
+             offset="-80px">Second message</m-toast>
+    <m-toast state="information"
+             position="bottom-right"
+             :open.sync="offSetOpen"
+             offset="-160px">Third message</m-toast>
 
     <h3>Toast with a custom action</h3>
     <p class="m-u--margin-bottom">
         Toast can be passed an action-label and they emit a action-button event.
     </p>
     <m-button @click="actionOpen = !actionOpen">Toggle Toast</m-button>
-    <m-toast state="warning" position="bottom-right" :open.sync="actionOpen" @action-button="doSomething('funny')" action-label="Alert">Toast with an action</m-toast>
+    <m-toast state="warning"
+             position="bottom-right"
+             :open.sync="actionOpen"
+             @action-button="doSomething('funny')"
+             action-label="Alert">Toast with an action</m-toast>
 
     <h3>Toast without an icon</h3>
     <p class="m-u--margin-bottom">
         Icons are present by default, but you can remove them.
     </p>
     <m-button @click="iconOpen = !iconOpen">Toggle Toast</m-button>
-    <m-toast :icon="false" state="information" position="bottom-right" :open.sync="iconOpen">Toast without icône</m-toast>
+    <m-toast :icon="false"
+             state="information"
+             position="bottom-right"
+             :open.sync="iconOpen">Toast without icône</m-toast>
 
     <h3>Toast with multiple options</h3>
     <p class="m-u--margin-bottom">
@@ -65,14 +87,14 @@
              :open.sync="allOpen"
              action-label="Réessayer de faire le questionnaire"
              @action-button="doSomething('funny')">
-            Les 3 informations en rouge sont à revoir pour continuer. On pourrait même mettre un texte plus long
+        Les 3 informations en rouge sont à revoir pour continuer. On pourrait même mettre un texte plus long
     </m-toast>
     <m-toast state="information"
              position="bottom-center"
-            :open.sync="allOpen"
-            :is-same-line="true"
-            action-label="Yay!"
-            @action-button="doSomething('funny')">
-            Give him a friend, we forget the trees get lonely too. We'll do another happy little painting. Absolutely no pressure. You are just a whisper floating across a mountain.
+             :open.sync="allOpen"
+             :is-same-line="true"
+             action-label="Yay!"
+             @action-button="doSomething('funny')">
+        Give him a friend, we forget the trees get lonely too. We'll do another happy little painting. Absolutely no pressure. You are just a whisper floating across a mountain.
     </m-toast>
 </div>

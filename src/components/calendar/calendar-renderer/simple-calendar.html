@@ -1,0 +1,104 @@
+<div class="m-simple-calendar"
+     :id="id">
+    <div class="m-simple-calendar__header">
+        <nav class="m-simple-calendar__nav">
+            <m-icon-button @click.stop="onYearPrevious()"
+                           :disabled="isMinYear"
+                           icon-name="m-svg__chevron--left"
+                           ref="previousYear">{{ previousYearLabel }}</m-icon-button>
+            <button class="m-simple-calendar__years"
+                    @click.stop="onYearClick"
+                    aria-live="polite"
+                    type="button"
+                    ref="currentYear">{{ currentYear }}</button>
+            <m-icon-button @click.stop="onYearNext()"
+                           :disabled="isMaxYear"
+                           icon-name="m-svg__chevron--right"
+                           ref="nextYear">{{ nextYearLabel }}</m-icon-button>
+        </nav>
+        <nav class="m-simple-calendar__nav">
+            <m-icon-button @click.stop="onMonthPrevious()"
+                           :disabled="isMinMonth"
+                           icon-name="m-svg__chevron--left"
+                           ref="previousMonth">{{ previousMonthLabel }}</m-icon-button>
+            <button class="m-simple-calendar__months"
+                    @click.stop="onMonthClick"
+                    aria-live="polite"
+                    ref="currentMonth"
+                    type="button">{{ currentMonthName }}</button>
+            <m-icon-button @click.stop="onMonthNext()"
+                           :disabled="isMaxMonth"
+                           icon-name="m-svg__chevron--right"
+                           ref="nextMonth">{{ nextMonthLabel }}</m-icon-button>
+        </nav>
+    </div>
+    <div class="m-simple-calendar__body"
+         aria-live="polite">
+        <table class="m-simple-calendar__body-table">
+            <template v-if="isPickerModeYear">
+                <tr v-for="(yearRow, yearIndex) in years"
+                    :key="yearIndex">
+                    <template v-for="(y, rowIndex) in yearRow">
+                        <td class="m-simple-calendar__body-cell"
+                            v-if="y !== undefined"
+                            :key="rowIndex">
+                            <button class="m-simple-calendar__item"
+                                    :class="{'m--is-selected': y.isCurrent}"
+                                    @click.stop="onYearSelect(y)"
+                                    :ref="buildRef('year', y)"
+                                    type="button">
+                                <span class="m-simple-calendar__item__text">{{ y.year }}</span>
+                            </button>
+                        </td>
+                    </template>
+                </tr>
+            </template>
+            <template v-if="isPickerModeMonth">
+                <tr v-for="(monthRow, monthIndex) in months"
+                    :key="monthIndex">
+                    <td class="m-simple-calendar__body-cell"
+                        v-for="(m, rowIndex) in monthRow"
+                        :key="rowIndex">
+                        <button class="m-simple-calendar__item"
+                                :class="{'m--is-selected': m.isCurrent,
+                                        'm--is-disabled': m.isDisabled}"
+                                @click.stop="onMonthSelect(m)"
+                                :disabled="m.isDisabled"
+                                :ref="buildRef('month', m)"
+                                type="button">
+                            <span class="m-simple-calendar__item__text">{{ monthIndexToShortName(m.month) }}</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+            <template v-if="isPickerModeDay">
+                <tr>
+                    <td class="m-simple-calendar__weekday"
+                        v-for="(w, weekdayIndex) in weekdaysLabels"
+                        :key="weekdayIndex">{{ w }}</td>
+                </tr>
+                <tr v-for="(dayRow, dayIndex) in daysOfMonth"
+                    :key="dayIndex">
+                    <td class="m-simple-calendar__body-cell"
+                        v-for="(d, rowIndex) in dayRow"
+                        :key="rowIndex">
+                        <button class="m-simple-calendar__item"
+                                :class="{ 'm--is-selected': d.isSelected,
+                                        'm--is-today': d.isToday,
+                                        'm--is-disabled': d.isDisabled,
+                                        'm--is-hidden': hideDay(d),
+                                        'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
+                                        'm--is-highlighted': d.isHighlighted }"
+                                @click.stop="onDaySelect(d)"
+                                @mouseenter="onDayMouseEnter(d)"
+                                @mouseleave="onDayMouseLeave(d)"
+                                :ref="buildRef('day', d)"
+                                type="button">
+                            <span class="m-simple-calendar__item__text">{{ d.day }}</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+        </table>
+    </div>
+</div>

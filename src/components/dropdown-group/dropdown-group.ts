@@ -1,9 +1,9 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import WithRender from './dropdown-group.html?style=./dropdown-group.scss';
 import { DROPDOWN_GROUP_NAME } from '../component-names';
-import { BaseDropdownGroup, BaseDropdown, MDropdownInterface } from '../dropdown-item/dropdown-item';
+import { BaseDropdown, BaseDropdownGroup, MDropdownInterface } from '../dropdown/dropdown-item/dropdown-item';
+import WithRender from './dropdown-group.html?style=./dropdown-group.scss';
 
 @WithRender
 @Component
@@ -28,7 +28,8 @@ export class MDropdownGroup extends BaseDropdownGroup {
 
 const DropdownGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(DROPDOWN_GROUP_NAME + ' is not ready for production');
+        v.prototype.$log.error('MDatefields will be deprecated in modul v.1.0');
+
         v.component(DROPDOWN_GROUP_NAME, MDropdownGroup);
     }
 };

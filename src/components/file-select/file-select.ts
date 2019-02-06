@@ -7,6 +7,7 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin, { MButtonIconPosition, MButtonSkin } from '../button/button';
 import { FILE_SELECT_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './file-select.html?style=./file-select.scss';
 
@@ -98,7 +99,7 @@ export class MFileSelect extends ModulVue {
 
 const FileSelectPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(FILE_SELECT_NAME, 'plugin.install');
+        v.use(I18nPlugin);
         v.use(ButtonPlugin);
         v.use(ValidationMesagePlugin);
         v.use(FilePlugin);

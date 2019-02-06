@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import { ModulVue } from '../../utils/vue/vue';
@@ -86,9 +86,17 @@ export class MPopup extends ModulVue {
     }
 
     private set propOpen(value: boolean) {
-        this.internalOpen = value;
-        this.$emit('update:open', value);
+        if (!this.disabled) {
+            this.internalOpen = value;
+            this.$emit('update:open', value);
+        }
     }
+
+    @Emit('open')
+    private onOpen(): void { }
+
+    @Emit('close')
+    private onClose(): void { }
 
     public get propOpenTrigger(): MOpenTrigger {
         return this.openTrigger; // todo: mobile + hover ??
@@ -100,14 +108,6 @@ export class MPopup extends ModulVue {
 
     private onPortalContentMounted(): void {
         this.$emit('portal-content-mounted');
-    }
-
-    private onOpen(): void {
-        this.$emit('open');
-    }
-
-    private onClose(): void {
-        this.$emit('close');
     }
 
     private onPortalContentVisible(): void {
@@ -123,6 +123,7 @@ const PopupPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(PopperPlugin);
         v.use(SidebarPlugin);
+
         v.component(POPUP_NAME, MPopup);
     }
 };

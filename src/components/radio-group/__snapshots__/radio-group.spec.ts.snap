@@ -14,9 +14,7 @@ exports[`MRadioGroup should render correctly 1`] = `
             </label>
         </li>
     </ul>
-    <div class="m-validation-message m-radio-group__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-radio-group__message"></div>
 </div>
 `;
 
@@ -34,9 +32,7 @@ exports[`MRadioGroup should render correctly when disabled 1`] = `
             </label>
         </li>
     </ul>
-    <div class="m-validation-message m-radio-group__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-radio-group__message"></div>
 </div>
 `;
 
@@ -54,9 +50,7 @@ exports[`MRadioGroup should render correctly when inline 1`] = `
             </label>
         </li>
     </ul>
-    <div class="m-validation-message m-radio-group__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-radio-group__message"></div>
 </div>
 `;
 
@@ -74,9 +68,7 @@ exports[`MRadioGroup should render correctly when radiosMarginTop is  10px 1`] =
             </label>
         </li>
     </ul>
-    <div class="m-validation-message m-radio-group__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-radio-group__message"></div>
 </div>
 `;
 
@@ -94,9 +86,7 @@ exports[`MRadioGroup should render correctly when radiosPosition is right 1`] = 
             </label>
         </li>
     </ul>
-    <div class="m-validation-message m-radio-group__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-radio-group__message"></div>
 </div>
 `;
 
@@ -114,8 +104,6 @@ exports[`MRadioGroup should render correctly when radiosVerticalAlign is center 
             </label>
         </li>
     </ul>
-    <div class="m-validation-message m-radio-group__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-radio-group__message"></div>
 </div>
 `;

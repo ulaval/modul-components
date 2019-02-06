@@ -158,7 +158,7 @@ export class MIconFile extends Vue {
     public get svgTitle(): string {
         let cleanExtension: string = this.extension ? this.extension.replace('.', '').toLowerCase() : '';
         let currentTooltip: string = this.tooltipGroup[cleanExtension] || TOOLTIP_OTHER;
-        let i18n: Messages = (Vue.prototype as any).$i18n;
+        let i18n: Messages = (Vue.prototype).$i18n;
         let tooltipContent: string = i18n.translate(`m-icon-file:${currentTooltip}`);
 
         return tooltipContent;
@@ -173,7 +173,6 @@ export class MIconFile extends Vue {
 
 const IconFilePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(ICON_FILE_NAME, 'plugin.install');
         v.use(IconPluggin);
         v.component(ICON_FILE_NAME, MIconFile);
     }

@@ -13,6 +13,7 @@ export abstract class MRichTextEditorDefaultOptions {
     public initOnClick: boolean = true;
     public wordPasteKeepFormatting: boolean = false;
     public placeholderText: string = '';
+    public listAdvancedTypes: boolean = false;
 
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {

@@ -1,5 +1,9 @@
 <div class="m-dropdown"
-     :class="{ 'm--is-open': open, 'm--is-disabled': disabled, 'm--is-waiting': waiting, 'm--is-filterable': filterable }"
+     :class="{ 'm--is-open': open,
+               'm--is-disabled': isDisabled,
+               'm--is-waiting': isWaiting,
+               'm--is-filterable': filterable,
+               'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
      ref="mDropdown">
     <m-input-style ref="mInputStyle"
@@ -10,6 +14,7 @@
                    :focus="open"
                    :empty="isEmpty"
                    :error="hasError"
+                   :cursor-pointer="hasPointer"
                    :valid="isValid"
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
@@ -31,6 +36,7 @@
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
                @keydown.tab="onKeydownTab"
+               @keydown="inputOnKeydown"
                @focus="inputOnFocus"
                v-model="selectedText">
         <template slot="adjust-width-auto"
@@ -49,11 +55,12 @@
                 <m-i18n k="m-dropdown:open"
                         v-if="!open"></m-i18n>
                 <m-i18n k="m-dropdown:close"
-                        v-if="open"></m-i18n>
+                        v-else></m-i18n>
             </m-icon>
         </div>
     </m-input-style>
-    <m-validation-message :disabled="isDisabled"
+    <m-validation-message class="m-dropdown__validation-message"
+                          :disabled="isDisabled"
                           :waiting="isWaiting"
                           :error="hasError"
                           :valid="isValid"
@@ -74,6 +81,8 @@
              :preload="true"
              :open-trigger="'mousedown'"
              :lazy="false"
+             @open="onOpen"
+             @close="onClose"
              @portal-content-visible="calculateFilterableListeHeight"
              @portal-content-mounted="portalContentMounted">
         <template slot="header"

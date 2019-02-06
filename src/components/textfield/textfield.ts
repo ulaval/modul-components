@@ -22,7 +22,8 @@ export enum MTextfieldType {
     Email = 'email',
     Url = 'url',
     Telephone = 'tel',
-    Search = 'search'
+    Search = 'search',
+    Number = 'number'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
@@ -47,7 +48,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Telephone ||
             value === MTextfieldType.Text ||
             value === MTextfieldType.Url ||
-            value === MTextfieldType.Search
+            value === MTextfieldType.Search ||
+            value === MTextfieldType.Number
     })
     public type: MTextfieldType;
     @Prop({ default: true })
@@ -102,6 +104,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;
+    }
+
+    private onEnter(): void {
+        if (this.isTypeSearch) {
+            this.search();
+        }
     }
 
     private search(): void {
@@ -162,6 +170,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
+    }
+
+    private resetModel(): void {
+        this.$emit('input', '');
     }
 }
 

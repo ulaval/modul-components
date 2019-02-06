@@ -20,7 +20,7 @@ describe('Media Queries plugin', () => {
 
         let Ex: VueConstructor<Vue> = Vue.extend({
             created: () => {
-                expect((this as any).$mq).toBeDefined();
+                expect((this).$mq).toBeDefined();
             }
         });
 

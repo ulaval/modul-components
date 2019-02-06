@@ -17,8 +17,12 @@
          ref="accordionHeader">
         <div class="m-accordion__header__content">
             <slot name="header"></slot>
-            <m-i18n k="m-accordion:open" class="m-accordion__hidden" v-if="!propOpen"></m-i18n>
-            <m-i18n k="m-accordion:close" class="m-accordion__hidden" v-if="propOpen"></m-i18n>
+            <m-i18n k="m-accordion:open"
+                    class="m-accordion__hidden"
+                    v-if="!propOpen"></m-i18n>
+            <m-i18n k="m-accordion:close"
+                    class="m-accordion__hidden"
+                    v-if="propOpen"></m-i18n>
         </div>
         <m-plus class="m-accordion__header-icon"
                 :class="{ 'm--is-left': iconPosition !== 'right' }"
@@ -33,7 +37,8 @@
              :id="propId + '-controls'"
              :aria-labelledby="propId"
              v-if="propOpen">
-            <div class="m-accordion__body" :class="{ 'm--has-padding': paddingBody && padding }">
+            <div class="m-accordion__body"
+                 :class="{ 'm--has-padding': paddingBody && padding }">
                 <slot></slot>
             </div>
         </div>

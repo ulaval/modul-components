@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 @import 'menu-skins';
 @import '../accordion/accordion-transition.scss';
 
@@ -47,7 +47,7 @@
         }
 
         .m-menu.m--is-disabled & {
-            cursor: not-allowed;
+            cursor: default;
         }
     }
 

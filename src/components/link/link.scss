@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 
 .m-link {
     --m-link--color-visited: #{$m-color--interactive-darker};
@@ -59,7 +59,7 @@
 
     &.m--is-disabled {
         color: $m-color--disabled;
-        cursor: not-allowed;
+        cursor: default;
     }
 
     &.m--is-skin-text {

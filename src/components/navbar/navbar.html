@@ -3,24 +3,47 @@
              { 'm--is-disabled': disabled,
                'm--is-anim-ready': animReady,
                'm--is-multiline': multiline }]">
-    <div class="m-navbar__max-width" :style="{ maxWidth: maxWidth }">
+    <div class="m-navbar__max-width"
+         :style="{ maxWidth: maxWidth }">
         <transition name="m--is">
-            <div ref="buttonLeft" class="m-navbar__button m--is-left" @click="scrollLeft" v-if="hasArrowLeft">
-                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--left" :ripple="buttonRipple" :title="titleButtonLeft"></m-icon-button>
+            <div ref="buttonLeft"
+                 class="m-navbar__button m--is-left"
+                 @click="scrollLeft"
+                 v-if="hasArrowLeft">
+                <m-icon-button :skin="buttonSkin"
+                               icon-name="m-svg__chevron--left"
+                               :ripple="buttonRipple"
+                               :title="titleButtonLeft"></m-icon-button>
             </div>
         </transition>
-        <div class="m-navbar__contents" ref="contents">
-            <div class="m-navbar__wrap" role="menubar" ref="wrap">
-                <ul class="m-navbar__list" aria-hidden="true" ref="list">
+        <div class="m-navbar__contents"
+             ref="contents">
+            <div class="m-navbar__wrap"
+                 ref="wrap">
+                <ul class="m-navbar__list"
+                    role="menubar"
+                    ref="list">
                     <slot></slot>
-                    <li aria-hidden="true" class="m-navbar__line" v-if="isTabUnderlineSkin" ref="tab-underline"></li>
-                    <li aria-hidden="true" class="m-navbar__arrow" v-if="isTabArrowSkin" ref="tab-arrow"></li>
+                    <li aria-hidden="true"
+                        class="m-navbar__line"
+                        v-if="isTabUnderlineSkin"
+                        ref="tab-underline"></li>
+                    <li aria-hidden="true"
+                        class="m-navbar__arrow"
+                        v-if="isTabArrowSkin"
+                        ref="tab-arrow"></li>
                 </ul>
             </div>
         </div>
         <transition name="m--is">
-            <div ref="buttonRight" class="m-navbar__button m--is-right" @click="scrollRight" v-if="hasArrowRight">
-                <m-icon-button :skin="buttonSkin" icon-name="m-svg__chevron--right" :ripple="buttonRipple" :title="titleButtonRight"></m-icon-button>
+            <div ref="buttonRight"
+                 class="m-navbar__button m--is-right"
+                 @click="scrollRight"
+                 v-if="hasArrowRight">
+                <m-icon-button :skin="buttonSkin"
+                               icon-name="m-svg__chevron--right"
+                               :ripple="buttonRipple"
+                               :title="titleButtonRight"></m-icon-button>
             </div>
         </transition>
     </div>

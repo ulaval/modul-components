@@ -41,9 +41,9 @@ const f3: GlobalFunc = (s: string) => {
 const ComponentMetaService: PluginObject<any> = {
     install(v, options): void {
         (v as any).$globalF1 = f1;
-        (v.prototype as any).$aa = 'aa';
+        (v.prototype).$aa = 'aa';
         v.mixin(new GlobalMixin());
-        (v.prototype as any).$globalF2 = f2;
+        (v.prototype).$globalF2 = f2;
     }
 };
 

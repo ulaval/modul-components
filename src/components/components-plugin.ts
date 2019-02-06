@@ -4,7 +4,7 @@ import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import ButtonGroupPlugin from './button-group/button-group';
 import ButtonPlugin from './button/button';
-import CarouselItemPlugin from './carousel-item/carousel-item';
+import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
 import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
@@ -12,19 +12,19 @@ import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
 import DialogPlugin from './dialog/dialog';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
-import DropdownItemPlugin from './dropdown-item/dropdown-item';
 import DropdownPlugin from './dropdown/dropdown';
 import DynamicTemplatePlugin from './dynamic-template/dynamic-template';
-import ErrorAccessDenied from './error-access-denied/error-access-denied';
-import ErrorBrowserNotSupported from './error-browser-not-supported/error-browser-not-supported';
-import ErrorConfigNotSupported from './error-config-not-supported/error-config-not-supported';
-import ErrorCookiesNotSupported from './error-cookies-not-supported/error-cookies-not-supported';
 import ErrorMessage from './error-message/error-message';
-import ErrorPageNotFoundPlugin from './error-page-not-found/error-page-not-found';
-import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty/error-technical-difficulty';
+import ErrorAccessDenied from './error-pages/error-access-denied/error-access-denied';
+import ErrorBrowserNotSupported from './error-pages/error-browser-not-supported/error-browser-not-supported';
+import ErrorConfigNotSupported from './error-pages/error-config-not-supported/error-config-not-supported';
+import ErrorCookiesNotSupported from './error-pages/error-cookies-not-supported/error-cookies-not-supported';
+import ErrorPageNotFoundPlugin from './error-pages/error-page-not-found/error-page-not-found';
+import ErrorTechnicalDifficultyPlugin from './error-pages/error-technical-difficulty/error-technical-difficulty';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
+import FormPlugin from './form/form';
 import I18nPlugin from './i18n/i18n';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
@@ -35,22 +35,16 @@ import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
 import ListItemPlugin from './list-item/list-item';
 import LoginPlugin from './login/login';
-import MenuItemPlugin from './menu-item/menu-item';
 import MenuPlugin from './menu/menu';
 import MessagePagePlugin from './message-page/message-page';
 import MessagePlugin from './message/message';
 import ModalPlugin from './modal/modal';
-import NavbarItemPlugin from './navbar-item/navbar-item';
 import NavbarPlugin from './navbar/navbar';
-import OptionItemPlugin from './option-item/option-item';
-import OptionItemAddPlugin from './option-item/option-item-add';
-import OptionItemArchivePlugin from './option-item/option-item-archive';
-import OptionItemDeletePlugin from './option-item/option-item-delete';
-import OptionItemEditPlugin from './option-item/option-item-edit';
 import OptionPlugin from './option/option';
 import Overlay from './overlay/overlay';
 import PageNotFoundPlugin from './page-not-found/page-not-found';
 import PanelPlugin from './panel/panel';
+import PeriodpickerPlugin from './periodpicker/periodpicker';
 import PhoneNumberPlugin from './phone-number/phone-number';
 import PlusPlugin from './plus/plus';
 import PopperPlugin from './popper/popper';
@@ -69,7 +63,6 @@ import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
 import StepPlugin from './step/step';
-import SteppersItemPlugin from './steppers-item/steppers-item';
 import SteppersPlugin from './steppers/steppers';
 import SwitchPlugin from './switch/switch';
 import TabPanelPlugin from './tab-panel/tab-panel';
@@ -82,10 +75,10 @@ import TextfieldPlugin from './textfield/textfield';
 import TimepickerPlugin from './timepicker/timepicker';
 import ToastPlugin from './toast/toast';
 import TooltipPlugin from './tooltip/tooltip';
-import TreeIconPlugin from './tree-icon/tree-icon';
-import TreeNodePlugin from './tree-node/tree-node';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
+
+
 
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
@@ -97,19 +90,21 @@ const ComponentsPlugin: PluginObject<any> = {
             Vue.use(LoggerPlugin);
         }
 
+        v.prototype.$log.error('ComponentsPlugin will be deprecated in modul v.1.0, components should now be installed separately');
+
+
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(ButtonGroupPlugin);
+        Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);
-        Vue.use(CarouselItemPlugin);
         Vue.use(CharacterCountPlugin);
         Vue.use(CheckboxPlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(ModalPlugin);
         Vue.use(DropdownPlugin);
-        Vue.use(DropdownItemPlugin);
         Vue.use(DropdownGroupPlugin);
         Vue.use(DynamicTemplatePlugin);
         Vue.use(Overlay);
@@ -124,6 +119,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
         Vue.use(FlexTemplatePlugin);
+        Vue.use(FormPlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
@@ -136,17 +132,11 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(MessagePlugin);
         Vue.use(DialogPlugin);
         Vue.use(NavbarPlugin);
-        Vue.use(NavbarItemPlugin);
         Vue.use(OptionPlugin);
         Vue.use(MenuPlugin);
-        Vue.use(MenuItemPlugin);
-        Vue.use(OptionItemAddPlugin);
-        Vue.use(OptionItemArchivePlugin);
-        Vue.use(OptionItemDeletePlugin);
-        Vue.use(OptionItemEditPlugin);
-        Vue.use(OptionItemPlugin);
         Vue.use(PageNotFoundPlugin);
         Vue.use(PanelPlugin);
+        Vue.use(PeriodpickerPlugin);
         Vue.use(PhoneNumberPlugin);
         Vue.use(PlusPlugin);
         Vue.use(PopperPlugin);
@@ -166,7 +156,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(Status);
         Vue.use(StepPlugin);
         Vue.use(SteppersPlugin);
-        Vue.use(SteppersItemPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
         Vue.use(TablePlugin);
@@ -181,8 +170,6 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
-        Vue.use(TreeIconPlugin);
-        Vue.use(TreeNodePlugin);
     }
 };
 

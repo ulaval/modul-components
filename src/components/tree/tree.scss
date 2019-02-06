@@ -1,4 +1,4 @@
-@import '../../styles/abstracts/variables';
+@import 'commons';
 
 .m-tree {
     overflow: auto;
@@ -16,5 +16,13 @@
     &__content {
         margin-top: 0;
         margin-bottom: 0;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children::before {
+        background-color: $m-color--ul-blue;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children > .m-tree-node__item {
+        border-color: $m-color--ul-blue;
     }
 }

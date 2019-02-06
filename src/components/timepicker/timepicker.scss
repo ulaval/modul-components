@@ -1,10 +1,17 @@
-@import 'abstracts/variables';
+@import 'commons';
 $m-timepicker--color-hover: $m-color--interactive-lightest !default;
 $m-timepicker--color-select: $m-color--grey-lighter !default;
 $m-timepicker--color-active: $m-color--grey-lightest !default;
 
 .m-timepicker {
     display: inline-flex;
+    flex-direction: column;
+
+    &.m--has-validation-message {
+        .m-timepicker__validation-message {
+            margin-top: $m-spacing--xs;
+        }
+    }
 
     &__header,
     &__body,
@@ -84,7 +91,7 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
                 }
 
                 &.m--is-selected {
-                    cursor: not-allowed;
+                    cursor: default;
                     background: $m-timepicker--color-select;
                 }
             }
@@ -99,5 +106,9 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
         @media (min-width: #{$m-mq--min--s}) {
             border-bottom: $m-border-width--s solid $m-color--border;
         }
+    }
+
+    &__validation-message {
+        transition: margin-top $m-transition-duration ease;
     }
 }

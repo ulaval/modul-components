@@ -1,11 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ElementQueries, ElementQueriesMixin } from '../../mixins/element-queries/element-queries';
+import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { FLEX_TEMPLATE_NAME } from '../component-names';
 import WithRender from './flex-template.html?style=./flex-template.scss';
+
 
 export enum MFlexTemplateOrigin {
     Left = 'left',
@@ -231,6 +232,7 @@ export class MFlexTemplate extends ModulVue {
             menuContent.focus();
         }
         this.menuOpenCount++;
+        // tslint:disable-next-line: deprecation
         this.$modul.updateAfterResize();
     }
 
@@ -243,6 +245,7 @@ export class MFlexTemplate extends ModulVue {
             pageContainer.style.removeProperty('width');
         }
         setTimeout(() => {
+            // tslint:disable-next-line: deprecation
             this.$modul.updateAfterResize();
             done();
         }, 450);
@@ -252,7 +255,8 @@ export class MFlexTemplate extends ModulVue {
 
 const FlexTemplatePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(FLEX_TEMPLATE_NAME + ' is not ready for production');
+        v.prototype.$log.error('MFlexTemplate will be deprecated in modul v.1.0');
+        v.use(ModulPlugin);
         v.component(FLEX_TEMPLATE_NAME, MFlexTemplate);
     }
 };
