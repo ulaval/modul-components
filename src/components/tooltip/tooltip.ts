@@ -20,7 +20,7 @@ export enum MTooltipMode {
 }
 
 export enum MTooltipSize {
-    Default = 'default',
+    Small = 'small',
     Large = 'large'
 }
 
@@ -66,10 +66,10 @@ export class MTooltip extends ModulVue {
     @Prop()
     public className: string;
     @Prop({
-        default: MTooltipSize.Default,
+        default: MTooltipSize.Small,
         validator: value =>
             value === MTooltipSize.Large ||
-            value === MTooltipSize.Default
+            value === MTooltipSize.Small
     })
     public size: MTooltipSize;
 
