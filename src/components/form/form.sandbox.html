@@ -1,61 +1,389 @@
 <div>
-    <m-form :form="form"
-            :required-marker="true"
-            @submit="submit">
-        <m-textfield v-model.trim="form.get('titleField').value"
-                     label="Title"
-                     :max-width="inputMaxWidthSmall"
-                     :required-marker="true"
-                     :error-message="form.get('titleField').errorMessage"
-                     :character-count="true"
-                     :max-length="maxTitleLength"
-                     :character-count-threshold="thresholdTitle"
-                     v-m-form-field="form.get('titleField')">
-        </m-textfield>
+    <h3>Basic form</h3>
+    <p class="m-u--margin-bottom">
 
-        <m-textarea v-model.trim="form.get('descriptionField').value"
-                    label="Description"
-                    :required-marker="true"
-                    :max-width="inputMaxWidthLarge"
-                    :error-message="form.get('descriptionField').errorMessage"
-                    :character-count="true"
-                    :max-length="maxDescriptionLength"
-                    :character-count-threshold="thresholdDescription"
-                    v-m-form-field="form.get('descriptionField')">
-        </m-textarea>
-
-        <m-textarea v-model.trim="form.get('passwordField').value"
-                    label="Password"
-                    :max-width="inputMaxWidthLarge"
-                    :error-message="form.get('passwordField').errorMessage"
-                    v-m-form-field="form.get('passwordField')">
-        </m-textarea>
-
-        <m-textarea v-model.trim="form.get('confirmPasswordField').value"
-                    label="Confirm password"
-                    :max-width="inputMaxWidthLarge"
-                    :error-message="form.get('confirmPasswordField').errorMessage"
-                    v-m-form-field="form.get('confirmPasswordField')">
-        </m-textarea>
-
-        <m-textarea v-model.trim="form.get('locationField').value"
-                    label="Location"
-                    :max-width="inputMaxWidthLarge"
-                    :required-marker="true"
-                    :error-message="form.get('locationField').errorMessage"
-                    :character-count="true"
-                    :max-length="maxLocationLength"
-                    :character-count-threshold="thresholdLocation"
-                    v-m-form-field="form.get('locationField')">
-        </m-textarea>
-    </m-form>
-    <m-button type="submit"
-              :form="form.id">Submit</m-button>
-    <m-button type="reset"
-              skin="secondary"
-              :form="form.id">Reset</m-button>
-
-    <p>
-        Form sent: {{ formSent }}
     </p>
+    <p>
+        <m-form :form="forms[0]"
+                @reset="reset(0)"
+                @submit="submit(0)">
+            <m-textfield v-model.trim="forms[0].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[0].get('field-1').errorMessage"
+                         v-m-form-field="forms[0].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[0].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[0].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with 1 field with validation</h3>
+    <p class="m-u--margin-bottom">
+        the summary message won't display if only one field has error
+    </p>
+    <p>
+        <m-form :form="forms[1]"
+                @reset="reset(1)"
+                @submit="submit(1)">
+            <m-textfield v-model.trim="forms[1].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[1].get('field-1').errorMessage"
+                         v-m-form-field="forms[1].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[1].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[1].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with 2 field with validation</h3>
+    <p class="m-u--margin-bottom">
+        the summary message will display if more than one fields has error
+    </p>
+    <p>
+        <m-form :form="forms[2]"
+                @reset="reset(2)"
+                @submit="submit(2)">
+            <m-textfield v-model.trim="forms[2].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[2].get('field-1').errorMessage"
+                         v-m-form-field="forms[2].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[2].get('field-2').value"
+                         label="Another field"
+                         :required-marker="true"
+                         :error-message="forms[2].get('field-2').errorMessage"
+                         v-m-form-field="forms[2].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[2].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[2].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with predefined value</h3>
+    <p class="m-u--margin-bottom">
+        reset will return to predefined value
+    </p>
+    <p>
+        <m-form :form="forms[3]"
+                @reset="reset(3)"
+                @submit="submit(3)">
+            <m-textfield v-model.trim="forms[3].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[3].get('field-1').errorMessage"
+                         v-m-form-field="forms[3].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[3].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[3].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Will give focus to the only field that has error</h3>
+    <p class="m-u--margin-bottom">
+        Just click submit to test
+    </p>
+    <p>
+        <m-form :form="forms[4]"
+                @reset="reset(4)"
+                @submit="submit(4)">
+            <m-textfield v-model.trim="forms[4].get('field-1').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[4].get('field-1').errorMessage"
+                         v-m-form-field="forms[4].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[4].get('field-2').value"
+                         label="A field"
+                         :required-marker="true"
+                         :error-message="forms[4].get('field-2').errorMessage"
+                         v-m-form-field="forms[4].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[4].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[4].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Allow to pass html to summary errors</h3>
+    <p class="m-u--margin-bottom">
+        Just click submit to test
+    </p>
+    <p>
+        <m-form :form="forms[5]"
+                @reset="reset(5)"
+                @submit="submit(5)">
+            <m-textfield v-model.trim="forms[5].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[5].get('field-1').errorMessage"
+                         v-m-form-field="forms[5].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[5].get('field-2').value"
+                         label="A field"
+                         :error-message="forms[5].get('field-2').errorMessage"
+                         v-m-form-field="forms[5].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[5].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[5].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Message error after field is touch vs live</h3>
+    <p class="m-u--margin-bottom">
+        field 1 is after field touch field 2 is live
+    </p>
+    <p>
+        <m-form :form="forms[6]"
+                @reset="reset(6)"
+                @submit="submit(6)">
+            <m-textfield v-model.trim="forms[6].get('field-1').value"
+                         label="Field 1"
+                         :error-message="forms[6].get('field-1').errorMessage"
+                         v-m-form-field="forms[6].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[6].get('field-2').value"
+                         label="Field 2"
+                         :error-message="forms[6].get('field-2').errorMessage"
+                         v-m-form-field="forms[6].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[6].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[6].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with internal validation</h3>
+    <p class="m-u--margin-bottom">
+        the validation here is field 1 must match field 2
+    </p>
+    <p>
+        <m-form :form="forms[7]"
+                @reset="reset(7)"
+                @submit="submit(7)">
+            <m-textfield v-model.trim="forms[7].get('field-1').value"
+                         label="Field 1"
+                         :error-message="forms[7].get('field-1').errorMessage"
+                         v-m-form-field="forms[7].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[7].get('field-2').value"
+                         label="Field 2"
+                         :error-message="forms[7].get('field-2').errorMessage"
+                         v-m-form-field="forms[7].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[7].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[7].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Basic form with required marker</h3>
+    <p class="m-u--margin-bottom">
+    </p>
+    <p>
+        <m-form :form="forms[8]"
+                :required-marker="true"
+                @reset="reset(8)"
+                @submit="submit(8)">
+            <m-textfield v-model.trim="forms[8].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[8].get('field-1').errorMessage"
+                         v-m-form-field="forms[8].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[8].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[8].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form with a field with multiple validations</h3>
+    <p class="m-u--margin-bottom">
+        Cannot have number and min length 5
+    </p>
+    <p>
+        <m-form :form="forms[9]"
+                :required-marker="true"
+                @reset="reset(9)"
+                @submit="submit(9)">
+            <m-textfield v-model.trim="forms[9].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[9].get('field-1').errorMessage"
+                         v-m-form-field="forms[9].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[9].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[9].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form in a modal</h3>
+    <p class="m-u--margin-bottom">
+    </p>
+    <p>
+        <m-modal size="small">
+            <m-button slot="trigger">Open modal</m-button>
+            <m-form :form="forms[10]"
+                    :required-marker="true"
+                    @reset="reset(10)"
+                    @submit="submit(10)">
+                <m-textfield v-model.trim="forms[10].get('field-1').value"
+                             label="A field"
+                             :error-message="forms[10].get('field-1').errorMessage"
+                             v-m-form-field="forms[10].get('field-1')">
+                </m-textfield>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+            </m-form>
+            <p class="m-u--margin-top">
+                <m-button type="submit"
+                          :form="forms[10].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="forms[10].id">Reset</m-button>
+            </p>
+        </m-modal>
+    </p>
+    <hr />
+    <h3>Form in an overlay</h3>
+    <p class="m-u--margin-bottom">
+        for scroll testing
+    </p>
+    <p>
+        <m-overlay>
+            <m-button slot="trigger">Open</m-button>
+            <m-form :form="forms[11]"
+                    :required-marker="true"
+                    @reset="reset(11)"
+                    @submit="submit(11)">
+                <m-textfield v-model.trim="forms[11].get('field-1').value"
+                             label="A field"
+                             :error-message="forms[11].get('field-1').errorMessage"
+                             v-m-form-field="forms[11].get('field-1')">
+                </m-textfield>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Error fuga odio, repudiandae eligendi reiciendis itaque dignissimos
+                    numquam eaque sit soluta quis eos, saepe corporis?
+                    Cupiditate nam reiciendis nisi nemo quis.
+                </p>
+            </m-form>
+            <p class="m-u--margin-top">
+                <m-button type="submit"
+                          :form="forms[11].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="forms[11].id">Reset</m-button>
+            </p>
+        </m-overlay>
+    </p>
+    <hr />
 </div>
