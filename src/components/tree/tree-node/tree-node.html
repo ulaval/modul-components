@@ -1,7 +1,7 @@
 <li class="m-tree-node"
     :class="{ 'm--is-selected': isSelected && !isDisabled,
             'm--is-disabled' : isDisabled,
-            'm--is-read-only' : isReadonly,
+            'm--is-read-only' : isReadonlyStyle,
             'm-tree-node__has-children' : hasChildren }">
     <div class="m-tree-node__item"
          ref="item"
