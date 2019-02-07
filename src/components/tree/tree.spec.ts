@@ -31,6 +31,7 @@ const TREE_WITH_DATA: TreeNode[] = [
         ]
     }
 ];
+
 const TREE_WITH_INVALID_DATA: TreeNode[] = [
     {
         label: 'index.html',

@@ -60,6 +60,13 @@ export class MTreeNode extends ModulVue {
         }
     }
 
+    protected mounted(): void {
+        this.internalOpen = this.open || this.isParentOfOpenedFolder() || this.isParentOfSelectedFile;
+        if (this.isSelected) {
+            this.notifyParentOfChildCheckboxState();
+        }
+    }
+
     public onClick(): void {
         if (this.isFolder) {
             this.internalOpen = !this.internalOpen;
@@ -106,13 +113,6 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    protected mounted(): void {
-        this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
-        if (this.isSelected) {
-            this.notifyParentOfChildCheckboxState();
-        }
-    }
-
     private recursiveSelect(): void {
         let childrenPaths: string[] = [];
         let addNodesToSelected: boolean = false;
@@ -151,6 +151,21 @@ export class MTreeNode extends ModulVue {
         } else {
             childrenPath.push(path);
         }
+    }
+
+    private isParentOfOpenedFolder(currentNode: TreeNode = this.node, found: boolean | undefined = undefined): boolean | undefined {
+        if (currentNode.children && currentNode.children.length > 0) {
+            currentNode.children.forEach(child => {
+                if (child.children && child.children.length > 0) {
+                    if (child.open) {
+                        found = true;
+                    } else {
+                        found = this.isParentOfOpenedFolder(child);
+                    }
+                }
+            });
+        }
+        return found;
     }
 
     private updateCheckboxParentNode(allChildrenSelected: boolean): void {
