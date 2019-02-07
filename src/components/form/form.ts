@@ -7,6 +7,7 @@ import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin, { MMessageState } from '../message/message';
 import { FormFieldDirective } from './form-field';
+import { FormServerResponse } from './form-server-response';
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender
@@ -19,10 +20,14 @@ export class MForm extends ModulVue {
     public requiredMarker: boolean;
 
     public messageStateError: MMessageState = MMessageState.Error;
-
     public errors: string[] = [];
 
+    // should be initialized to be reactive
+    // tslint:disable-next-line:no-null-keyword
+    private serverResponseInternal: FormServerResponse | null = null;
+
     @Emit('submit')
+
     public onSubmit(): void { }
 
     @Emit('reset')
@@ -30,6 +35,22 @@ export class MForm extends ModulVue {
 
     public get hasErrors(): boolean {
         return this.errors.length > 0;
+    }
+
+    public get hasServerResponse(): boolean {
+        return !!this.serverResponseInternal;
+    }
+
+    public get serverResponse(): FormServerResponse {
+        return this.serverResponseInternal!;
+    }
+
+    public set serverResponse(value: FormServerResponse) {
+        this.serverResponseInternal = value;
+    }
+
+    public get serverResponseTitle(): string {
+        return this.serverResponseInternal!.getTitle(this.$i18n);
     }
 
     public submit(): void {
@@ -54,11 +75,13 @@ export class MForm extends ModulVue {
 
     public reset(): void {
         this.errors = [];
+        // should be initialized to be reactive
+        // tslint:disable-next-line:no-null-keyword
+        this.serverResponseInternal = null;
 
         if (this.form) {
             this.form.reset();
         }
-
         this.onReset();
     }
 }
