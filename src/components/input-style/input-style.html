@@ -25,7 +25,9 @@
                  v-if="requiredMarker">*</sup>
         </span>
     </label>
-    <div class="m-input-style__body">
+    <div class="m-input-style__body"
+         :style="{ top: bodyOffset }"
+         ref="body">
         <div class="m-input-style__body__left">
             <slot></slot>
             <m-i18n k="m-input-style:empty-value"

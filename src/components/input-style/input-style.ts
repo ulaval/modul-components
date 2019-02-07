@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
@@ -8,8 +8,8 @@ import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
-// const cssScaleTransform: number = 0.8;
-export const CSSLABELDEFAULTMARGIN: number = 10;
+export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
+export const CSS_BODY_DEFAULT_MARGIN: string = '0';
 
 @WithRender
 @Component({
@@ -38,11 +38,13 @@ export class MInputStyle extends ModulVue {
     public $refs: {
         root: HTMLElement,
         label: HTMLElement,
+        body: HTMLElement,
         adjustWidthAuto: HTMLElement,
         rightContent: HTMLElement
     };
 
-    public labelOffset: string = CSSLABELDEFAULTMARGIN + 'px';
+    public labelOffset: string = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public bodyOffset: string = CSS_BODY_DEFAULT_MARGIN;
     private animReady: boolean = false;
 
     protected created(): void {
@@ -53,7 +55,7 @@ export class MInputStyle extends ModulVue {
     }
 
     protected mounted(): void {
-        this.calcLabelOffset(this.isLabelUp);
+        this.calculateLabelOffset();
     }
 
     public setInputWidth(): void {
@@ -86,22 +88,26 @@ export class MInputStyle extends ModulVue {
         });
     }
 
-    private calcLabelOffset(value: boolean): void {
-        if (value) {
+    @Watch('isLabelUp')
+    private calculateLabelOffset(): void {
+        if (this.isLabelUp) {
             let label: HTMLElement | null = this.$refs.label;
+            let rootStyle: any = window.getComputedStyle(this.$refs.root);
             if (label) {
                 let labelOffset: number = label.clientHeight / 2;
-                this.labelOffset = labelOffset > CSSLABELDEFAULTMARGIN ? labelOffset + 'px' : CSSLABELDEFAULTMARGIN + 'px';
+                this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? labelOffset + 'px' : CSS_LABEL_DEFAULT_MARGIN + 'px';
+
+                let bodyOffset: number = labelOffset - (parseFloat(rootStyle.getPropertyValue('padding-top')) + parseFloat(rootStyle.getPropertyValue('padding-bottom')));
+                this.bodyOffset = bodyOffset < 0 ? CSS_BODY_DEFAULT_MARGIN : '-' + bodyOffset + 'px';
             }
         } else {
-            this.labelOffset = CSSLABELDEFAULTMARGIN + 'px';
+            this.bodyOffset = CSS_BODY_DEFAULT_MARGIN;
+            this.labelOffset = CSS_LABEL_DEFAULT_MARGIN + 'px';
         }
     }
 
     public get isLabelUp(): boolean {
-        let isLabelUp: boolean = (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
-        this.calcLabelOffset(isLabelUp);
-        return isLabelUp;
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasValue(): boolean {
