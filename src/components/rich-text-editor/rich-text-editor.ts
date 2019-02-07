@@ -1,6 +1,7 @@
 import { MFile } from 'src/utils/file/file';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -9,6 +10,9 @@ import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from '../component-names';
+import FileUploadPlugin from '../file-upload/file-upload';
+import InputStylePlugin from '../input-style/input-style';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 import VueFroala from './adapter/vue-froala';
 import { MRichTextEditorDefaultOptions, MRichTextEditorMediaOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
 import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
@@ -136,15 +140,26 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         }
     }
 
+    @Emit()
     protected imageReady(file: MFile, storeName: string): void {
-        this.$emit('image-ready', file, storeName);
     }
 
+    @Emit()
     protected imageAdded(file: MFile, insertImage: (file: MFile, id: string) => void): void {
-        this.$emit('image-added', file, insertImage);
     }
 
+    @Emit()
     protected imageRemoved(id: string, storeName: string): void {
-        this.$emit('image-removed', id, storeName);
     }
 }
+
+const RichTextEditorPlugin: PluginObject<any> = {
+    install(v, options): void {
+        v.use(FileUploadPlugin);
+        v.use(InputStylePlugin);
+        v.use(ValidationMessagePlugin);
+        v.component(RICH_TEXT_EDITOR_NAME, MRichTextEditor);
+    }
+};
+
+export default RichTextEditorPlugin;

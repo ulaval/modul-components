@@ -207,7 +207,7 @@ export enum FroalaStatus {
             undo: true,
             focus: true,
             showOnMobile: true,
-            callback: function(): void {
+            callback: (): void => {
                 EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
                 EDITOR_INSTANCE.isFileUploadOpen = true;
                 EDITOR_INSTANCE.selectedImage = undefined;
