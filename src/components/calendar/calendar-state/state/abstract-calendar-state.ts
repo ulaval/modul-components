@@ -42,7 +42,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         this.initDates(value, minDate, maxDate);
     }
 
-    abstract updateState(value: SingleDate | RangeDate, minDate?: string | undefined, maxDate?: string | undefined): void;
+    abstract updateState(value: SingleDate | RangeDate, minDate?: string, maxDate?: string): void;
 
     buildCurrentCalendar(): CalendarCurrentState {
         return {

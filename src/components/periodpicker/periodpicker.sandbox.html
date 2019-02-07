@@ -1,11 +1,11 @@
 <div>
-    <h3>Devrait fonctionner à partir d'un modèle vide</h3>
+    <h3>Should work from an empty model</h3>
     <p class="m-u--margin-bottom">
-        Quand un modèle vide est fourni (dateTo, dateFrom à undefined), il est possible de sélectionner 2 nouvelles valeurs.
+        When an empty model is passed as a prop (dateTo and/or dateFrom with falsy values), it should be possible to select new values.
     </p>
     <p>
-        <m-button @click="emptyModel(undefined)">Vider le modèle (undefined)</m-button>
-        <m-button @click="emptyModel({})">Vider le modèle (Objet vide)</m-button>
+        <m-button @click="emptyModel(undefined)">Empty model (undefined)</m-button>
+        <m-button @click="emptyModel({})">Empty model (Objet vide)</m-button>
         <m-periodpicker v-model="model">
             <m-datepicker slot="first"
                           slot-scope="{ props, handlers }"
@@ -19,10 +19,10 @@
                           v-bind="props"></m-datepicker>
         </m-periodpicker>
     </p>
-    <p>Valeur sélectionnée: {{ model }}</p>
-    <h3>Devrait limiter correctement la sélection avec min et max</h3>
+    <p>Selected value: {{ model }}</p>
+    <h3>Should limit input based on min and max props</h3>
     <p class="m-u--margin-bottom">
-        Dans ce cas on ne devrait plus pouvoir sélectionner une date en dehors du mois courant.
+        It shouldn't be possible to select a date outside current month in the picker below.
     </p>
     <p>
         <m-periodpicker v-model="model"
@@ -38,9 +38,9 @@
                           v-bind="props"></m-datepicker>
         </m-periodpicker>
     </p>
-    <h3>Gère correctement les états</h3>
+    h3>Should manage input states</h3>
     <p class="m-u--margin-bottom">
-        Tous les états de base des inputs doivent être gérés
+        Every base input states should be handled correctly
     </p>
     <div class="m-u--margin-bottom">
         <div>
