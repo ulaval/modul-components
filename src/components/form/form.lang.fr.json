@@ -1,9 +1,5 @@
 {
     "m-form": {
-        "required": "Obligatoire",
-        "server-error-title": "Oops! Il s'est produit une erreur de notre côté...",
-        "server-success-title": "Succès!",
-        "server-warning-title": "Oops! Il s'est produit une erreur de votre côté...",
-        "server-info-title": "Informations"
+        "required": "Obligatoire"
     }
 }
