@@ -8,15 +8,13 @@
           :valid="isValid"
           :readonly="readonly"
           :validation-message="hasValidationMessage"></slot>
-    <div v-if="displayValidation"
-         class="m-input-group__validation">
-        <m-validation-message class="m-input-group__validation__message"
-                              :disabled="isDisabled"
-                              :waiting="isWaiting"
-                              :error="hasError"
-                              :error-message="errorMessage"
-                              :valid="isValid"
-                              :valid-message="validMessage"
-                              :helper-message="helperMessage"></m-validation-message>
-    </div>
+    <m-validation-message v-if="displayValidation"
+                          class="m-input-group__validation__message"
+                          :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasError"
+                          :error-message="errorMessage"
+                          :valid="isValid"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
 </fieldset>

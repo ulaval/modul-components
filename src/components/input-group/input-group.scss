@@ -3,7 +3,7 @@
 
 .m-input-group {
     border: 1px solid $m-color--grey-light;
-    border-radius: 3px;
+    border-radius: $m-border-radius--s;
 
     &.m--border-hidden {
         border-width: 0;
@@ -42,9 +42,7 @@
         }
     }
 
-    &.m--has-validation-message {
-        .m-input-group__validation {
-            margin-top: $m-spacing--xs;
-        }
+    &__validation__message {
+        margin-top: $m-spacing--xs;
     }
 }
