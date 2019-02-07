@@ -6,7 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { DATERANGEPICKER_NAME } from '../component-names';
 import DatepickerPlugin, { DatePickerSupportedTypes } from '../datepicker/datepicker';
 import MessagePlugin from '../message/message';
-import PeriodpickerPlugin, { MDateRange, MPeriodPickerProps } from '../periodpicker/periodpicker';
+import PeriodpickerPlugin, { MDateRange, MPeriodpickerProps } from '../periodpicker/periodpicker';
 import WithRender from './daterangepicker.html';
 
 @WithRender
@@ -33,8 +33,8 @@ export class MDaterangepicker extends ModulVue {
     })
     labelTo: string;
 
-    get periodPickerProps(): MPeriodPickerProps {
-        return new MPeriodPickerProps(this.value, this.min, this.max);
+    get periodPickerProps(): MPeriodpickerProps {
+        return { value: this.value, min: this.min, max: this.max };
     }
 
     @Emit('input')

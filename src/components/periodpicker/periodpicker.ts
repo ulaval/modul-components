@@ -6,6 +6,7 @@ import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/medi
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './periodpicker.html';
 
 export class MDateRange {
@@ -13,7 +14,7 @@ export class MDateRange {
     to: DatePickerSupportedTypes;
 }
 
-interface MPeriodPickerFromProps {
+interface MPeriodpickerFromProps {
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
     max: DatePickerSupportedTypes;
@@ -24,14 +25,14 @@ interface MPeriodPickerFromProps {
     readonly: boolean;
 }
 
-interface MPeriodPickerFromHandlers {
+interface MPeriodpickerFromHandlers {
     change(newValue: DatePickerSupportedTypes): void;
     open(): void;
 }
 
-export interface MPeriodPickerFromComponentVue extends MPeriodPickerFromProps, MPeriodPickerFromHandlers { }
+export interface MPeriodpickerFromComponentVue extends MPeriodpickerFromProps, MPeriodpickerFromHandlers { }
 
-interface MPeriodPickerToProps {
+interface MPeriodpickerToProps {
     focus: boolean;
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
@@ -43,28 +44,28 @@ interface MPeriodPickerToProps {
     readonly: boolean;
 }
 
-interface MPeriodPickerToHandlers {
+interface MPeriodpickerToHandlers {
     change(newValue: DatePickerSupportedTypes): void;
     close(): void;
 }
 
-export interface MPeriodPickerToComponentVue extends MPeriodPickerToProps, MPeriodPickerToHandlers { }
+export interface MPeriodpickerToComponentVue extends MPeriodpickerToProps, MPeriodpickerToHandlers { }
 
-export type MPeriodPickerFromSlotProps = { props: MPeriodPickerFromProps, handlers: MPeriodPickerFromHandlers };
+export interface MPeriodpickerFromSlotProps { props: MPeriodpickerFromProps; handlers: MPeriodpickerFromHandlers; }
 
-export type MPeriodPickerToSlotProps = { props: MPeriodPickerToProps, handlers: MPeriodPickerToHandlers };
+export interface MPeriodpickerToSlotProps { props: MPeriodpickerToProps; handlers: MPeriodpickerToHandlers; }
 
-export class MPeriodPickerProps {
-    constructor(public value: MDateRange = { from: undefined, to: undefined },
-        public min: DatePickerSupportedTypes = undefined,
-        public max: DatePickerSupportedTypes = undefined) { }
+export interface MPeriodpickerProps {
+    value: MDateRange;
+    min: DatePickerSupportedTypes;
+    max: DatePickerSupportedTypes;
 }
 
 @WithRender
 @Component({
     mixins: [MediaQueries, InputState]
 })
-export class MPeriodPicker extends ModulVue implements MPeriodPickerProps {
+export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()
     value: MDateRange;
 
@@ -76,7 +77,7 @@ export class MPeriodPicker extends ModulVue implements MPeriodPickerProps {
 
     toIsFocused: boolean = false;
 
-    get firstInputState(): MPeriodPickerFromSlotProps {
+    get firstInputState(): MPeriodpickerFromSlotProps {
         return {
             props: {
                 value: this.internalValue.from,
@@ -95,7 +96,7 @@ export class MPeriodPicker extends ModulVue implements MPeriodPickerProps {
         };
     }
 
-    get secondInputState(): MPeriodPickerToSlotProps {
+    get secondInputState(): MPeriodpickerToSlotProps {
         return {
             props: {
                 focus: this.toIsFocused,
@@ -156,9 +157,7 @@ export class MPeriodPicker extends ModulVue implements MPeriodPickerProps {
     }
 
     @Emit('input')
-    emitNewValue(newValue: MDateRange): MDateRange {
-        return newValue;
-    }
+    emitNewValue(newValue: MDateRange): void { }
 
     onDateFromOpen(): void {
         this.unfocusDateToField();
@@ -175,7 +174,8 @@ export class MPeriodPicker extends ModulVue implements MPeriodPickerProps {
 
 const PeriodpickerPlugin: PluginObject<any> = {
     install(v): void {
-        v.component(PERIODPICKER_NAME, MPeriodPicker);
+        v.use(ValidationMessagePlugin);
+        v.component(PERIODPICKER_NAME, MPeriodpicker);
     }
 };
 

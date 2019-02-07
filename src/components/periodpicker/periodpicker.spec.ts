@@ -2,20 +2,20 @@ import { shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import { DatePickerSupportedTypes } from './../datepicker/datepicker';
-import PeriodpickerPlugin, { MPeriodPicker, MPeriodPickerFromSlotProps, MPeriodPickerToSlotProps } from './periodpicker';
+import PeriodpickerPlugin, { MPeriodpicker, MPeriodpickerFromSlotProps, MPeriodpickerToSlotProps } from './periodpicker';
 
-let wrapper: Wrapper<MPeriodPicker>;
+let wrapper: Wrapper<MPeriodpicker>;
 let fromDateProp: DatePickerSupportedTypes;
 let toDateProp: DatePickerSupportedTypes;
 let minDateProp: DatePickerSupportedTypes;
 let maxDateProp: DatePickerSupportedTypes;
 
-let currentFromScopeProps: MPeriodPickerFromSlotProps;
-let currentToScopeProps: MPeriodPickerToSlotProps;
+let currentFromScopeProps: MPeriodpickerFromSlotProps;
+let currentToScopeProps: MPeriodpickerToSlotProps;
 let isMqMinSValue: boolean = false;
 
-const initializeWrapper: () => Wrapper<MPeriodPicker> = () => {
-    wrapper = shallowMount(MPeriodPicker, {
+const initializeWrapper: () => Wrapper<MPeriodpicker> = () => {
+    wrapper = shallowMount(MPeriodpicker, {
         propsData: {
             value: {
                 from: fromDateProp,
@@ -25,10 +25,10 @@ const initializeWrapper: () => Wrapper<MPeriodPicker> = () => {
             max: maxDateProp
         },
         scopedSlots: {
-            first(props: MPeriodPickerFromSlotProps): void {
+            first(props: MPeriodpickerFromSlotProps): void {
                 currentFromScopeProps = props;
             },
-            second(props: MPeriodPickerToSlotProps): void {
+            second(props: MPeriodpickerToSlotProps): void {
                 currentToScopeProps = props;
             }
         },

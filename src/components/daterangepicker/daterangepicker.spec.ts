@@ -1,12 +1,19 @@
 import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
 import { DATEPICKER_NAME, PERIODPICKER_NAME } from '../component-names';
-import { MPeriodPickerProps } from '../periodpicker/periodpicker';
+import { DatePickerSupportedTypes } from '../datepicker/datepicker';
+import { MDateRange, MPeriodpickerProps } from '../periodpicker/periodpicker';
 import { MDaterangepicker } from './daterangepicker';
 
 const PERIODPICKER_REF: RefSelector = { ref: 'periodpicker' };
 
 let wrapper: Wrapper<MDaterangepicker>;
+
+export class MPeriodpickerPropsStub implements MPeriodpickerProps {
+    constructor(public value: MDateRange = { from: undefined, to: undefined },
+        public min: DatePickerSupportedTypes = undefined,
+        public max: DatePickerSupportedTypes = undefined) { }
+}
 
 const initializeWrapper: () => Wrapper<MDaterangepicker> = () => {
     wrapper = shallowMount(MDaterangepicker, {
@@ -18,7 +25,7 @@ const initializeWrapper: () => Wrapper<MDaterangepicker> = () => {
                     <slot name="first"></slot>
                     <slot name="second"></slot>
                 </${PERIODPICKER_NAME}-stub>`,
-                props: Object.keys(new MPeriodPickerProps())
+                props: Object.keys(new MPeriodpickerPropsStub())
             }
         }
     });
@@ -38,7 +45,7 @@ describe(`m-daterangepicker`, () => {
     });
 
     describe(`considering all periodpicker props are present`, () => {
-        const periodpickerProps: MPeriodPickerProps = new MPeriodPickerProps({ from: new Date(), to: new Date() }, 'minProp', 'maxProp');
+        const periodpickerProps: MPeriodpickerProps = new MPeriodpickerPropsStub({ from: new Date(), to: new Date() }, 'minProp', 'maxProp');
 
         it(`should pass down its props to the periodpicker`, () => {
             initializeWrapper();
