@@ -389,12 +389,12 @@
     <hr />
     <h3>Server error</h3>
     <p class="m-u--margin-bottom">
-        <m-dropdown v-model="serverResponseStatus"
+        <m-dropdown v-model="serverResponse"
                     label="Response code">
-            <m-dropdown-item v-for="(item, index) in serverResponseStatuses"
+            <m-dropdown-item v-for="(item, index) in serverResponses"
                              :key="index"
                              :value="item"
-                             :label="item"></m-dropdown-item>
+                             :label="item.status"></m-dropdown-item>
         </m-dropdown>
     </p>
     <p>
@@ -402,6 +402,14 @@
                 @reset="reset(12)"
                 @submit="submit(12)"
                 ref="form-12">
+            <m-message class="m-form__message-summary"
+                       v-if="hasServerResponse"
+                       :close-button="true"
+                       :state="serverResponse.messageState"
+                       :title="serverResponse.title"
+                       @close="hasServerResponse = false">
+                {{ serverResponse.message }}
+            </m-message>
             <m-textfield v-model.trim="forms[12].get('field-1').value"
                          label="A field"
                          :error-message="forms[12].get('field-1').errorMessage"

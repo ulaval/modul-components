@@ -15,14 +15,8 @@
         </m-message>
     </m-accordion-transition>
     <m-accordion-transition>
-        <m-message class="m-form__message-summary"
-                   v-if="hasServerResponse"
-                   :close-button="true"
-                   :state="serverResponse.getMessageState()"
-                   :title="serverResponseTitle"
-                   @close="removeServerResponse()">
-            {{ serverResponse.message }}
-        </m-message>
+        <slot name="serverResponse">
+        </slot>
     </m-accordion-transition>
     <p class="required"
        v-if="requiredMarker">
