@@ -6,7 +6,7 @@
           :waiting="isWaiting"
           :error="hasError"
           :valid="isValid"
-          :readonly="isReadonly"
+          :readonly="readonly"
           :validation-message="hasValidationMessage"></slot>
     <div v-if="displayValidation"
          class="m-input-group__validation">
@@ -14,9 +14,9 @@
                               :disabled="isDisabled"
                               :waiting="isWaiting"
                               :error="hasError"
-                              :error-message="errorMessageInputGroup"
+                              :error-message="errorMessage"
                               :valid="isValid"
-                              :valid-message="validMessageInputGroup"
-                              :helper-message="helperMessageInputGroup"></m-validation-message>
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
     </div>
 </fieldset>

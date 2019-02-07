@@ -33,7 +33,6 @@
                        :waiting="isWaiting"
                        :readonly="isReadonly">
             <div slot-scope="{ disabled, waiting, readonly, valid, error, validationMessage }">
-                {{ test }}
                 <dl>
                     <dt>disabled</dt>
                     <dd :class="{ stronger : disabled }">{{ disabled }}</dd>
