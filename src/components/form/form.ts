@@ -75,14 +75,18 @@ export class MForm extends ModulVue {
 
     public reset(): void {
         this.errors = [];
-        // should be initialized to be reactive
-        // tslint:disable-next-line:no-null-keyword
-        this.serverResponseInternal = null;
+        this.removeServerResponse();
 
         if (this.form) {
             this.form.reset();
         }
         this.onReset();
+    }
+
+    public removeServerResponse(): void {
+        // should be initialized to be reactive
+        // tslint:disable-next-line:no-null-keyword
+        this.serverResponseInternal = null;
     }
 }
 

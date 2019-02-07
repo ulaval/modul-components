@@ -19,7 +19,8 @@
                    v-if="hasServerResponse"
                    :close-button="true"
                    :state="serverResponse.getMessageState()"
-                   :title="serverResponseTitle">
+                   :title="serverResponseTitle"
+                   @close="removeServerResponse()">
             {{ serverResponse.message }}
         </m-message>
     </m-accordion-transition>
