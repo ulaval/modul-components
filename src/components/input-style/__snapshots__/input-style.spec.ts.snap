@@ -2,7 +2,7 @@
 
 exports[`MInputStyle should render correctly 1`] = `
 <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body">
+    <div class="m-input-style__body" style="top:0;">
         <div class="m-input-style__body__left">
             <input type="text"> </div>
         <div class="m-input-style__body__right"></div>

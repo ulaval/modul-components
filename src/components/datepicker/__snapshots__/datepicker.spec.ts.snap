@@ -3,7 +3,7 @@
 exports[`MDatepicker should render correctly 1`] = `
 <div class="m-datepicker">
     <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body">
+        <div class="m-input-style__body" style="top:0;">
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
@@ -25,7 +25,7 @@ exports[`MDatepicker should render correctly 1`] = `
 exports[`MDatepicker should render correctly min/max time 1`] = `
 <div duration="true" class="m-datepicker">
     <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body">
+        <div class="m-input-style__body" style="top:0;">
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
@@ -47,7 +47,7 @@ exports[`MDatepicker should render correctly min/max time 1`] = `
 exports[`MDatepicker should render correctly when disabled is set 1`] = `
 <div class="m-datepicker m--is-disabled">
     <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body">
+        <div class="m-input-style__body" style="top:0;">
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
@@ -69,7 +69,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
 exports[`MDatepicker should render correctly when error is set 1`] = `
 <div class="m-datepicker m--has-error m--has-validation-message">
     <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body">
+        <div class="m-input-style__body" style="top:0;">
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
@@ -99,7 +99,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
 exports[`MDatepicker should render correctly when valid is set 1`] = `
 <div class="m-datepicker m--is-valid m--has-validation-message">
     <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body">
+        <div class="m-input-style__body" style="top:0;">
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
@@ -129,7 +129,7 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
 exports[`MDatepicker should render correctly when waiting is set 1`] = `
 <div class="m-datepicker m--is-waiting">
     <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body">
+        <div class="m-input-style__body" style="top:0;">
             <div class="m-input-style__body__left">
                 <input type="text" id="mDatepicker-uuid" aria-haspopup="true" aria-controls="mDatepicker-uuid-controls-1 mDatepicker-uuid-controls-2" disabled="disabled" placeholder="m-datepicker:placeholder" value=""> </div>
             <div class="m-input-style__body__right">
