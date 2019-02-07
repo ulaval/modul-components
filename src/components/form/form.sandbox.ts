@@ -17,7 +17,7 @@ export class MFormSandbox extends Vue {
         { status: 400, messageState: MMessageState.Warning, title: 'There was an error on your end', message: 'The error was...' },
         { status: 500, messageState: MMessageState.Error, title: 'There was an error on our end', message: 'Please try again later' }
     ];
-    serverResponse = this.serverResponses[0];
+    serverResponse: any = this.serverResponses[0];
     hasServerResponse: boolean = false;
     forms: Form[] = [
         new Form({

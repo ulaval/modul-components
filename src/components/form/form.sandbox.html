@@ -400,16 +400,18 @@
     <p>
         <m-form :form="forms[12]"
                 @reset="reset(12)"
-                @submit="submit(12)"
-                ref="form-12">
-            <m-message class="m-form__message-summary"
-                       v-if="hasServerResponse"
-                       :close-button="true"
-                       :state="serverResponse.messageState"
-                       :title="serverResponse.title"
-                       @close="hasServerResponse = false">
-                {{ serverResponse.message }}
-            </m-message>
+                @submit="submit(12)">
+            <m-accordion-transition>
+                <m-message slot="formResponse"
+                           class="m-form__message-summary"
+                           v-if="hasServerResponse"
+                           :close-button="true"
+                           :state="serverResponse.messageState"
+                           :title="serverResponse.title"
+                           @close="hasServerResponse = false">
+                    {{ serverResponse.message }}
+                </m-message>
+            </m-accordion-transition>
             <m-textfield v-model.trim="forms[12].get('field-1').value"
                          label="A field"
                          :error-message="forms[12].get('field-1').errorMessage"

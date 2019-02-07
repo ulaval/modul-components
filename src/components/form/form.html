@@ -14,10 +14,8 @@
             </ul>
         </m-message>
     </m-accordion-transition>
-    <m-accordion-transition>
-        <slot name="serverResponse">
-        </slot>
-    </m-accordion-transition>
+    <slot name="serverResponse">
+    </slot>
     <p class="required"
        v-if="requiredMarker">
         <span class="required__marker">*</span>
