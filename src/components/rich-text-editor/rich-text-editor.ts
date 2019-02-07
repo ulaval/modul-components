@@ -140,15 +140,15 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         }
     }
 
-    @Emit()
+    @Emit('imageReady')
     protected imageReady(file: MFile, storeName: string): void {
     }
 
-    @Emit()
+    @Emit('imageAdded')
     protected imageAdded(file: MFile, insertImage: (file: MFile, id: string) => void): void {
     }
 
-    @Emit()
+    @Emit('imageRemoved')
     protected imageRemoved(id: string, storeName: string): void {
     }
 }
