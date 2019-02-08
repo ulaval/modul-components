@@ -144,7 +144,14 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     public get inputType(): MTextfieldType {
-        return !this.passwordAsText ? this.type === MTextfieldType.Number ? MTextfieldType.Telephone : this.type : MTextfieldType.Text;
+        switch (this.type) {
+            case MTextfieldType.Number:
+                return MTextfieldType.Telephone;
+            case MTextfieldType.Password:
+                return this.passwordAsText ? MTextfieldType.Text : MTextfieldType.Password;
+            default:
+                return this.type;
+        }
     }
 
     private get passwordIcon(): boolean {
