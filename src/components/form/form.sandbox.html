@@ -1,25 +1,25 @@
 <div>
     <h3>Basic form</h3>
-    <p class="m-u--margin-bottom">
+    <p>
 
     </p>
-    <p>
-        <m-form :form="forms[0]"
-                @reset="reset(0)"
-                @submit="submit(0)">
-            <m-textfield v-model.trim="forms[0].get('field-1').value"
-                         label="A field"
-                         :error-message="forms[0].get('field-1').errorMessage"
-                         v-m-form-field="forms[0].get('field-1')">
-            </m-textfield>
-        </m-form>
-        <p class="m-u--margin-top">
-            <m-button type="submit"
-                      :form="forms[0].id">Submit</m-button>
-            <m-button type="reset"
-                      skin="secondary"
-                      :form="forms[0].id">Reset</m-button>
-        </p>
+
+    <m-form class="m-u--margin-top"
+            :form="forms[0]"
+            @reset="reset(0)"
+            @submit="submit(0)">
+        <m-textfield v-model.trim="forms[0].get('field-1').value"
+                     label="A field"
+                     :error-message="forms[0].get('field-1').errorMessage"
+                     v-m-form-field="forms[0].get('field-1')">
+        </m-textfield>
+    </m-form>
+    <p class="m-u--margin-top">
+        <m-button type="submit"
+                  :form="forms[0].id">Submit</m-button>
+        <m-button type="reset"
+                  skin="secondary"
+                  :form="forms[0].id">Reset</m-button>
     </p>
     <hr />
     <h3>Form with 1 field with validation</h3>
