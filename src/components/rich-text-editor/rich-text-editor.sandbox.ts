@@ -1,22 +1,25 @@
-import Vue, { PluginObject } from 'vue';
+import { InputManagement } from 'src/mixins/input-management/input-management';
+import { MFile } from 'src/utils/file/file';
+import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
-import { InputManagement } from '../../mixins/input-management/input-management';
-import { MRichText } from '../rich-text/rich-text';
-import { MRichTextEditor } from './rich-text-editor';
-import WithRender from './rich-text-editor.sandbox.html';
-import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-license-plugin';
+import uuid from '../../utils/uuid/uuid';
+import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import OverlayPlugin from '../overlay/overlay';
-import TextfieldPlugin from '../textfield/textfield';
 import RadioPlugin from '../radio/radio';
+import { MRichText } from '../rich-text/rich-text';
+import TextfieldPlugin from '../textfield/textfield';
+import { MRichTextEditor, MRichTextEditorMode } from './rich-text-editor';
+import WithRender from './rich-text-editor.sandbox.html';
+import RichTextLicensePlugin from './rich-text-license-plugin';
 
 @WithRender
 @Component({
     components: { MRichTextEditor, MRichText }
 })
-export class MRichTextEditorSandBox extends Vue {
+export class MRichTextEditorSandBox extends ModulVue {
     public model: string = '';
+    public mediaModel: string = '';
     public focus: boolean = false;
     public error: boolean = false;
     public errorMessage: string = '';
@@ -27,6 +30,7 @@ export class MRichTextEditorSandBox extends Vue {
     public readonly: boolean = false;
     public afficherFormulairePleinePage: boolean = false;
     public fullScreenFormModel: string = '';
+    public mode: MRichTextEditorMode = MRichTextEditorMode.MEDIA;
 
     public initializedModel: string = '<p>Test text</p><p><strong>I should be bold</strong></p><p><em>I should be italic</em></p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;I should be tabulated</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;And me even more</p><ol><li>Ordered list</li><li>Unordered list</li></ol>';
     public linksOpenInNewWindowModel = '<p>Tests de la La case à cocher « Ouvrir dans un nouvel onglet ».</p><ol><li>Elle est <strong>sélectionnée par défaut&nbsp;</strong>à la création d&#39;un <strong>nouveau&nbsp;</strong>lien externe.</li><li>Elle est <strong>sélectionnée&nbsp;</strong>lors de la modification d&#39;un lien existant, si l&#39;utilisateur l&#39;a laissé sélectionnée à la création du <a href="http://google.ca" rel="noopener noreferrer" target="_blank">lien</a>.</li><li>Par contre, elle <strong>n&#39;est pas&nbsp;</strong><strong>sélectionnée&nbsp;</strong>lors de la modification d&#39;un lien existant, si l&#39;utilisateur l&#39;avait désélectionnée à la création du <a href="http://google.ca">lien</a>.</li></ol></div>';
@@ -35,6 +39,8 @@ export class MRichTextEditorSandBox extends Vue {
     public todos: { todo: string, done: boolean }[] = [];
     public currentTodo: { todo: string, done: boolean } = { todo: '', done: false };
     public resetValue: string = '';
+
+    public fileList: { file: MFile, id: string }[] = [];
 
     public alertTestSuccess(message: string): void {
         alert(message);
@@ -51,6 +57,23 @@ export class MRichTextEditorSandBox extends Vue {
 
     public resetModelPleinePage(): void {
         this.fullScreenFormModel = '';
+    }
+
+    protected imageReady(file: MFile, storeName: string): void {
+        // would upload to a real server here and get back id
+        this.$file.uploadTemp([file], storeName);
+    }
+
+    protected imageAdded(file: MFile, insertImage: (file: MFile, id: string) => void): void {
+        // would use real id from server here
+        const id: string = uuid.generate();
+        this.fileList.push({ file, id });
+        insertImage(file, id);
+    }
+
+    protected imageRemoved(id: string): void {
+        // would delete on server here
+        this.fileList = this.fileList.filter(file => file.id !== id);
     }
 }
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {

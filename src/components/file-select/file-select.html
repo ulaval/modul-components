@@ -6,7 +6,8 @@
            @change="processFile"
            :disabled="disabled || isWaiting"
            tabindex="-1"
-           :multiple="multiple">
+           :multiple="multiple"
+           :accept="extensions">
     <label :for="id"
            class="m-file-select__hidden">
         <m-i18n v-if="!hasLabel"
@@ -16,6 +17,7 @@
     <m-button @click="onClick"
               @focus="onFocus"
               @blur="onBlur"
+              aria-hidden="true"
               :skin="skin"
               :disabled="disabled"
               :waiting="waiting"
