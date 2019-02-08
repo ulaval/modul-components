@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`MTreeNode Given a node When readonly = true Should render correctly 1`] = `
+<li class="m-tree-node m--is-read-only">
+    <div role="button" tabindex="1" class="m-tree-node__item">
+        <div filename="Node 1" class="m-tree-icon">m-tree-icon</div> <span class="m-tree-node__item__label">Node 1</span> </div>
+</li>
+`;
+
 exports[`MTreeNode Given a node When the node can and has children and the node is valid Should render correctly 1`] = `
 <li class="m-tree-node m-tree-node__has-children">
     <div role="button" tabindex="1" class="m-tree-node__item">
