@@ -108,7 +108,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
             return true;
         } else {
             event.preventDefault();
-            event.stopPropagation();
             return false;
         }
     }
