@@ -17,8 +17,8 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     private currentRange: InnerModel;
     private currentDateHiglighted: ModulDate = new ModulDate();
 
-    updateValue(value: RangeDate): void {
-        this.initDates(value);
+    updateState(value: RangeDate, minDate?: string, maxDate?: string): void {
+        this.initDates(value, minDate, maxDate);
     }
 
     protected assembleValue(): RangeDate {
