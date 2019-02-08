@@ -2,11 +2,10 @@ import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-d
 import AbstractCalendarState, { SingleDate } from './abstract-calendar-state';
 
 export default class CalendarSingleDateState extends AbstractCalendarState {
+    private currentDate: ModulDate | undefined;
 
-    private currentDate: ModulDate;
-
-    updateValue(value: SingleDate): void {
-        this.initDates(value);
+    updateState(value: SingleDate, minDate?: string, maxDate?: string): void {
+        this.initDates(value, minDate, maxDate);
     }
 
     protected assembleValue(): SingleDate {
@@ -27,6 +26,8 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
     protected initCurrentValue(value: SingleDate): void {
         if (value) {
             this.currentDate = new ModulDate(value);
+        } else {
+            this.currentDate = undefined;
         }
     }
 

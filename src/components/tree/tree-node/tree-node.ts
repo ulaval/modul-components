@@ -29,6 +29,9 @@ export class MTreeNode extends ModulVue {
     public selectable: boolean;
 
     @Prop()
+    public readonly: boolean;
+
+    @Prop()
     public useFilesIcons: boolean;
 
     @Prop({ default: '' })
@@ -187,10 +190,18 @@ export class MTreeNode extends ModulVue {
     public get isDisabled(): boolean {
         let isDisabled: boolean = false;
         let inDisabledNodes: boolean = this.disabledNodes && this.disabledNodes.indexOf(this.currentPath) !== -1;
-        if (!this.selectable && !this.isFolder || inDisabledNodes) {
+        if (!this.selectable && !this.isFolder && !this.readonly || inDisabledNodes && !this.readonly) {
             isDisabled = true;
         }
         return isDisabled;
+    }
+
+    public get isReadonlyStyle(): boolean {
+        let isReadonly: boolean = false;
+        if (!this.selectable && !this.isFolder && this.readonly) {
+            isReadonly = true;
+        }
+        return isReadonly;
     }
 
     public get currentPath(): string {

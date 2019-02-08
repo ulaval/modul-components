@@ -91,6 +91,10 @@ export class FileService {
         return this.getStore(storeName).upload<T>(fileuid, options);
     }
 
+    public uploadTemp(files: MFile[], storeName?: string): void {
+        this.getStore(storeName).uploadTemp(files);
+    }
+
     public cancelUpload(fileuid: string, storeName?: string): void {
         this.getStore(storeName).cancelUpload(fileuid);
     }
@@ -241,6 +245,15 @@ class FileStore {
                 delete this.cancelTokens[fileuid];
                 return value;
             });
+    }
+
+    public uploadTemp(files: MFile[]): void {
+        files.forEach(file => {
+            let storeFile: MFile = this.getFile(file.uid);
+            storeFile.url = URL.createObjectURL(file.file);
+            storeFile.status = MFileStatus.COMPLETED;
+            storeFile.progress = 100;
+        });
     }
 
     public cancelUpload(fileuid: string): void {

@@ -2,6 +2,8 @@
     "m-rich-text-editor": {
         "hide-submenu": "hide submenu",
         "insert": "insertions",
+        "insert-image": "Insert image",
+        "replace-image": "Replace image",
         "styles": "styles",
         "lists": "listes",
         "URL": "URL or email"

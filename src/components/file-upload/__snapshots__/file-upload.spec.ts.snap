@@ -4,7 +4,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
 <m-modal title="Upload file"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__no-drop-zone">
-            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
+            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
         </div>
         <div class="m-file-upload__completed-list">
             <ul name="m--is" tag="ul" class="m-file-upload__completed-list__wrap">
@@ -47,7 +47,7 @@ exports[`MFileUpload should render correctly 1`] = `
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
                     <m-i18n-stub k="m-file-upload:title" params="" htmlEncode="true"></m-i18n-stub>
                 </h3>
-                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
                     <m-i18n-stub k="m-file-upload:title" params="" htmlEncode="true"></m-i18n-stub>
                 </h3>
-                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+                <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
 <m-modal title="Upload file"><span slot="trigger"></span>
     <div class="m-file-upload">
         <div class="m-file-upload__no-drop-zone">
-            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
+            <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
         </div>
         <h3 class="m-file-upload__title">
             <m-i18n-stub k="m-file-upload:import" params="" htmlEncode="true"></m-i18n-stub> (1
@@ -144,7 +144,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
                     <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
                     <m-i18n-stub k="m-file-upload:title" params="" nb="5" htmlEncode="true"></m-i18n-stub>
                 </h3>
-                <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+                <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" allowed-extensions="jpg,png,mp4" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format">
                 <m-i18n-stub k="m-file-upload:format" params="" nb="3" htmlEncode="true" class="m-file-upload__drop-zone__format__label"></m-i18n-stub>: jpg, png, mp4
@@ -199,7 +199,7 @@ exports[`MFileUpload validation validation messages should render rejected files
                     <m-icon-stub name="m-svg__arrow--down" size="32px"></m-icon-stub>
                     <m-i18n-stub k="m-file-upload:title" params="" nb="5" htmlEncode="true"></m-i18n-stub>
                 </h3>
-                <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
+                <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" allowed-extensions="jpg,png,mp4" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format">
                 <m-i18n-stub k="m-file-upload:format" params="" nb="3" htmlEncode="true" class="m-file-upload__drop-zone__format__label"></m-i18n-stub>: jpg, png, mp4
