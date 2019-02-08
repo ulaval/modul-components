@@ -7,7 +7,7 @@
            :disabled="disabled || isWaiting"
            tabindex="-1"
            :multiple="multiple"
-           :accept="extensions">
+           :accept="extensions" />
     <label :for="id"
            class="m-file-select__hidden">
         <m-i18n v-if="!hasLabel"
@@ -21,10 +21,10 @@
               :skin="skin"
               :disabled="disabled"
               :waiting="waiting"
-              :fullSize="fullSize"
-              :iconName="iconName"
-              :iconPosition="iconPosition"
-              :iconSize="iconSize">
+              :full-size="fullSize"
+              :icon-name="iconName"
+              :icon-position="iconPosition"
+              :icon-size="iconSize">
         <m-i18n v-if="!hasLabel"
                 k="m-select-file:label"></m-i18n>
         <template v-else>{{ label }}</template>
