@@ -1,7 +1,7 @@
-import { InputManagement } from 'src/mixins/input-management/input-management';
-import { MFile } from 'src/utils/file/file';
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
+import { InputManagement } from '../../mixins/input-management/input-management';
+import { MFile } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
