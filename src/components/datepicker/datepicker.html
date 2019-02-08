@@ -31,7 +31,7 @@
                @focus="inputOnFocus"
                @blur="onBlur"
                @click.stop
-               v-model="formattedDate">
+               :value="formattedDate">
         <m-icon-button slot="right-content"
                        class="m-datepicker__icon"
                        icon-name="m-svg__calendar"
@@ -61,91 +61,10 @@
              placement="bottom"
              @open="onOpen"
              @close="onClose">
-        <div :id="ariaControls1"
-             class="m-datepicker__header"
-             :aria-labelledby="id"
-             slot="header">
-            <nav class="m-datepicker__header__nav">
-                <m-icon-button icon-name="m-svg__chevron--left"
-                               @click="selectYear(selectedYear - 1)"
-                               :disabled="isMinYear">previous year</m-icon-button>
-                <button type="button"
-                        class="m-datepicker__years"
-                        @click="showYears"
-                        aria-live="polite">{{selectedYear}}</button>
-                <m-icon-button icon-name="m-svg__chevron--right"
-                               @click="selectYear(selectedYear + 1)"
-                               :disabled="isMaxYear">next year</m-icon-button>
-            </nav>
-            <nav class="m-datepicker__header__nav">
-                <m-icon-button icon-name="m-svg__chevron--left"
-                               @click="selectMonth(selectedMonth - 1)"
-                               :disabled="isMinMonth">previous month</m-icon-button>
-                <button type="button"
-                        class="m-datepicker__months"
-                        @click="view = 'month'"
-                        aria-live="polite">{{ selectedMonthName }}</button>
-                <m-icon-button icon-name="m-svg__chevron--right"
-                               @click="selectMonth(selectedMonth + 1)"
-                               :disabled="isMaxMonth">next month</m-icon-button>
-            </nav>
-        </div>
-        <div :id="ariaControls2"
-             class="m-datepicker__body"
-             ref="body"
-             :aria-labelledby="id"
-             aria-live="polite">
-            <table class="m-datepicker__body-table">
-                <template v-if="view === 'year'">
-                    <tr v-for="yearRow in years">
-                        <td v-for="y in yearRow"
-                            class="m-datepicker__body-cell"
-                            v-if="y !== undefined">
-                            <button type="button"
-                                    class="m-datepicker__item"
-                                    :class="{'m--is-selected': selectedYear === y}"
-                                    @click.stop="selectYear(y, true)">
-                                <span class="m-datepicker__item__text">{{ y }}</span>
-                            </button>
-                        </td>
-                    </tr>
-                </template>
-                <template v-if="view === 'month'">
-                    <tr v-for="monthRow in months">
-                        <td v-for="m in monthRow"
-                            class="m-datepicker__body-cell">
-                            <button type="button"
-                                    class="m-datepicker__item"
-                                    :class="{'m--is-selected': selectedMonthName === m.name,
-                                                'm--is-disabled': m.isDisabled}"
-                                    :disabled="m.isDisabled"
-                                    @click.stop="selectMonth(m.index, true)">
-                                <span class="m-datepicker__item__text">{{ m.name }}</span>
-                            </button>
-                        </td>
-                    </tr>
-                </template>
-                <template v-if="view === 'day'">
-                    <tr>
-                        <td v-for="w in weekdays"
-                            class="m-datepicker__weekday">{{ w }}</td>
-                    </tr>
-                    <tr v-for="dayRow in daysOfMonth">
-                        <td v-for="d in dayRow"
-                            class="m-datepicker__body-cell">
-                            <button type="button"
-                                    class="m-datepicker__item"
-                                    :class="{ 'm--is-selected': d.isSelected,
-                                                'm--is-today': d.isToday,
-                                                'm--is-disabled': d.isDisabled,
-                                                'm--is-other-month': d.month !== selectedMonth }"
-                                    @click.stop="selectDate(d)">
-                                <span class="m-datepicker__item__text">{{ d.date }}</span>
-                            </button>
-                        </td>
-                    </tr>
-                </template>
-            </table>
-        </div>
+        <m-calendar :value="value"
+                    @input="selectDate"
+                    :min-date="minDateString"
+                    :max-date="maxDateString"
+                    :show-month-before-after="false"></m-calendar>
     </m-popup>
 </div>
