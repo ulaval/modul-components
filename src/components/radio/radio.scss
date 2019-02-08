@@ -40,10 +40,6 @@ $m-radio--color-disabled: $m-color--disabled !default;
                 &:not(.m--is-checked) .m-radio__wrap:hover,
                 &.m--is-focus {
                     .m-radio {
-                        &__label {
-                            color: $m-color--error;
-                        }
-
                         &__input {
                             background: $m-color--error-lightest;
                         }

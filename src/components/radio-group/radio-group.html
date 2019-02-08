@@ -3,6 +3,12 @@
               'm--is-disabled': stateIsDisabled,
               'm--has-error': hasError,
               'm--is-valid': isValid }">
+    <m-validation-message :id="idValidationMessage"
+                          class="m-radio-group__message m-u--margin-bottom"
+                          :disabled="stateIsDisabled"
+                          :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
     <p :id="idLabel"
        class="m-radio-group__label"
        v-if="hasLabel">
@@ -17,10 +23,4 @@
         :aria-describedby="idValidationMessage">
         <slot></slot>
     </ul>
-    <m-validation-message :id="idValidationMessage"
-                          class="m-radio-group__message"
-                          :disabled="stateIsDisabled"
-                          :error-message="errorMessage"
-                          :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
 </div>
