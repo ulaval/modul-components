@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { INPUT_GROUP_NAME } from '../component-names';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 import { InputManagement } from './../../mixins/input-management/input-management';
 import { InputState } from './../../mixins/input-state/input-state';
 import { ModulVue } from './../../utils/vue/vue';
@@ -42,9 +43,9 @@ export class MInputGroup extends ModulVue {
 
 const InputGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        // v.prototype.$log.debug(INPUT_GROUP_NAME, 'plugin.install');
-        v.prototype.$log.warn(INPUT_GROUP_NAME + ' is not ready for production');
+        v.prototype.$log.debug(INPUT_GROUP_NAME, 'plugin.install');
         v.component(INPUT_GROUP_NAME, MInputGroup);
+        v.use(ValidationMessagePlugin);
     }
 };
 
