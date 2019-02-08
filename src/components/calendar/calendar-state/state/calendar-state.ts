@@ -18,7 +18,7 @@ export type DaySelectCallBack = (date: SingleDate | RangeDate) => void;
 export default interface CalendarState {
     buildCurrentCalendar(): CalendarCurrentState;
     onDateSelect(callback: DaySelectCallBack): void;
-    updateValue(value: SingleDate | RangeDate): void;
+    updateState(value: SingleDate | RangeDate, minDate?: string, maxDate?: string): void;
 }
 
 export interface CalendarCurrentState {

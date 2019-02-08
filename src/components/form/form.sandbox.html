@@ -265,7 +265,8 @@
     <p class="m-u--margin-bottom">
     </p>
     <p>
-        <m-modal size="small">
+        <m-modal size="small"
+                 title="Form in a modal">
             <m-button slot="trigger">Open modal</m-button>
             <m-form :form="forms[10]"
                     :required-marker="true"
@@ -384,6 +385,51 @@
                           :form="forms[11].id">Reset</m-button>
             </p>
         </m-overlay>
+    </p>
+    <hr />
+    <h3>Server error</h3>
+    <p class="m-u--margin-bottom">
+        <m-dropdown v-model="serverResponse"
+                    label="Response code">
+            <m-dropdown-item v-for="(item, index) in serverResponses"
+                             :key="index"
+                             :value="item"
+                             :label="item.status"></m-dropdown-item>
+        </m-dropdown>
+    </p>
+    <p>
+        <m-form :form="forms[12]"
+                @reset="reset(12)"
+                @submit="submit(12)">
+            <m-accordion-transition>
+                <m-message slot="formResponse"
+                           style="margin-bottom: 24px;"
+                           v-if="hasServerResponse"
+                           :close-button="true"
+                           :state="serverResponse.messageState"
+                           :title="serverResponse.title"
+                           @close="hasServerResponse = false">
+                    {{ serverResponse.message }}
+                </m-message>
+            </m-accordion-transition>
+            <m-textfield v-model.trim="forms[12].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[12].get('field-1').errorMessage"
+                         v-m-form-field="forms[12].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[12].get('field-2').value"
+                         label="A field"
+                         :error-message="forms[12].get('field-2').errorMessage"
+                         v-m-form-field="forms[12].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[12].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[12].id">Reset</m-button>
+        </p>
     </p>
     <hr />
 </div>

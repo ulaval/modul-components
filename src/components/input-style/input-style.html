@@ -1,7 +1,7 @@
 <div class="m-input-style"
      :class="[{ 'm--is-focus' : isFocus,
               'm--is-readonly': readonly,
-              'm--is-label-up': labelIsUp,
+              'm--is-label-up': isLabelUp,
               'm--is-disabled' : isDisabled,
               'm--is-waiting' : isWaiting,
               'm--has-cursor-pointer' : cursorPointer,
@@ -15,7 +15,7 @@
      @mousedown="onMousedown"
      @mouseup="onMouseup"
      ref="root"
-     :style="{ width: width }">
+     :style="{ width: width,  marginTop: labelOffset }">
     <label class="m-input-style__label"
            ref="label"
            :for="labelFor"
@@ -25,7 +25,9 @@
                  v-if="requiredMarker">*</sup>
         </span>
     </label>
-    <div class="m-input-style__body">
+    <div class="m-input-style__body"
+         :style="{ top: bodyOffset }"
+         ref="body">
         <div class="m-input-style__body__left">
             <slot></slot>
             <m-i18n k="m-input-style:empty-value"

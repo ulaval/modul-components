@@ -1,0 +1,20 @@
+<fieldset class="m-input-group"
+          :class="classes">
+    <legend v-if="legend && visible"
+            class="m-input-group__legend">{{ legend }}</legend>
+    <slot :disabled="isDisabled"
+          :waiting="isWaiting"
+          :error="hasError"
+          :valid="isValid"
+          :readonly="readonly"
+          :validation-message="hasValidationMessage"></slot>
+    <m-validation-message v-if="displayValidation"
+                          class="m-input-group__validation__message"
+                          :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasError"
+                          :error-message="errorMessage"
+                          :valid="isValid"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
+</fieldset>

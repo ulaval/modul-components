@@ -1,4 +1,4 @@
-import { shallowMount, Wrapper } from '@vue/test-utils';
+import { mount, Wrapper } from '@vue/test-utils';
 import $ from 'jquery';
 import { VueFroala } from './vue-froala';
 
@@ -17,7 +17,7 @@ $.FroalaEditor = {
 
 describe('VueFroala', () => {
     beforeEach(() => {
-        wrapper = shallowMount(VueFroala);
+        wrapper = mount(VueFroala);
         froala = wrapper.vm;
     });
 

@@ -140,6 +140,7 @@ let icons: boolean = false;
 let path: string = '';
 let disabledNodes: string[] = [];
 let checkboxes: MCheckboxes = MCheckboxes.False;
+let readonly: boolean = false;
 
 let wrapper: Wrapper<MTreeNode>;
 
@@ -153,7 +154,8 @@ const initializeShallowWrapper: any = () => {
             icons,
             path,
             disabledNodes,
-            checkboxes
+            checkboxes,
+            readonly
         }
     });
 };
@@ -569,5 +571,16 @@ describe('MTreeNode', () => {
             });
         });
 
+        describe(`When readonly = true`, () => {
+
+            beforeEach(() => {
+                readonly = true;
+                initializeShallowWrapper();
+            });
+
+            it(`Should render correctly`, () => {
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+        });
     });
 });

@@ -11,7 +11,7 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
         background: $m-color--grey-light;
 
         &.m--is-monochrome {
-            background: $m-color--grey-lightest;
+            background: $m-color--grey-lighter;
         }
 
         &.m--is-determinate {
@@ -41,7 +41,7 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
             }
 
             &.m--is-monochrome .m-progress__bar {
-                background: $m-color--grey-darker;
+                background: $m-color--grey;
             }
         }
 
@@ -77,11 +77,11 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
             }
 
             &.m--is-monochrome .m-progress__bar {
-                background: $m-color--grey-lightest;
+                background: $m-color--grey-lighter;
 
                 &::before,
                 &::after {
-                    background-color: $m-color--grey-darker;
+                    background-color: $m-color--grey;
                 }
             }
         }
@@ -103,7 +103,7 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
 
             &.m--is-monochrome .m-progress__wrap {
                 .m-progress__circle {
-                    stroke: $m-color--grey-darker;
+                    stroke: $m-color--grey;
                 }
             }
         }
@@ -151,7 +151,7 @@ $m-circle-transition-speed: cubic-bezier(0.25, 0.8, 0.25, 1);
 
             &.m--is-monochrome {
                 .m-progress__circle {
-                    stroke: $m-color--grey-darker;
+                    stroke: $m-color--grey;
                 }
             }
         }
