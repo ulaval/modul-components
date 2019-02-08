@@ -153,7 +153,8 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    private isParentOfOpenedFolder(currentNode: TreeNode = this.node, found: boolean | undefined = undefined): boolean | undefined {
+    private isParentOfOpenedFolder(currentNode: TreeNode = this.node): boolean | undefined {
+        let found: boolean | undefined = undefined;
         if (currentNode.children && currentNode.children.length > 0) {
             currentNode.children.forEach(child => {
                 if (child.children && child.children.length > 0) {
