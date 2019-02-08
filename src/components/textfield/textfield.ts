@@ -117,13 +117,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
         if (this.type !== MTextfieldType.Number) {
             this.$emit('keydown', event);
         } else {
-            // tslint:disable-next-line: no-console
-            console.log(event);
-
-            if (event.key !== '0' && event.key !== '1' && event.key !== '2' && event.key !== '3' && event.key !== '4'
-                && event.key !== '5' && event.key !== '6' && event.key !== '7' && event.key !== '8' && event.key !== '9'
-                && event.key !== 'Backspace' && event.key !== 'Delete' && event.key !== 'Home' && event.key !== 'End'
-                && event.key !== 'ArrowUp' && event.key !== 'ArrowDown' && event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') {
+            // tslint:disable-next-line: deprecation
+            if (!(event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey === false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode === 8) || (event.keyCode === 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode === 46))) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
