@@ -51,6 +51,71 @@ const TREE_NODE_WITH_CHILDREN: TreeNode = {
     ]
 };
 
+const TREE_NODE_WITH_OPENED_CHILD: TreeNode = {
+    id: 'folder 1',
+    label: 'folder 1',
+    hasChildren: true,
+    children: [
+        {
+            id: 'index.html',
+            label: 'index.html'
+        },
+        {
+            id: 'menu.html'
+        },
+        {
+            id: 'folder 2',
+            label: 'folder 2',
+            hasChildren: true,
+            open: true,
+            children: [
+                {
+                    id: 'index.html',
+                    label: 'index.html'
+                },
+                {
+                    id: 'folder 3',
+                    label: 'folder 3',
+                    hasChildren: true,
+                    children: []
+                }
+            ]
+        }
+    ]
+};
+
+const TREE_NODE_WITHOUT_OPENED_CHILD: TreeNode = {
+    id: 'folder 1',
+    label: 'folder 1',
+    hasChildren: true,
+    children: [
+        {
+            id: 'index.html',
+            label: 'index.html'
+        },
+        {
+            id: 'menu.html'
+        },
+        {
+            id: 'folder 2',
+            label: 'folder 2',
+            hasChildren: true,
+            children: [
+                {
+                    id: 'index.html',
+                    label: 'index.html'
+                },
+                {
+                    id: 'folder 3',
+                    label: 'folder 3',
+                    hasChildren: true,
+                    children: []
+                }
+            ]
+        }
+    ]
+};
+
 const TREE_NODE_WITH_TWO_CHILDREN: TreeNode = {
     label: CHECKBOX_PARENT,
     id: CHECKBOX_PARENT,
@@ -104,6 +169,34 @@ const getStubs: any = () => {
 };
 
 describe('MTreeNode', () => {
+
+    describe(`Given a closed node with an internally opened child`, () => {
+
+        beforeEach(() => {
+            node = TREE_NODE_WITH_OPENED_CHILD;
+            initializeShallowWrapper();
+        });
+
+        it(`Should render correctly`, () => {
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+
+        it(`Should have current node internally opened`, () => {
+            expect(wrapper.vm.internalOpen).toBe(true);
+        });
+    });
+
+    describe(`Given a closed node without an internally opened child`, () => {
+
+        beforeEach(() => {
+            node = TREE_NODE_WITHOUT_OPENED_CHILD;
+            initializeShallowWrapper();
+        });
+
+        it(`Should have current node internally closed`, () => {
+            expect(wrapper.vm.internalOpen).toBe(false);
+        });
+    });
 
     describe(`Given a node`, () => {
 

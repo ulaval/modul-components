@@ -193,6 +193,7 @@ export class MRootTreeSandbox extends Vue {
                                             id: 'folder 1',
                                             label: 'folder 1',
                                             hasChildren: true,
+                                            open: true,
                                             children: [
                                                 {
                                                     id: 'index.html',
@@ -216,8 +217,8 @@ export class MRootTreeSandbox extends Vue {
                                                             hasChildren: true,
                                                             children: [
                                                                 {
-                                                                    id: 'folder 1',
-                                                                    label: 'folder 1',
+                                                                    id: 'folder 12',
+                                                                    label: 'folder 12',
                                                                     hasChildren: true,
                                                                     children: [
                                                                         {
