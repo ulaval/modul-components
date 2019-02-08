@@ -134,13 +134,7 @@ export class MFormSandbox extends Vue {
         new Form({
             'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
                 if (!value) {
-                    return new FormFieldValidation(true, [`the <strong>field-1</strong> is required`], ['this field is required']);
-                }
-                return new FormFieldValidation();
-            }]),
-            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
-                    return new FormFieldValidation(true, [`the <strong>field-2</strong> is required`], ['this field is required']);
+                    return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])

@@ -323,7 +323,7 @@
             </p>
         </m-modal>
     </p>
-    <hr />
+
     <h3>Form in an overlay</h3>
     <p class="m-u--margin-bottom">
         for scroll testing
@@ -387,41 +387,19 @@
         </m-overlay>
     </p>
     <hr />
-    <h3>Server error</h3>
+    <h3>Radio Buttons Form</h3>
     <p class="m-u--margin-bottom">
-        <m-dropdown v-model="serverResponse"
-                    label="Response code">
-            <m-dropdown-item v-for="(item, index) in serverResponses"
-                             :key="index"
-                             :value="item"
-                             :label="item.status"></m-dropdown-item>
-        </m-dropdown>
-    </p>
-    <p>
         <m-form :form="forms[12]"
+                :required-marker="true"
                 @reset="reset(12)"
                 @submit="submit(12)">
-            <m-accordion-transition>
-                <m-message slot="formResponse"
-                           style="margin-bottom: 24px;"
-                           v-if="hasServerResponse"
-                           :close-button="true"
-                           :state="serverResponse.messageState"
-                           :title="serverResponse.title"
-                           @close="hasServerResponse = false">
-                    {{ serverResponse.message }}
-                </m-message>
-            </m-accordion-transition>
-            <m-textfield v-model.trim="forms[12].get('field-1').value"
-                         label="A field"
-                         :error-message="forms[12].get('field-1').errorMessage"
-                         v-m-form-field="forms[12].get('field-1')">
-            </m-textfield>
-            <m-textfield v-model.trim="forms[12].get('field-2').value"
-                         label="A field"
-                         :error-message="forms[12].get('field-2').errorMessage"
-                         v-m-form-field="forms[12].get('field-2')">
-            </m-textfield>
+            <m-radio-group v-model.trim="forms[12].get('field-1').value"
+                           v-m-form-field="forms[12].get('field-1')"
+                           :error-message="forms[12].get('field-1').errorMessage">
+                <m-radio value="1">1</m-radio>
+                <m-radio value="2">2</m-radio>
+                <m-radio value="3">3</m-radio>
+            </m-radio-group>
         </m-form>
         <p class="m-u--margin-top">
             <m-button type="submit"
@@ -431,5 +409,4 @@
                       :form="forms[12].id">Reset</m-button>
         </p>
     </p>
-    <hr />
 </div>

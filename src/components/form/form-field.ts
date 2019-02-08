@@ -1,5 +1,6 @@
-import { FormField } from 'src/utils/form/form-field/form-field';
+
 import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+import { FormField } from '../../utils/form/form-field/form-field';
 
 let touchFormField: any;
 

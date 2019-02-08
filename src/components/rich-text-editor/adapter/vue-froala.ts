@@ -1,7 +1,6 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
-import { MFile } from 'src/utils/file/file';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
@@ -13,6 +12,7 @@ import replaceIcon from '../../../assets/icons/svg/Froala-replace.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
+import { MFile } from '../../../utils/file/file';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
 import { PopupPlugin } from './popup-plugin';

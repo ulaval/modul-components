@@ -1,4 +1,4 @@
-import { MFile } from 'src/utils/file/file';
+
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
@@ -7,6 +7,7 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import { MFile } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from '../component-names';
