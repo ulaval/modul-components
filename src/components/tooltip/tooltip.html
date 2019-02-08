@@ -49,7 +49,8 @@
                     :svg-tile="getCloseTitle()"></m-icon>
         </div>
         <div class="m-tooltip__body"
-             :class="{ 'm--is-link': propMode === 'link' }">
+             :class="{ 'm--is-link': propMode === 'link'
+            , 'm--is-large' : size === 'large' }">
             <slot></slot>
         </div>
     </div>

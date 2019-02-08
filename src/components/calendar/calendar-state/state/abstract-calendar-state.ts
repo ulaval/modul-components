@@ -16,7 +16,6 @@ export interface RangeDate {
 }
 
 export default abstract class AbstractCalendarState implements CalendarState {
-
     protected now: ModulDate = new ModulDate();
 
     protected currentlyDisplayedDate: ModulDate = new ModulDate();
@@ -43,7 +42,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         this.initDates(value, minDate, maxDate);
     }
 
-    abstract updateValue(value: SingleDate | RangeDate): void;
+    abstract updateState(value: SingleDate | RangeDate, minDate?: string, maxDate?: string): void;
 
     buildCurrentCalendar(): CalendarCurrentState {
         return {
@@ -229,7 +228,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
     }
 
     private initMaxDate(maxDate?: string): void {
-        if (this.currentMaxDate) { return; }
+        if (this.currentMaxDate && this.currentMaxDate.isSame(new ModulDate(maxDate))) { return; }
 
         if (maxDate) {
             this.currentMaxDate = new ModulDate(maxDate);
@@ -239,7 +238,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
     }
 
     private initMinDate(minDate?: string): void {
-        if (this.currentMinDate) { return; }
+        if (this.currentMinDate && this.currentMinDate.isSame(new ModulDate(minDate))) { return; }
 
         if (minDate) {
             this.currentMinDate = new ModulDate(minDate);

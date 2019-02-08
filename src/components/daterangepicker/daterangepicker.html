@@ -1,0 +1,14 @@
+<m-periodpicker v-bind="periodPickerProps"
+                @input="updateValue"
+                ref="periodpicker">
+    <m-datepicker :label="labelFrom"
+                  slot="first"
+                  slot-scope="{ props, handlers }"
+                  v-on="handlers"
+                  v-bind="props"></m-datepicker>
+    <m-datepicker :label="labelTo"
+                  slot="second"
+                  slot-scope="{ props, handlers }"
+                  v-on="handlers"
+                  v-bind="props"></m-datepicker>
+</m-periodpicker>

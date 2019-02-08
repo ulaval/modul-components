@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-1 -1 26 26" style="enable-background:new -1 -1 26 26;" xml:space="preserve">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+        <rect x="0.5" y="15.6" width="7.9" height="7.9"/>
+        <rect x="15.6" y="0.5" width="7.9" height="7.9"/>
+        <path d="M21.7,13.6 c0,5.5-4.5,10-10,10"/>
+        <polyline points="21.7,12.4 23.5,14.3 21.7,12.4 19.7,14.3"/>
+        <path d="M2.3,10.5 c0-5.5,4.5-10,10-10"/>
+        <polyline points="2.3,11.6 0.5,9.7 2.3,11.6 4.3,9.8"/>
+    </g>
+</svg>

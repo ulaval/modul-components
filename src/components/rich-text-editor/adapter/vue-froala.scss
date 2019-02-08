@@ -270,6 +270,23 @@
                 }
             }
         }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: auto;
+            text-align: center;
+
+            &.fr-fil {
+                float: left;
+                margin-right: $m-spacing--s;
+            }
+
+            &.fr-fir {
+                float: right;
+                margin-left: $m-spacing--s;
+            }
+        }
     }
 
     &.m--is-mobile {
@@ -279,6 +296,7 @@
             &[data-cmd*="-sub-menu"],
             &[data-cmd="fullscreen"],
             &[data-cmd="insertLink"],
+            &[data-cmd="insertImage"],
             &[data-cmd="specialCharacters"] {
                 display: inline-block;
             }

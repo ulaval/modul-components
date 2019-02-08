@@ -26,7 +26,8 @@ export interface TreeNode {
 export enum MSelectionMode {
     None = 'none',
     Single = 'single',
-    Multiple = 'multiple'
+    Multiple = 'multiple',
+    Readonly = 'readonly'
 }
 
 export enum MCheckboxes {
@@ -51,7 +52,8 @@ export class MTree extends ModulVue {
         validator: value =>
             value === MSelectionMode.None ||
             value === MSelectionMode.Single ||
-            value === MSelectionMode.Multiple
+            value === MSelectionMode.Multiple ||
+            value === MSelectionMode.Readonly
     })
     public selectionMode: MSelectionMode;
 
@@ -142,7 +144,11 @@ export class MTree extends ModulVue {
     }
 
     public get selectable(): boolean {
-        return this.selectionMode !== MSelectionMode.None;
+        return this.selectionMode !== MSelectionMode.None && !this.isReadonly;
+    }
+
+    public get isReadonly(): boolean {
+        return this.selectionMode === MSelectionMode.Readonly;
     }
 
     public get isMultipleSelectWithCheckboxes(): boolean {

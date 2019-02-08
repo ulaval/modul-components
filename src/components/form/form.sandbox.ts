@@ -5,12 +5,20 @@ import { FormFieldValidation } from '../../utils/form/form-field-validation/form
 import { FormField } from '../../utils/form/form-field/form-field';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { FORM } from '../component-names';
+import { MMessageState } from '../message/message';
 import FormPlugin from './form';
 import WithRender from './form.sandbox.html';
 
 @WithRender
 @Component
 export class MFormSandbox extends Vue {
+    serverResponses: any[] = [
+        { status: 100, messageState: MMessageState.Information, title: 'Info', message: 'Here is some information about your request treament..' },
+        { status: 400, messageState: MMessageState.Warning, title: 'There was an error on your end', message: 'The error was...' },
+        { status: 500, messageState: MMessageState.Error, title: 'There was an error on our end', message: 'Please try again later' }
+    ];
+    serverResponse: any = this.serverResponses[0];
+    hasServerResponse: boolean = false;
     forms: Form[] = [
         new Form({
             'field-1': new FormField<string>((): string => '', [])
@@ -131,14 +139,18 @@ export class MFormSandbox extends Vue {
                 return new FormFieldValidation();
             }])
         })
-
-
     ];
 
     submit(formIndex: number): void {
+        if (formIndex === 12) {
+            this.hasServerResponse = true;
+        }
     }
 
     reset(formIndex: number): void {
+        if (formIndex === 12) {
+            this.hasServerResponse = false;
+        }
     }
 }
 
