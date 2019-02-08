@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MInputGroup with all props defined when removing legend will render correctly 1`] = `
+<fieldset class="m-input-group m--is-readonly m--is-disabled">
+    <div>true false false true false</div>
+    <m-validation-message disabled="disabled" error-message="Some error message" valid-message="Some valid message" helper-message="Some helper message" class="m-input-group__validation__message"></m-validation-message>
+</fieldset>
+`;
+
+exports[`MInputGroup with all props defined when setting visiblity to false will render correctly 1`] = `
+<fieldset class="m-input-group m--is-readonly m--is-disabled m--border-hidden">
+    <div>true false false true false</div>
+</fieldset>
+`;
+
+exports[`MInputGroup with all props defined will render correctly 1`] = `
+<fieldset class="m-input-group m--is-readonly m--is-disabled">
+    <legend class="m-input-group__legend">Some legend</legend>
+    <div>true false false true false</div>
+    <m-validation-message disabled="disabled" error-message="Some error message" valid-message="Some valid message" helper-message="Some helper message" class="m-input-group__validation__message"></m-validation-message>
+</fieldset>
+`;
+
+exports[`MInputGroup with default values will render correctly 1`] = `
+<fieldset class="m-input-group">
+    <div>false false false false</div>
+    <m-validation-message class="m-input-group__validation__message"></m-validation-message>
+</fieldset>
+`;
