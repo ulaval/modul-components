@@ -102,6 +102,34 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
+    private onPasteTextfield(event: Event): boolean {
+        if (this.type !== MTextfieldType.Number) {
+            this.$emit('paste', event);
+            return true;
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    }
+
+    private onKeydownTextfield(event: KeyboardEvent): void {
+        if (this.type !== MTextfieldType.Number) {
+            this.$emit('keydown', event);
+        } else {
+            if (!(event.ctrlKey || event.altKey
+                || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey === false)
+                || (95 < event.keyCode && event.keyCode < 106)
+                || (event.keyCode === 8) || (event.keyCode === 9)
+                || (event.keyCode > 34 && event.keyCode < 40)
+                || (event.keyCode === 46))) {
+                event.preventDefault();
+            } else {
+                this.$emit('keydown', event);
+            }
+        }
+    }
+
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;
     }
@@ -121,7 +149,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     public get inputType(): MTextfieldType {
-        return !this.passwordAsText ? this.type : MTextfieldType.Text;
+        return !this.passwordAsText ? this.type === MTextfieldType.Number ? MTextfieldType.Telephone : this.type : MTextfieldType.Text;
     }
 
     private get passwordIcon(): boolean {
