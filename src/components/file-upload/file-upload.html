@@ -59,7 +59,8 @@
                                skin="secondary"
                                :multiple="multipleSelection"
                                :store-name="storeName"
-                               keep-store="true"></m-file-select>
+                               keep-store="true"
+                               :allowed-extensions="allowedExtensions"></m-file-select>
             </div>
             <p class="m-file-upload__drop-zone__format"
                v-if="hasAllowedExtensions">
@@ -74,7 +75,8 @@
                            skin="primary"
                            :multiple="maxFiles > 1 ? true : false"
                            :store-name="storeName"
-                           keep-store="true"></m-file-select>
+                           keep-store="true"
+                           :allowed-extensions="allowedExtensions"></m-file-select>
             <p class="m-file-upload__no-drop-zone__format"
                v-if="hasAllowedExtensions">
                 <m-i18n class="m-file-upload__no-drop-zone__format__label"
