@@ -4,10 +4,9 @@ import { createLocalVue, mount, RefSelector, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import { Form } from '../../utils/form/form';
-import { MFormEvents } from '../../utils/form/form-service/form-service';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from '../../utils/form/form-field/form-field';
-import MFormServicePlugin from '../../utils/form/form-service/form-service';
+import MFormServicePlugin, { MFormEvents } from '../../utils/form/form-service/form-service';
 import FormPlugin, { MForm } from './form';
 
 let mockForm: any = {};
