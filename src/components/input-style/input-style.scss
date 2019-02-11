@@ -1,5 +1,7 @@
 @import 'commons';
 
+$m-input-style-base-height: $m-line-height + em;
+
 @mixin input-style-cursor($cursor: default) {
     &,
     .m-input-style__label,
@@ -20,19 +22,11 @@
     border: 1px solid $m-color--grey-light;
     border-radius: 3px;
     padding: $m-input-style--padding;
-    transition: border-color $m-transition-duration--l ease-in-out;
-    margin-top: 0.6em;
+    transition: border-color $m-transition-duration--l ease-in-out, margin-top $m-transition-duration ease;
 
     @include input-style-cursor(text);
 
-    &:hover:not(.m--is-focus),
-    &.m--has-value {
-        &:not(.m--is-disabled):not(.m--is-waiting):not(.m--is-readonly):not(.m--has-error):not(.m--is-valid)::before {
-            border-color: $m-color--text;
-        }
-    }
-
-    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus) {
+    &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus):not(.m--is-readonly) {
         .m-input-style__label {
             color: $m-color--text;
         }
@@ -62,12 +56,6 @@
         .m-input-style {
             &__label {
                 transform: translate3d(0, calc((-50% * 0.8) - #{$m-input-style--padding}), 0) scale(0.8);
-
-                .m-textarea &,
-                .m-rich-text &,
-                .m--has-word-wrap & {
-                    margin-bottom: -1em; // to negate the space occupied by the label
-                }
             }
 
             &__text {
@@ -137,7 +125,7 @@
     &.m--is-anim-ready {
         .m-input-style {
             &__label {
-                transition-property: color, transform;
+                transition-property: color, transform, top;
                 transition-duration: $m-transition-duration--l;
                 transition-timing-function: ease;
             }
@@ -179,26 +167,18 @@
 
     &__body {
         display: flex;
+        position: relative;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
         font-weight: $m-font-weight;
         text-decoration: none;
         background-color: $m-color--white;
+        // background-color: hotpink;
 
         .m--has-label & {
-            position: absolute;
-            bottom: 0;
-            top: 0;
-            width: calc(100% - #{$m-input-style--padding * 2});
-        }
-
-        .m-textarea .m--is-label-up &,
-        .m-rich-text .m--is-label-up &,
-        .m--has-word-wrap .m--is-label-up & {
-            position: relative;
-            width: 100%;
-            bottom: unset;
+            min-height: $m-input-style-base-height;
+            margin-top: -$m-input-style-base-height;
         }
 
         &__left {
@@ -340,21 +320,18 @@
     }
 }
 
-// reserve space for search icon
+// reserve space for icon
+.m-datepicker .m-input-style__label,
 .m--is-type-search .m-input-style__label,
 .m--is-type-search .m-input-style__body__adjust-width-auto {
     padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }
 
 .m--is-type-number .m-textfield__input {
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
     appearance: textfield;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
-        -webkit-appearance: textfield;
-        -moz-appearance: textfield;
         appearance: textfield;
     }
 }

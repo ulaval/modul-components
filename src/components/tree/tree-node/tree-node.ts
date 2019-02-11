@@ -29,6 +29,9 @@ export class MTreeNode extends ModulVue {
     public selectable: boolean;
 
     @Prop()
+    public readonly: boolean;
+
+    @Prop()
     public useFilesIcons: boolean;
 
     @Prop({ default: '' })
@@ -57,6 +60,13 @@ export class MTreeNode extends ModulVue {
             } else if (this.isButtonAutoSelect && this.hasChildren) {
                 this.onAutoSelectChildCheckboxChange(this.isSelected, true);
             }
+        }
+    }
+
+    protected mounted(): void {
+        this.internalOpen = this.open || this.isParentOfOpenedFolder() || this.isParentOfSelectedFile;
+        if (this.isSelected) {
+            this.notifyParentOfChildCheckboxState();
         }
     }
 
@@ -106,13 +116,6 @@ export class MTreeNode extends ModulVue {
         }
     }
 
-    protected mounted(): void {
-        this.internalOpen = this.open ? this.open : this.isParentOfSelectedFile;
-        if (this.isSelected) {
-            this.notifyParentOfChildCheckboxState();
-        }
-    }
-
     private recursiveSelect(): void {
         let childrenPaths: string[] = [];
         let addNodesToSelected: boolean = false;
@@ -153,6 +156,22 @@ export class MTreeNode extends ModulVue {
         }
     }
 
+    private isParentOfOpenedFolder(currentNode: TreeNode = this.node): boolean {
+        let found: boolean = false;
+        if (currentNode.children && currentNode.children.length > 0) {
+            currentNode.children.forEach(child => {
+                if (child.children && child.children.length > 0) {
+                    if (child.open) {
+                        found = true;
+                    } else {
+                        found = this.isParentOfOpenedFolder(child);
+                    }
+                }
+            });
+        }
+        return found;
+    }
+
     private updateCheckboxParentNode(allChildrenSelected: boolean): void {
         if (allChildrenSelected && !this.isSelected) {
             this.$emit('click', this.currentPath); // Auto-push current, emit to parent for recursivity
@@ -187,10 +206,18 @@ export class MTreeNode extends ModulVue {
     public get isDisabled(): boolean {
         let isDisabled: boolean = false;
         let inDisabledNodes: boolean = this.disabledNodes && this.disabledNodes.indexOf(this.currentPath) !== -1;
-        if (!this.selectable && !this.isFolder || inDisabledNodes) {
+        if (!this.selectable && !this.isFolder && !this.readonly || inDisabledNodes && !this.readonly) {
             isDisabled = true;
         }
         return isDisabled;
+    }
+
+    public get isReadonlyStyle(): boolean {
+        let isReadonly: boolean = false;
+        if (!this.selectable && !this.isFolder && this.readonly) {
+            isReadonly = true;
+        }
+        return isReadonly;
     }
 
     public get currentPath(): string {

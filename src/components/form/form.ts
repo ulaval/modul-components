@@ -19,10 +19,10 @@ export class MForm extends ModulVue {
     public requiredMarker: boolean;
 
     public messageStateError: MMessageState = MMessageState.Error;
-
     public errors: string[] = [];
 
     @Emit('submit')
+
     public onSubmit(): void { }
 
     @Emit('reset')
@@ -56,7 +56,6 @@ export class MForm extends ModulVue {
         if (this.form) {
             this.form.reset();
         }
-
         this.onReset();
     }
 

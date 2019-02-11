@@ -9,12 +9,16 @@ const CSSCURSOR: string = 'm--has-cursor-pointer';
 
 let wrapper: Wrapper<MInputStyle>;
 
-beforeEach(() => {
-    Vue.use(InputStylePlugin);
-    wrapper = shallowMount(MInputStyle);
-});
-
 describe('MInputStyle', () => {
+    beforeEach(() => {
+        Vue.use(InputStylePlugin);
+        wrapper = shallowMount(MInputStyle, {
+            slots: {
+                default: '<input ref="input" type="text"/>'
+            }
+        });
+    });
+
     it('should render correctly', () => {
         expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
@@ -29,7 +33,7 @@ describe('MInputStyle', () => {
 
             wrapper.find(ROOT).trigger('click');
 
-            expect(wrapper.vm.labelIsUp).toBeFalsy();
+            expect(wrapper.vm.isLabelUp).toBeFalsy();
             expect(wrapper.classes()).not.toContain(CSSLABELUP);
         });
     });

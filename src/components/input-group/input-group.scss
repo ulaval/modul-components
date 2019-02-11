@@ -1,0 +1,48 @@
+@import 'commons';
+@import './../input-style/input-style.scss';
+
+.m-input-group {
+    border: 1px solid $m-color--grey-light;
+    border-radius: $m-border-radius--s;
+
+    &.m--border-hidden {
+        border-width: 0;
+    }
+
+    &__legend {
+        color: $m-color--text-light;
+    }
+
+    &.m--is-readonly,
+    &.m--is-disabled {
+        border-style: dashed;
+
+        .m-input-group__legend {
+            color: $m-input-style--color-disabled;
+        }
+    }
+
+    &.m--is-waiting {
+        @include input-style-cursor(wait);
+    }
+
+    &.m--is-valid {
+        border-color: $m-input-style--color-valid;
+
+        .m-input-group__legend {
+            color: $m-input-style--color-valid;
+        }
+    }
+
+    &.m--has-error {
+        border-color: $m-input-style--color-error;
+
+        .m-input-group__legend {
+            color: $m-input-style--color-error;
+        }
+    }
+
+    &__validation__message {
+        margin-top: $m-spacing--xs;
+    }
+}

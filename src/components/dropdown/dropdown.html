@@ -11,7 +11,7 @@
                    :label-for="id"
                    :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :focus="open"
+                   :focus="isFocus"
                    :empty="isEmpty"
                    :error="hasError"
                    :cursor-pointer="hasPointer"
@@ -37,7 +37,8 @@
                @keydown.down.prevent="onKeydownDown"
                @keydown.tab="onKeydownTab"
                @keydown="inputOnKeydown"
-               @focus="inputOnFocus"
+               @focusin="onFocusIn"
+               @focusout="onFocusOut"
                v-model="selectedText">
         <template slot="adjust-width-auto"
                   v-if="width === 'auto'">{{ selectedText }}</template>
