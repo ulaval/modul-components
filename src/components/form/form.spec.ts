@@ -4,20 +4,13 @@ import { createLocalVue, mount, RefSelector, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import { Form } from '../../utils/form/form';
+import { MFormEvents } from '../../utils/form/form-service/form-service';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from '../../utils/form/form-field/form-field';
-import { ToastService } from '../../utils/toast/toast-service';
+import MFormServicePlugin from '../../utils/form/form-service/form-service';
 import FormPlugin, { MForm } from './form';
 
 let mockForm: any = {};
-let mockToast: any = {};
-jest.mock('../../utils/toast/toast-service', () => {
-    return {
-        ToastService: jest.fn().mockImplementation(() => {
-            return mockToast;
-        })
-    };
-});
 jest.mock('../../utils/form/form', () => {
     return {
         Form: jest.fn().mockImplementation(() => {
@@ -36,7 +29,7 @@ describe(`MForm`, () => {
     let formHasError: boolean = false;
     let nbFieldsThatHasError: number = 0;
     let nbOfErrors: number = 0;
-    let totalNbofErrors: number = 0;
+    let totalNbOfErrors: number = 0;
     let mockGetErrorsForSummary: jest.Mock = jest.fn(() => []);
     let isValid: boolean = true;
     let wrapper: Wrapper<MForm>;
@@ -49,7 +42,6 @@ describe(`MForm`, () => {
                 form: FORM
             }
         });
-        wrapper.vm.$toast = new ToastService();
     };
 
     const initialiseForm: Function = (multiple: boolean): void => {
@@ -69,21 +61,18 @@ describe(`MForm`, () => {
     beforeEach(() => {
         localVue = createLocalVue();
         localVue.use(FormPlugin);
+        localVue.use(MFormServicePlugin);
         mockForm = {
             id: 'uuid',
             hasError: formHasError,
             reset: jest.fn(),
-            totalNbofErrors,
+            totalNbOfErrors: totalNbOfErrors,
             nbFieldsThatHasError,
             nbOfErrors,
             getErrorsForSummary: mockGetErrorsForSummary,
             focusFirstFieldWithError: jest.fn(),
             validateAll: jest.fn(),
             isValid
-        };
-        mockToast = {
-            clear: jest.fn(),
-            show: jest.fn()
         };
         ((Form as unknown) as jest.Mock).mockClear();
         initialiseForm();
@@ -105,12 +94,12 @@ describe(`MForm`, () => {
     });
 
     describe(`Given a submit event is triggered`, () => {
-        it(`Then it removes toasts`, () => {
-            const spy: jest.SpyInstance = jest.spyOn(mockToast, 'clear');
+        it(`Then it emits an event to clear`, () => {
+            const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
 
             wrapper.trigger('submit');
 
-            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(MFormEvents.formErrorClear);
         });
 
         describe(`When there are no errors`, () => {
@@ -127,7 +116,7 @@ describe(`MForm`, () => {
         describe(`When there is one error`, () => {
             beforeEach(() => {
                 isValid = false;
-                totalNbofErrors = 1;
+                totalNbOfErrors = 1;
                 nbFieldsThatHasError = 1;
                 mockGetErrorsForSummary = jest.fn(() => {
                     return [ERROR_MESSAGE_SUMMARY];
@@ -142,10 +131,15 @@ describe(`MForm`, () => {
                 expect(wrapper.find(REF_SUMMARY).exists()).toBeFalsy();
             });
 
-            it(`Then it focuses on the first error`, () => {
+            it(`Then it emits an event to handle form errors`, () => {
+                const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+
                 wrapper.trigger('submit');
 
-                expect(mockForm.focusFirstFieldWithError).toHaveBeenCalledTimes(1);
+                expect(spy).toHaveBeenCalledWith(MFormEvents.formError, {
+                    form: mockForm,
+                    totalNbOfErrors
+                });
             });
 
             it(`Then the submit event is not sent to the parent`, () => {
@@ -153,20 +147,12 @@ describe(`MForm`, () => {
 
                 expect(wrapper.emitted('submit')).toBeFalsy();
             });
-
-            it(`Then it does not show a toast`, () => {
-                const spy: jest.SpyInstance = jest.spyOn(mockToast, 'show');
-
-                wrapper.trigger('submit');
-
-                expect(spy).toHaveBeenCalledTimes(0);
-            });
         });
 
         describe(`When there are multiple errors`, () => {
             beforeEach(() => {
                 isValid = false;
-                totalNbofErrors = 2;
+                totalNbOfErrors = 2;
                 nbFieldsThatHasError = 2;
                 mockGetErrorsForSummary = jest.fn(() => {
                     return [ERROR_MESSAGE_SUMMARY, ERROR_MESSAGE_SUMMARY];
@@ -181,10 +167,15 @@ describe(`MForm`, () => {
                 expect(wrapper.emitted('submit')).toBeFalsy();
             });
 
-            it(`Then it focuses on the first error`, () => {
+            it(`Then it emits an event to handle form errors`, () => {
+                const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+
                 wrapper.trigger('submit');
 
-                expect(mockForm.focusFirstFieldWithError).toHaveBeenCalledTimes(1);
+                expect(spy).toHaveBeenCalledWith(MFormEvents.formError, {
+                    form: mockForm,
+                    totalNbOfErrors
+                });
             });
 
             it(`Then the summary of errors is shown`, async () => {
@@ -192,18 +183,18 @@ describe(`MForm`, () => {
 
                 expect(wrapper.find(REF_SUMMARY).exists()).toBeTruthy();
             });
-
-            it(`Then it shows a toast`, () => {
-                const spy: jest.SpyInstance = jest.spyOn(mockToast, 'show');
-
-                wrapper.trigger('submit');
-
-                expect(spy).toHaveBeenCalledTimes(1);
-            });
         });
     });
 
     describe(`When the reset event is triggered`, () => {
+        it(`Then an event is set to clear the form of errors`, () => {
+            const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+
+            wrapper.trigger('submit');
+
+            expect(spy).toHaveBeenCalledWith(MFormEvents.formErrorClear);
+        });
+
         it(`Then the reset event is sent to the parent`, () => {
             wrapper.trigger('reset');
 

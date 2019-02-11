@@ -5,12 +5,12 @@ import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
+import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import TextfieldPlugin from '../textfield/textfield';
 import { FormFieldDirective } from './form-field';
 
 let mockFormField: any = {};
-let mockScrollTo: any = {};
 
 jest.mock('../../utils/form/form-field/form-field', () => {
     return {
@@ -20,16 +20,8 @@ jest.mock('../../utils/form/form-field/form-field', () => {
     };
 });
 
-jest.mock('../../utils/scroll-to/scroll-to', () => {
-    return {
-        ScrollTo: jest.fn().mockImplementation(() => {
-            return mockScrollTo;
-        })
-    };
-});
-
 describe('form-field', () => {
-    let element: Wrapper<Vue>;
+    let wrapper: Wrapper<Vue>;
     let localVue: VueConstructor<ModulVue>;
 
     beforeEach(() => {
@@ -37,6 +29,7 @@ describe('form-field', () => {
         localVue = createLocalVue();
         localVue.directive(FORM_FIELD_NAME, FormFieldDirective);
         localVue.use(TextfieldPlugin);
+        localVue.use(ScrollToPlugin);
     });
 
     describe(`The form validate its fields`, () => {
@@ -46,9 +39,6 @@ describe('form-field', () => {
             hasError: true,
             touched: false,
             touch: jest.fn()
-        };
-        mockScrollTo = {
-            goTo: jest.fn()
         };
 
         let formField: FormField<any>;
@@ -63,7 +53,7 @@ describe('form-field', () => {
                 'a-field': formField
             });
 
-            element = mount(
+            wrapper = mount(
                 {
                     template: `<input v-m-form-field="form.get('a-field')" ref="field"></input>`,
                     data(): any {
@@ -72,38 +62,38 @@ describe('form-field', () => {
                         };
                     }
                 },
-                { localVue: localVue }
+                { localVue }
             );
         });
 
         it(`the element should be scrolled to`, async () => {
-            const spy: jest.SpyInstance = jest.spyOn(mockScrollTo, 'goTo');
+            const spy: jest.SpyInstance = jest.spyOn(localVue.prototype.$scrollTo, 'goTo');
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
 
-            await element.vm.$forceUpdate();
+            await wrapper.vm.$forceUpdate();
 
-            expect(spy).toHaveBeenCalledWith(element.element, -200);
+            expect(spy).toHaveBeenCalledWith(wrapper.element, -200);
         });
 
         it(`the element should be focused`, async () => {
-            const spy: any = jest.spyOn(element.find({ ref: 'field' }).element, 'focus');
+            const spy2: jest.SpyInstance = jest.spyOn(wrapper.find({ ref: 'field' }).element, 'focus');
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
 
-            await element.vm.$forceUpdate();
+            await wrapper.vm.$forceUpdate();
 
             expect(mockFormField.shouldFocus).toBe(false);
-            expect(spy).toHaveBeenCalled();
+            expect(spy2).toHaveBeenCalled();
         });
 
         it(`it should touch the form field on blur`, () => {
-            const spy: any = jest.spyOn(mockFormField, 'touch');
+            const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'touch');
 
-            element.find({ ref: 'field' }).element.focus();
-            element.find({ ref: 'field' }).element.blur();
+            wrapper.find({ ref: 'field' }).element.focus();
+            wrapper.find({ ref: 'field' }).element.blur();
 
-            expect(spy).toBeCalled();
+            expect(spy2).toBeCalled();
         });
     });
 });

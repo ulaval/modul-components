@@ -1,16 +1,18 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
+import MFormServicePlugin, { FormClearToastBehavior, FormErrorFocusBehavior, FormErrorToastBehavior } from '../../utils/form/form-service/form-service';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
+import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
 import FormPlugin from './form';
 import WithRender from './form.sandbox.html';
 
 @WithRender
 @Component
-export class MFormSandbox extends Vue {
+export class MFormSandbox extends ModulVue {
     forms: Form[] = [
         new Form({
             'field-1': new FormField<string>((): string => '', [])
@@ -145,6 +147,12 @@ export class MFormSandbox extends Vue {
         })
     ];
 
+    created(): void {
+        this.$form.subscribe(new FormErrorToastBehavior());
+        this.$form.subscribe(new FormClearToastBehavior());
+        this.$form.subscribe(new FormErrorFocusBehavior());
+    }
+
     submit(formIndex: number): void {
     }
 
@@ -154,6 +162,7 @@ export class MFormSandbox extends Vue {
 
 const MFormSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(MFormServicePlugin);
         v.use(FormPlugin);
         v.component(`${FORM}-sandbox`, MFormSandbox);
     }

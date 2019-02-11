@@ -35,7 +35,7 @@ export class Form {
     /**
      * Total number of errors
      */
-    get totalNbofErrors(): number {
+    get totalNbOfErrors(): number {
         return this.nbFieldsThatHasError + this.nbOfErrors;
     }
 

@@ -1,9 +1,14 @@
-import { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { FormField } from '../../utils/form/form-field/form-field';
-import { ScrollTo } from '../../utils/scroll-to/scroll-to';
 
 let touchFormField: any;
 const DISTANCE_FROM_TOP: number = -200;
+const scrollToThisField: Function = (element: HTMLElement): void => {
+    if (!(Vue.prototype).$scrollTo) {
+        throw new Error('FormField => this.$ScrollTo is undefined, you must install the scrollTo Plugin');
+    }
+    (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
+};
 
 export const FormFieldDirective: DirectiveOptions = {
     inserted(
@@ -24,16 +29,15 @@ export const FormFieldDirective: DirectiveOptions = {
         const formField: FormField<any> = binding.value;
 
         if (formField.shouldFocus) {
-            let scrollTo: ScrollTo = new ScrollTo();
             if (el instanceof HTMLInputElement) {
-                scrollTo.goTo(el, DISTANCE_FROM_TOP);
+                scrollToThisField(el);
                 el.focus();
             } else {
                 const selector: string = 'input, textarea, [contenteditable=true]';
                 const elements: NodeListOf<HTMLInputElement> = el.querySelectorAll(selector);
 
                 if (elements.length > 0) {
-                    scrollTo.goTo(elements[0], DISTANCE_FROM_TOP);
+                    scrollToThisField(elements[0]);
                     elements[0].focus();
                 }
             }
