@@ -1,12 +1,11 @@
-import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { FormField } from '../../utils/form/form-field/form-field';
+import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
 
 let touchFormField: any;
 const DISTANCE_FROM_TOP: number = -200;
 const scrollToThisField: Function = (element: HTMLElement): void => {
-    if (!(Vue.prototype).$scrollTo) {
-        throw new Error('FormField => this.$ScrollTo is undefined, you must install the scrollTo Plugin');
-    }
     (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
 };
 
@@ -52,3 +51,12 @@ export const FormFieldDirective: DirectiveOptions = {
         el.removeEventListener('blur', touchFormField, true);
     }
 };
+
+const FormFieldDirectivePlugin: PluginObject<any> = {
+    install(v): void {
+        v.use(ScrollToPlugin);
+        v.directive(FORM_FIELD_NAME, FormFieldDirective);
+    }
+};
+
+export default FormFieldDirectivePlugin;

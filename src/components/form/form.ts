@@ -1,13 +1,12 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
-import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
 import { MFormEvents } from '../../utils/form/form-service/form-service';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin, { MMessageState } from '../message/message';
-import { FormFieldDirective } from './form-field';
+import FormFieldDirectivePlugin from './form-field';
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender
@@ -80,7 +79,7 @@ const FormPlugin: PluginObject<any> = {
         v.prototype.$log.debug(FORM, 'plugin.install');
         v.use(I18nPlugin);
         v.use(MessagePlugin);
-        v.directive(FORM_FIELD_NAME, FormFieldDirective);
+        v.use(FormFieldDirectivePlugin);
         v.component(FORM, MForm);
     }
 };

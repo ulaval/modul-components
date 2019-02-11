@@ -1,14 +1,11 @@
-import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
-import Vue, { VueConstructor } from 'vue';
+import { mount, Wrapper } from '@vue/test-utils';
+import Vue from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
-import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
-import TextfieldPlugin from '../textfield/textfield';
-import { FormFieldDirective } from './form-field';
+import FormFieldDirectivePlugin from './form-field';
 
 let mockFormField: any = {};
 
@@ -19,17 +16,14 @@ jest.mock('../../utils/form/form-field/form-field', () => {
         })
     };
 });
+window.scrollTo = jest.fn();
 
 describe('form-field', () => {
-    let wrapper: Wrapper<Vue>;
-    let localVue: VueConstructor<ModulVue>;
+    let wrapper: Wrapper<ModulVue>;
 
     beforeEach(() => {
         resetModulPlugins();
-        localVue = createLocalVue();
-        localVue.directive(FORM_FIELD_NAME, FormFieldDirective);
-        localVue.use(TextfieldPlugin);
-        localVue.use(ScrollToPlugin);
+        Vue.use(FormFieldDirectivePlugin);
     });
 
     describe(`The form validate its fields`, () => {
@@ -61,13 +55,14 @@ describe('form-field', () => {
                             form: form
                         };
                     }
-                },
-                { localVue }
+                }, {
+                    localVue: Vue
+                }
             );
         });
 
         it(`the element should be scrolled to`, async () => {
-            const spy: jest.SpyInstance = jest.spyOn(localVue.prototype.$scrollTo, 'goTo');
+            const spy: jest.SpyInstance = jest.spyOn((Vue.prototype).$scrollTo, 'goTo');
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
 
@@ -93,7 +88,7 @@ describe('form-field', () => {
             wrapper.find({ ref: 'field' }).element.focus();
             wrapper.find({ ref: 'field' }).element.blur();
 
-            expect(spy2).toBeCalled();
+            expect(spy2).toHaveBeenCalled();
         });
     });
 });
