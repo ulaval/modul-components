@@ -4,6 +4,7 @@
          ref="countTotal">{{ status }}</div>
     <m-progress :value="visiblePourcentage"
                 :border-radius="false"
+                :skin="skin"
                 ref="progress"></m-progress>
     <m-button v-if="isButtonVisible"
               :skin="buttonSkin"
