@@ -1,0 +1,101 @@
+<div class="m-base-calendar"
+     :id="id">
+
+
+    <nav class="m-base-calendar__header">
+        <m-icon-button class="m-base-calendar__previus"
+                       skin="link"
+                       @click.stop="onMonthPrevious()"
+                       :disabled="isMinMonth"
+                       icon-name="m-svg__chevron--left"
+                       ref="previousMonth">{{ previousMonthLabel }}</m-icon-button>
+        <button class="m-base-calendar__months"
+                @click.stop="onYearClick"
+                aria-live="polite"
+                ref="currentMonth"
+                type="button">{{ currentMonthName }} {{ currentYear }}
+        </button>
+        <m-icon-button class="m-base-calendar__next"
+                       skin="link"
+                       @click.stop="onMonthNext()"
+                       :disabled="isMaxMonth"
+                       icon-name="m-svg__chevron--right"
+                       ref="nextMonth">{{ nextMonthLabel }}</m-icon-button>
+    </nav>
+    <div class="m-base-calendar__body"
+         aria-live="polite">
+        <table class="m-base-calendar__table">
+            <template v-if="isPickerModeYear">
+                <tr v-for="(yearRow, yearIndex) in years"
+                    :key="yearIndex">
+                    <template v-for="(y, rowIndex) in yearRow">
+                        <td class="m-base-calendar__table-cell"
+                            v-if="y !== undefined"
+                            :key="rowIndex">
+                            <button class="m-base-calendar__item"
+                                    :class="{'m--is-selected': y.isCurrent}"
+                                    @click.stop="onYearSelect(y)"
+                                    :ref="buildRef('year', y)"
+                                    type="button">
+                                <span class="m-base-calendar__item__text">{{ y.year }}</span>
+                            </button>
+                        </td>
+                    </template>
+                </tr>
+            </template>
+            <template v-if="isPickerModeMonth">
+                <tr v-for="(monthRow, monthIndex) in months"
+                    :key="monthIndex">
+                    <td class="m-base-calendar__body-cell"
+                        v-for="(m, rowIndex) in monthRow"
+                        :key="rowIndex">
+                        <button class="m-base-calendar__item"
+                                :class="{'m--is-selected': m.isCurrent,
+                                                        'm--is-disabled': m.isDisabled}"
+                                @click.stop="onMonthSelect(m)"
+                                :disabled="m.isDisabled"
+                                :ref="buildRef('month', m)"
+                                type="button">
+                            <span class="m-base-calendar__item__text">{{ monthIndexToShortName(m.month) }}</span>
+                        </button>
+                    </td>
+                </tr>
+            </template>
+            <template v-if="isPickerModeDay">
+                <thead>
+                    <tr>
+                        <td class="m-base-calendar__weekday"
+                            v-for="(w, weekdayIndex) in weekdaysLabels"
+                            :key="weekdayIndex">{{ w }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(dayRow, dayIndex) in daysOfMonth"
+                        :key="dayIndex">
+                        <td class="m-base-calendar__table-cell"
+                            :class="{ 'm--is-selected': d.isSelected,
+                                      'm--is-highlighted': d.isHighlighted }"
+                            v-for="(d, rowIndex) in dayRow"
+                            :key="rowIndex">
+                            <button class="m-base-calendar__item"
+                                    :class="{ 'm--is-selected': d.isSelected,
+                                                            'm--is-today': d.isToday,
+                                                            'm--is-disabled': d.isDisabled,
+                                                            'm--is-hidden': hideDay(d),
+                                                            'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
+                                                            'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
+                                                            'm--is-highlighted': d.isHighlighted }"
+                                    @click.stop="onDaySelect(d)"
+                                    @mouseenter="onDayMouseEnter(d)"
+                                    @mouseleave="onDayMouseLeave(d)"
+                                    :ref="buildRef('day', d)"
+                                    type="button">
+                                <span class="m-base-calendar__item__text">{{ d.day }}</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </template>
+        </table>
+    </div>
+</div>

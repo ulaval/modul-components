@@ -79,13 +79,13 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     }
 
     protected isDaySelected(date: ModulDate): boolean {
-        return ((this.currentRange.begin && this.currentRange.end) && date.isBetween(this.currentRange.begin, this.currentRange.end, DatePrecision.DAY))
-            || (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
+        return (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
             || (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
     }
 
     protected isHighlighted(date: ModulDate): boolean {
-        return (!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date);
+        return ((!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date))
+            || ((!!this.currentRange.begin && !!this.currentRange.end) && date.isBetween(this.currentRange.begin, this.currentRange.end, DatePrecision.DAY));
     }
 
     private betweenBeginAndHightlight(date: ModulDate): boolean {

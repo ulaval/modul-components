@@ -4,6 +4,7 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
+import MBaseCalendar from './calendar-renderer/base-calendar/base-calendar';
 import MSimpleCalendar from './calendar-renderer/simple-calendar';
 import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
@@ -19,7 +20,8 @@ export enum CalendarMode {
 @Component({
     components: {
         MCalendarStateMachine,
-        MSimpleCalendar
+        MSimpleCalendar,
+        MBaseCalendar
     }
 })
 export class MCalendar extends ModulVue {

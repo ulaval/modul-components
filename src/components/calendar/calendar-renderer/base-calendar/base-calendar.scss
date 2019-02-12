@@ -1,0 +1,201 @@
+@import 'commons';
+
+$m-datepicker--item-dimension: $m-touch-size !default;
+$m-base-calendar--buttons-size: $m-touch-size !default;
+$m-base-calendar--weekday-height: 25px !default; // DOM number
+
+%base-pseudo-content {
+    transition: transform $m-transition-duration ease, opacity $m-transition-duration ease;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    z-index: 1;
+    transform: translate3d(50%, 50%, 0);
+    content: '';
+    width: $m-touch-size;
+    height: $m-touch-size;
+    background: $m-color--interactive-lightest;
+}
+
+.m-base-calendar {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    border: $m-border-width--s solid $m-color--border;
+    padding: m-spacing(m);
+
+    &__header,
+    &__body {
+        background: $m-color--white;
+
+        @media (max-width: $m-mq--max--s) {
+            width: 100%;
+        }
+
+        @media (min-width: $m-mq--min--s) {
+            min-width: 7 * $m-datepicker--item-dimension;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: m-spacing(s);
+    }
+
+    &__months,
+    &__item {
+        background: none;
+        border: 0;
+        color: inherit;
+        font: inherit;
+        outline: none;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    &__months {
+        transition: color $m-transition-duration ease;
+        font-weight: $m-font-weight--bold;
+        flex: 1;
+    }
+
+    &__next,
+    &__previus,
+    &__months {
+        color: m-color(interactive);
+
+        &:hover,
+        &:focus {
+            color: m-color(interactive, darker);
+        }
+    }
+
+    &__table {
+        border-spacing: 0;
+        border-collapse: collapse;
+        text-align: center;
+        min-width: 100%;
+        min-height: $m-datepicker--item-dimension * 5 + $m-base-calendar--weekday-height;
+
+        &-cell {
+            padding: 0;
+        }
+    }
+
+    &__weekday {
+        padding: 0 0 m-spacing(xs) 0;
+        width: $m-datepicker--item-dimension;
+        font-weight: $m-font-weight--bold;
+        color: m-color(grey);
+        border-bottom: $m-border-width--s solid $m-color--border;
+    }
+
+    &__item {
+        position: relative;
+        width: $m-datepicker--item-dimension;
+        height: $m-datepicker--item-dimension;
+
+        &__text {
+            position: relative;
+            z-index: 2;
+        }
+
+        &::after {
+            @extend %base-pseudo-content;
+
+            opacity: 0;
+        }
+
+        &:not(.m--is-highlighted) {
+            &::after {
+                transform: translate3d(50%, 50%, 0) scale(0);
+                border-radius: 50%;
+            }
+        }
+
+        &:hover:not(.m--is-highlighted),
+        &:focus,
+        &.m--is-selected,
+        &.m--is-today {
+            &::after {
+                transform: translate3d(50%, 50%, 0) scale(1);
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &.m--is-selected,
+        &.m--is-today,
+        &.m--is-highlighted {
+            &::after {
+                opacity: 1;
+            }
+        }
+
+        &.m--is-selected {
+            color: #fff;
+            font-weight: $m-font-weight--bold;
+
+            &::after {
+                background: $m-color--interactive-light;
+            }
+
+            &.m--is-highlighted {
+                &::after {
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        &.m--is-today:not(.m--is-selected) {
+            &::after {
+                background: $m-color--grey-light;
+                font-weight: $m-font-weight--bold;
+            }
+        }
+
+        &.m--is-other-month:not(.m--is-selected) {
+            transition: color $m-transition-duration ease;
+            color: $m-color--disabled;
+
+            &:hover,
+            &:focus {
+                color: $m-color--text;
+            }
+        }
+
+        &.m--is-hidden {
+            display: none;
+        }
+    }
+
+    .m--is-disabled {
+        background-color: none;
+        color: $m-color--grey-light;
+        cursor: default;
+    }
+}
+
+// for range selection visual
+.m--is-selected + .m--is-highlighted {
+    .m-base-calendar__item {
+        &::before {
+            @extend %base-pseudo-content;
+
+            z-index: 0;
+            transform: translate3d(0, 50%, 0);
+        }
+    }
+}
+
+// for range selection visual
+.m--is-highlighted + .m--is-selected {
+    .m-base-calendar__item {
+        &::before {
+            @extend %base-pseudo-content;
+
+            transform: translate3d(0, 50%, 0);
+        }
+    }
+}
