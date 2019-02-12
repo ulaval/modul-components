@@ -1,5 +1,10 @@
 {
     "extends": "tslint-config-standard",
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**"
+        ]
+    },
     "rulesDirectory": [
         "./conf/tslint"
     ],
