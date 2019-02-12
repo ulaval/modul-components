@@ -415,7 +415,7 @@ export enum FroalaStatus {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return this.removeEmptyHTML(data);
+                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
                 [froalaEvents.ShowLinkInsert]: (_e, editor) => {
@@ -580,7 +580,14 @@ export enum FroalaStatus {
     }
 
     private removeEmptyHTML(value: string): string {
-        return this.froalaEditor.clean.html(value, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+        const div: HTMLElement = document.createElement('div');
+        div.innerHTML = value;
+        if ((div.textContent || div.innerText || '').trim().length > 0) {
+            return value;
+        } else if (value.includes('<img')) {
+            return value;
+        }
+        return '';
     }
 
     private registerEvent(element: any, eventName: any, callback: any): void {
