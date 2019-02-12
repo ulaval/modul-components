@@ -10,7 +10,9 @@ function resolve(dir) {
 }
 
 module.exports = function (env) {
+
     let isLib = !!(env && env.lib);
+    let isSilent = !!(env && env.silent);
 
     let outputObj;
     if (isLib) {
@@ -33,7 +35,7 @@ module.exports = function (env) {
 
     var config = {
 
-        mode: !isLib ? 'development' : 'production',
+        mode: isLib ? 'production' : 'development',
 
         entry: {
             app: [isLib ? './src/lib.ts' : './tests/app/main.ts']
@@ -42,6 +44,11 @@ module.exports = function (env) {
         externals: externalsObj,
 
         output: outputObj,
+
+        devServer: {
+            contentBase: path.join(__dirname, 'src'),
+            historyApiFallback: true
+        },
 
         resolve: {
             extensions: ['.js', '.ts', '.html'],
@@ -136,7 +143,11 @@ module.exports = function (env) {
 
         },
         plugins: [
-            new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
+            new ForkTsCheckerWebpackPlugin({
+                tsconfig: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
+                checkSyntacticErrors: true,
+                silent: isSilent
+            }),
             new ProgressPlugin(),
             new StyleLintPlugin({
                 configFile: '.stylelintrc',
