@@ -159,8 +159,14 @@ describe(`A range date state`, () => {
                 expect(calendar.dates.max.isSame(new ModulDate(MAX_DATE), DatePrecision.DAY)).toBe(true);
             });
 
-            it(`then current value will be defined`, () => {
+            it(`then current value will be selected`, () => {
                 const selectedDate: DayState[] = calendar.days.filter((day: DayState) => day.isSelected === true);
+
+                expect(selectedDate).toHaveLength(1);
+            });
+
+            it(`then values between selected dates will be highlighted`, () => {
+                const selectedDate: DayState[] = calendar.days.filter((day: DayState) => day.isHighlighted === true);
 
                 expect(selectedDate).toHaveLength(23);
             });
@@ -401,18 +407,14 @@ describe(`A range date state`, () => {
                     const selectedDays: DayState[] = calendarRangeDateState.buildCurrentCalendar().calendar
                         .days.filter((day: DayState) => day.isSelected);
 
-                    expect(selectedDays).toHaveLength(8);
+                    expect(selectedDays).toHaveLength(2);
                     expect(selectedDays[0].day).toBe(3);
                     expect(selectedDays[0].month).toBe(5);
                     expect(selectedDays[0].year).toBe(2019);
 
-                    expect(selectedDays[selectedDays.length / 2].day).toBe(7);
-                    expect(selectedDays[selectedDays.length / 2].month).toBe(5);
-                    expect(selectedDays[selectedDays.length / 2].year).toBe(2019);
-
-                    expect(selectedDays.slice(-1)[0].day).toBe(10);
-                    expect(selectedDays.slice(-1)[0].month).toBe(5);
-                    expect(selectedDays.slice(-1)[0].year).toBe(2019);
+                    expect(selectedDays[1].day).toBe(10);
+                    expect(selectedDays[1].month).toBe(5);
+                    expect(selectedDays[1].year).toBe(2019);
                 });
 
                 it(`will update current date through callback`, () => {
