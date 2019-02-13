@@ -5,15 +5,16 @@ import Vue from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { polyFillActive } from '../../utils/polyfills';
 import { MDOMPlugin } from '../domPlugin';
-import { MDraggableEventNames, MDraggableOptions } from '../drag-and-drop/draggable/draggable';
+import { MDraggable, MDraggableOptions } from '../drag-and-drop/draggable/draggable';
 import { MDroppable, MDroppableClassNames } from '../drag-and-drop/droppable/droppable';
 import DroppableGroupPlugin from '../drag-and-drop/droppable/droppable-group';
-import { MDraggable } from './../drag-and-drop/draggable/draggable';
 import { MSortableDefaultInsertionMarkerBehavior } from './insertion-behavior';
-import SortablePlugin, { MSortable, MSortableAction, MSortableClassNames, MSortableEventNames, MSortableOptions, MSortInsertPositions } from './sortable';
-
+import SortablePlugin, { MSortable, MSortableAction, MSortableClassNames, MSortableOptions, MSortEvent, MSortInfo, MSortInsertPositions } from './sortable';
 
 jest.mock('./insertion-behavior');
+let onAddSortInfo: MSortInfo;
+let onMoveSortInfo: MSortInfo;
+let onRemoveSortInfo: MSortInfo;
 
 describe('sortable', () => {
     beforeEach(() => {
@@ -25,6 +26,10 @@ describe('sortable', () => {
         MSortable.activeSortContainer = undefined;
         MDraggable.currentDraggable = undefined;
         MDroppable.currentHoverDroppable = undefined;
+
+        onAddSortInfo = undefined as any;
+        onMoveSortInfo = undefined as any;
+        onRemoveSortInfo = undefined as any;
     });
 
     const emptyPlaceholderTemplate: string = `<li v-for="item in items" v-if="items.length">Item #{{ $index }}</li>`;
@@ -32,21 +37,34 @@ describe('sortable', () => {
         (bindingValue?: boolean, options?: MSortableOptions, innerHtml?: string) => {
             const innerHTML: string = `${innerHtml || emptyPlaceholderTemplate}`;
             let template: string;
+
+            const handlers: string = `@sortable:add="onAdd" @sortable:move="onMove" @sortable:remove="onRemove"`;
             if (options) {
-                template = bindingValue === undefined ? `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''} :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`
-                    : `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''}="${bindingValue}" :items="items" :accepted-actions="acceptedActions">${innerHTML}</ul>`;
+                template = bindingValue === undefined
+                    ? `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''}
+                            :items="items"
+                            :accepted-actions="acceptedActions"
+                            ${handlers}>${innerHTML}</ul>`
+                    : `<ul v-m-sortable${options.encapsulate ? '.encapsulate' : ''}="${bindingValue}"
+                            :items="items"
+                            :accepted-actions="acceptedActions"
+                            ${handlers}>${innerHTML}</ul>`;
             } else {
                 template = bindingValue === undefined ? `<ul v-m-sortable>${innerHTML}</ul>`
-                    : `<ul v-m-sortable="${bindingValue}">${innerHTML}</ul>`;
+                    : `<ul v-m-sortable="${bindingValue}" ${handlers}>${innerHTML}</ul>`;
             }
 
             let directive: Wrapper<Vue>;
             directive = mount({
                 template,
+                methods: {
+                    onAdd(params: MSortEvent): void { onAddSortInfo = params.sortInfo; },
+                    onMove(params: MSortEvent): void { onMoveSortInfo = params.sortInfo; },
+                    onRemove(params: MSortEvent): void { onRemoveSortInfo = params.sortInfo; }
+                },
                 data: () => options || {}
             }, { localVue: Vue });
 
-            Object.keys(MSortableEventNames).forEach(key => directive.vm.$listeners[MSortableEventNames[key]] = () => { });
             return directive;
         };
 
@@ -66,7 +84,6 @@ describe('sortable', () => {
                 }, { localVue: Vue });
             }
 
-            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
             return directive;
         };
 
@@ -367,10 +384,9 @@ describe('sortable', () => {
             sortable.find('li').trigger('dragover', getEventDummy());
             sortable.find('li').trigger('drop', getEventDummy());
 
-            const event: any = sortable.emitted(MSortableEventNames.OnAdd)[0][0];
-            expect(event.sortInfo).toEqual({ canDrop: true, data: dragData, action: userDefinedAction, oldPosition: -1, newPosition: 1, grouping: userDefinedGrouping });
-            expect(sortable.emitted(MSortableEventNames.OnMove)).toBeUndefined();
-            expect(sortable.emitted(MSortableEventNames.OnRemove)).toBeUndefined();
+            expect(onAddSortInfo).toEqual({ canDrop: true, data: dragData, action: userDefinedAction, oldPosition: -1, newPosition: 1, grouping: userDefinedGrouping });
+            expect(onMoveSortInfo).toBeUndefined();
+            expect(onRemoveSortInfo).toBeUndefined();
         });
 
         it('it should handle drop correctly when moving an item to another index in the same sortable', () => {
@@ -382,10 +398,9 @@ describe('sortable', () => {
             childWrappers.at(1).trigger('dragover', getEventDummy());
             childWrappers.at(1).trigger('drop', getEventDummy());
 
-            const event: any = sortable.emitted(MSortableEventNames.OnMove)[0][0];
-            expect(event.sortInfo).toEqual({ canDrop: true, data: dragData, action: 'move', oldPosition: 0, newPosition: 1 });
-            expect(sortable.emitted(MSortableEventNames.OnAdd)).toBeUndefined();
-            expect(sortable.emitted(MSortableEventNames.OnRemove)).toBeUndefined();
+            expect(onAddSortInfo).toBeUndefined();
+            expect(onMoveSortInfo).toEqual({ canDrop: true, data: dragData, action: 'move', oldPosition: 0, newPosition: 1 });
+            expect(onRemoveSortInfo).toBeUndefined();
         });
 
         it('it should handle drop correctly when moving an item from one sortable to another', () => {
@@ -397,12 +412,10 @@ describe('sortable', () => {
             secondSortable.find('li').trigger('dragover', getEventDummy());
             secondSortable.find('li').trigger('drop', getEventDummy());
 
-            const event: any = secondSortable.emitted(MSortableEventNames.OnMove)[0][0];
-            expect(event.sortInfo).toEqual({ canDrop: true, data: dragData, action: 'move', oldPosition: -1, newPosition: 1 });
-            expect(secondSortable.emitted(MSortableEventNames.OnAdd)).toBeUndefined();
+            expect(onMoveSortInfo).toEqual({ canDrop: true, data: dragData, action: 'move', oldPosition: -1, newPosition: 1 });
+            expect(onAddSortInfo).toBeUndefined();
 
-            const removeEvent: any = sortable.emitted(MSortableEventNames.OnRemove)[0][0];
-            expect(removeEvent.sortInfo).toEqual({ canDrop: true, data: dragData, action: 'move', oldPosition: 0, newPosition: -1 });
+            expect(onRemoveSortInfo).toEqual({ canDrop: true, data: dragData, action: 'move', oldPosition: 0, newPosition: -1 });
         });
     });
 
@@ -416,11 +429,9 @@ describe('sortable', () => {
 
         it('it should manage dragEvent correctly', () => {
             const dropEventDummy: any = getEventDummy();
-            jest.spyOn(dropEventDummy, 'stopPropagation');
 
             sortable.find('li').trigger('dragstart', dropEventDummy);
 
-            expect(dropEventDummy.stopPropagation).toHaveBeenCalled();
             expect(MSortable.fromSortContainer).toBeDefined();
             expect(MSortable.fromSortContainer).toBe(plugin);
         });
@@ -437,12 +448,10 @@ describe('sortable', () => {
 
         it('it should manage dragEvent correctly', () => {
             const dropEventDummy: any = getEventDummy();
-            jest.spyOn(dropEventDummy, 'stopPropagation');
             jest.spyOn(plugin, 'doCleanUp');
 
             sortable.find('li').trigger('dragend', dropEventDummy);
 
-            expect(dropEventDummy.stopPropagation).toHaveBeenCalled();
             expect(MSortable.fromSortContainer).toBeUndefined();
             expect(plugin.doCleanUp).toHaveBeenCalled();
         });
