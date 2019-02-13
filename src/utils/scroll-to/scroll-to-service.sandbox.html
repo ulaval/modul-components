@@ -5,8 +5,10 @@
         Sandbox Parameters
     </p>
     <div>
-        Offset: <input type="text" v-model="offset" />
+        Offset: <input type="text"
+               v-model="offset" />
         Duration: <select v-model="speed">
+            <option value="instant">Instant</option>
             <option value="regular">Regular</option>
             <option value="long">Long</option>
         </select>
@@ -16,18 +18,27 @@
     </p>
     <p>
         <div>
-            <a href="#" @click="scrollToGreenUsingService()">Scroll to green using service</a>
-            <a href="#" @click="scrollToBottom()">Scroll to bottom</a>
+            <a href="#"
+               @click="scrollToGreenUsingService()">Scroll to green using service</a>
+            <a href="#"
+               @click="scrollToBottom()">Scroll to bottom</a>
         </div>
     </p>
     <!-- Test case -->
-    <div ref="blue" style="height: 1000px; background-color: royalblue;"> <a href="#" @click="scrollToTop()">Scroll to
+    <div ref="blue"
+         style="height: 1000px; background-color: royalblue;"> <a href="#"
+           @click="scrollToTop()">Scroll to
             top</a>
     </div>
-    <a href="#" @click="scrollToGreenUsingService()">Scroll to green using service</a>
-    <div ref="red" style="height: 1000px; background-color: red;"> <a href="#" @click="scrollToTop()">Scroll to top</a>
+    <a href="#"
+       @click="scrollToGreenUsingService()">Scroll to green using service</a>
+    <div ref="red"
+         style="height: 1000px; background-color: red;"> <a href="#"
+           @click="scrollToTop()">Scroll to top</a>
     </div>
-    <div ref="green" style="height: 1000px; background-color: green;"> <a href="#" @click="scrollToTop()">Scroll to top</a>
+    <div ref="green"
+         style="height: 1000px; background-color: green;"> <a href="#"
+           @click="scrollToTop()">Scroll to top</a>
     </div>
 
     <!-- Test in container -->
@@ -35,14 +46,20 @@
     <p class="m-u--margin-bottom">Use the scroll-to service to scroll down in a container</p>
     <p>
         <div>
-            <a href="#" @click.prevent="scrollInOrangeUsingService()">Scroll inside to green</a>
-            <a href="#" @click.prevent="scrollInToTopOrangeUsingService()">Scroll inside to top</a>
-            <a href="#" @click.prevent="scrollInToBottomOrangeUsingService()">Scroll inside to bottom</a>
-            <a href="#" @click.prevent="scrollInToDown200InOrangeUsingService()">Scroll inside to y=200</a>
+            <a href="#"
+               @click.prevent="scrollInOrangeUsingService()">Scroll inside to green</a>
+            <a href="#"
+               @click.prevent="scrollInToTopOrangeUsingService()">Scroll inside to top</a>
+            <a href="#"
+               @click.prevent="scrollInToBottomOrangeUsingService()">Scroll inside to bottom</a>
+            <a href="#"
+               @click.prevent="scrollInToDown200InOrangeUsingService()">Scroll inside to y=200</a>
         </div>
     </p>
-    <div ref="orange" style="height: 200px; background-color: orange; overflow-y: scroll;">
-        <a href="#" @click.prevent="scrollInOrangeUsingService()">Scroll to green inside</a>
+    <div ref="orange"
+         style="height: 200px; background-color: orange; overflow-y: scroll;">
+        <a href="#"
+           @click.prevent="scrollInOrangeUsingService()">Scroll to green inside</a>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
             fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
             similique ad.</p>
@@ -62,7 +79,8 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
             fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
             similique ad.</p>
-        <a href="#" @click.prevent="scrollInOrangeUsingService()">Scroll to green inside</a>
+        <a href="#"
+           @click.prevent="scrollInOrangeUsingService()">Scroll to green inside</a>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
             fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
             similique ad.</p>
@@ -120,7 +138,8 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos repellat libero rem provident blanditiis
             fugiat asperiores iusto labore delectus quam alias nihil deleniti, at quisquam, aliquid ipsum reprehenderit
             similique ad.</p>
-        <div ref="greenInOrange" style="height: 1000px; background-color: green;">
+        <div ref="greenInOrange"
+             style="height: 1000px; background-color: green;">
         </div>
     </div>
 
@@ -131,12 +150,16 @@
         use scroll to service inside an overlay object with a form
     </p>
 
-    <m-overlay title="Titre" @save="scrollToTextArea">
+    <m-overlay title="Titre"
+               @save="scrollToTextArea">
         <m-button slot="trigger">Ouvrir</m-button>
-        <h2 slot="header" style="margin:0;">Titre</h2>
+        <h2 slot="header"
+            style="margin:0;">Titre</h2>
 
-        <m-textfield class="m-u--margin-bottom" label="Prénom"></m-textfield>
-        <m-textfield class="m-u--margin-bottom" label="Nom"></m-textfield>
+        <m-textfield class="m-u--margin-bottom"
+                     label="Prénom"></m-textfield>
+        <m-textfield class="m-u--margin-bottom"
+                     label="Nom"></m-textfield>
 
         <p style="margin:0;">Consectetur dolore commodo voluptate est laborum ex nulla. Amet nisi quis minim dolor
             voluptate est nisi anim
@@ -163,8 +186,13 @@
             elit duis enim. Sint veniam tempor occaecat irure nostrud eiusmod. Fugiat nostrud laborum pariatur dolor
             tempor in in nostrud reprehenderit minim culpa incididunt.</p>
         <p>
-            <m-message state="information" class="m-u--margin-bottom m-u--margin-top--l">Scroll to this comment on save!</m-message>
-            <m-textarea class="scroll-to-me-on-save" label="Comment" max-width="medium" value="Giving feedback is one of the most important parts of every manager’s job. Good employees need and want to know how they are doing well and those with blind spots in their performance need and want to know those blind spots and how they can improve."></m-textarea></p>
+            <m-message state="information"
+                       class="m-u--margin-bottom m-u--margin-top--l">Scroll to this comment on save!</m-message>
+            <m-textarea class="scroll-to-me-on-save"
+                        label="Comment"
+                        max-width="medium"
+                        value="Giving feedback is one of the most important parts of every manager’s job. Good employees need and want to know how they are doing well and those with blind spots in their performance need and want to know those blind spots and how they can improve."></m-textarea>
+        </p>
         <p>Consectetur dolore commodo voluptate est laborum ex nulla. Amet nisi quis minim dolor voluptate est nisi
             anim
             elit duis enim. Sint veniam tempor occaecat irure nostrud eiusmod. Fugiat nostrud laborum pariatur dolor
@@ -221,7 +249,9 @@
     </m-overlay>
     <p>
         <h3>Test Scroll-to top</h3>
-        <a ref="bottom" href="#" @click="scrollToTop()">Scroll to top</a>
+        <a ref="bottom"
+           href="#"
+           @click="scrollToTop()">Scroll to top</a>
     </p>
 
 </div>
