@@ -98,7 +98,7 @@ export class MFlexTemplate extends ModulVue {
         this.adjustDynamicHeader();
     }
 
-    private onResizeDone(e): void {
+    private onResizeDone(e: any): void {
         this.setHeaderHeight();
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
@@ -200,7 +200,7 @@ export class MFlexTemplate extends ModulVue {
         return !!this.$slots.footer;
     }
 
-    private transitionEnter(el: HTMLElement, done): void {
+    private transitionEnter(el: HTMLElement, done: any): void {
         this.adjustFixeMenu();
         this.adjustDynamicHeader();
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
@@ -236,7 +236,7 @@ export class MFlexTemplate extends ModulVue {
         this.$modul.updateAfterResize();
     }
 
-    private transitionLeave(el: HTMLElement, done): void {
+    private transitionLeave(el: HTMLElement, done: any): void {
         this.transitionDelayOpen = false;
         if (!this.as<ElementQueriesMixin>().isEqMaxS) {
             let menuContainer: HTMLElement = this.$refs.menuContainer as HTMLElement;

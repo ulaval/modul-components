@@ -110,7 +110,7 @@ export class MLimitText extends ModulVue {
         return (currentHeight > this.maxHeight);
     }
 
-    private updateContent(content, el): void {
+    private updateContent(content: any, el: HTMLElement): void {
         el.innerHTML = content;
     }
 

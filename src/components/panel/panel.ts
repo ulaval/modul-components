@@ -1,7 +1,7 @@
-import ElementQueries from 'css-element-queries/src/ElementQueries';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { PANEL_NAME } from '../component-names';
 import WithRender from './panel.html?style=./panel.scss';
 

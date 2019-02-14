@@ -56,7 +56,7 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
 
     @Prop({
         default: () => {
-            return Object.keys(MonthsNames).map((key: string) => {
+            return Object.keys(MonthsNames).map((key: any) => {
                 return Vue.prototype.$i18n.translate(
                     `${TRANSLATION_MONTHS}.${MonthsNames[key]}${TRANSLATION_SUFFIXE}`
                 );
@@ -67,7 +67,7 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
 
     @Prop({
         default: () => {
-            return Object.keys(MonthsNames).map((key: string) => {
+            return Object.keys(MonthsNames).map((key: any) => {
                 return Vue.prototype.$i18n.translate(
                     `${TRANSLATION_MONTHS}.${MonthsNames[key]}`
                 );
@@ -78,7 +78,7 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
 
     @Prop({
         default: () => {
-            return Object.keys(WeekdayNames).map((key: string) => {
+            return Object.keys(WeekdayNames).map((key: any) => {
                 return Vue.prototype.$i18n.translate(
                     `${TRANSLATION_WEEKDAYS}.${WeekdayNames[key]}${TRANSLATION_SUFFIXE}`
                 );
@@ -134,7 +134,9 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
         super.onDaySelect(day);
 
         // TODO when there will be a directive to manage focus, replace this behaviour with it
-        this.$nextTick(() => (this.$refs[this.buildRef('day', day)][0] as HTMLButtonElement).focus());
+        this.$nextTick(() => (
+            (this.$refs[this.buildRef('day', day)] as any)[0] as HTMLButtonElement).focus()
+        );
     }
 
     onDayMouseEnter(day: DayState): void {

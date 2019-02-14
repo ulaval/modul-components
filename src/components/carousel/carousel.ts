@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { CAROUSEL_ITEM_NAME, CAROUSEL_NAME, TOUCH_NAME } from '../component-names';
+import { CAROUSEL_ITEM_NAME, CAROUSEL_NAME } from '../component-names';
+import TouchPlugin from '../touch/touch';
 import { MCarouselItem } from './carousel-item/carousel-item';
 import WithRender from './carousel.html?style=./carousel.scss';
-import TouchPlugin from '../touch/touch';
 
 
 @WithRender
@@ -87,7 +87,7 @@ export class MCarousel extends Vue {
         }
     }
 
-    private changeItem(e): void {
+    private changeItem(e: any): void {
         if (e.keyCode === 37) {
             this.showPrevItem();
         } else if (e.keyCode === 39) {
@@ -112,7 +112,7 @@ export class MCarousel extends Vue {
         }
     }
 
-    private isIndexValid(value): boolean {
+    private isIndexValid(value: number): boolean {
         return value >= 0 && value < this.numberOfCarouselItems();
     }
 

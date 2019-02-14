@@ -173,17 +173,17 @@ export class MNavbar extends BaseNavbar implements Navbar {
         return this.showArrowLeft && this.navigationArrow;
     }
 
-    private setSelectedIndicatorPosition(element, ref: string): void {
+    private setSelectedIndicatorPosition(element: any, ref: any): void {
         let positionX: number = element.$el.offsetLeft;
         let width: number = element.$el.clientWidth;
-        let localRef: HTMLElement = this.$refs[ref];
+        let localRef: HTMLElement = (this.$refs as any)[ref];
 
         localRef.style.transform = 'translate3d(' + positionX + 'px, 0, 0)';
         localRef.style.width = width + 'px';
     }
 
     @Watch('selected')
-    private setAndUpdate(value): void {
+    private setAndUpdate(value: any): void {
         this.internalValue = value;
         this.scrollToSelected();
     }

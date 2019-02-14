@@ -56,7 +56,7 @@ const initializeWrapper: Function = (): void => {
     });
 };
 
-const range: Function = (start, end): number[] => {
+const range: Function = (start: number, end: number): number[] => {
     const length: number = end - start + 1;
     return Array.from({ length }, (_, i) => start + i);
 };

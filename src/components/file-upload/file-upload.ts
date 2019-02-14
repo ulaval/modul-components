@@ -195,7 +195,7 @@ export class MFileUpload extends ModulVue {
         });
     }
 
-    private getFileStatus(file): string {
+    private getFileStatus(file: any): string {
         switch (file.status) {
             case MFileStatus.FAILED:
                 return MProgressState.Error;
@@ -206,7 +206,7 @@ export class MFileUpload extends ModulVue {
         }
     }
 
-    private getBadgeState(file): string | undefined {
+    private getBadgeState(file: any): string | undefined {
         switch (file.status) {
             case MFileStatus.FAILED:
                 return MBadgeState.Error;
@@ -217,15 +217,15 @@ export class MFileUpload extends ModulVue {
         }
     }
 
-    private hasExtensionsRejection(file): boolean {
+    private hasExtensionsRejection(file: any): boolean {
         return file.rejection === MFileRejectionCause.FILE_TYPE;
     }
 
-    private hasSizeRejection(file): boolean {
+    private hasSizeRejection(file: any): boolean {
         return file.rejection === MFileRejectionCause.FILE_SIZE;
     }
 
-    private hasMaxFilesRejection(file): boolean {
+    private hasMaxFilesRejection(file: any): boolean {
         return file.rejection === MFileRejectionCause.MAX_FILES;
     }
 

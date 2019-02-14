@@ -132,15 +132,15 @@ export class MInputStyle extends ModulVue {
         return !!this.$slots['adjust-width-auto'];
     }
 
-    private onClick(event): void {
+    private onClick(event: any): void {
         this.$emit('click', event);
     }
 
-    private onMousedown(event): void {
+    private onMousedown(event: any): void {
         this.$emit('mousedown', event);
     }
 
-    private onMouseup(event): void {
+    private onMouseup(event: any): void {
         this.$emit('mouseup', event);
     }
 }

@@ -102,7 +102,7 @@ export class MLink extends ModulVue {
         }
     }
 
-    private onClick(event): void {
+    private onClick(event: any): void {
         this.$el.blur();
         if (this.isButton || this.disabled) {
             event.preventDefault();
@@ -116,7 +116,7 @@ export class MLink extends ModulVue {
         return this.mode === MLinkMode.RouterLink;
     }
 
-    private onKeyup(event): void {
+    private onKeyup(event: any): void {
         event = event || window.event;
         if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
             this.onClick(event);
@@ -177,7 +177,7 @@ export class MLink extends ModulVue {
         return this.disabled ? '' : 'click';
     }
 
-    private isObject(a): boolean {
+    private isObject(a: any): boolean {
         return !!a && a.constructor === Object;
     }
 

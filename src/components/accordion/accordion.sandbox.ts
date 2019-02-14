@@ -13,15 +13,15 @@ export class MAccordionSandbox extends ModulVue {
 
     accordionOpen: boolean = true;
 
-    doSomething(text): void {
+    doSomething(text: string): void {
         window.alert('Something ' + text + '!');
     }
 
-    onAccordionOpen(status): void {
+    onAccordionOpen(status: boolean): void {
         window.alert(`isAccordionOpen = ${status}`);
     }
 
-    onClick(event, astring): void {
+    onClick(event: any, astring: string): void {
         window.alert(`onClick event = ${event} astring=${astring}`);
     }
 

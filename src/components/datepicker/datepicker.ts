@@ -127,7 +127,7 @@ export class MDatepicker extends ModulVue {
     @Emit('close')
     private onClose(): void { }
 
-    private validateDate(event): void {
+    private validateDate(event: any): void {
         if (event.target.value === '') {
             if (this.required) {
                 this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');

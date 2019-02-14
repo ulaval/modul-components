@@ -101,7 +101,7 @@ export class MDatefields extends ModulVue {
     }
 
     private emitDate(): void {
-        let date: object = {};
+        let date: any = {};
         let emitValue: boolean = true;
         let model: moment.Moment | Date | undefined = undefined;
 

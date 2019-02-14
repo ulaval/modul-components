@@ -164,10 +164,9 @@ export class MIconFile extends Vue {
         return tooltipContent;
     }
 
-    private mapExtensionsGroup(extensions, category: string, tooltip: string): void {
+    private mapExtensionsGroup(extensions: string, category: string, tooltip: string): void {
         extensions.split(',').forEach(ex => this.fileMap[ex] = category);
         extensions.split(',').forEach(ex => this.tooltipGroup[ex] = tooltip);
-
     }
 }
 
