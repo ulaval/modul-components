@@ -14,5 +14,12 @@
         "decompte_athletes_olympiques_canada.p": "Il y a %(nbAthletes)s athlètes olympiques canadiens.",
         "decompte_athletes_olympiques_pays": "Il y a %(nbAthletes)s athlètes olympiques et %(nbPays)s pays participants.",
         "decompte_athletes_olympiques_pays_default_formatting": "Il y a {0} athlètes olympiques et {1} pays participants."
+    },
+    "exemples_avec_characteres_speciaux": {
+        "decompte_medailles_olympiques_canada": "Le Canada a gagné %(nbMedailles)s%(_NBSP_)smédailles.",
+        "decompte_medailles_olympiques_canada_usa": "Le Canada s'est placé %(nieme)s<sup>e</sup>, devançant les États%(_NBHYPHEN_)sUnis d'Amérique.",
+        "decompte_medailles_olympiques": "L'équipe olympique canadienne %(_EMDASH_)s l'une des meilleures au monde %(_EMDASH_)s a obtenue médailles.",
+        "olympiques_rivalite": "La rivalitalié Canada%(_ENDASH_)sÉtats-Unis est a son plus fort depuis plusieurs années.",
+        "v2": "%(_ENDASH_)s"
     }
 }

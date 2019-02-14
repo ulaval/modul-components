@@ -1,9 +1,23 @@
-@import 'abstracts/variables';
-@import '../../../styles/abstracts/var-froala';
+@import 'commons';
 @import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css"); /* FA CSS import */
 
 .vue-froala {
     overflow: hidden;
+
+    // to overcome input-style base padding.
+    .m-input-style & {
+        margin: -#{$m-input-style--padding};
+    }
+
+    // to overcome input-style base padding, minus space for the label.
+    .m-input-style.m--has-label & {
+        margin-top: -#{$m-input-style--padding - 4}; // magic number
+    }
+
+    // basic body padding for all states
+    /deep/ .fr-element.fr-view {
+        padding: $m-spacing--s;
+    }
 
     /deep/ .fas { font-style: normal; }
 
@@ -37,6 +51,25 @@
         }
 
         .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+    }
+
+    &.m--is-disabled /deep/ {
+        .fr-wrapper {
+            cursor: default;
+        }
+
+        .fr-view {
+            color: $m-color--disabled;
+
+            /deep/ a {
+                color: $m-color--disabled;
+                cursor: default;
+            }
+        }
+
+        .fr-toolbar {
+            display: none;
+        }
     }
 
     &:not(.m--is-focus) {
@@ -78,18 +111,14 @@
 
     &.m--is-focus /deep/ {
         .fr-placeholder {
-            padding: $m-spacing $m-spacing 0 $m-spacing !important; // Fix placeholder positioning bug.  Magic numbers.
             color: $m-color--disabled;
             font-weight: $m-font-weight--bold;
         }
 
         .fr-box.fr-basic .fr-element {
-            padding: $m-spacing;
             font-weight: $m-font-weight;
             word-wrap: break-word;
             -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
-            border-left: 1px solid $m-color--grey-light;
-            border-right: 1px solid $m-color--grey-light;
         }
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
@@ -125,7 +154,7 @@
     }
 
     /deep/ {
-        @include commonsFroalaStyles();
+        @include m-commons-froala-styles();
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
             background: rgba($m-color--white, 0);
@@ -134,7 +163,6 @@
 
         .fr-box.fr-basic .fr-element {
             transition: padding $m-transition-duration--l ease;
-            padding: 0;
             min-height: unset;
             overflow-x: unset;
         }
@@ -158,9 +186,9 @@
             box-shadow: unset;
             border-radius: 0;
             border-top: 0;
-            border-right: 1px solid $m-color--grey-light;
+            border-right: 0;
+            border-left: 0;
             border-bottom: 1px solid $m-color--grey-light;
-            border-left: 1px solid $m-color--grey-light;
 
             button {
                 color: $m-color--grey-darker;
@@ -211,7 +239,7 @@
             textarea {
                 transition: border-color $m-transition-duration ease;
                 position: relative;
-                font-family: $m-font-family;
+                font-family: inherit;
                 font-size: $m-font-size;
                 font-weight: $m-font-weight--bold;
                 color: $m-color--text;

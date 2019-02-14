@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 $m-switch-size: 23px;
 
 .m-switch {
@@ -97,7 +97,7 @@ $m-switch-size: 23px;
 
     &.m--is-disabled {
         .m-switch__body {
-            cursor: not-allowed;
+            cursor: default;
         }
     }
 
@@ -114,7 +114,7 @@ $m-switch-size: 23px;
     }
 
     &.m--is-switch-right {
-        .m-switch__wrap {
+        .m-switch__body {
             flex-direction: row-reverse;
         }
 

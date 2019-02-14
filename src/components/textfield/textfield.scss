@@ -1,9 +1,15 @@
-@import 'abstracts/variables';
+@import 'commons';
 
 .m-textfield {
     position: relative;
     display: inline-flex;
     flex-direction: column;
+
+    &.m--has-validation-message {
+        .m-textfield__validation {
+            margin-top: $m-spacing--xs;
+        }
+    }
 
     &.m--has-error {
         .m-textfield__validation {
@@ -17,9 +23,14 @@
         }
     }
 
+    &__reset,
+    &__search-icon,
     &__icon-password {
-        margin-left: $m-margin--s;
+        margin-left: $m-spacing;
+    }
 
+    &__reset,
+    &__icon-password {
         &.m--is-enter-active,
         &.m--is-leave-active {
             transition: opacity $m-transition-duration--s linear;
@@ -32,11 +43,16 @@
     }
 
     &__validation {
+        transition: margin-top $m-transition-duration ease;
         display: flex;
         justify-content: flex-end;
 
         &__message {
             flex: 1 1 auto;
+        }
+
+        &__character-count {
+            flex-shrink: 0;
         }
     }
 }

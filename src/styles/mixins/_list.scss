@@ -1,0 +1,83 @@
+@mixin m-list() {
+    &,
+    ul,
+    ol {
+        padding: 0 0 0 $m-margin--l;
+    }
+
+    ul,
+    ol {
+        margin: 0;
+    }
+}
+
+@mixin m-number-list() {
+    @include m-list();
+
+    li {
+        list-style-type: decimal;
+    }
+}
+
+@mixin m-bullet-list() {
+    @include m-list();
+
+    margin-top: $m-spacing;
+    margin-bottom: 0;
+
+    li {
+        position: relative;
+        list-style: none;
+        margin: 0 0 $m-padding--xs 0;
+
+        &::before {
+            position: absolute;
+            top: 8px; // Magic number
+            left: - $m-margin; // Magic number
+            content: '';
+            transform: translate3d(-50%, 0, 0);
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+
+        > ul {
+            margin: $m-padding--xs 0 0 0;
+        }
+    }
+
+    > li {
+        > ul > li::before,
+        &::before,
+        > ul > li > ul > li::before,
+        > ul > li > ul > li > ul > li::before {
+            width: 4px;
+            height: 4px;
+        }
+
+        > ul > li::before,
+        &::before {
+            border-radius: 50%;
+            border: 1px solid $m-color--grey-dark;
+        }
+
+        &::before,
+        > ul > li > ul > li::before {
+            background: $m-color--grey-dark;
+        }
+
+        > ul > li > ul > li::before,
+        > ul > li > ul > li > ul > li::before {
+            border: 1px solid $m-color--grey-dark;
+        }
+
+        > ul > li > ul > li > ul > li > ul > li::before {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 3px 0 3px 4px;
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $m-color--grey-dark;
+        }
+    }
+}

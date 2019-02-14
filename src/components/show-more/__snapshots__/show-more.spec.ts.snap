@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`m-show-more Given nbVisible < nbTotal Should render correctly 1`] = `
+<div class="m-show-more">
+    <div class="m-show-more__status">m-show-more:status</div>
+    <m-progress value="20"></m-progress>
+    <m-button skin="secondary">m-show-more:button-label</m-button>
+</div>
+`;
+
+exports[`m-show-more Given nbVisible == nbTotal Should render correctly 1`] = `
+<div class="m-show-more">
+    <div class="m-show-more__status">m-show-more:status</div>
+    <m-progress value="100"></m-progress>
+</div>
+`;
+
+exports[`m-show-more With nbTotal equals to 0 Should not render anything 1`] = `""`;
+
+exports[`m-show-more With nbTotal inferior to 0 Should not render anything 1`] = `""`;
+
+exports[`m-show-more Without nbTotal specified Should not render anything 1`] = `""`;

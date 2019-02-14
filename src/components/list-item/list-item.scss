@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 
 .m-list-item {
     transition: color 0.3s ease;
@@ -29,7 +29,7 @@
 
     &.m--is-disabled {
         color: $m-color--disabled;
-        cursor: not-allowed;
+        cursor: default;
     }
 
     &.m--has-trigger {

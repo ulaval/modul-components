@@ -1,11 +1,11 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import moment from 'moment';
 import Vue from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import ErrorMessagePlugin, { MErrorMessage } from './error-message';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');

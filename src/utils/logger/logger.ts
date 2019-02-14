@@ -1,6 +1,15 @@
 /* tslint:disable:no-console */
 import { PluginObject } from 'vue';
 
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $log: Logger;
+    }
+}
 export interface ConsoleOptions {
     displayLogs?: boolean;
     displayWarnings?: boolean;
@@ -22,19 +31,19 @@ export class Logger {
 
     setConsoleOptions(options: ConsoleOptions): void {
         if (options) {
-            if (typeof(options.displayLogs) === 'boolean') {
+            if (typeof (options.displayLogs) === 'boolean') {
                 this.displayLogs = options.displayLogs;
             }
-            if (typeof(options.displayWarnings) === 'boolean') {
+            if (typeof (options.displayWarnings) === 'boolean') {
                 this.displayWarnings = options.displayWarnings;
             }
-            if (typeof(options.displayDebugs) === 'boolean') {
+            if (typeof (options.displayDebugs) === 'boolean') {
                 this.displayDebugs = options.displayDebugs;
             }
-            if (typeof(options.displayInfos) === 'boolean') {
+            if (typeof (options.displayInfos) === 'boolean') {
                 this.displayInfos = options.displayInfos;
             }
-            if (typeof(options.hideAll) === 'boolean') {
+            if (typeof (options.hideAll) === 'boolean') {
                 this.hideAll = options.hideAll;
             }
         }
@@ -63,6 +72,12 @@ export class Logger {
             console.info(message, ...optionalParams);
         }
     }
+
+    error(message?: any, ...optionalParams: any[]): void {
+        if (!this.hideAll) {
+            console.error(message, ...optionalParams);
+        }
+    }
 }
 
 const LoggerPlugin: PluginObject<any> = {
@@ -70,7 +85,7 @@ const LoggerPlugin: PluginObject<any> = {
         let logger: Logger = new Logger(options);
         logger.debug('$logger', 'plugin.install');
 
-        (v.prototype as any).$log = logger;
+        (v.prototype).$log = logger;
 
     }
 };

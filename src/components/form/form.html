@@ -1,0 +1,24 @@
+<form :id="form.id"
+      class="m-form"
+      @submit.prevent="submit"
+      @reset.prevent="reset">
+    <m-accordion-transition>
+        <m-message class="m-form__message-summary"
+                   v-if="hasErrors"
+                   :state="messageStateError"
+                   ref="summary">
+            <ul>
+                <li v-for="(error, index) in errors"
+                    :key="index"
+                    v-html="error"></li>
+            </ul>
+        </m-message>
+    </m-accordion-transition>
+    <p class="required"
+       v-if="requiredMarker">
+        <span class="required__marker">*</span>
+        <span class="required__label">{{ 'm-form:required' | f-m-i18n }}</span>
+    </p>
+
+    <slot></slot>
+</form>

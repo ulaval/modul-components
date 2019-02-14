@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ICON_BUTTON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './icon-button.html?style=./icon-button.scss';
+
 
 export enum MIconButtonSkin {
     Light = 'light',
@@ -86,7 +86,6 @@ export class MIconButton extends Vue {
 const IconButtonPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(ICON_BUTTON_NAME, 'plugin.install');
-        v.prototype.$log.warn(ICON_BUTTON_NAME + ' is not ready for production');
         v.use(IconPlugin);
         v.component(ICON_BUTTON_NAME, MIconButton);
     }

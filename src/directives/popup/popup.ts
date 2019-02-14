@@ -1,6 +1,6 @@
-import { PluginObject, DirectiveOptions, VNodeDirective, VNode } from 'vue';
-import { POPUP_NAME } from '../directive-names';
+import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { OpenTrigger } from '../../mixins/open-trigger/open-trigger';
+import { POPUP_NAME } from '../directive-names';
 
 const MPopupDirective: DirectiveOptions = {
     bind(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
@@ -14,10 +14,10 @@ const MPopupDirective: DirectiveOptions = {
     }
 };
 
-const PopupPlugin: PluginObject<any> = {
+const PopupDirectivePlugin: PluginObject<any> = {
     install(v, options): void {
         v.directive(POPUP_NAME, MPopupDirective);
     }
 };
 
-export default PopupPlugin;
+export default PopupDirectivePlugin;

@@ -64,7 +64,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public get internalOptions(): any {
         const propOptions: any = {
             // Hack to "hide" the default froala placeholder text
-            placeholderText: this.as<InputManagement>()!.placeholder || ' ',
+            placeholderText: this.as<InputManagement>().placeholder || ' ',
             toolbarStickyOffset: this.calculateToolbarStickyOffset(),
             scrollableContainer: this.getScrollableContainer()
         };

@@ -1,23 +1,21 @@
-.m-u--app-body {
-    .m-u--button-primary {
-        @include m-button();
-        @include m-button--primary();
-        @include m-button--hover();
-    }
+.m-u--button-primary {
+    @include m-button();
+    @include m-button--primary();
+    @include m-button--hover();
+}
 
-    .m-u--button-secondary {
-        @include m-button();
-        @include m-button--secondary();
-        @include m-button--hover();
-    }
+.m-u--button-secondary {
+    @include m-button();
+    @include m-button--secondary();
+    @include m-button--hover();
+}
 
-    .m-u--button-disabled {
-        @include m-button();
-        @include m-button--disabled();
-    }
+.m-u--button-disabled {
+    @include m-button();
+    @include m-button--disabled();
+}
 
-    .m-u--button-waiting {
-        @include m-button();
-        @include m-button--waiting();
-    }
+.m-u--button-waiting {
+    @include m-button();
+    @include m-button--waiting();
 }

@@ -31,6 +31,7 @@ export interface InputStateMixin {
     hasErrorMessage: boolean;
     hasValidMessage: boolean;
     hasHelperMessage: boolean;
+    hasValidationMessage: boolean;
 
     helperMessage: string;
     validMessage: string;
@@ -78,7 +79,7 @@ export class InputState extends ModulVue implements InputStateMixin {
     public readonly: boolean;
 
     public get active(): boolean {
-        return !this.isDisabled && !this.isWaiting;
+        return !this.isDisabled && !this.isWaiting && !this.readonly;
     }
 
     public get isDisabled(): boolean {
@@ -129,8 +130,12 @@ export class InputState extends ModulVue implements InputStateMixin {
         return (!!this.helperMessage || this.helperMessage === ' ') && !this.disabled && !this.waiting;
     }
 
+    public get hasValidationMessage(): boolean {
+        return (this.hasErrorMessage || this.hasValidMessage || this.hasHelperMessage) && this.active;
+    }
+
     public getInput(): HTMLElement | undefined {
-        const selector: string = this.as<InputStateInputSelector>()!.selector || 'input, textarea, [contenteditable=true]';
+        const selector: string = this.as<InputStateInputSelector>().selector || 'input, textarea, [contenteditable=true]';
         const elements: NodeListOf<Element> = this.$el.querySelectorAll(selector);
         if (elements.length > 1) {
             throw new Error(`Input state can manage 1 and only 1 nested editable element (${selector})`);

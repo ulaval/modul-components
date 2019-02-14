@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
+import { Location } from 'vue-router';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
@@ -31,7 +32,7 @@ const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
 @Component
 export class MLink extends ModulVue {
     @Prop({ default: '/' })
-    public url: string;
+    public url: string | Location;
 
     @Prop({
         default: MLinkMode.RouterLink,
@@ -79,7 +80,7 @@ export class MLink extends ModulVue {
     @Prop({ default: '12px' })
     public iconSize: string;
 
-    @Prop({ default: '1' })
+    @Prop({ default: '0' })
     public tabindex: string;
 
     protected mounted(): void {
@@ -161,15 +162,15 @@ export class MLink extends ModulVue {
     private get propUrl(): string | undefined {
         return this.isButton
             ? '#'
-            : !this.disabled ? this.url : undefined;
+            : !this.disabled ? this.url as string : undefined;
     }
 
     private get isTargetBlank(): boolean {
         return this.target === '_blank';
     }
 
-    private get routerLinkUrl(): string | Object {
-        return !this.isObject(this.url) ? { path: this.url } : this.url;
+    private get routerLinkUrl(): string | Location {
+        return this.isObject(this.url) ? this.url as Location : { path: this.url as string };
     }
 
     private get routerEvent(): string {
@@ -179,11 +180,11 @@ export class MLink extends ModulVue {
     private isObject(a): boolean {
         return !!a && a.constructor === Object;
     }
+
 }
 
 const LinkPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(LINK_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.use(I18nPlugin);
         v.component(LINK_NAME, MLink);

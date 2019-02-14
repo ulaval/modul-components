@@ -1,8 +1,8 @@
 <div class="m-popup"
      :class="{ 'm--is-inline': hasTriggerSlot }">
     <m-popper :open.sync="propOpen"
-              @open="onOpen()"
-              @close="onClose()"
+              @open="onOpen"
+              @close="onClose"
               @portal-content-visible="onPortalContentVisible"
               :disabled="disabled"
               :id="id"

@@ -1,8 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
+import ButtonPlugin from '../button/button';
 import { MENU_NAME } from '../component-names';
+import MenuPlugin from './menu';
 import WithRender from './menu.sandbox.html';
+
 
 @WithRender
 @Component
@@ -39,6 +41,8 @@ export class MMenuSandbox extends Vue {
 
 const MenuSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ButtonPlugin);
+        v.use(MenuPlugin);
         v.component(`${MENU_NAME}-sandbox`, MMenuSandbox);
     }
 };

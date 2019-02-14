@@ -1,8 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
+import ButtonPlugin from '../button/button';
+import CheckboxPlugin from '../checkbox/checkbox';
 import { TABLE_NAME } from '../component-names';
-import { MColumnTable } from './table';
+import OptionPlugin from '../option/option';
+import TablePlugin, { MColumnTable } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
@@ -31,7 +33,8 @@ export class MTableSandbox extends Vue {
         {
             id: 'check',
             title: '',
-            dataProp: 'check'
+            dataProp: 'check',
+            width: '16px'
         },
         {
             id: 'name',
@@ -52,7 +55,7 @@ export class MTableSandbox extends Vue {
             id: 'menu',
             title: '',
             dataProp: 'menu',
-            width: '10%'
+            width: '33px'
         }
     ];
 
@@ -92,24 +95,28 @@ export class MTableSandbox extends Vue {
     emptyRows: any[] = [];
 
     editData(id: string): void {
-        console.error('Edit data: ' + id);
+        alert('Edit data: ' + id);
     }
 
     deleteData(id: string): void {
-        console.error('Delete data: ' + id);
+        alert('Delete data: ' + id);
     }
 
     showMore(): void {
-        console.error('Show more');
+        alert('Show more');
     }
 
     onCheck(id: string): void {
-        console.error('Check: ' + id);
+        alert('Check: ' + id);
     }
 }
 
 const TableSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(TablePlugin);
+        v.use(OptionPlugin);
+        v.use(ButtonPlugin);
+        v.use(CheckboxPlugin);
         v.component(`${TABLE_NAME}-sandbox`, MTableSandbox);
     }
 };

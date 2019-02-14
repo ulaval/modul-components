@@ -7,6 +7,15 @@ import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $http: HttpService;
+    }
+}
 export interface HttpPluginOptions {
     protectedUrls?: string[];
     authorizationFn?: () => string;
@@ -122,7 +131,7 @@ export class HttpService implements RestAdapter {
 const HttpPlugin: PluginObject<any> = {
     install(v, options): void {
         let http: HttpService = new HttpService(options);
-        (v.prototype as any).$http = http;
+        (v.prototype).$http = http;
     }
 };
 

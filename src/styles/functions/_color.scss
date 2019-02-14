@@ -1,0 +1,15 @@
+@function m-color($color, $variant: 'base') {
+    $m-map: $m-color-map;
+
+    @if map-has-key($m-map, $color) {
+        @if map-has-deep-key($m-map, $color, $variant) {
+            @return map-get(map-get($m-map, $color), $variant);
+        }
+
+        @error "Unknown variant color `#{$variant}`, check _var-color.scss file.";
+    }
+
+    @error "Unknown color `#{$color}`, check _var-color.scss file.";
+
+    @return null;
+}

@@ -1,0 +1,14 @@
+@import 'commons';
+
+.m-show-more {
+    text-align: center;
+    max-width: $m-min-width;
+
+    &__status {
+        margin-bottom: $m-spacing;
+    }
+
+    .m-button {
+        margin-top: $m-spacing;
+    }
+}

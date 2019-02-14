@@ -4,6 +4,7 @@ import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { PROGRESS_NAME } from '../component-names';
 import WithRender from './progress.sandbox.html';
+import ProgressPlugin from './progress';
 
 const DEFAULT_COUNT: number = 5 * 1000;
 
@@ -31,6 +32,7 @@ export class MProgressSandbox extends ModulVue {
 
 const ProgressSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ProgressPlugin);
         v.component(`${PROGRESS_NAME}-sandbox`, MProgressSandbox);
     }
 };

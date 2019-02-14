@@ -1,0 +1,42 @@
+<div>
+    <m-button @click="toggleWidth">Toggle size ( current: {{ width }} )</m-button>
+    <h2>Translation control (no variable, no special chars)</h2>
+    <ul>
+        <li :class="{'i18n-service-sandbox-small': isSmall}"
+            :key="index"
+            v-for="(translation, index) in control">{{ translation.mode }} : {{ translation.value }}
+        </li>
+    </ul>
+
+    <h2>Translation string with &amp;nbsp;</h2>
+    <ul>
+        <li :class="{'i18n-service-sandbox-small': isSmall}"
+            :key="index"
+            v-for="(translation, index) in stringWithNBSP">{{ translation.mode }} : {{ translation.value }}
+        </li>
+    </ul>
+
+    <h2>Translation string with &amp;#8209;</h2>
+    <ul>
+        <li :class="{'i18n-service-sandbox-small': isSmall}"
+            :key="index"
+            v-for="(translation, index) in stringWithNBHYPHEN">{{ translation.mode }} : {{ translation.value }}
+        </li>
+    </ul>
+
+    <h2>Translation string with &amp;ndash;</h2>
+    <ul>
+        <li :class="{'i18n-service-sandbox-small': isSmall}"
+            :key="index"
+            v-for="(translation, index) in stringWithENDASH">{{ translation.mode }} : {{ translation.value }}
+        </li>
+    </ul>
+
+    <h2>Translation string with &amp;mdash;</h2>
+    <ul>
+        <li :class="{'i18n-service-sandbox-small': isSmall}"
+            :key="index"
+            v-for="(translation, index) in stringWithEMDASH">{{ translation.mode }} : {{ translation.value }}
+        </li>
+    </ul>
+</div>

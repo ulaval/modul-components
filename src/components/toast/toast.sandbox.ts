@@ -3,6 +3,8 @@ import { Component } from 'vue-property-decorator';
 
 import { TOAST } from '../component-names';
 import WithRender from './toast.sandbox.html';
+import ToastPlugin from './toast';
+import ButtonPlugin from '../button/button';
 
 @WithRender
 @Component
@@ -22,6 +24,8 @@ export class MToastSandbox extends Vue {
 
 const MToastSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ToastPlugin);
+        v.use(ButtonPlugin);
         v.component(`${TOAST}-sandbox`, MToastSandbox);
     }
 };

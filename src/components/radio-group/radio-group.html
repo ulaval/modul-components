@@ -1,15 +1,26 @@
-<div class="m-radio-group" :class="{ 'm--is-inline': inline,
+<div class="m-radio-group"
+     :class="{ 'm--is-inline': inline,
               'm--is-disabled': stateIsDisabled,
               'm--has-error': hasError,
               'm--is-valid': isValid }">
-    <p class="m-radio-group__label" v-if="hasLabel">
+    <p :id="idLabel"
+       class="m-radio-group__label"
+       v-if="hasLabel">
         <span>{{ label }}</span>
         <span class="m-radio-group__icon">
             <slot name="icon"></slot>
         </span>
     </p>
-    <ul role="radiogroup" class="m-radio-group__body">
+    <ul class="m-radio-group__body"
+        role="radiogroup"
+        :aria-labelledby="idLabel"
+        :aria-describedby="idValidationMessage">
         <slot></slot>
     </ul>
-    <m-validation-message class="m-radio-group__message" :disabled="stateIsDisabled" :error-message="errorMessage" :valid-message="validMessage" :helper-message="helperMessage"></m-validation-message>
+    <m-validation-message :id="idValidationMessage"
+                          class="m-radio-group__message"
+                          :disabled="stateIsDisabled"
+                          :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
 </div>

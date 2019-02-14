@@ -6,6 +6,7 @@ import { getDefaultMock } from '../../../tests/helpers/mock';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import DropdownPlugin, { MDropdown } from './dropdown';
+import ModulPlugin from '../../utils/modul/modul';
 
 
 jest.mock('../../utils/uuid/uuid');
@@ -18,7 +19,8 @@ describe('MDropdown', () => {
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
-        localVue.use(DropdownPlugin);
+        // localVue.use(ModulPlugin);
+        // localVue.use(DropdownPlugin);
         mockPopper = localVue.component('m-popper', {
             template: '<m-popper-mock><slot name="footer"></slot></m-popper-mock>'
         });
@@ -33,7 +35,7 @@ describe('MDropdown', () => {
             localVue: localVue
         });
 
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     it('should render correctly when placeholder is set', () => {
@@ -45,7 +47,7 @@ describe('MDropdown', () => {
             }
         });
 
-        return expect(renderComponent(dropdown.vm)).resolves.toMatchSnapshot();
+        return expect(dropdown.html()).toMatchSnapshot();
     });
 
     // it('should render correctly when footer slot is set', () => {

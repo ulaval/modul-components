@@ -18,7 +18,8 @@ export class MSessionExpired extends Vue {
 
 const SessionExpiredPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(SESSION_EXPIRED_NAME, 'plugin.install');
+        v.prototype.$log.error('MSessionExpired will be deprecated in modul v.1.0');
+
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.use(MessagePlugin);

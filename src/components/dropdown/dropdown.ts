@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import PopupPluginDirective from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
@@ -12,13 +12,15 @@ import { normalizeString } from '../../utils/str/str';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import uuid from '../../utils/uuid/uuid';
 import ButtonPlugin from '../button/button';
-import { DROPDOWN_NAME } from '../component-names';
+import { DROPDOWN_ITEM_NAME, DROPDOWN_NAME } from '../component-names';
 import { MDropdownGroup } from '../dropdown-group/dropdown-group';
-import DropdownItemPlugin, { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from '../dropdown-item/dropdown-item';
 import InputStylePlugin, { MInputStyle } from '../input-style/input-style';
 import PopupPlugin, { MPopup } from '../popup/popup';
+import RadioStylePlugin from '../radio-style/radio-style';
 import { MSidebar } from '../sidebar/sidebar';
 import ValidationMessagePlugin from '../validation-message/validation-message';
+import { InputManagement } from './../../mixins/input-management/input-management';
+import { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from './dropdown-item/dropdown-item';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
 const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
@@ -30,6 +32,7 @@ const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
         InputState,
         InputPopup,
         MediaQueries,
+        InputManagement,
         InputWidth,
         InputLabel
     ]
@@ -109,27 +112,34 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (value && value !== this.internalOpen) {
             this.focusedIndex = -1;
         }
-        this.internalOpen = value;
-        this.dirty = false;
-        this.$nextTick(() => {
-            let inputEl: any = this.$refs.input;
-            if (this.internalOpen) {
-                inputEl.focus();
-                if (this.filterable) {
-                    inputEl.setSelectionRange(0, this.selectedText.length);
-                }
-                this.focusSelected();
-                this.scrollToFocused();
+        if (this.as<InputState>().active) {
+            this.internalOpen = value;
 
-                this.$emit('open');
-                // Reset the height of the list before calculating its height
-                // (this code is executed before the method calculateFilterableListeHeight())
-                this.itemsHeightStyle = undefined;
-            } else {
-                this.internalFilter = '';
-                this.$emit('close');
-            }
+            this.dirty = false;
+        }
+    }
+
+    @Emit('open')
+    private async onOpen(): Promise<void> {
+        await this.$nextTick();
+        let inputEl: any = this.$refs.input;
+        setTimeout(() => { // Need timeout to set focus on input
+            inputEl.focus();
         });
+        if (this.filterable) {
+            inputEl.setSelectionRange(0, this.selectedText.length);
+        }
+
+        this.focusSelected();
+        this.scrollToFocused();
+        // Reset the height of the list before calculating its height
+        // (this code is executed before the method calculateFilterableListeHeight())
+        this.itemsHeightStyle = undefined;
+    }
+
+    @Emit('close')
+    private onClose(): void {
+        this.internalFilter = '';
     }
 
     private set itemsHeightStyle(value: object | number | undefined) {
@@ -252,7 +262,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get isEmpty(): boolean {
-        return (this.filterable && this.open) || this.as<InputPopup>().hasValue() || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
+        return (this.filterable && this.open) || this.as<InputManagement>().hasValue || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
     }
 
     private buildItemsMap(): void {
@@ -419,6 +429,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             setTimeout(() => {
                 if (this.as<MediaQueriesMixin>().isMqMinS) {
                     let height: number = el.clientHeight;
+                    // tslint:disable-next-line: deprecation
                     el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
                     el.style.transition = DROPDOWN_STYLE_TRANSITION;
                     el.style.overflowY = 'hidden';
@@ -454,17 +465,23 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             }
         });
     }
+
+    private get hasPointer(): boolean {
+        return !this.filterable || (this.filterable && !this.open);
+    }
+
 }
 
 const DropdownPlugin: PluginObject<any> = {
     install(v, options): void {
-        Vue.use(DropdownItemPlugin);
+        Vue.use(RadioStylePlugin);
         Vue.use(InputStylePlugin);
         Vue.use(ButtonPlugin);
         Vue.use(PopupPlugin);
         Vue.use(PopupPluginDirective);
         Vue.use(ValidationMessagePlugin);
         Vue.use(MediaQueriesPlugin);
+        v.component(DROPDOWN_ITEM_NAME, MDropdownItem);
         v.component(DROPDOWN_NAME, MDropdown);
     }
 };

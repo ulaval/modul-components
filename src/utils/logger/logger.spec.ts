@@ -1,8 +1,8 @@
 import { createLocalVue } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import LoggerPlugin from './logger';
 
+// tslint:disable:no-console
 describe(`Given the class Logger`, () => {
     const localVue: VueConstructor<Vue> = createLocalVue();
 
@@ -159,3 +159,5 @@ describe(`Given the class Logger`, () => {
         });
     });
 });
+// tslint:enable:no-console
+
