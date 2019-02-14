@@ -261,14 +261,14 @@ export class MetaGenerator {
         return _default;
     }
 
-    private getTypeTypesAsStrings(type): string[] {
+    private getTypeTypesAsStrings(type: any): string[] {
         if (type.types) {
-            return type.types.map((type) => type.value);
+            return type.types.map((type: any) => type.value);
         }
         return [];
     }
 
-    private getTypeValueAsString(type): string {
+    private getTypeValueAsString(type: any): string {
         return type.value;
     }
 

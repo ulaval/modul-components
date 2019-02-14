@@ -10,6 +10,8 @@
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
         "strictNullChecks": true,
         "types": [
             "node",
