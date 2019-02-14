@@ -479,7 +479,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return !this.filterable || (this.filterable && !this.open);
     }
 
-    private inputOnKeydownEsc(): void {
+    private onKeydownEsc(): void {
         this.open = false;
     }
 }
