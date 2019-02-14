@@ -6,6 +6,7 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import OverlayPlugin from '../overlay/overlay';
+import RadioGroupPlugin from '../radio-group/radio-group';
 import RadioPlugin from '../radio/radio';
 import { MRichText } from '../rich-text/rich-text';
 import TextfieldPlugin from '../textfield/textfield';
@@ -41,6 +42,7 @@ export class MRichTextEditorSandBox extends ModulVue {
     public resetValue: string = '';
 
     public fileList: { file: MFile, id: string }[] = [];
+    radioValue: string = '2';
 
     public alertTestSuccess(message: string): void {
         alert(message);
@@ -81,6 +83,7 @@ const RichTextEditorSandBoxPlugin: PluginObject<any> = {
         v.use(ButtonPlugin);
         v.use(OverlayPlugin);
         v.use(TextfieldPlugin);
+        v.use(RadioGroupPlugin);
         v.use(RadioPlugin);
         v.use(RichTextLicensePlugin, { key: `test` });
         v.component(`m-rich-text-editor-sandbox`, MRichTextEditorSandBox);
