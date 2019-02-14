@@ -479,6 +479,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return !this.filterable || (this.filterable && !this.open);
     }
 
+    private inputOnKeydownEsc(): void {
+        this.open = false;
+    }
 }
 
 const DropdownPlugin: PluginObject<any> = {
