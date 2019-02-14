@@ -68,7 +68,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalItems: MDropdownItem[] = [];
     private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
-    private isFocus: boolean = false;
+    private internalIsFocus: boolean = false;
     private observer: MutationObserver;
     private focusedIndex: number = -1;
 
@@ -86,11 +86,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public onFocusIn(): void {
-        this.isFocus = true;
+        this.internalIsFocus = true;
     }
 
     public onFocusOut(): void {
-        this.isFocus = false;
+        this.internalIsFocus = false;
     }
 
     public groupHasItems(group: BaseDropdownGroup): boolean {
