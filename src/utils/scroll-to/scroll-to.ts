@@ -150,9 +150,6 @@ export class ScrollTo {
                 const progressPercentage: number = _duration ? Math.min(1, ((currentTime - startTime) / _duration)) : 100;
                 const targetPosition: number = _duration ? Math.floor(startLocation + distanceToScroll * easing(progressPercentage)) : targetLocation;
 
-                // tslint:disable-next-line:no-console
-                console.log('step of:', progressPercentage, targetLocation, currentTime, startTime);
-
                 if (container) {
                     container.scrollTop = targetPosition;
 
