@@ -146,7 +146,7 @@ export class ScrollTo {
             const distanceToScroll: number = targetLocation - startLocation;
             const _duration: number = this.getDuration(duration);
 
-            const step: any = (currentTime) => {
+            const step: any = (currentTime: number) => {
                 const progressPercentage: number = _duration ? Math.min(1, ((currentTime - startTime) / _duration)) : 100;
                 const targetPosition: number = _duration ? Math.floor(startLocation + distanceToScroll * easing(progressPercentage)) : targetLocation;
 
