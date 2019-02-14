@@ -5,6 +5,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import { STEP_TRANSITION_NAME } from '../component-names';
+import StepTransitionItemPlugin from '../step-transition-item/step-transition-item';
 import WithRender from './step-transition.html?style=./step-transition.scss';
 
 export abstract class BaseStepTransition extends ModulVue { }
@@ -83,6 +84,7 @@ const StepTransitionPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.warn(STEP_TRANSITION_NAME + ' is not ready for production');
         v.component(STEP_TRANSITION_NAME, MStepTransition);
+        v.use(StepTransitionItemPlugin);
     }
 };
 
