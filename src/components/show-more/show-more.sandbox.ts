@@ -1,9 +1,9 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { SHOW_MORE_NAME } from '../component-names';
+import { MProgressSkin } from '../progress/progress';
 import ShowMorePlugin from './show-more';
 import WithRender from './show-more.sandbox.html';
-import { MProgressSkin } from '../progress/progress';
 
 @WithRender
 @Component
@@ -11,7 +11,6 @@ export class MShowMoreSandbox extends Vue {
     data: number[] = [];
     total: number = 20;
     totalZero: number = 0;
-    totalUndefined: undefined = undefined;
     loading: boolean = false;
     skin: MProgressSkin = MProgressSkin.Monochrome;
 
