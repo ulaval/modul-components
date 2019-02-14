@@ -16,7 +16,6 @@ import MetaFactory from './meta-init';
 import routerFactory from './router';
 import { getSandboxPlugin } from './sandbox-loader';
 
-
 Vue.config.productionTip = false;
 
 let utilsOptions: UtilsPluginOptions = {

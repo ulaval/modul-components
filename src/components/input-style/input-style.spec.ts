@@ -1,4 +1,4 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import InputStylePlugin, { MInputStyle } from './input-style';
@@ -9,12 +9,16 @@ const CSSCURSOR: string = 'm--has-cursor-pointer';
 
 let wrapper: Wrapper<MInputStyle>;
 
-beforeEach(() => {
-    Vue.use(InputStylePlugin);
-    wrapper = shallow(MInputStyle);
-});
-
 describe('MInputStyle', () => {
+    beforeEach(() => {
+        Vue.use(InputStylePlugin);
+        wrapper = shallowMount(MInputStyle, {
+            slots: {
+                default: '<input ref="input" type="text"/>'
+            }
+        });
+    });
+
     it('should render correctly', () => {
         expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
@@ -29,7 +33,7 @@ describe('MInputStyle', () => {
 
             wrapper.find(ROOT).trigger('click');
 
-            expect(wrapper.vm.labelIsUp).toBeFalsy();
+            expect(wrapper.vm.isLabelUp).toBeFalsy();
             expect(wrapper.classes()).not.toContain(CSSLABELUP);
         });
     });

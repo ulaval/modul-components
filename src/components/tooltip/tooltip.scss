@@ -1,5 +1,6 @@
 @import 'commons';
 $m-tooltip--width: 320px !default;
+$m-tooltip--width--l: 540px !default;
 $m-tooltip--max-height: 280px !default;
 
 .m-tooltip {
@@ -78,6 +79,7 @@ $m-tooltip--max-height: 280px !default;
 
         &.m--is-link {
             background: $m-color--white;
+            border: 1px solid $m-color--grey-lighter;
         }
 
         @media (max-width: $m-mq--max--s) {
@@ -99,6 +101,10 @@ $m-tooltip--max-height: 280px !default;
             max-height: $m-tooltip--max-height;
             overflow-x: hidden;
             overflow-y: auto;
+
+            &.m--is-large {
+                width: $m-tooltip--width--l;
+            }
 
             &:not(.m--is-link) {
                 border: 1px solid $m-color--interactive;

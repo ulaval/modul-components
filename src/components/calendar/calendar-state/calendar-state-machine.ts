@@ -30,8 +30,10 @@ export default class MCalendarStateMachine extends ModulVue {
     private calendarState: CalendarState = {} as CalendarState;
 
     @Watch('value')
+    @Watch('minDate')
+    @Watch('maxDate')
     refreshValue(): void {
-        this.calendarState.updateValue(this.value);
+        this.calendarState.updateState(this.value, this.minDate, this.maxDate);
     }
 
     created(): void {
@@ -46,13 +48,13 @@ export default class MCalendarStateMachine extends ModulVue {
     }
 
     render(): any {
-        return this.$scopedSlots.default!(
+        return this.$scopedSlots.default(
             this.calendarState.buildCurrentCalendar()
         );
     }
 
     onInput(value: SingleDate | RangeDate): void {
-        this.calendarState.updateValue(value);
+        this.calendarState.updateState(value, this.minDate, this.maxDate);
     }
 
     @Emit('input')

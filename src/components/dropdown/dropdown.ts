@@ -68,6 +68,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private internalItems: MDropdownItem[] = [];
     private internalNavigationItems: MDropdownItem[];
     private internalSelectedText: string | undefined = '';
+    private isFocus: boolean = false;
     private observer: MutationObserver;
     private focusedIndex: number = -1;
 
@@ -82,6 +83,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             result = this.internalFilterRegExp.test(text);
         }
         return result;
+    }
+
+    public onFocusIn(): void {
+        this.isFocus = true;
+    }
+
+    public onFocusOut(): void {
+        this.isFocus = false;
     }
 
     public groupHasItems(group: BaseDropdownGroup): boolean {
@@ -116,37 +125,31 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             this.internalOpen = value;
 
             this.dirty = false;
-            this.$nextTick(() => {
-                if (this.internalOpen) {
-                    let inputEl: any = this.$refs.input;
-                    setTimeout(() => { // Need timeout to set focus on input
-                        inputEl.focus();
-                    });
-                    if (this.filterable) {
-                        inputEl.setSelectionRange(0, this.selectedText.length);
-                    }
-
-                    this.focusSelected();
-                    this.scrollToFocused();
-
-                    this.onOpen();
-                    // Reset the height of the list before calculating its height
-                    // (this code is executed before the method calculateFilterableListeHeight())
-                    this.itemsHeightStyle = undefined;
-
-                } else {
-                    this.internalFilter = '';
-                    this.onClose();
-                }
-            });
         }
     }
 
     @Emit('open')
-    private onOpen(): void { }
+    private async onOpen(): Promise<void> {
+        await this.$nextTick();
+        let inputEl: any = this.$refs.input;
+        setTimeout(() => { // Need timeout to set focus on input
+            inputEl.focus();
+        });
+        if (this.filterable) {
+            inputEl.setSelectionRange(0, this.selectedText.length);
+        }
+
+        this.focusSelected();
+        this.scrollToFocused();
+        // Reset the height of the list before calculating its height
+        // (this code is executed before the method calculateFilterableListeHeight())
+        this.itemsHeightStyle = undefined;
+    }
 
     @Emit('close')
-    private onClose(): void { }
+    private onClose(): void {
+        this.internalFilter = '';
+    }
 
     private set itemsHeightStyle(value: object | number | undefined) {
         this.itemsHeightStyleInternal = value === undefined ? undefined : { height: value + 'px' };
@@ -435,6 +438,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             setTimeout(() => {
                 if (this.as<MediaQueriesMixin>().isMqMinS) {
                     let height: number = el.clientHeight;
+                    // tslint:disable-next-line: deprecation
                     el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
                     el.style.transition = DROPDOWN_STYLE_TRANSITION;
                     el.style.overflowY = 'hidden';

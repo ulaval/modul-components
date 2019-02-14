@@ -118,7 +118,7 @@ describe('MCheckbox', () => {
             }
         });
 
-        return expect(chkbox.find('input').element.indeterminate).toBeTruthy(); // TODO: Add prop to linter?
+        return expect((chkbox.find('input').element as any).indeterminate).toBeTruthy(); // TODO: Add prop to linter?
     });
 
     it('should flow down InputState mixin props to m-validation-message', () => {
@@ -127,7 +127,12 @@ describe('MCheckbox', () => {
             error: false,
             errorMessage: 'error-message',
             validMessage: 'valid-message',
-            helperMessage: 'helper-message'
+            helperMessage: 'helper-message',
+            readonly: undefined,
+            tagStyle: 'default',
+            transition: true,
+            valid: undefined,
+            waiting: undefined
         };
 
         const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {

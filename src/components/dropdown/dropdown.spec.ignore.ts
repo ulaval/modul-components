@@ -1,8 +1,8 @@
-import '../../utils/polyfills';
-
 import Vue from 'vue';
-
+import '../../utils/polyfills';
 import DropdownPlugin, { MDropdown } from './dropdown';
+
+
 
 const DISABLED_CSS: string = 'm--is-disabled';
 const WAITING_CSS: string = 'm--is-waiting';
@@ -62,8 +62,8 @@ describe('dropdown', () => {
             </m-dropdown>`
         }).$mount();
 
-        let li1: Element = vm.$el.querySelector('.a');
-        let li2: Element = vm.$el.querySelector('.b');
+        let li1: Element | null = vm.$el.querySelector('.a');
+        let li2: Element | null = vm.$el.querySelector('.b');
 
         if (li1 && li2) {
             expect(li1.classList.contains(SELECTED_CSS)).toBeFalsy();

@@ -9,8 +9,8 @@ jest.mock('./state/calendar-single-date-state');
 jest.mock('./state/calendar-range-date-state');
 
 const EMPTY_VALUE: string = '';
-const UNDEFINED_MIN_DATE: string = undefined;
-const UNDEFINED_MAX_DATE: string = undefined;
+const UNDEFINED_MIN_DATE: string | undefined = undefined;
+const UNDEFINED_MAX_DATE: string | undefined = undefined;
 
 const DEFAULT_DATE_VALUE: string = '2019-01-01';
 
@@ -157,9 +157,9 @@ describe(`Calendar state machine`, () => {
                 initializeWrapper();
                 wrapper.setProps({ value: '2019-10-10' });
 
-                const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
+                const mockCalendarRangeDateState: CalendarRangeDateState = ((CalendarRangeDateState as any) as jest.Mocked<CalendarRangeDateState>);
 
-                Vue.nextTick(() => { expect(mockCalendarSingleDateState.updateValue).toHaveBeenCalledWith('2019-10-10'); });
+                Vue.nextTick(() => { expect(mockCalendarRangeDateState.updateState).toHaveBeenCalledWith('2019-10-10'); });
             });
         });
 
@@ -168,9 +168,9 @@ describe(`Calendar state machine`, () => {
                 initializeWrapper();
                 wrapper.vm.onInput('2019-10-10');
 
-                const mockCalendarSingleDateState: any = (CalendarSingleDateState as any).mock.instances[0];
+                const mockCalendarRangeDateState: CalendarRangeDateState = ((CalendarRangeDateState as any) as jest.Mocked<CalendarRangeDateState>);
 
-                Vue.nextTick(() => { expect(mockCalendarSingleDateState.updateValue).toHaveBeenCalledWith('2019-10-10'); });
+                Vue.nextTick(() => { expect(mockCalendarRangeDateState.updateState).toHaveBeenCalledWith('2019-10-10'); });
             });
         });
     });
@@ -255,9 +255,9 @@ describe(`Calendar state machine`, () => {
                 initializeWrapper();
                 wrapper.setProps({ value: { begin: '2019-10-10', end: '2020-01-01' } });
 
-                const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];
+                const mockCalendarRangeDateState: CalendarRangeDateState = ((CalendarRangeDateState as any) as jest.Mocked<CalendarRangeDateState>);
 
-                Vue.nextTick(() => { expect(mockCalendarRangeDateState.updateValue).toHaveBeenCalledWith({ begin: '2019-10-10', end: '2020-01-01' }); });
+                Vue.nextTick(() => { expect(mockCalendarRangeDateState.updateState).toHaveBeenCalledWith({ begin: '2019-10-10', end: '2020-01-01' }); });
             });
         });
 
@@ -266,9 +266,9 @@ describe(`Calendar state machine`, () => {
                 initializeWrapper();
                 wrapper.vm.onInput({ begin: '2019-10-10', end: '2020-01-01' });
 
-                const mockCalendarRangeDateState: any = (CalendarRangeDateState as any).mock.instances[0];
+                const mockCalendarRangeDateState: CalendarRangeDateState = ((CalendarRangeDateState as any) as jest.Mocked<CalendarRangeDateState>);
 
-                Vue.nextTick(() => { expect(mockCalendarRangeDateState.updateValue).toHaveBeenCalledWith({ begin: '2019-10-10', end: '2020-01-01' }); });
+                Vue.nextTick(() => { expect(mockCalendarRangeDateState.updateState).toHaveBeenCalledWith({ begin: '2019-10-10', end: '2020-01-01' }); });
             });
         });
     });

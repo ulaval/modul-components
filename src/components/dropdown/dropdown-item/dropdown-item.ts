@@ -83,11 +83,11 @@ export class MDropdownItem extends ModulVue {
     }
 
     private get selected(): boolean {
-        return (this.root as MDropdownInterface).model === this.value && !this.readonly;
+        return this.root.model === this.value && !this.readonly;
     }
 
     private get focused(): boolean {
-        return (this.root as MDropdownInterface).focused === this.value && !this.readonly;
+        return this.root.focused === this.value && !this.readonly;
     }
 
     private get tabindex(): number | undefined {

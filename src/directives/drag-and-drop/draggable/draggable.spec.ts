@@ -20,6 +20,15 @@ let spyWindow: jest.SpyInstance<any> = jest.spyOn(window, 'getComputedStyle');
 let element: jest.Mock = jest.fn();
 element.mockReturnValue({ classList: jest.fn(), querySelector: jest.fn() });
 
+jest.mock('../../../utils/vue/events', () => ({
+    dispatchEvent: (element: HTMLElement, eventName: string, eventData: any) => {
+        const vue: Vue = (element as any).__vue__;
+        if (vue && vue.$children.length) {
+            return vue.$children[0].$emit(eventName, eventData);
+        }
+    }
+}));
+
 beforeEach(() => {
     mockTargetIsInput = false;
     element.mockReset();
@@ -51,7 +60,6 @@ describe('draggable', () => {
                 }, { localVue: Vue });
             }
 
-            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
             return directive;
         };
 
@@ -68,14 +76,14 @@ describe('draggable', () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(param, { dragData: userDefinedData, action: userDefinedAction, grouping: userDefinedGrouping });
 
             expect(draggable.element.classList).toContain(MDraggableClassNames.Draggable);
-            expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe(userDefinedAction);
-            expect(MDOMPlugin.get(MDraggable, draggable.element).options.dragData).toBe(userDefinedData);
+            expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.action).toBe(userDefinedAction);
+            expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.dragData).toBe(userDefinedData);
             expect(draggable.element.draggable).toBe(true);
             expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
         });
         it(`it should default action correctly when binding ${param} is provided and action is not user defined`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(param);
-            expect(MDOMPlugin.get(MDraggable, draggable.element).options.action).toBe('any');
+            expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.action).toBe('any');
         });
     });
 
@@ -234,11 +242,16 @@ describe('draggable', () => {
         it('should clean up events correctly', () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(undefined, undefined, dragImageTemplate);
             const element: HTMLElement = draggable.element;
-            const draggablePlugin: MDraggable = MDOMPlugin.get(MDraggable, element);
-            jest.spyOn(draggablePlugin, 'removeAllEvents');
-            draggable.destroy();
 
-            expect(draggablePlugin.removeAllEvents).toHaveBeenCalled();
+            const draggablePlugin: MDraggable | undefined = MDOMPlugin.get(MDraggable, element);
+            if (draggablePlugin) {
+                jest.spyOn(draggablePlugin, 'removeAllEvents');
+                draggable.destroy();
+
+                expect(draggablePlugin.removeAllEvents).toHaveBeenCalled();
+            } else {
+                fail('draggablePlugin is undefined');
+            }
         });
     });
 
@@ -271,7 +284,6 @@ describe('draggable', () => {
             draggable.trigger('dragstart', options);
 
             const event: any = draggable.emitted(MDraggableEventNames.OnDragStart)[0][0];
-            expect(options.stopPropagation).toHaveBeenCalled();
             expect(event.dragInfo).toBeDefined();
             expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
         });
@@ -384,7 +396,6 @@ describe('draggable', () => {
             draggable.trigger('dragend', options);
 
             const event: any = draggable.emitted(MDraggableEventNames.OnDragEnd)[0][0];
-            expect(options.stopPropagation).toHaveBeenCalled();
             expect(event.dragInfo).toBeDefined();
             expect(event.dragInfo).toEqual({ action: userDefinedAction, data: userDefinedData, grouping: userDefinedGrouping });
         });

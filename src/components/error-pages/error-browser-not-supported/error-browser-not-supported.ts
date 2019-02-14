@@ -17,12 +17,12 @@ import WithRender from './error-browser-not-supported.html';
 export class MErrorBrowserNotSupported extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:title')
+        default: () => (Vue.prototype).$i18n.translate('m-error-browser-not-supported:title')
     })
     public title: string;
 
     @Prop({
-        default: () => [new Link((Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:update-browser.desktop'), 'http://outdatedbrowser.com/fr', true)]
+        default: () => [new Link((Vue.prototype).$i18n.translate('m-error-browser-not-supported:update-browser.desktop'), 'http://outdatedbrowser.com/fr', true)]
     })
     public linksDesktop: Link[];
 
@@ -30,12 +30,12 @@ export class MErrorBrowserNotSupported extends ModulVue {
     public linksMobile: Link[];
 
     @Prop({
-        default: () => [(Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:hint.primary.desktop')]
+        default: () => [(Vue.prototype).$i18n.translate('m-error-browser-not-supported:hint.primary.desktop')]
     })
     public hintsDesktop: string[];
 
     @Prop({
-        default: () => [(Vue.prototype as any).$i18n.translate('m-error-browser-not-supported:hint.primary.mobile')]
+        default: () => [(Vue.prototype).$i18n.translate('m-error-browser-not-supported:hint.primary.mobile')]
     })
     public hintsMobile: string[];
 

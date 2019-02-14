@@ -1,16 +1,21 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
 import { PROGRESS_NAME } from '../component-names';
 import WithRender from './progress.html?style=./progress.scss';
 import INDETERMINATE_ANIMATION_TEMPLATE from './progressSpinnerAnimation';
 
+
 export enum MProgressState {
     Completed = 'completed',
     InProgress = 'in-progress',
     Error = 'error'
+}
+
+export enum MProgressSkin {
+    Default = 'default',
+    Monochrome = 'monochrome'
 }
 
 @WithRender
@@ -37,6 +42,8 @@ export class MProgress extends ModulVue {
     public state: MProgressState;
     @Prop({ default: true })
     public borderRadius: boolean;
+    @Prop({ default: MProgressSkin.Default })
+    public skin: MProgressSkin;
 
     private mode: string;
     private styleTag: HTMLElement | null;
@@ -226,6 +233,9 @@ export class MProgress extends ModulVue {
         return '0px';
     }
 
+    private get isMonochrome(): boolean {
+        return this.skin === MProgressSkin.Monochrome;
+    }
 }
 
 const ProgressPlugin: PluginObject<any> = {

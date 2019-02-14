@@ -70,6 +70,14 @@ export class MToastServiceSandbox extends ModulVue {
         });
     }
 
+    public html(): void {
+        this.$toast.show({
+            text: '<p>You have <strong> too many</strong> errors</p>',
+            icon: true,
+            state: MToastState.Error
+        });
+    }
+
     public action(event: Event): void {
         alert(`Type of event ${event.type}`);
     }

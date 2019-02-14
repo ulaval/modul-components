@@ -3,7 +3,6 @@
     <h3>Froala Text Editor</h3>
     <h5 class="m-u--margin-bottom">fonctionne sans option spécifiée</h5>
     <div class="m-u--margin-bottom">
-        <div><button @click="focus = !focus">Change focus (now: {{ focus }})</button></div>
         <div>
             Error message: <input type="text"
                    v-model="errorMessage" />
@@ -16,9 +15,18 @@
             Helper message: <input type="text"
                    v-model="helperMessage" />
         </div>
-        <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
-        <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
-        <div><button @click="readonly = !readonly">ReadOnly (now: {{ readonly }})</button></div>
+        <div>
+            <m-checkbox v-model="focus">Focus</m-checkbox>
+        </div>
+        <div>
+            <m-checkbox v-model="waiting">Waiting</m-checkbox>
+        </div>
+        <div>
+            <m-checkbox v-model="disabled">Disabled</m-checkbox>
+        </div>
+        <div>
+            <m-checkbox v-model="readonly">ReadOnly</m-checkbox>
+        </div>
     </div>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
@@ -33,6 +41,30 @@
                             :waiting="waiting"
                             :disabled="disabled"
                             :readonly="readonly"></m-rich-text-editor>
+    </div>
+    <div class="m-u--margin-bottom">
+        <m-rich-text-editor v-model="model"
+                            :label="'texte riche'"
+                            :max-width="'large'"
+                            :placeholder="'some placeholder'"
+                            :focus="focus"
+                            :error="error"
+                            :error-message="errorMessage"
+                            :valid-message="validMessage"
+                            :helper-message="helperMessage"
+                            :waiting="waiting"
+                            :disabled="disabled"
+                            :readonly="readonly"></m-rich-text-editor>
+    </div>
+    <div class="m-u--margin-bottom">
+        <h5>Mode media</h5>
+        <m-rich-text-editor v-model="mediaModel"
+                            :mode="mode"
+                            label="texte riche"
+                            max-width="large"
+                            @image-ready="imageReady"
+                            @image-added="imageAdded"
+                            @image-removed="imageRemoved"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>

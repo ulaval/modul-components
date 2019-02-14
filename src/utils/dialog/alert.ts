@@ -62,7 +62,7 @@ const AlertPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.error('AlertPlugin will be deprecated in modul v.1.0');
 
-        (v.prototype as any).$alert = alertFunction;
+        (v.prototype).$alert = alertFunction;
     }
 };
 

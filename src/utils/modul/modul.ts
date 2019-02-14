@@ -172,6 +172,8 @@ export class Modul {
             element.setAttribute('class', BACKDROP_CLASS_NAME);
             element.setAttribute('aria-hidden', 'true');
 
+
+            // tslint:disable-next-line: deprecation
             element.style.webkitTransition = BACKDROP_STYLE_TRANSITION;
             element.style.transition = BACKDROP_STYLE_TRANSITION;
             element.style.position = BACKDROP_STYLE_POSITION;
@@ -187,6 +189,7 @@ export class Modul {
 
             this.backdropElement = document.querySelector('#' + id) as HTMLElement;
             let duration: string = String(BACKDROP_STYLE_TRANSITION_FAST_DURATION / 1000) + 's';
+            // tslint:disable-next-line: deprecation
             this.backdropElement.style.webkitTransitionDuration = duration;
             this.backdropElement.style.transitionDuration = duration;
 
@@ -230,6 +233,7 @@ export class Modul {
             let speed: number = slow ? BACKDROP_STYLE_TRANSITION_SLOW_DURATION : BACKDROP_STYLE_TRANSITION_FAST_DURATION;
             if (this.backdropElement) {
                 let duration: string = String(speed / 1000) + 's';
+                // tslint:disable-next-line: deprecation
                 this.backdropElement.style.webkitTransitionDuration = duration;
                 this.backdropElement.style.transitionDuration = duration;
 
@@ -292,7 +296,7 @@ const ModulPlugin: PluginObject<any> = {
     install(v, options): void {
         Vue.use(PortalPlugin);
         let modul: Modul = new Modul();
-        (v.prototype as any).$modul = modul;
+        (v.prototype).$modul = modul;
     }
 };
 

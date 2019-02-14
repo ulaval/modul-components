@@ -155,7 +155,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private setDisplayButtonArrrow(): void {
-        let wrapEl: HTMLElement = this.$refs.wrap as HTMLElement;
+        let wrapEl: HTMLElement = this.$refs.wrap;
         if (wrapEl) {
             let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
 

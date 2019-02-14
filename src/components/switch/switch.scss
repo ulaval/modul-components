@@ -97,7 +97,7 @@ $m-switch-size: 23px;
 
     &.m--is-disabled {
         .m-switch__body {
-            cursor: not-allowed;
+            cursor: default;
         }
     }
 

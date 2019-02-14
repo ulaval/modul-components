@@ -39,7 +39,7 @@ $m-radio--color-disabled-light: $m-color--grey !default;
     }
 
     &.m--is-disabled {
-        cursor: not-allowed;
+        cursor: default;
 
         .m-radio-style {
             &__input {

@@ -392,7 +392,7 @@ describe('Simple calendar', () => {
         });
 
         describe(`when selecting a year`, () => {
-            let year: YearState;
+            let year: YearState | undefined;
 
             beforeEach(() => {
                 initializeWrapper();

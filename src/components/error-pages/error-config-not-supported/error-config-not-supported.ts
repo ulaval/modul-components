@@ -14,7 +14,7 @@ import WithRender from './error-config-not-supported.html';
 export class MErrorConfigNotSupported extends ModulVue {
 
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-error-config-not-supported:title')
+        default: () => (Vue.prototype).$i18n.translate('m-error-config-not-supported:title')
     })
     public title: string;
 
@@ -23,8 +23,8 @@ export class MErrorConfigNotSupported extends ModulVue {
 
     @Prop({
         default: () => [
-            (Vue.prototype as any).$i18n.translate('m-error-config-not-supported:hint.primary'),
-            (Vue.prototype as any).$i18n.translate('m-error-config-not-supported:hint.secondary')]
+            (Vue.prototype).$i18n.translate('m-error-config-not-supported:hint.primary'),
+            (Vue.prototype).$i18n.translate('m-error-config-not-supported:hint.secondary')]
     })
     public hints: string[];
 

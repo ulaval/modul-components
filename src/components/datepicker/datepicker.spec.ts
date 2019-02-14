@@ -8,6 +8,7 @@ import DatepickerPlugin, { MDatepicker } from './datepicker';
 import ModulPlugin from '../../utils/modul/modul';
 
 
+
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 

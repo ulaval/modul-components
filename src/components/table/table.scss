@@ -10,6 +10,7 @@
 
         th {
             color: $m-color--grey;
+            font-weight: $m-font-weight--bold;
         }
     }
 
@@ -31,7 +32,6 @@
     td {
         padding: $m-spacing;
         box-sizing: content-box;
-        word-break: break-word;
     }
 
     &__loading td {

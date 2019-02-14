@@ -95,7 +95,7 @@ $m-tree-node--line-width: 22px;
     }
 
     @media (min-width: $m-mq--min--s) {
-        &:not(.m--is-disabled):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover {
+        &:not(.m--is-disabled):not(.m--is-read-only):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover {
             @include m-button--hover();
         }
 

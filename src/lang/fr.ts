@@ -4,7 +4,7 @@ import { BundleMessagesMap, FRENCH, Messages } from '../utils/i18n/i18n';
 const FrenchPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug('FrenchPlugin', 'plugin.install');
-        const i18n: Messages = (v.prototype as any).$i18n;
+        const i18n: Messages = (v.prototype).$i18n;
         if (i18n) {
             const msgs: BundleMessagesMap[] = [
                 require('../components/accordion/accordion.lang.fr.json'),
@@ -14,6 +14,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/calendar/calendar.lang.fr.json'),
                 require('../components/datefields/datefields.lang.fr.json'),
                 require('../components/datepicker/datepicker.lang.fr.json'),
+                require('../components/daterangepicker/daterangepicker.lang.fr.json'),
                 require('../components/dropdown/dropdown.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/overlay/overlay.lang.fr.json'),

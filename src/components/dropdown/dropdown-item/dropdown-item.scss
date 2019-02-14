@@ -39,7 +39,7 @@ $m-dropdown-item--color-active: $m-color--grey-lightest !default;
         }
 
         &.m--is-disabled {
-            cursor: not-allowed;
+            cursor: default;
             color: $m-color--grey-light;
         }
 

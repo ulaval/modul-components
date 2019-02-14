@@ -23,7 +23,7 @@ import WithRender from './file-upload.html?style=./file-upload.scss';
 
 const COMPLETED_FILES_VISUAL_HINT_DELAY: number = 1000;
 
-interface MFileExt extends MFile {
+export interface MFileExt extends MFile {
     completeHinted: boolean;
     isOldRejection: boolean;
 }

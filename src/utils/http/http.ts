@@ -131,7 +131,7 @@ export class HttpService implements RestAdapter {
 const HttpPlugin: PluginObject<any> = {
     install(v, options): void {
         let http: HttpService = new HttpService(options);
-        (v.prototype as any).$http = http;
+        (v.prototype).$http = http;
     }
 };
 
