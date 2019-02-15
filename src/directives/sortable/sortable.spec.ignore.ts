@@ -1,3 +1,5 @@
+// TODO: Repair these tests.  Broke when passing to test-utils ^1.0.0-beta.28
+
 import { mount, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';

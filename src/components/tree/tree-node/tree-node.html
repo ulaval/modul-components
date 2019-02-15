@@ -1,5 +1,9 @@
 <li class="m-tree-node"
-    :class="{ 'm--is-selected': isSelected && !isDisabled, 'm--is-disabled' : isDisabled, 'm-tree-node__has-children' : isFolder, 'm-tree-node__file-icons' : useFilesIcons }">
+    :class="{ 'm--is-selected': isSelected && !isDisabled,
+            'm--is-disabled' : isDisabled,
+            'm--is-read-only' : isReadonlyStyle,
+            'm-tree-node__has-children' : isFolder,
+            'm-tree-node__file-icons' : useFilesIcons }">
     <div class="m-tree-node__item"
          ref="item"
          role="button"
@@ -20,6 +24,7 @@
                     :value="isSelected"
                     :indeterminate="isIndeterminate"
                     :disabled="isDisabled"
+                    :readonly="readonly"
                     @change="onCheckboxClick"></m-checkbox>
         <span class="m-tree-node__item__label">{{label}}</span>
         <span class="m-tree-node__item__check"></span>
@@ -36,6 +41,7 @@
                              :path="currentPath"
                              :selectable="selectable"
                              :selected="isSelected"
+                             :readonly="readonly"
                              :open.sync="childNode.open"
                              :node="childNode"
                              :use-files-icons="useFilesIcons"

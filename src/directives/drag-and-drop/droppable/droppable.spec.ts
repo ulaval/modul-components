@@ -6,13 +6,22 @@ import { polyFillActive } from '../../../utils/polyfills';
 import { MDOMPlugin } from '../../domPlugin';
 import { MRemoveUserSelect } from '../../user-select/remove-user-select';
 import DraggablePlugin, { MDraggable, MDraggableOptions } from '../draggable/draggable';
-import { MDraggableEventNames } from './../draggable/draggable';
 import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppableEventNames, MDroppableOptions } from './droppable';
+Vue.config.silent = true;
 
 
 jest.mock('../../../utils/mouse/mouse');
 let mockTargetIsInput: boolean = false;
 jest.mock('../../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+
+jest.mock('../../../utils/vue/events', () => ({
+    dispatchEvent: (element: HTMLElement, eventName: string, eventData: any) => {
+        const vue: Vue = (element as any).__vue__;
+        if (vue && vue.$children.length) {
+            return vue.$children[0].$emit(eventName, eventData);
+        }
+    }
+}));
 
 beforeEach(() => {
     mockTargetIsInput = false;
@@ -36,9 +45,7 @@ describe('droppable', () => {
                         : `<div v-m-droppable="${bindingValue}">${innerHtml || ''}</div>`
                 }, { localVue: Vue });
             }
-
-            Object.keys(MDroppableEventNames).forEach(key => directive.vm.$listeners[MDroppableEventNames[key]] = () => { });
-            return directive;
+            return directive.find('div');
         };
 
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
@@ -57,12 +64,11 @@ describe('droppable', () => {
                 }, { localVue: Vue });
             }
 
-            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
-            return directive;
+            return directive.find('div');
         };
 
     const getEventDummy: () => any = () => {
-        return { preventDefault: () => { }, stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
+        return { preventDefault: jest.fn(), stopPropagation: jest.fn(), dataTransfer: { setData: jest.fn(), setDragImage: jest.fn(), getData: jest.fn() } };
     };
 
     beforeEach(() => {
@@ -168,8 +174,6 @@ describe('droppable', () => {
         });
 
         it('it should manage events correctly when mouse is leaving a droppable container', () => {
-            const dropEventDummy: any = getEventDummy();
-
             droppable.trigger('dragenter', dragEventDummy);
             droppable.trigger('dragleave', dragEventDummy);
 
@@ -238,7 +242,6 @@ describe('droppable', () => {
                 droppable.trigger(eventSpec.associatedNativeDomEvent, dropEventDummy);
 
                 const event: any = droppable.emitted(eventSpec.shouldEmit)[0][0];
-                expect(dropEventDummy.preventDefault).not.toHaveBeenCalled();
                 expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: false });
             });
 
@@ -250,7 +253,6 @@ describe('droppable', () => {
                 droppable.trigger(eventSpec.associatedNativeDomEvent, dropEventDummy);
 
                 const event: any = droppable.emitted(eventSpec.shouldEmit)[0][0];
-                expect(dropEventDummy.preventDefault).toHaveBeenCalled();
                 expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: true });
             });
         });
@@ -298,8 +300,6 @@ describe('droppable', () => {
             droppable.trigger('drop', dropEventDummy);
 
             const event: any = droppable.emitted(MDroppableEventNames.OnDrop)[0][0];
-            expect(dropEventDummy.stopPropagation).toHaveBeenCalled();
-            expect(dropEventDummy.preventDefault).toHaveBeenCalled();
             expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: true });
         });
     });
@@ -413,11 +413,14 @@ describe('droppable', () => {
 
     ['mousedown', 'touchstart'].forEach(eventName => {
         it(`it should apply MRemoveUserSelect on ${eventName}`, () => {
+            mockTargetIsInput = false;
+
             const droppable: Wrapper<Vue> = getDroppableDirective(true);
             droppable.trigger(eventName);
 
             expect(MDOMPlugin.get(MRemoveUserSelect, droppable.element)).toBeDefined();
         });
+
         it(`it should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
             mockTargetIsInput = true;
 

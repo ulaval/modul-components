@@ -1,5 +1,5 @@
+import Vue from 'vue';
 import { PluginObject } from 'vue/types/plugin';
-import { VNode } from 'vue/types/vnode';
 import { MToast, MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
 
 
@@ -10,7 +10,7 @@ declare module 'vue/types/vue' {
 }
 
 export interface ToastParams {
-    text: string;
+    text: string; // Can be html, but must start with a root tag: <p> text of toast </p>
     actionLabel?: string;
     action?: (event: Event) => any;
     state?: MToastState;
@@ -72,8 +72,12 @@ export class ToastService {
 
         toast.offset = toast.isTop ? this.baseTopPosition : '0';
 
-        const vnode: VNode = toast.$createElement('p', [params.text]);
-        toast.$slots.default = [vnode];
+        if (params.text.charAt(0) === '<') {
+            toast.$slots.default = [toast.$createElement(Vue.compile(params.text))];
+        } else {
+            toast.$slots.default = [toast.$createElement('p', params.text)];
+        }
+
         return toast;
     }
 }

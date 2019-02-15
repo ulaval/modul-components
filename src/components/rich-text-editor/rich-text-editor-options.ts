@@ -32,3 +32,15 @@ export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOption
 
     constructor(key: string, language?: string | undefined) { super(key, language); }
 }
+
+export class MRichTextEditorMediaOptions extends MRichTextEditorStandardOptions {
+    public imageResizeWithPercent: boolean = true;
+    public imageDefaultWidth: number = 0;
+    public imageEditButtons: string[] = ['imageReplace', 'imageAlign', 'imageRemove', '|', 'imageLink', 'linkOpen', 'linkEdit', 'linkRemove', '|', 'imageAlt'];
+
+    constructor(key: string, language?: string | undefined) {
+        super(key, language);
+        this.pluginsEnabled.push('image');
+        this.toolbarButtons.push('insertImage');
+    }
+}

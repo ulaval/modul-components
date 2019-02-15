@@ -108,6 +108,7 @@ $m-tree-node--line-width: 20px;
     }
 
     @media (min-width: $m-mq--min--s) {
+        &:not(.m--is-disabled):not(.m--is-read-only):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover,
         &:not(.m--is-disabled):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover,
         &:not(.m--is-disabled):not(.m--is-selected) > &__item.m-tree-node__item--no-hover:hover {
             background: rgba($m-color--interactive, 0.15);

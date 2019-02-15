@@ -91,6 +91,10 @@ export class FileService {
         return this.getStore(storeName).upload<T>(fileuid, options);
     }
 
+    public uploadTemp(files: MFile[], storeName?: string): void {
+        this.getStore(storeName).uploadTemp(files);
+    }
+
     public cancelUpload(fileuid: string, storeName?: string): void {
         this.getStore(storeName).cancelUpload(fileuid);
     }
@@ -243,18 +247,25 @@ class FileStore {
             });
     }
 
+    public uploadTemp(files: MFile[]): void {
+        files.forEach(file => {
+            let storeFile: MFile = this.getFile(file.uid);
+            storeFile.url = URL.createObjectURL(file.file);
+            storeFile.status = MFileStatus.COMPLETED;
+            storeFile.progress = 100;
+        });
+    }
+
     public cancelUpload(fileuid: string): void {
         this.cancelTokens[fileuid].cancel();
         delete this.cancelTokens[fileuid];
     }
 
     private validate(file: MFile): void {
+        this.validateExtension(file);
+
         if (!this.options) {
             return;
-        }
-
-        if (this.options.rejectedExtensions || this.options.allowedExtensions) {
-            this.validateExtension(file);
         }
 
         if (this.options.maxSizeKb) {
@@ -267,6 +278,7 @@ class FileStore {
     }
 
     /**
+     * If the extension is not specified, it'll be rejected.
      * If the extension is a part of acceptedExtensions or if acceptedExtensions is empty or undefined, we accept all extensions.
      * If the extension is a part of rejectedExtensions, it'll be rejected.
      * If the extension is a part of the accepted and rejected extensions, it'll be rejected.
@@ -274,7 +286,7 @@ class FileStore {
     private validateExtension(file: MFile): void {
         const ext: string = extractExtension(file.file.name);
 
-        if (this.extensionInRejectedExtensions(ext) || !this.extensionInAcceptedExtensions(ext)) {
+        if (ext === '' || this.extensionInRejectedExtensions(ext) || !this.extensionInAcceptedExtensions(ext)) {
             file.status = MFileStatus.REJECTED;
             file.rejection = MFileRejectionCause.FILE_TYPE;
         }

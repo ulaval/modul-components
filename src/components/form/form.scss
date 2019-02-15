@@ -1,0 +1,29 @@
+@import 'commons';
+@import '../accordion/accordion-transition';
+
+.m-form {
+    &__message-summary {
+        margin-bottom: $m-spacing--m;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+}
+
+.required {
+    margin: 0;
+    text-align: right;
+
+    &__marker {
+        color: $m-color--accent;
+        font-weight: $m-font-weight--black;
+    }
+
+    &__label {
+        font-size: $m-font-size--s;
+        color: $m-color--text-light;
+    }
+}

@@ -26,6 +26,7 @@ $m-toast-max-width: 768px;
         display: flex;
         flex-flow: row wrap;
         align-items: center;
+        transition: transform $m-transition-duration ease;
     }
 
     &__icon {

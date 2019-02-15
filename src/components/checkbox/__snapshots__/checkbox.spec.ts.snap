@@ -5,9 +5,7 @@ exports[`MCheckbox should render correctly 1`] = `
     <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -15,9 +13,7 @@ exports[`MCheckbox should render correctly when a label is provided 1`] = `
 <div class="m-checkbox m--is-checkbox-left">
     <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span> <span class="m-checkbox__label">label</span></label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -26,9 +22,7 @@ exports[`MCheckbox should render correctly when disabled 1`] = `
     <input type="checkbox" id="mCheckbox-uuid" disabled="disabled" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -37,9 +31,7 @@ exports[`MCheckbox should render correctly when disabled and checked 1`] = `
     <input type="checkbox" id="mCheckbox-uuid" disabled="disabled" checked="checked" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -48,9 +40,7 @@ exports[`MCheckbox should render correctly when indeterminated (with correct cla
     <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -59,9 +49,7 @@ exports[`MCheckbox should render correctly when position prop is right 1`] = `
     <input type="checkbox" id="mCheckbox-uuid" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -70,9 +58,7 @@ exports[`MCheckbox should render correctly when readonly 1`] = `
     <input type="hidden" id="mCheckbox-uuid">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;
 
@@ -81,8 +67,6 @@ exports[`MCheckbox should render correctly when value prop is true 1`] = `
     <input type="checkbox" id="mCheckbox-uuid" checked="checked" class="m-checkbox__hidden">
     <label for="mCheckbox-uuid" aria-hidden="true" class="m-checkbox__wrap"><span aria-hidden="true" class="m-checkbox__input"><span class="m-checkbox__input__icon"></span></span>
     </label>
-    <div class="m-validation-message m-checkbox__message">
-        <m-accordion-transition transition="true"></m-accordion-transition>
-    </div>
+    <div class="m-validation-message m-checkbox__message"></div>
 </div>
 `;

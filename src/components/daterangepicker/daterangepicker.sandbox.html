@@ -1,0 +1,44 @@
+<div>
+    <h3>Should work from an empty model</h3>
+    <p class="m-u--margin-bottom">
+        When an empty model is passed as a prop (dateTo and/or dateFrom with falsy values), it should be possible to select new values.
+    </p>
+    <p>
+        <m-button @click="emptyModel(undefined)">Empty model (undefined)</m-button>
+        <m-button @click="emptyModel({})">Empty model (Objet vide)</m-button>
+        <m-daterangepicker v-model="model"></m-daterangepicker>
+    </p>
+    <p>Selected value: {{ model }}</p>
+    <h3>Should manage input states</h3>
+    <p class="m-u--margin-bottom">
+        Every base input states should be handled correctly
+    </p>
+    <div class="m-u--margin-bottom">
+        <div>
+            Error message: <input type="text"
+                   v-model="errorMessage" />
+        </div>
+        <div>
+            Valid message: <input type="text"
+                   v-model="validMessage" />
+        </div>
+        <div>
+            Helper message: <input type="text"
+                   v-model="helperMessage" />
+        </div>
+        <div><button @click="waiting = !waiting">Waiting (now: {{ waiting }})</button></div>
+        <div><button @click="disabled = !disabled">Disabled (now: {{ disabled }})</button></div>
+        <div><button @click="readonly = !readonly">ReadOnly (now: {{ readonly }})</button></div>
+    </div>
+    <p>
+        <m-daterangepicker v-model="model"
+                           :error="error"
+                           :error-message="errorMessage"
+                           :valid-message="validMessage"
+                           :helper-message="helperMessage"
+                           :waiting="waiting"
+                           :disabled="disabled"
+                           :readonly="readonly">
+        </m-daterangepicker>
+    </p>
+</div>
