@@ -6,9 +6,6 @@ import { MButtonSkin } from '../button/button';
 import { SHOW_MORE_NAME } from '../component-names';
 import { MShowMore } from './show-more';
 
-
-
-
 let wrapper: Wrapper<MShowMore>;
 
 const REF_COUNT_TOTAL: RefSelector = { ref: 'countTotal' };

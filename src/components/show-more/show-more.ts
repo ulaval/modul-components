@@ -9,8 +9,6 @@ import { SHOW_MORE_NAME } from '../component-names';
 import ProgressPlugin from '../progress/progress';
 import WithRender from './show-more.html?style=./show-more.scss';
 
-
-
 @WithRender
 @Component
 export class MShowMore extends ModulVue {
