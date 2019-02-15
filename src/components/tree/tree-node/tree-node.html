@@ -8,7 +8,7 @@
          ref="item"
          role="button"
          :class="{ 'm-tree-node__item--no-hover': moveSelectionZoneToCheckbox }"
-         :tabindex="isDisabled ? '-1' : 1"
+         :tabindex="isDisabled ? '-1' : 0"
          @click="onClick">
         <m-tree-icon v-if="useFilesIcons"
                      class="m-tree-icon"

@@ -1,8 +1,6 @@
 @import 'commons';
 
-$m-tree-node--height: $m-touch-size;
 $m-tree-node--child-indentation: 20px;
-$m-tree-node--line-width: 20px;
 
 .m-tree {
     overflow: auto;
@@ -20,7 +18,7 @@ $m-tree-node--line-width: 20px;
     &__content {
         margin-top: 0;
         margin-bottom: 0;
-        padding-left: 20px;
+        padding-left: $m-tree-node--child-indentation;
 
         > .m-tree-node:only-child {
             margin-left: 0;
@@ -30,11 +28,11 @@ $m-tree-node--line-width: 20px;
             }
         }
 
-        > .m-tree-node /deep/ > .m-tree-node__item {
+        > .m-tree-node:not(.m--is-single) /deep/ > .m-tree-node__item {
             &::before {
                 content: "";
                 position: absolute;
-                left: -$m-tree-node--line-width;
+                left: -$m-tree-node--child-indentation;
                 top: 50%;
                 width: $m-tree-node--child-indentation;
                 height: 1px;
@@ -42,23 +40,23 @@ $m-tree-node--line-width: 20px;
             }
         }
 
-        > .m-tree-node {
+        > .m-tree-node:not(.m--is-single) {
             &::after {
                 content: "";
                 position: absolute;
-                left: -$m-tree-node--line-width;
+                left: -$m-tree-node--child-indentation;
+                top: -26px; // Magic number
                 width: 1px;
-                top: -26px;
-                bottom: 20px;
+                bottom: $m-tree-node--child-indentation;
                 background-color: $m-color--interactive;
             }
 
             &:first-child::after {
-                top: 20px;
+                top: $m-tree-node--child-indentation;
             }
 
             &.m-tree-node__has-children:last-child::after {
-                height: 46px;
+                height: 46px; // Magic number
             }
         }
     }
@@ -91,11 +89,9 @@ $m-tree-node--line-width: 20px;
         border-color: $m-color--interactive;
     }
 
-    &__multiple-node-checkbox /deep/ .m-tree-node__child:not(.m-tree-node__has-children):not(.m--is-disabled) .m-tree-node__item:hover {
-        &::before,
-        &::after {
-            content: none;
-        }
+    &__multiple-node-checkbox /deep/ .m-tree-node__item.m-tree-node__item--no-hover .m-tree-node__item__check,
+    &__multiple-node-checkbox /deep/ .m-tree-node__child:not(.m-tree-node__has-children):not(.m--is-disabled) .m-tree-node__item .m-tree-node__item__check {
+        display: none;
     }
 
     &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children::before {

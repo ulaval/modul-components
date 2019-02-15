@@ -16,6 +16,7 @@
         v-else>
         <m-tree-node ref="tree-node"
                      v-for="node in tree"
+                     :class="{'m--is-single': isSingleNodeTree }"
                      :key="node.id"
                      :selectable="selectable"
                      :open.sync="node.open"

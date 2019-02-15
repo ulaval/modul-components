@@ -214,7 +214,7 @@ export class MTreeNode extends ModulVue {
 
     public get isReadonlyStyle(): boolean {
         let isReadonly: boolean = false;
-        if (!this.selectable && !this.isFolder && this.readonly) {
+        if (!this.selectable && this.readonly) {
             isReadonly = true;
         }
         return isReadonly;
