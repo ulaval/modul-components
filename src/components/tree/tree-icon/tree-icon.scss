@@ -1,10 +1,21 @@
 @import 'commons';
 
 .m-tree-icon {
-    margin-right: $m-spacing--s;
-    min-width: 32px;
+    background-color: $m-color--interactive;
+    border-radius: 50%;
+    left: -8px;
+    border: 3px solid $m-color--interactive;
+    box-sizing: content-box;
+    position: absolute;
 
-    /deep/ .m-svg__folder-open {
-        transform: scale(1.2) translateY(-2px);
+    /deep/ .m-svg__folder {
+        // transform: scale(0.9) translateY(-2px);
+    }
+
+    &:not(.m-plus) {
+        border: none;
+        background-color: transparent;
+        left: 20px;
+        border-radius: 0;
     }
 }

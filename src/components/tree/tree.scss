@@ -1,5 +1,9 @@
 @import 'commons';
 
+$m-tree-node--height: $m-touch-size;
+$m-tree-node--child-indentation: 20px;
+$m-tree-node--line-width: 20px;
+
 .m-tree {
     overflow: auto;
 
@@ -16,13 +20,81 @@
     &__content {
         margin-top: 0;
         margin-bottom: 0;
+        padding-left: 20px;
+
+        > .m-tree-node:only-child {
+            margin-left: 0;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        > .m-tree-node /deep/ > .m-tree-node__item {
+            &::before {
+                content: "";
+                position: absolute;
+                left: -$m-tree-node--line-width;
+                top: 50%;
+                width: $m-tree-node--child-indentation;
+                height: 1px;
+                background-color: $m-color--interactive;
+            }
+        }
+
+        > .m-tree-node {
+            &::after {
+                content: "";
+                position: absolute;
+                left: -$m-tree-node--line-width;
+                width: 1px;
+                top: -26px;
+                bottom: 20px;
+                background-color: $m-color--interactive;
+            }
+
+            &:first-child::after {
+                top: 20px;
+            }
+
+            &.m-tree-node__has-children:last-child::after {
+                height: 46px;
+            }
+        }
     }
 
-    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children::before {
-        background-color: $m-color--ul-blue;
+    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
+        color: $m-color--text;
+        background-color: $m-color--white;
     }
 
-    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children > .m-tree-node__item {
-        border-color: $m-color--ul-blue;
+    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-selected.m-tree-node__has-children > .m-tree-node__item {
+        color: $m-color--text;
+        background-color: $m-color--grey-lighter;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node:not(.m-tree-node__has-children) > .m-tree-node__item {
+        color: $m-color--text;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node:not(.m--is-disabled):not(.m--is-selected) > .m-tree-node__item.m-tree-node__item--no-hover:hover {
+        background: $m-color--white;
+        color: $m-color--interactive;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
+        cursor: pointer;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node:not(.m--is-disabled):not(.m--is-selected) > .m-tree-node__item.m-tree-node__item--no-hover:hover .m-checkbox__input {
+        background: $m-color--interactive-lightest;
+        border-color: $m-color--interactive;
+    }
+
+    &__multiple-node-checkbox /deep/ .m-tree-node__child:not(.m-tree-node__has-children):not(.m--is-disabled) .m-tree-node__item:hover {
+        &::before,
+        &::after {
+            content: none;
+        }
     }
 }

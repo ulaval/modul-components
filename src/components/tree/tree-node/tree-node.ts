@@ -64,7 +64,7 @@ export class MTreeNode extends ModulVue {
         if (this.isFolder) {
             this.internalOpen = !this.internalOpen;
             this.$emit('update:open', this.internalOpen);
-        } else if (this.selectable && !this.withCheckboxes) { // Clicks are emitted from checkboxes when true
+        } else if (this.selectable) { // Clicks are emitted from checkboxes when true
             this.$emit('click', this.currentPath);
         }
     }

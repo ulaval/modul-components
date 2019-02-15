@@ -2,45 +2,48 @@
 @import '../../accordion/accordion-transition';
 
 $m-tree-node--height: $m-touch-size;
-$m-tree-node--child-indentation: 52px;
-$m-tree-node--line-width: 22px;
+$m-tree-node--child-indentation: 20px;
+$m-tree-node--line-width: 20px;
 
 .m-tree-node {
-    color: $m-color--ul-blue;
-    margin-left: $m-tree-node--line-width;
+    color: $m-color--text;
+    margin-left: 10px;
     position: relative;
 
-    &::before {
+    .m-tree-node::before {
         content: "";
         position: absolute;
         left: -$m-tree-node--line-width;
-        top: $m-tree-node--height / 2 - 1;
-        width: $m-tree-node--line-width;
+        top: 15px;
+        width: $m-tree-node--child-indentation;
         height: 1px;
         background-color: $m-color--interactive;
     }
 
-    &.m--is-disabled::before {
-        background-color: $m-color--disabled;
-    }
-
-    &::after {
+    .m-tree-node::after {
         content: "";
         position: absolute;
         left: -$m-tree-node--line-width;
         width: 1px;
-        top: $m-tree-node--height / 2;
-        bottom: -$m-tree-node--height / 2 - $m-margin;
+        top: -25px;
         background-color: $m-color--interactive;
+        height: 45px;
     }
 
-    &:last-child::after {
-        content: none;
+    .m-tree-node.m-tree-node__has-children {
+        &::before {
+            top: 20px;
+        }
+    }
+
+    &:not(.m-tree-node__has-children)::after {
+        height: 40px;
+        top: -25px;
     }
 
     & + &,
     &__children > & {
-        margin-top: $m-margin;
+        margin-top: $m-margin--s;
     }
 
     &__auto-select-button {
@@ -56,16 +59,13 @@ $m-tree-node--line-width: 22px;
     }
 
     &__item {
-        border-radius: $m-tree-node--height / 2;
-        padding-left: 21px;
-        padding-right: 21px;
+        padding-left: $m-tree-node--child-indentation;
+        padding-right: $m-tree-node--child-indentation;
         width: $m-min-width;
         display: flex;
         align-items: center;
-        height: $m-tree-node--height;
-
-        @include m-button();
-        @include m-button--secondary();
+        height: 40px; // Magic number
+        position: relative;
 
         &__label {
             white-space: nowrap;
@@ -75,28 +75,43 @@ $m-tree-node--line-width: 22px;
             flex-grow: 1;
         }
 
-        .m-tree-node__item__label:first-child {
-            .m-tree--multiple-node-checkbox & {
-                margin-left: $m-spacing--m;
-            }
-        }
-
         /deep/ .m-checkbox__input {
-            margin-left: 8px;
+            margin-right: 10px;
         }
+    }
+
+    &.m-tree-node__has-children > .m-tree-node__item,
+    &.m-tree-node__has-children.m--is-disabled > .m-tree-node__item {
+        background: $m-color--grey-lighter;
+        cursor: pointer;
+    }
+
+    &:not(.m-tree-node__has-children) > .m-tree-node__item {
+        background: $m-color--white;
+        color: $m-color--interactive;
+        height: 32px;
+        display: inline-flex;
+        width: auto;
+        border-radius: 20px;
+        padding-right: 40px;
     }
 
     &.m--is-disabled > &__item {
-        @include m-button--disabled();
+        color: $m-color--text;
+        cursor: default;
+        background: $m-color--white;
     }
 
     &.m--is-selected > &__item {
-        @include m-button--active();
+        background-color: $m-color--interactive;
+        color: $m-color--white;
     }
 
     @media (min-width: $m-mq--min--s) {
-        &:not(.m--is-disabled):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover {
-            @include m-button--hover();
+        &:not(.m--is-disabled):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover,
+        &:not(.m--is-disabled):not(.m--is-selected) > &__item.m-tree-node__item--no-hover:hover {
+            background: rgba($m-color--interactive, 0.15);
+            cursor: pointer;
         }
 
         &:not(.m--is-disabled) > &__item:hover,
@@ -121,14 +136,40 @@ $m-tree-node--line-width: 22px;
     &__child {
         margin-left: $m-tree-node--child-indentation;
 
-        &::after {
-            top: -$m-margin;
-            height: $m-tree-node--height + $m-margin;
+        &:not(.m-tree-node__has-children) .m-tree-node__item:hover,
+        &.m--is-selected:not(.m-tree-node__has-children) .m-tree-node__item:hover,
+        &.m--is-selected:not(.m-tree-node__has-children) .m-tree-node__item {
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 14px;
+                background: $m-color--white;
+                border-radius: 2px;
+            }
+
+            &::before {
+                bottom: 16px;
+                transform: rotate(-50deg);
+                width: 12px;
+                height: 2px;
+            }
+
+            &::after {
+                bottom: 12px;
+                right: 24px;
+                transform: rotate(-30deg);
+                width: 2px;
+                height: 6px;
+            }
         }
 
-        &:last-child::after {
-            content: "";
-            height: $m-tree-node--height / 2 + $m-margin;
+        &:not(.m-tree-node__has-children):not(.m--is-disabled):not(.m--is-selected) .m-tree-node__item:hover {
+            &::before,
+            &::after {
+                background: $m-color--interactive;
+            }
         }
 
         &-empty {
@@ -137,12 +178,8 @@ $m-tree-node--line-width: 22px;
             color: $m-color--text;
         }
     }
-}
 
-.m-tree__content > .m-tree-node:only-child {
-    margin-left: 0;
-
-    &::before {
-        content: none;
+    &__file-icons .m-tree-node__item {
+        padding-left: 50px;
     }
 }

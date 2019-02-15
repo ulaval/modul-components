@@ -151,6 +151,7 @@ $m-checkbox--width: 16px;
 
             &__input {
                 border-color: $m-color--disabled;
+                background: $m-color--grey-lighter;
 
                 &__icon {
                     &::before,
