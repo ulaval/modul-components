@@ -2,7 +2,8 @@
      v-if="isVisible">
     <div class="m-show-more__status"
          ref="countTotal">{{ status }}</div>
-    <m-progress :value="visiblePourcentage"
+    <m-progress v-if="isProgressVisible"
+                :value="visiblePourcentage"
                 :border-radius="false"
                 ref="progress"></m-progress>
     <m-button v-if="isButtonVisible"
