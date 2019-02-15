@@ -60,6 +60,9 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
+    @Emit('fullscreen')
+    onFullscreen(fullscreenWasActived: boolean): void { }
+
     public customTranslations: { [key: string]: string } = {
         'Update': this.$i18n.translate('m-inplace-edit:modify'),
         'URL': this.$i18n.translate('m-rich-text-editor:URL')
@@ -106,7 +109,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     protected calculateToolbarStickyOffset(): number | undefined {
         if (this.toolbarStickyOffset) {
-            if (/^\d+$/.test(this.toolbarStickyOffset)) {
+            if (/^-*\d+$/.test(this.toolbarStickyOffset)) {
                 return Number(this.toolbarStickyOffset);
             } else {
                 const element: HTMLElement | null = document.querySelector(this.toolbarStickyOffset);
@@ -129,7 +132,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             }
         }
 
-        if (this.toolbarStickyOffset && !/^\d+$/.test(this.toolbarStickyOffset)) {
+        if (this.toolbarStickyOffset && !/^-*\d+$/.test(this.toolbarStickyOffset)) {
             if (!document.querySelector(this.toolbarStickyOffset)) {
                 propInError = 'toolbar-sticky-offset';
             }

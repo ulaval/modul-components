@@ -2,7 +2,7 @@
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
 import imageAlignCenterIcon from '../../../assets/icons/svg/Froala-image-align-center.svg';
 import imageAlignLeftIcon from '../../../assets/icons/svg/Froala-image-align-left.svg';
@@ -75,6 +75,9 @@ export enum FroalaStatus {
 
     @Prop()
     public customTranslations: { [key: string]: string };
+
+    @Emit('fullscreen')
+    onFullscreen(fullscreenWasActived: boolean): void { }
 
     protected internalValue: string = '';
     protected currentTag: string = 'div';
@@ -418,6 +421,24 @@ export enum FroalaStatus {
                         return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
+                [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
+                    if (cmd === 'fullscreen') {
+
+                        let fullscreenWasActivated: boolean = !_editor.fullscreen.isActive();
+                        this.onFullscreen(fullscreenWasActivated);
+
+                        if (fullscreenWasActivated) {
+                            this.hideToolbar();
+                        }
+                    }
+                },
+                [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
+                    if (cmd === 'fullscreen') {
+                        if (_editor.fullscreen.isActive()) {
+                            this.showToolbar();
+                        }
+                    }
+                },
                 [froalaEvents.ShowLinkInsert]: (_e, editor) => {
                     this.manageLinkInsert(editor);
                 },
@@ -550,6 +571,7 @@ export enum FroalaStatus {
     private adjusteToolbarPosition(): void {
         const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
         if (toolBar) {
+            console.error('AjusteToobarPosition : toolBar.style.marginTop = ' + toolBar.offsetHeight);
             toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
         }
     }
