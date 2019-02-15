@@ -19,4 +19,10 @@
     <m-datepicker class="m-u--margint-top"
                   v-model="model"></m-datepicker>
     <p>Selected value: {{ model }}</p>
+
+    <h2>Datepicker inside m-modal </h2>
+    <m-modal title="Modal title">
+        <m-button slot="trigger">Open the modal</m-button>
+        <m-datepicker class="m-u--margint-top"></m-datepicker>
+    </m-modal>
 </div>
