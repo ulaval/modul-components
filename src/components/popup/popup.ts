@@ -70,6 +70,8 @@ export class MPopup extends ModulVue {
     public trigger: HTMLElement;
     @Prop({ default: true })
     public lazy: boolean;
+    @Prop({ default: true })
+    public preventOverflow: boolean;
 
     public $refs: {
         popper: MPopper;
