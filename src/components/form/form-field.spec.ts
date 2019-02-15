@@ -1,4 +1,5 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
+import { BehaviorSubject } from 'rxjs';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { FORM_FIELD_NAME } from '../../directives/directive-names';
@@ -36,7 +37,8 @@ describe('form-field', () => {
             isTouched: false,
             hasError: true,
             touched: false,
-            touch: jest.fn()
+            touch: jest.fn(),
+            changes: new BehaviorSubject<string>('')
         };
 
         let formField: FormField<any>;

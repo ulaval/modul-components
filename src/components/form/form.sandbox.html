@@ -409,4 +409,32 @@
                       :form="forms[12].id">Reset</m-button>
         </p>
     </p>
+    <hr />
+    <h3>Observe form changes</h3>
+    <p class="m-u--margin-bottom">
+        {{observedChanges}}
+    </p>
+    <p>
+        <m-form :form="forms[13]"
+                @reset="reset(13)"
+                @submit="submit(13)">
+            <m-textfield v-model.trim="forms[13].get('field-1').value"
+                         label="Field 1"
+                         :error-message="forms[13].get('field-1').errorMessage"
+                         v-m-form-field="forms[13].get('field-1')">
+            </m-textfield>
+            <m-textfield v-model.trim="forms[13].get('field-2').value"
+                         label="Field 2"
+                         :error-message="forms[13].get('field-2').errorMessage"
+                         v-m-form-field="forms[13].get('field-2')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[13].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[13].id">Reset</m-button>
+        </p>
+    </p>
 </div>

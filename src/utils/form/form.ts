@@ -1,18 +1,21 @@
+import { Subject } from 'rxjs';
 import uuid from '../uuid/uuid';
 import { FormField } from './form-field/form-field';
 import { FormState } from './form-state/form-state';
 import { FormValidation } from './form-validation/form-validation';
-
 export type FormValidationCallback = (formInstance: Form) => FormValidation;
 export type FormFieldGroup = { [name: string]: FormField<any>; };
-
+export interface FormChange {
+    fieldName: string;
+    value: any;
+}
 /**
  * Form Class
  */
 export class Form {
     public id: string;
-
     private internalState: FormState;
+    private changes: Subject<FormChange> = new Subject<FormChange>();
 
     /**
      *
@@ -22,6 +25,18 @@ export class Form {
     constructor(private fieldGroup: FormFieldGroup, private validationCallbacks: FormValidationCallback[] = []) {
         this.id = uuid.generate();
         this.internalState = new FormState();
+        this.subscribeToFormFieldsObservables();
+    }
+
+    protected beforeDestroy(): void {
+        this.unsubscribeToFormFieldObservables();
+    }
+
+    /**
+     * return the changes Observable
+     */
+    get Changes(): Subject<FormChange> {
+        return this.changes;
     }
 
     /**
@@ -92,6 +107,9 @@ export class Form {
         return errorsSummary;
     }
 
+    /**
+     * mark first field with error as should focus
+     */
     focusFirstFieldWithError(): void {
         let fieldWithError: FormField<any> | undefined = this.fields.find(field => {
             return field.hasError;
@@ -124,5 +142,36 @@ export class Form {
 
         this.internalState.hasErrors = true;
         this.internalState.errorMessages = this.internalState.errorMessages.concat(formValidation.errorMessage);
+    }
+
+    private subscribeToFormFieldsObservables(): void {
+        this.subscribeToFormFieldsValueChange();
+    }
+
+    private unsubscribeToFormFieldObservables(): void {
+        this.unsubscribeToFormFieldsValueChange();
+    }
+
+    private subscribeToFormFieldsValueChange(): void {
+        this.fields.forEach((formField: FormField<any>) => {
+            formField.Changes.subscribe((value: any) => {
+                this.changes.next({
+                    fieldName: this.getFieldName(formField),
+                    value
+                });
+            });
+        });
+    }
+
+    private unsubscribeToFormFieldsValueChange(): void {
+        this.fields.forEach((formField: FormField<any>) => {
+            formField.Changes.unsubscribe();
+        });
+    }
+
+    private getFieldName(value: FormField<any>): string {
+        return Object
+            .keys(this.fieldGroup)
+            .find((key: string) => this.fieldGroup[key] === value)!;
     }
 }

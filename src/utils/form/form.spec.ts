@@ -1,6 +1,7 @@
 // tslint:disable:no-identical-functions no-big-function
 
-import { Form } from './form';
+import { Subject } from 'rxjs';
+import { Form, FormChange } from './form';
 import { FormFieldValidation } from './form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from './form-field/form-field';
 import { FormValidation } from './form-validation/form-validation';
@@ -20,6 +21,7 @@ let formFieldHasError: boolean = false;
 
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR SUMMARY';
 const FIELD_VALUE: string = 'VALUE';
+const FIELD_NEW_VALUE: string = 'NEW VALUE';
 const VALIDATING_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
 
 const mockFieldValidationWithError: FormFieldValidation = {
@@ -32,6 +34,8 @@ let formFieldSummaryErrors: string[];
 
 describe(`Form`, () => {
     beforeEach(() => {
+        const Changes: Subject<string> = new Subject<string>();
+
         mockFormField = {
             hasError: formFieldHasError,
             reset: jest.fn(),
@@ -39,7 +43,9 @@ describe(`Form`, () => {
             validate: jest.fn(),
             focusThisField: jest.fn(),
             touch: jest.fn(),
-            shouldFocus: false
+            shouldFocus: false,
+            Changes: Changes,
+            fakeValueSetter: jest.fn((value: string) => Changes.next(value))
         };
         ((FormField as unknown) as jest.Mock).mockClear();
     });
@@ -71,7 +77,28 @@ describe(`Form`, () => {
             it(`nbFieldsThatHasError returns 0`, () => {
                 expect(form.nbFieldsThatHasError).toBe(0);
             });
+        });
+    });
 
+    describe(`When any form field change value`, async () => {
+        beforeEach(() => {
+            form = new Form({
+                'a-field': new FormField((): string => FIELD_VALUE, []),
+                'another-field': new FormField((): string => FIELD_VALUE, [])
+            });
+        });
+
+        it(`Then you should be able to observe this change`, (done) => {
+            form.Changes.subscribe((change: FormChange) => {
+                expect(change.fieldName).toBe('a-field');
+                expect(change.value).toBe(FIELD_NEW_VALUE);
+
+                form.Changes.unsubscribe();
+
+                done();
+            });
+
+            (form.get('a-field') as any).fakeValueSetter(FIELD_NEW_VALUE);
         });
     });
 

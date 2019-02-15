@@ -133,7 +133,7 @@ export class InputManagement extends ModulVue
 
     @Watch('value')
     private onValueChange(value: string): void {
-        this.model = value;
+        this.internalValue = value;
     }
 
     private set model(value: string) {

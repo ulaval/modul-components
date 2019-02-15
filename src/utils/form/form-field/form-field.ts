@@ -1,11 +1,12 @@
+import { Subject } from 'rxjs';
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
-
 export interface FormFieldOptions {
     messageAfterTouched?: boolean;
 }
 
 export type FieldValidationCallback = (value: any) => FormFieldValidation;
+
 /**
  * Form Field Class
  */
@@ -16,15 +17,15 @@ export class FormField<T> {
     private messageAfterTouched: boolean = true;
     private touched: boolean = false;
     private shouldFocusInternal: boolean = false;
+    private changes: Subject<T> = new Subject<T>();
 
     /**
      *
      * @param accessCallback function called to initialize the value of a field
-     * @param validationCallback function called to validate
+     * @param validationCallbacks function called to validate
      * @param options options for the field
      */
-    constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
-
+    constructor(public accessCallback: () => T, public validationCallbacks: FieldValidationCallback[] = [], options?: FormFieldOptions) {
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
 
@@ -46,6 +47,20 @@ export class FormField<T> {
      */
     set value(newValue: T) {
         this.change(newValue);
+    }
+
+    /**
+     * get changes Observable
+     */
+    get Changes(): Subject<T> {
+        return this.changes;
+    }
+
+    /**
+     * indicates if the field is valid
+     */
+    get isValid(): boolean {
+        return !this.internalState.hasError;
     }
 
     /**
@@ -100,10 +115,12 @@ export class FormField<T> {
      * execute validations
      */
     validate(): void {
-        if (this.validationCallback.length > 0) {
+        if (this.validationCallbacks.length > 0) {
             let newState: FormFieldState = new FormFieldState();
-            this.validationCallback.forEach((validationFunction) => {
+
+            this.validationCallbacks.forEach((validationFunction) => {
                 let validation: FormFieldValidation = validationFunction(this.internalValue);
+
                 if (validation.isError) {
                     newState.hasError = true;
                 }
@@ -114,6 +131,7 @@ export class FormField<T> {
                     newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
                 }
             });
+
             this.changeState(newState);
         }
     }
@@ -141,6 +159,8 @@ export class FormField<T> {
      * @param value the new value of the field
      */
     private change(value: T): void {
+        this.changes.next(value);
+
         if (typeof value === 'object' || value !== this.oldValue) {
             this.internalValue = value;
             this.oldValue = this.internalValue;
@@ -153,4 +173,5 @@ export class FormField<T> {
         this.internalState.errorMessages = etat.errorMessages;
         this.internalState.errorMessagesSummary = etat.errorMessagesSummary;
     }
+
 }

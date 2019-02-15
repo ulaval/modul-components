@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { Form } from '../../utils/form/form';
+import { Form, FormChange } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
@@ -19,6 +19,7 @@ export class MFormSandbox extends Vue {
     ];
     serverResponse: any = this.serverResponses[0];
     hasServerResponse: boolean = false;
+    observedChange: FormChange = { fieldName: '', value: '' };
     forms: Form[] = [
         new Form({
             'field-1': new FormField<string>((): string => '', [])
@@ -138,6 +139,10 @@ export class MFormSandbox extends Vue {
                 }
                 return new FormFieldValidation();
             }])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => ''),
+            'field-2': new FormField<string>((): string => '')
         })
     ];
 
@@ -151,6 +156,12 @@ export class MFormSandbox extends Vue {
         if (formIndex === 12) {
             this.hasServerResponse = false;
         }
+    }
+
+    protected created(): void {
+        this.forms[13].Changes.subscribe((change: FormChange) => {
+            this.observedChange = change;
+        });
     }
 }
 
