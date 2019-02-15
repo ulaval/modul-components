@@ -367,6 +367,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private inputOnKeydownEsc(): void {
+        this.open = false;
+    }
+
     private focusOnResearchInput(): void {
         this.$refs.researchInput.focus();
     }
