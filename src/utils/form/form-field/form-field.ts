@@ -5,7 +5,7 @@ export interface FormFieldOptions {
     messageAfterTouched?: boolean;
 }
 
-export type FieldValidationCallback = (value: any) => FormFieldValidation;
+export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
 /**
  * Form Field Class
  */
@@ -16,6 +16,7 @@ export class FormField<T> {
     private messageAfterTouched: boolean = true;
     private touched: boolean = false;
     private shouldFocusInternal: boolean = false;
+    private externalError: string = '';
 
     /**
      *
@@ -23,7 +24,7 @@ export class FormField<T> {
      * @param validationCallback function called to validate
      * @param options options for the field
      */
-    constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
+    constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback<T>[] = [], options?: FormFieldOptions) {
 
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
@@ -53,6 +54,20 @@ export class FormField<T> {
      */
     get hasError(): boolean {
         return this.internalState.hasError;
+    }
+
+    /**
+     * get external error
+     */
+    get ExternalError(): string {
+        return this.externalError;
+    }
+
+    /**
+     * set external error
+     */
+    set ExternalError(value: string) {
+        this.externalError = value;
     }
 
     /**
@@ -103,7 +118,7 @@ export class FormField<T> {
         if (this.validationCallback.length > 0) {
             let newState: FormFieldState = new FormFieldState();
             this.validationCallback.forEach((validationFunction) => {
-                let validation: FormFieldValidation = validationFunction(this.internalValue);
+                let validation: FormFieldValidation = validationFunction(this);
                 if (validation.isError) {
                     newState.hasError = true;
                 }
@@ -119,10 +134,11 @@ export class FormField<T> {
     }
 
     /**
-     * mark the field as touched and trigger validation
+     * mark the field as touched, reset external error and trigger validation
      */
     touch(): void {
         this.touched = true;
+        this.ExternalError = '';
         this.validate();
     }
 
