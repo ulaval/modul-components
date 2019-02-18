@@ -138,7 +138,7 @@ export class FormField<T> {
      */
     touch(): void {
         this.touched = true;
-        this.ExternalError = '';
+        this.externalError = '';
         this.validate();
     }
 
@@ -149,6 +149,7 @@ export class FormField<T> {
         this.internalValue = this.accessCallback();
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
+        this.externalError = '';
         this.touched = false;
     }
 
