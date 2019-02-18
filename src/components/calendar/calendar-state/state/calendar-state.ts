@@ -64,6 +64,8 @@ export interface DayState {
     isDisabled: boolean;
     isToday: boolean;
     isSelected: boolean;
+    isSelectionStart: boolean;
+    isSelectionEnd: boolean;
     isInPreviousMonth: boolean;
     isInNextMonth: boolean;
     isHighlighted: boolean;

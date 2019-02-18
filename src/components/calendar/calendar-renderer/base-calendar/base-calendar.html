@@ -2,9 +2,11 @@
      :id="id">
 
 
-    <nav class="m-base-calendar__header">
+    <nav class="m-base-calendar__header"
+         :class="{'m--is-select-mode': !isPickerModeDay}">
         <m-icon-button class="m-base-calendar__previus"
                        skin="link"
+                       v-if="isPickerModeDay"
                        @click.stop="onMonthPrevious()"
                        :disabled="isMinMonth"
                        icon-name="m-svg__chevron--left"
@@ -17,6 +19,7 @@
         </button>
         <m-icon-button class="m-base-calendar__next"
                        skin="link"
+                       v-if="isPickerModeDay"
                        @click.stop="onMonthNext()"
                        :disabled="isMaxMonth"
                        icon-name="m-svg__chevron--right"
@@ -84,7 +87,9 @@
                                                             'm--is-hidden': hideDay(d),
                                                             'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
                                                             'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
-                                                            'm--is-highlighted': d.isHighlighted }"
+                                                            'm--is-highlighted': d.isHighlighted,
+                                                            'm--is-selection-start': d.isSelectionStart,
+                                                            'm--is-selection-end': d.isSelectionEnd }"
                                     @click.stop="onDaySelect(d)"
                                     @mouseenter="onDayMouseEnter(d)"
                                     @mouseleave="onDayMouseLeave(d)"

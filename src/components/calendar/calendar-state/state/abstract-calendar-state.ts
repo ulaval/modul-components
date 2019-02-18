@@ -185,6 +185,14 @@ export default abstract class AbstractCalendarState implements CalendarState {
         return false;
     }
 
+    protected isSelectionStart(_date: ModulDate): boolean {
+        return false;
+    }
+
+    protected isSelectionEnd(_date: ModulDate): boolean {
+        return false;
+    }
+
     protected hasFocus(date: ModulDate): boolean {
         return !!this.lastSelectedDate && date.isSame(this.lastSelectedDate);
     }
@@ -263,6 +271,8 @@ export default abstract class AbstractCalendarState implements CalendarState {
                 isDisabled: this.isDayDisabled(date),
                 isToday: this.isDayToday(date),
                 isSelected: this.isDaySelected(date),
+                isSelectionStart: this.isDaySelected(date),
+                isSelectionEnd: this.isDaySelected(date),
                 isInPreviousMonth: this.isInPreviousMonth(date),
                 isInNextMonth: this.isInNextMonth(date),
                 isHighlighted: this.isHighlighted(date),

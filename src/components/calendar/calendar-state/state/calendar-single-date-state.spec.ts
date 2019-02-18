@@ -20,7 +20,9 @@ const NEW_DAY_STATE: DayState = {
     isDisabled: false, isHighlighted: false,
     isInNextMonth: false, isInPreviousMonth: false,
     isSelected: false, isToday: false,
-    hasFocus: false
+    hasFocus: false,
+    isSelectionStart: false,
+    isSelectionEnd: false
 };
 
 

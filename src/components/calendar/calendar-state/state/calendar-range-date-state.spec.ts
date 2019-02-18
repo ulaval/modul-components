@@ -24,7 +24,9 @@ const FIRST_DAY_STATE: DayState = {
     isDisabled: false, isHighlighted: false,
     isInNextMonth: false, isInPreviousMonth: false,
     isSelected: false, isToday: false,
-    hasFocus: false
+    hasFocus: false,
+    isSelectionStart: false,
+    isSelectionEnd: false
 };
 
 const SECOND_DAY_STATE: DayState = {
@@ -32,7 +34,9 @@ const SECOND_DAY_STATE: DayState = {
     isDisabled: false, isHighlighted: false,
     isInNextMonth: false, isInPreviousMonth: false,
     isSelected: false, isToday: false,
-    hasFocus: false
+    hasFocus: false,
+    isSelectionStart: false,
+    isSelectionEnd: false
 };
 
 const DAY_SELECT_CALLBACK: DaySelectCallBack = jest.fn() as DaySelectCallBack;

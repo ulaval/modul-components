@@ -42,4 +42,12 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
     protected isDaySelected(date: ModulDate): boolean {
         return !!this.currentDate && date.isSame(this.currentDate, DatePrecision.DAY);
     }
+
+    protected isSelectionStart(date: ModulDate): boolean {
+        return this.isDaySelected(date);
+    }
+
+    protected isSelectionEnd(date: ModulDate): boolean {
+        return this.isDaySelected(date);
+    }
 }
