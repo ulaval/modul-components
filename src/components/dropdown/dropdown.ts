@@ -123,8 +123,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
         if (this.as<InputState>().active) {
             this.internalOpen = value;
-
-            this.dirty = false;
         }
     }
 
@@ -135,9 +133,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         setTimeout(() => { // Need timeout to set focus on input
             inputEl.focus();
         });
-        if (this.filterable) {
-            inputEl.setSelectionRange(0, this.selectedText.length);
-        }
 
         this.focusSelected();
         this.scrollToFocused();
@@ -379,7 +374,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private async selectionnerTexte(): Promise<void> {
         await this.$nextTick();
         this.$refs.input.focus();
-        this.$refs.input.setSelectionRange(0, this.selectedText.length);
+        if (this.filterable) {
+            this.$refs.input.setSelectionRange(0, this.selectedText.length);
+        }
     }
 
     private focusSelected(): void {
