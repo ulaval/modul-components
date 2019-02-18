@@ -154,15 +154,12 @@ export class MFormSandbox extends Vue {
             this.hasServerResponse = true;
         } else if (formIndex === 13) {
             this.forms[13].get('field-1').ExternalError = 'Server ask you to change this value';
-            this.forms[13].get('field-1').validate();
         }
     }
 
     reset(formIndex: number): void {
         if (formIndex === 12) {
             this.hasServerResponse = false;
-        } else if (formIndex === 13) {
-            this.forms[13].get('field-1').ExternalError = '';
         }
     }
 }

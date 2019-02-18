@@ -61,6 +61,7 @@ export class FormField<T> {
      */
     get ExternalError(): string {
         return this.externalError;
+        this.validate();
     }
 
     /**
