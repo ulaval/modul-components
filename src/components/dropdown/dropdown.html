@@ -33,7 +33,7 @@
                :placeholder="placeholder"
                @keydown.enter.prevent="onKeydownEnter"
                @keydown.return.prevent="onKeydownEnter"
-               @keydown.esc="inputOnKeydownEsc"
+               @keydown.esc="onKeydownEsc"
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
                @keydown.tab="onKeydownTab"
@@ -111,7 +111,7 @@
             :style="itemsHeightStyle"
             :aria-labelledby="id"
             aria-live="polite"
-            @mouseup="selectionnerTexte">
+            @mouseup="selectText">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty"
                              :readonly="true">{{ propTextNoData }}</m-dropdown-item>
