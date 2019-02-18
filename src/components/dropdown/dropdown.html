@@ -19,6 +19,7 @@
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
                    :tag-style="tagStyle"
+                   @click="onOpen"
                    v-m-popup:popup>
         <input type="text"
                ref="input"
@@ -109,7 +110,8 @@
             ref="items"
             :style="itemsHeightStyle"
             :aria-labelledby="id"
-            aria-live="polite">
+            aria-live="polite"
+            @mouseup="selectionnerTexte">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty"
                              :readonly="true">{{ propTextNoData }}</m-dropdown-item>

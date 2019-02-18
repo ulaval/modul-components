@@ -188,7 +188,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('focus')
     private focusChanged(focus: boolean): void {
         if (focus && !this.as<InputStateMixin>().isDisabled) {
-            this.$refs.input.focus();
+            this.selectionnerTexte();
         } else {
             this.$refs.input.blur();
             this.internalOpen = false;
@@ -355,6 +355,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
             this.model = item.value;
         }
+        this.selectionnerTexte();
     }
 
     private onKeydownTab($event: KeyboardEvent): void {
@@ -373,6 +374,12 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private focusOnResearchInput(): void {
         this.$refs.researchInput.focus();
+    }
+
+    private async selectionnerTexte(): Promise<void> {
+        await this.$nextTick();
+        this.$refs.input.focus();
+        this.$refs.input.setSelectionRange(0, this.selectedText.length);
     }
 
     private focusSelected(): void {
