@@ -18,7 +18,7 @@ export class MSlideTransition extends ModulVue {
     public scrollToOffset: number; // the offset to add (in case of a sticky header)
 
     @Prop({ default: false })
-    public disabled: boolean = false;
+    public disabled: boolean;
 
     public get name(): string {
         return this.disabled ? 'm--is-disabled' : 'm--is';
