@@ -64,7 +64,7 @@ export class FormField<T> {
     }
 
     /**
-     * set external error
+     * set external error and trigger validation
      */
     set ExternalError(value: string) {
         this.externalError = value;
