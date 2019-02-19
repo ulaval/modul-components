@@ -64,7 +64,7 @@ export class MButton extends Vue {
 
     @Emit('click')
     onClick(event: Event): void {
-        this.$el.blur();
+        (this.$el as HTMLElement).blur();
     }
 
     @Emit('focus')

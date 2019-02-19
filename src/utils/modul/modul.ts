@@ -134,7 +134,7 @@ export class Modul {
         this.event.$emit('click', event);
     }
 
-    private onScroll(event): void {
+    private onScroll(event: any): void {
         if (this.scrollActive) {
             this.scrollPosition = window.pageYOffset;
             if (this.lastScrollPosition > this.scrollPosition) {
@@ -155,7 +155,7 @@ export class Modul {
         }
     }
 
-    private onResize(event): void {
+    private onResize(event: any): void {
         this.event.$emit('resize', event);
 
         clearTimeout(this.doneResizeEvent);

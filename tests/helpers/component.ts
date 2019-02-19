@@ -12,7 +12,7 @@ export const resetModulPlugins: any = (keepI18n: boolean = true) => {
     vueCstr._installedPlugins = [];
 };
 
-const cleanComponentsOptions: any = components => {
+const cleanComponentsOptions: any = (components: any) => {
     if (components) {
         cleanComponentsOptions(Object.getPrototypeOf(components));
         const modulComponents: any = Object.keys(components).filter(c =>

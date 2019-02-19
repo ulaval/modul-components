@@ -63,8 +63,8 @@ export class MCarousel extends Vue {
                     if (item.componentInstance instanceof MCarouselItem) {
                         item.componentInstance.position = index - this.internalIndex;
                         item.componentInstance.margin = this.margin;
-                        item.componentInstance.$slots.default.forEach(content => {
-                            let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
+                        item.componentInstance.$slots.default!.forEach(content => {
+                            let el: HTMLElement = content.componentInstance && content.componentInstance.$el as HTMLElement || content.elm as HTMLElement;
                             if (el instanceof HTMLElement && (el.tagName === 'IMG' || el.tagName === 'PICTURE')) {
                                 el.style.maxWidth = '100%';
                                 el.style.maxHeight = '100%';

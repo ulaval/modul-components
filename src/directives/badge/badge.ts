@@ -1,9 +1,10 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective, VueConstructor } from 'vue';
-
+import { DirectiveBinding } from 'vue/types/options';
 import { MIconFile } from '../../components/icon-file/icon-file';
 import { MIcon } from '../../components/icon/icon';
 import { ComponentMeta } from '../../meta/meta';
 import { BADGE_NAME } from '../directive-names';
+
 
 // Icon state
 export enum MBadgeState {
@@ -78,7 +79,7 @@ const getBadgePosition: (element: HTMLElement, binding: VNodeDirective, vnode: V
     let badgeOrigin: String[] = getBadgeOrigin(vnode);
     let badgeOffset: BadgeOffset = getBadgeOffset(binding);
 
-    let elSize: number = (vnode.componentOptions as ComponentMeta)['propsData']['size'] ? parseInt((vnode.componentOptions as ComponentMeta)['propsData']['size'], 10) : (vnode.elm as HTMLElement).clientWidth;
+    let elSize: number = (vnode.componentOptions as any)['propsData']['size'] ? parseInt((vnode.componentOptions as any)['propsData']['size'], 10) : (vnode.elm as HTMLElement).clientWidth;
     let badgeSize: number = elSize * BADGE_SIZE_RATIO;
     let elLeftOrigin: number = Number(parseFloat(badgeOrigin[0].replace(/,/g, '.')).toFixed(2));
     let elTopOrigin: number = Number(parseFloat(badgeOrigin[1].replace(/,/g, '.')).toFixed(2));
@@ -89,7 +90,7 @@ const getBadgePosition: (element: HTMLElement, binding: VNodeDirective, vnode: V
     return { size: badgeSize, leftDistance, topDistance };
 };
 
-const buildBadge: (element, binding, vnode) => void = (element, binding, vnode) => {
+const buildBadge: (el: HTMLElement, binding: DirectiveBinding, vnode: VNode) => void = (element, binding, vnode) => {
 
     element.style.overflow = 'visible';
 
@@ -105,7 +106,7 @@ const buildBadge: (element, binding, vnode) => void = (element, binding, vnode) 
 
     Vue.nextTick(() => {
         const component: Vue = new MyComponent().$mount();
-        component.$el.style.color = BADGE_COLOR[binding.value.state];
+        (component.$el as HTMLElement).style.color = BADGE_COLOR[binding.value.state];
         element.appendChild(component.$el);
     });
 };
@@ -113,7 +114,7 @@ const buildBadge: (element, binding, vnode) => void = (element, binding, vnode) 
 const MBadgeDirective: DirectiveOptions = {
     inserted(
         element: HTMLElement,
-        binding: VNodeDirective,
+        binding: DirectiveBinding,
         vnode: VNode,
         oldVnode: VNode
     ): void {
@@ -123,7 +124,7 @@ const MBadgeDirective: DirectiveOptions = {
     },
     update(
         element: HTMLElement,
-        binding: VNodeDirective,
+        binding: DirectiveBinding,
         vnode: VNode,
         oldVnode: VNode
     ): void {
@@ -139,7 +140,7 @@ const MBadgeDirective: DirectiveOptions = {
     },
     unbind(
         element: HTMLElement,
-        binding: VNodeDirective,
+        binding: DirectiveBinding,
         vnode: VNode,
         oldVnode: VNode
     ): void {

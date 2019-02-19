@@ -6,7 +6,8 @@ export function startsWith(text: string | undefined, startsWith: string | undefi
         || (!!text && !!startsWith && text.slice(0, startsWith.length) === startsWith);
 }
 
-let diacriticsMap: Object = {};
+let diacriticsMap: any = {};
+
 diacriticsMap[0x0061] = 'a';
 diacriticsMap[0x24D0] = 'a';
 diacriticsMap[0xFF41] = 'a';
@@ -468,3 +469,4 @@ export function normalizeString(str: string): string {
 export const NBSP: string = '\xa0';
 
 export { sprintf, vsprintf } from 'sprintf-js';
+

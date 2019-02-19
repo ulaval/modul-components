@@ -152,7 +152,7 @@ export class MetaGenerator {
 
         let metaSlots: MetaSlot[] = [];
         if (template) {
-            const root: parser.HTMLElement = parser.parse(template);
+            const root: parser.HTMLElement = parser.parse(template) as any;
             metaSlots = root.querySelectorAll('slot').map((slot: parser.HTMLElement) => {
 
                 if (slot.attributes.name) {

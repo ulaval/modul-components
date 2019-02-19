@@ -1,12 +1,12 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
-import { STEPPERS_NAME, STEPPERS_ITEM_NAME } from '../component-names';
-import { MSteppersItem, BaseSteppers, MSteppersItemState } from './steppers-item/steppers-item';
-import WithRender from './steppers.html?style=./steppers.scss';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { STEPPERS_ITEM_NAME, STEPPERS_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import { BaseSteppers, MSteppersItem, MSteppersItemState } from './steppers-item/steppers-item';
+import WithRender from './steppers.html?style=./steppers.scss';
+
 
 @WithRender
 @Component({
@@ -35,14 +35,14 @@ export class MSteppers extends BaseSteppers {
                 rightSpacing = this.$children[i].$el.clientWidth / 2;
             }
             if (this.$children[i].$props.state === MSteppersItemState.InProgress) {
-                this.scrollElement(this.$children[i].$el);
+                this.scrollElement(this.$children[i].$el as HTMLElement);
             }
         }
 
         for (let i: number = this.$children.length - 1; i >= 0; i--) {
             if (hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.Visited) {
                 let childWidth: number = this.$children[i].$el.clientWidth;
-                let childOffset: number = this.$children[i].$el.offsetLeft;
+                let childOffset: number = (this.$children[i].$el as HTMLElement).offsetLeft;
                 this.lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
                 hasFindFirst = true;
             }
@@ -54,7 +54,7 @@ export class MSteppers extends BaseSteppers {
         selectedLineEL.style.left = leftSpacing + 'px';
     }
 
-    public setAnim(value): void {
+    public setAnim(value: boolean): void {
         if (value === true) {
             this.isAnimActive = value;
         } else {
@@ -72,7 +72,7 @@ export class MSteppers extends BaseSteppers {
         this.setLineWidth();
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
         let overflowWrapperStyleHeight: any = (this.$refs.overflowWrapper as HTMLElement).style.height;
-        let elStyleHeight: any = this.$el.style.height;
+        let elStyleHeight: any = (this.$el as HTMLElement).style.height;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
         let initHeight: number = wrapItem.clientHeight;
         let scrollbarSpace: number = 40;
@@ -112,11 +112,11 @@ export class MSteppers extends BaseSteppers {
         wrapItem.style.opacity = '1';
     }
 
-    private centeringElement(element): void {
+    private centeringElement(element: HTMLElement): void {
         (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft - ((this.$el.clientWidth / 2) - (element.clientWidth / 2));
     }
 
-    private scrollElement(element): void {
+    private scrollElement(element: HTMLElement): void {
         (this.$refs.overflowWrapper as HTMLElement).scrollLeft = element.offsetLeft;
     }
 }

@@ -57,11 +57,11 @@ export class MPanel extends Vue {
     onClick(): void { }
 
     protected mounted(): void {
-        ElementQueries.init();
+        (ElementQueries as any).init();
     }
 
     protected beforeDestroy(): void {
-        ElementQueries.detach(this.$el);
+        (ElementQueries as any).detach(this.$el);
     }
 
     private get lightSkin(): boolean {

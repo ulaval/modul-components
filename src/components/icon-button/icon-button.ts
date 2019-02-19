@@ -51,7 +51,7 @@ export class MIconButton extends Vue {
 
     private onClick(event: Event): void {
         this.$emit('click', event);
-        this.$el.blur();
+        (this.$el as HTMLElement).blur();
     }
 
     private onFocus(event: Event): void {

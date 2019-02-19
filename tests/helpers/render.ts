@@ -8,17 +8,17 @@ export const renderComponent = async (component: Vue) => {
 
 export const PortalStub = {
     render(): void {
-        let children = this.$options._renderChildren;
-        children = children.filter(c => c.tag);
+        let children = (this as any).$options._renderChildren;
+        children = children.filter((c: any) => c.tag);
         return children[0];
     }
 };
 
 export const WrapChildrenStub = (rootTag: string): any => {
     return {
-        render(h): void {
+        render(h: any): void {
             let children = this.$options._renderChildren;
-            children = children.filter(c => c.tag);
+            children = children.filter((c: any) => c.tag);
             return h(rootTag, {}, children);
         }
     };

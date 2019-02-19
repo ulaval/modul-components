@@ -223,16 +223,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
                 if (element && element.$props.value === this.model && wrapEl) {
                     let buttonLeftWidth: number = this.$refs.buttonLeft && this.hasArrowLeft ? this.$refs.buttonLeft.clientWidth : 0;
                     let buttonRightWidth: number = this.$refs.buttonRight && this.hasArrowRight ? this.$refs.buttonRight.clientWidth : 0;
-                    let scrollPositionAlignLeft: number = element.$el.offsetLeft - buttonLeftWidth;
+                    let scrollPositionAlignLeft: number = (element.$el as HTMLElement).offsetLeft - buttonLeftWidth;
 
                     // Check if selected element is visible in navbar
-                    if (wrapEl && wrapEl.clientWidth > (element.$el.offsetLeft - wrapEl.scrollLeft + buttonRightWidth)) {
+                    if (wrapEl && wrapEl.clientWidth > ((element.$el as HTMLElement).offsetLeft - wrapEl.scrollLeft + buttonRightWidth)) {
                         // Check if the selected element exceeds on the left side
-                        if ((element.$el.offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
+                        if (((element.$el as HTMLElement).offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
                             wrapEl.scrollLeft = scrollPositionAlignLeft;
                             // Check if the selected element exceeds on the right side
-                        } else if (wrapEl.clientWidth < (element.$el.offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
-                            wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - element.$el.offsetLeft);
+                        } else if (wrapEl.clientWidth < ((element.$el as HTMLElement).offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
+                            wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - (element.$el as HTMLElement).offsetLeft);
                         }
                     } else if (wrapEl) {
                         wrapEl.scrollLeft = scrollPositionAlignLeft;
@@ -269,9 +269,9 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
 
         // find first item
-        let firstElement: HTMLElement = navbarItems[0].$el;
+        let firstElement: HTMLElement = navbarItems[0].$el as HTMLElement;
         // find last item
-        let lastElement: HTMLElement = navbarItems[navbarItems.length - 1].$el;
+        let lastElement: HTMLElement = navbarItems[navbarItems.length - 1].$el as HTMLElement;
 
         return {
             elements: navbarItems,
@@ -286,13 +286,13 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
         // find the previus element outside visible area
         this.navbarItems().elements.forEach(element => {
-            if (element.$el.offsetLeft < wrapEl.scrollLeft) {
+            if ((element.$el as HTMLElement).offsetLeft < wrapEl.scrollLeft) {
                 outbound = element;
             }
         });
 
         if (outbound) {
-            wrapEl.scrollLeft = outbound.$el.offsetLeft - this.$refs.buttonLeft.clientWidth;
+            wrapEl.scrollLeft = (outbound.$el as HTMLElement).offsetLeft - this.$refs.buttonLeft.clientWidth;
         }
     }
 
@@ -302,11 +302,11 @@ export class MNavbar extends BaseNavbar implements Navbar {
         let cRight: number = wrapEl.scrollLeft + wrapEl.clientWidth;
 
         // find the next element outside visible area
-        let outbound: Vue | undefined = this.navbarItems().elements.find(element => element.$el.offsetLeft + element.$el.clientWidth > cRight);
+        let outbound: Vue | undefined = this.navbarItems().elements.find(element => (element.$el as HTMLElement).offsetLeft + element.$el.clientWidth > cRight);
 
         if (outbound) {
             // get the threshold of visible part of the element
-            let threshold: number = cRight - outbound.$el.offsetLeft;
+            let threshold: number = cRight - (outbound.$el as HTMLElement).offsetLeft;
 
             // move the container scroll
             wrapEl.scrollLeft += (outbound.$el.clientWidth + this.$refs.buttonRight.clientWidth) - threshold;

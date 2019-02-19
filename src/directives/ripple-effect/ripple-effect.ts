@@ -1,7 +1,8 @@
-import { DirectiveOptions, PluginObject, VNodeDirective } from 'vue';
-
+import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
+import { DirectiveBinding } from 'vue/types/options';
 import { RIPPLE_EFFECT_NAME } from '../directive-names';
 import RippleEffect from './ripple-effect-lib';
+
 
 const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';
 
@@ -10,22 +11,31 @@ interface RippleEffectBinding extends VNodeDirective {
 }
 
 const MRippleEffect: DirectiveOptions = {
-    bind(element: HTMLElement, binding: RippleEffectBinding): void {
+    bind(el: HTMLElement,
+        binding: DirectiveBinding,
+        vnode: VNode,
+        oldVnode: VNode): void {
         RippleEffect.isActive = binding.value === undefined ? false : binding.value;
-        element.style.overflow = 'hidden';
-        if (element) {
-            binding.listener = (event: MouseEvent) => {
-                RippleEffect.initRipple(event, element);
+        el.style.overflow = 'hidden';
+        if (el) {
+            (binding as RippleEffectBinding).listener = (event: MouseEvent) => {
+                RippleEffect.initRipple(event, el);
             };
-            element.addEventListener('mousedown', binding.listener);
+            el.addEventListener('mousedown', (binding as RippleEffectBinding).listener);
         }
     },
-    componentUpdated(element: HTMLElement, binding: RippleEffectBinding): void {
+    componentUpdated(el: HTMLElement,
+        binding: DirectiveBinding,
+        vnode: VNode,
+        oldVnode: VNode): void {
         RippleEffect.isActive = binding.value === undefined ? false : binding.value;
     },
-    unbind(element: HTMLElement, binding: RippleEffectBinding): void {
-        if (element && binding.listener) {
-            element.removeEventListener('mousedown', binding.listener);
+    unbind(el: HTMLElement,
+        binding: DirectiveBinding,
+        vnode: VNode,
+        oldVnode: VNode): void {
+        if (el && (binding as RippleEffectBinding).listener) {
+            el.removeEventListener('mousedown', (binding as RippleEffectBinding).listener);
         }
     }
 };
