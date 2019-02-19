@@ -2,7 +2,7 @@ import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils'
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub } from '../../../tests/helpers/render';
-import { Portal, PortalMixin } from '../../mixins/portal/portal';
+import { PortalMixin } from '../../mixins/portal/portal';
 import ModulPlugin from '../../utils/modul/modul';
 import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 
@@ -46,9 +46,9 @@ describe(`MToast`, () => {
 
         describe(`When the Toast is created`, () => {
             it(`Should automatically appear`, () => {
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+                expect((wrapper.vm as any).propOpen).toBe(true);
+                expect((wrapper.vm as any).portalCreated).toBe(true);
+                expect((wrapper.vm as any).portalMounted).toBe(true);
             });
 
             it(`Should be in Confirmation state`, () => {
@@ -114,21 +114,27 @@ describe(`MToast`, () => {
     });
 
     describe(`Given that a timeout prop have been passed`, () => {
+        beforeEach(async () => {
+            initializeWrapper();
+
+            wrapper.setProps({
+                timeout: 'short',
+                lazy: false
+            });
+
+            jest.runOnlyPendingTimers();
+        });
+
         describe(`When the Toast is created`, () => {
-            it(`Should appear and then disappear`, () => {
-                initializeWrapper();
-                wrapper.setProps({
-                    timeout: 'short'
-                });
-                jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            it(`Should appear and then disappear`, async () => {
 
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+                expect((wrapper.vm as any).propOpen).toBe(true);
+                expect((wrapper.vm as any).portalCreated).toBe(true);
+                expect((wrapper.vm as any).portalMounted).toBe(true);
 
-                jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over
+                jest.runOnlyPendingTimers();
 
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
+                expect((wrapper.vm as any).propOpen).toBe(false);
             });
         });
     });

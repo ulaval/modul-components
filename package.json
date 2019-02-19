@@ -137,7 +137,7 @@
         "vue-class-component": "^6.1.1",
         "vue-property-decorator": "^6.0.0",
         "vue-router": "^3.0.1",
-        "vue-server-renderer": "^2.5.9",
+        "vue-server-renderer": "^2.6.6",
         "vue-template-compiler": "^2.6.6",
         "vue-template-loader": "^1.0.0",
         "webpack": "^3.10.0",

@@ -1,11 +1,11 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { createMockFile } from '../../../tests/helpers/file';
-import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
+import { DEFAULT_STORE_NAME } from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import FileDropPlugin from './file-drop';
+
 
 describe('file-drop', () => {
     let localVue: VueConstructor<ModulVue>;

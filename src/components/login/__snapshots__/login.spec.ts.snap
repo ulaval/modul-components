@@ -2,9 +2,9 @@
 
 exports[`MLogin when login should render correctly 1`] = `
 <form>
-    <m-textfield-stub type="text" icon="true" maxLength="0" lengthOverflow="true" characterCountThreshold="0" label="Username" focus="true"></m-textfield-stub>
+    <m-textfield-stub type="text" icon="true" maxLength="0" lengthOverflow="true" characterCountThreshold="0" label="Username" focus="true" value=""></m-textfield-stub>
     <br>
-    <m-textfield-stub type="password" icon="true" maxLength="0" lengthOverflow="true" characterCountThreshold="0" label="Password"></m-textfield-stub>
+    <m-textfield-stub type="password" icon="true" maxLength="0" lengthOverflow="true" characterCountThreshold="0" label="Password" value=""></m-textfield-stub>
     <br>
     <m-button-stub type="submit" skin="primary" iconPosition="left" iconSize="12px">
         <m-i18n-stub k="m-login:login" params="" htmlEncode="true"></m-i18n-stub>

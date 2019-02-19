@@ -210,6 +210,7 @@ export class Portal extends ModulVue implements PortalMixin {
                 this.$emit(value ? 'open' : 'close');
             }
         }
+        this.open = value;
         this.internalOpen = value;
         this.$emit('update:open', value);
     }
