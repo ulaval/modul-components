@@ -59,7 +59,6 @@ export class MSlideTransition extends ModulVue {
 
 const SlideTransitionPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(SLIDE_TRANSITION_NAME + ' is not ready for production');
         v.component(SLIDE_TRANSITION_NAME, MSlideTransition);
     }
 };
