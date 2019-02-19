@@ -15,7 +15,7 @@ export interface MFormEventParams {
     totalNbOfErrors?: number;
 }
 
-type listenerCallback = (params?: MFormEventParams) => void;
+type ListenerCallback = (params?: MFormEventParams) => void;
 
 export enum MFormEvents {
     formErrorClear,
@@ -23,7 +23,7 @@ export enum MFormEvents {
 }
 
 export class MFormListener {
-    constructor(public eventType: MFormEvents, public callback: listenerCallback) { }
+    constructor(public eventType: MFormEvents, public callback: ListenerCallback) { }
 }
 
 export class FormClearToastBehavior extends MFormListener {
