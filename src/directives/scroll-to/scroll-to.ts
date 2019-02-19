@@ -1,5 +1,5 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-import { ScrollTo, ScrollToDuration } from '../../utils/scroll-to/scroll-to';
+import { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_TO_NAME } from '../directive-names';
 
@@ -9,7 +9,7 @@ class ScrollToCallback {
     constructor(private speed: ScrollToDuration, private offset: number, private target: HTMLElement) { }
 
     callBack: (event: MouseEvent) => void = (event: MouseEvent) => {
-        let scrollTo: ScrollTo = (Vue.prototype as ModulVue).$scrollTo;
+        let scrollTo: any = (Vue.prototype as ModulVue).$scrollTo;
 
         scrollTo.goTo(this.target, this.offset, this.speed);
     }
@@ -25,7 +25,7 @@ const MScrollTo: DirectiveOptions = {
         if (!node.context) {
             throw new Error('Error node context is null');
         }
-        let target: HTMLElement = node.context.$refs[binding.arg] as HTMLElement;
+        let target: HTMLElement = node.context.$refs[binding.arg!] as HTMLElement;
         const _scrollToCallback: ScrollToCallback = new ScrollToCallback(speed, offset, target);
 
         Object.defineProperty(element, '_scrollToCallback', {

@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-import { CAROUSEL_ITEM_NAME, CAROUSEL_NAME, TOUCH_NAME } from '../component-names';
+import { CAROUSEL_ITEM_NAME, CAROUSEL_NAME } from '../component-names';
+import TouchPlugin from '../touch/touch';
 import { MCarouselItem } from './carousel-item/carousel-item';
 import WithRender from './carousel.html?style=./carousel.scss';
-import TouchPlugin from '../touch/touch';
 
 
 @WithRender
@@ -63,8 +63,8 @@ export class MCarousel extends Vue {
                     if (item.componentInstance instanceof MCarouselItem) {
                         item.componentInstance.position = index - this.internalIndex;
                         item.componentInstance.margin = this.margin;
-                        item.componentInstance.$slots.default.forEach(content => {
-                            let el: HTMLElement = content.componentInstance && content.componentInstance.$el || content.elm as HTMLElement;
+                        item.componentInstance.$slots.default!.forEach(content => {
+                            let el: HTMLElement = content.componentInstance && content.componentInstance.$el as HTMLElement || content.elm as HTMLElement;
                             if (el instanceof HTMLElement && (el.tagName === 'IMG' || el.tagName === 'PICTURE')) {
                                 el.style.maxWidth = '100%';
                                 el.style.maxHeight = '100%';

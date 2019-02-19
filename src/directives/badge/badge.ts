@@ -1,9 +1,9 @@
 import Vue, { DirectiveOptions, PluginObject, VNode, VNodeDirective, VueConstructor } from 'vue';
-
 import { MIconFile } from '../../components/icon-file/icon-file';
 import { MIcon } from '../../components/icon/icon';
 import { ComponentMeta } from '../../meta/meta';
 import { BADGE_NAME } from '../directive-names';
+
 
 // Icon state
 export enum MBadgeState {
@@ -105,7 +105,7 @@ const buildBadge: (element, binding, vnode) => void = (element, binding, vnode) 
 
     Vue.nextTick(() => {
         const component: Vue = new MyComponent().$mount();
-        component.$el.style.color = BADGE_COLOR[binding.value.state];
+        (component.$el as HTMLElement).style.color = BADGE_COLOR[binding.value.state];
         element.appendChild(component.$el);
     });
 };

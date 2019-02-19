@@ -1,5 +1,5 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
-import FilePlugin, { DEFAULT_STORE_NAME, FileService } from '../../utils/file/file';
+import FilePlugin, { DEFAULT_STORE_NAME } from '../../utils/file/file';
 import { ModulVue } from '../../utils/vue/vue';
 import { FILE_DROP_NAME } from '../directive-names';
 
@@ -15,7 +15,7 @@ const MFileDropDirective: DirectiveOptions = {
         vnode: VNode,
         oldVnode: VNode
     ): void {
-        const $file: FileService = (vnode.context as ModulVue).$file;
+        const $file: any = (vnode.context as ModulVue).$file;
 
         const onDragEnterOver: (e: DragEvent) => void = (e: DragEvent) => {
             el.classList.add('m--is-drag-over');
@@ -58,8 +58,8 @@ const MFileDropDirective: DirectiveOptions = {
         oldVnode: VNode
     ): void {
         el.cleanupMFileDropDirective();
-        const $file: FileService = (vnode.context as ModulVue).$file;
-        if (!binding.modifiers['keep-store']) {
+        const $file: any = (vnode.context as ModulVue).$file;
+        if (!binding.modifiers!['keep-store']) {
             $file.destroy(
                 binding.value ? binding.value : DEFAULT_STORE_NAME
             );
