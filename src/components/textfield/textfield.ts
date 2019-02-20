@@ -102,7 +102,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
-    private togglePasswordVisibility(event): void {
+    private togglePasswordVisibility(event: any): void {
         this.passwordAsText = !this.passwordAsText;
     }
 

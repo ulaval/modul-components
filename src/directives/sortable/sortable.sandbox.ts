@@ -35,7 +35,7 @@ export class MSortableSandbox extends ModulVue {
         this.arraymove(this.elementsWithoutHandle, event.sortInfo.oldPosition, event.sortInfo.newPosition);
     }
 
-    arraymove(arr, oldIndex, newIndex): void {
+    arraymove(arr: any, oldIndex: number, newIndex: number): void {
         let elements: Array<ElementSortable> = arr[oldIndex];
         arr.splice(oldIndex, 1);
         arr.splice(newIndex, 0, elements);

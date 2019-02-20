@@ -6,8 +6,8 @@ export class RippleEffect {
     private clickEl: HTMLElement;
     private rippleEl: HTMLElement;
     private el: HTMLElement;
-    private rippleELStyle;
-    private boundingRectEl;
+    private rippleELStyle: any;
+    private boundingRectEl: ClientRect | DOMRect;
     private positionX: number;
     private positionY: number;
     private maxWidth: number;
@@ -33,7 +33,7 @@ export class RippleEffect {
         }
     }
 
-    private setPosition(event): void {
+    private setPosition(event: any): void {
         this.positionX = event.offsetX;
 
         if (this.positionX !== undefined) {

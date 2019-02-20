@@ -254,8 +254,8 @@ export class Messages {
      * NBSP => _NBSP_ : '\xOA'
      */
     private initSpecialCharactersDict(): void {
-        Object.keys(SpecialCharacter).forEach((key: string) => {
-            this.specialCharacterDict[`${SPECIAL_CHARACTER_PREFIXE}${key}${SPECIAL_CHARACTER_SUFIXE}`] = String.fromCharCode(SpecialCharacter[key]) as SpecialCharacter;
+        Object.keys(SpecialCharacter).forEach((key: any) => {
+            this.specialCharacterDict[`${SPECIAL_CHARACTER_PREFIXE}${key}${SPECIAL_CHARACTER_SUFIXE}`] = String.fromCharCode(SpecialCharacter[key] as any) as SpecialCharacter;
         });
     }
 

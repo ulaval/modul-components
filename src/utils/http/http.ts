@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
-import qs from 'qs/lib';
+import qs from 'qs';
 import { PluginObject } from 'vue';
 import { WindowErrorHandler } from '../errors/window-error-handler';
 import * as strUtils from '../str/str';

@@ -221,7 +221,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         }
     }
 
-    private onEnter(el: HTMLElement, done): void {
+    private onEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             this.update();
             if (this.enter) {
@@ -256,7 +256,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         }
     }
 
-    private onLeave(el: HTMLElement, done): void {
+    private onLeave(el: HTMLElement, done: any): void {
         if (this.leave) {
             this.leave(el.children[0], done);
         } else {

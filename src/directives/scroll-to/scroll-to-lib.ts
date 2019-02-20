@@ -79,7 +79,7 @@ export class ScrollTo {
         let distance: number = target - startTop;
 
         // based on http://en.wikipedia.org/wiki/Smoothstep
-        let smoothStep: (start, end, point) => number = (start, end, point) => {
+        let smoothStep: (start: number, end: number, point: number) => number = (start, end, point) => {
             if (point <= start) {
                 return 0;
             }

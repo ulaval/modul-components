@@ -30,18 +30,30 @@ export class MTimepicker extends ModulVue {
     public label: string;
     @Prop()
     public duration: boolean;
-    @Prop({ default: function(): moment.Moment | moment.Duration { return this.duration ? moment.duration('1:0') : moment(); } })
+    @Prop({
+        default: function(): moment.Moment | moment.Duration {
+            return (this as MTimepicker).duration ? moment.duration('1:0') : moment();
+        }
+    })
     public time: moment.Moment | moment.Duration;
-    @Prop({ default: function(): moment.Moment | moment.Duration { return this.duration ? moment.duration('0:0') : moment().hours(0).minutes(0); } })
+    @Prop({
+        default: function(): moment.Moment | moment.Duration {
+            return (this as MTimepicker).duration ? moment.duration('0:0') : moment().hours(0).minutes(0);
+        }
+    })
     public min: moment.Moment | moment.Duration;
-    @Prop({ default: function(): moment.Moment | moment.Duration { return this.duration ? moment.duration('4:0') : moment().hours(23).minutes(59); } })
+    @Prop({
+        default: function(): moment.Moment | moment.Duration {
+            return (this as MTimepicker).duration ? moment.duration('4:0') : moment().hours(23).minutes(59);
+        }
+    })
     public max: moment.Moment | moment.Duration;
     @Prop({ default: 5 })
     public step: number;
     @Prop({ default: 'LT' })
     public format: string;
 
-    private hours: object = {};
+    private hours: any = {};
     private selectedHour: number = NaN;
     private selectedMinute: number = NaN;
     private tempHour: number = NaN;
@@ -49,7 +61,7 @@ export class MTimepicker extends ModulVue {
     private placeholder: string = this.$i18n.translate('m-timepicker:placeholder');
     private okButtonText: string = this.$i18n.translate('m-timepicker:button-ok');
     private isMousedown: boolean = false;
-    private scrollTimeout;
+    private scrollTimeout: any;
 
     private internalOpen: boolean = false;
     private internalTimeErrorMessage: string = '';
@@ -128,7 +140,7 @@ export class MTimepicker extends ModulVue {
         return minute < 10 ? '0' + minute : minute.toString();
     }
 
-    private validateTime(event, value: string): void {
+    private validateTime(event: any, value: string): void {
         let numbers: RegExpMatchArray | null = value.match(/\d+/g);
         if (numbers && numbers.length === 2) {
             if (isNaN(Number(numbers[0])) || isNaN(Number(numbers[1]))) {
@@ -176,10 +188,10 @@ export class MTimepicker extends ModulVue {
     }
 
     private scrollToSelection(container: HTMLElement): void {
-        let selectedElement: Element | null = container.querySelector('.m--is-selected');
+        let selectedElement: HTMLElement | null = container.querySelector('.m--is-selected') as HTMLElement;
         setTimeout(function(): void {
             if (selectedElement) {
-                container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
+                container.scrollTop = selectedElement.offsetTop - container.clientHeight / 2 + selectedElement.clientHeight / 2;
             }
         }, 10);
     }

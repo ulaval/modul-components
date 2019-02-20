@@ -35,6 +35,7 @@
         "roots": [
             "<rootDir>/src/"
         ],
+        "testURL": "http://localhost/",
         "transform": {
             "^.+\\.tsx?$": "ts-jest",
             "^.+\\.html(\\?style=\\..+)?$": "<rootDir>/tests/jest/vue-template-transformer.js"
@@ -89,9 +90,12 @@
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
+        "@types/enquire.js": "^2.1.2",
         "@types/filesize": "^3.6.0",
         "@types/jest": "^22.1.1",
+        "@types/jquery": "^3.3.29",
         "@types/node": "^8.0.54",
+        "@types/qs": "^6.5.1",
         "@types/sprintf-js": "^1.1.0",
         "@types/webpack-env": "^1.13.6",
         "@vue/test-utils": "^1.0.0-beta.28",
@@ -125,13 +129,13 @@
         "stylelint-webpack-plugin": "^0.10.5",
         "svg-inline-loader": "^0.8.0",
         "ts-jest": "^22.4.6",
+        "ts-morph": "^1.1.0",
         "ts-node": "^7.0.1",
-        "ts-simple-ast": "^15.1.0",
         "tslint": "^5.12.0",
         "tslint-config-standard": "^8.0.1",
         "tslint-loader": "^3.5.3",
-        "typescript-tslint-plugin": "^0.2.1",
         "typescript": "^3.2.2",
+        "typescript-tslint-plugin": "^0.2.1",
         "url-loader": "^0.6.2",
         "vue": "^2.5.13",
         "vue-class-component": "^6.1.1",

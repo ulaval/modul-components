@@ -1,11 +1,8 @@
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { ModulVue } from '../../../utils/vue/vue';
-import { STEPPERS_ITEM_NAME } from '../../component-names';
-import IconPlugin from '../../icon/icon';
 import WithRender from './steppers-item.html?style=./steppers-item.scss';
+
 
 export enum MSteppersItemState {
     Visited = 'visited',
@@ -15,7 +12,7 @@ export enum MSteppersItemState {
 
 export abstract class BaseSteppers extends ModulVue {
     abstract setLineWidth(): void;
-    abstract setAnim(value): void;
+    abstract setAnim(value: any): void;
 }
 
 @WithRender

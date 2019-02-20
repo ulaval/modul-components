@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
-import { TOAST } from '../component-names';
-import WithRender from './toast.sandbox.html';
-import ToastPlugin from './toast';
 import ButtonPlugin from '../button/button';
+import { TOAST } from '../component-names';
+import ToastPlugin from './toast';
+import WithRender from './toast.sandbox.html';
+
 
 @WithRender
 @Component
@@ -17,7 +17,7 @@ export class MToastSandbox extends Vue {
     private iconOpen: boolean = false;
     private allOpen: boolean = false;
 
-    doSomething(text): void {
+    doSomething(text: string): void {
         window.alert('Something ' + text + '!');
     }
 }

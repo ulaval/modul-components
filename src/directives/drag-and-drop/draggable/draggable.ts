@@ -222,7 +222,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
         const dragImage: HTMLElement = this.element.querySelector(`.${MDraggableClassNames.DragImage}`) as HTMLElement;
         // We use this property to know if the dragImage was handled or not.
         const dragImagePluginName: string = '__mdraggableimage__';
-        if (dragImage && !dragImage[dragImagePluginName]) {
+        if (dragImage && !(dragImage as any)[dragImagePluginName]) {
             const offsetWidth: number = dragImage.offsetWidth;
 
             requestAnimationFrame(() => {
@@ -233,7 +233,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
                 dragImage.style.overflow = 'hidden';
                 dragImage.style.zIndex = '1';
                 dragImage.hidden = true;
-                dragImage[dragImagePluginName] = true;
+                (dragImage as any)[dragImagePluginName] = true;
             });
         }
     }

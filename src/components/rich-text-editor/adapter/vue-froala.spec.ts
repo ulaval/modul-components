@@ -7,7 +7,7 @@ let wrapper: Wrapper<VueFroala>;
 let froala: any;
 
 // mock froala editor
-$.FroalaEditor = {
+($ as any).FroalaEditor = {
     DefineIcon: jest.fn(),
     DefineIconTemplate: jest.fn(),
     POPUP_TEMPLATES: {},

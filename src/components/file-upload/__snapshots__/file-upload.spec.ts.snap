@@ -24,8 +24,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
                 </li>
             </ul>
         </div>
-    </div>
-    <template>
+    </div> <template>
         <div style="display:flex;">
             <m-button class="m-file-upload__footer-add">Add
                 <span slot="precision">1
@@ -34,8 +33,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
                 <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
         </div>
-    </template>
-</m-modal>
+    </template></m-modal>
 `;
 
 exports[`MFileUpload should render correctly 1`] = `
@@ -50,8 +48,7 @@ exports[`MFileUpload should render correctly 1`] = `
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
-    </div>
-    <template>
+    </div> <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
@@ -60,8 +57,7 @@ exports[`MFileUpload should render correctly 1`] = `
                 <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
         </div>
-    </template>
-</m-modal>
+    </template></m-modal>
 `;
 
 exports[`MFileUpload should render correctly in mobile 1`] = `
@@ -76,8 +72,7 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
                 <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
             </div>
         </div>
-    </div>
-    <template>
+    </div> <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
@@ -86,8 +81,7 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
                 <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
         </div>
-    </template>
-</m-modal>
+    </template></m-modal>
 `;
 
 exports[`MFileUpload uploading should render uploading files 1`] = `
@@ -121,8 +115,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
                 </li>
             </ul>
         </div>
-    </div>
-    <template>
+    </div> <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
@@ -131,8 +124,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
                 <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
         </div>
-    </template>
-</m-modal>
+    </template></m-modal>
 `;
 
 exports[`MFileUpload validation should render accepted file extensions 1`] = `
@@ -150,8 +142,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
                 <m-i18n-stub k="m-file-upload:format" params="" nb="3" htmlEncode="true" class="m-file-upload__drop-zone__format__label"></m-i18n-stub>: jpg, png, mp4
             </p>
         </div>
-    </div>
-    <template>
+    </div> <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
@@ -160,8 +151,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
                 <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
         </div>
-    </template>
-</m-modal>
+    </template></m-modal>
 `;
 
 exports[`MFileUpload validation validation messages should render rejected files in dialog 1`] = `
@@ -205,8 +195,7 @@ exports[`MFileUpload validation validation messages should render rejected files
                 <m-i18n-stub k="m-file-upload:format" params="" nb="3" htmlEncode="true" class="m-file-upload__drop-zone__format__label"></m-i18n-stub>: jpg, png, mp4
             </p>
         </div>
-    </div>
-    <template>
+    </div> <template>
         <div>
             <m-button disabled="disabled" class="m-file-upload__footer-add">Add
                 <span slot="precision" style="display:none;">0
@@ -215,6 +204,5 @@ exports[`MFileUpload validation validation messages should render rejected files
                 <m-i18n-stub k="m-file-upload:cancel" params="" htmlEncode="true"></m-i18n-stub>
             </m-button>
         </div>
-    </template>
-</m-modal>
+    </template></m-modal>
 `;

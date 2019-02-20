@@ -46,7 +46,7 @@ describe('sortable', () => {
                 data: () => options || {}
             }, { localVue: Vue });
 
-            Object.keys(MSortableEventNames).forEach(key => directive.vm.$listeners[MSortableEventNames[key]] = () => { });
+            Object.keys(MSortableEventNames).forEach(key => directive.vm.$listeners[(MSortableEventNames as any)[key]] = () => { });
             return directive;
         };
 
@@ -66,7 +66,7 @@ describe('sortable', () => {
                 }, { localVue: Vue });
             }
 
-            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
+            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[(MDraggableEventNames as any)[key]] = () => { });
             return directive;
         };
 

@@ -1,9 +1,9 @@
 // tslint:disable
 export const createMockFileList = (files: File[]): FileList => {
 
-    let fl = {
+    let fl: any = {
         length: files.length,
-        item: i => {
+        item: (i: number) => {
             return files[i];
         }
     };

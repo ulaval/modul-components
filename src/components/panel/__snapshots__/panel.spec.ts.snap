@@ -47,21 +47,3 @@ exports[`MPanel should render correctly with no header padding 1`] = `
 exports[`MPanel should render correctly with no padding 1`] = `<article class="m-panel m--is-skin-light m--has-border"> </article>`;
 
 exports[`MPanel should render correctly with shadow 1`] = `<article class="m-panel m--is-skin-light m--has-shadow m--has-border"> </article>`;
-
-exports[`MPanel should render skink correctly: Dark 1`] = `
-<article class="m-panel m--is-skin-dark m--has-border">
-    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
-</article>
-`;
-
-exports[`MPanel should render skink correctly: Darker 1`] = `
-<article class="m-panel m--is-skin-darker m--has-border">
-    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
-</article>
-`;
-
-exports[`MPanel should render skink correctly: Light 1`] = `
-<article class="m-panel m--is-skin-light m--has-border">
-    <div class="m-panel__body m--has-padding-top m--has-padding-bottom">body</div>
-</article>
-`;

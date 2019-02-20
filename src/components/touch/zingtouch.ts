@@ -1,9 +1,9 @@
 import ZingTouch from 'zingtouch';
-
 import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 
+
 export type MZingGestureCallback = (event: CustomEvent) => void;
-export interface MZingGesture {}
+export interface MZingGesture { }
 
 export interface MZingRegion {
     bind(element: HTMLElement, gesture: MZingTouchGestures | MZingGesture, callback: MZingGestureCallback): void;
@@ -33,10 +33,10 @@ export class MZingTouchUtil {
     detectDirection(event: CustomEvent, threshold: number = 0): MZingGestureDirections {
         const angle: number = event.detail.data[0].currentDirection;
         if ((angle >= 360 - threshold && angle <= 360) || (angle <= threshold && angle >= 0)) {
-            event.detail.events.forEach(event => event.originalEvent.preventDefault());
+            event.detail.events.forEach((event: any) => event.originalEvent.preventDefault());
             return MZingGestureDirections.Right;
         } else if (angle >= 180 - threshold && angle <= 180 + threshold) {
-            event.detail.events.forEach(event => event.originalEvent.preventDefault());
+            event.detail.events.forEach((event: any) => event.originalEvent.preventDefault());
             return MZingGestureDirections.Left;
         }
 

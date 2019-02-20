@@ -12,7 +12,7 @@ export interface RichTextLicensePluginOptions {
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
 export class RichTextLicensePlugin implements PluginObject<RichTextLicensePluginOptions | undefined> {
-    install(v, options: RichTextLicensePluginOptions | undefined = { key: '' }): void {
+    install(v: any, options: RichTextLicensePluginOptions | undefined = { key: '' }): void {
         v.use(LicensePlugin);
         v.use(InputStylePlugin);
         v.use(ValidationMessagePlugin);

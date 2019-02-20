@@ -117,13 +117,13 @@ export enum FroalaStatus {
         const buttonName: string = `${name}Popup`;
         const pluginName: string = `${name}Plugin`;
 
-        $.FroalaEditor.POPUP_TEMPLATES[`${pluginName}.popup`] = '[_BUTTONS_]';
+        ($ as any).FroalaEditor.POPUP_TEMPLATES[`${pluginName}.popup`] = '[_BUTTONS_]';
 
         // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new PopupPlugin(name, editor, buttonList); };
+        ($ as any).FroalaEditor.PLUGINS[pluginName] = (editor: any) => { return new PopupPlugin(name, editor, buttonList); };
 
         // Create the button that'll open the popup
-        $.FroalaEditor.RegisterCommand(buttonName, {
+        ($ as any).FroalaEditor.RegisterCommand(buttonName, {
             title: name,
             icon: icon,
             undo: false,
@@ -140,10 +140,10 @@ export enum FroalaStatus {
         const pluginName: string = `${name}SubMenu`;
 
         // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new SubMenuPlugin(editor, buttonList); };
+        ($ as any).FroalaEditor.PLUGINS[pluginName] = (editor: any) => { return new SubMenuPlugin(editor, buttonList); };
 
         // Create the button that'll open the popup
-        $.FroalaEditor.RegisterCommand(buttonName, {
+        ($ as any).FroalaEditor.RegisterCommand(buttonName, {
             title: name,
             icon: icon,
             undo: false,
@@ -156,18 +156,18 @@ export enum FroalaStatus {
     }
 
     protected addCustomIcons(): void {
-        $.FroalaEditor.DefineIconTemplate('custom-icons', '[SVG]');
+        ($ as any).FroalaEditor.DefineIconTemplate('custom-icons', '[SVG]');
 
         if (this.$i18n.currentLang() === 'fr') {
-            $.FroalaEditor.DefineIcon('bold', { SVG: (boldIcon as string), template: 'custom-icons' });
+            ($ as any).FroalaEditor.DefineIcon('bold', { SVG: (boldIcon as string), template: 'custom-icons' });
         }
-        $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
+        ($ as any).FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
+        ($ as any).FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
     }
 
     protected addPopups(): void {
         // add mobile mode popups
-        $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
+        ($ as any).FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters', 'insertImage']);
@@ -179,12 +179,12 @@ export enum FroalaStatus {
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
         // we'll use this submodule when we'll support images,tables,...
-        //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
+        //  ($ as any).FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
         // this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
 
         // add "hide sub-menu" button
-        $.FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
-        $.FroalaEditor.RegisterCommand('hide', {
+        ($ as any).FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
+        ($ as any).FroalaEditor.RegisterCommand('hide', {
             title: this.$i18n.translate('m-rich-text-editor:hide-submenu'),
             icon: 'angle-left',
             undo: false,
@@ -202,7 +202,7 @@ export enum FroalaStatus {
     protected addImageButton(): void {
         const EDITOR_INSTANCE: VueFroala = this;
 
-        $.FroalaEditor.RegisterCommand('insertImage', {
+        ($ as any).FroalaEditor.RegisterCommand('insertImage', {
             title: this.$i18n.translate('m-rich-text-editor:insert-image'),
             undo: true,
             focus: true,
@@ -214,8 +214,8 @@ export enum FroalaStatus {
             }
         });
 
-        $.FroalaEditor.DefineIcon('imageReplace', { SVG: (replaceIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.RegisterCommand('imageReplace', {
+        ($ as any).FroalaEditor.DefineIcon('imageReplace', { SVG: (replaceIcon as string), template: 'custom-icons' });
+        ($ as any).FroalaEditor.RegisterCommand('imageReplace', {
             title: this.$i18n.translate('m-rich-text-editor:replace-image'),
             undo: true,
             focus: true,
@@ -232,9 +232,9 @@ export enum FroalaStatus {
             }
         });
 
-        $.FroalaEditor.DefineIcon('image-align-center', { SVG: (imageAlignCenterIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('image-align-left', { SVG: (imageAlignLeftIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('image-align-right', { SVG: (imageAlignRightIcon as string), template: 'custom-icons' });
+        ($ as any).FroalaEditor.DefineIcon('image-align-center', { SVG: (imageAlignCenterIcon as string), template: 'custom-icons' });
+        ($ as any).FroalaEditor.DefineIcon('image-align-left', { SVG: (imageAlignLeftIcon as string), template: 'custom-icons' });
+        ($ as any).FroalaEditor.DefineIcon('image-align-right', { SVG: (imageAlignRightIcon as string), template: 'custom-icons' });
     }
 
     protected filesReady(files: MFile[]): void {
@@ -278,11 +278,11 @@ export enum FroalaStatus {
     }
 
     protected mounted(): void {
-        if ($.FE !== undefined
-            && $.FE.LANGUAGE[this.config.language] !== undefined
+        if (($ as any).FE !== undefined
+            && ($ as any).FE.LANGUAGE[this.config.language] !== undefined
             && this.customTranslations !== undefined
         ) {
-            Object.assign($.FE.LANGUAGE[this.config.language].translation, this.customTranslations);
+            Object.assign(($ as any).FE.LANGUAGE[this.config.language].translation, this.customTranslations);
         }
 
         this.createEditor();
@@ -361,14 +361,14 @@ export enum FroalaStatus {
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
-                [froalaEvents.InitializationDelayed]: (_e, editor) => {
+                [froalaEvents.InitializationDelayed]: (_e: any, editor: any) => {
                     this.froalaEditor = editor;
                     this.isLoaded = true;
                     this.setReadOnly();
                     this.htmlSet();
                     window.addEventListener('resize', this.onResize);
                 },
-                [froalaEvents.Initialized]: (_e, editor) => {
+                [froalaEvents.Initialized]: (_e: any, editor: any) => {
                     this.froalaEditor = editor;
                     this.isInitialized = true;
 
@@ -379,10 +379,10 @@ export enum FroalaStatus {
 
                     this.manageInitialFocus(editor);
                 },
-                [froalaEvents.ContentChanged]: (_e, _editor) => {
+                [froalaEvents.ContentChanged]: (_e: any, _editor: any) => {
                     this.updateModel();
                 },
-                [froalaEvents.Focus]: (_e) => {
+                [froalaEvents.Focus]: (_e: any) => {
                     if (!this.disabled) {
                         window.removeEventListener('resize', this.onResize);
 
@@ -398,34 +398,34 @@ export enum FroalaStatus {
                         this.closeEditor();
                     }
                 },
-                [froalaEvents.KeyUp]: (_e, _editor) => {
+                [froalaEvents.KeyUp]: (_e: any, _editor: any) => {
                     if (this.currentConfig.immediateVueModelUpdate) {
                         this.updateModel();
                     }
                     this.$emit('keyup');
                 },
-                [froalaEvents.KeyDown]: (_e, _editor) => {
+                [froalaEvents.KeyDown]: (_e: any, _editor: any) => {
                     this.$emit('keydown');
                     this.isDirty = true;
                 },
-                [froalaEvents.PasteAfter]: (_e, _editor) => {
+                [froalaEvents.PasteAfter]: (_e: any, _editor: any) => {
                     this.$emit('paste');
                 },
                 // if we use pasteBeforeCleanup, there's an error in froala's code
-                [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
+                [froalaEvents.PasteAfterCleanup]: (_e: any, _editor: any, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
                         return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
-                [froalaEvents.ShowLinkInsert]: (_e, editor) => {
+                [froalaEvents.ShowLinkInsert]: (_e: any, editor: any) => {
                     this.manageLinkInsert(editor);
                 },
-                [froalaEvents.ImageRemoved]: (_e, _editor, img) => {
+                [froalaEvents.ImageRemoved]: (_e: any, _editor: any, img: any) => {
                     this.$emit('image-removed', img[0].dataset.id, this.fileUploadStoreName);
                     this.updateModel();
                 },
-                [froalaEvents.ImageInserted]: (_e, _editor, img) => {
+                [froalaEvents.ImageInserted]: (_e: any, _editor: any, img: any) => {
                     img[0].alt = '';
                     this.updateModel();
                 }

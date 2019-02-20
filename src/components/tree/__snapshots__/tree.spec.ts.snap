@@ -25,7 +25,8 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
         </li>
         <li class="m-tree-node m-tree-node__has-children">
             <div role="button" tabindex="1" class="m-tree-node__item">
-                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span> </div>
+                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span>
+            </div>
             <m-accordion-transition>
                 <ul class="m-tree-node__children" style="display:none;">
                     <li class="m-tree-node m-tree-node__child m--is-selected">
@@ -46,7 +47,8 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
         </li>
         <li class="m-tree-node m-tree-node__has-children">
             <div role="button" tabindex="1" class="m-tree-node__item">
-                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span> </div>
+                <m-plus large="true" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item__label">Medias</span>
+            </div>
             <m-accordion-transition>
                 <ul class="m-tree-node__children" style="display:none;">
                     <li class="m-tree-node m-tree-node__child m--is-selected m--is-read-only">

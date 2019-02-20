@@ -20,7 +20,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         el.style.overflow = 'hidden';
     }
 
-    private accordionEnter(el: HTMLElement, done): void {
+    private accordionEnter(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.accordionAnim || this.accordionAnim === undefined) {
                 let height: number = el.clientHeight;
@@ -45,7 +45,7 @@ export class TransitionAccordion extends Vue implements TransitionAccordionMixin
         }
     }
 
-    private accordionLeave(el: HTMLElement, done): void {
+    private accordionLeave(el: HTMLElement, done: any): void {
         this.$nextTick(() => {
             if (this.accordionAnim || this.accordionAnim === undefined) {
                 let height: number = el.clientHeight;

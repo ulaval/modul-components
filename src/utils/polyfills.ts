@@ -19,10 +19,12 @@ polyFillActive.dragDrop = polyfill({
 // Polyfill for the Promise API
 Promise.polyfill();
 
+// tslint:disable
+
 // http://stackoverflow.com/questions/35135127/adding-a-function-to-array-prototype-in-ie-results-in-it-being-pushed-in-to-ever.
 if (!Array.prototype['find']) {
     Object.defineProperty(Array.prototype, 'find', {
-        value: function(predicate): void {
+        value: function(predicate: any): void {
             if (this === undefined) {
                 throw new TypeError('Array.prototype.find called on null or undefined');
             }
@@ -46,9 +48,9 @@ if (!Array.prototype['find']) {
 }
 
 // https://tc39.github.io/ecma262/#sec-array.prototype.includes
-if (!Array.prototype['includes']) {
+if (!(Array.prototype as any)['includes']) {
     Object.defineProperty(Array.prototype, 'includes', {
-        value: (searchElement, fromIndex) => {
+        value: (searchElement: any, fromIndex: number) => {
 
             // 1. Let O be ? ToObject(this value).
             if (this === undefined) {
@@ -111,7 +113,7 @@ if (!String.prototype['includes']) {
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith#Polyfill
 if (!String.prototype['startsWith']) {
-    String.prototype['startsWith'] = (searchString, position) => {
+    String.prototype['startsWith'] = (searchString: string, position: number) => {
         return this.substr(position || 0, searchString.length) === searchString;
     };
 }
@@ -150,3 +152,4 @@ if (typeof Object.assign !== 'function') {
     });
 }
 
+// tslint:enable

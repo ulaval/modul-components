@@ -11,12 +11,15 @@
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
-        "noImplicitThis": true,
+        "noImplicitThis": false,
         "strictNullChecks": true,
         "types": [
             "node",
             "jest",
-            "webpack-env"
+            "webpack-env",
+            "enquire.js",
+            "qs",
+            "jquery"
         ],
         "typeRoots": [
             "node_modules/@types"

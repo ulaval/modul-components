@@ -2,13 +2,13 @@ import ElementQueries from 'css-element-queries/src/ElementQueries';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { TransitionAccordion, TransitionAccordionMixin } from '../../mixins/transition-accordion/transition-accordion';
 import { ModulVue } from '../../utils/vue/vue';
 import { STEP_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import WithRender from './step.html?style=./step.scss';
+
 
 export enum MStepState {
     Locked = 'locked',
@@ -61,7 +61,7 @@ export class MStep extends ModulVue {
         ElementQueries.detach(this.$el);
     }
 
-    private openStep(event): void {
+    private openStep(event: any): void {
         if (this.propMode === MStepMode.Accordion) {
             this.as<TransitionAccordionMixin>().accordionAnim = true;
             this.propOpen = !this.propOpen;

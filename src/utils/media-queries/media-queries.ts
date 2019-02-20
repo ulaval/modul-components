@@ -1,4 +1,4 @@
-import enquire from 'enquire.js/dist/enquire';
+import enquire from 'enquire.js';
 import { PluginObject } from 'vue';
 
 
@@ -93,7 +93,7 @@ export class MediaQueries {
             unmatch: () => unmatch()
         };
 
-        enquire.register(breakingPoint, obj);
+        (enquire as any).register(breakingPoint, obj);
     }
 }
 

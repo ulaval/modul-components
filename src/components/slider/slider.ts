@@ -62,7 +62,7 @@ export class MSlider extends ModulVue {
         this.$emit('change', this.model);
     }
 
-    private onPanmove(event): void {
+    private onPanmove(event: any): void {
         this.model = Math.max(this.min, Math.min(this.max, this.computeNearestStep(event.center.x)));
         this.$emit('change', this.model);
     }

@@ -8,7 +8,7 @@ export const resetModulPlugins: any = (keepI18n: boolean = true) => {
     const modulServices: any = Object.keys(vueCstr.prototype).filter(
         c => (!keepI18n || c !== '$i18n') && typeof vueCstr.prototype[c] === 'object' && c !== '$log'
     );
-    modulServices.forEach(m => delete vueCstr.prototype[m]);
+    modulServices.forEach((m: any) => delete vueCstr.prototype[m]);
     vueCstr._installedPlugins = [];
 };
 
@@ -18,6 +18,6 @@ const cleanComponentsOptions: any = (components: any) => {
         const modulComponents: any = Object.keys(components).filter(c =>
             c.startsWith('m-')
         );
-        modulComponents.forEach(m => delete components[m]);
+        modulComponents.forEach((m: any) => delete components[m]);
     }
 };
