@@ -89,13 +89,11 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     }
 
     protected isSelectionStart(date: ModulDate): boolean {
-        return (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
-            || !(!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
+        return (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY));
     }
 
     protected isSelectionEnd(date: ModulDate): boolean {
-        return !(!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
-            || (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
+        return (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
     }
 
     private betweenBeginAndHightlight(date: ModulDate): boolean {
@@ -134,6 +132,4 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         }
         return range;
     }
-
-
 }

@@ -4,7 +4,6 @@ $m-datepicker--item-dimension: $m-touch-size !default;
 $m-base-calendar--weekday-height: 25px !default; // DOM number
 
 %base-pseudo-content {
-    // transition: transform $m-transition-duration ease, opacity $m-transition-duration ease;
     position: absolute;
     top: -50%;
     left: -50%;
@@ -23,7 +22,7 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
 
     &__header,
     &__body {
-        background: $m-color--white;
+        background-color: $m-color--white;
 
         @media (max-width: $m-mq--max--s) {
             width: 100%;
@@ -97,6 +96,11 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
         position: relative;
         width: $m-datepicker--item-dimension;
         height: $m-datepicker--item-dimension;
+        transition: background-color $m-transition-duration ease;
+
+        &::after {
+            transition: border-radius $m-transition-duration--s ease;
+        }
 
         &__text {
             position: relative;
@@ -108,8 +112,7 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
                 @extend %base-pseudo-content;
 
                 transform: translate3d(50%, 50%, 0);
-                border-radius: 50%;
-                background: #fff;
+                background-color: #fff;
                 border: 1px solid m-color(interactive, darker);
             }
 
@@ -117,47 +120,59 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
         }
 
         &.m--is-selected {
+            &:hover {
+                &::after {
+                    border-radius: 50%;
+                }
+            }
+
             &:not(:hover) {
                 color: #fff;
                 font-weight: $m-font-weight--bold;
+
+                &::after {
+                    @extend %base-pseudo-content;
+
+                    transform: translate3d(50%, 50%, 0);
+                    border-radius: 50%;
+                    background-color: m-color(interactive);
+                }
+            }
+        }
+
+        &.m--is-today:not(.m--is-selected) {
+            &:hover {
+                &::after {
+                    border-radius: 50%;
+                }
             }
 
-            border-radius: 50%;
+            &:not(:hover) {
+                &::after {
+                    @extend %base-pseudo-content;
 
-            &,
-            &.m--is-highlighted {
-                background: m-color(interactive);
+                    transform: translate3d(50%, 50%, 0);
+                    background-color: $m-color--grey-light;
+                    font-weight: $m-font-weight--bold;
+                    border-radius: 50%;
+                    z-index: 2;
+                }
             }
         }
 
         &.m--is-highlighted {
-            background: $m-color--interactive-lightest;
-        }
+            background-color: $m-color--interactive-lightest;
 
-        &.m--is-selection-start {
-            &::before {
-                @extend %base-pseudo-content;
-
-                z-index: 0;
-                transform: translate3d(50%, 50%, 0);
-                background: $m-color--interactive-lightest;
+            &.m--is-today:not(:hover):not(.m--is-selected) {
+                &::after {
+                    border: 1px solid m-color(border);
+                    background-color: m-color(interactive, lightest);
+                }
             }
-        }
 
-        // &.m--is-selection-end {
-        //     &::before {
-        //         @extend %base-pseudo-content;
-
-        //         z-index: 0;
-        //         transform: translate3d(0, 50%, 0);
-        //         background: $m-color--interactive-lightest;
-        //     }
-        // }
-
-        &.m--is-today:not(.m--is-selected) {
-            background: $m-color--grey-light;
-            font-weight: $m-font-weight--bold;
-            border-radius: 50%;
+            &.m--is-selected {
+                border-radius: 50%;
+            }
         }
 
         &.m--is-other-month:not(.m--is-selected) {
@@ -183,24 +198,33 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
 }
 
 // for range selection visual
-// .m--is-selected + .m--is-highlighted {
-//     .m-base-calendar__item {
-//         &::before {
-//             @extend %base-pseudo-content;
+.m--is-selected + .m--is-highlighted {
+    .m-base-calendar__item {
+        &::before {
+            @extend %base-pseudo-content;
 
-//             z-index: 0;
-//             transform: translate3d(0, 50%, 0);
-//         }
-//     }
-// }
+            z-index: 0;
+            background-color: m-color(interactive, lightest);
+            transform: translate3d(0, 50%, 0);
+        }
+    }
+}
 
 // for range selection visual
-// .m--is-highlighted + .m--is-selected {
-//     .m-base-calendar__item.m-base-calendar__item {
-//         &::before {
-//             @extend %base-pseudo-content;
+.m--is-highlighted + .m--is-selected {
+    .m-base-calendar__item {
+        border-radius: 0 50% 50% 0;
+    }
+}
 
-//             transform: translate3d(0, 50%, 0);
-//         }
-//     }
-// }
+.m--is-selected:first-child {
+    .m--is-selection-end {
+        border-radius: 0 50% 50% 0;
+    }
+}
+
+.m--is-selected:last-child {
+    .m--is-selection-start {
+        border-radius: 50% 0 0 50%;
+    }
+}
