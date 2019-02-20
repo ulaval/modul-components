@@ -10,10 +10,6 @@ $m-tree-node--child-indentation: 20px;
     box-sizing: content-box;
     position: absolute;
 
-    /deep/ .m-svg__folder {
-        // transform: scale(0.9) translateY(-2px);
-    }
-
     &:not(.m-plus) {
         border: none;
         background-color: transparent;

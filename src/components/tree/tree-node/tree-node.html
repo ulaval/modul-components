@@ -3,6 +3,7 @@
             'm--is-disabled' : isDisabled,
             'm--is-read-only' : isReadonlyStyle,
             'm-tree-node__has-children' : isFolder,
+            'm-tree-node__with-checkboxes' : withCheckboxes,
             'm-tree-node__file-icons' : useFilesIcons }">
     <div class="m-tree-node__item"
          ref="item"
@@ -26,8 +27,8 @@
                     :disabled="isDisabled"
                     :readonly="readonly"
                     @change="onCheckboxClick"></m-checkbox>
-        <span class="m-tree-node__item__label">{{label}}</span>
-        <span class="m-tree-node__item__check"></span>
+        <span class="m-tree-node__item-label">{{label}}</span>
+        <span class="m-tree-node__item-check"></span>
     </div>
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">
