@@ -265,7 +265,8 @@
     <p class="m-u--margin-bottom">
     </p>
     <p>
-        <m-modal size="small">
+        <m-modal size="small"
+                 title="Form in a modal">
             <m-button slot="trigger">Open modal</m-button>
             <m-form :form="forms[10]"
                     :required-marker="true"
@@ -322,7 +323,7 @@
             </p>
         </m-modal>
     </p>
-    <hr />
+
     <h3>Form in an overlay</h3>
     <p class="m-u--margin-bottom">
         for scroll testing
@@ -386,4 +387,26 @@
         </m-overlay>
     </p>
     <hr />
+    <h3>Radio Buttons Form</h3>
+    <p class="m-u--margin-bottom">
+        <m-form :form="forms[12]"
+                :required-marker="true"
+                @reset="reset(12)"
+                @submit="submit(12)">
+            <m-radio-group v-model.trim="forms[12].get('field-1').value"
+                           v-m-form-field="forms[12].get('field-1')"
+                           :error-message="forms[12].get('field-1').errorMessage">
+                <m-radio value="1">1</m-radio>
+                <m-radio value="2">2</m-radio>
+                <m-radio value="3">3</m-radio>
+            </m-radio-group>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[12].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[12].id">Reset</m-button>
+        </p>
+    </p>
 </div>

@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
@@ -8,16 +8,19 @@ import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
+export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
+export const CSS_BODY_DEFAULT_MARGIN: string = '0';
+
 @WithRender
 @Component({
     mixins: [InputState]
 })
 export class MInputStyle extends ModulVue {
-    @Prop()
+    @Prop({ default: '' })
     public label: string;
     @Prop()
     public labelFor: string;
-    @Prop()
+    @Prop({ default: false })
     public focus: boolean;
     @Prop({ default: true })
     public empty: boolean;
@@ -35,11 +38,25 @@ export class MInputStyle extends ModulVue {
     public $refs: {
         root: HTMLElement,
         label: HTMLElement,
+        body: HTMLElement,
         adjustWidthAuto: HTMLElement,
         rightContent: HTMLElement
     };
 
+    public labelOffset: string = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public bodyOffset: string = CSS_BODY_DEFAULT_MARGIN;
     private animReady: boolean = false;
+
+    protected created(): void {
+        setTimeout(() => {
+            this.animReady = true;
+            this.setInputWidth();
+        }, 0);
+    }
+
+    protected mounted(): void {
+        this.calculateLabelOffset();
+    }
 
     public setInputWidth(): void {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
@@ -55,7 +72,7 @@ export class MInputStyle extends ModulVue {
                             if (inputEl !== null) {
                                 let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
                                 if (this.hasLabel) {
-                                    width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                                    width = !this.isLabelUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
                                 }
                                 inputEl!.style.width = width + 'px';
                             }
@@ -71,19 +88,30 @@ export class MInputStyle extends ModulVue {
         });
     }
 
-    protected created(): void {
-        setTimeout(() => {
-            this.animReady = true;
-            this.setInputWidth();
-        }, 0);
+    @Watch('isLabelUp')
+    private calculateLabelOffset(): void {
+        if (this.isLabelUp) {
+            let label: HTMLElement | null = this.$refs.label;
+            let rootStyle: any = window.getComputedStyle(this.$refs.root);
+            if (label) {
+                let labelOffset: number = label.clientHeight / 2;
+                this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? labelOffset + 'px' : CSS_LABEL_DEFAULT_MARGIN + 'px';
+
+                let bodyOffset: number = labelOffset - (parseFloat(rootStyle.getPropertyValue('padding-top')) + parseFloat(rootStyle.getPropertyValue('padding-bottom')));
+                this.bodyOffset = bodyOffset < 0 ? CSS_BODY_DEFAULT_MARGIN : '-' + bodyOffset + 'px';
+            }
+        } else {
+            this.bodyOffset = CSS_BODY_DEFAULT_MARGIN;
+            this.labelOffset = CSS_LABEL_DEFAULT_MARGIN + 'px';
+        }
+    }
+
+    public get isLabelUp(): boolean {
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasValue(): boolean {
         return this.hasDefaultSlot && !this.empty;
-    }
-
-    public get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel && !this.readonly;
     }
 
     private get hasLabel(): boolean {

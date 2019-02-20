@@ -187,7 +187,7 @@ describe(`A range date state`, () => {
         describe(`without prior value`, () => {
             it(`will update begin value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -197,7 +197,7 @@ describe(`A range date state`, () => {
 
             it(`will update end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -207,7 +207,7 @@ describe(`A range date state`, () => {
 
             it(`will update both values`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -225,7 +225,7 @@ describe(`A range date state`, () => {
 
             it(`when updating begin value, will replace begin value and clear end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -234,7 +234,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating end value, will clear begin value and replace end value`, () => {
-                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -242,7 +242,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating both values, will replace both values`, () => {
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -250,7 +250,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating with nothing, will clear both values`, () => {
-                calendarRangeDateState.updateValue({});
+                calendarRangeDateState.updateState({});
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -267,7 +267,7 @@ describe(`A range date state`, () => {
 
             it(`when updating begin value, will replace begin value and clear end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -276,7 +276,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating end value, will clear begin value and replace end value`, () => {
-                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -284,7 +284,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating both values, will replace both values`, () => {
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -292,7 +292,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating with nothing, will clear both values`, () => {
-                calendarRangeDateState.updateValue({});
+                calendarRangeDateState.updateState({});
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -309,7 +309,7 @@ describe(`A range date state`, () => {
 
             it(`when updating begin value, will replace begin value and clear end value`, () => {
                 const calendarRangeDateState: CalendarRangeDateState = new CalendarRangeDateState();
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -318,7 +318,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating end value, will clear begin value and replace end value`, () => {
-                calendarRangeDateState.updateValue({ end: FIRST_DATE_PICKED });
+                calendarRangeDateState.updateState({ end: FIRST_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -326,7 +326,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating both values, will replace both values`, () => {
-                calendarRangeDateState.updateValue({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
+                calendarRangeDateState.updateState({ begin: FIRST_DATE_PICKED, end: SECOND_DATE_PICKED });
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 
@@ -334,7 +334,7 @@ describe(`A range date state`, () => {
             });
 
             it(`when updating with nothing, will clear both values`, () => {
-                calendarRangeDateState.updateValue({});
+                calendarRangeDateState.updateState({});
 
                 const calendar: Calendar = calendarRangeDateState.buildCurrentCalendar().calendar;
 

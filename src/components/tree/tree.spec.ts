@@ -31,6 +31,7 @@ const TREE_WITH_DATA: TreeNode[] = [
         ]
     }
 ];
+
 const TREE_WITH_INVALID_DATA: TreeNode[] = [
     {
         label: 'index.html',
@@ -181,6 +182,24 @@ describe(`MTree`, () => {
                 tree = TREE_WITH_DATA;
                 selectedNodes = [];
                 selectionMode = MSelectionMode.Multiple;
+                selectedNodes = SELECTED_NODES;
+                initializeMountWrapper();
+            });
+
+            it(`Should render correctly`, () => {
+                expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+
+            it(`Should render with two selected nodes`, () => {
+                expect(wrapper.findAll(SELECTED_NODE_CLASS).length).toBe(2);
+            });
+        });
+
+        describe(`Given a tree with two nodes selected in readonly mode`, () => {
+
+            beforeEach(() => {
+                tree = TREE_WITH_DATA;
+                selectionMode = MSelectionMode.Readonly;
                 selectedNodes = SELECTED_NODES;
                 initializeMountWrapper();
             });
