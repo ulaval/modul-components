@@ -571,7 +571,6 @@ export enum FroalaStatus {
     private adjusteToolbarPosition(): void {
         const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
         if (toolBar) {
-            console.error('AjusteToobarPosition : toolBar.style.marginTop = ' + toolBar.offsetHeight);
             toolBar.style.marginTop = `-${toolBar.offsetHeight}px`;
         }
     }

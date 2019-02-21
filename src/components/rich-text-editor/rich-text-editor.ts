@@ -109,13 +109,17 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     protected calculateToolbarStickyOffset(): number | undefined {
         if (this.toolbarStickyOffset) {
-            if (/^-*\d+$/.test(this.toolbarStickyOffset)) {
+            if (this.isNumber(this.toolbarStickyOffset)) {
                 return Number(this.toolbarStickyOffset);
             } else {
                 const element: HTMLElement | null = document.querySelector(this.toolbarStickyOffset);
                 return element!.offsetHeight;
             }
         }
+    }
+
+    private isNumber(value: string): boolean {
+        return /^-*\d+$/.test(this.toolbarStickyOffset);
     }
 
     protected getScrollableContainer(): string | undefined {
@@ -132,14 +136,13 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             }
         }
 
-        if (this.toolbarStickyOffset && !/^-*\d+$/.test(this.toolbarStickyOffset)) {
+        if (this.toolbarStickyOffset && !this.isNumber(this.toolbarStickyOffset)) {
             if (!document.querySelector(this.toolbarStickyOffset)) {
                 propInError = 'toolbar-sticky-offset';
             }
         }
 
         if (propInError) {
-            console.error(this.getSelectorErrorMsg(propInError));
             throw new Error(this.getSelectorErrorMsg(propInError));
         }
     }
