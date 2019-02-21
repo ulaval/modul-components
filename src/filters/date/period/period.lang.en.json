@@ -1,0 +1,6 @@
+{
+    "f-m-period": {
+        "dates": "Du %(start)s au %(end)s",
+        "same": "Le %(date)s"
+    }
+}

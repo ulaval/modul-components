@@ -35,4 +35,24 @@
                  label="minutes"></m-textfield>
 
     <h3>{{ date | f-m-time }}</h3>
+
+    <h3>Period Format</h3>
+    <p v-html="formattedPeriod"></p>
+    <div>
+
+        <m-textfield v-model="year"
+                     label="year"></m-textfield>
+        <m-textfield v-model="month"
+                     label="month"></m-textfield>
+        <m-textfield v-model="day"
+                     label="day"></m-textfield>
+    </div>
+    <div>
+        <m-textfield v-model="yearLater"
+                     label="year"></m-textfield>
+        <m-textfield v-model="monthLater"
+                     label="month"></m-textfield>
+        <m-textfield v-model="dayLater"
+                     label="day"></m-textfield>
+    </div>
 </div>
