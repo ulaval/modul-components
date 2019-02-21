@@ -1,6 +1,7 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
+import ModulDate from '../../utils/modul-date/modul-date';
 import { DatePickerSupportedTypes } from './../datepicker/datepicker';
 import PeriodpickerPlugin, { MPeriodpicker, MPeriodpickerFromSlotProps, MPeriodpickerToSlotProps } from './periodpicker';
 
@@ -98,7 +99,7 @@ describe(`m-periodpicker`, () => {
 
             expect(wrapper.emitted('input')[0][0]).toEqual({
                 from: undefined,
-                to: newDateToValue
+                to: new ModulDate(newDateToValue).endOfDay()
             });
         });
     });
@@ -135,7 +136,7 @@ describe(`m-periodpicker`, () => {
 
             expect(wrapper.emitted('input')[0][0]).toEqual({
                 from: newDateFromValue,
-                to: toDateProp
+                to: new ModulDate(newDateFromValue).endOfDay()
             });
         });
 
@@ -147,7 +148,7 @@ describe(`m-periodpicker`, () => {
 
             expect(wrapper.emitted('input')[0][0]).toEqual({
                 from: fromDateProp,
-                to: newDateToValue
+                to: new ModulDate(newDateToValue).endOfDay()
             });
         });
     });

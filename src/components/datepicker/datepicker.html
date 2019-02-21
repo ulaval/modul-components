@@ -61,7 +61,7 @@
              placement="bottom"
              @open="onOpen"
              @close="onClose">
-        <m-calendar :value="value"
+        <m-calendar :value="formattedDate"
                     @input="selectDate"
                     :min-date="minDateString"
                     :max-date="maxDateString"

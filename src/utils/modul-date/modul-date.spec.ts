@@ -133,6 +133,7 @@ describe(`ModulDate`, () => {
             });
         });
     });
+
     describe(`serialization`, () => {
         it(`of a date to string, will match the string format`, () => {
             const modulDate: ModulDate = new ModulDate('2018-01-01');
@@ -140,6 +141,22 @@ describe(`ModulDate`, () => {
             const result: string = modulDate.toString();
 
             expect(result).toBe('2018-01-01');
+        });
+
+        it(`of a date to isoString, will match the string format`, () => {
+            const modulDate: ModulDate = new ModulDate('2018-01-01');
+
+            const result: string = modulDate.toISOString();
+
+            expect(result).toBe(new Date(2018, 0, 1).toISOString());
+        });
+
+        it(`of a date to locale string, will match the string format`, () => {
+            const modulDate: ModulDate = new ModulDate('2018-01-01');
+
+            const result: string = modulDate.toLocaleDateString();
+
+            expect(result).toBe(new Date(2018, 0, 1).toLocaleDateString());
         });
     });
 
@@ -584,6 +601,52 @@ describe(`ModulDate`, () => {
                     ]
                 }]
             }].forEach(testSuiteRunner);
+        });
+    });
+
+    describe(`operations`, () => {
+        describe(`add`, () => {
+            it(`should return a new date with added years with kind year`, () => {
+                const date: Date = new Date(1900, 1, 1);
+                const modulDate: ModulDate = new ModulDate(date);
+
+                const newDate: Date = modulDate.add(10, 'year');
+
+                expect(newDate.getFullYear()).toBe(date.getFullYear() + 10);
+            });
+
+            it(`should not change the current date`, () => {
+                const date: Date = new Date(1900, 1, 1);
+                const modulDate: ModulDate = new ModulDate(date);
+
+                modulDate.add(10, 'year');
+
+                expect(modulDate.fullYear()).toBe(1900);
+                expect(modulDate.month()).toBe(1);
+                expect(modulDate.day()).toBe(1);
+            });
+        });
+
+        describe(`subtract`, () => {
+            it(`should return a new date with added years with kind year`, () => {
+                const date: Date = new Date(1900, 1, 1);
+                const modulDate: ModulDate = new ModulDate(date);
+
+                const newDate: Date = modulDate.subtract(10, 'year');
+
+                expect(newDate.getFullYear()).toBe(date.getFullYear() - 10);
+            });
+
+            it(`should not change the current date`, () => {
+                const date: Date = new Date(1900, 1, 1);
+                const modulDate: ModulDate = new ModulDate(date);
+
+                modulDate.subtract(10, 'year');
+
+                expect(modulDate.fullYear()).toBe(1900);
+                expect(modulDate.month()).toBe(1);
+                expect(modulDate.day()).toBe(1);
+            });
         });
     });
 });

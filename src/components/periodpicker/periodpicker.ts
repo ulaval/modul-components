@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import ModulDate from '../../utils/modul-date/modul-date';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
@@ -140,7 +141,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
 
             this.emitNewValue(Object.assign({}, this.internalValue, {
                 from: newValue,
-                to: newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to
+                to: newValue > (this.internalValue.to || '') ? undefined : new ModulDate(newValue).endOfDay()
             }));
         } else {
             this.emitNewValue({ from: undefined, to: this.internalValue.to });
@@ -150,7 +151,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     onDateToChange(newValue: DatePickerSupportedTypes): void {
         if (newValue) {
             this.unfocusDateToField();
-            this.emitNewValue(Object.assign({}, this.internalValue, { to: newValue }));
+            this.emitNewValue(Object.assign({}, this.internalValue, { to: new ModulDate(newValue).endOfDay() }));
         } else {
             this.emitNewValue({ from: this.internalValue.from, to: undefined });
         }
