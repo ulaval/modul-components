@@ -1,7 +1,6 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
-import { MFile } from 'src/utils/file/file';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
@@ -13,6 +12,7 @@ import replaceIcon from '../../../assets/icons/svg/Froala-replace.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
+import { MFile } from '../../../utils/file/file';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
 import { PopupPlugin } from './popup-plugin';
@@ -415,7 +415,7 @@ export enum FroalaStatus {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return this.removeEmptyHTML(data);
+                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
                     }
                 },
                 [froalaEvents.ShowLinkInsert]: (_e, editor) => {
@@ -580,7 +580,14 @@ export enum FroalaStatus {
     }
 
     private removeEmptyHTML(value: string): string {
-        return this.froalaEditor.clean.html(value, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+        const div: HTMLElement = document.createElement('div');
+        div.innerHTML = value;
+        if ((div.textContent || div.innerText || '').trim().length > 0) {
+            return value;
+        } else if (value.includes('<img')) {
+            return value;
+        }
+        return '';
     }
 
     private registerEvent(element: any, eventName: any, callback: any): void {

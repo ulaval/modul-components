@@ -30,6 +30,7 @@ import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
 import IconPlugin from './icon/icon';
 import InplaceEditPlugin from './inplace-edit/inplace-edit';
+import InputGroupPlugin from './input-group/input-group';
 import InputStylePlugin from './input-style/input-style';
 import LimitTextPlugin from './limit-text/limit-text';
 import LinkPlugin from './link/link';
@@ -125,6 +126,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(IconPlugin);
         Vue.use(IconButtonPlugin);
         Vue.use(IconFilePlugin);
+        Vue.use(InputGroupPlugin);
         Vue.use(InputStylePlugin);
         Vue.use(LimitTextPlugin);
         Vue.use(LinkPlugin);

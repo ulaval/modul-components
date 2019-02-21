@@ -1,5 +1,5 @@
 <div>
-    <h3>Basic form</h3>
+    <h2 class="m-u--no-margin">Basic form</h2>
     <m-form class="m-u--margin-top"
             :form="forms[0]"
             @reset="reset(0)"
@@ -17,13 +17,10 @@
                   skin="secondary"
                   :form="forms[0].id">Reset</m-button>
     </p>
-
     <hr />
+    <h2>Form with 1 field with validation</h2>
+    <p>The summary message won't display if only one field has error.</p>
 
-    <h3>Form with 1 field with validation</h3>
-    <p>
-        the summary message won't display if only one field has error
-    </p>
     <m-form class="m-u--margin-top"
             :form="forms[1]"
             @reset="reset(1)"
@@ -42,13 +39,9 @@
                   skin="secondary"
                   :form="forms[1].id">Reset</m-button>
     </p>
-
     <hr />
-
-    <h3>Form with 2 field with validation</h3>
-    <p>
-        the summary message will display if more than one fields has error
-    </p>
+    <h2>Form with 2 field with validation</h2>
+    <p>The summary message will display if more than one fields has error.</p>
     <m-form class="m-u--margin-top"
             :form="forms[2]"
             @reset="reset(2)"
@@ -75,11 +68,8 @@
     </p>
 
     <hr />
-
-    <h3>Form with predefined value</h3>
-    <p>
-        reset will return to predefined value
-    </p>
+    <h2>Form with predefined value</h2>
+    <p>Reset will return to predefined value</p>
     <m-form class="m-u--margin-top"
             :form="forms[3]"
             @reset="reset(3)"
@@ -91,20 +81,16 @@
                      v-m-form-field="forms[3].get('field-1')">
         </m-textfield>
     </m-form>
-    <p class="m-u--margin-bottom--l">
+    <p class="m-u--margin-top m-u--margin-bottom--l">
         <m-button type="submit"
                   :form="forms[3].id">Submit</m-button>
         <m-button type="reset"
                   skin="secondary"
                   :form="forms[3].id">Reset</m-button>
     </p>
-
     <hr />
-
-    <h3>Will give focus to the only field that has error</h3>
-    <p class="m-u--margin-bottom">
-        Just click submit to test
-    </p>
+    <h2>Will give focus to the only field that has error</h2>
+    <p>Just click submit to test</p>
     <m-form class="m-u--margin-top"
             :form="forms[4]"
             @reset="reset(4)"
@@ -129,13 +115,10 @@
                   skin="secondary"
                   :form="forms[4].id">Reset</m-button>
     </p>
-
-    <hr />
-
-    <h3>Allow to pass html to summary errors</h3>
-    <p>
-        Just click submit to test
     </p>
+    <hr />
+    <h2>Allow to pass html to summary errors</h2>
+    <p>Just click submit to test</p>
     <m-form class="m-u--margin-top"
             :form="forms[5]"
             @reset="reset(5)"
@@ -158,13 +141,9 @@
                   skin="secondary"
                   :form="forms[5].id">Reset</m-button>
     </p>
-
     <hr />
-
     <h3>Message error after field is touch vs live</h3>
-    <p class="m-u--margin-bottom">
-        field 1 is after field touch field 2 is live
-    </p>
+    <p>Field 1 is after field touch field 2 is live</p>
     <m-form class="m-u--margin-top"
             :form="forms[6]"
             @reset="reset(6)"
@@ -187,13 +166,9 @@
                   skin="secondary"
                   :form="forms[6].id">Reset</m-button>
     </p>
-
     <hr />
-
-    <h3>Form with internal validation</h3>
-    <p>
-        the validation here is field 1 must match field 2
-    </p>
+    <h2>Form with internal validation</h2>
+    <p>The validation here is field 1 must match field 2</p>
     <m-form class="m-u--margin-top"
             :form="forms[7]"
             @reset="reset(7)"
@@ -216,10 +191,8 @@
                   skin="secondary"
                   :form="forms[7].id">Reset</m-button>
     </p>
-
     <hr />
-
-    <h3>Basic form with required marker</h3>
+    <h2>Basic form with required marker</h2>
     <m-form class="m-u--margin-top"
             :form="forms[8]"
             :required-marker="true"
@@ -238,13 +211,9 @@
                   skin="secondary"
                   :form="forms[8].id">Reset</m-button>
     </p>
-
     <hr />
-
-    <h3>Form with a field with multiple validations</h3>
-    <p>
-        Cannot have number and min length 5
-    </p>
+    <h2>Form with a field with multiple validations</h2>
+    <p>Cannot have number and min length 5</p>
     <m-form class="m-u--margin-top"
             :form="forms[9]"
             :required-marker="true"
@@ -263,10 +232,8 @@
                   skin="secondary"
                   :form="forms[9].id">Reset</m-button>
     </p>
-
     <hr />
-
-    <h3>Form in a modal</h3>
+    <h2>Form in a modal</h2>
     <m-modal class="m-u--margin-top m-u--margin-bottom--l"
              size="small"
              title="Form in a modal">
@@ -317,7 +284,7 @@
                 Cupiditate nam reiciendis nisi nemo quis.
             </p>
         </m-form>
-        <p class="m-u--margin-top">
+        <p>
             <m-button type="submit"
                       :form="forms[10].id">Submit</m-button>
             <m-button type="reset"
@@ -325,13 +292,9 @@
                       :form="forms[10].id">Reset</m-button>
         </p>
     </m-modal>
-
     <hr />
-
-    <h3>Form in an overlay</h3>
-    <p class="m-u--margin-bottom">
-        for scroll testing
-    </p>
+    <h2>Form in an overlay</h2>
+    <p>For scroll testing</p>
     <m-overlay class="m-u--margin-top m-u--margin-bottom--l">
         <m-button slot="trigger">Open</m-button>
         <m-form :form="forms[11]"
@@ -388,45 +351,20 @@
                       :form="forms[11].id">Reset</m-button>
         </p>
     </m-overlay>
-
     <hr />
-
-    <h3>Server error</h3>
-
-    <m-dropdown class="m-u--margin-top"
-                v-model="serverResponse"
-                label="Response code">
-        <m-dropdown-item v-for="(item, index) in serverResponses"
-                         :key="index"
-                         :value="item"
-                         :label="item.status"></m-dropdown-item>
-    </m-dropdown>
-
+    <h3>Radio Buttons Form</h3>
     <m-form class="m-u--margin-top"
             :form="forms[12]"
+            :required-marker="true"
             @reset="reset(12)"
             @submit="submit(12)">
-        <m-accordion-transition>
-            <m-message slot="formResponse"
-                       style="margin-bottom: 24px;"
-                       v-if="hasServerResponse"
-                       :close-button="true"
-                       :state="serverResponse.messageState"
-                       :title="serverResponse.title"
-                       @close="hasServerResponse = false">
-                {{ serverResponse.message }}
-            </m-message>
-        </m-accordion-transition>
-        <m-textfield v-model.trim="forms[12].get('field-1').value"
-                     label="A field"
-                     :error-message="forms[12].get('field-1').errorMessage"
-                     v-m-form-field="forms[12].get('field-1')">
-        </m-textfield>
-        <m-textfield v-model.trim="forms[12].get('field-2').value"
-                     label="A field"
-                     :error-message="forms[12].get('field-2').errorMessage"
-                     v-m-form-field="forms[12].get('field-2')">
-        </m-textfield>
+        <m-radio-group v-model.trim="forms[12].get('field-1').value"
+                       v-m-form-field="forms[12].get('field-1')"
+                       :error-message="forms[12].get('field-1').errorMessage">
+            <m-radio value="1">1</m-radio>
+            <m-radio value="2">2</m-radio>
+            <m-radio value="3">3</m-radio>
+        </m-radio-group>
     </m-form>
     <p class="m-u--margin-bottom--l">
         <m-button type="submit"
@@ -435,5 +373,4 @@
                   skin="secondary"
                   :form="forms[12].id">Reset</m-button>
     </p>
-    <hr />
 </div>

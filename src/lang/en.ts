@@ -13,6 +13,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/modal/modal.lang.en.json'),
                 require('../components/datefields/datefields.lang.en.json'),
                 require('../components/datepicker/datepicker.lang.en.json'),
+                require('../components/daterangepicker/daterangepicker.lang.en.json'),
                 require('../components/dropdown/dropdown.lang.en.json'),
                 require('../components/dropdown-group/dropdown-group.lang.en.json'),
                 require('../components/overlay/overlay.lang.en.json'),
