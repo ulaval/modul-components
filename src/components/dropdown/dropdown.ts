@@ -86,6 +86,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public onFocusIn(): void {
+        if (!this.filterable) {
+            this.$refs.input.setSelectionRange(0, 0);
+        }
         this.internalIsFocus = true;
     }
 
