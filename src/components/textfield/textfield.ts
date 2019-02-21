@@ -109,7 +109,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
             this.$emit('paste', event);
         } else {
             let pasteContent: string = event['clipboardData'].getData('text');
-            if (/^\d+$/.test(pasteContent)) {
+            if (/^\d+$/.test(pasteContent) && pasteContent.length + this.as<InputManagement>().internalValue.length <= this.maxLength && this.maxLength) {
                 this.$emit('paste', event);
             } else {
                 event.preventDefault();
@@ -121,8 +121,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
         if (this.type !== MTextfieldType.Interger) {
             this.$emit('keydown', event);
         } else {
-            // tslint:disable-next-line: deprecation
-            if (!(event.ctrlKey || event.altKey || (47 < event.keyCode && event.keyCode < 58 && event.shiftKey === false) || (95 < event.keyCode && event.keyCode < 106) || (event.keyCode === 8) || (event.keyCode === 9) || (event.keyCode > 34 && event.keyCode < 40) || (event.keyCode === 46))) {
+            if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && event.key !== 'Backspace' && !event.ctrlKey
+                || event.key === 'e' || event.key === '.' || event.key === ',' || event.shiftKey) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
@@ -151,7 +151,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public get inputType(): MTextfieldType {
         switch (this.type) {
             case MTextfieldType.Interger:
-                return MTextfieldType.Telephone;
+                return MTextfieldType.Number;
             case MTextfieldType.Password:
                 return this.passwordAsText ? MTextfieldType.Text : MTextfieldType.Password;
             default:
