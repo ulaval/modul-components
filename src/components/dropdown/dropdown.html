@@ -40,7 +40,7 @@
                @keydown="inputOnKeydown"
                @focusin="onFocusIn"
                @focusout="onFocusOut"
-               v-model="selectedText">
+               v-model.trim="selectedText">
         <template slot="adjust-width-auto"
                   v-if="width === 'auto'">{{ selectedText }}</template>
         <div class="m-dropdown__arrow"
