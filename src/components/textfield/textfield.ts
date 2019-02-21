@@ -121,7 +121,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
         if (this.type !== MTextfieldType.Interger) {
             this.$emit('keydown', event);
         } else {
-            if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && event.key !== 'Backspace' && !event.ctrlKey
+            // tslint:disable-next-line: no-console
+            console.log(event);
+
+            if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && event.key !== 'Backspace' && !event.ctrlKey && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Delete' && event.key !== 'Tab' && event.key !== 'PageUp' && event.key !== 'PageDown' && event.key !== 'Home' && event.key !== 'End'
                 || event.key === 'e' || event.key === '.' || event.key === ',' || event.shiftKey) {
                 event.preventDefault();
             } else {
