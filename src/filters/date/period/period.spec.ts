@@ -15,4 +15,32 @@ describe(PERIOD_NAME, () => {
         };
         expect(periodFilter(period)).toEqual('Du 8 avril 2019 au 14 mai 2019');
     });
+
+    describe(`when the end date is missing`, () => {
+        it(`then we only show the start date`, () => {
+            const period: MPeriod = {
+                start: new Date(2019, 3, 8)
+            };
+
+            expect(periodFilter(period)).toEqual('Débute le 8 avril 2019');
+        });
+    });
+
+    describe(`when the start date is missing`, () => {
+        it(`then we only show the end date`, () => {
+            const period: MPeriod = {
+                end: new Date(2019, 3, 8)
+            };
+
+            expect(periodFilter(period)).toEqual('Se termine le 8 avril 2019');
+        });
+    });
+
+    describe(`when both dates are missing`, () => {
+        it(`then it throws an error`, () => {
+            const period: MPeriod = {};
+
+            expect(() => periodFilter(period)).toThrow(Error);
+        });
+    });
 });

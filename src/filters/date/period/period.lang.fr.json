@@ -1,6 +1,8 @@
 {
     "f-m-period": {
         "dates": "Du %(start)s au %(end)s",
+        "start": "Débute le %(start)s",
+        "end": "Se termine le %(end)s",
         "same": "Le %(date)s"
     }
 }
