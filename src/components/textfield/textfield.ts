@@ -23,7 +23,8 @@ export enum MTextfieldType {
     Url = 'url',
     Telephone = 'tel',
     Search = 'search',
-    Number = 'number'
+    Number = 'number',
+    Interger = 'interger'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
@@ -49,7 +50,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Text ||
             value === MTextfieldType.Url ||
             value === MTextfieldType.Search ||
-            value === MTextfieldType.Number
+            value === MTextfieldType.Number ||
+            value === MTextfieldType.Interger
     })
     public type: MTextfieldType;
     @Prop({ default: true })
@@ -102,18 +104,21 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
-    private onPasteTextfield(event: Event): boolean {
-        if (this.type !== MTextfieldType.Number) {
+    private onPasteTextfield(event: Event): void {
+        if (this.type !== MTextfieldType.Interger) {
             this.$emit('paste', event);
-            return true;
         } else {
-            event.preventDefault();
-            return false;
+            let pasteContent: string = event['clipboardData'].getData('text');
+            if (/^\d+$/.test(pasteContent)) {
+                this.$emit('paste', event);
+            } else {
+                event.preventDefault();
+            }
         }
     }
 
     private onKeydownTextfield(event: KeyboardEvent): void {
-        if (this.type !== MTextfieldType.Number) {
+        if (this.type !== MTextfieldType.Interger) {
             this.$emit('keydown', event);
         } else {
             // tslint:disable-next-line: deprecation
@@ -145,7 +150,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     public get inputType(): MTextfieldType {
         switch (this.type) {
-            case MTextfieldType.Number:
+            case MTextfieldType.Interger:
                 return MTextfieldType.Telephone;
             case MTextfieldType.Password:
                 return this.passwordAsText ? MTextfieldType.Text : MTextfieldType.Password;
