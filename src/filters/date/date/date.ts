@@ -1,10 +1,9 @@
-import 'moment/locale/fr';
-
 import moment from 'moment';
-import Vue, { PluginObject } from 'vue';
-
+import 'moment/locale/fr';
+import Vue from 'vue';
 import { FormatMode, Messages } from '../../../utils/i18n/i18n';
-import { DATE_NAME } from '../../filter-names';
+
+
 
 export let dateFilter: (date: Date, short?: boolean) => string = (date, short) => {
     let i18n: Messages = (Vue.prototype).$i18n as Messages;
