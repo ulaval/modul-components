@@ -1,7 +1,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import uuid from '../../../../utils/uuid/uuid';
-import { DayState, MonthState, YearState } from '../../calendar-state/state/calendar-state';
-import { DatePrecision } from './../../../../utils/modul-date/modul-date';
+import { RangeDate } from '../../calendar-state/state/abstract-calendar-state';
+import { CalendarType, DayState, MonthState, YearState } from '../../calendar-state/state/calendar-state';
+import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import { MAbstractCalendarRenderer } from './../abstract-calendar-renderer';
 import WithRender from './base-calendar.html?style=./base-calendar.scss';
 
@@ -143,6 +144,12 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onDayMouseLeave(day: DayState): void {
         super.onDayMouseLeave(day);
+    }
+
+    isDateInFuture(day: DayState): boolean {
+        return !!this.calendar.type && this.calendar.type === CalendarType.DATE_RANGE
+            && !!this.calendar.value && !!(this.calendar.value as RangeDate).begin
+            && day.date.isAfter(new ModulDate((this.calendar.value as RangeDate).begin));
     }
 
     hideDay(day: DayState): boolean {

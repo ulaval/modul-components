@@ -114,6 +114,7 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
                 transform: translate3d(50%, 50%, 0);
                 background-color: #fff;
                 border: 1px solid m-color(interactive, darker);
+                border-radius: 50%;
             }
 
             color: $m-color--interactive-darker;

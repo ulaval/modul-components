@@ -1,6 +1,6 @@
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import AbstractCalendarState, { RangeDate } from './abstract-calendar-state';
-import { CalendarEvent, CalendarEvents, DayState } from './calendar-state';
+import { CalendarEvent, CalendarEvents, CalendarType, DayState } from './calendar-state';
 
 enum DateRangePosition {
     BEGIN = 'begin',
@@ -94,6 +94,10 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
 
     protected isSelectionEnd(date: ModulDate): boolean {
         return (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
+    }
+
+    protected calendarType(): CalendarType {
+        return CalendarType.DATE_RANGE;
     }
 
     private betweenBeginAndHightlight(date: ModulDate): boolean {

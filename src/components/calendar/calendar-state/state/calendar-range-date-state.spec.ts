@@ -20,6 +20,7 @@ const MIN_DATE: string = '2018-01-15';
 const MAX_DATE: string = '2020-01-15';
 
 const FIRST_DAY_STATE: DayState = {
+    date: new ModulDate('2019-06-03'),
     day: 3, month: 5, year: 2019,
     isDisabled: false, isHighlighted: false,
     isInNextMonth: false, isInPreviousMonth: false,
@@ -30,6 +31,7 @@ const FIRST_DAY_STATE: DayState = {
 };
 
 const SECOND_DAY_STATE: DayState = {
+    date: new ModulDate('2019-06-10'),
     day: 10, month: 5, year: 2019,
     isDisabled: false, isHighlighted: false,
     isInNextMonth: false, isInPreviousMonth: false,

@@ -1,5 +1,5 @@
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
-import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, DaySelectCallBack, DayState, MonthState, YearState } from './calendar-state';
+import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, CalendarType, DaySelectCallBack, DayState, MonthState, YearState } from './calendar-state';
 
 export const MAX_DATE_OFFSET: number = 10;
 export const MIN_DATE_OFFSET: number = 10;
@@ -129,6 +129,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         this.calendar.years = this.years();
         this.calendar.months = this.months();
         this.calendar.days = this.daysOfMonth();
+        this.calendar.type = this.calendarType();
         return this.calendar;
     }
 
@@ -152,6 +153,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
     }
 
     protected abstract assembleValue(): SingleDate | RangeDate | undefined;
+    protected abstract calendarType(): CalendarType;
 
     protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
         return events;
@@ -265,6 +267,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         for (let index: number = 0; index <= numberOfDays; index++) {
             date = new ModulDate(startDate.fullYear(), startDate.month(), startDate.day() + index);
             days.push({
+                date,
                 day: date.day(),
                 month: date.month(),
                 year: date.fullYear(),

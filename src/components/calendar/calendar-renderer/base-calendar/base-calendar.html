@@ -89,6 +89,7 @@
                                                             'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
                                                             'm--is-highlighted': d.isHighlighted,
                                                             'm--is-selection-start': d.isSelectionStart,
+                                                            'm--is-in-future': isDateInFuture(d),
                                                             'm--is-selection-end': d.isSelectionEnd }"
                                     @click.stop="onDaySelect(d)"
                                     @mouseenter="onDayMouseEnter(d)"

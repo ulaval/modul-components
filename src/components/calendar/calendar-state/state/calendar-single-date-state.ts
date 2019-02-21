@@ -1,7 +1,9 @@
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import AbstractCalendarState, { SingleDate } from './abstract-calendar-state';
+import { CalendarType } from './calendar-state';
 
 export default class CalendarSingleDateState extends AbstractCalendarState {
+
     private currentDate: ModulDate | undefined;
 
     updateState(value: SingleDate, minDate?: string, maxDate?: string): void {
@@ -49,5 +51,9 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
 
     protected isSelectionEnd(date: ModulDate): boolean {
         return this.isDaySelected(date);
+    }
+
+    protected calendarType(): CalendarType {
+        return CalendarType.SINGLE_DATE;
     }
 }
