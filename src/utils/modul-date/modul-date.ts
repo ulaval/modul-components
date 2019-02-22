@@ -234,27 +234,27 @@ export default class ModulDate {
      * Add an unit of time to a copy of the current date and return it.
      *
      * @param valueToAdd The value to add to the time unit.
-     * @param kind The kind of time unit to be added.
+     * @param unitOfTime The kind of time unit to be added.
      * @return A new Date
      */
-    public add(valueToAdd: number, kind: 'year'): Date {
-        return this.subtract(-valueToAdd, kind);
+    public add(valueToAdd: number, unitOfTime: 'year'): Date {
+        return this.subtract(-valueToAdd, unitOfTime);
     }
 
     /**
      * subtract an unit of time to a copy of the current date and return it.
      *
-     * @param valueToAdd The value to add to the time unit.
-     * @param kind The kind of time unit to be added.
+     * @param valueToSubtract The value to add to the time unit.
+     * @param unitOfTime The kind of time unit to be added.
      * @return A new Date
      */
-    public subtract(valueToSubstract: number, kind: 'year'): Date {
+    public subtract(valueToSubtract: number, unitOfTime: 'year'): Date {
         const newDate: Date = new Date(this.innerDate);
-        switch (kind) {
+        switch (unitOfTime) {
             case 'year':
-                newDate.setFullYear(newDate.getFullYear() - valueToSubstract);
+                newDate.setFullYear(newDate.getFullYear() - valueToSubtract);
                 break;
-            default: throw new Error(`modul-date: Unknown substract kind: ${kind}`);
+            default: throw new Error(`modul-date: Unknown substract unitOfTime: ${unitOfTime}`);
         }
 
         return newDate;
@@ -273,16 +273,17 @@ export default class ModulDate {
         if (value === '') {
             this.innerDate = new Date();
         } else {
-            this.innerDate = this.convertDateString(value);
+            this.innerDate = this.convertStringToDate(value);
         }
     }
 
-    private convertDateString(value: string): Date {
+    private convertStringToDate(value: string): Date {
         // If the string is an iso string, we use it directly.
         if (value.split('T')[1]) {
             return new Date(value);
         }
 
+        // Otherwise we try to build the date from a partial date string (2010-12-01 or 2010/12/01)
         const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
 
         const parts: string[] = dateFormat.exec(value) as string[];

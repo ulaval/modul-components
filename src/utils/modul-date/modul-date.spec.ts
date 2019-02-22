@@ -634,7 +634,7 @@ describe(`ModulDate`, () => {
 
                 const newDate: Date = modulDate.subtract(10, 'year');
 
-                expect(newDate.getFullYear()).toBe(date.getFullYear() - 10);
+                expect(newDate.getFullYear()).toBe(1890);
             });
 
             it(`should not change the current date`, () => {
