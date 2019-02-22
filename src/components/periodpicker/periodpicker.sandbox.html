@@ -20,6 +20,43 @@
         </m-periodpicker>
     </p>
     <p>Selected value: {{ model }}</p>
+    <h3>Should work when model is not empty by default</h3>
+    <p class="m-u--margin-bottom">
+        When the model is filled by default with string values, it should be possible to select the same values withouth chaging the model.
+    </p>
+    <p>
+        <m-periodpicker v-model="defaultStringValueModel">
+            <m-datepicker slot="first"
+                          slot-scope="{ props, handlers }"
+                          label="From"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+            <m-datepicker slot="second"
+                          slot-scope="{ props, handlers }"
+                          label="To"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+        </m-periodpicker>
+    </p>
+    <p>Selected value: {{ defaultStringValueModel }}</p>
+    <p class="m-u--margin-bottom">
+        When the model is filled by default with date values, it should be possible to select the same values withouth chaging the model.
+    </p>
+    <p>
+        <m-periodpicker v-model="defaultDateValueModel">
+            <m-datepicker slot="first"
+                          slot-scope="{ props, handlers }"
+                          label="From"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+            <m-datepicker slot="second"
+                          slot-scope="{ props, handlers }"
+                          label="To"
+                          v-on="handlers"
+                          v-bind="props"></m-datepicker>
+        </m-periodpicker>
+    </p>
+    <p>Selected value: {{ defaultDateValueModel }}</p>
     <h3>Should limit input based on min and max props</h3>
     <p class="m-u--margin-bottom">
         It shouldn't be possible to select a date outside current month in the picker below.

@@ -134,26 +134,25 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     onDateFromChange(newValue: DatePickerSupportedTypes): void {
+        const dateToValue: DatePickerSupportedTypes = this.getNewModelValue(this.internalValue.to, true);
         if (newValue) {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 this.toIsFocused = true;
             }
 
-            this.emitNewValue(Object.assign({}, this.internalValue, {
-                from: newValue,
-                to: newValue > (this.internalValue.to || '') ? undefined : new ModulDate(newValue).endOfDay()
-            }));
+            this.emitNewValue({ from: this.getNewModelValue(newValue), to: newValue > (this.internalValue.to || '') ? undefined : dateToValue });
         } else {
-            this.emitNewValue({ from: undefined, to: this.internalValue.to });
+            this.emitNewValue({ from: undefined, to: dateToValue });
         }
     }
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
+        const dateFromValue: DatePickerSupportedTypes = this.getNewModelValue(this.internalValue.from);
         if (newValue) {
             this.unfocusDateToField();
-            this.emitNewValue(Object.assign({}, this.internalValue, { to: new ModulDate(newValue).endOfDay() }));
+            this.emitNewValue({ from: dateFromValue, to: this.getNewModelValue(newValue, true) });
         } else {
-            this.emitNewValue({ from: this.internalValue.from, to: undefined });
+            this.emitNewValue({ from: dateFromValue, to: undefined });
         }
     }
 
@@ -170,6 +169,15 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
 
     unfocusDateToField(): void {
         this.toIsFocused = false;
+    }
+
+    getNewModelValue(newValue: DatePickerSupportedTypes, endOfDay: boolean = false): DatePickerSupportedTypes {
+        if (!newValue) { return; }
+
+        const modulDate: ModulDate = new ModulDate(newValue);
+        const isoString: string = endOfDay ? modulDate.endOfDay().toISOString() : modulDate.toISOString();
+
+        return new Date(isoString);
     }
 }
 

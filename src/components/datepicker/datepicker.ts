@@ -156,8 +156,8 @@ export class MDatepicker extends ModulVue {
     }
 
     private createModelUpdateValue(newValue: DatePickerSupportedTypes): DatePickerSupportedTypes {
-        if (this.value instanceof Date) {
-            return new Date(this.value);
+        if (newValue && newValue instanceof Date) {
+            return new Date(newValue);
         } else {
             return newValue;
         }

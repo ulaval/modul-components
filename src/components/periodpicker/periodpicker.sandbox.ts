@@ -10,6 +10,13 @@ import WithRender from './periodpicker.sandbox.html';
 export class MPeriodpickerSandbox extends Vue {
     from: any = undefined;
     to: any = undefined;
+
+    fromDefaultStringValue: string = '2019-02-20T05:00:00.000Z';
+    toDefaultStringValue: string = '2019-03-01T04:59:59.999Z';
+
+    fromDefaultDateValue: Date = new Date('2019-02-20T05:00:00.000Z');
+    toDefaultDateValue: Date = new Date('2019-03-01T04:59:59.999Z');
+
     errorMessage: string = '';
     validMessage: string = '';
     helperMessage: string = '';
@@ -18,7 +25,9 @@ export class MPeriodpickerSandbox extends Vue {
     readonly: boolean = false;
     error: boolean = false;
 
-    model: MDateRange = { to: this.to, from: this.from };
+    model: MDateRange = { from: this.from, to: this.to };
+    defaultStringValueModel: MDateRange = { from: this.fromDefaultStringValue, to: this.toDefaultStringValue };
+    defaultDateValueModel: MDateRange = { from: this.fromDefaultDateValue, to: this.toDefaultDateValue };
 
     get min(): Date {
         const date: Date = new Date();

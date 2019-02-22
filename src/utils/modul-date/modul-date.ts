@@ -266,7 +266,7 @@ export default class ModulDate {
      * @return A new Date
      */
     public endOfDay(): Date {
-        return new Date(this.innerDate.getUTCFullYear(), this.innerDate.getUTCMonth(), this.innerDate.getUTCDate(), 23, 59, 59, 999);
+        return new Date(this.innerDate.getFullYear(), this.innerDate.getMonth(), this.innerDate.getDate(), 23, 59, 59, 999);
     }
 
     private dateFromString(value: string): void {
@@ -278,8 +278,12 @@ export default class ModulDate {
     }
 
     private convertDateString(value: string): Date {
+        // If the string is an iso string, we use it directly.
+        if (value.split('T')[1]) {
+            return new Date(value);
+        }
+
         const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
-        const isoTime: string = value.split('T')[1];
 
         const parts: string[] = dateFormat.exec(value) as string[];
         if (!parts || parts.length < 4) {
@@ -306,12 +310,7 @@ export default class ModulDate {
         }
         const month: string = this.padString(second);
         const day: string = this.padString(third);
-        let date: Date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
-
-        if (isoTime) {
-            date = new Date(`${date.toISOString().split('T')[0]}T${isoTime}`);
-        }
-
+        const date: Date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
         return date;
     }
 

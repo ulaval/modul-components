@@ -41,21 +41,21 @@ const initializeWrapper: () => Wrapper<MPeriodpicker> = () => {
     return wrapper;
 };
 
-beforeEach(() => {
-    Vue.use(PeriodpickerPlugin);
-
-    wrapper = undefined as any;
-    fromDateProp = undefined as any;
-    toDateProp = undefined as any;
-    minDateProp = undefined as any;
-    maxDateProp = undefined as any;
-
-    isMqMinSValue = false;
-
-    currentFromScopeProps = undefined as any;
-});
-
 describe(`m-periodpicker`, () => {
+    beforeEach(() => {
+        Vue.use(PeriodpickerPlugin);
+
+        wrapper = undefined as any;
+        fromDateProp = undefined as any;
+        toDateProp = undefined as any;
+        minDateProp = undefined as any;
+        maxDateProp = undefined as any;
+
+        isMqMinSValue = false;
+
+        currentFromScopeProps = undefined as any;
+    });
+
     it(`should render correctly`, () => {
         initializeWrapper();
 
@@ -136,7 +136,7 @@ describe(`m-periodpicker`, () => {
 
             expect(wrapper.emitted('input')[0][0]).toEqual({
                 from: newDateFromValue,
-                to: new ModulDate(newDateFromValue).endOfDay()
+                to: new ModulDate(toDateProp).endOfDay()
             });
         });
 

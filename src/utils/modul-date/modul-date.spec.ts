@@ -648,5 +648,38 @@ describe(`ModulDate`, () => {
                 expect(modulDate.day()).toBe(1);
             });
         });
+
+        describe(`endOfDay`, () => {
+            it(`should return end of day of current date`, () => {
+                const date: Date = new Date(1990, 1, 1);
+                const modulDate: ModulDate = new ModulDate(date);
+
+                const endOfDay: Date = modulDate.endOfDay();
+
+                expect(endOfDay.getFullYear()).toBe(date.getFullYear());
+                expect(endOfDay.getMonth()).toBe(date.getMonth());
+                expect(endOfDay.getDate()).toBe(date.getDate());
+                expect(endOfDay.getHours()).toBe(23);
+                expect(endOfDay.getMinutes()).toBe(59);
+                expect(endOfDay.getSeconds()).toBe(59);
+                expect(endOfDay.getMilliseconds()).toBe(999);
+            });
+
+            it(`should return end of day even when date is already at end of day`, () => {
+                const date: Date = new Date(1990, 1, 1);
+                date.setHours(23, 59, 59, 999);
+                const modulDate: ModulDate = new ModulDate(date);
+
+                const endOfDay: Date = modulDate.endOfDay();
+
+                expect(endOfDay.getFullYear()).toBe(date.getFullYear());
+                expect(endOfDay.getMonth()).toBe(date.getMonth());
+                expect(endOfDay.getDate()).toBe(date.getDate());
+                expect(endOfDay.getHours()).toBe(23);
+                expect(endOfDay.getMinutes()).toBe(59);
+                expect(endOfDay.getSeconds()).toBe(59);
+                expect(endOfDay.getMilliseconds()).toBe(999);
+            });
+        });
     });
 });
