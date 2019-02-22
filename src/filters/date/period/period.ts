@@ -8,96 +8,95 @@ export type MPeriod = {
     end?: Date
 };
 
-export interface MShowPeriodParams {
+export interface MPeriodFilterParams {
     period: MPeriod;
     fullMode?: boolean;
 }
 
-export let periodFilter: (params: MShowPeriodParams) => string = (params) => {
-    let formattedPeriod: string;
+export class PeriodFilter {
+    static formatPeriod(params: MPeriodFilterParams): string {
+        let formattedPeriod: string;
 
-    if (params.fullMode && params.period.start && params.period.end) {
-        formattedPeriod = fullStartAndEndDate(params.period.start, params.period.end);
-    } else if (params.period.start && params.period.end) {
-        formattedPeriod = compactStartAndEndDate(params.period.start, params.period.end);
-    } else if (params.period.start && !params.period.end) {
-        formattedPeriod = onlyStartDate(params.period.start);
-    } else if (params.period.end && !params.period.start) {
-        formattedPeriod = onlyEndDate(params.period.end);
-    } else {
-        throw new Error('Period must have at least one Date');
+        if (params.fullMode && params.period.start && params.period.end) {
+            formattedPeriod = PeriodFilter.fullStartAndEndDate(params.period.start, params.period.end);
+        } else if (params.period.start && params.period.end) {
+            formattedPeriod = PeriodFilter.compactStartAndEndDate(params.period.start, params.period.end);
+        } else if (params.period.start && !params.period.end) {
+            formattedPeriod = PeriodFilter.onlyStartDate(params.period.start);
+        } else if (params.period.end && !params.period.start) {
+            formattedPeriod = PeriodFilter.onlyEndDate(params.period.end);
+        } else {
+            throw new Error('Period must have at least one Date');
+        }
+
+        return formattedPeriod;
     }
 
-    return formattedPeriod;
-};
+    static compactStartAndEndDate(start: Date, end: Date): string {
+        let startDate: ModulDate = new ModulDate(start);
+        let endDate: ModulDate = new ModulDate(end);
+        let formattedPeriod: string;
 
-let compactStartAndEndDate: (start: Date, end: Date) => string = (start, end) => {
-    let startDate: ModulDate = new ModulDate(start);
-    let endDate: ModulDate = new ModulDate(end);
-    let formattedPeriod: string;
+        if (startDate.isSame(endDate, DatePrecision.DAY)) {
+            const startFormatted: string = dateFilter(start);
+            formattedPeriod = this.translateDate('f-m-period:sameDay', { date: startFormatted });
+        } else if (startDate.isSame(endDate, DatePrecision.MONTH)) {
+            formattedPeriod = this.startAndEndDateSameMonth(start, end);
+        } else if (startDate.isSame(endDate, DatePrecision.YEAR)) {
+            formattedPeriod = this.startAndEndDateSameYear(start, end);
+        } else {
+            formattedPeriod = this.fullStartAndEndDate(start, end);
+        }
+        return formattedPeriod;
+    }
 
-    if (startDate.isSame(endDate, DatePrecision.DAY)) {
+    static onlyStartDate(start: Date): string {
         const startFormatted: string = dateFilter(start);
-        formattedPeriod = translateDate('f-m-period:sameDay', { date: startFormatted });
-    } else if (startDate.isSame(endDate, DatePrecision.MONTH)) {
-        formattedPeriod = startAndEndDateSameMonth(start, end);
-    } else if (startDate.isSame(endDate, DatePrecision.YEAR)) {
-        formattedPeriod = startAndEndDateSameYear(start, end);
-    } else {
-        formattedPeriod = fullStartAndEndDate(start, end);
+        return this.translateDate('f-m-period:start', { start: startFormatted });
     }
-    return formattedPeriod;
-};
 
-let onlyStartDate: (start: Date) => string = (start) => {
-    const startFormatted: string = dateFilter(start);
+    static onlyEndDate(end: Date): string {
+        const endFormatted: string = dateFilter(end);
 
-    return translateDate('f-m-period:start', { start: startFormatted });
-};
+        return this.translateDate('f-m-period:end', { end: endFormatted });
+    }
 
-let onlyEndDate: (end: Date) => string = (end) => {
-    const endFormatted: string = dateFilter(end);
+    static startAndEndDateSameMonth(start: Date, end: Date): string {
+        const startFormatted: string = dateFilter(start, { showMonth: false, showYear: false });
+        const endFormatted: string = dateFilter(end);
 
-    return translateDate('f-m-period:end', { end: endFormatted });
-};
+        const params: any = {
+            start: startFormatted,
+            end: endFormatted
+        };
 
-let startAndEndDateSameMonth: (start: Date, end: Date) => string = (start, end) => {
-    const startFormatted: string = dateFilter(start, { showMonth: false, showYear: false });
-    const endFormatted: string = dateFilter(end);
+        return this.translateDate('f-m-period:dates', params);
+    }
 
-    const params: any = {
-        start: startFormatted,
-        end: endFormatted
-    };
+    static startAndEndDateSameYear(start: Date, end: Date): string {
+        const startFormatted: string = dateFilter(start, { showYear: false });
+        const endFormatted: string = dateFilter(end);
 
-    return translateDate('f-m-period:dates', params);
-};
+        const params: any = {
+            start: startFormatted,
+            end: endFormatted
+        };
 
-let startAndEndDateSameYear: (start: Date, end: Date) => string = (start, end) => {
-    const startFormatted: string = dateFilter(start, { showYear: false });
-    const endFormatted: string = dateFilter(end);
+        return this.translateDate('f-m-period:dates', params);
+    }
 
-    const params: any = {
-        start: startFormatted,
-        end: endFormatted
-    };
+    static fullStartAndEndDate(start: Date, end: Date): string {
+        const startFormatted: string = dateFilter(start);
+        const endFormatted: string = dateFilter(end);
+        const params: any = {
+            start: startFormatted,
+            end: endFormatted
+        };
 
-    return translateDate('f-m-period:dates', params);
-};
+        return this.translateDate('f-m-period:dates', params);
+    }
 
-let fullStartAndEndDate: (start: Date, end: Date) => string = (start, end) => {
-    const startFormatted: string = dateFilter(start);
-    const endFormatted: string = dateFilter(end);
-    const params: any = {
-        start: startFormatted,
-        end: endFormatted
-    };
-
-    return translateDate('f-m-period:dates', params);
-};
-
-
-
-let translateDate: (key: string, params: any) => string = (key, params) => {
-    return (Vue.prototype).$i18n.translate(key, params, 0, '', undefined, FormatMode.Vsprintf);
-};
+    static translateDate(key: string, params: any): string {
+        return (Vue.prototype).$i18n.translate(key, params, 0, '', undefined, FormatMode.Vsprintf);
+    }
+}

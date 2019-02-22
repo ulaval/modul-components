@@ -38,6 +38,9 @@
 
     <h3>Period Format</h3>
     <p v-html="formattedPeriod"></p>
+    <p>{{ periodThroughFilter | f-m-period }}</p>
+    <p v-html="$options.filters['f-m-period'](periodThroughFilter)"></p>
+
     <div>
 
         <m-textfield v-model="year"
