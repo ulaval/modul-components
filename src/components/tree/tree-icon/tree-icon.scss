@@ -1,10 +1,19 @@
 @import 'commons';
 
-.m-tree-icon {
-    margin-right: $m-spacing--s;
-    min-width: 32px;
+$m-tree-node--child-indentation: 20px;
 
-    /deep/ .m-svg__folder-open {
-        transform: scale(1.2) translateY(-2px);
+.m-tree-icon {
+    background-color: $m-color--interactive;
+    border-radius: 50%;
+    left: -8px; // Magic number
+    border: 3px solid $m-color--interactive;
+    box-sizing: content-box;
+    position: absolute;
+
+    &:not(.m-plus) {
+        border: none;
+        background-color: transparent;
+        left: $m-tree-node--child-indentation;
+        border-radius: 0;
     }
 }
