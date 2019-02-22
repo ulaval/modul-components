@@ -1,9 +1,20 @@
 import Vue from 'vue';
 
-export let dateFilter: (date: Date, short?: boolean) => string = (date, short) => {
+export interface DateFilterParams {
+    shortMode?: boolean;
+    showMonth?: boolean;
+    showYear?: boolean;
+}
+export let dateFilter: (date: Date, params?: DateFilterParams) => string = (date, params) => {
+    const defaultParams: DateFilterParams = {
+        shortMode: false,
+        showMonth: true,
+        showYear: true
+    };
+    const appliedParams: DateFilterParams = Object.assign(defaultParams, params);
     const options: Intl.DateTimeFormatOptions = {
-        year: 'numeric',
-        month: (short ? 'short' : 'long'),
+        year: appliedParams.showYear ? 'numeric' : undefined,
+        month: appliedParams.showMonth ? (appliedParams.shortMode ? 'short' : 'long') : undefined,
         day: 'numeric'
     };
     const locale: string = (Vue.prototype).$i18n.getCurrentLocale();

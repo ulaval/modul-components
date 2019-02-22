@@ -31,14 +31,58 @@ export let periodFilter: (params: MShowPeriodParams) => string = (params) => {
     return formattedPeriod;
 };
 
+let compactStartAndEndDate: (start: Date, end: Date) => string = (start, end) => {
+    let startDate: ModulDate = new ModulDate(start);
+    let endDate: ModulDate = new ModulDate(end);
+    let formattedPeriod: string;
+
+    if (startDate.isSame(endDate, DatePrecision.DAY)) {
+        const startFormatted: string = dateFilter(start);
+        formattedPeriod = translateDate('f-m-period:sameDay', { date: startFormatted });
+    } else if (startDate.isSame(endDate, DatePrecision.MONTH)) {
+        formattedPeriod = startAndEndDateSameMonth(start, end);
+    } else if (startDate.isSame(endDate, DatePrecision.YEAR)) {
+        formattedPeriod = startAndEndDateSameYear(start, end);
+    } else {
+        formattedPeriod = fullStartAndEndDate(start, end);
+    }
+    return formattedPeriod;
+};
+
 let onlyStartDate: (start: Date) => string = (start) => {
     const startFormatted: string = dateFilter(start);
+
     return translateDate('f-m-period:start', { start: startFormatted });
 };
 
 let onlyEndDate: (end: Date) => string = (end) => {
     const endFormatted: string = dateFilter(end);
+
     return translateDate('f-m-period:end', { end: endFormatted });
+};
+
+let startAndEndDateSameMonth: (start: Date, end: Date) => string = (start, end) => {
+    const startFormatted: string = dateFilter(start, { showMonth: false, showYear: false });
+    const endFormatted: string = dateFilter(end);
+
+    const params: any = {
+        start: startFormatted,
+        end: endFormatted
+    };
+
+    return translateDate('f-m-period:dates', params);
+};
+
+let startAndEndDateSameYear: (start: Date, end: Date) => string = (start, end) => {
+    const startFormatted: string = dateFilter(start, { showYear: false });
+    const endFormatted: string = dateFilter(end);
+
+    const params: any = {
+        start: startFormatted,
+        end: endFormatted
+    };
+
+    return translateDate('f-m-period:dates', params);
 };
 
 let fullStartAndEndDate: (start: Date, end: Date) => string = (start, end) => {
@@ -48,22 +92,11 @@ let fullStartAndEndDate: (start: Date, end: Date) => string = (start, end) => {
         start: startFormatted,
         end: endFormatted
     };
+
     return translateDate('f-m-period:dates', params);
 };
 
-let compactStartAndEndDate: (start: Date, end: Date) => string = (start, end) => {
-    let startDate: ModulDate = new ModulDate(start);
-    let endDate: ModulDate = new ModulDate(end);
-    let formattedPeriod: string;
 
-    if (startDate.isSame(endDate, DatePrecision.DAY)) {
-        const startFormatted: string = dateFilter(start);
-        formattedPeriod = translateDate('f-m-period:sameDay', { date: startFormatted });
-    } else {
-        formattedPeriod = fullStartAndEndDate(start, end);
-    }
-    return formattedPeriod;
-};
 
 let translateDate: (key: string, params: any) => string = (key, params) => {
     return (Vue.prototype).$i18n.translate(key, params, 0, '', undefined, FormatMode.Vsprintf);

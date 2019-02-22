@@ -47,31 +47,51 @@ describe(PERIOD_NAME, () => {
                 });
             });
 
-            xdescribe(`When both start date and end date are the same month`, () => {
+            describe(`When both start date and end date are the same month`, () => {
                 it(`should return a formatted period with 2 dates, but only one year and only one month`, () => {
+                    const startDate: Date = new Date(2019, 3, 8);
+                    const endDate: Date = new Date(2019, 3, 14);
                     const period: MPeriod = {
-                        start: new Date(2019, 3, 8),
-                        end: new Date(2019, 3, 14)
+                        start: startDate,
+                        end: endDate
                     };
                     const periodParams: MShowPeriodParams = {
                         period
                     };
+                    startDate.toLocaleDateString = jest.fn(() => '8');
+                    endDate.toLocaleDateString = jest.fn(() => '14 avril 2019');
+                    jest.spyOn(Vue.prototype.$i18n, 'getCurrentLocale').mockReturnValue('fr-CA');
 
                     expect(periodFilter(periodParams)).toEqual('Du 8 au 14 avril 2019');
+                    expect(startDate.toLocaleDateString).toHaveBeenCalledWith(['fr-CA'], {
+                        year: undefined,
+                        month: undefined,
+                        day: 'numeric'
+                    });
                 });
             });
 
-            xdescribe(`When both start date and end date are the same year`, () => {
+            describe(`When both start date and end date are the same year`, () => {
                 it(`should return a formatted period with 2 dates, but only one year`, () => {
+                    const startDate: Date = new Date(2019, 3, 8);
+                    const endDate: Date = new Date(2019, 4, 14);
                     const period: MPeriod = {
-                        start: new Date(2019, 3, 8),
-                        end: new Date(2019, 4, 14)
+                        start: startDate,
+                        end: endDate
                     };
                     const periodParams: MShowPeriodParams = {
                         period
                     };
+                    startDate.toLocaleDateString = jest.fn(() => '8 avril');
+                    endDate.toLocaleDateString = jest.fn(() => '14 mai 2019');
+                    jest.spyOn(Vue.prototype.$i18n, 'getCurrentLocale').mockReturnValue('fr-CA');
 
                     expect(periodFilter(periodParams)).toEqual('Du 8 avril au 14 mai 2019');
+                    expect(startDate.toLocaleDateString).toHaveBeenCalledWith(['fr-CA'], {
+                        year: undefined,
+                        month: 'long',
+                        day: 'numeric'
+                    });
                 });
             });
 

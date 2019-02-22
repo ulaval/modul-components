@@ -28,7 +28,7 @@ export class MDateSandbox extends Vue {
     }
 
     get formattedDateShort(): string {
-        return dateFilter(this.date, true);
+        return dateFilter(this.date, { shortMode: true });
     }
 
     get date(): Date {
