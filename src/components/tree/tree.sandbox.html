@@ -201,7 +201,6 @@
                     @select="onSelect"></m-tree>
         </p>
     </div>
-    <div style="clear: both;"></div>
 
     <div style="width: 50%; float:left;">
         <h3>Read only mode with checkbox</h3>
@@ -215,5 +214,19 @@
         </p>
     </div>
     <div style="clear: both;"></div>
+
+    <div style="width: 50%; float:left;">
+        <h3>Tree in a modal window</h3>
+        <p>
+            <m-modal title="Modal title">
+                <m-button slot="trigger">Open the modal</m-button>
+                <m-tree :tree="fileTree"
+                        selection-mode="single"
+                        :selected-nodes="currentFile"
+                        :use-files-icons="true"
+                        @select="onSelect"></m-tree>
+            </m-modal>
+        </p>
+    </div>
 
 </div>
