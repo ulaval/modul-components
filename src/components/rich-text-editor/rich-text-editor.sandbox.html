@@ -114,10 +114,24 @@
             </div>
         </m-overlay>
     </div>
+    <div>
+        <h5 class="m-u--margin-bottom">RTE dans un formulaire modal</h5>
+        <m-modal id="idModal" title="Modal title" :size="modalSize">
+            <m-button slot="trigger">Open the modal</m-button>
+            <div id="teste">
+                <m-rich-text-editor class="p-formulaire-texte__textearea"
+                                    :label="'texte riche'"
+                                    @fullscreen="onFullscreen"
+                                    max-width="720px"
+                                    v-model="model"
+                                    scrollable-container=".m-modal__body" ></m-rich-text-editor>
+            </div>
+            <div slot="footer">Footer</div>
+        </m-modal>
+    </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :focus="focus"
