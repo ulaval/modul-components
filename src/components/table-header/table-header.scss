@@ -1,0 +1,17 @@
+@import 'commons';
+
+.m-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $m-spacing;
+
+    &__spacer {
+        flex: 1 1 auto;
+        min-width: $m-spacing;
+    }
+
+    &__add-btn.m--has-margin {
+        margin-left: $m-spacing;
+    }
+}

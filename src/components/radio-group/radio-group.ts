@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { RADIO_GROUP_NAME } from '../component-names';
@@ -46,6 +45,15 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public name: string = uuid.generate();
     private internalValue: any | undefined = '';
 
+    @Emit('change')
+    onChange(value: any): void { }
+
+    @Emit('focus')
+    onFocus(event: Event): void { }
+
+    @Emit('blur')
+    onBlur(event: Event): void { }
+
     public get stateIsDisabled(): boolean {
         return this.as<InputState>().isDisabled;
     }
@@ -83,15 +91,23 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
         return !!this.label;
     }
 
+    public get idLabel(): string | undefined {
+        return this.hasLabel ? uuid.generate() : undefined;
+    }
+
+    private get idValidationMessage(): string | undefined {
+        return this.as<InputState>().errorMessage || this.as<InputState>().validMessage || this.as<InputState>().helperMessage ? uuid.generate() : undefined;
+    }
+
     private set model(value: any) {
         this.internalValue = value;
-        this.$emit('change', value);
+        this.onChange(value);
     }
 }
 
 const RadioGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(RADIO_GROUP_NAME, 'plugin.install');
+
         v.use(RadioPlugin);
         v.use(ValidationMessagePlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);

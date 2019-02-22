@@ -1,0 +1,62 @@
+// ======================================================================
+//  Max and min width
+// ======================================================================
+$m-max-width--xl: 1400px !default;
+$m-max-width--l: 1200px !default;
+$m-max-width: 1000px !default;
+$m-max-width--s: 800px !default;
+$m-max-width--xs: 400px !default;
+$m-max-width--text: 720px !default;
+$m-min-width: 320px !default;
+
+// ======================================================================
+//  Box min-height and min width
+// ======================================================================
+$m-box--min-height: 80px !default;
+
+// ======================================================================
+//  Margin
+// ======================================================================
+$m-margin--xl: 48px !default;
+$m-margin--l: 24px !default;
+$m-margin: 12px !default;
+$m-margin--s: 6px !default;
+$m-margin--xs: 3px !default;
+
+// ======================================================================
+//  Padding
+// ======================================================================
+$m-padding--xl: 64px !default;
+$m-padding--l: 32px !default;
+$m-padding: 16px !default;
+$m-padding--s: 8px !default;
+$m-padding--xs: 4px !default;
+
+// ======================================================================
+//  spacing
+// ======================================================================
+
+$m-spacing--xxxxl: 64px !default;
+$m-spacing--xxxl: 56px !default;
+$m-spacing--xxl: 48px !default;
+$m-spacing--xl: 40px !default;
+$m-spacing--l: 32px !default;
+$m-spacing--m: 24px !default;
+$m-spacing: 16px !default;
+$m-spacing--s: 8px !default;
+$m-spacing--xs: 4px !default;
+
+// ======================================================================
+//  map variable to be used with m-spacing function
+// ======================================================================
+$m-spacing-map: (
+    xxxxl: $m-spacing--xxxxl,
+    xxxl: $m-spacing--xxxl,
+    xxl: $m-spacing--xxl,
+    xl: $m-spacing--xl,
+    l: $m-spacing--l,
+    m: $m-spacing--m,
+    base : $m-spacing,
+    s: $m-spacing--s,
+    xs: $m-spacing--xs
+);

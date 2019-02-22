@@ -1,21 +1,27 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
-
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
 import { TOOLTIP_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import IconButtonPlugin from '../icon-button/icon-button';
+import IconPlugin from '../icon/icon';
 import LinkPlugin from '../link/link';
 import { MPopperPlacement } from '../popper/popper';
+import PopupPlugin from '../popup/popup';
 import WithRender from './tooltip.html?style=./tooltip.scss';
 
 export enum MTooltipMode {
     Icon = 'icon',
     Link = 'link'
+}
+
+export enum MTooltipSize {
+    Small = 'small',
+    Large = 'large'
 }
 
 @WithRender
@@ -31,7 +37,7 @@ export class MTooltip extends ModulVue {
             value === MTooltipMode.Icon ||
             value === MTooltipMode.Link
     })
-    public mode: string;
+    public mode: MTooltipMode;
     @Prop({
         default: MPopperPlacement.Bottom,
         validator: value =>
@@ -57,10 +63,15 @@ export class MTooltip extends ModulVue {
     public openTitle: string;
     @Prop()
     public closeTitle: string;
-    @Prop({ default: true })
-    public underline: boolean;
     @Prop()
     public className: string;
+    @Prop({
+        default: MTooltipSize.Small,
+        validator: value =>
+            value === MTooltipSize.Large ||
+            value === MTooltipSize.Small
+    })
+    public size: MTooltipSize;
 
     private propOpen: boolean = false;
     private id: string = `mTooltip-${uuid.generate()}`;
@@ -75,7 +86,7 @@ export class MTooltip extends ModulVue {
     }
 
     private get propMode(): string {
-        return this.mode === MTooltipMode.Link ? this.mode : MTooltipMode.Icon;
+        return this.mode;
     }
 
     private get propCloseButton(): boolean {
@@ -121,8 +132,9 @@ export class MTooltip extends ModulVue {
 
 const TooltipPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(TOOLTIP_NAME + ' is not ready for production');
-        v.use(ButtonPlugin);
+        v.use(PopupPlugin);
+        v.use(IconPlugin);
+        v.use(IconButtonPlugin);
         v.use(LinkPlugin);
         v.use(I18nPlugin);
         v.use(MediaQueriesPlugin);

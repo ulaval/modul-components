@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { MOpenTrigger, OpenTrigger, OpenTriggerMixin } from '../../mixins/open-trigger/open-trigger';
 import { ModulVue } from '../../utils/vue/vue';
@@ -10,9 +9,10 @@ import PopperPlugin, { MPopper, MPopperPlacement } from '../popper/popper';
 import SidebarPlugin from '../sidebar/sidebar';
 import WithRender from './popup.html?style=./popup.scss';
 
+
 @WithRender
 @Component({
-    mixins: [ MediaQueries, OpenTrigger]
+    mixins: [MediaQueries, OpenTrigger]
 })
 export class MPopup extends ModulVue {
 
@@ -81,18 +81,22 @@ export class MPopup extends ModulVue {
         return (this.$children[0] as any).popupBody;
     }
 
-    public update(): void {
-        this.$refs.popper.update();
-    }
-
     private get propOpen(): boolean {
         return this.open === undefined ? this.internalOpen : this.open;
     }
 
     private set propOpen(value: boolean) {
-        this.internalOpen = value;
-        this.$emit('update:open', value);
+        if (!this.disabled) {
+            this.internalOpen = value;
+            this.$emit('update:open', value);
+        }
     }
+
+    @Emit('open')
+    private onOpen(): void { }
+
+    @Emit('close')
+    private onClose(): void { }
 
     public get propOpenTrigger(): MOpenTrigger {
         return this.openTrigger; // todo: mobile + hover ??
@@ -106,12 +110,8 @@ export class MPopup extends ModulVue {
         this.$emit('portal-content-mounted');
     }
 
-    private onOpen(): void {
-        this.$emit('open');
-    }
-
-    private onClose(): void {
-        this.$emit('close');
+    private onPortalContentVisible(): void {
+        this.$emit('portal-content-visible');
     }
 
     private get hasTriggerSlot(): boolean {
@@ -123,6 +123,7 @@ const PopupPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(PopperPlugin);
         v.use(SidebarPlugin);
+
         v.component(POPUP_NAME, MPopup);
     }
 };

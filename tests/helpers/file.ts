@@ -1,4 +1,6 @@
+// tslint:disable
 export const createMockFileList = (files: File[]): FileList => {
+
     let fl = {
         length: files.length,
         item: i => {
@@ -16,3 +18,4 @@ export const createMockFile = (name: string, size?: number): File => {
     file['name'] = name;
     return file as File;
 };
+// tslint:enable

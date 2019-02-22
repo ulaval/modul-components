@@ -1,13 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
-
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RADIO_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
-import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './radio.html?style=./radio.scss';
 
 export enum MRadioPosition {
@@ -30,6 +28,8 @@ export interface RadioGroup {
     radiosVerticalAlign: MRadioVerticalAlignement;
     radiosMarginTop: string;
     readOnly: boolean;
+    onFocus(event: Event): void;
+    onBlur(event: Event): void;
     getValue(): string;
     updateValue(value: string): void;
 }
@@ -98,6 +98,9 @@ export class MRadio extends ModulVue {
 
     private internalDisabled: boolean = false;
 
+    @Emit('change')
+    onChange(value: any): void { }
+
     public get propPosition(): MRadioPosition {
         return this.isGroup() ? this.parentGroup.radiosPosition : this.radioPosition;
     }
@@ -145,7 +148,7 @@ export class MRadio extends ModulVue {
         if (this.isGroup()) {
             this.parentGroup.updateValue(value);
         } else {
-            this.$emit('change', value);
+            this.onChange(value);
         }
     }
 
@@ -178,11 +181,19 @@ export class MRadio extends ModulVue {
         return this.isGroup() && this.parentGroup instanceof BaseButtonGroup;
     }
 
-    private onFocus(): void {
+    @Emit('focus')
+    private onFocus(event: Event): void {
+        if (this.isGroup()) {
+            this.parentGroup.onFocus(event);
+        }
         this.hasFocus = true;
     }
 
-    private onBlur(): void {
+    @Emit('blur')
+    private onBlur(event: Event): void {
+        if (this.isGroup()) {
+            this.parentGroup.onBlur(event);
+        }
         this.hasFocus = false;
     }
 
@@ -197,9 +208,7 @@ export class MRadio extends ModulVue {
 
 const RadioPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(RADIO_NAME, 'plugin.install');
         v.use(IconPlugin);
-        v.use(ValidationMessagePlugin);
         v.component(RADIO_NAME, MRadio);
     }
 };

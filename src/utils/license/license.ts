@@ -1,5 +1,10 @@
 import { PluginObject } from 'vue';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $license: Licenses;
+    }
+}
 export class Licenses {
     protected static licenses: { [key: string]: any } = {};
 
@@ -14,7 +19,7 @@ export class Licenses {
 
 const LicensePlugin: PluginObject<any> = {
     install(v): void {
-        (v.prototype as any).$license = new Licenses();
+        (v.prototype).$license = new Licenses();
     }
 };
 

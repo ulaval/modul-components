@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
-
 import { MediaQueriesTest } from './media-queries/media-queries';
-import { getComponentsNames, getDirectiveNames, getFiltersNames, getUtilsNames } from './names-loader';
 import { Navigation } from './navigation/navigation';
+import { TypoAndStylesTest } from './typo-and-styles/typo-and-styles';
 import { Viewer } from './viewer/viewer';
+import { getSandboxesNames } from './sandbox-loader';
+
 
 Vue.use(Router);
 
@@ -17,37 +18,18 @@ const routerFactory: () => Router = () => {
         {
             path: '/media-queries',
             component: MediaQueriesTest
+        },
+        {
+            path: '/typo-and-styles',
+            component: TypoAndStylesTest
         }
     ];
 
-    getComponentsNames().forEach(tag => {
-        componentRoutes.push({
-            path: '/components/' + tag,
-            meta: tag,
-            component: Viewer
-        });
-    });
+    getSandboxesNames().forEach(tag => {
 
-    getDirectiveNames().forEach(tag => {
         componentRoutes.push({
-            path: '/directives/' + tag,
+            path: '/sandboxes/' + tag,
             meta: tag,
-            component: Viewer
-        });
-    });
-
-    getFiltersNames().forEach(tag => {
-        componentRoutes.push({
-            path: '/filters/' + tag,
-            meta: tag,
-            component: Viewer
-        });
-    });
-
-    getUtilsNames().forEach(name => {
-        componentRoutes.push({
-            path: '/services/' + name,
-            meta: name,
             component: Viewer
         });
     });

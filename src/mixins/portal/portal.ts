@@ -115,7 +115,10 @@ export class Portal extends ModulVue implements PortalMixin {
         return this.internalTrigger;
     }
 
-    public tryClose(): void {
+    public async tryClose(): Promise<void> {
+        if ((this as any).$toast) {
+            await (this as any).$toast.clear(); // @todo Portal should not know toast
+        }
         if (this.$modul.peekElement() === this.stackId) {
             if (this.$listeners && this.$listeners.beforeClose) {
                 this.$emit('beforeClose', (close: boolean) => {
@@ -191,12 +194,13 @@ export class Portal extends ModulVue implements PortalMixin {
                     this.$modul.popElement(this.stackId);
 
                     if (!this.as<PortalMixinImpl>().doCustomPropOpen(value, this.portalTargetEl)) {
+                        this.setFocusToTrigger();
+
                         setTimeout(() => {
                             // $emit update:open has been launched, animation already occurs
                             if (!this.opening) {
                                 this.portalTargetEl.style.position = '';
                             }
-                            this.setFocusToTrigger();
                         }, this.transitionDuration);
                     }
                 }
@@ -283,6 +287,7 @@ export class Portal extends ModulVue implements PortalMixin {
             this.propId = this.id === undefined ? 'mPortal-' + uuid.generate() : this.id;
             this.portalTargetEl = document.createElement('div');
             this.portalTargetEl.setAttribute('id', this.propId);
+            this.portalTargetEl.classList.add('m-u--app-body');
             document.body.appendChild(this.portalTargetEl);
             this.portalTargetCreated = true;
 
@@ -298,7 +303,9 @@ export class Portal extends ModulVue implements PortalMixin {
         }
     }
 
-    @Watch('open')
+    @Watch('open', {
+        immediate: true
+    })
     private openChanged(open: boolean): void {
         this.propOpen = open;
     }

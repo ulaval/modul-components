@@ -2,16 +2,15 @@ import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { DATEFIELDS_NAME } from '../component-names';
-import DropdownItemPlugin from '../dropdown-item/dropdown-item';
 import DropdownPlugin from '../dropdown/dropdown';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './datefields.html?style=./datefields.scss';
+
 
 const VIEW_DATE: string = 'date';
 const VIEW_MONTH: string = 'month';
@@ -150,9 +149,9 @@ export class MDatefields extends ModulVue {
 
 const DatefieldsPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(DATEFIELDS_NAME + ' is not ready for production');
+        v.prototype.$log.error('MDatefields will be deprecated in modul v.1.0');
+
         Vue.use(DropdownPlugin);
-        Vue.use(DropdownItemPlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconButtonPlugin);
         Vue.use(SpinnerPlugin);

@@ -1,13 +1,21 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import qs from 'qs/lib';
 import { PluginObject } from 'vue';
-
 import { WindowErrorHandler } from '../errors/window-error-handler';
 import * as strUtils from '../str/str';
 import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
 
+/**
+ * Augment the typings of Vue.js
+ */
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $http: HttpService;
+    }
+}
 export interface HttpPluginOptions {
     protectedUrls?: string[];
     authorizationFn?: () => string;
@@ -41,9 +49,7 @@ export class HttpService implements RestAdapter {
                     protectedUrls.every(url => {
                         if (strUtils.startsWith(config.url, url)) {
                             let token: string = authFn();
-                            config.headers = Object.assign({
-                                [AUTHORIZATION_HEADER]: token
-                            });
+                            config.headers = Object.assign(config.headers || {}, { [AUTHORIZATION_HEADER]: token });
                             return false;
                         }
                         return true;
@@ -125,7 +131,7 @@ export class HttpService implements RestAdapter {
 const HttpPlugin: PluginObject<any> = {
     install(v, options): void {
         let http: HttpService = new HttpService(options);
-        (v.prototype as any).$http = http;
+        (v.prototype).$http = http;
     }
 };
 

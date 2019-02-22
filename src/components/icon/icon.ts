@@ -1,7 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Emit, Prop } from 'vue-property-decorator';
 import { ICON_NAME } from '../component-names';
 import WithRender from './icon.html?style=./icon.scss';
 
@@ -14,6 +13,15 @@ export class MIcon extends Vue {
     public svgTitle: string;
     @Prop({ default: '1em' })
     public size: string;
+
+    @Prop({ default: false })
+    public showNameAsClass: boolean;
+
+    @Emit('click')
+    onClick(event: Event): void { }
+
+    @Emit('keydown')
+    onKeydown(event: Event): void { }
 
     private get hasSvgTitle(): boolean {
         return !!this.svgTitle;
@@ -29,12 +37,8 @@ export class MIcon extends Vue {
         }
     }
 
-    private onClick(event): void {
-        this.$emit('click', event);
-    }
-
-    private onKeydown(event): void {
-        this.$emit('keydown', event);
+    private get showNameAsClassInHtml(): string {
+        return this.showNameAsClass ? name : '';
     }
 }
 

@@ -1,22 +1,29 @@
-import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
 
+import { PluginObject } from 'vue';
+import Component from 'vue-class-component';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import { MFile } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from '../component-names';
+import FileUploadPlugin from '../file-upload/file-upload';
+import InputStylePlugin from '../input-style/input-style';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 import VueFroala from './adapter/vue-froala';
-import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
+import { MRichTextEditorDefaultOptions, MRichTextEditorMediaOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
 import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
+
 
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
 export enum MRichTextEditorMode {
-    STANDARD
+    STANDARD,
+    MEDIA
 }
 
 @WithRender
@@ -40,7 +47,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     @Prop({
         default: MRichTextEditorMode.STANDARD,
-        validator: value => value === MRichTextEditorMode.STANDARD
+        validator: value => {
+            return value === MRichTextEditorMode.STANDARD
+                || value === MRichTextEditorMode.MEDIA;
+        }
     })
     public mode: MRichTextEditorMode;
 
@@ -50,7 +60,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
-    public customTranslations: {[key: string]: string} = {
+    public customTranslations: { [key: string]: string } = {
         'Update': this.$i18n.translate('m-inplace-edit:modify'),
         'URL': this.$i18n.translate('m-rich-text-editor:URL')
     };
@@ -64,7 +74,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public get internalOptions(): any {
         const propOptions: any = {
             // Hack to "hide" the default froala placeholder text
-            placeholderText: this.as<InputManagement>()!.placeholder || ' ',
+            placeholderText: this.as<InputManagement>().placeholder || ' ',
             toolbarStickyOffset: this.calculateToolbarStickyOffset(),
             scrollableContainer: this.getScrollableContainer()
         };
@@ -79,6 +89,8 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public getDefaultOptions(): MRichTextEditorDefaultOptions {
         if (this.mode === MRichTextEditorMode.STANDARD) {
             return new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
+        } else if (this.mode === MRichTextEditorMode.MEDIA) {
+            return new MRichTextEditorMediaOptions(this.froalaLicenseKey, this.$i18n.currentLang());
         }
 
         throw new Error(`rich-text-edit: mode ${this.mode} is not a valid mode.  See MRichTextEditMode Enum for a list of compatible modes.`);
@@ -128,4 +140,27 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             throw new Error(this.getSelectorErrorMsg(propInError));
         }
     }
+
+    @Emit('imageReady')
+    protected imageReady(file: MFile, storeName: string): void {
+    }
+
+    @Emit('imageAdded')
+    protected imageAdded(file: MFile, insertImage: (file: MFile, id: string) => void): void {
+    }
+
+    @Emit('imageRemoved')
+    protected imageRemoved(id: string, storeName: string): void {
+    }
 }
+
+const RichTextEditorPlugin: PluginObject<any> = {
+    install(v, options): void {
+        v.use(FileUploadPlugin);
+        v.use(InputStylePlugin);
+        v.use(ValidationMessagePlugin);
+        v.component(RICH_TEXT_EDITOR_NAME, MRichTextEditor);
+    }
+};
+
+export default RichTextEditorPlugin;

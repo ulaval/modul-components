@@ -1,10 +1,10 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
-import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_TO } from '../utils-names';
-import { ScrollToDuration } from './scroll-to';
+import { ModulVue } from '../vue/vue';
+import ScrollToPlugin, { ScrollToDuration } from './scroll-to';
 import WithRender from './scroll-to-service.sandbox.html';
+
 
 @WithRender
 @Component
@@ -64,7 +64,8 @@ export class MScrollToServivceSandbox extends ModulVue {
 
 const ScrollToSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${SCROLL_TO}-sandbox`, MScrollToServivceSandbox);
+        v.use(ScrollToPlugin);
+        v.component('m-scroll-to-service-sandbox', MScrollToServivceSandbox);
     }
 };
 

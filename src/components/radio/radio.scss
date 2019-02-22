@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 $m-radio--width: 17px !default;
 $m-radio--color-disabled: $m-color--disabled !default;
 
@@ -40,10 +40,6 @@ $m-radio--color-disabled: $m-color--disabled !default;
                 &:not(.m--is-checked) .m-radio__wrap:hover,
                 &.m--is-focus {
                     .m-radio {
-                        &__label {
-                            color: $m-color--error;
-                        }
-
                         &__input {
                             background: $m-color--error-lightest;
                         }
@@ -96,7 +92,7 @@ $m-radio--color-disabled: $m-color--disabled !default;
         &.m--is-disabled {
             .m-radio {
                 &__wrap {
-                    cursor: not-allowed;
+                    cursor: default;
                 }
 
                 &__input {

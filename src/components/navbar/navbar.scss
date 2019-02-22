@@ -1,4 +1,4 @@
-@import 'abstracts/variables';
+@import 'commons';
 
 @mixin m-navbar-linear-gradient($color, $position) {
     background: linear-gradient(to $position, rgba($color, 1), rgba($color, 0));

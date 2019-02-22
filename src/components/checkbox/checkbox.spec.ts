@@ -1,6 +1,5 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MValidationMessage } from '../validation-message/validation-message';
@@ -58,6 +57,29 @@ describe('MCheckbox', () => {
         return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
     });
 
+    it('should render correctly when disabled and checked', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                disabled: true,
+                value: true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should render correctly when readonly', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                readonly: true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
     it('should render correctly when a label is provided', () => {
         const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
             localVue: localVue,
@@ -77,13 +99,40 @@ describe('MCheckbox', () => {
         expect(chkbox.emitted('click')).toBeTruthy();
     });
 
+    it('should render correctly when indeterminated (with correct classes)', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                'indeterminate': true
+            }
+        });
+
+        return expect(renderComponent(chkbox.vm)).resolves.toMatchSnapshot();
+    });
+
+    it('should should have the indeterminated prop when indeterminated', () => {
+        const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {
+            localVue: localVue,
+            propsData: {
+                'indeterminate': true
+            }
+        });
+
+        return expect((chkbox.find('input').element as any).indeterminate).toBeTruthy(); // TODO: Add prop to linter?
+    });
+
     it('should flow down InputState mixin props to m-validation-message', () => {
         const valMsgProps: any = {
             disabled: false,
             error: false,
             errorMessage: 'error-message',
             validMessage: 'valid-message',
-            helperMessage: 'helper-message'
+            helperMessage: 'helper-message',
+            readonly: undefined,
+            tagStyle: 'default',
+            transition: true,
+            valid: undefined,
+            waiting: undefined
         };
 
         const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {

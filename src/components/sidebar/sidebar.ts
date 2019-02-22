@@ -1,10 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl, PortalTransitionDuration } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import { SIDEBAR_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
+import IconButtonPlugin from '../icon-button/icon-button';
 import WithRender from './sidebar.html?style=./sidebar.scss';
 
 export enum MSidebarOrigin {
@@ -62,8 +63,15 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     @Prop({ default: true })
     public paddingFooter: boolean;
 
-    public get popupBody(): any {
-        return (this.$refs.article as Element).querySelector('.m-popup__body');
+    public $refs: {
+        baseWindow: HTMLElement;
+        article: HTMLElement;
+        modalWrap: HTMLElement;
+        body: HTMLElement;
+    };
+
+    public get popupBody(): HTMLElement {
+        return this.$refs.article.querySelector('.m-popup__body') as HTMLElement;
     }
 
     public handlesFocus(): boolean {
@@ -79,7 +87,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     }
 
     public getPortalElement(): HTMLElement {
-        return this.$refs.article as HTMLElement;
+        return this.$refs.article;
     }
 
     protected mounted(): void {
@@ -123,7 +131,7 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
     private get propWidth(): string {
 
         if (this.origin === MSidebarOrigin.Left || this.origin === MSidebarOrigin.Right) {
-            return this.width ? this.width : '50%' ;
+            return this.width ? this.width : '50%';
         } else {
             return '100%';
         }
@@ -133,6 +141,8 @@ export class MSidebar extends ModulVue implements PortalMixinImpl {
 
 const SidebarPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(IconButtonPlugin);
+        v.use(I18nPlugin);
         v.component(SIDEBAR_NAME, MSidebar);
     }
 };

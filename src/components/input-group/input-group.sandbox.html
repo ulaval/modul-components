@@ -1,0 +1,197 @@
+<div>
+    <!-- Sandbox template -->
+    <h3>Tools</h3>
+
+    <m-textfield label="Message valide"
+                 v-model="validMessage"></m-textfield><br /><br />
+    <m-textfield label="Message d'erreur"
+                 v-model="errorMessage"></m-textfield><br /><br />
+    <m-textfield label="Message d'aide"
+                 v-model="helperMessage"></m-textfield><br /><br />
+    <button @click="isDisabled = !isDisabled">Toogle disabled (current value: {{ !!isDisabled }}) </button><br />
+    <button @click="isWaiting = !isWaiting">Toogle waiting (current value: {{ !!isWaiting }}) </button><br />
+    <button @click="isReadonly = !isReadonly">Toogle readonly (current value: {{ !!isReadonly }}) </button><br />
+    <button @click="isValid = !isValid">Toogle valid (current value: {{ !!isValid }}) </button><br />
+    <button @click="hasError = !hasError">Toogle error (current value: {{ !!hasError }}) </button><br />
+    <button @click="visible = !visible">Toogle fieldset visiblity (current value: {{ !!visible }}) </button><br />
+
+
+    <h3>Propriétés ré-exposées par le composant</h3>
+    <p class="m-u--margin-bottom">
+        Les propriétés ré-exposées peuvent être assignées aux objets passés par la slot
+    </p>
+    <p>
+        <m-input-group legend="Propriétés exposées"
+                       :visible="visible"
+                       :display-validation="false"
+                       :error-message="errorMessage"
+                       :error="hasError"
+                       :valid-message="validMessage"
+                       :valid="isValid"
+                       :helper-message="helperMessage"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error, validationMessage }">
+                <dl>
+                    <dt>disabled</dt>
+                    <dd :class="{ stronger : disabled }">{{ disabled }}</dd>
+                    <dt>waiting</dt>
+                    <dd :class="{ stronger : waiting }">{{ waiting }}</dd>
+                    <dt>readonly</dt>
+                    <dd :class="{ stronger : readonly }">{{ readonly }}</dd>
+                    <dt>valid</dt>
+                    <dd :class="{ stronger : valid }">{{ valid }} -- Cette propriété réagit au message valide</dd>
+                    <dt>error</dt>
+                    <dd :class="{ stronger : error }">{{ error }} -- Cette propriété réagit au message d'erreur</dd>
+                    <dt>validationMessage</dt>
+                    <dd :class="{ stronger : validationMessage }">{{ validationMessage }} -- Cette propriété réagit aux messages (help, valid, error)</dd>
+                </dl>
+            </div>
+        </m-input-group>
+    </p>
+    <h3>Utilisation avec des champs textes (m-textfield)</h3>
+    <p class="m-u--margin-bottom">
+        Un exemple de validation de données est inclut
+    </p>
+    <p>
+        <m-input-group legend="Gestion de champs de texte"
+                       :visible="visible"
+                       :error-message="errorMessage"
+                       :error="hasError"
+                       :valid-message="validMessage"
+                       :valid="isValid"
+                       :helper-message="helperMessage"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+                <m-textfield label="Prénom"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             v-model="prenom"
+                             @input="valider"></m-textfield>
+                <m-textfield label="initiale"
+                             :max-width="xSmallFormWidth"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             v-model="initiale"></m-textfield>
+                <m-textfield label="Nom de famille"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             v-model="nom"
+                             @input="valider"></m-textfield>
+            </div>
+        </m-input-group>
+    </p>
+    <h3>Utilisation avec des champs textes (m-textfield) en ignorant les messages de validation regroupés</h3>
+    <p class="m-u--margin-bottom">
+        Un exemple de validation de données est inclut
+    </p>
+    <p>
+        <m-input-group legend="Gestion de champs de texte"
+                       :visible="visible"
+                       :error="hasError"
+                       :valid="isValid"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+                <m-textfield label="Prénom"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             :error-message="errorMessagePrenom"
+                             :valid-message="validMessage"
+                             :helper-message="helperMessage"
+                             v-model="prenom"
+                             @input="valider"></m-textfield>
+                <m-textfield label="initiale"
+                             :max-width="xSmallFormWidth"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             :valid-message="validMessage"
+                             :helper-message="helperMessage"
+                             v-model="initiale"></m-textfield>
+                <m-textfield label="Nom de famille"
+                             :disabled="disabled"
+                             :waiting="waiting"
+                             :readonly="readonly"
+                             :error="error"
+                             :valid="valid"
+                             :error-message="errorMessageNom"
+                             :valid-message="validMessage"
+                             :helper-message="helperMessage"
+                             v-model="nom"
+                             @input="valider"></m-textfield>
+            </div>
+        </m-input-group>
+    </p>
+    <h3>Utilisation avec des champs variés (m-textfield)</h3>
+    <p>
+        <m-input-group legend="Gestion de champs de texte"
+                       :visible="visible"
+                       :error-message="errorMessage"
+                       :error="hasError"
+                       :valid-message="validMessage"
+                       :valid="isValid"
+                       :helper-message="helperMessage"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :readonly="isReadonly">
+            <div slot-scope="{ disabled, waiting, readonly, valid, error }">
+                <m-rich-text-editor v-model="texteRiche"
+                                    :label="'texte riche'"
+                                    :max-width="'large'"
+                                    :placeholder="'some placeholder'"
+                                    :error="error"
+                                    :valid="valid"
+                                    :waiting="waiting"
+                                    :disabled="disabled"
+                                    :readonly="readonly"></m-rich-text-editor>
+                <hr />
+                <m-radio-group :error="error"
+                               :valid="valid"
+                               :read-only="readonly"
+                               :disabled="disabled || waiting">
+                    <m-radio value="1">1</m-radio>
+                    <m-radio value="2">2</m-radio>
+                    <m-radio value="3">3</m-radio>
+                </m-radio-group>
+                <hr />
+                <m-dropdown label="Légume"
+                            v-model="legumes"
+                            :error="error"
+                            :valid="valid"
+                            :waiting="waiting"
+                            :disabled="disabled"
+                            :readonly="readonly">
+                    <m-dropdown-item value="6a"
+                                     label="Asperge"></m-dropdown-item>
+                    <m-dropdown-item value="6b"
+                                     label="Brocoli"></m-dropdown-item>
+                    <m-dropdown-item value="6c"
+                                     label="Carotte"></m-dropdown-item>
+                    <m-dropdown-item value="6d"
+                                     label="Daikon"></m-dropdown-item>
+                    <m-dropdown-item value="6e"
+                                     label="Épinard"></m-dropdown-item>
+                </m-dropdown>
+            </div>
+        </m-input-group>
+    </p>
+</div>

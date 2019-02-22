@@ -1,14 +1,16 @@
 import * as fs from 'fs';
 import * as parser from 'node-html-parser';
 import Project, { ClassDeclaration, ClassInstanceMemberTypes, ClassInstancePropertyTypes, Decorator, Expression, LanguageService, MethodDeclaration, ObjectLiteralExpression, ParameterDeclaration, PropertyAssignment, SourceFile, StringLiteral, SyntaxKind, Type, TypeChecker } from 'ts-simple-ast';
-
 import { Meta, MetaComponent, MetaEvent, MetaProps, MetaSlot } from '../../src/meta/v2';
+
 
 const MIXINS_PROPERTY_NAME: string = 'mixins';
 const COMPONENT_DECORATOR_NAME: string = 'Component';
 const PROP_DECORATOR_NAME: string = 'Prop';
 const EMIT_DECORATOR_NAME: string = 'Emit';
 const DEFAULT_PROPERTY_NAME: string = 'default';
+
+const DEFAULT_ARROW_FUNCTION_VALUE: string = 'function()';
 
 /**
  * Extract static meta from a TS file using the typescript compiler API
@@ -35,7 +37,7 @@ export class MetaGenerator {
         //     tsConfigFilePath: './tsconfig.meta.json',
         //     addFilesFromTsConfig: false
         // });
-        // this.project.addExistingSourceFile('src/components/accordion/accordion.ts');
+        // this.project.addExistingSourceFile('src/components/datefields/datefields.ts');
 
         this.typeChecker = this.project.getTypeChecker();
         this.languageService = this.project.getLanguageService();
@@ -50,7 +52,7 @@ export class MetaGenerator {
         this.project.getSourceFiles().forEach((sourceFile: SourceFile) => {
             let classDeclarations: ClassDeclaration[] = sourceFile.getClasses();
             classDeclarations.forEach((classDeclaration: ClassDeclaration) => {
-                let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+                let componentDecorator: Decorator | undefined = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
 
                 // If the class has the @Component decorator
                 if (componentDecorator) {
@@ -65,11 +67,12 @@ export class MetaGenerator {
 
     private getTemplateAsString(filePath: string): string {
         // get the template
-        let template: string;
+        let template: string = '';
         try {
             template = fs.readFileSync(filePath, {
                 encoding: 'utf8'
             });
+
         } catch (err) { }
         return template;
     }
@@ -80,10 +83,10 @@ export class MetaGenerator {
     private generateComponentMeta(classDeclaration: ClassDeclaration, template: string): MetaComponent {
         // extract component name
         let output: MetaComponent = {
-            componentName: classDeclaration.getName()
+            componentName: classDeclaration.getName()!
         };
 
-        let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME);
+        let componentDecorator: Decorator = classDeclaration.getDecorator(COMPONENT_DECORATOR_NAME)!;
 
         output.mixins = this.extractorMixinsFromComponentDecorator(componentDecorator);
 
@@ -102,8 +105,8 @@ export class MetaGenerator {
 
         decorator.getArguments().forEach((argument) => {
             if (argument instanceof ObjectLiteralExpression) {
-                if ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME)) {
-                    let mixins: string = ((argument as ObjectLiteralExpression).getProperty(MIXINS_PROPERTY_NAME) as PropertyAssignment).getInitializer().getText();
+                if ((argument).getProperty(MIXINS_PROPERTY_NAME)) {
+                    let mixins: string = ((argument).getProperty(MIXINS_PROPERTY_NAME) as PropertyAssignment).getInitializer()!.getText();
                     if (mixins) {
                         result = mixins.replace(/\[?\]?\r?\n?/g, '').split(',').map((str) => str.trim());
                     }
@@ -174,12 +177,12 @@ export class MetaGenerator {
     }
 
     private extractMetaPropFromPropertyTypes(classInstancePropertyTypes: ClassInstancePropertyTypes): MetaProps {
-        let name: string = classInstancePropertyTypes.getName();
+        let name: string = classInstancePropertyTypes.getName()!;
         let type: Type = classInstancePropertyTypes.getType();
 
         let output: MetaProps = {
             name: name,
-            type: type.getNonNullableType().getText().split('.').pop(),
+            type: type.getNonNullableType().getText().split('.').pop()!,
             optional: type.isNullable()
         };
 
@@ -188,7 +191,7 @@ export class MetaGenerator {
             output.values = this.getTypeTypesAsStrings(type.getNonNullableType().compilerType);
         }
 
-        let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME);
+        let propDecorator: Decorator = classInstancePropertyTypes.getDecorator(PROP_DECORATOR_NAME)!;
         if (propDecorator.isDecoratorFactory()) {
             let defaultValue: string = this.extractDefaultValueFromPropDecorator(propDecorator);
             if (defaultValue) {
@@ -205,7 +208,7 @@ export class MetaGenerator {
             name: ''
         };
 
-        let metaDecorator: Decorator = methodDeclaration.getDecorator(EMIT_DECORATOR_NAME);
+        let metaDecorator: Decorator = methodDeclaration.getDecorator(EMIT_DECORATOR_NAME)!;
 
         // extract the name of event.
         if (metaDecorator.isDecoratorFactory() && metaDecorator.getArguments().length === 1) {
@@ -219,12 +222,12 @@ export class MetaGenerator {
         if (methodDeclaration.getParameters() && methodDeclaration.getParameters().length > 0) {
             output.arguments = methodDeclaration.getParameters().map((parameterDeclaration: ParameterDeclaration) => {
 
-                let name: string = parameterDeclaration.getName();
+                let name: string = parameterDeclaration.getName()!;
                 let type: Type = parameterDeclaration.getType();
 
                 return {
-                    name: parameterDeclaration.getName(),
-                    type: type.getNonNullableType().getText().split('.').pop()
+                    name,
+                    type: type.getNonNullableType().getText().split('.').pop()!
                 };
             });
         }
@@ -236,15 +239,19 @@ export class MetaGenerator {
         let _default: string = '';
         propDecorator.getArguments().forEach((argument) => {
             if (argument instanceof ObjectLiteralExpression) {
-                let arg: ObjectLiteralExpression = argument as ObjectLiteralExpression;
+                let arg: ObjectLiteralExpression = argument;
                 if (arg.getProperty(DEFAULT_PROPERTY_NAME)) {
 
-                    let initializer: Expression = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer();
-                    // we dont want arrow function here
-                    if (initializer.getKind() !== SyntaxKind.ArrowFunction) {
-                        _default = initializer.getText().split('.').pop();
+                    let initializer: Expression = (arg.getProperty(DEFAULT_PROPERTY_NAME) as PropertyAssignment).getInitializer()!;
+
+                    if (initializer.getKind() === SyntaxKind.ArrowFunction) {
+                        _default = DEFAULT_ARROW_FUNCTION_VALUE;                    // we dont want arrow function here
                     } else {
-                        _default = initializer.getText();
+                        if (initializer.getType().getNonNullableType()) {
+                            _default = this.getTypeValueAsString(initializer.getType().getNonNullableType().compilerType) ? this.getTypeValueAsString(initializer.getType().getNonNullableType().compilerType) : initializer.getText();
+                        } else {
+                            _default = initializer.getText();
+                        }
                     }
 
                 }
@@ -254,20 +261,15 @@ export class MetaGenerator {
         return _default;
     }
 
-    private getTypeAsString(type): string {
-
-        if (type.getSymbol()) {
-            return type.getSymbol().getName();
-        }
-        return type.intrinsicName;
-
-    }
-
     private getTypeTypesAsStrings(type): string[] {
         if (type.types) {
-            return type.types.map((type) => this.getTypeAsString(type));
+            return type.types.map((type) => type.value);
         }
         return [];
+    }
+
+    private getTypeValueAsString(type): string {
+        return type.value;
     }
 
 }

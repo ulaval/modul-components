@@ -1,13 +1,11 @@
 import Vue, { PluginObject } from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
-
+import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
-import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import ButtonPlugin from '../button/button';
 import { INPLACE_EDIT_NAME } from '../component-names';
-import ModalPlugin from '../modal/modal';
-import IconButtonPlugin from '../icon-button/icon-button';
+import OverlayPlugin from '../overlay/overlay';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 @WithRender
@@ -27,23 +25,32 @@ export class MInplaceEdit extends ModulVue {
     @Prop()
     public editModePadding: string;
     @Prop({
-        default: () => (Vue.prototype as any).$i18n.translate('m-inplace-edit:modify')
+        default: () => (Vue.prototype).$i18n.translate('m-inplace-edit:modify')
     })
     public title: string;
 
     private internalEditMode: boolean = false;
     private mqMounted: boolean;
 
+    @Emit('ok')
+    onOk(): void { }
+
+    @Emit('cancel')
+    onCancel(): void { }
+
+    @Emit('click')
+    onClick(event: MouseEvent): void { }
+
     public confirm(event: Event): void {
         if (this.editMode) {
-            this.$emit('ok');
+            this.onOk();
         }
     }
 
     public cancel(event: Event): void {
         if (this.editMode) {
             this.propEditMode = false;
-            this.$emit('cancel');
+            this.onCancel();
         }
     }
 
@@ -74,10 +81,6 @@ export class MInplaceEdit extends ModulVue {
         this.$nextTick(() => this.mqMounted = true);
     }
 
-    private onClick(event: MouseEvent): void {
-        this.$emit('click', event);
-    }
-
     private get propEditMode(): boolean {
         return this.editMode || this.internalEditMode;
     }
@@ -90,11 +93,9 @@ export class MInplaceEdit extends ModulVue {
 
 const InplaceEditPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(INPLACE_EDIT_NAME + ' is not ready for production');
-        v.use(MediaQueriesPlugin);
-        v.use(IconButtonPlugin);
+        v.use(AccordionTransitionPlugin);
+        v.use(OverlayPlugin);
         v.use(ButtonPlugin);
-        v.use(ModalPlugin);
         v.component(INPLACE_EDIT_NAME, MInplaceEdit);
     }
 };

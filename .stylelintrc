@@ -5,7 +5,8 @@
     ],
     "rules": {
         "indentation": 4,
-        "scss/dollar-variable-pattern": "^m-",
+        "scss/dollar-variable-pattern": [ "^m-", {
+        "ignore": ["local"]} ],
         "scss/selector-no-redundant-nesting-selector": null,
         "at-rule-no-unknown": null,
         "no-descending-specificity": null

@@ -1,24 +1,26 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
-
+import { Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
-import IconPlugin from '../icon/icon';
+import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
+
+export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
+export const CSS_BODY_DEFAULT_MARGIN: string = '0';
 
 @WithRender
 @Component({
     mixins: [InputState]
 })
 export class MInputStyle extends ModulVue {
-    @Prop()
+    @Prop({ default: '' })
     public label: string;
     @Prop()
     public labelFor: string;
-    @Prop()
+    @Prop({ default: false })
     public focus: boolean;
     @Prop({ default: true })
     public empty: boolean;
@@ -31,16 +33,37 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public readonly: boolean;
     @Prop({ default: false })
-    public borderTop: boolean;
+    public cursorPointer: boolean;
 
+    public $refs: {
+        root: HTMLElement,
+        label: HTMLElement,
+        body: HTMLElement,
+        adjustWidthAuto: HTMLElement,
+        rightContent: HTMLElement
+    };
+
+    public labelOffset: string = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public bodyOffset: string = CSS_BODY_DEFAULT_MARGIN;
     private animReady: boolean = false;
+
+    protected created(): void {
+        setTimeout(() => {
+            this.animReady = true;
+            this.setInputWidth();
+        }, 0);
+    }
+
+    protected mounted(): void {
+        this.calculateLabelOffset();
+    }
 
     public setInputWidth(): void {
         // This is not very VueJs friendly.  It should be replaced by :style or something similar.
         this.$nextTick(() => {
-            let labelEl: HTMLElement = this.$refs.label as HTMLElement;
+            let labelEl: HTMLElement = this.$refs.label;
             let inputEl: HTMLElement | undefined = this.as<InputState>().getInput();
-            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto as HTMLElement;
+            let adjustWidthAutoEl: HTMLElement = this.$refs.adjustWidthAuto;
             if (this.width === 'auto' && this.hasAdjustWidthAutoSlot) {
                 setTimeout(() => {
                     if (inputEl !== undefined) {
@@ -49,7 +72,7 @@ export class MInputStyle extends ModulVue {
                             if (inputEl !== null) {
                                 let width: number = adjustWidthAutoEl.clientWidth < 50 ? 50 : adjustWidthAutoEl.clientWidth;
                                 if (this.hasLabel) {
-                                    width = !this.labelIsUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
+                                    width = !this.isLabelUp && (labelEl.clientWidth > width) ? labelEl.clientWidth : width;
                                 }
                                 inputEl!.style.width = width + 'px';
                             }
@@ -65,26 +88,33 @@ export class MInputStyle extends ModulVue {
         });
     }
 
-    protected created(): void {
-        setTimeout(() => {
-            this.animReady = true;
-            this.setInputWidth();
-        }, 0);
+    @Watch('isLabelUp')
+    private calculateLabelOffset(): void {
+        if (this.isLabelUp) {
+            let label: HTMLElement | null = this.$refs.label;
+            let rootStyle: any = window.getComputedStyle(this.$refs.root);
+            if (label) {
+                let labelOffset: number = label.clientHeight / 2;
+                this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? labelOffset + 'px' : CSS_LABEL_DEFAULT_MARGIN + 'px';
+
+                let bodyOffset: number = labelOffset - (parseFloat(rootStyle.getPropertyValue('padding-top')) + parseFloat(rootStyle.getPropertyValue('padding-bottom')));
+                this.bodyOffset = bodyOffset < 0 ? CSS_BODY_DEFAULT_MARGIN : '-' + bodyOffset + 'px';
+            }
+        } else {
+            this.bodyOffset = CSS_BODY_DEFAULT_MARGIN;
+            this.labelOffset = CSS_LABEL_DEFAULT_MARGIN + 'px';
+        }
+    }
+
+    public get isLabelUp(): boolean {
+        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
     private get hasValue(): boolean {
         return this.hasDefaultSlot && !this.empty;
     }
 
-    private get labelIsUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
-    }
-
     private get hasLabel(): boolean {
-        return this.hasIcon || this.hasLabelText;
-    }
-
-    private get hasLabelText(): boolean {
         return !!this.label && this.label !== '';
     }
 
@@ -92,10 +122,6 @@ export class MInputStyle extends ModulVue {
         let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
-    }
-
-    private get hasIcon(): boolean {
-        return !!this.iconName && this.iconName !== '';
     }
 
     private get hasDefaultSlot(): boolean {
@@ -121,7 +147,7 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(IconPlugin);
+        v.use(I18nPlugin);
         v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);
     }

@@ -1,0 +1,6 @@
+{
+    "m-show-more": {
+        "status": "%(nbVisible)s of %(nbTotal)s",
+        "button-label": "Show more results"
+    }
+}

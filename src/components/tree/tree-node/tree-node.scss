@@ -1,0 +1,148 @@
+@import 'commons';
+@import '../../accordion/accordion-transition';
+
+$m-tree-node--height: $m-touch-size;
+$m-tree-node--child-indentation: 52px;
+$m-tree-node--line-width: 22px;
+
+.m-tree-node {
+    color: $m-color--ul-blue;
+    margin-left: $m-tree-node--line-width;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -$m-tree-node--line-width;
+        top: $m-tree-node--height / 2 - 1;
+        width: $m-tree-node--line-width;
+        height: 1px;
+        background-color: $m-color--interactive;
+    }
+
+    &.m--is-disabled::before {
+        background-color: $m-color--disabled;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: -$m-tree-node--line-width;
+        width: 1px;
+        top: $m-tree-node--height / 2;
+        bottom: -$m-tree-node--height / 2 - $m-margin;
+        background-color: $m-color--interactive;
+    }
+
+    &:last-child::after {
+        content: none;
+    }
+
+    & + &,
+    &__children > & {
+        margin-top: $m-margin;
+    }
+
+    &__auto-select-button {
+        position: absolute;
+        left: $m-min-width + 10px;
+        top: $m-tree-node--height / 4;
+        height: $m-tree-node--height / 2;
+        background: red;
+
+        &--selected {
+            background: blue;
+        }
+    }
+
+    &__item {
+        border-radius: $m-tree-node--height / 2;
+        padding-left: 21px;
+        padding-right: 21px;
+        width: $m-min-width;
+        display: flex;
+        align-items: center;
+        height: $m-tree-node--height;
+
+        @include m-button();
+        @include m-button--secondary();
+
+        &__label {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: $m-line-height;
+            flex-grow: 1;
+        }
+
+        .m-tree-node__item__label:first-child {
+            .m-tree--multiple-node-checkbox & {
+                margin-left: $m-spacing--m;
+            }
+        }
+
+        /deep/ .m-checkbox__input {
+            margin-left: 8px;
+        }
+    }
+
+    &.m--is-disabled > &__item {
+        @include m-button--disabled();
+    }
+
+    &.m--is-selected > &__item {
+        @include m-button--active();
+    }
+
+    @media (min-width: $m-mq--min--s) {
+        &:not(.m--is-disabled):not(.m--is-read-only):not(.m--is-selected) > &__item:not(.m-tree-node__item--no-hover):hover {
+            @include m-button--hover();
+        }
+
+        &:not(.m--is-disabled) > &__item:hover,
+        &.m--is-selected {
+            .m-tree-icon::before,
+            .m-tree-icon::after {
+                background-color: $m-color--white;
+            }
+        }
+    }
+
+    &__line-extension::before {
+        content: "";
+        position: absolute;
+        left: -$m-tree-node--line-width;
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        background-color: $m-color--interactive;
+    }
+
+    &__child {
+        margin-left: $m-tree-node--child-indentation;
+
+        &::after {
+            top: -$m-margin;
+            height: $m-tree-node--height + $m-margin;
+        }
+
+        &:last-child::after {
+            content: "";
+            height: $m-tree-node--height / 2 + $m-margin;
+        }
+
+        &-empty {
+            margin-left: $m-tree-node--child-indentation - $m-tree-node--line-width;
+            margin-top: $m-margin;
+            color: $m-color--text;
+        }
+    }
+}
+
+.m-tree__content > .m-tree-node:only-child {
+    margin-left: 0;
+
+    &::before {
+        content: none;
+    }
+}

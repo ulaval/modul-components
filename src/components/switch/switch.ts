@@ -1,13 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
-
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { SWITCH_NAME } from '../component-names';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './switch.html?style=./switch.scss';
+
 
 export enum MSwitchPosition {
     Left = 'left',
@@ -67,7 +67,6 @@ export class MSwitch extends ModulVue {
 
 const SwitchPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(SWITCH_NAME + ' is not ready for production');
         v.use(ValidationMessagePlugin);
         v.component(SWITCH_NAME, MSwitch);
     }

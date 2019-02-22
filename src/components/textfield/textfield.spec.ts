@@ -1,9 +1,9 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import TextfieldPlugin, { MTextfield, MTextfieldType } from './textfield';
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -20,7 +20,7 @@ describe('MTextfield', () => {
         return expect(renderComponent(component.vm)).resolves.toMatchSnapshot();
     });
 
-    [MTextfieldType.Email, MTextfieldType.Password, MTextfieldType.Telephone, MTextfieldType.Text, MTextfieldType.Url]
+    [MTextfieldType.Email, MTextfieldType.Password, MTextfieldType.Telephone, MTextfieldType.Text, MTextfieldType.Url, MTextfieldType.Number]
         .forEach((type: MTextfieldType) => {
             it('should return inputType equal to type prop', () => {
                 const component: Wrapper<MTextfield> = mount(MTextfield, {

@@ -1,0 +1,15 @@
+<div>
+    <slot name="first"
+          :props="firstInputState.props"
+          :handlers="firstInputState.handlers"></slot>
+    <slot name="second"
+          :props="secondInputState.props"
+          :handlers="secondInputState.handlers"></slot>
+    <m-validation-message :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasTextfieldError"
+                          :error-message="errorMessage"
+                          :valid="isTextfieldValid"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
+</div>

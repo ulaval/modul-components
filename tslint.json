@@ -1,0 +1,64 @@
+{
+    "extends": "tslint-config-standard",
+    "rulesDirectory": [
+        "./conf/tslint"
+    ],
+    "rules": {
+        "no-consecutive-blank-lines": false,
+        "func-method-return-type": true,
+        "await-promise": false,
+        "no-use-before-declare": false,
+        "return-undefined": false,
+        "no-floating-promises": false,
+        "no-unnecessary-qualifier": false,
+        "strict-type-predicates": false,
+        "indent": [
+            true,
+            "spaces"
+        ],
+        "triple-equals": true,
+        "ter-indent": [
+            true,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "space-before-function-paren": [
+            true,
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always",
+                "method": "never",
+                "constructor": "never"
+            }
+        ],
+        "typedef": [
+            true,
+            "property-declaration",
+            "call-signature",
+            "variable-declaration"
+        ],
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape"
+        ],
+        "no-empty": false,
+        "no-debugger": true,
+        "no-null-keyword": true,
+        "curly": true,
+        "no-console": [
+            true,
+            "debug",
+            "log",
+            "warn",
+            "info"
+        ]
+    }
+}

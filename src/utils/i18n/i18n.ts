@@ -1,6 +1,12 @@
 import Vue, { PluginObject } from 'vue';
-
 import { sprintf, vsprintf } from '../str/str';
+
+
+declare module 'vue/types/vue' {
+    interface Vue {
+        $i18n: Messages;
+    }
+}
 
 /**
  * This package provides language and locales utilities.
@@ -21,6 +27,12 @@ export const ENGLISH: string = 'en';
  */
 const FORMAT_REGEX: RegExp = /{\d+}/g;
 
+/**
+ * String used as a special characters wrapper
+ */
+const SPECIAL_CHARACTER_PREFIXE: string = '_';
+const SPECIAL_CHARACTER_SUFIXE: string = '_';
+
 export type MessageMap = {
     [key: string]: string;
 };
@@ -32,6 +44,20 @@ export type BundleMessagesMap = {
 type LanguageBundlesMap = {
     [language: string]: BundleMessagesMap;
 };
+
+type SpecialCharacterMap = {
+    [key: string]: SpecialCharacter
+};
+
+/**
+ * Special characters must be represented as their unicode equivalent \u00xxxx
+ */
+export enum SpecialCharacter {
+    NBSP = '160', // non-breaking space equivalent to HTML entity : &nbsp; => ()
+    NBHYPHEN = '8209', // non-breaking hyphen equivalent to unicode : \u002011, HTML entity : &#8209; => (‑)
+    EMDASH = '8212', // em dash equivalent to unicode :\u002014, HTML entity : &mdash; => (—)
+    ENDASH = '8211' // en dash equivalent to unicode :\u002013, HTML entity : &#ndash; => (–)
+}
 
 export enum DebugMode {
     Throw,
@@ -55,6 +81,7 @@ export class Messages {
     private curLang: string = ENGLISH;
     private formatMode: FormatMode;
     private messages: LanguageBundlesMap = {};
+    private specialCharacterDict: SpecialCharacterMap = {};
 
     constructor(private options?: I18nPluginOptions) {
         if (options) {
@@ -65,6 +92,7 @@ export class Messages {
                 this.formatMode = options.formatMode;
             }
         }
+        this.initSpecialCharactersDict();
     }
 
     /**
@@ -108,7 +136,7 @@ export class Messages {
         nb?: number,
         modifier?: string,
         htmlEncodeParams: boolean = true,
-        formatMode = this.formatMode
+        formatMode: FormatMode = this.formatMode
     ): string {
         if (!key) {
             throw new Error('The key is empty.');
@@ -117,9 +145,11 @@ export class Messages {
         let val: string = this.resolveKey(this.curLang, key, nb, modifier);
 
         if (htmlEncodeParams && params.length) {
-            for (let i: number = 0; i < params.length; ++i) {
-                params[i] = htmlEncode(params[i].toString());
-            }
+            Object.keys(params).forEach((key: any) => { params[key] = htmlEncode(params[key].toString()); });
+        }
+
+        if (formatMode === FormatMode.Sprintf || formatMode === FormatMode.Vsprintf) {
+            params = Object.assign(this.specialCharacterDict, params);
         }
 
         val = this.format(val, params, formatMode);
@@ -218,6 +248,19 @@ export class Messages {
     }
 
     /**
+     * Build the list of special characters that are automatically replaced to the desired pattern
+     *
+     * Example with '_' as PREFIXE and SUFIXE
+     * NBSP => _NBSP_ : '\xOA'
+     */
+    private initSpecialCharactersDict(): void {
+        Object.keys(SpecialCharacter).forEach((key: string) => {
+            this.specialCharacterDict[`${SPECIAL_CHARACTER_PREFIXE}${key}${SPECIAL_CHARACTER_SUFIXE}`] = String.fromCharCode(SpecialCharacter[key]) as SpecialCharacter;
+        });
+    }
+
+
+    /**
      * Finds a key in the available messages or returns null.
      *
      * @param lang The language to use
@@ -287,7 +330,7 @@ const MessagePlugin: PluginObject<any> = {
         v.prototype.$log.debug('$i18n', 'plugin.install');
 
         let msg: Messages = new Messages(options);
-        (v.prototype as any).$i18n = msg;
+        (v.prototype).$i18n = msg;
     }
 };
 

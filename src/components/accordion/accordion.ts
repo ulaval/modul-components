@@ -1,18 +1,19 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
-
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
-import PlusPlugin from '../plus/plus';
+import PlusPlugin, { MPlusSkin } from '../plus/plus';
 import AccordionTransitionPlugin from './accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
+
 
 export enum MAccordionSkin {
     Default = 'default',
     Dark = 'dark',
+    DarkB = 'dark-b',
     Light = 'light',
     Plain = 'plain'
 }
@@ -69,6 +70,7 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         validator: value =>
             value === MAccordionSkin.Default ||
             value === MAccordionSkin.Dark ||
+            value === MAccordionSkin.DarkB ||
             value === MAccordionSkin.Light ||
             value === MAccordionSkin.Plain
     })
@@ -117,13 +119,9 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
     public set propOpen(value) {
         if (value !== this.internalPropOpen) {
-            this.updateOpen(value);
+            this.internalPropOpen = value;
+            this.$emit('update:open', value);
         }
-    }
-
-    @Emit('update:open')
-    private updateOpen(value): void {
-        this.internalPropOpen = value;
     }
 
     @Emit('click')
@@ -151,6 +149,18 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
     private get propSkin(): MAccordionSkin {
         return isAccordionGroup(this.$parent) ? this.$parent.skin : this.skin;
+    }
+
+    private get plusSkin(): MPlusSkin {
+        if (this.skin === MAccordionSkin.DarkB) {
+            if (this.propOpen) {
+                return MPlusSkin.CurrentColor;
+            } else {
+                return MPlusSkin.Light;
+            }
+        } else {
+            return MPlusSkin.Default;
+        }
     }
 
     private get hasIconBorder(): boolean {

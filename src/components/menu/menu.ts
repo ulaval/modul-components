@@ -1,13 +1,15 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
-
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import { MENU_NAME } from '../component-names';
+import AccordionTransitionPlugin from '../accordion/accordion-transition';
+import { MENU_ITEM_NAME, MENU_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
-import { MMenuItem } from '../menu-item/menu-item';
+import IconPlugin from '../icon/icon';
+import PlusPlugin from '../plus/plus';
+import { MMenuItem } from './menu-item/menu-item';
 import WithRender from './menu.html?style=./menu.scss';
 
 export abstract class BaseMenu extends ModulVue {
@@ -67,9 +69,8 @@ export class MMenu extends BaseMenu implements Menu {
         this.model = value;
     }
 
-    public onClick(event: Event, value: string): void {
-        this.$emit('click', event, value);
-    }
+    @Emit('click')
+    onClick(event: Event, value: string): void { }
 
     protected mounted(): void {
         this.model = this.selected;
@@ -208,8 +209,12 @@ export class MMenu extends BaseMenu implements Menu {
 
 const MenuPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(AccordionTransitionPlugin);
         v.use(I18nPlugin);
+        v.use(PlusPlugin);
+        v.use(IconPlugin);
         v.use(IconButtonPlugin);
+        v.component(MENU_ITEM_NAME, MMenuItem);
         v.component(MENU_NAME, MMenu);
     }
 };

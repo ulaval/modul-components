@@ -1,0 +1,27 @@
+<li class="m-dropdown-item"
+    :class="{ 'm--is-selected': selected,
+              'm--is-disabled': disabled,
+              'm--is-inactive': inactive,
+              'm--is-focus': focused,
+              'm--readonly': readonly }"
+    role="option"
+    :aria-selected="selected"
+    :tabindex="tabindex"
+    v-if="!filtered || inactive"
+    @click.prevent="onClick">
+    <span class="m-dropdown-item__element-text"
+          v-if="isMqMinS || readonly">
+        <slot>{{ propLabel }}</slot>
+    </span>
+    <m-radio-style :full-width="true"
+                   radio-position="right"
+                   :focus="focused"
+                   :checked="selected"
+                   :disabled="disabled"
+                   tabindex="0"
+                   v-else>
+        <span class="m-dropdown-item__element-text">
+            <slot>{{ propLabel }}</slot>
+        </span>
+    </m-radio-style>
+</li>

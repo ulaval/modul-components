@@ -1,0 +1,105 @@
+@import 'commons';
+$m-steppers--icon-circle--size: 30px;
+$m-steppers--icon--size: 14px;
+$m-steppers--badge--size: 14px;
+
+.m-steppers-item {
+    display: inline-flex;
+    list-style: none;
+    z-index: 1;
+
+    &.m--is-visited {
+        .m-steppers-item__button {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                .m-steppers-item__icon,
+                .m-steppers-item__title {
+                    color: $m-color--interactive;
+                }
+            }
+        }
+
+        .m-steppers-item__icon {
+            border-color: $m-color--interactive;
+        }
+    }
+
+    &.m--is-in-progress {
+        .m-steppers-item {
+            &__icon {
+                border-color: $m-color--active;
+            }
+
+            &__title {
+                font-weight: $m-font-weight--bold;
+            }
+        }
+    }
+
+    &.m--is-disabled {
+        .m-steppers-item__button {
+            user-select: none;
+            cursor: default;
+        }
+
+        .m-steppers-item {
+            &__icon {
+                border-color: $m-color--grey;
+                color: $m-color--grey;
+            }
+
+            &__icon-completed {
+                color: $m-color--grey;
+            }
+
+            &__title {
+                color: $m-color--grey-dark;
+            }
+        }
+    }
+
+    &__button {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        outline: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    &__icon {
+        transition: color $m-transition-duration ease, border-color $m-transition-duration ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $m-steppers--icon-circle--size;
+        width: $m-steppers--icon-circle--size;
+        border-radius: 50%;
+        border: 2px solid;
+        background-color: $m-color--white;
+        font-size: $m-steppers--icon--size;
+        color: $m-color--text;
+    }
+
+    &__icon-completed {
+        transition: color $m-transition-duration ease;
+        position: absolute;
+        bottom: -4px; // Magic number
+        right: -6px; // Magic number
+        color: $m-color--success;
+    }
+
+    &__title {
+        transition: color $m-transition-duration ease;
+        margin-top: $m-margin--s;
+        text-align: center;
+        font-size: $m-font-size--s;
+        color: $m-color--text;
+        text-decoration: none;
+    }
+}
