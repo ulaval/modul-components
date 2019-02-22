@@ -6,6 +6,10 @@ const CURRENT_VALUE: string = '2019-12-14';
 const CURRENT_VALUE_NEAR_MIN_DATE: string = '2017-06-20';
 const CURRENT_VALUE_NEAR_MAX_DATE: string = '21-08-01';
 
+const CURRENT_VALUE_ONE_MONTH: string = '2019-02-14';
+const MIN_DATE_ONE_MONTH: string = '2019-02-04';
+const MAX_DATE_ONE_MONTH: string = '2019-02-20';
+
 const NEW_DAY_STATE: Partial<DayState> = {
     day: 3,
     month: 5,
@@ -14,9 +18,22 @@ const NEW_DAY_STATE: Partial<DayState> = {
 };
 
 const abstractCalendarStateTests: Function = (stateBuilder: (currentValue: string, minDate: string, maxDate: string) => CalendarState) => {
+    let calendarState: CalendarState;
+
+    describe(`when available dates match a single month`, () => {
+        it(`then the available month is active`, () => {
+            calendarState = stateBuilder(CURRENT_VALUE_ONE_MONTH, MIN_DATE_ONE_MONTH, MAX_DATE_ONE_MONTH);
+            const currentMonths: MonthState[] = calendarState.buildCurrentCalendar().calendar.months
+                .filter(((month: MonthState) => month.isCurrent));
+
+            expect(currentMonths).toHaveLength(1);
+            expect(currentMonths[0].isCurrent).toBe(true);
+            expect(currentMonths[0].isDisabled).toBe(false);
+        });
+    });
 
     describe(`when calling event (from abstract class)`, () => {
-        let calendarState: CalendarState;
+
         let calendarEvents: CalendarEvents;
         beforeEach(() => {
             calendarState = stateBuilder(CURRENT_VALUE, MIN_DATE, MAX_DATE);
