@@ -1,51 +1,36 @@
 @import 'commons';
 
-$m-datepicker--item-dimension: $m-touch-size !default;
-$m-base-calendar--weekday-height: 25px !default; // DOM number
+$m-base-calendar-week-length: 7 !default;
+$m-base-calendar-dimension: $m-touch-size !default;
+$m-base-calendar-weekday-height: 25px !default; // DOM number
+$m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-length !default;
 
 %base-pseudo-content {
     position: absolute;
     top: -50%;
     left: -50%;
-    z-index: 2;
     content: '';
     width: $m-touch-size;
     height: $m-touch-size;
+}
+
+@mixin grid($col: $m-base-calendar-week-length, $width: $m-base-calendar-dimension, $height: $m-base-calendar-dimension) {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat($col, $width);
+    grid-auto-rows: $height;
 }
 
 .m-base-calendar {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    border: $m-border-width--s solid $m-color--border;
-    padding: m-spacing(m);
 
-    &__header,
-    &__body {
-        background-color: $m-color--white;
-
-        @media (max-width: $m-mq--max--s) {
-            width: 100%;
-        }
-
-        @media (min-width: $m-mq--min--s) {
-            min-width: 7 * $m-datepicker--item-dimension;
-        }
-    }
-
-    &__header {
-        display: flex;
-        align-items: center;
-        margin-bottom: m-spacing(s);
-        min-height: $m-touch-size;
-
-        &.m--is-select-mode {
-            border-bottom: 1px solid m-color(border);
-        }
-    }
-
-    &__months,
-    &__item {
+    // reset default button styles
+    &__year-content,
+    &__month-content,
+    &__day-content,
+    &__current-month-and-year {
         background: none;
         border: 0;
         color: inherit;
@@ -55,15 +40,18 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
         cursor: pointer;
     }
 
-    &__months {
-        transition: color $m-transition-duration ease;
-        font-weight: $m-font-weight--bold;
-        flex: 1;
+    @media (max-width: $m-mq--max--s) {
+        padding: unset;
+    }
+
+    @media (min-width: $m-mq--min--s) {
+        padding: m-spacing(m);
+        border: $m-border-width--s solid $m-color--border;
     }
 
     &__next,
     &__previus,
-    &__months {
+    &__current-month-and-year {
         color: m-color(interactive);
 
         &:hover,
@@ -72,42 +60,82 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
         }
     }
 
-    &__table {
-        border-spacing: 0;
-        border-collapse: collapse;
-        text-align: center;
-        min-width: 100%;
-        min-height: $m-datepicker--item-dimension * 5 + $m-base-calendar--weekday-height;
+    &__current-month-and-year {
+        font-weight: $m-font-weight--bold;
+    }
 
-        &-cell {
-            padding: 0;
+    &__header,
+    &__body {
+        background-color: $m-color--white;
+
+        @media (max-width: $m-mq--max--s) {
+            min-width: $m-base-calendar-min-width;
         }
+
+        @media (min-width: $m-mq--min--s) {
+            min-width: $m-base-calendar-week-length * $m-base-calendar-dimension;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: m-spacing(s);
+        min-height: $m-touch-size;
+
+        &.m--is-select-mode {
+            border-bottom: 1px solid m-color(border);
+            justify-content: center;
+        }
+    }
+
+    &__body {
+        min-height: $m-base-calendar-dimension * 5 + $m-base-calendar-weekday-height;
+    }
+
+    &__years {
+        @include grid(5, minmax($m-base-calendar-dimension, auto));
+    }
+
+    &__months {
+        @include grid(3, minmax($m-base-calendar-dimension, auto));
+
+        transition: color $m-transition-duration ease;
+        font-weight: $m-font-weight--bold;
+    }
+
+    &__week {
+        @include grid($height: auto);
+
+        grid-auto-rows: auto;
+        align-items: center;
+        border-bottom: $m-border-width--s solid $m-color--border;
+        padding: 0 0 m-spacing(xs) 0;
     }
 
     &__weekday {
-        padding: 0 0 m-spacing(xs) 0;
-        width: $m-datepicker--item-dimension;
         font-weight: $m-font-weight--bold;
         color: m-color(grey);
-        border-bottom: $m-border-width--s solid $m-color--border;
     }
 
-    &__item {
+    &__days {
+        @include grid();
+
+        overflow: hidden;
+    }
+
+    // &__year-content,
+    // &__month-content,
+    &__day {
+        display: flex;
+        justify-content: center;
         position: relative;
-        width: $m-datepicker--item-dimension;
-        height: $m-datepicker--item-dimension;
-        transition: background-color $m-transition-duration ease;
-
-        &::after {
-            transition: border-radius $m-transition-duration--s ease;
-        }
-
-        &__text {
-            position: relative;
-            z-index: 3;
-        }
+        transition: background-color $m-transition-duration linear, color $m-transition-duration ease;
 
         &:hover {
+            color: $m-color--interactive-darker;
+
             &::after {
                 @extend %base-pseudo-content;
 
@@ -115,75 +143,61 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
                 background-color: #fff;
                 border: 1px solid m-color(interactive, darker);
                 border-radius: 50%;
-            }
-
-            color: $m-color--interactive-darker;
-        }
-
-        &.m--is-selected {
-            &:hover {
-                &::after {
-                    border-radius: 50%;
-                }
-            }
-
-            &:not(:hover) {
-                color: #fff;
-                font-weight: $m-font-weight--bold;
-
-                &::after {
-                    @extend %base-pseudo-content;
-
-                    transform: translate3d(50%, 50%, 0);
-                    border-radius: 50%;
-                    background-color: m-color(interactive);
-                }
-            }
-        }
-
-        &.m--is-today:not(.m--is-selected) {
-            &:hover {
-                &::after {
-                    border-radius: 50%;
-                }
-            }
-
-            &:not(:hover) {
-                &::after {
-                    @extend %base-pseudo-content;
-
-                    transform: translate3d(50%, 50%, 0);
-                    background-color: $m-color--grey-light;
-                    font-weight: $m-font-weight--bold;
-                    border-radius: 50%;
-                    z-index: 2;
-                }
+                z-index: 1;
             }
         }
 
         &.m--is-highlighted {
             background-color: $m-color--interactive-lightest;
 
-            &.m--is-today:not(:hover):not(.m--is-selected) {
-                &::after {
-                    border: 1px solid m-color(border);
-                    background-color: m-color(interactive, lightest);
-                }
-            }
+            &:hover:not(.m--is-selection-start) {
+                border-radius: 50% 0 0 50%;
 
-            &.m--is-selected {
-                border-radius: 50%;
+                &.m--is-in-future {
+                    border-radius: 0 50% 50% 0;
+                }
             }
         }
 
-        &.m--is-other-month:not(.m--is-selected) {
-            transition: color $m-transition-duration ease;
-            color: $m-color--disabled;
+        &.m--is-selection-start {
+            border-radius: 50%;
+        }
 
-            &:hover,
-            &:focus {
-                color: $m-color--text;
+        &.m--is-selection-end {
+            border-radius: 0 50% 50% 0;
+        }
+    }
+
+    // &__year-content,
+    // &__month-content,
+    &__day-content {
+        width: $m-base-calendar-dimension;
+        height: $m-base-calendar-dimension;
+        position: relative;
+        z-index: 2;
+
+        &.m--is-selected {
+            &:not(:hover) {
+                color: #fff;
+                font-weight: $m-font-weight--bold;
+                border-radius: 50%;
+                background-color: m-color(interactive);
             }
+        }
+
+        &.m--is-today:not(.m--is-selected):not(:hover) {
+            background-color: $m-color--grey-light;
+            font-weight: $m-font-weight--bold;
+            border-radius: 50%;
+
+            .m--is-highlighted & {
+                border: 1px solid $m-color--grey-light;
+                background-color: transparent;
+            }
+        }
+
+        &.m--is-other-month:not(.m--is-selected):not(:hover) {
+            color: $m-color--disabled;
         }
 
         &.m--is-hidden {
@@ -198,34 +212,32 @@ $m-base-calendar--weekday-height: 25px !default; // DOM number
     }
 }
 
-// for range selection visual
-.m--is-selected + .m--is-highlighted {
-    .m-base-calendar__item {
+// for left to right range selection visual
+.m--is-selection-start {
+    & + .m--is-highlighted,
+    &:nth-child(7n) + .m--is-highlighted {
         &::before {
             @extend %base-pseudo-content;
 
             z-index: 0;
             background-color: m-color(interactive, lightest);
+        }
+    }
+
+    & + .m--is-highlighted {
+        &::before {
             transform: translate3d(0, 50%, 0);
+        }
+    }
+
+    &:nth-child(7n) + .m--is-highlighted {
+        &::before {
+            transform: translate3d(700%, -50%, 0);
         }
     }
 }
 
-// for range selection visual
-.m--is-highlighted + .m--is-selected {
-    .m-base-calendar__item {
-        border-radius: 0 50% 50% 0;
-    }
-}
-
-.m--is-selected:first-child {
-    .m--is-selection-end {
-        border-radius: 0 50% 50% 0;
-    }
-}
-
-.m--is-selected:last-child {
-    .m--is-selection-start {
-        border-radius: 50% 0 0 50%;
-    }
+// for right to left range selection visual
+.m--is-highlighted + .m--is-selection-start {
+    border-radius: 0 50% 50% 0;
 }

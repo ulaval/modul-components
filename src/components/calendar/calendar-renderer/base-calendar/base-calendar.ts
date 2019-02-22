@@ -192,12 +192,14 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return this.daysNames;
     }
 
-    get years(): number[] {
-        return this.prepareDataForTableLayout(this.calendar.years, NB_YEARS_PER_ROW);
+    get years(): {} {
+        // return this.prepareDataForTableLayout(this.calendar.years, NB_YEARS_PER_ROW);
+        return this.calendar.years;
     }
 
-    get months(): number[] {
-        return this.prepareDataForTableLayout(this.calendar.months, NB_MONTHS_PER_ROW);
+    get months(): {} {
+        // return this.prepareDataForTableLayout(this.calendar.months, NB_MONTHS_PER_ROW);
+        return this.calendar.months;
     }
 
     get isPickerModeYear(): boolean {
@@ -228,9 +230,13 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return this.calendar.dates.current.isSameOrAfter(this.calendar.dates.max, DatePrecision.MONTH);
     }
 
-    get daysOfMonth(): DayState[] {
-        return this.prepareDataForTableLayout(this.calendar.days, 7);
+    get days(): DayState[] {
+        return this.calendar.days;
     }
+
+    // get daysOfMonth(): DayState[] {
+    //     return this.prepareDataForTableLayout(this.calendar.days, 7);
+    // }
 
     private prepareDataForTableLayout(data: any[], nbItemPerRow: number): any[] {
         let nbRow: number = Math.ceil(data.length / nbItemPerRow);
