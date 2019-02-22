@@ -1,0 +1,8 @@
+{
+    "m-paging": {
+        "first": "First Page",
+        "previous": "Previous Page",
+        "next": "Next Page",
+        "last": "Last Page"
+    }
+}

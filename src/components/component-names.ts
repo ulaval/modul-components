@@ -53,6 +53,7 @@ export const OPTION_ITEM_DELETE_NAME: string = 'm-option-item-delete';
 export const OPTION_ITEM_EDIT_NAME: string = 'm-option-item-edit';
 export const PAGE_NOT_FOUND_NAME: string = 'm-page-not-found';
 export const PANEL_NAME: string = 'm-panel';
+export const PAGING_NAME: string = 'm-paging';
 export const PERIODPICKER_NAME: string = 'm-periodpicker';
 export const PHONE_NUMBER_NAME: string = 'm-phone-number';
 export const PLUS_NAME: string = 'm-plus';

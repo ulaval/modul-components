@@ -1,0 +1,16 @@
+<div>
+    <!-- Sandbox template -->
+    <h3>Test Title</h3>
+    <p class="m-u--margin-bottom">
+        Test description
+        <!-- if relevant, add link to PR
+        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
+        -->
+    </p>
+    <p>
+        <h2>Page actuelle {{ currentPage }}</h2>
+        <m-paging v-model="currentPage"
+                  nb-of-items="1150"
+                  @change="alert()"></m-paging>
+    </p>
+</div>
