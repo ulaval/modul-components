@@ -281,4 +281,13 @@
                    v-model="resetValue">
         </div>
     </div>
+
+    <m-radio-group class="m-u--margin-top"
+                   v-model="radioValue">
+        <m-radio value="1">Option 1</m-radio>
+        <m-rich-text-editor v-model="model"
+                            max-width="large"
+                            :disabled="radioValue != 1"></m-rich-text-editor>
+        <m-radio value="2">Option 2</m-radio>
+    </m-radio-group>
 </div>

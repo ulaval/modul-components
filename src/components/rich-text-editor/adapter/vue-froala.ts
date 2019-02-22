@@ -275,7 +275,7 @@ export enum FroalaStatus {
 
     protected mouseupListener(event: MouseEvent): void {
         this.mousedownTriggered = false;
-        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement)) {
+        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused) {
             this.closeEditor();
         }
     }
