@@ -35,6 +35,7 @@
                @change="onChange"
                @paste="onPasteTextfield"
                :autocomplete="autocomplete"
+               :pattern="inputPattern"
                v-model="model"
                v-if="!hasWordWrap"
                :type="inputType">

@@ -121,7 +121,11 @@ export class MTextfield extends ModulVue implements InputManagementData {
         if (this.type !== MTextfieldType.Interger) {
             this.$emit('keydown', event);
         } else {
-            if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && !event.ctrlKey && event.key !== 'Backspace' && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Delete' && event.key !== 'Tab' && event.key !== 'PageUp' && event.key !== 'PageDown' && event.key !== 'Home' && event.key !== 'End' || event.key === 'e' || event.key === '.' || event.key === ',' || event.shiftKey) {
+            // tslint:disable-next-line: no-console
+            console.log(this.as<InputManagement>().internalValue.length);
+
+            // tslint:disable-next-line: deprecation
+            if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && !event.ctrlKey && event.keyCode !== 8 && event.keyCode !== 37 && event.keyCode !== 38 && event.key !== 'Delete' && event.keyCode !== 9 && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 || event.keyCode === 69 || event.keyCode === 190 || event.keyCode === 188 || event.keyCode === 107 || event.shiftKey) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
@@ -204,6 +208,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
+    }
+
+    private get inputPattern(): string | undefined {
+        return this.type === MTextfieldType.Interger ? '-?[0-9]*' : undefined;
     }
 
     private resetModel(): void {
