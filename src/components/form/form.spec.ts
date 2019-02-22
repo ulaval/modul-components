@@ -22,7 +22,7 @@ const ERROR_MESSAGE: string = 'ERROR';
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR MESSAGE SUMMARY';
 const REF_SUMMARY: RefSelector = { ref: 'summary' };
 
-let fieldValidation: FormFieldValidation;
+let fieldValidation: FormFieldValidation = new FormFieldValidation();
 
 let FORM: Form;
 let formHasError: boolean = false;
@@ -44,7 +44,7 @@ describe(`MForm`, () => {
     };
 
     const initialiseForm: Function = (multiple: boolean): void => {
-        const VALIDATION_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
+        const VALIDATION_FUNCTION: FieldValidationCallback<string> = (): FormFieldValidation => fieldValidation;
         if (multiple) {
             FORM = new Form({
                 'a-field': new FormField((): string => '', [VALIDATION_FUNCTION]),
