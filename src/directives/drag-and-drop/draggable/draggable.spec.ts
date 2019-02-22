@@ -69,7 +69,7 @@ describe('draggable', () => {
     });
 
     [true, undefined].forEach(param => {
-        it(`it should render correctly when binding ${param} is provided`, () => {
+        it(`should render correctly when binding ${param} is provided`, () => {
             const userDefinedAction: string = 'someAction';
             const userDefinedData: string = 'someData';
             const userDefinedGrouping: string = 'someGrouping';
@@ -81,13 +81,13 @@ describe('draggable', () => {
             expect(draggable.element.draggable).toBe(true);
             expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
         });
-        it(`it should default action correctly when binding ${param} is provided and action is not user defined`, () => {
+        it(`should default action correctly when binding ${param} is provided and action is not user defined`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(param);
             expect(MDOMPlugin.get(MDraggable, draggable.element)!.options.action).toBe('any');
         });
     });
 
-    it('it should render correctly when binding false is provided', () => {
+    it('should render correctly when binding false is provided', () => {
         const draggable: Wrapper<Vue> = getDraggableDirective(false);
 
         expect(draggable.element.classList).not.toContain(MDraggableClassNames.Draggable);
@@ -97,7 +97,7 @@ describe('draggable', () => {
     });
 
     [undefined, true, false].forEach(param => {
-        it(`it should manage drag image correctly when binding ${param} is provided`, () => {
+        it(`should manage drag image correctly when binding ${param} is provided`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(param, undefined, dragImageTemplate);
 
             const dragImage: HTMLElement = draggable.find('.dragImage').element;
@@ -111,7 +111,7 @@ describe('draggable', () => {
     });
 
     ['mousedown', 'touchstart'].forEach(eventName => {
-        it(`it should add grabbing class on ${eventName}`, () => {
+        it(`should add grabbing class on ${eventName}`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective();
             draggable.trigger(eventName);
             jest.runOnlyPendingTimers();
@@ -120,7 +120,7 @@ describe('draggable', () => {
             expect(MDraggable.currentDraggable).toBeUndefined();
         });
 
-        it(`it should apply MRemoveUserSelect on ${eventName}`, () => {
+        it(`should apply MRemoveUserSelect on ${eventName}`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective();
             draggable.trigger(eventName);
             jest.runOnlyPendingTimers();
@@ -128,7 +128,7 @@ describe('draggable', () => {
             expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeDefined();
         });
 
-        it(`it should not apply grabbing class on ${eventName} when the event target is an input`, () => {
+        it(`should not apply grabbing class on ${eventName} when the event target is an input`, () => {
             mockTargetIsInput = true;
 
             const draggable: Wrapper<Vue> = getDraggableDirective();
@@ -139,7 +139,7 @@ describe('draggable', () => {
             expect(MDraggable.currentDraggable).toBeUndefined();
         });
 
-        it(`it should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
+        it(`should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
             mockTargetIsInput = true;
 
             const draggable: Wrapper<Vue> = getDraggableDirective();
@@ -149,7 +149,7 @@ describe('draggable', () => {
             expect(MDOMPlugin.get(MRemoveUserSelect, draggable.element)).toBeUndefined();
         });
 
-        it(`it should not apply grabbing class to parent draggable on ${eventName} when draggable is nested into another draggable`, () => {
+        it(`should not apply grabbing class to parent draggable on ${eventName} when draggable is nested into another draggable`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
             const childDraggable: Wrapper<Vue> = draggable.find('.childDraggable');
 
@@ -160,7 +160,7 @@ describe('draggable', () => {
             expect(childDraggable.element.classList).toContain(MDraggableClassNames.Grabbing);
         });
 
-        it(`it should not apply grabbing class to parent draggable on ${eventName} when draggable is nested into another draggable`, () => {
+        it(`should not apply grabbing class to parent draggable on ${eventName} when draggable is nested into another draggable`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective(true, undefined, '<div class="childDraggable" v-m-draggable="true">child draggable</div>');
             const childDraggable: Wrapper<Vue> = draggable.find('.childDraggable');
 
@@ -214,7 +214,7 @@ describe('draggable', () => {
     });
 
     ['mouseup', 'touchend', 'click', 'touchcancel'].forEach(eventName => {
-        it(`it should remove grabbing class on document ${eventName}`, () => {
+        it(`should remove grabbing class on document ${eventName}`, () => {
             const draggable: Wrapper<Vue> = getDraggableDirective();
             draggable.trigger('touchstart');
             draggable.trigger('touchend');
@@ -269,7 +269,7 @@ describe('draggable', () => {
             }, dragImageTemplate);
         });
 
-        it('it should update element correctly', () => {
+        it('should update element correctly', () => {
             const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             draggable.trigger('dragstart', options);
 
@@ -278,7 +278,7 @@ describe('draggable', () => {
             expect(draggable.element.classList).toContain(MDraggableClassNames.Dragging);
         });
 
-        it('it should manage DragEvent correctly', () => {
+        it('should manage DragEvent correctly', () => {
             const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragstart', options);
@@ -349,7 +349,7 @@ describe('draggable', () => {
         });
 
         ['mousedown', 'touchstart'].forEach(eventName => {
-            it(`it should do nothing if the user triggered ${eventName} in an input before dragStart`, () => {
+            it(`should do nothing if the user triggered ${eventName} in an input before dragStart`, () => {
                 mockTargetIsInput = true;
                 draggable.trigger(eventName);
 
@@ -381,7 +381,7 @@ describe('draggable', () => {
             draggable.trigger('dragstart', options);
         });
 
-        it('it should update element correctly', () => {
+        it('should update element correctly', () => {
             const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             draggable.trigger('dragend', options);
 
@@ -390,7 +390,7 @@ describe('draggable', () => {
             expect(draggable.element.classList).not.toContain(MDraggableClassNames.Dragging);
         });
 
-        it('it should manage DragEvent correctly', () => {
+        it('should manage DragEvent correctly', () => {
             const options: any = { stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
             jest.spyOn(options, 'stopPropagation');
             draggable.trigger('dragend', options);
@@ -401,7 +401,7 @@ describe('draggable', () => {
         });
 
         ['mousedown', 'touchstart'].forEach(eventName => {
-            it(`it should do nothing if the user triggered ${eventName} in an input before dragEnd`, () => {
+            it(`should do nothing if the user triggered ${eventName} in an input before dragEnd`, () => {
                 mockTargetIsInput = true;
                 draggable.trigger(eventName);
 
