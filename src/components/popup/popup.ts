@@ -98,6 +98,12 @@ export class MPopup extends ModulVue {
     @Emit('close')
     private onClose(): void { }
 
+    private onClosePortalOnUserAction(): void {
+        // tslint:disable:no-console
+        console.log('onClosePortalOnUserAction');
+        this.propOpen = false;
+    }
+
     public get propOpenTrigger(): MOpenTrigger {
         return this.openTrigger; // todo: mobile + hover ??
     }

@@ -187,6 +187,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
             if (!(element && element.contains(event.target as Node) || this.$el.contains(event.target as HTMLElement) ||
                 (trigger && trigger.contains(event.target as HTMLElement)))) {
                 this.as<PortalMixin>().propOpen = false;
+                this.$emit('close-portal-on-user-action');
             }
         }
     }

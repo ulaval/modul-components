@@ -127,6 +127,7 @@ export class Portal extends ModulVue implements PortalMixin {
             } else {
                 this.propOpen = false;
             }
+            this.$emit('close-portal-on-user-action');
         }
     }
 
@@ -258,7 +259,12 @@ export class Portal extends ModulVue implements PortalMixin {
         if (this.internalTrigger) {
             switch (this.openTrigger) {
                 case MOpenTrigger.Click:
-                    this.internalTrigger.addEventListener('click', this.toggle);
+                    this.internalTrigger.addEventListener('click', (event: any) => {
+                        this.toggle(event);
+                        if (this.propOpen) {
+                            this.$emit('close-portal-on-user-action');
+                        }
+                    });
                     break;
                 case MOpenTrigger.MouseDown:
                     this.internalTrigger.addEventListener('mousedown', this.toggle);
