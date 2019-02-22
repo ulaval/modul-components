@@ -11,14 +11,19 @@ describe(PERIOD_NAME, () => {
     describe(`Given both dates are present`, () => {
         describe(`When fullmode is on`, () => {
             it(`should return a complete formatted period`, () => {
+                const startDate: Date = new Date(2019, 3, 8);
+                const endDate: Date = new Date(2019, 4, 14);
                 const period: MPeriod = {
-                    start: new Date(2019, 3, 8),
-                    end: new Date(2019, 4, 14)
+                    start: startDate,
+                    end: endDate
                 };
                 const periodParams: MShowPeriodParams = {
                     period,
                     fullMode: true
                 };
+                startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
+                endDate.toLocaleDateString = jest.fn(() => '14 mai 2019');
+
                 expect(periodFilter(periodParams)).toEqual('Du 8 avril 2019 au 14 mai 2019');
             });
         });
@@ -26,13 +31,18 @@ describe(PERIOD_NAME, () => {
         describe(`Given fullmode is off`, () => {
             describe(`When both start date and end date are the same day`, () => {
                 it(`should return a formatted period with only one date`, () => {
+                    const startDate: Date = new Date(2019, 3, 8);
+                    const endDate: Date = new Date(2019, 3, 8);
                     const period: MPeriod = {
-                        start: new Date(2019, 3, 8),
-                        end: new Date(2019, 3, 8)
+                        start: startDate,
+                        end: endDate
                     };
                     const periodParams: MShowPeriodParams = {
                         period
                     };
+                    startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
+                    endDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
+
                     expect(periodFilter(periodParams)).toEqual('Le 8 avril 2019');
                 });
             });
@@ -46,6 +56,7 @@ describe(PERIOD_NAME, () => {
                     const periodParams: MShowPeriodParams = {
                         period
                     };
+
                     expect(periodFilter(periodParams)).toEqual('Du 8 au 14 avril 2019');
                 });
             });
@@ -59,19 +70,25 @@ describe(PERIOD_NAME, () => {
                     const periodParams: MShowPeriodParams = {
                         period
                     };
+
                     expect(periodFilter(periodParams)).toEqual('Du 8 avril au 14 mai 2019');
                 });
             });
 
             describe(`When start date and end date have a different year`, () => {
                 it(`should return a formatted period with 2 dates`, () => {
+                    const startDate: Date = new Date(2019, 3, 8);
+                    const endDate: Date = new Date(2020, 4, 14);
                     const period: MPeriod = {
-                        start: new Date(2019, 3, 8),
-                        end: new Date(2020, 4, 14)
+                        start: startDate,
+                        end: endDate
                     };
                     const periodParams: MShowPeriodParams = {
                         period
                     };
+                    startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
+                    endDate.toLocaleDateString = jest.fn(() => '14 mai 2020');
+
                     expect(periodFilter(periodParams)).toEqual('Du 8 avril 2019 au 14 mai 2020');
                 });
             });
@@ -80,12 +97,14 @@ describe(PERIOD_NAME, () => {
 
     describe(`Given the end date is missing`, () => {
         it(`then we only show the start date`, () => {
+            const startDate: Date = new Date(2019, 3, 8);
             const period: MPeriod = {
-                start: new Date(2019, 3, 8)
+                start: startDate
             };
             const periodParams: MShowPeriodParams = {
                 period
             };
+            startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
 
             expect(periodFilter(periodParams)).toEqual('Débute le 8 avril 2019');
         });
@@ -93,12 +112,14 @@ describe(PERIOD_NAME, () => {
 
     describe(`Given the start date is missing`, () => {
         it(`then we only show the end date`, () => {
+            const endDate: Date = new Date(2019, 3, 8);
             const period: MPeriod = {
-                end: new Date(2019, 3, 8)
+                end: endDate
             };
             const periodParams: MShowPeriodParams = {
                 period
             };
+            endDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
 
             expect(periodFilter(periodParams)).toEqual('Se termine le 8 avril 2019');
         });

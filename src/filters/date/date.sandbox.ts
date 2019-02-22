@@ -5,7 +5,7 @@ import DateFilterPlugin from './date';
 import { dateTimeFilter } from './date-time/date-time';
 import WithRender from './date.sandbox.html';
 import { dateFilter } from './date/date';
-import { MPeriod, periodFilter } from './period/period';
+import { MPeriod, MShowPeriodParams, periodFilter } from './period/period';
 
 
 @WithRender
@@ -32,7 +32,7 @@ export class MDateSandbox extends Vue {
     }
 
     get date(): Date {
-        return new Date(this.now.getFullYear(), this.now.getMonth(), this.now.getDay(), this.hours, this.minutes);
+        return new Date(this.year, this.month, this.day, this.hours, this.minutes);
     }
 
     get dateLater(): Date {
@@ -53,7 +53,11 @@ export class MDateSandbox extends Vue {
             end: this.dateLater
         };
 
-        return periodFilter(period);
+        const periodParams: MShowPeriodParams = {
+            period
+        };
+
+        return periodFilter(periodParams);
     }
 
 }
