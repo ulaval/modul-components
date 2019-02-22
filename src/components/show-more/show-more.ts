@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin, { MButtonSkin } from '../button/button';
@@ -22,6 +23,10 @@ export class MShowMore extends ModulVue {
 
     get isVisible(): boolean {
         return this.nbTotal !== undefined && this.nbTotal > 0;
+    }
+
+    get isProgressVisible(): boolean {
+        return this.nbVisible < this.nbTotal;
     }
 
     get status(): string {
