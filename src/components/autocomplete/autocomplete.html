@@ -1,0 +1,12 @@
+<m-dropdown :filterable="true"
+            :clear-invalid-selection-on-close="true"
+            :show-arrow-icon="false"
+            :enable-animation="false"
+            :include-filterable-status-items="false"
+            v-model="selection"
+            @input="onInputChangeDebounced">
+    <m-dropdown-item v-for="i in items"
+                     :value="i.value"
+                     :label="i.label"
+                     :non-filterable="true"></m-dropdown-item>
+</m-dropdown>

@@ -1,6 +1,7 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
+export const AUTOCOMPLETE_NAME: string = 'm-autocomplete';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CALENDAR_NAME: string = 'm-calendar';
