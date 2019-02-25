@@ -109,8 +109,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
             this.$emit('paste', event);
         } else {
             let pasteContent: string = event['clipboardData'].getData('text');
-            if (/^\d+$/.test(pasteContent) && pasteContent.length + this.as<InputManagement>().internalValue.length <= this.maxLength && this.maxLength) {
-                this.$emit('paste', event);
+            if (/^\d+$/.test(pasteContent)) {
+                if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + this.as<InputManagement>().internalValue.length <= this.maxLength) {
+                    this.$emit('paste', event);
+                } else {
+                    event.preventDefault();
+                }
             } else {
                 event.preventDefault();
             }
@@ -122,7 +126,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
             this.$emit('keydown', event);
         } else {
             // tslint:disable-next-line: deprecation
-            if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && !event.ctrlKey && event.keyCode !== 8 && event.keyCode !== 37 && event.keyCode !== 39 && event.keyCode !== 46 && event.keyCode !== 9 && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 || event.keyCode > 31 && (event.keyCode < 48 || event.keyCode > 57)) {
+            if (isFinite(this.maxLengthNumber) && this.as<InputManagement>().internalValue.length + 1 > this.maxLengthNumber && !event.ctrlKey && event.keyCode !== 8 && event.keyCode !== 9 && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 && event.keyCode !== 37 && event.keyCode !== 39 && event.keyCode !== 46 || event.keyCode > 31 && (event.keyCode < 48 || event.keyCode > 57) && !event.ctrlKey && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 && event.keyCode !== 37 && event.keyCode !== 39 && event.keyCode !== 46) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
