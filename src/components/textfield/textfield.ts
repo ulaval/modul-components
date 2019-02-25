@@ -130,7 +130,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
         }
     }
 
-    private onDrop(event: DragEvent): void {
+    private onDropTextfield(event: DragEvent): void {
         if (this.type === MTextfieldType.Interger) {
             event.preventDefault();
         }
