@@ -121,15 +121,18 @@ export class MTextfield extends ModulVue implements InputManagementData {
         if (this.type !== MTextfieldType.Interger) {
             this.$emit('keydown', event);
         } else {
-            // tslint:disable-next-line: no-console
-            console.log(event.keyCode);
-
             // tslint:disable-next-line: deprecation
             if (this.maxLength && this.as<InputManagement>().internalValue.length + 1 > this.maxLength && !event.ctrlKey && event.keyCode !== 8 && event.keyCode !== 37 && event.keyCode !== 39 && event.keyCode !== 46 && event.keyCode !== 9 && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 || event.keyCode === 38 || event.keyCode === 40 || event.keyCode === 69 || event.keyCode === 190 || event.keyCode === 188 || event.keyCode === 107 || event.shiftKey || event.keyCode === 110) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
             }
+        }
+    }
+
+    private onDrop(event: DragEvent): void {
+        if (this.type === MTextfieldType.Interger) {
+            event.preventDefault();
         }
     }
 
