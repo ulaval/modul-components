@@ -19,6 +19,7 @@
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
                    :tag-style="tagStyle"
+                   @click="onOpen"
                    v-m-popup:popup>
         <input type="text"
                ref="input"
@@ -32,14 +33,14 @@
                :placeholder="placeholder"
                @keydown.enter.prevent="onKeydownEnter"
                @keydown.return.prevent="onKeydownEnter"
-               @keydown.esc="inputOnKeydownEsc"
+               @keydown.esc="onKeydownEsc"
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
                @keydown.tab="onKeydownTab"
                @keydown="inputOnKeydown"
                @focusin="onFocusIn"
                @focusout="onFocusOut"
-               v-model="selectedText">
+               v-model.trim="selectedText">
         <template slot="adjust-width-auto"
                   v-if="width === 'auto'">{{ selectedText }}</template>
         <div class="m-dropdown__arrow"
@@ -109,7 +110,8 @@
             ref="items"
             :style="itemsHeightStyle"
             :aria-labelledby="id"
-            aria-live="polite">
+            aria-live="polite"
+            @mouseup="selectText">
             <slot></slot>
             <m-dropdown-item v-if="!hasItems && !dirty"
                              :readonly="true">{{ propTextNoData }}</m-dropdown-item>

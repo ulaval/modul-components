@@ -6,9 +6,17 @@
                  @click="fetchData">
     </m-show-more>
 
+    <h3>m-show-more - Monochrome skin</h3>
+    <m-show-more :nb-visible="data.length"
+                 :nb-total="total"
+                 :skin="skin"
+                 :loading.sync="loading"
+                 @click="fetchData">
+    </m-show-more>
+
     <h3>m-show-more - With nbTotal = undefined</h3>
     <m-show-more :nb-visible="totalZero"
-                 :nb-total="totalUndefined"
+                 :nb-total="undefined"
                  :loading.sync="loading"
                  @click="fetchData">
     </m-show-more>
