@@ -1,6 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
+import { InputStateTagStyle } from '../../mixins/input-state/input-state';
+import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { AUTOCOMPLETE_NAME } from '../component-names';
 import WithRender from './autocomplete.html?style=./autocomplete.scss';
 
@@ -15,15 +17,46 @@ export class MAutoComplete extends Vue {
 
     @Model('change')
     model: string;
-
     @Prop({ default: (): [] => [] })
     results: MAutoCompleteResult[];
-
     @Prop({ default: 250 })
     throttle: number;
-
     @Prop({ default: 1 })
     minimumChars: number;
+
+    @Prop()
+    placeholder: string;
+    @Prop()
+    focus: boolean;
+    @Prop()
+    disabled: boolean;
+    @Prop()
+    errorMessage: string;
+    @Prop()
+    validMessage: string;
+    @Prop()
+    helperMessage: string;
+    @Prop({ default: '100%' })
+    width: string;
+    @Prop({ default: InputMaxWidth.Regular })
+    maxWidth: string;
+    @Prop()
+    label: string;
+    @Prop()
+    requiredMarker: boolean;
+    @Prop({
+        default: InputStateTagStyle.Default,
+        validator: value =>
+            value === InputStateTagStyle.Default ||
+            value === InputStateTagStyle.H1 ||
+            value === InputStateTagStyle.H2 ||
+            value === InputStateTagStyle.H3 ||
+            value === InputStateTagStyle.H4 ||
+            value === InputStateTagStyle.H5 ||
+            value === InputStateTagStyle.H6 ||
+            value === InputStateTagStyle.P
+    })
+    tagStyle: string;
 
     selection: string = '';
     items: MAutoCompleteResult[] = [];
@@ -36,19 +69,19 @@ export class MAutoComplete extends Vue {
     }
 
     @Watch('model')
-    public onModelChange(): void {
+    onModelChange(): void {
         this.refreshItemsOnSelectionChange(this.model);
         this.selection = this.model;
     }
 
     @Watch('selection')
-    public onSelection(): void {
+    onSelection(): void {
         this.refreshItemsOnSelectionChange(this.selection);
         this.$emit('change', this.selection);
     }
 
     @Watch('results')
-    public onResults(): void {
+    onResults(): void {
         this.items = this.results;
     }
 

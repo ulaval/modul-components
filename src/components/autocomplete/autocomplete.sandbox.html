@@ -1,6 +1,9 @@
 <div>
     <h3>Using https://api.publicapis.org back-end</h3>
-    <m-autocomplete :results="results"
+    <m-autocomplete placeholder="Type something"
+                    label="API"
+                    :required-marker="true"
+                    :results="results"
                     @complete="onComplete"
                     v-model="selection"></m-autocomplete>
 
