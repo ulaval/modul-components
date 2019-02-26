@@ -24,7 +24,7 @@ export enum MTextfieldType {
     Telephone = 'tel',
     Search = 'search',
     Number = 'number',
-    Interger = 'interger'
+    Integer = 'integer'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
@@ -51,7 +51,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Url ||
             value === MTextfieldType.Search ||
             value === MTextfieldType.Number ||
-            value === MTextfieldType.Interger
+            value === MTextfieldType.Integer
     })
     public type: MTextfieldType;
     @Prop({ default: true })
@@ -105,7 +105,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     private onPasteTextfield(event: Event): void {
-        if (this.type !== MTextfieldType.Interger) {
+        if (this.type !== MTextfieldType.Integer) {
             this.$emit('paste', event);
         } else {
             let pasteContent: string = event['clipboardData'].getData('text');
@@ -122,7 +122,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     private onKeydownTextfield(event: KeyboardEvent): void {
-        if (this.type !== MTextfieldType.Interger) {
+        if (this.type !== MTextfieldType.Integer) {
             this.$emit('keydown', event);
         } else {
             // tslint:disable-next-line: deprecation
@@ -135,7 +135,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     private onDropTextfield(event: DragEvent): void {
-        if (this.type === MTextfieldType.Interger) {
+        if (this.type === MTextfieldType.Integer) {
             event.preventDefault();
         }
     }
@@ -160,7 +160,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     public get inputType(): MTextfieldType {
         switch (this.type) {
-            case MTextfieldType.Interger:
+            case MTextfieldType.Integer:
                 return MTextfieldType.Number;
             case MTextfieldType.Password:
                 return this.passwordAsText ? MTextfieldType.Text : MTextfieldType.Password;
@@ -218,11 +218,11 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     private get inputPattern(): string | undefined {
-        return this.type === MTextfieldType.Interger ? '[0-9]*' : undefined;
+        return this.type === MTextfieldType.Integer ? '[0-9]*' : undefined;
     }
 
     private get inputMode(): string | undefined {
-        return this.type === MTextfieldType.Interger ? 'numeric' : undefined;
+        return this.type === MTextfieldType.Integer ? 'numeric' : undefined;
     }
 
     private resetModel(): void {
