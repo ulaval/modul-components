@@ -15,7 +15,7 @@
             :required-marker="requiredMarker"
             :tag-style="tagStyle"
             v-model="selection"
-            @input="onInputChangeDebounced">
+            @input="onInputChangeThrottled">
     <m-dropdown-item v-for="i in items"
                      :value="i.value"
                      :label="i.label"

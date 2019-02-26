@@ -60,12 +60,11 @@ export class MAutoComplete extends Vue {
 
     selection: string = '';
     items: MAutoCompleteResult[] = [];
-    onInputChangeDebounced: (value: string) => void;
+    throttleTimeout: any;
 
     created(): void {
         this.refreshItemsOnSelectionChange(this.model);
         this.selection = this.model;
-        this.onInputChangeDebounced = this.debounce(this.onInputChange, this.throttle);
     }
 
     @Watch('model')
@@ -85,6 +84,14 @@ export class MAutoComplete extends Vue {
         this.items = this.results;
     }
 
+    onInputChangeThrottled(value: string): void {
+        clearTimeout(this.throttleTimeout);
+        this.throttleTimeout = setTimeout(() => {
+            this.throttleTimeout = undefined;
+            this.onInputChange(value);
+        }, this.throttle);
+    }
+
     private refreshItemsOnSelectionChange(value: string): void {
         let label: string = '';
         const result: MAutoCompleteResult | undefined = this.results.find(r => r.value === value);
@@ -101,17 +108,6 @@ export class MAutoComplete extends Vue {
         } else if (value.length >= this.minimumChars) {
             this.$emit('complete', value);
         }
-    }
-
-    private debounce(fn: (value: string) => void, wait: number): (value: string) => void {
-        let timeout: any;
-        return (value: string) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                timeout = undefined;
-                fn(value);
-            }, wait);
-        };
     }
 }
 
