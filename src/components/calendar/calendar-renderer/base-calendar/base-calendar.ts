@@ -152,6 +152,13 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
             && day.date.isAfter(new ModulDate((this.calendar.value as RangeDate).begin));
     }
 
+    isSelectionCompleted(day: DayState): boolean {
+        return !!this.calendar.type && this.calendar.type === CalendarType.DATE_RANGE
+            && !!this.calendar.value && !!(this.calendar.value as RangeDate).begin
+            && !!this.calendar.value && !!(this.calendar.value as RangeDate).end
+            && day.isHighlighted;
+    }
+
     hideDay(day: DayState): boolean {
         return (day.isInNextMonth || day.isInPreviousMonth) && !this.showMonthBeforeAfter;
     }
@@ -193,12 +200,10 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     }
 
     get years(): {} {
-        // return this.prepareDataForTableLayout(this.calendar.years, NB_YEARS_PER_ROW);
         return this.calendar.years;
     }
 
     get months(): {} {
-        // return this.prepareDataForTableLayout(this.calendar.months, NB_MONTHS_PER_ROW);
         return this.calendar.months;
     }
 
@@ -232,25 +237,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     get days(): DayState[] {
         return this.calendar.days;
-    }
-
-    // get daysOfMonth(): DayState[] {
-    //     return this.prepareDataForTableLayout(this.calendar.days, 7);
-    // }
-
-    private prepareDataForTableLayout(data: any[], nbItemPerRow: number): any[] {
-        let nbRow: number = Math.ceil(data.length / nbItemPerRow);
-        let dataTable: any[] = [];
-        let count: number = 0;
-        for (let row: number = 0; row < nbRow; row++) {
-            let newRow: any[] = [];
-            for (let index: number = 0; index < nbItemPerRow; index++) {
-                newRow.push(data[count]);
-                count++;
-            }
-            dataTable.push(newRow);
-        }
-        return dataTable;
     }
 
     private padString(value: any, length: number = 2): string {

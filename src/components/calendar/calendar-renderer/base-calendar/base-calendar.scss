@@ -5,15 +5,6 @@ $m-base-calendar-dimension: $m-touch-size !default;
 $m-base-calendar-weekday-height: 25px !default; // DOM number
 $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-length !default;
 
-%base-pseudo-content {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    content: '';
-    width: $m-touch-size;
-    height: $m-touch-size;
-}
-
 @mixin grid($col: $m-base-calendar-week-length, $width: $m-base-calendar-dimension, $height: $m-base-calendar-dimension) {
     text-align: center;
     display: grid;
@@ -125,11 +116,9 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         overflow: hidden;
     }
 
-    // &__year-content,
-    // &__month-content,
+    &__year,
+    &__month,
     &__day {
-        display: flex;
-        justify-content: center;
         position: relative;
         transition: background-color $m-transition-duration linear, color $m-transition-duration ease;
 
@@ -137,9 +126,13 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
             color: $m-color--interactive-darker;
 
             &::after {
-                @extend %base-pseudo-content;
-
-                transform: translate3d(50%, 50%, 0);
+                content: '';
+                width: $m-touch-size;
+                height: $m-touch-size;
+                position: relative;
+                display: block;
+                top: -100%;
+                margin: 0 auto;
                 background-color: #fff;
                 border: 1px solid m-color(interactive, darker);
                 border-radius: 50%;
@@ -150,7 +143,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         &.m--is-highlighted {
             background-color: $m-color--interactive-lightest;
 
-            &:hover:not(.m--is-selection-start) {
+            &:hover:not(.m--is-selection-start):not(.m--is-selection-completed) {
                 border-radius: 50% 0 0 50%;
 
                 &.m--is-in-future {
@@ -168,8 +161,8 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         }
     }
 
-    // &__year-content,
-    // &__month-content,
+    &__year-content,
+    &__month-content,
     &__day-content {
         width: $m-base-calendar-dimension;
         height: $m-base-calendar-dimension;
@@ -217,8 +210,12 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     & + .m--is-highlighted,
     &:nth-child(7n) + .m--is-highlighted {
         &::before {
-            @extend %base-pseudo-content;
-
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            content: '';
+            width: $m-touch-size;
+            height: $m-touch-size;
             z-index: 0;
             background-color: m-color(interactive, lightest);
         }
