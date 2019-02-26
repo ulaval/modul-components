@@ -1,13 +1,10 @@
-import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
-import { MFormEvents } from '../../utils/form/form-service/form-service';
+import { MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
 import { ModulVue } from '../../utils/vue/vue';
-import { FORM } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
-import MessagePlugin, { MMessageState } from '../message/message';
-import FormFieldDirectivePlugin from './form-field';
+import { MMessageState } from '../message/message';
 import WithRender from './form.html?style=./form.scss';
+
 
 @WithRender
 @Component
@@ -21,6 +18,8 @@ export class MForm extends ModulVue {
     public messageStateError: MMessageState = MMessageState.Error;
     public errors: string[] = [];
 
+    listeners: MFormListener[];
+
     @Emit('submit')
 
     public onSubmit(): void { }
@@ -32,8 +31,13 @@ export class MForm extends ModulVue {
         return this.errors.length > 0;
     }
 
+    created(): void {
+        // get globaly registered form listener
+        this.listeners = this.$form.listeners;
+    }
+
     public submit(): void {
-        this.$form.emit(MFormEvents.formErrorClear);
+        this.emit(MFormEvents.formErrorClear);
 
         if (this.form) {
             this.errors = [];
@@ -51,7 +55,7 @@ export class MForm extends ModulVue {
 
     public reset(): void {
         this.errors = [];
-        this.$form.emit(MFormEvents.formErrorClear);
+        this.emit(MFormEvents.formErrorClear);
 
         if (this.form) {
             this.form.reset();
@@ -63,24 +67,23 @@ export class MForm extends ModulVue {
         return this.form.nbFieldsThatHasError > 1 || this.form.nbOfErrors > 0;
     }
 
+    public setListeners(listeners: MFormListener[]): void {
+        // set localy registered form listener
+        this.listeners = listeners;
+    }
+
     private handleErrors(): void {
         this.errors = this.form.getErrorsForSummary();
-        this.$form.emit(MFormEvents.formError, {
+        this.emit(MFormEvents.formError, {
             form: this.form,
             totalNbOfErrors: this.form.totalNbOfErrors
         });
     }
+
+    emit(eventType: MFormEvents, params?: any): void {
+        this.listeners
+            .filter((listener: MFormListener) => listener.eventType === eventType)
+            .forEach((listener: MFormListener) => listener.callback(params));
+    }
 }
 
-
-const FormPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.debug(FORM, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(MessagePlugin);
-        v.use(FormFieldDirectivePlugin);
-        v.component(FORM, MForm);
-    }
-};
-
-export default FormPlugin;

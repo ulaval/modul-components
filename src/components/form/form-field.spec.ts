@@ -5,7 +5,7 @@ import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { ModulVue } from '../../utils/vue/vue';
-import FormFieldDirectivePlugin from './form-field';
+import FormPlugin from './form.plugin';
 
 let mockFormField: any = {};
 
@@ -23,7 +23,7 @@ describe('form-field', () => {
 
     beforeEach(() => {
         resetModulPlugins();
-        Vue.use(FormFieldDirectivePlugin);
+        Vue.use(FormPlugin);
     });
 
     describe(`The form validate its fields`, () => {

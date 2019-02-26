@@ -503,4 +503,29 @@
                   skin="secondary"
                   :form="forms[13].id">Reset</m-button>
     </p>
+    <hr />
+    <h3>Form with custom listner</h3>
+    <p class="m-u--margin-bottom">
+
+    </p>
+    <p>
+        <m-form :form="forms[14]"
+                @reset="reset(14)"
+                @submit="submit(14)"
+                ref="form14">
+            <m-textfield v-model.trim="forms[14].get('field-1').value"
+                         label="A field"
+                         :error-message="forms[14].get('field-1').errorMessage"
+                         v-m-form-field="forms[14].get('field-1')">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[14].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[14].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
 </div>

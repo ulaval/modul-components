@@ -6,8 +6,9 @@ import { renderComponent } from '../../../tests/helpers/render';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from '../../utils/form/form-field/form-field';
-import MFormServicePlugin, { MFormEvents } from '../../utils/form/form-service/form-service';
-import FormPlugin, { MForm } from './form';
+import { MFormEvents } from '../../utils/form/form-service/form-service';
+import { MForm } from './form';
+import FormPlugin from './form.plugin';
 
 let mockForm: any = {};
 jest.mock('../../utils/form/form', () => {
@@ -59,8 +60,9 @@ describe(`MForm`, () => {
 
     beforeEach(() => {
         localVue = createLocalVue();
-        localVue.use(FormPlugin);
-        localVue.use(MFormServicePlugin);
+        localVue.use(FormPlugin, {
+            formListeners: []
+        });
         mockForm = {
             id: 'uuid',
             hasError: formHasError,
@@ -94,7 +96,7 @@ describe(`MForm`, () => {
 
     describe(`Given a submit event is triggered`, () => {
         it(`Then it emits an event to clear`, () => {
-            const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+            const spy: jest.SpyInstance = jest.spyOn(wrapper.vm, 'emit');
 
             wrapper.trigger('submit');
 
@@ -131,7 +133,7 @@ describe(`MForm`, () => {
             });
 
             it(`Then it emits an event to handle form errors`, () => {
-                const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+                const spy: jest.SpyInstance = jest.spyOn(wrapper.vm, 'emit');
 
                 wrapper.trigger('submit');
 
@@ -167,7 +169,7 @@ describe(`MForm`, () => {
             });
 
             it(`Then it emits an event to handle form errors`, () => {
-                const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+                const spy: jest.SpyInstance = jest.spyOn(wrapper.vm, 'emit');
 
                 wrapper.trigger('submit');
 
@@ -187,7 +189,7 @@ describe(`MForm`, () => {
 
     describe(`When the reset event is triggered`, () => {
         it(`Then an event is set to clear the form of errors`, () => {
-            const spy: jest.SpyInstance = jest.spyOn(wrapper.vm.$form, 'emit');
+            const spy: jest.SpyInstance = jest.spyOn(wrapper.vm, 'emit');
 
             wrapper.trigger('submit');
 
