@@ -1,0 +1,40 @@
+<div>
+    <h2>Period</h2>
+    <div>
+        <m-textfield v-model="year"
+                     label="year"></m-textfield>
+        <m-textfield v-model="month"
+                     label="month"></m-textfield>
+        <m-textfield v-model="day"
+                     label="day"></m-textfield>
+    </div>
+    <div>
+        <m-textfield v-model="yearLater"
+                     label="year"></m-textfield>
+        <m-textfield v-model="monthLater"
+                     label="month"></m-textfield>
+        <m-textfield v-model="dayLater"
+                     label="day"></m-textfield>
+    </div>
+
+    <h3>FullMode On</h3>
+    <p class="m-u--margin-bottom">
+        <m-period :period="period"
+                  full-mode="true"></m-period>
+    </p>
+
+    <h3>FullMode Off (default)</h3>
+    <p class="m-u--margin-bottom">
+        <m-period :period="period"></m-period>
+    </p>
+
+    <h3>No end</h3>
+    <p class="m-u--margin-bottom">
+        <m-period :period="periodNoEnd"></m-period>
+    </p>
+
+    <h3>No start</h3>
+    <p class="m-u--margin-bottom">
+        <m-period :period="periodNoStart"></m-period>
+    </p>
+</div>

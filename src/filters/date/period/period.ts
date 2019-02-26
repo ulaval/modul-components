@@ -3,18 +3,18 @@ import { FormatMode } from '../../../utils/i18n/i18n';
 import ModulDate, { DatePrecision } from '../../../utils/modul-date/modul-date';
 import { dateFilter } from '../date/date';
 
-export type MPeriod = {
+export type ModulPeriod = {
     start?: Date,
     end?: Date
 };
 
-export interface MPeriodFilterParams {
-    period: MPeriod;
+export interface PeriodFilterParams {
+    period: ModulPeriod;
     fullMode?: boolean;
 }
 
 export class PeriodFilter {
-    static formatPeriod(params: MPeriodFilterParams): string {
+    static formatPeriod(params: PeriodFilterParams): string {
         let formattedPeriod: string;
 
         if (params.fullMode && params.period.start && params.period.end) {
@@ -32,7 +32,7 @@ export class PeriodFilter {
         return formattedPeriod;
     }
 
-    static compactStartAndEndDate(start: Date, end: Date): string {
+    private static compactStartAndEndDate(start: Date, end: Date): string {
         let startDate: ModulDate = new ModulDate(start);
         let endDate: ModulDate = new ModulDate(end);
         let formattedPeriod: string;
@@ -50,18 +50,18 @@ export class PeriodFilter {
         return formattedPeriod;
     }
 
-    static onlyStartDate(start: Date): string {
+    private static onlyStartDate(start: Date): string {
         const startFormatted: string = dateFilter(start);
         return this.translateDate('f-m-period:start', { start: startFormatted });
     }
 
-    static onlyEndDate(end: Date): string {
+    private static onlyEndDate(end: Date): string {
         const endFormatted: string = dateFilter(end);
 
         return this.translateDate('f-m-period:end', { end: endFormatted });
     }
 
-    static startAndEndDateSameMonth(start: Date, end: Date): string {
+    private static startAndEndDateSameMonth(start: Date, end: Date): string {
         const startFormatted: string = dateFilter(start, { showMonth: false, showYear: false });
         const endFormatted: string = dateFilter(end);
 
@@ -73,7 +73,7 @@ export class PeriodFilter {
         return this.translateDate('f-m-period:dates', params);
     }
 
-    static startAndEndDateSameYear(start: Date, end: Date): string {
+    private static startAndEndDateSameYear(start: Date, end: Date): string {
         const startFormatted: string = dateFilter(start, { showYear: false });
         const endFormatted: string = dateFilter(end);
 
@@ -85,7 +85,7 @@ export class PeriodFilter {
         return this.translateDate('f-m-period:dates', params);
     }
 
-    static fullStartAndEndDate(start: Date, end: Date): string {
+    private static fullStartAndEndDate(start: Date, end: Date): string {
         const startFormatted: string = dateFilter(start);
         const endFormatted: string = dateFilter(end);
         const params: any = {
@@ -96,7 +96,7 @@ export class PeriodFilter {
         return this.translateDate('f-m-period:dates', params);
     }
 
-    static translateDate(key: string, params: any): string {
+    private static translateDate(key: string, params: any): string {
         return (Vue.prototype).$i18n.translate(key, params, 0, '', undefined, FormatMode.Vsprintf);
     }
 }

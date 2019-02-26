@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { addMessages } from '../../../../tests/helpers/lang';
 import { PERIOD_NAME } from '../../filter-names';
-import { MPeriod, MPeriodFilterParams, PeriodFilter } from './period';
+import { ModulPeriod, PeriodFilter, PeriodFilterParams } from './period';
 
 describe(PERIOD_NAME, () => {
     beforeEach(() => {
@@ -13,11 +13,11 @@ describe(PERIOD_NAME, () => {
             it(`should return a complete formatted period`, () => {
                 const startDate: Date = new Date(2019, 3, 8);
                 const endDate: Date = new Date(2019, 4, 14);
-                const period: MPeriod = {
+                const period: ModulPeriod = {
                     start: startDate,
                     end: endDate
                 };
-                const periodParams: MPeriodFilterParams = {
+                const periodParams: PeriodFilterParams = {
                     period,
                     fullMode: true
                 };
@@ -33,11 +33,11 @@ describe(PERIOD_NAME, () => {
                 it(`should return a formatted period with only one date`, () => {
                     const startDate: Date = new Date(2019, 3, 8);
                     const endDate: Date = new Date(2019, 3, 8);
-                    const period: MPeriod = {
+                    const period: ModulPeriod = {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: MPeriodFilterParams = {
+                    const periodParams: PeriodFilterParams = {
                         period
                     };
                     startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
@@ -51,11 +51,11 @@ describe(PERIOD_NAME, () => {
                 it(`should return a formatted period with 2 dates, but only one year and only one month`, () => {
                     const startDate: Date = new Date(2019, 3, 8);
                     const endDate: Date = new Date(2019, 3, 14);
-                    const period: MPeriod = {
+                    const period: ModulPeriod = {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: MPeriodFilterParams = {
+                    const periodParams: PeriodFilterParams = {
                         period
                     };
                     startDate.toLocaleDateString = jest.fn(() => '8');
@@ -75,11 +75,11 @@ describe(PERIOD_NAME, () => {
                 it(`should return a formatted period with 2 dates, but only one year`, () => {
                     const startDate: Date = new Date(2019, 3, 8);
                     const endDate: Date = new Date(2019, 4, 14);
-                    const period: MPeriod = {
+                    const period: ModulPeriod = {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: MPeriodFilterParams = {
+                    const periodParams: PeriodFilterParams = {
                         period
                     };
                     startDate.toLocaleDateString = jest.fn(() => '8 avril');
@@ -99,11 +99,11 @@ describe(PERIOD_NAME, () => {
                 it(`should return a formatted period with 2 dates`, () => {
                     const startDate: Date = new Date(2019, 3, 8);
                     const endDate: Date = new Date(2020, 4, 14);
-                    const period: MPeriod = {
+                    const period: ModulPeriod = {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: MPeriodFilterParams = {
+                    const periodParams: PeriodFilterParams = {
                         period
                     };
                     startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
@@ -118,10 +118,10 @@ describe(PERIOD_NAME, () => {
     describe(`Given the end date is missing`, () => {
         it(`then we only show the start date`, () => {
             const startDate: Date = new Date(2019, 3, 8);
-            const period: MPeriod = {
+            const period: ModulPeriod = {
                 start: startDate
             };
-            const periodParams: MPeriodFilterParams = {
+            const periodParams: PeriodFilterParams = {
                 period
             };
             startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
@@ -133,10 +133,10 @@ describe(PERIOD_NAME, () => {
     describe(`Given the start date is missing`, () => {
         it(`then we only show the end date`, () => {
             const endDate: Date = new Date(2019, 3, 8);
-            const period: MPeriod = {
+            const period: ModulPeriod = {
                 end: endDate
             };
-            const periodParams: MPeriodFilterParams = {
+            const periodParams: PeriodFilterParams = {
                 period
             };
             endDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
@@ -147,8 +147,8 @@ describe(PERIOD_NAME, () => {
 
     describe(`Given both dates are missing`, () => {
         it(`then it throws an error`, () => {
-            const period: MPeriod = {};
-            const periodParams: MPeriodFilterParams = {
+            const period: ModulPeriod = {};
+            const periodParams: PeriodFilterParams = {
                 period
             };
 
