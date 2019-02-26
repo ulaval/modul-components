@@ -30,6 +30,8 @@ export enum MTextfieldType {
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
+const ALLOWED_KEYCODE: number[] = [8, 9, 33, 34, 35, 36, 37, 39, 46];
+
 @WithRender
 @Component({
     mixins: [
@@ -126,12 +128,16 @@ export class MTextfield extends ModulVue implements InputManagementData {
             this.$emit('keydown', event);
         } else {
             // tslint:disable-next-line: deprecation
-            if (isFinite(this.maxLengthNumber) && this.as<InputManagement>().internalValue.length + 1 > this.maxLengthNumber && !event.ctrlKey && event.keyCode !== 8 && event.keyCode !== 9 && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 && event.keyCode !== 37 && event.keyCode !== 39 && event.keyCode !== 46 || event.keyCode > 31 && (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && !event.ctrlKey && event.keyCode !== 33 && event.keyCode !== 34 && event.keyCode !== 35 && event.keyCode !== 36 && event.keyCode !== 37 && event.keyCode !== 39 && event.keyCode !== 46) {
+            if (isFinite(this.maxLengthNumber) && this.as<InputManagement>().internalValue.length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
             }
         }
+    }
+
+    private isNumberKeycode(keycode): boolean {
+        return keycode > 31 && (keycode < 48 || keycode > 57) && (keycode < 96 || keycode > 105);
     }
 
     private onDropTextfield(event: DragEvent): void {
