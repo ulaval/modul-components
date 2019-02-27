@@ -1,14 +1,8 @@
-import { PluginObject } from 'vue/types/plugin';
 import { MToastPosition, MToastState } from '../../../components/toast/toast';
 import { FormatMode } from '../../../utils/i18n/i18n';
 import { ModulVue } from '../../../utils/vue/vue';
 import { Form } from '../form';
 
-declare module 'vue/types/vue' {
-    interface Vue {
-        $form: MFormService;
-    }
-}
 
 export interface MFormEventParams {
     form?: Form;
@@ -61,25 +55,14 @@ export class FormErrorFocusBehavior extends MFormListener {
 
 export class MFormService {
 
-    public listeners: MFormListener[] = [];
+    private _listeners: MFormListener[] = [];
 
-    subscribe(listener: MFormListener): void {
-        this.listeners.push(listener);
+    constructor(listeners: MFormListener[]) {
+        this._listeners = listeners;
     }
 
-    emit(eventType: MFormEvents, params?: any): void {
-        this.listeners
-            .filter((listener: MFormListener) => listener.eventType === eventType)
-            .forEach((listener: MFormListener) => listener.callback(params));
+    get listeners(): MFormListener[] {
+        return this._listeners;
     }
+
 }
-
-
-const MFormServicePlugin: PluginObject<any> = {
-    install(v): void {
-        let form: MFormService = new MFormService();
-        (v.prototype).$form = form;
-    }
-};
-
-export default MFormServicePlugin;
