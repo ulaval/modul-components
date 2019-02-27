@@ -1,37 +1,32 @@
-<div class="m-paging">
-    <m-icon-button class="m-paging__first-button"
-                   icon-name="m-svg__chevron-circle--left"
-                   @click="goToPage(1)"
-                   :disabled="firstPageSelected">
-        <m-i18n k="m-paging:first"></m-i18n>
-    </m-icon-button>
-    <m-icon-button class="
-                   m-paging__previous-button"
-                   icon-name="m-svg__chevron-circle--left"
-                   @click="goToPage(value - 1)"
-                   :disabled="firstPageSelected">
-        <m-i18n k="m-paging:previous"></m-i18n>
-    </m-icon-button>
-    <ul class="m-paging__pages">
-        <li v-for="page of nbOfPage">
-            <m-link v-if="page !== value"
-                    class="m-paging__page-link"
-                    mode="button"
-                    @click="goToPage(page)">{{ page }}</m-link>
-            <span v-else
-                  class="m-paging__page-selected">{{ page }}</span>
-        </li>
-    </ul>
-    <m-icon-button class="m-paging__next-button"
-                   icon-name="m-svg__chevron-circle--right"
-                   @click="goToPage(value + 1)"
-                   :disabled="lastPageSelected">
-        <m-i18n k="m-paging:next"></m-i18n>
-    </m-icon-button>
-    <m-icon-button class="m-paging__last-button"
-                   icon-name="m-svg__chevron-circle--right"
-                   @click="goToPage(nbOfPage)"
-                   :disabled="lastPageSelected">
-        <m-i18n k="m-paging:last"></m-i18n>
-    </m-icon-button>
+<div class="m-paging"
+     :class="{'m--is-loading': loading}">
+    <div class="m-paging__status">{{ status }}</div>
+    <div class="m-paging__nav"
+         v-if="nbOfPages > 1">
+        <m-icon-button class="m-paging__previous-button"
+                       icon-name="m-svg__chevron-circle--left"
+                       @click="goToPage(value - 1)"
+                       :disabled="firstPageSelected || loading">
+            <m-i18n k="m-paging:previous"></m-i18n>
+        </m-icon-button>
+        <ul class="m-paging__pages">
+            <li v-for="item of pagingItems"
+                class="m-paging__item"
+                :class="{'m-paging__item--ellipsis': item.ellipsis}">
+                <m-link v-if="item.clickable"
+                        class="m-paging__item--link"
+                        mode="button"
+                        :disabled="loading"
+                        @click="goToPage(parseInt(item.label))">{{ item.label }}</m-link>
+                <span v-else
+                      class="m-paging__item--text">{{ item.label }}</span>
+            </li>
+        </ul>
+        <m-icon-button class="m-paging__next-button"
+                       icon-name="m-svg__chevron-circle--right"
+                       @click="goToPage(value + 1)"
+                       :disabled="lastPageSelected || loading">
+            <m-i18n k="m-paging:next"></m-i18n>
+        </m-icon-button>
+    </div>
 </div>

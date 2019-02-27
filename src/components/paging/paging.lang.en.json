@@ -1,8 +1,9 @@
 {
     "m-paging": {
-        "first": "First Page",
         "previous": "Previous Page",
         "next": "Next Page",
-        "last": "Last Page"
+        "ellipsis": "...",
+        "status": "%(nbVisible)s of %(nbTotal)s page",
+        "status.p": "%(nbVisible)s of %(nbTotal)s pages"
     }
 }

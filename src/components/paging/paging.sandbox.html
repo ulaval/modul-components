@@ -1,16 +1,21 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
+    <h3>Pagination : multi-pages</h3>
     <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
+        Affichage de la pagination
     </p>
     <p>
-        <h2>Page actuelle {{ currentPage }}</h2>
         <m-paging v-model="currentPage"
                   nb-of-items="1150"
-                  @change="alert()"></m-paging>
+                  @change="simulateBackEndCall()"
+                  :loading="loading"></m-paging>
+    </p>
+
+    <h3>Pagination : 1 page</h3>
+    <p class="m-u--margin-bottom">
+        Affichage de la pagination lorsqu'il y a seulement 1 page
+    </p>
+    <p>
+        <m-paging v-model="currentSinglePage"
+                  nb-of-items="10"></m-paging>
     </p>
 </div>

@@ -10,10 +10,14 @@ import WithRender from './paging.sandbox.html';
 @Component
 export class MPagingSandbox extends Vue {
     public currentPage: number = 1;
+    public currentSinglePage: number = 1;
+    public loading: boolean = false;
 
-    public alert(): void {
-        //  tslint:disable:no-console
-        console.log(this.currentPage);
+    public simulateBackEndCall(): void {
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false;
+        }, 2000);
     }
 }
 
