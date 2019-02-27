@@ -9,7 +9,7 @@ branches:
   - develop
 
 install:
-  - npm run ci
+  - npm ci
 
 script:
   - npm run clean
