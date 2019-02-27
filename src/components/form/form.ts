@@ -32,7 +32,6 @@ export class MForm extends ModulVue {
     }
 
     created(): void {
-        // get globaly registered form listener
         this.listeners = this.$form.listeners;
     }
 
@@ -68,7 +67,6 @@ export class MForm extends ModulVue {
     }
 
     public setListeners(listeners: MFormListener[]): void {
-        // set localy registered form listener
         this.listeners = listeners;
     }
 

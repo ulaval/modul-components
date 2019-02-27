@@ -3,7 +3,7 @@ import { Component } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
-import { MFormEvents } from '../../utils/form/form-service/form-service';
+import { MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
@@ -179,12 +179,9 @@ export class MFormSandbox extends ModulVue {
 
 
     mounted(): void {
-        this.$refs.form14.setListeners([{
-            eventType: MFormEvents.formError,
-            callback: (param: Form) => {
-                alert(`this is a custom form listener! toltaNbOfErrors =  ${param.totalNbOfErrors}`);
-            }
-        }]);
+        this.$refs.form14.setListeners([new MFormListener(MFormEvents.formError, (param: Form) => {
+            alert(`this is a custom form listener! toltaNbOfErrors =  ${param.totalNbOfErrors}`);
+        })]);
     }
 
     submit(formIndex: number): void {
