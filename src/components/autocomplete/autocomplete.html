@@ -17,6 +17,7 @@
             v-model="selection"
             @input="onInputChangeThrottled">
     <m-dropdown-item v-for="i in items"
+                     :key="i.value"
                      :value="i.value"
                      :label="i.label"
                      :non-filterable="true"></m-dropdown-item>

@@ -1,9 +1,12 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputStateTagStyle } from '../../mixins/input-state/input-state';
 import { InputMaxWidth } from '../../mixins/input-width/input-width';
+import { Enums } from '../../utils/enums/enums';
+import { ModulVue } from '../../utils/vue/vue';
 import { AUTOCOMPLETE_NAME } from '../component-names';
+import DropdownPlugin from '../dropdown/dropdown';
 import WithRender from './autocomplete.html?style=./autocomplete.scss';
 
 export interface MAutoCompleteResult {
@@ -13,7 +16,7 @@ export interface MAutoCompleteResult {
 
 @WithRender
 @Component
-export class MAutoComplete extends Vue {
+export class MAutocomplete extends ModulVue {
 
     @Model('change')
     model: string;
@@ -46,15 +49,7 @@ export class MAutoComplete extends Vue {
     requiredMarker: boolean;
     @Prop({
         default: InputStateTagStyle.Default,
-        validator: value =>
-            value === InputStateTagStyle.Default ||
-            value === InputStateTagStyle.H1 ||
-            value === InputStateTagStyle.H2 ||
-            value === InputStateTagStyle.H3 ||
-            value === InputStateTagStyle.H4 ||
-            value === InputStateTagStyle.H5 ||
-            value === InputStateTagStyle.H6 ||
-            value === InputStateTagStyle.P
+        validator: value => Enums.toValueArray(InputStateTagStyle).indexOf(value) !== -1
     })
     tagStyle: string;
 
@@ -73,10 +68,11 @@ export class MAutoComplete extends Vue {
         this.selection = this.model;
     }
 
+    @Emit('change')
     @Watch('selection')
-    onSelection(): void {
+    onSelection(): string {
         this.refreshItemsOnSelectionChange(this.selection);
-        this.$emit('change', this.selection);
+        return this.selection;
     }
 
     @Watch('results')
@@ -106,15 +102,21 @@ export class MAutoComplete extends Vue {
         if (value === '') {
             this.items = [];
         } else if (value.length >= this.minimumChars) {
-            this.$emit('complete', value);
+            this.emitComplete(value);
         }
+    }
+
+    @Emit('complete')
+    private emitComplete(value: string): string {
+        return value;
     }
 }
 
 const AutoCompletePlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(AUTOCOMPLETE_NAME, 'plugin.install');
-        v.component(AUTOCOMPLETE_NAME, MAutoComplete);
+        v.use(DropdownPlugin);
+        v.component(AUTOCOMPLETE_NAME, MAutocomplete);
     }
 };
 
