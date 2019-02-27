@@ -1,8 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
-const ProgressPlugin = require("webpack/lib/ProgressPlugin");
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 function resolve(dir) {
@@ -146,9 +146,10 @@ module.exports = function (env) {
             new ForkTsCheckerWebpackPlugin({
                 tsconfig: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
                 checkSyntacticErrors: true,
+                tslint: true,
+                async: false,
                 silent: isSilent
             }),
-            new ProgressPlugin(),
             new StyleLintPlugin({
                 configFile: '.stylelintrc',
                 emitErrors: true
@@ -166,6 +167,15 @@ module.exports = function (env) {
             template: resolve('tests/app/index.html'),
             inject: 'body'
         }));
+    } else {
+        config.optimization = {
+            minimizer: [
+                new UglifyJsPlugin({
+                    parallel: true,
+                    sourceMap: true
+                })
+            ]
+        };
     }
 
     return config;
