@@ -10,7 +10,7 @@ exports[`m-show-more Given nbVisible < nbTotal Should render correctly 1`] = `
 
 exports[`m-show-more Given nbVisible == nbTotal Should render correctly 1`] = `
 <div class="m-show-more">
-    <div class="m-show-more__status">m-show-more:status</div>
+  <div class="m-show-more__status">m-show-more:status</div>
 </div>
 `;
 
