@@ -152,7 +152,7 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
             && day.date.isAfter(new ModulDate((this.calendar.value as RangeDate).begin));
     }
 
-    isSelectionCompleted(day: DayState): boolean {
+    isInsideRange(day: DayState): boolean {
         return !!this.calendar.type && this.calendar.type === CalendarType.DATE_RANGE
             && !!this.calendar.value && !!(this.calendar.value as RangeDate).begin
             && !!this.calendar.value && !!(this.calendar.value as RangeDate).end

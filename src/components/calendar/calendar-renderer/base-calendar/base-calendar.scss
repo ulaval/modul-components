@@ -143,7 +143,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         &.m--is-highlighted {
             background-color: $m-color--interactive-lightest;
 
-            &:hover:not(.m--is-selection-start):not(.m--is-selection-completed) {
+            &:hover:not(.m--is-selection-start):not(.m--is-inside-range) {
                 border-radius: 50% 0 0 50%;
 
                 &.m--is-in-future {
