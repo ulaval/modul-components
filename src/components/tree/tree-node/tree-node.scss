@@ -155,12 +155,14 @@ $m-tree-node--child-indentation: 20px;
         background: $m-color--white;
     }
 
-    &.m--is-selected > &__item {
+    &.m--is-selected:not(.m-tree-node__has-children) > &__item,
+    &.m--is-selected:not(.m--is-read-only) > &__item {
         background-color: $m-color--interactive;
         color: $m-color--white;
     }
 
     &:not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) > &__item:not(.m-tree-node__item--no-hover):hover,
+    &:not(.m--is-disabled).m--is-selected:not(.m--is-read-only) > &__item:not(.m-tree-node__item--no-hover):hover,
     &:not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) > &__item.m-tree-node__item--no-hover:hover {
         background: rgba($m-color--interactive, 0.15);
         cursor: pointer;
