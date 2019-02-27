@@ -29,7 +29,7 @@ Please refer to [this repository](https://github.com/ulaval/modul-typescript-tem
 ### Deploy sandboxes
 
 1. Clone this project and install using npm install
-2. Run npm run setup
+2. Run npm run install
 3. Run npm run dev
 
 ### Deployment for local usage in your project
