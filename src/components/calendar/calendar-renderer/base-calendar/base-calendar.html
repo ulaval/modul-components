@@ -4,7 +4,7 @@
 
     <nav class="m-base-calendar__header"
          :class="{'m--is-select-mode': !isPickerModeDay}">
-        <m-icon-button class="m-base-calendar__previus"
+        <m-icon-button class="m-base-calendar__previous"
                        skin="link"
                        v-if="isPickerModeDay"
                        @click.stop="onMonthPrevious()"
@@ -14,7 +14,7 @@
         <button class="m-base-calendar__current-month-and-year"
                 @click.stop="onYearClick"
                 aria-live="polite"
-                ref="currentMonth"
+                ref="currentDate"
                 type="button">{{ currentMonthName }} {{ currentYear }}
         </button>
         <m-icon-button class="m-base-calendar__next"
