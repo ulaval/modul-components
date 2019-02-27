@@ -189,7 +189,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
             }
         }
 
-        &.m--is-other-month:not(.m--is-selected):not(:hover) {
+        &.m--is-other-month:not(.m--is-selected):not(.m--is-today):not(:hover) {
             color: $m-color--disabled;
         }
 
