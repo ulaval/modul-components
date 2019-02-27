@@ -74,7 +74,7 @@ export class MTreeNode extends ModulVue {
         if (this.isFolder) {
             this.internalOpen = !this.internalOpen;
             this.$emit('update:open', this.internalOpen);
-        } else if (this.selectable && !this.withCheckboxes) { // Clicks are emitted from checkboxes when true
+        } else if (this.selectable) {
             this.$emit('click', this.currentPath);
         }
     }
@@ -214,7 +214,7 @@ export class MTreeNode extends ModulVue {
 
     public get isReadonlyStyle(): boolean {
         let isReadonly: boolean = false;
-        if (!this.selectable && !this.isFolder && this.readonly) {
+        if (!this.selectable && this.readonly) {
             isReadonly = true;
         }
         return isReadonly;

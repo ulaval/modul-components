@@ -1,6 +1,5 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { SCROLL_TO } from '../utils-names';
 import { ModulVue } from '../vue/vue';
 import ScrollToPlugin, { ScrollToDuration } from './scroll-to';
 import WithRender from './scroll-to-service.sandbox.html';
@@ -15,9 +14,7 @@ export class MScrollToServivceSandbox extends ModulVue {
     scrollToGreenUsingService(): void {
         let _element: HTMLElement = this.$refs.green as HTMLElement;
 
-        this.$scrollTo.goTo(_element, +this.offset, this.speed).then((finalPosition) => {
-            alert(`callback at ${finalPosition}`);
-        });
+        this.$scrollTo.goTo(_element, +this.offset, this.speed);
     }
 
     scrollToBottom(): void {

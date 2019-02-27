@@ -28,72 +28,72 @@ export class MFormSandbox extends ModulVue {
             'field-1': new FormField<string>((): string => '', [])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }]),
-            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-2 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => 'predefined value', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => 'predefined value', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => 'predefined value', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => 'predefined value', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }]),
-            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-2 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, [`the <strong>field-1</strong> is required`], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }]),
-            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-2 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (value.length < 5) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (formField.value.length < 5) {
                     return new FormFieldValidation(true, [`the field-1 should be 5 letters at least`], ['this field should be 5 letters at least']);
                 }
                 return new FormFieldValidation();
             }]),
-            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (value.length < 5) {
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (formField.value.length < 5) {
                     return new FormFieldValidation(true, [`the field-2 should be 5 letters at least`], ['this field should be 5 letters at least']);
                 }
                 return new FormFieldValidation();
@@ -114,14 +114,14 @@ export class MFormSandbox extends ModulVue {
         new Form({
             'field-1': new FormField<string>((): string => '',
                 [
-                    (value: string): FormFieldValidation => {
-                        if (value.length < 5) {
+                    (formField: FormField<string>): FormFieldValidation => {
+                        if (formField.value.length < 5) {
                             return new FormFieldValidation(true, [`the field-1 should be 5 letters at least`], ['this field should be 5 letters at least']);
                         }
                         return new FormFieldValidation();
                     },
-                    (value: string): FormFieldValidation => {
-                        if (/\d/.test(value)) {
+                    (formField: FormField<string>): FormFieldValidation => {
+                        if (/\d/.test(formField.value)) {
                             return new FormFieldValidation(true, [`the field-1 cannot have number`], ['this field cannot have number']);
                         }
                         return new FormFieldValidation();
@@ -136,36 +136,44 @@ export class MFormSandbox extends ModulVue {
             'field-1': new FormField<string>((): string => '', [])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (formField.ExternalError) {
+                    return new FormFieldValidation(true, [], [formField.ExternalError]);
+                }
+                return new FormFieldValidation();
+            }])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }]),
-            'field-2': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-2 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }]),
-            'field-3': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-3': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-3 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
             }])
         }),
         new Form({
-            'field-1': new FormField<string>((): string => '', [(value: string): FormFieldValidation => {
-                if (!value) {
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
                     return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
                 }
                 return new FormFieldValidation();
@@ -174,12 +182,12 @@ export class MFormSandbox extends ModulVue {
     ];
 
     $refs: {
-        form14: MForm;
+        form15: MForm;
     };
 
 
     mounted(): void {
-        this.$refs.form14.setListeners([new MFormListener(MFormEvents.formError, (param: Form) => {
+        this.$refs.form15.setListeners([new MFormListener(MFormEvents.formError, (param: Form) => {
             alert(`this is a custom form listener! toltaNbOfErrors =  ${param.totalNbOfErrors}`);
         })]);
     }
@@ -187,6 +195,8 @@ export class MFormSandbox extends ModulVue {
     submit(formIndex: number): void {
         if (formIndex === 12) {
             this.hasServerResponse = true;
+        } else if (formIndex === 13) {
+            this.forms[13].get('field-1').ExternalError = 'Server ask you to change this value';
         }
     }
 

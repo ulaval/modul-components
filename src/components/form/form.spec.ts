@@ -45,7 +45,7 @@ describe(`MForm`, () => {
     };
 
     const initialiseForm: Function = (multiple: boolean): void => {
-        const VALIDATION_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
+        const VALIDATION_FUNCTION: FieldValidationCallback<string> = (): FormFieldValidation => fieldValidation;
         if (multiple) {
             FORM = new Form({
                 'a-field': new FormField((): string => '', [VALIDATION_FUNCTION]),

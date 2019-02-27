@@ -223,11 +223,6 @@ describe('MTreeNode', () => {
                 expect(wrapper.emitted('click')).toBeTruthy();
             });
 
-            it(`Should not emit a click when click is somewhere else`, () => {
-                wrapper.find(ITEM).trigger('click');
-                expect(wrapper.emitted('click')).toBeFalsy();
-            });
-
             describe(`and the node is the parent of two nodes`, () => {
 
                 describe(`and auto-select is on`, () => {

@@ -8,7 +8,8 @@ declare module 'vue/types/vue' {
 
 export enum ScrollToDuration {
     Regular = 'regular',
-    Long = 'long'
+    Long = 'long',
+    Instant = 'instant'
 }
 
 // linear
@@ -145,9 +146,9 @@ export class ScrollTo {
             const distanceToScroll: number = targetLocation - startLocation;
             const _duration: number = this.getDuration(duration);
 
-            const step: any = (currentTime) => {
-                const progressPercentage: number = Math.min(1, ((currentTime - startTime) / _duration));
-                const targetPosition: number = Math.floor(startLocation + distanceToScroll * easing(progressPercentage));
+            const step: any = (currentTime: number) => {
+                const progressPercentage: number = _duration ? Math.min(1, ((currentTime - startTime) / _duration)) : 100;
+                const targetPosition: number = _duration ? Math.floor(startLocation + distanceToScroll * easing(progressPercentage)) : targetLocation;
 
                 if (container) {
                     container.scrollTop = targetPosition;
@@ -219,8 +220,11 @@ export class ScrollTo {
         switch (speed) {
             case ScrollToDuration.Long:
                 return 1000;
-            default:
+            case ScrollToDuration.Regular:
                 return 600;
+            case ScrollToDuration.Instant:
+                return 0;
+            default: throw Error('scrollToUtil: Unknown scroll duration.');
         }
     }
 

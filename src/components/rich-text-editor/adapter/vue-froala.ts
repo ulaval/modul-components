@@ -2,7 +2,7 @@
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
 import $ from 'jquery';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
 import imageAlignCenterIcon from '../../../assets/icons/svg/Froala-image-align-center.svg';
 import imageAlignLeftIcon from '../../../assets/icons/svg/Froala-image-align-left.svg';
@@ -75,6 +75,9 @@ export enum FroalaStatus {
 
     @Prop()
     public customTranslations: { [key: string]: string };
+
+    @Emit('fullscreen')
+    onFullscreen(fullscreenWasActived: boolean): void { }
 
     protected internalValue: string = '';
     protected currentTag: string = 'div';
@@ -272,7 +275,7 @@ export enum FroalaStatus {
 
     protected mouseupListener(event: MouseEvent): void {
         this.mousedownTriggered = false;
-        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement)) {
+        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused) {
             this.closeEditor();
         }
     }
@@ -415,7 +418,25 @@ export enum FroalaStatus {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return this.removeEmptyHTML(data);
+                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+                    }
+                },
+                [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
+                    if (cmd === 'fullscreen') {
+
+                        let fullscreenWasActivated: boolean = !_editor.fullscreen.isActive();
+                        this.onFullscreen(fullscreenWasActivated);
+
+                        if (fullscreenWasActivated) {
+                            this.hideToolbar();
+                        }
+                    }
+                },
+                [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
+                    if (cmd === 'fullscreen') {
+                        if (_editor.fullscreen.isActive()) {
+                            this.showToolbar();
+                        }
                     }
                 },
                 [froalaEvents.ShowLinkInsert]: (_e, editor) => {
@@ -580,7 +601,14 @@ export enum FroalaStatus {
     }
 
     private removeEmptyHTML(value: string): string {
-        return this.froalaEditor.clean.html(value, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+        const div: HTMLElement = document.createElement('div');
+        div.innerHTML = value;
+        if ((div.textContent || div.innerText || '').trim().length > 0) {
+            return value;
+        } else if (value.includes('<img')) {
+            return value;
+        }
+        return '';
     }
 
     private registerEvent(element: any, eventName: any, callback: any): void {

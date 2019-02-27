@@ -10,6 +10,7 @@ import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
 import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
+import DaterangepickerPlugin from './daterangepicker/daterangepicker';
 import DialogPlugin from './dialog/dialog';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DropdownPlugin from './dropdown/dropdown';
@@ -105,6 +106,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(CheckboxPlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
+        Vue.use(DaterangepickerPlugin);
         Vue.use(ModalPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(DropdownGroupPlugin);
