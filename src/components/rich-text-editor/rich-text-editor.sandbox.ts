@@ -5,13 +5,16 @@ import { MFile } from '../../utils/file/file';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import { MModalSize } from '../modal/modal';
 import OverlayPlugin from '../overlay/overlay';
+import RadioGroupPlugin from '../radio-group/radio-group';
 import RadioPlugin from '../radio/radio';
 import { MRichText } from '../rich-text/rich-text';
 import TextfieldPlugin from '../textfield/textfield';
 import { MRichTextEditor, MRichTextEditorMode } from './rich-text-editor';
 import WithRender from './rich-text-editor.sandbox.html';
 import RichTextLicensePlugin from './rich-text-license-plugin';
+
 
 @WithRender
 @Component({
@@ -41,6 +44,9 @@ export class MRichTextEditorSandBox extends ModulVue {
     public resetValue: string = '';
 
     public fileList: { file: MFile, id: string }[] = [];
+    radioValue: string = '2';
+
+    public fullscreen: boolean = false;
 
     public alertTestSuccess(message: string): void {
         alert(message);
@@ -75,12 +81,21 @@ export class MRichTextEditorSandBox extends ModulVue {
         // would delete on server here
         this.fileList = this.fileList.filter(file => file.id !== id);
     }
+
+    public onFullscreen(fullscreenWasActivated: boolean): void {
+        this.fullscreen = fullscreenWasActivated;
+    }
+
+    public get modalSize(): string {
+        return this.fullscreen ? MModalSize.FullScreen : MModalSize.Regular;
+    }
 }
 const RichTextEditorSandBoxPlugin: PluginObject<any> = {
     install(v): void {
         v.use(ButtonPlugin);
         v.use(OverlayPlugin);
         v.use(TextfieldPlugin);
+        v.use(RadioGroupPlugin);
         v.use(RadioPlugin);
         v.use(RichTextLicensePlugin, { key: `test` });
         v.component(`m-rich-text-editor-sandbox`, MRichTextEditorSandBox);

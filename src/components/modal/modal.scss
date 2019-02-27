@@ -72,7 +72,7 @@ $m-modal--max-width--s: 420px !default;
         }
 
         &:not(.m--is-full-screen) {
-            padding: $m-padding--l $m-padding--l 0 $m-padding--l;
+            padding: 0 $m-padding--l 0 $m-padding--l;
 
             .m-modal__article {
                 transition: transform $m-transition-duration ease, opacity $m-transition-duration--s linear;

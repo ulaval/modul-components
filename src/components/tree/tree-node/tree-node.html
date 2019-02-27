@@ -2,19 +2,24 @@
     :class="{ 'm--is-selected': isSelected && !isDisabled,
             'm--is-disabled' : isDisabled,
             'm--is-read-only' : isReadonlyStyle,
-            'm-tree-node__has-children' : hasChildren }">
+            'm-tree-node__has-children' : isFolder,
+            'm-tree-node__with-checkboxes' : withCheckboxes,
+            'm-tree-node__file-icons' : useFilesIcons }">
     <div class="m-tree-node__item"
          ref="item"
          role="button"
          :class="{ 'm-tree-node__item--no-hover': moveSelectionZoneToCheckbox }"
-         :tabindex="isDisabled ? '-1' : 1"
+         :tabindex="isDisabled ? '-1' : 0"
          @click="onClick">
+        <m-tree-icon v-if="useFilesIcons"
+                     class="m-tree-icon"
+                     :is-folder-open="internalOpen"
+                     :is-folder="isFolder"></m-tree-icon>
         <m-tree-icon class="m-tree-icon"
                      :filename="node.id"
                      :is-folder-open="internalOpen"
                      :use-files-icons="useFilesIcons"
                      :is-folder="isFolder"></m-tree-icon>
-        <span class="m-tree-node__item__label">{{label}}</span>
         <m-checkbox v-if="withCheckboxes"
                     ref="checkbox"
                     :value="isSelected"
@@ -22,6 +27,8 @@
                     :disabled="isDisabled"
                     :readonly="readonly"
                     @change="onCheckboxClick"></m-checkbox>
+        <span class="m-tree-node__item-label">{{label}}</span>
+        <span class="m-tree-node__item-check"></span>
     </div>
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">

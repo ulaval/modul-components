@@ -217,7 +217,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
             months.push({
                 month: index,
                 isCurrent: this.currentlyDisplayedMonth() === index,
-                isDisabled: !date.isBetweenStrict(this.currentMinDate, this.currentMaxDate, DatePrecision.MONTH)
+                isDisabled: !date.isBetween(this.currentMinDate, this.currentMaxDate, DatePrecision.MONTH)
             });
         }
         return months;
