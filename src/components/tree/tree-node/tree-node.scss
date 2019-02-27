@@ -81,6 +81,10 @@ $m-tree-node--child-indentation: 20px;
             right: 0;
         }
 
+        &:focus {
+            outline: 1px solid $m-color--interactive-lighter;
+        }
+
         /deep/ .m-checkbox__input {
             margin-right: $m-tree-node--child-indentation / 2;
         }
@@ -151,7 +155,7 @@ $m-tree-node--child-indentation: 20px;
         background: $m-color--white;
     }
 
-    &.m--is-selected:not(.m--is-read-only) > &__item {
+    &.m--is-selected > &__item {
         background-color: $m-color--interactive;
         color: $m-color--white;
     }
@@ -194,6 +198,8 @@ $m-tree-node--child-indentation: 20px;
         padding-left: $m-tree-node--height + 10px;
     }
 
+    /* Règles des exceptions du Tree-node with checkboxes  */
+
     &.m-tree-node__with-checkboxes:not(.m-tree-node__has-children) > .m-tree-node__item {
         color: $m-color--text;
     }
@@ -227,7 +233,7 @@ $m-tree-node--child-indentation: 20px;
         color: $m-color--interactive;
     }
 
-    &.m-tree-node__with-checkboxes.m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
+    &.m-tree-node__with-checkboxes.m--is-selected:not(.m--is-read-only) > .m-tree-node__item.m-tree-node__item--no-hover {
         background-color: $m-color--white;
         color: $m-color--text;
 
@@ -236,7 +242,12 @@ $m-tree-node--child-indentation: 20px;
         }
     }
 
+    &.m-tree-node__with-checkboxes.m--is-selected.m--is-read-only > .m-tree-node__item.m-tree-node__item--no-hover:hover {
+        cursor: default;
+    }
+
     &.m-tree-node__with-checkboxes:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
         cursor: pointer;
+        background-color: $m-color--white;
     }
 }
