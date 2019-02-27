@@ -140,7 +140,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
                 this.toIsFocused = true;
             }
 
-            this.emitNewValue({ from: this.getNewModelValue(newValue), to: newValue > (this.internalValue.to || '') ? undefined : dateToValue });
+            this.emitNewValue({ from: this.getNewModelValue(newValue), to: dateToValue });
         } else {
             this.emitNewValue({ from: undefined, to: dateToValue });
         }
