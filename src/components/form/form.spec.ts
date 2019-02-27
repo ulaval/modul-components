@@ -137,10 +137,9 @@ describe(`MForm`, () => {
 
                 wrapper.trigger('submit');
 
-                expect(spy).toHaveBeenCalledWith(MFormEvents.formError, {
-                    form: mockForm,
-                    totalNbOfErrors
-                });
+                expect(spy).toHaveBeenCalledTimes(2);
+                expect(spy.mock.calls[0][0]).toEqual(MFormEvents.formErrorClear);
+                expect(spy.mock.calls[1][0]).toEqual(MFormEvents.formError);
             });
 
             it(`Then the submit event is not sent to the parent`, () => {
@@ -173,16 +172,9 @@ describe(`MForm`, () => {
 
                 wrapper.trigger('submit');
 
-                expect(spy).toHaveBeenCalledWith(MFormEvents.formError, {
-                    form: mockForm,
-                    totalNbOfErrors
-                });
-            });
-
-            it(`Then the summary of errors is shown`, async () => {
-                wrapper.trigger('submit');
-
-                expect(wrapper.find(REF_SUMMARY).exists()).toBeTruthy();
+                expect(spy).toHaveBeenCalledTimes(2);
+                expect(spy.mock.calls[0][0]).toEqual(MFormEvents.formErrorClear);
+                expect(spy.mock.calls[1][0]).toEqual(MFormEvents.formError);
             });
         });
     });

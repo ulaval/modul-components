@@ -62,19 +62,17 @@ export class MForm extends ModulVue {
         this.onReset();
     }
 
-    public get shouldShowErrorSummary(): boolean {
-        return this.form.nbFieldsThatHasError > 1 || this.form.nbOfErrors > 0;
-    }
-
     public setListeners(listeners: MFormListener[]): void {
         this.listeners = listeners;
     }
 
     private handleErrors(): void {
-        this.errors = this.form.getErrorsForSummary();
         this.emit(MFormEvents.formError, {
             form: this.form,
-            totalNbOfErrors: this.form.totalNbOfErrors
+            totalNbOfErrors: this.form.totalNbOfErrors,
+            errorsToShowInMessagesCallback: (errors: string[]) => {
+                this.errors = errors;
+            }
         });
     }
 

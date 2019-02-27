@@ -3,7 +3,7 @@ import { Component } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
-import { MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
+import { FormErrorFocusBehavior, FormErrorMessagesBehavior, MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
@@ -178,18 +178,36 @@ export class MFormSandbox extends ModulVue {
                 }
                 return new FormFieldValidation();
             }])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
+                    return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }]),
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
+                    return new FormFieldValidation(true, ['the field-2 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }])
         })
     ];
 
     $refs: {
         form15: MForm;
+        form16: MForm;
     };
-
 
     mounted(): void {
         this.$refs.form15.setListeners([new MFormListener(MFormEvents.formError, (param: Form) => {
             alert(`this is a custom form listener! toltaNbOfErrors =  ${param.totalNbOfErrors}`);
         })]);
+        this.$refs.form16.setListeners([
+            new FormErrorMessagesBehavior(),
+            new FormErrorFocusBehavior()
+        ]);
     }
 
     submit(formIndex: number): void {

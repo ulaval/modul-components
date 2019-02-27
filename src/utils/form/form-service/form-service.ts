@@ -7,6 +7,7 @@ import { Form } from '../form';
 export interface MFormEventParams {
     form?: Form;
     totalNbOfErrors?: number;
+    errorsToShowInMessagesCallback?: (errors: string[]) => void;
 }
 
 type ListenerCallback = (params?: MFormEventParams) => void;
@@ -17,7 +18,7 @@ export enum MFormEvents {
 }
 
 export class MFormListener {
-    constructor(public eventType: MFormEvents, public callback: ListenerCallback) { }
+    constructor(public readonly eventType: MFormEvents, public readonly callback: ListenerCallback) { }
 }
 
 export class FormClearToastBehavior extends MFormListener {
@@ -48,6 +49,16 @@ export class FormErrorFocusBehavior extends MFormListener {
         super(MFormEvents.formError, (params) => {
             if (params && params.form) {
                 params.form.focusFirstFieldWithError();
+            }
+        });
+    }
+}
+
+export class FormErrorMessagesBehavior extends MFormListener {
+    constructor() {
+        super(MFormEvents.formError, (params) => {
+            if (params && params.form && params.errorsToShowInMessagesCallback && (params.form.nbFieldsThatHasError > 1 || params.form.nbOfErrors > 0)) {
+                params.errorsToShowInMessagesCallback(params.form.getErrorsForSummary());
             }
         });
     }
