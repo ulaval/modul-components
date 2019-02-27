@@ -62,16 +62,22 @@ $m-tree-node--child-indentation: 20px;
 
         > .m-tree-node:not(.m--is-single):not(.m-tree-node__has-children) {
             &::after {
-                top: -23px;
+                top: -23px; // Magic number
             }
         }
 
         > .m-tree-node:first-child:not(.m--is-single):not(.m-tree-node__has-children) {
             &::after {
-                top: 10px; // Magic number
-                background-color: $m-color--white;
-                z-index: 10;
-                height: 6px; // Magic number
+                top: 16px; // Magic number
+                height: 39px; // Magic number
+            }
+
+            + .m-tree-node:not(.m--is-single)::after {
+                top: -22px; // Magic number
+            }
+
+            + .m-tree-node:last-child:not(.m--is-single)::after {
+                display: none;
             }
         }
     }

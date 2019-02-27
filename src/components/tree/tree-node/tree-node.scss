@@ -229,12 +229,12 @@ $m-tree-node--child-indentation: 20px;
     }
 
     &.m-tree-node__with-checkboxes:not(.m--is-read-only):not(.m--is-disabled):not(.m--is-selected) > .m-tree-node__item.m-tree-node__item--no-hover:hover {
-        background: $m-color--white;
+        background: transparent;
         color: $m-color--interactive;
     }
 
     &.m-tree-node__with-checkboxes.m--is-selected:not(.m--is-read-only) > .m-tree-node__item.m-tree-node__item--no-hover {
-        background-color: $m-color--white;
+        background-color: transparent;
         color: $m-color--text;
 
         &:hover {
@@ -248,6 +248,6 @@ $m-tree-node--child-indentation: 20px;
 
     &.m-tree-node__with-checkboxes:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
         cursor: pointer;
-        background-color: $m-color--white;
+        background-color: transparent;
     }
 }

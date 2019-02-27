@@ -94,11 +94,11 @@ export class MRootTreeSandbox extends Vue {
     public tree2: TreeNode[] = [
         {
             id: '6',
-            label: 'Title 2'
+            label: 'Title 1'
         },
         {
             id: '1',
-            label: 'Title 1',
+            label: 'Title 2',
             hasChildren: true,
             children: [
                 {
