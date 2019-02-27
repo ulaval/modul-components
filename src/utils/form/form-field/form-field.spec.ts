@@ -9,7 +9,7 @@ const NEW_FIELD_VALUE: string = 'NEW VALUE';
 const ERROR_MESSAGE: string = 'ERROR';
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR SUMMARY';
 const FIELD_VALUE: string = 'VALUE';
-const VALIDATION_FUNCTION: FieldValidationCallback[] = [(): FormFieldValidation => validationState];
+const VALIDATION_FUNCTION: FieldValidationCallback<string>[] = [(): FormFieldValidation => validationState];
 
 describe(`FormField`, () => {
     describe(`When we create a new instance with a value and a validating function`, () => {
