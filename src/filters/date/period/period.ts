@@ -8,23 +8,27 @@ export type ModulPeriod = {
     end?: Date
 };
 
+export enum PeriodFilterMode {
+    FULLMODE = 'full',
+    COMPACTMODE = 'compact'
+}
+
 export interface PeriodFilterParams {
-    period: ModulPeriod;
-    fullMode?: boolean;
+    mode?: PeriodFilterMode;
 }
 
 export class PeriodFilter {
-    static formatPeriod(params: PeriodFilterParams): string {
+    static formatPeriod(period: ModulPeriod, params: PeriodFilterParams = { mode: PeriodFilterMode.COMPACTMODE }): string {
         let formattedPeriod: string;
 
-        if (params.fullMode && params.period.start && params.period.end) {
-            formattedPeriod = PeriodFilter.fullStartAndEndDate(params.period.start, params.period.end);
-        } else if (params.period.start && params.period.end) {
-            formattedPeriod = PeriodFilter.compactStartAndEndDate(params.period.start, params.period.end);
-        } else if (params.period.start && !params.period.end) {
-            formattedPeriod = PeriodFilter.onlyStartDate(params.period.start);
-        } else if (params.period.end && !params.period.start) {
-            formattedPeriod = PeriodFilter.onlyEndDate(params.period.end);
+        if (params.mode === PeriodFilterMode.FULLMODE && period.start && period.end) {
+            formattedPeriod = PeriodFilter.fullStartAndEndDate(period.start, period.end);
+        } else if (period.start && period.end) {
+            formattedPeriod = PeriodFilter.compactStartAndEndDate(period.start, period.end);
+        } else if (period.start && !period.end) {
+            formattedPeriod = PeriodFilter.onlyStartDate(period.start);
+        } else if (period.end && !period.start) {
+            formattedPeriod = PeriodFilter.onlyEndDate(period.end);
         } else {
             throw new Error('Period must have at least one Date');
         }

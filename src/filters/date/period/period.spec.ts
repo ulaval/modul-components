@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { addMessages } from '../../../../tests/helpers/lang';
 import { PERIOD_NAME } from '../../filter-names';
-import { ModulPeriod, PeriodFilter, PeriodFilterParams } from './period';
+import { ModulPeriod, PeriodFilter, PeriodFilterMode } from './period';
 
 describe(PERIOD_NAME, () => {
     beforeEach(() => {
@@ -17,14 +17,10 @@ describe(PERIOD_NAME, () => {
                     start: startDate,
                     end: endDate
                 };
-                const periodParams: PeriodFilterParams = {
-                    period,
-                    fullMode: true
-                };
                 startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
                 endDate.toLocaleDateString = jest.fn(() => '14 mai 2019');
 
-                expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Du 8 avril 2019 au 14 mai 2019');
+                expect(PeriodFilter.formatPeriod(period, { mode: PeriodFilterMode.FULLMODE })).toEqual('Du 8 avril 2019 au 14 mai 2019');
             });
         });
 
@@ -37,13 +33,10 @@ describe(PERIOD_NAME, () => {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: PeriodFilterParams = {
-                        period
-                    };
                     startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
                     endDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
 
-                    expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Le 8 avril 2019');
+                    expect(PeriodFilter.formatPeriod(period)).toEqual('Le 8 avril 2019');
                 });
             });
 
@@ -55,14 +48,11 @@ describe(PERIOD_NAME, () => {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: PeriodFilterParams = {
-                        period
-                    };
                     startDate.toLocaleDateString = jest.fn(() => '8');
                     endDate.toLocaleDateString = jest.fn(() => '14 avril 2019');
                     jest.spyOn(Vue.prototype.$i18n, 'getCurrentLocale').mockReturnValue('fr-CA');
 
-                    expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Du 8 au 14 avril 2019');
+                    expect(PeriodFilter.formatPeriod(period)).toEqual('Du 8 au 14 avril 2019');
                     expect(startDate.toLocaleDateString).toHaveBeenCalledWith(['fr-CA'], {
                         year: undefined,
                         month: undefined,
@@ -79,14 +69,11 @@ describe(PERIOD_NAME, () => {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: PeriodFilterParams = {
-                        period
-                    };
                     startDate.toLocaleDateString = jest.fn(() => '8 avril');
                     endDate.toLocaleDateString = jest.fn(() => '14 mai 2019');
                     jest.spyOn(Vue.prototype.$i18n, 'getCurrentLocale').mockReturnValue('fr-CA');
 
-                    expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Du 8 avril au 14 mai 2019');
+                    expect(PeriodFilter.formatPeriod(period)).toEqual('Du 8 avril au 14 mai 2019');
                     expect(startDate.toLocaleDateString).toHaveBeenCalledWith(['fr-CA'], {
                         year: undefined,
                         month: 'long',
@@ -103,13 +90,10 @@ describe(PERIOD_NAME, () => {
                         start: startDate,
                         end: endDate
                     };
-                    const periodParams: PeriodFilterParams = {
-                        period
-                    };
                     startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
                     endDate.toLocaleDateString = jest.fn(() => '14 mai 2020');
 
-                    expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Du 8 avril 2019 au 14 mai 2020');
+                    expect(PeriodFilter.formatPeriod(period)).toEqual('Du 8 avril 2019 au 14 mai 2020');
                 });
             });
         });
@@ -121,12 +105,9 @@ describe(PERIOD_NAME, () => {
             const period: ModulPeriod = {
                 start: startDate
             };
-            const periodParams: PeriodFilterParams = {
-                period
-            };
             startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
 
-            expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Débute le 8 avril 2019');
+            expect(PeriodFilter.formatPeriod(period)).toEqual('Débute le 8 avril 2019');
         });
     });
 
@@ -136,23 +117,17 @@ describe(PERIOD_NAME, () => {
             const period: ModulPeriod = {
                 end: endDate
             };
-            const periodParams: PeriodFilterParams = {
-                period
-            };
             endDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
 
-            expect(PeriodFilter.formatPeriod(periodParams)).toEqual('Se termine le 8 avril 2019');
+            expect(PeriodFilter.formatPeriod(period)).toEqual('Se termine le 8 avril 2019');
         });
     });
 
     describe(`Given both dates are missing`, () => {
         it(`then it throws an error`, () => {
             const period: ModulPeriod = {};
-            const periodParams: PeriodFilterParams = {
-                period
-            };
 
-            expect(() => PeriodFilter.formatPeriod(periodParams)).toThrow(Error);
+            expect(() => PeriodFilter.formatPeriod(period)).toThrow(Error);
         });
     });
 });

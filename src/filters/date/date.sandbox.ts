@@ -5,7 +5,7 @@ import DateFilterPlugin from './date';
 import { dateTimeFilter } from './date-time/date-time';
 import WithRender from './date.sandbox.html';
 import { dateFilter } from './date/date';
-import { ModulPeriod, PeriodFilter, PeriodFilterParams } from './period/period';
+import { ModulPeriod, PeriodFilter, PeriodFilterMode } from './period/period';
 
 @WithRender
 @Component
@@ -14,7 +14,7 @@ export class MDateSandbox extends Vue {
 
     year: number = this.now.getFullYear();
     month: number = this.now.getMonth() + 1;
-    day: number = this.now.getDay();
+    day: number = 1;
     hours: number = this.now.getHours();
     minutes: number = this.now.getMinutes();
 
@@ -52,26 +52,24 @@ export class MDateSandbox extends Vue {
             end: this.dateLater
         };
 
-        const periodParams: PeriodFilterParams = {
-            period
-        };
-
-        return PeriodFilter.formatPeriod(periodParams);
+        return PeriodFilter.formatPeriod(period);
     }
 
-    get periodThroughFilter(): PeriodFilterParams {
+    get formattedPeriodFullMode(): string {
         const period: ModulPeriod = {
             start: this.date,
             end: this.dateLater
         };
 
-        const periodParams: PeriodFilterParams = {
-            period
-        };
-
-        return periodParams;
+        return PeriodFilter.formatPeriod(period, { mode: PeriodFilterMode.FULLMODE });
     }
 
+    get periodThroughFilter(): ModulPeriod {
+        return {
+            start: this.date,
+            end: this.dateLater
+        };
+    }
 }
 
 const DateSandboxPlugin: PluginObject<any> = {
