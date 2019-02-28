@@ -174,7 +174,8 @@ $m-checkbox--width: 16px;
             }
 
             &__input {
-                border-color: $m-color--text;
+                border-color: $m-color--grey-light;
+                background-color: $m-color--grey-lighter;
 
                 &__icon {
                     &::before,
