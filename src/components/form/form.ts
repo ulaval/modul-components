@@ -1,13 +1,10 @@
-import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
-import { FORM_FIELD_NAME } from '../../directives/directive-names';
 import { Form } from '../../utils/form/form';
+import { MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
 import { ModulVue } from '../../utils/vue/vue';
-import { FORM } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
-import MessagePlugin, { MMessageState } from '../message/message';
-import { FormFieldDirective } from './form-field';
+import { MMessageState } from '../message/message';
 import WithRender from './form.html?style=./form.scss';
+
 
 @WithRender
 @Component
@@ -21,6 +18,8 @@ export class MForm extends ModulVue {
     public messageStateError: MMessageState = MMessageState.Error;
     public errors: string[] = [];
 
+    listeners: MFormListener[];
+
     @Emit('submit')
 
     public onSubmit(): void { }
@@ -32,20 +31,21 @@ export class MForm extends ModulVue {
         return this.errors.length > 0;
     }
 
+    created(): void {
+        this.listeners = this.$form.listeners;
+    }
+
     public submit(): void {
+        this.emit(MFormEvents.formErrorClear);
+
         if (this.form) {
             this.errors = [];
             this.form.validateAll();
 
-            if (this.form.nbFieldsThatHasError === 0 && this.form.nbOfErrors === 0) {
+            if (this.form.isValid) {
                 this.onSubmit();
-            } else if (this.form.nbFieldsThatHasError === 1) {
-                if (this.form.nbOfErrors > 0) {
-                    this.errors = this.form.getErrorsForSummary();
-                }
-                this.form.focusFirstFieldWithError();
             } else {
-                this.errors = this.form.getErrorsForSummary();
+                this.handleErrors();
             }
         } else {
             this.onSubmit();
@@ -54,23 +54,32 @@ export class MForm extends ModulVue {
 
     public reset(): void {
         this.errors = [];
+        this.emit(MFormEvents.formErrorClear);
 
         if (this.form) {
             this.form.reset();
         }
         this.onReset();
     }
+
+    public setListeners(listeners: MFormListener[]): void {
+        this.listeners = listeners;
+    }
+
+    private handleErrors(): void {
+        this.emit(MFormEvents.formError, {
+            form: this.form,
+            totalNbOfErrors: this.form.totalNbOfErrors,
+            errorsToShowInMessagesCallback: (errors: string[]) => {
+                this.errors = errors;
+            }
+        });
+    }
+
+    emit(eventType: MFormEvents, params?: any): void {
+        this.listeners
+            .filter((listener: MFormListener) => listener.eventType === eventType)
+            .forEach((listener: MFormListener) => listener.callback(params));
+    }
 }
 
-
-const FormPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.debug(FORM, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(MessagePlugin);
-        v.directive(FORM_FIELD_NAME, FormFieldDirective);
-        v.component(FORM, MForm);
-    }
-};
-
-export default FormPlugin;

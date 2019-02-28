@@ -1,6 +1,14 @@
 <m-periodpicker v-bind="periodPickerProps"
                 @input="updateValue"
-                ref="periodpicker">
+                ref="periodpicker"
+                :disabled="disabled"
+                :waiting="waiting"
+                :error="error"
+                :valid="valid"
+                :readonly="readonly"
+                :error-message="errorMessage"
+                :valid-message="validMessage"
+                :helper-message="helperMessage">
     <m-datepicker :label="labelFrom"
                   slot="first"
                   slot-scope="{ props, handlers }"

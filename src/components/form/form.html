@@ -4,7 +4,7 @@
       @reset.prevent="reset">
     <m-accordion-transition>
         <m-message class="m-form__message-summary"
-                   v-if="hasErrors"
+                   v-if="errors.length > 0"
                    :state="messageStateError"
                    ref="summary">
             <ul>
