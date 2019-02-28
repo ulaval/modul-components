@@ -744,10 +744,10 @@
         <polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
             2,13.3 7.4,18.7 22,5.3 "/>
     </symbol>
-        <symbol id="m-svg__role-assignation" viewBox="-1 -1 26 26">
-        <path fill="currentColor" d="M18 8.3l-2.3-3h7.5M18 2.3l-2.3 3"/>
-        <circle fill="currentColor" cx="6.8" cy="3.8" r="3"/>
-        <path fill="currentColor" d="M6.8 7.5c-3.3 0-6 2.7-6 6v2.2c0 .8.7 1.5 1.5 1.5h1.5v4.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5v-4.5h1.5c.8 0 1.5-.7 1.5-1.5v-2.2c0-3.3-2.7-6-6-6z"/>
+    <symbol id="m-svg__role-assignation" viewBox="-1 -1 26 26">
+        <path d="M18 8.3l-2.3-3h7.5m-5.2-3l-2.3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" cx="6.8" cy="3.8" r="3"/>
+        <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" d="M6.8 7.5c-3.3 0-6 2.7-6 6v2.2c0 .8.7 1.5 1.5 1.5h1.5v4.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5v-4.5h1.5c.8 0 1.5-.7 1.5-1.5v-2.2c0-3.3-2.7-6-6-6z"/>
     </symbol>
     <symbol id="m-svg__search" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M23.1,23.1L23.1,23.1
