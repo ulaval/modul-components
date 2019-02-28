@@ -11,7 +11,8 @@ export enum MIconButtonSkin {
     Dark = 'dark',
     Primary = 'primary',
     Secondary = 'secondary',
-    Link = 'link'
+    Link = 'link',
+    Bold = 'bold'
 }
 
 @WithRender
@@ -24,7 +25,8 @@ export class MIconButton extends Vue {
             value === MIconButtonSkin.Dark ||
             value === MIconButtonSkin.Primary ||
             value === MIconButtonSkin.Secondary ||
-            value === MIconButtonSkin.Link
+            value === MIconButtonSkin.Link ||
+            value === MIconButtonSkin.Bold
     })
     public skin: MIconButtonSkin;
     @Prop()
@@ -80,6 +82,10 @@ export class MIconButton extends Vue {
 
     private get isSkinLink(): boolean {
         return this.skin === MIconButtonSkin.Link;
+    }
+
+    private get isSkinBold(): boolean {
+        return this.skin === MIconButtonSkin.Bold;
     }
 }
 

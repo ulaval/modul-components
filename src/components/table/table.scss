@@ -11,6 +11,36 @@
         th {
             color: $m-color--grey;
             font-weight: $m-font-weight--bold;
+
+            &.m--is-sortable {
+                .m-table__header-name {
+                    cursor: pointer;
+                }
+
+                .m-table__sortable-icon {
+                    position: relative;
+                    top: -5px;
+                    opacity: 0;
+                }
+
+                &:hover {
+                    color: $m-color--grey-darker;
+
+                    .m-table__sortable-icon {
+                        color: $m-color--grey;
+                        opacity: 0.6;
+                    }
+                }
+
+                &.m--is-sorted {
+                    color: $m-color--grey-darker;
+
+                    .m-table__sortable-icon {
+                        color: $m-color--grey-darker;
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
 

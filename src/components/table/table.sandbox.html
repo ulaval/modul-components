@@ -106,4 +106,16 @@
              :rows="rows"
              :loading="true">
     </m-table>
+
+    <h2>Sortable table</h2>
+    <p>Colonne trié: {{ sortedColumn.dataProp }}
+    </p>
+    <p>Tri :
+        <template v-if="sortedColumn.ascending">Ascendant</template>
+        <template v-else>Descendant</template>
+    </p>
+    <m-table :columns="sortableColumns"
+             :sorted-column.sync="sortedColumn"
+             @update:sortedColumn="launchSorting()"></m-table>
+
 </div>

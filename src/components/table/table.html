@@ -6,10 +6,21 @@
             <tr>
                 <th v-for="column in columns"
                     :style="columnWidth(column)"
+                    :class="{'m--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column)}"
                     :key="column.id"
                     scope="col">
                     <slot :name="'header.' + column.dataProp"
-                          :column="column">{{ column.title }}</slot>
+                          :column="column">
+                        <span class="m-table__header-name"
+                              @click="sort(column)">{{ column.title }}</span>
+                        <m-icon-button v-if="column.sortable"
+                                       class="m-table__sortable-icon"
+                                       skin="bold"
+                                       :icon-name="getIconName(column)"
+                                       button-size="12px"
+                                       @click="sort(column)"></m-icon-button>
+                    </slot>
+
                 </th>
 
             </tr>

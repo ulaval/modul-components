@@ -13,7 +13,7 @@ const SLOT_FOOTER: string = '<td>SLOT FOOTER</td>';
 let rows: any[] = [];
 
 const columns: MColumnTable[] = [
-    { id: 'a', title: 'A', dataProp: 'a', width: '10%' },
+    { id: 'a', title: 'A', dataProp: 'a', width: '10%', sortable: true },
     { id: 'b', title: 'B', dataProp: 'b' }
 ];
 
