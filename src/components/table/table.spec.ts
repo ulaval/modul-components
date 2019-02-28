@@ -1,4 +1,5 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
+import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import { MColumnTable, MTable } from './table';
 
@@ -105,6 +106,22 @@ describe(`MTable`, () => {
                 initializeShallowWrapper();
 
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+            });
+        });
+
+        describe(`When a column is sortable`, () => {
+            it(`Should show a button with the label on it`, async () => {
+                const icon: Wrapper<Vue> = wrapper.find('.m-table__sortable-icon');
+
+                expect(icon.exists()).toBeTruthy();
+            });
+        });
+
+        describe(`When the arrow is clicked`, () => {
+            it(`Should emit a action event`, () => {
+                wrapper.find('.m-table__sortable-icon').trigger('click');
+
+                expect(wrapper.emitted('update:sortedColumn')).toBeTruthy();
             });
         });
 
