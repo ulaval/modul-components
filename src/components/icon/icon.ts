@@ -38,7 +38,7 @@ export class MIcon extends Vue {
     }
 
     private get showNameAsClassInHtml(): string {
-        return this.showNameAsClass ? name : '';
+        return this.showNameAsClass ? this.name : '';
     }
 }
 

@@ -10,6 +10,7 @@ import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
 import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
+import DaterangepickerPlugin from './daterangepicker/daterangepicker';
 import DialogPlugin from './dialog/dialog';
 import DropdownGroupPlugin from './dropdown-group/dropdown-group';
 import DropdownPlugin from './dropdown/dropdown';
@@ -24,7 +25,7 @@ import ErrorTechnicalDifficultyPlugin from './error-pages/error-technical-diffic
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
-import FormPlugin from './form/form';
+import FormPlugin from './form/form.plugin';
 import I18nPlugin from './i18n/i18n';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';
@@ -105,6 +106,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(CheckboxPlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
+        Vue.use(DaterangepickerPlugin);
         Vue.use(ModalPlugin);
         Vue.use(DropdownPlugin);
         Vue.use(DropdownGroupPlugin);

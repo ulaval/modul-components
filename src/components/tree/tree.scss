@@ -1,5 +1,7 @@
 @import 'commons';
 
+$m-tree-node--child-indentation: 20px;
+
 .m-tree {
     overflow: auto;
 
@@ -16,13 +18,46 @@
     &__content {
         margin-top: 0;
         margin-bottom: 0;
-    }
+        padding-left: $m-tree-node--child-indentation;
 
-    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children::before {
-        background-color: $m-color--ul-blue;
-    }
+        > .m-tree-node:only-child {
+            margin-left: 0;
 
-    &__multiple-node-checkbox /deep/ .m-tree-node.m--is-disabled.m-tree-node__has-children > .m-tree-node__item {
-        border-color: $m-color--ul-blue;
+            &::before {
+                content: none;
+            }
+        }
+
+        > .m-tree-node:not(.m--is-single) /deep/ > .m-tree-node__item {
+            &::before {
+                content: "";
+                position: absolute;
+                left: -$m-tree-node--child-indentation;
+                top: 50%;
+                width: $m-tree-node--child-indentation;
+                height: 1px;
+                background-color: $m-color--interactive;
+            }
+        }
+
+        > .m-tree-node:not(.m--is-single) {
+            &::after {
+                content: "";
+                position: absolute;
+                left: -$m-tree-node--child-indentation;
+                top: -26px; // Magic number
+                width: 1px;
+                bottom: $m-tree-node--child-indentation;
+                background-color: $m-color--interactive;
+            }
+
+            &:first-child::after {
+                top: $m-tree-node--child-indentation;
+            }
+
+            &.m-tree-node__has-children:last-child::after {
+                height: 46px; // Magic number
+            }
+        }
     }
 }

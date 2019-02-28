@@ -20,7 +20,7 @@ let formFieldHasError: boolean = false;
 
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR SUMMARY';
 const FIELD_VALUE: string = 'VALUE';
-const VALIDATING_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
+const VALIDATING_FUNCTION: FieldValidationCallback<string> = (): FormFieldValidation => fieldValidation;
 
 const mockFieldValidationWithError: FormFieldValidation = {
     isError: true,
@@ -99,7 +99,6 @@ describe(`Form`, () => {
             expect(form.getErrorsForSummary()).toEqual([ERROR_MESSAGE_SUMMARY]);
         });
     });
-
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
             form = new Form({

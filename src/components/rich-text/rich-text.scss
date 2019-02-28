@@ -9,5 +9,9 @@
 
     /deep/ {
         @include m-commons-froala-styles();
+
+        img {
+            max-width: 100%;
+        }
     }
 }

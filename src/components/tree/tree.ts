@@ -158,6 +158,10 @@ export class MTree extends ModulVue {
     public get withCheckboxes(): boolean {
         return this.checkboxes !== MCheckboxes.False;
     }
+
+    public get isSingleNodeTree(): boolean {
+        return this.tree.length === 1;
+    }
 }
 
 const TreePlugin: PluginObject<any> = {

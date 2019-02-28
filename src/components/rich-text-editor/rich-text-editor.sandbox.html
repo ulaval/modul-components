@@ -75,7 +75,6 @@
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="initializedModel"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :placeholder="'some placeholder'"
@@ -114,10 +113,24 @@
             </div>
         </m-overlay>
     </div>
+    <div>
+        <h5 class="m-u--margin-bottom">RTE dans un formulaire modal</h5>
+        <m-modal id="idModal" title="Modal title" :size="modalSize">
+            <m-button slot="trigger">Open the modal</m-button>
+            <div id="teste">
+                <m-rich-text-editor class="p-formulaire-texte__textearea"
+                                    :label="'texte riche'"
+                                    @fullscreen="onFullscreen"
+                                    max-width="720px"
+                                    v-model="model"
+                                    scrollable-container=".m-modal__body" ></m-rich-text-editor>
+            </div>
+            <div slot="footer">Footer</div>
+        </m-modal>
+    </div>
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :focus="focus"
@@ -141,7 +154,6 @@
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="linksOpenInNewWindowModel"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :focus="focus"
@@ -167,7 +179,6 @@
             </select>
         </div>
         <m-rich-text-editor v-model="model"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :focus="focus"
@@ -251,7 +262,6 @@
 
         <div>
             <m-rich-text-editor v-model="currentTodo.todo"
-                                :toolbar-sticky-offset="58"
                                 :label="'Todo'"
                                 :max-width="'large'"
                                 :focus="focus"
@@ -267,4 +277,13 @@
                    v-model="resetValue">
         </div>
     </div>
+
+    <m-radio-group class="m-u--margin-top"
+                   v-model="radioValue">
+        <m-radio value="1">Option 1</m-radio>
+        <m-rich-text-editor v-model="model"
+                            max-width="large"
+                            :disabled="radioValue != 1"></m-rich-text-editor>
+        <m-radio value="2">Option 2</m-radio>
+    </m-radio-group>
 </div>

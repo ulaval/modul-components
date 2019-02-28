@@ -44,6 +44,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/validation-message/validation-message.lang.en.json'),
                 require('../filters/filesize/filesize.lang.en.json'),
                 require('../filters/date/date/date.lang.en.json'),
+                require('../filters/date/period/period.lang.en.json'),
                 require('../filters/date/time/time.lang.en.json'),
                 require('../filters/date/date-time/date-time.lang.en.json')
             ];

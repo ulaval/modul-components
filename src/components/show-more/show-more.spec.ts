@@ -1,4 +1,5 @@
 import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
+
 import { renderComponent } from '../../../tests/helpers/render';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { MButtonSkin } from '../button/button';
@@ -96,6 +97,16 @@ describe(SHOW_MORE_NAME, () => {
             expect(wrapper.vm.isVisible).toBeTruthy();
         });
 
+        it(`Progress should be visible`, () => {
+            expect(wrapper.vm.isProgressVisible).toBeTruthy();
+        });
+
+        it(`Should render a label with nbVisible and nbTotal`, () => {
+            expect(wrapper.find(REF_COUNT_TOTAL).exists()).toBeTruthy();
+            expect(wrapper.find(REF_COUNT_TOTAL).text()).toBe('m-show-more:status');
+            expect(wrapper.vm.$i18n.translate).toHaveBeenCalledWith('m-show-more:status', { nbVisible: NB_VISIBLE, nbTotal: NB_TOTAL }, undefined, undefined, undefined, FormatMode.Sprintf);
+        });
+
         it(`Should render a button`, () => {
             expect(wrapper.find(REF_BUTTON).exists()).toBeTruthy();
             expect(wrapper.find(REF_BUTTON).text()).toBe('m-show-more:button-label');
@@ -131,12 +142,20 @@ describe(SHOW_MORE_NAME, () => {
             wrapper.setProps({ nbVisible: NB_TOTAL, nbTotal: NB_TOTAL });
         });
 
+        it(`Progress should not be visible`, () => {
+            expect(wrapper.vm.isProgressVisible).toBeFalsy();
+        });
+
         it(`Should render correctly`, () => {
             expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         it(`Should not render a button`, () => {
             expect(wrapper.find(REF_BUTTON).exists()).toBeFalsy();
+        });
+
+        it(`Should not render a progress bar`, () => {
+            expect(wrapper.find(REF_PROGRESS).exists()).toBeFalsy();
         });
     });
 });
