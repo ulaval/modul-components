@@ -165,6 +165,20 @@ export default class ModulDate {
     }
 
     /**
+     * format date following the date part of the standard ISO-8601
+     */
+    public toISOString(): string {
+        return this.innerDate.toISOString();
+    }
+
+    /**
+     * format date following the locale representation of a date
+     */
+    public toLocaleDateString(): string {
+        return this.innerDate.toLocaleDateString();
+    }
+
+    /**
      * Getter for the year value
      */
     public fullYear(): number {
@@ -216,17 +230,62 @@ export default class ModulDate {
         return Math.round(Math.abs(other.innerDate.getTime() - this.innerDate.getTime()) / (1000 * 3600 * 24));
     }
 
+    /**
+     * Add an unit of time to a copy of the current date and return it.
+     *
+     * @param valueToAdd The value to add to the time unit.
+     * @param unitOfTime The kind of time unit to be added.
+     * @return A new Date
+     */
+    public add(valueToAdd: number, unitOfTime: 'year'): Date {
+        return this.subtract(-valueToAdd, unitOfTime);
+    }
+
+    /**
+     * subtract an unit of time to a copy of the current date and return it.
+     *
+     * @param valueToSubtract The value to add to the time unit.
+     * @param unitOfTime The kind of time unit to be added.
+     * @return A new Date
+     */
+    public subtract(valueToSubtract: number, unitOfTime: 'year'): Date {
+        const newDate: Date = new Date(this.innerDate);
+        switch (unitOfTime) {
+            case 'year':
+                newDate.setFullYear(newDate.getFullYear() - valueToSubtract);
+                break;
+            default: throw new Error(`modul-date: Unknown substract unitOfTime: ${unitOfTime}`);
+        }
+
+        return newDate;
+    }
+
+    /**
+     * Return a date representing the end of the day of a given date (23:59:59).
+     *
+     * @return A new Date
+     */
+    public endOfDay(): Date {
+        return new Date(this.innerDate.getFullYear(), this.innerDate.getMonth(), this.innerDate.getDate(), 23, 59, 59, 999);
+    }
+
     private dateFromString(value: string): void {
         if (value === '') {
             this.innerDate = new Date();
         } else {
-            this.innerDate = this.convertDateString(value);
+            this.innerDate = this.convertStringToDate(value);
         }
-
     }
 
-    private convertDateString(value: string): Date {
-        const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4}))$/;
+    private convertStringToDate(value: string): Date {
+        // If the string is an iso string, we use it directly.
+        if (value.split('T')[1]) {
+            return new Date(value);
+        }
+
+        // Otherwise we try to build the date from a partial date string (2010-12-01 or 2010/12/01)
+        const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
+
         const parts: string[] = dateFormat.exec(value) as string[];
         if (!parts || parts.length < 4) {
             throw Error(`Impossible to find date parts in date`);
@@ -253,8 +312,7 @@ export default class ModulDate {
         const month: string = this.padString(second);
         const day: string = this.padString(third);
         const date: Date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
-
-        return new Date(`${year}-${month}-${day}`);
+        return date;
     }
 
     private padString(input: string): string {
