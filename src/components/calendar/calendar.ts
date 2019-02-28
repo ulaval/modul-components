@@ -7,7 +7,7 @@ import IconButtonPlugin from '../icon-button/icon-button';
 import MBaseCalendar from './calendar-renderer/base-calendar/base-calendar';
 import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
-import WithRender from './calendar.html';
+import WithRender from './calendar.html?style=./calendar.scss';
 
 
 export enum CalendarMode {

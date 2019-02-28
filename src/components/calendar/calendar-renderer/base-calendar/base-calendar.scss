@@ -28,7 +28,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         font: inherit;
         outline: none;
         padding: 0;
-        cursor: pointer;
+        cursor: inherit;
     }
 
     @media (max-width: $m-mq--max--s) {
@@ -53,6 +53,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
 
     &__current-month-and-year {
         font-weight: $m-font-weight--bold;
+        cursor: pointer;
     }
 
     &__header,
@@ -121,8 +122,10 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     &__day {
         position: relative;
         transition: background-color $m-transition-duration linear, color $m-transition-duration ease;
+        cursor: pointer;
 
-        &:hover {
+        &:hover:not(.m--is-hidden):not(.m--is-disabled),
+        &:focus:not(.m--is-hidden):not(.m--is-disabled) {
             color: $m-color--interactive-darker;
 
             &::after {
@@ -140,7 +143,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
             }
         }
 
-        &.m--is-highlighted {
+        &.m--is-highlighted:not(.m--is-hidden) {
             background-color: $m-color--interactive-lightest;
 
             &:hover:not(.m--is-selection-start):not(.m--is-inside-range) {
@@ -159,6 +162,12 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         &.m--is-selection-end {
             border-radius: 0 50% 50% 0;
         }
+
+        &.m--is-disabled {
+            background-color: transparent;
+            color: $m-color--grey-light;
+            cursor: default;
+        }
     }
 
     &__year-content,
@@ -169,16 +178,11 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         position: relative;
         z-index: 2;
 
-        &.m--is-selected {
-            &:not(:hover) {
-                color: #fff;
-                font-weight: $m-font-weight--bold;
-                border-radius: 50%;
-                background-color: m-color(interactive);
-            }
+        &.m--is-other-month:not(:hover):not(.m--is-selected):not(.m--is-today) {
+            color: $m-color--disabled;
         }
 
-        &.m--is-today:not(.m--is-selected):not(:hover) {
+        &.m--is-today:not(:hover):not(.m--is-selected) {
             background-color: $m-color--grey-light;
             font-weight: $m-font-weight--bold;
             border-radius: 50%;
@@ -189,26 +193,23 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
             }
         }
 
-        &.m--is-other-month:not(.m--is-selected):not(.m--is-today):not(:hover) {
-            color: $m-color--disabled;
+        &.m--is-selected:not(:hover) {
+            color: #fff;
+            font-weight: $m-font-weight--bold;
+            border-radius: 50%;
+            background-color: m-color(interactive);
         }
 
         &.m--is-hidden {
             display: none;
         }
     }
-
-    .m--is-disabled {
-        background-color: none;
-        color: $m-color--grey-light;
-        cursor: default;
-    }
 }
 
 // for left to right range selection visual
 .m--is-selection-start {
-    & + .m--is-highlighted,
-    &:nth-child(7n) + .m--is-highlighted {
+    & + .m--is-highlighted:not(.m--is-hidden),
+    &:nth-child(7n) + .m--is-highlighted:not(.m--is-hidden) {
         &::before {
             position: absolute;
             top: -50%;

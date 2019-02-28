@@ -213,7 +213,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
 
     private years(): YearState[] {
         let years: YearState[] = [];
-        for (let year: number = this.currentMaxDate.fullYear(); year >= this.currentMinDate.fullYear(); year--) {
+        for (let year: number = this.currentMinDate.fullYear(); year <= this.currentMaxDate.fullYear(); year++) {
             years.push({ year: year, isCurrent: this.currentlyDisplayedYear() === year });
         }
         return years;

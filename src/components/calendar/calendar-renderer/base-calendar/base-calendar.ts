@@ -11,9 +11,6 @@ const TRANSLATION_MONTHS: string = TRANSLATION_ROOT + 'month';
 const TRANSLATION_WEEKDAYS: string = TRANSLATION_ROOT + 'weekday';
 const TRANSLATION_SUFFIXE: string = '.short';
 
-const NB_YEARS_PER_ROW: number = 4;
-const NB_MONTHS_PER_ROW: number = 3;
-
 enum MonthsNames {
     JANUARY = 'january',
     FEBRUARY = 'february',
@@ -98,7 +95,7 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     private currentPickerMode: PickerMode = this.initialPickerMode;
 
     onYearClick(): void {
-        this.currentPickerMode = PickerMode.YEAR;
+        this.currentPickerMode = this.isPickerModeDay ? this.currentPickerMode = PickerMode.YEAR : this.currentPickerMode = PickerMode.DAY;
     }
 
     onYearSelect(year: YearState): void {
@@ -157,6 +154,14 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
             && !!this.calendar.value && !!(this.calendar.value as RangeDate).begin
             && !!this.calendar.value && !!(this.calendar.value as RangeDate).end
             && day.isHighlighted;
+    }
+
+    isSelectionStart(day: DayState): boolean {
+        return day.isSelectionStart && !this.hideDay(day);
+    }
+
+    isSelectionEnd(day: DayState): boolean {
+        return day.isSelectionEnd && !this.hideDay(day);
     }
 
     hideDay(day: DayState): boolean {
