@@ -3,6 +3,7 @@ import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import ModulDate from '../../utils/modul-date/modul-date';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
@@ -133,26 +134,25 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     onDateFromChange(newValue: DatePickerSupportedTypes): void {
+        const dateToValue: DatePickerSupportedTypes = this.getNewModelValue(this.internalValue.to, true);
         if (newValue) {
             if (this.as<MediaQueriesMixin>().isMqMinS) {
                 this.toIsFocused = true;
             }
 
-            this.emitNewValue(Object.assign({}, this.internalValue, {
-                from: newValue,
-                to: newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to
-            }));
+            this.emitNewValue({ from: this.getNewModelValue(newValue), to: dateToValue });
         } else {
-            this.emitNewValue({ from: undefined, to: this.internalValue.to });
+            this.emitNewValue({ from: undefined, to: dateToValue });
         }
     }
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
+        const dateFromValue: DatePickerSupportedTypes = this.getNewModelValue(this.internalValue.from);
         if (newValue) {
             this.unfocusDateToField();
-            this.emitNewValue(Object.assign({}, this.internalValue, { to: newValue }));
+            this.emitNewValue({ from: dateFromValue, to: this.getNewModelValue(newValue, true) });
         } else {
-            this.emitNewValue({ from: this.internalValue.from, to: undefined });
+            this.emitNewValue({ from: dateFromValue, to: undefined });
         }
     }
 
@@ -169,6 +169,15 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
 
     unfocusDateToField(): void {
         this.toIsFocused = false;
+    }
+
+    getNewModelValue(newValue: DatePickerSupportedTypes, endOfDay: boolean = false): DatePickerSupportedTypes {
+        if (!newValue) { return; }
+
+        const modulDate: ModulDate = new ModulDate(newValue);
+        const isoString: string = endOfDay ? modulDate.endOfDay().toISOString() : modulDate.toISOString();
+
+        return new Date(isoString);
     }
 }
 

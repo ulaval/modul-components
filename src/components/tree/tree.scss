@@ -16,8 +16,8 @@ $m-tree-node--child-indentation: 20px;
     }
 
     &__content {
-        margin-top: 0;
-        margin-bottom: 0;
+        margin-top: 1px;
+        margin-bottom: 1px;
         padding-left: $m-tree-node--child-indentation;
 
         > .m-tree-node:only-child {
@@ -47,7 +47,7 @@ $m-tree-node--child-indentation: 20px;
                 left: -$m-tree-node--child-indentation;
                 top: -26px; // Magic number
                 width: 1px;
-                bottom: $m-tree-node--child-indentation;
+                bottom: 0;
                 background-color: $m-color--interactive;
             }
 
@@ -57,6 +57,27 @@ $m-tree-node--child-indentation: 20px;
 
             &.m-tree-node__has-children:last-child::after {
                 height: 46px; // Magic number
+            }
+        }
+
+        > .m-tree-node:not(.m--is-single):not(.m-tree-node__has-children) {
+            &::after {
+                top: -23px; // Magic number
+            }
+        }
+
+        > .m-tree-node:first-child:not(.m--is-single):not(.m-tree-node__has-children) {
+            &::after {
+                top: 16px; // Magic number
+                height: 39px; // Magic number
+            }
+
+            + .m-tree-node:not(.m--is-single)::after {
+                top: -22px; // Magic number
+            }
+
+            + .m-tree-node:last-child:not(.m--is-single)::after {
+                display: none;
             }
         }
     }

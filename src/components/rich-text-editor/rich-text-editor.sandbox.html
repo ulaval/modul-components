@@ -75,7 +75,6 @@
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="initializedModel"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :placeholder="'some placeholder'"
@@ -155,7 +154,6 @@
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="linksOpenInNewWindowModel"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :focus="focus"
@@ -181,7 +179,6 @@
             </select>
         </div>
         <m-rich-text-editor v-model="model"
-                            :toolbar-sticky-offset="58"
                             :label="'texte riche'"
                             :max-width="'large'"
                             :focus="focus"
@@ -265,7 +262,6 @@
 
         <div>
             <m-rich-text-editor v-model="currentTodo.todo"
-                                :toolbar-sticky-offset="58"
                                 :label="'Todo'"
                                 :max-width="'large'"
                                 :focus="focus"

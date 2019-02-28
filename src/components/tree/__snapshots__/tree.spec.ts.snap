@@ -2,59 +2,61 @@
 
 exports[`MTree Given a single node selection Given a tree with some data Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content">
-        <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
-        <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
-    </ul>
+  <ul class="m-tree__content">
+    <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
+    <m-tree-node-stub node="[object Object]" selectedNodes="/medias/Videos" checkboxes="false" selectable="true" path=""></m-tree-node-stub>
+  </ul>
 </div>
 `;
 
 exports[`MTree Given a single node selection Given an empty tree Should render correctly 1`] = `
 <div class="m-tree">
-    <p class="m-tree__empty">
-        m-tree:empty
-    </p>
+  <p class="m-tree__empty">
+    m-tree:empty
+  </p>
 </div>
 `;
 
 exports[`MTree Given a tree with multiple selection Given a tree with two nodes selected Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content">
-        <li class="m-tree-node m--is-selected">
-            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span></div>
-        </li>
-        <li class="m-tree-node m-tree-node__has-children">
-            <div role="button" tabindex="0" class="m-tree-node__item">
-                <m-plus skin="light" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item-label">Medias</span> <span class="m-tree-node__item-check"></span></div>
-            <m-accordion-transition>
-                <ul class="m-tree-node__children" style="display:none;">
-                    <li class="m-tree-node m-tree-node__child m--is-selected">
-                        <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span></div>
-                    </li>
-                </ul>
-            </m-accordion-transition>
-        </li>
-    </ul>
+  <ul class="m-tree__content">
+    <li class="m-tree-node m--is-selected">
+      <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span></div>
+    </li>
+    <li class="m-tree-node m-tree-node__has-children">
+      <div role="button" tabindex="0" class="m-tree-node__item">
+        <m-plus skin="light" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item-label">Medias</span> <span class="m-tree-node__item-check"></span>
+      </div>
+      <m-accordion-transition>
+        <ul class="m-tree-node__children" style="display:none;">
+          <li class="m-tree-node m-tree-node__child m--is-selected">
+            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span></div>
+          </li>
+        </ul>
+      </m-accordion-transition>
+    </li>
+  </ul>
 </div>
 `;
 
 exports[`MTree Given a tree with multiple selection Given a tree with two nodes selected in readonly mode Should render correctly 1`] = `
 <div class="m-tree">
-    <ul class="m-tree__content">
-        <li class="m-tree-node m--is-selected m--is-read-only">
-            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span></div>
-        </li>
-        <li class="m-tree-node m--is-read-only m-tree-node__has-children">
-            <div role="button" tabindex="0" class="m-tree-node__item">
-                <m-plus skin="light" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item-label">Medias</span> <span class="m-tree-node__item-check"></span></div>
-            <m-accordion-transition>
-                <ul class="m-tree-node__children" style="display:none;">
-                    <li class="m-tree-node m-tree-node__child m--is-selected m--is-read-only">
-                        <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span></div>
-                    </li>
-                </ul>
-            </m-accordion-transition>
-        </li>
-    </ul>
+  <ul class="m-tree__content">
+    <li class="m-tree-node m--is-selected m--is-read-only">
+      <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span></div>
+    </li>
+    <li class="m-tree-node m--is-read-only m-tree-node__has-children">
+      <div role="button" tabindex="0" class="m-tree-node__item">
+        <m-plus skin="light" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item-label">Medias</span> <span class="m-tree-node__item-check"></span>
+      </div>
+      <m-accordion-transition>
+        <ul class="m-tree-node__children" style="display:none;">
+          <li class="m-tree-node m-tree-node__child m--is-selected m--is-read-only">
+            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span></div>
+          </li>
+        </ul>
+      </m-accordion-transition>
+    </li>
+  </ul>
 </div>
 `;

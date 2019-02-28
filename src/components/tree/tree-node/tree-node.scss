@@ -81,6 +81,10 @@ $m-tree-node--child-indentation: 20px;
             right: 0;
         }
 
+        &:focus {
+            outline: 1px solid $m-color--interactive-lighter;
+        }
+
         /deep/ .m-checkbox__input {
             margin-right: $m-tree-node--child-indentation / 2;
         }
@@ -151,12 +155,14 @@ $m-tree-node--child-indentation: 20px;
         background: $m-color--white;
     }
 
+    &.m--is-selected:not(.m-tree-node__has-children) > &__item,
     &.m--is-selected:not(.m--is-read-only) > &__item {
         background-color: $m-color--interactive;
         color: $m-color--white;
     }
 
     &:not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) > &__item:not(.m-tree-node__item--no-hover):hover,
+    &:not(.m--is-disabled).m--is-selected:not(.m--is-read-only) > &__item:not(.m-tree-node__item--no-hover):hover,
     &:not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) > &__item.m-tree-node__item--no-hover:hover {
         background: rgba($m-color--interactive, 0.15);
         cursor: pointer;
@@ -194,6 +200,8 @@ $m-tree-node--child-indentation: 20px;
         padding-left: $m-tree-node--height + 10px;
     }
 
+    /* Règles des exceptions du Tree-node with checkboxes  */
+
     &.m-tree-node__with-checkboxes:not(.m-tree-node__has-children) > .m-tree-node__item {
         color: $m-color--text;
     }
@@ -223,12 +231,12 @@ $m-tree-node--child-indentation: 20px;
     }
 
     &.m-tree-node__with-checkboxes:not(.m--is-read-only):not(.m--is-disabled):not(.m--is-selected) > .m-tree-node__item.m-tree-node__item--no-hover:hover {
-        background: $m-color--white;
+        background: transparent;
         color: $m-color--interactive;
     }
 
-    &.m-tree-node__with-checkboxes.m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
-        background-color: $m-color--white;
+    &.m-tree-node__with-checkboxes.m--is-selected:not(.m--is-read-only) > .m-tree-node__item.m-tree-node__item--no-hover {
+        background-color: transparent;
         color: $m-color--text;
 
         &:hover {
@@ -236,7 +244,12 @@ $m-tree-node--child-indentation: 20px;
         }
     }
 
+    &.m-tree-node__with-checkboxes.m--is-selected.m--is-read-only > .m-tree-node__item.m-tree-node__item--no-hover:hover {
+        cursor: default;
+    }
+
     &.m-tree-node__with-checkboxes:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
         cursor: pointer;
+        background-color: transparent;
     }
 }

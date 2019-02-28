@@ -25,7 +25,7 @@ import ErrorTechnicalDifficultyPlugin from './error-pages/error-technical-diffic
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
-import FormPlugin from './form/form';
+import FormPlugin from './form/form.plugin';
 import I18nPlugin from './i18n/i18n';
 import IconButtonPlugin from './icon-button/icon-button';
 import IconFilePlugin from './icon-file/icon-file';

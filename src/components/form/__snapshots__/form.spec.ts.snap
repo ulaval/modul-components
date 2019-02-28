@@ -2,19 +2,19 @@
 
 exports[`MForm When the form has no required fields, then it should not show a required label 1`] = `
 <form id="uuid" class="m-form">
-    <m-accordion-transition></m-accordion-transition>
+  <m-accordion-transition></m-accordion-transition>
 </form>
 `;
 
 exports[`MForm When the form has required fields, then it should show a required label 1`] = `
 <form id="uuid" class="m-form">
-    <m-accordion-transition></m-accordion-transition>
-    <p class="required"><span class="required__marker">*</span> <span class="required__label">m-form:required</span></p>
+  <m-accordion-transition></m-accordion-transition>
+  <p class="required"><span class="required__marker">*</span> <span class="required__label">m-form:required</span></p>
 </form>
 `;
 
 exports[`MForm should render correctly 1`] = `
 <form id="uuid" class="m-form">
-    <m-accordion-transition></m-accordion-transition>
+  <m-accordion-transition></m-accordion-transition>
 </form>
 `;
