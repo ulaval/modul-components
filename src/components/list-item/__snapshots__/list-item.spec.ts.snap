@@ -2,46 +2,42 @@
 
 exports[`MListItem disabled should not render icon 1`] = `
 <li class="m-list-item m--is-disabled m--has-icon">
-    <div class="m-list-item__content"></div>
+  <div class="m-list-item__content"></div>
 </li>
 `;
 
 exports[`MListItem disabled should not render spinner 1`] = `
 <li class="m-list-item m--is-disabled">
-    <div class="m-list-item__content"></div>
+  <div class="m-list-item__content"></div>
 </li>
 `;
 
 exports[`MListItem disabled should render correctly 1`] = `
 <li class="m-list-item m--is-disabled">
-    <div class="m-list-item__content"></div>
+  <div class="m-list-item__content"></div>
 </li>
 `;
 
 exports[`MListItem should render correctly 1`] = `
 <li class="m-list-item">
-    <div class="m-list-item__content">item 1</div>
+  <div class="m-list-item__content">item 1</div>
 </li>
 `;
 
 exports[`MListItem should render correctly when icon is set 1`] = `
 <li class="m-list-item m--has-icon">
-    <div class="m-list-item__content"></div>
-    <div class="m-list-item__icon">
-        <button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;">
-            <svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
-                <use aria-hidden="true"></use>
-            </svg>
-        </button>
-    </div>
+  <div class="m-list-item__content"></div>
+  <div class="m-list-item__icon"><button type="button" class="m-icon-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:20px;"><svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
+        <use aria-hidden="true"></use>
+      </svg> </button></div>
 </li>
 `;
 
 exports[`MListItem should render correctly when waiting 1`] = `
 <li class="m-list-item m--is-waiting">
-    <div class="m-list-item__content"></div>
-    <div class="m-list-item__icon">
-        <m-spinner-mock size="small"></m-spinner-mock>
-    </div>
+  <div class="m-list-item__content"></div>
+  <div class="m-list-item__icon">
+    <m-spinner-mock size="small"></m-spinner-mock>
+  </div>
 </li>
 `;

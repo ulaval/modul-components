@@ -2,24 +2,20 @@
 
 exports[`message-page integration tests Given an error with all props and slots initialized Then should render properly 1`] = `
 <article class="m-message-page m--is-state-warning m--is-skin-default">
-    <header class="m-message-page__header">
-        <h2 class="m-message-page__title">An error title.</h2>
-        <div aria-hidden="true" class="m-message-page__icon-container"><span name="iconName" size="130px" class="m-message-page__icon">Icone : iconName</span></div>
-    </header>
-    <div class="m-message-page__body">
-        <p class="m-message-page__hints">a hint</p>
-        <p class="m-message-page__hints">another hint</p>
-        <div class="m-message-page__details">
-            <div id="theSlotId">The slot content</div>
-        </div>
-        <ul class="m-message-page__links">
-            <li>
-                <a icon-name="m-svg__chevron--right" mode="link" url="an Url" target="" class="m-message-page__link">a link</a>
-            </li>
-            <li>
-                <a icon-name="m-svg__chevron--right" mode="link" url="another Url" target="" class="m-message-page__link">another link</a>
-            </li>
-        </ul>
+  <header class="m-message-page__header">
+    <h2 class="m-message-page__title">An error title.</h2>
+    <div aria-hidden="true" class="m-message-page__icon-container"><span name="iconName" size="130px" class="m-message-page__icon">Icone : iconName</span></div>
+  </header>
+  <div class="m-message-page__body">
+    <p class="m-message-page__hints">a hint</p>
+    <p class="m-message-page__hints">another hint</p>
+    <div class="m-message-page__details">
+      <div id="theSlotId">The slot content</div>
     </div>
+    <ul class="m-message-page__links">
+      <li><a icon-name="m-svg__chevron--right" mode="link" url="an Url" target="" class="m-message-page__link">a link</a></li>
+      <li><a icon-name="m-svg__chevron--right" mode="link" url="another Url" target="" class="m-message-page__link">another link</a></li>
+    </ul>
+  </div>
 </article>
 `;

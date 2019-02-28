@@ -11,15 +11,15 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "package.json" }}
-          - v2-dependencies-
+          - v4-dependencies-{{ checksum "package.json" }}
+          - v4-dependencies-
 
-      - run: npm install
+      - run: npm ci
 
       - save_cache:
           paths:
             - node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
+          key: v4-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: tslint
@@ -32,10 +32,6 @@ jobs:
       - run:
           name: npm test
           command: npm run unitall -- -w 1
-
-      - run:
-          name: npm pack
-          command: npm pack
 
       - store_test_results:
           path: reports/junit

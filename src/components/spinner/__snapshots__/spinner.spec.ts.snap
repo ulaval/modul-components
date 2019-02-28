@@ -2,95 +2,95 @@
 
 exports[`MSpinner should render correctly 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render custom description when prop is set 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-        <p class="m-spinner__description">description</p>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+    <p class="m-spinner__description">description</p>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render custom title when prop is set 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-        <h2 class="m-spinner__title">title</h2>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+    <h2 class="m-spinner__title">title</h2>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render default description when title prop is true  1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-        <p class="m-spinner__description"><span class="m-i18n">Please wait.</span></p>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+    <p class="m-spinner__description"><span class="m-i18n">Please wait.</span></p>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render default description when title prop is true  2`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-        <p class="m-spinner__description"><span class="m-i18n">Please wait.</span></p>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+    <p class="m-spinner__description"><span class="m-i18n">Please wait.</span></p>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render default title when title prop is true  1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-        <h2 class="m-spinner__title"> <span class="m-i18n">Loading</span></h2>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+    <h2 class="m-spinner__title"> <span class="m-i18n">Loading</span></h2>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render skins correctly : dark 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap m--is-dark">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap m--is-dark">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render skins correctly : light 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap m--is-light">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap m--is-light">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render skins correctly : lighter 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap m--is-lighter">
-        <div aria-hidden="true" class="m-spinner__icon"></div>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap m--is-lighter">
+    <div aria-hidden="true" class="m-spinner__icon"></div>
+  </div>
+  <div></div>
 </div>
 `;
 
 exports[`MSpinner should render small size correctly 1`] = `
 <div appear="true" class="m-spinner">
-    <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
-        <div aria-hidden="true" class="m-spinner__icon m--is-small"></div>
-    </div>
-    <div></div>
+  <div target-el="[object HTMLDivElement]" class="m-spinner__wrap">
+    <div aria-hidden="true" class="m-spinner__icon m--is-small"></div>
+  </div>
+  <div></div>
 </div>
 `;

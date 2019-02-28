@@ -33,7 +33,7 @@ pipeline {
             }
 
             steps {
-                sh 'npm install'
+                sh 'npm ci'
                 sh 'npm run buildWebpack'
                 // Probablement une étape de publish ici.
             }
@@ -55,7 +55,7 @@ pipeline {
             }
 
             steps {
-                sh 'npm install'
+                sh 'npm ci'
                 sh 'npm run buildWebpack'
                 sh 'npm run unit -- --single-run --junitReport'
             }
