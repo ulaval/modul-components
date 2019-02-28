@@ -9,7 +9,7 @@ exports[`MForm When the form has no required fields, then it should not show a r
 exports[`MForm When the form has required fields, then it should show a required label 1`] = `
 <form id="uuid" class="m-form">
   <m-accordion-transition></m-accordion-transition>
-  <p class="required"><span class="required__marker">*</span> <span class="required__label">m-form:required</span></p>
+  <p class="m-form__required"><span class="m-form__required-marker">*</span> <span class="m-form__required-label">m-form:required</span></p>
 </form>
 `;
 
