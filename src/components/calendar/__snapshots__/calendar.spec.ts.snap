@@ -108,10 +108,10 @@ exports[`Calendar in date range mode should render date range view 1`] = `
                     <button type="button" class="m-base-calendar__day-content"><span>26</span></button>
                 </div>
                 <div class="m-base-calendar__day">
-                    <button type="button" class="m-base-calendar__day-content m--is-today"><span>27</span></button>
+                    <button type="button" class="m-base-calendar__day-content"><span>27</span></button>
                 </div>
                 <div class="m-base-calendar__day">
-                    <button type="button" class="m-base-calendar__day-content"><span>28</span></button>
+                    <button type="button" class="m-base-calendar__day-content m--is-today"><span>28</span></button>
                 </div>
                 <div class="m-base-calendar__day">
                     <button type="button" class="m-base-calendar__day-content m--is-other-month"><span>1</span></button>
@@ -233,10 +233,10 @@ exports[`Calendar in single date mode should render single dates view 1`] = `
                     <button type="button" class="m-base-calendar__day-content"><span>26</span></button>
                 </div>
                 <div class="m-base-calendar__day">
-                    <button type="button" class="m-base-calendar__day-content m--is-today"><span>27</span></button>
+                    <button type="button" class="m-base-calendar__day-content"><span>27</span></button>
                 </div>
                 <div class="m-base-calendar__day">
-                    <button type="button" class="m-base-calendar__day-content"><span>28</span></button>
+                    <button type="button" class="m-base-calendar__day-content m--is-today"><span>28</span></button>
                 </div>
                 <div class="m-base-calendar__day">
                     <button type="button" class="m-base-calendar__day-content m--is-other-month"><span>1</span></button>
@@ -358,10 +358,10 @@ exports[`Calendar with default values should render default view 1`] = `
                     <button type="button" class="m-base-calendar__day-content"><span>26</span></button>
                 </div>
                 <div class="m-base-calendar__day">
-                    <button type="button" class="m-base-calendar__day-content m--is-today"><span>27</span></button>
+                    <button type="button" class="m-base-calendar__day-content"><span>27</span></button>
                 </div>
                 <div class="m-base-calendar__day">
-                    <button type="button" class="m-base-calendar__day-content"><span>28</span></button>
+                    <button type="button" class="m-base-calendar__day-content m--is-today"><span>28</span></button>
                 </div>
                 <div class="m-base-calendar__day">
                     <button type="button" class="m-base-calendar__day-content m--is-other-month"><span>1</span></button>

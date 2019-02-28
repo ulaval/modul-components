@@ -94,8 +94,8 @@ exports[`Base calendar in day picker mode should render a calendar 1`] = `
             <div class="m-base-calendar__day">
                 <button type="button" class="m-base-calendar__day-content"><span>25</span></button>
             </div>
-            <div class="m-base-calendar__day">
-                <button type="button" class="m-base-calendar__day-content m--is-disabled"><span>26</span></button>
+            <div class="m-base-calendar__day m--is-disabled">
+                <button type="button" class="m-base-calendar__day-content"><span>26</span></button>
             </div>
             <div class="m-base-calendar__day">
                 <button type="button" class="m-base-calendar__day-content"><span>27</span></button>
@@ -136,8 +136,8 @@ exports[`Base calendar in day picker mode when hiding days from previous and fol
             <span
                 class="m-base-calendar__weekday">Fri.</span><span class="m-base-calendar__weekday">Sat.</span></div>
         <div class="m-base-calendar__days">
-            <div class="m-base-calendar__day">
-                <button type="button" class="m-base-calendar__day-content m--is-hidden m--is-other-month"><span>30</span></button>
+            <div class="m-base-calendar__day m--is-hidden">
+                <button type="button" class="m-base-calendar__day-content m--is-other-month m--is-hidden"><span>30</span></button>
             </div>
             <div class="m-base-calendar__day">
                 <button type="button" class="m-base-calendar__day-content"><span>31</span></button>
@@ -217,8 +217,8 @@ exports[`Base calendar in day picker mode when hiding days from previous and fol
             <div class="m-base-calendar__day">
                 <button type="button" class="m-base-calendar__day-content"><span>25</span></button>
             </div>
-            <div class="m-base-calendar__day">
-                <button type="button" class="m-base-calendar__day-content m--is-disabled"><span>26</span></button>
+            <div class="m-base-calendar__day m--is-disabled">
+                <button type="button" class="m-base-calendar__day-content"><span>26</span></button>
             </div>
             <div class="m-base-calendar__day">
                 <button type="button" class="m-base-calendar__day-content"><span>27</span></button>
@@ -232,14 +232,14 @@ exports[`Base calendar in day picker mode when hiding days from previous and fol
             <div class="m-base-calendar__day">
                 <button type="button" class="m-base-calendar__day-content"><span>30</span></button>
             </div>
-            <div class="m-base-calendar__day">
-                <button type="button" class="m-base-calendar__day-content m--is-hidden m--is-other-month"><span>31</span></button>
+            <div class="m-base-calendar__day m--is-hidden">
+                <button type="button" class="m-base-calendar__day-content m--is-other-month m--is-hidden"><span>31</span></button>
             </div>
-            <div class="m-base-calendar__day">
-                <button type="button" class="m-base-calendar__day-content m--is-hidden m--is-other-month"><span>1</span></button>
+            <div class="m-base-calendar__day m--is-hidden">
+                <button type="button" class="m-base-calendar__day-content m--is-other-month m--is-hidden"><span>1</span></button>
             </div>
-            <div class="m-base-calendar__day">
-                <button type="button" class="m-base-calendar__day-content m--is-hidden m--is-other-month"><span>2</span></button>
+            <div class="m-base-calendar__day m--is-hidden">
+                <button type="button" class="m-base-calendar__day-content m--is-other-month m--is-hidden"><span>2</span></button>
             </div>
         </div>
     </div>
