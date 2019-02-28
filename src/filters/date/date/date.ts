@@ -1,19 +1,34 @@
-import 'moment/locale/fr';
+import Vue from 'vue';
 
-import moment from 'moment';
-import Vue, { PluginObject } from 'vue';
+export interface DateFilterParams {
+    shortMode?: boolean;
+    showMonth?: boolean;
+    showYear?: boolean;
+}
+export let dateFilter: (date: Date, params?: DateFilterParams) => string = (date, params) => {
+    const defaultParams: DateFilterParams = {
+        shortMode: false,
+        showMonth: true,
+        showYear: true
+    };
+    const appliedParams: DateFilterParams = Object.assign(defaultParams, params);
+    const options: Intl.DateTimeFormatOptions = {
+        year: appliedParams.showYear ? 'numeric' : undefined,
+        month: appliedParams.showMonth ? (appliedParams.shortMode ? 'short' : 'long') : undefined,
+        day: 'numeric'
+    };
+    const locale: string = (Vue.prototype).$i18n.getCurrentLocale();
+    let formattedDate: string = date.toLocaleDateString([locale], options);
 
-import { FormatMode, Messages } from '../../../utils/i18n/i18n';
-import { DATE_NAME } from '../../filter-names';
-
-export let dateFilter: (date: Date, short?: boolean) => string = (date, short) => {
-    let i18n: Messages = (Vue.prototype).$i18n as Messages;
-    let regexp: RegExp = /(\$)\d*(\D*)\d*(\$)/;
-    let formattedDate: string = moment(date).format(i18n.translate(short ? 'f-m-date:short' : 'f-m-date:long', undefined, 0, '', undefined, FormatMode.Vsprintf));
-    let match: RegExpExecArray | null = regexp.exec(formattedDate);
-    if (match) {
-        return formattedDate.replace(match[1], '').replace(match[2], match[2] ? `<sup>${match[2]}</sup>` : '').replace(match[3], '');
-    }
+    formattedDate = addOrdinal(formattedDate, locale);
     return formattedDate;
 };
 
+let addOrdinal: (date: string, locale: string) => string = (date, locale) => {
+    const regexp2: RegExp = /^1 /;
+    let match: RegExpExecArray | null = regexp2.exec(date);
+    if (match && locale === 'fr-CA') {
+        return date.replace(match[0], `${match[0].trim()}<sup>er</sup> `);
+    }
+    return date;
+};
