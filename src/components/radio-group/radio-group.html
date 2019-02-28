@@ -2,9 +2,10 @@
      :class="{ 'm--is-inline': inline,
               'm--is-disabled': stateIsDisabled,
               'm--has-error': hasError,
-              'm--is-valid': isValid }">
+              'm--is-valid': isValid,
+              'm--has-validation-message': hasValidationMessage }">
     <m-validation-message :id="idValidationMessage"
-                          class="m-radio-group__message m-u--margin-bottom"
+                          class="m-radio-group__message"
                           :disabled="stateIsDisabled"
                           :error-message="errorMessage"
                           :valid-message="validMessage"

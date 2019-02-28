@@ -23,7 +23,13 @@
     }
 
     &__message {
-        margin-top: $m-margin--xs;
+        transition: margin $m-transition-duration ease;
+    }
+
+    &.m--has-validation-message {
+        .m-radio-group__message {
+            margin-bottom: $m-spacing--s;
+        }
     }
 
     &.m--is-inline {
