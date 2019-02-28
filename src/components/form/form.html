@@ -16,10 +16,10 @@
     </m-accordion-transition>
     <slot name="serverResponse">
     </slot>
-    <p class="required"
+    <p class="m-form__required"
        v-if="requiredMarker">
-        <span class="required__marker">*</span>
-        <span class="required__label">{{ 'm-form:required' | f-m-i18n }}</span>
+        <span class="m-form__required-marker">*</span>
+        <span class="m-form__required-label">{{ 'm-form:required' | f-m-i18n }}</span>
     </p>
 
     <slot></slot>

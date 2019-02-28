@@ -11,18 +11,18 @@
             list-style: none;
         }
     }
-}
 
-.required {
-    margin: 0;
-    text-align: right;
+    &__required {
+        margin: 0;
+        float: right;
+    }
 
-    &__marker {
+    &__required-marker {
         color: $m-color--accent;
         font-weight: $m-font-weight--black;
     }
 
-    &__label {
+    &__required-label {
         font-size: $m-font-size--s;
         color: $m-color--text-light;
     }
