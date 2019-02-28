@@ -2,6 +2,6 @@
 
 exports[`m-periodpicker should render correctly 1`] = `
 <div>
-    <m-validation-message-stub transition="true"></m-validation-message-stub>
+  <m-validation-message-stub tagStyle="default" transition="true"></m-validation-message-stub>
 </div>
 `;

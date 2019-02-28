@@ -2,15 +2,15 @@
 
 exports[`m-show-more Given nbVisible < nbTotal Should render correctly 1`] = `
 <div class="m-show-more">
-    <div class="m-show-more__status">m-show-more:status</div>
-    <m-progress value="20"></m-progress>
-    <m-button skin="secondary">m-show-more:button-label</m-button>
+  <div class="m-show-more__status">m-show-more:status</div>
+  <m-progress value="20"></m-progress>
+  <m-button skin="secondary">m-show-more:button-label</m-button>
 </div>
 `;
 
 exports[`m-show-more Given nbVisible == nbTotal Should render correctly 1`] = `
 <div class="m-show-more">
-    <div class="m-show-more__status">m-show-more:status</div>
+  <div class="m-show-more__status">m-show-more:status</div>
 </div>
 `;
 

@@ -6,7 +6,7 @@ import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent, WrapChildrenStub } from '../../../tests/helpers/render';
 import I18nPlugin from '../../components/i18n/i18n';
 import FileSizeFilterPlugin from '../../filters/filesize/filesize';
-import FilePlugin, { DEFAULT_STORE_NAME, MFile, MFileStatus, MFileValidationOptions } from '../../utils/file/file';
+import FilePlugin, { DEFAULT_STORE_NAME, FileService, MFile, MFileStatus, MFileValidationOptions } from '../../utils/file/file';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import UserAgentUtil from '../../utils/user-agent/user-agent';
 import { ModulVue } from '../../utils/vue/vue';
@@ -14,7 +14,6 @@ import ButtonPlugin from '../button/button';
 import { MESSAGE_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import { MMessage } from '../message/message';
-import { FileService } from './../../utils/file/file';
 import ModulPlugin from './../../utils/modul/modul';
 import { MFileUpload } from './file-upload';
 

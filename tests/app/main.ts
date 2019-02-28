@@ -7,10 +7,10 @@ import LinkPlugin from '../../src/components/link/link';
 import TemplatePlugin from '../../src/components/template/template';
 import FrenchPlugin from '../../src/lang/fr';
 import '../../src/styles/main.scss';
-import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils';
 import { FRENCH } from '../../src/utils/i18n/i18n';
 import '../../src/utils/polyfills';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
+import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils/utils-plugin';
 import { AppFrame } from './app-frame/app-frame';
 import MetaFactory from './meta-init';
 import routerFactory from './router';
@@ -30,7 +30,6 @@ Vue.use(FrenchPlugin);
 
 // Vue.use(EnglishPlugin);
 Vue.use(DefaultSpritesPlugin);
-
 // required components
 Vue.use(FlexTemplatePlugin);
 Vue.use(LinkPlugin);

@@ -2,84 +2,84 @@
 
 exports[`MMenu Menu should render correctly 1`] = `
 <div class="m-menu m--is-skin-dark">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should react to disabled prop changes 1`] = `
 <div class="m-menu m--is-skin-dark">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should react to disabled prop changes 2`] = `
 <div class="m-menu m--is-skin-dark m--is-disabled">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should react to open prop changes 1`] = `
 <div class="m-menu m--is-skin-dark">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should react to open prop changes 2`] = `
 <div class="m-menu m--is-skin-dark m--is-open">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" class="m-menu__body">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" class="m-menu__body">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should render correctly when skin is dark 1`] = `
 <div class="m-menu m--is-skin-dark">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;
 
 exports[`MMenu should render correctly when skin is light 1`] = `
 <div class="m-menu m--is-skin-light">
-    <m-accordion-transition>
-        <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
-            <m-menu-item value="a">A item</m-menu-item>
-            <m-menu-item value="b">B item</m-menu-item>
-            <m-menu-item value="c">C item</m-menu-item>
-        </ul>
-    </m-accordion-transition>
+  <m-accordion-transition>
+    <ul id="mMenu-undefined-controls" role="menu" aria-hidden="true" class="m-menu__body" style="display:none;">
+      <m-menu-item value="a">A item</m-menu-item>
+      <m-menu-item value="b">B item</m-menu-item>
+      <m-menu-item value="c">C item</m-menu-item>
+    </ul>
+  </m-accordion-transition>
 </div>
 `;

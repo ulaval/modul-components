@@ -196,8 +196,10 @@
     <div style="width: 50%; float:left;">
         <h3>Read only mode</h3>
         <p>
-            <m-tree :tree="tree"
+            <m-tree :tree="multiNodeTree"
                     selection-mode="readonly"
+                    :disabled-nodes="disabledNodesCheckboxesNone"
+                    :selected-nodes="currentNodesCheckboxesNone"
                     @select="onSelect"></m-tree>
         </p>
     </div>
@@ -229,4 +231,12 @@
         </p>
     </div>
 
+    <div style="width: 50%; float:left;">
+        <h3>Read only mode</h3>
+        <p>
+            <m-tree :tree="tree2"
+                    selection-mode="readonly"
+                    @select="onSelect"></m-tree>
+        </p>
+    </div>
 </div>

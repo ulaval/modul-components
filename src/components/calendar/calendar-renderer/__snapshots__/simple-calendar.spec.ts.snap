@@ -2,409 +2,219 @@
 
 exports[`Simple calendar in day picker mode should render a calendar 1`] = `
 <div id="m-simple-calendar-uuid" class="m-simple-calendar">
-    <div class="m-simple-calendar__header">
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
-        </nav>
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
-        </nav>
-    </div>
-    <div aria-live="polite" class="m-simple-calendar__body">
-        <table class="m-simple-calendar__body-table">
-            <tr>
-                <td class="m-simple-calendar__weekday">Sun.</td>
-                <td class="m-simple-calendar__weekday">Mon.</td>
-                <td class="m-simple-calendar__weekday">Tue.</td>
-                <td class="m-simple-calendar__weekday">Wed.</td>
-                <td class="m-simple-calendar__weekday">Thu.</td>
-                <td class="m-simple-calendar__weekday">Fri.</td>
-                <td class="m-simple-calendar__weekday">Sat.</td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">30</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">1</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">3</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">4</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">5</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">6</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">7</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">8</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">9</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">10</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">11</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">12</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-today"><span class="m-simple-calendar__item__text">13</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">14</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">15</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">16</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">17</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">18</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">19</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">20</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">21</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">22</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">23</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">24</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">25</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-disabled"><span class="m-simple-calendar__item__text">26</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">27</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">28</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">29</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">30</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">1</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">2</span></button>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <div class="m-simple-calendar__header">
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
+    </nav>
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
+    </nav>
+  </div>
+  <div aria-live="polite" class="m-simple-calendar__body">
+    <table class="m-simple-calendar__body-table">
+      <tr>
+        <td class="m-simple-calendar__weekday">Sun.</td>
+        <td class="m-simple-calendar__weekday">Mon.</td>
+        <td class="m-simple-calendar__weekday">Tue.</td>
+        <td class="m-simple-calendar__weekday">Wed.</td>
+        <td class="m-simple-calendar__weekday">Thu.</td>
+        <td class="m-simple-calendar__weekday">Fri.</td>
+        <td class="m-simple-calendar__weekday">Sat.</td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">30</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">1</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">3</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">4</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">5</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">6</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">7</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">8</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">9</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">10</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">11</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">12</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-today"><span class="m-simple-calendar__item__text">13</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">14</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">15</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">16</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">17</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">18</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">19</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">20</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">21</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">22</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">23</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">24</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">25</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-disabled"><span class="m-simple-calendar__item__text">26</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">27</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">28</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">29</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">30</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">1</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-other-month"><span class="m-simple-calendar__item__text">2</span></button></td>
+      </tr>
+    </table>
+  </div>
 </div>
 `;
 
 exports[`Simple calendar in day picker mode when hiding days from previous and following month, these days should be hidden 1`] = `
 <div id="m-simple-calendar-uuid" class="m-simple-calendar">
-    <div class="m-simple-calendar__header">
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
-        </nav>
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
-        </nav>
-    </div>
-    <div aria-live="polite" class="m-simple-calendar__body">
-        <table class="m-simple-calendar__body-table">
-            <tr>
-                <td class="m-simple-calendar__weekday">Sun.</td>
-                <td class="m-simple-calendar__weekday">Mon.</td>
-                <td class="m-simple-calendar__weekday">Tue.</td>
-                <td class="m-simple-calendar__weekday">Wed.</td>
-                <td class="m-simple-calendar__weekday">Thu.</td>
-                <td class="m-simple-calendar__weekday">Fri.</td>
-                <td class="m-simple-calendar__weekday">Sat.</td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">30</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">1</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">3</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">4</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">5</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">6</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">7</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">8</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">9</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">10</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">11</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">12</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-today"><span class="m-simple-calendar__item__text">13</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">14</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">15</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">16</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">17</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">18</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">19</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">20</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">21</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">22</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">23</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">24</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">25</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-disabled"><span class="m-simple-calendar__item__text">26</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">27</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">28</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">29</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">30</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">1</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">2</span></button>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <div class="m-simple-calendar__header">
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
+    </nav>
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
+    </nav>
+  </div>
+  <div aria-live="polite" class="m-simple-calendar__body">
+    <table class="m-simple-calendar__body-table">
+      <tr>
+        <td class="m-simple-calendar__weekday">Sun.</td>
+        <td class="m-simple-calendar__weekday">Mon.</td>
+        <td class="m-simple-calendar__weekday">Tue.</td>
+        <td class="m-simple-calendar__weekday">Wed.</td>
+        <td class="m-simple-calendar__weekday">Thu.</td>
+        <td class="m-simple-calendar__weekday">Fri.</td>
+        <td class="m-simple-calendar__weekday">Sat.</td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">30</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">31</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">1</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">3</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">4</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">5</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">6</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">7</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">8</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">9</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">10</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">11</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">12</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-today"><span class="m-simple-calendar__item__text">13</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">14</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">15</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">16</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">17</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">18</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">19</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">20</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-highlighted"><span class="m-simple-calendar__item__text">21</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">22</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">23</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">24</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">25</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-disabled"><span class="m-simple-calendar__item__text">26</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">27</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">28</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">29</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">30</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">31</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">1</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-hidden m--is-other-month"><span class="m-simple-calendar__item__text">2</span></button></td>
+      </tr>
+    </table>
+  </div>
 </div>
 `;
 
 exports[`Simple calendar in month picker mode should render a list of months 1`] = `
 <div id="m-simple-calendar-uuid" class="m-simple-calendar">
-    <div class="m-simple-calendar__header">
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
-        </nav>
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
-        </nav>
-    </div>
-    <div aria-live="polite" class="m-simple-calendar__body">
-        <table class="m-simple-calendar__body-table">
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">Jan.</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Feb.</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Mar.</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Apr.</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">May</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">June</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">July</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Aug.</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Sept.</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Oct.</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Nov.</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Dec.</span></button>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <div class="m-simple-calendar__header">
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
+    </nav>
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
+    </nav>
+  </div>
+  <div aria-live="polite" class="m-simple-calendar__body">
+    <table class="m-simple-calendar__body-table">
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">Jan.</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Feb.</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Mar.</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Apr.</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">May</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">June</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">July</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Aug.</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Sept.</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Oct.</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Nov.</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">Dec.</span></button></td>
+      </tr>
+    </table>
+  </div>
 </div>
 `;
 
 exports[`Simple calendar in year picker mode should render a list of years 1`] = `
 <div id="m-simple-calendar-uuid" class="m-simple-calendar">
-    <div class="m-simple-calendar__header">
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
-        </nav>
-        <nav class="m-simple-calendar__nav">
-            <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button>
-            <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
-            <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
-        </nav>
-    </div>
-    <div aria-live="polite" class="m-simple-calendar__body">
-        <table class="m-simple-calendar__body-table">
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2015</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2016</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2017</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2018</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">2019</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2020</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2021</span></button>
-                </td>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2022</span></button>
-                </td>
-            </tr>
-            <tr>
-                <td class="m-simple-calendar__body-cell">
-                    <button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2023</span></button>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <div class="m-simple-calendar__header">
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous year</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__years">2019</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next year</m-icon-button>
+    </nav>
+    <nav class="m-simple-calendar__nav">
+      <m-icon-button icon-name="m-svg__chevron--left">Previous month</m-icon-button> <button aria-live="polite" type="button" class="m-simple-calendar__months">January</button>
+      <m-icon-button icon-name="m-svg__chevron--right">Next month</m-icon-button>
+    </nav>
+  </div>
+  <div aria-live="polite" class="m-simple-calendar__body">
+    <table class="m-simple-calendar__body-table">
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2015</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2016</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2017</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2018</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item m--is-selected"><span class="m-simple-calendar__item__text">2019</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2020</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2021</span></button></td>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2022</span></button></td>
+      </tr>
+      <tr>
+        <td class="m-simple-calendar__body-cell"><button type="button" class="m-simple-calendar__item"><span class="m-simple-calendar__item__text">2023</span></button></td>
+      </tr>
+    </table>
+  </div>
 </div>
 `;
