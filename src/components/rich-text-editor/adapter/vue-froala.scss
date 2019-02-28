@@ -170,10 +170,12 @@
         .fr-wrapper {
             transition: background $m-transition-duration ease;
             cursor: text;
+            display: flex;
         }
 
         .fr-view {
             color: $m-color--text;
+            width: 100%;
 
             & > :first-child {
                 margin-top: 0 !important;
