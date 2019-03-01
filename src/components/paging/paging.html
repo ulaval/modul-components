@@ -5,6 +5,7 @@
          v-if="nbOfPages > 1">
         <m-icon-button class="m-paging__previous-button"
                        icon-name="m-svg__chevron-circle--left"
+                       skin="link"
                        @click="goToPage(value - 1)"
                        :disabled="firstPageSelected || loading">
             <m-i18n k="m-paging:previous"></m-i18n>
@@ -24,6 +25,7 @@
         </ul>
         <m-icon-button class="m-paging__next-button"
                        icon-name="m-svg__chevron-circle--right"
+                       skin="link"
                        @click="goToPage(value + 1)"
                        :disabled="lastPageSelected || loading">
             <m-i18n k="m-paging:next"></m-i18n>

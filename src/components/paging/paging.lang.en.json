@@ -3,7 +3,6 @@
         "previous": "Previous Page",
         "next": "Next Page",
         "ellipsis": "...",
-        "status": "%(nbVisible)s of %(nbTotal)s page",
-        "status.p": "%(nbVisible)s of %(nbTotal)s pages"
+        "status": "Page %(nbVisible)s of %(nbTotal)s"
     }
 }

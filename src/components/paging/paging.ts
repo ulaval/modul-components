@@ -46,8 +46,21 @@ export class MPaging extends ModulVue {
     public get pagingItems(): PagingItem[] {
         let items: PagingItem[] = [];
         let delta: number = this.as<MediaQueriesMixin>().isMqMinS ? DELTA_DESKTOP : DELTA_MOBILE;
-        let minDelta: number = this.value - delta < 2 ? 2 : this.value - delta;
-        let maxDelta: number = this.value + delta > this.nbOfPages - 1 ? this.nbOfPages - 1 : this.value + delta;
+        let minDelta: number;
+        let maxDelta: number;
+
+        if (this.value <= FIRST_PAGE + delta) {
+            let adjustDelta: number = (delta * 2) - (this.value - (FIRST_PAGE + 1));
+            minDelta = FIRST_PAGE + 1;
+            maxDelta = this.value + adjustDelta > this.nbOfPages - 1 ? this.nbOfPages - 1 : this.value + adjustDelta;
+        } else if (this.value >= this.nbOfPages - delta) {
+            let adjustDelta: number = (delta * 2) - ((this.nbOfPages - 1) - this.value);
+            minDelta = this.value - adjustDelta < FIRST_PAGE + 1 ? FIRST_PAGE + 1 : this.value - adjustDelta;
+            maxDelta = this.nbOfPages - 1;
+        } else {
+            minDelta = this.value - delta < FIRST_PAGE + 1 ? FIRST_PAGE + 1 : this.value - delta;
+            maxDelta = this.value + delta > this.nbOfPages - 1 ? this.nbOfPages - 1 : this.value + delta;
+        }
 
         items.push({ label: FIRST_PAGE.toString(), clickable: FIRST_PAGE === this.value ? false : true });
 
@@ -77,7 +90,7 @@ export class MPaging extends ModulVue {
     }
 
     public get status(): string {
-        return this.$i18n.translate('m-paging:status', { nbVisible: this.value, nbTotal: this.nbOfPages }, this.nbOfPages, undefined, undefined, FormatMode.Sprintf);
+        return this.$i18n.translate('m-paging:status', { nbVisible: this.value, nbTotal: this.nbOfPages }, undefined, undefined, undefined, FormatMode.Sprintf);
     }
 
     @Emit('change')
