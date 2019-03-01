@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Model, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_NAME } from '../component-names';
 import WithRender from './input.html';
@@ -11,8 +11,10 @@ import WithRender from './input.html';
 @Component
 export class MInput extends ModulVue {
 
+
     @Prop()
-    value: string;
+    @Model('input')
+    inputValue: string;
 
     onInput($event: InputEvent): void {
         this.$emit('input', ($event.target as any).value);
