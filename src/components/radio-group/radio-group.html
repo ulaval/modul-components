@@ -4,12 +4,6 @@
               'm--has-error': hasError,
               'm--is-valid': isValid,
               'm--has-validation-message': hasValidationMessage }">
-    <m-validation-message :id="idValidationMessage"
-                          class="m-radio-group__message"
-                          :disabled="stateIsDisabled"
-                          :error-message="errorMessage"
-                          :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
     <p :id="idLabel"
        class="m-radio-group__label"
        v-if="hasLabel">
@@ -18,6 +12,12 @@
             <slot name="icon"></slot>
         </span>
     </p>
+    <m-validation-message :id="idValidationMessage"
+                          class="m-radio-group__message"
+                          :disabled="stateIsDisabled"
+                          :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
     <ul class="m-radio-group__body"
         role="radiogroup"
         :aria-labelledby="idLabel"
