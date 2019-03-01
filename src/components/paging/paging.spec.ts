@@ -16,6 +16,7 @@ let localVue: VueConstructor<Vue>;
 let value: number = 1;
 let nbOfItems: number;
 let nbOfItemsPerPage: number;
+let loading: boolean;
 
 const NB_OF_ITEMS_1PAGE: number = 10;
 const NB_OF_ITEMS_PAGES: number = 50;
@@ -32,7 +33,8 @@ const initializeWrapper: () => any = () => {
         propsData: {
             value,
             nbOfItems,
-            nbOfItemsPerPage
+            nbOfItemsPerPage,
+            loading
         }
     });
 };
@@ -142,6 +144,31 @@ describe('MPaging', () => {
 
         it(`Then the ellipsis should be displayed on both side`, () => {
             expect(wrapper.findAll('.m-paging__item--text').length).toEqual(3);
+        });
+
+        it(`Then should render correctly`, () => {
+            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+        });
+    });
+
+    describe(`Given component is disabled while loading`, () => {
+
+        beforeEach(() => {
+            nbOfItems = NB_OF_ITEMS_PAGES_ELLIPSIS;
+            loading = true;
+            initializeWrapper();
+        });
+
+        it(`Then navigation should be display`, () => {
+            expect(wrapper.vm.$refs.navigation).toBeTruthy();
+        });
+
+        it(`Then 'previous' and 'next' should be disabled`, () => {
+            const previousElement: Wrapper<Vue> = wrapper.find(PREVIOUS_REF);
+            const nextElement: Wrapper<Vue> = wrapper.find(NEXT_REF);
+
+            expect(previousElement.props().disabled).toBeTruthy();
+            expect(nextElement.props().disabled).toBeTruthy();
         });
 
         it(`Then should render correctly`, () => {
