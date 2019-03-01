@@ -1,0 +1,53 @@
+@import 'commons';
+
+.m-scroll-spy {
+    position: relative;
+
+    &__container {
+        display: flex;
+    }
+
+    &__left-sidebar {
+        position: sticky;
+        top: 60px;
+        min-width: 300px;
+        height: 100%;
+        left: 0;
+        flex: none;
+        padding-right: $m-spacing;
+        background-color: $m-color--white;
+
+        h2 {
+            margin-top: 0;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+
+            li {
+                padding: $m-padding;
+                margin-bottom: $m-margin--s;
+                color: #fff;
+                font-weight: $m-font-weight--black;
+                background-color: #7cadf1;
+                display: flex;
+                align-items: center;
+
+                &.noHandle {
+                    cursor: grab;
+                }
+
+                .drag-handle {
+                    flex: none;
+                    cursor: grab;
+                    margin-right: $m-margin;
+                }
+            }
+        }
+    }
+
+    section {
+        margin: $m-spacing--xl 0 0;
+    }
+}

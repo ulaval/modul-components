@@ -19,7 +19,7 @@ export class Navigation extends ModulVue {
 
     protected mounted(): void {
 
-        this.sandboxesNames = getSandboxesNames();
+        this.sandboxesNames = getSandboxesNames().sort();
         this.directivesName = getDirectiveNames();
         this.filtersName = getFiltersNames();
         this.utilsNames = getUtilsNames();
