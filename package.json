@@ -68,6 +68,7 @@
     },
     "dependencies": {
         "axios": "^0.17.1",
+        "cleave.js": "^1.4.7",
         "css-element-queries": "^0.4.0",
         "enquire.js": "^2.1.6",
         "es6-promise": "^4.1.1",
