@@ -58,7 +58,7 @@ module.exports = function (env) {
             }
         },
 
-        devtool: isLib ? 'source-map' : 'eval-source-map',
+        devtool: isLib ? 'source-map' : 'inline-source-map',
 
         module: {
             rules: [
@@ -147,7 +147,6 @@ module.exports = function (env) {
                 tsconfig: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
                 checkSyntacticErrors: true,
                 tslint: true,
-                async: false,
                 silent: isSilent
             }),
             new StyleLintPlugin({

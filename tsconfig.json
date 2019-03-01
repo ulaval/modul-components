@@ -8,13 +8,15 @@
         ],
         "module": "es2015",
         "moduleResolution": "node",
+        "sourceMap": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
         "types": [
             "node",
             "jest",
-            "webpack-env"
+            "webpack-env",
+            "dom-inputevent"
         ],
         "typeRoots": [
             "node_modules/@types"
