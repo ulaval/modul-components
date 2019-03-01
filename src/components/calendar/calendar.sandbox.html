@@ -1,5 +1,5 @@
 <div>
-    <h2>Single date picker</h2>
+    <h2>Single date selection (for a date picker)</h2>
     <h3>Default settings</h3>
     <p>
         Selected Date: {{ date }}<br />
@@ -29,7 +29,7 @@
                 max-date="2025-02-20"
                 :show-month-before-after="true"></m-calendar>
 
-    <h2>Period picker</h2>
+    <h2>Multiple dates selection (for a period picker)</h2>
     <h3>Default setting</h3>
     <p>
         Selected Date: {{ dateRange }}<br />
@@ -38,7 +38,7 @@
     <m-calendar mode="date-range"
                 v-model="dateRange"></m-calendar>
 
-    <h3>Calendar (with min/max date, days from month before and after are hidden)</h3>
+    <h3>Hide days from month before and after</h3>
     <p>
         Selected Date: {{ dateRange }}<br />
         Min-date : 2018-06-15<br />
