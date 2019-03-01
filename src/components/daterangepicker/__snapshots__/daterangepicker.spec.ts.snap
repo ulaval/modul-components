@@ -2,14 +2,14 @@
 
 exports[`m-daterangepicker considering custom labels are provided should render them correctly 1`] = `
 <m-periodpicker-stub>
-    <m-datepicker-stub label="labelFrom"></m-datepicker-stub>
-    <m-datepicker-stub label="labelTo"></m-datepicker-stub>
+  <m-datepicker-stub label="labelFrom"></m-datepicker-stub>
+  <m-datepicker-stub label="labelTo"></m-datepicker-stub>
 </m-periodpicker-stub>
 `;
 
 exports[`m-daterangepicker should render correctly 1`] = `
 <m-periodpicker-stub>
-    <m-datepicker-stub label="m-daterangepicker:label.from"></m-datepicker-stub>
-    <m-datepicker-stub label="m-daterangepicker:label.to"></m-datepicker-stub>
+  <m-datepicker-stub label="m-daterangepicker:label.from"></m-datepicker-stub>
+  <m-datepicker-stub label="m-daterangepicker:label.to"></m-datepicker-stub>
 </m-periodpicker-stub>
 `;

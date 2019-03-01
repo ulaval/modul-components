@@ -2,15 +2,14 @@
 
 exports[`MTextfield should render correctly 1`] = `
 <div class="m-textfield m--is-type-text" style="width:100%;max-width:288px;">
-    <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
-        <div class="m-input-style__body" style="top:0;">
-            <div class="m-input-style__body__left">
-                <input id="mTextfield-uuid" maxlength="Infinity" type="text" value="" class="m-textfield__input"> </div>
-            <div class="m-input-style__body__right"><span name="m--is"></span></div>
-        </div>
+  <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
+    <div class="m-input-style__body" style="top:0;">
+      <div class="m-input-style__body__left"><input id="mTextfield-uuid" maxlength="Infinity" type="text" value="" class="m-textfield__input"> </div>
+      <div class="m-input-style__body__right"><span name="m--is"></span></div>
     </div>
-    <div class="m-textfield__validation">
-        <div class="m-validation-message m-textfield__validation__message"></div>
-    </div>
+  </div>
+  <div class="m-textfield__validation">
+    <div class="m-validation-message m-textfield__validation__message"></div>
+  </div>
 </div>
 `;

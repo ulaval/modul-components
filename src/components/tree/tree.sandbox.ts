@@ -91,6 +91,60 @@ export class MRootTreeSandbox extends Vue {
         }
     ];
 
+    public tree2: TreeNode[] = [
+        {
+            id: '6',
+            label: 'Title 1'
+        },
+        {
+            id: '1',
+            label: 'Title 2',
+            hasChildren: true,
+            children: [
+                {
+                    id: '2',
+                    label: 'Subtitle 1'
+                },
+                {
+                    id: '3',
+                    label: 'Subtitle 2',
+                    children: [
+                        {
+                            id: '2',
+                            label: 'Subtitle 1'
+                        },
+                        {
+                            id: '3',
+                            label: 'Subtitle 2',
+                            hasChildren: true
+                        },
+                        {
+                            id: '4',
+                            label: 'Subtitle 3'
+                        },
+                        {
+                            id: '5',
+                            label: 'Subtitle 4'
+                        }
+                    ]
+                },
+                {
+                    id: '4',
+                    label: 'Subtitle 3'
+                },
+                {
+                    id: '5',
+                    label: 'Subtitle 4'
+                }
+            ]
+        },
+        {
+            id: '7',
+            label: 'Title 3',
+            open: true
+        }
+    ];
+
     public errorTree: TreeNode[] = [
         {
             id: '1',

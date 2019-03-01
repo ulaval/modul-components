@@ -33,6 +33,13 @@ export class Form {
     }
 
     /**
+     * Total number of errors
+     */
+    get totalNbOfErrors(): number {
+        return this.nbFieldsThatHasError + this.nbOfErrors;
+    }
+
+    /**
      * Number of fields that have errors
      */
     get nbFieldsThatHasError(): number {
@@ -83,7 +90,11 @@ export class Form {
      * returns all the messages that must be shown in the summary
      */
     getErrorsForSummary(): string[] {
-        let errorsSummary: string[] = this.internalState.errorMessages;
+        let errorsSummary: string[] = [];
+
+        this.internalState.errorMessages.forEach((message: string) => {
+            errorsSummary.push(message);
+        });
 
         this.fields.forEach((field: FormField<any>) => {
             errorsSummary.push(field.errorMessageSummary[0]);

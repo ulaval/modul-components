@@ -20,7 +20,7 @@ describe('MTextfield', () => {
         return expect(renderComponent(component.vm)).resolves.toMatchSnapshot();
     });
 
-    [MTextfieldType.Email, MTextfieldType.Password, MTextfieldType.Telephone, MTextfieldType.Text, MTextfieldType.Url, MTextfieldType.Number]
+    [MTextfieldType.Email, MTextfieldType.Password, MTextfieldType.Telephone, MTextfieldType.Text, MTextfieldType.Url]
         .forEach((type: MTextfieldType) => {
             it('should return inputType equal to type prop', () => {
                 const component: Wrapper<MTextfield> = mount(MTextfield, {

@@ -1,6 +1,7 @@
 export const ALERT: string = 'alert';
 export const CONFIRM: string = 'confirm';
 export const FILE: string = 'file';
+export const FORM: string = 'form';
 export const HTTP: string = 'http';
 export const I18N: string = 'i18n';
 export const LICENSE: string = 'license';

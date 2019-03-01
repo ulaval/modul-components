@@ -2,12 +2,12 @@
 
 exports[`MNavbarItem should render correctly 1`] = `
 <li role="menuitem" class="m-navbar-item">
-    <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text">navbar item content</span></div>
+  <div tabindex="0" role="button" class="m-navbar-item__contents"><span class="m-navbar-item__text">navbar item content</span></div>
 </li>
 `;
 
 exports[`MNavbarItem should render correctly when disabled 1`] = `
 <li role="menuitem" class="m-navbar-item m--is-disabled">
-    <div tabindex="-1" class="m-navbar-item__contents"><span class="m-navbar-item__text">navbar item content</span></div>
+  <div tabindex="-1" class="m-navbar-item__contents"><span class="m-navbar-item__text">navbar item content</span></div>
 </li>
 `;

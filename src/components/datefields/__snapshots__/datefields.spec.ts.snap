@@ -2,145 +2,145 @@
 
 exports[`MDateFields should render correctly 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly minYear/maxYear items 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years">
-        <m-dropdown-item value="2017"></m-dropdown-item>
-        <m-dropdown-item value="2018"></m-dropdown-item>
-    </m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months">
-        <m-dropdown-item value="1" label="January"></m-dropdown-item>
-        <m-dropdown-item value="2" label="February"></m-dropdown-item>
-        <m-dropdown-item value="3" label="March"></m-dropdown-item>
-        <m-dropdown-item value="4" label="April"></m-dropdown-item>
-        <m-dropdown-item value="5" label="May"></m-dropdown-item>
-        <m-dropdown-item value="6" label="June"></m-dropdown-item>
-        <m-dropdown-item value="7" label="July"></m-dropdown-item>
-        <m-dropdown-item value="8" label="August"></m-dropdown-item>
-        <m-dropdown-item value="9" label="September"></m-dropdown-item>
-        <m-dropdown-item value="10" label="October"></m-dropdown-item>
-        <m-dropdown-item value="11" label="November"></m-dropdown-item>
-        <m-dropdown-item value="12" label="December"></m-dropdown-item>
-    </m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates">
-        <m-dropdown-item value="1" label="01"></m-dropdown-item>
-        <m-dropdown-item value="2" label="02"></m-dropdown-item>
-        <m-dropdown-item value="3" label="03"></m-dropdown-item>
-        <m-dropdown-item value="4" label="04"></m-dropdown-item>
-        <m-dropdown-item value="5" label="05"></m-dropdown-item>
-        <m-dropdown-item value="6" label="06"></m-dropdown-item>
-        <m-dropdown-item value="7" label="07"></m-dropdown-item>
-        <m-dropdown-item value="8" label="08"></m-dropdown-item>
-        <m-dropdown-item value="9" label="09"></m-dropdown-item>
-        <m-dropdown-item value="10" label="10"></m-dropdown-item>
-        <m-dropdown-item value="11" label="11"></m-dropdown-item>
-        <m-dropdown-item value="12" label="12"></m-dropdown-item>
-        <m-dropdown-item value="13" label="13"></m-dropdown-item>
-        <m-dropdown-item value="14" label="14"></m-dropdown-item>
-        <m-dropdown-item value="15" label="15"></m-dropdown-item>
-        <m-dropdown-item value="16" label="16"></m-dropdown-item>
-        <m-dropdown-item value="17" label="17"></m-dropdown-item>
-        <m-dropdown-item value="18" label="18"></m-dropdown-item>
-        <m-dropdown-item value="19" label="19"></m-dropdown-item>
-        <m-dropdown-item value="20" label="20"></m-dropdown-item>
-        <m-dropdown-item value="21" label="21"></m-dropdown-item>
-        <m-dropdown-item value="22" label="22"></m-dropdown-item>
-        <m-dropdown-item value="23" label="23"></m-dropdown-item>
-        <m-dropdown-item value="24" label="24"></m-dropdown-item>
-        <m-dropdown-item value="25" label="25"></m-dropdown-item>
-        <m-dropdown-item value="26" label="26"></m-dropdown-item>
-        <m-dropdown-item value="27" label="27"></m-dropdown-item>
-        <m-dropdown-item value="28" label="28"></m-dropdown-item>
-        <m-dropdown-item value="29" label="29"></m-dropdown-item>
-        <m-dropdown-item value="30" label="30"></m-dropdown-item>
-        <m-dropdown-item value="31" label="31"></m-dropdown-item>
-    </m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years">
+    <m-dropdown-item value="2017"></m-dropdown-item>
+    <m-dropdown-item value="2018"></m-dropdown-item>
+  </m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months">
+    <m-dropdown-item value="1" label="January"></m-dropdown-item>
+    <m-dropdown-item value="2" label="February"></m-dropdown-item>
+    <m-dropdown-item value="3" label="March"></m-dropdown-item>
+    <m-dropdown-item value="4" label="April"></m-dropdown-item>
+    <m-dropdown-item value="5" label="May"></m-dropdown-item>
+    <m-dropdown-item value="6" label="June"></m-dropdown-item>
+    <m-dropdown-item value="7" label="July"></m-dropdown-item>
+    <m-dropdown-item value="8" label="August"></m-dropdown-item>
+    <m-dropdown-item value="9" label="September"></m-dropdown-item>
+    <m-dropdown-item value="10" label="October"></m-dropdown-item>
+    <m-dropdown-item value="11" label="November"></m-dropdown-item>
+    <m-dropdown-item value="12" label="December"></m-dropdown-item>
+  </m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates">
+    <m-dropdown-item value="1" label="01"></m-dropdown-item>
+    <m-dropdown-item value="2" label="02"></m-dropdown-item>
+    <m-dropdown-item value="3" label="03"></m-dropdown-item>
+    <m-dropdown-item value="4" label="04"></m-dropdown-item>
+    <m-dropdown-item value="5" label="05"></m-dropdown-item>
+    <m-dropdown-item value="6" label="06"></m-dropdown-item>
+    <m-dropdown-item value="7" label="07"></m-dropdown-item>
+    <m-dropdown-item value="8" label="08"></m-dropdown-item>
+    <m-dropdown-item value="9" label="09"></m-dropdown-item>
+    <m-dropdown-item value="10" label="10"></m-dropdown-item>
+    <m-dropdown-item value="11" label="11"></m-dropdown-item>
+    <m-dropdown-item value="12" label="12"></m-dropdown-item>
+    <m-dropdown-item value="13" label="13"></m-dropdown-item>
+    <m-dropdown-item value="14" label="14"></m-dropdown-item>
+    <m-dropdown-item value="15" label="15"></m-dropdown-item>
+    <m-dropdown-item value="16" label="16"></m-dropdown-item>
+    <m-dropdown-item value="17" label="17"></m-dropdown-item>
+    <m-dropdown-item value="18" label="18"></m-dropdown-item>
+    <m-dropdown-item value="19" label="19"></m-dropdown-item>
+    <m-dropdown-item value="20" label="20"></m-dropdown-item>
+    <m-dropdown-item value="21" label="21"></m-dropdown-item>
+    <m-dropdown-item value="22" label="22"></m-dropdown-item>
+    <m-dropdown-item value="23" label="23"></m-dropdown-item>
+    <m-dropdown-item value="24" label="24"></m-dropdown-item>
+    <m-dropdown-item value="25" label="25"></m-dropdown-item>
+    <m-dropdown-item value="26" label="26"></m-dropdown-item>
+    <m-dropdown-item value="27" label="27"></m-dropdown-item>
+    <m-dropdown-item value="28" label="28"></m-dropdown-item>
+    <m-dropdown-item value="29" label="29"></m-dropdown-item>
+    <m-dropdown-item value="30" label="30"></m-dropdown-item>
+    <m-dropdown-item value="31" label="31"></m-dropdown-item>
+  </m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly model Date type 1`] = `
 <div class="m-datefields complete">
-    <m-dropdown-mock value="1999" width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock value="8" width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock value="12" width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock value="1999" width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock value="8" width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock value="12" width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly moment.js model type 1`] = `
 <div class="m-datefields complete">
-    <m-dropdown-mock value="1999" width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock value="8" width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock value="12" width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock value="1999" width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock value="8" width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock value="12" width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when day/month/year is hidden: day 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when day/month/year is hidden: month 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when day/month/year is hidden: year 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when disabled is set 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" disabled="disabled" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" disabled="disabled" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" disabled="disabled" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message disabled="disabled"></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" disabled="disabled" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" disabled="disabled" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" disabled="disabled" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message disabled="disabled"></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when error is set 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" error="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" error="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" error="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message error="true" error-message="Nostrud laboris quis velit voluptate aute elit elit non."></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" error="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" error="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" error="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message error="true" error-message="Nostrud laboris quis velit voluptate aute elit elit non."></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when valid is set 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" valid="true" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" valid="true" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" valid="true" class="m-datefields__dates"></m-dropdown-mock>
-    <m-validation-message valid-message="Nostrud laboris quis velit voluptate aute elit elit non."></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" valid="true" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" valid="true" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" valid="true" class="m-datefields__dates"></m-dropdown-mock>
+  <m-validation-message valid-message="Nostrud laboris quis velit voluptate aute elit elit non."></m-validation-message>
 </div>
 `;
 
 exports[`MDateFields should render correctly when waiting is set 1`] = `
 <div class="m-datefields">
-    <m-dropdown-mock width="70px" placeholder="Year" filterable="true" disabled="disabled" class="m-datefields__years"></m-dropdown-mock>
-    <m-dropdown-mock width="105px" placeholder="Month" filterable="true" disabled="disabled" class="m-datefields__months"></m-dropdown-mock>
-    <m-dropdown-mock width="60px" placeholder="Day" filterable="true" disabled="disabled" class="m-datefields__dates"></m-dropdown-mock>
-    <m-spinner size="small"></m-spinner>
-    <m-validation-message></m-validation-message>
+  <m-dropdown-mock width="70px" placeholder="Year" filterable="true" disabled="disabled" class="m-datefields__years"></m-dropdown-mock>
+  <m-dropdown-mock width="105px" placeholder="Month" filterable="true" disabled="disabled" class="m-datefields__months"></m-dropdown-mock>
+  <m-dropdown-mock width="60px" placeholder="Day" filterable="true" disabled="disabled" class="m-datefields__dates"></m-dropdown-mock>
+  <m-spinner size="small"></m-spinner>
+  <m-validation-message></m-validation-message>
 </div>
 `;

@@ -2,21 +2,18 @@
 
 exports[`MSessionExpired should render correctly 1`] = `
 <div>
-    <div class="m-message m--is-state-information m--is-skin-default">
-        <div class="m-message__wrap">
-            <div class="m-message__icon">
-                <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use aria-hidden="true"></use>
-                </svg>
-            </div>
-            <div class="m-message__body">
-                <div class="m-message__text"><span class="m-i18n">m-session-expired:message</span></div>
-            </div>
-        </div>
+  <div class="m-message m--is-state-information m--is-skin-default">
+    <div class="m-message__wrap">
+      <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+          <use aria-hidden="true"></use>
+        </svg></div>
+      <div class="m-message__body">
+        <div class="m-message__text"><span class="m-i18n">m-session-expired:message</span></div>
+      </div>
     </div>
-    <p><span class="m-i18n">m-session-expired:directions-1</span></p>
-    <p><span class="m-i18n">m-session-expired:directions-2</span></p>
-    <a href="/" tabindex="0" class="m-link"> <span class="m-link__text">
+  </div>
+  <p><span class="m-i18n">m-session-expired:directions-1</span></p>
+  <p><span class="m-i18n">m-session-expired:directions-2</span></p> <a href="/" tabindex="0" class="m-link"> <span class="m-link__text">
         m-session-expired:back-to-portal
     </span> </a>
 </div>
@@ -24,21 +21,18 @@ exports[`MSessionExpired should render correctly 1`] = `
 
 exports[`MSessionExpired should render correctly with back-to-label override 1`] = `
 <div>
-    <div class="m-message m--is-state-information m--is-skin-default">
-        <div class="m-message__wrap">
-            <div class="m-message__icon">
-                <svg aria-hidden="true" width="1em" height="1em" class="m-icon">
-                    <use aria-hidden="true"></use>
-                </svg>
-            </div>
-            <div class="m-message__body">
-                <div class="m-message__text"><span class="m-i18n">m-session-expired:message</span></div>
-            </div>
-        </div>
+  <div class="m-message m--is-state-information m--is-skin-default">
+    <div class="m-message__wrap">
+      <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+          <use aria-hidden="true"></use>
+        </svg></div>
+      <div class="m-message__body">
+        <div class="m-message__text"><span class="m-i18n">m-session-expired:message</span></div>
+      </div>
     </div>
-    <p><span class="m-i18n">m-session-expired:directions-1</span></p>
-    <p><span class="m-i18n">m-session-expired:directions-2</span></p>
-    <a href="/" tabindex="0" class="m-link"> <span class="m-link__text">
+  </div>
+  <p><span class="m-i18n">m-session-expired:directions-1</span></p>
+  <p><span class="m-i18n">m-session-expired:directions-2</span></p> <a href="/" tabindex="0" class="m-link"> <span class="m-link__text">
         Some back to label
     </span> </a>
 </div>
