@@ -1,13 +1,16 @@
 <div class="m-paging"
      :class="{'m--is-loading': loading}">
-    <div class="m-paging__status">{{ status }}</div>
+    <div class="m-paging__status"
+         ref="status">{{ status }}</div>
     <div class="m-paging__nav"
-         v-if="nbOfPages > 1">
+         v-if="nbOfPages > 1"
+         ref="navigation">
         <m-icon-button class="m-paging__previous-button"
                        icon-name="m-svg__chevron-circle--left"
                        skin="link"
                        @click="goToPage(value - 1)"
-                       :disabled="firstPageSelected || loading">
+                       :disabled="firstPageSelected || loading"
+                       ref="previous">
             <m-i18n k="m-paging:previous"></m-i18n>
         </m-icon-button>
         <ul class="m-paging__pages">
@@ -27,7 +30,8 @@
                        icon-name="m-svg__chevron-circle--right"
                        skin="link"
                        @click="goToPage(value + 1)"
-                       :disabled="lastPageSelected || loading">
+                       :disabled="lastPageSelected || loading"
+                       ref="next">
             <m-i18n k="m-paging:next"></m-i18n>
         </m-icon-button>
     </div>
