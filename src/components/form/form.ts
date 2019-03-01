@@ -1,76 +1,85 @@
-import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
+import { MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
 import { ModulVue } from '../../utils/vue/vue';
-import { FORM } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
-import MessagePlugin, { MMessageState } from '../message/message';
-import WithRender from './form.html';
+import { MMessageState } from '../message/message';
+import WithRender from './form.html?style=./form.scss';
+
 
 @WithRender
 @Component
 export class MForm extends ModulVue {
     @Prop()
-    form: Form;
+    public form: Form;
 
-    @Prop({ default: true })
-    hasRequiredFields: boolean;
+    @Prop()
+    public requiredMarker: boolean;
 
-    messageStateEror: MMessageState = MMessageState.Error;
+    public messageStateError: MMessageState = MMessageState.Error;
+    public errors: string[] = [];
 
-    errors: string[] = [];
-
-    get hasErrors(): boolean {
-        return this.errors.length > 1;
-    }
+    listeners: MFormListener[];
 
     @Emit('submit')
-    onSubmit(): void { }
+
+    public onSubmit(): void { }
 
     @Emit('reset')
-    onReset(): void { }
+    public onReset(): void { }
 
-    submit(): void {
+    public get hasErrors(): boolean {
+        return this.errors.length > 0;
+    }
+
+    created(): void {
+        this.listeners = this.$form.listeners;
+    }
+
+    public submit(): void {
+        this.emit(MFormEvents.formErrorClear);
+
         if (this.form) {
             this.errors = [];
             this.form.validateAll();
 
-            if (this.form.nbFieldsThatHasError === 0) {
+            if (this.form.isValid) {
                 this.onSubmit();
-            } else if (this.form.nbFieldsThatHasError === 1) {
-                setTimeout(() => {
-                    let fieldWithError: HTMLElement | null = this.$el.querySelector('.m--has-error input, .m--has-error textarea');
-                    if (fieldWithError) {
-                        (fieldWithError).focus();
-                    }
-                });
             } else {
-                this.errors = this.form.getErrorsForSummary();
+                this.handleErrors();
             }
         } else {
             this.onSubmit();
         }
     }
 
-    reset(): void {
+    public reset(): void {
         this.errors = [];
+        this.emit(MFormEvents.formErrorClear);
 
         if (this.form) {
             this.form.reset();
         }
-
         this.onReset();
+    }
+
+    public setListeners(listeners: MFormListener[]): void {
+        this.listeners = listeners;
+    }
+
+    private handleErrors(): void {
+        this.emit(MFormEvents.formError, {
+            form: this.form,
+            totalNbOfErrors: this.form.totalNbOfErrors,
+            errorsToShowInMessagesCallback: (errors: string[]) => {
+                this.errors = errors;
+            }
+        });
+    }
+
+    emit(eventType: MFormEvents, params?: any): void {
+        this.listeners
+            .filter((listener: MFormListener) => listener.eventType === eventType)
+            .forEach((listener: MFormListener) => listener.callback(params));
     }
 }
 
-
-const FormPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.prototype.$log.debug(FORM, 'plugin.install');
-        v.use(I18nPlugin);
-        v.use(MessagePlugin);
-        v.component(FORM, MForm);
-    }
-};
-
-export default FormPlugin;

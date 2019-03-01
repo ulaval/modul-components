@@ -14,4 +14,11 @@
     }">
     <component ref="editor"
                :is="tag"></component>
+    <m-file-upload :open.sync="isFileUploadOpen"
+                   :max-files="1"
+                   :store-name="fileUploadStoreName"
+                   :allowed-extensions="allowedExtensions"
+                   @files-ready="filesReady"
+                   @done="filesAdded"
+                   @close="onClose"></m-file-upload>
 </div>

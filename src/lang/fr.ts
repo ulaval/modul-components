@@ -14,6 +14,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/calendar/calendar.lang.fr.json'),
                 require('../components/datefields/datefields.lang.fr.json'),
                 require('../components/datepicker/datepicker.lang.fr.json'),
+                require('../components/daterangepicker/daterangepicker.lang.fr.json'),
                 require('../components/dropdown/dropdown.lang.fr.json'),
                 require('../components/dropdown-group/dropdown-group.lang.fr.json'),
                 require('../components/overlay/overlay.lang.fr.json'),
@@ -54,6 +55,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/validation-message/validation-message.lang.fr.json'),
                 require('../filters/filesize/filesize.lang.fr.json'),
                 require('../filters/date/date/date.lang.fr.json'),
+                require('../filters/date/period/period.lang.fr.json'),
                 require('../filters/date/time/time.lang.fr.json'),
                 require('../filters/date/date-time/date-time.lang.fr.json')
             ];

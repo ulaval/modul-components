@@ -3,10 +3,8 @@
 exports[`m-scroll-top When loading with position fixed. Should render correctly. 1`] = `<div class="m-scroll-top m--is-position-fixed"></div>`;
 
 exports[`m-scroll-top When loading with position relative. Should render correctly. 1`] = `
-<div class="m-scroll-top m--is-position-relative">
-    <button name="m--is" class="m-scroll-top__button">
-        <m-icon name="m-svg__chevron--right" size="16px"></m-icon>
-        <m-i18n k="m-scroll-top:top" class="m-scroll-top__hidden"></m-i18n>
-    </button>
-</div>
+<div class="m-scroll-top m--is-position-relative"><button name="m--is" class="m-scroll-top__button">
+    <m-icon name="m-svg__chevron--right" size="16px"></m-icon>
+    <m-i18n k="m-scroll-top:top" class="m-scroll-top__hidden"></m-i18n>
+  </button></div>
 `;

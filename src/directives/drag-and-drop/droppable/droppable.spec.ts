@@ -6,13 +6,22 @@ import { polyFillActive } from '../../../utils/polyfills';
 import { MDOMPlugin } from '../../domPlugin';
 import { MRemoveUserSelect } from '../../user-select/remove-user-select';
 import DraggablePlugin, { MDraggable, MDraggableOptions } from '../draggable/draggable';
-import { MDraggableEventNames } from './../draggable/draggable';
 import DroppablePlugin, { MDropEffect, MDroppable, MDroppableClassNames, MDroppableEventNames, MDroppableOptions } from './droppable';
+Vue.config.silent = true;
 
 
 jest.mock('../../../utils/mouse/mouse');
 let mockTargetIsInput: boolean = false;
 jest.mock('../../../utils/event/event', () => ({ targetIsInput(): boolean { return mockTargetIsInput; } }));
+
+jest.mock('../../../utils/vue/events', () => ({
+    dispatchEvent: (element: HTMLElement, eventName: string, eventData: any) => {
+        const vue: Vue = (element as any).__vue__;
+        if (vue && vue.$children.length) {
+            return vue.$children[0].$emit(eventName, eventData);
+        }
+    }
+}));
 
 beforeEach(() => {
     mockTargetIsInput = false;
@@ -36,9 +45,7 @@ describe('droppable', () => {
                         : `<div v-m-droppable="${bindingValue}">${innerHtml || ''}</div>`
                 }, { localVue: Vue });
             }
-
-            Object.keys(MDroppableEventNames).forEach(key => directive.vm.$listeners[MDroppableEventNames[key]] = () => { });
-            return directive;
+            return directive.find('div');
         };
 
     const getDraggableDirective: (bindingValue?: boolean, options?: MDraggableOptions, innerHtml?: string) => Wrapper<Vue> =
@@ -57,12 +64,11 @@ describe('droppable', () => {
                 }, { localVue: Vue });
             }
 
-            Object.keys(MDraggableEventNames).forEach(key => directive.vm.$listeners[MDraggableEventNames[key]] = () => { });
-            return directive;
+            return directive.find('div');
         };
 
     const getEventDummy: () => any = () => {
-        return { preventDefault: () => { }, stopPropagation: () => { }, dataTransfer: { setData: () => { }, setDragImage: () => { }, getData: () => { } } };
+        return { preventDefault: jest.fn(), stopPropagation: jest.fn(), dataTransfer: { setData: jest.fn(), setDragImage: jest.fn(), getData: jest.fn() } };
     };
 
     beforeEach(() => {
@@ -72,7 +78,7 @@ describe('droppable', () => {
     });
 
     [true, undefined].forEach(param => {
-        it(`it should render correctly when binding ${param} is provided`, () => {
+        it(`should render correctly when binding ${param} is provided`, () => {
             const userDefinedActions: string[] = ['a', 'b'];
             const droppable: Wrapper<Vue> = getDroppableDirective(param, { acceptedActions: userDefinedActions });
 
@@ -82,7 +88,7 @@ describe('droppable', () => {
         });
 
         [undefined].forEach(emptyValue => {
-            it(`it should default action correctly when binding ${param} is provided and action is not user defined`, () => {
+            it(`should default action correctly when binding ${param} is provided and action is not user defined`, () => {
                 const droppable: Wrapper<Vue> = getDroppableDirective(param, { acceptedActions: emptyValue! });
                 expect(MDOMPlugin.get(MDroppable, droppable.element)!.options.acceptedActions).toEqual(['any']);
             });
@@ -90,7 +96,7 @@ describe('droppable', () => {
     });
 
     describe('unbind', () => {
-        it('it should clean up element correctly', () => {
+        it('should clean up element correctly', () => {
             const droppable: Wrapper<Vue> = getDroppableDirective();
             const element: HTMLElement = droppable.element;
             const droppablePlugin: MDroppable | undefined = MDOMPlugin.get(MDroppable, droppable.element);
@@ -103,7 +109,7 @@ describe('droppable', () => {
             expect(MDOMPlugin.get(MRemoveUserSelect, element)).toBeUndefined();
         });
 
-        it('it should clean up events correctly', () => {
+        it('should clean up events correctly', () => {
             const droppable: Wrapper<Vue> = getDroppableDirective();
             const element: HTMLElement = droppable.element;
             const droppablePlugin: MDroppable | undefined = MDOMPlugin.get(MDroppable, element);
@@ -128,7 +134,7 @@ describe('droppable', () => {
             droppable.trigger('dragover', dragEventDummy);
         });
 
-        it('it should cleanup element when changing from a droppable container to another', () => {
+        it('should cleanup element when changing from a droppable container to another', () => {
             (isInElement as jest.Mock).mockImplementationOnce(() => true);
             const secondDroppable: Wrapper<Vue> = getDroppableDirective(true, { acceptedActions: [userDefinedAction] });
             const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element)!;
@@ -143,7 +149,7 @@ describe('droppable', () => {
             expect(droppablePlugin.cleanupCssClasses).toHaveBeenCalled();
         });
 
-        it('it should manage events correctly when changing from a droppable container to another', () => {
+        it('should manage events correctly when changing from a droppable container to another', () => {
             const dropEventDummy: any = getEventDummy();
 
             const secondDroppable: Wrapper<Vue> = getDroppableDirective(true, { acceptedActions: [userDefinedAction] });
@@ -155,7 +161,7 @@ describe('droppable', () => {
             expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: true });
         });
 
-        it('it should cleanup element when mouse is leaving a droppable container', () => {
+        it('should cleanup element when mouse is leaving a droppable container', () => {
             const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element)!;
             jest.spyOn(droppablePlugin, 'cleanupCssClasses');
 
@@ -167,9 +173,7 @@ describe('droppable', () => {
             expect(droppablePlugin.cleanupCssClasses).toHaveBeenCalled();
         });
 
-        it('it should manage events correctly when mouse is leaving a droppable container', () => {
-            const dropEventDummy: any = getEventDummy();
-
+        it('should manage events correctly when mouse is leaving a droppable container', () => {
             droppable.trigger('dragenter', dragEventDummy);
             droppable.trigger('dragleave', dragEventDummy);
 
@@ -216,7 +220,7 @@ describe('droppable', () => {
                 expectedClass: MDroppableClassNames.CantDrop,
                 expectedDropEffect: MDropEffect.MNone
             }].forEach(combination => {
-                it(`it should update element correctly when canDrop is ${combination.canDrop}`, () => {
+                it(`should update element correctly when canDrop is ${combination.canDrop}`, () => {
                     const plugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element)!;
                     mockCanDrop(droppable, combination.canDrop);
                     jest.spyOn(plugin, 'cleanupCssClasses');
@@ -230,7 +234,7 @@ describe('droppable', () => {
                 });
             });
 
-            it('it should manage DragEvent correctly when canDrop is false', () => {
+            it('should manage DragEvent correctly when canDrop is false', () => {
                 mockCanDrop(droppable, false);
                 const dropEventDummy: any = getEventDummy();
                 jest.spyOn(dropEventDummy, 'preventDefault');
@@ -238,11 +242,10 @@ describe('droppable', () => {
                 droppable.trigger(eventSpec.associatedNativeDomEvent, dropEventDummy);
 
                 const event: any = droppable.emitted(eventSpec.shouldEmit)[0][0];
-                expect(dropEventDummy.preventDefault).not.toHaveBeenCalled();
                 expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: false });
             });
 
-            it('it should manage DragEvent correctly when canDrop is true', () => {
+            it('should manage DragEvent correctly when canDrop is true', () => {
                 mockCanDrop(droppable, true);
                 const dropEventDummy: any = getEventDummy();
                 jest.spyOn(dropEventDummy, 'preventDefault');
@@ -250,12 +253,11 @@ describe('droppable', () => {
                 droppable.trigger(eventSpec.associatedNativeDomEvent, dropEventDummy);
 
                 const event: any = droppable.emitted(eventSpec.shouldEmit)[0][0];
-                expect(dropEventDummy.preventDefault).toHaveBeenCalled();
                 expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: true });
             });
         });
 
-        it('it should emit MDroppableEventNames.onDragEnter only once when multiple dragEnter occurs on a droppable', () => {
+        it('should emit MDroppableEventNames.onDragEnter only once when multiple dragEnter occurs on a droppable', () => {
             if (eventSpec.shouldEmit === MDroppableEventNames.OnDragOver) { return; }
 
             droppable.trigger(eventSpec.associatedNativeDomEvent, dragEventDummy);
@@ -280,7 +282,7 @@ describe('droppable', () => {
             droppable.trigger('dragover', dragEventDummy);
         });
 
-        it('it should update element correctly', () => {
+        it('should update element correctly', () => {
             const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element)!;
             jest.spyOn(droppablePlugin, 'cleanupCssClasses');
 
@@ -290,7 +292,7 @@ describe('droppable', () => {
             expect(MDroppable.currentHoverDroppable).toBeUndefined();
         });
 
-        it('it should manage DragEvent correctly', () => {
+        it('should manage DragEvent correctly', () => {
             const dropEventDummy: any = getEventDummy();
             jest.spyOn(dropEventDummy, 'stopPropagation');
             jest.spyOn(dropEventDummy, 'preventDefault');
@@ -298,8 +300,6 @@ describe('droppable', () => {
             droppable.trigger('drop', dropEventDummy);
 
             const event: any = droppable.emitted(MDroppableEventNames.OnDrop)[0][0];
-            expect(dropEventDummy.stopPropagation).toHaveBeenCalled();
-            expect(dropEventDummy.preventDefault).toHaveBeenCalled();
             expect(event.dropInfo).toEqual({ action: userDefinedAction, grouping: userDefinedGrouping, data: userDefinedData, canDrop: true });
         });
     });
@@ -317,7 +317,7 @@ describe('droppable', () => {
             }
         };
 
-        it('it should never clean up Droppable class', () => {
+        it('should never clean up Droppable class', () => {
             addClass(MDroppableClassNames.Droppable);
             const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element)!;
 
@@ -327,7 +327,7 @@ describe('droppable', () => {
         });
 
         [MDroppableClassNames.CanDrop, MDroppableClassNames.CantDrop, MDroppableClassNames.Overing].forEach(className => {
-            it(`it should clean up ${className} class when it exists on element`, () => {
+            it(`should clean up ${className} class when it exists on element`, () => {
                 addClass(className);
                 const droppablePlugin: MDroppable = MDOMPlugin.get(MDroppable, droppable.element)!;
 
@@ -350,7 +350,7 @@ describe('droppable', () => {
             plugin = MDOMPlugin.get(MDroppable, droppable.element)!;
         });
 
-        it('it should return false when currentDraggable is undefined', () => {
+        it('should return false when currentDraggable is undefined', () => {
             MDraggable.currentDraggable = undefined;
 
             const returnValue: boolean = plugin.canDrop();
@@ -358,7 +358,7 @@ describe('droppable', () => {
             expect(returnValue).toBeFalsy();
         });
 
-        it('it should return false droppable binding is false', () => {
+        it('should return false droppable binding is false', () => {
             plugin.options.canDrop = false;
 
             const returnValue: boolean = plugin.canDrop();
@@ -366,7 +366,7 @@ describe('droppable', () => {
             expect(returnValue).toBeFalsy();
         });
 
-        it('it should return false if draggable action is not accepted by droppable', () => {
+        it('should return false if draggable action is not accepted by droppable', () => {
             const draggablePlugin: MDraggable = MDOMPlugin.get(MDraggable, draggable.element)!;
             draggablePlugin.options.action = 'wontBeAcceptedByDroppable';
             plugin.options.acceptedActions = ['iWontAcceptAnything'];
@@ -376,7 +376,7 @@ describe('droppable', () => {
             expect(returnValue).toBeFalsy();
         });
 
-        it('it should return false if current droppable is dragging element', () => {
+        it('should return false if current droppable is dragging element', () => {
             const element: Wrapper<Vue> = mount({
                 template: `<div v-m-droppable v-m-draggable :drag-data="'something'"></div>`
             }, { localVue: Vue });
@@ -388,7 +388,7 @@ describe('droppable', () => {
             expect(returnValue).toBeFalsy();
         });
 
-        it('it should return false if current droppable is dragging elements child', () => {
+        it('should return false if current droppable is dragging elements child', () => {
             const element: Wrapper<Vue> = mount({
                 template: `
                     <div v-m-draggable :drag-data="'something'">
@@ -404,7 +404,7 @@ describe('droppable', () => {
             expect(returnValue).toBeFalsy();
         });
 
-        it('it should return true when everything is ok', () => {
+        it('should return true when everything is ok', () => {
             const returnValue: boolean = plugin.canDrop();
 
             expect(returnValue).toBeTruthy();
@@ -412,13 +412,16 @@ describe('droppable', () => {
     });
 
     ['mousedown', 'touchstart'].forEach(eventName => {
-        it(`it should apply MRemoveUserSelect on ${eventName}`, () => {
+        it(`should apply MRemoveUserSelect on ${eventName}`, () => {
+            mockTargetIsInput = false;
+
             const droppable: Wrapper<Vue> = getDroppableDirective(true);
             droppable.trigger(eventName);
 
             expect(MDOMPlugin.get(MRemoveUserSelect, droppable.element)).toBeDefined();
         });
-        it(`it should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
+
+        it(`should not apply MRemoveUserSelect on ${eventName} when the event target is an input`, () => {
             mockTargetIsInput = true;
 
             const droppable: Wrapper<Vue> = getDroppableDirective(true);

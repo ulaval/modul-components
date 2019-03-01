@@ -1,10 +1,10 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_TO_NAME } from '../directive-names';
 import WithRender from './scroll-to.sandbox.html';
+
 
 @WithRender
 @Component

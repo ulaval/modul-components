@@ -1,4 +1,4 @@
-import { RefSelector, shallow, Wrapper } from '@vue/test-utils';
+import { RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import { TreeNode } from '../tree';
 import { MTreeIcon } from './tree-icon';
 
@@ -18,7 +18,7 @@ let useFilesIcons: boolean = false;
 let wrapper: Wrapper<MTreeIcon>;
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MTreeIcon, {
+    wrapper = shallowMount(MTreeIcon, {
         stubs: getStubs(),
         propsData: {
             file,

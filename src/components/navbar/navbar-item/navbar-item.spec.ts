@@ -1,4 +1,4 @@
-import { createLocalVue, mount, shallow, Wrapper } from '@vue/test-utils';
+import { createLocalVue, mount, shallowMount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { renderComponent } from '../../../../tests/helpers/render';
 import ModulPlugin from '../../../utils/modul/modul';
@@ -20,13 +20,13 @@ describe('MNavbarItem', () => {
         mockIsRouterLinkActive = false;
         Vue.use(ModulPlugin);
         localVue = createLocalVue();
-        parentNavbar = shallow(MNavbar);
+        parentNavbar = shallowMount(MNavbar);
     });
 
     const initializeWrapper: (initialPropValues: any)
         => Wrapper<MNavbarItem> = (initialPropValues: any = {}) => {
             document.querySelector = () => true;
-            wrapper = shallow(MNavbarItem, {
+            wrapper = shallowMount(MNavbarItem, {
                 methods: {
                     getParent(): MNavbar {
                         return parentNavbar.vm;
@@ -65,7 +65,7 @@ describe('MNavbarItem', () => {
 
     describe('given parent Navbar has autoselect set to true', () => {
         beforeEach(() => {
-            parentNavbar = shallow(MNavbar);
+            parentNavbar = shallowMount(MNavbar);
             parentNavbar.setProps({ autoSelect: true });
             parentNavbar.vm.updateValue = jest.fn();
         });
@@ -95,7 +95,7 @@ describe('MNavbarItem', () => {
 
     describe('given parent Navbar has autoselect set to false', () => {
         beforeEach(() => {
-            parentNavbar = shallow(MNavbar);
+            parentNavbar = shallowMount(MNavbar);
             parentNavbar.setProps({ autoSelect: false });
         });
 

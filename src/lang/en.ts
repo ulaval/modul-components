@@ -13,6 +13,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/modal/modal.lang.en.json'),
                 require('../components/datefields/datefields.lang.en.json'),
                 require('../components/datepicker/datepicker.lang.en.json'),
+                require('../components/daterangepicker/daterangepicker.lang.en.json'),
                 require('../components/dropdown/dropdown.lang.en.json'),
                 require('../components/dropdown-group/dropdown-group.lang.en.json'),
                 require('../components/overlay/overlay.lang.en.json'),
@@ -43,6 +44,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/validation-message/validation-message.lang.en.json'),
                 require('../filters/filesize/filesize.lang.en.json'),
                 require('../filters/date/date/date.lang.en.json'),
+                require('../filters/date/period/period.lang.en.json'),
                 require('../filters/date/time/time.lang.en.json'),
                 require('../filters/date/date-time/date-time.lang.en.json')
             ];

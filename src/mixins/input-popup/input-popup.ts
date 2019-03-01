@@ -40,6 +40,7 @@ export class InputPopup extends ModulVue {
         if ($event.keyCode !== KeyCode.M_RETURN &&
             $event.keyCode !== KeyCode.M_ENTER &&
             $event.keyCode !== KeyCode.M_TAB &&
+            $event.keyCode !== KeyCode.M_SHIFT &&
             $event.keyCode !== KeyCode.M_ESCAPE && !this.open) {
             this.open = true;
         }

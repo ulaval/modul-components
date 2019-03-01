@@ -108,6 +108,23 @@ export class Messages {
     }
 
     /**
+     * Get current locale
+     */
+    public getCurrentLocale(): string {
+        let locale: string;
+        switch (this.curLang) {
+            case FRENCH:
+                locale = 'fr-CA';
+                break;
+            case ENGLISH:
+            default:
+                locale = 'en-CA';
+                break;
+        }
+        return locale;
+    }
+
+    /**
      * Adds the messages so that they can be resolved.
      *
      * @param lang The language, for example: 'en'

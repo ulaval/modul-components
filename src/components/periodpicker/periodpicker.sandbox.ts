@@ -1,7 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { PERIODPICKER_NAME } from '../component-names';
-import { MDateRange } from './periodpicker';
+import DatepickerPlugin from '../datepicker/datepicker';
+import PeriodpickerPlugin, { MDateRange } from './periodpicker';
 import WithRender from './periodpicker.sandbox.html';
 
 @WithRender
@@ -10,7 +11,23 @@ export class MPeriodpickerSandbox extends Vue {
     from: any = undefined;
     to: any = undefined;
 
-    model: MDateRange = { to: this.to, from: this.from };
+    fromDefaultStringValue: string = '2019-02-20T05:00:00.000Z';
+    toDefaultStringValue: string = '2019-03-01T04:59:59.999Z';
+
+    fromDefaultDateValue: Date = new Date('2019-02-20T05:00:00.000Z');
+    toDefaultDateValue: Date = new Date('2019-03-01T04:59:59.999Z');
+
+    errorMessage: string = '';
+    validMessage: string = '';
+    helperMessage: string = '';
+    waiting: boolean = false;
+    disabled: boolean = false;
+    readonly: boolean = false;
+    error: boolean = false;
+
+    model: MDateRange = { from: this.from, to: this.to };
+    defaultStringValueModel: MDateRange = { from: this.fromDefaultStringValue, to: this.toDefaultStringValue };
+    defaultDateValueModel: MDateRange = { from: this.fromDefaultDateValue, to: this.toDefaultDateValue };
 
     get min(): Date {
         const date: Date = new Date();
@@ -29,6 +46,8 @@ export class MPeriodpickerSandbox extends Vue {
 
 const PeriodpickerSandboxPlugin: PluginObject<any> = {
     install(v): void {
+        v.use(DatepickerPlugin);
+        v.use(PeriodpickerPlugin);
         v.component(`${PERIODPICKER_NAME}-sandbox`, MPeriodpickerSandbox);
     }
 };

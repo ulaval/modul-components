@@ -34,5 +34,32 @@
     <m-textfield v-model="minutes"
                  label="minutes"></m-textfield>
 
-    <h3>{{ date | f-m-time }}</h3>
+    <h4>{{ date | f-m-time }}</h4>
+
+    <h3>Period Format</h3>
+
+    <h4>Compact Mode</h4>
+    <p v-html="formattedPeriod"></p>
+    <p v-html="$options.filters['f-m-period'](periodThroughFilter)"></p>
+
+    <h4>Full Mode</h4>
+    <p v-html="formattedPeriodFullMode"></p>
+    <p v-html="$options.filters['f-m-period'](periodThroughFilter, { mode: 'full' })"></p>
+
+    <div>
+        <m-textfield v-model="year"
+                     label="year"></m-textfield>
+        <m-textfield v-model="month"
+                     label="month"></m-textfield>
+        <m-textfield v-model="day"
+                     label="day"></m-textfield>
+    </div>
+    <div>
+        <m-textfield v-model="yearLater"
+                     label="year"></m-textfield>
+        <m-textfield v-model="monthLater"
+                     label="month"></m-textfield>
+        <m-textfield v-model="dayLater"
+                     label="day"></m-textfield>
+    </div>
 </div>

@@ -127,7 +127,12 @@ describe('MCheckbox', () => {
             error: false,
             errorMessage: 'error-message',
             validMessage: 'valid-message',
-            helperMessage: 'helper-message'
+            helperMessage: 'helper-message',
+            readonly: undefined,
+            tagStyle: 'default',
+            transition: true,
+            valid: undefined,
+            waiting: undefined
         };
 
         const chkbox: Wrapper<MCheckbox> = mount(MCheckbox, {

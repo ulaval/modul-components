@@ -1,11 +1,11 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { TABLE_NAME } from '../component-names';
-import TablePlugin, { MColumnTable } from './table';
-import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
-import OptionPlugin from '../option/option';
 import ButtonPlugin from '../button/button';
 import CheckboxPlugin from '../checkbox/checkbox';
+import { TABLE_NAME } from '../component-names';
+import OptionPlugin from '../option/option';
+import TablePlugin, { MColumnTable } from './table';
+import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
 @Component
@@ -89,52 +89,6 @@ export class MTableSandbox extends Vue {
             name: 'Manon',
             age: '28',
             username: 'manon.28'
-        }
-    ];
-
-    columnsOverflow: MColumnTable[] = [
-        {
-            id: 'name',
-            title: 'Name',
-            dataProp: 'name'
-        },
-        {
-            id: 'email',
-            title: 'Email',
-            dataProp: 'email'
-        },
-        {
-            id: 'address',
-            title: 'Address',
-            dataProp: 'address'
-        }
-    ];
-
-    rowsOverflow: any[] = [
-        {
-            name: 'Jonathan',
-            email: 'gasdghfhagsdlhfagldshf@ashdhgflasdf.com',
-            address: '1234 fasjdfje iawueriajsdfahsdfahsdfhfhasjdhf'
-        },
-        {
-            name: 'Carl',
-            email: 'asghfksda@asdfasdf.com',
-            address: '23874 da sdkajsd kjashd'
-        },
-        {
-            name: 'Jacob',
-            email: 'weoirfksdbnsd@asdfjasbd.com',
-            address: '123 sad sdasdasd'
-        },
-        {
-            name: 'Vincent',
-            email: 'owiefkjsd893@asduahdwu.com',
-            address: '1 dsakjda'
-        },
-        {
-            name: 'Manon',
-            email: 'iewf@asda.com',
-            address: '120 ddqawdw'
         }
     ];
 

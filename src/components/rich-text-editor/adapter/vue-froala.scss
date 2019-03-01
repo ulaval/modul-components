@@ -10,13 +10,13 @@
     }
 
     // to overcome input-style base padding, minus space for the label.
-    .m-input-style.m--has-label & {
+    .m-input-style.m--is-label-up.m--is-focus & {
         margin-top: -#{$m-input-style--padding - 4}; // magic number
     }
 
     // basic body padding for all states
     /deep/ .fr-element.fr-view {
-        padding: $m-spacing--s;
+        padding: $m-input-style--padding;
     }
 
     /deep/ .fas { font-style: normal; }
@@ -270,6 +270,23 @@
                 }
             }
         }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: auto;
+            text-align: center;
+
+            &.fr-fil {
+                float: left;
+                margin-right: $m-spacing--s;
+            }
+
+            &.fr-fir {
+                float: right;
+                margin-left: $m-spacing--s;
+            }
+        }
     }
 
     &.m--is-mobile {
@@ -279,6 +296,7 @@
             &[data-cmd*="-sub-menu"],
             &[data-cmd="fullscreen"],
             &[data-cmd="insertLink"],
+            &[data-cmd="insertImage"],
             &[data-cmd="specialCharacters"] {
                 display: inline-block;
             }

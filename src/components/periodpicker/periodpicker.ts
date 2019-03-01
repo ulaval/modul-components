@@ -1,9 +1,13 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
+import { InputState } from '../../mixins/input-state/input-state';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import ModulDate from '../../utils/modul-date/modul-date';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
-import DatepickerPlugin, { DatePickerSupportedTypes } from '../datepicker/datepicker';
+import { DatePickerSupportedTypes } from '../datepicker/datepicker';
+import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './periodpicker.html';
 
 export class MDateRange {
@@ -11,9 +15,58 @@ export class MDateRange {
     to: DatePickerSupportedTypes;
 }
 
+interface MPeriodpickerFromProps {
+    value: DatePickerSupportedTypes;
+    min: DatePickerSupportedTypes;
+    max: DatePickerSupportedTypes;
+    disabled: boolean;
+    waiting: boolean;
+    error: boolean;
+    valid: boolean;
+    readonly: boolean;
+}
+
+interface MPeriodpickerFromHandlers {
+    change(newValue: DatePickerSupportedTypes): void;
+    open(): void;
+}
+
+export interface MPeriodpickerFromComponentVue extends MPeriodpickerFromProps, MPeriodpickerFromHandlers { }
+
+interface MPeriodpickerToProps {
+    focus: boolean;
+    value: DatePickerSupportedTypes;
+    min: DatePickerSupportedTypes;
+    max: DatePickerSupportedTypes;
+    disabled: boolean;
+    waiting: boolean;
+    error: boolean;
+    valid: boolean;
+    readonly: boolean;
+}
+
+interface MPeriodpickerToHandlers {
+    change(newValue: DatePickerSupportedTypes): void;
+    close(): void;
+}
+
+export interface MPeriodpickerToComponentVue extends MPeriodpickerToProps, MPeriodpickerToHandlers { }
+
+export interface MPeriodpickerFromSlotProps { props: MPeriodpickerFromProps; handlers: MPeriodpickerFromHandlers; }
+
+export interface MPeriodpickerToSlotProps { props: MPeriodpickerToProps; handlers: MPeriodpickerToHandlers; }
+
+export interface MPeriodpickerProps {
+    value: MDateRange;
+    min: DatePickerSupportedTypes;
+    max: DatePickerSupportedTypes;
+}
+
 @WithRender
-@Component
-export class MPeriodPicker extends ModulVue {
+@Component({
+    mixins: [MediaQueries, InputState]
+})
+export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()
     value: MDateRange;
 
@@ -25,21 +78,40 @@ export class MPeriodPicker extends ModulVue {
 
     toIsFocused: boolean = false;
 
-    get firstInputState(): any {
+    get firstInputState(): MPeriodpickerFromSlotProps {
         return {
-            props: { label: 'Du', value: this.internalValue.from, min: this.min, max: this.max },
+            props: {
+                value: this.internalValue.from,
+                min: this.min,
+                max: this.max,
+                disabled: this.as<InputState>().isDisabled,
+                waiting: this.as<InputState>().isWaiting,
+                error: this.as<InputState>().hasError,
+                valid: this.as<InputState>().isValid,
+                readonly: this.as<InputState>().readonly
+            },
             handlers: {
-                change: (newValue: string) => this.onDateFromChange(newValue),
+                change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
                 open: () => this.onDateFromOpen()
             }
         };
     }
 
-    get secondInputState(): any {
+    get secondInputState(): MPeriodpickerToSlotProps {
         return {
-            props: { label: 'Au', focus: this.toIsFocused, value: this.internalValue.to, min: this.minDateTo, max: this.max },
+            props: {
+                focus: this.toIsFocused,
+                value: this.internalValue.to,
+                min: this.minDateTo,
+                max: this.max,
+                disabled: this.as<InputState>().isDisabled,
+                waiting: this.as<InputState>().isWaiting,
+                error: this.as<InputState>().hasError,
+                valid: this.as<InputState>().isValid,
+                readonly: this.as<InputState>().readonly
+            },
             handlers: {
-                change: (newValue: string) => this.onDateToChange(newValue),
+                change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),
                 close: () => this.onDateToClose()
             }
         };
@@ -53,37 +125,66 @@ export class MPeriodPicker extends ModulVue {
         return this.internalValue.from ? this.internalValue.from : this.min;
     }
 
-    onDateFromChange(newValue: any): void {
-        if (newValue) {
-            const dateTo: DatePickerSupportedTypes = newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to;
+    get hasTextfieldError(): boolean {
+        return this.as<InputState>().hasError;
+    }
 
-            this.$emit('input', Object.assign({}, this.internalValue, { from: newValue, to: dateTo }));
-            this.toIsFocused = true;
+    get isTextfieldValid(): boolean {
+        return this.as<InputState>().isValid;
+    }
+
+    onDateFromChange(newValue: DatePickerSupportedTypes): void {
+        const dateToValue: DatePickerSupportedTypes = this.getNewModelValue(this.internalValue.to, true);
+        if (newValue) {
+            if (this.as<MediaQueriesMixin>().isMqMinS) {
+                this.toIsFocused = true;
+            }
+
+            this.emitNewValue({ from: this.getNewModelValue(newValue), to: dateToValue });
+        } else {
+            this.emitNewValue({ from: undefined, to: dateToValue });
         }
     }
 
-    onDateToChange(newValue: any): void {
+    onDateToChange(newValue: DatePickerSupportedTypes): void {
+        const dateFromValue: DatePickerSupportedTypes = this.getNewModelValue(this.internalValue.from);
         if (newValue) {
-            this.toIsFocused = false;
-            this.$emit('input', Object.assign({}, this.internalValue, { to: newValue }));
+            this.unfocusDateToField();
+            this.emitNewValue({ from: dateFromValue, to: this.getNewModelValue(newValue, true) });
+        } else {
+            this.emitNewValue({ from: dateFromValue, to: undefined });
         }
     }
+
+    @Emit('input')
+    emitNewValue(newValue: MDateRange): void { }
 
     onDateFromOpen(): void {
-        this.toIsFocused = false;
+        this.unfocusDateToField();
     }
 
     onDateToClose(): void {
-        if (this.toIsFocused) {
-            this.toIsFocused = false;
-        }
+        this.unfocusDateToField();
+    }
+
+    unfocusDateToField(): void {
+        this.toIsFocused = false;
+    }
+
+    getNewModelValue(newValue: DatePickerSupportedTypes, endOfDay: boolean = false): DatePickerSupportedTypes {
+        if (!newValue) { return; }
+
+        const modulDate: ModulDate = new ModulDate(newValue);
+        const isoString: string = endOfDay ? modulDate.endOfDay().toISOString() : modulDate.toISOString();
+
+        return new Date(isoString);
     }
 }
 
 const PeriodpickerPlugin: PluginObject<any> = {
     install(v): void {
-        v.use(DatepickerPlugin);
-        v.component(PERIODPICKER_NAME, MPeriodPicker);
+        v.use(ValidationMessagePlugin);
+        v.component(PERIODPICKER_NAME, MPeriodpicker);
     }
 };
 

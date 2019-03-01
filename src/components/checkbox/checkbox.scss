@@ -146,11 +146,12 @@ $m-checkbox--width: 16px;
     &.m--is-disabled {
         .m-checkbox {
             &__wrap {
-                cursor: not-allowed;
+                cursor: default;
             }
 
             &__input {
                 border-color: $m-color--disabled;
+                background: $m-color--grey-lighter;
 
                 &__icon {
                     &::before,
@@ -169,16 +170,17 @@ $m-checkbox--width: 16px;
     &.m--is-readonly {
         .m-checkbox {
             &__wrap {
-                cursor: not-allowed;
+                cursor: default;
             }
 
             &__input {
-                border-color: $m-color--disabled;
+                border-color: $m-color--grey-light;
+                background-color: $m-color--grey-lighter;
 
                 &__icon {
                     &::before,
                     &::after {
-                        background: $m-color--disabled;
+                        background: $m-color--text;
                     }
                 }
             }

@@ -2,7 +2,7 @@
 
 exports[`MBadge should render correctly 1`] = `
 <svg width="100px" height="100px" class="m-icon m-icon-file">
-    <title>m-icon-file:default</title>
-    <use aria-hidden="true"></use>
+  <title>m-icon-file:default</title>
+  <use aria-hidden="true"></use>
 </svg>
 `;

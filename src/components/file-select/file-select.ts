@@ -51,6 +51,9 @@ export class MFileSelect extends ModulVue {
     @Prop({ default: false })
     public keepStore: boolean;
 
+    @Prop({ default: () => [] })
+    public allowedExtensions: string[];
+
     $refs: {
         inputFile: HTMLInputElement;
     };
@@ -87,6 +90,10 @@ export class MFileSelect extends ModulVue {
 
     private get hasLabel(): boolean {
         return !!this.label;
+    }
+
+    get extensions(): string {
+        return this.allowedExtensions.map((ext: string) => (ext.startsWith('.') ? '' : '.') + ext).join(', ');
     }
 }
 

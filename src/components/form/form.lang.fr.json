@@ -1,5 +1,6 @@
 {
     "m-form": {
-        "required": "Obligatoire"
+        "required": "Obligatoire",
+        "multipleErrorsToCorrect": "Les <strong>%(totalNbOfErrors)s</strong> informations en rouges sont à revoir pour continuer"
     }
 }

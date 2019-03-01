@@ -14,4 +14,15 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque aut enim adipisci laudantium atque, perferendis quisquam possimus suscipit, nulla debitis temporibus. Sit nulla corrupti facere amet, reiciendis minus natus.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque aut enim adipisci laudantium atque, perferendis quisquam possimus suscipit, nulla debitis temporibus. Sit nulla corrupti facere amet, reiciendis minus natus.</p>
     </m-popper>
+
+    <h3>Popper inside m-modal </h3>
+    <m-modal title="Modal title" >
+        <m-button slot="trigger">Open the modal</m-button>
+        <m-popper @close="onClose">
+            <m-button slot="trigger">Open popper</m-button>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque aut enim adipisci laudantium atque, perferendis quisquam possimus suscipit, nulla debitis temporibus. Sit nulla corrupti facere amet, reiciendis minus natus.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque aut enim adipisci laudantium atque, perferendis quisquam possimus suscipit, nulla debitis temporibus. Sit nulla corrupti facere amet, reiciendis minus natus.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque aut enim adipisci laudantium atque, perferendis quisquam possimus suscipit, nulla debitis temporibus. Sit nulla corrupti facere amet, reiciendis minus natus.</p>
+        </m-popper>
+    </m-modal>
 </div>

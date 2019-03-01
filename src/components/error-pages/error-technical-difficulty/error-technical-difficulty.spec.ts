@@ -1,4 +1,4 @@
-import { shallow, Wrapper } from '@vue/test-utils';
+import { shallowMount, Wrapper } from '@vue/test-utils';
 import moment from 'moment';
 import Vue from 'vue';
 import { ACCORDION_NAME, I18N_NAME, MESSAGE_PAGE_NAME, PANEL_NAME } from '../../component-names';
@@ -45,7 +45,7 @@ const getStubs: any = () => {
 };
 
 const initializeShallowWrapperNoProps: any = () => {
-    wrapper = shallow(MErrorTechnicalDifficulty, {
+    wrapper = shallowMount(MErrorTechnicalDifficulty, {
         stubs: getStubs(),
         propsData: {
             title: DEFAULT_TITLE
@@ -54,7 +54,7 @@ const initializeShallowWrapperNoProps: any = () => {
 };
 
 const initializeShallowWrapper: any = () => {
-    wrapper = shallow(MErrorTechnicalDifficulty, {
+    wrapper = shallowMount(MErrorTechnicalDifficulty, {
         stubs: getStubs(),
         propsData: {
             title: A_CUSTOM_TITLE,

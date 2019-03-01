@@ -1,11 +1,12 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin, { MButtonSkin } from '../button/button';
 import { SHOW_MORE_NAME } from '../component-names';
-import ProgressPlugin from '../progress/progress';
+import ProgressPlugin, { MProgressSkin } from '../progress/progress';
 import WithRender from './show-more.html?style=./show-more.scss';
 
 @WithRender
@@ -20,8 +21,15 @@ export class MShowMore extends ModulVue {
     @Prop({ default: false })
     loading: boolean;
 
+    @Prop()
+    public skin: MProgressSkin;
+
     get isVisible(): boolean {
         return this.nbTotal !== undefined && this.nbTotal > 0;
+    }
+
+    get isProgressVisible(): boolean {
+        return this.nbVisible < this.nbTotal;
     }
 
     get status(): string {
