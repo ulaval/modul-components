@@ -1,6 +1,6 @@
 @import 'commons';
 
-.m-paging {
+.m-pagination {
     text-align: center;
 
     &__nav {
@@ -14,8 +14,8 @@
     }
 
     &__item {
-        .m-paging__item--link,
-        .m-paging__item--text {
+        .m-pagination__item--link,
+        .m-pagination__item--text {
             display: flex;
             width: 40px; // Magic number, 44px trop large pour afficher suffisament d'item en mobile
             height: $m-touch-size;
@@ -25,7 +25,7 @@
     }
 
     &__item--ellipsis {
-        .m-paging__item--text {
+        .m-pagination__item--text {
             width: $m-touch-size/2;
         }
     }

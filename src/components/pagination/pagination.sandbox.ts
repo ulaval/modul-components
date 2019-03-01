@@ -1,14 +1,14 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { PAGING_NAME } from '../component-names';
+import { PAGINATION_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
-import PagingPlugin from './paging';
-import WithRender from './paging.sandbox.html';
+import PaginationPlugin from './pagination';
+import WithRender from './pagination.sandbox.html';
 
 
 @WithRender
 @Component
-export class MPagingSandbox extends Vue {
+export class MPaginationSandbox extends Vue {
     public currentPage: number = 1;
     public currentSinglePage: number = 1;
     public loading: boolean = false;
@@ -21,13 +21,13 @@ export class MPagingSandbox extends Vue {
     }
 }
 
-const PagingSandboxPlugin: PluginObject<any> = {
+const PaginationSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(PagingPlugin);
+        v.use(PaginationPlugin);
         v.use(IconButtonPlugin);
 
-        v.component(`${PAGING_NAME}-sandbox`, MPagingSandbox);
+        v.component(`${PAGINATION_NAME}-sandbox`, MPaginationSandbox);
     }
 };
 
-export default PagingSandboxPlugin;
+export default PaginationSandboxPlugin;

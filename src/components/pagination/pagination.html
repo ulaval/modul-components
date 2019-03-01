@@ -1,38 +1,38 @@
-<div class="m-paging"
+<div class="m-pagination"
      :class="{'m--is-loading': loading}">
-    <div class="m-paging__status"
+    <div class="m-pagination__status"
          ref="status">{{ status }}</div>
-    <div class="m-paging__nav"
+    <div class="m-pagination__nav"
          v-if="nbOfPages > 1"
          ref="navigation">
-        <m-icon-button class="m-paging__previous-button"
+        <m-icon-button class="m-pagination__previous-button"
                        icon-name="m-svg__chevron-circle--left"
                        skin="link"
                        @click="goToPage(value - 1)"
                        :disabled="firstPageSelected || loading"
                        ref="previous">
-            <m-i18n k="m-paging:previous"></m-i18n>
+            <m-i18n k="m-pagination:previous"></m-i18n>
         </m-icon-button>
-        <ul class="m-paging__pages">
-            <li v-for="item of pagingItems"
-                class="m-paging__item"
-                :class="{'m-paging__item--ellipsis': item.ellipsis}">
+        <ul class="m-pagination__pages">
+            <li v-for="item of paginationItems"
+                class="m-pagination__item"
+                :class="{'m-pagination__item--ellipsis': item.ellipsis}">
                 <m-link v-if="item.clickable"
-                        class="m-paging__item--link"
+                        class="m-pagination__item--link"
                         mode="button"
                         :disabled="loading"
                         @click="goToPage(parseInt(item.label))">{{ item.label }}</m-link>
                 <span v-else
-                      class="m-paging__item--text">{{ item.label }}</span>
+                      class="m-pagination__item--text">{{ item.label }}</span>
             </li>
         </ul>
-        <m-icon-button class="m-paging__next-button"
+        <m-icon-button class="m-pagination__next-button"
                        icon-name="m-svg__chevron-circle--right"
                        skin="link"
                        @click="goToPage(value + 1)"
                        :disabled="lastPageSelected || loading"
                        ref="next">
-            <m-i18n k="m-paging:next"></m-i18n>
+            <m-i18n k="m-pagination:next"></m-i18n>
         </m-icon-button>
     </div>
 </div>

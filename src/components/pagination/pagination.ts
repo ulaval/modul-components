@@ -4,18 +4,18 @@ import { Emit, Model, Prop } from 'vue-property-decorator';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
-import { PAGING_NAME } from '../component-names';
+import { PAGINATION_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import LinkPlugin from '../link/link';
-import WithRender from './paging.html?style=./paging.scss';
+import WithRender from './pagination.html?style=./pagination.scss';
 
 
 const FIRST_PAGE: number = 1;
 const DELTA_DESKTOP: number = 4;
 const DELTA_MOBILE: number = 1;
 
-export interface PagingItem {
+export interface PaginationItem {
     label: string;
     clickable: boolean;
     ellipsis?: boolean;
@@ -25,7 +25,7 @@ export interface PagingItem {
 @Component({
     mixins: [MediaQueries]
 })
-export class MPaging extends ModulVue {
+export class MPagination extends ModulVue {
     @Model('change')
     @Prop({ default: FIRST_PAGE })
     public value: number;
@@ -43,8 +43,8 @@ export class MPaging extends ModulVue {
         return Math.ceil(this.nbOfItems / this.nbOfItemsPerPage);
     }
 
-    public get pagingItems(): PagingItem[] {
-        let items: PagingItem[] = [];
+    public get paginationItems(): PaginationItem[] {
+        let items: PaginationItem[] = [];
         let delta: number = this.as<MediaQueriesMixin>().isMqMinS ? DELTA_DESKTOP : DELTA_MOBILE;
         let minDelta: number;
         let maxDelta: number;
@@ -65,7 +65,7 @@ export class MPaging extends ModulVue {
         items.push({ label: FIRST_PAGE.toString(), clickable: FIRST_PAGE === this.value ? false : true });
 
         if (minDelta !== FIRST_PAGE + 1) {
-            items.push({ label: this.$i18n.translate('m-paging:ellipsis'), clickable: false, ellipsis: true });
+            items.push({ label: this.$i18n.translate('m-pagination:ellipsis'), clickable: false, ellipsis: true });
         }
 
         for (let i: number = minDelta; i <= maxDelta; i++) {
@@ -73,7 +73,7 @@ export class MPaging extends ModulVue {
         }
 
         if (maxDelta !== this.nbOfPages - 1) {
-            items.push({ label: this.$i18n.translate('m-paging:ellipsis'), clickable: false, ellipsis: true });
+            items.push({ label: this.$i18n.translate('m-pagination:ellipsis'), clickable: false, ellipsis: true });
         }
 
         items.push({ label: this.nbOfPages.toString(), clickable: this.nbOfPages === this.value ? false : true });
@@ -90,20 +90,20 @@ export class MPaging extends ModulVue {
     }
 
     public get status(): string {
-        return this.$i18n.translate('m-paging:status', { nbVisible: this.value, nbTotal: this.nbOfPages }, undefined, undefined, undefined, FormatMode.Sprintf);
+        return this.$i18n.translate('m-pagination:status', { nbVisible: this.value, nbTotal: this.nbOfPages }, undefined, undefined, undefined, FormatMode.Sprintf);
     }
 
     @Emit('change')
     goToPage(value: number): void { }
 }
 
-const PagingPlugin: PluginObject<any> = {
+const PaginationPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(IconButtonPlugin);
         v.use(LinkPlugin);
         v.use(I18nPlugin);
-        v.component(PAGING_NAME, MPaging);
+        v.component(PAGINATION_NAME, MPagination);
     }
 };
 
-export default PagingPlugin;
+export default PaginationPlugin;

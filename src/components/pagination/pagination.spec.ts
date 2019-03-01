@@ -8,9 +8,9 @@ import IconButtonPlugin from '../../components/icon-button/icon-button';
 import LinkPlugin from '../../components/link/link';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import ModulPlugin from '../../utils/modul/modul';
-import PagingPlugin, { MPaging } from './paging';
+import PaginationPlugin, { MPagination } from './pagination';
 
-let wrapper: Wrapper<MPaging>;
+let wrapper: Wrapper<MPagination>;
 let localVue: VueConstructor<Vue>;
 
 let value: number = 1;
@@ -28,7 +28,7 @@ const NEXT_REF: RefSelector = { ref: 'next' };
 
 
 const initializeWrapper: () => any = () => {
-    wrapper = mount(MPaging, {
+    wrapper = mount(MPagination, {
         localVue: localVue,
         propsData: {
             value,
@@ -43,18 +43,18 @@ beforeEach(() => {
     wrapper = undefined as any;
 });
 
-describe('MPaging', () => {
+describe('MPagination', () => {
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
         localVue.use(ModulPlugin);
-        Vue.use(PagingPlugin);
+        Vue.use(PaginationPlugin);
         Vue.use(I18nPlugin);
         Vue.use(IconButtonPlugin);
         Vue.use(LinkPlugin);
         Vue.use(MediaQueriesPlugin);
 
-        addMessages(Vue, ['components/paging/paging.lang.fr.json']);
+        addMessages(Vue, ['components/pagination/pagination.lang.fr.json']);
     });
 
     describe(`Given only 1 page of results`, () => {
@@ -99,7 +99,7 @@ describe('MPaging', () => {
         });
 
         it(`Then the pagination should have 3 pages`, () => {
-            expect(wrapper.findAll('.m-paging__item').length).toEqual(3);
+            expect(wrapper.findAll('.m-pagination__item').length).toEqual(3);
         });
 
         describe('click on next button', () => {
@@ -126,7 +126,7 @@ describe('MPaging', () => {
         });
 
         it(`Then the pagination should have more than 3 pages`, () => {
-            expect(wrapper.findAll('.m-paging__item').length).toBeGreaterThan(3);
+            expect(wrapper.findAll('.m-pagination__item').length).toBeGreaterThan(3);
         });
 
         it(`Then should render correctly`, () => {
@@ -143,7 +143,7 @@ describe('MPaging', () => {
         });
 
         it(`Then the ellipsis should be displayed on both side`, () => {
-            expect(wrapper.findAll('.m-paging__item--text').length).toEqual(3);
+            expect(wrapper.findAll('.m-pagination__item--text').length).toEqual(3);
         });
 
         it(`Then should render correctly`, () => {
