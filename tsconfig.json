@@ -15,8 +15,7 @@
         "types": [
             "node",
             "jest",
-            "webpack-env",
-            "dom-inputevent"
+            "webpack-env"
         ],
         "typeRoots": [
             "node_modules/@types"
