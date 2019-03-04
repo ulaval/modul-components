@@ -83,8 +83,15 @@ describe(`FormField`, () => {
         });
 
         describe(`When we change the value of the field with a valid value`, () => {
+            let change: string = '';
+
             beforeEach(() => {
                 validationState = new FormFieldValidation();
+
+                formField.Changes.subscribe((value: any) => {
+                    change = value;
+                });
+
                 formField.value = NEW_FIELD_VALUE;
             });
 
@@ -96,6 +103,11 @@ describe(`FormField`, () => {
                 expect(formField.hasError).toBeFalsy();
                 expect(formField.errorMessageSummary).toEqual([]);
                 expect(formField.errorMessage).toBe('');
+            });
+
+            it(`Then that change should be observable`, () => {
+                jest.runAllTimers();
+                expect(change).toBe(NEW_FIELD_VALUE);
             });
         });
 

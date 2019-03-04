@@ -58,7 +58,7 @@ module.exports = function (env) {
             }
         },
 
-        devtool: isLib ? 'source-map' : 'eval-source-map',
+        devtool: isLib ? 'source-map' : 'inline-source-map',
 
         module: {
             rules: [

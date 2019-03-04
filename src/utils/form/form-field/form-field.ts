@@ -1,6 +1,6 @@
+import { Subject } from 'rxjs';
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
-
 export interface FormFieldOptions {
     messageAfterTouched?: boolean;
 }
@@ -17,6 +17,7 @@ export class FormField<T> {
     private touched: boolean = false;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
+    private changeObservable: Subject<T> = new Subject<T>();
 
     /**
      *
@@ -33,6 +34,13 @@ export class FormField<T> {
             this.messageAfterTouched = typeof options.messageAfterTouched === undefined ?
                 this.messageAfterTouched : options.messageAfterTouched!;
         }
+    }
+
+    /**
+     * get change observable
+     */
+    get Changes(): Subject<T> {
+        return this.changeObservable;
     }
 
     /**
@@ -162,6 +170,7 @@ export class FormField<T> {
         if (typeof value === 'object' || value !== this.oldValue) {
             this.internalValue = value;
             this.oldValue = this.internalValue;
+            this.changeObservable.next(this.internalValue);
             this.validate();
         }
     }

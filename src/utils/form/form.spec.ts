@@ -1,10 +1,10 @@
 // tslint:disable:no-identical-functions no-big-function
 
-import { Form } from './form';
+import { Subject } from 'rxjs';
+import { Form, FormChange } from './form';
 import { FormFieldValidation } from './form-field-validation/form-field-validation';
 import { FieldValidationCallback, FormField } from './form-field/form-field';
 import { FormValidation } from './form-validation/form-validation';
-
 let mockFormField: any = {};
 jest.mock('./form-field/form-field', () => {
     return {
@@ -39,7 +39,8 @@ describe(`Form`, () => {
             validate: jest.fn(),
             focusThisField: jest.fn(),
             touch: jest.fn(),
-            shouldFocus: false
+            shouldFocus: false,
+            Changes: new Subject()
         };
         ((FormField as unknown) as jest.Mock).mockClear();
     });
@@ -72,6 +73,23 @@ describe(`Form`, () => {
                 expect(form.nbFieldsThatHasError).toBe(0);
             });
 
+        });
+    });
+
+    describe(`When a form field change value`, () => {
+        beforeEach(() => {
+            form = new Form({
+                'a-field': new FormField((): string => FIELD_VALUE, [VALIDATING_FUNCTION])
+            });
+        });
+
+        it(`Then that change should be observable`, async (done) => {
+            form.Changes.subscribe((change: FormChange) => {
+                expect(change.field).toBe('a-field');
+                done();
+            });
+
+            form.get('a-field').Changes.next('A NEW VALUE');
         });
     });
 

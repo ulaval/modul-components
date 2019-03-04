@@ -390,7 +390,7 @@
                      label="A field"
                      :error-message="forms[13].get('field-1').errorMessage"
                      v-m-form-field="forms[13].get('field-1')">
-        </m-textfield>lop
+        </m-textfield>
     </m-form>
     <p>
         <m-button type="submit"
@@ -400,7 +400,7 @@
                   :form="forms[13].id">Reset</m-button>
 
     </p>
-    <hr />
+
     <h3>Radio Buttons Form</h3>
     <m-form class="m-u--margin-top"
             :form="forms[12]"
@@ -570,4 +570,30 @@
         </p>
     </p>
     <hr />
+    <h3>Observe form changes</h3>
+    <p class="m-u--margin-bottom">
+        {{ changeWatcher }}
+    </p>
+    <m-form :form="forms[17]"
+            @reset="reset(17)"
+            @submit="submit(17)">
+        <m-textfield v-model.trim="forms[17].get('field-1').value"
+                     label="A field"
+                     :error-message="forms[17].get('field-1').errorMessage"
+                     v-m-form-field="forms[17].get('field-1')">
+        </m-textfield>
+        <m-textfield v-model.trim="forms[17].get('field-2').value"
+                     label="A field"
+                     :error-message="forms[17].get('field-2').errorMessage"
+                     v-m-form-field="forms[17].get('field-2')">
+        </m-textfield>
+    </m-form>
+    <p>
+        <m-button type="submit"
+                  :form="forms[17].id">Submit</m-button>
+        <m-button type="reset"
+                  skin="secondary"
+                  :form="forms[17].id">Reset</m-button>
+
+    </p>
 </div>

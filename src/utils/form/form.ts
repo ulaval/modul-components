@@ -1,18 +1,19 @@
+import { Subject } from 'rxjs';
 import uuid from '../uuid/uuid';
 import { FormField } from './form-field/form-field';
 import { FormState } from './form-state/form-state';
 import { FormValidation } from './form-validation/form-validation';
-
 export type FormValidationCallback = (formInstance: Form) => FormValidation;
 export type FormFieldGroup = { [name: string]: FormField<any>; };
+export type FormChange = { field: string, value: any };
 
 /**
  * Form Class
  */
 export class Form {
     public id: string;
-
     private internalState: FormState;
+    private changeObservable: Subject<FormChange> = new Subject();
 
     /**
      *
@@ -22,6 +23,14 @@ export class Form {
     constructor(private fieldGroup: FormFieldGroup, private validationCallbacks: FormValidationCallback[] = []) {
         this.id = uuid.generate();
         this.internalState = new FormState();
+        this.observeFieldChanges();
+    }
+
+    /**
+     * return change observable
+     */
+    get Changes(): Subject<FormChange> {
+        return this.changeObservable;
     }
 
     /**
@@ -58,6 +67,13 @@ export class Form {
      */
     get isValid(): boolean {
         return this.nbFieldsThatHasError === 0 && this.nbOfErrors === 0;
+    }
+
+    /**
+     * return the field's name
+     */
+    getFieldName(formField: FormField<any>): string {
+        return Object.keys(this.fieldGroup).find((name: string) => this.fieldGroup[name] === formField)!;
     }
 
     /**
@@ -136,4 +152,14 @@ export class Form {
         this.internalState.hasErrors = true;
         this.internalState.errorMessages = this.internalState.errorMessages.concat(formValidation.errorMessage);
     }
+
+    private observeFieldChanges(): void {
+        this.fields.forEach((formField: FormField<any>) => {
+            formField.Changes.subscribe((value: any) => {
+                let change: FormChange = { field: this.getFieldName(formField), value };
+                this.changeObservable.next(change);
+            });
+        });
+    }
+
 }

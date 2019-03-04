@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { Form } from '../../utils/form/form';
+import { Form, FormChange } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { FormErrorFocusBehavior, FormErrorMessagesBehavior, MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
@@ -23,6 +23,7 @@ export class MFormSandbox extends ModulVue {
     ];
     serverResponse: any = this.serverResponses[0];
     hasServerResponse: boolean = false;
+    changeWatcher: any = {};
     forms: Form[] = [
         new Form({
             'field-1': new FormField<string>((): string => '', [])
@@ -192,6 +193,20 @@ export class MFormSandbox extends ModulVue {
                 }
                 return new FormFieldValidation();
             }])
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
+                    return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }]),
+            'field-2': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
+                    return new FormFieldValidation(true, ['the field-2 is required'], ['this field is required']);
+                }
+                return new FormFieldValidation();
+            }])
         })
     ];
 
@@ -208,6 +223,10 @@ export class MFormSandbox extends ModulVue {
             new FormErrorMessagesBehavior(),
             new FormErrorFocusBehavior()
         ]);
+
+        this.forms[17].Changes.subscribe((change: FormChange) => {
+            this.changeWatcher = change;
+        });
     }
 
     submit(formIndex: number): void {
