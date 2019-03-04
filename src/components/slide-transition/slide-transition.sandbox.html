@@ -1,8 +1,7 @@
 <div>
     <h2 class="m-u--no-margin">Slide transition</h2>
     <m-slide-transition class="m-u--margin-top--l"
-                        :scroll-to-offset="-80"
-                        :left-to-right="isLeftToRightTransition">
+                        :direction="direction">
         <div v-if="model === 1"
              key="1">
             <h3>Étape 1</h3>

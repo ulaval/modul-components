@@ -1,18 +1,23 @@
 
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
 import { ModulVue } from '../../utils/vue/vue';
 import { SLIDE_TRANSITION_NAME } from '../component-names';
 import WithRender from './slide-transition.html?style=./slide-transition.scss';
 
+export enum MSlideTransitionDirection {
+    LeftToRight = 'left-to-right',
+    RightToLeft = 'right-to-left'
+}
+
 @WithRender
 @Component
 export class MSlideTransition extends ModulVue {
 
-    @Prop({ default: true })
-    public leftToRight: boolean;
+    @Prop({ default: MSlideTransitionDirection.LeftToRight })
+    public direction: MSlideTransitionDirection;
 
     @Prop({ default: 0 })
     public scrollToOffset: number; // the offset to add (in case of a sticky header)
@@ -20,16 +25,20 @@ export class MSlideTransition extends ModulVue {
     @Prop({ default: false })
     public disabled: boolean;
 
-    public get name(): string {
-        return this.disabled ? 'm--is-disabled' : 'm--is';
+    public get transitionName(): string | undefined {
+        return !this.disabled ? 'm--is' : undefined;
     }
 
+    public get isLeftToRight(): boolean {
+        return this.direction === MSlideTransitionDirection.LeftToRight;
+    }
+
+    @Emit('enter')
     private transitionEnter(el: HTMLElement): void {
         this.$scrollTo.goTo(this.$el, this.scrollToOffset, ScrollToDuration.Regular);
         setTimeout(() => {
             this.transitionBeforeLeave(el);
         }, 100);
-        this.$emit('enter');
     }
 
     private transitionAfterEnter(): void {
@@ -37,23 +46,19 @@ export class MSlideTransition extends ModulVue {
     }
 
     private transitionBeforeLeave(el: HTMLElement): void {
-        this.$el.style.height = this.getHauteurEl(el) + 'px';
+        this.$el.style.height = this.getHeightEl(el) + 'px';
     }
 
+    @Emit('afterLeave')
     private transitionAfterLeave(): void {
         this.transitionAfterEnter();
-        this.$emit('afterLeave');
     }
 
-    private getHauteurEl(el): number {
+    private getHeightEl(el): number {
         let elComputedStyle: any = window.getComputedStyle(el);
-        return parseInt(elComputedStyle.height as string, 10)
+        return el.getBoundingClientRect().height +
             + parseInt(elComputedStyle.marginTop as string, 10)
-            + parseInt(elComputedStyle.marginBottom as string, 10)
-            + parseInt(elComputedStyle.paddingTop as string, 10)
-            + parseInt(elComputedStyle.paddingBottom as string, 10)
-            + parseInt(elComputedStyle.borderTopWidth as string, 10)
-            + parseInt(elComputedStyle.borderBottomWidth as string, 10);
+            + parseInt(elComputedStyle.marginBottom as string, 10);
     }
 }
 
