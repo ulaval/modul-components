@@ -1,4 +1,4 @@
-<div class="m-textfield"
+<div class="m-integerfield"
      :class="[{ 'm--is-disabled': isDisabled,
                 'm--is-waiting': isWaiting,
                 'm--has-error': hasTextfieldError,
@@ -18,7 +18,7 @@
                    :readonly="readonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
-        <input class="m-textfield__input"
+        <input class="m-integerfield__input"
                v-model="model"
                :id="id"
                :disabled="!active"
@@ -37,8 +37,8 @@
                @paste="onPasteTextfield"
                @drop="onDropTextfield" />
     </m-input-style>
-    <div class="m-textfield__validation">
-        <m-validation-message class="m-textfield__validation__message"
+    <div class="m-integerfield__validation">
+        <m-validation-message class="m-integerfield__validation__message"
                               :disabled="isDisabled"
                               :waiting="isWaiting"
                               :error="hasTextfieldError"
