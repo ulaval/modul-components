@@ -107,21 +107,21 @@ describe(`MTable`, () => {
 
                 expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
             });
-        });
 
-        describe(`When a column is sortable`, () => {
-            it(`Should show a button with the label on it`, async () => {
-                const icon: Wrapper<Vue> = wrapper.find('.m-table__sortable-icon');
+            describe(`When a column is sortable`, () => {
+                it(`Should show a button with the label on it`, async () => {
+                    const icon: Wrapper<Vue> = wrapper.find('.m-table__sortable-icon');
 
-                expect(icon.exists()).toBeTruthy();
-            });
-        });
+                    expect(icon.exists()).toBeTruthy();
+                });
 
-        describe(`When the arrow is clicked`, () => {
-            it(`Should emit a action event`, () => {
-                wrapper.find('.m-table__sortable-icon').trigger('click');
+                describe(`When the arrow is clicked`, () => {
+                    it(`Should emit a action event`, () => {
+                        wrapper.find('.m-table__sortable-icon').trigger('click');
 
-                expect(wrapper.emitted('update:sortedColumn')).toBeTruthy();
+                        expect(wrapper.emitted('update:sortedColumn')).toBeTruthy();
+                    });
+                });
             });
         });
 
