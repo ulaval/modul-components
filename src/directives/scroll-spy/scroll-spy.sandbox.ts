@@ -5,7 +5,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 import WithRender from './scroll-spy.sandbox.html?style=./scroll-spy.scss';
 
-const options: any = {
+const options: IntersectionObserverInit = {
     root: document.querySelector('.observeElement'),
     rootMargin: '0px',
     threshold: 1.0
@@ -15,12 +15,12 @@ const options: any = {
 @Component
 export class MScrollSpySandbox extends ModulVue {
 
-    mounted(): any {
+    mounted(): void {
         const observer: any = new IntersectionObserver(this.handleIntersect, options);
         observer.observe(this.$el);
     }
 
-    handleIntersect(entries: IntersectionObserverEntry[], observer: any): void {
+    handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserverInit): void {
         console.log(entries);
         entries.forEach(entry => {
             console.log(observer);
