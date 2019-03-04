@@ -21,7 +21,7 @@ export class MScrollSpySandbox extends ModulVue {
         const myImg: HTMLElement | null = document.querySelector('.test');
 
         let observer: IntersectionObserver = new IntersectionObserver((entry, observer) => {
-            console.log('entry:', entry);
+            console.log('entry:', entry[0].isIntersecting);
             console.log('observer:', observer);
         });
         if (myImg) {
