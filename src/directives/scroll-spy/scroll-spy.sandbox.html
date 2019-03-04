@@ -6,12 +6,16 @@
             <nav>
                 <ul>
                     <li><a href="#section1"
+                           :class="{ 'active': isCurrent('section1') }"
                            @click.prevent="scrolling">Section 1</a></li>
                     <li><a href="#section2"
+                           :class="{ 'active': isCurrent('section2') }"
                            @click.prevent="scrolling">Section 2</a></li>
                     <li><a href="#section3"
+                           :class="{ 'active': isCurrent('section3') }"
                            @click.prevent="scrolling">Section 3</a></li>
                     <li><a href="#section4"
+                           :class="{ 'active': isCurrent('section4') }"
                            @click.prevent="scrolling">Section 4</a></li>
                 </ul>
             </nav>
