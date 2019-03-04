@@ -11,8 +11,11 @@
                     scope="col">
                     <slot :name="'header.' + column.dataProp"
                           :column="column">
-                        <span class="m-table__header-name"
+                        <span v-if="column.sortable"
+                              class="m-table__header-name"
                               @click="sort(column)">{{ column.title }}</span>
+                        <span v-else
+                              class="m-table__header-name">{{ column.title }}</span>
                         <m-icon-button v-if="column.sortable"
                                        class="m-table__sortable-icon"
                                        skin="bold"
