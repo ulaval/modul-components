@@ -1,10 +1,8 @@
 import Cleave from 'cleave.js';
 import { CleaveOptions } from 'cleave.js/options';
-import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Model, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
-import { INPUT_MASK_NAME } from '../component-names';
 import WithRender from './input-mask.html';
 
 @WithRender
@@ -12,12 +10,12 @@ import WithRender from './input-mask.html';
 export class MInputMask extends ModulVue {
 
     @Prop()
-    public value: string;
+    @Model('input')
+    inputValue: string;
 
 
     @Prop({ default: true })
     public raw: boolean;
-
 
     private cleave: Cleave;
     // private onValueChangedFn: any;
@@ -37,23 +35,43 @@ export class MInputMask extends ModulVue {
             creditCard: true,
             onValueChanged: (event => {
                 let _value: string = this.raw ? event.target.rawValue : event.target.value;
+                // tslint:disable-next-line: no-console
+                console.log('asdsadas=' + _value);
                 this.$emit('input', _value);
             })
         };
 
     }
 
-    // private onBlur(event: Event): void {
-    //     this.$emit('blur', this.value)
-    // }
-
-}
-
-
-const InputMaskPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.component(INPUT_MASK_NAME, MInputMask);
+    onFocus($event: any): void {
+        this.$emit('focus', $event);
     }
-};
 
-export default InputMaskPlugin;
+    onBlur($event: any): void {
+        this.$emit('blur', $event);
+    }
+
+    onKeyup($event: any): void {
+        this.$emit('keyup', $event);
+    }
+
+    onKeydownTextfield($event: any): void {
+        this.$emit('keydown', $event);
+    }
+
+    onEnter($event: any): void {
+        this.$emit('keydown.enter', $event);
+    }
+
+    onPasteTextfield($event: any): void {
+        this.$emit('paste', $event);
+    }
+
+    onDropTextfield($event: any): void {
+        this.$emit('drop', $event);
+    }
+
+    onChange($event: any): void {
+        this.$emit('change', $event);
+    }
+}

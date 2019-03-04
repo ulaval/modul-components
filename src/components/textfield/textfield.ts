@@ -12,7 +12,6 @@ import CharacterCountPlugin from '../character-count/character-count';
 import { TEXTFIELD_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import InputStyle from '../input-style/input-style';
-import InputPlugin from '../input/input';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textfield.html?style=./textfield.scss';
 
@@ -235,7 +234,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
 const TextfieldPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(InputPlugin);
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
         v.use(TextareaAutoHeightPlugin);
