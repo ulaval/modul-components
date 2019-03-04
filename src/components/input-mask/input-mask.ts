@@ -5,6 +5,9 @@ import { Model, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './input-mask.html';
 
+/**
+ * inspired from https://github.com/ankurk91/vue-cleave-component/blob/master/src/component.js
+ */
 @WithRender
 @Component
 export class MInputMask extends ModulVue {
@@ -13,12 +16,14 @@ export class MInputMask extends ModulVue {
     @Model('input')
     inputValue: string;
 
-
     @Prop({ default: true })
     public raw: boolean;
 
+    // https://github.com/nosir/cleave.js/blob/master/doc/options.md
+    @Prop()
+    public options: CleaveOptions;
+
     private cleave: Cleave;
-    // private onValueChangedFn: any;
 
     mounted(): void {
         this.cleave = new Cleave(this.$el, this.getOptions());
@@ -29,14 +34,10 @@ export class MInputMask extends ModulVue {
     }
 
     private getOptions(): CleaveOptions {
-
-
         return {
             creditCard: true,
             onValueChanged: (event => {
                 let _value: string = this.raw ? event.target.rawValue : event.target.value;
-                // tslint:disable-next-line: no-console
-                console.log('asdsadas=' + _value);
                 this.$emit('input', _value);
             })
         };

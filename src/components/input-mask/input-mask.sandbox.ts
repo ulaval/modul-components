@@ -15,9 +15,8 @@ import WithRender from './input-mask.sandbox.html';
 })
 export class MInputMaskSandbox extends Vue {
 
-    public ccModel: string = '';
-
-
+    public integerModel: string = '';
+    public decimalModel: string = '';
 
 }
 
