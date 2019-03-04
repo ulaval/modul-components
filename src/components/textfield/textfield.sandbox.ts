@@ -9,6 +9,7 @@ import WithRender from './textfield.sandbox.html';
 export class MTextfieldSandbox extends Vue {
     public test4Model: string = '';
     public searchModel: string = '';
+    public numberModel: Number = 0;
 }
 
 const TextfieldSandboxPlugin: PluginObject<any> = {

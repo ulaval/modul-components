@@ -112,7 +112,9 @@ export class MTextfield extends ModulVue implements InputManagementData {
         } else {
             let pasteContent: string = event['clipboardData'].getData('text');
             if (/^\d+$/.test(pasteContent)) {
-                if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + this.as<InputManagement>().internalValue.length <= this.maxLength) {
+                let value: string = this.as<InputManagement>().internalValue.toString();
+
+                if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + value.length <= this.maxLength) {
                     this.$emit('paste', event);
                 } else {
                     event.preventDefault();
@@ -127,8 +129,10 @@ export class MTextfield extends ModulVue implements InputManagementData {
         if (this.type !== MTextfieldType.Integer) {
             this.$emit('keydown', event);
         } else {
+            let value: string = this.as<InputManagement>().internalValue.toString();
+
             // tslint:disable-next-line: deprecation
-            if (isFinite(this.maxLengthNumber) && this.as<InputManagement>().internalValue.length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
+            if (isFinite(this.maxLengthNumber) && value.length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
                 event.preventDefault();
             } else {
                 this.$emit('keydown', event);
