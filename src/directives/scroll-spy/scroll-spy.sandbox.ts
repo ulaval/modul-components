@@ -5,37 +5,25 @@ import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 import WithRender from './scroll-spy.sandbox.html?style=./scroll-spy.scss';
 
-const options: IntersectionObserverInit = {
-    root: document.querySelector('.observeElement'),
-    rootMargin: '0px',
-    threshold: 1.0
-};
-
 @WithRender
 @Component
 export class MScrollSpySandbox extends ModulVue {
 
     mounted(): void {
-        // const observer: any = new IntersectionObserver(this.handleIntersect, options);
-        // observer.observe(this.$el);
-        const myImg: HTMLElement | null = document.querySelector('.test');
-
-        let observer: IntersectionObserver = new IntersectionObserver((entry, observer) => {
-            console.log('entry:', entry[0].isIntersecting);
-            console.log('observer:', observer);
+        const elements: NodeListOf<HTMLElement> = document.querySelectorAll('.watch');
+        const observer: IntersectionObserver = new IntersectionObserver(this.handleIntersect);
+        elements.forEach(element => {
+            observer.observe(element);
         });
-        if (myImg) {
-            observer.observe(myImg);
-        }
     }
 
     handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserverInit): void {
-        console.log(entries);
         entries.forEach(entry => {
-            console.log(observer);
             console.log(entry);
             if (entry.isIntersecting) {
-                console.log('DEDANS');
+                console.log(entry.target.id);
+            } else {
+
             }
         });
     }
