@@ -147,7 +147,6 @@ module.exports = function (env) {
                 tsconfig: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
                 checkSyntacticErrors: true,
                 tslint: true,
-                async: false,
                 silent: isSilent
             }),
             new StyleLintPlugin({
