@@ -46,7 +46,7 @@ export class MIntegerfield extends ModulVue {
 
     private id: string = `mIntegerfield-${uuid.generate()}`;
 
-    private onPasteTextfield(event: Event): void {
+    private onPasteIntegerfield(event: Event): void {
         let pasteContent: string = event['clipboardData'].getData('text');
         if (/^\d+$/.test(pasteContent)) {
             if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + this.internalValue.toString().length <= this.maxLength) {
@@ -59,7 +59,7 @@ export class MIntegerfield extends ModulVue {
         }
     }
 
-    private onKeydownTextfield(event: KeyboardEvent): void {
+    private onKeydownIntegerfield(event: KeyboardEvent): void {
         // tslint:disable-next-line: deprecation
         if (isFinite(this.maxLengthNumber) && this.internalValue.toString().length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
             event.preventDefault();
@@ -73,7 +73,7 @@ export class MIntegerfield extends ModulVue {
         return keycode > 31 && (keycode < 48 || keycode > 57) && (keycode < 96 || keycode > 105);
     }
 
-    private onDropTextfield(event: DragEvent): void {
+    private onDropIntegerfield(event: DragEvent): void {
         event.preventDefault();
     }
 
@@ -81,11 +81,11 @@ export class MIntegerfield extends ModulVue {
         return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity;
     }
 
-    private get hasTextfieldError(): boolean {
+    private get hasIntegerfieldError(): boolean {
         return this.as<InputState>().hasError;
     }
 
-    private get isTextfieldValid(): boolean {
+    private get isIntegerfieldValid(): boolean {
         return this.as<InputState>().isValid;
     }
 

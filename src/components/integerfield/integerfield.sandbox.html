@@ -19,16 +19,13 @@
     <h3 class="m-u--h6">Static error (default)</h3>
     <m-integerfield label="label"
                     value="10"
+                    v-model="model3"
                     error-message="this field is in error">
     </m-integerfield>
 
-    <h3 class="m-u--h6">Dynamic error on character count</h3>
-    <m-integerfield placeholder="In error pass 5 characters"
-                    :character-count="true"
-                    max-length="5"
-                    :length-overflow="true"
-                    v-model="test4Model"
-                    :error="test4Model.length > 5 ? true : false">
-    </m-integerfield>
-
+    <h3 class="m-u--h6">Valid message</h3>
+    <m-integerfield label="label"
+                    value="10"
+                    v-model="model4"
+                    valid-message="Valid textfield"></m-integerfield>
 </div>
