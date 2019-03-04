@@ -30,7 +30,7 @@
     </div>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-                            :label="'texte riche'"
+                            :label="'rich text with placeholder'"
                             :max-width="'large'"
                             :placeholder="'some placeholder'"
                             :focus="focus"
@@ -44,7 +44,7 @@
     </div>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-                            :label="'texte riche'"
+                            :label="'rich text with placeholder'"
                             :max-width="'large'"
                             :placeholder="'some placeholder'"
                             :focus="focus"
@@ -60,7 +60,7 @@
         <h5>Mode media</h5>
         <m-rich-text-editor v-model="mediaModel"
                             :mode="mode"
-                            label="texte riche"
+                            label="rich text"
                             max-width="large"
                             @image-ready="imageReady"
                             @image-added="imageAdded"
@@ -75,7 +75,7 @@
     <h5 class="m-u--margin-bottom">fonctionne quand le modèle est déjà initialisé</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="initializedModel"
-                            :label="'texte riche'"
+                            :label="'rich text'"
                             :max-width="'large'"
                             :placeholder="'some placeholder'"
                             :focus="focus"
@@ -106,7 +106,7 @@
             <div>
                 <m-rich-text-editor class="p-formulaire-texte__textearea"
                                     scrollable-container="#overlayPleinePage .m-overlay__body"
-                                    :label="'texte riche'"
+                                    :label="'rich text'"
                                     tag-style="p"
                                     max-width="720px"
                                     v-model="fullScreenFormModel"></m-rich-text-editor>
@@ -115,15 +115,17 @@
     </div>
     <div>
         <h5 class="m-u--margin-bottom">RTE dans un formulaire modal</h5>
-        <m-modal id="idModal" title="Modal title" :size="modalSize">
+        <m-modal id="idModal"
+                 title="Modal title"
+                 :size="modalSize">
             <m-button slot="trigger">Open the modal</m-button>
             <div id="teste">
                 <m-rich-text-editor class="p-formulaire-texte__textearea"
-                                    :label="'texte riche'"
+                                    :label="'rich text'"
                                     @fullscreen="onFullscreen"
                                     max-width="720px"
                                     v-model="model"
-                                    scrollable-container=".m-modal__body" ></m-rich-text-editor>
+                                    scrollable-container=".m-modal__body"></m-rich-text-editor>
             </div>
             <div slot="footer">Footer</div>
         </m-modal>
@@ -131,7 +133,7 @@
     <h5 class="m-u--margin-bottom">placeholder vide n'affiche rien</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="model"
-                            :label="'texte riche'"
+                            :label="'rich text'"
                             :max-width="'large'"
                             :focus="focus"
                             :error="error"
@@ -154,7 +156,7 @@
     <h5 class="m-u--margin-bottom">Tests de la case à cocher « Ouvrir dans un nouvel onglet » d'un lien externe</h5>
     <div class="m-u--margin-bottom">
         <m-rich-text-editor v-model="linksOpenInNewWindowModel"
-                            :label="'texte riche'"
+                            :label="'rich text'"
                             :max-width="'large'"
                             :focus="focus"
                             :error="error"
@@ -179,7 +181,7 @@
             </select>
         </div>
         <m-rich-text-editor v-model="model"
-                            :label="'texte riche'"
+                            :label="'rich text'"
                             :max-width="'large'"
                             :focus="focus"
                             :error="error"
