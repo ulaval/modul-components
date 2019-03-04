@@ -9,6 +9,8 @@ import WithRender from './integerfield.sandbox.html';
 export class MIntegerfieldSandbox extends Vue {
     public model1: number = 2;
     public model2: number = 0;
+    public model3: number = 3;
+    public model4: number = 5;
 }
 
 const IntegerfieldSandboxPlugin: PluginObject<any> = {
