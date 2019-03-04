@@ -16,13 +16,19 @@ const options: any = {
 export class MScrollSpySandbox extends ModulVue {
 
     mounted(): any {
-        let observer: any = new IntersectionObserver(([entry]) => {
-            console.log(entry);
-            if (entry && entry.isIntersecting) {
-                console.log(entry);
-            }
-        }, options);
+        const observer: any = new IntersectionObserver(this.handleIntersect, options);
         observer.observe(this.$el);
+    }
+
+    handleIntersect(entries: IntersectionObserverEntry[], observer: any): void {
+        console.log(entries);
+        entries.forEach(entry => {
+            console.log(observer);
+            console.log(entry);
+            if (entry.isIntersecting) {
+                // console.log(entry);
+            }
+        });
     }
 
     scrolling(event: Event): void {
