@@ -1,0 +1,50 @@
+<div class="m-textfield"
+     :class="[{ 'm--is-disabled': isDisabled,
+                'm--is-waiting': isWaiting,
+                'm--has-error': hasTextfieldError,
+                'm--is-valid': isTextfieldValid,
+                'm--has-label': hasLabel,
+                'm--has-validation-message': hasValidationMessage } ]"
+     @click="onClick"
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
+    <m-input-style :disabled="isDisabled"
+                   :waiting="isWaiting"
+                   :error="hasTextfieldError"
+                   :valid="isTextfieldValid"
+                   :label="label"
+                   :label-for="id"
+                   :focus="isFocus"
+                   :empty="isEmpty"
+                   :readonly="readonly"
+                   :required-marker="requiredMarker"
+                   :tag-style="tagStyle">
+        <input class="m-textfield__input"
+               v-model="model"
+               :id="id"
+               :disabled="!active"
+               :placeholder="placeholder"
+               :readonly="readonly"
+               :maxlength="maxLengthNumber"
+               :pattern="inputPattern"
+               :inputmode="inputMode"
+               type="number"
+               @focus="onFocus"
+               @blur="onBlur"
+               @keyup="onKeyup"
+               @keydown="onKeydownTextfield"
+               @keydown.enter="onEnter"
+               @change="onChange"
+               @paste="onPasteTextfield"
+               @drop="onDropTextfield" />
+    </m-input-style>
+    <div class="m-textfield__validation">
+        <m-validation-message class="m-textfield__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasTextfieldError"
+                              :error-message="errorMessage"
+                              :valid="isTextfieldValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
+</div>
