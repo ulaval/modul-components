@@ -16,8 +16,17 @@ const options: IntersectionObserverInit = {
 export class MScrollSpySandbox extends ModulVue {
 
     mounted(): void {
-        const observer: any = new IntersectionObserver(this.handleIntersect, options);
-        observer.observe(this.$el);
+        // const observer: any = new IntersectionObserver(this.handleIntersect, options);
+        // observer.observe(this.$el);
+        const myImg: HTMLElement | null = document.querySelector('.test');
+
+        let observer: IntersectionObserver = new IntersectionObserver((entry, observer) => {
+            console.log('entry:', entry);
+            console.log('observer:', observer);
+        });
+        if (myImg) {
+            observer.observe(myImg);
+        }
     }
 
     handleIntersect(entries: IntersectionObserverEntry[], observer: IntersectionObserverInit): void {
