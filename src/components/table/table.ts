@@ -19,7 +19,7 @@ export interface MColumnTable {
     sortable?: boolean;
 }
 
-export interface MSortedColumn {
+export class MSortedColumn {
     dataProp: string;
     ascending: boolean;
 }
@@ -60,10 +60,10 @@ export class MTable extends ModulVue {
     }
 
     public sort(columnTable: MColumnTable): void {
-        this.$emit('update:sortedColumn', {
-            dataProp: columnTable.dataProp,
-            ascending: !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending
-        });
+        let sortedColumn: MSortedColumn = new MSortedColumn();
+        sortedColumn.dataProp = columnTable.dataProp;
+        sortedColumn.ascending = !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending;
+        this.$emit('update:sortedColumn', sortedColumn);
     }
 
     public isColumnSorted(columnTable: MColumnTable): boolean {
