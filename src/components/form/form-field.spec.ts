@@ -1,4 +1,5 @@
 import { mount, Wrapper } from '@vue/test-utils';
+import { Subject } from 'rxjs';
 import Vue from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { Form } from '../../utils/form/form';
@@ -32,7 +33,8 @@ describe('form-field', () => {
             isTouched: false,
             hasError: true,
             touched: false,
-            touch: jest.fn()
+            touch: jest.fn(),
+            Changes: new Subject()
         };
 
         let formField: FormField<any>;
