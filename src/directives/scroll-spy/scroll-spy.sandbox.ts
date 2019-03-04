@@ -26,7 +26,7 @@ export class MScrollSpySandbox extends ModulVue {
             console.log(observer);
             console.log(entry);
             if (entry.isIntersecting) {
-                // console.log(entry);
+                console.log('DEDANS');
             }
         });
     }
