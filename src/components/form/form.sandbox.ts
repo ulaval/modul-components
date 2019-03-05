@@ -1,6 +1,8 @@
+import { timer } from 'rxjs';
+import { debounce, map, skipWhile, tap } from 'rxjs/operators';
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { Form, FormChange } from '../../utils/form/form';
+import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
 import { FormField } from '../../utils/form/form-field/form-field';
 import { FormErrorFocusBehavior, FormErrorMessagesBehavior, MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
@@ -23,7 +25,7 @@ export class MFormSandbox extends ModulVue {
     ];
     serverResponse: any = this.serverResponses[0];
     hasServerResponse: boolean = false;
-    changeWatcher: any = {};
+    observedChange: any = '';
     forms: Form[] = [
         new Form({
             'field-1': new FormField<string>((): string => '', [])
@@ -224,9 +226,14 @@ export class MFormSandbox extends ModulVue {
             new FormErrorFocusBehavior()
         ]);
 
-        this.forms[17].Changes.subscribe((change: FormChange) => {
-            this.changeWatcher = change;
-        });
+        this.forms[17].Changes
+            .pipe(
+                debounce(() => timer(500)),
+                skipWhile((v: any) => v.value.length < 3),
+                map((v: any) => `A mapped value ${v.value} of the change for field ${v.field}`),
+                tap(() => this.$log.info('streamed data is mapped'))
+            )
+            .subscribe((v: any) => this.observedChange = v);
     }
 
     submit(formIndex: number): void {
