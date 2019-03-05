@@ -21,7 +21,17 @@ class ScrollSpy {
     public createMapObserver(): void {
         elementsMap.set(this.id, this.element);
         const section: HTMLElement | null = document.getElementById(this.id);
-        observer = new IntersectionObserver(this.handleIntersection);
+        observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    sectionsMap.set(entry.target.id, entry.isIntersecting);
+                } else {
+                    sectionsMap.set(entry.target.id, entry.isIntersecting);
+                }
+            });
+
+            this.searchFirstCurrent();
+        });
         if (section) {
             observer.observe(section);
             sectionsMap.set(section.id, false);
@@ -32,19 +42,7 @@ class ScrollSpy {
         observer.disconnect();
     }
 
-    private handleIntersection(entries: IntersectionObserverEntry[]): void {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                sectionsMap.set(entry.target.id, entry.isIntersecting);
-            } else {
-                sectionsMap.set(entry.target.id, entry.isIntersecting);
-            }
-        });
-
-        ScrollSpy.searchFirstCurrent();
-    }
-
-    private static searchFirstCurrent(): void {
+    private searchFirstCurrent(): void {
         let elementFound: Boolean = false;
         sectionsMap.forEach((value: boolean, key: string) => {
             const myCurentHTMLElement: HTMLElement | undefined = elementsMap.get(key);
