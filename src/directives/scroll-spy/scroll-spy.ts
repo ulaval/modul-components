@@ -2,8 +2,8 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 
-const mapSection: Map<string, boolean> = new Map<string, boolean>();
-const mapElement: Map<string, HTMLElement> = new Map<string, HTMLElement>();
+const sectionsMap: Map<string, boolean> = new Map<string, boolean>();
+const elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
 
 export enum MScrollSpyClassNames {
     Current = 'm--is-current'
@@ -15,22 +15,22 @@ class ScrollSpy {
 
     constructor(private element: HTMLElement, private id: string) { }
 
-    public createMapToObserve(): void {
-        mapElement.set(this.id, this.element);
+    public createMapObserver(): void {
+        elementsMap.set(this.id, this.element);
         const section: HTMLElement | null = document.getElementById(this.id);
         const observer: IntersectionObserver = new IntersectionObserver(this.handleIntersection);
         if (section) {
             observer.observe(section);
-            mapSection.set(section.id, false);
+            sectionsMap.set(section.id, false);
         }
     }
 
     private handleIntersection(entries: IntersectionObserverEntry[]): void {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                mapSection.set(entry.target.id, entry.isIntersecting);
+                sectionsMap.set(entry.target.id, entry.isIntersecting);
             } else {
-                mapSection.set(entry.target.id, entry.isIntersecting);
+                sectionsMap.set(entry.target.id, entry.isIntersecting);
             }
         });
 
@@ -39,8 +39,8 @@ class ScrollSpy {
 
     private static searchFirstCurrent(): void {
         let elementFound: Boolean = false;
-        mapSection.forEach((value: boolean, key: string) => {
-            const myCurentHTMLElement: HTMLElement | undefined = mapElement.get(key);
+        sectionsMap.forEach((value: boolean, key: string) => {
+            const myCurentHTMLElement: HTMLElement | undefined = elementsMap.get(key);
             if (myCurentHTMLElement) {
                 myCurentHTMLElement.classList.remove(MScrollSpyClassNames.Current);
 
@@ -56,7 +56,7 @@ class ScrollSpy {
 const Directive: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
         const monIdElementCourant: ScrollSpy = new ScrollSpy(element, binding.value);
-        monIdElementCourant.createMapToObserve();
+        monIdElementCourant.createMapObserver();
     }
 };
 
