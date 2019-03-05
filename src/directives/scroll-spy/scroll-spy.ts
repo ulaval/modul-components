@@ -5,6 +5,9 @@ import { SCROLL_SPY_NAME } from '../directive-names';
 const sectionsMap: Map<string, boolean> = new Map<string, boolean>();
 const elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
 
+let observer: IntersectionObserver;
+let monIdElementCourant: ScrollSpy;
+
 export enum MScrollSpyClassNames {
     Current = 'm--is-current'
 }
@@ -18,11 +21,15 @@ class ScrollSpy {
     public createMapObserver(): void {
         elementsMap.set(this.id, this.element);
         const section: HTMLElement | null = document.getElementById(this.id);
-        const observer: IntersectionObserver = new IntersectionObserver(this.handleIntersection);
+        observer = new IntersectionObserver(this.handleIntersection);
         if (section) {
             observer.observe(section);
             sectionsMap.set(section.id, false);
         }
+    }
+
+    public KillMapObserver(): void {
+        observer.disconnect();
     }
 
     private handleIntersection(entries: IntersectionObserverEntry[]): void {
@@ -53,16 +60,23 @@ class ScrollSpy {
     }
 }
 
-const Directive: DirectiveOptions = {
+const observeDirective: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
-        const monIdElementCourant: ScrollSpy = new ScrollSpy(element, binding.value);
+        monIdElementCourant = new ScrollSpy(element, binding.value);
         monIdElementCourant.createMapObserver();
+    },
+    update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
+        monIdElementCourant = new ScrollSpy(element, binding.value);
+        monIdElementCourant.createMapObserver();
+    },
+    unbind(_element: HTMLElement): void {
+        monIdElementCourant.KillMapObserver();
     }
 };
 
 const ScrollSpyPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.directive(SCROLL_SPY_NAME, Directive);
+    install(v, _options): void {
+        v.directive(SCROLL_SPY_NAME, observeDirective);
     }
 };
 
