@@ -21,4 +21,7 @@
                      :value="i.value"
                      :label="i.label"
                      :non-filterable="true"></m-dropdown-item>
+    <m-dropdown-item v-if="showNoResult"
+                     :readonly="true"
+                     :non-filterable="true">{{ propTextNoMatch }}</m-dropdown-item>
 </m-dropdown>

@@ -26,6 +26,8 @@ export class MAutocomplete extends ModulVue {
     throttle: number;
     @Prop({ default: 1 })
     minimumChars: number;
+    @Prop()
+    textNoMatch: string;
 
     @Prop()
     placeholder: string;
@@ -54,7 +56,9 @@ export class MAutocomplete extends ModulVue {
     tagStyle: string;
 
     selection: string = '';
+    inputText: string = '';
     items: MAutoCompleteResult[] = [];
+    loading: boolean = false;
     throttleTimeout: any;
 
     created(): void {
@@ -78,6 +82,7 @@ export class MAutocomplete extends ModulVue {
     @Watch('results')
     onResults(): void {
         this.items = this.results;
+        this.loading = false;
     }
 
     onInputChangeThrottled(value: string): void {
@@ -86,6 +91,16 @@ export class MAutocomplete extends ModulVue {
             this.throttleTimeout = undefined;
             this.onInputChange(value);
         }, this.throttle);
+    }
+
+    get showNoResult(): boolean {
+        return !this.loading &&
+            this.items.length === 0 &&
+            this.inputText.length >= this.minimumChars;
+    }
+
+    get propTextNoMatch(): string {
+        return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
     }
 
     private refreshItemsOnSelectionChange(value: string): void {
@@ -99,10 +114,12 @@ export class MAutocomplete extends ModulVue {
     }
 
     private onInputChange(value: string): void {
+        this.inputText = value;
         if (value === '') {
             this.items = [];
         } else if (value.length >= this.minimumChars) {
             this.emitComplete(value);
+            this.loading = true;
         }
     }
 
