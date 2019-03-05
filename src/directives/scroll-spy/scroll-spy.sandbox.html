@@ -5,25 +5,16 @@
             <h2>Test Scroll-spy</h2>
             <nav>
                 <ul>
-                    <li><a href="#section1"
-                           :class="{ 'active': isCurrent('section1') }"
-                           @click.prevent="scrolling">Section 1</a></li>
-                    <li><a href="#section2"
-                           :class="{ 'active': isCurrent('section2') }"
-                           @click.prevent="scrolling">Section 2</a></li>
-                    <li><a href="#section3"
-                           :class="{ 'active': isCurrent('section3') }"
-                           @click.prevent="scrolling">Section 3</a></li>
-                    <li><a href="#section4"
-                           :class="{ 'active': isCurrent('section4') }"
-                           @click.prevent="scrolling">Section 4</a></li>
+                    <li><span v-m-scroll-spy="idSection1">Section 1</span></li>
+                    <li><span v-m-scroll-spy="idSection2">Section 2</span></li>
+                    <li><span v-m-scroll-spy="idSection3">Section 3</span></li>
+                    <li><span v-m-scroll-spy="idSection4">Section 4</span></li>
                 </ul>
             </nav>
         </div>
 
         <div>
-            <section id="section1"
-                     class="watch">
+            <section :id="idSection1">
                 <h3 class="m-u--no-margin-top">Section 1</h3>
                 <p class="test">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent
@@ -81,8 +72,7 @@
                 </p>
             </section>
 
-            <section id="section2"
-                     class="watch">
+            <section :id="idSection2">
                 <h3>Section 2</h3>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent
@@ -140,8 +130,7 @@
                 </p>
             </section>
 
-            <section id="section3"
-                     class="watch">
+            <section :id="idSection3">
                 <h3>Section 3</h3>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent
@@ -199,8 +188,7 @@
                 </p>
             </section>
 
-            <section id="section4"
-                     class="watch">
+            <section :id="idSection4">
                 <h3>Section 4</h3>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent

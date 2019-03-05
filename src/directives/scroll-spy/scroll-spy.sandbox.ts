@@ -6,9 +6,15 @@ import { SCROLL_SPY_NAME } from '../directive-names';
 import WithRender from './scroll-spy.sandbox.html?style=./scroll-spy.scss';
 
 const map: Map<string, boolean> = new Map<string, boolean>();
+
 @WithRender
 @Component
 export class MScrollSpySandbox extends ModulVue {
+
+    idSection1: string = 'section1';
+    idSection2: string = 'section2';
+    idSection3: string = 'section3';
+    idSection4: string = 'section4';
 
     currentID: string = '';
 
@@ -44,14 +50,6 @@ export class MScrollSpySandbox extends ModulVue {
 
     isCurrent(id: string): boolean {
         return id === this.currentID;
-    }
-
-    scrolling(event: Event): void {
-        let myId: any = (event.target as HTMLElement).getAttribute('href');
-        let htmlElement: HTMLElement | null = this.$el.querySelector(myId);
-        if (htmlElement) {
-            this.$scrollTo.goTo(htmlElement, 0);
-        }
     }
 }
 
