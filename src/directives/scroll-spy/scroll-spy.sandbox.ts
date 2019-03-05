@@ -3,6 +3,7 @@ import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
+import ScrollSpyPlugin from './scroll-spy';
 import WithRender from './scroll-spy.sandbox.html?style=./scroll-spy.scss';
 
 const map: Map<string, boolean> = new Map<string, boolean>();
@@ -55,6 +56,7 @@ export class MScrollSpySandbox extends ModulVue {
 
 const ScrollSpySandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ScrollSpyPlugin);
         v.component(`${SCROLL_SPY_NAME}-sandbox`, MScrollSpySandbox);
     }
 };

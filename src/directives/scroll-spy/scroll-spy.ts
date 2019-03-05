@@ -3,7 +3,7 @@ import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 
 
-const MScrollSpyDirective: DirectiveOptions = {
+const MScrollSpy: DirectiveOptions = {
     inserted(
         element: HTMLElement,
         binding: VNodeDirective,
@@ -31,7 +31,7 @@ const MScrollSpyDirective: DirectiveOptions = {
 
 const ScrollSpyPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(SCROLL_SPY_NAME, MScrollSpyDirective);
+        v.directive(SCROLL_SPY_NAME, MScrollSpy);
     }
 };
 
