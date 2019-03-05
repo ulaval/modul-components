@@ -4,7 +4,7 @@ import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 import ScrollSpyPlugin from './scroll-spy';
-import WithRender from './scroll-spy.sandbox.html?style=./scroll-spy.scss';
+import WithRender from './scroll-spy.sandbox.html?style=./scroll-spy.sandbox.scss';
 
 
 @WithRender
