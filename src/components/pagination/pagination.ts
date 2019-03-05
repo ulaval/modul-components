@@ -62,21 +62,21 @@ export class MPagination extends ModulVue {
             maxDelta = this.value + delta > this.nbOfPages - 1 ? this.nbOfPages - 1 : this.value + delta;
         }
 
-        items.push({ label: FIRST_PAGE.toString(), clickable: FIRST_PAGE === this.value ? false : true });
+        items.push({ label: FIRST_PAGE.toString(), clickable: this.isPageActive(FIRST_PAGE) ? false : true });
 
         if (minDelta !== FIRST_PAGE + 1) {
             items.push({ label: this.$i18n.translate('m-pagination:ellipsis'), clickable: false, ellipsis: true });
         }
 
         for (let i: number = minDelta; i <= maxDelta; i++) {
-            items.push({ label: i.toString(), clickable: i === this.value ? false : true });
+            items.push({ label: i.toString(), clickable: this.isPageActive(i) ? false : true });
         }
 
         if (maxDelta !== this.nbOfPages - 1) {
             items.push({ label: this.$i18n.translate('m-pagination:ellipsis'), clickable: false, ellipsis: true });
         }
 
-        items.push({ label: this.nbOfPages.toString(), clickable: this.nbOfPages === this.value ? false : true });
+        items.push({ label: this.nbOfPages.toString(), clickable: this.isPageActive(this.nbOfPages) ? false : true });
 
         return items;
     }
@@ -90,7 +90,11 @@ export class MPagination extends ModulVue {
     }
 
     public get status(): string {
-        return this.$i18n.translate('m-pagination:status', { nbVisible: this.value, nbTotal: this.nbOfPages }, undefined, undefined, undefined, FormatMode.Sprintf);
+        return this.$i18n.translate('m-pagination:status', { nbVisible: this.value, nbTotal: this.nbOfPages, nbResultats: this.nbOfItems }, this.nbOfItems, undefined, undefined, FormatMode.Sprintf);
+    }
+
+    public isPageActive(page: number): boolean {
+        return page === this.value;
     }
 
     @Emit('change')

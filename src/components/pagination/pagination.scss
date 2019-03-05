@@ -3,6 +3,10 @@
 .m-pagination {
     text-align: center;
 
+    &__status {
+        color: $m-color--grey;
+    }
+
     &__nav {
         display: flex;
         justify-content: center;
@@ -13,7 +17,16 @@
         margin: 0;
     }
 
+    &__indicator {
+        width: 100%;
+        height: 6px;
+        margin-top: 8px;
+        background: $m-color--grey-lighter;
+    }
+
     &__item {
+        position: relative;
+
         .m-pagination__item--link,
         .m-pagination__item--text {
             display: flex;
@@ -21,6 +34,19 @@
             height: $m-touch-size;
             align-items: center;
             justify-content: center;
+        }
+
+        &.m--is-active {
+            &::before {
+                content: '';
+                position: absolute;
+                top: -6px;
+                left: 0;
+                right: 0;
+                height: 6px;
+                width: 100%;
+                background: $m-color--grey;
+            }
         }
     }
 
@@ -32,5 +58,13 @@
 
     &.m--is-loading {
         color: $m-color--disabled;
+
+        .m-pagination__item {
+            &.m--is-active {
+                &::before {
+                    background: $m-color--grey-light;
+                }
+            }
+        }
     }
 }
