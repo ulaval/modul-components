@@ -2,36 +2,67 @@
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 
+const mapSection: Map<string, boolean> = new Map<string, boolean>();
+const mapElement: Map<string, HTMLElement> = new Map<string, HTMLElement>();
 
-const MScrollSpy: DirectiveOptions = {
-    inserted(
-        element: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode,
-        oldVnode: VNode
-    ): void {
-        console.log('DEDANS2');
-    },
-    update(
-        element: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode,
-        oldVnode: VNode
-    ): void {
-        console.log('DEDANS2');
-    },
-    unbind(
-        element: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode,
-        oldVnode: VNode
-    ): void {
+export enum MScrollSpyClassNames {
+    Current = 'm--is-current'
+}
+
+class ScrollSpy {
+
+    currentId: string = '';
+
+    constructor(private element: HTMLElement, private id: string) { }
+
+    public createMapToObserve(): void {
+        mapElement.set(this.id, this.element);
+        const section: HTMLElement | null = document.getElementById(this.id);
+        const observer: IntersectionObserver = new IntersectionObserver(this.handleIntersection);
+        if (section) {
+            observer.observe(section);
+            mapSection.set(section.id, false);
+        }
+    }
+
+    private handleIntersection(entries: IntersectionObserverEntry[]): void {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                mapSection.set(entry.target.id, entry.isIntersecting);
+            } else {
+                mapSection.set(entry.target.id, entry.isIntersecting);
+            }
+        });
+
+        ScrollSpy.searchFirstCurrent();
+    }
+
+    private static searchFirstCurrent(): void {
+        let elementFound: Boolean = false;
+        mapSection.forEach((value: boolean, key: string) => {
+            const myCurentHTMLElement: HTMLElement | undefined = mapElement.get(key);
+            if (myCurentHTMLElement) {
+                myCurentHTMLElement.classList.remove(MScrollSpyClassNames.Current);
+
+                if (value && !elementFound) {
+                    myCurentHTMLElement.classList.add(MScrollSpyClassNames.Current);
+                    elementFound = true;
+                }
+            }
+        });
+    }
+}
+
+const Directive: DirectiveOptions = {
+    inserted(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
+        const monIdElementCourant: ScrollSpy = new ScrollSpy(element, binding.value);
+        monIdElementCourant.createMapToObserve();
     }
 };
 
 const ScrollSpyPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.directive(SCROLL_SPY_NAME, MScrollSpy);
+        v.directive(SCROLL_SPY_NAME, Directive);
     }
 };
 
