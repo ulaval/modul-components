@@ -1,4 +1,5 @@
 /* tslint:disable:no-console */
+import 'intersection-observer';
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 
