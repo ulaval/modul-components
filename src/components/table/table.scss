@@ -1,5 +1,7 @@
 @import 'commons';
 
+$m-table--icon-vertical-offset: -5px !default;
+
 .m-table {
     thead {
         text-align: left;
@@ -19,7 +21,7 @@
 
                 .m-table__sortable-icon {
                     position: relative;
-                    top: -5px;
+                    top: $m-table--icon-vertical-offset;
                     opacity: 0;
                 }
 
