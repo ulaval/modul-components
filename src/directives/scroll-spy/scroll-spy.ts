@@ -3,11 +3,7 @@ import 'intersection-observer';
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 
-const sectionsMap: Map<string, boolean> = new Map<string, boolean>();
-const elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
-
-let observer: IntersectionObserver;
-let monIdElementCourant: ScrollSpy;
+let myScrollSpy: ScrollSpy;
 
 export enum MScrollSpyClassNames {
     Current = 'm--is-current'
@@ -15,38 +11,40 @@ export enum MScrollSpyClassNames {
 
 class ScrollSpy {
 
-    currentId: string = '';
+    private sectionsMap: Map<string, boolean> = new Map<string, boolean>();
+    private elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
+    private observer: IntersectionObserver;
 
     constructor(private element: HTMLElement, private id: string) { }
 
     public createMapObserver(): void {
-        elementsMap.set(this.id, this.element);
+        this.elementsMap.set(this.id, this.element);
         const section: HTMLElement | null = document.getElementById(this.id);
-        observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+        this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    sectionsMap.set(entry.target.id, entry.isIntersecting);
+                    this.sectionsMap.set(entry.target.id, entry.isIntersecting);
                 } else {
-                    sectionsMap.set(entry.target.id, entry.isIntersecting);
+                    this.sectionsMap.set(entry.target.id, entry.isIntersecting);
                 }
             });
 
             this.searchFirstCurrent();
         });
         if (section) {
-            observer.observe(section);
-            sectionsMap.set(section.id, false);
+            this.observer.observe(section);
+            this.sectionsMap.set(section.id, false);
         }
     }
 
-    public KillMapObserver(): void {
-        observer.disconnect();
+    public killMapObserver(): void {
+        this.observer.disconnect();
     }
 
     private searchFirstCurrent(): void {
         let elementFound: Boolean = false;
-        sectionsMap.forEach((value: boolean, key: string) => {
-            const myCurentHTMLElement: HTMLElement | undefined = elementsMap.get(key);
+        this.sectionsMap.forEach((value: boolean, key: string) => {
+            const myCurentHTMLElement: HTMLElement | undefined = this.elementsMap.get(key);
             if (myCurentHTMLElement) {
                 myCurentHTMLElement.classList.remove(MScrollSpyClassNames.Current);
 
@@ -61,15 +59,15 @@ class ScrollSpy {
 
 const observeDirective: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
-        monIdElementCourant = new ScrollSpy(element, binding.value);
-        monIdElementCourant.createMapObserver();
+        myScrollSpy = new ScrollSpy(element, binding.value);
+        myScrollSpy.createMapObserver();
     },
     update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        monIdElementCourant = new ScrollSpy(element, binding.value);
-        monIdElementCourant.createMapObserver();
+        myScrollSpy = new ScrollSpy(element, binding.value);
+        myScrollSpy.createMapObserver();
     },
     unbind(_element: HTMLElement): void {
-        monIdElementCourant.KillMapObserver();
+        myScrollSpy.killMapObserver();
     }
 };
 
