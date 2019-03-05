@@ -8,6 +8,7 @@
     }
 
     &__left-sidebar {
+        position: fixed;
         position: sticky;
         top: 60px;
         min-width: 300px;
@@ -42,7 +43,9 @@
         }
     }
 
-    section {
-        margin: $m-spacing--xl 0 0;
+    &__right-area {
+        section {
+            margin: $m-spacing--xl 0 0;
+        }
     }
 }
