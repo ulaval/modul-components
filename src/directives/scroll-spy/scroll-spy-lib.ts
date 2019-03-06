@@ -13,7 +13,6 @@ export class ElementMap {
 
 class ScrollSpy {
     private elementsMap: Map<string, ElementMap> = new Map<string, ElementMap>();
-
     private observer: IntersectionObserver;
 
     public addElementToObserve(element: HTMLElement, id: string): void {
@@ -28,8 +27,9 @@ class ScrollSpy {
                 monElement.isShowing = entry.isIntersecting;
             });
 
-            this.searchFirstCurrent();
+            this.assignClassToFirstCurrent();
         });
+
         if (section) {
             this.observer.observe(section);
             monElement.observeElement = section;
@@ -44,7 +44,7 @@ class ScrollSpy {
         }
     }
 
-    private searchFirstCurrent(): void {
+    private assignClassToFirstCurrent(): void {
         let elementFound: Boolean = false;
         this.elementsMap.forEach((myElement: ElementMap, _key: string) => {
             myElement.menuElement.classList.remove(MScrollSpyClassNames.Current);
