@@ -1,69 +1,18 @@
 /* tslint:disable:no-console */
-import 'intersection-observer';
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
-
-const sectionsMap: Map<string, boolean> = new Map<string, boolean>();
-const elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
-
-let observer: IntersectionObserver;
-let myScrollSpy: ScrollSpy;
-
-export enum MScrollSpyClassNames {
-    Current = 'm--is-current'
-}
-
-class ScrollSpy {
-
-    constructor(private element: HTMLElement, private id: string) { }
-
-    public createMapObserver(): void {
-        elementsMap.set(this.id, this.element);
-        const section: HTMLElement | null = document.getElementById(this.id);
-        observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-            entries.forEach(entry => {
-                sectionsMap.set(entry.target.id, entry.isIntersecting);
-            });
-
-            this.searchFirstCurrent();
-        });
-        if (section) {
-            observer.observe(section);
-            sectionsMap.set(section.id, false);
-        }
-    }
-
-    public killMapObserver(): void {
-        observer.disconnect();
-    }
-
-    private searchFirstCurrent(): void {
-        let elementFound: Boolean = false;
-        sectionsMap.forEach((value: boolean, key: string) => {
-            const myCurentHTMLElement: HTMLElement | undefined = elementsMap.get(key);
-            if (myCurentHTMLElement) {
-                myCurentHTMLElement.classList.remove(MScrollSpyClassNames.Current);
-
-                if (value && !elementFound) {
-                    myCurentHTMLElement.classList.add(MScrollSpyClassNames.Current);
-                    elementFound = true;
-                }
-            }
-        });
-    }
-}
+import ScrollSpyUtil from './scroll-spy-lib';
 
 const observeDirective: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
-        myScrollSpy = new ScrollSpy(element, binding.value);
-        myScrollSpy.createMapObserver();
+        ScrollSpyUtil.addElementToObserve(element, binding.value);
     },
-    update(element: HTMLElement, binding: VNodeDirective, node: VNode): void {
-        myScrollSpy = new ScrollSpy(element, binding.value);
-        myScrollSpy.createMapObserver();
+    update(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
+        ScrollSpyUtil.removeElementObserved(binding.value);
+        ScrollSpyUtil.addElementToObserve(element, binding.value);
     },
-    unbind(_element: HTMLElement): void {
-        myScrollSpy.killMapObserver();
+    unbind(_element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
+        ScrollSpyUtil.removeElementObserved(binding.value);
     }
 };
 

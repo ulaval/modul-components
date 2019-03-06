@@ -15,6 +15,10 @@ export class MScrollSpySandbox extends ModulVue {
     idSection2: string = 'section2';
     idSection3: string = 'section3';
     idSection4: string = 'section4';
+    idSection6: string = 'section6';
+    idSection7: string = 'section7';
+    idSection8: string = 'section8';
+    idSection9: string = 'section9';
 
 }
 
