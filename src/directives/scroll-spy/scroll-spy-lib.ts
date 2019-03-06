@@ -12,15 +12,13 @@ export class ElementMap {
 }
 
 class ScrollSpy {
-    private sectionsMap: Map<string, boolean> = new Map<string, boolean>();
-    private elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
-    private mapElements: Map<string, ElementMap> = new Map<string, ElementMap>();
+    private elementsMap: Map<string, ElementMap> = new Map<string, ElementMap>();
 
     private observer: IntersectionObserver;
 
     public addElementToObserve(element: HTMLElement, id: string): void {
         let monElement: ElementMap = new ElementMap();
-        this.mapElements.set(id, monElement);
+        this.elementsMap.set(id, monElement);
 
         monElement.menuElement = element;
 
@@ -36,12 +34,12 @@ class ScrollSpy {
             this.observer.observe(section);
             monElement.isShowing = false;
             monElement.observeElement = section;
-            this.mapElements.set(id, monElement);
+            this.elementsMap.set(id, monElement);
         }
     }
 
     public removeElementObserved(id: string): void {
-        const myElementToRemove: ElementMap | undefined = this.mapElements.get(id);
+        const myElementToRemove: ElementMap | undefined = this.elementsMap.get(id);
         if (myElementToRemove) {
             this.observer.unobserve(myElementToRemove.observeElement);
         }
@@ -49,15 +47,12 @@ class ScrollSpy {
 
     private searchFirstCurrent(): void {
         let elementFound: Boolean = false;
-        this.mapElements.forEach((value: ElementMap, key: string) => {
-            const myCurentHTMLElement: ElementMap | undefined = this.mapElements.get(key);
-            if (myCurentHTMLElement) {
-                myCurentHTMLElement.menuElement.classList.remove(MScrollSpyClassNames.Current);
+        this.elementsMap.forEach((myElement: ElementMap, key: string) => {
+            myElement.menuElement.classList.remove(MScrollSpyClassNames.Current);
 
-                if (value.isShowing && !elementFound) {
-                    myCurentHTMLElement.menuElement.classList.add(MScrollSpyClassNames.Current);
-                    elementFound = true;
-                }
+            if (myElement.isShowing && !elementFound) {
+                myElement.menuElement.classList.add(MScrollSpyClassNames.Current);
+                elementFound = true;
             }
         });
     }
