@@ -43,20 +43,20 @@ export class MInputMaskSandbox extends Vue {
     public moneyOptions: CleaveOptions = {
         numeral: true,
         prefix: '$',
-        noImmediatePrefix: true,
         rawValueTrimPrefix: true
     };
 
     public telephoneOptions: CleaveOptions = {
         numericOnly: true,
-        delimiters: [' ', '-', '-'],
+        delimiters: [' ', ' ', '-'],
         prefix: '+1',
         blocks: [2, 3, 3, 4]
     };
 
     public dateOptions: CleaveOptions = {
         date: true,
-        datePattern: ['Y', 'm', 'd']
+        datePattern: ['Y', 'm', 'd'],
+        delimiter: '-'
     };
 }
 
