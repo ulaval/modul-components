@@ -388,9 +388,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private async selectText(): Promise<void> {
         await this.$nextTick();
         this.$refs.input.focus();
-        if (this.filterable) {
-            this.$refs.input.setSelectionRange(0, this.selectedText.length);
-        }
     }
 
     private focusSelected(): void {
