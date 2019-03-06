@@ -32,7 +32,6 @@ class ScrollSpy {
         });
         if (section) {
             this.observer.observe(section);
-            monElement.isShowing = false;
             monElement.observeElement = section;
             this.elementsMap.set(id, monElement);
         }
