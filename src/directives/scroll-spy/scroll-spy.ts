@@ -22,11 +22,7 @@ class ScrollSpy {
         const section: HTMLElement | null = document.getElementById(this.id);
         observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    sectionsMap.set(entry.target.id, entry.isIntersecting);
-                } else {
-                    sectionsMap.set(entry.target.id, entry.isIntersecting);
-                }
+                sectionsMap.set(entry.target.id, entry.isIntersecting);
             });
 
             this.searchFirstCurrent();
