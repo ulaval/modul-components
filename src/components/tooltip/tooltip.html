@@ -44,9 +44,6 @@
              @keyup.enter="close"
              @click="close"
              v-if="propCloseButton">
-            <m-icon name="m-svg__close-clear"
-                    size="12px"
-                    :svg-tile="getCloseTitle()"></m-icon>
         </div>
         <div class="m-tooltip__body"
              :class="{ 'm--is-link': propMode === 'link'
