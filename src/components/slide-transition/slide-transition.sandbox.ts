@@ -12,7 +12,7 @@ export class MSlideTransitionSandbox extends Vue {
 
     @Watch('model')
     modelChange(after: number, before: number): void {
-        this.direction = (after > before) ? MSlideTransitionDirection.LeftToRight : MSlideTransitionDirection.RightToLeft;
+        this.direction = (after < before) ? MSlideTransitionDirection.LeftToRight : MSlideTransitionDirection.RightToLeft;
     }
 }
 
