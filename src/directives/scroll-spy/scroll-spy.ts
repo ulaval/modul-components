@@ -3,6 +3,10 @@ import 'intersection-observer';
 import { DirectiveOptions, PluginObject, VNode, VNodeDirective } from 'vue';
 import { SCROLL_SPY_NAME } from '../directive-names';
 
+const sectionsMap: Map<string, boolean> = new Map<string, boolean>();
+const elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
+
+let observer: IntersectionObserver;
 let myScrollSpy: ScrollSpy;
 
 export enum MScrollSpyClassNames {
@@ -11,40 +15,36 @@ export enum MScrollSpyClassNames {
 
 class ScrollSpy {
 
-    private sectionsMap: Map<string, boolean> = new Map<string, boolean>();
-    private elementsMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
-    private observer: IntersectionObserver;
-
     constructor(private element: HTMLElement, private id: string) { }
 
     public createMapObserver(): void {
-        this.elementsMap.set(this.id, this.element);
+        elementsMap.set(this.id, this.element);
         const section: HTMLElement | null = document.getElementById(this.id);
-        this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+        observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    this.sectionsMap.set(entry.target.id, entry.isIntersecting);
+                    sectionsMap.set(entry.target.id, entry.isIntersecting);
                 } else {
-                    this.sectionsMap.set(entry.target.id, entry.isIntersecting);
+                    sectionsMap.set(entry.target.id, entry.isIntersecting);
                 }
             });
 
             this.searchFirstCurrent();
         });
         if (section) {
-            this.observer.observe(section);
-            this.sectionsMap.set(section.id, false);
+            observer.observe(section);
+            sectionsMap.set(section.id, false);
         }
     }
 
     public killMapObserver(): void {
-        this.observer.disconnect();
+        observer.disconnect();
     }
 
     private searchFirstCurrent(): void {
         let elementFound: Boolean = false;
-        this.sectionsMap.forEach((value: boolean, key: string) => {
-            const myCurentHTMLElement: HTMLElement | undefined = this.elementsMap.get(key);
+        sectionsMap.forEach((value: boolean, key: string) => {
+            const myCurentHTMLElement: HTMLElement | undefined = elementsMap.get(key);
             if (myCurentHTMLElement) {
                 myCurentHTMLElement.classList.remove(MScrollSpyClassNames.Current);
 
