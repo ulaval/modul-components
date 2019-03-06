@@ -47,7 +47,7 @@ class ScrollSpy {
 
     private searchFirstCurrent(): void {
         let elementFound: Boolean = false;
-        this.elementsMap.forEach((myElement: ElementMap, key: string) => {
+        this.elementsMap.forEach((myElement: ElementMap, _key: string) => {
             myElement.menuElement.classList.remove(MScrollSpyClassNames.Current);
 
             if (myElement.isShowing && !elementFound) {
