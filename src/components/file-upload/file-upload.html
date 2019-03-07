@@ -71,6 +71,9 @@
         </div>
         <div class="m-file-upload__no-drop-zone"
              v-else>
+            <h3 class="m-u--no-margin-top">
+                <m-i18n k="m-file-upload:titleMobile"></m-i18n>
+            </h3>
             <m-file-select class="m-file-upload__no-drop-zone__instructions__button"
                            skin="primary"
                            :multiple="maxFiles > 1 ? true : false"
