@@ -68,6 +68,7 @@
     },
     "dependencies": {
         "axios": "^0.17.1",
+        "cleave.js": "^1.4.7",
         "css-element-queries": "^0.4.0",
         "enquire.js": "^2.1.6",
         "es6-promise": "^4.1.1",
@@ -87,6 +88,7 @@
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
+        "@types/cleave.js": "^1.4.0",
         "@types/filesize": "^3.6.0",
         "@types/jest": "^22.2.0",
         "@types/node": "^10.12.20",
