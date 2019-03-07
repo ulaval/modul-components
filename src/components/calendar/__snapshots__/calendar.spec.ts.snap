@@ -16,13 +16,13 @@ exports[`Calendar in date range mode should render date range view 1`] = `
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>26</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>27</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>28</span></button></div>
-        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-today"><span>1</span></button></div>
+        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>1</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>2</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>3</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>4</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>5</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>6</span></button></div>
-        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>7</span></button></div>
+        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-today"><span>7</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>8</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>9</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>10</span></button></div>
@@ -75,13 +75,13 @@ exports[`Calendar in single date mode should render single dates view 1`] = `
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>26</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>27</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>28</span></button></div>
-        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-today"><span>1</span></button></div>
+        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>1</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>2</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>3</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>4</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>5</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>6</span></button></div>
-        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>7</span></button></div>
+        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-today"><span>7</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>8</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>9</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>10</span></button></div>
@@ -134,13 +134,13 @@ exports[`Calendar with default values should render default view 1`] = `
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>26</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>27</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-other-month"><span>28</span></button></div>
-        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-today"><span>1</span></button></div>
+        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>1</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>2</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>3</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>4</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>5</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>6</span></button></div>
-        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>7</span></button></div>
+        <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content m--is-today"><span>7</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>8</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>9</span></button></div>
         <div class="m-base-calendar__day"><button type="button" class="m-base-calendar__day-content"><span>10</span></button></div>
