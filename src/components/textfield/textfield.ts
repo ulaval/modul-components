@@ -23,14 +23,13 @@ export enum MTextfieldType {
     Url = 'url',
     Telephone = 'tel',
     Search = 'search',
-    Number = 'number',
-    Integer = 'integer'
+    Number = 'number'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
-const ALLOWED_KEYCODE: number[] = [8, 9, 33, 34, 35, 36, 37, 39, 46];
+
 
 @WithRender
 @Component({
@@ -52,8 +51,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Text ||
             value === MTextfieldType.Url ||
             value === MTextfieldType.Search ||
-            value === MTextfieldType.Number ||
-            value === MTextfieldType.Integer
+            value === MTextfieldType.Number
     })
     public type: MTextfieldType;
     @Prop({ default: true })
@@ -70,10 +68,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public characterCountThreshold: number;
 
     readonly internalValue: string;
-
-    public $refs: {
-        input: HTMLInputElement
-    };
 
     private passwordAsText: boolean = false;
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
@@ -106,45 +100,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
-    private onPasteTextfield(event: Event): void {
-        if (this.type !== MTextfieldType.Integer) {
-            this.$emit('paste', event);
-        } else {
-            let pasteContent: string = event['clipboardData'].getData('text');
-            if (/^\d+$/.test(pasteContent)) {
-                if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + this.as<InputManagement>().internalValue.length <= this.maxLength) {
-                    this.$emit('paste', event);
-                } else {
-                    event.preventDefault();
-                }
-            } else {
-                event.preventDefault();
-            }
-        }
-    }
-
-    private onKeydownTextfield(event: KeyboardEvent): void {
-        if (this.type !== MTextfieldType.Integer) {
-            this.$emit('keydown', event);
-        } else {
-            // tslint:disable-next-line: deprecation
-            if (isFinite(this.maxLengthNumber) && this.as<InputManagement>().internalValue.length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
-                event.preventDefault();
-            } else {
-                this.$emit('keydown', event);
-            }
-        }
-    }
-
-    private isNumberKeycode(keycode): boolean {
-        return keycode > 31 && (keycode < 48 || keycode > 57) && (keycode < 96 || keycode > 105);
-    }
-
-    private onDropTextfield(event: DragEvent): void {
-        if (this.type === MTextfieldType.Integer) {
-            event.preventDefault();
-        }
-    }
 
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;
@@ -166,8 +121,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     public get inputType(): MTextfieldType {
         switch (this.type) {
-            case MTextfieldType.Integer:
-                return MTextfieldType.Number;
             case MTextfieldType.Password:
                 return this.passwordAsText ? MTextfieldType.Text : MTextfieldType.Password;
             default:
@@ -223,13 +176,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return !this.as<InputState>().hasErrorMessage;
     }
 
-    private get inputPattern(): string | undefined {
-        return this.type === MTextfieldType.Integer ? '[0-9]*' : undefined;
-    }
 
-    private get inputMode(): string | undefined {
-        return this.type === MTextfieldType.Integer ? 'numeric' : undefined;
-    }
 
     private resetModel(): void {
         this.$emit('input', '');

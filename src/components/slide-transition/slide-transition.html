@@ -1,0 +1,10 @@
+<div class="m-slide-transition"
+     :class="{'m--is-left-to-right-transition': isLeftToRight}">
+    <transition :name="transitionName"
+                @enter="transitionEnter"
+                @after-enter="transitionAfterEnter"
+                @before-leave="transitionBeforeLeave"
+                @after-leave="transitionAfterLeave">
+        <slot></slot>
+    </transition>
+</div>

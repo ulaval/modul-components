@@ -8,6 +8,7 @@
         ],
         "module": "es2015",
         "moduleResolution": "node",
+        "sourceMap": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
