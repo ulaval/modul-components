@@ -1,17 +1,15 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import uuid from '../../../utils/uuid/uuid';
-import { DayState, MonthState, YearState } from '../calendar-state/state/calendar-state';
-import { DatePrecision } from './../../../utils/modul-date/modul-date';
-import { MAbstractCalendarRenderer } from './abstract-calendar-renderer';
-import WithRender from './simple-calendar.html?style=./simple-calendar.scss';
+import uuid from '../../../../utils/uuid/uuid';
+import { RangeDate } from '../../calendar-state/state/abstract-calendar-state';
+import { CalendarType, DayState, MonthState, YearState } from '../../calendar-state/state/calendar-state';
+import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
+import { MAbstractCalendarRenderer } from './../abstract-calendar-renderer';
+import WithRender from './base-calendar.html?style=./base-calendar.scss';
 
 const TRANSLATION_ROOT: string = 'm-calendar' + ':';
 const TRANSLATION_MONTHS: string = TRANSLATION_ROOT + 'month';
 const TRANSLATION_WEEKDAYS: string = TRANSLATION_ROOT + 'weekday';
 const TRANSLATION_SUFFIXE: string = '.short';
-
-const NB_YEARS_PER_ROW: number = 4;
-const NB_MONTHS_PER_ROW: number = 3;
 
 enum MonthsNames {
     JANUARY = 'january',
@@ -46,7 +44,7 @@ export enum PickerMode {
 
 @WithRender
 @Component
-export default class MSimpleCalendar extends MAbstractCalendarRenderer {
+export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     @Prop({ default: PickerMode.DAY })
     initialPickerMode: PickerMode;
@@ -97,7 +95,7 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
     private currentPickerMode: PickerMode = this.initialPickerMode;
 
     onYearClick(): void {
-        this.currentPickerMode = PickerMode.YEAR;
+        this.currentPickerMode = this.isPickerModeDay ? this.currentPickerMode = PickerMode.YEAR : this.currentPickerMode = PickerMode.DAY;
     }
 
     onYearSelect(year: YearState): void {
@@ -145,6 +143,27 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
         super.onDayMouseLeave(day);
     }
 
+    isDateInFuture(day: DayState): boolean {
+        return !!this.calendar.type && this.calendar.type === CalendarType.DATE_RANGE
+            && !!this.calendar.value && !!(this.calendar.value as RangeDate).begin
+            && day.date.isAfter(new ModulDate((this.calendar.value as RangeDate).begin));
+    }
+
+    isInsideRange(day: DayState): boolean {
+        return !!this.calendar.type && this.calendar.type === CalendarType.DATE_RANGE
+            && !!this.calendar.value && !!(this.calendar.value as RangeDate).begin
+            && !!this.calendar.value && !!(this.calendar.value as RangeDate).end
+            && day.isHighlighted;
+    }
+
+    isSelectionStart(day: DayState): boolean {
+        return day.isSelectionStart && !this.hideDay(day);
+    }
+
+    isSelectionEnd(day: DayState): boolean {
+        return day.isSelectionEnd && !this.hideDay(day);
+    }
+
     hideDay(day: DayState): boolean {
         return (day.isInNextMonth || day.isInPreviousMonth) && !this.showMonthBeforeAfter;
     }
@@ -185,12 +204,12 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
         return this.daysNames;
     }
 
-    get years(): number[] {
-        return this.prepareDataForTableLayout(this.calendar.years, NB_YEARS_PER_ROW);
+    get years(): {} {
+        return this.calendar.years;
     }
 
-    get months(): number[] {
-        return this.prepareDataForTableLayout(this.calendar.months, NB_MONTHS_PER_ROW);
+    get months(): {} {
+        return this.calendar.months;
     }
 
     get isPickerModeYear(): boolean {
@@ -221,23 +240,8 @@ export default class MSimpleCalendar extends MAbstractCalendarRenderer {
         return this.calendar.dates.current.isSameOrAfter(this.calendar.dates.max, DatePrecision.MONTH);
     }
 
-    get daysOfMonth(): DayState[] {
-        return this.prepareDataForTableLayout(this.calendar.days, 7);
-    }
-
-    private prepareDataForTableLayout(data: any[], nbItemPerRow: number): any[] {
-        let nbRow: number = Math.ceil(data.length / nbItemPerRow);
-        let dataTable: any[] = [];
-        let count: number = 0;
-        for (let row: number = 0; row < nbRow; row++) {
-            let newRow: any[] = [];
-            for (let index: number = 0; index < nbItemPerRow; index++) {
-                newRow.push(data[count]);
-                count++;
-            }
-            dataTable.push(newRow);
-        }
-        return dataTable;
+    get days(): DayState[] {
+        return this.calendar.days;
     }
 
     private padString(value: any, length: number = 2): string {

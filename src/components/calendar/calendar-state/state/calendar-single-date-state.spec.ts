@@ -16,11 +16,14 @@ const MAX_DATE: string = '2020-01-15';
 const NEW_DATE: string = '2019-06-03';
 
 const NEW_DAY_STATE: DayState = {
+    date: new ModulDate('2019-06-03'),
     day: 3, month: 5, year: 2019,
     isDisabled: false, isHighlighted: false,
     isInNextMonth: false, isInPreviousMonth: false,
     isSelected: false, isToday: false,
-    hasFocus: false
+    hasFocus: false,
+    isSelectionStart: false,
+    isSelectionEnd: false
 };
 
 
