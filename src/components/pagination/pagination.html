@@ -16,9 +16,10 @@
             <m-i18n k="m-pagination:previous"></m-i18n>
         </m-icon-button>
         <ul class="m-pagination__pages">
-            <li v-for="item of paginationItems"
+            <li v-for="(item, index) of paginationItems"
                 class="m-pagination__item"
-                :class="{'m-pagination__item--ellipsis': item.ellipsis, 'm--is-active': isPageActive(parseInt(item.label))}">
+                :class="{'m-pagination__item--ellipsis': item.ellipsis, 'm--is-active': isPageActive(parseInt(item.label))}"
+                :key="index">
                 <m-link v-if="item.clickable"
                         class="m-pagination__item--link"
                         mode="button"
