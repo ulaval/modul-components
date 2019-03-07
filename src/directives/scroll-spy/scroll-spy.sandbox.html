@@ -5,20 +5,24 @@
             <h2>Scroll Spy observer</h2>
             <h3>Menu 1</h3>
             <nav>
-                <ul>
-                    <li><span v-m-scroll-spy="idSection1">Section 1</span></li>
-                    <li><span v-m-scroll-spy="idSection2">Section 2</span></li>
-                    <li><span v-m-scroll-spy="idSection3">Section 3</span></li>
-                    <li><span v-m-scroll-spy="idSection4">Section 4</span></li>
+                <ul v-m-scroll-spy="true"
+                    @spy:scrolling="scrolling">
+                    <li v-for="(id, index) in menu1"
+                        :data-scroll-spy-id="id">
+                        <a href="#"
+                           @click.prevent="naviguer(id, $event)">{{ id }}</a>
+                    </li>
                 </ul>
             </nav>
             <h3>Menu 2</h3>
             <nav>
-                <ul>
-                    <li><span v-m-scroll-spy="idSection6">Section 6</span></li>
-                    <li><span v-m-scroll-spy="idSection7">Section 7</span></li>
-                    <li><span v-m-scroll-spy="idSection8">Section 8</span></li>
-                    <li><span v-m-scroll-spy="idSection9">Section 9</span></li>
+                <ul v-m-scroll-spy="true"
+                    @spy:scrolling="scrolling">
+                    <li v-for="(id, index) in menu2"
+                        :data-scroll-spy-id="id">
+                        <a href="#"
+                           @click.prevent="naviguer(id, $event)">{{ id }}</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -744,7 +748,7 @@
                     euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie
                     dapibus enim eget, imperdiet egestas ex.
                 </p>
-                <p>
+                <!-- <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ultrices egestas. Class aptent
                     taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec non magna ac diam
                     mattis feugiat sit amet at tellus. Curabitur ullamcorper lorem ac mauris pretium, vel suscipit ex
@@ -897,7 +901,7 @@
                     magna. Praesent dictum purus quis metus vehicula placerat. Praesent eu pellentesque lorem. Integer et
                     euismod nulla. Integer ex erat, tincidunt a sem a, blandit blandit leo. Curabitur nisi libero, molestie
                     dapibus enim eget, imperdiet egestas ex.
-                </p>
+                </p> -->
             </section>
 
         </div>

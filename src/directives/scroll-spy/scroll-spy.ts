@@ -5,14 +5,16 @@ import ScrollSpyUtil from './scroll-spy-lib';
 
 const observeDirective: DirectiveOptions = {
     inserted(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
-        ScrollSpyUtil.addElementToObserve(element, binding.value);
+        if (binding.value) {
+            ScrollSpyUtil.addElementToObserve(element);
+        }
     },
-    update(element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
-        ScrollSpyUtil.removeElementObserved(binding.value);
-        ScrollSpyUtil.addElementToObserve(element, binding.value);
+    update(element: HTMLElement, _binding: VNodeDirective, _node: VNode): void {
+        ScrollSpyUtil.removeElementObserved(element);
+        ScrollSpyUtil.addElementToObserve(element);
     },
-    unbind(_element: HTMLElement, binding: VNodeDirective, _node: VNode): void {
-        ScrollSpyUtil.removeElementObserved(binding.value);
+    unbind(element: HTMLElement, _binding: VNodeDirective, _node: VNode): void {
+        ScrollSpyUtil.removeElementObserved(element);
     }
 };
 

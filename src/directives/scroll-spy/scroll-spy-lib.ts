@@ -1,59 +1,91 @@
 /* tslint:disable:no-console */
 import 'intersection-observer';
-
-export enum MScrollSpyClassNames {
-    Current = 'm--is-current'
-}
+import { dispatchEvent } from '../../utils/vue/events';
 
 export class ElementMap {
+    isCurrent: boolean;
+    id: string;
     isShowing: boolean;
     menuElement: HTMLElement;
     observeElement: HTMLElement;
+}
+
+export enum MScrollSpyEventNames {
+    OnScrolling = 'spy:scrolling'
+}
+
+export interface HtmlElement extends Map<string, ElementMap> {
+    htmlElement: HtmlElement;
 }
 
 class ScrollSpy {
     private elementsMap: Map<string, ElementMap> = new Map<string, ElementMap>();
     private observer: IntersectionObserver;
 
-    public addElementToObserve(element: HTMLElement, id: string): void {
-        let monElement: ElementMap = new ElementMap();
-        this.elementsMap.set(id, monElement);
+    public addElementToObserve(elementParent: HTMLElement): void {
 
-        monElement.menuElement = element;
+        elementParent.childNodes.forEach(nodeElement => {
+            const element: HTMLElement = nodeElement as HTMLElement;
+            let monElement: ElementMap = new ElementMap();
+            const myCurrentId: string | null = element.getAttribute('data-scroll-spy-id');
+            if (myCurrentId) {
+                this.elementsMap.set(myCurrentId, monElement);
+                monElement.menuElement = element;
+                monElement.id = myCurrentId;
 
-        const section: HTMLElement | null = document.getElementById(id);
-        this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-            entries.forEach(entry => {
-                monElement.isShowing = entry.isIntersecting;
-            });
+                const section: HTMLElement | null = document.getElementById(myCurrentId);
+                this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+                    entries.forEach(entry => {
+                        monElement.isShowing = entry.isIntersecting;
+                    });
+                    this.assignClassToFirstCurrent();
+                });
 
-            this.assignClassToFirstCurrent();
+                if (section) {
+                    this.observer.observe(section);
+                    monElement.observeElement = section;
+                    this.elementsMap.set(myCurrentId, monElement);
+                }
+
+            }
         });
-
-        if (section) {
-            this.observer.observe(section);
-            monElement.observeElement = section;
-            this.elementsMap.set(id, monElement);
-        }
     }
 
-    public removeElementObserved(id: string): void {
-        const myElementToRemove: ElementMap | undefined = this.elementsMap.get(id);
-        if (myElementToRemove) {
-            this.observer.unobserve(myElementToRemove.observeElement);
-        }
+    public removeElementObserved(elementParent: HTMLElement): void {
+        elementParent.childNodes.forEach(nodeElement => {
+            const element: HTMLElement = nodeElement as HTMLElement;
+            const myCurrentId: string | null = element.getAttribute('data-scroll-spy-id');
+            if (myCurrentId) {
+                const myElementToRemove: ElementMap | undefined = this.elementsMap.get(myCurrentId);
+                if (myElementToRemove) {
+                    this.observer.unobserve(myElementToRemove.observeElement);
+                }
+            }
+
+        });
     }
 
     private assignClassToFirstCurrent(): void {
         let elementFound: Boolean = false;
-        this.elementsMap.forEach((myElement: ElementMap, _key: string) => {
-            myElement.menuElement.classList.remove(MScrollSpyClassNames.Current);
-
+        let currentHtmlElement: HTMLElement | undefined = undefined;
+        this.elementsMap.forEach((myElement: ElementMap, key: string) => {
+            let currentElementMap: ElementMap = myElement;
+            currentHtmlElement = currentElementMap.menuElement;
+            currentElementMap.isCurrent = false;
             if (myElement.isShowing && !elementFound) {
-                myElement.menuElement.classList.add(MScrollSpyClassNames.Current);
                 elementFound = true;
+                currentElementMap.isCurrent = true;
             }
+            this.elementsMap.set(key, currentElementMap);
         });
+
+        if (currentHtmlElement) {
+            const myEmitMap: Map<string, ElementMap> = this.elementsMap;
+            const customEvent: CustomEvent = document.createEvent('CustomEvent');
+            customEvent.initCustomEvent(MScrollSpyEventNames.OnScrolling, true, true, Object.assign('htmlElement', { myEmitMap }));
+            (customEvent as any).htmlElement = myEmitMap;
+            dispatchEvent(currentHtmlElement, MScrollSpyEventNames.OnScrolling, customEvent);
+        }
     }
 
 }

@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: column;
 
-            li span {
+            li {
                 padding: $m-padding;
                 margin-bottom: $m-margin--s;
                 color: #fff;
@@ -38,6 +38,10 @@
 
                 &.m--is-current {
                     background-color: #01070f;
+                }
+
+                a {
+                    color: #fff;
                 }
             }
         }

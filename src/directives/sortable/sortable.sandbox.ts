@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
@@ -28,6 +29,7 @@ export class MSortableSandbox extends ModulVue {
     }
 
     deplacerElementsWithHandle(event: MSortEvent): void {
+        console.log(event);
         this.arraymove(this.elementsWithHandle, event.sortInfo.oldPosition, event.sortInfo.newPosition);
     }
 
