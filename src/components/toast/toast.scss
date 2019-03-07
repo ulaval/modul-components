@@ -96,7 +96,7 @@ $m-toast-max-width: 768px;
         }
 
         &.m--is-bottom {
-            bottom: 5%;
+            bottom: $m-spacing--m;
         }
     }
 
