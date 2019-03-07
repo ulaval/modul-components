@@ -1,6 +1,7 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
+export const AUTOCOMPLETE_NAME: string = 'm-autocomplete';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CALENDAR_NAME: string = 'm-calendar';
@@ -72,6 +73,7 @@ export const SLIDER_NAME: string = 'm-slider';
 export const SPINNER_NAME: string = 'm-spinner';
 export const STATUS_NAME: string = 'm-status';
 export const STEP_NAME: string = 'm-step';
+export const SLIDE_TRANSITION_NAME: string = 'm-slide-transition';
 export const STEPPERS_NAME: string = 'm-steppers';
 export const STEPPERS_ITEM_NAME: string = 'm-steppers-item';
 export const SWITCH_NAME: string = 'm-switch';
@@ -90,3 +92,5 @@ export const TREE_NAME: string = 'm-tree';
 export const TREE_ICON_NAME: string = 'm-tree-icon';
 export const TREE_NAME_NODE: string = 'm-tree-node';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
+export const INTEGERFIELD_NAME: string = 'm-integerfield';
+
