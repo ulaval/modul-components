@@ -92,3 +92,5 @@ export const TREE_NAME: string = 'm-tree';
 export const TREE_ICON_NAME: string = 'm-tree-icon';
 export const TREE_NAME_NODE: string = 'm-tree-node';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
+export const INTEGERFIELD_NAME: string = 'm-integerfield';
+

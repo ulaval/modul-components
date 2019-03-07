@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MTextfield should render correctly 1`] = `
+<div class="m-integerfield" style="width:100%;max-width:288px;">
+  <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
+    <div class="m-input-style__body" style="top:0;">
+      <div class="m-input-style__body__left"><input id="mIntegerfield-uuid" maxlength="Infinity" pattern="[0-9]*" inputmode="numeric" type="number" value="" class="m-integerfield__input"> </div>
+      <div class="m-input-style__body__right"></div>
+    </div>
+  </div>
+  <div class="m-integerfield__validation">
+    <div class="m-validation-message m-integerfield__validation__message"></div>
+  </div>
+</div>
+`;
