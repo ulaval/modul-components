@@ -49,28 +49,13 @@ $m-tooltip--max-height: 280px !default;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 30px;
-        height: 30px;
+        width: $m-touch-size;
+        height: $m-touch-size;
         transition: color $m-transition-duration--s ease;
-
-        &::before,
-        &::after {
-            content: "";
-            width: 1px;
-            height: 15px;
-            background-color: $m-color--interactive;
-            transform: rotate(45deg);
-            position: absolute;
-            top: 10px;
-            left: 12px;
-        }
-
-        &::after {
-            transform: rotate(-45deg);
-        }
 
         &:not(.m--is-link) {
             color: $m-color--interactive;
+            stroke-width: 2;
 
             &:hover,
             &:focus {
@@ -88,7 +73,7 @@ $m-tooltip--max-height: 280px !default;
     }
 
     &__body {
-        padding: $m-spacing--m;
+        padding: $m-spacing $m-spacing--xl $m-spacing $m-spacing;
         background: $m-color--information;
         word-break: break-word;
         user-select: text;
