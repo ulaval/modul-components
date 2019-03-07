@@ -326,12 +326,3 @@ $m-input-style-base-height: $m-line-height + em;
 .m--is-type-search .m-input-style__body__adjust-width-auto {
     padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }
-
-.m--is-type-number .m-textfield__input {
-    appearance: textfield;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        appearance: textfield;
-    }
-}
