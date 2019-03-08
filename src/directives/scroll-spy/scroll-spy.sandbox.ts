@@ -56,10 +56,10 @@ export class MScrollSpySandbox extends ModulVue {
         }
     }
 
-    naviguer(id: string, event: any): void {
-        let sectionAncre: HTMLElement | null = this.$el.querySelector('#' + id);
-        if (sectionAncre) {
-            this.$scrollTo.goTo(sectionAncre, 0).then(() => {
+    moving(id: string, event: any): void {
+        let section: HTMLElement | null = this.$el.querySelector('#' + id);
+        if (section) {
+            this.$scrollTo.goTo(section, 0).then(() => {
                 this.menuElements.htmlElement.forEach(element => {
                     this.removeCurrentMenuClass(element.menuElement);
                 });

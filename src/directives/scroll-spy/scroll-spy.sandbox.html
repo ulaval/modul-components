@@ -10,7 +10,7 @@
                     <li v-for="(id, index) in menu1"
                         :data-scroll-spy-id="id">
                         <a href="#"
-                           @click.prevent="naviguer(id, $event)">{{ id }}</a>
+                           @click.prevent="moving(id, $event)">{{ id }}</a>
                     </li>
                 </ul>
             </nav>
@@ -21,7 +21,7 @@
                     <li v-for="(id, index) in menu2"
                         :data-scroll-spy-id="id">
                         <a href="#"
-                           @click.prevent="naviguer(id, $event)">{{ id }}</a>
+                           @click.prevent="moving(id, $event)">{{ id }}</a>
                     </li>
                 </ul>
             </nav>

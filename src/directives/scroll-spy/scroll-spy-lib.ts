@@ -26,25 +26,25 @@ class ScrollSpy {
 
         elementParent.childNodes.forEach(nodeElement => {
             const element: HTMLElement = nodeElement as HTMLElement;
-            let monElement: ElementMap = new ElementMap();
+            let myElement: ElementMap = new ElementMap();
             const myCurrentId: string | null = element.getAttribute('data-scroll-spy-id');
             if (myCurrentId) {
-                this.elementsMap.set(myCurrentId, monElement);
-                monElement.menuElement = element;
-                monElement.id = myCurrentId;
+                this.elementsMap.set(myCurrentId, myElement);
+                myElement.menuElement = element;
+                myElement.id = myCurrentId;
 
                 const section: HTMLElement | null = document.getElementById(myCurrentId);
                 this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
                     entries.forEach(entry => {
-                        monElement.isShowing = entry.isIntersecting;
+                        myElement.isShowing = entry.isIntersecting;
                     });
                     this.assignClassToFirstCurrent();
                 });
 
                 if (section) {
                     this.observer.observe(section);
-                    monElement.observeElement = section;
-                    this.elementsMap.set(myCurrentId, monElement);
+                    myElement.observeElement = section;
+                    this.elementsMap.set(myCurrentId, myElement);
                 }
 
             }
