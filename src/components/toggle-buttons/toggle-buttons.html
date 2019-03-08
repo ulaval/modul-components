@@ -1,0 +1,9 @@
+<div class="m-toggle-buttons">
+    <m-button v-for="button in buttons"
+              :key="button.id"
+              :skin="getSkin(button)"
+              :disabled="disabled"
+              @click="toggle(button)">
+        {{ button.title }}
+    </m-button>
+</div>
