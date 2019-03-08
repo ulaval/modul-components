@@ -4,6 +4,6 @@
               :skin="getSkin(button)"
               :disabled="disabled"
               @click="toggle(button)">
-        {{ button.title }}
+        <slot :name="'button.' + button.id">{{ button.title }}</slot>
     </m-button>
 </div>

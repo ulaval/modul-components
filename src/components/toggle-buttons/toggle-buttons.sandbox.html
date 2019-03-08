@@ -14,6 +14,20 @@
         </m-toggle-buttons>
     </p>
     <p>Current object selected: {{ selectedSingle }}</p>
+    <h3>Toggle buttons with slot</h3>
+    <p>
+        <h4>Select the session:</h4>
+        <m-toggle-buttons v-model="sessionsScoped"
+                          :multiple="false">
+            <template slot="button.session201801">
+                <m-icon name="m-svg__close-clear"></m-icon> Printemps 2018 <m-icon name="m-svg__close-clear"></m-icon>
+            </template>
+            <template slot="button.session201809">
+                <m-icon name="m-svg__confirmation"></m-icon> Automne 2018
+            </template>
+        </m-toggle-buttons>
+    </p>
+    <p>Current object selected: {{ selectedScoped }}</p>
     <h3>Toggle buttons disabled</h3>
     <p>
         <h4>Select the session:</h4>

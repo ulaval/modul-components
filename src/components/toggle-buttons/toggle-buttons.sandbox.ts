@@ -15,13 +15,21 @@ export class MToggleButtonsSandbox extends Vue {
     session201901: MToggleButton = { id: 'session201901', title: 'Printemps 2019' };
     sessionsMultiple: MToggleButton[] = [this.session201709, this.session201801, this.session201805, this.session201809, this.session201901];
     sessionsSingle: MToggleButton[] = [this.session201709, this.session201801, this.session201805, this.session201809, this.session201901];
+    sessionsScoped: MToggleButton[] = [this.session201709, this.session201801, this.session201805, this.session201809, this.session201901];
 
     get selectedMultiple(): string {
-        return this.sessionsMultiple.filter(b => b.pressed).map(b => b.id).reduce((acc, b) => acc + ', ' + b);
+        let selection: string[] = this.sessionsMultiple.filter(b => b.pressed).map(b => b.id);
+        return selection.length === 0 ? '' : selection.reduce((acc, b) => acc + ', ' + b);
     }
 
     get selectedSingle(): string {
-        return this.sessionsSingle.filter(b => b.pressed).map(b => b.id).reduce((acc, b) => acc + ', ' + b);
+        let selection: string[] = this.sessionsSingle.filter(b => b.pressed).map(b => b.id);
+        return selection.length === 0 ? '' : selection.reduce((acc, b) => acc + ', ' + b);
+    }
+
+    get selectedScoped(): string {
+        let selection: string[] = this.sessionsScoped.filter(b => b.pressed).map(b => b.id);
+        return selection.length === 0 ? '' : selection.reduce((acc, b) => acc + ', ' + b);
     }
 }
 
