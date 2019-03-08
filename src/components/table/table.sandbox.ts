@@ -133,8 +133,7 @@ export class MTableSandbox extends Vue {
     }
 
     launchSorting(): void {
-        // tslint:disable:no-console
-        console.log(`Tri: dataProp: ${this.sortedColumn.dataProp} - ascending: ${this.sortedColumn.ascending}`);
+        this.$log.log(`Tri: dataProp: ${this.sortedColumn.dataProp} - ascending: ${this.sortedColumn.ascending}`);
     }
 }
 

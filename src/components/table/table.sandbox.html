@@ -108,11 +108,11 @@
     </m-table>
 
     <h2>Sortable table</h2>
-    <p>On peut trier les 2 premières colonnes</p>
-    <p>Colonne triée: {{ sortedColumn.dataProp }}</p>
-    <p>Tri :
-        <template v-if="sortedColumn.ascending">Ascendant</template>
-        <template v-else>Descendant</template>
+    <p>The first two columns can be sorted</p>
+    <p>Sorted column: {{ sortedColumn.dataProp }}</p>
+    <p>Sort :
+        <template v-if="sortedColumn.ascending">Ascending</template>
+        <template v-else>Descending</template>
     </p>
     <m-table :columns="sortableColumns"
              :sorted-column.sync="sortedColumn"
