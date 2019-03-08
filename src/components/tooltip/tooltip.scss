@@ -52,24 +52,15 @@ $m-tooltip--max-height: 280px !default;
         width: $m-touch-size;
         height: $m-touch-size;
         transition: color $m-transition-duration--s ease;
-
-        &:not(.m--is-link) {
-            color: $m-color--interactive;
-            stroke-width: 2;
-
-            &:hover,
-            &:focus {
-                color: $m-color--interactive-darker;
-            }
-        }
+        outline: none;
+        cursor: pointer;
+        color: $m-color--interactive;
+        stroke-width: 2; // Magic number : width of icon stroke
 
         &:hover,
         &:focus {
-            color: $m-color--black;
+            color: $m-color--interactive-darker;
         }
-
-        outline: none;
-        cursor: pointer;
     }
 
     &__body {
