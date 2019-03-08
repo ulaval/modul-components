@@ -62,7 +62,7 @@ export class MTable extends ModulVue {
     public sort(columnTable: MColumnTable): void {
         let sortedColumn: MSortedColumn = new MSortedColumn();
         sortedColumn.dataProp = columnTable.dataProp;
-        sortedColumn.ascending = this.isAscending(columnTable);
+        sortedColumn.ascending = !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending;
         this.$emit('update:sortedColumn', sortedColumn);
     }
 
@@ -75,11 +75,7 @@ export class MTable extends ModulVue {
     }
 
     public getIconName(columnTable: MColumnTable): string {
-        return this.isAscending(columnTable) ? 'm-svg__arrow-thin--up' : 'm-svg__arrow-thin--down';
-    }
-
-    private isAscending(columnTable: MColumnTable): boolean {
-        return !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || this.sortedColumn.ascending;
+        return !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || this.sortedColumn.ascending ? 'm-svg__arrow-thin--up' : 'm-svg__arrow-thin--down';
     }
 
     columnWidth(col: MColumnTable): { width: string } | '' {
