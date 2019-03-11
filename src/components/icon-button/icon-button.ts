@@ -87,7 +87,6 @@ const IconButtonPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(ICON_BUTTON_NAME, 'plugin.install');
         v.use(IconPlugin);
-        
         v.component(ICON_BUTTON_NAME, MIconButton);
     }
 };
