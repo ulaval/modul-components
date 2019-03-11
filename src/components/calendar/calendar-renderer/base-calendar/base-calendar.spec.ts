@@ -1,13 +1,13 @@
 import { mount, RefSelector, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-import { addMessages } from '../../../../tests/helpers/lang';
-import { renderComponent } from '../../../../tests/helpers/render';
-import ModulDate from '../../../utils/modul-date/modul-date';
-import uuid from '../../../utils/uuid/uuid';
-import { Calendar, CalendarEvent, YearState } from '../calendar-state/state/calendar-state';
-import MSimpleCalendar, { PickerMode } from './simple-calendar';
+import { addMessages } from '../../../../../tests/helpers/lang';
+import { renderComponent } from '../../../../../tests/helpers/render';
+import ModulDate from '../../../../utils/modul-date/modul-date';
+import uuid from '../../../../utils/uuid/uuid';
+import { Calendar, CalendarEvent, YearState } from '../../calendar-state/state/calendar-state';
+import MBaseCalendar, { PickerMode } from './base-calendar';
 
-jest.mock('../../../utils/uuid/uuid');
+jest.mock('../../../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 const MIN_YEAR: number = 2015;
@@ -23,12 +23,7 @@ const HIGHLIGHTED_DAYS: number[] = [20, 21, 22, 23];
 const SELECTED_DAY: number = 18;
 const DISABLED_DAY: number = 28;
 
-const PREVIOUS_YEAR_REF: RefSelector = { ref: 'previousYear' };
-const CURRENT_YEAR_REF: RefSelector = { ref: 'currentYear' };
-const NEXT_YEAR_REF: RefSelector = { ref: 'nextYear' };
-
-const PREVIOUS_MONTH_REF: RefSelector = { ref: 'previousMonth' };
-const CURRENT_MONTH_REF: RefSelector = { ref: 'currentMonth' };
+const CURRENT_DATE_REF: RefSelector = { ref: 'currentDate' };
 const NEXT_MONTH_REF: RefSelector = { ref: 'nextMonth' };
 
 const padString: Function = (value: any): string => {
@@ -39,7 +34,7 @@ const SELECTABLE_DAY_REF: RefSelector = { ref: `day${CURRENT_YEAR}${padString(CU
 const SELECTABLE_MONTH_REF: RefSelector = { ref: `month${padString(CURRENT_MONTH_INDEX + 1)}` };
 const SELECTABLE_YEAR_REF: RefSelector = { ref: `year${CURRENT_YEAR}` };
 
-let wrapper: Wrapper<MSimpleCalendar>;
+let wrapper: Wrapper<MBaseCalendar>;
 let calendar: Calendar;
 let initialPickerMode: any;
 let showMonthBeforeAfter: any;
@@ -48,7 +43,7 @@ let monthsNamesLong: any;
 let daysNames: any;
 
 const initializeWrapper: Function = (): void => {
-    wrapper = mount(MSimpleCalendar, {
+    wrapper = mount(MBaseCalendar, {
         localVue: Vue,
         propsData: {
             calendar, initialPickerMode, showMonthBeforeAfter, monthsNames, monthsNamesLong, daysNames
@@ -116,7 +111,7 @@ const initCalendar: Function = (): Calendar => {
     };
 };
 
-describe('Simple calendar', () => {
+describe('Base calendar', () => {
     beforeAll(() => {
         addMessages(Vue, [
             'components/calendar/calendar.lang.en.json'
@@ -213,45 +208,6 @@ describe('Simple calendar', () => {
                 });
             });
 
-            describe('when changing year', () => {
-                describe('to next year', () => {
-                    it(`will call event handler`, () => {
-                        wrapper.setMethods({ 'onYearNext': jest.fn() });
-                        const nextYearElement: Wrapper<Vue> = wrapper.find(NEXT_YEAR_REF);
-
-                        nextYearElement.trigger('click');
-
-                        expect(wrapper.vm.onYearNext).toHaveBeenCalledTimes(1);
-                    });
-
-                    it(`will throw related calendar event`, () => {
-                        const nextYearElement: Wrapper<Vue> = wrapper.find(NEXT_YEAR_REF);
-
-                        nextYearElement.trigger('click');
-
-                        expect(wrapper.vm.onYearNext).toBeDefined();
-                    });
-                });
-                describe('to previous year', () => {
-                    it(`will call event handler`, () => {
-                        wrapper.setMethods({ 'onYearPrevious': jest.fn() });
-                        const previousYearElement: Wrapper<Vue> = wrapper.find(PREVIOUS_YEAR_REF);
-
-                        previousYearElement.trigger('click');
-
-                        expect(wrapper.vm.onYearPrevious).toHaveBeenCalledTimes(1);
-                    });
-
-                    it(`will throw related calendar event`, () => {
-                        const previousYearElement: Wrapper<Vue> = wrapper.find(PREVIOUS_YEAR_REF);
-
-                        previousYearElement.trigger('click');
-
-                        expect(wrapper.vm.onYearPrevious).toBeDefined();
-                    });
-                });
-            });
-
             describe('when changing month', () => {
                 describe('to next month', () => {
                     it(`will call event handler`, () => {
@@ -271,32 +227,13 @@ describe('Simple calendar', () => {
                         expect(wrapper.vm.onMonthPrevious).toBeDefined();
                     });
                 });
-
-                describe('to previous month', () => {
-                    it(`will call event handler`, () => {
-                        wrapper.setMethods({ 'onMonthPrevious': jest.fn() });
-                        const previousMonthElement: Wrapper<Vue> = wrapper.find(PREVIOUS_MONTH_REF);
-
-                        previousMonthElement.trigger('click');
-
-                        expect(wrapper.vm.onMonthPrevious).toHaveBeenCalledTimes(1);
-                    });
-
-                    it(`will throw related calendar event`, () => {
-                        const previousMonthElement: Wrapper<Vue> = wrapper.find(PREVIOUS_MONTH_REF);
-
-                        previousMonthElement.trigger('click');
-
-                        expect(wrapper.vm.onMonthPrevious).toBeDefined();
-                    });
-                });
             });
 
             describe('when changing picker mode', () => {
                 describe('to year', () => {
                     it(`will call event handler`, () => {
                         wrapper.setMethods({ 'onYearClick': jest.fn() });
-                        const yearElement: Wrapper<Vue> = wrapper.find(CURRENT_YEAR_REF);
+                        const yearElement: Wrapper<Vue> = wrapper.find(CURRENT_DATE_REF);
 
                         yearElement.trigger('click');
 
@@ -304,33 +241,13 @@ describe('Simple calendar', () => {
                     });
 
                     it(`will switch picker mode to year`, () => {
-                        const yearElement: Wrapper<Vue> = wrapper.find(CURRENT_YEAR_REF);
+                        const yearElement: Wrapper<Vue> = wrapper.find(CURRENT_DATE_REF);
 
                         yearElement.trigger('click');
 
                         expect(wrapper.vm.isPickerModeDay).toBe(false);
-                        expect(wrapper.vm.isPickerModeMonth).toBe(false);
                         expect(wrapper.vm.isPickerModeYear).toBe(true);
-                    });
-                });
-                describe('to month', () => {
-                    it(`will call event handler`, () => {
-                        wrapper.setMethods({ 'onMonthClick': jest.fn() });
-                        const monthElement: Wrapper<Vue> = wrapper.find(CURRENT_MONTH_REF);
-
-                        monthElement.trigger('click');
-
-                        expect(wrapper.vm.onMonthClick).toHaveBeenCalledTimes(1);
-                    });
-
-                    it(`will switch picker mode to year`, () => {
-                        const monthElement: Wrapper<Vue> = wrapper.find(CURRENT_MONTH_REF);
-
-                        monthElement.trigger('click');
-
-                        expect(wrapper.vm.isPickerModeDay).toBe(false);
-                        expect(wrapper.vm.isPickerModeMonth).toBe(true);
-                        expect(wrapper.vm.isPickerModeYear).toBe(false);
+                        expect(wrapper.vm.isPickerModeMonth).toBe(false);
                     });
                 });
             });

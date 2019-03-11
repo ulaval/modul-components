@@ -1,0 +1,8 @@
+@import 'commons';
+
+@media (max-width: $m-mq--max--s) {
+    .m-calendar {
+        display: flex;
+        justify-content: center;
+    }
+}
