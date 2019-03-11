@@ -11,7 +11,7 @@
 
     // to overcome input-style base padding, minus space for the label.
     .m-input-style.m--is-label-up.m--is-focus & {
-        margin-top: -#{$m-input-style--padding - 4}; // magic number
+        margin-top: -4px // magic number
     }
 
     // basic body padding for all states

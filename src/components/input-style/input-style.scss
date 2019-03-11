@@ -138,7 +138,6 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__label {
         position: relative;
-        z-index: 202; // Useful when using m-rich-text-editor
         transform-origin: 0 0;
         transform: translate3d(0, 0, 0);
         align-items: center;
