@@ -62,6 +62,7 @@ import ScrollTopPlugin from './scroll-top/scroll-top';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import ShowMorePlugin from './show-more/show-more';
 import SidebarPlugin from './sidebar/sidebar';
+import SlideTransitionPlugin from './slide-transition/slide-transition';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
@@ -161,6 +162,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(SpinnerPlugin);
         Vue.use(Status);
         Vue.use(StepPlugin);
+        Vue.use(SlideTransitionPlugin);
         Vue.use(SteppersPlugin);
         Vue.use(SwitchPlugin);
         Vue.use(TabPanelPlugin);
