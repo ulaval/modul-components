@@ -1,0 +1,24 @@
+<div>
+    <h3>Using https://api.publicapis.org back-end</h3>
+    <div>
+        <m-autocomplete placeholder="Type something"
+                        label="API"
+                        :required-marker="true"
+                        :results="results"
+                        @complete="onComplete"
+                        v-model="selection"></m-autocomplete>
+
+        Selection: {{selection}}
+    </div>
+
+    <div>
+        <m-autocomplete placeholder="Type something"
+                        label="API"
+                        :required-marker="true"
+                        :results="results2"
+                        @complete="onComplete2"
+                        v-model="selection2"></m-autocomplete>
+
+        Selection: {{selection2}}
+    </div>
+</div>
