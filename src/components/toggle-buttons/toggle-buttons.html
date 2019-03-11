@@ -1,5 +1,7 @@
-<div class="m-toggle-buttons">
+<div class="m-toggle-buttons"
+     ref="toggle">
     <m-button v-for="button in buttons"
+              class="m-toggle-buttons__button"
               :key="button.id"
               :skin="getSkin(button)"
               :disabled="disabled"
