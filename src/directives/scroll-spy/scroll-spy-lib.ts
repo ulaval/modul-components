@@ -27,7 +27,7 @@ class ScrollSpy {
         elementParent.childNodes.forEach(nodeElement => {
             const element: HTMLElement = nodeElement as HTMLElement;
             let myElement: ElementMap = new ElementMap();
-            const myCurrentId: string | null = element.getAttribute('data-scroll-spy-id');
+            const myCurrentId: string | undefined = element.dataset.scrollSpyId;
             if (myCurrentId) {
                 this.elementsMap.set(myCurrentId, myElement);
                 myElement.menuElement = element;
@@ -54,7 +54,7 @@ class ScrollSpy {
     public removeElementObserved(elementParent: HTMLElement): void {
         elementParent.childNodes.forEach(nodeElement => {
             const element: HTMLElement = nodeElement as HTMLElement;
-            const myCurrentId: string | null = element.getAttribute('data-scroll-spy-id');
+            const myCurrentId: string | undefined = element.dataset.scrollSpyId;
             if (myCurrentId) {
                 const myElementToRemove: ElementMap | undefined = this.elementsMap.get(myCurrentId);
                 if (myElementToRemove) {
