@@ -192,7 +192,8 @@ export class MFormSandbox extends ModulVue {
                 }
                 return new FormFieldValidation();
             }])
-        })
+        }),
+        new Form({})
     ];
 
     $refs: {
@@ -221,6 +222,23 @@ export class MFormSandbox extends ModulVue {
     reset(formIndex: number): void {
         if (formIndex === 12) {
             this.hasServerResponse = false;
+        } else if (formIndex === 17) {
+            this.forms[17] = new Form({});
+        }
+    }
+
+    addField(): void {
+        this.forms[17].addField(`a-field-${this.forms[17].fields.length}`, new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+            if (!formField.value) {
+                return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
+            }
+            return new FormFieldValidation();
+        }]));
+    }
+
+    removeField(): void {
+        if (this.forms[17].fields.length > 0) {
+            this.forms[17].removeField(`a-field-${this.forms[17].fields.length - 1}`);
         }
     }
 
