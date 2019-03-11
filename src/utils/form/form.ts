@@ -119,7 +119,7 @@ export class Form {
      */
     validateAll(): void {
         this.fields.forEach((field: FormField<any>) => {
-            field.touch();
+            field.dirtyTouch();
         });
 
         this.internalState = new FormState();

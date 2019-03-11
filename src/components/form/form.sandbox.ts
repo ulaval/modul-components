@@ -192,7 +192,24 @@ export class MFormSandbox extends ModulVue {
                 }
                 return new FormFieldValidation();
             }])
-        })
+        }),
+        new Form({
+            'field-1': new FormField<string>((): string => 'predefined value',
+                [
+                    (formField: FormField<string>): FormFieldValidation => {
+                        if (!formField.value) {
+                            return new FormFieldValidation(true, ['the field-1 is required'], ['this field is required']);
+                        }
+                        return new FormFieldValidation();
+                    },
+                    (formField: FormField<string>): FormFieldValidation => {
+                        if (formField.value.length < 10) {
+                            return new FormFieldValidation(true, ['the field-1 have to be at least 10 chars'], ['this field have to be at least 10 chars']);
+                        }
+                        return new FormFieldValidation();
+                    }
+                ])
+        }),
     ];
 
     $refs: {

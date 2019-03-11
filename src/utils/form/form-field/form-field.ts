@@ -13,8 +13,10 @@ export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
+    private initialValue: T;
     private messageAfterTouched: boolean = true;
     private touched: boolean = false;
+    private dirty: boolean = false;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
 
@@ -26,7 +28,7 @@ export class FormField<T> {
      */
     constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback<T>[] = [], options?: FormFieldOptions) {
 
-        this.internalValue = accessCallback();
+        this.initialValue = this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
 
         if (options) {
@@ -79,6 +81,13 @@ export class FormField<T> {
     }
 
     /**
+     * indicates if the field is dirty
+     */
+    get isDirty(): boolean {
+        return this.dirty;
+    }
+
+    /**
      * if the field should focus
      */
     get shouldFocus(): boolean {
@@ -116,7 +125,7 @@ export class FormField<T> {
      * execute validations
      */
     validate(): void {
-        if (this.validationCallback.length > 0) {
+        if (this.validationCallback.length > 0 && this.dirty) {
             let newState: FormFieldState = new FormFieldState();
             this.validationCallback.forEach((validationFunction) => {
                 let validation: FormFieldValidation = validationFunction(this);
@@ -135,12 +144,22 @@ export class FormField<T> {
     }
 
     /**
-     * mark the field as touched, reset external error and trigger validation
+     * mark the field as touched, reset external error, determine if the field is dirty and trigger validation
      */
     touch(): void {
         this.touched = true;
         this.externalError = '';
+
+        if (this.initialValue !== this.internalValue) {
+            this.dirty = true;
+        }
+
         this.validate();
+    }
+
+    dirtyTouch(): void {
+        this.dirty = true;
+        this.touch();
     }
 
     /**
@@ -152,6 +171,7 @@ export class FormField<T> {
         this.internalState = new FormFieldState();
         this.externalError = '';
         this.touched = false;
+        this.dirty = false;
     }
 
     /**

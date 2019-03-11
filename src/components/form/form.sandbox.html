@@ -570,4 +570,25 @@
         </p>
     </p>
     <hr />
+    <h2>Form with a field with predefined value, required and min length 10</h2>
+    <p>Should only display error when dirty (value has been changed at least once))</p>
+    <m-form class="m-u--margin-top"
+            :form="forms[17]"
+            @reset="reset(17)"
+            @submit="submit(17)">
+        <m-textfield v-model.trim="forms[17].get('field-1').value"
+                     label="A field"
+                     :required-marker="true"
+                     :error-message="forms[17].get('field-1').errorMessage"
+                     v-m-form-field="forms[17].get('field-1')">
+        </m-textfield>
+    </m-form>
+    <p class="m-u--margin-top m-u--margin-bottom--l">
+        <m-button type="submit"
+                  :form="forms[17].id">Submit</m-button>
+        <m-button type="reset"
+                  skin="secondary"
+                  :form="forms[17].id">Reset</m-button>
+    </p>
+    <hr />
 </div>

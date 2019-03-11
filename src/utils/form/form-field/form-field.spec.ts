@@ -44,9 +44,25 @@ describe(`FormField`, () => {
             });
         });
 
-        describe(`When we validate an invalid field`, () => {
+        describe(`When we validate an invalid pristine field`, () => {
             beforeEach(() => {
                 validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
+                formField.validate();
+            });
+
+            it(`Then the value does not change`, () => {
+                expect(formField.value).toBe(FIELD_VALUE);
+            });
+
+            it(`Then the state of the field contains no errors`, () => {
+                expect(formField.hasError).toBeFalsy();
+            });
+        });
+
+        describe(`When we validate an invalid dirty field`, () => {
+            beforeEach(() => {
+                validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
+                formField['dirty'] = true;
                 formField.validate();
             });
 
@@ -61,9 +77,10 @@ describe(`FormField`, () => {
             });
         });
 
-        describe(`When we validate an invalid field with messageAfterTouched = true`, () => {
+        describe(`When we validate an invalid and dirty field with messageAfterTouched = true`, () => {
             beforeEach(() => {
                 formField = new FormField((): string => FIELD_VALUE, VALIDATION_FUNCTION, { messageAfterTouched: true });
+                formField['dirty'] = true;
                 validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
             });
 
@@ -99,9 +116,35 @@ describe(`FormField`, () => {
             });
         });
 
-        describe(`When we change the value for an invalid value`, () => {
+        describe(`When we change the value of the field, it will be marked as dirty when touched`, () => {
+            beforeEach(() => {
+                formField = new FormField((): string => FIELD_VALUE, VALIDATION_FUNCTION);
+                expect(formField['dirty']).toBe(false);
+                formField.value = NEW_FIELD_VALUE;
+                formField.touch();
+            });
+
+            it(`Then the field is marked as dirty`, () => {
+                expect(formField['dirty']).toBeTruthy();
+            });
+        });
+
+        describe(`When dirty touched, it will be marked as dirty`, () => {
+            beforeEach(() => {
+                formField = new FormField((): string => FIELD_VALUE, VALIDATION_FUNCTION);
+                expect(formField['dirty']).toBe(false);
+                formField.dirtyTouch();
+            });
+
+            it(`Then the field is marked as dirty`, () => {
+                expect(formField['dirty']).toBeTruthy();
+            });
+        });
+
+        describe(`When we change the value for an invalid and dirty value`, () => {
             beforeEach(() => {
                 validationState = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
+                formField['dirty'] = true;
                 formField.value = NEW_FIELD_VALUE;
             });
 

@@ -39,6 +39,7 @@ describe(`Form`, () => {
             validate: jest.fn(),
             focusThisField: jest.fn(),
             touch: jest.fn(),
+            dirtyTouch: jest.fn(),
             shouldFocus: false
         };
         ((FormField as unknown) as jest.Mock).mockClear();
@@ -122,7 +123,7 @@ describe(`Form`, () => {
             });
 
             it(`validates each fields`, () => {
-                expect(mockFormField.touch).toHaveBeenCalledTimes(1);
+                expect(mockFormField.dirtyTouch).toHaveBeenCalledTimes(1);
             });
 
             it(`getErrorsForSummary returns 1 error message`, () => {
