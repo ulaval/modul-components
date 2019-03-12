@@ -209,7 +209,7 @@ export class MFormSandbox extends ModulVue {
                         return new FormFieldValidation();
                     }
                 ])
-        }),
+        })
     ];
 
     $refs: {
