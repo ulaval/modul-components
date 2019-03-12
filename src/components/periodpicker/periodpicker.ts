@@ -79,6 +79,9 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()
     max: DatePickerSupportedTypes;
 
+    @Emit('input')
+    emitNewValue(newValue: MDateRange): void { }
+
     dateFromInternalValue: DatePickerSupportedTypes = new Date();
     dateToInternalValue: DatePickerSupportedTypes = new Date();
     dateFromChanged: boolean = false;
@@ -167,9 +170,6 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         this.dateToInternalValue = newValue ? this.getNewModelValue(newValue, true) : undefined;
         this.endSelection();
     }
-
-    @Emit('input')
-    emitNewValue(newValue: MDateRange): void { }
 
     onDateFromOpen(): void {
         this.fromIsFocused = true;
