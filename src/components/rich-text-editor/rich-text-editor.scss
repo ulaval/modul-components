@@ -16,6 +16,6 @@
     }
 
     /deep/ .m-input-style__label {
-        z-index: 202;
+        z-index: 202; // fix animation overlap
     }
 }
