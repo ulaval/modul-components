@@ -15,7 +15,7 @@ enum MScrollSpyClassNames {
 @Component
 export class MScrollSpySandbox extends ModulVue {
 
-    rootMargin: string = '-80px 0px 0px 0px';
+    rootMargin: string = '-72px 0px 0px 0px';
     idSection1: string = 'section1';
     idSection2: string = 'section2';
     idSection3: string = 'section3';

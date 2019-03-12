@@ -5,7 +5,7 @@ import { SCROLL_SPY_NAME } from '../directive-names';
 import ScrollSpyUtil from './scroll-spy-lib';
 
 export class IntersectionObserverOptions {
-    root: Element | null;
+    root: Element | undefined;
     rootMargin: string;
     threshold: number;
 }
@@ -33,7 +33,6 @@ const observeDirective: DirectiveOptions = {
             rootMargin: rootMargin,
             threshold: threshold
         };
-        ScrollSpyUtil.removeElementObserved(element);
         if (binding.value) {
             ScrollSpyUtil.addElementToObserve(element, options);
         }
