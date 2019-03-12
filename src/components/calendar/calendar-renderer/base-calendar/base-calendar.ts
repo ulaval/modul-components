@@ -240,6 +240,11 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return this.calendar.dates.current.isSameOrAfter(this.calendar.dates.max, DatePrecision.MONTH);
     }
 
+    get isMaxRow(): boolean {
+        let numberOfDays: number = this.calendar.days.length;
+        return numberOfDays / 7 > 5 ? true : false;
+    }
+
     get days(): DayState[] {
         return this.calendar.days;
     }
