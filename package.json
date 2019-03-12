@@ -12,7 +12,7 @@
         "build": "tsc --project tsconfig.lib.json && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagenv2",
         "buildlib": "webpack --config conf/webpack.config.js --colors --env.lib",
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
-        "start": "webpack --config conf/webpack.config.js  && http-server \"./dist\" -p 8080 -a 0.0.0.0",
+        "start": "webpack-dev-server --config conf/webpack.config.js --content-base src --port 8080 --history-api-fallback --host 0.0.0.0 --disable-host-check --inline=false",
         "unit": "jest --verbose --silent",
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
