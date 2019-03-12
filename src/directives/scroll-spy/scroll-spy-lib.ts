@@ -1,6 +1,7 @@
 /* tslint:disable:no-console */
 import 'intersection-observer';
 import { dispatchEvent } from '../../utils/vue/events';
+import { IntersectionObserverOptions } from './scroll-spy';
 
 export class ElementMap {
     isCurrent: boolean;
@@ -22,7 +23,7 @@ class ScrollSpy {
     private elementsMap: Map<string, ElementMap> = new Map<string, ElementMap>();
     private observer: IntersectionObserver;
 
-    public addElementToObserve(elementParent: HTMLElement): void {
+    public addElementToObserve(elementParent: HTMLElement, options: IntersectionObserverOptions): void {
 
         elementParent.childNodes.forEach(nodeElement => {
             const element: HTMLElement = nodeElement as HTMLElement;
@@ -39,7 +40,7 @@ class ScrollSpy {
                         myElement.isShowing = entry.isIntersecting;
                     });
                     this.assignClassToFirstCurrent();
-                });
+                }, options);
 
                 if (section) {
                     this.observer.observe(section);
