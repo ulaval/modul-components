@@ -222,8 +222,6 @@ export class MFormSandbox extends ModulVue {
     reset(formIndex: number): void {
         if (formIndex === 12) {
             this.hasServerResponse = false;
-        } else if (formIndex === 17) {
-            this.forms[17] = new Form({});
         }
     }
 
