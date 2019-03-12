@@ -1,6 +1,6 @@
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import AbstractCalendarState, { RangeDate } from './abstract-calendar-state';
-import { CalendarEvent, CalendarEvents, DayState } from './calendar-state';
+import { CalendarEvent, CalendarEvents, CalendarType, DayState } from './calendar-state';
 
 enum DateRangePosition {
     BEGIN = 'begin',
@@ -79,13 +79,25 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
     }
 
     protected isDaySelected(date: ModulDate): boolean {
-        return ((this.currentRange.begin && this.currentRange.end) && date.isBetween(this.currentRange.begin, this.currentRange.end, DatePrecision.DAY))
-            || (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
+        return (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY))
             || (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
     }
 
     protected isHighlighted(date: ModulDate): boolean {
-        return (!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date);
+        return ((!!this.currentRange.begin && !this.currentRange.end) && this.betweenBeginAndHightlight(date))
+            || ((!!this.currentRange.begin && !!this.currentRange.end) && date.isBetween(this.currentRange.begin, this.currentRange.end, DatePrecision.DAY));
+    }
+
+    protected isSelectionStart(date: ModulDate): boolean {
+        return (!!this.currentRange.begin && date.isSame(this.currentRange.begin, DatePrecision.DAY));
+    }
+
+    protected isSelectionEnd(date: ModulDate): boolean {
+        return (!!this.currentRange.end && date.isSame(this.currentRange.end, DatePrecision.DAY));
+    }
+
+    protected calendarType(): CalendarType {
+        return CalendarType.DATE_RANGE;
     }
 
     private betweenBeginAndHightlight(date: ModulDate): boolean {
@@ -124,6 +136,4 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
         }
         return range;
     }
-
-
 }

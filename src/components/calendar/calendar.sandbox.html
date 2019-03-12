@@ -1,31 +1,49 @@
 <div>
-    <h2>Single date picker</h2>
-    <h3>Calendar</h3>
-    <p>Current Date: {{ date }}</p>
+    <h2>Single date selection (for a date picker)</h2>
+    <h3>Default settings</h3>
+    <p>
+        Selected Date: {{ date }}<br />
+        Min/max dates should be 10 years before and after current date.
+    </p>
     <m-calendar v-model="date"></m-calendar>
 
-    <h3>Calendar (with min/max date, days from month before and after are hidden)</h3>
-    <p>Current Date: {{ date }}</p>
+    <h3>Hide days of the month before and after</h3>
+    <p>
+        Selected Date: {{ date }}<br />
+        Min-date : 2018-06-15<br />
+        Max-date : 2025-02-20
+    </p>
     <m-calendar v-model="date"
                 min-date="2018-06-15"
                 max-date="2025-02-20"
                 :show-month-before-after="false"></m-calendar>
 
-    <h3>Calendar (with min/max date, days from month before and after are explicitly shown)</h3>
-    <p>Current Date: {{ date }}</p>
+    <h3>Show days from month before and after</h3>
+    <p>
+        Selected Date: {{ date }}<br />
+        Min-date : 2018-06-15<br />
+        Max-date : 2025-02-20
+    </p>
     <m-calendar v-model="date"
                 min-date="2018-06-15"
                 max-date="2025-02-20"
                 :show-month-before-after="true"></m-calendar>
 
-    <h2>Date range picker</h2>
-    <h3>Calendar</h3>
-    <p>Current Date: {{ dateRange }}</p>
+    <h2>Multiple dates selection (for a period picker)</h2>
+    <h3>Default setting</h3>
+    <p>
+        Selected Date: {{ dateRange }}<br />
+        Min/max dates should be 10 years before and after current date.
+    </p>
     <m-calendar mode="date-range"
                 v-model="dateRange"></m-calendar>
 
-    <h3>Calendar (with min/max date, days from month before and after are hidden)</h3>
-    <p>Current Date: {{ dateRange }}</p>
+    <h3>Hide days from month before and after</h3>
+    <p>
+        Selected Date: {{ dateRange }}<br />
+        Min-date : 2018-06-15<br />
+        Max-date : 2025-02-20
+    </p>
     <m-calendar mode="date-range"
                 v-model="dateRange"
                 min-date="2018-06-15"
