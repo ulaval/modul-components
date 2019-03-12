@@ -10,6 +10,11 @@
             <span>
                 {{ currentMonthName }} {{ currentYear }}
             </span>
+            <m-icon class="m-base-calendar__carret"
+                    name="m-svg__arrow-head-filled--down"
+                    button-size="18px"
+                    icon-size="16px">
+            </m-icon>
         </button>
         <div>
             <m-icon-button class="m-base-calendar__previous"
@@ -17,7 +22,6 @@
                            v-if="isPickerModeDay"
                            @click.stop="onMonthPrevious()"
                            :disabled="isMinMonth"
-                           button-size="auto"
                            icon-name="m-svg__chevron--left"
                            ref="previousMonth">{{ previousMonthLabel }}</m-icon-button>
             <m-icon-button class="m-base-calendar__next"
@@ -25,7 +29,6 @@
                            v-if="isPickerModeDay"
                            @click.stop="onMonthNext()"
                            :disabled="isMaxMonth"
-                           button-size="auto"
                            icon-name="m-svg__chevron--right"
                            ref="nextMonth">{{ nextMonthLabel }}</m-icon-button>
         </div>

@@ -5,10 +5,11 @@ exports[`Calendar in date range mode should render date range view 1`] = `
   <div id="m-simple-calendar-uuid" class="m-base-calendar m-calendar__renderer">
     <nav class="m-base-calendar__header"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year"><span>
                 m-calendar:month.march 2019
-            </span></button>
+            </span>
+        <m-icon name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" class="m-base-calendar__carret"></m-icon></button>
       <div>
-        <m-icon-button skin="link" button-size="auto" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">m-calendar:previous.month</m-icon-button>
-        <m-icon-button skin="link" button-size="auto" icon-name="m-svg__chevron--right" class="m-base-calendar__next">m-calendar:next.month</m-icon-button>
+        <m-icon-button skin="link" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">m-calendar:previous.month</m-icon-button>
+        <m-icon-button skin="link" icon-name="m-svg__chevron--right" class="m-base-calendar__next">m-calendar:next.month</m-icon-button>
       </div>
     </nav>
     <div aria-live="polite" class="m-base-calendar__body m--is-max-row">
@@ -67,10 +68,11 @@ exports[`Calendar in single date mode should render single dates view 1`] = `
   <div id="m-simple-calendar-uuid" class="m-base-calendar m-calendar__renderer">
     <nav class="m-base-calendar__header"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year"><span>
                 m-calendar:month.march 2019
-            </span></button>
+            </span>
+        <m-icon name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" class="m-base-calendar__carret"></m-icon></button>
       <div>
-        <m-icon-button skin="link" button-size="auto" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">m-calendar:previous.month</m-icon-button>
-        <m-icon-button skin="link" button-size="auto" icon-name="m-svg__chevron--right" class="m-base-calendar__next">m-calendar:next.month</m-icon-button>
+        <m-icon-button skin="link" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">m-calendar:previous.month</m-icon-button>
+        <m-icon-button skin="link" icon-name="m-svg__chevron--right" class="m-base-calendar__next">m-calendar:next.month</m-icon-button>
       </div>
     </nav>
     <div aria-live="polite" class="m-base-calendar__body m--is-max-row">
@@ -129,10 +131,11 @@ exports[`Calendar with default values should render default view 1`] = `
   <div id="m-simple-calendar-uuid" class="m-base-calendar m-calendar__renderer">
     <nav class="m-base-calendar__header"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year"><span>
                 m-calendar:month.march 2019
-            </span></button>
+            </span>
+        <m-icon name="m-svg__arrow-head-filled--down" button-size="18px" icon-size="16px" class="m-base-calendar__carret"></m-icon></button>
       <div>
-        <m-icon-button skin="link" button-size="auto" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">m-calendar:previous.month</m-icon-button>
-        <m-icon-button skin="link" button-size="auto" icon-name="m-svg__chevron--right" class="m-base-calendar__next">m-calendar:next.month</m-icon-button>
+        <m-icon-button skin="link" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">m-calendar:previous.month</m-icon-button>
+        <m-icon-button skin="link" icon-name="m-svg__chevron--right" class="m-base-calendar__next">m-calendar:next.month</m-icon-button>
       </div>
     </nav>
     <div aria-live="polite" class="m-base-calendar__body m--is-max-row">

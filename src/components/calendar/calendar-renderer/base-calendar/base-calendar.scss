@@ -2,7 +2,7 @@
 
 $m-base-calendar-week-length: 7 !default;
 $m-base-calendar-dimension: $m-touch-size !default;
-$m-base-calendar-weekday-height: 25px !default; // DOM number
+$m-base-calendar-weekday-height: 33px !default; // magic number
 $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-length !default;
 
 %m-base-calendar__today {
@@ -67,16 +67,16 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     &__current-month-and-year {
         font-weight: $m-font-weight--bold;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
 
-        > span {
-            display: flex;
-            align-items: center;
+    &__carret {
+        margin-left: 6px;
+        transition: transform $m-transition-duration ease, color $m-transition-duration ease;
 
-            &::after {
-                margin-left: 6px;
-
-                @include m-triangle(bottom, currentColor, 12px);
-            }
+        .m--is-select-mode & {
+            transform: rotate(-180deg);
         }
     }
 
@@ -133,6 +133,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         align-items: center;
         border-bottom: $m-border-width--s solid $m-color--border;
         padding: 0 0 m-spacing(xs) 0;
+        margin: 0 0 m-spacing(s) 0;
     }
 
     &__weekday {
