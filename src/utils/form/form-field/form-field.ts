@@ -59,6 +59,13 @@ export class FormField<T> {
     }
 
     /**
+     * indicates if the field is valid
+     */
+    get isValid(): boolean {
+        return !this.internalState.hasError;
+    }
+
+    /**
      * get external error
      */
     get ExternalError(): string {
@@ -125,22 +132,29 @@ export class FormField<T> {
      * execute validations
      */
     validate(): void {
-        if (this.validationCallback.length > 0 && this.dirty) {
-            let newState: FormFieldState = new FormFieldState();
-            this.validationCallback.forEach((validationFunction) => {
-                let validation: FormFieldValidation = validationFunction(this);
-                if (validation.isError) {
-                    newState.hasError = true;
-                }
-                if (validation.errorMessages.length > 0) {
-                    newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
-                }
-                if (validation.errorMessagesSummary.length > 0) {
-                    newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
-                }
-            });
-            this.changeState(newState);
+        if (!this.dirty) {
+            return;
         }
+
+        let newState: FormFieldState = new FormFieldState();
+
+        this.validationCallback.forEach((validationFunction) => {
+            let validation: FormFieldValidation = validationFunction(this);
+
+            if (validation.isError) {
+                newState.hasError = true;
+            }
+
+            if (validation.errorMessages.length > 0) {
+                newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
+            }
+
+            if (validation.errorMessagesSummary.length > 0) {
+                newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
+            }
+        });
+
+        this.changeState(newState);
     }
 
     /**
