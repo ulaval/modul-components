@@ -1,6 +1,6 @@
-<portal :target-el="portalTargetSelector"
-        open-trigger="manual"
-        v-if="portalCreated">
+<portal v-if="portalCreated"
+        :target-el="portalTargetSelector"
+        open-trigger="manual">
     <transition name="m--is">
         <div class="m-toast"
              :class="{'m--is-state-confirmation': isStateConfirmation,
@@ -17,27 +17,27 @@
              ref="toast"
              v-show="portalMounted && propOpen">
             <div class="m-toast__wrap">
-                <div class="m-toast__icon"
-                     v-if="icon">
+                <div v-if="icon"
+                     class="m-toast__icon">
                     <m-icon :name="getIcon()"></m-icon>
                 </div>
                 <div class="m-toast__body">
                     <div class="m-toast__text">
                         <slot></slot>
                     </div>
-                    <div class="m-toast__actions"
-                         v-if="actionLabel">
-                        <m-link @click="onAction"
-                                :mode="buttonMode">{{ actionLabel }}</m-link>
+                    <div v-if="actionLabel"
+                         class="m-toast__actions">
+                        <m-link :mode="buttonMode"
+                                @click="onAction">{{ actionLabel }}</m-link>
                     </div>
                 </div>
                 <m-icon-button class="m-toast__close-button"
-                               icon-name="m-svg__close-clear"
-                               skin="link"
+                               :title="'m-toast:close' | f-m-i18n"
                                @click="onClose"
+                               icon-name="m-svg__close-clear"
+                               iconSize="12px"
                                ref="toastclose"
-                               iconSize="12px">
-                    {{'m-toast:close' | f-m-i18n}}
+                               skin="link">
                 </m-icon-button>
             </div>
         </div>
