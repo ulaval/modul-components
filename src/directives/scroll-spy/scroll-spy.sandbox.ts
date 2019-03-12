@@ -41,7 +41,7 @@ export class MScrollSpySandbox extends ModulVue {
     }
 
     scrolling(elements: HtmlElement): void {
-        let currentElementFound: Boolean = false;
+        let currentElementFound: boolean = false;
         this.menuElements = elements;
         elements.htmlElement.forEach(element => {
             if (element.isCurrent && !currentElementFound) {
