@@ -19,11 +19,8 @@
         <h4>Select the session:</h4>
         <m-toggle-buttons v-model="sessionsScoped"
                           :multiple="false">
-            <template slot="button.session201801">
-                <m-icon name="m-svg__close-clear"></m-icon> Printemps 2018 <m-icon name="m-svg__close-clear"></m-icon>
-            </template>
-            <template slot="button.session201809">
-                <m-icon name="m-svg__confirmation"></m-icon> Automne 2018
+            <template slot-scope="{button}">
+                <m-icon name="m-svg__close-clear"></m-icon> {{ button.title }} <m-icon name="m-svg__close-clear"></m-icon>
             </template>
         </m-toggle-buttons>
     </p>

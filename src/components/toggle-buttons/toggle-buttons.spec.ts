@@ -86,19 +86,19 @@ describe('MToggleButtons', () => {
         describe(`When the first button is clicked`, () => {
             it(`Should emit a change event and prop 'button' is updated on first button`, () => {
                 wrapper.findAll('.m-toggle-buttons__button').at(0).trigger('click');
-                expect(wrapper.emitted('change')).toEqual([[[{...BTN_A, pressed: true}, BTN_B, BTN_C, BTN_D, BTN_E]]]);
+                expect(wrapper.emitted('change')).toEqual([[[{ ...BTN_A, pressed: true }, BTN_B, BTN_C, BTN_D, BTN_E]]]);
             });
         });
 
         describe(`When second button is clicked`, () => {
             beforeEach(() => {
-                buttons = [{...BTN_A, pressed: true}, BTN_B, BTN_C, BTN_D, BTN_E];
+                buttons = [{ ...BTN_A, pressed: true }, BTN_B, BTN_C, BTN_D, BTN_E];
                 multiple = true;
                 initializeWrapper();
             });
             it(`Should emit a change event and prop 'buttons' is updated on 2 first buttons`, () => {
                 wrapper.findAll('.m-toggle-buttons__button').at(1).trigger('click');
-                expect(wrapper.emitted('change')).toEqual([[[{...BTN_A, pressed: true}, {...BTN_B, pressed: true}, BTN_C, BTN_D, BTN_E]]]);
+                expect(wrapper.emitted('change')).toEqual([[[{ ...BTN_A, pressed: true }, { ...BTN_B, pressed: true }, BTN_C, BTN_D, BTN_E]]]);
             });
         });
     });
@@ -127,19 +127,19 @@ describe('MToggleButtons', () => {
         describe(`When the first button is clicked`, () => {
             it(`Should emit a change event and prop 'buttons' is updated on first button`, () => {
                 wrapper.findAll('.m-toggle-buttons__button').at(0).trigger('click');
-                expect(wrapper.emitted('change')).toEqual([[[{...BTN_A, pressed: true}, {...BTN_B, pressed: false}, {...BTN_C, pressed: false}, {...BTN_D, pressed: false}, {...BTN_E, pressed: false}]]]);
+                expect(wrapper.emitted('change')).toEqual([[[{ ...BTN_A, pressed: true }, { ...BTN_B, pressed: false }, { ...BTN_C, pressed: false }, { ...BTN_D, pressed: false }, { ...BTN_E, pressed: false }]]]);
             });
         });
 
         describe(`When second button is clicked`, () => {
             beforeEach(() => {
-                buttons = [{...BTN_A, pressed: true}, BTN_B, BTN_C, BTN_D, BTN_E];
+                buttons = [{ ...BTN_A, pressed: true }, BTN_B, BTN_C, BTN_D, BTN_E];
                 multiple = false;
                 initializeWrapper();
             });
             it(`Should emit a change event and prop 'button' is updated, first button is unpressed and second button is pressed`, () => {
                 wrapper.findAll('.m-toggle-buttons__button').at(1).trigger('click');
-                expect(wrapper.emitted('change')).toEqual([[[{...BTN_A, pressed: false}, {...BTN_B, pressed: true}, {...BTN_C, pressed: false}, {...BTN_D, pressed: false}, {...BTN_E, pressed: false}]]]);
+                expect(wrapper.emitted('change')).toEqual([[[{ ...BTN_A, pressed: false }, { ...BTN_B, pressed: true }, { ...BTN_C, pressed: false }, { ...BTN_D, pressed: false }, { ...BTN_E, pressed: false }]]]);
             });
         });
 
@@ -159,4 +159,5 @@ describe('MToggleButtons', () => {
             expect(wrapper.findAll('.m-toggle-buttons__button').at(0).props().disabled).toBeTruthy();
             expect(wrapper.findAll('.m-toggle-buttons__button').at(1).props().disabled).toBeTruthy();
         });
+    });
 });
