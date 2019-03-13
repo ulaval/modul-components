@@ -11,7 +11,8 @@
                        @click="goToPage(value - 1)"
                        :disabled="firstPageSelected || loading"
                        icon-name="m-svg__chevron-circle--left"
-                       skin="link">
+                       skin="link"
+                       ref="previous">
             <m-i18n k="m-pagination:previous"></m-i18n>
         </m-icon-button>
         <ul class="m-pagination__pages">
@@ -32,7 +33,8 @@
                        @click="goToPage(value + 1)"
                        :disabled="lastPageSelected || loading"
                        icon-name="m-svg__chevron-circle--right"
-                       skin="link">
+                       skin="link"
+                       ref="next">
             <m-i18n k="m-pagination:next"></m-i18n>
         </m-icon-button>
     </div>
