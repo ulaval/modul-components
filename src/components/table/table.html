@@ -16,6 +16,7 @@
                                   @click="sort(column)">{{ column.title }}</span>
                             <m-icon-button v-if="column.sortable"
                                            class="m-table__sortable-icon"
+                                           :disabled="loading"
                                            :icon-name="getIconName(column)"
                                            @click="sort(column)"
                                            skin="bold"
