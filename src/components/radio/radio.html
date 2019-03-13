@@ -9,18 +9,18 @@
               'm--is-inline': propInline,
               'm--is-align-center': propVerticalAlign === 'center' }">
     <input class="m-radio__hidden"
-           :id="radioID"
-           :value="value"
-           :name="propName"
-           :disabled="propDisabled || propReadOnly"
-           :aria-hidden="propDisabled"
            @focus="onFocus"
            @blur="onBlur"
+           :aria-hidden="propDisabled"
+           :disabled="propDisabled || propReadOnly"
+           :id="radioID"
+           :name="propName"
+           :value="value"
            v-model="model"
            type="radio">
     <label class="m-radio__wrap"
-           :for="radioID"
-           ref="label">
+           ref="label"
+           :for="radioID">
         <span class="m-radio__input"
               :style="{ 'margin-top': propRadioMarginTop }"
               aria-hidden="true"></span>
