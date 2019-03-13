@@ -114,6 +114,8 @@ export class MTableSandbox extends Vue {
 
     sortedColumn: MSortedColumn = { dataProp: 'name', ascending: true };
 
+    loading: boolean = false;
+
     emptyRows: any[] = [];
 
     editData(id: string): void {
@@ -133,7 +135,13 @@ export class MTableSandbox extends Vue {
     }
 
     launchSorting(): void {
-        this.$log.log(`Tri: dataProp: ${this.sortedColumn.dataProp} - ascending: ${this.sortedColumn.ascending}`);
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false;
+            this.$log.log(`Tri: dataProp: ${this.sortedColumn.dataProp} - ascending: ${this.sortedColumn.ascending}`);
+        }, 700);
+
+
     }
 }
 
