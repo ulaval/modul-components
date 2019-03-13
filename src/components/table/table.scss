@@ -46,6 +46,18 @@ $m-table--icon-vertical-offset: -5px !default;
         }
     }
 
+    &.m--is-loading {
+        thead {
+            th {
+                &.m--is-sortable {
+                    .m-table__header-name {
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+
     tbody {
         color: $m-color--grey-darker;
 

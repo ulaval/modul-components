@@ -60,10 +60,12 @@ export class MTable extends ModulVue {
     }
 
     public sort(columnTable: MColumnTable): void {
-        let sortedColumn: MSortedColumn = new MSortedColumn();
-        sortedColumn.dataProp = columnTable.dataProp;
-        sortedColumn.ascending = !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending;
-        this.$emit('update:sortedColumn', sortedColumn);
+        if (!this.loading) {
+            let sortedColumn: MSortedColumn = new MSortedColumn();
+            sortedColumn.dataProp = columnTable.dataProp;
+            sortedColumn.ascending = !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending;
+            this.$emit('update:sortedColumn', sortedColumn);
+        }
     }
 
     public isColumnSorted(columnTable: MColumnTable): boolean {
