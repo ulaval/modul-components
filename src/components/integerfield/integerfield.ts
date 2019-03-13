@@ -39,9 +39,6 @@ export class MIntegerfield extends ModulVue {
     @Prop({ default: 0 })
     public maxLength: number;
 
-    @Prop({ default: true })
-    public lengthOverflow: boolean;
-
     public internalValue: number;
 
     private id: string = `mIntegerfield-${uuid.generate()}`;
@@ -78,7 +75,7 @@ export class MIntegerfield extends ModulVue {
     }
 
     private get maxLengthNumber(): number {
-        return !this.lengthOverflow && this.maxLength > 0 ? this.maxLength : Infinity;
+        return this.maxLength > 0 ? this.maxLength : Infinity;
     }
 
     private get hasIntegerfieldError(): boolean {
