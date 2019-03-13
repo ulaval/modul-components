@@ -15,7 +15,7 @@ const FIRST_PAGE: number = 1;
 const DELTA_DESKTOP: number = 4;
 const DELTA_MOBILE: number = 1;
 
-export interface PaginationItem {
+interface PaginationItem {
     label: string;
     clickable: boolean;
     ellipsis?: boolean;
@@ -31,16 +31,19 @@ export class MPagination extends ModulVue {
     public value: number;
 
     @Prop({ required: true })
-    public nbOfItems: number;
+    public itemsTotal: number;
 
     @Prop({ default: 20 })
-    public nbOfItemsPerPage: number;
+    public itemsPerPage: number;
 
     @Prop({ default: false })
     loading: boolean;
 
-    public get nbOfPages(): number {
-        return Math.ceil(this.nbOfItems / this.nbOfItemsPerPage);
+    @Emit('change')
+    goToPage(value: number): void { }
+
+    public get pagesTotal(): number {
+        return Math.ceil(this.itemsTotal / this.itemsPerPage);
     }
 
     public get paginationItems(): PaginationItem[] {
@@ -52,14 +55,14 @@ export class MPagination extends ModulVue {
         if (this.value <= FIRST_PAGE + delta) {
             let adjustDelta: number = (delta * 2) - (this.value - (FIRST_PAGE + 1));
             minDelta = FIRST_PAGE + 1;
-            maxDelta = this.value + adjustDelta > this.nbOfPages - 1 ? this.nbOfPages - 1 : this.value + adjustDelta;
-        } else if (this.value >= this.nbOfPages - delta) {
-            let adjustDelta: number = (delta * 2) - ((this.nbOfPages - 1) - this.value);
+            maxDelta = this.value + adjustDelta > this.pagesTotal - 1 ? this.pagesTotal - 1 : this.value + adjustDelta;
+        } else if (this.value >= this.pagesTotal - delta) {
+            let adjustDelta: number = (delta * 2) - ((this.pagesTotal - 1) - this.value);
             minDelta = this.value - adjustDelta < FIRST_PAGE + 1 ? FIRST_PAGE + 1 : this.value - adjustDelta;
-            maxDelta = this.nbOfPages - 1;
+            maxDelta = this.pagesTotal - 1;
         } else {
             minDelta = this.value - delta < FIRST_PAGE + 1 ? FIRST_PAGE + 1 : this.value - delta;
-            maxDelta = this.value + delta > this.nbOfPages - 1 ? this.nbOfPages - 1 : this.value + delta;
+            maxDelta = this.value + delta > this.pagesTotal - 1 ? this.pagesTotal - 1 : this.value + delta;
         }
 
         items.push({ label: FIRST_PAGE.toString(), clickable: this.isPageActive(FIRST_PAGE) ? false : true });
@@ -72,11 +75,11 @@ export class MPagination extends ModulVue {
             items.push({ label: i.toString(), clickable: this.isPageActive(i) ? false : true });
         }
 
-        if (maxDelta !== this.nbOfPages - 1) {
+        if (maxDelta !== this.pagesTotal - 1) {
             items.push({ label: this.$i18n.translate('m-pagination:ellipsis'), clickable: false, ellipsis: true });
         }
 
-        items.push({ label: this.nbOfPages.toString(), clickable: this.isPageActive(this.nbOfPages) ? false : true });
+        items.push({ label: this.pagesTotal.toString(), clickable: this.isPageActive(this.pagesTotal) ? false : true });
 
         return items;
     }
@@ -86,19 +89,16 @@ export class MPagination extends ModulVue {
     }
 
     public get lastPageSelected(): boolean {
-        return this.value === this.nbOfPages;
+        return this.value === this.pagesTotal;
     }
 
     public get status(): string {
-        return this.$i18n.translate('m-pagination:status', { nbVisible: this.value, nbTotal: this.nbOfPages, nbResultats: this.nbOfItems }, this.nbOfItems, undefined, undefined, FormatMode.Sprintf);
+        return this.$i18n.translate('m-pagination:status', { nbVisible: this.value, nbTotal: this.pagesTotal, nbResultats: this.itemsTotal }, this.itemsTotal, undefined, undefined, FormatMode.Sprintf);
     }
 
     public isPageActive(page: number): boolean {
         return page === this.value;
     }
-
-    @Emit('change')
-    goToPage(value: number): void { }
 }
 
 const PaginationPlugin: PluginObject<any> = {

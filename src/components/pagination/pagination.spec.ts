@@ -14,8 +14,8 @@ let wrapper: Wrapper<MPagination>;
 let localVue: VueConstructor<Vue>;
 
 let value: number = 1;
-let nbOfItems: number;
-let nbOfItemsPerPage: number;
+let itemsTotal: number;
+let itemsPerPage: number;
 let loading: boolean;
 
 const NB_OF_ITEMS_1PAGE: number = 10;
@@ -32,8 +32,8 @@ const initializeWrapper: () => any = () => {
         localVue: localVue,
         propsData: {
             value,
-            nbOfItems,
-            nbOfItemsPerPage,
+            itemsTotal,
+            itemsPerPage,
             loading
         }
     });
@@ -60,7 +60,7 @@ describe('MPagination', () => {
     describe(`Given only 1 page of results`, () => {
 
         beforeEach(() => {
-            nbOfItems = NB_OF_ITEMS_1PAGE;
+            itemsTotal = NB_OF_ITEMS_1PAGE;
             initializeWrapper();
         });
 
@@ -77,7 +77,7 @@ describe('MPagination', () => {
     describe(`Given enough items to have more than 1 page`, () => {
 
         beforeEach(() => {
-            nbOfItems = NB_OF_ITEMS_PAGES;
+            itemsTotal = NB_OF_ITEMS_PAGES;
             initializeWrapper();
         });
 
@@ -120,8 +120,8 @@ describe('MPagination', () => {
     describe(`Given showing less item per page`, () => {
 
         beforeEach(() => {
-            nbOfItems = NB_OF_ITEMS_PAGES;
-            nbOfItemsPerPage = NB_OF_ITEMS_PER_PAGE;
+            itemsTotal = NB_OF_ITEMS_PAGES;
+            itemsPerPage = NB_OF_ITEMS_PER_PAGE;
             initializeWrapper();
         });
 
@@ -137,7 +137,7 @@ describe('MPagination', () => {
     describe(`Given a lot of pages`, () => {
 
         beforeEach(() => {
-            nbOfItems = NB_OF_ITEMS_PAGES_ELLIPSIS;
+            itemsTotal = NB_OF_ITEMS_PAGES_ELLIPSIS;
             value = 5;
             initializeWrapper();
         });
@@ -154,7 +154,7 @@ describe('MPagination', () => {
     describe(`Given component is disabled while loading`, () => {
 
         beforeEach(() => {
-            nbOfItems = NB_OF_ITEMS_PAGES_ELLIPSIS;
+            itemsTotal = NB_OF_ITEMS_PAGES_ELLIPSIS;
             loading = true;
             initializeWrapper();
         });

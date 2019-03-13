@@ -6,7 +6,7 @@
     </p>
     <p>
         <m-pagination v-model="currentPage"
-                      nb-of-items="1150"
+                      items-total="1150"
                       @change="simulateBackEndCall()"
                       :loading="loading"></m-pagination>
     </p>
@@ -15,6 +15,6 @@
     <p class="m-u--margin-bottom">Show pagination with only one page of results</p>
     <p>
         <m-pagination v-model="currentSinglePage"
-                      nb-of-items="10"></m-pagination>
+                      items-total="10"></m-pagination>
     </p>
 </div>
