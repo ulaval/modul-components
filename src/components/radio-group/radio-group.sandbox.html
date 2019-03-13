@@ -1,7 +1,15 @@
 <div>
-    <h3>Add a margin below the radio button group</h3>
-    <p>From <a href="https://jira.dti.ulaval.ca/browse/MODUL-135">MODUL-135</a></p>
-    <m-radio-group error-message="Enim ipsum qui consectetur ea in non.">
+    <h3>Margin management between element in radio-group</h3>
+    <m-radio-group class="m-u--margin-top"
+                   error-message="Error message: Enim ipsum qui consectetur ea in non."
+                   label="Radio-group with label and error">
+        <m-radio value="1">1</m-radio>
+        <m-radio value="2">2</m-radio>
+        <m-radio value="3">3</m-radio>
+    </m-radio-group>
+
+    <m-radio-group class="m-u--margin-top"
+                   label="Radio-group with label">
         <m-radio value="1">1</m-radio>
         <m-radio value="2">2</m-radio>
         <m-radio value="3">3</m-radio>

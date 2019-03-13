@@ -2,12 +2,19 @@
 
 .m-radio-group {
     &__label {
-        margin-top: 0;
-        margin-bottom: $m-margin--s;
+        margin: 0;
         font-size: $m-font-size;
         font-weight: $m-font-weight--bold;
         display: flex;
         align-items: center;
+
+        ~ .m-radio-group__body {
+            margin-top: $m-spacing--s;
+        }
+    }
+
+    &__message {
+        transition: margin $m-transition-duration ease;
     }
 
     &__body {
@@ -22,8 +29,16 @@
         margin-left: $m-margin--xs;
     }
 
-    &__message {
-        margin-top: $m-margin--xs;
+    &.m--has-validation-message {
+        .m-radio-group__label {
+            ~ .m-radio-group__message {
+                margin-top: $m-spacing--xs;
+            }
+        }
+
+        .m-radio-group__body {
+            margin-top: $m-spacing--s;
+        }
     }
 
     &.m--is-inline {
@@ -31,7 +46,7 @@
             display: inline;
 
             + .m-radio {
-                margin-left: $m-padding--s;
+                margin-left: $m-spacing--s;
             }
         }
     }
@@ -39,7 +54,7 @@
     &:not(.m--is-inline) {
         .m-radio {
             + .m-radio {
-                margin-top: $m-margin--s;
+                margin-top: $m-spacing--s;
             }
 
             &-group__body {

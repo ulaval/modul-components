@@ -149,13 +149,13 @@ export class MMessagePage extends ModulVue {
         } else {
             switch (this.state) {
                 case MMessageState.Confirmation:
-                    return 'm-svg__confirmation';
+                    return 'm-svg__confirmation-white-filled';
                 case MMessageState.Information:
-                    return 'm-svg__information';
+                    return 'm-svg__information-white-filled';
                 case MMessageState.Warning:
-                    return 'm-svg__warning';
+                    return 'm-svg__warning-white-filled';
                 default:
-                    return 'm-svg__error';
+                    return 'm-svg__error-white-filled';
             }
         }
     }

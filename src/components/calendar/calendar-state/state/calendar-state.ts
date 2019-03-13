@@ -13,6 +13,11 @@ export enum CalendarEvent {
     YEAR_PREVIOUS = 'year-previous'
 }
 
+export enum CalendarType {
+    SINGLE_DATE = 'single-date',
+    DATE_RANGE = 'date-range'
+}
+
 export type DaySelectCallBack = (date: SingleDate | RangeDate) => void;
 
 export default interface CalendarState {
@@ -32,6 +37,7 @@ export interface Calendar {
     years: YearState[];
     months: MonthState[];
     days: DayState[];
+    type?: CalendarType;
 }
 
 export interface CalendarEvents {
@@ -58,12 +64,15 @@ export interface MonthState {
 }
 
 export interface DayState {
+    date: ModulDate;
     day: number;
     month: number;
     year: number;
     isDisabled: boolean;
     isToday: boolean;
     isSelected: boolean;
+    isSelectionStart: boolean;
+    isSelectionEnd: boolean;
     isInPreviousMonth: boolean;
     isInNextMonth: boolean;
     isHighlighted: boolean;
