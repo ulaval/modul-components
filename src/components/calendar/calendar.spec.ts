@@ -62,8 +62,8 @@ const initializeWrapper: Function = (methods: any = {}): void => {
 };
 
 /**
- * @chuckmah
- * CE TEST EST IGNORÉ
+ * @todo @chuckmah
+ * CE TEST EST IGNORÉ!!
  *
  * Il faudrait que le test ne soit pas depêndant de la journee courant lors des snapshot testing.
  */
