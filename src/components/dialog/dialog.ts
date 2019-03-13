@@ -8,7 +8,10 @@ import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import MessagePlugin, { MMessageState } from '../message/message';
 import WithRender from './dialog.html?style=./dialog.scss';
+import { MPopup } from '../popup/popup';
+import { MInputStyle } from '../input-style/input-style';
 
 
 
@@ -16,6 +19,15 @@ export enum MDialogWidth {
     Default = 'default',
     Large = 'large'
 }
+
+export enum MDialogState {
+    Default = 'default',
+    Warning = 'warning',
+    Confirmation = 'confirmation',
+    Information = 'information',
+    Error = 'error'
+}
+
 
 @WithRender
 @Component({
@@ -41,6 +53,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogWidth.Large
     })
     public width: string;
+
+    @Prop({
+        default: MDialogState.Default,
+        validator: value =>
+            value === MDialogState.Default ||
+            value === MDialogState.Warning ||
+            value === MDialogState.Confirmation ||
+            value === MDialogState.Information ||
+            value === MDialogState.Error
+    })
+    public type: MDialogState;
 
     public handlesFocus(): boolean {
         return true;
@@ -99,6 +122,28 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     private get hasWidthLarge(): boolean {
         return this.width === MDialogWidth.Large;
     }
+
+    private getState(): string {
+        let state: string = '';
+        switch (this.type) {
+            case MDialogState.Confirmation:
+                state = 'confirmation';
+                break;
+            case MDialogState.Information:
+                state = 'information';
+                break;
+            case MDialogState.Warning:
+                state = 'warning';
+                break;
+            case MDialogState.Error:
+                state = 'error';
+                break;
+            default:
+                break;
+        }
+        return state;
+    }
+
 }
 
 const DialogPlugin: PluginObject<any> = {
