@@ -156,7 +156,7 @@ exports[`MTable Given an empty table When loading Then should render correctly 1
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;"><span class="m-table__header-name">A</span>
-        <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+        <m-icon-button disabled="disabled" icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
     </tr>
