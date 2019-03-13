@@ -1,11 +1,12 @@
 <div class="m-toggle-buttons"
      ref="toggle">
-    <m-button v-for="button in buttons"
-              class="m-toggle-buttons__button"
+    <m-button class="m-toggle-buttons__button"
+              v-for="button in buttons"
+              @click="toggle(button)"
               :key="button.id"
               :skin="getSkin(button)"
               :disabled="disabled"
-              @click="toggle(button)">
+              :aria-pressed="button.pressed ? 'true' : 'false'">
         <slot :name="'button.' + button.id">{{ button.title }}</slot>
     </m-button>
 </div>
