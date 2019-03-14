@@ -123,7 +123,7 @@ $m-tooltip--max-height: 280px !default;
         }
     }
 
-    &__link {
-        border-bottom: 2px dotted currentColor;
+    &__link /deep/ .m-link__text span {
+        border-bottom: 1px dotted currentColor;
     }
 }
