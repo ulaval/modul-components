@@ -7,6 +7,7 @@ import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import IconPlugin from '../icon/icon';
 import WithRender from './dialog.html?style=./dialog.scss';
 
 export enum MDialogWidth {
@@ -39,6 +40,8 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public cancelLabel: string | undefined;
     @Prop({ default: true })
     public negativeLink: boolean;
+    @Prop()
+    public hint: string;
     @Prop({
         default: MDialogWidth.Default,
         validator: value =>
@@ -92,6 +95,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.$slots.footer;
     }
 
+    private get hasHint(): boolean {
+        return !!this.hint;
+    }
+
     private get hasTitle(): boolean {
         return !!this.title;
     }
@@ -142,6 +149,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 const DialogPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(ButtonPlugin);
+        v.use(IconPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.component(DIALOG_NAME, MDialog);

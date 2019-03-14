@@ -1,4 +1,5 @@
 @import 'commons';
+
 $m-dialog--max-width: 380px !default;
 $m-dialog--max-width--l: 500px !default;
 
@@ -126,10 +127,47 @@ $m-dialog--max-width--l: 500px !default;
             padding-top: 0;
         }
 
-        .m-message {
-            &.m--is-skin-page-light {
-                margin-top: -$m-spacing;
-                margin-bottom: $m-spacing;
+        .m-dialog {
+            &__hint {
+                border: 1px solid $m-color--hint;
+                padding: 10px 5px;
+
+                &--wrap {
+                    font-style: italic;
+                    font-size: 19px;
+                    line-height: 1;
+                    border: 1px solid $m-color--hint;
+                    margin: 4px;
+                    background-color: $m-color--white;
+                    padding: 4px;
+                }
+
+                &--icon {
+                    display: inline-block;
+
+                    .m-icon {
+                        color: $m-color--hint;
+                    }
+                }
+
+                &--text {
+                    display: inline;
+                }
+
+                &__message {
+                    + .m-dialog__hint--wrap {
+                        margin-top: $m-spacing;
+                    }
+                }
+
+                &__type-icon {
+                    .m-message {
+                        &.m--is-skin-page-light {
+                            margin-top: -$m-spacing;
+                            margin-bottom: $m-spacing;
+                        }
+                    }
+                }
             }
         }
     }
