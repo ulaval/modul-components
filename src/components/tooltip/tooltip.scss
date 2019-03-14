@@ -52,27 +52,19 @@ $m-tooltip--max-height: 280px !default;
         width: $m-touch-size;
         height: $m-touch-size;
         transition: color $m-transition-duration--s ease;
-
-        &:not(.m--is-link) {
-            color: $m-color--interactive;
-
-            &:hover,
-            &:focus {
-                color: $m-color--interactive-darker;
-            }
-        }
+        outline: none;
+        cursor: pointer;
+        color: $m-color--interactive;
+        stroke-width: 2; // Magic number : width of icon stroke
 
         &:hover,
         &:focus {
-            color: $m-color--black;
+            color: $m-color--interactive-darker;
         }
-
-        outline: none;
-        cursor: pointer;
     }
 
     &__body {
-        padding: $m-padding;
+        padding: $m-spacing $m-spacing--xl $m-spacing $m-spacing;
         background: $m-color--information;
         word-break: break-word;
         user-select: text;
