@@ -1,17 +1,18 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import { Enums } from '../../utils/enums/enums';
 import { ICON_BUTTON_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './icon-button.html?style=./icon-button.scss';
-
 
 export enum MIconButtonSkin {
     Light = 'light',
     Dark = 'dark',
     Primary = 'primary',
     Secondary = 'secondary',
-    Link = 'link'
+    Link = 'link',
+    Bold = 'bold'
 }
 
 @WithRender
@@ -19,12 +20,7 @@ export enum MIconButtonSkin {
 export class MIconButton extends Vue {
     @Prop({
         default: MIconButtonSkin.Light,
-        validator: value =>
-            value === MIconButtonSkin.Light ||
-            value === MIconButtonSkin.Dark ||
-            value === MIconButtonSkin.Primary ||
-            value === MIconButtonSkin.Secondary ||
-            value === MIconButtonSkin.Link
+        validator: value => Enums.toValueArray(MIconButtonSkin).indexOf(value) !== -1
     })
     public skin: MIconButtonSkin;
     @Prop()
@@ -80,6 +76,10 @@ export class MIconButton extends Vue {
 
     private get isSkinLink(): boolean {
         return this.skin === MIconButtonSkin.Link;
+    }
+
+    private get isSkinBold(): boolean {
+        return this.skin === MIconButtonSkin.Bold;
     }
 }
 
