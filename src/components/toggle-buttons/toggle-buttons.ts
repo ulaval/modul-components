@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import ButtonPlugin, { MButtonSkin } from '../button/button';
 import { TOGGLE_BUTTONS_NAME } from '../component-names';
 import WithRender from './toggle-buttons.html?style=./toggle-buttons.scss';
@@ -29,9 +29,12 @@ export class MToggleButtons extends Vue {
             this.multiple ? b : { ...b, pressed: false } :
             { ...b, pressed: !b.pressed }
         ));
-        this.$emit('button', { ...button, pressed: !button.pressed });
-        this.$nextTick(() => this.$emit('click', this.buttons.filter(b => !!b.pressed).map(b => b.id)));
+
+        this.onClick({ ...button, pressed: !button.pressed });
     }
+
+    @Emit('click')
+    private onClick(button: MToggleButton): void { }
 
     public getSkin(button: MToggleButton): string {
         return !button.pressed ? MButtonSkin.Secondary : MButtonSkin.Primary;
