@@ -34,7 +34,6 @@ $m-option-item--color-active: $m-color--grey-lightest !default;
     &__icon {
         transition: color $m-transition-duration ease;
         color: $m-color--grey;
-        width: 32px;
         padding-left: $m-padding;
     }
 

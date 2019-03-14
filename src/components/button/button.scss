@@ -1,5 +1,7 @@
 @import 'commons';
 
+$m-button--border-radius: 4px !default;
+
 .m-button {
     position: relative;
     display: inline-flex;
@@ -7,7 +9,7 @@
     text-align: center;
     vertical-align: middle;
     font-size: $m-font-size;
-    border-radius: 4px;
+    border-radius: $m-button--border-radius;
     padding: 11px $m-padding 11px $m-padding; // Magic number
     font-weight: $m-font-weight--bold;
 

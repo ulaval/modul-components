@@ -131,7 +131,7 @@ $m-tree-node--child-indentation: 20px;
 
     &.m-tree-node__has-children > .m-tree-node__item,
     &.m-tree-node__has-children.m--is-disabled > .m-tree-node__item {
-        background: $m-color--grey-lighter;
+        font-weight: $m-font-weight--bold;
         cursor: pointer;
     }
 

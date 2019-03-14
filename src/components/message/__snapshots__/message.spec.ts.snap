@@ -3,7 +3,7 @@
 exports[`MMessage should render correctly 1`] = `
 <div class="m-message m--is-state-confirmation m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body"> </div>
@@ -14,7 +14,7 @@ exports[`MMessage should render correctly 1`] = `
 exports[`MMessage should render correctly all possible states: Confirmation 1`] = `
 <div class="m-message m--is-state-confirmation m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body"> </div>
@@ -25,7 +25,7 @@ exports[`MMessage should render correctly all possible states: Confirmation 1`] 
 exports[`MMessage should render correctly all possible states: Error 1`] = `
 <div class="m-message m--is-state-error m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body"> </div>
@@ -36,7 +36,7 @@ exports[`MMessage should render correctly all possible states: Error 1`] = `
 exports[`MMessage should render correctly all possible states: Information 1`] = `
 <div class="m-message m--is-state-information m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body"> </div>
@@ -47,7 +47,7 @@ exports[`MMessage should render correctly all possible states: Information 1`] =
 exports[`MMessage should render correctly all possible states: Warning 1`] = `
 <div class="m-message m--is-state-warning m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body"> </div>
@@ -58,10 +58,10 @@ exports[`MMessage should render correctly all possible states: Warning 1`] = `
 exports[`MMessage should render correctly close button when prop is set 1`] = `
 <div class="m-message m--is-state-confirmation m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
-    <div class="m-message__body m--has-close-button"> </div> <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;"><svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
+    <div class="m-message__body m--has-close-button"> </div> <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
         <use aria-hidden="true"></use>
       </svg> </button>
   </div>
@@ -71,7 +71,7 @@ exports[`MMessage should render correctly close button when prop is set 1`] = `
 exports[`MMessage should render correctly content 1`] = `
 <div class="m-message m--is-state-confirmation m--is-skin-default">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body">
@@ -84,7 +84,7 @@ exports[`MMessage should render correctly content 1`] = `
 exports[`MMessage should render correctly light skin 1`] = `
 <div class="m-message m--is-state-confirmation m--is-skin-light">
   <div class="m-message__wrap">
-    <div class="m-message__icon"><svg aria-hidden="true" width="1em" height="1em" class="m-icon">
+    <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
     <div class="m-message__body"> </div>

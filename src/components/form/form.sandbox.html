@@ -570,4 +570,32 @@
         </p>
     </p>
     <hr />
+    <h3>Add and remove fields</h3>
+    <p class="m-u--margin-bottom">
+        <m-button @click="addField()"
+                  skin="secondary">Add field</m-button>
+        <m-button @click="removeField()"
+                  skin="secondary">Remove field</m-button>
+    </p>
+    <p>
+        <m-form :form="forms[17]"
+                @reset="reset(17)"
+                @submit="submit(17)">
+            <m-textfield v-for="(field, index) in forms[17].fields"
+                         :key="index"
+                         v-model.trim="field.value"
+                         label="A field"
+                         :error-message="field.errorMessage"
+                         v-m-form-field="field">
+            </m-textfield>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[17].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[17].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
 </div>

@@ -9,8 +9,8 @@ $m-tooltip--max-height: 280px !default;
     }
 
     &.m--is-mode-definition {
-        .m-tooltip__link {
-            border-bottom: 2px dotted currentColor;
+        .m-tooltip__link /deep/ .m-link__text > :first-child {
+            border-bottom: 1px dotted currentColor;
         }
     }
 
@@ -51,12 +51,12 @@ $m-tooltip--max-height: 280px !default;
 
     &__close-button {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 1px;
+        right: 1px;
     }
 
     &__body {
-        padding: $m-padding;
+        padding: $m-spacing $m-spacing--xl $m-spacing $m-spacing;
         background: $m-color--information;
         word-break: break-word;
         user-select: text;

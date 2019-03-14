@@ -24,6 +24,7 @@
 
         &.m--is-skin-light,
         &.m--is-skin-link,
+        &.m--is-skin-bold,
         &.m--is-skin-dark {
             &::before {
                 transition: width $m-transition-duration ease, height $m-transition-duration ease, opacity $m-transition-duration--s linear;
@@ -63,7 +64,8 @@
             }
         }
 
-        &.m--is-skin-light {
+        &.m--is-skin-light,
+        &.m--is-skin-bold {
             color: $m-color--grey-dark;
 
             &:hover {
@@ -73,6 +75,10 @@
             &::before {
                 background: $m-color--interactive-lightest;
             }
+        }
+
+        &.m--is-skin-bold {
+            stroke-width: 3;
         }
 
         &.m--is-skin-link {
@@ -110,7 +116,8 @@
     &.m--is-disabled {
         &.m--is-skin-light,
         &.m--is-skin-link,
-        &.m--is-skin-dark {
+        &.m--is-skin-dark,
+        &.m--is-skin-bold {
             cursor: inherit;
             color: $m-color--disabled;
         }
@@ -123,7 +130,8 @@
 
     &.m--is-skin-light,
     &.m--is-skin-link,
-    &.m--is-skin-dark {
+    &.m--is-skin-dark,
+    &.m--is-skin-bold {
         transition: color $m-transition-duration ease;
         cursor: pointer;
         border: none;

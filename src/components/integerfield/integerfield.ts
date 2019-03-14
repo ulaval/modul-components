@@ -36,7 +36,17 @@ export class MIntegerfield extends ModulVue {
     @Prop()
     public readonly: boolean;
 
-    @Prop({ default: 0 })
+    @Prop({
+        default: 16,
+        validator(value: any): boolean {
+            const numericValue: number = parseInt(value, 10);
+            if (!isNaN(numericValue) && numericValue <= 16) {
+                return true;
+            }
+
+            return false;
+        }
+    })
     public maxLength: number;
 
     public internalValue: number;

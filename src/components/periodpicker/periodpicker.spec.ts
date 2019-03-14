@@ -3,7 +3,7 @@ import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import ModulDate from '../../utils/modul-date/modul-date';
 import { DatePickerSupportedTypes } from './../datepicker/datepicker';
-import PeriodpickerPlugin, { MPeriodpicker, MPeriodpickerFromSlotProps, MPeriodpickerToSlotProps } from './periodpicker';
+import PeriodpickerPlugin, { MDateRange, MPeriodpicker, MPeriodpickerFromSlotProps, MPeriodpickerToSlotProps } from './periodpicker';
 
 let wrapper: Wrapper<MPeriodpicker>;
 let fromDateProp: DatePickerSupportedTypes;
@@ -13,7 +13,6 @@ let maxDateProp: DatePickerSupportedTypes;
 
 let currentFromScopeProps: MPeriodpickerFromSlotProps;
 let currentToScopeProps: MPeriodpickerToSlotProps;
-let isMqMinSValue: boolean = false;
 
 const initializeWrapper: () => Wrapper<MPeriodpicker> = () => {
     wrapper = shallowMount(MPeriodpicker, {
@@ -32,13 +31,25 @@ const initializeWrapper: () => Wrapper<MPeriodpicker> = () => {
             second(props: MPeriodpickerToSlotProps): void {
                 currentToScopeProps = props;
             }
-        },
-        computed: {
-            isMqMinS: { get(): boolean { return isMqMinSValue; } }
         }
     });
 
     return wrapper;
+};
+
+const expectSelectionEnd: (expectedValue?: MDateRange) => void = (expectedValue: MDateRange) => {
+    expect(wrapper.vm.selecting).toBe(false);
+    expect(wrapper.vm.fromIsFocused).toBe(false);
+    expect(wrapper.vm.toIsFocused).toBe(false);
+
+    if (expectedValue) {
+        expect(wrapper.emitted('input')[0][0]).toEqual(expectedValue);
+    }
+};
+
+const expectNoSelectionEnd: () => void = () => {
+    expect(wrapper.vm.selecting).toBe(true);
+    expect(wrapper.emitted('input')).toBeUndefined();
 };
 
 describe(`m-periodpicker`, () => {
@@ -51,8 +62,6 @@ describe(`m-periodpicker`, () => {
         minDateProp = undefined as any;
         maxDateProp = undefined as any;
 
-        isMqMinSValue = false;
-
         currentFromScopeProps = undefined as any;
     });
 
@@ -60,6 +69,65 @@ describe(`m-periodpicker`, () => {
         initializeWrapper();
 
         expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+    });
+
+    it(`should show closed / unfocused pickers by default`, () => {
+        initializeWrapper();
+
+        expect(currentFromScopeProps.props.focus).toBe(false);
+        expect(currentToScopeProps.props.focus).toBe(false);
+    });
+
+    it(`should open dateFrom picker only when opening dateFrom picker`, () => {
+        initializeWrapper();
+
+        currentFromScopeProps.handlers.open();
+
+        expect(currentFromScopeProps.props.focus).toBe(true);
+        expect(currentToScopeProps.props.focus).toBe(false);
+    });
+
+    it(`should open dateTo picker only when opening dateTo picker`, () => {
+        initializeWrapper();
+
+        currentToScopeProps.handlers.open();
+
+        expect(currentFromScopeProps.props.focus).toBe(false);
+        expect(currentToScopeProps.props.focus).toBe(true);
+    });
+
+    it(`should end selection when closing dateFrom picker without changing any value`, () => {
+        initializeWrapper();
+
+        currentFromScopeProps.handlers.open();
+        currentFromScopeProps.handlers.close();
+
+        expectSelectionEnd();
+    });
+
+    it(`should end selection when closing dateTo picker without changing any value`, () => {
+        initializeWrapper();
+
+        currentToScopeProps.handlers.open();
+        currentToScopeProps.handlers.close();
+
+        expectSelectionEnd();
+    });
+
+    it(`should end selection when emptying dateFrom picker value`, () => {
+        initializeWrapper();
+
+        currentFromScopeProps.handlers.change(undefined);
+
+        expectSelectionEnd();
+    });
+
+    it(`should end selection when emptying dateTo picker value`, () => {
+        initializeWrapper();
+
+        currentToScopeProps.handlers.change(undefined);
+
+        expectSelectionEnd();
     });
 
     describe(`given no props are provided`, () => {
@@ -79,27 +147,68 @@ describe(`m-periodpicker`, () => {
             expect(currentToScopeProps.props.max).toBe(undefined);
         });
 
-        it(`should update periodpicker value when datefrom change`, () => {
-            initializeWrapper();
+        describe(`given dateFrom selector is open`, () => {
+            beforeEach(() => {
+                initializeWrapper();
+                currentFromScopeProps.handlers.open();
+            });
 
-            const newDateFromValue: DatePickerSupportedTypes = new Date();
-            currentFromScopeProps.handlers.change(newDateFromValue);
+            it(`should end selection when emptying the value`, () => {
+                currentFromScopeProps.handlers.change(undefined);
 
-            expect(wrapper.emitted('input')[0][0]).toEqual({
-                from: newDateFromValue,
-                to: undefined
+                expectSelectionEnd({ from: undefined, to: undefined });
+            });
+
+            it(`should not end selection and start dateTo pick when changing dateFrom the value`, () => {
+                currentFromScopeProps.handlers.change(new Date());
+
+                expectNoSelectionEnd();
+                expect(wrapper.vm.fromIsFocused).toBe(false);
+                expect(wrapper.vm.toIsFocused).toBe(true);
+            });
+
+            it(`should display newly selected date when changing dateFrom value`, () => {
+                const newFromDate: Date = new Date();
+                currentFromScopeProps.handlers.change(newFromDate);
+
+                expect(currentFromScopeProps.props.value).toEqual(newFromDate);
+            });
+
+            it(`should emit the new value when closing dateTo picker`, () => {
+                const newFromDate: Date = new Date();
+                currentFromScopeProps.handlers.change(newFromDate);
+                currentToScopeProps.handlers.close();
+
+                expectSelectionEnd({ from: newFromDate, to: undefined });
+            });
+
+            it(`should emit the new value when changing dateToValue`, () => {
+                const newFromDate: Date = new Date();
+                const newToDate: Date = new Date();
+                currentFromScopeProps.handlers.change(newFromDate);
+                currentToScopeProps.handlers.change(newToDate);
+
+                expectSelectionEnd({ from: newFromDate, to: new ModulDate(newToDate).endOfDay() });
             });
         });
 
-        it(`should update periodpicker value when dateTo change`, () => {
-            initializeWrapper();
-            const newDateToValue: DatePickerSupportedTypes = new Date();
+        describe(`given dateTo selector is open`, () => {
+            beforeEach(() => {
+                initializeWrapper();
+                currentToScopeProps.handlers.open();
+            });
 
-            currentToScopeProps.handlers.change(newDateToValue);
+            it(`should end selection when emptying the value`, () => {
+                currentToScopeProps.handlers.change(undefined);
 
-            expect(wrapper.emitted('input')[0][0]).toEqual({
-                from: undefined,
-                to: new ModulDate(newDateToValue).endOfDay()
+                expectSelectionEnd({ from: undefined, to: undefined });
+            });
+
+            it(`should emit the new value when changing dateToValue`, () => {
+                const newToDate: Date = new Date();
+                currentToScopeProps.handlers.change(newToDate);
+
+                expectSelectionEnd({ from: undefined, to: new ModulDate(newToDate).endOfDay() });
             });
         });
     });
@@ -112,7 +221,7 @@ describe(`m-periodpicker`, () => {
             maxDateProp = new Date(new Date().setFullYear(fromDateProp.getFullYear() + 1));
         });
 
-        it(`should pass down data to the first date`, () => {
+        it(`should pass down empty data to the first date`, () => {
             initializeWrapper();
 
             expect(currentFromScopeProps.props.value).toBe(fromDateProp);
@@ -120,7 +229,7 @@ describe(`m-periodpicker`, () => {
             expect(currentFromScopeProps.props.max).toBe(maxDateProp);
         });
 
-        it(`should pass down data to the second date`, () => {
+        it(`should pass down empty data to the second date`, () => {
             initializeWrapper();
 
             expect(currentToScopeProps.props.value).toBe(toDateProp);
@@ -128,86 +237,69 @@ describe(`m-periodpicker`, () => {
             expect(currentToScopeProps.props.max).toBe(maxDateProp);
         });
 
-        it(`should update periodpicker value when datefrom change`, () => {
-            initializeWrapper();
+        describe(`given dateFrom selector is open`, () => {
+            beforeEach(() => {
+                initializeWrapper();
+                currentFromScopeProps.handlers.open();
+            });
 
-            const newDateFromValue: DatePickerSupportedTypes = new Date();
-            currentFromScopeProps.handlers.change(newDateFromValue);
+            it(`should end selection when emptying the value`, () => {
+                currentFromScopeProps.handlers.change(undefined);
 
-            expect(wrapper.emitted('input')[0][0]).toEqual({
-                from: newDateFromValue,
-                to: new ModulDate(toDateProp).endOfDay()
+                expectSelectionEnd({ from: undefined, to: toDateProp });
+            });
+
+            it(`should not end selection and start dateTo pick when changing dateFrom the value`, () => {
+                currentFromScopeProps.handlers.change(new Date());
+
+                expectNoSelectionEnd();
+                expect(wrapper.vm.fromIsFocused).toBe(false);
+                expect(wrapper.vm.toIsFocused).toBe(true);
+            });
+
+            it(`should display newly selected date when changing dateFrom value`, () => {
+                const newFromDate: Date = new Date();
+                currentFromScopeProps.handlers.change(newFromDate);
+
+                expect(currentFromScopeProps.props.value).toEqual(newFromDate);
+            });
+
+            it(`should emit the new value when closing dateTo picker`, () => {
+                const newFromDate: Date = new Date();
+                currentFromScopeProps.handlers.change(newFromDate);
+                currentToScopeProps.handlers.close();
+
+                expectSelectionEnd({ from: newFromDate, to: toDateProp });
+            });
+
+            it(`should emit the new value when changing dateToValue`, () => {
+                const newFromDate: Date = new Date();
+                const newToDate: Date = new Date();
+                currentFromScopeProps.handlers.change(newFromDate);
+                currentToScopeProps.handlers.change(newToDate);
+
+                expectSelectionEnd({ from: newFromDate, to: new ModulDate(newToDate).endOfDay() });
             });
         });
 
-        it(`should update periodpicker value when dateTo change`, () => {
-            initializeWrapper();
-            const newDateToValue: DatePickerSupportedTypes = new Date();
-
-            currentToScopeProps.handlers.change(newDateToValue);
-
-            expect(wrapper.emitted('input')[0][0]).toEqual({
-                from: fromDateProp,
-                to: new ModulDate(newDateToValue).endOfDay()
+        describe(`given dateTo selector is open`, () => {
+            beforeEach(() => {
+                initializeWrapper();
+                currentToScopeProps.handlers.open();
             });
-        });
-    });
 
-    describe(`given current device is not a small screen`, () => {
-        beforeEach(() => {
-            isMqMinSValue = true;
-        });
+            it(`should end selection when emptying the value`, () => {
+                currentToScopeProps.handlers.change(undefined);
 
-        it(`should focus the second date when datefrom change and device is not mobile`, async () => {
-            initializeWrapper();
+                expectSelectionEnd({ from: fromDateProp, to: undefined });
+            });
 
-            const newDateFromValue: DatePickerSupportedTypes = new Date();
-            currentFromScopeProps.handlers.change(newDateFromValue);
-            await wrapper.vm.$nextTick();
+            it(`should emit the new value when changing dateToValue`, () => {
+                const newToDate: Date = new Date();
+                currentToScopeProps.handlers.change(newToDate);
 
-            expect(currentToScopeProps.props.focus).toBe(true);
-        });
-
-        it(`should unfocus the second date when the first date is opened`, () => {
-            initializeWrapper();
-
-            currentFromScopeProps.handlers.change(new Date());
-            currentFromScopeProps.handlers.open();
-
-            expect(currentToScopeProps.props.focus).toBe(false);
-        });
-
-        it(`should unfocus the second date when the second date is closed`, () => {
-            initializeWrapper();
-
-            currentFromScopeProps.handlers.change(new Date());
-            currentToScopeProps.handlers.close();
-
-            expect(currentToScopeProps.props.focus).toBe(false);
-        });
-
-        it(`should unfocus the second date when it's value is changed`, () => {
-            initializeWrapper();
-
-            currentFromScopeProps.handlers.change(new Date());
-            currentToScopeProps.handlers.change(new Date());
-
-            expect(currentToScopeProps.props.focus).toBe(false);
-        });
-    });
-
-    describe(`given current device is> a small screen`, () => {
-        beforeEach(() => {
-            isMqMinSValue = false;
-        });
-
-        it(`should not focus the second date when datefrom change and device is mobile`, () => {
-            initializeWrapper();
-
-            const newDateFromValue: DatePickerSupportedTypes = new Date();
-            currentFromScopeProps.handlers.change(newDateFromValue);
-
-            expect(currentToScopeProps.props.focus).toBe(false);
+                expectSelectionEnd({ from: fromDateProp, to: new ModulDate(newToDate).endOfDay() });
+            });
         });
     });
 });
