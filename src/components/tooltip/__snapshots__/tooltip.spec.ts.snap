@@ -2,11 +2,9 @@
 
 exports[`tooltip should render correctly 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
+  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body"></div>
   </div>
 </m-popup-stub>
@@ -14,11 +12,9 @@ exports[`tooltip should render correctly 1`] = `
 
 exports[`tooltip should render correctly when close title is set 1`] = `
 <m-popup-stub open="open" placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="test_close" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-expanded="true" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
+  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="test_close" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-expanded="true" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="test_close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body"></div>
   </div>
 </m-popup-stub>
@@ -26,8 +22,8 @@ exports[`tooltip should render correctly when close title is set 1`] = `
 
 exports[`tooltip should render correctly when close-button is false 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
+  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon">
     <div class="m-tooltip__body"></div>
   </div>
 </m-popup-stub>
@@ -35,11 +31,9 @@ exports[`tooltip should render correctly when close-button is false 1`] = `
 
 exports[`tooltip should render correctly when disabled 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" disabled="disabled" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip m--is-disabled">
-  <m-icon-button-stub skin="light" disabled="disabled" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
+  <m-icon-button-stub skin="light" disabled="disabled" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body"></div>
   </div>
 </m-popup-stub>
@@ -47,11 +41,9 @@ exports[`tooltip should render correctly when disabled 1`] = `
 
 exports[`tooltip should render correctly when is open 1`] = `
 <m-popup-stub open="open" placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:close" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-expanded="true" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
+  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:close" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-expanded="true" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body"></div>
   </div>
 </m-popup-stub>
@@ -59,23 +51,19 @@ exports[`tooltip should render correctly when is open 1`] = `
 
 exports[`tooltip should render correctly when mode is link 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-link-stub url="/" mode="button" skin="default" iconPosition="left" iconSize="12px" tabindex="0" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-haspopup="true" class="m-tooltip__link">Link</m-link-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
-    <div class="m-tooltip__body m--is-link">Tooltip text</div>
+  <m-link-stub url="/" mode="button" underline="true" skin="default" iconPosition="left" iconSize="12px" tabindex="0" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" class="m-tooltip__link">Link</m-link-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
+    <div class="m-tooltip__body">Tooltip text</div>
   </div>
 </m-popup-stub>
 `;
 
 exports[`tooltip should render correctly when open title is set 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="test_open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
+  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="test_open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body"></div>
   </div>
 </m-popup-stub>
@@ -83,11 +71,9 @@ exports[`tooltip should render correctly when open title is set 1`] = `
 
 exports[`tooltip should render correctly with default slot 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" aria-haspopup="true" class="m-tooltip__icon"></m-icon-button-stub>
-  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container">
-    <div title="m-tooltip:close" class="m-tooltip__close-button">
-      <m-icon-stub name="m-svg__close-clear" size="12px"></m-icon-stub>
-    </div>
+  <m-icon-button-stub skin="light" buttonSize="22px" iconName="m-svg__information" iconSize="20px" ripple="true" title="m-tooltip:open" id="mTooltip-uuid" aria-controls="mTooltip-uuid-controls" class="m-tooltip__icon"></m-icon-button-stub>
+  <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--is-mode-icon m--has-close-button">
+    <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body">Tooltip text</div>
   </div>
 </m-popup-stub>
