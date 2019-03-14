@@ -1,7 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
-import { MButtonSkin } from '../button/button';
+import ButtonPlugin, { MButtonSkin } from '../button/button';
 import { TOGGLE_BUTTONS_NAME } from '../component-names';
 import WithRender from './toggle-buttons.html?style=./toggle-buttons.scss';
 
@@ -41,6 +41,7 @@ export class MToggleButtons extends Vue {
 const ToggleButtonsPlugin: PluginObject<any> = {
     install(v, options): void {
         v.prototype.$log.debug(TOGGLE_BUTTONS_NAME, 'plugin.install');
+        v.use(ButtonPlugin);
         v.component(TOGGLE_BUTTONS_NAME, MToggleButtons);
     }
 };

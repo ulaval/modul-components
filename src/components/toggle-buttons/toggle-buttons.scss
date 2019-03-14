@@ -1,6 +1,5 @@
 @import 'commons';
-
-$m-toggle-buttons--border-radius: 4px !default;
+@import '../button/button.scss';
 
 .m-toggle-buttons {
     display: inline-block;
@@ -13,11 +12,11 @@ $m-toggle-buttons--border-radius: 4px !default;
         }
 
         &:nth-child(1) {
-            border-radius: $m-toggle-buttons--border-radius 0 0 $m-toggle-buttons--border-radius;
+            border-radius: $m-button--border-radius 0 0 $m-button--border-radius;
         }
 
         &:nth-last-child(1) {
-            border-radius: 0 $m-toggle-buttons--border-radius $m-toggle-buttons--border-radius 0;
+            border-radius: 0 $m-button--border-radius $m-button--border-radius 0;
         }
     }
 }
