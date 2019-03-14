@@ -1,0 +1,74 @@
+@import 'commons';
+
+$m-pagination--indicator-height: 6px !default;
+$m-pagination--indicator-margin: 8px !default;
+$m-pagination--touch-size: 40px !default; // Magic number, 44px trop large pour afficher suffisament d'items en mobile
+
+.m-pagination {
+    text-align: center;
+
+    &__status {
+        color: $m-color--grey;
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__pages {
+        display: flex;
+        margin: 0;
+    }
+
+    &__indicator {
+        width: 100%;
+        height: $m-pagination--indicator-height;
+        margin-top: $m-pagination--indicator-margin;
+        background: $m-color--grey-lighter;
+    }
+
+    &__item {
+        position: relative;
+
+        .m-pagination__item--link,
+        .m-pagination__item--text {
+            display: flex;
+            width: $m-pagination--touch-size;
+            height: $m-touch-size;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &.m--is-active {
+            &::before {
+                content: '';
+                position: absolute;
+                top: -$m-pagination--indicator-height;
+                left: 0;
+                right: 0;
+                height: $m-pagination--indicator-height;
+                width: 100%;
+                background: $m-color--grey;
+            }
+        }
+    }
+
+    &__item--ellipsis {
+        .m-pagination__item--text {
+            width: $m-touch-size/2;
+        }
+    }
+
+    &.m--is-loading {
+        color: $m-color--disabled;
+
+        .m-pagination__item {
+            &.m--is-active {
+                &::before {
+                    background: $m-color--grey-light;
+                }
+            }
+        }
+    }
+}

@@ -18,6 +18,12 @@ exports[`MIconButton should render correctly icon size when set 1`] = `
   </svg> </button>
 `;
 
+exports[`MIconButton should render correctly selected skin: Bold 1`] = `
+<button type="button" class="m-icon-button m--is-skin-bold m--has-ripple" style="width:44px;height:44px;font-size:20px;"><svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
+    <use aria-hidden="true"></use>
+  </svg> </button>
+`;
+
 exports[`MIconButton should render correctly selected skin: Dark 1`] = `
 <button type="button" class="m-icon-button m--is-skin-dark m--has-ripple" style="width:44px;height:44px;font-size:20px;"><svg aria-hidden="true" width="1em" height="1em" class="m-icon m-icon-button__icon">
     <use aria-hidden="true"></use>

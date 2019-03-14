@@ -4,6 +4,7 @@
                'm--is-skin-dark': isSkinDark,
                'm--is-skin-primary': isSkinPrimary,
                'm--is-skin-secondary': isSkinSecondary,
+               'm--is-skin-bold': isSkinBold,
                'm--has-ripple': ripple,
                'm--is-disabled': disabled }"
         :disabled="disabled"
@@ -13,6 +14,11 @@
         @blur="onBlur"
         :title="title"
         :style="{ width: buttonSize, height: buttonSize, fontSize: iconSize }">
-    <m-icon ref="icon" class="m-icon-button__icon" :name="iconName"></m-icon>
-    <span class="m-icon-button__hidden" v-if="hasSlot"><slot></slot></span>
+    <m-icon ref="icon"
+            class="m-icon-button__icon"
+            :name="iconName"></m-icon>
+    <span class="m-icon-button__hidden"
+          v-if="hasSlot">
+        <slot></slot>
+    </span>
 </button>

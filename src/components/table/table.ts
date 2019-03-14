@@ -16,6 +16,12 @@ export interface MColumnTable {
     title: string;
     dataProp: string;
     width?: string;
+    sortable?: boolean;
+}
+
+export class MSortedColumn {
+    dataProp: string;
+    ascending: boolean;
 }
 
 @WithRender
@@ -38,6 +44,9 @@ export class MTable extends ModulVue {
     @Prop({ default: false })
     loading: boolean;
 
+    @Prop({ default: undefined })
+    sortedColumn: MSortedColumn | undefined;
+
     i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
     i18nLoading: string = this.$i18n.translate('m-table:loading');
     i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
@@ -48,6 +57,27 @@ export class MTable extends ModulVue {
 
     get isEmpty(): boolean {
         return this.rows.length === 0 && !this.loading;
+    }
+
+    public sort(columnTable: MColumnTable): void {
+        if (!this.loading) {
+            let sortedColumn: MSortedColumn = new MSortedColumn();
+            sortedColumn.dataProp = columnTable.dataProp;
+            sortedColumn.ascending = !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending;
+            this.$emit('update:sortedColumn', sortedColumn);
+        }
+    }
+
+    public isColumnSorted(columnTable: MColumnTable): boolean {
+        if (this.sortedColumn) {
+            return columnTable.dataProp === this.sortedColumn.dataProp;
+        } else {
+            return false;
+        }
+    }
+
+    public getIconName(columnTable: MColumnTable): string {
+        return !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || this.sortedColumn.ascending ? 'm-svg__arrow-thin--up' : 'm-svg__arrow-thin--down';
     }
 
     columnWidth(col: MColumnTable): { width: string } | '' {
