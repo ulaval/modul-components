@@ -43,7 +43,8 @@ $m-tooltip--max-height: 280px !default;
             height: $m-font-size;
             color: $m-color--interactive-light;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 color: $m-color--interactive;
             }
         }
