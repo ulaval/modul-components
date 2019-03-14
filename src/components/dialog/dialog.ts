@@ -1,4 +1,3 @@
-
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -8,12 +7,7 @@ import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
-import MessagePlugin, { MMessageState } from '../message/message';
 import WithRender from './dialog.html?style=./dialog.scss';
-import { MPopup } from '../popup/popup';
-import { MInputStyle } from '../input-style/input-style';
-
-
 
 export enum MDialogWidth {
     Default = 'default',
@@ -27,7 +21,6 @@ export enum MDialogState {
     Information = 'information',
     Error = 'error'
 }
-
 
 @WithRender
 @Component({
