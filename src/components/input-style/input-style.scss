@@ -138,8 +138,8 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__label {
         position: relative;
-        z-index: 1;
         transform-origin: 0 0;
+        z-index: 1;
         transform: translate3d(0, 0, 0);
         align-items: center;
         font-size: $m-font-size;

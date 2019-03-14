@@ -1,52 +1,51 @@
 <m-popup class="m-tooltip"
          :class="{ 'm--is-disabled': disabled }"
+         :class-name="className"
+         :close-on-backdrop="true"
+         :focus-management="isMqMaxS"
          :open.sync="propOpen"
          :padding="false"
          :background="false"
          :placement="placement"
          :disabled="disabled"
-         :close-on-backdrop="true"
-         :class-name="className"
-         :focus-management="isMqMaxS"
          @open="onOpen"
          @close="onClose">
-    <m-icon-button :id="id"
+    <m-icon-button v-if="propMode === 'icon'"
+                   :id="id"
                    class="m-tooltip__icon"
-                   @click="onClick"
-                   aria-haspopup="true"
                    :aria-controls="ariaControls"
                    :aria-expanded="propOpen"
-                   slot="trigger"
-                   icon-name="m-svg__information"
-                   :title="propTitle"
-                   button-size="22px"
                    :disabled="disabled"
-                   v-if="propMode === 'icon'">
+                   :title="propTitle"
+                   @click="onClick"
+                   aria-haspopup="true"
+                   icon-name="m-svg__information"
+                   button-size="22px"
+                   slot="trigger">
     </m-icon-button>
-    <m-link :id="id"
+    <m-link v-if="propMode !== 'icon'"
+            :id="id"
             class="m-tooltip__link"
-            @click="onClick"
-            aria-haspopup="true"
             :aria-controls="ariaControls"
             :aria-expanded="propOpen"
-            slot="trigger"
-            mode="button"
-            :underline="false"
             :disabled="disabled"
-            v-if="propMode !== 'icon'">
+            :underline="false"
+            @click="onClick"
+            aria-haspopup="true"
+            mode="button"
+            slot="trigger">
         <slot name="link"></slot>
     </m-link>
     <div :id="ariaControls"
          class="m-tooltip__body-container"
          :aria-labelledby="id">
-        <div class="m-tooltip__close-button"
-             tabindex="0"
+        <div v-if="propCloseButton"
+             class="m-tooltip__close-button"
+             :title="'m-tooltip:close' | f-m-i18n"
              @keyup.enter="close"
-             @click="close"
-             v-if="propCloseButton">
+             @click="close">
             <m-icon name="m-svg__close-clear"
-                    size="12px"
-                    :svg-tile="getCloseTitle()"></m-icon>
+                    size="12px"></m-icon>
         </div>
         <div class="m-tooltip__body"
              :class="{ 'm--is-link': propMode === 'link'
