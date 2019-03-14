@@ -76,60 +76,60 @@ $m-tooltip--max-height: 280px !default;
 
         @include m-scrollbar();
     }
+}
 
-    &__body-container {
-        &.m--has-close-button {
-            position: relative;
+.m-tooltip__body-container {
+    &.m--has-close-button {
+        position: relative;
 
-            .m-tooltip__body {
-                padding-right: $m-padding--l;
+        .m-tooltip__body {
+            padding-right: $m-padding--l;
+        }
+    }
+
+    &.m--is-size-large {
+        .m-tooltip__body {
+            width: $m-tooltip--width--l;
+        }
+    }
+
+    &:not(.m--is-mode-icon) {
+        .m-tooltip__body {
+            background: $m-color--white;
+
+            @media (min-width: $m-mq--min--s) {
+                border: 1px solid $m-color--grey-light;
+            }
+        }
+    }
+
+    &.m--is-mode-icon {
+        .m-tooltip__body {
+            @media (max-width: $m-mq--max--s) {
+                position: relative;
+
+                &::after {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    content: '';
+                    height: 1px;
+                    background: $m-color--interactive;
+                }
+            }
+
+            @media (min-width: $m-mq--min--s) {
+                border: 1px solid $m-color--interactive;
             }
         }
 
-        &.m--is-size-large {
-            .m-tooltip__body {
-                width: $m-tooltip--width--l;
-            }
-        }
+        .m-tooltip__close-button {
+            color: $m-color--interactive;
 
-        &:not(.m--is-mode-icon) {
-            .m-tooltip__body {
-                background: $m-color--white;
-
-                @media (min-width: $m-mq--min--s) {
-                    border: 1px solid $m-color--grey-light;
-                }
-            }
-        }
-
-        &.m--is-mode-icon {
-            .m-tooltip__body {
-                @media (max-width: $m-mq--max--s) {
-                    position: relative;
-
-                    &::after {
-                        position: fixed;
-                        top: 0;
-                        right: 0;
-                        left: 0;
-                        content: '';
-                        height: 1px;
-                        background: $m-color--interactive;
-                    }
-                }
-
-                @media (min-width: $m-mq--min--s) {
-                    border: 1px solid $m-color--interactive;
-                }
-            }
-
-            .m-tooltip__close-button {
-                color: $m-color--interactive;
-
-                &:hover,
-                &:focus {
-                    color: $m-color--interactive-darker;
-                }
+            &:hover,
+            &:focus {
+                color: $m-color--interactive-darker;
             }
         }
     }
