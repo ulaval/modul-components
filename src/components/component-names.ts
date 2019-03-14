@@ -87,6 +87,7 @@ export const TEXTAREA_NAME: string = 'm-textarea';
 export const TEXTFIELD_NAME: string = 'm-textfield';
 export const TIMEPICKER_NAME: string = 'm-timepicker';
 export const TOAST: string = 'm-toast';
+export const TOGGLE_BUTTONS_NAME: string = 'm-toggle-buttons';
 export const TOOLTIP_NAME: string = 'm-tooltip';
 export const TOUCH_NAME: string = 'm-touch';
 export const TREE_NAME: string = 'm-tree';

@@ -34,14 +34,7 @@ export interface RadioGroup {
     updateValue(value: string): void;
 }
 
-export interface ButtonGroup extends RadioGroup {
-    fullSize: boolean;
-}
-
 export abstract class BaseRadioGroup extends ModulVue {
-}
-
-export abstract class BaseButtonGroup extends BaseRadioGroup {
 }
 
 @WithRender
@@ -78,18 +71,6 @@ export class MRadio extends ModulVue {
     @Prop()
     public readOnly: boolean;
 
-    // ----- For Button Group -----
-    @Prop()
-    public iconName: string;
-    @Prop({
-        default: MRadioPosition.Left,
-        validator: value =>
-            value === MRadioPosition.Left ||
-            value === MRadioPosition.Right
-    })
-    public iconPosition: MRadioPosition;
-
-    // ---------------------------
     public radioID: string = uuid.generate();
 
     private hasFocus: boolean = false;
@@ -136,10 +117,6 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullSize(): boolean {
-        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullSize : false;
-    }
-
     protected get model(): string {
         return this.isGroup() ? this.parentGroup.getValue() : this.modelValue;
     }
@@ -156,7 +133,7 @@ export class MRadio extends ModulVue {
         if (this.readOnly !== undefined) {
             return this.readOnly;
         } else {
-            return this.isGroup() ? (this.parentGroup as ButtonGroup).readOnly : false;
+            return this.isGroup() ? this.parentGroup.readOnly : false;
         }
     }
 
@@ -164,8 +141,8 @@ export class MRadio extends ModulVue {
         if (this.hasParentGroup === undefined) {
             let parentGroup: BaseRadioGroup | undefined;
             parentGroup = this.getParent<BaseRadioGroup>(
-                p => p instanceof BaseRadioGroup || p instanceof BaseButtonGroup || // these will fail with Jest, but should pass in prod mode
-                    p.$options.name === 'MRadioGroup' || p.$options.name === 'MButtonGroup' // these are necessary for Jest, but the first two should pass in prod mode
+                p => p instanceof BaseRadioGroup || // these will fail with Jest, but should pass in prod mode
+                    p.$options.name === 'MRadioGroup' // these are necessary for Jest, but the first two should pass in prod mode
             );
             if (parentGroup) {
                 this.parentGroup = (parentGroup as any) as RadioGroup;
@@ -175,10 +152,6 @@ export class MRadio extends ModulVue {
             }
         }
         return !!this.hasParentGroup;
-    }
-
-    private isButton(): boolean {
-        return this.isGroup() && this.parentGroup instanceof BaseButtonGroup;
     }
 
     @Emit('focus')
@@ -195,14 +168,6 @@ export class MRadio extends ModulVue {
             this.parentGroup.onBlur(event);
         }
         this.hasFocus = false;
-    }
-
-    private hasIcon(): boolean {
-        return !!this.iconName;
-    }
-
-    private hasIconLeft(): boolean {
-        return this.iconPosition === MRadioPosition.Left;
     }
 }
 
