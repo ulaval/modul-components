@@ -20,4 +20,21 @@
     table {
         @include m-table();
     }
+
+    img {
+        max-width: 100%;
+        display: block;
+        margin: auto;
+        text-align: center;
+
+        &.fr-fil {
+            float: left;
+            margin-right: $m-spacing--s;
+        }
+
+        &.fr-fir {
+            float: right;
+            margin-left: $m-spacing--s;
+        }
+    }
 }
