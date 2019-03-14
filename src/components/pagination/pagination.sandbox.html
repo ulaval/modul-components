@@ -1,0 +1,20 @@
+<div>
+    <h3>Pagination : multipage</h3>
+    <p class="m-u--margin-bottom">Show pagination.
+        <br />
+        <span class="m-u--typo--precision">Simulate loading of 700ms on click.</span>
+    </p>
+    <p>
+        <m-pagination v-model="currentPage"
+                      items-total="1150"
+                      @change="simulateBackEndCall()"
+                      :loading="loading"></m-pagination>
+    </p>
+
+    <h3>Pagination : 1 page</h3>
+    <p class="m-u--margin-bottom">Show pagination with only one page of results</p>
+    <p>
+        <m-pagination v-model="currentSinglePage"
+                      items-total="10"></m-pagination>
+    </p>
+</div>

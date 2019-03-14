@@ -4,7 +4,7 @@ import ButtonPlugin from '../button/button';
 import CheckboxPlugin from '../checkbox/checkbox';
 import { TABLE_NAME } from '../component-names';
 import OptionPlugin from '../option/option';
-import TablePlugin, { MColumnTable } from './table';
+import TablePlugin, { MColumnTable, MSortedColumn } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
@@ -92,6 +92,30 @@ export class MTableSandbox extends Vue {
         }
     ];
 
+    sortableColumns: MColumnTable[] = [
+        {
+            id: 'name',
+            title: 'Name',
+            dataProp: 'name',
+            sortable: true
+        },
+        {
+            id: 'age',
+            title: 'Age',
+            dataProp: 'age',
+            sortable: true
+        },
+        {
+            id: 'username',
+            title: 'Username',
+            dataProp: 'username'
+        }
+    ];
+
+    sortedColumn: MSortedColumn = { dataProp: 'name', ascending: true };
+
+    loading: boolean = false;
+
     emptyRows: any[] = [];
 
     editData(id: string): void {
@@ -108,6 +132,16 @@ export class MTableSandbox extends Vue {
 
     onCheck(id: string): void {
         alert('Check: ' + id);
+    }
+
+    launchSorting(): void {
+        this.loading = true;
+        setTimeout(() => {
+            this.loading = false;
+            this.$log.log(`Tri: dataProp: ${this.sortedColumn.dataProp} - ascending: ${this.sortedColumn.ascending}`);
+        }, 700);
+
+
     }
 }
 

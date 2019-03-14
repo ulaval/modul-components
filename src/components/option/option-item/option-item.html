@@ -6,10 +6,15 @@
     role="option"
     @keydown.enter.prevent="onClick"
     @click.prevent="onClick">
-    <span class="m-option-item__icon" ref="icon" v-if="hasIcon">
-        <m-icon :name="iconName" v-if="hasIconNameProp"></m-icon>
+    <span v-if="hasIcon"
+          class="m-option-item__icon"
+          ref="icon">
+        <m-icon v-if="hasIconNameProp"
+                :name="iconName"
+                size="20px"></m-icon>
     </span>
-    <span class="m-option-item__text" ref="text">
+    <span class="m-option-item__text"
+          ref="text">
         <slot></slot>
     </span>
 </li>

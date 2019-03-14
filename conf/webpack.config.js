@@ -13,6 +13,7 @@ module.exports = function (env) {
 
     let isLib = !!(env && env.lib);
     let isSilent = !!(env && env.silent);
+    let isOpenshift = !!(env && env.openshift);
 
     let outputObj;
     if (isLib) {
@@ -143,21 +144,25 @@ module.exports = function (env) {
 
         },
         plugins: [
-            new ForkTsCheckerWebpackPlugin({
-                tsconfig: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
-                checkSyntacticErrors: true,
-                tslint: true,
-                silent: isSilent
-            }),
-            new StyleLintPlugin({
-                configFile: '.stylelintrc',
-                emitErrors: true
-            }),
             new ContextReplacementPlugin(
                 /moment[\/\\]locale$/,
                 /en-ca|fr-ca/
             )
         ]
+    }
+
+    if (!isOpenshift) {
+        //do not run ts check and stylint in openshift (ressource limit!)
+        config.plugins.push(new ForkTsCheckerWebpackPlugin({
+            tsconfig: isLib ? 'tsconfig.lib.json' : 'tsconfig.json',
+            checkSyntacticErrors: true,
+            tslint: true,
+            silent: isSilent
+        }));
+        config.plugins.push(new StyleLintPlugin({
+            configFile: '.stylelintrc',
+            emitErrors: true
+        }));
     }
 
     if (!isLib) {

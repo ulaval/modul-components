@@ -11,30 +11,11 @@
         }
     }
 
-    &__label {
-        font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
-    }
-
-    &__input {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1;
-        width: 100%;
-        outline: none;
-        resize: none;
-        overflow: hidden;
-
-        &-hidden {
-            opacity: 0;
-            word-wrap: break-word;
-        }
-    }
-
     &__validation-message {
         transition: margin-top $m-transition-duration ease;
+    }
+
+    /deep/ .m-input-style__label {
+        z-index: 202; // fix animation overlap
     }
 }

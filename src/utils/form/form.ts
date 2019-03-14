@@ -11,7 +11,7 @@ export type FormFieldGroup = { [name: string]: FormField<any>; };
  */
 export class Form {
     public id: string;
-
+    private internalFields: FormField<any>[];
     private internalState: FormState;
 
     /**
@@ -22,14 +22,11 @@ export class Form {
     constructor(private fieldGroup: FormFieldGroup, private validationCallbacks: FormValidationCallback[] = []) {
         this.id = uuid.generate();
         this.internalState = new FormState();
+        this.setFields();
     }
 
-    /**
-     * return the form fields
-     */
     get fields(): FormField<any>[] {
-        return Object.keys(this.fieldGroup)
-            .map((name: string): FormField<any> => this.fieldGroup[name]);
+        return this.internalFields;
     }
 
     /**
@@ -59,6 +56,34 @@ export class Form {
     get isValid(): boolean {
         return this.nbFieldsThatHasError === 0 && this.nbOfErrors === 0;
     }
+
+    /**
+     * Add a field to the form
+     * @param name
+     * @param field
+     */
+    addField(name: string, field: FormField<any>): void {
+        if (this.fieldGroup[name]) {
+            throw Error('This field name already exist');
+        }
+
+        this.fieldGroup[name] = field;
+        this.setFields();
+    }
+
+    /**
+     * Remove a field to the form
+     * @param name
+     */
+    removeField(name: string): void {
+        if (!this.fieldGroup[name]) {
+            throw Error('This field name does not exist');
+        }
+
+        delete this.fieldGroup[name];
+        this.setFields();
+    }
+
 
     /**
      * Return the formField with the coresponding name
@@ -135,5 +160,10 @@ export class Form {
 
         this.internalState.hasErrors = true;
         this.internalState.errorMessages = this.internalState.errorMessages.concat(formValidation.errorMessage);
+    }
+
+    private setFields(): void {
+        this.internalFields = Object.keys(this.fieldGroup)
+            .map((name: string): FormField<any> => this.fieldGroup[name]);
     }
 }

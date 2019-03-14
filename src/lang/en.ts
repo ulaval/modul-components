@@ -28,6 +28,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/message/message.lang.en.json'),
                 require('../components/option/option.lang.en.json'),
                 require('../components/dialog/dialog.lang.en.json'),
+                require('../components/pagination/pagination.lang.en.json'),
                 require('../components/phone-number/phone-number.lang.en.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.en.json'),
                 require('../components/table/table.lang.en.json'),

@@ -38,6 +38,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/option/option.lang.fr.json'),
                 require('../components/dialog/dialog.lang.fr.json'),
                 require('../components/page-not-found/page-not-found.lang.fr.json'),
+                require('../components/pagination/pagination.lang.fr.json'),
                 require('../components/phone-number/phone-number.lang.fr.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.fr.json'),
                 require('../components/table/table.lang.fr.json'),
