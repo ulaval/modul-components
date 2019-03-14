@@ -116,8 +116,10 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     }
 
     onMonthSelect(month: MonthState): void {
-        super.onMonthSelect(month);
-        this.currentPickerMode = PickerMode.DAY;
+        if (!month.isDisabled) {
+            super.onMonthSelect(month);
+            this.currentPickerMode = PickerMode.DAY;
+        }
     }
 
     onMonthNext(event: Event): void {
@@ -126,6 +128,10 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onMonthPrevious(event: Event): void {
         super.onMonthPrevious(event);
+    }
+
+    monthTabIndex(month: MonthState): string {
+        return month.isDisabled ? '-1' : '0';
     }
 
     onDaySelect(day: DayState): void {
@@ -139,8 +145,16 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         super.onDayMouseEnter(day);
     }
 
+    onDaykeyboardTab(day: DayState): void {
+        super.onDayKeyboardTab(day);
+    }
+
     onDayMouseLeave(day: DayState): void {
         super.onDayMouseLeave(day);
+    }
+
+    dayTabIndex(day: DayState): string {
+        return day.isDisabled || this.hideDay(day) ? '-1' : '0';
     }
 
     isDateInFuture(day: DayState): boolean {

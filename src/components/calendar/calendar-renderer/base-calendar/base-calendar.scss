@@ -67,16 +67,18 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     &__current-month-and-year {
         font-weight: $m-font-weight--bold;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-    }
+        padding-right: 3px; // magic number for the focus visual
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        transition: border-color $m-transition-duration--s ease;
 
-    &__carret {
-        margin-left: 6px;
-        transition: transform $m-transition-duration ease, color $m-transition-duration ease;
+        &:hover:not(:focus) {
+            border-bottom-color: m-color(interactive, darker);
+        }
 
-        .m--is-select-mode & {
-            transform: rotate(-180deg);
+        &:focus {
+            background-color: $m-color--interactive-lightest;
+            border-radius: 3px;
         }
     }
 
@@ -102,7 +104,6 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
 
         &.m--is-select-mode {
             border-bottom: 1px solid m-color(border);
-            justify-content: center;
         }
     }
 
@@ -163,6 +164,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         position: relative;
         transition: background-color $m-transition-duration linear, color $m-transition-duration ease;
         cursor: pointer;
+        outline: none;
 
         // to avoid sticky hover on mobile
         @media (min-width: $m-mq--min--s) {
@@ -230,8 +232,12 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         // m--is-today
         // m--is-hidden
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: $m-base-calendar-dimension;
         height: $m-base-calendar-dimension;
+        margin: 0 auto;
         position: relative;
         z-index: 2;
 

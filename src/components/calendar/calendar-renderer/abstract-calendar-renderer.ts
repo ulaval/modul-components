@@ -18,6 +18,10 @@ export abstract class MAbstractCalendarRenderer extends ModulVue {
     onDayMouseLeave(day: DayState): void {
     }
 
+    @Emit(CalendarEvent.DAY_KEYBOARD_TAB)
+    onDayKeyboardTab(day: DayState): void {
+    }
+
     @Emit(CalendarEvent.MONTH_SELECT)
     onMonthSelect(month: MonthState): void {
     }
