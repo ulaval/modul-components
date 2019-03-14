@@ -5,7 +5,7 @@ exports[`MFileUpload completed should render completed files 1`] = `
   <div class="m-file-upload">
     <div class="m-file-upload__no-drop-zone">
       <h3 class="m-u--no-margin-top">
-        <m-i18n-stub k="m-file-upload:titleMobile" params="" htmlEncode="true"></m-i18n-stub>
+        <m-i18n-stub k="m-file-upload:selectFile" params="" htmlEncode="true"></m-i18n-stub>
       </h3>
       <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
     </div>
@@ -46,7 +46,7 @@ exports[`MFileUpload should render correctly 1`] = `
       <div class="m-file-upload__drop-zone__instructions">
         <h3 class="m-file-upload__drop-zone__instructions__title">
           <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
-          <m-i18n-stub k="m-file-upload:title" params="" htmlEncode="true"></m-i18n-stub>
+          <m-i18n-stub k="m-file-upload:dropFile" params="" htmlEncode="true"></m-i18n-stub>
         </h3>
         <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
       </div>
@@ -70,7 +70,7 @@ exports[`MFileUpload should render correctly in mobile 1`] = `
       <div class="m-file-upload__drop-zone__instructions">
         <h3 class="m-file-upload__drop-zone__instructions__title">
           <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
-          <m-i18n-stub k="m-file-upload:title" params="" htmlEncode="true"></m-i18n-stub>
+          <m-i18n-stub k="m-file-upload:dropFile" params="" htmlEncode="true"></m-i18n-stub>
         </h3>
         <m-file-select skin="secondary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
       </div>
@@ -92,7 +92,7 @@ exports[`MFileUpload uploading should render uploading files 1`] = `
   <div class="m-file-upload">
     <div class="m-file-upload__no-drop-zone">
       <h3 class="m-u--no-margin-top">
-        <m-i18n-stub k="m-file-upload:titleMobile" params="" htmlEncode="true"></m-i18n-stub>
+        <m-i18n-stub k="m-file-upload:selectFile" params="" htmlEncode="true"></m-i18n-stub>
       </h3>
       <m-file-select skin="primary" store-name="DEFAULT" keep-store="true" allowed-extensions="" class="m-file-upload__no-drop-zone__instructions__button"></m-file-select>
     </div>
@@ -140,7 +140,7 @@ exports[`MFileUpload validation should render accepted file extensions 1`] = `
       <div class="m-file-upload__drop-zone__instructions">
         <h3 class="m-file-upload__drop-zone__instructions__title">
           <m-icon name="m-svg__arrow--down" size="32px"></m-icon>
-          <m-i18n-stub k="m-file-upload:title" params="" nb="5" htmlEncode="true"></m-i18n-stub>
+          <m-i18n-stub k="m-file-upload:dropFile" params="" nb="5" htmlEncode="true"></m-i18n-stub>
         </h3>
         <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" allowed-extensions="jpg,png,mp4" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
       </div>
@@ -193,7 +193,7 @@ exports[`MFileUpload validation validation messages should render rejected files
       <div class="m-file-upload__drop-zone__instructions">
         <h3 class="m-file-upload__drop-zone__instructions__title">
           <m-icon-stub name="m-svg__arrow--down" size="32px"></m-icon-stub>
-          <m-i18n-stub k="m-file-upload:title" params="" nb="5" htmlEncode="true"></m-i18n-stub>
+          <m-i18n-stub k="m-file-upload:dropFile" params="" nb="5" htmlEncode="true"></m-i18n-stub>
         </h3>
         <m-file-select skin="secondary" multiple="multiple" store-name="DEFAULT" keep-store="true" allowed-extensions="jpg,png,mp4" class="m-file-upload__drop-zone__instructions__button"></m-file-select>
       </div>
