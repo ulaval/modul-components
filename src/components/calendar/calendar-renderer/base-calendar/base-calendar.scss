@@ -19,7 +19,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
 }
 
 @mixin m-base-calendar__selected() {
-    color: #fff;
+    color: $m-color--white;
     font-weight: $m-font-weight--bold;
     border-radius: 50%;
     background-color: m-color(interactive);
@@ -29,20 +29,6 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-
-    // reset default button styles
-    &__year-content,
-    &__month-content,
-    &__day-content,
-    &__current-month-and-year {
-        background: none;
-        border: 0;
-        color: inherit;
-        font: inherit;
-        outline: none;
-        padding: 0;
-        cursor: inherit;
-    }
 
     @media (max-width: $m-mq--max--s) {
         padding: unset;
@@ -65,9 +51,14 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     }
 
     &__current-month-and-year {
+        background: none;
+        font: inherit;
+        border-left: 0;
+        border-right: 0;
+        outline: none;
         font-weight: $m-font-weight--bold;
         cursor: pointer;
-        padding-right: 3px; // magic number for the focus visual
+        padding: 0 3px 0 0; // magic number for the focus visual
         border-top: 1px solid transparent;
         border-bottom: 1px solid transparent;
         transition: border-color $m-transition-duration--s ease;
@@ -151,16 +142,6 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     &__year,
     &__month,
     &__day {
-
-        // modifiers list
-        // m--is-highlighted
-        // m--is-in-future
-        // m--is-inside-range
-        // m--is-disabled
-        // m--is-other-month
-        // m--is-selection-start
-        // m--is-selection-end
-
         position: relative;
         transition: background-color $m-transition-duration linear, color $m-transition-duration ease;
         cursor: pointer;
@@ -180,7 +161,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
                     display: block;
                     top: -100%;
                     margin: 0 auto;
-                    background-color: #fff;
+                    background-color: $m-color--white;
                     border: 1px solid m-color(interactive, darker);
                     border-radius: 50%;
                     z-index: 1;
@@ -220,18 +201,12 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     }
 
     &__day:not(.m--is-disabled):not(.m--is-other-month) {
-        font-weight: 500;
+        font-weight: $m-font-weight--bold;
     }
 
     &__year-content,
     &__month-content,
     &__day-content {
-
-        // modifiers list
-        // m--is-selected
-        // m--is-today
-        // m--is-hidden
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -240,6 +215,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         margin: 0 auto;
         position: relative;
         z-index: 2;
+        outline: none;
 
         &.m--is-today:not(.m--is-selected) {
             // today style shouldn't be visible on hover
@@ -257,7 +233,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
             .m--is-disabled & {
                 @extend %m-base-calendar__today;
 
-                color: #fff;
+                color: $m-color--white;
             }
         }
 
