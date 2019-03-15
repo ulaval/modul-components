@@ -202,5 +202,11 @@ $m-dialog--max-width--l: 500px !default;
                 margin-top: $m-margin;
             }
         }
+
+        .m-button {
+            + .m-button {
+                margin-top: $m-margin;
+            }
+        }
     }
 }

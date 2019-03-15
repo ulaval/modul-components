@@ -48,6 +48,11 @@
                                           v-if="hasOkPrecision">{{ okPrecision }}
                                 </template>
                             </m-button>
+                            <m-button @click="onSecondaryBtn()" skin="secondary" v-if="secBtn">
+                                <template v-if="hasSecBtnLabel">{{ secBtnLabel }}</template>
+                                <m-i18n v-else k="m-dialog:cancel"></m-i18n>
+                                <template slot="precision" v-if="hasSecBtnPrecision">{{ secBtnPrecision }}</template>
+                            </m-button>
                             <m-link mode="button"
                                     @click="onCancel()"
                                     v-if="negativeLink">

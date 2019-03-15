@@ -36,6 +36,12 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public okLabel: string | undefined;
     @Prop()
     public okPrecision: string | undefined;
+    @Prop({ default: false })
+    public secBtn: boolean;
+    @Prop()
+    public secBtnLabel: string | undefined;
+    @Prop()
+    public secBtnPrecision: string | undefined;
     @Prop()
     public cancelLabel: string | undefined;
     @Prop({ default: true })
@@ -82,6 +88,11 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         this.$emit('ok');
     }
 
+    private onSecondaryBtn(): void {
+        this.as<PortalMixin>().propOpen = false;
+        this.$emit('secondaryBtn');
+    }
+
     private onCancel(): void {
         this.as<PortalMixin>().propOpen = false;
         this.$emit('cancel');
@@ -113,6 +124,14 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     private get hasOkPrecision(): boolean {
         return !!this.okPrecision;
+    }
+
+    private get hasSecBtnLabel(): boolean {
+        return !!this.secBtnLabel;
+    }
+
+    private get hasSecBtnPrecision(): boolean {
+        return !!this.secBtnPrecision;
     }
 
     private get hasCancelLabel(): boolean {
