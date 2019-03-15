@@ -8,22 +8,11 @@ export type ModulPeriod = {
     end?: Date
 };
 
-export enum PeriodFilterMode {
-    FULLMODE = 'full',
-    COMPACTMODE = 'compact'
-}
-
-export interface PeriodFilterParams {
-    mode?: PeriodFilterMode;
-}
-
 export class PeriodFilter {
-    static formatPeriod(period: ModulPeriod, params: PeriodFilterParams = { mode: PeriodFilterMode.COMPACTMODE }): string {
+    static formatPeriod(period: ModulPeriod): string {
         let formattedPeriod: string;
 
-        if (params.mode === PeriodFilterMode.FULLMODE && period.start && period.end) {
-            formattedPeriod = PeriodFilter.fullStartAndEndDate(period.start, period.end);
-        } else if (period.start && period.end) {
+        if (period.start && period.end) {
             formattedPeriod = PeriodFilter.compactStartAndEndDate(period.start, period.end);
         } else if (period.start && !period.end) {
             formattedPeriod = PeriodFilter.onlyStartDate(period.start);

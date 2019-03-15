@@ -1,0 +1,36 @@
+<div>
+    <!-- Sandbox template -->
+    <h3>Toggle buttons with multiple selection allowed</h3>
+    <p>
+        <h4>Select the sessions:</h4>
+        <m-toggle-buttons v-model="sessionsMultiple"></m-toggle-buttons>
+    </p>
+    <p>Current objects selected: {{ selectedMultiple }}</p>
+    <h3>Toggle buttons with one selection allowed</h3>
+    <p>
+        <h4>Select the session:</h4>
+        <m-toggle-buttons v-model="sessionsSingle"
+                          :multiple="false">
+        </m-toggle-buttons>
+    </p>
+    <p>Current object selected: {{ selectedSingle }}</p>
+    <h3>Toggle buttons with slot</h3>
+    <p>
+        <h4>Select the session:</h4>
+        <m-toggle-buttons v-model="sessionsScoped"
+                          :multiple="false">
+            <template slot-scope="{button}">
+                <m-icon name="m-svg__close-clear"></m-icon> {{ button.title }} <m-icon name="m-svg__close-clear"></m-icon>
+            </template>
+        </m-toggle-buttons>
+    </p>
+    <p>Current object selected: {{ selectedScoped }}</p>
+    <h3>Toggle buttons disabled</h3>
+    <p>
+        <h4>Select the session:</h4>
+        <m-toggle-buttons v-model="sessionsSingle"
+                          :multiple="false"
+                          :disabled="true">
+        </m-toggle-buttons>
+    </p>
+</div>

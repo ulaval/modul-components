@@ -69,7 +69,7 @@ export class MForm extends ModulVue {
     private handleErrors(): void {
         this.emit(MFormEvents.formError, {
             form: this.form,
-            totalNbOfErrors: this.form.totalNbOfErrors,
+            totalNbOfErrors: this.form.nbFieldsThatHasError,
             errorsToShowInMessagesCallback: (errors: string[]) => {
                 this.errors = errors;
             }
