@@ -6,17 +6,38 @@
 
     .m-button {
         border-radius: 0;
+        margin: 0;
 
-        &:not(:nth-last-child(1)) {
-            border-right: none;
+        @media (min-width: #{$m-mq--min--s}) {
+            width: auto;
+
+            &:not(:nth-last-child(1)) {
+                border-right: none;
+            }
+
+            &:nth-child(1) {
+                border-radius: $m-button--border-radius 0 0 $m-button--border-radius;
+            }
+
+            &:nth-last-child(1) {
+                border-radius: 0 $m-button--border-radius $m-button--border-radius 0;
+            }
         }
 
-        &:nth-child(1) {
-            border-radius: $m-button--border-radius 0 0 $m-button--border-radius;
-        }
+        @media (max-width: #{$m-mq--min--s}) {
+            width: 100%;
 
-        &:nth-last-child(1) {
-            border-radius: 0 $m-button--border-radius $m-button--border-radius 0;
+            &:not(:nth-last-child(1)) {
+                border-bottom: none;
+            }
+
+            &:nth-child(1) {
+                border-radius: $m-button--border-radius $m-button--border-radius 0 0;
+            }
+
+            &:nth-last-child(1) {
+                border-radius: 0 0 $m-button--border-radius $m-button--border-radius;
+            }
         }
     }
 }
