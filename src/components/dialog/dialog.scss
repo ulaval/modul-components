@@ -137,10 +137,10 @@ $m-dialog--max-width--l: 500px !default;
 
                 &--body {
                     border: 1px solid $m-color--hint;
-                    padding: 10px 8px;
+                    padding: 10px $m-spacing--s;
                     text-align: left;
                     font-style: italic;
-                    font-size: 16px;
+                    font-size: $m-font-size;
                     line-height: 1;
                     display: flex;
                 }
