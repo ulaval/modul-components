@@ -61,7 +61,7 @@ exports[`MMessage should render correctly close button when prop is set 1`] = `
     <div class="m-message__icon"><svg aria-hidden="true" width="20px" height="20px" class="m-icon">
         <use aria-hidden="true"></use>
       </svg></div>
-    <div class="m-message__body m--has-close-button"> </div> <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;font-size:10px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+    <div class="m-message__body m--has-close-button"> </div> <button type="button" class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple" style="width:44px;height:44px;"><svg aria-hidden="true" width="10px" height="10px" class="m-icon m-icon-button__icon">
         <use aria-hidden="true"></use>
       </svg> </button>
   </div>

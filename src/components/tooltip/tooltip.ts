@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
@@ -16,7 +16,8 @@ import WithRender from './tooltip.html?style=./tooltip.scss';
 
 export enum MTooltipMode {
     Icon = 'icon',
-    Link = 'link'
+    Link = 'link',
+    Definition = 'definition'
 }
 
 export enum MTooltipSize {
@@ -35,7 +36,8 @@ export class MTooltip extends ModulVue {
         default: MTooltipMode.Icon,
         validator: value =>
             value === MTooltipMode.Icon ||
-            value === MTooltipMode.Link
+            value === MTooltipMode.Link ||
+            value === MTooltipMode.Definition
     })
     public mode: MTooltipMode;
     @Prop({
@@ -73,11 +75,57 @@ export class MTooltip extends ModulVue {
     })
     public size: MTooltipSize;
 
+    public id: string = `mTooltip-${uuid.generate()}`;
+    public ariaControls: string = this.id + '-controls';
+
     private propOpen: boolean = false;
-    private id: string = `mTooltip-${uuid.generate()}`;
 
     protected mounted(): void {
         this.propOpen = this.open;
+    }
+
+    @Emit('close')
+    public onClick(event: Event): void {
+    }
+
+    public get isModeIcon(): boolean {
+        return this.mode === MTooltipMode.Icon;
+    }
+
+    public get isModeLink(): boolean {
+        return this.mode === MTooltipMode.Link;
+    }
+
+    public get isModeDefinition(): boolean {
+        return this.mode === MTooltipMode.Definition;
+    }
+
+    public get isSizeLarge(): boolean {
+        return this.size === MTooltipSize.Large;
+    }
+
+    public get hasCloseButton(): boolean {
+        return this.as<MediaQueriesMixin>().isMqMaxS ? false : this.closeButton;
+    }
+
+    public get title(): string {
+        return this.propOpen ? this.CloseTitle : this.OpenTitle;
+    }
+
+    public get OpenTitle(): string {
+        return this.openTitle === undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
+    }
+
+    public get CloseTitle(): string {
+        return this.closeTitle === undefined ? this.$i18n.translate('m-tooltip:close') : this.closeTitle;
+    }
+
+    public close(): void {
+        this.propOpen = false;
+    }
+
+    public get hasDefaultSlot(): boolean {
+        return !!this.$slots.default;
     }
 
     @Watch('open')
@@ -85,48 +133,12 @@ export class MTooltip extends ModulVue {
         this.propOpen = open;
     }
 
-    private get propMode(): string {
-        return this.mode;
-    }
-
-    private get propCloseButton(): boolean {
-        return this.as<MediaQueriesMixin>().isMqMaxS ? false : this.closeButton;
-    }
-
-    private get hasDefaultSlot(): boolean {
-        return !!this.$slots.default;
-    }
-
+    @Emit('open')
     private onOpen(): void {
-        this.$emit('open');
     }
 
-    private onClose(event: Event): void {
-        this.$emit('close', event);
-    }
-
-    private onClick(): void {
-        this.$emit('click');
-    }
-
-    private getOpenTitle(): string {
-        return this.openTitle === undefined ? this.$i18n.translate('m-tooltip:open') : this.openTitle;
-    }
-
-    private getCloseTitle(): string {
-        return this.closeTitle === undefined ? this.$i18n.translate('m-tooltip:close') : this.closeTitle;
-    }
-
-    private get propTitle(): string {
-        return this.propOpen ? this.getCloseTitle() : this.getOpenTitle();
-    }
-
-    private close(): void {
-        this.propOpen = false;
-    }
-
-    private get ariaControls(): string {
-        return this.id + '-controls';
+    @Emit('close')
+    private onClose(): void {
     }
 }
 
