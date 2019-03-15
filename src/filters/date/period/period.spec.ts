@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { addMessages } from '../../../../tests/helpers/lang';
 import { PERIOD_NAME } from '../../filter-names';
-import { ModulPeriod, PeriodFilter, PeriodFilterMode } from './period';
+import { ModulPeriod, PeriodFilter } from './period';
 
 describe(PERIOD_NAME, () => {
     beforeEach(() => {
@@ -9,20 +9,6 @@ describe(PERIOD_NAME, () => {
     });
 
     describe(`Given both dates are present`, () => {
-        describe(`When fullmode is on`, () => {
-            it(`should return a complete formatted period`, () => {
-                const startDate: Date = new Date(2019, 3, 8);
-                const endDate: Date = new Date(2019, 4, 14);
-                const period: ModulPeriod = {
-                    start: startDate,
-                    end: endDate
-                };
-                startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
-                endDate.toLocaleDateString = jest.fn(() => '14 mai 2019');
-
-                expect(PeriodFilter.formatPeriod(period, { mode: PeriodFilterMode.FULLMODE })).toEqual('Du 8 avril 2019 au 14 mai 2019');
-            });
-        });
 
         describe(`Given fullmode is off`, () => {
             describe(`When both start date and end date are the same day`, () => {

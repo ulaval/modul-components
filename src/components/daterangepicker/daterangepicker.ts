@@ -24,12 +24,12 @@ export class MDaterangepicker extends ModulVue {
     max: DatePickerSupportedTypes;
 
     @Prop({
-        default: Vue.prototype.$i18n.translate('m-daterangepicker:label.from')
+        default: () => Vue.prototype.$i18n.translate('m-daterangepicker:label.from')
     })
     labelFrom: string;
 
     @Prop({
-        default: Vue.prototype.$i18n.translate('m-daterangepicker:label.to')
+        default: () => Vue.prototype.$i18n.translate('m-daterangepicker:label.to')
     })
     labelTo: string;
 

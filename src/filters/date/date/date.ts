@@ -25,7 +25,7 @@ export let dateFilter: (date: Date, params?: DateFilterParams) => string = (date
 };
 
 let addOrdinal: (date: string, locale: string) => string = (date, locale) => {
-    const regexp2: RegExp = /^1 /;
+    const regexp2: RegExp = /(^1 )|(^1$)/;
     let match: RegExpExecArray | null = regexp2.exec(date);
     if (match && locale === 'fr-CA') {
         return date.replace(match[0], `${match[0].trim()}<sup>er</sup> `);

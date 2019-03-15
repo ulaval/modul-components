@@ -106,4 +106,20 @@
              :rows="rows"
              :loading="true">
     </m-table>
+
+    <h2>Sortable table</h2>
+    <p>The first two columns can be sorted
+        <br />
+        <span class="m-u--typo--precision">Simulate loading of 700ms on click.</span>
+    </p>
+    <p>Sorted column: {{ sortedColumn.dataProp }}</p>
+    <p>Sort :
+        <template v-if="sortedColumn.ascending">Ascending</template>
+        <template v-else>Descending</template>
+    </p>
+    <m-table :columns="sortableColumns"
+             :loading="loading"
+             :sorted-column.sync="sortedColumn"
+             @update:sortedColumn="launchSorting()"></m-table>
+
 </div>
