@@ -1,5 +1,7 @@
 @import 'commons';
 
+$m-table--icon-vertical-offset: -5px !default;
+
 .m-table {
     thead {
         text-align: left;
@@ -11,6 +13,48 @@
         th {
             color: $m-color--grey;
             font-weight: $m-font-weight--bold;
+
+            &.m--is-sortable {
+                .m-table__header-name {
+                    cursor: pointer;
+                }
+
+                .m-table__sortable-icon {
+                    position: relative;
+                    top: $m-table--icon-vertical-offset;
+                    opacity: 0;
+                }
+
+                &:hover {
+                    color: $m-color--grey-darker;
+
+                    .m-table__sortable-icon {
+                        color: $m-color--grey;
+                        opacity: 0.6;
+                    }
+                }
+
+                &.m--is-sorted {
+                    color: $m-color--grey-darker;
+
+                    .m-table__sortable-icon {
+                        color: $m-color--grey-darker;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    &.m--is-loading {
+        thead {
+            th {
+                &.m--is-sortable {
+                    .m-table__header-name {
+                        cursor: default;
+                    }
+                }
+            }
         }
     }
 

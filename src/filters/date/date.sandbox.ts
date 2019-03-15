@@ -5,22 +5,26 @@ import DateFilterPlugin from './date';
 import { dateTimeFilter } from './date-time/date-time';
 import WithRender from './date.sandbox.html';
 import { dateFilter } from './date/date';
-import { ModulPeriod, PeriodFilter, PeriodFilterMode } from './period/period';
+import { ModulPeriod, PeriodFilter } from './period/period';
 
 @WithRender
 @Component
 export class MDateSandbox extends Vue {
     now: Date = new Date();
 
-    year: number = this.now.getFullYear();
-    month: number = this.now.getMonth() + 1;
-    day: number = 1;
-    hours: number = this.now.getHours();
-    minutes: number = this.now.getMinutes();
+    current: any = {
+        year: this.now.getFullYear(),
+        month: this.now.getMonth() + 1,
+        day: 1,
+        hours: this.now.getHours(),
+        minutes: this.now.getMinutes()
+    };
 
-    yearLater: number = this.now.getFullYear();
-    monthLater: number = this.month + 1;
-    dayLater: number = this.day + 1;
+    later: any = {
+        year: this.now.getFullYear(),
+        month: this.current.month + 1,
+        day: this.current.day + 1
+    };
 
     get formattedDateLong(): string {
         return dateFilter(this.date);
@@ -31,11 +35,21 @@ export class MDateSandbox extends Vue {
     }
 
     get date(): Date {
-        return new Date(this.year, this.month, this.day, this.hours, this.minutes);
+        return new Date(this.current.year, this.current.month, this.current.day, this.current.hours, this.current.minutes);
     }
 
     get dateLater(): Date {
-        return new Date(this.yearLater, this.monthLater, this.dayLater);
+        return new Date(this.later.year, this.later.month, this.later.day);
+    }
+
+    clearLater(): void {
+        this.later = {};
+    }
+
+    clearCurrent(): void {
+        this.current.year = undefined;
+        this.current.month = undefined;
+        this.current.day = undefined;
     }
 
     get formattedDateTimeLong(): string {
@@ -47,27 +61,20 @@ export class MDateSandbox extends Vue {
     }
 
     get formattedPeriod(): string {
-        const period: ModulPeriod = {
-            start: this.date,
-            end: this.dateLater
+        let period: ModulPeriod;
+
+        period = {
+            start: this.current.year ? this.date : undefined,
+            end: this.later.year ? this.dateLater : undefined
         };
 
         return PeriodFilter.formatPeriod(period);
     }
 
-    get formattedPeriodFullMode(): string {
-        const period: ModulPeriod = {
-            start: this.date,
-            end: this.dateLater
-        };
-
-        return PeriodFilter.formatPeriod(period, { mode: PeriodFilterMode.FULLMODE });
-    }
-
     get periodThroughFilter(): ModulPeriod {
         return {
-            start: this.date,
-            end: this.dateLater
+            start: this.current.year ? this.date : undefined,
+            end: this.later.year ? this.dateLater : undefined
         };
     }
 }

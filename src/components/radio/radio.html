@@ -1,23 +1,31 @@
 <li class="m-radio"
-    :class="{ 'm--is-mode-button': isButton(),
-              'm--is-disabled': propDisabled,
+    :class="{ 'm--is-disabled': propDisabled,
               'm--is-read-only': propReadOnly,
               'm--is-error': propError,
               'm--is-valid': propValid,
               'm--is-checked': model === value,
               'm--is-focus': hasFocus && !propDisabled,
               'm--is-input-right': propPosition === 'right',
-              'm--is-full-size': propFullSize,
               'm--is-inline': propInline,
               'm--is-align-center': propVerticalAlign === 'center' }">
-    <input class="m-radio__hidden" :value="value" type="radio" v-model="model" :id="radioID" :name="propName"
-           @focus="onFocus" @blur="onBlur" :disabled="propDisabled || propReadOnly" :aria-hidden="propDisabled">
-    <label class="m-radio__wrap" :for="radioID" ref="label">
-        <span class="m-radio__input" aria-hidden="true" v-if="!isButton()" :style="{ 'margin-top': propRadioMarginTop }"></span>
+    <input class="m-radio__hidden"
+           @focus="onFocus"
+           @blur="onBlur"
+           :aria-hidden="propDisabled"
+           :disabled="propDisabled || propReadOnly"
+           :id="radioID"
+           :name="propName"
+           :value="value"
+           v-model="model"
+           type="radio">
+    <label class="m-radio__wrap"
+           ref="label"
+           :for="radioID">
+        <span class="m-radio__input"
+              :style="{ 'margin-top': propRadioMarginTop }"
+              aria-hidden="true"></span>
         <span class="m-radio__label">
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-left" :name="iconName" v-if="isButton() && hasIconLeft() && hasIcon()"></m-icon>
-            <span class="m-radio__label__content"><slot></slot></span>
-            <m-icon aria-hidden="true" class="m-radio__icon m--is-right" :name="iconName" v-if="isButton() && !hasIconLeft() && hasIcon()"></m-icon>
+            <slot></slot>
         </span>
     </label>
 </li>

@@ -7,4 +7,8 @@
     font-size: $m-font-size--xs;
     padding-left: $m-padding--xs;
     color: currentColor;
+
+    span {
+        font-weight: $m-font-weight--bold;
+    }
 }
