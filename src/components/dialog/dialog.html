@@ -24,8 +24,8 @@
                             <p v-if="hasMessage" v-html="message"></p>
                             <slot></slot>
                         </div>
-                        <div class="m-dialog__hint--wrap" v-if="hasHint">
-                            <div class="m-dialog__hint">
+                        <div class="m-dialog__hint" v-if="hasHint">
+                            <div class="m-dialog__hint--body">
                                 <div class="m-dialog__hint--icon">
                                     <m-icon name="m-svg__hint"
                                             size="32px"></m-icon>
