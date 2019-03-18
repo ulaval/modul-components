@@ -26,7 +26,8 @@
         "component": "node ./tests/meta/component-generator",
         "stats": "webpack --config conf/webpack.config.js --env.lib --env.silent --colors --profile --json > reports/stats.json && webpack-bundle-analyzer reports/stats.json",
         "print_version_win": "echo %npm_package_version%",
-        "print_version_nx": "echo $npm_package_version"
+        "print_version_nx": "echo $npm_package_version",
+        "storybook": "start-storybook --config-dir ./conf/storybook"
     },
     "jest": {
         "testURL": "http://localhost/",
@@ -88,15 +89,20 @@
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
+        "@babel/core": "^7.3.4",
+        "@storybook/vue": "^5.0.1",
         "@types/cleave.js": "^1.4.0",
         "@types/filesize": "^3.6.0",
         "@types/jest": "^22.2.0",
         "@types/node": "^10.12.20",
         "@types/sprintf-js": "^1.1.0",
+        "@types/storybook__vue": "^5.0.0",
         "@types/webpack-env": "^1.13.6",
         "@vue/test-utils": "^1.0.0-beta.28",
         "acorn": "^6.0.0",
         "autoprefixer": "^9.4.7",
+        "babel-loader": "^8.0.5",
+        "babel-preset-vue": "^2.0.2",
         "chromedriver": "^2.33.2",
         "copyfiles": "^1.2.0",
         "cross-env": "^5.2.0",
@@ -139,6 +145,7 @@
         "url-loader": "^1.1.2",
         "vue": "^2.5.13",
         "vue-class-component": "^6.1.1",
+        "vue-loader": "^15.7.0",
         "vue-property-decorator": "^6.0.0",
         "vue-router": "^3.0.1",
         "vue-server-renderer": "^2.5.13",
