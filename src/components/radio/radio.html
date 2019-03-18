@@ -1,6 +1,6 @@
 <li class="m-radio"
     :class="{ 'm--is-disabled': propDisabled,
-              'm--is-read-only': propReadOnly,
+              'm--is-read-only': propReadonly,
               'm--is-error': propError,
               'm--is-valid': propValid,
               'm--is-checked': model === value,
@@ -12,7 +12,7 @@
            @focus="onFocus"
            @blur="onBlur"
            :aria-hidden="propDisabled"
-           :disabled="propDisabled || propReadOnly"
+           :disabled="propDisabled || propReadonly"
            :id="radioID"
            :name="propName"
            :value="value"
