@@ -103,11 +103,6 @@ export class MIntegerfield extends ModulVue {
     private get inputMode(): string | undefined {
         return 'numeric';
     }
-
-    private test(newValue: string): void {
-        // tslint:disable-next-line:no-console
-        console.log('integerfield', newValue);
-    }
 }
 
 const IntegerfieldPlugin: PluginObject<any> = {
