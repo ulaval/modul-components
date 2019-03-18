@@ -1,7 +1,7 @@
 import Vue from 'vue';
-
 import MessagePlugin, { DebugMode, ENGLISH, I18nPluginOptions } from '../src/utils/i18n/i18n';
 import LoggerPlugin, { ConsoleOptions } from '../src/utils/logger/logger';
+
 
 let i18nOptions: I18nPluginOptions = {
     curLang: ENGLISH,
@@ -11,6 +11,7 @@ let i18nOptions: I18nPluginOptions = {
 let consoleOptions: ConsoleOptions = {
     displayDebugs: false
 };
+
 
 Vue.config.productionTip = false;
 Vue.config.silent = true;

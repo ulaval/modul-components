@@ -6,6 +6,7 @@ import '../../src/utils/polyfills';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';
 import UtilsPlugin, { UtilsPluginOptions } from '../../src/utils/utils-plugin';
 
+
 export const ModulPlugin: PluginObject<any> = {
     install(v, options): void {
 
