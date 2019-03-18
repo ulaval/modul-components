@@ -90,7 +90,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.3.4",
-        "@storybook/vue": "^5.0.1",
+        "@storybook/vue": "^5.0.3",
         "@types/cleave.js": "^1.4.0",
         "@types/filesize": "^3.6.0",
         "@types/jest": "^22.2.0",
