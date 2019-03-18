@@ -3,9 +3,15 @@ import Vue from 'vue';
 import { loadStories } from './all.storybook';
 import { ModulPlugin } from './modul';
 import modulTheme from './modulTheme';
+import { getSandboxPlugin } from './sandbox-loader';
+import { loadSandboxStories } from './sandboxes.storybook';
+import { hierarchyRootSeparatorRegex, hierarchySeparatorRegex } from './utils';
 
 
 Vue.use(ModulPlugin);
+
+// load all sandboxes
+Vue.use(getSandboxPlugin());
 
 // Option defaults:
 addParameters({
@@ -26,15 +32,10 @@ addParameters({
          */
         showPanel: false,
         /**
-         * where to show the addon panel
-         * @type {String}
-         */
-        panelPosition: 'bottom',
-        /**
          * sorts stories
          * @type {Boolean}
          */
-        sortStoriesByKind: false,
+        sortStoriesByKind: true,
         /**
          * regex for finding the hierarchy separator
          * @example:
@@ -44,7 +45,7 @@ addParameters({
          *   /\/|\./ - split by `/` or `.`
          * @type {Regex}
          */
-        hierarchySeparator: /\/|\./,
+        hierarchySeparator: hierarchySeparatorRegex,
         /**
          * regex for finding the hierarchy root separator
          * @example:
@@ -52,7 +53,7 @@ addParameters({
          *   /\|/ - split by `|`
          * @type {Regex}
          */
-        hierarchyRootSeparator: /\|/,
+        hierarchyRootSeparator: hierarchyRootSeparatorRegex,
         /**
          * sidebar tree animations
          * @type {Boolean}
@@ -68,4 +69,6 @@ addParameters({
     },
 });
 
-configure(loadStories, module);
+configure(() => {
+    return [loadStories(), loadSandboxStories()];
+}, module);

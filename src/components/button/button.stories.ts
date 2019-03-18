@@ -1,9 +1,10 @@
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
-import ButtonSandboxPlugin from './button.sandbox';
+import { componentshierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { BUTTON_NAME } from '../component-names';
+import ButtonPlugin from './button';
 
+Vue.use(ButtonPlugin);
 
-Vue.use(ButtonSandboxPlugin);
-
-storiesOf('m-button', module)
-    .add('sandbox', () => '<div ><m-button-sandbox class="m-u--app-body"></m-button-sandbox>');
+storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}`, module)
+    .add('default', () => '<m-button ></m-button>');
