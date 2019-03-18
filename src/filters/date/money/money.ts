@@ -1,33 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import MessagePlugin from '../../../components/message/message';
+import { MMoney } from '../../../utils/money/money';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MONEY_NAME } from '../../filter-names';
-
-export enum MCurrencyType {
-    NONE = '',
-    CAD = 'CAD',
-    USD = 'USD',
-    EUR = 'EUR'
-}
-
-export class MMoney {
-    amount: number;
-    currency: MCurrencyType;
-}
-
-export class MMoneyFactory {
-    static create(): MMoney {
-        return new MMoney();
-    }
-
-    static createAllParams(amount?: number, currency?: MCurrencyType): MMoney {
-        const money: MMoney = this.create();
-        money.amount = amount!;
-        money.currency = currency!;
-
-        return money;
-    }
-}
 
 export class MoneyFilter {
     static formatCurrency(money: MMoney): string {

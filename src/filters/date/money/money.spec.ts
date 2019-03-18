@@ -1,7 +1,8 @@
 import Vue from 'vue';
+import { MCurrencyType, MMoney, MMoneyFactory } from '../../../utils/money/money';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MONEY_NAME } from '../../filter-names';
-import { MCurrencyType, MMoney, MMoneyFactory, MoneyFilter } from './money';
+import { MoneyFilter } from './money';
 
 const fakeNumber: (numberToFake: number) => number = (numberToFake: number) => {
     return Object.assign({}, numberToFake);
