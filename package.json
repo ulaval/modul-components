@@ -14,7 +14,6 @@
         "assetsToDist": "copyfiles -u 1 \"./src/assets/**/*\" dist",
         "start": "webpack --config conf/webpack.config.js --env.openshift && http-server \"./dist\" -p 8080 -a 0.0.0.0",
         "unit": "jest --verbose --silent",
-        "unit:debug:windows": "node --inspect-brk node_modules/jest/bin/jest.js --runInBand --testNamePattern 'storyshots' --verbose",
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
         "metagenv2": "node -r ./tests/meta-v2/ts-loader.js  ./tests/meta-v2/generate-meta.ts ./dist",
@@ -28,8 +27,7 @@
         "stats": "webpack --config conf/webpack.config.js --env.lib --env.silent --colors --profile --json > reports/stats.json && webpack-bundle-analyzer reports/stats.json",
         "print_version_win": "echo %npm_package_version%",
         "print_version_nx": "echo $npm_package_version",
-        "storybook": "start-storybook --config-dir ./conf/storybook",
-        "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose"
+        "storybook": "start-storybook --config-dir ./conf/storybook"
     },
     "jest-junit": {
         "output": "reports/junit/js-test-results.xml"
