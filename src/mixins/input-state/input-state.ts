@@ -5,6 +5,7 @@ import { ModulVue } from '../../utils/vue/vue';
 export enum InputStateValue {
     Default = 'default',
     Disabled = 'disabled',
+    Readonly = 'readonly',
     Waiting = 'waiting',
     Error = 'error',
     Valid = 'valid'
@@ -24,6 +25,7 @@ export enum InputStateTagStyle {
 export interface InputStateMixin {
     active: boolean;
     isDisabled: boolean;
+    isReadonly: boolean;
     isWaiting: boolean;
     hasError: boolean;
     isValid: boolean;
@@ -86,6 +88,10 @@ export class InputState extends ModulVue implements InputStateMixin {
         return this.state === InputStateValue.Disabled;
     }
 
+    public get isReadonly(): boolean {
+        return this.state === InputStateValue.Readonly;
+    }
+
     public get isWaiting(): boolean {
         return this.state === InputStateValue.Waiting;
     }
@@ -99,23 +105,27 @@ export class InputState extends ModulVue implements InputStateMixin {
     }
 
     public get state(): InputStateValue {
-        let state: InputStateValue;
-        if (!this.disabled) {
-            if (!this.waiting) {
-                if (this.hasErrorMessage || this.error) {
-                    state = InputStateValue.Error;
-                } else if (this.hasValidMessage || this.valid) {
-                    state = InputStateValue.Valid;
-                } else {
-                    state = InputStateValue.Default;
-                }
-            } else {
-                state = InputStateValue.Waiting;
-            }
-        } else {
-            state = InputStateValue.Disabled;
+        if (this.readonly) {
+            return InputStateValue.Readonly;
         }
-        return state;
+
+        if (this.disabled) {
+            return InputStateValue.Disabled;
+        }
+
+        if (this.waiting) {
+            return InputStateValue.Waiting;
+        }
+
+        if (this.hasErrorMessage || this.error) {
+            return InputStateValue.Error;
+        }
+
+        if (this.hasValidMessage || this.valid) {
+            return InputStateValue.Valid;
+        }
+
+        return InputStateValue.Default;
     }
 
     public get hasErrorMessage(): boolean {

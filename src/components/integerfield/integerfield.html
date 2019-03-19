@@ -1,6 +1,7 @@
 <div class="m-integerfield"
      :class="[{ 'm--is-disabled': isDisabled,
                 'm--is-waiting': isWaiting,
+                'm--is-readonly': isReadonly,
                 'm--has-error': hasIntegerfieldError,
                 'm--is-valid': isIntegerfieldValid,
                 'm--has-label': hasLabel,
@@ -15,15 +16,15 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :readonly="readonly"
+                   :readonly="isReadonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <input class="m-integerfield__input"
                v-model="model"
                :id="id"
-               :disabled="!active"
+               :disabled="isDisabled || isWaiting"
                :placeholder="placeholder"
-               :readonly="readonly"
+               :readonly="isReadonly"
                :maxlength="maxLengthNumber"
                :pattern="inputPattern"
                :inputmode="inputMode"

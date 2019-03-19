@@ -28,4 +28,14 @@
                     value="10"
                     v-model="model4"
                     valid-message="Valid textfield"></m-integerfield>
+
+    <h2>Readonly</h2>
+    <h3 class="m-u--h6">Placehoder</h3>
+    <m-integerfield label="label"
+                    placeholder="Put a number"
+                    :readonly="true"></m-integerfield>
+    <h3 class="m-u--h6">Value</h3>
+    <m-integerfield label="label"
+                    value="10"
+                    :readonly="true"></m-integerfield>
 </div>

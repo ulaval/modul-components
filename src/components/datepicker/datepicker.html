@@ -1,5 +1,6 @@
 <div class="m-datepicker"
      :class="{ 'm--is-disabled': isDisabled,
+               'm--is-readonly': isReadonly,
                'm--is-waiting': isWaiting,
                'm--has-error': calandarError,
                'm--is-valid': isValid,
@@ -7,6 +8,7 @@
     <m-input-style :label="label"
                    :label-for="id"
                    :disabled="isDisabled"
+                   :readonly="isReadonly"
                    :waiting="isWaiting"
                    :focus="open"
                    :empty="isEmpty"
@@ -19,7 +21,8 @@
                aria-haspopup="true"
                :aria-controls="ariaControls1 + ' ' + ariaControls2"
                :aria-expanded="open"
-               :disabled="!active"
+               :disabled="isDisabled || isWaiting"
+               :readonly="isReadonly"
                :placeholder="placeholder"
                @keydown.delete="inputOnKeydownDelete"
                @keydown.enter="inputOnKeydownEnter"
@@ -31,7 +34,7 @@
                @focus="inputOnFocus"
                @blur="onBlur"
                @click.stop
-               :value="formattedDate">
+               :value="formattedDate" />
         <m-icon-button slot="right-content"
                        class="m-datepicker__icon"
                        icon-name="m-svg__calendar"
