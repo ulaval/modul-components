@@ -8,7 +8,7 @@ describe('MButton', () => {
     beforeEach(() => {
         localVue = createLocalVue();
         localVue.use(MButtonPlugin);
-    })
+    });
 
     it('should emit click event when clicked', () => {
         const btn: Wrapper<MButton> = mount(MButton, {
