@@ -136,6 +136,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.secBtnPrecision;
     }
 
+    private get dialogStyles(): { width: string } {
+        return { 'width': this.btnWidth };
+    }
+
     private get hasCancelLabel(): boolean {
         return !!this.cancelLabel;
     }
