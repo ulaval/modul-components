@@ -14,6 +14,12 @@ export const loadSandboxStories: any = () => {
 
     let sandboxes: Story = storiesOf(`Sandboxes`, module);
     sandboxes.addDecorator(sandboxeDecorator);
+    sandboxes.addParameters({
+        options: {
+            showPanel: false
+        }
+    });
+
     getSandboxesNames().forEach((sandboxeName) => {
         sandboxes.add(`${sandboxeName}`, () => `<m-${sandboxeName}-sandbox></m-${sandboxeName}-sandbox>`)
     });

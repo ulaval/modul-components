@@ -1,3 +1,4 @@
+
 import { addParameters, configure } from '@storybook/vue';
 import Vue from 'vue';
 import { loadStories } from './all.storybook';
@@ -8,11 +9,12 @@ import { loadSandboxStories } from './sandboxes.storybook';
 import { hierarchyRootSeparatorRegex, hierarchySeparatorRegex } from './utils';
 
 
-
 Vue.use(ModulPlugin);
 
 // load all sandboxes
 Vue.use(getSandboxPlugin());
+
+
 
 // Option defaults:
 addParameters({
@@ -31,7 +33,7 @@ addParameters({
          * display panel that shows addon configurations
          * @type {Boolean}
          */
-        showPanel: false,
+        showPanel: true,
         /**
          * sorts stories
          * @type {Boolean}
@@ -69,7 +71,6 @@ addParameters({
         theme: modulTheme
     }
 });
-
 
 
 configure(() => {
