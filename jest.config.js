@@ -19,6 +19,7 @@ module.exports = {
     ],
     moduleNameMapper: {
         "^(.+\\.html)(\\?style=\\..+)?$": "$1",
+        "\\.(css|less|sass|scss)$": "<rootDir>/tests/jest/jest-ignore.js",
         "\\.min\\.(css|less|sass|scss)|\\.svg$": "<rootDir>/tests/jest/jest-ignore.js"
     },
     snapshotSerializers: [

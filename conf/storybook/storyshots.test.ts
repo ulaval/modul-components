@@ -1,19 +1,13 @@
-import initStoryshots from '@storybook/addon-storyshots';
-import Vue from 'vue';
-import ButtonPlugin from '../../src/components/button/button';
-
+import initStoryshots, { multiSnapshotWithOptions, Stories2SnapsConverter } from '@storybook/addon-storyshots';
 declare module '@storybook/addon-storyshots' {
     export const Stories2SnapsConverter: any;
 }
 
 initStoryshots({
-    config: ({ configure }) => {
-
-        Vue.use(ButtonPlugin);
-
-        configure(() => {
-            require('../../src/components/button/button.stories.ts');
-        }, module);
-    }
-
+    configPath: 'conf/storybook/config.jest.ts',
+    test: multiSnapshotWithOptions({}),
+    shallow: true,
+    stories2snapsConverter: new Stories2SnapsConverter({
+        snapshotExtension: '.ts.snap'
+    })
 } as any);

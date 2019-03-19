@@ -8,6 +8,7 @@ import { loadSandboxStories } from './sandboxes.storybook';
 import { hierarchyRootSeparatorRegex, hierarchySeparatorRegex } from './utils';
 
 
+
 Vue.use(ModulPlugin);
 
 // load all sandboxes
@@ -66,8 +67,10 @@ addParameters({
         enableShortcuts: true,
 
         theme: modulTheme
-    },
+    }
 });
+
+
 
 configure(() => {
     return [loadStories(), loadSandboxStories()];
