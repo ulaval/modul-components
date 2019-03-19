@@ -1,5 +1,6 @@
 <m-popup class="m-tooltip"
-         :class="{ 'm--is-disabled': disabled }"
+         :class="{ 'm--is-disabled': disabled,
+                   'm--is-mode-definition': isModeDefinition }"
          :class-name="className"
          :close-on-backdrop="true"
          :focus-management="isMqMaxS"
@@ -10,46 +11,44 @@
          :disabled="disabled"
          @open="onOpen"
          @close="onClose">
-    <m-icon-button v-if="propMode === 'icon'"
-                   :id="id"
+    <m-icon-button :id="id"
                    class="m-tooltip__icon"
+                   v-if="isModeIcon"
                    :aria-controls="ariaControls"
                    :aria-expanded="propOpen"
-                   :disabled="disabled"
-                   :title="propTitle"
-                   @click="onClick"
-                   aria-haspopup="true"
+                   slot="trigger"
                    icon-name="m-svg__information"
+                   :title="title"
                    button-size="22px"
-                   slot="trigger">
+                   :disabled="disabled">
     </m-icon-button>
-    <m-link v-if="propMode !== 'icon'"
-            :id="id"
+    <m-link :id="id"
             class="m-tooltip__link"
-            :aria-controls="ariaControls"
-            :aria-expanded="propOpen"
-            :disabled="disabled"
-            :underline="false"
+            v-else
             @click="onClick"
             aria-haspopup="true"
+            :aria-controls="ariaControls"
+            :aria-expanded="propOpen"
+            slot="trigger"
             mode="button"
-            slot="trigger">
+            :underline="isModeLink"
+            :disabled="disabled">
         <slot name="link"></slot>
     </m-link>
     <div :id="ariaControls"
          class="m-tooltip__body-container"
+         :class="{ 'm--is-mode-icon': isModeIcon,
+                   'm--is-size-large': isSizeLarge,
+                   'm--has-close-button': hasCloseButton }"
          :aria-labelledby="id">
-        <div v-if="propCloseButton"
-             class="m-tooltip__close-button"
-             :title="'m-tooltip:close' | f-m-i18n"
-             @keyup.enter="close"
-             @click="close">
-            <m-icon name="m-svg__close-clear"
-                    size="12px"></m-icon>
-        </div>
-        <div class="m-tooltip__body"
-             :class="{ 'm--is-link': propMode === 'link'
-            , 'm--is-large' : size === 'large' }">
+        <m-icon-button class="m-tooltip__close-button"
+                       v-if="hasCloseButton"
+                       @click="close"
+                       icon-name="m-svg__close-clear"
+                       icon-size="14px"
+                       :svg-tile="CloseTitle">
+        </m-icon-button>
+        <div class="m-tooltip__body">
             <slot></slot>
         </div>
     </div>
