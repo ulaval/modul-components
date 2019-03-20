@@ -34,7 +34,7 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/primary`, module)
         template: '<m-button icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
     }))
     .add('precision', () => ({
-        template: '<m-button >A Button <template slot="precision">Button precision<template></m-button>'
+        template: '<m-button >A Button <template slot="precision">Button precision</template></m-button>'
     }))
     .add('submit', () => ({
         template: '<m-button type="submit">A Button</m-button>'
@@ -59,5 +59,5 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/secondary`, module)
         template: '<m-button skin="secondary" icon-name="m-svg__close-clear">A Button</m-button>'
     }))
     .add('precision', () => ({
-        template: '<m-button skin="secondary" >A Button <template slot="precision">Button precision<template></m-button>'
+        template: '<m-button skin="secondary" >A Button <template slot="precision">Button precision</template></m-button>'
     }));
