@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -85,19 +85,19 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.$refs.article as HTMLElement;
     }
 
-    private onOk(): void {
+    @Emit('ok')
+    onOk(event: Event): void {
         this.as<PortalMixin>().propOpen = false;
-        this.$emit('ok');
     }
 
-    private onSecondaryBtn(): void {
+    @Emit('secondaryBtn')
+    onSecondaryBtn(event: Event): void {
         this.as<PortalMixin>().propOpen = false;
-        this.$emit('secondaryBtn');
     }
 
-    private onCancel(): void {
+    @Emit('cancel')
+    onCancel(event: Event): void {
         this.as<PortalMixin>().propOpen = false;
-        this.$emit('cancel');
     }
 
     private get hasDefaultSlot(): boolean {
