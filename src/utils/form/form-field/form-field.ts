@@ -222,13 +222,6 @@ export class FormField<T> {
         if (this.pristine) {
             switch (this.validationType) {
                 case FormFieldValidationType.Optimistic:
-                    if (this.pristine) {
-                        shouldValidate = this.touched;
-                    } else {
-                        shouldValidate = this.editing;
-                    }
-
-                    break;
                 case FormFieldValidationType.AtExit:
                 case FormFieldValidationType.Correctable:
                     shouldValidate = this.touched;
