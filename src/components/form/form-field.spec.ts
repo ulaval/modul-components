@@ -29,7 +29,7 @@ describe('form-field', () => {
     describe(`The form validate its fields`, () => {
         mockFormField = {
             shouldFocus: false,
-            isTouched: false,
+            isEditing: false,
             hasError: true,
             touched: false,
             touch: jest.fn()

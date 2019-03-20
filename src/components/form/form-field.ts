@@ -15,7 +15,6 @@ export const FormFieldDirective: DirectiveOptions = {
     ): void {
         const formField: FormField<any> = binding.value;
         touchFormField = () => formField.touch();
-
         el.addEventListener('blur', touchFormField, true);
     },
     update(
@@ -24,18 +23,19 @@ export const FormFieldDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         const formField: FormField<any> = binding.value;
+        const selector: string = 'input, textarea, [contenteditable=true]';
+        const inputElement: Element = el.querySelectorAll(selector)[0];
+
+        formField.isEditing = inputElement === document.activeElement;
 
         if (formField.shouldFocus) {
             if (el instanceof HTMLInputElement) {
                 scrollToThisField(el);
                 el.focus();
             } else {
-                const selector: string = 'input, textarea, [contenteditable=true]';
-                const elements: NodeListOf<HTMLInputElement> = el.querySelectorAll(selector);
-
-                if (elements.length > 0) {
-                    scrollToThisField(elements[0]);
-                    elements[0].focus();
+                if (inputElement) {
+                    scrollToThisField(inputElement);
+                    (inputElement as HTMLInputElement).focus();
                 }
             }
 

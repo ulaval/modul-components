@@ -1,20 +1,32 @@
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 
+export enum FormFieldValidationType {
+    Optimistic = 'optimistic',
+    OnGoing = 'on-going',
+    Correctable = 'correctable',
+    AtExit = 'at-exit'
+}
+
 export interface FormFieldOptions {
-    messageAfterTouched?: boolean;
+    validationType?: FormFieldValidationType;
 }
 
 export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
 /**
  * Form Field Class
+ * @property {boolean} $editing True if value is being updated via edition.
+ * @property {boolean} $touched True if control has lost focus.
+ * @property {boolean} $pristine True if user has not interacted with the control yet.
  */
 export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
-    private messageAfterTouched: boolean = true;
+    private validationType: FormFieldValidationType = FormFieldValidationType.AtExit;
     private touched: boolean = false;
+    private editing: boolean = false;
+    private pristine: boolean = true;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
 
@@ -30,8 +42,8 @@ export class FormField<T> {
         this.internalState = new FormFieldState();
 
         if (options) {
-            this.messageAfterTouched = typeof options.messageAfterTouched === undefined ?
-                this.messageAfterTouched : options.messageAfterTouched!;
+            this.validationType = typeof options.validationType === undefined ?
+                this.validationType : options.validationType!;
         }
     }
 
@@ -57,6 +69,13 @@ export class FormField<T> {
     }
 
     /**
+     * indicates if the field is valid
+     */
+    get isValid(): boolean {
+        return !this.internalState.hasError;
+    }
+
+    /**
      * get external error
      */
     get ExternalError(): string {
@@ -79,6 +98,20 @@ export class FormField<T> {
     }
 
     /**
+     * indicates if the field is being edited
+     */
+    get isEditing(): boolean {
+        return this.editing;
+    }
+
+    /**
+     * set wheter or not the field is being edited
+     */
+    set isEditing(value: boolean) {
+        this.editing = value;
+    }
+
+    /**
      * if the field should focus
      */
     get shouldFocus(): boolean {
@@ -98,7 +131,7 @@ export class FormField<T> {
     get errorMessage(): string {
         let errorMessageToShow: string = '';
 
-        if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)) {
+        if (this.hasError) {
             errorMessageToShow = this.internalState.errorMessages[0];
         }
 
@@ -116,31 +149,37 @@ export class FormField<T> {
      * execute validations
      */
     validate(): void {
-        if (this.validationCallback.length > 0) {
-            let newState: FormFieldState = new FormFieldState();
-            this.validationCallback.forEach((validationFunction) => {
-                let validation: FormFieldValidation = validationFunction(this);
-                if (validation.isError) {
-                    newState.hasError = true;
-                }
-                if (validation.errorMessages.length > 0) {
-                    newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
-                }
-                if (validation.errorMessagesSummary.length > 0) {
-                    newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
-                }
-            });
-            this.changeState(newState);
+        if (this.validationCallback.length === 0 || !this.shouldValidate()) {
+            return;
         }
+
+        let newState: FormFieldState = new FormFieldState();
+        this.validationCallback.forEach((validationFunction) => {
+            let validation: FormFieldValidation = validationFunction(this);
+            if (validation.isError) {
+                newState.hasError = true;
+            }
+            if (validation.errorMessages.length > 0) {
+                newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
+            }
+            if (validation.errorMessagesSummary.length > 0) {
+                newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
+            }
+        });
+
+        this.changeState(newState);
     }
 
     /**
      * mark the field as touched, reset external error and trigger validation
      */
     touch(): void {
+        this.pristine = false;
         this.touched = true;
-        this.externalError = '';
         this.validate();
+        this.touched = false;
+
+        this.externalError = '';
     }
 
     /**
@@ -151,7 +190,9 @@ export class FormField<T> {
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
         this.externalError = '';
+        this.editing = false;
         this.touched = false;
+        this.pristine = true;
     }
 
     /**
@@ -160,8 +201,8 @@ export class FormField<T> {
      */
     private change(value: T): void {
         if (typeof value === 'object' || value !== this.oldValue) {
-            this.internalValue = value;
             this.oldValue = this.internalValue;
+            this.internalValue = value;
             this.validate();
         }
     }
@@ -170,5 +211,56 @@ export class FormField<T> {
         this.internalState.hasError = etat.hasError;
         this.internalState.errorMessages = etat.errorMessages;
         this.internalState.errorMessagesSummary = etat.errorMessagesSummary;
+    }
+
+    /**
+     * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
+     */
+    private shouldValidate(): boolean {
+        let shouldValidate: boolean = false;
+
+        if (this.pristine) {
+            switch (this.validationType) {
+                case FormFieldValidationType.Optimistic:
+                    if (this.pristine) {
+                        shouldValidate = this.touched;
+                    } else {
+                        shouldValidate = this.editing;
+                    }
+
+                    break;
+                case FormFieldValidationType.AtExit:
+                case FormFieldValidationType.Correctable:
+                    shouldValidate = this.touched;
+                    break;
+                case FormFieldValidationType.OnGoing:
+                    shouldValidate = this.editing;
+                    break;
+            }
+        } else if (this.isValid) {
+            switch (this.validationType) {
+                case FormFieldValidationType.Optimistic:
+                case FormFieldValidationType.OnGoing:
+                    shouldValidate = this.editing;
+                    break;
+                case FormFieldValidationType.AtExit:
+                case FormFieldValidationType.Correctable:
+                    shouldValidate = this.touched;
+                    break;
+            }
+        } else if (!this.isValid) {
+            switch (this.validationType) {
+                case FormFieldValidationType.Optimistic:
+                case FormFieldValidationType.OnGoing:
+                case FormFieldValidationType.Correctable:
+                    shouldValidate = this.editing;
+                    break;
+                case FormFieldValidationType.AtExit:
+                    shouldValidate = this.touched;
+                    break;
+            }
+        }
+
+        return shouldValidate;
     }
 }

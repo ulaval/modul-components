@@ -598,4 +598,38 @@
         </p>
     </p>
     <hr />
+    <h3>Form field validation types</h3>
+    <p class="m-u--margin-bottom">
+        <a href="https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs">documentation</a>
+    </p>
+    <p>
+        <m-form :form="forms[18]"
+                @reset="reset(18)"
+                @submit="submit(18)">
+            <m-textfield v-for="(field, index) in forms[18].fields"
+                         :key="index"
+                         v-model.trim="field.value"
+                         :label="forms[18].getFieldName(field)"
+                         :error-message="field.errorMessage"
+                         v-m-form-field="field">
+            </m-textfield>
+            <p>
+                value {{forms[18].get('Optimistic (example: required)').value}}
+            </p>
+            <p>
+                old value {{forms[18].get('Optimistic (example: required)').oldValue}}
+            </p>
+            <p>
+                is Valid {{forms[18].get('Optimistic (example: required)').isValid}}
+            </p>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[18].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[18].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
 </div>
