@@ -2,7 +2,8 @@ import Vue from 'vue';
 import { MCurrencyType, MMoney, MMoneyFactory } from '../../../utils/money/money';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MONEY_NAME } from '../../filter-names';
-import { MoneyFilter } from './money';
+import { formatCurrency } from './money';
+
 
 const fakeNumber: (numberToFake: number) => number = (numberToFake: number) => {
     return Object.assign({}, numberToFake);
@@ -18,7 +19,7 @@ describe(MONEY_NAME, () => {
         MMoneyFactory.createAllParams(123, MCurrencyType.NONE)
     ].forEach((money: MMoney) => {
         it(`should return empty if the currency can't be displayed (${JSON.stringify(money)})`, () => {
-            expect(MoneyFilter.formatCurrency(money)).toBe('');
+            expect(formatCurrency(money)).toBe('');
         });
     });
 
@@ -30,7 +31,7 @@ describe(MONEY_NAME, () => {
             const expectedReturnValue: string = 'someString';
             money.amount.toLocaleString = jest.fn(() => expectedReturnValue);
 
-            const formatedCurrency: string = MoneyFilter.formatCurrency(money);
+            const formatedCurrency: string = formatCurrency(money);
 
             expect(formatedCurrency).toBe(expectedReturnValue);
             expect(money.amount.toLocaleString)

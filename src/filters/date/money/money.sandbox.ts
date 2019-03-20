@@ -4,15 +4,15 @@ import DropdownPlugin from '../../../components/dropdown/dropdown';
 import IntegerfieldPlugin from '../../../components/integerfield/integerfield';
 import { Enums } from '../../../utils/enums/enums';
 import { ENGLISH, FRENCH, Messages } from '../../../utils/i18n/i18n';
-import { MCurrencyType, MMoney, MMoneyFactory } from '../../../utils/money/money';
 import { ModulVue } from '../../../utils/vue/vue';
-import MoneyPlugin from './money';
+import MoneyPlugin, { MCurrencyType } from './money';
 import WithRender from './money.sandbox.html';
+
 
 @WithRender
 @Component
 export class MMoneySandbox extends Vue {
-    selectedCurrency: MCurrencyType = '' as any;
+    selectedCurrency: MCurrencyType = MCurrencyType.CAD;
     selectedLanguage: string = (Vue.prototype as ModulVue).$i18n.currentLang();
     amount: number = NaN;
     currencies: { key: any, value: string }[] = Enums.toKeyValueArray(MCurrencyType);
@@ -25,10 +25,6 @@ export class MMoneySandbox extends Vue {
 
     set integerFieldAmount(value: string) {
         this.amount = value || value === '0' ? parseFloat(value) : NaN;
-    }
-
-    get moneyToFilter(): MMoney {
-        return MMoneyFactory.createAllParams(this.amount, this.selectedCurrency);
     }
 
     @Watch('selectedLanguage')

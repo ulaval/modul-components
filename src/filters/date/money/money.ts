@@ -1,29 +1,34 @@
 import Vue, { PluginObject } from 'vue';
 import MessagePlugin from '../../../components/message/message';
-import { MMoney } from '../../../utils/money/money';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MONEY_NAME } from '../../filter-names';
 
-export class MoneyFilter {
-    static formatCurrency(money: MMoney): string {
-        if (!MoneyFilter.moneyCanDisplay(money)) {
-            return '';
-        }
 
-        return money.amount.toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
-            style: 'currency',
-            currency: money.currency
-        });
-    }
-
-    static moneyCanDisplay(money: MMoney): boolean {
-        return money && (!!money.amount || money.amount === 0) && !!money.currency;
-    }
+// ISO 4217  https://www.currency-iso.org/en/home/tables/table-a1.html
+export enum MCurrencyType {
+    CAD = 'CAD',
+    USD = 'USD',
+    EUR = 'EUR'
 }
+
+export function formatCurrency(money: number, currency = MCurrencyType.CAD): string {
+
+    if (!isNaN(money)) {
+        return money.toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
+            style: 'currency',
+            currency: currency
+        });
+    } else {
+        return '';
+    }
+
+}
+
+
 
 const MoneyPlugin: PluginObject<any> = {
     install(v): void {
-        v.filter(MONEY_NAME, MoneyFilter.formatCurrency);
+        v.filter(MONEY_NAME, formatCurrency);
         v.use(MessagePlugin);
     }
 };
