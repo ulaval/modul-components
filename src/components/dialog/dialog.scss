@@ -125,6 +125,13 @@ $m-dialog--max-width--l: 500px !default;
         ~ .m-dialog__footer {
             padding-top: 0;
         }
+
+        .m-message {
+            &.m--is-skin-page-light {
+                margin-top: -$m-spacing;
+                margin-bottom: $m-spacing;
+            }
+        }
     }
 
     &__footer {
