@@ -16,11 +16,14 @@
                             v-if="hasTitle">
                         <h2>{{ title }}</h2>
                     </header>
-                    <div class="m-dialog__body"
-                         v-if="hasDefaultSlot || hasMessage">
-                        <p v-if="hasMessage"
-                           v-html="message"></p>
-                        <slot></slot>
+                    <div class="m-dialog__body">
+                        <div v-if="type !== 'default'">
+                            <m-message class="m-u--margin-top--l" skin="page-light" :state="getState"></m-message>
+                        </div>
+                        <div v-if="hasDefaultSlot || hasMessage">
+                            <p v-if="hasMessage" v-html="message"></p>
+                            <slot></slot>
+                        </div>
                     </div>
                     <footer class="m-dialog__footer">
                         <slot name="footer"></slot>

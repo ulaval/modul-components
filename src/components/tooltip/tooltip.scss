@@ -8,6 +8,12 @@ $m-tooltip--max-height: 280px !default;
         display: inline;
     }
 
+    &.m--is-mode-definition {
+        .m-tooltip__link /deep/ .m-link__text > :first-child {
+            border-bottom: 1px dotted currentColor;
+        }
+    }
+
     &.m--is-disabled {
         .m-tooltip__icon {
             &.m-icon-button.m-icon-button {
@@ -21,7 +27,8 @@ $m-tooltip--max-height: 280px !default;
         color: $m-color--interactive-light;
         cursor: pointer;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: $m-color--interactive;
         }
 
@@ -36,7 +43,8 @@ $m-tooltip--max-height: 280px !default;
             height: $m-font-size;
             color: $m-color--interactive-light;
 
-            &:hover {
+            &:hover,
+            &:focus {
                 color: $m-color--interactive;
             }
         }
@@ -44,23 +52,8 @@ $m-tooltip--max-height: 280px !default;
 
     &__close-button {
         position: absolute;
-        top: 1px; // Magic number: border-width
-        right: 1px; // Magic number: border-width
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: $m-touch-size;
-        height: $m-touch-size;
-        transition: color $m-transition-duration--s ease;
-        outline: none;
-        cursor: pointer;
-        color: $m-color--interactive;
-        stroke-width: 2; // Magic number : width of icon stroke
-
-        &:hover,
-        &:focus {
-            color: $m-color--interactive-darker;
-        }
+        top: 1px;
+        right: 1px;
     }
 
     &__body {
@@ -69,39 +62,11 @@ $m-tooltip--max-height: 280px !default;
         word-break: break-word;
         user-select: text;
 
-        &.m--is-link {
-            background: $m-color--white;
-            border: 1px solid $m-color--grey-lighter;
-        }
-
-        @media (max-width: $m-mq--max--s) {
-            position: relative;
-
-            &::after {
-                position: fixed;
-                top: 0;
-                right: 0;
-                left: 0;
-                content: '';
-                height: 1px;
-                background: $m-color--interactive;
-            }
-        }
-
         @media (min-width: $m-mq--min--s) {
             width: $m-tooltip--width;
             max-height: $m-tooltip--max-height;
             overflow-x: hidden;
             overflow-y: auto;
-
-            &.m--is-large {
-                width: $m-tooltip--width--l;
-            }
-
-            &:not(.m--is-link) {
-                border: 1px solid $m-color--interactive;
-            }
-
             border-radius: $m-border-radius--s;
         }
 
@@ -111,19 +76,62 @@ $m-tooltip--max-height: 280px !default;
         }
 
         @include m-scrollbar();
+    }
+}
 
-        &-container {
-            &.m--has-close-button {
-                position: relative;
+.m-tooltip__body-container {
+    &.m--has-close-button {
+        position: relative;
 
-                .m-tooltip__body {
-                    padding-right: $m-padding--l;
-                }
+        .m-tooltip__body {
+            padding-right: $m-padding--l;
+        }
+    }
+
+    &.m--is-size-large {
+        .m-tooltip__body {
+            width: $m-tooltip--width--l;
+        }
+    }
+
+    &:not(.m--is-mode-icon) {
+        .m-tooltip__body {
+            background: $m-color--white;
+
+            @media (min-width: $m-mq--min--s) {
+                border: 1px solid $m-color--grey-light;
             }
         }
     }
 
-    &__link /deep/ .m-link__text span {
-        border-bottom: 1px dotted currentColor;
+    &.m--is-mode-icon {
+        .m-tooltip__body {
+            @media (max-width: $m-mq--max--s) {
+                position: relative;
+
+                &::after {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    content: '';
+                    height: 1px;
+                    background: $m-color--interactive;
+                }
+            }
+
+            @media (min-width: $m-mq--min--s) {
+                border: 1px solid $m-color--interactive;
+            }
+        }
+
+        .m-tooltip__close-button {
+            color: $m-color--interactive;
+
+            &:hover,
+            &:focus {
+                color: $m-color--interactive-darker;
+            }
+        }
     }
 }

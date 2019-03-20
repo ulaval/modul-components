@@ -1,4 +1,3 @@
-
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
@@ -10,11 +9,17 @@ import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import WithRender from './dialog.html?style=./dialog.scss';
 
-
-
 export enum MDialogWidth {
     Default = 'default',
     Large = 'large'
+}
+
+export enum MDialogState {
+    Default = 'default',
+    Warning = 'warning',
+    Confirmation = 'confirmation',
+    Information = 'information',
+    Error = 'error'
 }
 
 @WithRender
@@ -41,6 +46,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogWidth.Large
     })
     public width: string;
+
+    @Prop({
+        default: MDialogState.Default,
+        validator: value =>
+            value === MDialogState.Default ||
+            value === MDialogState.Warning ||
+            value === MDialogState.Confirmation ||
+            value === MDialogState.Information ||
+            value === MDialogState.Error
+    })
+    public type: MDialogState;
 
     public handlesFocus(): boolean {
         return true;
@@ -99,6 +115,28 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     private get hasWidthLarge(): boolean {
         return this.width === MDialogWidth.Large;
     }
+
+    private get getState(): string {
+        let state: string = '';
+        switch (this.type) {
+            case MDialogState.Confirmation:
+                state = 'confirmation';
+                break;
+            case MDialogState.Information:
+                state = 'information';
+                break;
+            case MDialogState.Warning:
+                state = 'warning';
+                break;
+            case MDialogState.Error:
+                state = 'error';
+                break;
+            default:
+                break;
+        }
+        return state;
+    }
+
 }
 
 const DialogPlugin: PluginObject<any> = {
