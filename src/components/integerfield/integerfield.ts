@@ -76,6 +76,10 @@ export class MIntegerfield extends ModulVue {
 
     }
 
+    private onEnter(event: Event): void {
+        this.$emit('enter', event);
+    }
+
     private isNumberKeycode(keycode): boolean {
         return keycode > 31 && (keycode < 48 || keycode > 57) && (keycode < 96 || keycode > 105);
     }
