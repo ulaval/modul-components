@@ -102,7 +102,7 @@ export class Form {
 
 
     /**
-     * Return the name of the form
+     * Return the name of the form field
      *
      * @param formField the formfield to find the name of
      */
