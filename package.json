@@ -79,6 +79,7 @@
         "moment": "^2.19.3",
         "popper.js": "^1.12.9",
         "portal-vue": "~1.1.1",
+        "qs": "^6.5.1",
         "sprintf-js": "^1.1.1",
         "vue-touch": "^2.0.0-beta.4",
         "zingtouch": "^1.0.6"
@@ -116,7 +117,6 @@
         "node-html-parser": "^1.1.10",
         "node-sass": "^4.11.0",
         "postcss-loader": "^3.0.0",
-        "qs": "^6.5.1",
         "rimraf": "^2.6.2",
         "sass-loader": "^7.1.0",
         "selenium-server": "^3.8.1",
