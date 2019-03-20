@@ -207,13 +207,13 @@ export class MFormSandbox extends ModulVue {
                 }
                 return new FormFieldValidation();
             }], { validationType: FormFieldValidationType.OnGoing }),
-            'Correctable (email)': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+            'Correctable (example: email)': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
                 if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(formField.value)) {
                     return new FormFieldValidation(true, [''], ['the correctable validation was triggered']);
                 }
                 return new FormFieldValidation();
             }], { validationType: FormFieldValidationType.Correctable }),
-            'At exit (max 5)': new FormField<number>((): number => 0, [(formField: FormField<number>): FormFieldValidation => {
+            'At exit (example: max 5)': new FormField<number>((): number => 0, [(formField: FormField<number>): FormFieldValidation => {
                 if (formField.value > 5) {
                     return new FormFieldValidation(true, [''], ['the at-exit validation was triggered']);
                 }
