@@ -148,7 +148,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.width === MDialogWidth.Large;
     }
 
-    private getState(): string {
+    private get getState(): string {
         let state: string = '';
         switch (this.type) {
             case MDialogState.Confirmation:
