@@ -13,11 +13,12 @@ export interface FormFieldOptions {
 }
 
 export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
+
 /**
  * Form Field Class
- * @property {boolean} $editing True if value is being updated via edition.
- * @property {boolean} $touched True if control has lost focus.
- * @property {boolean} $pristine True if user has not interacted with the control yet.
+ * @property {boolean} editing True if value is being updated via edition.
+ * @property {boolean} touched True if control has lost focus.
+ * @property {boolean} pristine True if user has not interacted with the control yet.
  */
 export class FormField<T> {
     private internalValue: T;
