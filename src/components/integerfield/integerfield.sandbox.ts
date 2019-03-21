@@ -11,6 +11,10 @@ export class MIntegerfieldSandbox extends Vue {
     public model2: number = 0;
     public model3: number = 3;
     public model4: number = 5;
+
+    get isNumber(): boolean {
+        return (typeof this.model1 === 'number');
+    }
 }
 
 const IntegerfieldSandboxPlugin: PluginObject<any> = {
@@ -18,6 +22,8 @@ const IntegerfieldSandboxPlugin: PluginObject<any> = {
         v.use(IntegerfieldPlugin);
         v.component(`${INTEGERFIELD_NAME}-sandbox`, MIntegerfieldSandbox);
     }
+
+
 };
 
 export default IntegerfieldSandboxPlugin;

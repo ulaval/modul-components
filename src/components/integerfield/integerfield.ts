@@ -103,6 +103,10 @@ export class MIntegerfield extends ModulVue {
     private get inputMode(): string | undefined {
         return 'numeric';
     }
+
+    private set model(value: string) {
+        this.$emit('input', Number.parseInt(value, 10));
+    }
 }
 
 const IntegerfieldPlugin: PluginObject<any> = {
