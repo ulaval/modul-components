@@ -14,7 +14,11 @@ export class MMoneyfieldSandbox extends Vue {
     selectedLanguage: string = (Vue.prototype as ModulVue).$i18n.currentLang();
     originalLang = (Vue.prototype as ModulVue).$i18n.currentLang();
     i18n: Messages = Vue.prototype.$i18n;
-    model: any = '';
+    model: number = 0;
+
+    get isNumber(): boolean {
+        return (typeof this.model === 'number');
+    }
 
     @Watch('selectedLanguage')
     changeLanguage(): void {
