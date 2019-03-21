@@ -83,7 +83,6 @@ export class MCalendar extends ModulVue {
 
 const CalendarPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(CALENDAR_NAME + ' is not ready for production');
         Vue.use(IconButtonPlugin);
         v.component(CALENDAR_NAME, MCalendar);
     }

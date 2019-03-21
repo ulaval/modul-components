@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
+import { Model, Prop, Watch } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -104,6 +104,18 @@ export class MIntegerfield extends ModulVue {
         return 'numeric';
     }
 
+    @Watch('value')
+    private onValueChange(value: number): void {
+        this.model = value.toString();
+    }
+
+    private get model(): string {
+        return ((this as any) as InputManagement).internalValue;
+    }
+
+    private set model(value: string) {
+        this.$emit('input', Number.parseInt(value, 10));
+    }
 }
 
 const IntegerfieldPlugin: PluginObject<any> = {
