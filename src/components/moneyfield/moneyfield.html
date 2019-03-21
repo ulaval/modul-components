@@ -2,8 +2,9 @@
     <span v-if="currencyDetail.symbolPosition === 'before'">
         {{ currencyDetail.localizedSymbol }}
     </span>
-    <m-integerfield v-bind="propsNumberField"
-                    @input="updateModel"></m-integerfield>
+    <m-integerfield v-bind="$attrs"
+                    v-on="$listeners"
+                    v-model="internalModel"></m-integerfield>
     <span v-if="currencyDetail.symbolPosition === 'after'">
         {{ currencyDetail.localizedSymbol }}
     </span>
