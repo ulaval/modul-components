@@ -3,8 +3,7 @@
         {{ currencyDetail.localizedSymbol }}
     </span>
     <m-integerfield v-bind="$attrs"
-                    v-on="$listeners"
-                    v-model="internalModel"></m-integerfield>
+                    v-on="$listeners"></m-integerfield>
     <span v-if="currencyDetail.symbolPosition === 'after'">
         {{ currencyDetail.localizedSymbol }}
     </span>
