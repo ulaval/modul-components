@@ -30,6 +30,8 @@
                 :large="iconSize=='large'"
                 :border="hasIconBorder"
                 :skin="plusSkin"
+                :title-open="titleMenuOpen"
+                :title-close="titleMenuClose"
                 aria-hidden="true"></m-plus>
     </div>
     <m-accordion-transition :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 24 : 0">
