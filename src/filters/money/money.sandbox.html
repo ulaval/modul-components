@@ -2,7 +2,7 @@
     <h3>Money format</h3>
 
     <h4>Result</h4>
-    <p>{{ $options.filters['f-m-money'](moneyToFilter) }}</p>
+    <p>{{ amount | f-m-money(selectedCurrency) }}</p>
 
     <div>
         <m-integerfield v-model="integerFieldAmount"
