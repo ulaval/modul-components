@@ -17,12 +17,23 @@
                         <h2>{{ title }}</h2>
                     </header>
                     <div class="m-dialog__body">
-                        <div v-if="type !== 'default'">
+                        <div class="m-dialog__type-icon" v-if="type !== 'default'">
                             <m-message class="m-u--margin-top--l" skin="page-light" :state="getState"></m-message>
                         </div>
-                        <div v-if="hasDefaultSlot || hasMessage">
+                        <div class="m-dialog__message" v-if="hasDefaultSlot || hasMessage">
                             <p v-if="hasMessage" v-html="message"></p>
                             <slot></slot>
+                        </div>
+                        <div class="m-dialog__hint" v-if="hasHint">
+                            <div class="m-dialog__hint--body">
+                                <div class="m-dialog__hint--icon">
+                                    <m-icon name="m-svg__hint"
+                                            size="32px"></m-icon>
+                                </div>
+                                <div class="m-dialog__hint--text">
+                                    <span>{{ hint }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <footer class="m-dialog__footer">
@@ -34,7 +45,8 @@
                                 <m-i18n v-else
                                         k="m-dialog:ok"></m-i18n>
                                 <template slot="precision"
-                                          v-if="hasOkPrecision">{{ okPrecision }}</template>
+                                          v-if="hasOkPrecision">{{ okPrecision }}
+                                </template>
                             </m-button>
                             <m-link mode="button"
                                     @click="onCancel()"

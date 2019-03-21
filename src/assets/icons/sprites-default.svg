@@ -813,7 +813,7 @@
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="17.8" x2="23.5" y2="17.8"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="23.5" x2="16.5" y2="23.5"/>
     </symbol>
-    <symbol id="m-svg__tip" viewBox="-1 -1 26 26">
+    <symbol id="m-svg__hint" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.4,8.9
             c0,3.7-2.4,6.8-5.6,7.9v5.1h-1.3v1.6h-2.6v-1.6H9.4v-5c-3.3-1.1-5.8-4.2-5.8-8c0-4.6,3.8-8.4,8.4-8.4S20.4,4.3,20.4,8.9z"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="9.4" y1="17.9" x2="14.8" y2="17.9"/>
