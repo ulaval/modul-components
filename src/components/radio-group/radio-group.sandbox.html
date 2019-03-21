@@ -63,7 +63,7 @@
     <p>From <a href="https://jira.dti.ulaval.ca/browse/MODUL-283">MODUL-283</a></p>
     <h4>Group read-only set to true and childs read-only default</h4>
     <m-radio-group class="m-u--margin-top"
-                   :read-only="true"
+                   :readonly="true"
                    value="1">
         <m-radio value="1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         <m-radio value="2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
@@ -72,26 +72,26 @@
 
     <h4>Group read-only set to true and childs read-only false</h4>
     <m-radio-group class="m-u--margin-top"
-                   :read-only="true"
+                   :readonly="true"
                    value="1">
         <m-radio value="1"
-                 :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+                 :readonly="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         <m-radio value="2"
-                 :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+                 :readonly="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         <m-radio value="3"
-                 :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+                 :readonly="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
     </m-radio-group>
 
     <h4>Group read-only not setted (default value) and childs read-only setted individually</h4>
     <m-radio-group class="m-u--margin-top"
                    value="3">
         <m-radio value="1"
-                 :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+                 :readonly="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         <m-radio value="2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         <m-radio value="3"
-                 :read-only="true">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+                 :readonly="true">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
         <m-radio value="4"
-                 :read-only="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
+                 :readonly="false">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam<br>placeat dolores esse libero ipsum, officiis asperiores!</m-radio>
     </m-radio-group>
 
     <h3>Radio $emit('focus') - See the console.log</h3>

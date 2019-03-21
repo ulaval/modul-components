@@ -1,0 +1,110 @@
+<div>
+    <h2>Base moneyfield</h2>
+    <m-moneyfield v-model="model"></m-moneyfield>
+    <div>
+        model value: {{ model }} is number = {{  isNumber }}
+    </div>
+
+    <h3 class="m-u--h6">Label</h3>
+    <m-moneyfield label="label"></m-moneyfield>
+
+    <h3 class="m-u--h6">Placeholder</h3>
+    <m-moneyfield placeholder="write something clever"></m-moneyfield>
+
+    <h3 class="m-u--h6">Required</h3>
+    <m-moneyfield :required-marker="true"
+                  label="Amount"
+                  value=""></m-moneyfield>
+
+    <h3 class="m-u--h6">Waiting</h3>
+    <m-moneyfield :waiting="true"
+                  label="label"></m-moneyfield>
+
+    <h3 class="m-u--h6">Disabled</h3>
+    <m-moneyfield :disabled="true"
+                  label="label"></m-moneyfield>
+    <m-moneyfield :disabled="true"
+                  label="label"
+                  value="value"></m-moneyfield>
+
+    <h3 class="m-u--h6">Read only</h3>
+    <m-moneyfield :readonly="true"
+                  label="label"></m-moneyfield>
+    <m-moneyfield :readonly="true"
+                  label="label"
+                  value="value"></m-moneyfield>
+    <h2>Messages</h2>
+    <h3 class="m-u--h6">Static error (default)</h3>
+    <m-moneyfield label="label"
+                  value="wrong answer"
+                  error-message="this field is in error">
+    </m-moneyfield>
+
+    <h3 class="m-u--h6">Helper message</h3>
+    <m-moneyfield label="label"
+                  helper-message="this message is helping you understand the component awesome feature">
+    </m-moneyfield>
+
+    <h3 class="m-u--h6">Valid message</h3>
+    <m-moneyfield label="label"
+                  valid-message="Valid textfield"></m-moneyfield>
+    <h2>Sizes</h2>
+    <m-moneyfield label="x-small"
+                  max-width="x-small"
+                  value=""></m-moneyfield>
+    <br />
+    <m-moneyfield label="regular"
+                  max-width="regular"
+                  value=""></m-moneyfield>
+    <br />
+    <m-moneyfield label="medium"
+                  max-width="medium"
+                  value=""></m-moneyfield>
+    <br />
+    <m-moneyfield label="large"
+                  max-width="large"
+                  value=""></m-moneyfield>
+
+    <p class="m-u--margin-top"><b>max-width</b> should be set at <b>none</b> to override default settings</p>
+    <m-moneyfield label="custom width"
+                  width="333px"
+                  max-width="none"
+                  value=""></m-moneyfield>
+    <h2>Tag style</h2>
+    <m-moneyfield label="h1"
+                  tag-style="h1">
+    </m-moneyfield>
+    <br />
+    <m-moneyfield label="h2"
+                  tag-style="h2">
+    </m-moneyfield>
+    <br />
+    <m-moneyfield label="h3"
+                  tag-style="h3">
+    </m-moneyfield>
+    <br />
+    <m-moneyfield label="h4"
+                  tag-style="h4">
+    </m-moneyfield>
+    <br />
+    <m-moneyfield label="h5"
+                  tag-style="h5">
+    </m-moneyfield>
+    <br />
+    <m-moneyfield label="h6"
+                  tag-style="h6">
+    </m-moneyfield>
+    <br />
+    <m-moneyfield label="p"
+                  tag-style="p">
+    </m-moneyfield>
+    <h2>Localization</h2>
+    <m-dropdown label="Language"
+                placeholder="Choose a language"
+                v-model="selectedLanguage">
+        <m-dropdown-item v-for="language in languages"
+                         :key="language"
+                         :value="language"
+                         :label="language"></m-dropdown-item>
+    </m-dropdown>
+</div>

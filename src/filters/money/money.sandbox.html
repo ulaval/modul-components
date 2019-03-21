@@ -1,0 +1,27 @@
+<div>
+    <h3>Money format</h3>
+
+    <h4>Result</h4>
+    <p>{{ amount | f-m-money(selectedCurrency) }}</p>
+
+    <div>
+        <m-integerfield v-model="integerFieldAmount"
+                        label="amount"></m-integerfield>
+        <m-dropdown label="Currency"
+                    placeholder="Choose a currency"
+                    v-model="selectedCurrency">
+            <m-dropdown-item v-for="currency in currencies"
+                             :key="currency.value"
+                             :value="currency.value"
+                             :label="currency.key"></m-dropdown-item>
+        </m-dropdown>
+        <m-dropdown label="Language"
+                    placeholder="Choose a language"
+                    v-model="selectedLanguage">
+            <m-dropdown-item v-for="language in languages"
+                             :key="language"
+                             :value="language"
+                             :label="language"></m-dropdown-item>
+        </m-dropdown>
+    </div>
+</div>
