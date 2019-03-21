@@ -15,11 +15,6 @@ module.exports = ({ config, mode }) => {
     config.module.rules = baseConfig.module.rules;
     config.plugins.push(...(baseConfig.plugins));
 
-    // Pour faire fonctionner __filename dans webpack
-    config.node = {
-        __filename: true
-    };
-
     //Uncomment the following line to display configuration
     // console.dir(config, { depth: null });
     return config;
