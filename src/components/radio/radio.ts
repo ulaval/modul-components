@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop } from 'vue-property-decorator';
-import { InputState } from '../../mixins/input-state/input-state';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RADIO_NAME } from '../component-names';
@@ -27,7 +27,6 @@ export interface RadioGroup {
     inline: boolean;
     radiosVerticalAlign: MRadioVerticalAlignement;
     radiosMarginTop: string;
-    readOnly: boolean;
     onFocus(event: Event): void;
     onBlur(event: Event): void;
     getValue(): string;
@@ -68,8 +67,6 @@ export class MRadio extends ModulVue {
     public radioVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radioMarginTop: string;
-    @Prop()
-    public readOnly: boolean;
 
     public radioID: string = uuid.generate();
 
@@ -129,11 +126,11 @@ export class MRadio extends ModulVue {
         }
     }
 
-    public get propReadOnly(): boolean {
-        if (this.readOnly !== undefined) {
-            return this.readOnly;
+    public get propReadonly(): boolean {
+        if (this.as<InputStateMixin>().readonly !== undefined) {
+            return this.as<InputStateMixin>().readonly;
         } else {
-            return this.isGroup() ? this.parentGroup.readOnly : false;
+            return this.isGroup() ? (this.parentGroup as any).readonly : false;
         }
     }
 
