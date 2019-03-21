@@ -6,8 +6,8 @@ exports[`Base calendar in day picker mode should render a calendar 1`] = `
       January 2019
     </button>
     <div>
-      <m-icon-button skin="link" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">Previous month</m-icon-button>
-      <m-icon-button skin="link" icon-name="m-svg__chevron--right" class="m-base-calendar__next">Next month</m-icon-button>
+      <m-icon-button icon-name="m-svg__chevron--left" skin="link" class="m-base-calendar__previous">Previous month</m-icon-button>
+      <m-icon-button icon-name="m-svg__chevron--right" skin="link" class="m-base-calendar__next">Next month</m-icon-button>
     </div>
   </nav>
   <div aria-live="polite" class="m-base-calendar__body">
@@ -59,8 +59,8 @@ exports[`Base calendar in day picker mode when hiding days from previous and fol
       January 2019
     </button>
     <div>
-      <m-icon-button skin="link" icon-name="m-svg__chevron--left" class="m-base-calendar__previous">Previous month</m-icon-button>
-      <m-icon-button skin="link" icon-name="m-svg__chevron--right" class="m-base-calendar__next">Next month</m-icon-button>
+      <m-icon-button icon-name="m-svg__chevron--left" skin="link" class="m-base-calendar__previous">Previous month</m-icon-button>
+      <m-icon-button icon-name="m-svg__chevron--right" skin="link" class="m-base-calendar__next">Next month</m-icon-button>
     </div>
   </nav>
   <div aria-live="polite" class="m-base-calendar__body">
