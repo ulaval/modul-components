@@ -42,7 +42,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public secBtnLabel: string | undefined;
     @Prop()
     public secBtnPrecision: string | undefined;
-    @Prop({ default: 'auto' })
+    @Prop({ default: '100%' })
     public btnWidth: string;
     @Prop()
     public cancelLabel: string | undefined;
