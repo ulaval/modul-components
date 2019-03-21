@@ -2,6 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import { WindowErrorHandler } from './errors/window-error-handler';
 import HttpPlugin, { HttpPluginOptions, HttpService } from './http/http';
 import I18nPlugin, { I18nPluginOptions, Messages } from './i18n/i18n';
+import L10nPlugin, { L10n, L10nPluginOptions } from './l10n/l10n';
 import LoggerPlugin, { ConsoleOptions, Logger } from './logger/logger';
 import MediaQueriesPlugin, { MediaQueries } from './media-queries/media-queries';
 import ModulPlugin, { Modul } from './modul/modul';
@@ -13,6 +14,7 @@ declare module 'vue/types/vue' {
         $modul: Modul;
         $log: Logger;
         $i18n: Messages;
+        $l10n: L10n;
         $http: HttpService;
         $mq: MediaQueries;
         $svg: SpritesService;
@@ -23,6 +25,7 @@ export interface UtilsPluginOptions {
     httpPluginOptions?: HttpPluginOptions;
     consoleOptions?: ConsoleOptions;
     i18PluginOptions?: I18nPluginOptions;
+    l10nPluginOptions?: L10nPluginOptions;
     propagateVueParserErrors?: boolean;
 }
 
@@ -41,8 +44,9 @@ const UtilsPlugin: PluginObject<any> = {
             v.prototype.$log.setConsoleOptions(options.consoleOptions);
         }
 
-        Vue.use(I18nPlugin, options ? options.i18PluginOptions : undefined);
-        Vue.use(HttpPlugin, options ? options.httpPluginOptions : undefined);
+        Vue.use(I18nPlugin, options.i18PluginOptions);
+        Vue.use(L10nPlugin, options.l10nPluginOptions);
+        Vue.use(HttpPlugin, options.httpPluginOptions);
         Vue.use(MediaQueriesPlugin);
         Vue.use(SpritesPlugin);
         Vue.use(ModulPlugin);
