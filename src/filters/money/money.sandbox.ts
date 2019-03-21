@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
-import DropdownPlugin from '../../../components/dropdown/dropdown';
-import IntegerfieldPlugin from '../../../components/integerfield/integerfield';
-import { Enums } from '../../../utils/enums/enums';
-import { ENGLISH, FRENCH, Messages } from '../../../utils/i18n/i18n';
-import { ModulVue } from '../../../utils/vue/vue';
+import DropdownPlugin from '../../components/dropdown/dropdown';
+import IntegerfieldPlugin from '../../components/integerfield/integerfield';
+import { Enums } from '../../utils/enums/enums';
+import { ENGLISH, FRENCH, Messages } from '../../utils/i18n/i18n';
+import { ModulVue } from '../../utils/vue/vue';
 import MoneyPlugin, { MCurrencyType } from './money';
 import WithRender from './money.sandbox.html';
 
