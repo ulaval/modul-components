@@ -4,6 +4,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
@@ -21,6 +22,7 @@ import WithRender from './timepicker.html?style=./timepicker.scss';
     mixins: [
         InputState,
         InputPopup,
+        InputWidth,
         MediaQueries
     ]
 })
@@ -40,6 +42,8 @@ export class MTimepicker extends ModulVue {
     public step: number;
     @Prop({ default: 'LT' })
     public format: string;
+    @Prop({ default: InputMaxWidth.Small })
+    public maxWidth: string;
 
     private hours: object = {};
     private selectedHour: number = NaN;

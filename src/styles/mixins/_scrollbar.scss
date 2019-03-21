@@ -5,6 +5,9 @@
     scrollbar-darkshadow-color: $m-color--white;
     scrollbar-track-color: $m-color--white;
     scrollbar-arrow-color: $m-color--scrollbar;
+    // for firefox 64+
+    scrollbar-color: $m-color--scrollbar $m-color--scrollbar-light;
+    scrollbar-width: thin;
 
     &::-webkit-scrollbar {
         width: $m-scrollbar-width;
