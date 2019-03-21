@@ -1,4 +1,5 @@
 @import 'commons';
+
 $m-dialog--max-width: 380px !default;
 $m-dialog--max-width--l: 500px !default;
 
@@ -82,17 +83,6 @@ $m-dialog--max-width--l: 500px !default;
         }
     }
 
-    &__body,
-    &__footer {
-        &:not(.m--no-padding) {
-            padding: $m-spacing--l $m-spacing;
-
-            @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing--l $m-spacing--m;
-            }
-        }
-    }
-
     &__header {
         width: 100%;
         border-bottom: 1px solid $m-color--border;
@@ -109,16 +99,24 @@ $m-dialog--max-width--l: 500px !default;
         }
 
         &:not(.m--no-padding) {
-            padding: $m-spacing $m-spacing;
+            padding: $m-spacing;
 
             @media (min-width: $m-mq--min--s) {
-                padding: $m-spacing $m-spacing--m;
+                padding: 28px $m-spacing--m 26px;
             }
         }
     }
 
     &__body {
         text-align: center;
+
+        &:not(.m--no-padding) {
+            padding: $m-spacing--m $m-spacing;
+
+            @media (min-width: $m-mq--min--s) {
+                padding: $m-spacing--l $m-spacing--m;
+            }
+        }
 
         @include m-scrollbar();
 
@@ -165,20 +163,35 @@ $m-dialog--max-width--l: 500px !default;
                     justify-content: center;
                     flex-direction: column;
                     padding-left: 10px;
+                    font-size: $m-font-size--h6;
                 }
             }
 
             &__message {
+                font-size: 18px;
+
+                @media (min-width: $m-mq--min--s) {
+                    font-size: $m-font-size--h5;
+                }
+
                 + .m-dialog__hint {
                     margin-top: $m-spacing;
+
+                    @media (min-width: $m-mq--min--s) {
+                        margin-top: $m-spacing--m;
+                    }
                 }
             }
 
             &__type-icon {
                 .m-message {
                     &.m--is-skin-page-light {
-                        margin-top: -$m-spacing;
+                        margin-top: -$m-spacing--s;
                         margin-bottom: $m-spacing;
+
+                        @media (min-width: $m-mq--min--s) {
+                            margin-top: -$m-spacing;
+                        }
                     }
                 }
             }
@@ -192,12 +205,26 @@ $m-dialog--max-width--l: 500px !default;
         flex-direction: column;
         align-items: center;
 
+        &:not(.m--no-padding) {
+            padding: 0 $m-spacing $m-spacing;
+
+            @media (min-width: $m-mq--min--s) {
+                padding: 0 $m-spacing--m 28px;
+            }
+        }
+
         &__nav {
             display: inline-flex;
             flex-direction: column;
             align-items: center;
 
             .m-link {
+                margin-top: $m-margin;
+            }
+        }
+
+        .m-button {
+            + .m-button {
                 margin-top: $m-margin;
             }
         }
