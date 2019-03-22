@@ -13,7 +13,11 @@
                  :aria-selected="selected"
                  role="menuitem"
                  v-if="isUrl">
-        <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
+        <m-icon class="m-menu-item__icon"
+                v-if="iconName"
+                :name="iconName"
+                size="1em"
+                ref="icon"></m-icon>
         <span class="m-menu-item__label">{{ label }}</span>
     </router-link>
     <span class="m-menu-item__link"
@@ -25,12 +29,25 @@
           :aria-controls="group ? ariaControls : undefined"
           :aria-expanded="group ? propOpen : undefined"
           v-else>
-        <m-icon class="m-menu-item__icon" ref="icon" v-if="iconName" :name="iconName"></m-icon>
+        <m-icon class="m-menu-item__icon"
+                v-if="iconName"
+                :name="iconName"
+                ref="icon"
+                size="1em"></m-icon>
         <span class="m-menu-item__label">{{ label }}</span>
-        <m-plus class="m-menu-item__plus" skin="current-color" :open="propOpen" :large="groupSelected" ref="plus" v-if="group"></m-plus>
+        <m-plus class="m-menu-item__plus"
+                skin="current-color"
+                :open="propOpen"
+                :large="groupSelected"
+                ref="plus"
+                v-if="group"></m-plus>
     </span>
     <m-accordion-transition :transition="isAnimReady">
-        <ul :id="ariaControls" class="m-menu-item__group" ref="group" :aria-hidden="!propOpen" v-show="propOpen">
+        <ul :id="ariaControls"
+            class="m-menu-item__group"
+            ref="group"
+            :aria-hidden="!propOpen"
+            v-show="propOpen">
             <slot></slot>
         </ul>
     </m-accordion-transition>

@@ -5,18 +5,20 @@
              @click="onClick">
             <p class="m-validation-message__error"
                v-if="hasErrorMessage && hasError">
-                <m-icon name="m-svg__error"
+                <m-icon class="m-validation-message__error__icon"
+                        name="m-svg__error"
                         :svg-title="titleErrorIcon"
-                        class="m-validation-message__error__icon">
+                        size="1em">
                 </m-icon>
                 <span class="m-validation-message__text"
                       v-html="errorMessage"></span>
             </p>
             <p class="m-validation-message__valid"
                v-if="hasValidMessage && isValid">
-                <m-icon name="m-svg__confirmation"
+                <m-icon class="m-validation-message__valid__icon"
+                        name="m-svg__confirmation"
                         :svg-title="titleValidIcon"
-                        class="m-validation-message__valid__icon"></m-icon>
+                        size="1em"></m-icon>
                 <span class="m-validation-message__text"
                       v-html="validMessage"></span>
             </p>
