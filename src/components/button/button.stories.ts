@@ -1,4 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
+import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentshierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -7,11 +8,21 @@ import ButtonPlugin from './button';
 Vue.use(ButtonPlugin);
 
 
+declare module '@storybook/addon-knobs' {
+    export function withKnobs(): any;
+}
+
 
 storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}`, module)
     .addDecorator(withA11y)
+    .addDecorator(withKnobs)
     .add('default', () => ({
-        template: '<m-button>A Button</m-button>'
+        props: {
+            text: {
+                default: text('Text', 'A Button')
+            }
+        },
+        template: '<m-button>{{ text }}</m-button>'
     }))
     .add('disabled', () => ({
         template: '<m-button :disabled="true">A Button</m-button>'
