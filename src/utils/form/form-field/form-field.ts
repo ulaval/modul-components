@@ -14,7 +14,7 @@ export interface FormFieldOptions {
 
 export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
 
-enum EditionContext {
+export enum FormFieldEditionContext {
     None = 'none',
     EmptyAndValid = 'empty-and-valid',
     PopulateAndValid = 'populate-and-valid',
@@ -29,7 +29,7 @@ export class FormField<T> {
     private oldValue: T;
     private internalState: FormFieldState;
     private validationType: FormFieldValidationType = FormFieldValidationType.AtExit;
-    private editionContext: EditionContext = EditionContext.None;
+    private editionContext: FormFieldEditionContext = FormFieldEditionContext.None;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
 
@@ -130,12 +130,13 @@ export class FormField<T> {
     /**
      * execute validations
      */
-    validate(): void {
-        if (!this.validationGuard()) {
+    validate(force: boolean = false): void {
+        if (!force && !this.validationGuard()) {
             return;
         }
 
         let newState: FormFieldState = new FormFieldState();
+
         this.validationCallback.forEach((validationFunction) => {
             let validation: FormFieldValidation = validationFunction(this);
             if (validation.isError) {
@@ -160,21 +161,22 @@ export class FormField<T> {
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
         this.externalError = '';
-        this.editionContext = EditionContext.None;
+        this.editionContext = FormFieldEditionContext.None;
     }
 
     initEdition(): void {
         if (!this.internalValue && this.isValid) {
-            this.editionContext = EditionContext.EmptyAndValid;
+            this.editionContext = FormFieldEditionContext.EmptyAndValid;
         } else if (this.internalValue && this.isValid) {
-            this.editionContext = EditionContext.PopulateAndValid;
+            this.editionContext = FormFieldEditionContext.PopulateAndValid;
         } else if (!this.isValid) {
-            this.editionContext = EditionContext.NotValid;
+            this.editionContext = FormFieldEditionContext.NotValid;
         }
     }
 
     endEdition(): void {
-        this.editionContext = EditionContext.None;
+        this.validate(true);
+        this.editionContext = FormFieldEditionContext.None;
     }
 
     /**
@@ -201,20 +203,20 @@ export class FormField<T> {
     private validationGuard(): boolean {
         let shouldValidate: boolean = false;
 
-        if (this.editionContext === EditionContext.EmptyAndValid) {
+        if (this.editionContext === FormFieldEditionContext.EmptyAndValid) {
             switch (this.validationType) {
                 case FormFieldValidationType.OnGoing:
                     shouldValidate = true;
                     break;
             }
-        } else if (this.editionContext === EditionContext.PopulateAndValid) {
+        } else if (this.editionContext === FormFieldEditionContext.PopulateAndValid) {
             switch (this.validationType) {
                 case FormFieldValidationType.Optimistic:
                 case FormFieldValidationType.OnGoing:
                     shouldValidate = true;
                     break;
             }
-        } else if (this.editionContext === EditionContext.NotValid) {
+        } else if (this.editionContext === FormFieldEditionContext.NotValid) {
             switch (this.validationType) {
                 case FormFieldValidationType.Optimistic:
                 case FormFieldValidationType.OnGoing:
@@ -222,8 +224,6 @@ export class FormField<T> {
                     shouldValidate = true;
                     break;
             }
-        } else if (this.editionContext === EditionContext.None) {
-            shouldValidate = true;
         }
 
         return shouldValidate;

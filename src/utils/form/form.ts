@@ -162,7 +162,7 @@ export class Form {
      */
     validateAll(): void {
         this.fields.forEach((field: FormField<any>) => {
-            field.validate();
+            field.validate(true);
         });
 
         this.internalState = new FormState();
