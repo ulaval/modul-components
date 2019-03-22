@@ -1,5 +1,4 @@
 import { withA11y } from '@storybook/addon-a11y';
-import centered from '@storybook/addon-centered/vue';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentshierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -9,10 +8,9 @@ Vue.use(ButtonPlugin);
 
 
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/primary`, module)
+storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/default`, module)
     .addDecorator(withA11y)
-    .addDecorator(centered)
-    .add('default', () => ({
+    .add('no props', () => ({
         template: '<m-button>A Button</m-button>'
     }))
     .add('disabled', () => ({
@@ -45,7 +43,6 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/primary`, module)
 
 storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/secondary`, module)
     .addDecorator(withA11y)
-    .addDecorator(centered)
     .add('default', () => ({
         template: '<m-button skin="secondary">A Button</m-button>'
     }))
