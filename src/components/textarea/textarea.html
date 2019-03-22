@@ -1,6 +1,7 @@
 <div class="m-textarea"
      :class="{ 'm--is-disabled' : isDisabled,
                'm--is-waiting' : isWaiting,
+               'm--is-readonly' : isReadonly,
                'm--has-error' : hasTextareaError,
                'm--is-valid' : isTextareaValid,
                'm--is-focus' : isFocus,
@@ -16,15 +17,15 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :readonly="readonly"
+                   :readonly="isReadonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <textarea ref="input"
                   :id="id"
                   class="m-textarea__input"
-                  :disabled="!active"
+                  :disabled="isDisabled || isWaiting"
+                  :readonly="isReadonly"
                   :placeholder="placeholder"
-                  :readonly="readonly"
                   :maxlength="maxLengthNumber"
                   :autocomplete="autocomplete"
                   rows="1"

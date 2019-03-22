@@ -43,6 +43,7 @@ export const MESSAGE_NAME: string = 'm-message';
 export const MENU_NAME: string = 'm-menu';
 export const MENU_ITEM_NAME: string = 'm-menu-item';
 export const MESSAGE_PAGE_NAME: string = 'm-message-page';
+export const MONEYFIELD_NAME: string = 'm-moneyfield';
 export const MODAL_NAME: string = 'm-modal';
 export const NAVBAR_NAME: string = 'm-navbar';
 export const NAVBAR_ITEM_NAME: string = 'm-navbar-item';

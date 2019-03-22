@@ -1,9 +1,11 @@
 <div class="m-timepicker"
      :class="{ 'm--is-disabled': isDisabled,
+               'm--is-readonly': isReadonly,
                'm--has-validation-message': hasValidationMessage }">
     <m-input-style :label="label"
                    :label-for="id"
                    :disabled="isDisabled"
+                   :readonly="isReadonly"
                    :waiting="isWaiting"
                    :focus="open"
                    :empty="isEmpty"
@@ -17,7 +19,8 @@
                aria-haspopup="true"
                :aria-controls="ariaControls"
                :aria-expanded="open"
-               :disabled="!active"
+               :disabled="isDisabled || isWaiting"
+               :readonly="isReadonly"
                :placeholder="placeholder"
                @keydown.enter="inputOnKeydownEnter"
                @keydown.return="inputOnKeydownEnter"

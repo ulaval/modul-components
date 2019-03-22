@@ -1,20 +1,26 @@
-
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
+import IconPlugin from '../icon/icon';
 import WithRender from './dialog.html?style=./dialog.scss';
-
-
 
 export enum MDialogWidth {
     Default = 'default',
     Large = 'large'
+}
+
+export enum MDialogState {
+    Default = 'default',
+    Warning = 'warning',
+    Confirmation = 'confirmation',
+    Information = 'information',
+    Error = 'error'
 }
 
 @WithRender
@@ -30,10 +36,20 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public okLabel: string | undefined;
     @Prop()
     public okPrecision: string | undefined;
+    @Prop({ default: false })
+    public secBtn: boolean;
+    @Prop()
+    public secBtnLabel: string | undefined;
+    @Prop()
+    public secBtnPrecision: string | undefined;
+    @Prop({ default: '100%' })
+    public btnWidth: string;
     @Prop()
     public cancelLabel: string | undefined;
     @Prop({ default: true })
     public negativeLink: boolean;
+    @Prop()
+    public hint: string;
     @Prop({
         default: MDialogWidth.Default,
         validator: value =>
@@ -41,6 +57,17 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogWidth.Large
     })
     public width: string;
+
+    @Prop({
+        default: MDialogState.Default,
+        validator: value =>
+            value === MDialogState.Default ||
+            value === MDialogState.Warning ||
+            value === MDialogState.Confirmation ||
+            value === MDialogState.Information ||
+            value === MDialogState.Error
+    })
+    public type: MDialogState;
 
     public handlesFocus(): boolean {
         return true;
@@ -58,14 +85,19 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return this.$refs.article as HTMLElement;
     }
 
-    private onOk(): void {
+    @Emit('ok')
+    onOk(event: Event): void {
         this.as<PortalMixin>().propOpen = false;
-        this.$emit('ok');
     }
 
-    private onCancel(): void {
+    @Emit('secondaryBtn')
+    onSecondaryBtn(event: Event): void {
         this.as<PortalMixin>().propOpen = false;
-        this.$emit('cancel');
+    }
+
+    @Emit('cancel')
+    onCancel(event: Event): void {
+        this.as<PortalMixin>().propOpen = false;
     }
 
     private get hasDefaultSlot(): boolean {
@@ -74,6 +106,10 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     private get hasFooterSlot(): boolean {
         return !!this.$slots.footer;
+    }
+
+    private get hasHint(): boolean {
+        return !!this.hint;
     }
 
     private get hasTitle(): boolean {
@@ -92,6 +128,18 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
         return !!this.okPrecision;
     }
 
+    private get hasSecBtnLabel(): boolean {
+        return !!this.secBtnLabel;
+    }
+
+    private get hasSecBtnPrecision(): boolean {
+        return !!this.secBtnPrecision;
+    }
+
+    private get dialogStyles(): { width: string } {
+        return { 'width': this.btnWidth };
+    }
+
     private get hasCancelLabel(): boolean {
         return !!this.cancelLabel;
     }
@@ -99,11 +147,34 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     private get hasWidthLarge(): boolean {
         return this.width === MDialogWidth.Large;
     }
+
+    private get getState(): string {
+        let state: string = '';
+        switch (this.type) {
+            case MDialogState.Confirmation:
+                state = 'confirmation';
+                break;
+            case MDialogState.Information:
+                state = 'information';
+                break;
+            case MDialogState.Warning:
+                state = 'warning';
+                break;
+            case MDialogState.Error:
+                state = 'error';
+                break;
+            default:
+                break;
+        }
+        return state;
+    }
+
 }
 
 const DialogPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(ButtonPlugin);
+        v.use(IconPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
         v.component(DIALOG_NAME, MDialog);

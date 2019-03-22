@@ -48,6 +48,11 @@ $m-color--error: $m-color--ul-red !default;
 $m-color--error-lightest: #fcf2f3 !default;
 
 // ======================================================================
+//  Hint colors
+// ======================================================================
+$m-color--hint: #00cb78 !default;
+
+// ======================================================================
 //  Interactive colors
 // ======================================================================
 $m-color--interactive-darker: #0075c3 !default;
@@ -113,6 +118,7 @@ $m-color-map: (
         black : $m-color--grey-black,
         darkest : $m-color--grey-darkest,
         darker : $m-color--grey-darker,
+        dark : $m-color--grey-dark,
         light : $m-color--grey-light,
         lighter : $m-color--grey-lighter,
         lightest : $m-color--grey-lightest
