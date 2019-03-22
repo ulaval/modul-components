@@ -16,7 +16,7 @@ describe(`FormField`, () => {
     describe(`When we create a new instance with a value and a validating function`, () => {
         beforeEach(() => {
             formField = new FormField((): string => FIELD_VALUE, VALIDATION_FUNCTIONS);
-            formField['touched'] = true;
+            formField.endEdition();
         });
 
         it(`Then the value is the field is the one passed`, () => {
@@ -117,11 +117,8 @@ describe(`FormField`, () => {
          * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
          */
         describe(`When we update form field with different type of validations`, () => {
-            formFieldValidation = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
-            let formFieldForValidationTypeTest: FormField<string> = new FormField(
-                (): string => '',
-                VALIDATION_FUNCTIONS
-            );
+            formFieldValidation = new FormFieldValidation();
+            let formFieldForValidationTypeTest: FormField<string> = new FormField((): string => '');
             const spy: jest.SpyInstance = jest.spyOn(formFieldForValidationTypeTest as any, 'changeState');
 
             describe(`When we update value of a form field with optimisitc validation type`, () => {
@@ -133,26 +130,26 @@ describe(`FormField`, () => {
                     formFieldForValidationTypeTest.reset();
                 });
 
-                describe(`When the field is pristine`, () => {
+                describe(`When the field as no value and is valid`, () => {
                     beforeEach(() => {
                         formFieldForValidationTypeTest.reset();
                         jest.resetAllMocks();
                     });
 
                     it(`Then the field should be pristine with no value`, () => {
-                        expect(formFieldForValidationTypeTest['pristine']).toBeTruthy();
                         expect(formFieldForValidationTypeTest.value).toBeFalsy();
+                        expect(formFieldForValidationTypeTest.isValid).toBeTruthy();
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
 
-                    it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                    it(`Then the validation will trigger when edition ended`, () => {
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
+                        formFieldForValidationTypeTest.endEdition();
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
                 });
@@ -161,7 +158,6 @@ describe(`FormField`, () => {
                     beforeEach(() => {
                         formFieldForValidationTypeTest.reset();
                         formFieldForValidationTypeTest.value = 'test value';
-                        formFieldForValidationTypeTest['pristine'] = false;
                         jest.resetAllMocks();
                     });
 
@@ -171,15 +167,15 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
-                        expect(spy).toHaveBeenCalledTimes(0);
+                        formFieldForValidationTypeTest.endEdition();
+                        expect(spy).toHaveBeenCalledTimes(1);
                     });
                 });
 
@@ -196,13 +192,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
@@ -218,7 +214,7 @@ describe(`FormField`, () => {
                     formFieldForValidationTypeTest.reset();
                 });
 
-                describe(`When the field is pristine`, () => {
+                describe(`When the field as no value and is valid`, () => {
                     beforeEach(() => {
                         formFieldForValidationTypeTest.reset();
                         jest.resetAllMocks();
@@ -230,13 +226,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
@@ -256,13 +252,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
@@ -281,13 +277,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
@@ -303,7 +299,7 @@ describe(`FormField`, () => {
                     formFieldForValidationTypeTest.reset();
                 });
 
-                describe(`When the field is pristine`, () => {
+                describe(`When the field as no value and is valid`, () => {
                     beforeEach(() => {
                         formFieldForValidationTypeTest.reset();
                         jest.resetAllMocks();
@@ -315,13 +311,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
@@ -341,13 +337,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
@@ -366,13 +362,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
@@ -388,7 +384,7 @@ describe(`FormField`, () => {
                     formFieldForValidationTypeTest.reset();
                 });
 
-                describe(`When the field is pristine`, () => {
+                describe(`When the field as no value and is valid`, () => {
                     beforeEach(() => {
                         formFieldForValidationTypeTest.reset();
                         jest.resetAllMocks();
@@ -400,13 +396,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
@@ -426,13 +422,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });
@@ -451,13 +447,13 @@ describe(`FormField`, () => {
                     });
 
                     it(`Then the validation will not trigger while editing`, () => {
-                        formFieldForValidationTypeTest['editing'] = true;
+                        formFieldForValidationTypeTest.initEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(0);
                     });
 
                     it(`Then the validation will trigger on touch`, () => {
-                        formFieldForValidationTypeTest['touched'] = true;
+                        formFieldForValidationTypeTest.endEdition();
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
                         expect(spy).toHaveBeenCalledTimes(1);
                     });

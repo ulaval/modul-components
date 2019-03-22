@@ -14,20 +14,22 @@ export interface FormFieldOptions {
 
 export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
 
+enum EditionContext {
+    None = 'none',
+    EmptyAndValid = 'empty-and-valid',
+    PopulateAndValid = 'populate-and-valid',
+    NotValid = 'not-valid'
+}
+
 /**
  * Form Field Class
- * @property {boolean} editing True if value is being updated via edition.
- * @property {boolean} touched True if control has lost focus.
- * @property {boolean} pristine True if user has not interacted with the control yet.
  */
 export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
     private validationType: FormFieldValidationType = FormFieldValidationType.AtExit;
-    private touched: boolean = false;
-    private editing: boolean = false;
-    private pristine: boolean = true;
+    private editionContext: EditionContext = EditionContext.None;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
 
@@ -92,27 +94,6 @@ export class FormField<T> {
     }
 
     /**
-     * indicates if the field is touched
-     */
-    get isTouched(): boolean {
-        return this.touched;
-    }
-
-    /**
-     * indicates if the field is being edited
-     */
-    get isEditing(): boolean {
-        return this.editing;
-    }
-
-    /**
-     * set wheter or not the field is being edited
-     */
-    set isEditing(value: boolean) {
-        this.editing = value;
-    }
-
-    /**
      * if the field should focus
      */
     get shouldFocus(): boolean {
@@ -150,7 +131,7 @@ export class FormField<T> {
      * execute validations
      */
     validate(): void {
-        if (this.validationCallback.length === 0 || !this.shouldValidate()) {
+        if (!this.validationGuard()) {
             return;
         }
 
@@ -172,18 +153,6 @@ export class FormField<T> {
     }
 
     /**
-     * mark the field as touched, reset external error and trigger validation
-     */
-    touch(): void {
-        this.pristine = false;
-        this.touched = true;
-        this.validate();
-        this.touched = false;
-
-        this.externalError = '';
-    }
-
-    /**
      * reset the field without validating
      */
     reset(): void {
@@ -191,9 +160,21 @@ export class FormField<T> {
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
         this.externalError = '';
-        this.editing = false;
-        this.touched = false;
-        this.pristine = true;
+        this.editionContext = EditionContext.None;
+    }
+
+    initEdition(): void {
+        if (!this.internalValue && this.isValid) {
+            this.editionContext = EditionContext.EmptyAndValid;
+        } else if (this.internalValue && this.isValid) {
+            this.editionContext = EditionContext.PopulateAndValid;
+        } else if (!this.isValid) {
+            this.editionContext = EditionContext.NotValid;
+        }
+    }
+
+    endEdition(): void {
+        this.editionContext = EditionContext.None;
     }
 
     /**
@@ -217,42 +198,32 @@ export class FormField<T> {
     /**
      * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
      */
-    private shouldValidate(): boolean {
+    private validationGuard(): boolean {
         let shouldValidate: boolean = false;
 
-        if (this.pristine) {
+        if (this.editionContext === EditionContext.EmptyAndValid) {
             switch (this.validationType) {
-                case FormFieldValidationType.Optimistic:
-                case FormFieldValidationType.AtExit:
-                case FormFieldValidationType.Correctable:
-                    shouldValidate = this.touched;
-                    break;
                 case FormFieldValidationType.OnGoing:
-                    shouldValidate = this.editing;
+                    shouldValidate = true;
                     break;
             }
-        } else if (this.isValid) {
+        } else if (this.editionContext === EditionContext.PopulateAndValid) {
             switch (this.validationType) {
                 case FormFieldValidationType.Optimistic:
                 case FormFieldValidationType.OnGoing:
-                    shouldValidate = this.editing;
-                    break;
-                case FormFieldValidationType.AtExit:
-                case FormFieldValidationType.Correctable:
-                    shouldValidate = this.touched;
+                    shouldValidate = true;
                     break;
             }
-        } else if (!this.isValid) {
+        } else if (this.editionContext === EditionContext.NotValid) {
             switch (this.validationType) {
                 case FormFieldValidationType.Optimistic:
                 case FormFieldValidationType.OnGoing:
                 case FormFieldValidationType.Correctable:
-                    shouldValidate = this.editing;
-                    break;
-                case FormFieldValidationType.AtExit:
-                    shouldValidate = this.touched;
+                    shouldValidate = true;
                     break;
             }
+        } else if (this.editionContext === EditionContext.None) {
+            shouldValidate = true;
         }
 
         return shouldValidate;

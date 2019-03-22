@@ -1,7 +1,6 @@
 import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { FormField } from '../../utils/form/form-field/form-field';
 
-let touchFormField: any;
 const DISTANCE_FROM_TOP: number = -200;
 const scrollToThisField: Function = (element: HTMLElement): void => {
     (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
@@ -14,8 +13,9 @@ export const FormFieldDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         const formField: FormField<any> = binding.value;
-        touchFormField = () => formField.touch();
-        el.addEventListener('blur', touchFormField, true);
+
+        el.addEventListener('focus', () => formField.initEdition(), true);
+        el.addEventListener('blur', () => formField.endEdition(), true);
     },
     update(
         el: HTMLElement,
@@ -25,8 +25,6 @@ export const FormFieldDirective: DirectiveOptions = {
         const formField: FormField<any> = binding.value;
         const selector: string = 'input, textarea, [contenteditable=true]';
         const inputElement: Element = el.querySelectorAll(selector)[0];
-
-        formField.isEditing = inputElement === document.activeElement;
 
         if (formField.shouldFocus) {
             if (el instanceof HTMLInputElement) {
@@ -46,6 +44,9 @@ export const FormFieldDirective: DirectiveOptions = {
         el: HTMLElement,
         binding: VNodeDirective
     ): void {
-        el.removeEventListener('blur', touchFormField, true);
+        const formField: FormField<any> = binding.value;
+
+        el.removeEventListener('focus', formField.initEdition, true);
+        el.removeEventListener('blur', formField.endEdition, true);
     }
 };
