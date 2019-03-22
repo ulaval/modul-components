@@ -8,9 +8,9 @@ Vue.use(ButtonPlugin);
 
 
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/default`, module)
+storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}`, module)
     .addDecorator(withA11y)
-    .add('no props', () => ({
+    .add('default', () => ({
         template: '<m-button>A Button</m-button>'
     }))
     .add('disabled', () => ({
@@ -25,10 +25,10 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/default`, module)
     .add('icon', () => ({
         template: '<m-button icon-name="m-svg__close-clear">A Button</m-button>'
     }))
-    .add('icon 20px', () => ({
+    .add('icon=20px', () => ({
         template: '<m-button icon-name="m-svg__close-clear" icon-size="20px">A Button</m-button>'
     }))
-    .add('icon right', () => ({
+    .add('icon=right', () => ({
         template: '<m-button icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
     }))
     .add('precision', () => ({
@@ -41,7 +41,7 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/default`, module)
         template: '<m-button type="reset">A Button</m-button>'
     }));
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/secondary`, module)
+storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/skin=secondary`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-button skin="secondary">A Button</m-button>'
