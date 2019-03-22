@@ -49,7 +49,7 @@ describe(`FormField`, () => {
         describe(`When we validate an invalid field`, () => {
             beforeEach(() => {
                 formFieldValidation = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
-                formField.validate();
+                formField.validate(true);
             });
 
             it(`Then the value does not change`, () => {
@@ -83,6 +83,7 @@ describe(`FormField`, () => {
         describe(`When we change the value for an invalid value`, () => {
             beforeEach(() => {
                 formFieldValidation = new FormFieldValidation(true, [ERROR_MESSAGE_SUMMARY], [ERROR_MESSAGE]);
+                formField.initEdition();
                 formField.value = NEW_FIELD_VALUE;
             });
 

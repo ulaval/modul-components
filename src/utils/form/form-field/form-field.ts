@@ -28,7 +28,7 @@ export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
-    private validationType: FormFieldValidationType = FormFieldValidationType.AtExit;
+    private validationType: FormFieldValidationType = FormFieldValidationType.OnGoing;
     private editionContext: FormFieldEditionContext = FormFieldEditionContext.None;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
@@ -175,8 +175,8 @@ export class FormField<T> {
     }
 
     endEdition(): void {
-        this.validate(true);
         this.editionContext = FormFieldEditionContext.None;
+        this.validate();
     }
 
     /**
