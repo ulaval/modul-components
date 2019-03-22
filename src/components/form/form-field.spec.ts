@@ -84,7 +84,7 @@ describe('form-field', () => {
             expect(spy2).toHaveBeenCalled();
         });
 
-        it(`it should touch the form field on blur`, () => {
+        it(`it should init and end edition on focus and blur`, () => {
             const spy1: jest.SpyInstance = jest.spyOn(mockFormField, 'initEdition');
             const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'endEdition');
 
