@@ -224,6 +224,8 @@ export class FormField<T> {
                     shouldValidate = true;
                     break;
             }
+        } else if (this.editionContext === FormFieldEditionContext.None) {
+            shouldValidate = true;
         }
 
         return shouldValidate;
