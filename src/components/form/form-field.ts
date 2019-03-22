@@ -1,4 +1,4 @@
-import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
 import { FormField } from '../../utils/form/form-field/form-field';
 
 const DISTANCE_FROM_TOP: number = -200;
@@ -9,18 +9,23 @@ const scrollToThisField: Function = (element: HTMLElement): void => {
 export const FormFieldDirective: DirectiveOptions = {
     inserted(
         el: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode
+        binding: VNodeDirective
     ): void {
         const formField: FormField<any> = binding.value;
 
-        el.addEventListener('focus', () => formField.initEdition(), true);
-        el.addEventListener('blur', () => formField.endEdition(), true);
+        Object.defineProperty(el, 'formFieldDirectiveListeners', {
+            value: {
+                focusListener: () => formField.initEdition(),
+                blurListener: () => formField.endEdition()
+            }
+        });
+
+        el.addEventListener('focus', el['formFieldDirectiveListeners'].focusListener, true);
+        el.addEventListener('blur', el['formFieldDirectiveListeners'].blurListener, true);
     },
     update(
         el: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode
+        binding: VNodeDirective
     ): void {
         const formField: FormField<any> = binding.value;
         const selector: string = 'input, textarea, [contenteditable=true]';
@@ -41,12 +46,9 @@ export const FormFieldDirective: DirectiveOptions = {
         }
     },
     unbind(
-        el: HTMLElement,
-        binding: VNodeDirective
+        el: HTMLElement
     ): void {
-        const formField: FormField<any> = binding.value;
-
-        el.removeEventListener('focus', formField.initEdition, true);
-        el.removeEventListener('blur', formField.endEdition, true);
+        el.removeEventListener('focus', el['formFieldDirectiveListeners'].focusListener, true);
+        el.removeEventListener('blur', el['formFieldDirectiveListeners'].blurListener, true);
     }
 };
