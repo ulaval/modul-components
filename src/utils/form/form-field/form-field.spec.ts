@@ -181,7 +181,7 @@ describe(`FormField`, () => {
                         expect(formFieldForValidationTypeTest.isValid).toBeFalsy();
                     });
 
-                    it(`Then the validation will not trigger while editing`, () => {
+                    it(`Then the validation will trigger while editing`, () => {
                         formFieldForValidationTypeTest.initEdition();
                         expect(formFieldForValidationTypeTest['editionContext']).toBe(FormFieldEditionContext.NotValid);
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
@@ -210,7 +210,7 @@ describe(`FormField`, () => {
                         expect(formFieldForValidationTypeTest.isValid).toBeTruthy();
                     });
 
-                    it(`Then the validation will not trigger while editing`, () => {
+                    it(`Then the validation will trigger while editing`, () => {
                         formFieldForValidationTypeTest.initEdition();
                         expect(formFieldForValidationTypeTest['editionContext']).toBe(FormFieldEditionContext.EmptyAndValid);
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
@@ -249,7 +249,7 @@ describe(`FormField`, () => {
                         expect(formFieldForValidationTypeTest.isValid).toBeFalsy();
                     });
 
-                    it(`Then the validation will not trigger while editing`, () => {
+                    it(`Then the validation will trigger while editing`, () => {
                         formFieldForValidationTypeTest.initEdition();
                         expect(formFieldForValidationTypeTest['editionContext']).toBe(FormFieldEditionContext.NotValid);
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
@@ -298,7 +298,7 @@ describe(`FormField`, () => {
                         expect(formFieldForValidationTypeTest.isValid).toBeTruthy();
                     });
 
-                    it(`Then the validation will trigger while editing`, () => {
+                    it(`Then the validation will not trigger while editing`, () => {
                         formFieldForValidationTypeTest.initEdition();
                         expect(formFieldForValidationTypeTest['editionContext']).toBe(FormFieldEditionContext.PopulateAndValid);
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
@@ -317,7 +317,7 @@ describe(`FormField`, () => {
                         expect(formFieldForValidationTypeTest.isValid).toBeFalsy();
                     });
 
-                    it(`Then the validation will not trigger while editing`, () => {
+                    it(`Then the validation will trigger while editing`, () => {
                         formFieldForValidationTypeTest.initEdition();
                         expect(formFieldForValidationTypeTest['editionContext']).toBe(FormFieldEditionContext.NotValid);
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
@@ -366,7 +366,7 @@ describe(`FormField`, () => {
                         expect(formFieldForValidationTypeTest.isValid).toBeTruthy();
                     });
 
-                    it(`Then the validation will trigger while editing`, () => {
+                    it(`Then the validation will not trigger while editing`, () => {
                         formFieldForValidationTypeTest.initEdition();
                         expect(formFieldForValidationTypeTest['editionContext']).toBe(FormFieldEditionContext.PopulateAndValid);
                         formFieldForValidationTypeTest.value = NEW_FIELD_VALUE;
