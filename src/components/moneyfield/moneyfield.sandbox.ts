@@ -15,6 +15,7 @@ export class MMoneyfieldSandbox extends Vue {
     originalLang = (Vue.prototype as ModulVue).$i18n.currentLang();
     i18n: Messages = Vue.prototype.$i18n;
     model: number = 0;
+    definedModel: number = 1;
 
     get isNumber(): boolean {
         return (typeof this.model === 'number');

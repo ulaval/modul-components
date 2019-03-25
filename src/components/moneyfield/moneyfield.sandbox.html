@@ -5,6 +5,12 @@
         model value: {{ model }} is number = {{  isNumber }}
     </div>
 
+    <h2>Base moneyfield with initialized model</h2>
+    <m-moneyfield v-model="definedModel"></m-moneyfield>
+    <div>
+        value should be: {{ definedModel }}
+    </div>
+
     <h3 class="m-u--h6">Label</h3>
     <m-moneyfield label="label"></m-moneyfield>
 
