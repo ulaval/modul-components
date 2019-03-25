@@ -1,7 +1,6 @@
-import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
 import { FormField } from '../../utils/form/form-field/form-field';
 
-let touchFormField: any;
 const DISTANCE_FROM_TOP: number = -200;
 const scrollToThisField: Function = (element: HTMLElement): void => {
     (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
@@ -10,32 +9,36 @@ const scrollToThisField: Function = (element: HTMLElement): void => {
 export const FormFieldDirective: DirectiveOptions = {
     inserted(
         el: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode
+        binding: VNodeDirective
     ): void {
         const formField: FormField<any> = binding.value;
-        touchFormField = () => formField.touch();
 
-        el.addEventListener('blur', touchFormField, true);
+        Object.defineProperty(el, 'formFieldDirectiveListeners', {
+            value: {
+                focusListener: () => formField.initEdition(),
+                blurListener: () => formField.endEdition()
+            }
+        });
+
+        el.addEventListener('focus', el['formFieldDirectiveListeners'].focusListener, true);
+        el.addEventListener('blur', el['formFieldDirectiveListeners'].blurListener, true);
     },
     update(
         el: HTMLElement,
-        binding: VNodeDirective,
-        vnode: VNode
+        binding: VNodeDirective
     ): void {
         const formField: FormField<any> = binding.value;
+        const selector: string = 'input, textarea, [contenteditable=true]';
+        const inputElement: Element = el.querySelectorAll(selector)[0];
 
         if (formField.shouldFocus) {
             if (el instanceof HTMLInputElement) {
                 scrollToThisField(el);
                 el.focus();
             } else {
-                const selector: string = 'input, textarea, [contenteditable=true]';
-                const elements: NodeListOf<HTMLInputElement> = el.querySelectorAll(selector);
-
-                if (elements.length > 0) {
-                    scrollToThisField(elements[0]);
-                    elements[0].focus();
+                if (inputElement) {
+                    scrollToThisField(inputElement);
+                    (inputElement as HTMLInputElement).focus();
                 }
             }
 
@@ -43,9 +46,9 @@ export const FormFieldDirective: DirectiveOptions = {
         }
     },
     unbind(
-        el: HTMLElement,
-        binding: VNodeDirective
+        el: HTMLElement
     ): void {
-        el.removeEventListener('blur', touchFormField, true);
+        el.removeEventListener('focus', el['formFieldDirectiveListeners'].focusListener, true);
+        el.removeEventListener('blur', el['formFieldDirectiveListeners'].blurListener, true);
     }
 };

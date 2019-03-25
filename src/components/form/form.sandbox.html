@@ -142,31 +142,6 @@
                   :form="forms[5].id">Reset</m-button>
     </p>
     <hr />
-    <h3>Message error after field is touch vs live</h3>
-    <p>Field 1 is after field touch field 2 is live</p>
-    <m-form class="m-u--margin-top"
-            :form="forms[6]"
-            @reset="reset(6)"
-            @submit="submit(6)">
-        <m-textfield v-model.trim="forms[6].get('field-1').value"
-                     label="Field 1"
-                     :error-message="forms[6].get('field-1').errorMessage"
-                     v-m-form-field="forms[6].get('field-1')">
-        </m-textfield>
-        <m-textfield v-model.trim="forms[6].get('field-2').value"
-                     label="Field 2"
-                     :error-message="forms[6].get('field-2').errorMessage"
-                     v-m-form-field="forms[6].get('field-2')">
-        </m-textfield>
-    </m-form>
-    <p class="m-u--margin-bottom--l">
-        <m-button type="submit"
-                  :form="forms[6].id">Submit</m-button>
-        <m-button type="reset"
-                  skin="secondary"
-                  :form="forms[6].id">Reset</m-button>
-    </p>
-    <hr />
     <h2>Form with internal validation</h2>
     <p>The validation here is field 1 must match field 2</p>
     <m-form class="m-u--margin-top"
@@ -595,6 +570,33 @@
             <m-button type="reset"
                       skin="secondary"
                       :form="forms[17].id">Reset</m-button>
+        </p>
+    </p>
+    <hr />
+    <h3>Form field validation types</h3>
+    <p class="m-u--margin-bottom">
+        <a href="https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs">documentation</a>
+    </p>
+    <p>
+        <m-form :form="forms[18]"
+                @reset="reset(18)"
+                @submit="submit(18)">
+            <template v-for="(field, index) in forms[18].fields">
+                <m-textfield v-model.trim="field.value"
+                             :label="forms[18].getFieldName(field)"
+                             :error-message="field.errorMessage"
+                             v-m-form-field="field">
+                </m-textfield>
+
+                <p>edition context : {{field['editionContext']}}</p>
+            </template>
+        </m-form>
+        <p class="m-u--margin-top">
+            <m-button type="submit"
+                      :form="forms[18].id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="forms[18].id">Reset</m-button>
         </p>
     </p>
     <hr />
