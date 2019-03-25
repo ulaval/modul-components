@@ -2,11 +2,11 @@
      :class="{'m--is-position-fixed': isPositionFixed , 'm--is-position-relative': !isPositionFixed}">
     <transition name="m--is">
         <button v-if="show"
-                ref="scrollButton"
-                @click="onClick"
                 class="m-scroll-top__button"
                 :class="{'m--is-position-fixed': isPositionFixed}"
-                :title="'m-scroll-top:top' | f-m-i18n">
+                :title="'m-scroll-top:top' | f-m-i18n"
+                @click="onClick"
+                ref="scrollButton">
             <m-icon name="m-svg__chevron--right"
                     size="16px"></m-icon>
         </button>
