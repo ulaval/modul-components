@@ -1,6 +1,9 @@
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 
+/**
+ * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
+ */
 export enum FormFieldValidationType {
     Optimistic = 'optimistic',
     OnGoing = 'on-going',
@@ -197,9 +200,6 @@ export class FormField<T> {
         this.internalState.errorMessagesSummary = etat.errorMessagesSummary;
     }
 
-    /**
-     * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
-     */
     private validationGuard(): boolean {
         let shouldValidate: boolean = false;
 
