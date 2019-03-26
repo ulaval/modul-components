@@ -35,6 +35,7 @@ export class FormField<T> {
     private editionContext: FormFieldEditionContext = FormFieldEditionContext.None;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
+    private touched: boolean = false;
 
     /**
      *
@@ -130,6 +131,10 @@ export class FormField<T> {
         return this.internalState.errorMessagesSummary;
     }
 
+    get isTouched(): boolean {
+        return this.touched;
+    }
+
     /**
      * execute validations
      */
@@ -164,6 +169,7 @@ export class FormField<T> {
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
         this.externalError = '';
+        this.touched = false;
         this.editionContext = FormFieldEditionContext.None;
     }
 
@@ -180,6 +186,10 @@ export class FormField<T> {
     endEdition(): void {
         this.editionContext = FormFieldEditionContext.None;
         this.validate();
+    }
+
+    touch(): void {
+        this.touched = true;
     }
 
     /**
