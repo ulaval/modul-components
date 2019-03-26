@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import { PluginObject } from 'vue/types/plugin';
-import { MDialogWidth, MDialogState, MDialog } from '../../components/dialog/dialog';
-import { AlertFunction, AlertOptions } from './alert';
-import { confirmFunction, ConfirmFunction, ConfirmOptions } from './confirm';
+import { MDialog, MDialogState } from '../../components/dialog/dialog';
+
 
 declare module 'vue/types/vue' {
     interface Vue {
@@ -10,93 +9,63 @@ declare module 'vue/types/vue' {
     }
 }
 
-export interface DialogParams {
-    title?: string;
-    message?: string;
-    okLabel?: string;
-    okPrecision?: string;
-    secBtnLabel?: string;
-    sebBtnPrecision?: string;
-    cancelLabel?: string;
-    negativeLink?: boolean;
-    hint?: string;
-    silentCancel?: boolean;
-}
-
-export type AlertFunction = (message: string, options?: DialogParams) => Promise<any>;
-export type ConfirmFunction = (message: string, options?: DialogParams) => Promise<any>;
-
 export class DialogService {
 
-    private createAlert(params: DialogParams): void {
-        let AlertInstance: MDialog | undefined = undefined;
-        const alertFunction: AlertFunction = (message: string, options?: DialogParams) => {
-            if (!AlertInstance) {
-                AlertInstance = new MDialog({
-                    el: document.createElement('div')
-                });
-
-                document.body.appendChild(AlertInstance.$el);
-            }
-            AlertInstance.message = message;
-            AlertInstance.okLabel = options && options.okLabel ? options.okLabel : undefined;
-            AlertInstance.negativeLink = false;
-
-            this.handleEvents(AlertInstance)
-        };
-    }
-
-    private createConfirm(params: DialogParams): void {
-        let confirmInstance: MDialog | undefined = undefined;
-        const confirmFunction: ConfirmFunction = (message: string, options?: DialogParams) => {
-            if (!confirmInstance) {
-                confirmInstance = new MDialog({
-                    el: document.createElement('div')
-                });
-
-                document.body.appendChild(confirmInstance.$el);
-            }
-            confirmInstance.message = message;
-            confirmInstance.okLabel = options && options.okLabel ? options.okLabel : undefined;
-            confirmInstance.cancelLabel = options && options.cancelLabel ? options.cancelLabel : undefined;
-
-            this.handleEvents(confirmInstance)
-        };
-    }
-
-    private createDialog(params: DialogParams): MDialog {
-        const dialog: MDialog = new MDialog({
-            el: document.createElement('div'),
-            propsData: {
-                title: params.title,
-                message: params.message,
-                okLabel: params.okLabel,
-                okPrecision: params.okPrecision,
-                secBtnLabel: params.secBtnLabel,
-                cancelLabel: params.cancelLabel,
-                negativeLink: params.negativeLink,
-                hint: params.hint
-            }
+    /**
+     *
+     * @param message the message of the confirmation dialog
+     * @param title a title label if any
+     * @param okLabel a cancel label if any
+     */
+    public alert(message: string, title?: string, okLabel?: string): Promise<void> {
+        let alertInstance: MDialog = new MDialog({
+            el: document.createElement('div')
         });
 
-        return this.handleEvents(dialog);
+        document.body.appendChild(alertInstance.$el);
+        alertInstance.message = message;
+        alertInstance.okLabel = okLabel ? okLabel : undefined;
+        alertInstance.title = title ? title : '';
+        alertInstance.negativeLink = false;
 
+        return this.show(alertInstance);
     }
 
-    public handleEvents(dialogInstance: MDialog): any {
+
+    /**
+     *
+     * @param message the message of the confirmation dialog
+     * @param title a title label if any
+     * @param okLabel a ok label if any
+     * @param cancelLabel a cancel label if any
+     * @param rejectOnCancel if true, the promise will be rejected on cancel
+     */
+    public confirm(message: string, title?: string, okLabel?: string, cancelLabel?: string, rejectOnCancel?: boolean): Promise<void> {
+        let confirmInstance: MDialog = new MDialog({
+            el: document.createElement('div')
+        });
+
+        document.body.appendChild(confirmInstance.$el);
+        confirmInstance.message = message;
+        confirmInstance.type = MDialogState.Confirmation;
+        confirmInstance.title = title ? title : '';
+        confirmInstance.okLabel = okLabel ? okLabel : undefined;
+        confirmInstance.cancelLabel = cancelLabel ? cancelLabel : undefined;
+
+        return this.show(confirmInstance, rejectOnCancel);
+    }
+
+
+    /**
+     *
+     * @param mDialogInstance the MDialog instance
+     * @param rejectOnCancel if true, the promise will be rejected on cancel
+     */
+    public show(mDialogInstance: MDialog, rejectOnCancel?: boolean): Promise<void> {
         return new Promise((resolve, reject) => {
+
             let onOk: () => void = () => {
-                if (dialogInstance) {
-                    unhook();
-                }
-
-                Vue.nextTick(() => {
-                    resolve();
-                });
-            };
-
-            let onSecondaryBtn: () => void = () => {
-                if (dialogInstance) {
+                if (mDialogInstance) {
                     unhook();
                 }
 
@@ -106,40 +75,39 @@ export class DialogService {
             };
 
             let onCancel: () => void = () => {
-                if (dialogInstance) {
+                if (mDialogInstance) {
                     unhook();
                 }
-                if (!(options && options.silentCancel)) {
+                if (rejectOnCancel) {
                     reject();
                 }
             };
 
             let hook: () => void = () => {
-                if (dialogInstance) {
-                    dialogInstance.$on('ok', onOk);
-                    dialogInstance.$on('secondaryBtn', onSecondaryBtn);
-                    dialogInstance.$on('cancel', onCancel);
-                    dialogInstance.$props['open'] = true;
+                if (mDialogInstance) {
+                    mDialogInstance.$on('ok', onOk);
+                    mDialogInstance.$on('cancel', onCancel);
+                    mDialogInstance.openDialog();
+
                 }
             };
 
             let unhook: () => void = () => {
-                if (dialogInstance) {
-                    dialogInstance.$off('ok', onOk);
-                    dialogInstance.$off('secondaryBtn', onSecondaryBtn);
-                    dialogInstance.$off('cancel', onCancel);
-                    dialogInstance.$props['open'] = false;
+                if (mDialogInstance) {
+                    mDialogInstance.$off('ok', onOk);
+                    mDialogInstance.$off('cancel', onCancel);
                 }
             };
 
-            if (dialogInstance) {
-                dialogInstance.$nextTick(() => {
+            if (mDialogInstance) {
+                mDialogInstance.$nextTick(() => {
                     hook();
                 });
             } else {
                 console.error('No instance of dialog');
                 reject();
             }
+
         });
     }
 
@@ -148,9 +116,7 @@ export class DialogService {
 const DialogServicePlugin: PluginObject<any> = {
     install(v): void {
         let dialog: DialogService = new DialogService();
-        (v.prototype).$dialog = this.createDialog;
-        (v.prototype).$alert = this.createAlert;
-        (v.prototype).$confirm = this.createConfirm;
+        (v.prototype).$dialog = dialog;
     }
 };
 
