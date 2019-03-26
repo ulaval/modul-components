@@ -8,12 +8,13 @@
         -->
     </p>
     <p>
-        <m-timepicker>
+        <m-timepicker v-model="model">
             <!-- Test case -->
         </m-timepicker>
     </p>
     <h3>Readonly</h3>
-    <m-timepicker :readonly="true">
+    <m-timepicker :readonly="true"
+                  v-model="model">
     </m-timepicker>
     <p>
         <m-timepicker max-width="550px">

@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MTimepicker should render correctly 1`] = `
-<div class="m-timepicker" style="width:100%;max-width:144px;">
+<div time="Tue Mar 26 2019 14:00:00 GMT-0400" class="m-timepicker" style="width:100%;max-width:144px;">
   <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
     <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
+      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="time" step="300" min="00:00" max="23:59" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" value=""> </div>
       <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
             <use aria-hidden="true"></use>
           </svg> </button></div>
@@ -18,10 +18,10 @@ exports[`MTimepicker should render correctly 1`] = `
 `;
 
 exports[`MTimepicker should render correctly min/max time 1`] = `
-<div class="m-timepicker" style="width:100%;max-width:144px;">
+<div duration="true" time="Tue Mar 26 2019 03:00:00 GMT-0400" class="m-timepicker" style="width:100%;max-width:144px;">
   <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
     <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="7:00"> </div>
+      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="time" step="300" min="PT2H" max="PT7H" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" value=""> </div>
       <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
             <use aria-hidden="true"></use>
           </svg> </button></div>
@@ -35,10 +35,10 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when disabled is set 1`] = `
-<div class="m-timepicker m--is-disabled" style="width:100%;max-width:144px;">
+<div time="Tue Mar 26 2019 14:00:00 GMT-0400" class="m-timepicker m--is-disabled" style="width:100%;max-width:144px;">
   <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;margin-top:10px;">
     <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
+      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="time" step="300" min="00:00" max="23:59" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" value=""> </div>
       <div class="m-input-style__body__right"><button disabled="disabled" type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
             <use aria-hidden="true"></use>
           </svg> </button></div>
@@ -52,10 +52,10 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when error is set 1`] = `
-<div class="m-timepicker m--has-validation-message" style="width:100%;max-width:144px;">
+<div time="Tue Mar 26 2019 14:00:00 GMT-0400" class="m-timepicker m--has-validation-message" style="width:100%;max-width:144px;">
   <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;margin-top:10px;">
     <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
+      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="time" step="300" min="00:00" max="23:59" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" value=""> </div>
       <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
             <use aria-hidden="true"></use>
           </svg> </button></div>
@@ -76,10 +76,10 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when valid is set 1`] = `
-<div class="m-timepicker m--has-validation-message" style="width:100%;max-width:144px;">
+<div time="Tue Mar 26 2019 14:00:00 GMT-0400" class="m-timepicker m--has-validation-message" style="width:100%;max-width:144px;">
   <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;margin-top:10px;">
     <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
+      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="time" step="300" min="00:00" max="23:59" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" value=""> </div>
       <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
             <use aria-hidden="true"></use>
           </svg> </button></div>
@@ -100,10 +100,10 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
 `;
 
 exports[`MTimepicker should render correctly when waiting is set 1`] = `
-<div class="m-timepicker" style="width:100%;max-width:144px;">
+<div time="Tue Mar 26 2019 14:00:00 GMT-0400" class="m-timepicker" style="width:100%;max-width:144px;">
   <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;margin-top:10px;">
     <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
+      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="time" step="300" min="00:00" max="23:59" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" value=""> </div>
       <div class="m-input-style__body__right"><button disabled="disabled" type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
             <use aria-hidden="true"></use>
           </svg> </button></div>

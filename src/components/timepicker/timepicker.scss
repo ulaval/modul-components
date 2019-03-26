@@ -91,6 +91,7 @@ $m-timepicker--color-select: $m-color--interactive !default;
         background-color: $m-color--white;
         transition: color $m-transition-duration--s ease, background-color $m-transition-duration--s ease, border-color $m-transition-duration--s ease;
         border: 1px solid transparent;
+        cursor: pointer;
 
         @media (pointer: fine) {
             &:hover {
