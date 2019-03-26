@@ -17,7 +17,7 @@ export class DialogService {
      * @param title a title label if any
      * @param okLabel a cancel label if any
      */
-    public alert(message: string, title?: string, okLabel?: string): Promise<void> {
+    public alert(message: string, title?: string, okLabel?: string): Promise<boolean> {
         let alertInstance: MDialog = new MDialog({
             el: document.createElement('div')
         });
@@ -28,7 +28,10 @@ export class DialogService {
         alertInstance.title = title ? title : '';
         alertInstance.negativeLink = false;
 
-        return this.show(alertInstance);
+        return this.show(alertInstance).then((result) => {
+            alertInstance.$destroy();
+            return result;
+        });
     }
 
 
@@ -38,9 +41,8 @@ export class DialogService {
      * @param title a title label if any
      * @param okLabel a ok label if any
      * @param cancelLabel a cancel label if any
-     * @param rejectOnCancel if true, the promise will be rejected on cancel
      */
-    public confirm(message: string, title?: string, okLabel?: string, cancelLabel?: string, rejectOnCancel?: boolean): Promise<void> {
+    public confirm(message: string, title?: string, okLabel?: string, cancelLabel?: string): Promise<boolean> {
         let confirmInstance: MDialog = new MDialog({
             el: document.createElement('div')
         });
@@ -52,7 +54,10 @@ export class DialogService {
         confirmInstance.okLabel = okLabel ? okLabel : undefined;
         confirmInstance.cancelLabel = cancelLabel ? cancelLabel : undefined;
 
-        return this.show(confirmInstance, rejectOnCancel);
+        return this.show(confirmInstance).then((result) => {
+            confirmInstance.$destroy();
+            return result;
+        });
     }
 
 
@@ -61,7 +66,7 @@ export class DialogService {
      * @param mDialogInstance the MDialog instance
      * @param rejectOnCancel if true, the promise will be rejected on cancel
      */
-    public show(mDialogInstance: MDialog, rejectOnCancel?: boolean): Promise<void> {
+    public show(mDialogInstance: MDialog, rejectOnCancel?: boolean): Promise<boolean> {
         return new Promise((resolve, reject) => {
 
             let onOk: () => void = () => {
@@ -70,7 +75,7 @@ export class DialogService {
                 }
 
                 Vue.nextTick(() => {
-                    resolve();
+                    resolve(true);
                 });
             };
 
@@ -78,9 +83,10 @@ export class DialogService {
                 if (mDialogInstance) {
                     unhook();
                 }
-                if (rejectOnCancel) {
-                    reject();
-                }
+
+                Vue.nextTick(() => {
+                    resolve(false);
+                });
             };
 
             let hook: () => void = () => {

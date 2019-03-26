@@ -79,6 +79,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     }
 
 
+
     public doCustomPropOpen(value: boolean): boolean {
         return false;
     }
