@@ -87,12 +87,14 @@ describe('form-field', () => {
         it(`it should init and end edition on focus and blur`, () => {
             const spy1: jest.SpyInstance = jest.spyOn(mockFormField, 'initEdition');
             const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'endEdition');
+            const spy3: jest.SpyInstance = jest.spyOn(mockFormField, 'touch');
 
             wrapper.find({ ref: 'field' }).element.focus();
             wrapper.find({ ref: 'field' }).element.blur();
 
             expect(spy1).toHaveBeenCalled();
             expect(spy2).toHaveBeenCalled();
+            expect(spy3).toHaveBeenCalled();
         });
     });
 });
