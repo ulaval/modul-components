@@ -5,7 +5,7 @@ import { getSandboxesNames } from './sandbox-loader';
 
 let sandboxeDecorator: StoryDecorator = () => {
     return {
-        template: '<div style="padding: 32px;"><story /></div>'
+        template: '<story />'
     };
 };
 
