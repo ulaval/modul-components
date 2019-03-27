@@ -40,7 +40,7 @@ $m-message-size: 32px;
     .m-message {
         &__wrap {
             display: flex;
-            padding: $m-margin;
+            padding: $m-spacing;
             background: $m-color--grey-lightest;
         }
 
@@ -56,7 +56,7 @@ $m-message-size: 32px;
             display: flex;
             justify-content: center;
             flex-direction: column;
-            padding-left: $m-margin;
+            padding-left: $m-spacing;
             width: calc(100% - #{$m-message-size});
 
             &.m--has-close-button {
@@ -126,9 +126,10 @@ $m-message-size: 32px;
         }
 
         &__body {
-            margin-left: $m-margin--s;
+            margin-top: 1px; // Magic number: align text with icon
+            margin-left: $m-spacing--s;
             align-self: flex-start;
-            width: calc(100% - #{$m-font-size--l + $m-margin--s});
+            width: calc(100% - #{$m-font-size--l + $m-spacing--s});
         }
 
         &__title {

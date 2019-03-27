@@ -29,10 +29,12 @@ describe('form-field', () => {
     describe(`The form validate its fields`, () => {
         mockFormField = {
             shouldFocus: false,
-            isTouched: false,
+            isEditing: false,
             hasError: true,
             touched: false,
-            touch: jest.fn()
+            touch: jest.fn(),
+            initEdition: jest.fn(),
+            endEdition: jest.fn()
         };
 
         let formField: FormField<any>;
@@ -82,12 +84,14 @@ describe('form-field', () => {
             expect(spy2).toHaveBeenCalled();
         });
 
-        it(`it should touch the form field on blur`, () => {
-            const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'touch');
+        it(`it should init and end edition on focus and blur`, () => {
+            const spy1: jest.SpyInstance = jest.spyOn(mockFormField, 'initEdition');
+            const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'endEdition');
 
             wrapper.find({ ref: 'field' }).element.focus();
             wrapper.find({ ref: 'field' }).element.blur();
 
+            expect(spy1).toHaveBeenCalled();
             expect(spy2).toHaveBeenCalled();
         });
     });

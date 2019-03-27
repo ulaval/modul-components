@@ -100,6 +100,24 @@ export class Form {
         return this.fieldGroup[formFieldName];
     }
 
+
+    /**
+     * Return the name of the form field
+     *
+     * @param formField the formfield to find the name of
+     */
+    getFieldName(formField: FormField<any>): string {
+        let name: string | undefined = Object
+            .keys(this.fieldGroup)
+            .find((key: string) => this.fieldGroup[key] === formField);
+
+        if (!name) {
+            throw new Error('Trying to access an non existing form field');
+        }
+
+        return name;
+    }
+
     /**
      * reset all fields in the form without validating
      */
@@ -144,7 +162,7 @@ export class Form {
      */
     validateAll(): void {
         this.fields.forEach((field: FormField<any>) => {
-            field.touch();
+            field.validate(true);
         });
 
         this.internalState = new FormState();

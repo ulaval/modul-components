@@ -1,5 +1,277 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots components|m-button default 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button disabled 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-disabled"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button fullsize 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-full-size"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button icon 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button icon=20px 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button icon=right 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button precision 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button  
+    <span
+      class="m-button__precision"
+    >
+      Button precision
+      <!---->
+      
+        
+    </span>
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button reset 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="reset"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button submit 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="submit"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button waiting 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-waiting"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <div
+    aria-hidden="true"
+    class="m-spinner m-button__icon m--is-left"
+  >
+    <!---->
+     
+    <div />
+  </div>
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
 exports[`Storyshots components|m-button/primary default 1`] = `
 <div
   style="position: fixed; top: 0px; left: 0px; bottom: 0px; right: 0px; display: flex; align-items: center; overflow: auto;"
@@ -528,4 +800,142 @@ exports[`Storyshots components|m-button/secondary waiting 1`] = `
     </button>
   </div>
 </div>
+`;
+
+exports[`Storyshots components|m-button/skin=secondary default 1`] = `
+<button
+  class="m-button m--is-skin-secondary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin=secondary disabled 1`] = `
+<button
+  class="m-button m--is-skin-secondary m--is-disabled"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin=secondary icon 1`] = `
+<button
+  class="m-button m--is-skin-secondary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin=secondary precision 1`] = `
+<button
+  class="m-button m--is-skin-secondary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button  
+    <span
+      class="m-button__precision"
+    >
+      Button precision
+      <!---->
+      
+        
+    </span>
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin=secondary waiting 1`] = `
+<button
+  class="m-button m--is-skin-secondary m--is-waiting"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <div
+    aria-hidden="true"
+    class="m-spinner m-button__icon m--is-left"
+  >
+    <!---->
+     
+    <div />
+  </div>
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
 `;

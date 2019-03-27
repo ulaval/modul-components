@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import centered from '@storybook/addon-centered/vue';
+import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentshierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,12 +8,21 @@ import ButtonPlugin from './button';
 Vue.use(ButtonPlugin);
 
 
+declare module '@storybook/addon-knobs' {
+    export function withKnobs(): any;
+}
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/primary`, module)
+
+storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}`, module)
     .addDecorator(withA11y)
-    .addDecorator(centered)
+    .addDecorator(withKnobs)
     .add('default', () => ({
-        template: '<m-button>A Button</m-button>'
+        props: {
+            text: {
+                default: text('Text', 'A Button')
+            }
+        },
+        template: '<m-button>{{ text }}</m-button>'
     }))
     .add('disabled', () => ({
         template: '<m-button :disabled="true">A Button</m-button>'
@@ -27,10 +36,10 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/primary`, module)
     .add('icon', () => ({
         template: '<m-button icon-name="m-svg__close-clear">A Button</m-button>'
     }))
-    .add('icon 20px', () => ({
+    .add('icon=20px', () => ({
         template: '<m-button icon-name="m-svg__close-clear" icon-size="20px">A Button</m-button>'
     }))
-    .add('icon right', () => ({
+    .add('icon=right', () => ({
         template: '<m-button icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
     }))
     .add('precision', () => ({
@@ -43,9 +52,8 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/primary`, module)
         template: '<m-button type="reset">A Button</m-button>'
     }));
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/secondary`, module)
+storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/skin=secondary`, module)
     .addDecorator(withA11y)
-    .addDecorator(centered)
     .add('default', () => ({
         template: '<m-button skin="secondary">A Button</m-button>'
     }))

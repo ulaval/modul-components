@@ -47,6 +47,7 @@ export default class CalendarRangeDateState extends AbstractCalendarState {
 
     protected overrideCalendarEvents(events: CalendarEvents): CalendarEvents {
         events[CalendarEvent.DAY_MOUSE_ENTER] = this.highlightDate.bind(this);
+        events[CalendarEvent.DAY_KEYBOARD_TAB] = this.highlightDate.bind(this);
         return events;
     }
 

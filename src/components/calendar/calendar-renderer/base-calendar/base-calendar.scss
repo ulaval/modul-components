@@ -2,34 +2,34 @@
 
 $m-base-calendar-week-length: 7 !default;
 $m-base-calendar-dimension: $m-touch-size !default;
-$m-base-calendar-weekday-height: 25px !default; // DOM number
+$m-base-calendar-weekday-height: 33px !default; // magic number
 $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-length !default;
+$m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
 
-@mixin grid($col: $m-base-calendar-week-length, $width: $m-base-calendar-dimension, $height: $m-base-calendar-dimension) {
+%m-base-calendar__today {
+    background-color: $m-color--grey-light;
+    font-weight: $m-font-weight--bold;
+    border-radius: 50%;
+}
+
+@mixin m-base-calendar__grid($col: $m-base-calendar-week-length, $width: $m-base-calendar-dimension, $height: $m-base-calendar-dimension) {
     text-align: center;
     display: grid;
     grid-template-columns: repeat($col, $width);
     grid-auto-rows: $height;
 }
 
+@mixin m-base-calendar__selected() {
+    color: $m-color--white;
+    font-weight: $m-font-weight--bold;
+    border-radius: 50%;
+    background-color: m-color(interactive);
+}
+
 .m-base-calendar {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-
-    // reset default button styles
-    &__year-content,
-    &__month-content,
-    &__day-content,
-    &__current-month-and-year {
-        background: none;
-        border: 0;
-        color: inherit;
-        font: inherit;
-        outline: none;
-        padding: 0;
-        cursor: inherit;
-    }
 
     @media (max-width: $m-mq--max--s) {
         padding: unset;
@@ -52,8 +52,26 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     }
 
     &__current-month-and-year {
+        background: none;
+        font: inherit;
+        border-left: 0;
+        border-right: 0;
+        outline: none;
         font-weight: $m-font-weight--bold;
         cursor: pointer;
+        padding: 0 3px 0 0; // magic number for the focus visual
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        transition: border-color $m-transition-duration--s ease;
+
+        &:hover:not(:focus) {
+            border-bottom-color: m-color(interactive, darker);
+        }
+
+        &:focus {
+            background-color: $m-color--interactive-lightest;
+            border-radius: 3px;
+        }
     }
 
     &__header,
@@ -78,32 +96,37 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
 
         &.m--is-select-mode {
             border-bottom: 1px solid m-color(border);
-            justify-content: center;
         }
     }
 
     &__body {
-        min-height: $m-base-calendar-dimension * 5 + $m-base-calendar-weekday-height;
+        // for animation purpose
+        transition: height 0.3s ease;
+        height: ($m-base-calendar-dimension * 5) + $m-base-calendar-weekday-height;
+
+        &.m--is-max-row {
+            height: ($m-base-calendar-dimension * 6) + $m-base-calendar-weekday-height;
+        }
     }
 
     &__years {
-        @include grid(5, minmax($m-base-calendar-dimension, auto));
+        @include m-base-calendar__grid(5, minmax($m-base-calendar-dimension, auto));
     }
 
     &__months {
-        @include grid(3, minmax($m-base-calendar-dimension, auto));
+        @include m-base-calendar__grid(3, minmax($m-base-calendar-dimension, auto));
 
         transition: color $m-transition-duration ease;
         font-weight: $m-font-weight--bold;
     }
 
     &__week {
-        @include grid($height: auto);
+        @include m-base-calendar__grid($height: auto);
 
-        grid-auto-rows: auto;
         align-items: center;
         border-bottom: $m-border-width--s solid $m-color--border;
         padding: 0 0 m-spacing(xs) 0;
+        margin: 0 0 m-spacing(s) 0;
     }
 
     &__weekday {
@@ -112,7 +135,7 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
     }
 
     &__days {
-        @include grid();
+        @include m-base-calendar__grid();
 
         overflow: hidden;
     }
@@ -123,30 +146,52 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         position: relative;
         transition: background-color $m-transition-duration linear, color $m-transition-duration ease;
         cursor: pointer;
+        outline: none;
 
-        &:hover:not(.m--is-hidden):not(.m--is-disabled),
-        &:focus:not(.m--is-hidden):not(.m--is-disabled) {
-            color: $m-color--interactive-darker;
+        // mouse only, to avoid sticky hover on mobile
+        @media (pointer: fine) {
+            &:hover:not(.m--is-disabled),
+            &:focus:not(.m--is-disabled) {
+                &::after {
+                    content: '';
+                    width: $m-touch-size;
+                    height: $m-touch-size;
+                    position: relative;
+                    display: block;
+                    top: -100%;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    z-index: 1;
+                }
+            }
 
-            &::after {
-                content: '';
-                width: $m-touch-size;
-                height: $m-touch-size;
-                position: relative;
-                display: block;
-                top: -100%;
-                margin: 0 auto;
-                background-color: #fff;
-                border: 1px solid m-color(interactive, darker);
-                border-radius: 50%;
-                z-index: 1;
+            &:hover:not(.m--is-disabled) {
+                color: $m-color--interactive-darker;
+
+                &::after {
+                    background-color: $m-color--white;
+                    border: 1px solid m-color(interactive, darker);
+                }
+            }
+
+            &:focus:not(.m--is-disabled) {
+                &::after {
+                    border: $m-base-calendar--border-focus;
+                }
+            }
+
+            &:focus:hover:not(.m--is-disabled) {
+                &::after {
+                    border: 2px solid m-color(interactive, darker);
+                }
             }
         }
 
-        &.m--is-highlighted:not(.m--is-hidden) {
+        &.m--is-highlighted {
             background-color: $m-color--interactive-lightest;
 
-            &:hover:not(.m--is-selection-start):not(.m--is-inside-range) {
+            &:hover:not(.m--is-selection-start):not(.m--is-inside-range),
+            &:focus:not(.m--is-selection-start):not(.m--is-inside-range) {
                 border-radius: 50% 0 0 50%;
 
                 &.m--is-in-future {
@@ -159,8 +204,12 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
             border-radius: 50%;
         }
 
-        &.m--is-selection-end {
+        &.m--is-selection-end:not(.m--is-selection-start) {
             border-radius: 0 50% 50% 0;
+        }
+
+        &.m--is-other-month {
+            color: m-color(gray, dark);
         }
 
         &.m--is-disabled {
@@ -170,34 +219,60 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
         }
     }
 
+    &__day:not(.m--is-disabled):not(.m--is-other-month) {
+        font-weight: $m-font-weight--bold;
+    }
+
     &__year-content,
     &__month-content,
     &__day-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: $m-base-calendar-dimension;
         height: $m-base-calendar-dimension;
+        margin: 0 auto;
         position: relative;
         z-index: 2;
+        outline: none;
 
-        &.m--is-other-month:not(:hover):not(.m--is-selected):not(.m--is-today) {
-            color: $m-color--disabled;
-        }
+        &.m--is-today:not(.m--is-selected) {
+            // today style shouldn't be visible on hover
+            &:not(:hover) {
+                @extend %m-base-calendar__today;
 
-        &.m--is-today:not(:hover):not(.m--is-selected) {
-            background-color: $m-color--grey-light;
-            font-weight: $m-font-weight--bold;
-            border-radius: 50%;
+                // when inside a daterange selection
+                .m--is-highlighted & {
+                    border: 1px solid $m-color--grey-light;
+                    background-color: $m-color--interactive-lightest;
+                }
 
-            .m--is-highlighted & {
-                border: 1px solid $m-color--grey-light;
-                background-color: transparent;
+                .m-base-calendar__day:focus &,
+                .m--is-highlighted:focus & {
+                    border: $m-base-calendar--border-focus;
+                }
+            }
+
+            // when today is outside of min or max date
+            .m--is-disabled & {
+                @extend %m-base-calendar__today;
+
+                color: $m-color--white;
             }
         }
 
-        &.m--is-selected:not(:hover) {
-            color: #fff;
-            font-weight: $m-font-weight--bold;
-            border-radius: 50%;
-            background-color: m-color(interactive);
+        // no mouse, to avoid sticky hover on mobile
+        @media not all and (pointer: fine) {
+            &.m--is-selected {
+                @include m-base-calendar__selected();
+            }
+        }
+
+        // mouse only, to avoid sticky hover on mobile
+        @media (pointer: fine) {
+            &.m--is-selected:not(:hover) {
+                @include m-base-calendar__selected();
+            }
         }
 
         &.m--is-hidden {
@@ -208,8 +283,8 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
 
 // for left to right range selection visual
 .m--is-selection-start {
-    & + .m--is-highlighted:not(.m--is-hidden),
-    &:nth-child(7n) + .m--is-highlighted:not(.m--is-hidden) {
+    & + .m--is-highlighted,
+    &:nth-child(7n) + .m--is-highlighted {
         &::before {
             position: absolute;
             top: -50%;
@@ -238,4 +313,12 @@ $m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-l
 // for right to left range selection visual
 .m--is-highlighted + .m--is-selection-start {
     border-radius: 0 50% 50% 0;
+}
+
+// mouse only, to avoid sticky hover on mobile
+@media (pointer: fine) {
+    .m-base-calendar__day:focus .m-base-calendar__day-content.m--is-selected {
+        border: $m-base-calendar--border-focus;
+        border-radius: 50%;
+    }
 }

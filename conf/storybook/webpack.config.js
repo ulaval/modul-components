@@ -13,6 +13,20 @@ module.exports = ({ config, mode }) => {
     // Attention, j'écrase les loaders webpack par défaut de storybook car ils ne gèrent pas bien les css.
     // Par contre, ce dernier offrait automatiquement le support des fichiers .md (markdown). Utile si on veut faire marcher le addon-notes avec du markdown
     config.module.rules = baseConfig.module.rules;
+
+    //addon sources
+    config.module.rules.push({
+        test: /\.stories\.ts?$/,
+        loaders: [
+            {
+                loader: require.resolve('@storybook/addon-storysource/loader'),
+                options: { parser: 'typescript' }
+            }
+        ],
+        enforce: 'pre',
+    });
+
+
     config.plugins.push(...(baseConfig.plugins));
 
     //Uncomment the following line to display configuration

@@ -11,6 +11,7 @@ export class MIntegerfieldSandbox extends Vue {
     public model2: number = 0;
     public model3: number = 3;
     public model4: number = 5;
+    public definedModel: number = 1;
 
     get isNumber(): boolean {
         return (typeof this.model1 === 'number');

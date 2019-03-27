@@ -139,6 +139,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
                 [CalendarEvent.DAY_SELECT]: this.selectDay.bind(this),
                 [CalendarEvent.DAY_MOUSE_ENTER]: () => { },
                 [CalendarEvent.DAY_MOUSE_LEAVE]: () => { },
+                [CalendarEvent.DAY_KEYBOARD_TAB]: () => { },
                 [CalendarEvent.MONTH_SELECT]: this.selectMonth.bind(this),
                 [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth.bind(this),
                 [CalendarEvent.MONTH_NEXT]: this.nextMonth.bind(this),
