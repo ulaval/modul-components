@@ -58,45 +58,69 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
         template: '<m-checkbox :valid="true"> Checkbox</m-checkbox>'
     }))
 
-
-storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/disabled=true`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/value`, module)
     .addDecorator(withA11y)
-    .add('value', () => ({
+    .add('disabled', () => ({
         template: '<m-checkbox :disabled="true" value="true">A Checkbox</m-checkbox>'
     }))
-    .add('position=right', () => ({
-        template: '<m-checkbox :disabled="true" position="right">A Checkbox</m-checkbox>'
-    }));
-
-
-storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/disabled=true/position=right`, module)
-    .add('value', () => ({
-        template: '<m-checkbox :disabled="true" position="right" value="true">A Checkbox</m-checkbox>'
-    }));
-
-
-storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/readonly=true`, module)
-    .addDecorator(withA11y)
-    .add('value', () => ({
+    .add('readonly', () => ({
         template: '<m-checkbox :readonly="true" value="true">A Checkbox</m-checkbox>'
     }))
-    .add('position=right', () => ({
-        template: '<m-checkbox :readonly="true" position="right">A Checkbox</m-checkbox>'
-    }));
+    .add('focus', () => ({
+        template: '<m-checkbox :focus="true" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('error-message', () => ({
+        template: '<m-checkbox error-message="This is an error" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('error', () => ({
+        template: '<m-checkbox :error="true" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('valid', () => ({
+        template: '<m-checkbox :valid="true" value="true">A Checkbox</m-checkbox>'
+    }))
 
-
-storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/readonly=true/position=right`, module)
-    .add('value', () => ({
-        template: '<m-checkbox :disabled="true" position="right" value="true">A Checkbox</m-checkbox>'
-    }));
-
-
-storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/indeterminate=true`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right`, module)
     .addDecorator(withA11y)
-    .add('position=right', () => ({
-        template: '<m-checkbox indeterminate="true" position="right">A Checkbox</m-checkbox>'
+    .add('value', () => ({
+        template: '<m-checkbox position="right" value="true">A Checkbox</m-checkbox>'
     }))
     .add('disabled', () => ({
-        template: '<m-checkbox indeterminate="true" :disabled="true">A Checkbox</m-checkbox>'
+        template: '<m-checkbox :disabled="true" position="right">A Checkbox</m-checkbox>'
+    }))
+    .add('readonly', () => ({
+        template: '<m-checkbox :readonly="true" position="right">A Checkbox</m-checkbox>'
+    }))
+    .add('focus', () => ({
+        template: '<m-checkbox :focus="true" position="right">A Checkbox</m-checkbox>'
+    }))
+    .add('error-message', () => ({
+        template: '<m-checkbox error-message="This is an error" position="right">A Checkbox</m-checkbox>'
+    }))
+    .add('error', () => ({
+        template: '<m-checkbox :error="true" position="right">A Checkbox</m-checkbox>'
+    }))
+    .add('valid', () => ({
+        template: '<m-checkbox :valid="true" position="right">A Checkbox</m-checkbox>'
+    }))
+
+storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right/value`, module)
+    .addDecorator(withA11y)
+    .add('disabled', () => ({
+        template: '<m-checkbox :disabled="true" position="right" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('readonly', () => ({
+        template: '<m-checkbox :readonly="true" position="right" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('focus', () => ({
+        template: '<m-checkbox :focus="true" position="right" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('error-message', () => ({
+        template: '<m-checkbox error-message="This is an error" position="right" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('error', () => ({
+        template: '<m-checkbox :error="true"position="right" value="true">A Checkbox</m-checkbox>'
+    }))
+    .add('valid', () => ({
+        template: '<m-checkbox :valid="true" position="right" value="true">A Checkbox</m-checkbox>'
     }))
 
