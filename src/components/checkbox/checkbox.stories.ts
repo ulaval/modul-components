@@ -56,7 +56,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     }))
     .add('valid', () => ({
         template: '<m-checkbox :valid="true"> Checkbox</m-checkbox>'
-    }))
+    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/value`, module)
     .addDecorator(withA11y)
@@ -77,7 +77,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/value`, module)
     }))
     .add('valid', () => ({
         template: '<m-checkbox :valid="true" value="true">A Checkbox</m-checkbox>'
-    }))
+    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right`, module)
     .addDecorator(withA11y)
@@ -101,7 +101,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right`, 
     }))
     .add('valid', () => ({
         template: '<m-checkbox :valid="true" position="right">A Checkbox</m-checkbox>'
-    }))
+    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right/value`, module)
     .addDecorator(withA11y)
@@ -122,5 +122,5 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right/va
     }))
     .add('valid', () => ({
         template: '<m-checkbox :valid="true" position="right" value="true">A Checkbox</m-checkbox>'
-    }))
+    }));
 
