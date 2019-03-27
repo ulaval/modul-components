@@ -1,0 +1,1334 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-checkbox default 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-62a373b4-1185-4b07-a906-81a8cd5cf999"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-62a373b4-1185-4b07-a906-81a8cd5cf999"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox disabled 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-disabled"
+>
+  <input
+    class="m-checkbox__hidden"
+    disabled="disabled"
+    id="mCheckbox-773656c6-429e-4984-99ed-9035cd686486"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-773656c6-429e-4984-99ed-9035cd686486"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox error 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-3dd75d34-10dd-4741-a350-5acbfea47cc8"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-3dd75d34-10dd-4741-a350-5acbfea47cc8"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+       Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox error-message 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-6b081b06-378f-4377-9f3b-10c5d58fcfb6"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-6b081b06-378f-4377-9f3b-10c5d58fcfb6"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+       Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <div
+      class="m-validation-message__wrap"
+    >
+      <p
+        class="m-validation-message__error"
+      >
+        <svg
+          class="m-icon m-validation-message__error__icon"
+          height="1em"
+          width="1em"
+        >
+          <title>
+            Erreur
+          </title>
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-validation-message__text"
+        >
+          This is an error
+        </span>
+      </p>
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox focus 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left"
+  focus="true"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-5e5c9123-07c9-4433-bf17-8ee3cb8981b4"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-5e5c9123-07c9-4433-bf17-8ee3cb8981b4"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+       Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox indeterminate 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-indeterminate"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-8eb93291-9e58-4f9f-984a-02de938c1f47"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-8eb93291-9e58-4f9f-984a-02de938c1f47"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox label 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left"
+  label="label"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-f6da4c3b-c20e-4909-b910-49bdffc4f34c"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-f6da4c3b-c20e-4909-b910-49bdffc4f34c"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox position=right 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-e60ea9bb-77b1-45de-8c2f-c242515d60f9"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-e60ea9bb-77b1-45de-8c2f-c242515d60f9"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox readonly 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-readonly"
+>
+  <!---->
+   
+  <input
+    id="mCheckbox-4a74d9ec-8d22-4fa7-8327-eb95c7db778e"
+    type="hidden"
+    value="false"
+  />
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-4a74d9ec-8d22-4fa7-8327-eb95c7db778e"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox valid 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-valid"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-8917eed4-284a-4243-95d8-504b5a1ebc41"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-8917eed4-284a-4243-95d8-504b5a1ebc41"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+       Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox value 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-6919dd2a-bad3-4af6-b1ea-3c5a79d121b0"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-6919dd2a-bad3-4af6-b1ea-3c5a79d121b0"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right disabled 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-disabled"
+>
+  <input
+    class="m-checkbox__hidden"
+    disabled="disabled"
+    id="mCheckbox-fec68b35-05e1-474b-b959-a9cdf2d13548"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-fec68b35-05e1-474b-b959-a9cdf2d13548"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right error 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-bf7bf512-389b-4316-b5f4-bcf4325ae6ba"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-bf7bf512-389b-4316-b5f4-bcf4325ae6ba"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right error-message 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-29f1156b-30c8-4597-b58b-37c5868996b3"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-29f1156b-30c8-4597-b58b-37c5868996b3"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <div
+      class="m-validation-message__wrap"
+    >
+      <p
+        class="m-validation-message__error"
+      >
+        <svg
+          class="m-icon m-validation-message__error__icon"
+          height="1em"
+          width="1em"
+        >
+          <title>
+            Erreur
+          </title>
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-validation-message__text"
+        >
+          This is an error
+        </span>
+      </p>
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right focus 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right"
+  focus="true"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-cd01b145-4240-4437-81a9-c56c16ae1bd0"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-cd01b145-4240-4437-81a9-c56c16ae1bd0"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right readonly 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-readonly"
+>
+  <!---->
+   
+  <input
+    id="mCheckbox-8599918f-2c3e-459b-bfaf-d8471718d0d2"
+    type="hidden"
+    value="false"
+  />
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-8599918f-2c3e-459b-bfaf-d8471718d0d2"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right valid 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-valid"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-98796674-a0b7-4808-9397-a8047e47c695"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-98796674-a0b7-4808-9397-a8047e47c695"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right value 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-6700807c-35b8-4b28-b76b-0ebe0ec30e6f"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-6700807c-35b8-4b28-b76b-0ebe0ec30e6f"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right/value disabled 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked m--is-disabled"
+>
+  <input
+    class="m-checkbox__hidden"
+    disabled="disabled"
+    id="mCheckbox-e1c3eb0d-ddbe-4a64-862f-814ee9e1ac4c"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-e1c3eb0d-ddbe-4a64-862f-814ee9e1ac4c"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right/value error 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-5db88067-188e-4582-903f-332c03f691d5"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-5db88067-188e-4582-903f-332c03f691d5"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right/value error-message 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-fd7ed1d8-b435-4eda-aeaa-771c315c6ebb"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-fd7ed1d8-b435-4eda-aeaa-771c315c6ebb"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <div
+      class="m-validation-message__wrap"
+    >
+      <p
+        class="m-validation-message__error"
+      >
+        <svg
+          class="m-icon m-validation-message__error__icon"
+          height="1em"
+          width="1em"
+        >
+          <title>
+            Erreur
+          </title>
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-validation-message__text"
+        >
+          This is an error
+        </span>
+      </p>
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right/value focus 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked"
+  focus="true"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-dbaddbec-eed7-4efd-bb41-e2e82114f86e"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-dbaddbec-eed7-4efd-bb41-e2e82114f86e"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right/value readonly 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked m--is-readonly"
+>
+  <!---->
+   
+  <input
+    id="mCheckbox-a5c9687b-418a-496a-b847-d71c4b38d309"
+    type="hidden"
+    value="true"
+  />
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-a5c9687b-418a-496a-b847-d71c4b38d309"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/position=right/value valid 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-checked m--is-valid"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-b160f042-dd71-496f-8473-74a1b3d363cc"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-b160f042-dd71-496f-8473-74a1b3d363cc"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value disabled 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked m--is-disabled"
+>
+  <input
+    class="m-checkbox__hidden"
+    disabled="disabled"
+    id="mCheckbox-2772f73e-5d90-4dc1-b1d6-35ffda3fe164"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-2772f73e-5d90-4dc1-b1d6-35ffda3fe164"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value error 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-ad037c5e-fdc3-49ec-a895-c4dea8587b85"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-ad037c5e-fdc3-49ec-a895-c4dea8587b85"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value error-message 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked m--has-error"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-9a7c17be-4ea6-431f-9d29-8b6ff4426e91"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-9a7c17be-4ea6-431f-9d29-8b6ff4426e91"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <div
+      class="m-validation-message__wrap"
+    >
+      <p
+        class="m-validation-message__error"
+      >
+        <svg
+          class="m-icon m-validation-message__error__icon"
+          height="1em"
+          width="1em"
+        >
+          <title>
+            Erreur
+          </title>
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-validation-message__text"
+        >
+          This is an error
+        </span>
+      </p>
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value focus 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked"
+  focus="true"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-c5c801b7-2627-401c-b330-fb79a001609b"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-c5c801b7-2627-401c-b330-fb79a001609b"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value readonly 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked m--is-readonly"
+>
+  <!---->
+   
+  <input
+    id="mCheckbox-f8f5afd0-3f06-4048-b31d-88766f4760f9"
+    type="hidden"
+    value="true"
+  />
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-f8f5afd0-3f06-4048-b31d-88766f4760f9"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value valid 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked m--is-valid"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-17fb99e6-07a7-4060-878f-3f7d105d4385"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-17fb99e6-07a7-4060-878f-3f7d105d4385"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+  </div>
+</div>
+`;
