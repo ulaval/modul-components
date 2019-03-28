@@ -28,7 +28,7 @@
         "print_version_win": "echo %npm_package_version%",
         "print_version_nx": "echo $npm_package_version",
         "storybook": "start-storybook --config-dir ./conf/storybook",
-        "gen-cli": "./node_modules/.bin/gen-cli"
+        "modul-cli": "./node_modules/.bin/gen-cli"
     },
     "jest-junit": {
         "output": "reports/junit/js-test-results.xml"
