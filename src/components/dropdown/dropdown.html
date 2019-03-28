@@ -31,6 +31,7 @@
                :disabled="!active"
                :readonly="!filterable"
                :placeholder="placeholder"
+               :maxlength="maxLength"
                @keydown.enter.prevent="onKeydownEnter"
                @keydown.return.prevent="onKeydownEnter"
                @keydown.esc="onKeydownEsc"
@@ -99,6 +100,7 @@
                        placeholder="Recherche"
                        ref="researchInput"
                        v-model="selectedText"
+                       :max-length="maxLength"
                        @input="onInput">
                 <m-icon-button class="m-dropdown__header__research-button"
                                icon-name="m-svg__search"
