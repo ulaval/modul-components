@@ -1011,25 +1011,3 @@ exports[`Storyshots components|m-input-style width 1`] = `
   </div>
 </div>
 `;
-
-exports[`Storyshots components|m-input-style/skin=secondary default 1`] = `
-<button
-  class="m-button m--is-skin-secondary"
-  type="button"
->
-  <!---->
-   
-  <!---->
-   
-  <span
-    class="m-button__text"
-  >
-    A Button 
-    <!---->
-  </span>
-   
-  <!---->
-   
-  <!---->
-</button>
-`;

@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -17,11 +17,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        props: {
-            text: {
-                default: text('Text', 'A Button')
-            }
-        },
         template: '<m-input-style></m-input-style>'
     }))
     .add('label', () => ({
@@ -63,25 +58,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
     .add('tagStyle', () => ({
         template: '<div><m-input-style label="H1" :empty="false" tag-style="h1">h1</m-input-style><m-input-style label="H2" :empty="false" tag-style="h2">h2</m-input-style><m-input-style label="H3" :empty="false" tag-style="h3">h3</m-input-style><m-input-style label="H4" :empty="false" tag-style="h4">h4</m-input-style><m-input-style label="H5" :empty="false" tag-style="h5">h5</m-input-style><m-input-style label="H6" :empty="false" tag-style="h6">h6</m-input-style></div>'
     }));
-
-// .add('waiting', () => ({
-//     template: '<m-button :waiting="true">A Button</m-button>'
-// }))
-
-storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}/skin=secondary`, module)
-    .addDecorator(withA11y)
-    .add('default', () => ({
-        template: '<m-button skin="secondary">A Button</m-button>'
-    }))
-    // .add('disabled', () => ({
-    //     template: '<m-button skin="secondary" :disabled="true">A Button</m-button>'
-    // }))
-    // .add('waiting', () => ({
-    //     template: '<m-button skin="secondary" :waiting="true">A Button</m-button>'
-    // }))
-    // .add('icon', () => ({
-    //     template: '<m-button skin="secondary" icon-name="m-svg__close-clear">A Button</m-button>'
-    // }))
-    // .add('precision', () => ({
-    //     template: '<m-button skin="secondary" >A Button <template slot="precision">Button precision</template></m-button>'
-    // }));
