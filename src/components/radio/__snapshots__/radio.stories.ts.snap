@@ -1,0 +1,593 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-radio default 1`] = `
+<li
+  class="m-radio m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="ef6dac76-66a2-4420-8e30-957c7bde40bf"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="ef6dac76-66a2-4420-8e30-957c7bde40bf"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio disabled 1`] = `
+<li
+  class="m-radio m--is-disabled m--is-checked"
+>
+  <input
+    aria-hidden="true"
+    class="m-radio__hidden"
+    disabled="disabled"
+    id="fcd85a0f-2ead-4016-ade5-edfaeae73aaf"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="fcd85a0f-2ead-4016-ade5-edfaeae73aaf"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio error 1`] = `
+<li
+  class="m-radio m--is-error m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="90ec09eb-c378-4f74-9c5e-90f321c74750"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="90ec09eb-c378-4f74-9c5e-90f321c74750"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio focus 1`] = `
+<li
+  class="m-radio m--is-checked"
+  focus="true"
+>
+  <input
+    class="m-radio__hidden"
+    id="3d0fd4bf-f4e9-4a70-8b0e-3ef142c1e331"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="3d0fd4bf-f4e9-4a70-8b0e-3ef142c1e331"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio iconName=chip-error 1`] = `
+<li
+  class="m-radio m--is-checked"
+  iconname="chip-error"
+>
+  <input
+    class="m-radio__hidden"
+    id="9d32de79-94a7-416a-a4b0-934b6d4e57cd"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="9d32de79-94a7-416a-a4b0-934b6d4e57cd"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio label 1`] = `
+<li
+  class="m-radio m--is-checked"
+  label="radio3-label"
+>
+  <input
+    class="m-radio__hidden"
+    id="d1cfd2d7-2a05-4fa3-af65-624ac2cde5b5"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="d1cfd2d7-2a05-4fa3-af65-624ac2cde5b5"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio name 1`] = `
+<li
+  class="m-radio m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="312a8f78-4860-4e80-a156-5e209d3a5d1d"
+    name="radio-2"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="312a8f78-4860-4e80-a156-5e209d3a5d1d"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio radioPosition=right 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="1b80cbf9-5301-4bdd-88c5-ddf3e26b61d1"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="1b80cbf9-5301-4bdd-88c5-ddf3e26b61d1"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio radioVerticalAlign=center 1`] = `
+<li
+  class="m-radio m--is-checked m--is-align-center"
+>
+  <input
+    class="m-radio__hidden"
+    id="0ea40e85-79e3-46c4-8b29-65f9113bd7e9"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="0ea40e85-79e3-46c4-8b29-65f9113bd7e9"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio valid 1`] = `
+<li
+  class="m-radio m--is-valid m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="a9175452-c758-4222-8d42-85c523fd9c5f"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="a9175452-c758-4222-8d42-85c523fd9c5f"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio value 1`] = `
+<li
+  class="m-radio"
+>
+  <input
+    class="m-radio__hidden"
+    id="3ba9638d-25ba-4469-8817-15505c826689"
+    type="radio"
+    value="radio1-value"
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="3ba9638d-25ba-4469-8817-15505c826689"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right disabled 1`] = `
+<li
+  class="m-radio m--is-disabled m--is-checked m--is-input-right"
+>
+  <input
+    aria-hidden="true"
+    class="m-radio__hidden"
+    disabled="disabled"
+    id="3f583201-53af-427a-b053-a1f7de834def"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="3f583201-53af-427a-b053-a1f7de834def"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right error 1`] = `
+<li
+  class="m-radio m--is-error m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="3b064e9f-40fb-404f-8f7e-846774e82b36"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="3b064e9f-40fb-404f-8f7e-846774e82b36"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right focus 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+  focus="true"
+>
+  <input
+    class="m-radio__hidden"
+    id="27be4162-9c8c-42a4-a603-9213fb8bb409"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="27be4162-9c8c-42a4-a603-9213fb8bb409"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right iconName=chip-error 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+  iconname="chip-error"
+>
+  <input
+    class="m-radio__hidden"
+    id="f498146b-b2ad-4657-984a-6493f166e476"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="f498146b-b2ad-4657-984a-6493f166e476"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right label 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+  label="radio6-label"
+>
+  <input
+    class="m-radio__hidden"
+    id="ed5d19f9-7092-4ca5-a22d-71ce1fa97b86"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="ed5d19f9-7092-4ca5-a22d-71ce1fa97b86"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right name 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="ddf2c938-dd6a-40f9-bc55-182170b624b7"
+    name="radio5"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="ddf2c938-dd6a-40f9-bc55-182170b624b7"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right radioVerticalAlign=center 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right m--is-align-center"
+>
+  <input
+    class="m-radio__hidden"
+    id="9fd46da9-93a7-4963-bc0a-c5a9460a6f3b"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="9fd46da9-93a7-4963-bc0a-c5a9460a6f3b"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right valid 1`] = `
+<li
+  class="m-radio m--is-valid m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="556743ec-546c-4200-92f3-9b7fe4873733"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="556743ec-546c-4200-92f3-9b7fe4873733"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radioPosition=right value 1`] = `
+<li
+  class="m-radio m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="81a39ce3-7456-496e-830d-444807485041"
+    type="radio"
+    value="radio4-value"
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="81a39ce3-7456-496e-830d-444807485041"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
