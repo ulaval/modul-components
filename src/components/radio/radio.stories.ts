@@ -3,7 +3,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { CHECKBOX_NAME, RADIO_NAME } from '../component-names';
+import { RADIO_NAME } from '../component-names';
 import RadioPlugin from './radio';
 
 Vue.use(RadioPlugin);
