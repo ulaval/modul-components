@@ -230,11 +230,9 @@ describe('FileService', () => {
 
         const expectValidationResults: (
             expectedNbReadyFiles: number,
-            rejectionCause: MFileRejectionCause
-        ) => void = (
-            expectedNbReadyFiles: number,
-            rejectionCause: MFileRejectionCause
-        ) => {
+            rejectionCause: MFileRejectionCause) => void = (
+                expectedNbReadyFiles: number,
+                rejectionCause: MFileRejectionCause) => {
 
                 expect(readyFiles().length).toEqual(expectedNbReadyFiles);
                 expect(rejectedFiles().length).toEqual(1);
