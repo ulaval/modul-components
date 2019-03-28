@@ -6,7 +6,7 @@ exports[`Storyshots components|m-checkbox default 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-f574f25d-be60-460d-b345-534a249b415b"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -14,7 +14,7 @@ exports[`Storyshots components|m-checkbox default 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-f574f25d-be60-460d-b345-534a249b415b"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -47,7 +47,7 @@ exports[`Storyshots components|m-checkbox disabled 1`] = `
   <input
     class="m-checkbox__hidden"
     disabled="disabled"
-    id="mCheckbox-c66b8be7-8583-4b80-b67d-871c1b8eb5aa"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -55,7 +55,7 @@ exports[`Storyshots components|m-checkbox disabled 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-c66b8be7-8583-4b80-b67d-871c1b8eb5aa"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -87,7 +87,7 @@ exports[`Storyshots components|m-checkbox error 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-8aa53667-cdb0-4b1a-a520-028fd6c71c80"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -95,7 +95,7 @@ exports[`Storyshots components|m-checkbox error 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-8aa53667-cdb0-4b1a-a520-028fd6c71c80"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -127,7 +127,7 @@ exports[`Storyshots components|m-checkbox error-message 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-e41fe219-d387-4e31-b221-0a2916ae4434"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -135,7 +135,7 @@ exports[`Storyshots components|m-checkbox error-message 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-e41fe219-d387-4e31-b221-0a2916ae4434"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -199,7 +199,7 @@ exports[`Storyshots components|m-checkbox focus 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-51b67fbb-c37f-457d-b06b-8434d58e696a"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -207,7 +207,7 @@ exports[`Storyshots components|m-checkbox focus 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-51b67fbb-c37f-457d-b06b-8434d58e696a"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -239,7 +239,7 @@ exports[`Storyshots components|m-checkbox indeterminate 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-2feb6301-647a-4333-a1c2-f7736fbd21ec"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -247,7 +247,7 @@ exports[`Storyshots components|m-checkbox indeterminate 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-2feb6301-647a-4333-a1c2-f7736fbd21ec"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -280,7 +280,7 @@ exports[`Storyshots components|m-checkbox label 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-9c4a85e2-ee22-4826-94fb-08fee2d9a90d"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -288,7 +288,7 @@ exports[`Storyshots components|m-checkbox label 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-9c4a85e2-ee22-4826-94fb-08fee2d9a90d"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -320,7 +320,7 @@ exports[`Storyshots components|m-checkbox position=right 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-0808ea95-1bab-4395-868c-49757eb17b13"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -328,7 +328,7 @@ exports[`Storyshots components|m-checkbox position=right 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-0808ea95-1bab-4395-868c-49757eb17b13"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -361,14 +361,14 @@ exports[`Storyshots components|m-checkbox readonly 1`] = `
   <!---->
    
   <input
-    id="mCheckbox-a26c601a-9346-43df-99b8-c4baf58b2a97"
+    id="mCheckbox-uuid"
     type="hidden"
     value="false"
   />
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-a26c601a-9346-43df-99b8-c4baf58b2a97"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -400,7 +400,7 @@ exports[`Storyshots components|m-checkbox valid 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-729f4b22-9cb3-4fb9-83f8-e8c7e4ae98cb"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -408,7 +408,7 @@ exports[`Storyshots components|m-checkbox valid 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-729f4b22-9cb3-4fb9-83f8-e8c7e4ae98cb"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -440,7 +440,7 @@ exports[`Storyshots components|m-checkbox value 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-cbecb749-3bee-4362-84f7-f9f7c9dc846c"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -448,7 +448,7 @@ exports[`Storyshots components|m-checkbox value 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-cbecb749-3bee-4362-84f7-f9f7c9dc846c"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -481,7 +481,7 @@ exports[`Storyshots components|m-checkbox/position=right disabled 1`] = `
   <input
     class="m-checkbox__hidden"
     disabled="disabled"
-    id="mCheckbox-5d5e1b5b-71db-4f3c-a25b-11e5be65b206"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -489,7 +489,7 @@ exports[`Storyshots components|m-checkbox/position=right disabled 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-5d5e1b5b-71db-4f3c-a25b-11e5be65b206"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -521,7 +521,7 @@ exports[`Storyshots components|m-checkbox/position=right error 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-189358c9-18cb-41d4-8f3c-08e378d0dca9"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -529,7 +529,7 @@ exports[`Storyshots components|m-checkbox/position=right error 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-189358c9-18cb-41d4-8f3c-08e378d0dca9"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -561,7 +561,7 @@ exports[`Storyshots components|m-checkbox/position=right error-message 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-8b557c93-04d5-4d2e-9dfd-8a68b2c98149"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -569,7 +569,7 @@ exports[`Storyshots components|m-checkbox/position=right error-message 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-8b557c93-04d5-4d2e-9dfd-8a68b2c98149"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -633,7 +633,7 @@ exports[`Storyshots components|m-checkbox/position=right focus 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-b90439f2-285e-4dda-9ceb-9717a05e5776"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -641,7 +641,7 @@ exports[`Storyshots components|m-checkbox/position=right focus 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-b90439f2-285e-4dda-9ceb-9717a05e5776"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -674,14 +674,14 @@ exports[`Storyshots components|m-checkbox/position=right readonly 1`] = `
   <!---->
    
   <input
-    id="mCheckbox-723f71d7-49e8-4649-a65b-6bfede1b800b"
+    id="mCheckbox-uuid"
     type="hidden"
     value="false"
   />
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-723f71d7-49e8-4649-a65b-6bfede1b800b"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -713,7 +713,7 @@ exports[`Storyshots components|m-checkbox/position=right valid 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-41ec535f-0b1e-44ac-8c9d-f2abc6f14387"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -721,7 +721,7 @@ exports[`Storyshots components|m-checkbox/position=right valid 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-41ec535f-0b1e-44ac-8c9d-f2abc6f14387"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -753,7 +753,7 @@ exports[`Storyshots components|m-checkbox/position=right value 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-b9d1337d-60d6-4a3c-a16f-02eeebec7a74"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -761,7 +761,7 @@ exports[`Storyshots components|m-checkbox/position=right value 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-b9d1337d-60d6-4a3c-a16f-02eeebec7a74"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -794,7 +794,7 @@ exports[`Storyshots components|m-checkbox/position=right/value disabled 1`] = `
   <input
     class="m-checkbox__hidden"
     disabled="disabled"
-    id="mCheckbox-db7e478f-afa5-4eaa-a82e-f1fe851a1052"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -802,7 +802,7 @@ exports[`Storyshots components|m-checkbox/position=right/value disabled 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-db7e478f-afa5-4eaa-a82e-f1fe851a1052"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -834,7 +834,7 @@ exports[`Storyshots components|m-checkbox/position=right/value error 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-20863071-f9c8-4974-9562-38fe91b16268"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -842,7 +842,7 @@ exports[`Storyshots components|m-checkbox/position=right/value error 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-20863071-f9c8-4974-9562-38fe91b16268"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -874,7 +874,7 @@ exports[`Storyshots components|m-checkbox/position=right/value error-message 1`]
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-6af3981c-50bb-4b21-b4b2-61ca66681f36"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -882,7 +882,7 @@ exports[`Storyshots components|m-checkbox/position=right/value error-message 1`]
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-6af3981c-50bb-4b21-b4b2-61ca66681f36"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -946,7 +946,7 @@ exports[`Storyshots components|m-checkbox/position=right/value focus 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-24f6d1f0-661c-4bd3-883a-4b91437af6be"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -954,7 +954,7 @@ exports[`Storyshots components|m-checkbox/position=right/value focus 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-24f6d1f0-661c-4bd3-883a-4b91437af6be"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -987,14 +987,14 @@ exports[`Storyshots components|m-checkbox/position=right/value readonly 1`] = `
   <!---->
    
   <input
-    id="mCheckbox-7e3058cc-70af-4801-bd6b-29f0f64937f4"
+    id="mCheckbox-uuid"
     type="hidden"
     value="true"
   />
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-7e3058cc-70af-4801-bd6b-29f0f64937f4"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1026,7 +1026,7 @@ exports[`Storyshots components|m-checkbox/position=right/value valid 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-b124c658-f7af-4547-bbc5-f4797d828198"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -1034,7 +1034,7 @@ exports[`Storyshots components|m-checkbox/position=right/value valid 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-b124c658-f7af-4547-bbc5-f4797d828198"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1067,7 +1067,7 @@ exports[`Storyshots components|m-checkbox/value disabled 1`] = `
   <input
     class="m-checkbox__hidden"
     disabled="disabled"
-    id="mCheckbox-6ae1be82-9d6b-4f74-b061-356effefb1a5"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -1075,7 +1075,7 @@ exports[`Storyshots components|m-checkbox/value disabled 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-6ae1be82-9d6b-4f74-b061-356effefb1a5"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1107,7 +1107,7 @@ exports[`Storyshots components|m-checkbox/value error 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-177d1e55-0cea-4fdf-8300-d0a3e18c127f"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -1115,7 +1115,7 @@ exports[`Storyshots components|m-checkbox/value error 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-177d1e55-0cea-4fdf-8300-d0a3e18c127f"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1147,7 +1147,7 @@ exports[`Storyshots components|m-checkbox/value error-message 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-2fbd6fdd-7b27-4ba6-8dff-c101d33b025d"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -1155,7 +1155,7 @@ exports[`Storyshots components|m-checkbox/value error-message 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-2fbd6fdd-7b27-4ba6-8dff-c101d33b025d"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1219,7 +1219,7 @@ exports[`Storyshots components|m-checkbox/value focus 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-55213564-4d36-4c70-be08-7b2c563227e1"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -1227,7 +1227,7 @@ exports[`Storyshots components|m-checkbox/value focus 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-55213564-4d36-4c70-be08-7b2c563227e1"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1260,14 +1260,14 @@ exports[`Storyshots components|m-checkbox/value readonly 1`] = `
   <!---->
    
   <input
-    id="mCheckbox-552076c6-21eb-4a6a-93bd-0e268d8a9e41"
+    id="mCheckbox-uuid"
     type="hidden"
     value="true"
   />
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-552076c6-21eb-4a6a-93bd-0e268d8a9e41"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
@@ -1299,7 +1299,7 @@ exports[`Storyshots components|m-checkbox/value valid 1`] = `
 >
   <input
     class="m-checkbox__hidden"
-    id="mCheckbox-b5d6384f-052f-457a-b71e-bfc265f0b0da"
+    id="mCheckbox-uuid"
     type="checkbox"
   />
    
@@ -1307,7 +1307,7 @@ exports[`Storyshots components|m-checkbox/value valid 1`] = `
    
   <label
     class="m-checkbox__wrap"
-    for="mCheckbox-b5d6384f-052f-457a-b71e-bfc265f0b0da"
+    for="mCheckbox-uuid"
   >
     <span
       aria-hidden="true"
