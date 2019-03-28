@@ -26,7 +26,8 @@
         "print_version_win": "echo %npm_package_version%",
         "print_version_nx": "echo $npm_package_version",
         "storybook": "start-storybook --config-dir ./conf/storybook",
-        "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose"
+        "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose",
+        "storybook:unit:update": "jest --config ./conf/storybook/jest.config.storybook.js --verbose --updateSnapshot"
     },
     "jest-junit": {
         "output": "reports/junit/js-test-results.xml"
