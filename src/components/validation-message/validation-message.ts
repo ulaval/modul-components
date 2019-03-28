@@ -21,8 +21,7 @@ export class MValidationMessage extends ModulVue {
     public classMessage: string = '';
 
     @Emit('click')
-    public onClick(event: Event): void {
-    }
+    public onClick(event: Event): void { }
 
     public get message(): string | undefined {
         let message: string | undefined;
