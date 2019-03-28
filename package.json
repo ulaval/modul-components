@@ -17,7 +17,7 @@
         "unitwatch": "jest --watch --verbose --silent",
         "metagen": "node ./tests/meta/meta-generator \"./src/components\" \"./dist/components\" && node ./tests/meta/meta-generator \"./src/mixins\" \"./dist/mixins\"",
         "metagenv2": "node -r ./tests/meta-v2/ts-loader.js  ./tests/meta-v2/generate-meta.ts ./dist",
-        "test": "jest --ci --silent --coverage --testResultsProcessor=./tests/jest/ci-test-processor && jest --ci --silent --config ./conf/storybook/jest.config.storybook.js --verbose",
+        "test": "jest --ci -w 1 --silent --coverage --testResultsProcessor=./tests/jest/ci-test-processor && jest -w 1 --ci --silent --config ./conf/storybook/jest.config.storybook.js --verbose",
         "tslint": "tslint --project tsconfig.json -s node_modules/custom-tslint-formatters/formatters -t grouped",
         "tslint-ci": "tslint --project tsconfig.json -t junit -o reports/junit/js-lint-results.xml ",
         "prepack": "npm run clean && npm run build && npm run buildlib",
