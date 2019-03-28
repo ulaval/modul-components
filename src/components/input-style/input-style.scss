@@ -229,6 +229,10 @@ $m-input-style-base-height: $m-line-height + em;
         }
     }
 
+    &__spinner {
+        margin-left: $m-spacing--s;
+    }
+
     ::placeholder {
         color: $m-color--disabled;
     }

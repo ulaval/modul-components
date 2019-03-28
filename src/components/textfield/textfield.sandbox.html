@@ -13,7 +13,8 @@
 
     <h3 class="m-u--h6">Waiting</h3>
     <m-textfield :waiting="true"
-                 label="label"></m-textfield>
+                 label="label label label label label label label label label"
+                 value="bonjour bonjour bonjour bonjour bonjour bonjour"></m-textfield>
 
     <h3 class="m-u--h6">Disabled</h3>
     <m-textfield :disabled="true"
@@ -185,5 +186,9 @@
     <m-textfield label="p"
                  tag-style="p">
     </m-textfield>
+
+    <m-input-style label="label"
+                   :waiting="true"
+                   :empty="false">A Button</m-input-style>
 
 </div>
