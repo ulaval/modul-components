@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { Form } from '../../utils/form/form';
 import { FormFieldValidation } from '../../utils/form/form-field-validation/form-field-validation';
-import { FormField } from '../../utils/form/form-field/form-field';
+import { FormField, FormFieldValidationType } from '../../utils/form/form-field/form-field';
 import { FormErrorFocusBehavior, FormErrorMessagesBehavior, MFormEvents, MFormListener } from '../../utils/form/form-service/form-service';
 import { FormValidation } from '../../utils/form/form-validation/form-validation';
 import { ModulVue } from '../../utils/vue/vue';
@@ -97,7 +97,7 @@ export class MFormSandbox extends ModulVue {
                     return new FormFieldValidation(true, [`the field-2 should be 5 letters at least`], ['this field should be 5 letters at least']);
                 }
                 return new FormFieldValidation();
-            }], { messageAfterTouched: false })
+            }])
         }),
         new Form({
             'field-1': new FormField<string>((): string => 'a value', []),
@@ -193,7 +193,33 @@ export class MFormSandbox extends ModulVue {
                 return new FormFieldValidation();
             }])
         }),
-        new Form({})
+        new Form({}),
+        new Form({
+            'Optimistic (example: required)': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!formField.value) {
+                    return new FormFieldValidation(true, [''], ['the optimistic validation was triggered']);
+                }
+                return new FormFieldValidation();
+            }], { validationType: FormFieldValidationType.Optimistic }),
+            'On going (example: max length 5)': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (formField.value.length > 5) {
+                    return new FormFieldValidation(true, [''], ['the on-going validation was triggered']);
+                }
+                return new FormFieldValidation();
+            }], { validationType: FormFieldValidationType.OnGoing }),
+            'Correctable (example: email)': new FormField<string>((): string => '', [(formField: FormField<string>): FormFieldValidation => {
+                if (!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(formField.value)) {
+                    return new FormFieldValidation(true, [''], ['the correctable validation was triggered']);
+                }
+                return new FormFieldValidation();
+            }], { validationType: FormFieldValidationType.Correctable }),
+            'At exit (example: max 5)': new FormField<number>((): number => 0, [(formField: FormField<number>): FormFieldValidation => {
+                if (formField.value > 5) {
+                    return new FormFieldValidation(true, [''], ['the at-exit validation was triggered']);
+                }
+                return new FormFieldValidation();
+            }], { validationType: FormFieldValidationType.AtExit })
+        })
     ];
 
     $refs: {

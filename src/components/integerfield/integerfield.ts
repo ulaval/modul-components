@@ -114,6 +114,7 @@ export class MIntegerfield extends ModulVue {
     }
 
     private set model(value: string) {
+        ((this as any) as InputManagement).internalValue = value;
         this.$emit('input', Number.parseInt(value, 10));
     }
 }
