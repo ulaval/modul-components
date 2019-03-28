@@ -14,7 +14,7 @@ install:
 script:
   - npm run clean
   - npm run buildWebpack
-  - npm run unitall -- -w 1
+  - npm run test
 
 cache:
   directories:
