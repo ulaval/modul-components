@@ -1,0 +1,17 @@
+import Vue from 'vue';
+import { mount, Wrapper } from '@vue/test-utils';
+import { renderComponent } from '../../../tests/helpers/render';
+import {{PREFIXED_SINGULAR_PASCAL_CASE}}Plugin, { {{SINGULAR_PASCAL_CASE}} } from './{{SINGULAR_KEBAB_CASE}}';
+
+describe('{{SINGULAR_PASCAL_CASE}}', () => {
+    beforeEach(() => {
+        Vue.use({{PREFIXED_SINGULAR_PASCAL_CASE}}Plugin);
+    });
+    it('should render correctly', () => {
+        const component: Wrapper<{{SINGULAR_PASCAL_CASE}}> = mount({{SINGULAR_PASCAL_CASE}}, {
+            localVue: Vue
+        });
+
+        return expect(renderComponent(component.vm)).resolves.toMatchSnapshot();
+    });
+});
