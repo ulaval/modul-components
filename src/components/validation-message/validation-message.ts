@@ -16,11 +16,31 @@ export class MValidationMessage extends ModulVue {
     @Prop({ default: true })
     public transition: boolean = true;
 
-    public titleErrorIcon: string = this.$i18n.translate('m-validation-message:title-error-icon');
-    public titleValidIcon: string = this.$i18n.translate('m-validation-message:title-valid-icon');
+    public svgTitle: string;
+    public iconName: string;
+    public classMessage: string = '';
 
     @Emit('click')
     public onClick(event: Event): void {
+    }
+
+    public get message(): string | undefined {
+        let message: string | undefined;
+        if (this.as<InputState>().hasErrorMessage && this.as<InputState>().hasError) {
+            this.classMessage = 'error';
+            this.svgTitle = this.$i18n.translate('m-validation-message:title-error-icon');
+            this.iconName = 'm-svg__error';
+            message = this.as<InputState>().errorMessage;
+        }
+
+        if (this.as<InputState>().hasValidMessage && this.as<InputState>().isValid) {
+            this.classMessage = 'valid';
+            this.svgTitle = this.$i18n.translate('m-validation-message:title-valid-icon');
+            this.iconName = 'm-svg__confirmation';
+            message = this.as<InputState>().validMessage;
+        }
+
+        return message;
     }
 }
 
