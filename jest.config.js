@@ -1,8 +1,7 @@
 module.exports = {
     testURL: 'http://localhost/',
     roots: [
-        '<rootDir>/src/',
-        '<rootDir>/conf/storybook/'
+        '<rootDir>/src/'
     ],
     transform: {
         "^.+\\.tsx?$": "ts-jest",
