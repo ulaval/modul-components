@@ -1,10 +1,11 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { FormatMode } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
@@ -16,6 +17,15 @@ import ValidationMessagePlugin from '../validation-message/validation-message';
 import { InputManagement } from './../../mixins/input-management/input-management';
 import WithRender from './timepicker.html?style=./timepicker.scss';
 
+const MAXHOURS: number = 23;
+const MAXMINUTES: number = 59;
+const MINUTESECONDS: number = 60;
+
+export interface TimeObject {
+    hour: number;
+    minute: number;
+    seconde?: number;
+}
 
 @WithRender
 @Component({
@@ -29,8 +39,6 @@ import WithRender from './timepicker.html?style=./timepicker.scss';
 })
 export class MTimepicker extends ModulVue {
 
-    @Prop()
-    public label: string;
     @Prop({ default: '00:00' })
     public min: string;
     @Prop({ default: '23:59' })
@@ -41,12 +49,17 @@ export class MTimepicker extends ModulVue {
     public maxWidth: string;
 
     public i18nButton: string = this.$i18n.translate('m-timepicker:button-ok');
+    public i18nPlaceHolder: string = this.$i18n.translate('m-timepicker:placeholder');
+    public i18nErrorFormat: string = this.$i18n.translate('m-timepicker:error-format');
+    public i18nOutOfBoundsError: string = this.$i18n.translate('m-timepicker:out-of-bounds-error', { min: this.min, max: this.max }, undefined, undefined, undefined, FormatMode.Sprintf);
 
     private hours: number[] = [];
     private minutes: number[] = [];
     private internalTime: string = '';
     private internalHour: number = NaN;
     private internalMinute: number = NaN;
+    private internalFilteredMinutes: number[] = [];
+    private internalFilteredHours: number[] = [];
     private isMousedown: boolean = false;
     private scrollTimeout;
 
@@ -56,48 +69,68 @@ export class MTimepicker extends ModulVue {
 
     private mounted(): void {
         // create hours
-        for (let i: number = 0; i < 24; i++) {
+        for (let i: number = -1; i < MAXHOURS; i++) {
             this.hours.push(i + 1);
         }
 
         // create minutes
-        for (let i: number = 0; i < 59; i++) {
+        for (let i: number = -1; i < MAXMINUTES; i++) {
             this.minutes.push(i + 1);
         }
 
-        // affect inital model
-        if (this.as<InputManagement>().value) {
-            this.initTime();
+        this.internalFilteredMinutes = this.minutes;
+    }
+
+    private timeStringToNumber(value: string): TimeObject {
+        let timeString: string[] = value.split(':');
+        let timeObject: TimeObject = {
+            hour: parseInt(timeString[0], 10),
+            minute: parseInt(timeString[1], 10)
+        };
+
+        return timeObject;
+    }
+
+    private validateTime(value: string): boolean {
+        if (this.validateTimeString(value)) {
+            if (this.validateTimeRange(value)) {
+                this.internalTimeErrorMessage = '';
+                return true;
+            } else {
+                this.internalTimeErrorMessage = this.i18nOutOfBoundsError;
+                return false;
+            }
+        } else {
+            this.internalTimeErrorMessage = this.i18nErrorFormat;
+            return false;
         }
     }
 
-    private initTime(): void {
-        this.internalTime = this.as<InputManagement>().value;
-        this.dispatchTime(this.as<InputManagement>().value);
+    private validateTimeString(value: string): boolean {
+        const regex: RegExp = /(\d\d):(\d\d)/g;
+        return value.match(regex) ? true : false;
     }
 
-    private dispatchTime(value: string): void {
-        let time: string[] = value.split(':');
-        this.internalHour = parseInt(time[0], 10);
-        this.internalMinute = parseInt(time[1], 10);
+    private validateTimeRange(value: string): boolean {
+        return this.validateHour(value) && this.validateMinute(value);
     }
 
-    private selectHour(hour: number): void {
-        this.internalHour = hour;
+    private validateHour(value: string): boolean {
+        return this.timeStringToNumber(value).hour >= this.timeStringToNumber(this.min).hour &&
+            this.timeStringToNumber(value).hour <= this.timeStringToNumber(this.max).hour;
     }
 
-    private selectMinute(minute: number): void {
-        this.internalMinute = minute;
-        this.emitTime();
-        this.open = false;
+    private validateMinute(value: string): boolean {
+        if (this.timeStringToNumber(value).hour === this.timeStringToNumber(this.min).hour) {
+            return this.timeStringToNumber(value).minute >= this.timeStringToNumber(this.min).minute;
+        } else if (this.timeStringToNumber(value).hour === this.timeStringToNumber(this.max).hour) {
+            return this.timeStringToNumber(value).minute <= this.timeStringToNumber(this.max).minute;
+        } else {
+            return true;
+        }
     }
 
-    private emitTime(): void {
-        this.internalTime = this.formatTime();
-        this.$emit('input', this.internalTime);
-    }
-
-    private formatTime(): string {
+    private formatTimeString(): string {
         return this.formatNumber(this.internalHour) + ':' + this.formatNumber(this.internalMinute);
     }
 
@@ -105,14 +138,128 @@ export class MTimepicker extends ModulVue {
         return value < 10 ? '0' + value : value.toString();
     }
 
+    private scrollToSelection(container: HTMLElement): void {
+        let selectedElement: Element | null = container.querySelector('.m--is-selected');
+        setTimeout(function(): void {
+            if (selectedElement) {
+                container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
+            }
+        }, 10);
+    }
+
+    private positionScroll(el: Element): void {
+        el.scrollTop = Math.round(el.scrollTop / 44) * 44;
+    }
+
+    ///////////////////////////////////////
+
+    @Watch('value')
+    private updateInternalTime(value: string): void {
+        this.internalTime = value;
+        if (this.validateTime(value)) {
+            this.updatePopupTime(value);
+        } else {
+            this.resetPopupTime();
+        }
+    }
+
+    private updatePopupTime(value: string): void {
+        this.internalHour = this.timeStringToNumber(value).hour;
+        this.internalMinute = this.timeStringToNumber(value).minute;
+    }
+
+    private resetPopupTime(): void {
+        this.internalHour = NaN;
+        this.internalMinute = NaN;
+    }
+
+    private emitTime(): void {
+        this.internalTime = this.formatTimeString();
+
+        if (this.validateTime(this.internalTime)) {
+            this.$emit('input', this.internalTime);
+        } else {
+            this.resetPopupTime();
+        }
+    }
+
+    ///////////////////////////////////////
+
+    private onScroll(event: Event): void {
+        if (!this.isMousedown) {
+            clearTimeout(this.scrollTimeout);
+            this.scrollTimeout = setTimeout(() => {
+
+                // tslint:disable-next-line: deprecation
+                if (event.srcElement) {
+                    // tslint:disable-next-line: deprecation
+                    this.positionScroll(event.srcElement);
+                }
+            }, 300);
+        }
+    }
+
+    private onSelectHour(hour: number): void {
+        this.internalHour = hour;
+
+        // change available minutes in function of min/max value
+        if (hour === this.timeStringToNumber(this.min).hour) {
+            this.internalFilteredMinutes = this.minutes.filter(x => (x >= this.timeStringToNumber(this.min).minute));
+        } else if (hour === this.timeStringToNumber(this.max).hour) {
+            this.internalFilteredMinutes = this.minutes.filter(x => (x <= this.timeStringToNumber(this.max).minute));
+        } else {
+            this.internalFilteredMinutes = this.minutes;
+        }
+    }
+
+    private onSelectMinute(minute: number): void {
+        this.internalMinute = minute;
+        if (this.internalHour) {
+            this.emitTime();
+            this.open = false;
+        }
+    }
+
+    private onMousedown(event: Event): void {
+        this.isMousedown = true;
+    }
+
+    private onMouseup(event: Event): void {
+        this.isMousedown = false;
+        // tslint:disable-next-line: deprecation
+        if (event.srcElement) {
+            // tslint:disable-next-line: deprecation
+            this.positionScroll(event.srcElement);
+        }
+    }
+
+    private onOk(): void {
+        if (this.internalHour && this.internalMinute) {
+            this.emitTime();
+            this.open = false;
+        }
+    }
+
+    private onClose(): void {
+        if (!this.internalHour || !this.internalMinute) {
+            this.resetPopupTime();
+        }
+    }
+
+    ///////////////////////////////////////
+
     public get currentTime(): string {
         return this.internalTime;
     }
 
     public set currentTime(value: string) {
         this.internalTime = value;
-        this.dispatchTime(value);
-        this.$emit('input', value);
+        if (this.validateTime(value)) {
+            this.updatePopupTime(value);
+            this.$emit('input', value);
+        } else {
+            this.resetPopupTime();
+        }
     }
 
     public get currentHour(): number {
@@ -123,12 +270,16 @@ export class MTimepicker extends ModulVue {
         return this.internalMinute;
     }
 
-    private get currentStep(): number {
-        return this.step * 60;
+    public get currentfilteredHours(): number[] {
+        return this.internalFilteredHours = this.hours.filter(x => (x >= this.timeStringToNumber(this.min).hour) && (x <= this.timeStringToNumber(this.max).hour));
     }
 
-    private get filteredMinutes(): number[] {
-        return this.minutes.filter(x => x % this.step === 0);
+    public get currentFilteredMinutes(): number[] {
+        return this.internalFilteredMinutes.filter(x => (x % this.step === 0));
+    }
+
+    public get currentStep(): number {
+        return this.step * MINUTESECONDS;
     }
 
     private get timeError(): boolean {
@@ -147,61 +298,13 @@ export class MTimepicker extends ModulVue {
         this.internalOpen = open;
         setTimeout(() => {
             if (this.internalOpen) {
-                // let inputEl: any = this.$refs.input;
-                // inputEl.focus();
-                // inputEl.setSelectionRange(0, this.formattedTime.length);
-                // this.scrollToSelection(this.$refs.hours as HTMLElement);
-                // this.scrollToSelection(this.$refs.minutes as HTMLElement);
+                this.scrollToSelection(this.$refs.hours as HTMLElement);
+                this.scrollToSelection(this.$refs.minutes as HTMLElement);
                 this.$emit('open');
             } else {
                 this.$emit('close');
             }
         });
-    }
-
-    private scrollToSelection(container: HTMLElement): void {
-        let selectedElement: Element | null = container.querySelector('.m--is-selected');
-        setTimeout(function(): void {
-            if (selectedElement) {
-                container.scrollTop = selectedElement['offsetTop'] - container.clientHeight / 2 + selectedElement.clientHeight / 2;
-            }
-        }, 10);
-    }
-
-    private onScroll(event: Event): void {
-        if (!this.isMousedown) {
-            clearTimeout(this.scrollTimeout);
-            this.scrollTimeout = setTimeout(() => {
-
-                // tslint:disable-next-line: deprecation
-                if (event.srcElement) {
-                    // tslint:disable-next-line: deprecation
-                    this.positionScroll(event.srcElement);
-                }
-            }, 300);
-        }
-    }
-
-    private onMousedown(event: Event): void {
-        this.isMousedown = true;
-    }
-
-    private onMouseup(event: Event): void {
-        this.isMousedown = false;
-        // tslint:disable-next-line: deprecation
-        if (event.srcElement) {
-            // tslint:disable-next-line: deprecation
-            this.positionScroll(event.srcElement);
-        }
-    }
-
-    private onOk(): void {
-        this.emitTime();
-        this.open = false;
-    }
-
-    private positionScroll(el: Element): void {
-        el.scrollTop = Math.round(el.scrollTop / 44) * 44;
     }
 
     private get ariaControls(): string {

@@ -3,9 +3,7 @@
                'm--is-readonly': isReadonly,
                'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
-    <m-input-style :label="label"
-                   :label-for="id"
-                   :disabled="isDisabled"
+    <m-input-style :disabled="isDisabled"
                    :readonly="isReadonly"
                    :waiting="isWaiting"
                    :focus="open"
@@ -15,7 +13,7 @@
                    v-m-popup:popup>
         <input v-model="currentTime"
                :id="id"
-               type="time"
+               type="text"
                :step="currentStep"
                :min="min"
                :max="max"
@@ -25,7 +23,7 @@
                :aria-expanded="open"
                :disabled="isDisabled || isWaiting"
                :readonly="isReadonly"
-               :placeholder="placeholder"
+               :placeholder="i18nPlaceHolder"
                @click.stop />
         <m-icon-button slot="right-content"
                        icon-name="m-svg__clock"
@@ -50,7 +48,8 @@
              :open.sync="open"
              :disabled="!active"
              :padding="false"
-             :focus-management="isMqMaxS">
+             :focus-management="isMqMaxS"
+             @close="onClose">
         <div slot="header"
              class="m-timepicker__header">
             <m-i18n k="m-timepicker:hours"
@@ -68,14 +67,14 @@
                 @mousedown="onMousedown"
                 @mouseup="onMouseup"
                 @scroll="onScroll">
-                <li v-for="(h, hoursIndex) in hours"
+                <li v-for="(h, hoursIndex) in currentfilteredHours"
                     :key="hoursIndex"
                     :id="h"
                     class="m-timepicker__body__hours-item"
                     :aria-selected="h == currentHour"
                     role="option"
-                    @click="selectHour(h)"
-                    @keyup.enter="selectHour(h)">
+                    @click="onSelectHour(h)"
+                    @keyup.enter="onSelectHour(h)">
                     <span class="m-timepicker__hours-number"
                           :class="{'m--is-selected': h == currentHour}"
                           tabindex="0">{{formatNumber(h)}}</span>
@@ -87,14 +86,14 @@
                 @mousedown="onMousedown"
                 @mouseup="onMouseup"
                 @scroll="onScroll">
-                <li v-for="(m, minutesIndex) in filteredMinutes"
+                <li v-for="(m, minutesIndex) in currentFilteredMinutes"
                     :key="minutesIndex"
                     :id="minutesIndex"
                     class="m-timepicker__body__minutes-item"
                     :aria-selected="m == currentMinute"
                     role="option"
-                    @click="selectMinute(m)"
-                    @keyup.enter="selectMinute(m)">
+                    @click="onSelectMinute(m)"
+                    @keyup.enter="onSelectMinute(m)">
                     <span class="m-timepicker__minutes-number"
                           :class="{'m--is-selected': m == currentMinute}"
                           tabindex="0">{{formatNumber(m)}}</span>
