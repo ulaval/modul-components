@@ -37,6 +37,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}`, module)
     .add('disabled', () => ({
         template: '<m-radio :disabled="true">A Radio</m-radio>'
     }))
+    .add('readonly', () => ({
+        template: '<m-radio :readonly="true">A Radio</m-radio>'
+    }))
     .add('radioPosition=right', () => ({
         template: '<m-radio radioPosition="right">A Radio</m-radio>'
     }))
@@ -70,6 +73,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}/radioPosition=right`
     }))
     .add('disabled', () => ({
         template: '<m-radio :disabled="true" radioPosition="right">A Radio</m-radio>'
+    }))
+    .add('readonly', () => ({
+        template: '<m-radio :readonly="true" radioPosition="right">A Radio</m-radio>'
     }))
     .add('radioVerticalAlign=center', () => ({
         template: '<m-radio radioPosition="right" radioVerticalAlign="center">A Radio</m-radio>'
