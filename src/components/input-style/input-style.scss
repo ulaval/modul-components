@@ -314,28 +314,30 @@ $m-input-style-base-height: $m-line-height + em;
         }
     }
 
-    &.m--is-tag-h1 {
-        @include m-h1-font-style();
-    }
+    &.m--is-tag- {
+        &h1 {
+            @include m-h1-font-style();
+        }
 
-    &.m--is-tag-h2 {
-        @include m-h2-font-style();
-    }
+        &h2 {
+            @include m-h2-font-style();
+        }
 
-    &.m--is-tag-h3 {
-        @include m-h3-font-style();
-    }
+        &h3 {
+            @include m-h3-font-style();
+        }
 
-    &.m--is-tag-h4 {
-        @include m-h4-font-style();
-    }
+        &h4 {
+            @include m-h4-font-style();
+        }
 
-    &.m--is-tag-h5 {
-        @include m-h5-font-style();
-    }
+        &h5 {
+            @include m-h5-font-style();
+        }
 
-    &.m--is-tag-h6 {
-        @include m-h6-font-style();
+        &h6 {
+            @include m-h6-font-style();
+        }
     }
 }
 
