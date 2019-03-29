@@ -92,17 +92,22 @@ export class MTimepicker extends ModulVue {
     }
 
     private validateTime(value: string): boolean {
-        if (this.validateTimeString(value)) {
-            if (this.validateTimeRange(value)) {
-                this.internalTimeErrorMessage = '';
-                return true;
+        if (value.length !== 0) {
+            if (this.validateTimeString(value)) {
+                if (this.validateTimeRange(value)) {
+                    this.internalTimeErrorMessage = '';
+                    return true;
+                } else {
+                    this.internalTimeErrorMessage = this.i18nOutOfBoundsError;
+                    return false;
+                }
             } else {
-                this.internalTimeErrorMessage = this.i18nOutOfBoundsError;
+                this.internalTimeErrorMessage = this.i18nErrorFormat;
                 return false;
             }
         } else {
-            this.internalTimeErrorMessage = this.i18nErrorFormat;
-            return false;
+            this.internalTimeErrorMessage = '';
+            return true;
         }
     }
 
@@ -214,7 +219,7 @@ export class MTimepicker extends ModulVue {
 
     private onSelectMinute(minute: number): void {
         this.internalMinute = minute;
-        if (this.internalHour) {
+        if (!isNaN(this.internalHour)) {
             this.emitTime();
             this.open = false;
         }
@@ -234,14 +239,14 @@ export class MTimepicker extends ModulVue {
     }
 
     private onOk(): void {
-        if (this.internalHour && this.internalMinute) {
+        if (!isNaN(this.internalHour) && !isNaN(this.internalMinute)) {
             this.emitTime();
             this.open = false;
         }
     }
 
     private onClose(): void {
-        if (!this.internalHour || !this.internalMinute) {
+        if (isNaN(this.internalHour) || isNaN(this.internalMinute)) {
             this.resetPopupTime();
         }
     }
