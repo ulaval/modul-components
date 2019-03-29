@@ -2,7 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
-import { componentshierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { BUTTON_NAME } from '../component-names';
 import ButtonPlugin from './button';
 Vue.use(ButtonPlugin);
@@ -13,7 +13,7 @@ declare module '@storybook/addon-knobs' {
 }
 
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -52,7 +52,7 @@ storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}`, module)
         template: '<m-button type="reset">A Button</m-button>'
     }));
 
-storiesOf(`${componentshierarchyRootSeparator}${BUTTON_NAME}/skin=secondary`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/skin=secondary`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-button skin="secondary">A Button</m-button>'

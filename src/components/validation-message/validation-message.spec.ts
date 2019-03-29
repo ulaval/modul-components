@@ -1,9 +1,9 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
 import { renderComponent } from '../../../tests/helpers/render';
 import ValidationMessagePlugin, { MValidationMessage } from '../validation-message/validation-message';
+
 
 describe('MValidationMessage', () => {
     let localVue: VueConstructor<Vue>;
@@ -122,7 +122,7 @@ describe('MValidationMessage', () => {
             }
         });
 
-        valMsg.find('div div').trigger('click');
+        valMsg.trigger('click');
 
         expect(valMsg.emitted('click')).toBeTruthy();
     });

@@ -1,0 +1,23 @@
+<div>
+    <h2 class="m-u--h4 m-u--no-margin">Service confirm</h2>
+    <br />
+    <m-button @click="onAlertService()">Trigger a confirm dialog with the $dialog service</m-button>
+    <br />
+
+    <h2 class="m-u--h4 m-u--no-margin">Service alert</h2>
+    <br />
+    <m-button @click="onConfirmService()">Trigger a alert dialog with the $dialog service</m-button>
+    <br />
+
+    <h2 class="m-u--h4 m-u--no-margin">Service custom dialog</h2>
+    <br />
+    <m-button @click="onCustomConfirmService()">Trigger a custom dialog with the $dialog service</m-button>
+    <br />
+    <m-dialog title="Dialog Type #3"
+              type="confirmation"
+              ref="customDialog">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, delectus, quisquam nobis recusandae, vel
+        doloribus iure sapiente debitis nisi pariatur impedit asperiores magni rerum ratione qui voluptatum dolorum vero
+        id!
+    </m-dialog>
+</div>

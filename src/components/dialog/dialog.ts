@@ -2,12 +2,13 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
+import DialogServicePlugin from '../../utils/dialog/dialog-service';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { DIALOG_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
-import LinkPlugin from '../link/link';
 import IconPlugin from '../icon/icon';
+import LinkPlugin from '../link/link';
 import WithRender from './dialog.html?style=./dialog.scss';
 
 export enum MDialogWidth {
@@ -72,6 +73,12 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
     public handlesFocus(): boolean {
         return true;
     }
+
+    public openDialog(): void {
+        this.as<PortalMixin>().propOpen = true;
+    }
+
+
 
     public doCustomPropOpen(value: boolean): boolean {
         return false;
@@ -177,6 +184,7 @@ const DialogPlugin: PluginObject<any> = {
         v.use(IconPlugin);
         v.use(I18nPlugin);
         v.use(LinkPlugin);
+        v.use(DialogServicePlugin);
         v.component(DIALOG_NAME, MDialog);
     }
 };

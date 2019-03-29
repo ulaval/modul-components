@@ -2,52 +2,42 @@
 
 exports[`MValidationMessage should render correctly when it is in error 1`] = `
 <div class="m-validation-message">
-  <div class="m-validation-message__wrap">
-    <p class="m-validation-message__error"><svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
-        <title>Error</title>
-        <use aria-hidden="true"></use>
-      </svg> <span class="m-validation-message__text">error</span></p>
-  </div>
+  <p class="m-validation-message__error"><svg width="1em" height="1em" class="m-icon m-validation-message__icon">
+      <title>Error</title>
+      <use aria-hidden="true"></use>
+    </svg> <span class="m-validation-message__text">error</span></p>
 </div>
 `;
 
 exports[`MValidationMessage should render correctly when it is in error 2`] = `
 <div class="m-validation-message">
-  <div class="m-validation-message__wrap">
-    <p class="m-validation-message__error"><svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
-        <title>Error</title>
-        <use aria-hidden="true"></use>
-      </svg> <span class="m-validation-message__text">error</span></p>
-  </div>
+  <p class="m-validation-message__error"><svg width="1em" height="1em" class="m-icon m-validation-message__icon">
+      <title>Error</title>
+      <use aria-hidden="true"></use>
+    </svg> <span class="m-validation-message__text">error</span></p>
 </div>
 `;
 
 exports[`MValidationMessage should render correctly when it is valid 1`] = `
 <div class="m-validation-message">
-  <div class="m-validation-message__wrap">
-    <p class="m-validation-message__valid"><svg width="1em" height="1em" class="m-icon m-validation-message__valid__icon">
-        <title>Valid</title>
-        <use aria-hidden="true"></use>
-      </svg> <span class="m-validation-message__text">valid</span></p>
-  </div>
+  <p class="m-validation-message__valid"><svg width="1em" height="1em" class="m-icon m-validation-message__icon">
+      <title>Valid</title>
+      <use aria-hidden="true"></use>
+    </svg> <span class="m-validation-message__text">valid</span></p>
 </div>
 `;
 
 exports[`MValidationMessage should render error message even if there is a valid message 1`] = `
 <div class="m-validation-message">
-  <div class="m-validation-message__wrap">
-    <p class="m-validation-message__error"><svg width="1em" height="1em" class="m-icon m-validation-message__error__icon">
-        <title>Error</title>
-        <use aria-hidden="true"></use>
-      </svg> <span class="m-validation-message__text">error</span></p>
-  </div>
+  <p class="m-validation-message__error"><svg width="1em" height="1em" class="m-icon m-validation-message__icon">
+      <title>Error</title>
+      <use aria-hidden="true"></use>
+    </svg> <span class="m-validation-message__text">error</span></p>
 </div>
 `;
 
 exports[`MValidationMessage should render helper message when prop is set 1`] = `
 <div class="m-validation-message">
-  <div class="m-validation-message__wrap">
-    <p class="m-validation-message__helper">help</p>
-  </div>
+  <p class="m-validation-message__helper">help</p>
 </div>
 `;

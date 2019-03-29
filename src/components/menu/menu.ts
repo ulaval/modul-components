@@ -64,6 +64,9 @@ export class MMenu extends BaseMenu implements Menu {
     private internalItems: MMenuItem[] = [];
     private observer: MutationObserver;
 
+    public titleMenuOpen: string = this.$i18n.translate('m-menu:open');
+    public titleMenuClose: string = this.$i18n.translate('m-menu:close');
+
     @Watch('selected')
     public updateValue(value: string | undefined): void {
         this.model = value;
