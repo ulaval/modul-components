@@ -57,7 +57,7 @@ pipeline {
             steps {
                 sh 'npm ci'
                 sh 'npm run buildWebpack'
-                sh 'npm run unit -- --single-run --junitReport'
+                sh 'npm run test'
             }
         }
     }

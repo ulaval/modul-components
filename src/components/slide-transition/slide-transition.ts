@@ -43,10 +43,12 @@ export class MSlideTransition extends ModulVue {
 
     private transitionAfterEnter(): void {
         this.$el.style.removeProperty('height');
+        this.$el.style.removeProperty('overflow');
     }
 
     private transitionBeforeLeave(el: HTMLElement): void {
         this.$el.style.height = this.getHeightEl(el) + 'px';
+        this.$el.style.overflow = 'hidden';
     }
 
     @Emit('afterLeave')

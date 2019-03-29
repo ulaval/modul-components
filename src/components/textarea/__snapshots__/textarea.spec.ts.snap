@@ -9,7 +9,7 @@ exports[`MTextArea max-length should render correctly state when text length is 
     </div>
   </div>
   <div class="m-textarea__validation">
-    <div class="m-validation-message m-textarea__validation__message"></div>
+    <div class="m-validation-message m-textarea__validation__message"> </div>
   </div>
 </div>
 `;
@@ -23,7 +23,7 @@ exports[`MTextArea max-length should render invalid state when text length is gr
     </div>
   </div>
   <div class="m-textarea__validation">
-    <div class="m-validation-message m-textarea__validation__message"></div>
+    <div class="m-validation-message m-textarea__validation__message"> </div>
   </div>
 </div>
 `;
@@ -37,7 +37,7 @@ exports[`MTextArea should render correctly 1`] = `
     </div>
   </div>
   <div class="m-textarea__validation">
-    <div class="m-validation-message m-textarea__validation__message"></div>
+    <div class="m-validation-message m-textarea__validation__message"> </div>
   </div>
 </div>
 `;

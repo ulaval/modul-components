@@ -94,5 +94,13 @@ describe('form-field', () => {
             expect(spy1).toHaveBeenCalled();
             expect(spy2).toHaveBeenCalled();
         });
+
+        it(`it should touch the field on blur`, () => {
+            const spy: jest.SpyInstance = jest.spyOn(mockFormField, 'touch');
+
+            wrapper.find({ ref: 'field' }).element.blur();
+
+            expect(spy).toHaveBeenCalled();
+        });
     });
 });

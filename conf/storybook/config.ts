@@ -3,7 +3,7 @@ import { addParameters, configure } from '@storybook/vue';
 import Vue from 'vue';
 import { loadStories } from './all.storybook';
 import { ModulPlugin } from './modul';
-import modulTheme from './modulTheme';
+import modulTheme from './modul-theme';
 import { getSandboxPlugin } from './sandbox-loader';
 import { loadSandboxStories } from './sandboxes.storybook';
 import { hierarchyRootSeparatorRegex, hierarchySeparatorRegex } from './utils';
