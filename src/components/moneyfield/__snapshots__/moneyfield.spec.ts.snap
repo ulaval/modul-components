@@ -12,7 +12,7 @@ exports[`MTextfield should render correctly 1`] = `
       </div>
     </div>
     <div class="m-integerfield__validation">
-      <div class="m-validation-message m-integerfield__validation__message"></div>
+      <div class="m-validation-message m-integerfield__validation__message"> </div>
     </div>
   </div>
 </div>

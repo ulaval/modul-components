@@ -9,7 +9,7 @@ exports[`MTextfield should render correctly 1`] = `
     </div>
   </div>
   <div class="m-textfield__validation">
-    <div class="m-validation-message m-textfield__validation__message"></div>
+    <div class="m-validation-message m-textfield__validation__message"> </div>
   </div>
 </div>
 `;
