@@ -5,39 +5,41 @@
             'm--is-disabled': propDisabled,
             'm--has-icon-left': iconPosition !== 'right',
             'm--has-icon-large': iconSize=='large' }]">
-    <div class="m-accordion__header"
+    <div :id="propId"
+         class="m-accordion__header"
          :class="{ 'm--has-padding': paddingHeader && padding }"
-         tabindex="0"
-         :id="propId"
-         role="tab"
          :aria-expanded="propOpen"
          :aria-controls="propId + '-controls'"
-         @keyup.self.enter="toggleAccordion"
          @click.prevent="toggleAccordion"
+         @keyup.self.enter="toggleAccordion"
+         tabindex="0"
+         role="tab"
          ref="accordionHeader">
         <div class="m-accordion__header__content">
             <slot name="header"></slot>
-            <m-i18n k="m-accordion:open"
+            <m-i18n v-if="!propOpen"
                     class="m-accordion__hidden"
-                    v-if="!propOpen"></m-i18n>
-            <m-i18n k="m-accordion:close"
+                    k="m-accordion:open"></m-i18n>
+            <m-i18n v-if="propOpen"
                     class="m-accordion__hidden"
-                    v-if="propOpen"></m-i18n>
+                    k="m-accordion:close"></m-i18n>
         </div>
         <m-plus class="m-accordion__header-icon"
                 :class="{ 'm--is-left': iconPosition !== 'right' }"
-                :open="propOpen"
-                :large="iconSize=='large'"
                 :border="hasIconBorder"
+                :large="iconSize=='large'"
+                :open="propOpen"
                 :skin="plusSkin"
+                :title-open="titleMenuOpen"
+                :title-close="titleMenuClose"
                 aria-hidden="true"></m-plus>
     </div>
     <m-accordion-transition :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 24 : 0">
-        <div class="m-accordion__body-wrap"
-             role="tabpanel"
+        <div v-if="propOpen"
              :id="propId + '-controls'"
+             class="m-accordion__body-wrap"
              :aria-labelledby="propId"
-             v-if="propOpen">
+             role="tabpanel">
             <div class="m-accordion__body"
                  :class="{ 'm--has-padding': paddingBody && padding }">
                 <slot></slot>
