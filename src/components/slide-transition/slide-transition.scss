@@ -1,9 +1,8 @@
-@import 'commons';
+@import "commons";
 
 .m-slide-transition {
     position: relative;
     transition: height $m-transition-duration--l ease;
-    overflow: hidden;
 
     .m--is-enter-active,
     .m--is-leave-active {
@@ -21,7 +20,7 @@
     }
 
     .m--is-enter-active {
-        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease $m-transition-duration--l;
+        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
     }
 
     .m--is-leave-active {
