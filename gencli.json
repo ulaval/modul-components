@@ -9,7 +9,7 @@
             "name": "component",
             "rootPath": "/src/components",
             "prefix": "m",
-            "files": [
+            "fileConfigs": [
                 {
                     "name": "*",
                     "template": "component-vue.txt"
