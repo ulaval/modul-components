@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Model, Prop, Watch } from 'vue-property-decorator';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
@@ -17,14 +17,19 @@ import ValidationMessagePlugin from '../validation-message/validation-message';
 import { InputManagement } from './../../mixins/input-management/input-management';
 import WithRender from './timepicker.html?style=./timepicker.scss';
 
-const MAXHOURS: number = 23;
-const MAXMINUTES: number = 59;
-const MINUTESECONDS: number = 60;
+const MAXIMUM_HOURS: number = 23;
+const MAXIMUM_MINUTES: number = 59;
+const MINUTE_SECONDS: number = 60;
 
 export interface TimeObject {
     hour: number;
     minute: number;
     seconde?: number;
+}
+
+function validateTimeString(value: string): boolean {
+    const regex: RegExp = /(\d\d):(\d\d)/g;
+    return value.match(regex) || !value.length ? true : false;
 }
 
 @WithRender
@@ -39,6 +44,13 @@ export interface TimeObject {
 })
 export class MTimepicker extends ModulVue {
 
+    @Prop({
+        validator(value: string): boolean {
+            return validateTimeString(value);
+        }
+    })
+    @Model('input')
+    public value: string;
     @Prop({ default: '00:00' })
     public min: string;
     @Prop({ default: '23:59' })
@@ -69,12 +81,12 @@ export class MTimepicker extends ModulVue {
 
     private mounted(): void {
         // create hours
-        for (let i: number = -1; i < MAXHOURS; i++) {
+        for (let i: number = -1; i < MAXIMUM_HOURS; i++) {
             this.hours.push(i + 1);
         }
 
         // create minutes
-        for (let i: number = -1; i < MAXMINUTES; i++) {
+        for (let i: number = -1; i < MAXIMUM_MINUTES; i++) {
             this.minutes.push(i + 1);
         }
 
@@ -92,32 +104,24 @@ export class MTimepicker extends ModulVue {
     }
 
     private validateTime(value: string): boolean {
-        if (value.length !== 0) {
-            if (this.validateTimeString(value)) {
-                if (this.validateTimeRange(value)) {
-                    this.internalTimeErrorMessage = '';
-                    return true;
-                } else {
-                    this.internalTimeErrorMessage = this.i18nOutOfBoundsError;
-                    return false;
-                }
+        if (validateTimeString(value)) {
+            this.internalTimeErrorMessage = '';
+
+            if (this.validateTimeRange(value)) {
+                this.internalTimeErrorMessage = '';
+                return true;
             } else {
-                this.internalTimeErrorMessage = this.i18nErrorFormat;
+                this.internalTimeErrorMessage = this.i18nOutOfBoundsError;
                 return false;
             }
         } else {
-            this.internalTimeErrorMessage = '';
-            return true;
+            this.internalTimeErrorMessage = this.i18nErrorFormat;
+            return false;
         }
     }
 
-    private validateTimeString(value: string): boolean {
-        const regex: RegExp = /(\d\d):(\d\d)/g;
-        return value.match(regex) ? true : false;
-    }
-
     private validateTimeRange(value: string): boolean {
-        return this.validateHour(value) && this.validateMinute(value);
+        return !value.length || (this.validateHour(value) && this.validateMinute(value));
     }
 
     private validateHour(value: string): boolean {
@@ -160,12 +164,7 @@ export class MTimepicker extends ModulVue {
 
     @Watch('value')
     private updateInternalTime(value: string): void {
-        this.internalTime = value;
-        if (this.validateTime(value)) {
-            this.updatePopupTime(value);
-        } else {
-            this.resetPopupTime();
-        }
+        this.currentTime = value;
     }
 
     private updatePopupTime(value: string): void {
@@ -176,16 +175,6 @@ export class MTimepicker extends ModulVue {
     private resetPopupTime(): void {
         this.internalHour = NaN;
         this.internalMinute = NaN;
-    }
-
-    private emitTime(): void {
-        this.internalTime = this.formatTimeString();
-
-        if (this.validateTime(this.internalTime)) {
-            this.$emit('input', this.internalTime);
-        } else {
-            this.resetPopupTime();
-        }
     }
 
     ///////////////////////////////////////
@@ -220,7 +209,7 @@ export class MTimepicker extends ModulVue {
     private onSelectMinute(minute: number): void {
         this.internalMinute = minute;
         if (!isNaN(this.internalHour)) {
-            this.emitTime();
+            this.currentTime = this.formatTimeString();
             this.open = false;
         }
     }
@@ -240,7 +229,7 @@ export class MTimepicker extends ModulVue {
 
     private onOk(): void {
         if (!isNaN(this.internalHour) && !isNaN(this.internalMinute)) {
-            this.emitTime();
+            this.currentTime = this.formatTimeString();
             this.open = false;
         }
     }
@@ -258,10 +247,16 @@ export class MTimepicker extends ModulVue {
     }
 
     public set currentTime(value: string) {
+        let oldTime: string = this.internalTime;
         this.internalTime = value;
+
         if (this.validateTime(value)) {
             this.updatePopupTime(value);
-            this.$emit('input', value);
+
+            if (value !== oldTime) {
+                this.$emit('input', value);
+            }
+
         } else {
             this.resetPopupTime();
         }
@@ -284,7 +279,7 @@ export class MTimepicker extends ModulVue {
     }
 
     public get currentStep(): number {
-        return this.step * MINUTESECONDS;
+        return this.step * MINUTE_SECONDS;
     }
 
     private get timeError(): boolean {

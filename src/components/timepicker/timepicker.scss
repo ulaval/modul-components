@@ -1,5 +1,6 @@
 @import 'commons';
 $m-timepicker--color-select: $m-color--interactive !default;
+$m-timepicker--height-multiplier: 5;
 
 .m-timepicker {
     display: inline-flex;
@@ -46,11 +47,11 @@ $m-timepicker--color-select: $m-color--interactive !default;
         position: relative;
         display: flex;
         width: 100%;
-        height: $m-touch-size * 5;
+        height: $m-touch-size * $m-timepicker--height-multiplier;
 
         @media (min-width: #{$m-mq--min--s}) {
             width: 210px;
-            height: $m-touch-size * 5;
+            height: $m-touch-size * $m-timepicker--height-multiplier;
         }
 
         &__hours,
