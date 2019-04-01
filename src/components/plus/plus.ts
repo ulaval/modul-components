@@ -17,6 +17,12 @@ export enum MPlusSkin {
 export class MPlus extends ModulVue {
 
     @Prop()
+    public titleOpen: string;
+
+    @Prop()
+    public titleClose: string;
+
+    @Prop()
     public open: boolean;
 
     @Prop()
@@ -36,6 +42,10 @@ export class MPlus extends ModulVue {
 
     @Prop()
     public disabled: boolean;
+
+    public get title(): string {
+        return this.open ? this.titleClose : this.titleOpen;
+    }
 
     private onClick(event: Event): void {
         if (!this.disabled) {

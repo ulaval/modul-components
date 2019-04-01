@@ -13,6 +13,7 @@ install:
 
 script:
   - npm run clean
+  - npm run tslint:ci
   - npm run buildWebpack
   - npm run test
 

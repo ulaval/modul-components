@@ -7,24 +7,17 @@ $m-validation-message--color-helper: $m-color--text-light !default;
 $m-validation-message--margin: $m-padding--xs !default;
 
 .m-validation-message {
+    display: flex;
+    flex-direction: column;
     line-height: 1.2;
 
-    &__wrap {
-        display: flex;
-        flex-direction: column;
-
-        &.m-accordion-enter,
-        &.m-accordion-leave-to {
-            p {
-                opacity: 0;
-            }
-        }
-    }
-
-    p {
-        transition: opacity $m-transition-duration ease;
-        margin: 0;
+    &__icon {
+        display: table-cell;
+        position: relative;
+        top: 1px; // Magic number
         font-size: $m-font-size--s;
+        margin-right: $m-padding--xs;
+        min-width: $m-font-size--s;
     }
 
     &__error,
@@ -34,15 +27,6 @@ $m-validation-message--margin: $m-padding--xs !default;
 
         ~ .m-validation-message__helper {
             margin-top: 2px; // Magic number
-        }
-
-        &__icon {
-            display: table-cell;
-            position: relative;
-            top: 1px; // Magic number
-            font-size: $m-font-size--s;
-            margin-right: $m-padding--xs;
-            min-width: $m-font-size--s;
         }
     }
 
@@ -62,5 +46,11 @@ $m-validation-message--margin: $m-padding--xs !default;
         position: relative;
         top: 2px; // Magic number: align icon with text
         flex: 1 1 auto;
+    }
+
+    p {
+        transition: opacity $m-transition-duration ease;
+        margin: 0;
+        font-size: $m-font-size--s;
     }
 }
