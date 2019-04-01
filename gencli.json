@@ -7,7 +7,7 @@
     "entityConfigs": [
         {
             "name": "component",
-            "rootPath": "/src/components",
+            "path": "/src/components",
             "prefix": "m",
             "fileConfigs": [
                 {
@@ -44,7 +44,7 @@
         },
         {
             "name": "directive",
-            "rootPath": "/src/directives",
+            "path": "/src/directives",
             "files": [
                 {
                     "name": "*",
