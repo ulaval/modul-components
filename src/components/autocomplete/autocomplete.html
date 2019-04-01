@@ -20,6 +20,7 @@
     <m-dropdown-item v-for="i in items"
                      :key="i.value"
                      :value="i.value"
+                     :label="i.label"
                      :non-filterable="true">
         <slot :item="i">{{ i.label }}</slot>
     </m-dropdown-item>
