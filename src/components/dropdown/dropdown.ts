@@ -60,6 +60,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public includeFilterableStatusItems: boolean;
     @Prop({ default: false })
     public clearInvalidSelectionOnClose: boolean;
+    @Prop({ default: true })
+    public clearModelOnSelectedText: boolean;
 
     public $refs: {
         popup: MPopup;
@@ -274,8 +276,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private set selectedText(value: string) {
         this.dirty = true;
-        this.$emit('change', '');
-        this.as<InputPopup>().internalValue = value;
+        if (this.clearModelOnSelectedText) {
+            this.$emit('change', '');
+            this.as<InputPopup>().internalValue = value;
+        }
         this.internalFilter = value;
         let parsedQuery: string = normalizeString(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
         this.internalFilterRegExp = new RegExp(parsedQuery, 'i');
