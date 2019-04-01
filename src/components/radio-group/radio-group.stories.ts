@@ -177,3 +177,51 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/radiosPosition
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly/readonly=false`, module)
+    .addDecorator(withA11y)
+    .add('all childrens readonly=false', () => ({
+        template: `<m-radio-group :readonly="false">
+                        <m-radio :readonly="false">Radio Option 1</m-radio>
+                        <m-radio :readonly="false">Radio Option 2</m-radio>
+                        <m-radio :readonly="false">Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('all childrens readonly=true', () => ({
+        template: `<m-radio-group :readonly="true">
+                        <m-radio :readonly="true">Radio Option 1</m-radio>
+                        <m-radio :readonly="true">Radio Option 2</m-radio>
+                        <m-radio :readonly="true">Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('all childrens readonly=mixed', () => ({
+        template: `<m-radio-group :readonly="true">
+                        <m-radio :readonly="false">Radio Option 1</m-radio>
+                        <m-radio :readonly="true">Radio Option 2</m-radio>
+                        <m-radio :readonly="false">Radio Option 3</m-radio>
+    </m-radio-group>`
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly/readonly=true`, module)
+    .addDecorator(withA11y)
+    .add('readonly=false', () => ({
+        template: `<m-radio-group :readonly="true">
+                        <m-radio :readonly="false">Radio Option 1</m-radio>
+                        <m-radio :readonly="false">Radio Option 2</m-radio>
+                        <m-radio :readonly="false">Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('all childrens readonly=true', () => ({
+        template: `<m-radio-group :readonly="true">
+                        <m-radio :readonly="true">Radio Option 1</m-radio>
+                        <m-radio :readonly="true">Radio Option 2</m-radio>
+                        <m-radio :readonly="true">Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('all childrens readonly=mixed', () => ({
+        template: `<m-radio-group :readonly="true">
+                        <m-radio :readonly="true">Radio Option 1</m-radio>
+                        <m-radio :readonly="false">Radio Option 2</m-radio>
+                        <m-radio :readonly="true">Radio Option 3</m-radio>
+    </m-radio-group>`
+    }));
