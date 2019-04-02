@@ -7,8 +7,8 @@ declare module 'vue/types/vue' {
 }
 
 export enum ScrollToDuration {
-    Regular = 'regular',
     Long = 'long',
+    Regular = 'regular',
     Fast = 'fast',
     Instant = 'instant'
 }
