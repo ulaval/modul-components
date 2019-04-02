@@ -273,3 +273,4 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled/disab
                         <m-radio :disabled="true">Radio Option 3</m-radio>
     </m-radio-group>`
     }));
+
