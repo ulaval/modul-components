@@ -9,6 +9,7 @@ declare module 'vue/types/vue' {
 export enum ScrollToDuration {
     Regular = 'regular',
     Long = 'long',
+    Fast = 'fast',
     Instant = 'instant'
 }
 
@@ -222,6 +223,8 @@ export class ScrollTo {
                 return 1000;
             case ScrollToDuration.Regular:
                 return 600;
+            case ScrollToDuration.Fast:
+                return 400;
             case ScrollToDuration.Instant:
                 return 0;
             default: throw Error('scrollToUtil: Unknown scroll duration.');
