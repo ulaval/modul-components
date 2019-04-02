@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 24 17.58" style="width: 14px; height: 14px;" xml:space="preserve">
-    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-        <line class="cls-1" x1="23.5" y1="0.5" x2="0.5" y2="0.5"/>
-        <line class="cls-1" x1="10.02" y1="6.03" x2="0.5" y2="6.03"/>
-        <line class="cls-1" x1="10.02" y1="11.55" x2="0.5" y2="11.55"/>
-        <line class="cls-1" x1="23.5" y1="17.08" x2="0.5" y2="17.08"/>
-        <rect class="cls-1" x="13.45" y="4.14" width="10.05" height="9.2" transform="translate(36.95 17.49) rotate(-180)"/>
+	 viewBox="0 0 24 24" style="width: 14px; height: 14px;" xml:space="preserve">
+    <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2px">
+        <line x1="23" y1="4.07" x2="1" y2="4.07"/>
+        <line x1="10.1" y1="9.36" x2="1" y2="9.36"/>
+        <line x1="10.1" y1="14.64" x2="1" y2="14.64"/>
+        <line x1="23" y1="19.93" x2="1" y2="19.93"/>
+        <rect x="13.39" y="7.56" width="9.61" height="8.8" transform="translate(36.39 23.92) rotate(-180)"/>
     </g>
 </svg>
