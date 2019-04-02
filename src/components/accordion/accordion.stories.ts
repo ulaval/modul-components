@@ -19,52 +19,75 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}`, module)
     .add('default', () => ({
         props: {
             text: {
-                default: text('Text', 'An Accordion')
+                default: text('Text', 'Accordion')
             }
         },
-        template: '<m-accordion>{{ text }}</m-accordion>'
+        template: '<m-accordion> {{ text }}</m-accordion>'
     }))
-    .add('value', () => ({
-        template: '<m-accordion open="true">An Accordion</m-accordion>'
+    .add('id', () => ({
+        template: '<m-accordion id="id123"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('open', () => ({
+        template: '<m-accordion open="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('disabled', () => ({
-        template: '<m-accordion :disabled="true">An Accordion</m-accordion>'
+        template: '<m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('iconPosition=right', () => ({
-        template: '<m-accordion iconPosition="right">An Accordion</m-accordion>'
+        template: '<m-accordion iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('iconBorder=true', () => ({
-        template: '<m-accordion iconBorder="true">An Accordion</m-accordion>'
+        template: '<m-accordion iconBorder="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
-    .add('iconSize=large', () => ({
-        template: '<m-accordion iconSize="large">An Accordion</m-accordion>'
+    .add('iconSize=small', () => ({
+        template: '<m-accordion iconSize="small"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
-    .add('padding=true', () => ({
-        template: '<m-accordion padding="true">An Accordion</m-accordion>'
+
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/iconSize=small`, module)
+    .addDecorator(withA11y)
+    .add('iconBorder=true', () => ({
+        template: '<m-accordion iconBorder="true" iconSize="small"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }));
+
+
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/iconPosition=right`, module)
+    .addDecorator(withA11y)
+    .add('iconBorder=true', () => ({
+        template: '<m-accordion iconBorder="true" iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
+    .add('iconSize=small', () => ({
+        template: '<m-accordion iconSize="small" iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('iconSize=small && iconBorder=true', () => ({
+        template: '<m-accordion iconBorder="true" iconSize="small" iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }));
+
+
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/padding=true`, module)
+    .addDecorator(withA11y)
     .add('paddingHeader=true', () => ({
-        template: '<m-accordion paddingHeader="true">An Accordion</m-accordion>'
+        template: '<m-accordion :padding="true" :paddingHeader="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('paddingBody=true', () => ({
-        template: '<m-accordion paddingBody="true">An Accordion</m-accordion>'
+        template: '<m-accordion :padding="true" :paddingBody="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/skin`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
-        template: '<m-accordion skin="default">An Accordion</m-accordion>'
+        template: '<m-accordion skin="default"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('dark', () => ({
-        template: '<m-accordion skin="dark">An Accordion</m-accordion>'
+        template: '<m-accordion skin="dark"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('dark-b', () => ({
-        template: '<m-accordion skin="dark-b">An Accordion</m-accordion>'
+        template: '<m-accordion skin="dark-b"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('light', () => ({
-        template: '<m-accordion skin="light">An Accordion</m-accordion>'
+        template: '<m-accordion skin="light"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
     .add('plain', () => ({
-        template: '<m-accordion skin="plain">An Accordion</m-accordion>'
+        template: '<m-accordion skin="plain"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
 
