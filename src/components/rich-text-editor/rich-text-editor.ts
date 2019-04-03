@@ -1,3 +1,4 @@
+// tslint:disable:deprecation
 
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
@@ -15,14 +16,14 @@ import FileUploadPlugin from '../file-upload/file-upload';
 import InputStylePlugin from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import VueFroala from './adapter/vue-froala';
-import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
+import { MRichTextEditorStandardOptions } from './rich-text-editor-options';
 import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
 
 
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
 /**
- * @deprecated
+ * @deprecated use MRichTextEditorOption instead
  */
 export enum MRichTextEditorMode {
     STANDARD,
@@ -55,7 +56,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public value: string;
 
     /**
-     * @deprecated
+     * @deprecated use options instead
      */
     @Prop({
         default: MRichTextEditorMode.STANDARD,
@@ -102,14 +103,14 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             scrollableContainer: this.getScrollableContainer()
         };
 
-        return Object.assign(this.getDefaultOptions(), propOptions);
+        return Object.assign(this.getOptions(), propOptions);
     }
 
     public get froalaLicenseKey(): string {
         return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY) || '';
     }
 
-    public getDefaultOptions(): MRichTextEditorDefaultOptions {
+    public getOptions(): MRichTextEditorStandardOptions {
         const options: MRichTextEditorStandardOptions = new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
 
         if (this.options.includes(MRichTextEditorOption.IMAGE) || this.mode === MRichTextEditorMode.MEDIA) {

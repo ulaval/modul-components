@@ -2,7 +2,7 @@ import { mount, shallowMount, Wrapper } from '../../../node_modules/@vue/test-ut
 import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
-import { MRichTextEditor, MRichTextEditorMode } from './rich-text-editor';
+import { MRichTextEditor, MRichTextEditorOption } from './rich-text-editor';
 import { MRichTextEditorStandardOptions } from './rich-text-editor-options';
 import RichTextLicensePlugin from './rich-text-license-plugin';
 
@@ -41,14 +41,27 @@ describe('MRichTextEditor', () => {
         expect(richTextEditor.froalaLicenseKey).toEqual(froalaLicenseKey);
     });
 
-    describe('In standard Mode', () => {
+    describe('Without options', () => {
         beforeEach(() => {
             wrapper.setProps({
-                mode: MRichTextEditorMode.STANDARD
+                options: []
             });
         });
         it('default options are standard default options', () => {
-            expect(richTextEditor.getDefaultOptions()).toEqual(defaultOptions);
+            expect(richTextEditor.getOptions()).toEqual(defaultOptions);
+        });
+
+    });
+
+    describe('With image option', () => {
+        beforeEach(() => {
+            wrapper.setProps({
+                options: [MRichTextEditorOption.IMAGE]
+            });
+        });
+        it('default options are standard default options', () => {
+            expect(richTextEditor.getOptions().pluginsEnabled).toContain('image');
+            expect(richTextEditor.getOptions().toolbarButtons).toContain('insertImage');
         });
 
     });
