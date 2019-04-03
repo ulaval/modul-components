@@ -15,16 +15,25 @@ import FileUploadPlugin from '../file-upload/file-upload';
 import InputStylePlugin from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import VueFroala from './adapter/vue-froala';
-import { MRichTextEditorDefaultOptions, MRichTextEditorMediaOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
+import { MRichTextEditorDefaultOptions, MRichTextEditorStandardOptions } from './rich-text-editor-options';
 import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
 
 
 const RICH_TEXT_LICENSE_KEY: string = 'm-rich-text-license-key';
 
+/**
+ * @deprecated
+ */
 export enum MRichTextEditorMode {
     STANDARD,
     MEDIA
 }
+
+export enum MRichTextEditorOption {
+    IMAGE
+}
+
+export type MRichTextEditorOptions = MRichTextEditorOption[];
 
 @WithRender
 @Component({
@@ -45,6 +54,9 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop({ default: '' })
     public value: string;
 
+    /**
+     * @deprecated
+     */
     @Prop({
         default: MRichTextEditorMode.STANDARD,
         validator: value => {
@@ -53,6 +65,14 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         }
     })
     public mode: MRichTextEditorMode;
+
+    @Prop({
+        default: () => [],
+        validator: (options: MRichTextEditorOptions) => {
+            return options.filter(option => !MRichTextEditorOption[option]).length === 0;
+        }
+    })
+    public options: MRichTextEditorOptions;
 
     @Prop({ default: '0' })
     public toolbarStickyOffset: string;
@@ -90,13 +110,14 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     }
 
     public getDefaultOptions(): MRichTextEditorDefaultOptions {
-        if (this.mode === MRichTextEditorMode.STANDARD) {
-            return new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
-        } else if (this.mode === MRichTextEditorMode.MEDIA) {
-            return new MRichTextEditorMediaOptions(this.froalaLicenseKey, this.$i18n.currentLang());
+        const options: MRichTextEditorStandardOptions = new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
+
+        if (this.options.includes(MRichTextEditorOption.IMAGE) || this.mode === MRichTextEditorMode.MEDIA) {
+            options.pluginsEnabled.push('image');
+            options.toolbarButtons.push('insertImage');
         }
 
-        throw new Error(`rich-text-edit: mode ${this.mode} is not a valid mode.  See MRichTextEditMode Enum for a list of compatible modes.`);
+        return options;
     }
 
     public getSelectorErrorMsg(prop: string): string {

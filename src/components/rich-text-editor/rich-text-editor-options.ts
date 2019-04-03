@@ -15,6 +15,10 @@ export abstract class MRichTextEditorDefaultOptions {
     public placeholderText: string = '';
     public listAdvancedTypes: boolean = false;
 
+    public imageResizeWithPercent: boolean = true;
+    public imageDefaultWidth: number = 0;
+    public imageEditButtons: string[] = ['imageReplace', 'imageAlign', 'imageRemove', '|', 'imageLink', 'linkOpen', 'linkEdit', 'linkRemove', '|', 'imageAlt'];
+
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
             throw new Error('In order to use the rich-text-editor you need to provide a valid froala key.');
@@ -31,16 +35,4 @@ export class MRichTextEditorStandardOptions extends MRichTextEditorDefaultOption
     public linkInsertButtons: string[] = [];
 
     constructor(key: string, language?: string | undefined) { super(key, language); }
-}
-
-export class MRichTextEditorMediaOptions extends MRichTextEditorStandardOptions {
-    public imageResizeWithPercent: boolean = true;
-    public imageDefaultWidth: number = 0;
-    public imageEditButtons: string[] = ['imageReplace', 'imageAlign', 'imageRemove', '|', 'imageLink', 'linkOpen', 'linkEdit', 'linkRemove', '|', 'imageAlt'];
-
-    constructor(key: string, language?: string | undefined) {
-        super(key, language);
-        this.pluginsEnabled.push('image');
-        this.toolbarButtons.push('insertImage');
-    }
 }
