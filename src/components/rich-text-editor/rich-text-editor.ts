@@ -16,7 +16,7 @@ import FileUploadPlugin from '../file-upload/file-upload';
 import InputStylePlugin from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 import VueFroala from './adapter/vue-froala';
-import { MRichTextEditorStandardOptions } from './rich-text-editor-options';
+import { MRichTextEditorDefaultOptions } from './rich-text-editor-options';
 import WithRender from './rich-text-editor.html?style=./rich-text-editor.scss';
 
 
@@ -110,8 +110,8 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         return this.$license.getLicense<string>(RICH_TEXT_LICENSE_KEY) || '';
     }
 
-    public getOptions(): MRichTextEditorStandardOptions {
-        const options: MRichTextEditorStandardOptions = new MRichTextEditorStandardOptions(this.froalaLicenseKey, this.$i18n.currentLang());
+    public getOptions(): MRichTextEditorDefaultOptions {
+        const options: MRichTextEditorDefaultOptions = new MRichTextEditorDefaultOptions(this.froalaLicenseKey, this.$i18n.currentLang());
 
         if (this.options.includes(MRichTextEditorOption.IMAGE) || this.mode === MRichTextEditorMode.MEDIA) {
             options.pluginsEnabled.push('image');

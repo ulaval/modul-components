@@ -3,7 +3,7 @@ import Vue from '../../../node_modules/vue';
 import { renderComponent } from '../../../tests/helpers/render';
 import uuid from '../../utils/uuid/uuid';
 import { MRichTextEditor, MRichTextEditorOption } from './rich-text-editor';
-import { MRichTextEditorStandardOptions } from './rich-text-editor-options';
+import { MRichTextEditorDefaultOptions } from './rich-text-editor-options';
 import RichTextLicensePlugin from './rich-text-license-plugin';
 
 jest.mock('../../utils/uuid/uuid');
@@ -12,7 +12,7 @@ jest.mock('../../utils/uuid/uuid');
 const froalaLicenseKey: string = 'testKey';
 let wrapper: Wrapper<MRichTextEditor>;
 let richTextEditor: MRichTextEditor;
-let defaultOptions: MRichTextEditorStandardOptions;
+let defaultOptions: MRichTextEditorDefaultOptions;
 
 describe('MRichTextEditor', () => {
     beforeEach(() => {
@@ -24,7 +24,7 @@ describe('MRichTextEditor', () => {
                 }
             });
         richTextEditor = wrapper.vm;
-        defaultOptions = new MRichTextEditorStandardOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
+        defaultOptions = new MRichTextEditorDefaultOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
     });
 
     it('should have a value for each custom translations key', () => {
