@@ -1,0 +1,2144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-accordion-group concurrent 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <!---->
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group default 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group disabled 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group title 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header"
+  >
+    <div
+      class="m-accordion-group__header__title"
+    >
+      <h2>
+        An Accordion Group Title
+      </h2>
+    </div>
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/disabled/disabled=false all childrens disabled=false 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/disabled/disabled=false all childrens disabled=true 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/disabled/disabled=false childrens disabled=mixed 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/disabled/disabled=true all childrens disabled=false 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/disabled/disabled=true all childrens disabled=true 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/disabled/disabled=true childrens disabled=mixed 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/openedIds=[x,y,z] openedIds=[] 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="1-controls"
+        class="m-accordion__header m--has-padding"
+        id="1"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="2-controls"
+        class="m-accordion__header m--has-padding"
+        id="2"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="3-controls"
+        class="m-accordion__header m--has-padding"
+        id="3"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/openedIds=[x,y,z] openedIds=[1,2,3] 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="1-controls"
+        aria-expanded="true"
+        class="m-accordion__header m--has-padding"
+        id="1"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <!---->
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour cacher le contenu
+          </span>
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-open m--is-large m--is-left"
+          title="Cliquer pour cacher le contenu"
+        />
+      </div>
+       
+      <div
+        aria-labelledby="1"
+        class="m-accordion__body-wrap"
+        id="1-controls"
+        role="tabpanel"
+      >
+        <div
+          class="m-accordion__body m--has-padding"
+        >
+          Some Accordion Content
+        </div>
+      </div>
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="2-controls"
+        aria-expanded="true"
+        class="m-accordion__header m--has-padding"
+        id="2"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <!---->
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour cacher le contenu
+          </span>
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-open m--is-large m--is-left"
+          title="Cliquer pour cacher le contenu"
+        />
+      </div>
+       
+      <div
+        aria-labelledby="2"
+        class="m-accordion__body-wrap"
+        id="2-controls"
+        role="tabpanel"
+      >
+        <div
+          class="m-accordion__body m--has-padding"
+        >
+          Some Accordion Content
+        </div>
+      </div>
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="3-controls"
+        aria-expanded="true"
+        class="m-accordion__header m--has-padding"
+        id="3"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <!---->
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour cacher le contenu
+          </span>
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-open m--is-large m--is-left"
+          title="Cliquer pour cacher le contenu"
+        />
+      </div>
+       
+      <div
+        aria-labelledby="3"
+        class="m-accordion__body-wrap"
+        id="3-controls"
+        role="tabpanel"
+      >
+        <div
+          class="m-accordion__body m--has-padding"
+        >
+          Some Accordion Content
+        </div>
+      </div>
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/openedIds=[x,y,z] openedIds=[1,3] 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="1-controls"
+        aria-expanded="true"
+        class="m-accordion__header m--has-padding"
+        id="1"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <!---->
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour cacher le contenu
+          </span>
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-open m--is-large m--is-left"
+          title="Cliquer pour cacher le contenu"
+        />
+      </div>
+       
+      <div
+        aria-labelledby="1"
+        class="m-accordion__body-wrap"
+        id="1-controls"
+        role="tabpanel"
+      >
+        <div
+          class="m-accordion__body m--has-padding"
+        >
+          Some Accordion Content
+        </div>
+      </div>
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="2-controls"
+        class="m-accordion__header m--has-padding"
+        id="2"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="3-controls"
+        aria-expanded="true"
+        class="m-accordion__header m--has-padding"
+        id="3"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <!---->
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour cacher le contenu
+          </span>
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-open m--is-large m--is-left"
+          title="Cliquer pour cacher le contenu"
+        />
+      </div>
+       
+      <div
+        aria-labelledby="3"
+        class="m-accordion__body-wrap"
+        id="3-controls"
+        role="tabpanel"
+      >
+        <div
+          class="m-accordion__body m--has-padding"
+        >
+          Some Accordion Content
+        </div>
+      </div>
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/skin skin=default 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/skin skin=light 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-light m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--has-border m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-light m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--has-border m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-light m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--has-border m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group/skin skin=plain 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--no-title"
+  >
+    <!---->
+     
+    <div>
+      <!---->
+       
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+    <article
+      class="m-accordion m--is-plain m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-plain m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-plain m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
