@@ -33,9 +33,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}`, module)
     .add('fullsize', () => ({
         template: '<m-button fullSize="true">A Button</m-button>'
     }))
-    .add('icon="20px"', () => ({
-        template: '<m-button icon-name="m-svg__close-clear" icon-size="20px">A Button</m-button>'
-    }))
     .add('precision', () => ({
         template: '<m-button >A Button <template slot="precision">Button precision</template></m-button>'
     }))
@@ -95,7 +92,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/icon-name="m-svg__c
             'Button precision</template></m-button>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/icon-name="m-svg__close-clear"/icon-position="right"`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/icon-position="right"`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-button icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
