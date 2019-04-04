@@ -28,5 +28,4 @@ describe('MRadio', () => {
         expect(rdo.emitted('change')[0][0]).toEqual('radio');
     });
 
-    //TODO Add Blur testing
 });
