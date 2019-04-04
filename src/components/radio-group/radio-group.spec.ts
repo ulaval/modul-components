@@ -34,4 +34,6 @@ describe('MRadioGroup', () => {
 
         expect(grp.emitted('change')[0][0]).toEqual('rdo1');
     });
+
+    //TODO Add focus and blur events
 });

@@ -25,9 +25,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                 default: text('Text', 'A Radio Group')
             }
         },
-        template: '<m-radio-group>{{ text }}</m-radio-group>'
-    }))
-    .add('radiosPosition=right', () => ({
         template: `<m-radio-group>
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
@@ -41,29 +38,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('radiosVerticalAlign=center', () => ({
-        template: `<m-radio-group radiosVerticalAlign=""center">
+    .add('radios-vertical-align="center"', () => ({
+        template: `<m-radio-group radios-vertical-align="center">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('radiosMarginTop=10px', () => ({
-        template: `<m-radio-group radiosMarginTop="10px">
-                        <m-radio>Radio Option 1</m-radio>
-                        <m-radio>Radio Option 2</m-radio>
-                        <m-radio>Radio Option 3</m-radio>
-                   </m-radio-group>`
-    }))
-    .add('disabled', () => ({
-        template: `<m-radio-group :disabled="true">
-                        <m-radio>Radio Option 1</m-radio>
-                        <m-radio>Radio Option 2</m-radio>
-                        <m-radio>Radio Option 3</m-radio>
-                   </m-radio-group>`
-    }))
-    .add('readonly', () => ({
-        template: `<m-radio-group :readonly="true">
+    .add('radios-margin-top="10px"', () => ({
+        template: `<m-radio-group radios-margin-top="10px">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
@@ -105,96 +88,96 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                    </m-radio-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/radiosPosition=right`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/radios-position="right"`, module)
     .addDecorator(withA11y)
     .add('inline', () => ({
-        template: `<m-radio-group inline="true" radiosPosition="right">
+        template: `<m-radio-group inline="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('radiosVerticalAlign=center', () => ({
-        template: `<m-radio-group radiosPosition="right" radiosVerticalAlign=center>
+    .add('radios-vertical-align="center"', () => ({
+        template: `<m-radio-group radios-position="right" radios-vertical-align="center">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('radiosMarginTop=10px', () => ({
-        template: `<m-radio-group radiosMarginTop="10px" radiosPosition="right">
+    .add('radios-margin-top="10px"', () => ({
+        template: `<m-radio-group radios-margin-top="10px" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('disabled', () => ({
-        template: `<m-radio-group :disabled="true" radiosPosition="right">
+        template: `<m-radio-group :disabled="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('readonly', () => ({
-        template: `<m-radio-group :readonly="true" radiosPosition="right">
+        template: `<m-radio-group :readonly="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('label', () => ({
-        template: `<m-radio-group label="This is a label" radiosPosition="right">
+        template: `<m-radio-group label="This is a label" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('focus', () => ({
-        template: `<m-radio-group :focus="true" radiosPosition="right">
+        template: `<m-radio-group :focus="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('error', () => ({
-        template: `<m-radio-group :error="true" radiosPosition="right">
+        template: `<m-radio-group :error="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('valid', () => ({
-        template: `<m-radio-group :valid="true" radiosPosition="right">
+        template: `<m-radio-group :valid="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('error-message', () => ({
-        template: `<m-radio-group error-message="This is an error message" radiosPosition="right">
+        template: `<m-radio-group error-message="This is an error message" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly/readonly=false`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly="false"`, module)
     .addDecorator(withA11y)
-    .add('all childrens readonly=false', () => ({
+    .add('all childrens readonly="false"', () => ({
         template: `<m-radio-group :readonly="false">
                         <m-radio :readonly="false">Radio Option 1</m-radio>
                         <m-radio :readonly="false">Radio Option 2</m-radio>
                         <m-radio :readonly="false">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens readonly=true', () => ({
+    .add('all childrens readonly="true"', () => ({
         template: `<m-radio-group :readonly="true">
                         <m-radio :readonly="true">Radio Option 1</m-radio>
                         <m-radio :readonly="true">Radio Option 2</m-radio>
                         <m-radio :readonly="true">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens readonly=mixed', () => ({
+    .add('all childrens readonly="mixed"', () => ({
         template: `<m-radio-group :readonly="true">
                         <m-radio :readonly="false">Radio Option 1</m-radio>
                         <m-radio :readonly="true">Radio Option 2</m-radio>
@@ -202,23 +185,30 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly/reado
     </m-radio-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly/readonly=true`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly="true"`, module)
     .addDecorator(withA11y)
-    .add('readonly=false', () => ({
+    .add('default', () => ({
+        template: `<m-radio-group :readonly="true">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('all childrens readonly="false"', () => ({
         template: `<m-radio-group :readonly="true">
                         <m-radio :readonly="false">Radio Option 1</m-radio>
                         <m-radio :readonly="false">Radio Option 2</m-radio>
                         <m-radio :readonly="false">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens readonly=true', () => ({
+    .add('all childrens readonly="true"', () => ({
         template: `<m-radio-group :readonly="true">
                         <m-radio :readonly="true">Radio Option 1</m-radio>
                         <m-radio :readonly="true">Radio Option 2</m-radio>
                         <m-radio :readonly="true">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens readonly=mixed', () => ({
+    .add('all childrens readonly="mixed"', () => ({
         template: `<m-radio-group :readonly="true">
                         <m-radio :readonly="true">Radio Option 1</m-radio>
                         <m-radio :readonly="false">Radio Option 2</m-radio>
@@ -226,23 +216,23 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly/reado
     </m-radio-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled/disabled=false`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled="false"`, module)
     .addDecorator(withA11y)
-    .add('all childrens disabled=false', () => ({
+    .add('all childrens disabled="false"', () => ({
         template: `<m-radio-group :disabled="false">
                         <m-radio :disabled="false">Radio Option 1</m-radio>
                         <m-radio :disabled="false">Radio Option 2</m-radio>
                         <m-radio :disabled="false">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens disabled=true', () => ({
+    .add('all childrens disabled="true"', () => ({
         template: `<m-radio-group :disabled="true">
                         <m-radio :disabled="true">Radio Option 1</m-radio>
                         <m-radio :disabled="true">Radio Option 2</m-radio>
                         <m-radio :disabled="true">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens disabled=mixed', () => ({
+    .add('all childrens disabled="mixed"', () => ({
         template: `<m-radio-group :disabled="true">
                         <m-radio :disabled="false">Radio Option 1</m-radio>
                         <m-radio :disabled="true">Radio Option 2</m-radio>
@@ -250,23 +240,30 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled/disab
     </m-radio-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled/disabled=true`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled="true"`, module)
     .addDecorator(withA11y)
-    .add('disabled=false', () => ({
+    .add('default', () => ({
+        template: `<m-radio-group :disabled="true">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('all childrens disabled="false"', () => ({
         template: `<m-radio-group :disabled="true">
                         <m-radio :disabled="false">Radio Option 1</m-radio>
                         <m-radio :disabled="false">Radio Option 2</m-radio>
                         <m-radio :disabled="false">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens disabled=true', () => ({
+    .add('all childrens disabled="true"', () => ({
         template: `<m-radio-group :disabled="true">
                         <m-radio :disabled="true">Radio Option 1</m-radio>
                         <m-radio :disabled="true">Radio Option 2</m-radio>
                         <m-radio :disabled="true">Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
-    .add('all childrens disabled=mixed', () => ({
+    .add('all childrens disabled="mixed"', () => ({
         template: `<m-radio-group :disabled="true">
                         <m-radio :disabled="true">Radio Option 1</m-radio>
                         <m-radio :disabled="false">Radio Option 2</m-radio>
