@@ -240,7 +240,7 @@ $m-accordion--color-default: $m-color--interactive !default;
             .m-accordion.m--is-dark.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > &,
             .m-accordion.m--is-dark-b.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > &,
             .m-accordion.m--is-default.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
-                padding-left: $m-spacing *2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
+                padding-left: $m-spacing * 2 + $m-accordion--icon-l-width + $m-accordion--vertical-border-size;
             }
 
             .m-accordion.m--is-light > .m-accordion__body-wrap > & {
@@ -254,6 +254,10 @@ $m-accordion--color-default: $m-color--interactive !default;
 
             .m-accordion.m--is-light.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
                 padding-left: 36px; // Magic number
+            }
+
+            .m-error-technical-difficulty & {
+                font-size: $m-font-size;
             }
         }
     }

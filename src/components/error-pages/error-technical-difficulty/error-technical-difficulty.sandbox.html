@@ -1,4 +1,14 @@
 <div>
+    <h5>Recommended display of a technical error in a dialog</h5>
+    <m-button v-m-popup:errorpopup>pop me an error</m-button>
+    <m-dialog :negativeLink="false"
+              ok-label="Fermer"
+              width="large"
+              ref="errorpopup">
+        <m-error-technical-difficulty :showStackTrace="true"
+                                      :error="errorWithStack"></m-error-technical-difficulty>
+    </m-dialog>
+
     <h5>default</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
         <m-error-technical-difficulty></m-error-technical-difficulty>
@@ -57,14 +67,9 @@
 
     <h5>With stack trace</h5>
     <div style="border: solid 1px black; padding: 10px; width: 600px;">
-        <m-error-technical-difficulty :showStackTrace="true" :error="errorWithStack"></m-error-technical-difficulty>
+        <m-error-technical-difficulty :showStackTrace="true"
+                                      :error="errorWithStack"></m-error-technical-difficulty>
     </div>
 
     <br />
-
-    <h5>Unexpected error popup with stack</h5>
-    <m-button v-m-popup:errorpopup>pop me an error</m-button>
-    <m-dialog ref="errorpopup" :negativeLink="false" ok-label="Fermer">
-            <m-error-technical-difficulty :showStackTrace="true" :error="errorWithStack"></m-error-technical-difficulty>
-    </m-dialog>
 </div>
