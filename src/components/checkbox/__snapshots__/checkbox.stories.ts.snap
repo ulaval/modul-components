@@ -488,6 +488,48 @@ exports[`Storyshots components|m-checkbox value 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-checkbox/position=right default 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-uuid"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-checkbox/position=right disabled 1`] = `
 <div
   class="m-checkbox m--is-checkbox-right m--is-disabled"
@@ -681,6 +723,48 @@ exports[`Storyshots components|m-checkbox/position=right focus 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-checkbox/position=right indeterminate 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-right m--is-indeterminate"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-uuid"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-checkbox/position=right readonly 1`] = `
 <div
   class="m-checkbox m--is-checkbox-right m--is-readonly"
@@ -768,283 +852,6 @@ exports[`Storyshots components|m-checkbox/position=right valid 1`] = `
 exports[`Storyshots components|m-checkbox/position=right value 1`] = `
 <div
   class="m-checkbox m--is-checkbox-right m--is-checked"
->
-  <input
-    class="m-checkbox__hidden"
-    id="mCheckbox-uuid"
-    type="checkbox"
-  />
-   
-  <!---->
-   
-  <label
-    class="m-checkbox__wrap"
-    for="mCheckbox-uuid"
-  >
-    <span
-      aria-hidden="true"
-      class="m-checkbox__input"
-    >
-      <span
-        class="m-checkbox__input__icon"
-      />
-    </span>
-     
-    <span
-      class="m-checkbox__label"
-    >
-      A Checkbox
-    </span>
-  </label>
-   
-  <div
-    class="m-validation-message m-checkbox__message"
-  >
-    <!---->
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-checkbox/position=right/value disabled 1`] = `
-<div
-  class="m-checkbox m--is-checkbox-right m--is-checked m--is-disabled"
->
-  <input
-    class="m-checkbox__hidden"
-    disabled="disabled"
-    id="mCheckbox-uuid"
-    type="checkbox"
-  />
-   
-  <!---->
-   
-  <label
-    class="m-checkbox__wrap"
-    for="mCheckbox-uuid"
-  >
-    <span
-      aria-hidden="true"
-      class="m-checkbox__input"
-    >
-      <span
-        class="m-checkbox__input__icon"
-      />
-    </span>
-     
-    <span
-      class="m-checkbox__label"
-    >
-      A Checkbox
-    </span>
-  </label>
-   
-  <div
-    class="m-validation-message m-checkbox__message"
-  >
-    <!---->
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-checkbox/position=right/value error 1`] = `
-<div
-  class="m-checkbox m--is-checkbox-right m--is-checked m--has-error"
->
-  <input
-    class="m-checkbox__hidden"
-    id="mCheckbox-uuid"
-    type="checkbox"
-  />
-   
-  <!---->
-   
-  <label
-    class="m-checkbox__wrap"
-    for="mCheckbox-uuid"
-  >
-    <span
-      aria-hidden="true"
-      class="m-checkbox__input"
-    >
-      <span
-        class="m-checkbox__input__icon"
-      />
-    </span>
-     
-    <span
-      class="m-checkbox__label"
-    >
-      A Checkbox
-    </span>
-  </label>
-   
-  <div
-    class="m-validation-message m-checkbox__message"
-  >
-    <!---->
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-checkbox/position=right/value error-message 1`] = `
-<div
-  class="m-checkbox m--is-checkbox-right m--is-checked m--has-error"
->
-  <input
-    class="m-checkbox__hidden"
-    id="mCheckbox-uuid"
-    type="checkbox"
-  />
-   
-  <!---->
-   
-  <label
-    class="m-checkbox__wrap"
-    for="mCheckbox-uuid"
-  >
-    <span
-      aria-hidden="true"
-      class="m-checkbox__input"
-    >
-      <span
-        class="m-checkbox__input__icon"
-      />
-    </span>
-     
-    <span
-      class="m-checkbox__label"
-    >
-      A Checkbox
-    </span>
-  </label>
-   
-  <div
-    class="m-validation-message m-checkbox__message"
-  >
-    <p
-      class="m-validation-message__error"
-    >
-      <svg
-        class="m-icon m-validation-message__icon"
-        height="1em"
-        width="1em"
-      >
-        <title>
-          Erreur
-        </title>
-         
-        <use
-          aria-hidden="true"
-          class=""
-        />
-      </svg>
-       
-      <span
-        class="m-validation-message__text"
-      >
-        This is an error
-      </span>
-    </p>
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-checkbox/position=right/value focus 1`] = `
-<div
-  class="m-checkbox m--is-checkbox-right m--is-checked"
-  focus="true"
->
-  <input
-    class="m-checkbox__hidden"
-    id="mCheckbox-uuid"
-    type="checkbox"
-  />
-   
-  <!---->
-   
-  <label
-    class="m-checkbox__wrap"
-    for="mCheckbox-uuid"
-  >
-    <span
-      aria-hidden="true"
-      class="m-checkbox__input"
-    >
-      <span
-        class="m-checkbox__input__icon"
-      />
-    </span>
-     
-    <span
-      class="m-checkbox__label"
-    >
-      A Checkbox
-    </span>
-  </label>
-   
-  <div
-    class="m-validation-message m-checkbox__message"
-  >
-    <!---->
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-checkbox/position=right/value readonly 1`] = `
-<div
-  class="m-checkbox m--is-checkbox-right m--is-checked m--is-readonly"
->
-  <!---->
-   
-  <input
-    id="mCheckbox-uuid"
-    type="hidden"
-    value="true"
-  />
-   
-  <label
-    class="m-checkbox__wrap"
-    for="mCheckbox-uuid"
-  >
-    <span
-      aria-hidden="true"
-      class="m-checkbox__input"
-    >
-      <span
-        class="m-checkbox__input__icon"
-      />
-    </span>
-     
-    <span
-      class="m-checkbox__label"
-    >
-      A Checkbox
-    </span>
-  </label>
-   
-  <div
-    class="m-validation-message m-checkbox__message"
-  >
-    <!---->
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-checkbox/position=right/value valid 1`] = `
-<div
-  class="m-checkbox m--is-checkbox-right m--is-checked m--is-valid"
 >
   <input
     class="m-checkbox__hidden"
@@ -1238,6 +1045,48 @@ exports[`Storyshots components|m-checkbox/value focus 1`] = `
 <div
   class="m-checkbox m--is-checkbox-left m--is-checked"
   focus="true"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-uuid"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox/value indeterminate 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checked"
 >
   <input
     class="m-checkbox__hidden"

@@ -1,0 +1,593 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-radio default 1`] = `
+<li
+  class="m-radio m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio disabled 1`] = `
+<li
+  class="m-radio m--is-disabled m--is-checked"
+>
+  <input
+    aria-hidden="true"
+    class="m-radio__hidden"
+    disabled="disabled"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio error 1`] = `
+<li
+  class="m-radio m--is-error m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio focus 1`] = `
+<li
+  class="m-radio m--is-checked"
+  focus="true"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio label 1`] = `
+<li
+  class="m-radio m--is-checked"
+  label="radio3-label"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio name 1`] = `
+<li
+  class="m-radio m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    name="radio2-name"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio radio-vertical-align="center" 1`] = `
+<li
+  class="m-radio m--is-checked m--is-align-center"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio readonly 1`] = `
+<li
+  class="m-radio m--is-read-only m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    disabled="disabled"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio valid 1`] = `
+<li
+  class="m-radio m--is-valid m--is-checked"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio value 1`] = `
+<li
+  class="m-radio"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value="radio1-value"
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" default 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" disabled 1`] = `
+<li
+  class="m-radio m--is-disabled m--is-checked m--is-input-right"
+>
+  <input
+    aria-hidden="true"
+    class="m-radio__hidden"
+    disabled="disabled"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" error 1`] = `
+<li
+  class="m-radio m--is-error m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" focus 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+  focus="true"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" label 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+  label="radio6-label"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" name 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    name="radio5-name"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" radio-vertical-align="center" 1`] = `
+<li
+  class="m-radio m--is-checked m--is-input-right m--is-align-center"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" readonly 1`] = `
+<li
+  class="m-radio m--is-read-only m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    disabled="disabled"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" valid 1`] = `
+<li
+  class="m-radio m--is-valid m--is-checked m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value=""
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Checkbox
+    </span>
+  </label>
+</li>
+`;
+
+exports[`Storyshots components|m-radio/radio-position="right" value 1`] = `
+<li
+  class="m-radio m--is-input-right"
+>
+  <input
+    class="m-radio__hidden"
+    id="uuid"
+    type="radio"
+    value="radio4-value"
+  />
+   
+  <label
+    class="m-radio__wrap"
+    for="uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-radio__input"
+    />
+     
+    <span
+      class="m-radio__label"
+    >
+      A Radio
+    </span>
+  </label>
+</li>
+`;

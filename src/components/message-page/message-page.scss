@@ -140,6 +140,10 @@ $m-message-page--shadow-height: 5px;
     &__hints,
     &__links {
         text-align: left; // needed when inside a popup
+
+        .m-error-technical-difficulty & {
+            font-size: $m-font-size;
+        }
     }
 
     &__hints {

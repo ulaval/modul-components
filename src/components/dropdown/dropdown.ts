@@ -60,6 +60,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public includeFilterableStatusItems: boolean;
     @Prop({ default: false })
     public clearInvalidSelectionOnClose: boolean;
+    @Prop({ default: true })
+    public clearModelOnSelectedText: boolean;
 
     public $refs: {
         popup: MPopup;
@@ -258,7 +260,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get selectedText(): string {
         let result: string | undefined = '';
-        if (this.dirty) {
+        if (this.dirty || this.internalFilter) {
             result = this.internalFilter;
         } else if (this.internalItems.every(item => {
             if (item.value === this.model) {
@@ -274,6 +276,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private set selectedText(value: string) {
         this.dirty = true;
+        if (this.clearModelOnSelectedText) {
+            this.$emit('change', '');
+            this.as<InputPopup>().internalValue = value;
+        }
         this.internalFilter = value;
         let parsedQuery: string = normalizeString(this.internalFilter).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
         this.internalFilterRegExp = new RegExp(parsedQuery, 'i');
@@ -494,6 +500,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                     if (this.enableAnimation) {
                         el.style.maxHeight = 'none';
                     }
+                    this.dirty = false;
+                    this.internalFilterRegExp = / /;
                     done();
                 }, 300);
             } else {
