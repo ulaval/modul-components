@@ -52,6 +52,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public listMinWidth: string;
     @Prop()
     public focus: boolean;
+    @Prop()
+    public maxLength: number;
     @Prop({ default: true })
     public showArrowIcon: boolean;
     @Prop({ default: true })
@@ -155,8 +157,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Emit('close')
     private onClose(): void {
+        const hasMatch: boolean = this.matchFilterTextToValue();
         this.internalFilter = '';
-        if (this.clearInvalidSelectionOnClose && this.selectedText === '') {
+        if (this.clearInvalidSelectionOnClose && !hasMatch && this.selectedText === '') {
             this.$emit('input', '');
             this.setModel('', true);
         }
@@ -204,6 +207,24 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             this.$refs.input.blur();
             this.internalOpen = false;
         }
+    }
+
+    private matchFilterTextToValue(): boolean {
+        if (this.filterable && this.internalFilter !== '') {
+            let value: string = '';
+            this.internalItems.every(item => {
+                if (item.propLabel === this.internalFilter) {
+                    value = item.value;
+                    return false;
+                }
+                return true;
+            });
+            if (value !== '') {
+                this.model = value;
+                return true;
+            }
+        }
+        return false;
     }
 
     public get model(): any {
