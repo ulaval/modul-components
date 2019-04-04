@@ -2,12 +2,14 @@
 
 exports[`MTimepicker should render correctly 1`] = `
 <div class="m-timepicker">
-  <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
-      <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
-            <use aria-hidden="true"></use>
-          </svg> </button></div>
+  <div class="m-input-style m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
+        <div class="m-input-style__right-content"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+              <use aria-hidden="true"></use>
+            </svg> </button></div>
+      </div>
     </div>
   </div>
   <div class="m-validation-message m-timepicker__validation-message"> </div>
@@ -19,12 +21,14 @@ exports[`MTimepicker should render correctly 1`] = `
 
 exports[`MTimepicker should render correctly min/max time 1`] = `
 <div class="m-timepicker">
-  <div class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="7:00"> </div>
-      <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
-            <use aria-hidden="true"></use>
-          </svg> </button></div>
+  <div class="m-input-style m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="7:00"> </div>
+        <div class="m-input-style__right-content"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+              <use aria-hidden="true"></use>
+            </svg> </button></div>
+      </div>
     </div>
   </div>
   <div class="m-validation-message m-timepicker__validation-message"> </div>
@@ -36,12 +40,14 @@ exports[`MTimepicker should render correctly min/max time 1`] = `
 
 exports[`MTimepicker should render correctly when disabled is set 1`] = `
 <div class="m-timepicker m--is-disabled">
-  <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
-      <div class="m-input-style__body__right"><button disabled="disabled" type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
-            <use aria-hidden="true"></use>
-          </svg> </button></div>
+  <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
+        <div class="m-input-style__right-content"><button disabled="disabled" type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+              <use aria-hidden="true"></use>
+            </svg> </button></div>
+      </div>
     </div>
   </div>
   <div class="m-validation-message m-timepicker__validation-message"> </div>
@@ -53,12 +59,14 @@ exports[`MTimepicker should render correctly when disabled is set 1`] = `
 
 exports[`MTimepicker should render correctly when error is set 1`] = `
 <div class="m-timepicker m--has-validation-message">
-  <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
-      <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
-            <use aria-hidden="true"></use>
-          </svg> </button></div>
+  <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
+        <div class="m-input-style__right-content"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+              <use aria-hidden="true"></use>
+            </svg> </button></div>
+      </div>
     </div>
   </div>
   <div class="m-validation-message m-timepicker__validation-message">
@@ -75,12 +83,14 @@ exports[`MTimepicker should render correctly when error is set 1`] = `
 
 exports[`MTimepicker should render correctly when valid is set 1`] = `
 <div class="m-timepicker m--has-validation-message">
-  <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
-      <div class="m-input-style__body__right"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
-            <use aria-hidden="true"></use>
-          </svg> </button></div>
+  <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" placeholder="hh mm" value="2:00 PM"> </div>
+        <div class="m-input-style__right-content"><button type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+              <use aria-hidden="true"></use>
+            </svg> </button></div>
+      </div>
     </div>
   </div>
   <div class="m-validation-message m-timepicker__validation-message">
@@ -97,14 +107,16 @@ exports[`MTimepicker should render correctly when valid is set 1`] = `
 
 exports[`MTimepicker should render correctly when waiting is set 1`] = `
 <div class="m-timepicker">
-  <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
-      <div class="m-input-style__body__right"><button disabled="disabled" type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
-            <use aria-hidden="true"></use>
-          </svg> </button></div>
-      <div appear="true" class="m-spinner m-input-style__spinner">
-        <div></div>
+  <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><input id="mTimepicker-uuid" type="text" aria-haspopup="true" aria-controls="mTimepicker-uuid-controls" disabled="disabled" placeholder="hh mm" value="2:00 PM"> </div>
+        <div class="m-input-style__right-content"><button disabled="disabled" type="button" aria-controls="mTimepicker-uuid" class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled" style="width:22px;height:22px;"><svg aria-hidden="true" width="20px" height="20px" class="m-icon m-icon-button__icon">
+              <use aria-hidden="true"></use>
+            </svg> </button></div>
+        <div appear="true" class="m-spinner m-input-style__spinner">
+          <div></div>
+        </div>
       </div>
     </div>
   </div>
