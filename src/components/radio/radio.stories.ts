@@ -29,7 +29,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}`, module)
         template: '<m-radio value="radio1-value">A Radio</m-radio>'
     }))
     .add('name', () => ({
-        template: '<m-radio name="radio-2">A Radio</m-radio>'
+        template: '<m-radio name="radio2-name">A Radio</m-radio>'
     }))
     .add('label', () => ({
         template: '<m-radio label="radio3-label">A Radio</m-radio>'
@@ -40,11 +40,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}`, module)
     .add('readonly', () => ({
         template: '<m-radio :readonly="true">A Radio</m-radio>'
     }))
-    .add('radioPosition=right', () => ({
-        template: '<m-radio radioPosition="right">A Radio</m-radio>'
-    }))
-    .add('radioVerticalAlign=center', () => ({
-        template: '<m-radio radioVerticalAlign="center">A Radio</m-radio>'
+    .add('radio-vertical-align="center"', () => ({
+        template: '<m-radio radio-vertical-align="center">A Radio</m-radio>'
     }))
     .add('focus', () => ({
         template: '<m-radio :focus="true">A Checkbox</m-radio>'
@@ -54,19 +51,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}`, module)
     }))
     .add('valid', () => ({
         template: '<m-radio :valid="true">A Checkbox</m-radio>'
-    }))
-    // iconName should not render anything when the m-radio component is not part of a radio-group
-    .add('iconName=chip-error', () => ({
-        template: '<m-radio iconName="chip-error">A Checkbox</m-radio>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}/radioPosition=right`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}/radio-position="right"`, module)
     .addDecorator(withA11y)
+    .add('default', () => ({
+        template: '<m-radio radio-position="right">A Radio</m-radio>'
+    }))
     .add('value', () => ({
-        template: '<m-radio radioPosition="right" value="radio4-value">A Radio</m-radio>'
+        template: '<m-radio radio-position="right" value="radio4-value">A Radio</m-radio>'
     }))
     .add('name', () => ({
-        template: '<m-radio name="radio5" radioPosition="right">A Radio</m-radio>'
+        template: '<m-radio name="radio5-name" radioPosition="right">A Radio</m-radio>'
     }))
     .add('label', () => ({
         template: '<m-radio label="radio6-label" radioPosition="right">A Radio</m-radio>'
@@ -77,8 +73,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}/radioPosition=right`
     .add('readonly', () => ({
         template: '<m-radio :readonly="true" radioPosition="right">A Radio</m-radio>'
     }))
-    .add('radioVerticalAlign=center', () => ({
-        template: '<m-radio radioPosition="right" radioVerticalAlign="center">A Radio</m-radio>'
+    .add('radio-vertical-align="center"', () => ({
+        template: '<m-radio radioPosition="right" radio-vertical-align="center">A Radio</m-radio>'
     }))
     .add('focus', () => ({
         template: '<m-radio :focus="true" radioPosition="right">A Radio</m-radio>'
@@ -88,10 +84,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_NAME}/radioPosition=right`
     }))
     .add('valid', () => ({
         template: '<m-radio :valid="true" radioPosition="right">A Checkbox</m-radio>'
-    }))
-    // iconName should not render anything when the m-radio component is not part of a radio-group
-    .add('iconName=chip-error', () => ({
-        template: '<m-radio iconName="chip-error" radioPosition="right">A Checkbox</m-radio>'
     }));
 
 
