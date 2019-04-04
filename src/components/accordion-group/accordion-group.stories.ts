@@ -23,9 +23,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
             }
         },
         template: `<m-accordion-group>
-                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
-                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
-                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion>Some Accordion Content</m-accordion>
+                        <m-accordion>Some Accordion Content</m-accordion>
+                        <m-accordion>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
+    .add('header', () => ({
+        template: `<m-accordion-group>
+                        <m-accordion><h3 slot="header">Value specified in header slot for this example and all others to follow</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">Value specified in header slot for this example and all others to follow</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">Value specified in header slot for this example and all others to follow</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
     .add('title', () => ({
@@ -41,32 +48,25 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
-    }))
-    .add('disabled', () => ({
-        template: `<m-accordion-group :disabled="true">
-                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
-                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
-                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
-    </m-accordion-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled/disabled=true`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled="true"`, module)
     .addDecorator(withA11y)
-    .add('all childrens disabled=false', () => ({
+    .add('all childrens disabled="false"', () => ({
         template: `<m-accordion-group :disabled="true">
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('all childrens disabled=true', () => ({
+    .add('all childrens disabled="true"', () => ({
         template: `<m-accordion-group :disabled="true">
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('childrens disabled=mixed', () => ({
+    .add('childrens disabled="mixed"', () => ({
         template: `<m-accordion-group :disabled="true">
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -74,23 +74,23 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled/d
     </m-accordion-group>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled/disabled=false`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled=false`, module)
     .addDecorator(withA11y)
-    .add('all childrens disabled=false', () => ({
+    .add('all childrens disabled="false"', () => ({
         template: `<m-accordion-group :disabled="false">
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('all childrens disabled=true', () => ({
+    .add('all childrens disabled="true"', () => ({
         template: `<m-accordion-group :disabled="false">
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('childrens disabled=mixed', () => ({
+    .add('childrens disabled="mixed"', () => ({
         template: `<m-accordion-group :disabled="false">
                         <m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -101,27 +101,27 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled/d
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/skin`, module)
     .addDecorator(withA11y)
-    .add('skin=default', () => ({
+    .add('skin="default"', () => ({
         template: `<m-accordion-group>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('skin=light', () => ({
+    .add('skin="light"', () => ({
         template: `<m-accordion-group skin="light">
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('skin=plain', () => ({
+    .add('skin="plain"', () => ({
         template: `<m-accordion-group skin="plain">
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
-    }))
+    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/openedIds=[x,y,z]`, module)
     .addDecorator(withA11y)
@@ -145,7 +145,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/openedIds=
                         <m-accordion :id="2"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion :id="3"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
-    }))
+    }));
 
 
 

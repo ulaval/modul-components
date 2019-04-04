@@ -34,4 +34,5 @@ describe('MRadioGroup', () => {
 
         expect(grp.emitted('change')[0][0]).toEqual('rdo1');
     });
+
 });
