@@ -22,7 +22,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}`, module)
                 default: text('Text', 'Accordion')
             }
         },
-        template: '<m-accordion> {{ text }}</m-accordion>'
+        template: '<m-accordion>{{ text }}</m-accordion>'
+    }))
+
+    .add('header', () => ({
+        template: '<m-accordion><h3 slot="header">Value specified in header slot for this example and all others to follow</h3> Some Accordion Content</m-accordion>'
     }))
     .add('id', () => ({
         template: '<m-accordion id="id123"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
@@ -33,43 +37,47 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}`, module)
     .add('disabled', () => ({
         template: '<m-accordion :disabled="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
-    .add('iconPosition=right', () => ({
-        template: '<m-accordion iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
-    }))
-    .add('iconBorder=true', () => ({
-        template: '<m-accordion iconBorder="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
-    }))
-    .add('iconSize=small', () => ({
-        template: '<m-accordion iconSize="small"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
-    }))
-
-storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/iconSize=small`, module)
-    .addDecorator(withA11y)
-    .add('iconBorder=true', () => ({
-        template: '<m-accordion iconBorder="true" iconSize="small"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    .add('icon-border="true"', () => ({
+        template: '<m-accordion icon-border="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
 
 
-storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/iconPosition=right`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/icon-size="small"`, module)
     .addDecorator(withA11y)
-    .add('iconBorder=true', () => ({
-        template: '<m-accordion iconBorder="true" iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    .add('default', () => ({
+        template: '<m-accordion icon-size="small"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
-    .add('iconSize=small', () => ({
-        template: '<m-accordion iconSize="small" iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
-    }))
-    .add('iconSize=small && iconBorder=true', () => ({
-        template: '<m-accordion iconBorder="true" iconSize="small" iconPosition="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    .add('icon-border="true"', () => ({
+        template: '<m-accordion icon-border="true" icon-size="small"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
 
 
-storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/padding=true`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/icon-position="right"`, module)
     .addDecorator(withA11y)
-    .add('paddingHeader=true', () => ({
-        template: '<m-accordion :padding="true" :paddingHeader="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    .add('default', () => ({
+        template: '<m-accordion icon-position="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
-    .add('paddingBody=true', () => ({
-        template: '<m-accordion :padding="true" :paddingBody="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    .add('icon-border="true"', () => ({
+        template: '<m-accordion icon-border="true" icon-position="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('icon-size="small"', () => ({
+        template: '<m-accordion icon-size="small" icon-position="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('icon-size="small && icon-border="true"', () => ({
+        template: '<m-accordion icon-border="true" icon-size="small" icon-position="right"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }));
+
+
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/padding`, module)
+    .addDecorator(withA11y)
+    .add('default', () => ({
+        template: '<m-accordion :padding="true"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('padding-header="false"', () => ({
+        template: '<m-accordion :padding="false" :padding-header="false"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('padding-body="false"', () => ({
+        template: '<m-accordion :padding="false" :padding-body="false"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
 
 
@@ -90,4 +98,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/skin`, module)
     .add('plain', () => ({
         template: '<m-accordion skin="plain"><h3 slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
-
