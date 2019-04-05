@@ -1,7 +1,6 @@
 @import 'commons';
-$m-timepicker--color-hover: $m-color--interactive-lightest !default;
-$m-timepicker--color-select: $m-color--grey-lighter !default;
-$m-timepicker--color-active: $m-color--grey-lightest !default;
+$m-timepicker--color-select: $m-color--interactive !default;
+$m-timepicker--height-multiplier: 5;
 
 .m-timepicker {
     display: inline-flex;
@@ -48,22 +47,22 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
         position: relative;
         display: flex;
         width: 100%;
-        height: $m-touch-size * 3;
+        height: $m-touch-size * $m-timepicker--height-multiplier;
 
         @media (min-width: #{$m-mq--min--s}) {
             width: 210px;
-            height: $m-touch-size * 5;
+            height: $m-touch-size * $m-timepicker--height-multiplier;
         }
 
         &__hours,
         &__minutes {
             width: 50%;
-            flex: 1 0 auto;
             list-style: none;
             padding: 0;
             margin: 0;
             text-align: center;
-            overflow: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
 
             @include m-scrollbar();
 
@@ -76,24 +75,54 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
                 align-items: center;
                 justify-content: center;
                 text-decoration: none;
+                font-weight: $m-font-weight--bold;
+            }
+        }
+    }
 
-                &:not(.m--is-selected) {
-                    cursor: pointer;
+    &__hours-number,
+    &__minutes-number {
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $m-touch-size;
+        width: $m-touch-size;
+        outline: none;
+        background-color: $m-color--white;
+        transition: color $m-transition-duration--s ease, background-color $m-transition-duration--s ease, border-color $m-transition-duration--s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
 
-                    &:hover,
-                    &:focus {
-                        background: $m-timepicker--color-hover;
-                    }
+        @media (pointer: fine) {
+            &:hover {
+                border-color: $m-color--interactive-darker;
+                background-color: $m-color--white;
+            }
 
-                    &:active {
-                        background: $m-timepicker--color-active;
+            &:focus {
+                background-color: $m-color--interactive-lightest;
+            }
+        }
+
+        &.m--is-selected {
+            @media (pointer: fine) {
+                cursor: default;
+                color: $m-color--white;
+                background-color: $m-timepicker--color-select;
+
+                &:focus {
+                    border: 1px solid $m-color--interactive-darker;
+
+                    &:hover {
+                        border-width: 2px;
                     }
                 }
+            }
 
-                &.m--is-selected {
-                    cursor: default;
-                    background: $m-timepicker--color-select;
-                }
+            @media not all and (pointer: fine) {
+                color: $m-color--white;
+                background-color: $m-timepicker--color-select;
             }
         }
     }
@@ -101,7 +130,10 @@ $m-timepicker--color-active: $m-color--grey-lightest !default;
     &__footer {
         border-top: $m-border-width--s solid $m-color--border;
         padding: $m-margin--s $m-padding;
-        text-align: center;
+        min-height: $m-touch-size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         @media (min-width: #{$m-mq--min--s}) {
             border-bottom: $m-border-width--s solid $m-color--border;
