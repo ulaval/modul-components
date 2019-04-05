@@ -6,6 +6,7 @@ import PopupDirectivePlugin from '../../directives/popup/popup';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import ModulDate from '../../utils/modul-date/modul-date';
@@ -31,6 +32,7 @@ export type DatePickerSupportedTypes = Date | string | undefined;
         InputLabel,
         InputPopup,
         InputManagement,
+        InputWidth,
         MediaQueries
     ]
 })
@@ -53,6 +55,8 @@ export class MDatepicker extends ModulVue {
     public max: DatePickerSupportedTypes;
     @Prop({ default: () => Vue.prototype.$i18n.translate('m-datepicker:placeholder') })
     public placeholder: string;
+    @Prop({ default: InputMaxWidth.Small })
+    public maxWidth: string;
 
     private internalOpen: boolean = false;
     private selectedYear: number = 0;
