@@ -7,6 +7,15 @@ import WithRender from './timepicker.sandbox.html';
 @WithRender
 @Component
 export class MTimepickerSandbox extends Vue {
+
+    model: string = '';
+
+    private mounted(): void {
+        setTimeout(() => {
+            this.model = '12:05';
+        }, 3000);
+    }
+
 }
 
 const TimepickerSandboxPlugin: PluginObject<any> = {

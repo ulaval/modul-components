@@ -21,4 +21,28 @@
 
         Selection: {{selection2}}
     </div>
+
+    <h4>With custom item template</h4>
+    <m-autocomplete placeholder="Type something"
+                    label="API"
+                    :required-marker="true"
+                    :results="results2"
+                    @complete="onComplete2"
+                    v-model="selection2">
+        <template slot-scope="{item}"><b>{{item.label}}</b>
+            <div>{{item.entry.Category}}</div>
+        </template>
+
+        Selection: {{selection2}}
+    </m-autocomplete>
+
+    <h4>With max length</h4>
+    <m-autocomplete placeholder="Type something"
+                    :required-marker="true"
+                    :results="results2"
+                    :max-length="10"
+                    @complete="onComplete2"
+                    v-model="selection2"></m-autocomplete>
+
+    Selection: {{selection2}}
 </div>

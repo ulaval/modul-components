@@ -34,7 +34,7 @@ export class MAutoCompleteSandbox extends ModulVue {
                         const label: string = entry.API.length > 60
                             ? entry.API.slice(0, 60) + '...'
                             : entry.API;
-                        return { label: label, value: label };
+                        return { label: label, value: label, entry: entry };
                     });
                 } else {
                     return [];
