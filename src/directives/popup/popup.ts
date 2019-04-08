@@ -7,7 +7,7 @@ const MPopupDirective: DirectiveOptions = {
         if (node.context) {
             node.context.$nextTick(() => {
                 if (node.context) {
-                    (node.context.$refs[binding.arg] as OpenTrigger).triggerHook = element;
+                    (node.context.$refs[binding.arg!] as OpenTrigger).triggerHook = element;
                 }
             });
         }

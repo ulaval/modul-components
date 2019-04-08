@@ -462,8 +462,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 let container: HTMLElement = this.$refs.items;
                 if (container) {
                     let focusedItem: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
-                    let top: number = focusedItem.$el.offsetTop;
-                    let bottom: number = focusedItem.$el.offsetTop + focusedItem.$el.offsetHeight;
+                    let top: number = (focusedItem.$el as HTMLElement).offsetTop;
+                    let bottom: number = (focusedItem.$el as HTMLElement).offsetTop + (focusedItem.$el as HTMLElement).offsetHeight;
                     let viewRectTop: number = container.scrollTop;
                     let viewRectBottom: number = viewRectTop + container.clientHeight;
 
