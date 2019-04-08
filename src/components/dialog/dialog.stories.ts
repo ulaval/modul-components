@@ -3,7 +3,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { CHECKBOX_NAME, DIALOG_NAME } from '../component-names';
+import { DIALOG_NAME } from '../component-names';
 import DialogPlugin from './dialog';
 
 Vue.use(DialogPlugin);
@@ -156,4 +156,4 @@ storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/Btn-Link Combos`, m
         A Dialog with type="confirmation"
         <m-button slot="trigger">type="confirmation"</m-button>
                     </m-dialog>`
-    }))
+    }));
