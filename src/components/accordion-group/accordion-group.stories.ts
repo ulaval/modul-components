@@ -42,6 +42,57 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
+    .add('secondary-title', () => ({
+        template: `<m-accordion-group>
+                        <h2 slot="title">An Accordion Group Title</h2>
+                        <h3 slot="secondary-title">An Accordion Group Title</h3>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
+    .add('title-reverse', () => ({
+        template: `<m-accordion-group :reverse-header="true">
+                        <h2 slot="title">An Accordion Group Title</h2>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
+    .add('secondary-title-reverse', () => ({
+        template: `<m-accordion-group :reverse-header="true">
+                        <h2 slot="title">An Accordion Group Title</h2>
+                        <h3 slot="secondary-title">An Accordion Group Title</h3>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
+    .add('secondary-title-link', () => ({
+        template: `<m-accordion-group :reverse-header="true">
+                        <h2 slot="title">An Accordion Group Title</h2>
+                        <m-link icon-name="m-svg__add-circle-filled" icon-size="22px" mode="button" slot="secondary-title">Add content</m-link>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
+    .add('no-title-with-secondary-title', () => ({
+        template: `<m-accordion-group>
+                        <h3 slot="secondary-title">An Accordion Group Title</h3>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
+    .add('no-title-with-secondary-title-reverse', () => ({
+        template: `<m-accordion-group :reverse-header="true">
+                        <h3 slot="secondary-title">An Accordion Group Title</h3>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+                        <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
+    </m-accordion-group>`
+    }))
     .add('concurrent', () => ({
         template: `<m-accordion-group :concurrent="true">
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
