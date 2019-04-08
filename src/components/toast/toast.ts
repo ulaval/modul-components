@@ -2,7 +2,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import I18nFilterPlugin from '../../filters/i18n/i18n';
-import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
 import { BackdropMode, Portal, PortalMixin, PortalMixinImpl } from '../../mixins/portal/portal';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
@@ -131,11 +131,31 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     private convertTimeout(timeout: MToastTimeout): number {
+        if (this.isMobile) {
+            return this.convertTimeoutMobile(timeout);
+        } else {
+            return this.convertTimeoutDesktop(timeout);
+        }
+    }
+
+    private convertTimeoutDesktop(timeout: MToastTimeout): number {
         switch (timeout) {
             case MToastTimeout.long:
-                return 15000;
+                return 8000;
             case MToastTimeout.short:
                 return 5000;
+            case MToastTimeout.none:
+            default:
+                return 0;
+        }
+    }
+
+    private convertTimeoutMobile(timeout: MToastTimeout): number {
+        switch (timeout) {
+            case MToastTimeout.long:
+                return 5000;
+            case MToastTimeout.short:
+                return 3000;
             case MToastTimeout.none:
             default:
                 return 0;
@@ -186,6 +206,10 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     private get isRight(): boolean {
         return this.position === MToastPosition.TopRight ||
             this.position === MToastPosition.BottomRight;
+    }
+
+    private get isMobile(): boolean {
+        return !this.as<MediaQueriesMixin>().isMqMinS;
     }
 
     private getIcon(): string {

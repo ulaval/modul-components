@@ -9,6 +9,7 @@ import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
 let localVue: VueConstructor<Vue>;
+let modeMobile = false;
 
 const defaultSlot: any = {
     default: `toast message content`
@@ -23,6 +24,11 @@ const initializeWrapper: () => any = () => {
         stubs: {
             transition: TransitionStub as any,
             portal: PortalStub as any
+        },
+        computed: {
+            isMqMaxS: {
+                get(): boolean { return modeMobile; }
+            }
         }
     });
 };
