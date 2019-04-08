@@ -3,7 +3,7 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { DIALOG_NAME } from '../component-names';
+import { CHECKBOX_NAME, DIALOG_NAME } from '../component-names';
 import DialogPlugin from './dialog';
 
 Vue.use(DialogPlugin);
@@ -130,3 +130,30 @@ storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/type`, module)
         <m-button slot="trigger">type="error"</m-button>
                     </m-dialog>`
     }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/Btn-Link Combos`, module)
+    .addDecorator(withA11y)
+    .add('default', () => ({
+        template: `<m-dialog>A Dialog
+        A Dialog with type="confirmation"
+        <m-button slot="trigger">type="confirmation"</m-button>
+                    </m-dialog>`
+    }))
+    .add('secBtn="true"', () => ({
+        template: `<m-dialog :SecBtn="true">A Dialog
+        A Dialog with type="confirmation"
+        <m-button slot="trigger">type="confirmation"</m-button>
+                    </m-dialog>`
+    }))
+    .add('negativeLink="false"', () => ({
+        template: `<m-dialog :negativeLink="false">A Dialog
+        A Dialog with type="confirmation"
+        <m-button slot="trigger">type="confirmation"</m-button>
+                    </m-dialog>`
+    }))
+    .add('secBtn="true" && negativeLink="false"', () => ({
+        template: `<m-dialog :secBtn="true" :negativeLink="false">A Dialog
+        A Dialog with type="confirmation"
+        <m-button slot="trigger">type="confirmation"</m-button>
+                    </m-dialog>`
+    }))
