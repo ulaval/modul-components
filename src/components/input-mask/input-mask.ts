@@ -91,6 +91,8 @@ export class MInputMask extends ModulVue {
     }
 
     onPasteTextfield($event: any): void {
+        // tslint:disable-next-line:no-console
+        console.log('paste', $event);
         this.$emit('paste', $event);
     }
 
