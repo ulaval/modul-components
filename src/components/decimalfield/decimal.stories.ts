@@ -35,9 +35,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
     .addDecorator(withKnobs)
     .add('With initial value', () => ({
         components: { MDecimalfield },
-        template: `<div>
-            <${DECIMALFIELD_NAME} v-model="value"></${DECIMALFIELD_NAME}>
-        </div>`,
+        template: `<${DECIMALFIELD_NAME} v-model="value"></${DECIMALFIELD_NAME}>`,
         data: () => ({
             value: 123456.78
         })

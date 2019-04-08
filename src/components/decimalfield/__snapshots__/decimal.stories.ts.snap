@@ -23,6 +23,7 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
+            inputmode="numeric"
           />
            
           <!---->
@@ -76,6 +77,7 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
+            inputmode="numeric"
           />
            
           <!---->
@@ -107,55 +109,54 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
 `;
 
 exports[`Storyshots components|m-decimalfield With initial value 1`] = `
-<div>
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
   <div
-    class="m-decimalfield"
-    style="width: 100%; max-width: 288px;"
+    class="m-input-style m--has-value m--is-tag-default"
   >
     <div
-      class="m-input-style m--has-value m--is-tag-default"
+      class="m-input-style__content"
+      style="margin-top: 10px;"
     >
+      <!---->
+       
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__body"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
+          class="m-input-style__left-content"
         >
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-            />
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <input
+            class="m-decimalfield__input"
+            id="mDecimalfield-uuid"
+            inputmode="numeric"
           />
            
           <!---->
+           
+          <!---->
         </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-decimalfield__validation"
-    >
-      <div
-        class="m-validation-message m-decimalfield__validation__message"
-      >
-        <!---->
+         
+        <div
+          class="m-input-style__right-content"
+        />
          
         <!---->
       </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
     </div>
   </div>
 </div>
@@ -184,6 +185,7 @@ exports[`Storyshots components|m-decimalfield default 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
+            inputmode="numeric"
           />
            
           <!---->
