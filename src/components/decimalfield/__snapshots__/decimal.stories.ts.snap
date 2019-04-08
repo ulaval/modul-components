@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-decimalfield Localization 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <m-input-style
+    label-for="mDecimalfield-uuid"
+    tag-style="default"
+  >
+    <input
+      class="m-decimalfield__input"
+      id="mDecimalfield-uuid"
+    />
+  </m-input-style>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <m-input-style
+    label-for="mDecimalfield-uuid"
+    tag-style="default"
+  >
+    <input
+      class="m-decimalfield__input"
+      id="mDecimalfield-uuid"
+    />
+  </m-input-style>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield With initial value 1`] = `
+<div>
+  <div
+    class="m-decimalfield"
+    style="width: 100%; max-width: 288px;"
+  >
+    <m-input-style
+      label-for="mDecimalfield-uuid"
+      tag-style="default"
+    >
+      <input
+        class="m-decimalfield__input"
+        id="mDecimalfield-uuid"
+      />
+    </m-input-style>
+     
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield default 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <m-input-style
+    empty="true"
+    label-for="mDecimalfield-uuid"
+    tag-style="default"
+  >
+    <input
+      class="m-decimalfield__input"
+      id="mDecimalfield-uuid"
+    />
+  </m-input-style>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
