@@ -5,6 +5,13 @@
     display: inline-flex;
     flex-direction: column;
 
+    &:not(:last-child):not(:only-child) {
+        // visually aligned with inline-flex intrinsic space to equal $m-spacing (16px)
+        margin-right: 13px;
+        // negate inline-flex intrinsic trailling space
+        // margin-left: -0.2em;
+    }
+
     &.m--has-validation-message {
         .m-textfield__validation {
             margin-top: $m-spacing--xs;

@@ -1,7 +1,7 @@
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import { ModulVue } from '../../utils/vue/vue';
+
 
 export enum InputMaxWidth {
     None = 'none',
@@ -10,6 +10,16 @@ export enum InputMaxWidth {
     Regular = 'regular',
     Medium = 'medium',
     Large = 'large'
+}
+
+// input refence is minimal mobile width (320px), minus base padding (16px);
+// $m-min-width - $m-spacing * 2 = regular input width
+export enum InputMaxWidthValues {
+    XSmall = '85px',
+    Small = '136px',
+    Regular = '288px',
+    Medium = '592px',
+    Large = '896px'
 }
 
 @Component
@@ -27,19 +37,19 @@ export class InputWidth extends ModulVue {
                 maxWidth = undefined;
                 break;
             case InputMaxWidth.XSmall:
-                maxWidth = '72px';
+                maxWidth = InputMaxWidthValues.XSmall;
                 break;
             case InputMaxWidth.Small:
-                maxWidth = '144px';
+                maxWidth = InputMaxWidthValues.Small;
                 break;
             case InputMaxWidth.Regular:
-                maxWidth = '288px';
+                maxWidth = InputMaxWidthValues.Regular;
                 break;
             case InputMaxWidth.Medium:
-                maxWidth = '608px';
+                maxWidth = InputMaxWidthValues.Medium;
                 break;
             case InputMaxWidth.Large:
-                maxWidth = '800px';
+                maxWidth = InputMaxWidthValues.Large;
                 break;
             default:
                 maxWidth = this.maxWidth;
