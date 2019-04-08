@@ -9,7 +9,7 @@ import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
 let localVue: VueConstructor<Vue>;
-let modeMobile = false;
+let modeMobile: boolean = false;
 
 const defaultSlot: any = {
     default: `toast message content`
