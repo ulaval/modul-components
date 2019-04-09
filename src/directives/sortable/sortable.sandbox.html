@@ -21,7 +21,8 @@
 
         <li v-for="(element, index) in elementsSortableWithoutHandle"
             class="noHandle"
-            :key="element.cle">
+            :key="element.cle"
+            :draggable="isDraggable(element.cle)">
             {{ element.titre }}
         </li>
     </ul>

@@ -151,6 +151,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
         const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
         for (let i: number = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
+            const childDragValue: null | Attr = currentElement.attributes.getNamedItem('draggable');
 
             if (currentElement.classList.contains('emptyPlaceholder')) {
                 this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : undefined);
@@ -162,7 +163,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
                     action: !grouping ? MSortableAction.Move : MSortableAction.MoveGroup,
                     dragData: this.options.items[itemCounter++],
                     grouping,
-                    canDrag: this.options.canSort
+                    canDrag: childDragValue && childDragValue.value === 'false' ? false : true
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);

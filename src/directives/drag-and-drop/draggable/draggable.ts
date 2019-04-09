@@ -89,7 +89,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     public detach(): void {
-        this.element.draggable = false;
+        this.element.draggable = this.options.canDrag ? this.options.canDrag : false;
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.element.classList.remove(MDraggableClassNames.Draggable);
         this.destroyGrabBehavior();
@@ -159,7 +159,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private turnDragOn(): void {
-        this.element.draggable = true;
+        this.element.draggable = this.options.canDrag ? this.options.canDrag : true;
 
         this.addEventListener('dragend', (event: DragEvent) => this.onDragEnd(event));
         this.addEventListener('dragstart', (event: DragEvent) => this.onDragStart(event));
@@ -170,7 +170,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
     }
 
     private turnDragOff(): void {
-        this.element.draggable = false;
+        this.element.draggable = this.options.canDrag ? this.options.canDrag : false;
 
         this.removeEventListener('dragend');
         this.removeEventListener('dragstart');
