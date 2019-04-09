@@ -154,6 +154,17 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
             const childDragValue: null | Attr = currentElement.attributes.getNamedItem('can-drag');
 
+            let canDragValue: boolean;
+            if (!this.options.canSort) {
+                canDragValue = false;
+            } else if (childDragValue && childDragValue.value === 'false') {
+                canDragValue = false;
+            } else if (childDragValue && childDragValue.value) {
+                canDragValue = true;
+            } else {
+                canDragValue = this.options.canSort;
+            }
+
             if (currentElement.classList.contains('emptyPlaceholder')) {
                 this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : undefined);
             } else {
@@ -164,7 +175,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
                     action: !grouping ? MSortableAction.Move : MSortableAction.MoveGroup,
                     dragData: this.options.items[itemCounter++],
                     grouping,
-                    canDrag: childDragValue && childDragValue.value === 'false' ? false : this.options.canSort
+                    canDrag: canDragValue
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);
