@@ -165,7 +165,7 @@
                     "spec": {
                         "containers": [
                             {
-                                "env": [],
+                                "env": ["NPM_RUN=storybook"],
                                 "image": " ",
                                 "livenessProbe": {
                                     "httpGet": {
@@ -175,7 +175,7 @@
                                     "initialDelaySeconds": 120,
                                     "timeoutSeconds": 3
                                 },
-                                "name": "nodejs-example",
+                                "name": "modul-components",
                                 "ports": [
                                     {
                                         "containerPort": 8080
