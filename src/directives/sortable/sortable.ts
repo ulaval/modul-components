@@ -163,7 +163,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
                     action: !grouping ? MSortableAction.Move : MSortableAction.MoveGroup,
                     dragData: this.options.items[itemCounter++],
                     grouping,
-                    canDrag: childDragValue && childDragValue.value === 'false' ? false : true
+                    canDrag: childDragValue && childDragValue.value === 'false' ? false : this.options.canSort
                 });
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragEnd);
                 draggablePlugin.removeEventListener(MDraggableEventNames.OnDragStart);
