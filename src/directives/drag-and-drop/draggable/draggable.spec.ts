@@ -231,7 +231,7 @@ describe('draggable', () => {
             const dragImage: HTMLElement = draggable.find(`.${MDraggableClassNames.DragImage}`).element;
             draggable.destroy();
 
-            expect(element.draggable).toBeFalsy();
+            expect(element.draggable).toBeTruthy();
             expect(dragImage.hidden).toBeTruthy();
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Draggable);
             expect(dragImage.classList).not.toContain(MDraggableClassNames.Dragging);
