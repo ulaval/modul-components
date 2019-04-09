@@ -27,20 +27,22 @@ describe('form-field', () => {
     });
 
     describe(`The form validate its fields`, () => {
-        mockFormField = {
-            shouldFocus: false,
-            isEditing: false,
-            hasError: true,
-            touched: false,
-            touch: jest.fn(),
-            initEdition: jest.fn(),
-            endEdition: jest.fn()
-        };
+
 
         let formField: FormField<any>;
         let form: Form;
 
         beforeEach(() => {
+            mockFormField = {
+                shouldFocus: false,
+                isEditing: false,
+                hasError: true,
+                touched: false,
+                touch: jest.fn(),
+                initEdition: jest.fn(),
+                endEdition: jest.fn()
+            };
+
             formField = new FormField(() => undefined, [(value: any) => {
                 return new FormFieldValidation(true, [''], ['']);
             }]);
@@ -79,7 +81,6 @@ describe('form-field', () => {
             expect(mockFormField.shouldFocus).toBe(true);
 
             await wrapper.vm.$forceUpdate();
-
             expect(mockFormField.shouldFocus).toBe(false);
             expect(spy2).toHaveBeenCalled();
         });
@@ -88,8 +89,8 @@ describe('form-field', () => {
             const spy1: jest.SpyInstance = jest.spyOn(mockFormField, 'initEdition');
             const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'endEdition');
 
-            wrapper.find({ ref: 'field' }).element.focus();
-            wrapper.find({ ref: 'field' }).element.blur();
+            wrapper.find({ ref: 'field' }).trigger('focus');
+            wrapper.find({ ref: 'field' }).trigger('blur');
 
             expect(spy1).toHaveBeenCalled();
             expect(spy2).toHaveBeenCalled();
@@ -98,7 +99,7 @@ describe('form-field', () => {
         it(`it should touch the field on blur`, () => {
             const spy: jest.SpyInstance = jest.spyOn(mockFormField, 'touch');
 
-            wrapper.find({ ref: 'field' }).element.blur();
+            wrapper.find({ ref: 'field' }).trigger('blur');
 
             expect(spy).toHaveBeenCalled();
         });
