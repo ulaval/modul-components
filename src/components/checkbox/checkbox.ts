@@ -13,6 +13,10 @@ export enum MCheckboxPosition {
     Right = 'right'
 }
 
+export enum MCheckboxVerticalAlignement {
+    Center = 'center',
+    Top = 'top'
+}
 @WithRender
 @Component({
     mixins: [InputState]
@@ -33,6 +37,14 @@ export class MCheckbox extends ModulVue {
             value === MCheckboxPosition.Right
     })
     public position: MCheckboxPosition;
+
+    @Prop({
+        default: MCheckboxVerticalAlignement.Center,
+        validator: value =>
+            value === MCheckboxVerticalAlignement.Center ||
+            value === MCheckboxVerticalAlignement.Top
+    })
+    public verticalAlign: MCheckboxVerticalAlignement;
 
     private isFocus = false;
     private id: string = `mCheckbox-${uuid.generate()}`;
@@ -74,6 +86,10 @@ export class MCheckbox extends ModulVue {
 
     private get hasCheckboxLeft(): boolean {
         return this.position === MCheckboxPosition.Left;
+    }
+
+    private get hasCheckboxAlign(): MCheckboxVerticalAlignement {
+        return this.verticalAlign;
     }
 
     private get hasLabelSlot(): boolean {
