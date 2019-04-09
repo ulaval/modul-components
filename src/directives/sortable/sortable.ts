@@ -159,7 +159,7 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
                 canDragValue = false;
             } else if (childDragValue && childDragValue.value === 'false') {
                 canDragValue = false;
-            } else if (childDragValue && childDragValue.value) {
+            } else if (childDragValue && childDragValue.value === 'true') {
                 canDragValue = true;
             } else {
                 canDragValue = this.options.canSort;
