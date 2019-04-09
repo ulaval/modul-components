@@ -1,32 +1,15 @@
 <article class="m-accordion-group">
     <div class="m-accordion-group__header"
-         :class="{ 'm--no-title' : !hasTitleSlot, 'm--has-secondary-title' : hasSecondaryTitleSlot, 'm--is-reserve-header' : reverseHeader }"
+         :class="{ 'm--no-title' : !hasTitleSlot,
+                   'm--has-secondary-content' : hasSecondaryContentSlot,
+                   'm--is-reserve-header' : reverseHeader }"
          v-if="hasTitleSlot || !concurrent">
         <div class="m-accordion-group__header-title"
              v-if="hasTitleSlot">
             <slot name="title"></slot>
         </div>
-        <template v-if="!hasSecondaryTitleSlot">
-            <div class="m-accordion-group__toggle-link"
-                 v-if="!concurrent && !disabled">
-                <m-link mode="button"
-                        @click="openAllAccordions"
-                        v-if="!propAllOpen"
-                        ref="openAllButton">
-                    <m-i18n k="m-accordion-group:open-all"></m-i18n>
-                </m-link>
-                <template v-if="!propAllOpen && !propAllClosed">&nbsp;&nbsp;|&nbsp;&nbsp;</template>
-                <m-link mode="button"
-                        @click="closeAllAccordions"
-                        v-if="!propAllClosed"
-                        ref="closeAllButton">
-                    <m-i18n k="m-accordion-group:close-all"></m-i18n>
-                </m-link>
-            </div>
-        </template>
-        <div class="m-accordion-group__secondary-title"
-             v-else>
-            <slot name="secondary-title"></slot>
+        <div class="m-accordion-group__secondary-content">
+            <slot name="secondary-content"></slot>
             <div class="m-accordion-group__toggle-link"
                  v-if="!concurrent && !disabled">
                 <m-link mode="button"
@@ -44,7 +27,6 @@
                 </m-link>
             </div>
         </div>
-
     </div>
     <div class="m-accordion-group__body">
         <slot></slot>

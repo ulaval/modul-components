@@ -9,7 +9,7 @@
             justify-content: flex-end;
         }
 
-        &:not(.m--has-secondary-title):not(.m--no-title) {
+        &:not(.m--has-secondary-content):not(.m--no-title) {
             justify-content: space-between;
             align-items: flex-end;
 
@@ -18,18 +18,18 @@
             }
         }
 
-        &.m--has-secondary-title {
+        &.m--has-secondary-content {
             flex-direction: column;
 
             &.m--is-reserve-header {
-                .m-accordion-group__secondary-title {
+                .m-accordion-group__secondary-content {
                     flex-direction: row-reverse;
                 }
             }
         }
     }
 
-    &__secondary-title {
+    &__secondary-content {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;

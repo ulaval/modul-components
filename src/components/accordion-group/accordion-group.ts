@@ -89,8 +89,8 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
         return !!this.$slots['title'];
     }
 
-    private get hasSecondaryTitleSlot(): boolean {
-        return !!this.$slots['secondary-title'];
+    private get hasSecondaryContentSlot(): boolean {
+        return !!this.$slots['secondary-content'];
     }
 
     private openAllAccordions(): void {

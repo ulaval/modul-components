@@ -130,13 +130,18 @@ exports[`Storyshots components|m-accordion-group default 1`] = `
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -255,13 +260,18 @@ exports[`Storyshots components|m-accordion-group header 1`] = `
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -379,17 +389,17 @@ exports[`Storyshots components|m-accordion-group header 1`] = `
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group no-title-with-secondary-title 1`] = `
+exports[`Storyshots components|m-accordion-group no-title-with-secondary-content 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--no-title m--has-secondary-title"
+    class="m-accordion-group__header m--no-title m--has-secondary-content"
   >
     <!---->
      
     <div
-      class="m-accordion-group__secondary-title"
+      class="m-accordion-group__secondary-content"
     >
       <h3>
         An Accordion Group Title
@@ -522,17 +532,17 @@ exports[`Storyshots components|m-accordion-group no-title-with-secondary-title 1
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group no-title-with-secondary-title-reverse 1`] = `
+exports[`Storyshots components|m-accordion-group no-title-with-secondary-content-reverse 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--no-title m--has-secondary-title m--is-reserve-header"
+    class="m-accordion-group__header m--no-title m--has-secondary-content m--is-reserve-header"
   >
     <!---->
      
     <div
-      class="m-accordion-group__secondary-title"
+      class="m-accordion-group__secondary-content"
     >
       <h3>
         An Accordion Group Title
@@ -665,12 +675,12 @@ exports[`Storyshots components|m-accordion-group no-title-with-secondary-title-r
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group secondary-title 1`] = `
+exports[`Storyshots components|m-accordion-group secondary-content 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--has-secondary-title"
+    class="m-accordion-group__header m--has-secondary-content"
   >
     <div
       class="m-accordion-group__header-title"
@@ -681,7 +691,7 @@ exports[`Storyshots components|m-accordion-group secondary-title 1`] = `
     </div>
      
     <div
-      class="m-accordion-group__secondary-title"
+      class="m-accordion-group__secondary-content"
     >
       <h3>
         An Accordion Group Title
@@ -814,12 +824,12 @@ exports[`Storyshots components|m-accordion-group secondary-title 1`] = `
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group secondary-title-link 1`] = `
+exports[`Storyshots components|m-accordion-group secondary-content-link 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--has-secondary-title m--is-reserve-header"
+    class="m-accordion-group__header m--has-secondary-content m--is-reserve-header"
   >
     <div
       class="m-accordion-group__header-title"
@@ -830,7 +840,7 @@ exports[`Storyshots components|m-accordion-group secondary-title-link 1`] = `
     </div>
      
     <div
-      class="m-accordion-group__secondary-title"
+      class="m-accordion-group__secondary-content"
     >
       <a
         class="m-link m--is-unvisited m--is-button m--has-left-icon"
@@ -987,12 +997,12 @@ exports[`Storyshots components|m-accordion-group secondary-title-link 1`] = `
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group secondary-title-reverse 1`] = `
+exports[`Storyshots components|m-accordion-group secondary-content-reverse 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--has-secondary-title m--is-reserve-header"
+    class="m-accordion-group__header m--has-secondary-content m--is-reserve-header"
   >
     <div
       class="m-accordion-group__header-title"
@@ -1003,7 +1013,7 @@ exports[`Storyshots components|m-accordion-group secondary-title-reverse 1`] = `
     </div>
      
     <div
-      class="m-accordion-group__secondary-title"
+      class="m-accordion-group__secondary-content"
     >
       <h3>
         An Accordion Group Title
@@ -1152,13 +1162,18 @@ exports[`Storyshots components|m-accordion-group title 1`] = `
     </div>
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -1293,13 +1308,18 @@ exports[`Storyshots components|m-accordion-group title-reverse 1`] = `
     </div>
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -1427,7 +1447,12 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
   >
     <!---->
      
-    <!---->
+    <div
+      class="m-accordion-group__secondary-content"
+    >
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1553,7 +1578,12 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
   >
     <!---->
      
-    <!---->
+    <div
+      class="m-accordion-group__secondary-content"
+    >
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1679,7 +1709,12 @@ exports[`Storyshots components|m-accordion-group/disabled="true" childrens disab
   >
     <!---->
      
-    <!---->
+    <div
+      class="m-accordion-group__secondary-content"
+    >
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1806,13 +1841,18 @@ exports[`Storyshots components|m-accordion-group/disabled=false all childrens di
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -1940,13 +1980,18 @@ exports[`Storyshots components|m-accordion-group/disabled=false all childrens di
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2074,13 +2119,18 @@ exports[`Storyshots components|m-accordion-group/disabled=false childrens disabl
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2208,13 +2258,18 @@ exports[`Storyshots components|m-accordion-group/openedIds=[x,y,z] openedIds=[] 
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2342,13 +2397,18 @@ exports[`Storyshots components|m-accordion-group/openedIds=[x,y,z] openedIds=[1,
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2512,13 +2572,18 @@ exports[`Storyshots components|m-accordion-group/openedIds=[x,y,z] openedIds=[1,
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2670,13 +2735,18 @@ exports[`Storyshots components|m-accordion-group/skin skin="default" 1`] = `
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2804,13 +2874,18 @@ exports[`Storyshots components|m-accordion-group/skin skin="light" 1`] = `
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -2938,13 +3013,18 @@ exports[`Storyshots components|m-accordion-group/skin skin="plain" 1`] = `
     <!---->
      
     <div
-      class="m-accordion-group__toggle-link"
+      class="m-accordion-group__secondary-content"
     >
-      <!---->
        
-      <!---->
-       
-      <!---->
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
     </div>
   </div>
    
