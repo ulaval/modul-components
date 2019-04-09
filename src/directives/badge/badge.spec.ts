@@ -1,28 +1,25 @@
-import { mount, Wrapper } from '@vue/test-utils';
-import Vue from 'vue';
-
+import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
+import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { renderComponent } from '../../../tests/helpers/render';
 import IconFilePluggin from '../../components/icon-file/icon-file';
-import BadgePlugin, { MBadgeState } from './badge';
+import BadgePlugin from './badge';
 
+// to be replaced with storybook @
 describe('MBadge', () => {
-    const getBadgeDirective: (bindingValue: MBadgeState) => Wrapper<Vue> =
-    (bindingValue: MBadgeState) => {
-        return mount({
-            template: `<m-icon-file v-m-badge="{ state: 'completed' }" :size="'100px'" :extension="'pdf'"></m-icon-file>`,
-            data: () => bindingValue
-        }, { localVue: Vue });
-    };
+    let localVue: VueConstructor<Vue>;
 
     beforeEach(() => {
         resetModulPlugins();
-        Vue.use(IconFilePluggin);
-        Vue.use(BadgePlugin);
+        localVue = createLocalVue();
+        localVue.use(IconFilePluggin);
+        localVue.use(BadgePlugin);
     });
 
     it(`should render correctly`, () => {
-        const badge: Wrapper<Vue> = getBadgeDirective(MBadgeState.Completed);
+        const badge: Wrapper<Vue> = mount({
+            template: `<m-icon-file v-m-badge="{ state: 'completed' }" :size="'100px'" :extension="'pdf'"></m-icon-file>`
+        }, { localVue: localVue });
         return expect(renderComponent(badge.vm)).resolves.toMatchSnapshot();
     });
 });
