@@ -1,0 +1,13 @@
+<div class="p-address-field">
+    <m-autocomplete :placeholder="'address:placeholder' | f-m-i18n"
+                    max-width="large"
+                    :results="results"
+                    @complete="onAdresseTyped"
+                    v-model="query"
+                    @change="onAdresseChange"
+                    v-m-form-field="formField"
+                    :error="formField.hasError"></m-autocomplete>
+    <slot></slot>
+    <m-validation-message class="p--error"
+                          :error-message="formField.errorMessage"></m-validation-message>
+</div>
