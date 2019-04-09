@@ -149,9 +149,10 @@ export class MSortable extends MElementDomPlugin<MSortableOptions> {
     private attachChilds(): void {
         let itemCounter: number = 0;
         const sortableGroup: MDroppableGroup | undefined = MDOMPlugin.getRecursive(MDroppableGroup, this.element);
+
         for (let i: number = 0; i < this.element.children.length; i++) {
             const currentElement: HTMLElement = this.element.children[i] as HTMLElement;
-            const childDragValue: null | Attr = currentElement.attributes.getNamedItem('draggable');
+            const childDragValue: null | Attr = currentElement.attributes.getNamedItem('can-drag');
 
             if (currentElement.classList.contains('emptyPlaceholder')) {
                 this.attachEmptyPlaceholder(currentElement, sortableGroup ? sortableGroup.options : undefined);

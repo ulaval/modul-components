@@ -1,12 +1,34 @@
 <div class="m-sortable">
-    <h4>Sortable - with handle</h4>
-    <ul v-m-sortable="true"
-        :items="elementsSortableWithHandle"
-        @sortable:move="deplacerElementsWithHandle">
+    <h4>Sortable - with handle and no attribut can-drag</h4>
+    <m-switch :value="peutEtreDrag"
+              @change="basculePeutEtreDrag($event)">Enable/disable sort</m-switch>
+    <ul v-m-sortable="peutEtreDrag"
+        :items="elementsSortableWithHandle1"
+        @sortable:move="deplacerElementsWithHandle1">
 
-        <li v-for="(element, index) in elementsSortableWithHandle"
+        <li v-for="(element, index) in elementsSortableWithHandle1"
             :key="element.cle">
-            <div class="drag-handle">
+            <div v-if="peutEtreDrag"
+                 class="drag-handle">
+                <m-icon name="m-svg__drag-vertical"
+                        size="28px"></m-icon>
+            </div>
+            {{ element.titre }}
+        </li>
+    </ul>
+
+    <h4>Sortable - with handle and attribut can-drag</h4>
+    <m-switch :value="peutEtreDrag"
+              @change="basculePeutEtreDrag($event)">Enable/disable sort</m-switch>
+    <ul v-m-sortable="peutEtreDrag"
+        :items="elementsSortableWithHandle2"
+        @sortable:move="deplacerElementsWithHandle2">
+
+        <li v-for="(element, index) in elementsSortableWithHandle2"
+            :key="element.cle"
+            :can-drag="isDraggable(element.cle)">
+            <div v-if="peutEtreDrag"
+                 class="drag-handle">
                 <m-icon name="m-svg__drag-vertical"
                         size="28px"></m-icon>
             </div>
@@ -22,7 +44,7 @@
         <li v-for="(element, index) in elementsSortableWithoutHandle"
             class="noHandle"
             :key="element.cle"
-            :draggable="isDraggable(element.cle)">
+            :can-drag="isDraggable(element.cle)">
             {{ element.titre }}
         </li>
     </ul>
