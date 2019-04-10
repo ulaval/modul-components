@@ -48,9 +48,12 @@ export default class MCalendarStateMachine extends ModulVue {
     }
 
     render(): any {
-        return this.$scopedSlots.default(
-            this.calendarState.buildCurrentCalendar()
-        );
+        if (this.$scopedSlots) {
+            return (this.$scopedSlots as any).default(
+                this.calendarState.buildCurrentCalendar()
+            );
+        }
+
     }
 
     onInput(value: SingleDate | RangeDate): void {

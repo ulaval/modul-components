@@ -9,6 +9,7 @@ import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
 export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
+export const CSS_BODY_DEFAULT_MARGIN: string = '0';
 
 @WithRender
 @Component({
@@ -26,6 +27,8 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public width: string;
     @Prop()
+    public iconName: string;
+    @Prop()
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
@@ -40,7 +43,8 @@ export class MInputStyle extends ModulVue {
         rightContent: HTMLElement
     };
 
-    public labelOffset: string | undefined = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public labelOffset: string = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public bodyOffset: string = CSS_BODY_DEFAULT_MARGIN;
     private animReady: boolean = false;
 
     protected created(): void {
@@ -86,19 +90,19 @@ export class MInputStyle extends ModulVue {
 
     @Watch('isLabelUp')
     private calculateLabelOffset(): void {
-        if (this.label) {
-            if (this.isLabelUp) {
-                let label: HTMLElement | null = this.$refs.label;
-                let rootStyle: any = window.getComputedStyle(this.$refs.root);
-                if (label) {
-                    let labelOffset: number = label.clientHeight / 2;
-                    this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? `${labelOffset}px` : `${CSS_LABEL_DEFAULT_MARGIN}px`;
-                }
-            } else {
-                this.labelOffset = `${CSS_LABEL_DEFAULT_MARGIN}px`;
+        if (this.isLabelUp) {
+            let label: HTMLElement | null = this.$refs.label;
+            let rootStyle: any = window.getComputedStyle(this.$refs.root);
+            if (label) {
+                let labelOffset: number = label.clientHeight / 2;
+                this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? labelOffset + 'px' : CSS_LABEL_DEFAULT_MARGIN + 'px';
+
+                let bodyOffset: number = labelOffset - (parseFloat(rootStyle.getPropertyValue('padding-top')) + parseFloat(rootStyle.getPropertyValue('padding-bottom')));
+                this.bodyOffset = bodyOffset < 0 ? CSS_BODY_DEFAULT_MARGIN : '-' + bodyOffset + 'px';
             }
         } else {
-            this.labelOffset = undefined;
+            this.bodyOffset = CSS_BODY_DEFAULT_MARGIN;
+            this.labelOffset = CSS_LABEL_DEFAULT_MARGIN + 'px';
         }
     }
 

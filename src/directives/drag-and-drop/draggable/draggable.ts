@@ -90,6 +90,7 @@ export class MDraggable extends MElementDomPlugin<MDraggableOptions> {
 
     public detach(): void {
         this.element.draggable = false;
+
         MDOMPlugin.detach(MRemoveUserSelect, this.element);
         this.element.classList.remove(MDraggableClassNames.Draggable);
         this.destroyGrabBehavior();
