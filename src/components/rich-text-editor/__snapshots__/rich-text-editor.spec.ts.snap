@@ -2,14 +2,12 @@
 
 exports[`MRichTextEditor should render correctly 1`] = `
 <div class="m-rich-text" style="width:100%;max-width:288px;">
-  <div border-top="true" class="m-input-style m--is-tag-default" style="width:undefined;">
-    <div class="m-input-style__content" style="margin-top:10px;">
-      <div class="m-input-style__body">
-        <div class="m-input-style__left-content">
-          <div></div>
-        </div>
-        <div class="m-input-style__right-content"></div>
+  <div border-top="true" class="m-input-style m--is-tag-default" style="width:undefined;margin-top:10px;">
+    <div class="m-input-style__body" style="top:0;">
+      <div class="m-input-style__body__left">
+        <div></div>
       </div>
+      <div class="m-input-style__body__right"></div>
     </div>
   </div>
   <div class="m-validation-message m-rich-text__validation-message"> </div>
