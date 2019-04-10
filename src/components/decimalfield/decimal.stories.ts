@@ -11,9 +11,35 @@ import { MDecimalfield } from './decimalfield';
 storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
-    .add('default', () => ({
+    .add('Basic', () => ({
         components: { MDecimalfield },
-        template: `<${DECIMALFIELD_NAME} v-model="value"></${DECIMALFIELD_NAME}>`,
+        template: `
+            <div>
+                <div><${DECIMALFIELD_NAME} v-model="value"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :label="'Label'"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :label="'Required label'" :required-marker="true"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :valid-message="'Valid message'"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :helper-message="'Helper message'"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :error-message="'Error message'"></${DECIMALFIELD_NAME}></div>
+            </div>
+        `,
+        data: () => ({
+            value: undefined
+        })
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('States', () => ({
+        components: { MDecimalfield },
+        template: `
+            <div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :disabled="true" :placeholder="'Disabled'"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :placeholder="'Read-only'" :readonly="true"></${DECIMALFIELD_NAME}></div>
+                <div><${DECIMALFIELD_NAME} v-model="value" :placeholder="'Waiting'" :waiting="true"></${DECIMALFIELD_NAME}></div>
+            </div>
+        `,
         data: () => ({
             value: undefined
         })

@@ -1,7 +1,7 @@
 import { CleaveOptions } from 'cleave.js/options';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -76,8 +76,11 @@ export class MDecimalfield extends ModulVue {
 
     private set model(value: string) {
         const valueAsNumber: number = Number.parseFloat(value);
-        this.$emit('input', valueAsNumber);
+        this.emitNewValue(valueAsNumber);
     }
+
+    @Emit('input')
+    emitNewValue(_newValue: number): void { }
 }
 
 const DecimalfieldPlugin: PluginObject<any> = {

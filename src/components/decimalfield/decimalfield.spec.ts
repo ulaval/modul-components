@@ -17,21 +17,23 @@ beforeEach(() => {
 });
 
 describe('MDecimalfield', () => {
-    it(`should update value correctly when user type in something in the input mask`, () => {
+    it(`should update value correctly when user type in something in the input mask`, async () => {
         const newInputMaskValue: string = '123456.78';
         initializeWrapper();
 
         wrapper.find(REF_INPUT_MASK).vm.$emit('input', newInputMaskValue);
+        await wrapper.vm.$nextTick();
 
         expect(wrapper.emitted('input')[0]).toBeDefined();
         expect(wrapper.emitted('input')[0][0]).toBe(123456.78);
     });
 
-    it(`should update value correctly when user type in 0 the input mask`, () => {
+    it(`should update value correctly when user type in 0 the input mask`, async () => {
         const newInputMaskValue: string = '0';
         initializeWrapper();
 
         wrapper.find(REF_INPUT_MASK).vm.$emit('input', newInputMaskValue);
+        await wrapper.vm.$nextTick();
 
         expect(wrapper.emitted('input')[0]).toBeDefined();
         expect(wrapper.emitted('input')[0][0]).toBe(0);
