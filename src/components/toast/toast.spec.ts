@@ -18,6 +18,7 @@ const ACTION_LABEL: string = 'Action';
 
 const initializeWrapper: () => any = () => {
     wrapper = mount(MToast, {
+        sync: false,
         localVue: localVue,
         slots: defaultSlot,
         stubs: {
@@ -42,12 +43,14 @@ describe(`MToast`, () => {
     describe(`Given that no props have been passed`, async () => {
         beforeEach(async () => {
             initializeWrapper();
+            await Vue.nextTick();
         });
 
         describe(`When the Toast is created`, () => {
-            it(`Should automatically appear`, () => {
+            it(`Should automatically appear`, async () => {
                 expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
                 expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                await Vue.nextTick();
                 expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
             });
 
@@ -74,6 +77,7 @@ describe(`MToast`, () => {
 
         describe(`When the close button is clicked`, () => {
             it(`Should emit a close event`, () => {
+
                 wrapper.find('.m-toast__close-button').trigger('click');
 
                 expect(wrapper.emitted('close')).toBeTruthy();
@@ -115,7 +119,7 @@ describe(`MToast`, () => {
 
     describe(`Given that a timeout prop have been passed`, () => {
         describe(`When the Toast is created`, () => {
-            it(`Should appear and then disappear`, () => {
+            it(`Should appear and then disappear`, async () => {
                 initializeWrapper();
                 wrapper.setProps({
                     timeout: 'short'
@@ -124,6 +128,7 @@ describe(`MToast`, () => {
 
                 expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
                 expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                await Vue.nextTick();
                 expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
 
                 jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over

@@ -1,7 +1,7 @@
 import ResizeSensor from 'css-element-queries/src/ResizeSensor';
 import Component from 'vue-class-component';
-
 import { ModulVue } from '../../utils/vue/vue';
+
 
 export enum ElementQueriesBpMin {
     XL = 1600,
@@ -61,8 +61,8 @@ export class ElementQueries extends ModulVue implements ElementQueriesMixin {
     private doneResizeEvent: any;
 
     protected mounted(): void {
-        this.resizeElement(this.$el);
-        this.resizeSensor = new ResizeSensor(this.$el, () => this.resizeElement(this.$el));
+        this.resizeElement(this.$el as HTMLElement);
+        this.resizeSensor = new ResizeSensor(this.$el, () => this.resizeElement(this.$el as HTMLElement));
     }
 
     protected beforeDestroy(): void {

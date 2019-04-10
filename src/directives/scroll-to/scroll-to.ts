@@ -25,7 +25,7 @@ const MScrollTo: DirectiveOptions = {
         if (!node.context) {
             throw new Error('Error node context is null');
         }
-        let target: HTMLElement = node.context.$refs[binding.arg] as HTMLElement;
+        let target: HTMLElement = node.context.$refs[binding.arg!] as HTMLElement;
         const _scrollToCallback: ScrollToCallback = new ScrollToCallback(speed, offset, target);
 
         Object.defineProperty(element, '_scrollToCallback', {

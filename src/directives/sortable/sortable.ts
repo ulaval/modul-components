@@ -412,7 +412,7 @@ const extractVnodeAttributes: (binding: VNodeDirective, node: VNode) => MSortabl
         items: getVNodeAttributeValue(node, 'items'),
         acceptedActions: getVNodeAttributeValue(node, 'accepted-actions'),
         canSort: binding.value,
-        encapsulate: binding.modifiers.encapsulate || false
+        encapsulate: (binding.modifiers || {}).encapsulate || false
     };
 };
 const Directive: DirectiveOptions = {
