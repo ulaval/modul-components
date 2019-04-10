@@ -7,7 +7,7 @@
     "scripts": {
         "clean": "rimraf dist",
         "reset": "rmdir /S /Q node_modules",
-        "dev": "rimraf dist/**/* && webpack-dev-server --progress --config conf/webpack.config.js  --colors --port 8082 --open --history-api-fallback",
+        "dev": "start-storybook --config-dir ./conf/storybook --port 8082",
         "buildWebpack": "webpack --config conf/webpack.config.js --env.lib --colors",
         "build": "tsc --project tsconfig.lib.json && copyfiles -u 1 \"./src/**/*.json\" dist && copyfiles -u 1 \"./src/**/*.html\" dist && copyfiles -u 1 \"./src/**/*.scss\" dist && copyfiles -u 1 \"./src/**/*.css\" dist && npm run assetsToDist && npm run metagenv2",
         "buildlib": "webpack --config conf/webpack.config.js --colors --env.lib",
@@ -25,7 +25,7 @@
         "stats": "webpack --config conf/webpack.config.js --env.lib --env.silent --colors --profile --json > reports/stats.json && webpack-bundle-analyzer reports/stats.json",
         "print_version_win": "echo %npm_package_version%",
         "print_version_nx": "echo $npm_package_version",
-        "storybook": "start-storybook --config-dir ./conf/storybook",
+        "sandboxes": "rimraf dist/**/* && webpack-dev-server --progress --config conf/webpack.config.js  --colors --port 8082 --open --history-api-fallback",
         "storybook:openshift": "start-storybook --ci --port 8080 --config-dir ./conf/storybook",
         "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose",
         "storybook:unit:update": "jest --config ./conf/storybook/jest.config.storybook.js --verbose --updateSnapshot"
