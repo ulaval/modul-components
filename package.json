@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.91",
+    "version": "1.0.0-beta.92",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -26,6 +26,7 @@
         "print_version_win": "echo %npm_package_version%",
         "print_version_nx": "echo $npm_package_version",
         "storybook": "start-storybook --config-dir ./conf/storybook",
+        "storybook:openshift": "start-storybook --ci --port 8080 --config-dir ./conf/storybook",
         "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose",
         "storybook:unit:update": "jest --config ./conf/storybook/jest.config.storybook.js --verbose --updateSnapshot"
     },
