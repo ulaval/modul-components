@@ -20,16 +20,21 @@ export class MSortableSandbox extends ModulVue {
     element5: ElementSortable = { cle: 5, titre: 'Element 5' };
     element6: ElementSortable = { cle: 6, titre: 'Element 6 - draggable false' };
 
-    elementsWithHandle1: Array<ElementSortable> = [this.element1, this.element2, this.element3, this.element4, this.element5];
-    elementsWithHandle2: Array<ElementSortable> = [this.element1, this.element2, this.element3, this.element4, this.element5, this.element6];
+    elementsWithHandleNoAttribut: Array<ElementSortable> = [this.element1, this.element2, this.element3, this.element4, this.element5];
+    elementsWithHandleWithAttribut: Array<ElementSortable> = [this.element1, this.element2, this.element3, this.element4, this.element5, this.element6];
+    elementsWithHandle: Array<ElementSortable> = [this.element1, this.element2, this.element3, this.element4, this.element5, this.element6];
     elementsWithoutHandle: Array<ElementSortable> = [this.element1, this.element2, this.element3, this.element4, this.element5, this.element6];
 
-    get elementsSortableWithHandle1(): ElementSortable[] {
-        return this.elementsWithHandle1;
+    get elementsSortableWithHandleNoAttribut(): ElementSortable[] {
+        return this.elementsWithHandleNoAttribut;
     }
 
-    get elementsSortableWithHandle2(): ElementSortable[] {
-        return this.elementsWithHandle2;
+    get elementsSortableWithHandleWithAttribut(): ElementSortable[] {
+        return this.elementsWithHandleWithAttribut;
+    }
+
+    get elementsSortableWithHandle(): ElementSortable[] {
+        return this.elementsWithHandle;
     }
 
     get elementsSortableWithoutHandle(): ElementSortable[] {
@@ -40,12 +45,16 @@ export class MSortableSandbox extends ModulVue {
         return cle === 6 ? 'false' : 'true';
     }
 
-    deplacerElementsWithHandle1(event: MSortEvent): void {
-        this.arraymove(this.elementsWithHandle1, event.sortInfo.oldPosition, event.sortInfo.newPosition);
+    deplacerElementsWithHandleNoAttribut(event: MSortEvent): void {
+        this.arraymove(this.elementsWithHandleNoAttribut, event.sortInfo.oldPosition, event.sortInfo.newPosition);
     }
 
-    deplacerElementsWithHandle2(event: MSortEvent): void {
-        this.arraymove(this.elementsWithHandle2, event.sortInfo.oldPosition, event.sortInfo.newPosition);
+    deplacerElementsWithHandleWithAttribut(event: MSortEvent): void {
+        this.arraymove(this.elementsWithHandleWithAttribut, event.sortInfo.oldPosition, event.sortInfo.newPosition);
+    }
+
+    deplacerElementsWithHandle(event: MSortEvent): void {
+        this.arraymove(this.elementsWithHandle, event.sortInfo.oldPosition, event.sortInfo.newPosition);
     }
 
     deplacerElementsWithoutHandle(event: MSortEvent): void {

@@ -1,12 +1,13 @@
 <div class="m-sortable">
+    <h3>Sort with switch</h3>
     <h4>Sortable - with handle and no attribut can-drag</h4>
     <m-switch :value="peutEtreDrag"
               @change="basculePeutEtreDrag($event)">Enable/disable sort</m-switch>
     <ul v-m-sortable="peutEtreDrag"
-        :items="elementsSortableWithHandle1"
-        @sortable:move="deplacerElementsWithHandle1">
+        :items="elementsSortableWithHandleNoAttribut"
+        @sortable:move="deplacerElementsWithHandleNoAttribut">
 
-        <li v-for="(element, index) in elementsSortableWithHandle1"
+        <li v-for="(element, index) in elementsSortableWithHandleNoAttribut"
             :key="element.cle">
             <div v-if="peutEtreDrag"
                  class="drag-handle">
@@ -21,10 +22,10 @@
     <m-switch :value="peutEtreDrag"
               @change="basculePeutEtreDrag($event)">Enable/disable sort</m-switch>
     <ul v-m-sortable="peutEtreDrag"
-        :items="elementsSortableWithHandle2"
-        @sortable:move="deplacerElementsWithHandle2">
+        :items="elementsSortableWithHandleWithAttribut"
+        @sortable:move="deplacerElementsWithHandleWithAttribut">
 
-        <li v-for="(element, index) in elementsSortableWithHandle2"
+        <li v-for="(element, index) in elementsSortableWithHandleWithAttribut"
             :key="element.cle"
             :can-drag="isDraggable(element.cle)">
             <div v-if="peutEtreDrag"
@@ -35,6 +36,24 @@
             {{ element.titre }}
         </li>
     </ul>
+
+    <h3>Sort without switch</h3>
+    <h4>Sortable - with handle</h4>
+    <ul v-m-sortable="true"
+        :items="elementsSortableWithHandle"
+        @sortable:move="deplacerElementsWithHandle">
+
+        <li v-for="(element, index) in elementsSortableWithHandle"
+            :key="element.cle"
+            :can-drag="isDraggable(element.cle)">
+            <div class="drag-handle">
+                <m-icon name="m-svg__drag-vertical"
+                        size="28px"></m-icon>
+            </div>
+            {{ element.titre }}
+        </li>
+    </ul>
+
 
     <h4>Sortable - without handle</h4>
     <ul v-m-sortable="true"
