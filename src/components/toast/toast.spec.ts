@@ -4,7 +4,7 @@ import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub } from '../../../tests/helpers/render';
 import { Portal, PortalMixin } from '../../mixins/portal/portal';
 import ModulPlugin from '../../utils/modul/modul';
-import ToastPlugin, { MToast, MToastPosition, MToastState } from './toast';
+import ToastPlugin, { MToast, MToastDuration, MToastPosition, MToastState } from './toast';
 
 jest.useFakeTimers();
 let wrapper: Wrapper<MToast>;
@@ -158,5 +158,73 @@ describe(`MToast`, () => {
                 expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
             });
         });
+    });
+
+    describe(`Given that calling function 'doCustomPropOpen'`, () => {
+        describe(`with mode desktop'`, () => {
+            beforeEach(() => {
+                modeMobile = false;
+                initializeWrapper();
+            });
+
+            describe(`When timeout prop 'long`, () => {
+                beforeEach(() => {
+                    wrapper.setProps({
+                        timeout: 'long'
+                    });
+                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                });
+
+                it(`should appear after MToastDuration.DesktopLong `, async () => {
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopLong);
+                });
+            });
+
+            describe(`When timeout prop 'short'`, () => {
+                beforeEach(() => {
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                });
+
+                it(`should appear after MToastDuration.DesktopShort `, async () => {
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopShort);
+                });
+            });
+        });
+
+        describe(`with mode mobile `, () => {
+            beforeEach(() => {
+                modeMobile = true;
+                initializeWrapper();
+            });
+            describe(`When timeout prop 'long`, () => {
+                beforeEach(() => {
+                    wrapper.setProps({
+                        timeout: 'long'
+                    });
+                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                });
+
+                it(`should appear after MToastDuration.MobileLong `, async () => {
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.MobileLong);
+                });
+            });
+
+            describe(`When timeout prop 'short'`, () => {
+                beforeEach(() => {
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                });
+
+                it(`should appear after MToastDuration.MobileShort `, async () => {
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.MobileShort);
+                });
+            });
+        });
+
     });
 });

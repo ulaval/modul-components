@@ -35,6 +35,14 @@ export enum MToastState {
     Error = 'error'
 }
 
+export enum MToastDuration {
+    MobileLong = 5000,
+    MobileShort = 3000,
+    DesktopLong = 8000,
+    DesktopShort = 5000,
+    None = 0
+}
+
 @WithRender
 @Component({
     mixins: [MediaQueries, Portal]
@@ -131,34 +139,14 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     private convertTimeout(timeout: MToastTimeout): number {
-        if (this.isMobile) {
-            return this.convertTimeoutMobile(timeout);
-        } else {
-            return this.convertTimeoutDesktop(timeout);
-        }
-    }
-
-    private convertTimeoutDesktop(timeout: MToastTimeout): number {
         switch (timeout) {
             case MToastTimeout.long:
-                return 8000;
+                return this.isMobile ? MToastDuration.MobileLong : MToastDuration.DesktopLong;
             case MToastTimeout.short:
-                return 5000;
+                return this.isMobile ? MToastDuration.MobileShort : MToastDuration.DesktopShort;
             case MToastTimeout.none:
             default:
-                return 0;
-        }
-    }
-
-    private convertTimeoutMobile(timeout: MToastTimeout): number {
-        switch (timeout) {
-            case MToastTimeout.long:
-                return 5000;
-            case MToastTimeout.short:
-                return 3000;
-            case MToastTimeout.none:
-            default:
-                return 0;
+                return MToastDuration.None;
         }
     }
 
@@ -209,7 +197,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     private get isMobile(): boolean {
-        return !this.as<MediaQueriesMixin>().isMqMinS;
+        return this.as<MediaQueriesMixin>().isMqMaxS;
     }
 
     private getIcon(): string {
