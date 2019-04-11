@@ -1,30 +1,20 @@
-<div class="m-validation-message">
+<div class="m-validation-message"
+     @click="onClick">
     <m-accordion-transition :transition="transition">
-        <div class="m-validation-message__wrap"
-             v-if="hasValidationMessage"
-             @click="onClick">
-            <p class="m-validation-message__error"
-               v-if="hasErrorMessage && hasError">
-                <m-icon class="m-validation-message__error__icon"
-                        name="m-svg__error"
-                        :svg-title="titleErrorIcon"
-                        size="1em">
-                </m-icon>
-                <span class="m-validation-message__text"
-                      v-html="errorMessage"></span>
-            </p>
-            <p class="m-validation-message__valid"
-               v-if="hasValidMessage && isValid">
-                <m-icon class="m-validation-message__valid__icon"
-                        name="m-svg__confirmation"
-                        :svg-title="titleValidIcon"
-                        size="1em"></m-icon>
-                <span class="m-validation-message__text"
-                      v-html="validMessage"></span>
-            </p>
-            <p class="m-validation-message__helper"
-               v-if="hasHelperMessage"
-               v-html="helperMessage"></p>
-        </div>
+        <p :class="['m-validation-message__' + classMessage]"
+           v-if="message">
+            <m-icon class="m-validation-message__icon"
+                    :name="iconName"
+                    :svg-title="svgTitle"
+                    size="1em">
+            </m-icon>
+            <span class="m-validation-message__text"
+                  v-html="message"></span>
+        </p>
+    </m-accordion-transition>
+    <m-accordion-transition :transition="transition">
+        <p class="m-validation-message__helper"
+           v-if="hasHelperMessage"
+           v-html="helperMessage"></p>
     </m-accordion-transition>
 </div>

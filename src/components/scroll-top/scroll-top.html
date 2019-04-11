@@ -1,15 +1,14 @@
 <div class="m-scroll-top"
      :class="{'m--is-position-fixed': isPositionFixed , 'm--is-position-relative': !isPositionFixed}">
     <transition name="m--is">
-        <button ref="scrollButton"
-                @click="onClick"
+        <button v-if="show"
                 class="m-scroll-top__button"
                 :class="{'m--is-position-fixed': isPositionFixed}"
-                v-if="show">
+                :title="'m-scroll-top:top' | f-m-i18n"
+                @click="onClick"
+                ref="scrollButton">
             <m-icon name="m-svg__chevron--right"
                     size="16px"></m-icon>
-            <m-i18n class="m-scroll-top__hidden"
-                    k="m-scroll-top:top"></m-i18n>
         </button>
     </transition>
 </div>

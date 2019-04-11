@@ -2,25 +2,30 @@
      :class="[ 'm--is-skin-' + skin,
                { 'm--is-open': propOpen,
                  'm--is-disabled': propDisabled }]">
-    <div class="m-menu__trigger"
-         ref="buttonMenu"
+    <div v-if="hasSlotTrigger"
+         class="m-menu__trigger"
          :tabindex="propDisabled ? '-1' : '0'"
+         :aria-controls="idAriaControls"
+         :aria-expanded="propOpen"
          @click="toggleMenu"
          @keypress.enter="toggleMenu"
          aria-haspopup="true"
-         :aria-controls="idAriaControls"
-         :aria-expanded="propOpen"
-         v-if="hasSlotTrigger">
-        <m-plus class="m-menu__trigger__plus" skin="current-color" :open="propOpen" :large="true"></m-plus>
+         ref="buttonMenu">
+        <m-plus class="m-menu__trigger__plus"
+                :large="true"
+                :open="propOpen"
+                :title-open="titleMenuOpen"
+                :title-close="titleMenuClose"
+                skin="current-color"></m-plus>
         <slot name="trigger"></slot>
     </div>
     <m-accordion-transition>
-        <ul :id="idAriaControls"
+        <ul v-show="propOpen"
+            :id="idAriaControls"
             class="m-menu__body"
-            role="menu"
-            ref="menu"
             :aria-hidden="!propOpen"
-            v-show="propOpen">
+            role="menu"
+            ref="menu">
             <slot></slot>
         </ul>
     </m-accordion-transition>

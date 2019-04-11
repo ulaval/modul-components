@@ -16,7 +16,10 @@ export const FormFieldDirective: DirectiveOptions = {
         Object.defineProperty(el, 'formFieldDirectiveListeners', {
             value: {
                 focusListener: () => formField.initEdition(),
-                blurListener: () => formField.endEdition()
+                blurListener: () => {
+                    formField.endEdition();
+                    formField.touch();
+                }
             }
         });
 

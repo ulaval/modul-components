@@ -59,7 +59,7 @@ const MFileDropDirective: DirectiveOptions = {
     ): void {
         el.cleanupMFileDropDirective();
         const $file: FileService = (vnode.context as ModulVue).$file;
-        if (!binding.modifiers['keep-store']) {
+        if (!(binding as any).modifiers['keep-store']) {
             $file.destroy(
                 binding.value ? binding.value : DEFAULT_STORE_NAME
             );

@@ -1,41 +1,22 @@
 <div>
-    <!-- Sandbox template -->
-    <h3>Test Title</h3>
-    <p class="m-u--margin-bottom">
-        Test description
-        <!-- if relevant, add link to PR
-        </br>From <a href="https://github.com/ulaval/modul-components/pull/000" target="blank">PR description</a>
-        -->
-    </p>
-    <p>
-        <m-validation-message>
-            <!-- Test case -->
-        </m-validation-message>
-    </p>
+    <h2 class="m-u--margin-bottom--s">Test the component</h2>
+    Set error-mesage: <input v-model="errorMessage"></input><br>
+    Set valide-mesage: <input v-model="validMessage"></input><br>
+    Set helper-mesage: <input v-model="helperMessage"></input><br>
+    <h3 class="m-u--h6">Test area</h3>
+    <div class="m-u--margin-top--s"
+         style="padding: 16px; border: 1px solid #ccc;">
+        <m-validation-message :error-message="errorMessage"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
 
-    <h3>Message d'erreur avec italique</h3>
-    <p class="m-u--margin-bottom">
-        Teste qu'un message d'erreur avec de l'italique s'affiche correctement
-    </p>
-    <p>
-        <m-validation-message :error="true"
-                              error-message="Message d'erreur avec <i>italique</i>"></m-validation-message>
-    </p>
 
-    <h3>Message valide avec italique</h3>
-    <p class="m-u--margin-bottom">
-        Teste qu'un message valide avec de l'italique s'affiche correctement
-    </p>
-    <p>
-        <m-validation-message :valid="true"
-                              valid-message="Message valide avec <i>italique</i>"></m-validation-message>
-    </p>
-
-    <h3>Message d'aide avec italique</h3>
-    <p class="m-u--margin-bottom">
-        Teste qu'un message d'aide avec de l'italique s'affiche correctement
-    </p>
-    <p>
-        <m-validation-message helper-message="Message d'aide avec <i>italique</i>"></m-validation-message>
-    </p>
+    <h2>Display a message with italic</h2>
+    <m-validation-message class="m-u--margin-top--s"
+                          error-message="Error message with <i>italic</i>"></m-validation-message>
+    <m-validation-message class="m-u--margin-top--s"
+                          valid-message="Valid message with <i>italic</i>"></m-validation-message>
+    <m-validation-message class="m-u--margin-top--s"
+                          helper-message="Helper message with <i>italic</i>"></m-validation-message>
 </div>
