@@ -22,42 +22,42 @@
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <input v-if="!hasWordWrap"
-               v-model="model"
                :id="id"
                class="m-textfield__input"
-               ref="input"
+               v-model="model"
                :autocomplete="autocomplete"
                :disabled="isDisabled || isWaiting"
                :placeholder="placeholder"
                :readonly="isReadonly"
                :maxlength="maxLengthNumber"
                :type="inputType"
-               @focus="onFocus"
                @blur="onBlur"
+               @change="onChange"
+               @focus="onFocus"
                @keyup="onKeyup"
                @keydown="onKeydown"
                @keydown.enter="onEnter"
-               @change="onChange"
-               @paste="onPaste" />
-        <template slot="right-content"
-                  v-if="!hasWordWrap">
+               @paste="onPaste"
+               ref="input" />
+        <template v-if="!hasWordWrap"
+                  slot="right-content">
             <transition-group name="m--is">
                 <m-icon-button v-if="passwordIcon && hasValue"
                                class="m-textfield__icon-password"
-                               key="passwordIcon"
-                               button-size="22px"
                                :aria-controls="id"
                                :title="passwordIconDescription"
-                               @click="togglePasswordVisibility"
-                               :icon-name="passwordIconName"></m-icon-button>
+                               :icon-name="passwordIconName"
+                               key="passwordIcon"
+                               button-size="22px"
+                               @click="togglePasswordVisibility"></m-icon-button>
                 <m-icon-button v-if="isTypeSearch && hasValue"
                                class="m-textfield__reset"
                                key="resetIcon"
                                button-size="1em"
-                               icon-size="11px"
                                :aria-controls="id"
-                               @click="reset"
-                               icon-name="m-svg__close-clear"></m-icon-button>
+                               icon-size="11px"
+                               icon-name="m-svg__close-clear"
+                               @click="reset"></m-icon-button>
                 <m-icon-button v-if="isTypeSearch && searchIcon"
                                class="m-textfield__search-icon"
                                key="searchIcon"
@@ -70,10 +70,10 @@
             </transition-group>
         </template>
         <textarea v-if="hasWordWrap"
-                  v-model="model"
                   :id="id"
                   class="m-textfield__input"
-                  ref="input"
+                  v-model="model"
+                  :autocomplete="autocomplete"
                   :disabled="isDisabled || isWaiting"
                   :placeholder="placeholder"
                   :readonly="isReadonly"
@@ -85,8 +85,8 @@
                   @keyup="onKeyup"
                   @keydown="onKeydown"
                   @paste="onPaste"
-                  :autocomplete="autocomplete"
-                  v-m-textarea-auto-height>
+                  v-m-textarea-auto-height
+                  ref="input">
         </textarea>
     </m-input-style>
     <div class="m-textfield__validation">
