@@ -67,6 +67,8 @@ $m-input-style-base-height: $m-line-height + em;
 
         .m-input-style__text {
             background: $m-color--white;
+            left: -$m-spacing--xs; // Magic number: align label with text zone
+            padding: 0 $m-spacing--xs;
 
             .m-inplace-edit & {
                 background: $m-color--information;
@@ -169,8 +171,9 @@ $m-input-style-base-height: $m-line-height + em;
     }
 
     &__text {
-        transition: background $m-transition-duration ease;
-        padding: 0 $m-spacing--xs;
+        position: relative;
+        transition: background $m-transition-duration ease, padding $m-transition-duration ease, left $m-transition-duration ease;
+        left: 0;
         display: inline-block;
     }
 
