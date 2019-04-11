@@ -21,10 +21,11 @@
                    :readonly="isReadonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
-        <input class="m-textfield__input"
-               v-if="!hasWordWrap"
+        <input v-if="!hasWordWrap"
                v-model="model"
                :id="id"
+               class="m-textfield__input"
+               ref="input"
                :autocomplete="autocomplete"
                :disabled="isDisabled || isWaiting"
                :placeholder="placeholder"
@@ -41,36 +42,38 @@
         <template slot="right-content"
                   v-if="!hasWordWrap">
             <transition-group name="m--is">
-                <m-icon-button class="m-textfield__icon-password"
+                <m-icon-button v-if="passwordIcon && hasValue"
+                               class="m-textfield__icon-password"
                                key="passwordIcon"
                                button-size="22px"
                                :aria-controls="id"
                                :title="passwordIconDescription"
                                @click="togglePasswordVisibility"
-                               :icon-name="passwordIconName"
-                               v-if="passwordIcon && hasValue"></m-icon-button>
-                <m-icon-button class="m-textfield__reset"
+                               :icon-name="passwordIconName"></m-icon-button>
+                <m-icon-button v-if="isTypeSearch && hasValue"
+                               class="m-textfield__reset"
                                key="resetIcon"
                                button-size="1em"
                                icon-size="11px"
                                :aria-controls="id"
                                @click="reset"
-                               icon-name="m-svg__close-clear"
-                               v-if="isTypeSearch && hasValue"></m-icon-button>
-                <m-icon-button class="m-textfield__search-icon"
+                               icon-name="m-svg__close-clear"></m-icon-button>
+                <m-icon-button v-if="isTypeSearch && searchIcon"
+                               class="m-textfield__search-icon"
                                key="searchIcon"
                                button-size="22px"
                                :aria-controls="id"
                                :title="searchIconDescription"
                                :disabled="!hasValue"
                                icon-name="m-svg__search"
-                               @click="search"
-                               v-if="isTypeSearch && searchIcon"></m-icon-button>
+                               @click="search"></m-icon-button>
             </transition-group>
         </template>
-        <textarea ref="input"
+        <textarea v-if="hasWordWrap"
+                  v-model="model"
                   :id="id"
                   class="m-textfield__input"
+                  ref="input"
                   :disabled="isDisabled || isWaiting"
                   :placeholder="placeholder"
                   :readonly="isReadonly"
@@ -83,9 +86,7 @@
                   @keydown="onKeydown"
                   @paste="onPaste"
                   :autocomplete="autocomplete"
-                  v-model="model"
-                  v-m-textarea-auto-height
-                  v-if="hasWordWrap">
+                  v-m-textarea-auto-height>
         </textarea>
     </m-input-style>
     <div class="m-textfield__validation">
@@ -97,8 +98,8 @@
                               :valid="isTextfieldValid"
                               :valid-message="validMessage"
                               :helper-message="helperMessage"></m-validation-message>
-        <m-character-count class="m-textfield__validation__character-count"
-                           v-if="characterCount"
+        <m-character-count v-if="characterCount"
+                           class="m-textfield__validation__character-count"
                            :value-length="valueLength"
                            :max-length="maxLength"
                            :threshold="characterCountThreshold"
