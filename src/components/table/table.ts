@@ -11,17 +11,19 @@ export enum MTableSkin {
     Regular = 'regular'
 }
 
+export enum MColumnSortDirection {
+    None = 'none',
+    Asc = 'asc',
+    Dsc = 'dsc'
+}
+
 export interface MColumnTable {
     id: string;
     title: string;
     dataProp: string;
     width?: string;
     sortable?: boolean;
-}
-
-export class MSortedColumn {
-    dataProp: string;
-    ascending: boolean;
+    sortDirection: MColumnSortDirection;
 }
 
 @WithRender
@@ -44,9 +46,6 @@ export class MTable extends ModulVue {
     @Prop({ default: false })
     loading: boolean;
 
-    @Prop({ default: undefined })
-    sortedColumn: MSortedColumn | undefined;
-
     i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
     i18nLoading: string = this.$i18n.translate('m-table:loading');
     i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
@@ -60,24 +59,35 @@ export class MTable extends ModulVue {
     }
 
     public sort(columnTable: MColumnTable): void {
-        if (!this.loading) {
-            let sortedColumn: MSortedColumn = new MSortedColumn();
-            sortedColumn.dataProp = columnTable.dataProp;
-            sortedColumn.ascending = !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || !this.sortedColumn.ascending;
-            this.$emit('update:sortedColumn', sortedColumn);
+        if (this.loading) {
+            return;
         }
+
+        switch (columnTable.sortDirection) {
+            case MColumnSortDirection.None:
+                columnTable.sortDirection = MColumnSortDirection.Asc;
+                break;
+            case MColumnSortDirection.Asc:
+                columnTable.sortDirection = MColumnSortDirection.Dsc;
+                break;
+            case MColumnSortDirection.Dsc:
+                columnTable.sortDirection = MColumnSortDirection.None;
+                break;
+        }
+
+        this.$emit('update:sortedColumn', columnTable);
     }
 
     public isColumnSorted(columnTable: MColumnTable): boolean {
-        if (this.sortedColumn) {
-            return columnTable.dataProp === this.sortedColumn.dataProp;
-        } else {
-            return false;
-        }
+        return columnTable.sortDirection === MColumnSortDirection.Asc || columnTable.sortDirection === MColumnSortDirection.Dsc;
     }
 
-    public getIconName(columnTable: MColumnTable): string {
-        return !this.sortedColumn || columnTable.dataProp !== this.sortedColumn.dataProp || this.sortedColumn.ascending ? 'm-svg__arrow-thin--up' : 'm-svg__arrow-thin--down';
+    public getIconName(columnTable: MColumnTable): string | undefined {
+        if (columnTable.sortDirection === MColumnSortDirection.Dsc) {
+            return 'm-svg__arrow-thin--down';
+        }
+
+        return 'm-svg__arrow-thin--up';
     }
 
     columnWidth(col: MColumnTable): { width: string } | '' {

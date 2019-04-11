@@ -4,7 +4,7 @@ exports[`MTable Given a table full of data When using a footer Then should rende
 <table cellspacing="0" class="m-table m--is-skin-regular">
   <thead>
     <tr>
-      <th scope="col" class="m--is-sortable" style="width:10%;"><span class="m-table__header-name">A</span>
+      <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;"><span class="m-table__header-name">A</span>
         <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -32,7 +32,7 @@ exports[`MTable Given a table full of data When using slot to replace a td Then 
 <table cellspacing="0" class="m-table m--is-skin-regular">
   <thead>
     <tr>
-      <th scope="col" class="m--is-sortable" style="width:10%;"><span class="m-table__header-name">A</span>
+      <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;"><span class="m-table__header-name">A</span>
         <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -55,7 +55,7 @@ exports[`MTable Given a table full of data When using slot to replace a th Then 
 <table cellspacing="0" class="m-table m--is-skin-regular">
   <thead>
     <tr>
-      <th scope="col" class="m--is-sortable" style="width:10%;">SLOT TH</th>
+      <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">SLOT TH</th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
     </tr>
   </thead>
@@ -96,7 +96,7 @@ exports[`MTable Given a table full of data When using slot to replace the tbody 
 <table cellspacing="0" class="m-table m--is-skin-regular">
   <thead>
     <tr>
-      <th scope="col" class="m--is-sortable" style="width:10%;"><span class="m-table__header-name">A</span>
+      <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;"><span class="m-table__header-name">A</span>
         <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
