@@ -255,7 +255,7 @@ exports[`Storyshots components|m-message/skin="default" state="confirmation" && 
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for confirmation purposes
       </div>
     </div>
      
@@ -297,7 +297,7 @@ exports[`Storyshots components|m-message/skin="default" state="confirmation" 1`]
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for confirmation purposes
       </div>
     </div>
      
@@ -337,13 +337,13 @@ exports[`Storyshots components|m-message/skin="default" state="error" && title 1
       <h2
         class="m-message__title"
       >
-        Confirmation Title
+        Error Title
       </h2>
        
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for error purposes
       </div>
     </div>
      
@@ -385,7 +385,7 @@ exports[`Storyshots components|m-message/skin="default" state="error" 1`] = `
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for error purposes
       </div>
     </div>
      
@@ -431,7 +431,7 @@ exports[`Storyshots components|m-message/skin="default" state="information" && t
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for information purposes
       </div>
     </div>
      
@@ -473,7 +473,7 @@ exports[`Storyshots components|m-message/skin="default" state="information" 1`] 
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for information purposes
       </div>
     </div>
      
@@ -513,13 +513,13 @@ exports[`Storyshots components|m-message/skin="default" state="warning" && title
       <h2
         class="m-message__title"
       >
-        Warning
+        Warning Title
       </h2>
        
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for warning purposes
       </div>
     </div>
      
@@ -561,7 +561,7 @@ exports[`Storyshots components|m-message/skin="default" state="warning" 1`] = `
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for warning purposes
       </div>
     </div>
      
@@ -607,7 +607,7 @@ exports[`Storyshots components|m-message/skin="light" state="confirmation" && ti
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for confirmation purposes
       </div>
     </div>
      
@@ -649,7 +649,7 @@ exports[`Storyshots components|m-message/skin="light" state="confirmation" 1`] =
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for confirmation purposes
       </div>
     </div>
      
@@ -689,13 +689,13 @@ exports[`Storyshots components|m-message/skin="light" state="error" && title 1`]
       <h2
         class="m-message__title"
       >
-        Confirmation Title
+        Error Title
       </h2>
        
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for error purposes
       </div>
     </div>
      
@@ -706,8 +706,7 @@ exports[`Storyshots components|m-message/skin="light" state="error" && title 1`]
 
 exports[`Storyshots components|m-message/skin="light" state="error" 1`] = `
 <div
-  class="m-message m--is-state-confirmation m--is-skin-light"
-  skinstate="error"
+  class="m-message m--is-state-error m--is-skin-light"
 >
   <div
     class="m-message__wrap"
@@ -738,7 +737,7 @@ exports[`Storyshots components|m-message/skin="light" state="error" 1`] = `
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for error purposes
       </div>
     </div>
      
@@ -784,7 +783,7 @@ exports[`Storyshots components|m-message/skin="light" state="information" && tit
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for information purposes
       </div>
     </div>
      
@@ -826,7 +825,7 @@ exports[`Storyshots components|m-message/skin="light" state="information" 1`] = 
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for information purposes
       </div>
     </div>
      
@@ -866,13 +865,13 @@ exports[`Storyshots components|m-message/skin="light" state="warning" && title 1
       <h2
         class="m-message__title"
       >
-        Warning
+        Warning Title
       </h2>
        
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for warning purposes
       </div>
     </div>
      
@@ -914,12 +913,412 @@ exports[`Storyshots components|m-message/skin="light" state="warning" 1`] = `
       <div
         class="m-message__text"
       >
-        A message for testing purposes
+        A message for warning purposes
       </div>
     </div>
      
     <!---->
   </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="confirmation" && title 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Confirmation Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for confirmation purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="confirmation" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for confirmation purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="error" && title 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Error Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for error purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="error" 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for error purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="information" && title 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-information m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Information Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for information purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="information" 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-information m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for information purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="warning" && title 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Warning Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for warning purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="warning" 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for warning purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
 </div>
 `;
 
@@ -966,7 +1365,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="confirmation" 
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for confirmation purposes
       </div>
        
       <!---->
@@ -1014,7 +1413,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="confirmation" 
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for confirmation purposes
       </div>
        
       <!---->
@@ -1036,7 +1435,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="error" && titl
       <h2
         class="m-message-page__title"
       >
-        Confirmation Title
+        Error Title
       </h2>
        
       <div
@@ -1066,7 +1465,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="error" && titl
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for error purposes
       </div>
        
       <!---->
@@ -1077,11 +1476,10 @@ exports[`Storyshots components|m-message/skin="page-light" state="error" && titl
 
 exports[`Storyshots components|m-message/skin="page-light" state="error" 1`] = `
 <div
-  class="m-message m--is-state-confirmation m--is-skin-page-light"
-  skinstate="error"
+  class="m-message m--is-state-error m--is-skin-page-light"
 >
   <article
-    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-light"
+    class="m-message-page m-message__page m--is-state-error m--is-skin-light"
   >
     <header
       class="m-message-page__header"
@@ -1115,7 +1513,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="error" 1`] = `
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for error purposes
       </div>
        
       <!---->
@@ -1167,7 +1565,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="information" &
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for information purposes
       </div>
        
       <!---->
@@ -1215,7 +1613,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="information" 1
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for information purposes
       </div>
        
       <!---->
@@ -1237,7 +1635,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="warning" && ti
       <h2
         class="m-message-page__title"
       >
-        Warning
+        Warning Title
       </h2>
        
       <div
@@ -1267,7 +1665,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="warning" && ti
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
+        A message for warning purposes
       </div>
        
       <!---->
@@ -1315,408 +1713,7 @@ exports[`Storyshots components|m-message/skin="page-light" state="warning" 1`] =
       <div
         class="m-message-page__details"
       >
-        A message for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="confirmation" && title 1`] = `
-<div
-  class="m-message m--is-state-confirmation m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <h2
-        class="m-message-page__title"
-      >
-        Confirmation Title
-      </h2>
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="confirmation" 1`] = `
-<div
-  class="m-message m--is-state-confirmation m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <!---->
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="error" && title 1`] = `
-<div
-  class="m-message m--is-state-error m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-error m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <h2
-        class="m-message-page__title"
-      >
-        Confirmation Title
-      </h2>
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="error" 1`] = `
-<div
-  class="m-message m--is-state-confirmation m--is-skin-page"
-  skinstate="error"
->
-  <article
-    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <!---->
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="information" && title 1`] = `
-<div
-  class="m-message m--is-state-information m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-information m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <h2
-        class="m-message-page__title"
-      >
-        Information Title
-      </h2>
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="information" 1`] = `
-<div
-  class="m-message m--is-state-information m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-information m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <!---->
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="warning" && title 1`] = `
-<div
-  class="m-message m--is-state-warning m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-warning m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <h2
-        class="m-message-page__title"
-      >
-        Warning
-      </h2>
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
-      </div>
-       
-      <!---->
-    </div>
-  </article>
-</div>
-`;
-
-exports[`Storyshots components|m-message/skin="page-page" state="warning" 1`] = `
-<div
-  class="m-message m--is-state-warning m--is-skin-page"
->
-  <article
-    class="m-message-page m-message__page m--is-state-warning m--is-skin-default"
-  >
-    <header
-      class="m-message-page__header"
-    >
-      <!---->
-       
-      <div
-        aria-hidden="true"
-        class="m-message-page__icon-container"
-      >
-        <svg
-          aria-hidden="true"
-          class="m-icon m-message-page__icon"
-          height="130px"
-          width="130px"
-        >
-          <!---->
-           
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
-      </div>
-    </header>
-     
-    <div
-      class="m-message-page__body"
-    >
-       
-      <div
-        class="m-message-page__details"
-      >
-        A message for testing purposes for testing purposes
+        A message for warning purposes
       </div>
        
       <!---->
