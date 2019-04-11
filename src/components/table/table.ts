@@ -59,6 +59,12 @@ export class MTable extends ModulVue {
     }
 
     public sort(columnTable: MColumnTable): void {
+        this.columns.forEach(c => {
+            if (c !== columnTable) {
+                c.sortDirection = MColumnSortDirection.None;
+            }
+        });
+
         if (this.loading) {
             return;
         }
