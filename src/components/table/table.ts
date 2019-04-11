@@ -12,9 +12,9 @@ export enum MTableSkin {
 }
 
 export enum MColumnSortDirection {
-    None = 'none',
-    Asc = 'asc',
-    Dsc = 'dsc'
+    None = 0,
+    Asc = 1,
+    Dsc = -1
 }
 
 export interface MColumnTable {
