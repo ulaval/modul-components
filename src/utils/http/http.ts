@@ -18,7 +18,7 @@ declare module 'vue/types/vue' {
 }
 export interface HttpPluginOptions {
     protectedUrls?: string[];
-    authorizationFn?: () => string;
+    authorizationFn?: () => string | Promise<string>;
     timeout?: number;
     useEventOnPromiseError?: boolean;
 }
@@ -44,17 +44,28 @@ export class HttpService implements RestAdapter {
             // request interceptor for authorization header
             if (this.options.protectedUrls && this.options.authorizationFn) {
                 let protectedUrls: string[] = this.options.protectedUrls;
-                let authFn: () => string = this.options.authorizationFn;
+                let authFn: () => string | Promise<string> = this.options.authorizationFn;
+
                 this.instance.interceptors.request.use(config => {
+                    let result: Promise<AxiosRequestConfig> = Promise.resolve(config);
+                    let tokenAsync: Promise<string> | undefined;
+
                     protectedUrls.every(url => {
                         if (strUtils.startsWith(config.url, url)) {
-                            let token: string = authFn();
-                            config.headers = Object.assign(config.headers || {}, { [AUTHORIZATION_HEADER]: token });
-                            return false;
+                            tokenAsync = Promise.resolve(authFn());
+                            return false; // break
                         }
                         return true;
                     });
-                    return config;
+
+                    if (tokenAsync) {
+                        result = tokenAsync.then(token => {
+                            config.headers = Object.assign(config.headers || {}, { [AUTHORIZATION_HEADER]: token });
+                            return config;
+                        });
+                    }
+
+                    return result;
                 });
             }
 
