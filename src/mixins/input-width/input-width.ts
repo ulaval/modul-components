@@ -12,7 +12,7 @@ export enum InputMaxWidth {
     Large = 'large'
 }
 
-// input refence is minimal mobile width (320px), minus base padding (16px);
+// input reference is minimum mobile width (320px), minus base padding (16px) from both sides.
 // $m-min-width - $m-spacing * 2 = regular input width
 export enum InputMaxWidthValues {
     XSmall = '85px',
