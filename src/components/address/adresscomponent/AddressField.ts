@@ -6,6 +6,13 @@ import LoqateFind from '../loqate/LoqateFind';
 import LoqateRetrieve from '../loqate/LoqateRetrieve';
 import WithRender from './AddressField.html?style=./AddressField.scss';
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $find: (text: string, container?: string) => Promise<LoqateFind[]>;
+        $retrieve: (id: string) => Promise<LoqateRetrieve[]>;
+    }
+}
+
 
 @WithRender
 @Component({
