@@ -12,6 +12,7 @@ export const CHECKBOX_NAME: string = 'm-checkbox';
 export const DATEFIELDS_NAME: string = 'm-datefields';
 export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DATERANGEPICKER_NAME: string = 'm-daterangepicker';
+export const DECIMALFIELD_NAME: string = 'm-decimalfield';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DROPDOWN_NAME: string = 'm-dropdown';
 export const DROPDOWN_ITEM_NAME: string = 'm-dropdown-item';
