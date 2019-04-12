@@ -203,17 +203,16 @@ export enum FroalaStatus {
     }
 
     protected addImageButton(): void {
-        const EDITOR_INSTANCE: VueFroala = this;
-
         $.FroalaEditor.RegisterCommand('insertImage', {
             title: this.$i18n.translate('m-rich-text-editor:insert-image'),
             undo: true,
             focus: true,
             showOnMobile: true,
-            callback: (): void => {
-                EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
-                EDITOR_INSTANCE.isFileUploadOpen = true;
-                EDITOR_INSTANCE.selectedImage = undefined;
+            callback: function(): void {
+                let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
+                currentInstance.allowedExtensions = currentInstance.imageExtensions;
+                currentInstance.isFileUploadOpen = true;
+                currentInstance.selectedImage = undefined;
             }
         });
 
@@ -224,13 +223,15 @@ export enum FroalaStatus {
             focus: true,
             showOnMobile: true,
             callback: function(): void {
-                EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
-                EDITOR_INSTANCE.isFileUploadOpen = true;
+                let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
+                currentInstance.allowedExtensions = currentInstance.imageExtensions;
+                currentInstance.isFileUploadOpen = true;
             },
             refresh: function(): void {
                 const selectedElement: HTMLElement = this.selection.element();
                 if (selectedElement.tagName === 'IMG') {
-                    EDITOR_INSTANCE.selectedImage = selectedElement;
+                    let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
+                    currentInstance.selectedImage = selectedElement;
                 }
             }
         });
