@@ -51,28 +51,28 @@ storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/state`, module)
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="default"`, module)
     .addDecorator(withA11y)
     .add('state="confirmation"', () => ({
-        template: '<m-message  state="confirmation">A message for confirmation purposes</m-message>'
+        template: '<m-message state="confirmation">A message for confirmation purposes</m-message>'
     }))
     .add('state="confirmation" && title', () => ({
-        template: '<m-message  state="confirmation" title="Confirmation Title">A message for confirmation purposes</m-message>'
+        template: '<m-message state="confirmation" title="Confirmation Title">A message for confirmation purposes</m-message>'
     }))
     .add('state="information"', () => ({
-        template: '<m-message  state="information">A message for information purposes</m-message>'
+        template: '<m-message state="information">A message for information purposes</m-message>'
     }))
     .add('state="information" && title', () => ({
-        template: '<m-message  state="information" title="Information Title">A message for information purposes</m-message>'
+        template: '<m-message state="information" title="Information Title">A message for information purposes</m-message>'
     }))
     .add('state="warning"', () => ({
-        template: '<m-message  state="warning">A message for warning purposes</m-message>'
+        template: '<m-message state="warning">A message for warning purposes</m-message>'
     }))
     .add('state="warning" && title', () => ({
-        template: '<m-message  state="warning" title="Warning Title">A message for warning purposes</m-message>'
+        template: '<m-message state="warning" title="Warning Title">A message for warning purposes</m-message>'
     }))
     .add('state="error"', () => ({
         template: '<m-message state="error">A message for error purposes</m-message>'
     }))
     .add('state="error" && title', () => ({
-        template: '<m-message  state="error" title="Error Title">A message for error purposes</m-message>'
+        template: '<m-message state="error" title="Error Title">A message for error purposes</m-message>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="light"`, module)
