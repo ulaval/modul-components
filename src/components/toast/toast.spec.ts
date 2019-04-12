@@ -177,7 +177,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'long'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
                 });
 
                 it(`should appear after MToastDuration.DesktopLong `, async () => {
@@ -190,7 +190,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
                 });
 
                 it(`should appear after MToastDuration.DesktopShort `, async () => {
@@ -209,7 +209,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'long'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
                 });
 
                 it(`should appear after MToastDuration.MobileLong `, async () => {
@@ -222,7 +222,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
                 });
 
                 it(`should appear after MToastDuration.MobileShort `, async () => {
