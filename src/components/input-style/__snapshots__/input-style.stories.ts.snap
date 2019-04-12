@@ -1,0 +1,1026 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-input-style cursorPointer 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        Hello 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style default 1`] = `
+<div
+  class="m-input-style m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <!---->
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+         
+        <span
+          aria-hidden="true"
+          class="m-i18n m-input-style__transparent-text"
+        >
+          Aucune valeur
+        </span>
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style disabled 1`] = `
+<div
+  class="m-input-style m--is-label-up m--is-disabled m--has-label m--has-value m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        Hello 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style empty 1`] = `
+<div>
+  <h2>
+    Prop empty = true
+  </h2>
+  <div
+    class="m-input-style m--has-label m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <h2>
+    Prop empty = false
+  </h2>
+  <div
+    class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style error 1`] = `
+<div>
+  <div
+    class="m-input-style m--is-label-up m--has-error m--has-label m--has-value m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+  <p>
+    Visual when the prop prop 
+    <strong>
+      error = true
+    </strong>
+     and prop 
+    <strong>
+      valide = true
+    </strong>
+  </p>
+  <div
+    class="m-input-style m--is-label-up m--has-error m--has-label m--has-value m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style focus 1`] = `
+<div
+  class="m-input-style m--is-focus m--is-label-up m--has-label m--has-value m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        Hello 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style label 1`] = `
+<div
+  class="m-input-style m--has-label m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+         
+        <span
+          aria-hidden="true"
+          class="m-i18n m-input-style__transparent-text"
+        >
+          Aucune valeur
+        </span>
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style labelFor 1`] = `
+<div>
+  <div
+    class="m-input-style m--has-label m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="Label for"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+           
+          <span
+            aria-hidden="true"
+            class="m-i18n m-input-style__transparent-text"
+          >
+            Aucune valeur
+          </span>
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+  <p>
+    Open 
+    <em>
+      Page Inspector
+    </em>
+     to see 
+    <strong>
+      for
+    </strong>
+     attribute on label tag.
+  </p>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style readonly 1`] = `
+<div
+  class="m-input-style m--is-readonly m--is-label-up m--has-label m--has-value m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        Hello 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style requiredMarker 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <sup
+          class="m-input-style__required-marker"
+        >
+          *
+        </sup>
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        Hello 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style valid 1`] = `
+<div>
+  <div
+    class="m-input-style m--is-label-up m--is-valid m--has-label m--has-value m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+  <p>
+    Visual when the prop prop 
+    <strong>
+      error = true
+    </strong>
+     and prop 
+    <strong>
+      valide = true
+    </strong>
+  </p>
+  <div
+    class="m-input-style m--is-label-up m--has-error m--has-label m--has-value m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style waiting 1`] = `
+<div
+  class="m-input-style m--is-label-up m--is-waiting m--has-label m--has-value m--is-tag-default"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          Label
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        Hello 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <div
+        class="m-spinner m-input-style__spinner"
+      >
+        <!---->
+         
+        <div />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style width 1`] = `
+<div>
+  <h2>
+    Prop width = 300px
+  </h2>
+  <div
+    class="m-input-style m--is-focus m--is-label-up m--has-label m--has-value m--is-tag-default"
+    style="width: 300px;"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <div
+          class="m-input-style__left-content"
+        >
+          Hello 
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style/tagStyle h1 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h1"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          H1
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        h1 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style/tagStyle h2 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h2"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          H2
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        h2 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style/tagStyle h3 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h3"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          H3
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        h3 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style/tagStyle h4 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h4"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          H4
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        h4 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style/tagStyle h5 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h5"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          H5
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        h5 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-style/tagStyle h6 1`] = `
+<div
+  class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h6"
+>
+  <div
+    class="m-input-style__content"
+    style="margin-top: 10px;"
+  >
+    <label
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      >
+        <span>
+          H6
+        </span>
+         
+        <!---->
+      </span>
+    </label>
+     
+    <div
+      class="m-input-style__body"
+    >
+      <div
+        class="m-input-style__left-content"
+      >
+        h6 
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-input-style__right-content"
+      />
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;

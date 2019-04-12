@@ -230,18 +230,16 @@ describe('FileService', () => {
 
         const expectValidationResults: (
             expectedNbReadyFiles: number,
-            rejectionCause: MFileRejectionCause
-        ) => void = (
-            expectedNbReadyFiles: number,
-            rejectionCause: MFileRejectionCause
-        ) => {
+            rejectionCause: MFileRejectionCause) => void = (
+                expectedNbReadyFiles: number,
+                rejectionCause: MFileRejectionCause) => {
 
-            expect(readyFiles().length).toEqual(expectedNbReadyFiles);
-            expect(rejectedFiles().length).toEqual(1);
-            expect(rejectedFiles()[0].name).toEqual('invalid.mov');
-            expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
-            expect(rejectedFiles()[0].rejection).toEqual(rejectionCause);
-        };
+                expect(readyFiles().length).toEqual(expectedNbReadyFiles);
+                expect(rejectedFiles().length).toEqual(1);
+                expect(rejectedFiles()[0].name).toEqual('invalid.mov');
+                expect(rejectedFiles()[0].status).toEqual(MFileStatus.REJECTED);
+                expect(rejectedFiles()[0].rejection).toEqual(rejectionCause);
+            };
 
         const readyFiles: () => MFile[] = () => {
             return filesvc.files().filter(f => f.status === MFileStatus.READY);
@@ -291,7 +289,7 @@ describe('FileService', () => {
         const mockHttpService: () => jest.Mocked<HttpService> = () => {
             httpSvcMock = new HttpService() as jest.Mocked<HttpService>;
             (Vue.prototype as ModulVue).$http = httpSvcMock;
-            httpSvcMock.execute.mockReturnValue(Promise.resolve());
+            httpSvcMock.execute.mockReturnValue(Promise.resolve() as any);
 
             return httpSvcMock;
         };
@@ -334,7 +332,7 @@ describe('FileService', () => {
 
             it('should set the file status as failed when an error is encountered', async () => {
                 httpSvcMock.execute.mockReturnValue(
-                    Promise.reject('network error')
+                    Promise.reject('network error') as any
                 );
 
                 try {
@@ -351,9 +349,9 @@ describe('FileService', () => {
                     url: 'http://fake'
                 });
 
-                let axiosOptions: AxiosRequestConfig;
+                let axiosOptions: AxiosRequestConfig | undefined;
                 axiosOptions = httpSvcMock.execute.mock.calls[0][1];
-                axiosOptions.onUploadProgress!({
+                axiosOptions!.onUploadProgress!({
                     loaded: 10,
                     total: 200
                 });
@@ -369,9 +367,9 @@ describe('FileService', () => {
                     onUploadProgress: () => (customUploadProgressCalled = true)
                 });
 
-                let axiosOptions: AxiosRequestConfig;
+                let axiosOptions: AxiosRequestConfig | undefined;
                 axiosOptions = httpSvcMock.execute.mock.calls[0][1];
-                axiosOptions.onUploadProgress!({
+                axiosOptions!.onUploadProgress!({
                     loaded: 10,
                     total: 200
                 });
@@ -405,9 +403,9 @@ describe('FileService', () => {
                     url: 'http://fake'
                 });
 
-                let axiosOptions: AxiosRequestConfig;
+                let axiosOptions: AxiosRequestConfig | undefined;
                 axiosOptions = httpSvcMock.execute.mock.calls[0][1];
-                expect(axiosOptions.cancelToken).not.toBeUndefined();
+                expect(axiosOptions!.cancelToken).not.toBeUndefined();
             });
 
             it('should cancel the request using token', () => {
@@ -424,7 +422,7 @@ describe('FileService', () => {
                 httpSvcMock.execute.mockReturnValue(
                     Promise.reject({
                         __CANCEL__: true
-                    })
+                    }) as any
                 );
 
                 await filesvc.upload(fileToUpload.uid, {

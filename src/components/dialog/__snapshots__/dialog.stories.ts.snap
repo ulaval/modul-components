@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-dialog btnWidth="328px" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog cancelLabel 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog default 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog hint 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog negativeLink="false" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog okLabel 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog okPrecision 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog secBtn="true" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog secBtnLabel 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog secBtnPrecision 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog title 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog trigger (slot) 1`] = `
+<div
+  class="m-dialog"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      slot="trigger" 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-dialog width="large" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/Btn-Link Combos default 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/Btn-Link Combos negativeLink="false" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/Btn-Link Combos secBtn="true" && negativeLink="false" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/Btn-Link Combos secBtn="true" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/type default 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/type type="confirmation" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/type type="error" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/type type="information" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-dialog/type type="warning" 1`] = `
+<div
+  class="m-dialog"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;

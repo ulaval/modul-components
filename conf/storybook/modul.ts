@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import FrenchPlugin from '../../src/lang/fr';
 import '../../src/styles/main.scss';
+import './styles/storybook.scss';
 import { FRENCH } from '../../src/utils/i18n/i18n';
 import '../../src/utils/polyfills';
 import DefaultSpritesPlugin from '../../src/utils/svg/default-sprites';

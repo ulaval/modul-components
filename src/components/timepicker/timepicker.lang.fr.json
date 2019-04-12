@@ -1,12 +1,12 @@
 {
     "m-timepicker": {
         "button-ok": "OK",
-        "placeholder": "hh mm",
+        "placeholder": "hh:mm",
         "hours": "Heures",
         "minutes": "Minutes",
         "open": "Ouvrir le sélecteur de temps",
         "close": "Fermer le sélecteur de temps",
-        "out-of-bounds-error": "Temps hors limites",
-        "error-format": "Format invalide"
+        "out-of-bounds-error": "Entrer une heure comprise entre %(min)s et %(max)s",
+        "error-format": "Le format attendu est HH:MM"
     }
 }

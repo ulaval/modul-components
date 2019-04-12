@@ -8,10 +8,16 @@ import WithRender from './slide-transition.sandbox.html';
 @Component
 export class MSlideTransitionSandbox extends Vue {
     private model: number = 1;
+    private model2: number = 1;
     private direction: MSlideTransitionDirection = MSlideTransitionDirection.LeftToRight;
 
     @Watch('model')
     modelChange(after: number, before: number): void {
+        this.direction = (after < before) ? MSlideTransitionDirection.LeftToRight : MSlideTransitionDirection.RightToLeft;
+    }
+
+    @Watch('model2')
+    model2Change(after: number, before: number): void {
         this.direction = (after < before) ? MSlideTransitionDirection.LeftToRight : MSlideTransitionDirection.RightToLeft;
     }
 }

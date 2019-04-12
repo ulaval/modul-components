@@ -33,6 +33,11 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     @Prop()
     public openedIds?: string[];
 
+    @Prop({
+        default: false
+    })
+    public reverseHeader: boolean;
+
     private accordions: { [id: string]: AccordionGateway } = {};
 
     public addAccordion(accordion: AccordionGateway): void {
@@ -82,6 +87,10 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
 
     private get hasTitleSlot(): boolean {
         return !!this.$slots['title'];
+    }
+
+    private get hasSecondaryContentSlot(): boolean {
+        return !!this.$slots['secondary-content'];
     }
 
     private openAllAccordions(): void {

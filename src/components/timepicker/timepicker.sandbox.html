@@ -8,11 +8,47 @@
         -->
     </p>
     <p>
-        <m-timepicker>
+        <m-timepicker v-model="model"
+                      label="timepicker label">
             <!-- Test case -->
         </m-timepicker>
     </p>
+
+    <p>{{model}}</p>
     <h3>Readonly</h3>
-    <m-timepicker :readonly="true">
+    <m-timepicker :readonly="true"
+                  v-model="model">
     </m-timepicker>
+    <p>
+        <p>
+            range : 8:00 à 13:20
+        </p>
+        <m-timepicker max-width="550px"
+                      v-model="model"
+                      max="13:20"
+                      min="08:00"
+                      :step="5">
+            <!-- Test case -->
+        </m-timepicker>
+        <p>
+            range : 8:30 à 13:30
+        </p>
+        <m-timepicker max-width="550px"
+                      v-model="model"
+                      max="13:30"
+                      min="8:30"
+                      :step="15">
+            <!-- Test case -->
+        </m-timepicker>
+        <p>
+            range : 11:45 à 15:15
+        </p>
+        <m-timepicker max-width="550px"
+                      v-model="model"
+                      max="15:15"
+                      min="11:45"
+                      :step="15">
+            <!-- Test case -->
+        </m-timepicker>
+    </p>
 </div>
