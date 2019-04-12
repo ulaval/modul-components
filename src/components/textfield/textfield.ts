@@ -153,7 +153,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     public get valueLength(): number {
-        return this.internalValue.length;
+        return (this.internalValue || '').length;
     }
 
     private get maxLengthNumber(): number {
