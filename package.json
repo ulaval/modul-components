@@ -23,12 +23,11 @@
         "tslint": "tslint --project tsconfig.json -s node_modules/custom-tslint-formatters/formatters -t grouped",
         "tslint-ci": "tslint --project tsconfig.json -t junit -o reports/junit/js-lint-results.xml ",
         "prepack": "npm run clean && npm run build && npm run buildlib",
-        "component": "node ./tests/meta/component-generator",
         "stats": "webpack --config conf/webpack.config.js --env.lib --env.silent --colors --profile --json > reports/stats.json && webpack-bundle-analyzer reports/stats.json",
         "print_version_win": "echo %npm_package_version%",
         "print_version_nx": "echo $npm_package_version",
         "storybook": "start-storybook --config-dir ./conf/storybook",
-        "modul-cli": "./node_modules/.bin/gen-cli"
+        "file-gen-cli": "./node_modules/.bin/gen-cli"
     },
     "jest-junit": {
         "output": "reports/junit/js-test-results.xml"
@@ -43,6 +42,7 @@
         "css-element-queries": "^0.4.0",
         "enquire.js": "^2.1.6",
         "es6-promise": "^4.1.1",
+        "file-gen-cli": "^1.1.3",
         "filesize": "^3.6.0",
         "froala-editor": "2.9.3",
         "jquery": "^3.3.1",

@@ -1,5 +1,4 @@
 {
-    "cliName": "modul-cli",
     "fileExtension": "ts",
     "fileNameCase": "kebab",
     "folderNameCase": "kebab",
@@ -7,19 +6,21 @@
     "entityConfigs": [
         {
             "name": "component",
-            "rootPath": "/src/components",
+            "path": "/src/components",
             "prefix": "m",
-            "files": [
+            "fileConfigs": [
                 {
                     "name": "*",
                     "template": "component-vue.txt"
                 },
                 {
                     "name": "*",
+                    "template": "component-template.txt",
                     "extension": "html"
                 },
                 {
                     "name": "*",
+                    "template": "component-style.txt",
                     "extension": "scss"
                 },
                 {
@@ -27,13 +28,8 @@
                     "template": "component-test.txt"
                 },
                 {
-                    "name": "*.sandbox",
-                    "template": "component-sandbox-vue.txt"
-                },
-                {
-                    "name": "*.sandbox",
-                    "template": "component-sandbox-template.txt",
-                    "extension": "scss"
+                    "name": "*.stories",
+                    "template": "component-stories.txt"
                 },
                 {
                     "name": "*.lang.fr",
@@ -44,7 +40,7 @@
         },
         {
             "name": "directive",
-            "rootPath": "/src/directives",
+            "path": "/src/directives",
             "files": [
                 {
                     "name": "*",
