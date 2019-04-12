@@ -21,68 +21,6 @@ describe('MAcordionGroup', () => {
         ]);
     });
 
-    it('should render correctly', () => {
-        const acn: Wrapper<MAccordionGroup> = mountGroup();
-
-        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly with title', () => {
-        const acn: Wrapper<MAccordionGroup> = mountGroup(
-            {},
-            {
-                title: 'title'
-            }
-        );
-
-        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should not render toggle links when concurrent', () => {
-        const acn: Wrapper<MAccordionGroup> = mountGroup({
-            concurrent: true
-        });
-
-        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should not render open all link when all accordions are closed', () => {
-        const acn: Wrapper<MAccordionGroup> = mountGroup();
-
-        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should not render close all link when all accordions are opened', () => {
-        const acn: Wrapper<MAccordionGroup> = mount(MAccordionGroup, {
-            slots: {
-                default: `<m-accordion :open="true">
-                                <span slot="header">A</span>
-                            </m-accordion>
-                            <m-accordion :open="true">
-                                <span slot="header">B</span>
-                            </m-accordion>'`
-            }
-        });
-
-        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
-    });
-
-
-    it('should not render both close all and open all link when state is mixed', () => {
-        const acn: Wrapper<MAccordionGroup> = mount(MAccordionGroup, {
-            slots: {
-                default: `<m-accordion :open="true">
-                                <span slot="header">A</span>
-                            </m-accordion>
-                            <m-accordion>
-                                <span slot="header">B</span>
-                            </m-accordion>'`
-            }
-        });
-
-        return expect(renderComponent(acn.vm)).resolves.toMatchSnapshot();
-    });
-
     it('should open all accordions when open all is clicked', async () => {
         const acn: Wrapper<MAccordionGroup> = mountGroup();
 

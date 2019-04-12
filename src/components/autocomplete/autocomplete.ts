@@ -30,6 +30,8 @@ export class MAutocomplete extends ModulVue {
     textNoMatch: string;
 
     @Prop()
+    maxLength: number;
+    @Prop()
     placeholder: string;
     @Prop()
     focus: boolean;
@@ -110,7 +112,7 @@ export class MAutocomplete extends ModulVue {
             label = result.label;
         }
 
-        this.items = value !== '' ? [{ label: label, value: value }] : [];
+        this.items = value !== '' ? [{ label: label, value: value, ...result }] : [];
     }
 
     private onInputChange(value: string): void {

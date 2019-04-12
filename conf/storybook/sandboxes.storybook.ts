@@ -1,19 +1,10 @@
-import { storiesOf, Story, StoryDecorator } from '@storybook/vue';
+import { storiesOf, Story } from '@storybook/vue';
 import { getSandboxesNames } from './sandbox-loader';
-
-
-
-let sandboxeDecorator: StoryDecorator = () => {
-    return {
-        template: '<story />'
-    };
-};
 
 // legacy sandboxe loader for storybook
 export const loadSandboxStories: any = () => {
 
     let sandboxes: Story = storiesOf(`Sandboxes`, module);
-    sandboxes.addDecorator(sandboxeDecorator);
     sandboxes.addParameters({
         options: {
             showPanel: false

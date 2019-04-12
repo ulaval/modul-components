@@ -204,7 +204,7 @@ describe(`ModulDate`, () => {
         describe(`when checking for equality`, () => {
             describe('with a javascript Date object', () => {
                 it(`will be equal if the dates are the same`, () => {
-                    const date: Date = new Date('2019-01-15');
+                    const date: Date = new Date(2019, 0, 15);
                     const modulDate: ModulDate = new ModulDate('2019-01-15');
 
                     const result: boolean = modulDate.equals(date);
@@ -213,7 +213,7 @@ describe(`ModulDate`, () => {
                 });
 
                 it(`will not be equal if the dates are different`, () => {
-                    const date: Date = new Date('2019-01-15');
+                    const date: Date = new Date(2019, 0, 15);
                     const modulDate: ModulDate = new ModulDate('2019-01-16');
 
                     const result: boolean = modulDate.equals(date);
