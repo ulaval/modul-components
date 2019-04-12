@@ -13,7 +13,7 @@ A set of VueJS components for MOD**UL** web applications (beta release).
 ## Getting started to use modul in your project
 
 - To create components and directives use
-> `npm run file-gen-cli`
+    > `npm run file-gen-cli`
 
 ### Prerequisites
 
