@@ -11,7 +11,8 @@
             "fileConfigs": [
                 {
                     "name": "*",
-                    "template": "component-vue.txt"
+                    "template": "component-vue.txt",
+                    "extension": "ts"
                 },
                 {
                     "name": "*",
@@ -25,11 +26,13 @@
                 },
                 {
                     "name": "*.spec",
-                    "template": "component-test.txt"
+                    "template": "component-test.txt",
+                    "extension": "ts"
                 },
                 {
                     "name": "*.stories",
-                    "template": "component-stories.txt"
+                    "template": "component-stories.txt",
+                    "extension": "ts"
                 },
                 {
                     "name": "*.lang.fr",
@@ -44,11 +47,13 @@
             "files": [
                 {
                     "name": "*",
-                    "template": "directive.txt"
+                    "template": "directive.txt",
+                    "extension": "ts"
                 },
                 {
                     "name": "*.spec",
-                    "template": "directive-test.txt"
+                    "template": "directive-test.txt",
+                    "extension": "ts"
                 }
             ]
         }
