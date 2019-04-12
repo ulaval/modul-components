@@ -23,6 +23,7 @@ import RichTextLicensePlugin from './rich-text-license-plugin';
 export class MRichTextEditorSandBox extends ModulVue {
     public model: string = '';
     public mediaModel: string = '';
+    public mediaModel2: string = '';
     public focus: boolean = false;
     public error: boolean = false;
     public errorMessage: string = '';
