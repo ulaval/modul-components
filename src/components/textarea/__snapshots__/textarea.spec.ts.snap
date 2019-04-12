@@ -2,10 +2,12 @@
 
 exports[`MTextArea max-length should render correctly state when text length is lesser than max length 1`] = `
 <div class="m-textarea" style="width:100%;max-width:288px;">
-  <div class="m-input-style m--has-value m--is-tag-default" style="margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><textarea id="mTextarea-uuid" maxlength="Infinity" rows="1" class="m-textarea__input">1</textarea> </div>
-      <div class="m-input-style__body__right"></div>
+  <div class="m-input-style m--has-value m--is-tag-default">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><textarea id="mTextarea-uuid" maxlength="Infinity" rows="1" class="m-textarea__input">1</textarea> </div>
+        <div class="m-input-style__right-content"></div>
+      </div>
     </div>
   </div>
   <div class="m-textarea__validation">
@@ -16,10 +18,12 @@ exports[`MTextArea max-length should render correctly state when text length is 
 
 exports[`MTextArea max-length should render invalid state when text length is greater than max length 1`] = `
 <div class="m-textarea" style="width:100%;max-width:288px;">
-  <div class="m-input-style m--has-value m--is-tag-default" style="margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><textarea id="mTextarea-uuid" maxlength="Infinity" rows="1" class="m-textarea__input">123456789</textarea> </div>
-      <div class="m-input-style__body__right"></div>
+  <div class="m-input-style m--has-value m--is-tag-default">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><textarea id="mTextarea-uuid" maxlength="Infinity" rows="1" class="m-textarea__input">123456789</textarea> </div>
+        <div class="m-input-style__right-content"></div>
+      </div>
     </div>
   </div>
   <div class="m-textarea__validation">
@@ -30,10 +34,12 @@ exports[`MTextArea max-length should render invalid state when text length is gr
 
 exports[`MTextArea should render correctly 1`] = `
 <div class="m-textarea" style="width:100%;max-width:288px;">
-  <div class="m-input-style m--is-tag-default" style="margin-top:10px;">
-    <div class="m-input-style__body" style="top:0;">
-      <div class="m-input-style__body__left"><textarea id="mTextarea-uuid" maxlength="Infinity" rows="1" class="m-textarea__input"></textarea> </div>
-      <div class="m-input-style__body__right"></div>
+  <div class="m-input-style m--is-tag-default">
+    <div class="m-input-style__content" style="margin-top:10px;">
+      <div class="m-input-style__body">
+        <div class="m-input-style__left-content"><textarea id="mTextarea-uuid" maxlength="Infinity" rows="1" class="m-textarea__input"></textarea> </div>
+        <div class="m-input-style__right-content"></div>
+      </div>
     </div>
   </div>
   <div class="m-textarea__validation">

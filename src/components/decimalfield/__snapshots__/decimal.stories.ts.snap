@@ -9,165 +9,174 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
     >
       <div
         class="m-input-style m--is-tag-default"
-        style="margin-top: 10px;"
-      >
-        <!---->
-         
-        <div
-          class="m-input-style__body"
-          style="top: 0px;"
-        >
-          <div
-            class="m-input-style__body__left"
-          >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
-            />
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
-        </div>
-      </div>
-       
-      <div
-        class="m-decimalfield__validation"
       >
         <div
-          class="m-validation-message m-decimalfield__validation__message"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
           <!---->
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-  </div>
-   
-  <div>
-    <div
-      class="m-decimalfield m--has-label"
-      style="width: 100%; max-width: 288px;"
-    >
-      <div
-        class="m-input-style m--has-label m--is-tag-default"
-        style="margin-top: 10px;"
-      >
-        <label
-          class="m-input-style__label"
-          for="mDecimalfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              Label
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
-        <div
-          class="m-input-style__body"
-          style="top: 0px;"
-        >
-          <div
-            class="m-input-style__body__left"
-          >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
-            />
-             
-            <!---->
-             
-            <!---->
-          </div>
            
           <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
-        </div>
-      </div>
-       
-      <div
-        class="m-decimalfield__validation"
-      >
-        <div
-          class="m-validation-message m-decimalfield__validation__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-  </div>
-   
-  <div>
-    <div
-      class="m-decimalfield m--has-label"
-      style="width: 100%; max-width: 288px;"
-    >
-      <div
-        class="m-input-style m--has-label m--is-tag-default"
-        style="margin-top: 10px;"
-      >
-        <label
-          class="m-input-style__label"
-          for="mDecimalfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
+            class="m-input-style__body"
           >
-            <span>
-              Required label
-            </span>
-             
-            <sup
-              class="m-input-style__required-marker"
+            <div
+              class="m-input-style__left-content"
             >
-              *
-            </sup>
-          </span>
-        </label>
-         
-        <div
-          class="m-input-style__body"
-          style="top: 0px;"
-        >
-          <div
-            class="m-input-style__body__left"
-          >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
             <!---->
+          </div>
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-label"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-label m--is-tag-default"
+      >
+        <div
+          class="m-input-style__content"
+          style="margin-top: 10px;"
+        >
+          <label
+            class="m-input-style__label"
+            for="mDecimalfield-uuid"
+          >
+            <span
+              class="m-input-style__text"
+            >
+              <span>
+                Label
+              </span>
+               
+              <!---->
+            </span>
+          </label>
+           
+          <div
+            class="m-input-style__body"
+          >
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
+            />
              
             <!---->
           </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
            
           <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-label"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-label m--is-tag-default"
+      >
+        <div
+          class="m-input-style__content"
+          style="margin-top: 10px;"
+        >
+          <label
+            class="m-input-style__label"
+            for="mDecimalfield-uuid"
+          >
+            <span
+              class="m-input-style__text"
+            >
+              <span>
+                Required label
+              </span>
+               
+              <sup
+                class="m-input-style__required-marker"
+              >
+                *
+              </sup>
+            </span>
+          </label>
+           
+          <div
+            class="m-input-style__body"
+          >
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
+            />
+             
+            <!---->
+          </div>
         </div>
       </div>
        
@@ -192,33 +201,36 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
     >
       <div
         class="m-input-style m--is-valid m--is-tag-default"
-        style="margin-top: 10px;"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
-          style="top: 0px;"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
+          <!---->
+           
           <div
-            class="m-input-style__body__left"
+            class="m-input-style__body"
           >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
             <!---->
-             
-            <!---->
           </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
         </div>
       </div>
        
@@ -266,33 +278,36 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
     >
       <div
         class="m-input-style m--is-tag-default"
-        style="margin-top: 10px;"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
-          style="top: 0px;"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
+          <!---->
+           
           <div
-            class="m-input-style__body__left"
+            class="m-input-style__body"
           >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
             <!---->
-             
-            <!---->
           </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
         </div>
       </div>
        
@@ -321,33 +336,36 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
     >
       <div
         class="m-input-style m--has-error m--is-tag-default"
-        style="margin-top: 10px;"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
-          style="top: 0px;"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
+          <!---->
+           
           <div
-            class="m-input-style__body__left"
+            class="m-input-style__body"
           >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
             <!---->
-             
-            <!---->
           </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
         </div>
       </div>
        
@@ -397,33 +415,36 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
-    style="margin-top: 10px;"
   >
-    <!---->
-     
     <div
-      class="m-input-style__body"
-      style="top: 0px;"
+      class="m-input-style__content"
+      style="margin-top: 10px;"
     >
+      <!---->
+       
       <div
-        class="m-input-style__body__left"
+        class="m-input-style__body"
       >
-        <input
-          class="m-decimalfield__input"
-          id="mDecimalfield-uuid"
-          inputmode="numeric"
+        <div
+          class="m-input-style__left-content"
+        >
+          <input
+            class="m-decimalfield__input"
+            id="mDecimalfield-uuid"
+            inputmode="numeric"
+          />
+           
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
         />
          
         <!---->
-         
-        <!---->
       </div>
-       
-      <div
-        class="m-input-style__body__right"
-      />
-       
-      <!---->
     </div>
   </div>
    
@@ -450,35 +471,38 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
     >
       <div
         class="m-input-style m--is-disabled m--is-tag-default"
-        style="margin-top: 10px;"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
-          style="top: 0px;"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
+          <!---->
+           
           <div
-            class="m-input-style__body__left"
+            class="m-input-style__body"
           >
-            <input
-              class="m-decimalfield__input"
-              disabled="disabled"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
-              placeholder="Disabled"
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                disabled="disabled"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+                placeholder="Disabled"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
             <!---->
-             
-            <!---->
           </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
         </div>
       </div>
        
@@ -503,35 +527,38 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
     >
       <div
         class="m-input-style m--is-readonly m--is-tag-default"
-        style="margin-top: 10px;"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
-          style="top: 0px;"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
+          <!---->
+           
           <div
-            class="m-input-style__body__left"
+            class="m-input-style__body"
           >
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
-              placeholder="Read-only"
-              readonly="readonly"
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+                placeholder="Read-only"
+                readonly="readonly"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
             <!---->
-             
-            <!---->
           </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <!---->
         </div>
       </div>
        
@@ -556,40 +583,43 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
     >
       <div
         class="m-input-style m--is-waiting m--is-tag-default"
-        style="margin-top: 10px;"
       >
-        <!---->
-         
         <div
-          class="m-input-style__body"
-          style="top: 0px;"
+          class="m-input-style__content"
+          style="margin-top: 10px;"
         >
+          <!---->
+           
           <div
-            class="m-input-style__body__left"
+            class="m-input-style__body"
           >
-            <input
-              class="m-decimalfield__input"
-              disabled="disabled"
-              id="mDecimalfield-uuid"
-              inputmode="numeric"
-              placeholder="Waiting"
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-decimalfield__input"
+                disabled="disabled"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+                placeholder="Waiting"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
             />
              
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__body__right"
-          />
-           
-          <div
-            class="m-spinner m-input-style__spinner"
-          >
-            <!---->
-             
-            <div />
+            <div
+              class="m-spinner m-input-style__spinner"
+            >
+              <!---->
+               
+              <div />
+            </div>
           </div>
         </div>
       </div>
@@ -617,33 +647,36 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
-    style="margin-top: 10px;"
   >
-    <!---->
-     
     <div
-      class="m-input-style__body"
-      style="top: 0px;"
+      class="m-input-style__content"
+      style="margin-top: 10px;"
     >
+      <!---->
+       
       <div
-        class="m-input-style__body__left"
+        class="m-input-style__body"
       >
-        <input
-          class="m-decimalfield__input"
-          id="mDecimalfield-uuid"
-          inputmode="numeric"
+        <div
+          class="m-input-style__left-content"
+        >
+          <input
+            class="m-decimalfield__input"
+            id="mDecimalfield-uuid"
+            inputmode="numeric"
+          />
+           
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
         />
          
         <!---->
-         
-        <!---->
       </div>
-       
-      <div
-        class="m-input-style__body__right"
-      />
-       
-      <!---->
     </div>
   </div>
    
@@ -668,33 +701,36 @@ exports[`Storyshots components|m-decimalfield With initial value 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
-    style="margin-top: 10px;"
   >
-    <!---->
-     
     <div
-      class="m-input-style__body"
-      style="top: 0px;"
+      class="m-input-style__content"
+      style="margin-top: 10px;"
     >
+      <!---->
+       
       <div
-        class="m-input-style__body__left"
+        class="m-input-style__body"
       >
-        <input
-          class="m-decimalfield__input"
-          id="mDecimalfield-uuid"
-          inputmode="numeric"
+        <div
+          class="m-input-style__left-content"
+        >
+          <input
+            class="m-decimalfield__input"
+            id="mDecimalfield-uuid"
+            inputmode="numeric"
+          />
+           
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
         />
          
         <!---->
-         
-        <!---->
       </div>
-       
-      <div
-        class="m-input-style__body__right"
-      />
-       
-      <!---->
     </div>
   </div>
    
