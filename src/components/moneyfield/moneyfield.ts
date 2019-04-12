@@ -8,7 +8,7 @@ import { InputWidth } from '../../mixins/input-width/input-width';
 import L10nPlugin, { MCurrency } from '../../utils/l10n/l10n';
 import { ModulVue } from '../../utils/vue/vue';
 import { MONEYFIELD_NAME } from '../component-names';
-import IntegerfieldPlugin from '../integerfield/integerfield';
+import DecimalfieldPlugin from '../decimalfield/decimalfield';
 import MessagePlugin from '../message/message';
 import WithRender from './moneyfield.html';
 
@@ -44,7 +44,7 @@ const MoneyFieldPlugin: PluginObject<any> = {
     install(v): void {
         v.use(MessagePlugin);
         v.use(L10nPlugin);
-        v.use(IntegerfieldPlugin);
+        v.use(DecimalfieldPlugin);
         v.component(MONEYFIELD_NAME, MMoneyfield);
     }
 };
