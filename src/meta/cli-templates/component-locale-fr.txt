@@ -1,4 +1,4 @@
 {
-    "{{SINGULAR_KEBAB_CASE}}": {
+    "{{PREFIXED_SINGULAR_KEBAB_CASE}}": {
     }
 }
