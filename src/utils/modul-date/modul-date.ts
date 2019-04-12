@@ -52,7 +52,7 @@ export default class ModulDate {
                     this.dateFromString(value);
                 } else {
                     const date: Date = new Date();
-                    this.innerDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+                    this.innerDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 }
                 break;
             case 3:
@@ -60,7 +60,7 @@ export default class ModulDate {
                 break;
             default:
                 const date: Date = new Date();
-                this.innerDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+                this.innerDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         }
     }
 
@@ -182,28 +182,28 @@ export default class ModulDate {
      * Getter for the year value
      */
     public fullYear(): number {
-        return this.innerDate.getUTCFullYear();
+        return this.innerDate.getFullYear();
     }
 
     /**
      * Getter for the month value
      */
     public month(): number {
-        return this.innerDate.getUTCMonth();
+        return this.innerDate.getMonth();
     }
 
     /**
      * Getter for the day of the month value
      */
     public day(): number {
-        return this.innerDate.getUTCDate();
+        return this.innerDate.getDate();
     }
 
     /**
      * Getter for the day of the week value
      */
     public dayOfWeek(): number {
-        return this.innerDate.getUTCDay();
+        return this.innerDate.getDay();
     }
 
     /**
@@ -323,13 +323,13 @@ export default class ModulDate {
         let toTimeDate: Date;
         switch (precision) {
             case DatePrecision.YEAR:
-                toTimeDate = new Date(date.getUTCFullYear(), 1, 1);
+                toTimeDate = new Date(date.getFullYear(), 1, 1);
                 break;
             case DatePrecision.MONTH:
-                toTimeDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), 1);
+                toTimeDate = new Date(date.getFullYear(), date.getMonth(), 1);
                 break;
             default: // DatePrecision.DAY:
-                toTimeDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+                toTimeDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         }
         return toTimeDate.getTime();
     }

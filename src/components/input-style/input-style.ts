@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
@@ -120,17 +120,14 @@ export class MInputStyle extends ModulVue {
         return !!this.$slots['adjust-width-auto'];
     }
 
-    private onClick(event): void {
-        this.$emit('click', event);
-    }
+    @Emit('click')
+    private onClick(event): void { }
 
-    private onMousedown(event): void {
-        this.$emit('mousedown', event);
-    }
+    @Emit('mousedown')
+    private onMousedown(event): void { }
 
-    private onMouseup(event): void {
-        this.$emit('mouseup', event);
-    }
+    @Emit('mouseup')
+    private onMouseup(event): void { }
 }
 
 const InputStylePlugin: PluginObject<any> = {
