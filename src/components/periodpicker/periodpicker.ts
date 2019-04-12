@@ -8,7 +8,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import WithRender from './periodpicker.html';
+import WithRender from './periodpicker.html?style=./periodpicker.scss';
 
 export class MDateRange {
     from: DatePickerSupportedTypes;
