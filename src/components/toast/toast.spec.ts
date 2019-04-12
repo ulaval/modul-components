@@ -121,20 +121,61 @@ describe(`MToast`, () => {
 
     describe(`Given that a timeout prop have been passed`, () => {
         describe(`When the Toast is created`, () => {
-            it(`Should appear and then disappear`, () => {
-                initializeWrapper();
-                wrapper.setProps({
-                    timeout: 'short'
+
+            describe(`Then the mouse is not over the toast`, () => {
+                it(`Should appear and then disappear`, async () => {
+                    initializeWrapper();
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
+
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
                 });
-                jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            });
 
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+            describe(`Then the mouse is over the toast`, () => {
+                it(`Should appear and then not disappear`, async () => {
+                    initializeWrapper();
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
 
-                jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over
+                    wrapper.vm.mouseOverToast();
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
 
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                });
+            });
+
+            describe(`Then the mouse is over and leave the toast`, () => {
+                it(`Should appear and then not disappear`, async () => {
+                    initializeWrapper();
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+
+                    wrapper.vm.mouseOverToast();
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+
+                    wrapper.vm.mouseLeaveToast();
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
+                });
             });
         });
     });
