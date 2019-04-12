@@ -24,17 +24,11 @@
                :disabled="isDisabled || isWaiting"
                :readonly="isReadonly"
                :placeholder="placeholder"
-               @keydown.delete="inputOnKeydownDelete"
-               @keydown.enter="inputOnKeydownEnter"
-               @keydown.return="inputOnKeydownEnter"
-               @keydown.esc="inputOnKeydownEsc"
-               @keydown.tab="inputOnKeydownTab"
-               @keydown="inputOnKeydown"
-               @change="validateDate"
                @focus="inputOnFocus"
                @blur="onBlur"
                @click.stop
-               :value="formattedDate" />
+               :value="inputModel"
+               v-on:input="validateDate($event.target.value)" />
         <m-icon-button slot="right-content"
                        class="m-datepicker__icon"
                        icon-name="m-svg__calendar"

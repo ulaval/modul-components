@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
@@ -53,18 +52,20 @@ export class MDatepicker extends ModulVue {
     public placeholder: string;
 
     private internalOpen: boolean = false;
-    private selectedYear: number = 0;
-    private selectedMonth: number = 0;
-    private selectedDay: number = 0;
 
     private internalCalandarErrorMessage: string = '';
+
+    private inputModel = '';
+    private internalDateModel = '';
+
     private id: string = `mDatepicker-${uuid.generate()}`;
 
-    @Emit('blur')
-    public onBlur(): void { }
 
     protected created(): void {
-        moment.locale([this.$i18n.currentLang(), 'en-ca']);
+
+        if (this.value instanceof Date) {
+            this.$log.warn('The type date for datepicker will be deprecated in 1.0, please use a string with the format "YYYY-MM-DD". Using the Date object can lead to timezone issue in your projet see -> https://stackoverflow.com/questions/29174810/javascript-date-timezone-issue');
+        }
     }
 
     private inputOnKeydownDelete(): void {
@@ -72,7 +73,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private get formattedDate(): string {
-        return this.value ? moment(this.value).format(this.format) : '';
+        return this.convertToIsoString(this.model);
     }
 
     private get calandarError(): boolean {
@@ -96,11 +97,19 @@ export class MDatepicker extends ModulVue {
     }
 
     private get minDateString(): string {
-        return moment(this.min).format('Y-M-D');
+        return this.convertToIsoString(this.min);
     }
 
     private get maxDateString(): string {
-        return moment(this.max).format('Y-M-D');
+        return this.convertToIsoString(this.max);
+    }
+
+    private get minModulDate(): ModulDate {
+        return new ModulDate(this.min);
+    }
+
+    private get maxModulDate(): ModulDate {
+        return new ModulDate(this.max);
     }
 
     @Watch('focus')
@@ -119,37 +128,16 @@ export class MDatepicker extends ModulVue {
         await this.$nextTick();
         let inputEl: any = this.$refs.input;
         inputEl.focus();
-        inputEl.setSelectionRange(0, this.formattedDate.length);
-        this.setSelectionToCurrentValue();
+        inputEl.setSelectionRange(0, this.model.length);
     }
 
     @Emit('close')
     private onClose(): void { }
 
-    private validateDate(event): void {
-        if (event.target.value === '') {
-            if (this.required) {
-                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
-            } else {
-                this.$emit('change', '');
-                this.internalCalandarErrorMessage = '';
-            }
-        } else if (moment(event.target.value, this.format).isValid()) {
-            let newDate: moment.Moment = moment(event.target.value, this.format);
-            if (newDate.isBetween(this.min, this.max, 'day', '[]')) {
-                this.$emit('change', newDate);
-                this.internalCalandarErrorMessage = '';
-            } else {
-                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
-            }
-        } else {
-            this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
-        }
-    }
-
     private selectDate(selectedDate: DatePickerSupportedTypes): void {
         this.internalCalandarErrorMessage = '';
-        this.$emit('change', this.createModelUpdateValue(selectedDate));
+        this.model = this.convertToIsoString(selectedDate);
+        this.emitChange();
         this.open = false;
     }
 
@@ -161,27 +149,87 @@ export class MDatepicker extends ModulVue {
         }
     }
 
-    private setSelectionToCurrentValue(): void {
-        const value: DatePickerSupportedTypes = this.value || this.getDefaultCurrentValue();
 
-        if (value instanceof Date) {
-            this.selectedYear = value.getFullYear();
-            this.selectedMonth = value.getMonth();
-            this.selectedDay = value.getDate();
+    private validateDate(inputValue: string, emit = true): void {
+
+        this.inputModel = inputValue;
+
+        if (inputValue === '' || inputValue === undefined || inputValue === null) {
+            if (this.required) {
+                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
+            } else {
+                this.model = '';
+                if (emit) {
+                    this.emitChange();
+                }
+                this.internalCalandarErrorMessage = '';
+            }
+        } else if (this.validateDateFormat(inputValue)) {
+            let newDate: ModulDate = new ModulDate(inputValue);
+            if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
+                // set the model with default value
+                this.model = inputValue;
+                if (emit) {
+                    this.emitChange();
+                }
+                this.internalCalandarErrorMessage = '';
+            } else {
+                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
+            }
         } else {
-            const dateValue: Date = new Date(value as string);
-            this.selectedYear = dateValue.getFullYear();
-            this.selectedMonth = dateValue.getMonth();
-            this.selectedDay = dateValue.getDate();
+            this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
         }
     }
 
-    private getDefaultCurrentValue(): DatePickerSupportedTypes {
-        if (moment(this.min).isAfter(moment(new Date()))) {
-            return this.min;
+
+    @Watch('value', { immediate: true })
+    private onValueChange(value: DatePickerSupportedTypes): void {
+        if (value instanceof Date) {
+            this.validateDate(new Date(value).toISOString(), false);
         } else {
-            return new Date();
+            this.validateDate(value as string, false);
         }
+    }
+
+    private set model(value: string) {
+        this.internalDateModel = value;
+        this.inputModel = value;
+
+    }
+
+    public emitChange(): void {
+        // tslint:disable-next-line: no-console
+        console.log('change = ' + this.createModelUpdateValue(this.internalDateModel));
+        this.$emit('change', this.createModelUpdateValue(this.internalDateModel));
+    }
+
+    private get model(): string {
+        return this.internalDateModel;
+    }
+
+    private convertToIsoString(input: DatePickerSupportedTypes): string {
+        if (input) {
+            try {
+                return new ModulDate(input).toString();
+            } catch (err) {
+                // invalid date
+            }
+            return '';
+        }
+        return '';
+    }
+
+    private validateDateFormat(dateString: string): boolean {
+        if (dateString) {
+            try {
+                new ModulDate(dateString).toString();
+                return true;
+            } catch (err) {
+                // invalid date
+            }
+            return false;
+        }
+        return false;
     }
 }
 

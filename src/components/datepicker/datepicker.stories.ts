@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -19,12 +19,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         template: `<m-datepicker></m-datepicker>`
     }))
     .add('v-model', () => ({
-        props: {
-            model1: {
-                default: text('Date', '2011-01-01')
-            }
-        },
-        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/>model value = {{model1}}</div>`
+        data: () => ({
+            model1: '2011-01-01'
+        }),
+        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/> <br/>model value = {{model1}}</div>`
     }))
 
     .add('label', () => ({
@@ -40,7 +38,28 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
 
     .add('min="2008-01-01" && max="2014-12-31"', () => ({
-        template: `<m-datepicker min="2008-01-01" max="2014-12-31"></m-datepicker>`
+        data: () => ({
+            model1: '2011-01-01'
+        }),
+        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+    }))
+    .add('date format invalide', () => ({
+        data: () => ({
+            model1: '01ad01/2000'
+        }),
+        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+    }))
+    .add('date hors limite min', () => ({
+        data: () => ({
+            model1: '2000-01-01'
+        }),
+        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+    }))
+    .add('date hors limite max', () => ({
+        data: () => ({
+            model1: '2015-01-01'
+        }),
+        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
 
     .add('disabled', () => ({
