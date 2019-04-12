@@ -2,8 +2,8 @@
     <span v-if="currencyDetail.symbolPosition === 'before'">
         {{ currencyDetail.localizedSymbol }}
     </span>
-    <m-integerfield v-bind="bindData"
-                    v-on="$listeners"></m-integerfield>
+    <m-decimalfield v-bind="bindData"
+                    v-on="$listeners"></m-decimalfield>
     <span v-if="currencyDetail.symbolPosition === 'after'">
         {{ currencyDetail.localizedSymbol }}
     </span>
