@@ -51,7 +51,7 @@ export class MInputMask extends ModulVue {
     @Watch('options', { deep: true })
     public optionsChanged(options: CleaveOptions): void {
         this.cleave.destroy();
-        this.cleave = new Cleave(this.$el, this.getOptions());
+        this.cleave = new Cleave(this.$el as HTMLElement, this.getOptions());
         this.cleave.setRawValue(this.inputValue);
     }
 
