@@ -2,7 +2,8 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
-import { MediaQueries, MediaQueriesMixin } from '../../mixins/media-queries/media-queries';
+import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import ModulDate from '../../utils/modul-date/modul-date';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
@@ -15,6 +16,7 @@ export class MDateRange {
 }
 
 interface MPeriodpickerFromProps {
+    focus: boolean;
     value: DatePickerSupportedTypes;
     min: DatePickerSupportedTypes;
     max: DatePickerSupportedTypes;
@@ -28,6 +30,7 @@ interface MPeriodpickerFromProps {
 interface MPeriodpickerFromHandlers {
     change(newValue: DatePickerSupportedTypes): void;
     open(): void;
+    close(): void;
 }
 
 export interface MPeriodpickerFromComponentVue extends MPeriodpickerFromProps, MPeriodpickerFromHandlers { }
@@ -46,6 +49,7 @@ interface MPeriodpickerToProps {
 
 interface MPeriodpickerToHandlers {
     change(newValue: DatePickerSupportedTypes): void;
+    open(): void;
     close(): void;
 }
 
@@ -75,11 +79,21 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()
     max: DatePickerSupportedTypes;
 
+    @Emit('input')
+    emitNewValue(newValue: MDateRange): void { }
+
+    dateFromInternalValue: DatePickerSupportedTypes = new Date();
+    dateToInternalValue: DatePickerSupportedTypes = new Date();
+    dateFromChanged: boolean = false;
+    dateToChanged: boolean = false;
+    selecting: boolean = false;
+    fromIsFocused: boolean = false;
     toIsFocused: boolean = false;
 
     get firstInputState(): MPeriodpickerFromSlotProps {
         return {
             props: {
+                focus: this.fromIsFocused,
                 value: this.internalValue.from,
                 min: this.min,
                 max: this.max,
@@ -91,7 +105,8 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
             },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
-                open: () => this.onDateFromOpen()
+                open: () => this.onDateFromOpen(),
+                close: () => this.onDateFromClose()
             }
         };
     }
@@ -111,13 +126,18 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
             },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),
+                open: () => this.onDateToOpen(),
                 close: () => this.onDateToClose()
             }
         };
     }
 
     get internalValue(): MDateRange {
-        return this.value || {};
+        if (!this.selecting) {
+            return this.value || {};
+        } else {
+            return { from: this.dateFromInternalValue, to: this.dateToInternalValue };
+        }
     }
 
     get minDateTo(): DatePickerSupportedTypes {
@@ -133,42 +153,70 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     onDateFromChange(newValue: DatePickerSupportedTypes): void {
-        if (newValue) {
-            if (this.as<MediaQueriesMixin>().isMqMinS) {
-                this.toIsFocused = true;
-            }
+        this.dateFromChanged = true;
 
-            this.emitNewValue(Object.assign({}, this.internalValue, {
-                from: newValue,
-                to: newValue > (this.internalValue.to || '') ? undefined : this.internalValue.to
-            }));
+        this.dateFromInternalValue = newValue ? this.getNewModelValue(newValue) : undefined;
+        if (!newValue) {
+            this.endSelection();
         } else {
-            this.emitNewValue({ from: undefined, to: this.internalValue.to });
+            this.toIsFocused = true;
         }
+        this.fromIsFocused = false;
     }
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
-        if (newValue) {
-            this.unfocusDateToField();
-            this.emitNewValue(Object.assign({}, this.internalValue, { to: newValue }));
-        } else {
-            this.emitNewValue({ from: this.internalValue.from, to: undefined });
+        this.dateToChanged = true;
+
+        this.dateToInternalValue = newValue ? this.getNewModelValue(newValue, true) : undefined;
+        this.endSelection();
+    }
+
+    onDateFromOpen(): void {
+        this.fromIsFocused = true;
+        this.beginSelection();
+    }
+
+    onDateFromClose(): void {
+        if (!this.dateFromChanged) {
+            this.endSelection();
         }
     }
 
-    @Emit('input')
-    emitNewValue(newValue: MDateRange): void { }
-
-    onDateFromOpen(): void {
-        this.unfocusDateToField();
+    onDateToOpen(): void {
+        this.toIsFocused = true;
+        this.beginSelection();
     }
 
     onDateToClose(): void {
-        this.unfocusDateToField();
+        if (!this.dateToChanged) {
+            this.endSelection();
+        }
     }
 
-    unfocusDateToField(): void {
+    getNewModelValue(newValue: DatePickerSupportedTypes, endOfDay: boolean = false): DatePickerSupportedTypes {
+        if (!newValue) { return; }
+
+        const modulDate: ModulDate = new ModulDate(newValue);
+        const isoString: string = endOfDay ? modulDate.endOfDay().toISOString() : modulDate.toISOString();
+
+        return new Date(isoString);
+    }
+
+    beginSelection(): void {
+        if (!this.selecting) {
+            this.dateFromChanged = false;
+            this.dateToChanged = false;
+            this.dateFromInternalValue = (this.value || {}).from;
+            this.dateToInternalValue = (this.value || {}).to;
+            this.selecting = true;
+        }
+    }
+
+    endSelection(): void {
+        this.selecting = false;
+        this.fromIsFocused = false;
         this.toIsFocused = false;
+        this.emitNewValue({ from: this.dateFromInternalValue, to: this.dateToInternalValue });
     }
 }
 

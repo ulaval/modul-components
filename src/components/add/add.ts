@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { ADD_NAME } from '../component-names';
 import { MLinkIconPosition, MLinkSkin } from '../link/link';
@@ -9,9 +9,6 @@ import WithRender from './add.html?style=./add.scss';
 @WithRender
 @Component
 export class MAdd extends ModulVue {
-    @Prop()
-    public url: string | Location;
-
     @Prop()
     public disabled: boolean;
 
@@ -27,9 +24,6 @@ export class MAdd extends ModulVue {
     })
     public skin: MLinkSkin;
 
-    @Prop()
-    public target: string;
-
     @Prop({
         default: MLinkIconPosition.Left,
         validator: value =>
@@ -40,13 +34,15 @@ export class MAdd extends ModulVue {
     @Prop({ default: '24px' })
     public iconSize: string;
 
-    @Prop({ default: 0 })
-    public tabindex: number;
+    @Emit('click')
+    public emitClick(): void { }
 
-    private onClick(event): void {
-        if (!this.disabled) {
-            this.$emit('click', event);
+    private onClick(): void {
+        if (this.disabled) {
+            return;
         }
+
+        this.emitClick();
     }
 }
 

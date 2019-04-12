@@ -10,13 +10,13 @@
     }
 
     // to overcome input-style base padding, minus space for the label.
-    .m-input-style.m--has-label & {
-        margin-top: -#{$m-input-style--padding - 4}; // magic number
+    .m-input-style.m--is-label-up.m--is-focus & {
+        margin-top: -4px // magic number
     }
 
     // basic body padding for all states
     /deep/ .fr-element.fr-view {
-        padding: $m-spacing--s;
+        padding: $m-input-style--padding;
     }
 
     /deep/ .fas { font-style: normal; }
@@ -170,10 +170,12 @@
         .fr-wrapper {
             transition: background $m-transition-duration ease;
             cursor: text;
+            display: flex;
         }
 
         .fr-view {
             color: $m-color--text;
+            width: 100%;
 
             & > :first-child {
                 margin-top: 0 !important;
@@ -268,23 +270,6 @@
                 &.fr-not-empty:focus + label {
                     color: $m-color--interactive;
                 }
-            }
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-            margin: auto;
-            text-align: center;
-
-            &.fr-fil {
-                float: left;
-                margin-right: $m-spacing--s;
-            }
-
-            &.fr-fir {
-                float: right;
-                margin-left: $m-spacing--s;
             }
         }
     }

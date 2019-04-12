@@ -1,7 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { TIMEPICKER_NAME } from '../component-names';
+import TimepickerPlugin from './timepicker';
 import WithRender from './timepicker.sandbox.html';
 
 @WithRender
@@ -11,6 +11,7 @@ export class MTimepickerSandbox extends Vue {
 
 const TimepickerSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(TimepickerPlugin);
         v.component(`${TIMEPICKER_NAME}-sandbox`, MTimepickerSandbox);
     }
 };

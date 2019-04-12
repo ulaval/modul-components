@@ -19,6 +19,9 @@
         "**/reports/": true,
         "package-lock.json": true,
     },
+    "files.associations": {
+        "**/addons.ts": "plaintext"
+    },
     "html.format.wrapLineLength": 0,
     "html.format.wrapAttributes": "force-aligned",
     "typescript.updateImportsOnFileMove.enabled": "prompt"

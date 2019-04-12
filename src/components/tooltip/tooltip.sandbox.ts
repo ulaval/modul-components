@@ -1,9 +1,9 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-
 import { TOOLTIP_NAME } from '../component-names';
-import WithRender from './tooltip.sandbox.html';
 import TooltipPlugin from './tooltip';
+import WithRender from './tooltip.sandbox.html';
+
 
 @WithRender
 @Component

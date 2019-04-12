@@ -1,9 +1,9 @@
 <div>
-    <m-textfield v-model="year"
+    <m-textfield v-model="current.year"
                  label="year"></m-textfield>
-    <m-textfield v-model="month"
+    <m-textfield v-model="current.month"
                  label="month"></m-textfield>
-    <m-textfield v-model="day"
+    <m-textfield v-model="current.day"
                  label="day"></m-textfield>
 
     <h3>Long format</h3>
@@ -12,15 +12,15 @@
     <h3>Short format</h3>
     <p v-html="formattedDateShort"></p>
 
-    <m-textfield v-model="year"
+    <m-textfield v-model="current.year"
                  label="year"></m-textfield>
-    <m-textfield v-model="month"
+    <m-textfield v-model="current.month"
                  label="month"></m-textfield>
-    <m-textfield v-model="day"
+    <m-textfield v-model="current.day"
                  label="day"></m-textfield>
-    <m-textfield v-model="hours"
+    <m-textfield v-model="current.hours"
                  label="hours"></m-textfield>
-    <m-textfield v-model="minutes"
+    <m-textfield v-model="current.minutes"
                  label="minutes"></m-textfield>
 
     <h3>Long format</h3>
@@ -29,10 +29,37 @@
     <h3>Short format</h3>
     <p v-html="formattedDateTimeShort"></p>
 
-    <m-textfield v-model="hours"
+    <m-textfield v-model="current.hours"
                  label="hours"></m-textfield>
-    <m-textfield v-model="minutes"
+    <m-textfield v-model="current.minutes"
                  label="minutes"></m-textfield>
 
-    <h3>{{ date | f-m-time }}</h3>
+    <h4>{{ date | f-m-time }}</h4>
+
+    <h3>Period Format</h3>
+
+    <h4>Compact Mode</h4>
+    <p v-html="formattedPeriod"></p>
+    <p v-html="$options.filters['f-m-period'](periodThroughFilter)"></p>
+
+    <div>
+        <m-textfield v-model="current.year"
+                     label="year"></m-textfield>
+        <m-textfield v-model="current.month"
+                     label="month"></m-textfield>
+        <m-textfield v-model="current.day"
+                     label="day"></m-textfield>
+        <m-button type="reset"
+                  @click="clearCurrent">Clear current date</m-button>
+    </div>
+    <div>
+        <m-textfield v-model="later.year"
+                     label="year"></m-textfield>
+        <m-textfield v-model="later.month"
+                     label="month"></m-textfield>
+        <m-textfield v-model="later.day"
+                     label="day"></m-textfield>
+        <m-button type="reset"
+                  @click="clearLater">Clear Later date</m-button>
+    </div>
 </div>

@@ -52,7 +52,7 @@
                 <h3 class="m-file-upload__drop-zone__instructions__title">
                     <m-icon name="m-svg__arrow--down"
                             size="32px"></m-icon>
-                    <m-i18n k="m-file-upload:title"
+                    <m-i18n k="m-file-upload:dropFile"
                             :nb="propMaxFiles"></m-i18n>
                 </h3>
                 <m-file-select class="m-file-upload__drop-zone__instructions__button"
@@ -71,6 +71,10 @@
         </div>
         <div class="m-file-upload__no-drop-zone"
              v-else>
+            <h3 class="m-u--no-margin-top">
+                <m-i18n k="m-file-upload:selectFile"
+                        :nb="propMaxFiles"></m-i18n>
+            </h3>
             <m-file-select class="m-file-upload__no-drop-zone__instructions__button"
                            skin="primary"
                            :multiple="maxFiles > 1 ? true : false"

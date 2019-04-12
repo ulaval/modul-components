@@ -1,5 +1,6 @@
 <div class="m-textfield"
      :class="[{ 'm--is-disabled': isDisabled,
+                'm--is-readonly': isReadonly,
                 'm--is-waiting': isWaiting,
                 'm--has-error': hasTextfieldError,
                 'm--is-valid': isTextfieldValid,
@@ -17,27 +18,26 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
-                   :readonly="readonly"
+                   :readonly="isReadonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
-        <input ref="input"
+        <input class="m-textfield__input"
+               v-if="!hasWordWrap"
+               v-model="model"
                :id="id"
-               class="m-textfield__input"
-               :disabled="!active"
+               :autocomplete="autocomplete"
+               :disabled="isDisabled || isWaiting"
                :placeholder="placeholder"
-               :readonly="readonly"
+               :readonly="isReadonly"
                :maxlength="maxLengthNumber"
+               :type="inputType"
                @focus="onFocus"
                @blur="onBlur"
                @keyup="onKeyup"
                @keydown="onKeydown"
                @keydown.enter="onEnter"
                @change="onChange"
-               @paste="onPaste"
-               :autocomplete="autocomplete"
-               v-model="model"
-               v-if="!hasWordWrap"
-               :type="inputType">
+               @paste="onPaste" />
         <template slot="right-content"
                   v-if="!hasWordWrap">
             <transition-group name="m--is">
@@ -71,9 +71,9 @@
         <textarea ref="input"
                   :id="id"
                   class="m-textfield__input"
-                  :disabled="!active"
+                  :disabled="isDisabled || isWaiting"
                   :placeholder="placeholder"
-                  :readonly="readonly"
+                  :readonly="isReadonly"
                   rows="1"
                   @focus="onFocus"
                   @blur="onBlur"

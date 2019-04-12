@@ -11,7 +11,7 @@ export type FormFieldGroup = { [name: string]: FormField<any>; };
  */
 export class Form {
     public id: string;
-
+    private internalFields: FormField<any>[];
     private internalState: FormState;
 
     /**
@@ -22,14 +22,18 @@ export class Form {
     constructor(private fieldGroup: FormFieldGroup, private validationCallbacks: FormValidationCallback[] = []) {
         this.id = uuid.generate();
         this.internalState = new FormState();
+        this.setFields();
+    }
+
+    get fields(): FormField<any>[] {
+        return this.internalFields;
     }
 
     /**
-     * return the form fields
+     * Total number of errors
      */
-    get fields(): FormField<any>[] {
-        return Object.keys(this.fieldGroup)
-            .map((name: string): FormField<any> => this.fieldGroup[name]);
+    get totalNbOfErrors(): number {
+        return this.nbFieldsThatHasError + this.nbOfErrors;
     }
 
     /**
@@ -54,6 +58,34 @@ export class Form {
     }
 
     /**
+     * Add a field to the form
+     * @param name
+     * @param field
+     */
+    addField(name: string, field: FormField<any>): void {
+        if (this.fieldGroup[name]) {
+            throw Error('This field name already exist');
+        }
+
+        this.fieldGroup[name] = field;
+        this.setFields();
+    }
+
+    /**
+     * Remove a field to the form
+     * @param name
+     */
+    removeField(name: string): void {
+        if (!this.fieldGroup[name]) {
+            throw Error('This field name does not exist');
+        }
+
+        delete this.fieldGroup[name];
+        this.setFields();
+    }
+
+
+    /**
      * Return the formField with the coresponding name
      *
      * @param formFieldName the name of the formfield to access
@@ -66,6 +98,24 @@ export class Form {
         }
 
         return this.fieldGroup[formFieldName];
+    }
+
+
+    /**
+     * Return the name of the form field
+     *
+     * @param formField the formfield to find the name of
+     */
+    getFieldName(formField: FormField<any>): string {
+        let name: string | undefined = Object
+            .keys(this.fieldGroup)
+            .find((key: string) => this.fieldGroup[key] === formField);
+
+        if (!name) {
+            throw new Error('Trying to access an non existing form field');
+        }
+
+        return name;
     }
 
     /**
@@ -83,7 +133,11 @@ export class Form {
      * returns all the messages that must be shown in the summary
      */
     getErrorsForSummary(): string[] {
-        let errorsSummary: string[] = this.internalState.errorMessages;
+        let errorsSummary: string[] = [];
+
+        this.internalState.errorMessages.forEach((message: string) => {
+            errorsSummary.push(message);
+        });
 
         this.fields.forEach((field: FormField<any>) => {
             errorsSummary.push(field.errorMessageSummary[0]);
@@ -108,7 +162,7 @@ export class Form {
      */
     validateAll(): void {
         this.fields.forEach((field: FormField<any>) => {
-            field.touch();
+            field.validate(true);
         });
 
         this.internalState = new FormState();
@@ -124,5 +178,10 @@ export class Form {
 
         this.internalState.hasErrors = true;
         this.internalState.errorMessages = this.internalState.errorMessages.concat(formValidation.errorMessage);
+    }
+
+    private setFields(): void {
+        this.internalFields = Object.keys(this.fieldGroup)
+            .map((name: string): FormField<any> => this.fieldGroup[name]);
     }
 }

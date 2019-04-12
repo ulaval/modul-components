@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop } from 'vue-property-decorator';
-import { InputState } from '../../mixins/input-state/input-state';
+import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RADIO_NAME } from '../component-names';
@@ -27,21 +27,13 @@ export interface RadioGroup {
     inline: boolean;
     radiosVerticalAlign: MRadioVerticalAlignement;
     radiosMarginTop: string;
-    readOnly: boolean;
     onFocus(event: Event): void;
     onBlur(event: Event): void;
     getValue(): string;
     updateValue(value: string): void;
 }
 
-export interface ButtonGroup extends RadioGroup {
-    fullSize: boolean;
-}
-
 export abstract class BaseRadioGroup extends ModulVue {
-}
-
-export abstract class BaseButtonGroup extends BaseRadioGroup {
 }
 
 @WithRender
@@ -75,21 +67,7 @@ export class MRadio extends ModulVue {
     public radioVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radioMarginTop: string;
-    @Prop()
-    public readOnly: boolean;
 
-    // ----- For Button Group -----
-    @Prop()
-    public iconName: string;
-    @Prop({
-        default: MRadioPosition.Left,
-        validator: value =>
-            value === MRadioPosition.Left ||
-            value === MRadioPosition.Right
-    })
-    public iconPosition: MRadioPosition;
-
-    // ---------------------------
     public radioID: string = uuid.generate();
 
     private hasFocus: boolean = false;
@@ -136,10 +114,6 @@ export class MRadio extends ModulVue {
         return this.isGroup() ? this.parentGroup.inline : false;
     }
 
-    public get propFullSize(): boolean {
-        return this.isGroup() ? (this.parentGroup as ButtonGroup).fullSize : false;
-    }
-
     protected get model(): string {
         return this.isGroup() ? this.parentGroup.getValue() : this.modelValue;
     }
@@ -152,11 +126,11 @@ export class MRadio extends ModulVue {
         }
     }
 
-    public get propReadOnly(): boolean {
-        if (this.readOnly !== undefined) {
-            return this.readOnly;
+    public get propReadonly(): boolean {
+        if (this.as<InputStateMixin>().readonly !== undefined) {
+            return this.as<InputStateMixin>().readonly;
         } else {
-            return this.isGroup() ? (this.parentGroup as ButtonGroup).readOnly : false;
+            return this.isGroup() ? (this.parentGroup as any).readonly : false;
         }
     }
 
@@ -164,8 +138,8 @@ export class MRadio extends ModulVue {
         if (this.hasParentGroup === undefined) {
             let parentGroup: BaseRadioGroup | undefined;
             parentGroup = this.getParent<BaseRadioGroup>(
-                p => p instanceof BaseRadioGroup || p instanceof BaseButtonGroup || // these will fail with Jest, but should pass in prod mode
-                    p.$options.name === 'MRadioGroup' || p.$options.name === 'MButtonGroup' // these are necessary for Jest, but the first two should pass in prod mode
+                p => p instanceof BaseRadioGroup || // these will fail with Jest, but should pass in prod mode
+                    p.$options.name === 'MRadioGroup' // these are necessary for Jest, but the first two should pass in prod mode
             );
             if (parentGroup) {
                 this.parentGroup = (parentGroup as any) as RadioGroup;
@@ -175,10 +149,6 @@ export class MRadio extends ModulVue {
             }
         }
         return !!this.hasParentGroup;
-    }
-
-    private isButton(): boolean {
-        return this.isGroup() && this.parentGroup instanceof BaseButtonGroup;
     }
 
     @Emit('focus')
@@ -195,14 +165,6 @@ export class MRadio extends ModulVue {
             this.parentGroup.onBlur(event);
         }
         this.hasFocus = false;
-    }
-
-    private hasIcon(): boolean {
-        return !!this.iconName;
-    }
-
-    private hasIconLeft(): boolean {
-        return this.iconPosition === MRadioPosition.Left;
     }
 }
 

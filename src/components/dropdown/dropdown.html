@@ -19,6 +19,7 @@
                    :required-marker="requiredMarker"
                    :width="inputStyletWidth"
                    :tag-style="tagStyle"
+                   @click="onOpen"
                    v-m-popup:popup>
         <input type="text"
                ref="input"
@@ -32,19 +33,20 @@
                :placeholder="placeholder"
                @keydown.enter.prevent="onKeydownEnter"
                @keydown.return.prevent="onKeydownEnter"
-               @keydown.esc="inputOnKeydownEsc"
+               @keydown.esc="onKeydownEsc"
                @keydown.up.prevent="onKeydownUp"
                @keydown.down.prevent="onKeydownDown"
                @keydown.tab="onKeydownTab"
                @keydown="inputOnKeydown"
                @focusin="onFocusIn"
                @focusout="onFocusOut"
-               v-model="selectedText">
+               @input="onInput"
+               v-model.trim="selectedText">
         <template slot="adjust-width-auto"
                   v-if="width === 'auto'">{{ selectedText }}</template>
         <div class="m-dropdown__arrow"
              :class="{ 'm--is-open': open }"
-             v-if="active"
+             v-if="active && showArrowIcon"
              slot="right-content">
             <m-icon class="m-dropdown__arrow__icon"
                     ref="arrow"
@@ -96,7 +98,8 @@
                        type="text"
                        placeholder="Recherche"
                        ref="researchInput"
-                       v-model="selectedText">
+                       v-model="selectedText"
+                       @input="onInput">
                 <m-icon-button class="m-dropdown__header__research-button"
                                icon-name="m-svg__search"
                                @click="focusOnResearchInput">
@@ -109,11 +112,12 @@
             ref="items"
             :style="itemsHeightStyle"
             :aria-labelledby="id"
-            aria-live="polite">
+            aria-live="polite"
+            @mouseup="selectText">
             <slot></slot>
-            <m-dropdown-item v-if="!hasItems && !dirty"
+            <m-dropdown-item v-if="!hasItems && !dirty && includeFilterableStatusItems"
                              :readonly="true">{{ propTextNoData }}</m-dropdown-item>
-            <m-dropdown-item v-if="!hasItems && dirty"
+            <m-dropdown-item v-if="!hasItems && dirty && includeFilterableStatusItems"
                              :readonly="true">{{ propTextNoMatch }}</m-dropdown-item>
         </ul>
 

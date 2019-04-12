@@ -5,12 +5,18 @@ export enum CalendarEvent {
     DAY_SELECT = 'day-select',
     DAY_MOUSE_ENTER = 'day-mouse-enter',
     DAY_MOUSE_LEAVE = 'day-mouse-leave',
+    DAY_KEYBOARD_TAB = 'day-keyboard-tab',
     MONTH_SELECT = 'month-select',
     MONTH_NEXT = 'month-next',
     MONTH_PREVIOUS = 'month-previous',
     YEAR_SELECT = 'year-select',
     YEAR_NEXT = 'year-next',
     YEAR_PREVIOUS = 'year-previous'
+}
+
+export enum CalendarType {
+    SINGLE_DATE = 'single-date',
+    DATE_RANGE = 'date-range'
 }
 
 export type DaySelectCallBack = (date: SingleDate | RangeDate) => void;
@@ -32,12 +38,14 @@ export interface Calendar {
     years: YearState[];
     months: MonthState[];
     days: DayState[];
+    type?: CalendarType;
 }
 
 export interface CalendarEvents {
     [CalendarEvent.DAY_SELECT]: (event: DayState) => void;
     [CalendarEvent.DAY_MOUSE_ENTER]: (event: DayState) => void;
     [CalendarEvent.DAY_MOUSE_LEAVE]: (event: DayState) => void;
+    [CalendarEvent.DAY_KEYBOARD_TAB]: (event: DayState) => void;
     [CalendarEvent.MONTH_SELECT]: (event: MonthState) => void;
     [CalendarEvent.MONTH_PREVIOUS]: (event: Event) => void;
     [CalendarEvent.MONTH_NEXT]: (event: Event) => void;
@@ -58,12 +66,15 @@ export interface MonthState {
 }
 
 export interface DayState {
+    date: ModulDate;
     day: number;
     month: number;
     year: number;
     isDisabled: boolean;
     isToday: boolean;
     isSelected: boolean;
+    isSelectionStart: boolean;
+    isSelectionEnd: boolean;
     isInPreviousMonth: boolean;
     isInNextMonth: boolean;
     isHighlighted: boolean;

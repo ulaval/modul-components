@@ -4,10 +4,10 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
-import MSimpleCalendar from './calendar-renderer/simple-calendar';
+import MBaseCalendar from './calendar-renderer/base-calendar/base-calendar';
 import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
-import WithRender from './calendar.html';
+import WithRender from './calendar.html?style=./calendar.scss';
 
 
 export enum CalendarMode {
@@ -19,7 +19,7 @@ export enum CalendarMode {
 @Component({
     components: {
         MCalendarStateMachine,
-        MSimpleCalendar
+        MBaseCalendar
     }
 })
 export class MCalendar extends ModulVue {
@@ -83,7 +83,6 @@ export class MCalendar extends ModulVue {
 
 const CalendarPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.warn(CALENDAR_NAME + ' is not ready for production');
         Vue.use(IconButtonPlugin);
         v.component(CALENDAR_NAME, MCalendar);
     }

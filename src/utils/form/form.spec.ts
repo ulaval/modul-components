@@ -20,7 +20,7 @@ let formFieldHasError: boolean = false;
 
 const ERROR_MESSAGE_SUMMARY: string = 'ERROR SUMMARY';
 const FIELD_VALUE: string = 'VALUE';
-const VALIDATING_FUNCTION: FieldValidationCallback = (): FormFieldValidation => fieldValidation;
+const VALIDATING_FUNCTION: FieldValidationCallback<string> = (): FormFieldValidation => fieldValidation;
 
 const mockFieldValidationWithError: FormFieldValidation = {
     isError: true,
@@ -38,7 +38,6 @@ describe(`Form`, () => {
             errorMessageSummary: formFieldSummaryErrors,
             validate: jest.fn(),
             focusThisField: jest.fn(),
-            touch: jest.fn(),
             shouldFocus: false
         };
         ((FormField as unknown) as jest.Mock).mockClear();
@@ -99,7 +98,6 @@ describe(`Form`, () => {
             expect(form.getErrorsForSummary()).toEqual([ERROR_MESSAGE_SUMMARY]);
         });
     });
-
     describe(`When at least one field has errors`, () => {
         beforeEach(() => {
             form = new Form({
@@ -123,7 +121,7 @@ describe(`Form`, () => {
             });
 
             it(`validates each fields`, () => {
-                expect(mockFormField.touch).toHaveBeenCalledTimes(1);
+                expect(mockFormField.validate).toHaveBeenCalledTimes(1);
             });
 
             it(`getErrorsForSummary returns 1 error message`, () => {
@@ -157,6 +155,29 @@ describe(`Form`, () => {
             form.reset();
 
             expect(spy).toHaveBeenCalledTimes(form.fields.length);
+        });
+    });
+
+    describe(`When we add a field`, () => {
+        beforeEach(() => {
+            form.addField('a new field', new FormField<string>((): string => '', []));
+        });
+
+        it(`Then the field should be part of the form`, () => {
+            expect(form.get('a new field')).toBeTruthy();
+        });
+    });
+
+    describe(`When we remove a field`, () => {
+        beforeEach(() => {
+            form = new Form({});
+            form.addField('a new field', new FormField<string>((): string => '', []));
+            expect(form.get('a new field')).toBeTruthy();
+            form.removeField('a new field');
+        });
+
+        it(`Then the field should not be part of the form`, () => {
+            expect(form['fieldGroup']['a new field']).toBeUndefined();
         });
     });
 });

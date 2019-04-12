@@ -37,10 +37,6 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public radiosVerticalAlign: MRadioVerticalAlignement;
     @Prop()
     public radiosMarginTop: string;
-    @Prop({
-        default: false
-    })
-    public readOnly: boolean;
 
     public name: string = uuid.generate();
     private internalValue: any | undefined = '';

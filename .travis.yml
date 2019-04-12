@@ -9,14 +9,13 @@ branches:
   - develop
 
 install:
-  - npm run setup
+  - npm ci
 
 script:
   - npm run clean
+  - npm run tslint:ci
   - npm run buildWebpack
-  - npm run unitall -- -w 1
-  - npm run tslint
-  - npm pack
+  - npm run test
 
 cache:
   directories:

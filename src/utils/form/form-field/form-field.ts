@@ -1,11 +1,29 @@
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 
-export interface FormFieldOptions {
-    messageAfterTouched?: boolean;
+/**
+ * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
+ */
+export enum FormFieldValidationType {
+    Optimistic = 'optimistic',
+    OnGoing = 'on-going',
+    Correctable = 'correctable',
+    AtExit = 'at-exit'
 }
 
-export type FieldValidationCallback = (value: any) => FormFieldValidation;
+export interface FormFieldOptions {
+    validationType?: FormFieldValidationType;
+}
+
+export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
+
+export enum FormFieldEditionContext {
+    None = 'none',
+    EmptyAndValid = 'empty-and-valid',
+    PopulateAndValid = 'populate-and-valid',
+    NotValid = 'not-valid'
+}
+
 /**
  * Form Field Class
  */
@@ -13,9 +31,11 @@ export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
-    private messageAfterTouched: boolean = true;
-    private touched: boolean = false;
+    private validationType: FormFieldValidationType = FormFieldValidationType.OnGoing;
+    private editionContext: FormFieldEditionContext = FormFieldEditionContext.None;
     private shouldFocusInternal: boolean = false;
+    private externalError: string = '';
+    private touched: boolean = false;
 
     /**
      *
@@ -23,14 +43,14 @@ export class FormField<T> {
      * @param validationCallback function called to validate
      * @param options options for the field
      */
-    constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback[] = [], options?: FormFieldOptions) {
+    constructor(public accessCallback: () => T, public validationCallback: FieldValidationCallback<T>[] = [], options?: FormFieldOptions) {
 
         this.internalValue = accessCallback();
         this.internalState = new FormFieldState();
 
         if (options) {
-            this.messageAfterTouched = typeof options.messageAfterTouched === undefined ?
-                this.messageAfterTouched : options.messageAfterTouched!;
+            this.validationType = typeof options.validationType === undefined ?
+                this.validationType : options.validationType!;
         }
     }
 
@@ -56,10 +76,25 @@ export class FormField<T> {
     }
 
     /**
-     * indicates if the field is touched
+     * indicates if the field is valid
      */
-    get isTouched(): boolean {
-        return this.touched;
+    get isValid(): boolean {
+        return !this.internalState.hasError;
+    }
+
+    /**
+     * get external error
+     */
+    get ExternalError(): string {
+        return this.externalError;
+    }
+
+    /**
+     * set external error and trigger validation
+     */
+    set ExternalError(value: string) {
+        this.externalError = value;
+        this.validate();
     }
 
     /**
@@ -82,7 +117,7 @@ export class FormField<T> {
     get errorMessage(): string {
         let errorMessageToShow: string = '';
 
-        if (this.hasError && ((this.messageAfterTouched && this.touched) || !this.messageAfterTouched)) {
+        if (this.hasError) {
             errorMessageToShow = this.internalState.errorMessages[0];
         }
 
@@ -96,34 +131,34 @@ export class FormField<T> {
         return this.internalState.errorMessagesSummary;
     }
 
-    /**
-     * execute validations
-     */
-    validate(): void {
-        if (this.validationCallback.length > 0) {
-            let newState: FormFieldState = new FormFieldState();
-            this.validationCallback.forEach((validationFunction) => {
-                let validation: FormFieldValidation = validationFunction(this.internalValue);
-                if (validation.isError) {
-                    newState.hasError = true;
-                }
-                if (validation.errorMessages.length > 0) {
-                    newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
-                }
-                if (validation.errorMessagesSummary.length > 0) {
-                    newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
-                }
-            });
-            this.changeState(newState);
-        }
+    get isTouched(): boolean {
+        return this.touched;
     }
 
     /**
-     * mark the field as touched and trigger validation
+     * execute validations
      */
-    touch(): void {
-        this.touched = true;
-        this.validate();
+    validate(force: boolean = false): void {
+        if (!force && !this.validationGuard()) {
+            return;
+        }
+
+        let newState: FormFieldState = new FormFieldState();
+
+        this.validationCallback.forEach((validationFunction) => {
+            let validation: FormFieldValidation = validationFunction(this);
+            if (validation.isError) {
+                newState.hasError = true;
+            }
+            if (validation.errorMessages.length > 0) {
+                newState.errorMessages = newState.errorMessages.concat(validation.errorMessages);
+            }
+            if (validation.errorMessagesSummary.length > 0) {
+                newState.errorMessagesSummary = newState.errorMessagesSummary.concat(validation.errorMessagesSummary);
+            }
+        });
+
+        this.changeState(newState);
     }
 
     /**
@@ -133,7 +168,28 @@ export class FormField<T> {
         this.internalValue = this.accessCallback();
         this.oldValue = this.internalValue;
         this.internalState = new FormFieldState();
+        this.externalError = '';
         this.touched = false;
+        this.editionContext = FormFieldEditionContext.None;
+    }
+
+    initEdition(): void {
+        if (!this.internalValue && this.isValid) {
+            this.editionContext = FormFieldEditionContext.EmptyAndValid;
+        } else if (this.internalValue && this.isValid) {
+            this.editionContext = FormFieldEditionContext.PopulateAndValid;
+        } else if (!this.isValid) {
+            this.editionContext = FormFieldEditionContext.NotValid;
+        }
+    }
+
+    endEdition(): void {
+        this.editionContext = FormFieldEditionContext.None;
+        this.validate();
+    }
+
+    touch(): void {
+        this.touched = true;
     }
 
     /**
@@ -142,8 +198,8 @@ export class FormField<T> {
      */
     private change(value: T): void {
         if (typeof value === 'object' || value !== this.oldValue) {
-            this.internalValue = value;
             this.oldValue = this.internalValue;
+            this.internalValue = value;
             this.validate();
         }
     }
@@ -152,5 +208,36 @@ export class FormField<T> {
         this.internalState.hasError = etat.hasError;
         this.internalState.errorMessages = etat.errorMessages;
         this.internalState.errorMessagesSummary = etat.errorMessagesSummary;
+    }
+
+    private validationGuard(): boolean {
+        let shouldValidate: boolean = false;
+
+        if (this.editionContext === FormFieldEditionContext.EmptyAndValid) {
+            switch (this.validationType) {
+                case FormFieldValidationType.OnGoing:
+                    shouldValidate = true;
+                    break;
+            }
+        } else if (this.editionContext === FormFieldEditionContext.PopulateAndValid) {
+            switch (this.validationType) {
+                case FormFieldValidationType.Optimistic:
+                case FormFieldValidationType.OnGoing:
+                    shouldValidate = true;
+                    break;
+            }
+        } else if (this.editionContext === FormFieldEditionContext.NotValid) {
+            switch (this.validationType) {
+                case FormFieldValidationType.Optimistic:
+                case FormFieldValidationType.OnGoing:
+                case FormFieldValidationType.Correctable:
+                    shouldValidate = true;
+                    break;
+            }
+        } else if (this.editionContext === FormFieldEditionContext.None) {
+            shouldValidate = true;
+        }
+
+        return shouldValidate;
     }
 }

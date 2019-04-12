@@ -29,6 +29,8 @@ export enum MTextfieldType {
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
 
+
+
 @WithRender
 @Component({
     mixins: [
@@ -67,10 +69,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     readonly internalValue: string;
 
-    public $refs: {
-        input: HTMLInputElement
-    };
-
     private passwordAsText: boolean = false;
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
@@ -102,6 +100,7 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
+
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;
     }
@@ -121,7 +120,12 @@ export class MTextfield extends ModulVue implements InputManagementData {
     }
 
     public get inputType(): MTextfieldType {
-        return !this.passwordAsText ? this.type : MTextfieldType.Text;
+        switch (this.type) {
+            case MTextfieldType.Password:
+                return this.passwordAsText ? MTextfieldType.Text : MTextfieldType.Password;
+            default:
+                return this.type;
+        }
     }
 
     private get passwordIcon(): boolean {
@@ -171,6 +175,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
     }
+
+
 
     private resetModel(): void {
         this.$emit('input', '');

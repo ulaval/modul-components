@@ -1,0 +1,40 @@
+@import "commons";
+
+.m-slide-transition {
+    position: relative;
+    transition: height $m-transition-duration--l ease;
+
+    .m--is-enter-active,
+    .m--is-leave-active {
+        cursor: not-allowed;
+    }
+
+    .m--is-enter {
+        opacity: 0.3;
+        transform: translate3d(110%, 0, 0);
+    }
+
+    .m--is-leave-to {
+        opacity: 0.3;
+        transform: translate3d(-110%, 0, 0);
+    }
+
+    .m--is-enter-active {
+        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
+    }
+
+    .m--is-leave-active {
+        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
+        position: absolute;
+    }
+
+    &.m--is-left-to-right-transition {
+        .m--is-enter {
+            transform: translate3d(-110%, 0, 0);
+        }
+
+        .m--is-leave-to {
+            transform: translate3d(110%, 0, 0);
+        }
+    }
+}

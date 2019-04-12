@@ -1,0 +1,83 @@
+<div>
+    <h2 class="m-u--no-margin">Slide transition</h2>
+    <m-slide-transition class="m-u--margin-top--l"
+                        :direction="direction">
+        <div v-if="model === 1"
+             key="1">
+            <h3>Étape 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+        </div>
+        <div v-if="model === 2"
+             key="2">
+            <h3 style="color: red;">Étape 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+        </div>
+        <div v-if="model === 3"
+             key="3">
+            <h3 style="color: blue;">Étape 3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+        </div>
+    </m-slide-transition>
+    <div class="m-u--margin-top">
+        <m-button @click="model = 1"
+                  :disabled="model === 1">Step 1</m-button>
+        <m-button class="m-u--margin-left"
+                  @click="model = 2"
+                  :disabled="model === 2">Step 2</m-button>
+        <m-button class="m-u--margin-left"
+                  @click="model = 3"
+                  :disabled="model === 3">Step 3</m-button>
+    </div>
+    <m-modal title="Modal title"
+             class="m-u--margin-top--l">
+        <m-button slot="trigger">Open the modal</m-button>
+        <m-slide-transition :direction="direction">
+            <div v-if="model2 === 1"
+                 key="1">
+                <p class="m-u--require"><span class="m-u--asterisk">*</span> <span class="m-u--typo--precision">Obligatoire</span></p>
+                <h3 class="m-u--no-margin-top">Étape 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            </div>
+            <div v-if="model2 === 2"
+                 key="2">
+                <p class="m-u--require"><span class="m-u--asterisk">*</span> <span class="m-u--typo--precision">Obligatoire</span></p>
+                <h3 class="m-u--no-margin-top"
+                    style="color: red;">Étape 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            </div>
+            <div v-if="model2 === 3"
+                 key="3">
+                <p class="m-u--require"><span class="m-u--asterisk">*</span> <span class="m-u--typo--precision">Obligatoire</span></p>
+                <h3 class="m-u--no-margin-top"
+                    style="color: blue;">Étape 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?</p>
+            </div>
+        </m-slide-transition>
+        <div class="m-u--margin-top">
+            <m-button @click="model2 = 1"
+                      :disabled="model2 === 1">Step 1</m-button>
+            <m-button class="m-u--margin-left"
+                      @click="model2 = 2"
+                      :disabled="model2 === 2">Step 2</m-button>
+            <m-button class="m-u--margin-left"
+                      @click="model2 = 3"
+                      :disabled="model2 === 3">Step 3</m-button>
+        </div>
+    </m-modal>
+</div>

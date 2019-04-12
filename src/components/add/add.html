@@ -1,13 +1,11 @@
 <m-link class="m-add"
-        :url="url"
-        @click="onClick"
         :disabled="disabled"
-        :tabindex="tabindex"
-        :skin="skin"
-        :target="target"
-        :underline="underline"
         :icon-position="iconPosition"
         :icon-size="iconSize"
-        icon-name="m-svg__add-circle-filled">
+        :skin="skin"
+        :underline="underline"
+        icon-name="m-svg__add-circle-filled"
+        mode="button"
+        @click="onClick">
     <slot></slot>
 </m-link>

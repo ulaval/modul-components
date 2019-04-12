@@ -1,0 +1,9 @@
+{
+    "m-pagination": {
+        "previous": "Previous Page",
+        "next": "Next Page",
+        "ellipsis": "...",
+        "status": "Page %(nbVisible)s of %(nbTotal)s - %(nbResultats)s result",
+        "status.p": "Page %(nbVisible)s of %(nbTotal)s - %(nbResultats)s results"
+    }
+}

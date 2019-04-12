@@ -1,0 +1,55 @@
+<div>
+
+    <h3>Integer field - 3 numeral - 0 decimal - positive only - strip leading zero</h3>
+    <p class="m-u--margin-bottom">
+        <m-input-mask v-model="integerModel"
+                      :options="integerOptions"
+                      placeholder="999">
+        </m-input-mask>
+
+        model = {{ integerModel }}
+    </p>
+
+
+    <h3>Decimal field 3 numeral - 2 decimal</h3>
+    <p class="m-u--margin-bottom">
+        <m-input-mask v-model="decimalModel"
+                      :options="decimalOptions"
+                      placeholder="999.99">
+        </m-input-mask>
+
+        model = {{ decimalModel }}
+    </p>
+
+    <h3>Money field</h3>
+    <p class="m-u--margin-bottom">
+        <m-input-mask v-model="moneyModel"
+                      :options="moneyOptions">
+        </m-input-mask>
+
+        model = {{ moneyModel }}
+    </p>
+
+    <h3>Telephone field</h3>
+    <p class="m-u--margin-bottom">
+        <m-input-mask v-model="telephoneModel"
+                      :options="telephoneOptions">
+        </m-input-mask>
+
+        model = {{ telephoneModel }}
+    </p>
+
+
+    <h3>Date field (keep delimiters)</h3>
+    <p class="m-u--margin-bottom">
+        <m-input-mask v-model="dateModel"
+                      :options="dateOptions"
+                      :raw="false"
+                      placeholder="aaaa-mm-jj">
+        </m-input-mask>
+
+        model = {{ dateModel }}
+    </p>
+
+
+</div>

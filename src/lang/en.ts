@@ -26,8 +26,10 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/limit-text/limit-text.lang.en.json'),
                 require('../components/login/login.lang.en.json'),
                 require('../components/message/message.lang.en.json'),
+                require('../components/menu/menu.lang.en.json'),
                 require('../components/option/option.lang.en.json'),
                 require('../components/dialog/dialog.lang.en.json'),
+                require('../components/pagination/pagination.lang.en.json'),
                 require('../components/phone-number/phone-number.lang.en.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.en.json'),
                 require('../components/table/table.lang.en.json'),
@@ -44,6 +46,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/validation-message/validation-message.lang.en.json'),
                 require('../filters/filesize/filesize.lang.en.json'),
                 require('../filters/date/date/date.lang.en.json'),
+                require('../filters/date/period/period.lang.en.json'),
                 require('../filters/date/time/time.lang.en.json'),
                 require('../filters/date/date-time/date-time.lang.en.json')
             ];

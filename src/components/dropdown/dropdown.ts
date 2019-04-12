@@ -23,7 +23,6 @@ import { InputManagement } from './../../mixins/input-management/input-managemen
 import { BaseDropdown, BaseDropdownGroup, MDropdownInterface, MDropdownItem } from './dropdown-item/dropdown-item';
 import WithRender from './dropdown.html?style=./dropdown.scss';
 
-const DROPDOWN_MAX_WIDTH: string = '288px'; // 320 - (16*2)
 const DROPDOWN_STYLE_TRANSITION: string = 'max-height 0.3s ease';
 
 @WithRender
@@ -53,6 +52,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public listMinWidth: string;
     @Prop()
     public focus: boolean;
+    @Prop({ default: true })
+    public showArrowIcon: boolean;
+    @Prop({ default: true })
+    public enableAnimation: boolean;
+    @Prop({ default: true })
+    public includeFilterableStatusItems: boolean;
+    @Prop({ default: false })
+    public clearInvalidSelectionOnClose: boolean;
 
     public $refs: {
         popup: MPopup;
@@ -86,6 +93,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public onFocusIn(): void {
+        if (!this.filterable) {
+            this.$refs.input.setSelectionRange(0, 0);
+        }
         this.internalIsFocus = true;
     }
 
@@ -123,8 +133,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
         if (this.as<InputState>().active) {
             this.internalOpen = value;
-
-            this.dirty = false;
         }
     }
 
@@ -135,9 +143,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         setTimeout(() => { // Need timeout to set focus on input
             inputEl.focus();
         });
-        if (this.filterable) {
-            inputEl.setSelectionRange(0, this.selectedText.length);
-        }
 
         this.focusSelected();
         this.scrollToFocused();
@@ -149,6 +154,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Emit('close')
     private onClose(): void {
         this.internalFilter = '';
+        if (this.clearInvalidSelectionOnClose && this.selectedText === '') {
+            this.$emit('input', '');
+            this.setModel('', true);
+        }
     }
 
     private set itemsHeightStyle(value: object | number | undefined) {
@@ -188,7 +197,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('focus')
     private focusChanged(focus: boolean): void {
         if (focus && !this.as<InputStateMixin>().isDisabled) {
-            this.$refs.input.focus();
+            this.selectText();
         } else {
             this.$refs.input.blur();
             this.internalOpen = false;
@@ -315,10 +324,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return this.internalItems.length > 0;
     }
 
-    private get noItemsLabel(): string {
-        return (!this.internalItems || this.internalItems.length === 0) ? this.propTextNoData : this.propTextNoMatch;
-    }
-
     private get ariaControls(): string {
         return this.id + '-controls';
     }
@@ -355,6 +360,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
             let item: MDropdownItem = this.internalNavigationItems[this.focusedIndex];
             this.model = item.value;
         }
+        this.selectText();
     }
 
     private onKeydownTab($event: KeyboardEvent): void {
@@ -367,8 +373,21 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         }
     }
 
+    private onKeydownEsc(): void {
+        this.open = false;
+    }
+
+    private onInput(value: Event): void {
+        this.$emit('input', (value.target as HTMLInputElement).value);
+    }
+
     private focusOnResearchInput(): void {
         this.$refs.researchInput.focus();
+    }
+
+    private async selectText(): Promise<void> {
+        await this.$nextTick();
+        this.$refs.input.focus();
     }
 
     private focusSelected(): void {
@@ -442,12 +461,16 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                     el.style.webkitTransition = DROPDOWN_STYLE_TRANSITION;
                     el.style.transition = DROPDOWN_STYLE_TRANSITION;
                     el.style.overflowY = 'hidden';
-                    el.style.maxHeight = '0';
+                    if (this.enableAnimation) {
+                        el.style.maxHeight = '0';
+                    }
                     el.style.width = this.$el.clientWidth + 'px';
                     el.style.minWidth = this.listMinWidth;
                     el.style.removeProperty('opacity');
                     setTimeout(() => {
-                        el.style.maxHeight = height + 'px';
+                        if (this.enableAnimation) {
+                            el.style.maxHeight = height + 'px';
+                        }
                         done();
                     }, 0);
                 } else {
@@ -463,10 +486,14 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
                 let height: number = el.clientHeight;
                 el.style.width = this.$el.clientWidth + 'px';
                 el.style.minWidth = this.listMinWidth;
-                el.style.maxHeight = height + 'px';
-                el.style.maxHeight = '0';
+                if (this.enableAnimation) {
+                    el.style.maxHeight = height + 'px';
+                    el.style.maxHeight = '0';
+                }
                 setTimeout(() => {
-                    el.style.maxHeight = 'none';
+                    if (this.enableAnimation) {
+                        el.style.maxHeight = 'none';
+                    }
                     done();
                 }, 300);
             } else {

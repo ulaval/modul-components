@@ -79,6 +79,7 @@ export enum FormatMode {
 
 export class Messages {
     private curLang: string = ENGLISH;
+    private curLocale: string;
     private formatMode: FormatMode;
     private messages: LanguageBundlesMap = {};
     private specialCharacterDict: SpecialCharacterMap = {};
@@ -86,7 +87,7 @@ export class Messages {
     constructor(private options?: I18nPluginOptions) {
         if (options) {
             if (options.curLang) {
-                this.curLang = options.curLang;
+                this.currentLang(options.curLang);
             }
             if (options.formatMode) {
                 this.formatMode = options.formatMode;
@@ -103,8 +104,30 @@ export class Messages {
     public currentLang(lang?: string): string {
         if (lang) {
             this.curLang = lang;
+            this.curLocale = this.getCurrentLocale();
         }
         return this.curLang;
+    }
+
+    /**
+     * Get current locale
+     */
+    public getCurrentLocale(): string {
+        let locale: string;
+        switch (this.curLang) {
+            case FRENCH:
+                locale = 'fr-CA';
+                break;
+            case ENGLISH:
+            default:
+                locale = 'en-CA';
+                break;
+        }
+        return locale;
+    }
+
+    public get currentLocale(): string {
+        return this.curLocale;
     }
 
     /**

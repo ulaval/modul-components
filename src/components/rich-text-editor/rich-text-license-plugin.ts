@@ -4,7 +4,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import InputStylePlugin from '../input-style/input-style';
 import ValidationMessagePlugin from '../validation-message/validation-message';
 
-
 export interface RichTextLicensePluginOptions {
     key: string;
 }

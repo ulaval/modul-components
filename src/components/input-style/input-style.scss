@@ -89,9 +89,18 @@ $m-input-style-base-height: $m-line-height + em;
     }
 
     &.m--is-disabled,
-    &.m--is-waiting {
+    &.m--is-waiting,
+    &.m--is-readonly {
         border-style: dashed;
 
+        input,
+        textarea {
+            user-select: none;
+        }
+    }
+
+    &.m--is-disabled,
+    &.m--is-waiting {
         .m-input-style__label,
         .m-input-style__body,
         .m-icon-button.m-icon-button,
@@ -99,11 +108,6 @@ $m-input-style-base-height: $m-line-height + em;
         input,
         textarea {
             color: $m-input-style--color-disabled;
-        }
-
-        input,
-        textarea {
-            user-select: none;
         }
     }
 
@@ -119,7 +123,9 @@ $m-input-style-base-height: $m-line-height + em;
     }
 
     &.m--is-readonly {
-        @include input-style-cursor();
+        @include input-style-cursor() {
+            user-select: none;
+        }
     }
 
     &.m--is-anim-ready {
@@ -138,8 +144,8 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__label {
         position: relative;
-        z-index: 1;
         transform-origin: 0 0;
+        z-index: 1;
         transform: translate3d(0, 0, 0);
         align-items: center;
         font-size: $m-font-size;
@@ -325,13 +331,4 @@ $m-input-style-base-height: $m-line-height + em;
 .m--is-type-search .m-input-style__label,
 .m--is-type-search .m-input-style__body__adjust-width-auto {
     padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
-}
-
-.m--is-type-number .m-textfield__input {
-    appearance: textfield;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        appearance: textfield;
-    }
 }

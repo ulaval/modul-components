@@ -145,6 +145,12 @@
         c0.2,0.2,0.4,0.3,0.6,0.3c0.3,0,0.5-0.1,0.6-0.3l6.9-6.5c0.2-0.2,0.3-0.4,0.3-0.7c0-0.5-0.4-0.9-0.9-0.9C16.4,7.8,16.1,7.9,16,8.1
         L16,8.1z"/>
     </symbol>
+    <symbol id="m-svg__confirmation-white-filled" viewBox="-1 -1 26 26">
+        <circle stroke="currentColor" fill="#fff" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
+        <path fill="currentColor" d="M16,8.1l-6.3,5.8L8,12.3C7.9,12.1,7.6,12,7.4,12s-0.5,0.1-0.6,0.3c-0.2,0.2-0.3,0.4-0.3,0.6s0.1,0.5,0.3,0.6L9,15.9
+        c0.2,0.2,0.4,0.3,0.6,0.3c0.3,0,0.5-0.1,0.6-0.3l6.9-6.5c0.2-0.2,0.3-0.4,0.3-0.7c0-0.5-0.4-0.9-0.9-0.9C16.4,7.8,16.1,7.9,16,8.1
+        L16,8.1z"/>
+    </symbol>
     <symbol id="m-svg__delete" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M21.7,5.8H2.3V3.7 c0-0.3,0.2-0.5,0.5-0.5h18.3c0.3,0,0.5,0.2,0.5,0.5V5.8z"/>
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M19.5,23.5h-15 C4.2,23.5,4,23.3,4,23V5.8h16V23C20,23.3,19.8,23.5,19.5,23.5z"/>
@@ -204,6 +210,10 @@
         <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="23,3.6
             12,13.9 1,3.6 	"/>
     </symbol>
+        <symbol id="m-svg__email-send" viewBox="-1 -1 26 26">
+        <path fill="currentColor" d="M17.249 24.002c-3.722 0-6.75-3.028-6.75-6.75s3.028-6.75 6.75-6.75 6.75 3.028 6.75 6.75-3.028 6.75-6.75 6.75zm0-12c-2.895 0-5.25 2.355-5.25 5.25s2.355 5.25 5.25 5.25 5.25-2.355 5.25-5.25-2.355-5.25-5.25-5.25z"/>
+        <path fill="currentColor" d="M17.999 20.252a.752.752 0 0 1-.53-1.281l.97-.97H14.25a.75.75 0 0 1 0-1.5h4.189l-.97-.97a.752.752 0 0 1 .53-1.281c.2 0 .389.078.53.22l2.25 2.25a.74.74 0 0 1 .163.245l.01.026a.73.73 0 0 1 .001.517l-.006.017a.748.748 0 0 1-.167.256l-2.25 2.25a.744.744 0 0 1-.531.221zM2.249 16.502a2.252 2.252 0 0 1-2.25-2.25v-12c0-.497.161-.969.465-1.366A.74.74 0 0 1 .569.759a2.25 2.25 0 0 1 1.68-.758h18c.669 0 1.297.295 1.727.809l.026.03.024.034c.31.399.473.874.473 1.377V9a.75.75 0 0 1-1.5 0V2.562L13.723 8.16a4.081 4.081 0 0 1-2.474.841 4.08 4.08 0 0 1-2.474-.841L1.499 2.562v11.689c0 .414.336.75.75.75h6a.75.75 0 0 1 0 1.5h-6zm7.44-9.531c.444.342.998.53 1.559.53s1.115-.188 1.559-.53l7.109-5.47H2.58l7.109 5.47z"/>
+    </symbol>
     <symbol id="m-svg__error-filled" viewBox="-1 -1 26 26">
         <circle fill="currentColor" cx="12" cy="12" r="12"/>
         <path fill="#fff" d="M12,14.3c0.5,0,0.9-0.4,0.9-0.9V6c0-0.5-0.4-0.9-0.9-0.9S11.1,5.5,11.1,6v7.4C11.1,13.9,11.5,14.3,12,14.3z"/>
@@ -211,6 +221,11 @@
     </symbol>
     <symbol id="m-svg__error" viewBox="-1 -1 26 26">
         <circle stroke="currentColor" fill="none" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
+        <path fill="currentColor" d="M13.4,17.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4c0-0.8,0.6-1.3,1.4-1.3S13.4,16.8,13.4,17.5z"/>
+        <path fill="currentColor" d="M12,14.3c0.5,0,0.9-0.4,0.9-0.9V6c0-0.5-0.4-0.9-0.9-0.9S11.1,5.5,11.1,6v7.4C11.1,13.9,11.5,14.3,12,14.3z"/>
+    </symbol>
+    <symbol id="m-svg__error-white-filled" viewBox="-1 -1 26 26">
+        <circle stroke="currentColor" fill="#fff" stroke-miterlimit="10" cx="12" cy="12" r="11.5"/>
         <path fill="currentColor" d="M13.4,17.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4c0-0.8,0.6-1.3,1.4-1.3S13.4,16.8,13.4,17.5z"/>
         <path fill="currentColor" d="M12,14.3c0.5,0,0.9-0.4,0.9-0.9V6c0-0.5-0.4-0.9-0.9-0.9S11.1,5.5,11.1,6v7.4C11.1,13.9,11.5,14.3,12,14.3z"/>
     </symbol>
@@ -619,6 +634,11 @@
         <path fill="currentColor" d="M10.6,6.5c0-0.8,0.6-1.4,1.4-1.4s1.4,0.6,1.4,1.4S12.8,7.8,12,7.8S10.6,7.2,10.6,6.5z"/>
         <path fill="currentColor" d="M12,9.7c-0.5,0-0.9,0.4-0.9,0.9V18c0,0.5,0.4,0.9,0.9,0.9s0.9-0.4,0.9-0.9v-7.4C12.9,10.1,12.5,9.7,12,9.7z"/>
     </symbol>
+    <symbol id="m-svg__information-white-filled" viewBox="-1 -1 26 26">
+        <circle stroke="currentColor" fill="#fff" stroke-miterlimit="10" class="st0" cx="12" cy="12" r="11.5"/>
+        <path fill="currentColor" d="M10.6,6.5c0-0.8,0.6-1.4,1.4-1.4s1.4,0.6,1.4,1.4S12.8,7.8,12,7.8S10.6,7.2,10.6,6.5z"/>
+        <path fill="currentColor" d="M12,9.7c-0.5,0-0.9,0.4-0.9,0.9V18c0,0.5,0.4,0.9,0.9,0.9s0.9-0.4,0.9-0.9v-7.4C12.9,10.1,12.5,9.7,12,9.7z"/>
+    </symbol>
     <symbol id="m-svg__leave-full-screen" viewBox="-1 -1 26 26">
         <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="21,9 15,9 15,3 	"/>
         <polyline fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="9,3 9,9 3,9 	"/>
@@ -740,6 +760,16 @@
         <polyline fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
             2,13.3 7.4,18.7 22,5.3 "/>
     </symbol>
+    <symbol id="m-svg__remove-assignation" viewBox="-1 -1 26 26">
+        <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5" stroke-linecap="round" d="M20.999 2.254l2.25 3h-7.5M21 8.254l2.25-3"/>
+        <circle fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5" cx="6.75" cy="3.754" r="3" />
+        <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5" d="M6.75 7.5a6 6 0 0 0-6 6v2.25a1.5 1.5 0 0 0 1.5 1.5h1.5v4.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5v-4.5h1.5a1.5 1.5 0 0 0 1.5-1.5V13.5a6 6 0 0 0-6-6z"/>    </symbol>
+    </symbol>
+    <symbol id="m-svg__role-assignation" viewBox="-1 -1 26 26">
+        <path d="M18 8.3l-2.3-3h7.5m-5.2-3l-2.3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" cx="6.8" cy="3.8" r="3"/>
+        <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" d="M6.8 7.5c-3.3 0-6 2.7-6 6v2.2c0 .8.7 1.5 1.5 1.5h1.5v4.5c0 .8.7 1.5 1.5 1.5h3c.8 0 1.5-.7 1.5-1.5v-4.5h1.5c.8 0 1.5-.7 1.5-1.5v-2.2c0-3.3-2.7-6-6-6z"/>
+    </symbol>
     <symbol id="m-svg__search" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M23.1,23.1L23.1,23.1
             c-0.5,0.5-1.3,0.5-1.8,0l-6-6c-0.5-0.5-0.5-1.3,0-1.8l0,0c0.5-0.5,1.3-0.5,1.8,0l6,6C23.6,21.8,23.6,22.6,23.1,23.1z"/>
@@ -783,7 +813,7 @@
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="17.8" x2="23.5" y2="17.8"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="0.5" y1="23.5" x2="16.5" y2="23.5"/>
     </symbol>
-    <symbol id="m-svg__tip" viewBox="-1 -1 26 26">
+    <symbol id="m-svg__hint" viewBox="-1 -1 26 26">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.4,8.9
             c0,3.7-2.4,6.8-5.6,7.9v5.1h-1.3v1.6h-2.6v-1.6H9.4v-5c-3.3-1.1-5.8-4.2-5.8-8c0-4.6,3.8-8.4,8.4-8.4S20.4,4.3,20.4,8.9z"/>
         <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="9.4" y1="17.9" x2="14.8" y2="17.9"/>
@@ -821,12 +851,13 @@
         <path fill="currentColor" d="M12,16.2c0.5,0,0.9-0.4,0.9-0.9V7.9C12.9,7.4,12.5,7,12,7s-0.9,0.4-0.9,0.9v7.4C11.1,15.8,11.5,16.2,12,16.2z"/>
         <path fill="currentColor" d="M13.4,19.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4S13.4,18.7,13.4,19.5z"/>
     </symbol>
+    <symbol id="m-svg__warning-white-filled" viewBox="-1 -1 26 26">
+        <path stroke="currentColor" fill="#fff" d="M1.3,23.5h21.5c0.6,0,1-0.7,0.7-1.2L12.7,0.9c-0.3-0.6-1.2-0.6-1.4,0L0.6,22.4C0.3,22.8,0.7,23.5,1.3,23.5z"/>
+        <path fill="currentColor" d="M12,16.2c0.5,0,0.9-0.4,0.9-0.9V7.9C12.9,7.4,12.5,7,12,7s-0.9,0.4-0.9,0.9v7.4C11.1,15.8,11.5,16.2,12,16.2z"/>
+        <path fill="currentColor" d="M13.4,19.5c0,0.8-0.6,1.4-1.4,1.4s-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4S13.4,18.7,13.4,19.5z"/>
+    </symbol>
     <symbol id="m-svg__wrong-answer" viewBox="-1 -1 26 26">
         <line fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="2" y1="22" x2="22" y2="2"/>
         <line fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="22" y1="22" x2="2" y2="2"/>
-    </symbol>
-    <symbol id="m-svg__email-send" viewBox="-1 -1 26 26">
-        <path fill="currentColor" d="M17.249 24.002c-3.722 0-6.75-3.028-6.75-6.75s3.028-6.75 6.75-6.75 6.75 3.028 6.75 6.75-3.028 6.75-6.75 6.75zm0-12c-2.895 0-5.25 2.355-5.25 5.25s2.355 5.25 5.25 5.25 5.25-2.355 5.25-5.25-2.355-5.25-5.25-5.25z"/>
-        <path fill="currentColor" d="M17.999 20.252a.752.752 0 0 1-.53-1.281l.97-.97H14.25a.75.75 0 0 1 0-1.5h4.189l-.97-.97a.752.752 0 0 1 .53-1.281c.2 0 .389.078.53.22l2.25 2.25a.74.74 0 0 1 .163.245l.01.026a.73.73 0 0 1 .001.517l-.006.017a.748.748 0 0 1-.167.256l-2.25 2.25a.744.744 0 0 1-.531.221zM2.249 16.502a2.252 2.252 0 0 1-2.25-2.25v-12c0-.497.161-.969.465-1.366A.74.74 0 0 1 .569.759a2.25 2.25 0 0 1 1.68-.758h18c.669 0 1.297.295 1.727.809l.026.03.024.034c.31.399.473.874.473 1.377V9a.75.75 0 0 1-1.5 0V2.562L13.723 8.16a4.081 4.081 0 0 1-2.474.841 4.08 4.08 0 0 1-2.474-.841L1.499 2.562v11.689c0 .414.336.75.75.75h6a.75.75 0 0 1 0 1.5h-6zm7.44-9.531c.444.342.998.53 1.559.53s1.115-.188 1.559-.53l7.109-5.47H2.58l7.109 5.47z"/>
     </symbol>
 </svg>

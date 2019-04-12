@@ -8,6 +8,7 @@ import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import ModulDate from '../../utils/modul-date/modul-date';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
@@ -21,7 +22,7 @@ import { InputManagement } from './../../mixins/input-management/input-managemen
 import WithRender from './datepicker.html?style=./datepicker.scss';
 
 
-export type DatePickerSupportedTypes = moment.Moment | Date | string | undefined;
+export type DatePickerSupportedTypes = Date | string | undefined;
 
 @WithRender
 @Component({
@@ -46,9 +47,9 @@ export class MDatepicker extends ModulVue {
     public required: boolean;
     @Prop({ default: 'YYYY/MM/DD' })
     public format: string;
-    @Prop({ default: () => { return moment().subtract(10, 'year'); } })
+    @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
-    @Prop({ default: () => { return moment().add(10, 'year'); } })
+    @Prop({ default: () => { return new ModulDate().add(10, 'year'); } })
     public max: DatePickerSupportedTypes;
     @Prop({ default: () => Vue.prototype.$i18n.translate('m-datepicker:placeholder') })
     public placeholder: string;
@@ -155,10 +156,8 @@ export class MDatepicker extends ModulVue {
     }
 
     private createModelUpdateValue(newValue: DatePickerSupportedTypes): DatePickerSupportedTypes {
-        if (this.value instanceof Date) {
-            return new Date(this.value);
-        } else if (this.value instanceof moment) {
-            return moment({ year: this.selectedYear, month: this.selectedMonth, day: this.selectedDay });
+        if (newValue && newValue instanceof Date) {
+            return new Date(newValue);
         } else {
             return newValue;
         }
@@ -171,10 +170,6 @@ export class MDatepicker extends ModulVue {
             this.selectedYear = value.getFullYear();
             this.selectedMonth = value.getMonth();
             this.selectedDay = value.getDate();
-        } else if (value instanceof moment) {
-            this.selectedYear = moment(value).get('year');
-            this.selectedMonth = moment(value).get('month');
-            this.selectedDay = moment(value).get('day');
         } else {
             const dateValue: Date = new Date(value as string);
             this.selectedYear = dateValue.getFullYear();
