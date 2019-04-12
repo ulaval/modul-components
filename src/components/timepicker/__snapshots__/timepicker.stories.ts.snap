@@ -7,64 +7,61 @@ exports[`Storyshots components|m-timepicker default 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
+    <!---->
+     
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__body"
+      style="top: 0px;"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__body__left"
       >
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            aria-controls="mTimepicker-uuid-controls"
-            aria-haspopup="true"
-            id="mTimepicker-uuid"
-            max="23:59"
-            min="00:00"
-            placeholder="hh:mm"
-            step="300"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <button
-            aria-controls="mTimepicker-uuid"
-            class="m-icon-button m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
-             
-            <!---->
-          </button>
-        </div>
+        <input
+          aria-controls="mTimepicker-uuid-controls"
+          aria-haspopup="true"
+          id="mTimepicker-uuid"
+          max="23:59"
+          min="00:00"
+          placeholder="hh:mm"
+          step="300"
+          type="text"
+        />
+          
+        <!---->
          
         <!---->
       </div>
+       
+      <div
+        class="m-input-style__body__right"
+      >
+        <button
+          aria-controls="mTimepicker-uuid"
+          class="m-icon-button m--is-skin-light m--has-ripple"
+          style="width: 22px; height: 22px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -98,64 +95,61 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
 >
   <div
     class="m-input-style m--is-tag-default"
+    style="margin-top: 10px;"
   >
+    <!---->
+     
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__body"
+      style="top: 0px;"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__body__left"
       >
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            aria-controls="mTimepicker-uuid-controls"
-            aria-haspopup="true"
-            id="mTimepicker-uuid"
-            max="23:59"
-            min="00:00"
-            placeholder="hh:mm"
-            step="300"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <button
-            aria-controls="mTimepicker-uuid"
-            class="m-icon-button m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
-             
-            <!---->
-          </button>
-        </div>
+        <input
+          aria-controls="mTimepicker-uuid-controls"
+          aria-haspopup="true"
+          id="mTimepicker-uuid"
+          max="23:59"
+          min="00:00"
+          placeholder="hh:mm"
+          step="300"
+          type="text"
+        />
+          
+        <!---->
          
         <!---->
       </div>
+       
+      <div
+        class="m-input-style__body__right"
+      >
+        <button
+          aria-controls="mTimepicker-uuid"
+          class="m-icon-button m--is-skin-light m--has-ripple"
+          style="width: 22px; height: 22px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -189,64 +183,61 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
+    <!---->
+     
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__body"
+      style="top: 0px;"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__body__left"
       >
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            aria-controls="mTimepicker-uuid-controls"
-            aria-haspopup="true"
-            id="mTimepicker-uuid"
-            max="15:15"
-            min="8:45"
-            placeholder="hh:mm"
-            step="300"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <button
-            aria-controls="mTimepicker-uuid"
-            class="m-icon-button m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
-             
-            <!---->
-          </button>
-        </div>
+        <input
+          aria-controls="mTimepicker-uuid-controls"
+          aria-haspopup="true"
+          id="mTimepicker-uuid"
+          max="15:15"
+          min="8:45"
+          placeholder="hh:mm"
+          step="300"
+          type="text"
+        />
+          
+        <!---->
          
         <!---->
       </div>
+       
+      <div
+        class="m-input-style__body__right"
+      >
+        <button
+          aria-controls="mTimepicker-uuid"
+          class="m-icon-button m--is-skin-light m--has-ripple"
+          style="width: 22px; height: 22px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -280,64 +271,61 @@ exports[`Storyshots components|m-timepicker step 15m 1`] = `
 >
   <div
     class="m-input-style m--is-tag-default"
+    style="margin-top: 10px;"
   >
+    <!---->
+     
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__body"
+      style="top: 0px;"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__body__left"
       >
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            aria-controls="mTimepicker-uuid-controls"
-            aria-haspopup="true"
-            id="mTimepicker-uuid"
-            max="23:59"
-            min="00:00"
-            placeholder="hh:mm"
-            step="900"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <button
-            aria-controls="mTimepicker-uuid"
-            class="m-icon-button m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
-             
-            <!---->
-          </button>
-        </div>
+        <input
+          aria-controls="mTimepicker-uuid-controls"
+          aria-haspopup="true"
+          id="mTimepicker-uuid"
+          max="23:59"
+          min="00:00"
+          placeholder="hh:mm"
+          step="900"
+          type="text"
+        />
+          
+        <!---->
          
         <!---->
       </div>
+       
+      <div
+        class="m-input-style__body__right"
+      >
+        <button
+          aria-controls="mTimepicker-uuid"
+          class="m-icon-button m--is-skin-light m--has-ripple"
+          style="width: 22px; height: 22px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
     </div>
   </div>
    
