@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MDatepicker should render correctly 1`] = `
-<div class="m-datepicker" style="width:100%;max-width:144px;">
+<div class="m-datepicker" style="width:100%;max-width:136px;">
   <div class="m-input-style m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__content" style="margin-top:10px;">
       <div class="m-input-style__body">
@@ -20,7 +20,7 @@ exports[`MDatepicker should render correctly 1`] = `
 `;
 
 exports[`MDatepicker should render correctly min/max time 1`] = `
-<div duration="true" class="m-datepicker" style="width:100%;max-width:144px;">
+<div duration="true" class="m-datepicker" style="width:100%;max-width:136px;">
   <div class="m-input-style m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__content" style="margin-top:10px;">
       <div class="m-input-style__body">
@@ -39,7 +39,7 @@ exports[`MDatepicker should render correctly min/max time 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when disabled is set 1`] = `
-<div class="m-datepicker m--is-disabled" style="width:100%;max-width:144px;">
+<div class="m-datepicker m--is-disabled" style="width:100%;max-width:136px;">
   <div class="m-input-style m--is-disabled m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__content" style="margin-top:10px;">
       <div class="m-input-style__body">
@@ -58,7 +58,7 @@ exports[`MDatepicker should render correctly when disabled is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when error is set 1`] = `
-<div class="m-datepicker m--has-error m--has-validation-message" style="width:100%;max-width:144px;">
+<div class="m-datepicker m--has-error m--has-validation-message" style="width:100%;max-width:136px;">
   <div class="m-input-style m--has-error m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__content" style="margin-top:10px;">
       <div class="m-input-style__body">
@@ -82,7 +82,7 @@ exports[`MDatepicker should render correctly when error is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when valid is set 1`] = `
-<div class="m-datepicker m--is-valid m--has-validation-message" style="width:100%;max-width:144px;">
+<div class="m-datepicker m--is-valid m--has-validation-message" style="width:100%;max-width:136px;">
   <div class="m-input-style m--is-valid m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__content" style="margin-top:10px;">
       <div class="m-input-style__body">
@@ -106,7 +106,7 @@ exports[`MDatepicker should render correctly when valid is set 1`] = `
 `;
 
 exports[`MDatepicker should render correctly when waiting is set 1`] = `
-<div class="m-datepicker m--is-waiting" style="width:100%;max-width:144px;">
+<div class="m-datepicker m--is-waiting" style="width:100%;max-width:136px;">
   <div class="m-input-style m--is-waiting m--is-tag-default" style="width:undefined;">
     <div class="m-input-style__content" style="margin-top:10px;">
       <div class="m-input-style__body">
