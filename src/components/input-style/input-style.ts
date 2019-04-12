@@ -41,7 +41,7 @@ export class MInputStyle extends ModulVue {
     };
 
     public labelOffset: string | undefined = CSS_LABEL_DEFAULT_MARGIN + 'px';
-    private animReady: boolean = false;
+    public animReady: boolean = false;
 
     protected created(): void {
         setTimeout(() => {
@@ -98,36 +98,36 @@ export class MInputStyle extends ModulVue {
         return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
     }
 
-    private get hasValue(): boolean {
+    public get hasValue(): boolean {
         return this.hasDefaultSlot && !this.empty;
     }
 
-    private get hasLabel(): boolean {
+    public get hasLabel(): boolean {
         return !!this.label && this.label !== '';
     }
 
-    private get isFocus(): boolean {
+    public get isFocus(): boolean {
         let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
     }
 
-    private get hasDefaultSlot(): boolean {
+    public get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
 
-    private get hasAdjustWidthAutoSlot(): boolean {
+    public get hasAdjustWidthAutoSlot(): boolean {
         return !!this.$slots['adjust-width-auto'];
     }
 
     @Emit('click')
-    private onClick(event): void { }
+    public onClick(event): void { }
 
     @Emit('mousedown')
-    private onMousedown(event): void { }
+    public onMousedown(event): void { }
 
     @Emit('mouseup')
-    private onMouseup(event): void { }
+    public onMouseup(event): void { }
 }
 
 const InputStylePlugin: PluginObject<any> = {
