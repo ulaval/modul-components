@@ -17,12 +17,70 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        template: '<m-input-style></m-input-style>'
+        props: {
+            defaultSlot: {
+                default: text('Default slot', '')
+            }
+        },
+        template: '<m-input-style>{{defaultSlot}}</m-input-style>'
+    }))
+    .add('testAllProps', () => ({
+        props: {
+            defaultSlot: {
+                default: text('Default slot', '')
+            },
+            label: {
+                default: text('label', 'label')
+            },
+            tagStyle: {
+                default: select('tagStyle', {
+                    'default': 'default',
+                    'h1': 'h1',
+                    'h2': 'h2',
+                    'h3': 'h3',
+                    'h4': 'h4',
+                    'h5': 'h5',
+                    'h6': 'h6',
+                    'p': 'p'
+                }, 'default')
+            },
+            width: {
+                default: number('width', 150)
+            },
+            empty: {
+                default: boolean('empty', true)
+            },
+            focus: {
+                default: boolean('focus', false)
+            },
+            readonly: {
+                default: boolean('Readonly', false)
+            },
+            cursorPointer: {
+                default: boolean('Cursor pointer', false)
+            },
+            requiredMarker: {
+                default: boolean('Required marker', false)
+            },
+            disabled: {
+                default: boolean('Disabled', false)
+            },
+            waiting: {
+                default: boolean('Waiting', false)
+            },
+            error: {
+                default: boolean('error', false)
+            },
+            valid: {
+                default: boolean('valid', false)
+            }
+        },
+        template: '<m-input-style :label="label" :tagStyle="tagStyle" :empty="empty" :focus="focus" :error="error" :valid="valid" :width="width+\'px\'" :disabled="disabled" :waiting="waiting" :cursor-pointer="cursorPointer" :readonly="readonly" :required-marker="requiredMarker">{{defaultSlot}}</m-input-style>'
     }))
     .add('label', () => ({
         props: {
             label: {
-                default: text('Change label', 'label')
+                default: text('Label', 'label')
             }
         },
         template: '<m-input-style :label="label"></m-input-style>'
@@ -119,12 +177,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
         props: {
             tagStyle: {
                 default: select('tagStyle', {
+                    'default': 'default',
                     'h1': 'h1',
                     'h2': 'h2',
                     'h3': 'h3',
                     'h4': 'h4',
                     'h5': 'h5',
-                    'h6': 'h6'
+                    'h6': 'h6',
+                    'p': 'p'
                 }, 'h1')
             }
         },
