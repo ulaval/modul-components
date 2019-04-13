@@ -22,7 +22,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         data: () => ({
             model1: '2011-01-01'
         }),
-        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/> <br/>model value = {{model1}}</div>`
+        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/> <m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
 
     .add('label', () => ({
