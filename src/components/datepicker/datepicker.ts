@@ -135,26 +135,28 @@ export class MDatepicker extends ModulVue {
     private async selectDate(selectedDate: DatePickerSupportedTypes): Promise<void> {
         this.internalCalandarErrorMessage = '';
         this.model = this.convertToIsoString(selectedDate);
-        this.inputModel = this.model;
-        this.emitChange();
         this.open = false;
     }
 
     private createModelUpdateValue(newValue: DatePickerSupportedTypes): DatePickerSupportedTypes {
-        // if (newValue && newValue instanceof Date) {
-        //     return new Date(newValue);
-        // } else {
-        //     return newValue;
-        // }
-        return newValue;
+        if (newValue && this.value instanceof Date) {
+            return new Date(newValue);
+        } else {
+            return newValue;
+        }
     }
 
     private inputDate(inputValue: string): void {
-        this.open = false;
-        this.inputModel = inputValue;
-        this.showErrorMessage(inputValue);
-        this.model = inputValue;
-        this.emitChange();
+        if (inputValue === '') {
+            // clear the value
+            this.model = '';
+            this.showErrorMessage(inputValue);
+        } else {
+            this.inputModel = this.model;
+            //TODO ! not implemented
+        }
+        //   this.inputModel = inputValue;
+        //   this.open = false;
 
     }
 
@@ -196,25 +198,28 @@ export class MDatepicker extends ModulVue {
     private onValueChange(value: DatePickerSupportedTypes): void {
         if (value) {
             if (value instanceof Date) {
-                this.model = new ModulDate(new Date(value).toISOString()).toString();
-                this.inputModel = this.model;
+                this.internalDateModel = new ModulDate(value.toISOString()).toString();
+
             } else {
-                this.model = value;
-                this.inputModel = value;
+                this.internalDateModel = value;
             }
         } else {
-            this.model = '';
-            this.inputModel = '';
+            this.internalDateModel = '';
         }
-        this.showErrorMessage(this.model);
+
+        this.inputModel = this.internalDateModel;
+        this.showErrorMessage(this.inputModel);
     }
 
     // override from InputManagement
     private set model(value: string) {
         this.internalDateModel = value;
+        this.inputModel = this.internalDateModel;
+        this.emitChange();
     }
 
     public emitChange(): void {
+        console.log('change emmited = ' + this.createModelUpdateValue(this.internalDateModel));
         this.$emit('change', this.createModelUpdateValue(this.internalDateModel));
     }
 
