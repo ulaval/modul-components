@@ -1,3 +1,3 @@
-describe('{{SINGULAR_KEBAB_CASE}}', () => {
+describe('{{SINGULAR_KEBAB}}', () => {
     expect(true).toBe(true);
 });

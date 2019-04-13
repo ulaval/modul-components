@@ -1,6 +1,6 @@
 import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 
-export const {{SINGULAR_PASCAL_CASE}}Directive: DirectiveOptions = {
+export const {{SINGULAR_PASCAL}}Directive: DirectiveOptions = {
     bind(
         el: HTMLElement,
         binding: VNodeDirective,

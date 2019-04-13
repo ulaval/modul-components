@@ -1,5 +1,4 @@
 {
-    "fileExtension": "ts",
     "fileNameCase": "kebab",
     "folderNameCase": "kebab",
     "templatePath": "/src/meta/cli-templates",
@@ -10,34 +9,28 @@
             "prefix": "m",
             "fileConfigs": [
                 {
-                    "name": "*",
-                    "template": "component-vue.txt",
-                    "extension": "ts"
+                    "name": "*.ts",
+                    "template": "component-vue.txt"
                 },
                 {
-                    "name": "*",
-                    "template": "component-template.txt",
-                    "extension": "html"
+                    "name": "*.html",
+                    "template": "component-template.txt"
                 },
                 {
-                    "name": "*",
-                    "template": "component-style.txt",
-                    "extension": "scss"
+                    "name": "*.scss",
+                    "template": "component-style.txt"
                 },
                 {
-                    "name": "*.spec",
-                    "template": "component-test.txt",
-                    "extension": "ts"
+                    "name": "*.spec.ts",
+                    "template": "component-test.txt"
                 },
                 {
-                    "name": "*.stories",
-                    "template": "component-stories.txt",
-                    "extension": "ts"
+                    "name": "*.stories.ts",
+                    "template": "component-stories.txt"
                 },
                 {
-                    "name": "*.lang.fr",
-                    "template": "component-locale-fr.txt",
-                    "extension": "json"
+                    "name": "*.lang.fr.json",
+                    "template": "component-locale-fr.txt"
                 }
             ]
         },
@@ -46,14 +39,12 @@
             "path": "/src/directives",
             "files": [
                 {
-                    "name": "*",
-                    "template": "directive.txt",
-                    "extension": "ts"
+                    "name": "*.ts",
+                    "template": "directive.txt"
                 },
                 {
-                    "name": "*.spec",
-                    "template": "directive-test.txt",
-                    "extension": "ts"
+                    "name": "*.spec.ts",
+                    "template": "directive-test.txt"
                 }
             ]
         }

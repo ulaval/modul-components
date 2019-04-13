@@ -3,18 +3,18 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentshierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { {{SINGULAR_CONSTANT_CASE}}_NAME } from '../component-names';
-import {{SINGULAR_PASCAL_CASE}}Plugin from './{{SINGULAR_KEBAB_CASE}}';
+import { {{SINGULAR_CONSTANT}}_NAME } from '../component-names';
+import {{SINGULAR_PASCAL}}Plugin from './{{SINGULAR_KEBAB}}';
 
-Vue.use({{SINGULAR_PASCAL_CASE}}Plugin);
+Vue.use({{SINGULAR_PASCAL}}Plugin);
 
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-storiesOf(`${componentshierarchyRootSeparator}${{{SINGULAR_CONSTANT_CASE}}_NAME}`, module)
+storiesOf(`${componentshierarchyRootSeparator}${{{SINGULAR_CONSTANT}}_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        template: '<{{PREFIXED_SINGULAR_KEBAB_CASE}}></{{PREFIXED_SINGULAR_KEBAB_CASE}}>'
+        template: '<{{PREFIXED_SINGULAR_KEBAB}}></{{PREFIXED_SINGULAR_KEBAB}}>'
     }));

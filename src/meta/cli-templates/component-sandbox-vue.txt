@@ -1,18 +1,18 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { {{SINGULAR_CONSTANT_CASE}} } from '../component-names';
-import WithRender from './{{SINGULAR_KEBAB_CASE}}.sandbox.html';
+import { {{SINGULAR_CONSTANT}} } from '../component-names';
+import WithRender from './{{SINGULAR_KEBAB}}.sandbox.html';
 
 @WithRender
 @Component
-export class {{SINGULAR_PASCAL_CASE}}Sandbox extends Vue {
+export class {{SINGULAR_PASCAL}}Sandbox extends Vue {
 }
 
-const {{PREFIXED_SINGULAR_PASCAL_CASE}}SandboxPlugin: PluginObject<any> = {
+const {{PREFIXED_SINGULAR_PASCAL}}SandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${{{SINGULAR_CONSTANT_CASE}}}-sandbox`, {{SINGULAR_PASCAL_CASE}}Sandbox);
+        v.component(`${{{SINGULAR_CONSTANT}}}-sandbox`, {{SINGULAR_PASCAL}}Sandbox);
     }
 };
 
-export default {{PREFIXED_SINGULAR_PASCAL_CASE}}SandboxPlugin;
+export default {{PREFIXED_SINGULAR_PASCAL}}SandboxPlugin;

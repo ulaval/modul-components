@@ -8,6 +8,6 @@
         -->
     </p>
     <p>
-        <{{PREFIXED_SINGULAR_KEBAB_CASE}}><!-- Test case --></{{PREFIXED_SINGULAR_KEBAB_CASE}}>
+        <{{PREFIXED_SINGULAR_KEBAB}}><!-- Test case --></{{PREFIXED_SINGULAR_KEBAB}}>
     </p>
 </div>
