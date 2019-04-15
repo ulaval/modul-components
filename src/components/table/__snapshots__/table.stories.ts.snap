@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-table default 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+>
+  <thead>
+    <tr />
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr />
+    <tr />
+    <tr />
+    <tr />
+    <tr />
+  </tbody>
+   
+  <!---->
+</table>
+`;
