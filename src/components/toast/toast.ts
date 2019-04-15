@@ -39,7 +39,7 @@ export enum MToastDuration {
     MobileLong = 5000,
     MobileShort = 3000,
     DesktopLong = 8000,
-    DesktopShort = 1000,
+    DesktopShort = 5000,
     None = 0
 }
 

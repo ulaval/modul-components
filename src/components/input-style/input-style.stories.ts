@@ -54,7 +54,26 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
     }))
     .add('valid', () => ({
         template: '<div><m-input-style label="Label" :valid="true" :empty="false">Hello</m-input-style><p>Visual when the prop prop <strong>error = true</strong> and prop <strong>valide = true</strong></p><m-input-style label="Label" :error="true" valid="true" :empty="false">Hello</m-input-style></div>'
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}/tagStyle`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('h1', () => ({
+        template: '<m-input-style label="H1" :empty="false" tag-style="h1">h1</m-input-style>'
     }))
-    .add('tagStyle', () => ({
-        template: '<div><m-input-style label="H1" :empty="false" tag-style="h1">h1</m-input-style><m-input-style label="H2" :empty="false" tag-style="h2">h2</m-input-style><m-input-style label="H3" :empty="false" tag-style="h3">h3</m-input-style><m-input-style label="H4" :empty="false" tag-style="h4">h4</m-input-style><m-input-style label="H5" :empty="false" tag-style="h5">h5</m-input-style><m-input-style label="H6" :empty="false" tag-style="h6">h6</m-input-style></div>'
+    .add('h2', () => ({
+        template: '<m-input-style label="H2" :empty="false" tag-style="h2">h2</m-input-style>'
+    }))
+    .add('h3', () => ({
+        template: '<m-input-style label="H3" :empty="false" tag-style="h3">h3</m-input-style>'
+    }))
+    .add('h4', () => ({
+        template: '<m-input-style label="H4" :empty="false" tag-style="h4">h4</m-input-style>'
+    }))
+    .add('h5', () => ({
+        template: '<m-input-style label="H5" :empty="false" tag-style="h5">h5</m-input-style>'
+    }))
+    .add('h6', () => ({
+        template: '<m-input-style label="H6" :empty="false" tag-style="h6">h6</m-input-style>'
     }));

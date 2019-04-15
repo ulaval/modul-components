@@ -87,16 +87,8 @@ export class MInputStyle extends ModulVue {
     @Watch('isLabelUp')
     private calculateLabelOffset(): void {
         if (this.label) {
-            if (this.isLabelUp) {
-                let label: HTMLElement | null = this.$refs.label;
-                let rootStyle: any = window.getComputedStyle(this.$refs.root);
-                if (label) {
-                    let labelOffset: number = label.clientHeight / 2;
-                    this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? `${labelOffset}px` : `${CSS_LABEL_DEFAULT_MARGIN}px`;
-                }
-            } else {
-                this.labelOffset = `${CSS_LABEL_DEFAULT_MARGIN}px`;
-            }
+            let labelOffset: number = this.$refs.label.clientHeight / 2;
+            this.labelOffset = this.isLabelUp && labelOffset > CSS_LABEL_DEFAULT_MARGIN ? `${labelOffset}px` : `${CSS_LABEL_DEFAULT_MARGIN}px`;
         } else {
             this.labelOffset = undefined;
         }
