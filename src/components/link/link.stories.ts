@@ -5,8 +5,8 @@ import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { LINK_NAME } from '../component-names';
 import LinkPlugin from './link';
-Vue.use(LinkPlugin);
 
+Vue.use(LinkPlugin);
 
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
@@ -50,17 +50,59 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
         template: '<m-link mode="link" url="#">A link</m-link>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
-    .addDecorator(withA11y)
-    .add('default', () => ({
-        template: '<m-link mode="link" url="#" skin="text">A link</m-link>'
-    }));
-
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="light"`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
         template: `<div style="background: grey;">
                         <m-link mode="link" url="#" skin="light">A link</m-link>
+                   </div>`
+    }))
+    .add('icon', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" mode="link" url="#" skin="light">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-name="m-svg__clock"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-name="m-svg__clock" mode="link" url="#" skin="light">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-position="right"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-position="right" mode="link" url="#" skin="light">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-size="20px"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-size="20px" mode="link" url="#" skin="light">A link</m-link>
+                   </div>`
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
+    .addDecorator(withA11y)
+    .add('default', () => ({
+        template: `<div style="background: grey;">
+                        <m-link mode="link" url="#" skin="text">A link</m-link>
+                   </div>`
+    }))
+    .add('icon', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" mode="link" url="#" skin="text">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-name="m-svg__clock"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-name="m-svg__clock" mode="link" url="#" skin="text">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-position="right"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-position="right" mode="link" url="#" skin="text">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-size="20px"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-size="20px" mode="link" url="#" skin="text">A link</m-link>
                    </div>`
     }));
 
@@ -68,14 +110,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/mode`, module)
     .addDecorator(withA11y)
     // .add('default (router-link)', () => ({
     //     data: () => ({
-    //         routerLink: { name: 'router-test', path: 'components/m-link' }
+    //         routerLink: { name: 'router-storybook', path: 'components/m-link' }
     //     }),
     //     template: `<m-link :url="routerLink">A link</m-link>`
     // }))
     .add('mode="link', () => ({
-        template: '<m-link mode="link" url="#">A link</m-link>'
+        template: '<m-link mode="link" url="http://www.google.ca">A link</m-link>'
     }))
     .add('mode="button"', () => ({
-        template: '<m-link mode="button" url="#">A link</m-link>'
+        template: '<m-link mode="button" url="http://www.google.ca">A link</m-link>'
     }));
 
