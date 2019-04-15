@@ -2,7 +2,6 @@
 import { Component } from 'vue-property-decorator';
 import { PluginObject } from 'vue/types/plugin';
 import { MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
-import { TOAST } from '../utils-names';
 import { ModulVue } from '../vue/vue';
 import ToastServicePlugin, { ToastParams } from './toast-service';
 import WithRender from './toast-service.sandbox.html';
@@ -10,6 +9,8 @@ import WithRender from './toast-service.sandbox.html';
 @WithRender
 @Component
 export class MToastServiceSandbox extends ModulVue {
+    public toastTimeout: MToastTimeout = MToastTimeout.long;
+
     public simpleToastParams: ToastParams = {
         text: 'A simple toast with text',
         actionLabel: 'txt',
@@ -32,7 +33,8 @@ export class MToastServiceSandbox extends ModulVue {
         this.$toast.show({
             text: 'Other toast',
             actionLabel: 'Action',
-            action: this.action
+            action: this.action,
+            timeout: this.toastTimeout
         });
     }
 
@@ -40,7 +42,8 @@ export class MToastServiceSandbox extends ModulVue {
         this.$toast.show({
             text: 'success toast',
             actionLabel: 'UNDO',
-            action: this.action
+            action: this.action,
+            timeout: this.toastTimeout
         });
     }
 
@@ -55,7 +58,7 @@ export class MToastServiceSandbox extends ModulVue {
             action: this.action,
             icon: true,
             state: MToastState.Warning,
-            timeout: MToastTimeout.short,
+            timeout: this.toastTimeout,
             text: 'Test of a Toast'
         });
     }
@@ -66,7 +69,8 @@ export class MToastServiceSandbox extends ModulVue {
             actionLabel: 'retry',
             action: this.action,
             icon: true,
-            state: MToastState.Error
+            state: MToastState.Error,
+            timeout: this.toastTimeout
         });
     }
 
@@ -74,7 +78,8 @@ export class MToastServiceSandbox extends ModulVue {
         this.$toast.show({
             text: '<p>You have <strong> too many</strong> errors</p>',
             icon: true,
-            state: MToastState.Error
+            state: MToastState.Error,
+            timeout: this.toastTimeout
         });
     }
 

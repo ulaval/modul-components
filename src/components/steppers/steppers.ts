@@ -1,12 +1,12 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
-import { STEPPERS_NAME, STEPPERS_ITEM_NAME } from '../component-names';
-import { MSteppersItem, BaseSteppers, MSteppersItemState } from './steppers-item/steppers-item';
-import WithRender from './steppers.html?style=./steppers.scss';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
+import { STEPPERS_ITEM_NAME, STEPPERS_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
+import { BaseSteppers, MSteppersItem, MSteppersItemState } from './steppers-item/steppers-item';
+import WithRender from './steppers.html?style=./steppers.scss';
+
 
 @WithRender
 @Component({
@@ -41,8 +41,8 @@ export class MSteppers extends BaseSteppers {
 
         for (let i: number = this.$children.length - 1; i >= 0; i--) {
             if (hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.InProgress || hasFindFirst === false && this.$children[i].$props.state === MSteppersItemState.Visited) {
-                let childWidth: number = this.$children[i].$el.clientWidth;
-                let childOffset: number = this.$children[i].$el.offsetLeft;
+                let childWidth: number = (this.$children[i].$el as HTMLElement).clientWidth;
+                let childOffset: number = (this.$children[i].$el as HTMLElement).offsetLeft;
                 this.lineWidth = ((childOffset - leftSpacing + (childWidth / 2)) / parentWidth) * 100;
                 hasFindFirst = true;
             }
@@ -72,7 +72,7 @@ export class MSteppers extends BaseSteppers {
         this.setLineWidth();
         this.as<ElementQueries>().$on('resizeDone', this.setLineWidth);
         let overflowWrapperStyleHeight: any = (this.$refs.overflowWrapper as HTMLElement).style.height;
-        let elStyleHeight: any = this.$el.style.height;
+        let elStyleHeight: any = (this.$el as HTMLElement).style.height;
         let wrapItem: HTMLElement = this.$refs.wrapItem as HTMLElement;
         let initHeight: number = wrapItem.clientHeight;
         let scrollbarSpace: number = 40;

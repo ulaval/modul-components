@@ -11,24 +11,10 @@ exports[`MDropdown should render correctly 1`] = `
     </div>
   </m-input-style>
   <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
-  <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }" leave="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }" close-on-backdrop="true" preload="true" open-trigger="mousedown">
+  <m-popup width="100%" placement="bottom-start" enter="function () { [native code] }" leave="function () { [native code] }" close-on-backdrop="true" preload="true" open-trigger="mousedown">
     <!---->
     <ul id="mDropdown-uuid-controls" aria-labelledby="mDropdown-uuid" aria-live="polite" class="m-dropdown__list">
-      <m-dropdown-item readonly="readonly">No data</m-dropdown-item>
+      <m-dropdown-item readonly="true">No data</m-dropdown-item>
       <!---->
     </ul>
     <!---->
@@ -47,24 +33,10 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
     </div>
   </m-input-style>
   <m-validation-message class="m-dropdown__validation-message"></m-validation-message>
-  <m-popup width="100%" placement="bottom-start" enter="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }" leave="function boundFn (a) {
-    var l = arguments.length;
-    return l
-      ? l > 1
-        ? fn.apply(ctx, arguments)
-        : fn.call(ctx, a)
-      : fn.call(ctx)
-  }" close-on-backdrop="true" preload="true" open-trigger="mousedown">
+  <m-popup width="100%" placement="bottom-start" enter="function () { [native code] }" leave="function () { [native code] }" close-on-backdrop="true" preload="true" open-trigger="mousedown">
     <!---->
     <ul id="mDropdown-uuid-controls" aria-labelledby="mDropdown-uuid" aria-live="polite" class="m-dropdown__list">
-      <m-dropdown-item readonly="readonly">No data</m-dropdown-item>
+      <m-dropdown-item readonly="true">No data</m-dropdown-item>
       <!---->
     </ul>
     <!---->

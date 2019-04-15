@@ -26,7 +26,7 @@ Please refer to [this repository](https://github.com/ulaval/modul-typescript-tem
 
 ## Contributing
 
-### Deploy sandboxes
+### Deploy storybook
 
 1. Clone this project and install using npm install
 2. Run npm run install
@@ -34,7 +34,8 @@ Please refer to [this repository](https://github.com/ulaval/modul-typescript-tem
 
 ### Deployment for local usage in your project
 
-1. Run npm pack
-2. Add the dependency in your package.json ("@ulaval/modul-components": "file://&lt;path-to&gt;\\ulaval-modul-components-&lt;version&gt;.tgz")
+1. Run npm pack in the modUL project folder
+2. In you project Add the dependency in your package.json ("@ulaval/modul-components": "file://&lt;path-to&gt;\\ulaval-modul-components-&lt;version&gt;.tgz")
+3. Then update the modUL package using npm install @ulaval/modul-components
 
 > The `npm pack` command produces multiple .js files along with their definition files (.d.ts), html templates, scss files, etc.

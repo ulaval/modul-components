@@ -67,108 +67,6 @@ exports[`Storyshots components|m-button fullsize 1`] = `
 </button>
 `;
 
-exports[`Storyshots components|m-button icon 1`] = `
-<button
-  class="m-button m--is-skin-primary"
-  type="button"
->
-  <svg
-    aria-hidden="true"
-    class="m-icon m-button__icon m--is-left"
-    height="12px"
-    width="12px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
-   
-  <!---->
-   
-  <span
-    class="m-button__text"
-  >
-    A Button 
-    <!---->
-  </span>
-   
-  <!---->
-   
-  <!---->
-</button>
-`;
-
-exports[`Storyshots components|m-button icon=20px 1`] = `
-<button
-  class="m-button m--is-skin-primary"
-  type="button"
->
-  <svg
-    aria-hidden="true"
-    class="m-icon m-button__icon m--is-left"
-    height="20px"
-    width="20px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
-   
-  <!---->
-   
-  <span
-    class="m-button__text"
-  >
-    A Button 
-    <!---->
-  </span>
-   
-  <!---->
-   
-  <!---->
-</button>
-`;
-
-exports[`Storyshots components|m-button icon=right 1`] = `
-<button
-  class="m-button m--is-skin-primary"
-  type="button"
->
-  <!---->
-   
-  <!---->
-   
-  <span
-    class="m-button__text"
-  >
-    A Button 
-    <!---->
-  </span>
-   
-  <!---->
-   
-  <svg
-    aria-hidden="true"
-    class="m-icon m-button__icon m--is-right"
-    height="12px"
-    width="12px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
-</button>
-`;
-
 exports[`Storyshots components|m-button precision 1`] = `
 <button
   class="m-button m--is-skin-primary"
@@ -272,7 +170,423 @@ exports[`Storyshots components|m-button waiting 1`] = `
 </button>
 `;
 
-exports[`Storyshots components|m-button/skin=secondary default 1`] = `
+exports[`Storyshots components|m-button/icon-name="m-svg__close-clear" default 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-name="m-svg__close-clear" disabled 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-disabled"
+  disabled="disabled"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-name="m-svg__close-clear" fullSize 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-full-size"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-name="m-svg__close-clear" icon="20px" 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-name="m-svg__close-clear" precision 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button  
+    <span
+      class="m-button__precision"
+    >
+      Button precision
+      <!---->
+      
+        
+    </span>
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-name="m-svg__close-clear" waiting 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-waiting"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <div
+    aria-hidden="true"
+    class="m-spinner m-button__icon m--is-left"
+  >
+    <!---->
+     
+    <div />
+  </div>
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-position="right" default 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-position="right" disabled 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-disabled"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-position="right" fullSize 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-full-size"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-position="right" icon="20px" 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-position="right" precision 1`] = `
+<button
+  class="m-button m--is-skin-primary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button  
+    <span
+      class="m-button__precision"
+    >
+      Button precision
+      <!---->
+      
+        
+    </span>
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button/icon-position="right" waiting 1`] = `
+<button
+  class="m-button m--is-skin-primary m--is-waiting"
+  disabled="disabled"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <div
+    aria-hidden="true"
+    class="m-spinner m-button__icon m--is-right"
+  >
+    <!---->
+     
+    <div />
+  </div>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin="secondary" default 1`] = `
 <button
   class="m-button m--is-skin-secondary"
   type="button"
@@ -294,7 +608,7 @@ exports[`Storyshots components|m-button/skin=secondary default 1`] = `
 </button>
 `;
 
-exports[`Storyshots components|m-button/skin=secondary disabled 1`] = `
+exports[`Storyshots components|m-button/skin="secondary" disabled 1`] = `
 <button
   class="m-button m--is-skin-secondary m--is-disabled"
   disabled="disabled"
@@ -317,7 +631,63 @@ exports[`Storyshots components|m-button/skin=secondary disabled 1`] = `
 </button>
 `;
 
-exports[`Storyshots components|m-button/skin=secondary icon 1`] = `
+exports[`Storyshots components|m-button/skin="secondary" fullSize 1`] = `
+<button
+  class="m-button m--is-skin-secondary m--is-full-size"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin="secondary" icon="20px" 1`] = `
+<button
+  class="m-button m--is-skin-secondary"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-left"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin="secondary" icon-name="m-svg__close-clear" 1`] = `
 <button
   class="m-button m--is-skin-secondary"
   type="button"
@@ -351,7 +721,41 @@ exports[`Storyshots components|m-button/skin=secondary icon 1`] = `
 </button>
 `;
 
-exports[`Storyshots components|m-button/skin=secondary precision 1`] = `
+exports[`Storyshots components|m-button/skin="secondary" icon-position="right" 1`] = `
+<button
+  class="m-button m--is-skin-secondary"
+  type="button"
+>
+  <!---->
+   
+  <!---->
+   
+  <span
+    class="m-button__text"
+  >
+    A Button 
+    <!---->
+  </span>
+   
+  <!---->
+   
+  <svg
+    aria-hidden="true"
+    class="m-icon m-button__icon m--is-right"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots components|m-button/skin="secondary" precision 1`] = `
 <button
   class="m-button m--is-skin-secondary"
   type="button"
@@ -380,7 +784,7 @@ exports[`Storyshots components|m-button/skin=secondary precision 1`] = `
 </button>
 `;
 
-exports[`Storyshots components|m-button/skin=secondary waiting 1`] = `
+exports[`Storyshots components|m-button/skin="secondary" waiting 1`] = `
 <button
   class="m-button m--is-skin-secondary m--is-waiting"
   disabled="disabled"

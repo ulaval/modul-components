@@ -31,16 +31,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}`, module)
         template: '<m-button :waiting="true">A Button</m-button>'
     }))
     .add('fullsize', () => ({
-        template: '<m-button :fullSize="true">A Button</m-button>'
-    }))
-    .add('icon', () => ({
-        template: '<m-button icon-name="m-svg__close-clear">A Button</m-button>'
-    }))
-    .add('icon=20px', () => ({
-        template: '<m-button icon-name="m-svg__close-clear" icon-size="20px">A Button</m-button>'
-    }))
-    .add('icon=right', () => ({
-        template: '<m-button icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
+        template: '<m-button fullSize="true">A Button</m-button>'
     }))
     .add('precision', () => ({
         template: '<m-button >A Button <template slot="precision">Button precision</template></m-button>'
@@ -52,7 +43,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}`, module)
         template: '<m-button type="reset">A Button</m-button>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/skin=secondary`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/skin="secondary"`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-button skin="secondary">A Button</m-button>'
@@ -63,9 +54,63 @@ storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/skin=secondary`, mo
     .add('waiting', () => ({
         template: '<m-button skin="secondary" :waiting="true">A Button</m-button>'
     }))
-    .add('icon', () => ({
-        template: '<m-button skin="secondary" icon-name="m-svg__close-clear">A Button</m-button>'
+    .add('fullSize', () => ({
+        template: '<m-button :fullSize="true" skin="secondary">A Button</m-button>'
+    }))
+    .add('icon-name="m-svg__close-clear"', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" skin="secondary">A Button</m-button>'
+    }))
+    .add('icon="20px"', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" icon-size="20px" skin="secondary">A Button</m-button>'
+    }))
+    .add('icon-position="right"', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" icon-position="right" skin="secondary">A Button</m-button>'
     }))
     .add('precision', () => ({
         template: '<m-button skin="secondary" >A Button <template slot="precision">Button precision</template></m-button>'
     }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/icon-name="m-svg__close-clear"`, module)
+    .addDecorator(withA11y)
+    .add('default', () => ({
+        template: '<m-button icon-name="m-svg__close-clear">A Button</m-button>'
+    }))
+    .add('disabled', () => ({
+        template: '<m-button :disabled="true" icon-name="m-svg__close-clear">A Button</m-button>'
+    }))
+    .add('waiting', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" waiting="true">A Button</m-button>'
+    }))
+    .add('fullSize', () => ({
+        template: '<m-button :fullSize="true" icon-name="m-svg__close-clear">A Button</m-button>'
+    }))
+    .add('icon="20px"', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" icon-size="20px">A Button</m-button>'
+    }))
+    .add('precision', () => ({
+        template: '<m-button icon-name="m-svg__close-clear">A Button <template slot="precision">' +
+            'Button precision</template></m-button>'
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}/icon-position="right"`, module)
+    .addDecorator(withA11y)
+    .add('default', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
+    }))
+    .add('disabled', () => ({
+        template: '<m-button :disabled="true" icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
+    }))
+    .add('waiting', () => ({
+        template: '<m-button icon-position="right" icon-name="m-svg__close-clear" waiting="true">A Button</m-button>'
+    }))
+    .add('fullSize', () => ({
+        template: '<m-button :fullSize="true" icon-name="m-svg__close-clear" icon-position="right">A Button</m-button>'
+    }))
+    .add('icon="20px"', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" icon-position="right" icon-size="20px">A Button</m-button>'
+    }))
+    .add('precision', () => ({
+        template: '<m-button icon-name="m-svg__close-clear" icon-position="right" >A Button <template slot="precision">' +
+            'Button precision</template></m-button>'
+    }));
+

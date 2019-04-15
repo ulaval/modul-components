@@ -1,104 +1,53 @@
-import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
+import { createLocalVue, RefSelector, shallowMount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-import moment from 'moment';
-
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent } from '../../../tests/helpers/render';
-import uuid from '../../utils/uuid/uuid';
-import { MIconButton } from '../icon-button/icon-button';
-import TimepickerPlugin, { MTimepicker } from './timepicker';
 import ModulPlugin from '../../utils/modul/modul';
+import TimepickerPlugin, { MTimepicker } from './timepicker';
 
-jest.mock('../../utils/uuid/uuid');
-(uuid.generate as jest.Mock).mockReturnValue('uuid');
+const REF_INPUT: RefSelector = { ref: 'input' };
 
 describe('MTimepicker', () => {
     let localVue: VueConstructor<Vue>;
-    let mockDropDown: VueConstructor<Vue>;
+    const TESTTIME: string = '11:22';
+    const TESTHOUR: number = 11;
+    const TESTMINUTE: number = 22;
 
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
         Vue.use(TimepickerPlugin);
         Vue.use(ModulPlugin);
-        addMessages(Vue, [
-            'components/timepicker/timepicker.lang.en.json'
-        ]);
     });
 
-    it('should render correctly', () => {
-        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
-            localVue: localVue,
-            propsData: {
-                time: moment('02:00 PM', 'h:mm A')
-            }
+    it('should update on input change', () => {
+        const timepicker: Wrapper<MTimepicker> = shallowMount(MTimepicker, {
+            localVue: localVue
         });
 
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
+        const textInput: any = timepicker.find(REF_INPUT);
+        textInput.setValue(TESTTIME);
+
+        expect(timepicker.emitted().input).toBeDefined();
+        expect(timepicker.vm.currentTime).toEqual(TESTTIME);
+        expect(timepicker.vm.currentHour).toEqual(TESTHOUR);
+        expect(timepicker.vm.currentMinute).toEqual(TESTMINUTE);
+        expect(timepicker.emitted().input[0]).toEqual([TESTTIME]);
+
     });
 
-    it('should render correctly when waiting is set', () => {
-        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
-            localVue: localVue,
-            propsData: {
-                waiting: true,
-                time: moment('02:00 PM', 'h:mm A')
-            }
+    it('should update on model change', () => {
+        const timepicker: Wrapper<MTimepicker> = shallowMount(MTimepicker, {
+            localVue: localVue
         });
 
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
+        timepicker.setProps({ value: TESTTIME });
+        expect(timepicker.props().value).toBe(TESTTIME);
 
-    it('should render correctly when disabled is set', () => {
-        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
-            localVue: localVue,
-            propsData: {
-                disabled: true,
-                time: moment('02:00 PM', 'h:mm A')
-            }
-        });
+        expect(timepicker.emitted().input).toBeDefined();
+        expect(timepicker.vm.currentTime).toEqual(TESTTIME);
+        expect(timepicker.vm.currentHour).toEqual(TESTHOUR);
+        expect(timepicker.vm.currentMinute).toEqual(TESTMINUTE);
+        expect(timepicker.emitted().input[0]).toEqual([TESTTIME]);
 
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly when error is set', () => {
-        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
-            localVue: localVue,
-            propsData: {
-                error: true,
-                time: moment('02:00 PM', 'h:mm A'),
-                errorMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
-            }
-        });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly when valid is set', () => {
-        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
-            localVue: localVue,
-            propsData: {
-                valid: true,
-                time: moment('02:00 PM', 'h:mm A'),
-                validMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
-            }
-        });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly min/max time', () => {
-        const tp: Wrapper<MTimepicker> = mount(MTimepicker, {
-            localVue: localVue,
-            propsData: {
-                duration: true,
-                time: moment('03:00', 'h:mm A'),
-                min: moment.duration(2, 'hour'),
-                max: moment.duration(7, 'hour')
-            }
-        });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
     });
 });
