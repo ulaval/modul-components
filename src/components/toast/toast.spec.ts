@@ -206,6 +206,7 @@ describe(`MToast`, () => {
     });
 
     describe(`Given that calling function 'doCustomPropOpen'`, () => {
+        const elementHtml: HTMLElement = createMockHTMLElementStyleAbsolute();
         describe(`with mode desktop'`, () => {
             beforeEach(() => {
                 modeMobile = false;
@@ -217,7 +218,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'long'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.DesktopLong `, async () => {
@@ -230,7 +231,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.DesktopShort `, async () => {
@@ -249,7 +250,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'long'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.MobileLong `, async () => {
@@ -262,7 +263,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    wrapper.vm.doCustomPropOpen(true, wrapper.vm.$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.MobileShort `, async () => {
@@ -270,6 +271,14 @@ describe(`MToast`, () => {
                 });
             });
         });
+
+        function createMockHTMLElementStyleAbsolute(): HTMLElement {
+            return {
+                style: {
+                    position: 'absolute'
+                }
+            } as HTMLElement;
+        }
 
     });
 });
