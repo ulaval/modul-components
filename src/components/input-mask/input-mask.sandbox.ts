@@ -54,9 +54,9 @@ export class MInputMaskSandbox extends Vue {
     };
 
     public dateOptions: CleaveOptions = {
-        date: true,
-        datePattern: ['Y', 'm', 'd'],
-        delimiter: '-'
+        numericOnly: true,
+        delimiters: ['-', '-'],
+        blocks: [4, 2, 2]
     };
 }
 

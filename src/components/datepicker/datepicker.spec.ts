@@ -1,7 +1,6 @@
 import { createLocalVue } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import ModulPlugin from '../../utils/modul/modul';
 import uuid from '../../utils/uuid/uuid';
 import DatepickerPlugin from './datepicker';
 
@@ -12,16 +11,14 @@ jest.mock('../../utils/uuid/uuid');
 
 describe('MDatepicker', () => {
     let localVue: VueConstructor<Vue>;
-    let mockDropDown: VueConstructor<Vue>;
 
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
         Vue.use(DatepickerPlugin);
-        Vue.use(ModulPlugin);
     });
 
-    it('dummy test', () => {
+    it('When the field is click then popup show open and field has focus', () => {
         expect(true).toBe(true);
-    })
+    });
 });

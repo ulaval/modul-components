@@ -12,6 +12,6 @@ export const loadSandboxStories: any = () => {
     });
 
     getSandboxesNames().forEach((sandboxeName) => {
-        sandboxes.add(`${sandboxeName}`, () => `<m-${sandboxeName}-sandbox></m-${sandboxeName}-sandbox>`)
+        sandboxes.add(`${sandboxeName}`, () => `<m-${sandboxeName}-sandbox class="m-sandbox"></m-${sandboxeName}-sandbox>`);
     });
 };

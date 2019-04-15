@@ -1,3 +1,4 @@
+import { CleaveOptions } from 'cleave.js/options';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
@@ -13,6 +14,7 @@ import ButtonPlugin from '../button/button';
 import CalendarPlugin from '../calendar/calendar';
 import { DATEPICKER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
+import { MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -24,6 +26,9 @@ export type DatePickerSupportedTypes = Date | string | undefined;
 
 @WithRender
 @Component({
+    components: {
+        MInputMask
+    },
     mixins: [
         InputState,
         InputLabel,
@@ -56,6 +61,18 @@ export class MDatepicker extends ModulVue {
 
     private id: string = `mDatepicker-${uuid.generate()}`;
 
+    public $refs: {
+        input: MInputMask;
+    };
+
+    private get inputOptions(): CleaveOptions {
+        return {
+            numericOnly: true,
+            delimiters: ['-', '-'],
+            blocks: [4, 2, 2]
+        };
+    }
+
     protected created(): void {
 
         if (this.value instanceof Date) {
@@ -66,7 +83,7 @@ export class MDatepicker extends ModulVue {
 
 
     private get formattedDate(): string {
-        return this.convertToIsoString(this.model);
+        return this.convertValueToModel(this.model);
     }
 
     private get calandarError(): boolean {
@@ -74,27 +91,24 @@ export class MDatepicker extends ModulVue {
     }
 
     private get calandarErrorMessage(): string {
-        return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : this.internalCalandarErrorMessage;
+        if (this.internalCalandarErrorMessage) {
+            return this.internalCalandarErrorMessage;
+        } else {
+            return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : '';
+        }
+
     }
 
     private get open(): boolean {
         return this.internalOpen;
     }
 
-    private get ariaControls1(): string {
-        return this.id + '-controls-1';
-    }
-
-    private get ariaControls2(): string {
-        return this.id + '-controls-2';
-    }
-
     private get minDateString(): string {
-        return this.convertToIsoString(this.min);
+        return this.convertValueToModel(this.min);
     }
 
     private get maxDateString(): string {
-        return this.convertToIsoString(this.max);
+        return this.convertValueToModel(this.max);
     }
 
     private get minModulDate(): ModulDate {
@@ -124,44 +138,42 @@ export class MDatepicker extends ModulVue {
 
     @Emit('open')
     private async onOpen(): Promise<void> {
-        await this.$nextTick();
-        let inputEl: any = this.$refs.input;
-        inputEl.focus();
-        inputEl.setSelectionRange(0, this.inputModel.length);
+        let inputMask: MInputMask = this.$refs.input;
+        inputMask.focusAndSelectAll();
     }
-
 
 
     private async selectDate(selectedDate: DatePickerSupportedTypes): Promise<void> {
         this.internalCalandarErrorMessage = '';
-        this.model = this.convertToIsoString(selectedDate);
+        this.model = this.convertValueToModel(selectedDate);
+        this.inputModel = this.internalDateModel;
         this.open = false;
     }
 
-    private createModelUpdateValue(newValue: DatePickerSupportedTypes): DatePickerSupportedTypes {
-        if (newValue && this.value instanceof Date) {
-            return new Date(newValue);
-        } else {
-            return newValue;
-        }
-    }
 
     private inputDate(inputValue: string): void {
-        if (inputValue === '') {
+        this.inputModel = inputValue;
+
+        if (!inputValue || inputValue === '') {
             // clear the value
             this.model = '';
-            this.showErrorMessage(inputValue);
-        } else {
-            this.inputModel = this.model;
-            //TODO ! not implemented
-        }
-        //   this.inputModel = inputValue;
-        //   this.open = false;
+            this.clearErrorMessage();
+        } else if (inputValue.length === 10) {
 
+            if (this.showErrorMessage(inputValue)) {
+                this.model = this.inputModel;
+            }
+        } else {
+            // we are editing, clear error message and hide popup
+            if (this.open) {
+                this.open = false;
+            }
+            this.clearErrorMessage();
+        }
     }
 
-    private toggleOpen(): void {
-        this.open = !this.open;
+    private clearErrorMessage(): void {
+        this.internalCalandarErrorMessage = '';
     }
 
     private showErrorMessage(inputValue: string): boolean {
@@ -173,7 +185,7 @@ export class MDatepicker extends ModulVue {
                 this.internalCalandarErrorMessage = '';
                 return true;
             }
-        } else if (this.validateDateFormat(inputValue)) {
+        } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
             let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalandarErrorMessage = '';
@@ -196,61 +208,34 @@ export class MDatepicker extends ModulVue {
     // override from InputManagement
     @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
-        if (value) {
-            if (value instanceof Date) {
-                this.internalDateModel = new ModulDate(value.toISOString()).toString();
 
-            } else {
-                this.internalDateModel = value;
-            }
-        } else {
-            this.internalDateModel = '';
+        if (this.internalDateModel !== this.convertModelToString(value)) {
+            this.internalDateModel = this.convertModelToString(value);
+            this.inputModel = this.internalDateModel;
+            this.showErrorMessage(this.inputModel);
         }
 
-        this.inputModel = this.internalDateModel;
-        this.showErrorMessage(this.inputModel);
     }
 
     // override from InputManagement
     private set model(value: string) {
         this.internalDateModel = value;
-        this.inputModel = this.internalDateModel;
         this.emitChange();
     }
 
+    // override from InputManagement
+    public get hasValue(): boolean {
+        return !!(this.inputModel || '').toString().trim();
+    }
+
     public emitChange(): void {
-        console.log('change emmited = ' + this.createModelUpdateValue(this.internalDateModel));
-        this.$emit('change', this.createModelUpdateValue(this.internalDateModel));
+        this.$emit('change', this.convertStringToModel(this.internalDateModel));
     }
 
     private get model(): string {
         return this.internalDateModel;
     }
 
-    private convertToIsoString(input: DatePickerSupportedTypes): string {
-        if (input) {
-            try {
-                return new ModulDate(input).toString();
-            } catch (err) {
-                // invalid date
-            }
-            return '';
-        }
-        return '';
-    }
-
-    private validateDateFormat(dateString: string): boolean {
-        if (dateString) {
-            try {
-                new ModulDate(dateString).toString();
-                return true;
-            } catch (err) {
-                // invalid date
-            }
-            return false;
-        }
-        return false;
-    }
 
 
     // Focus management.
@@ -268,17 +253,82 @@ export class MDatepicker extends ModulVue {
     }
 
     // override from InputManagement
+    private onClick(event: MouseEvent): void {
+        this.as<InputManagement>().internalIsFocus = this.as<InputStateMixin>().active;
+        let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
+        if (this.as<InputManagement>().internalIsFocus && inputEl) {
+            inputEl.focus();
+        }
+        this.$emit('click');
+    }
+
+    // override from InputManagement
     private onBlur(event: Event): void {
         this.as<InputManagement>().internalIsFocus = false;
 
         if (!this.open) { // do not emit blur if still open
             this.$emit('blur', event);
         }
+
+        if (this.inputModel && this.inputModel.length < 10) {
+            // clear the model
+            this.model = '';
+
+            this.showErrorMessage(this.inputModel);
+        }
     }
 
     // override from Input-management
     private get isFocus(): boolean {
         return this.as<InputManagement>().internalIsFocus || this.open;
+    }
+
+
+    private convertValueToModel(input: DatePickerSupportedTypes): string {
+        if (input) {
+            try {
+                return new ModulDate(input).toString();
+            } catch (err) {
+                // invalid date
+            }
+            return '';
+        }
+        return '';
+    }
+
+    togglePopup(event: Event): void {
+        this.open = !this.open;
+        // stop event propagation to parent.
+        event.stopPropagation();
+    }
+
+    private validateDateFormat(dateString: string): boolean {
+        if (dateString) {
+            try {
+                new ModulDate(dateString).toString();
+                return true;
+            } catch (err) {
+                // invalid date
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private convertStringToModel(newValue: string): DatePickerSupportedTypes {
+        if (newValue && this.value instanceof Date) {
+            return new Date(newValue);
+        } else {
+            return newValue;
+        }
+    }
+
+    private convertModelToString(value: DatePickerSupportedTypes): string {
+        if (value instanceof Date) {
+            return new ModulDate(value.toISOString()).toString();
+        } else {
+            return value as string;
+        }
     }
 }
 

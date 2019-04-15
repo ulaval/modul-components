@@ -22,13 +22,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         data: () => ({
             model1: '2011-01-01'
         }),
-        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/> <m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
     .add('v-model as date', () => ({
         data: () => ({
             model1: new Date('2011-01-01')
         }),
-        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/> <m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
@@ -50,7 +50,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('date format invalide', () => ({
         data: () => ({
-            model1: '01ad01/2000'
+            model1: '2000-99-99'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
@@ -78,5 +78,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('error-message', () => ({
         template: `<m-datepicker :error="true" error-message="this is an error"></m-datepicker>`
+    }))
+    .add('helper-message', () => ({
+        template: `<m-datepicker helper-message="AAAA-MM-JJ"></m-datepicker>`
     }));
 
