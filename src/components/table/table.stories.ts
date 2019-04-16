@@ -236,4 +236,25 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
             }
         },
         template: `<m-table :columns="columns" :rows="emptyRows" :loading="true" width="100%"></m-table>`
+    }))
+    .add('Sortable', () => ({
+        props: {
+            columns: {
+                default: [
+                    { id: 'name', title: 'Name', dataProp: 'name', sortable: true },
+                    { id: 'age', title: 'Age', dataProp: 'age', sortable: true },
+                    { id: 'username', title: 'Username', dataProp: 'username', sortable: true }
+                ]
+            },
+            rows: {
+                default: [
+                    { id: '1', name: 'Jonathan', age: '25', username: 'jonathan.25' },
+                    { id: '2', name: 'Carl', age: '30', username: 'carl.30' },
+                    { id: '3', name: 'Jacob', age: '26', username: 'jacob.26' },
+                    { id: '4', name: 'Vincent', age: '34', username: 'vincent.34' },
+                    { id: '5', name: 'Manon', age: '28', username: 'manon.28' }
+                ]
+            }
+        },
+        template: '<m-table :columns="columns" :rows="rows" width="100%"></m-table>'
     }));
