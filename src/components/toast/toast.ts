@@ -226,7 +226,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         return icon;
     }
 
-    public mouseOverToast(): void {
+    public mouseEnterToast(): void {
         if (!this.isMobile) {
             clearTimeout(this.timerCloseToast);
         }

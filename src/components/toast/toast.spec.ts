@@ -94,7 +94,7 @@ describe(`MToast`, () => {
     describe(`Given that a custom action prop have been passed`, () => {
         beforeEach(async () => {
             initializeWrapper();
-            await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            await jest.runOnlyPendingTimers(); // wait for component to be instantiated
 
             wrapper.setProps({
                 actionLabel: ACTION_LABEL
@@ -132,7 +132,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+                    await jest.runOnlyPendingTimers(); // wait for component to be instantiated
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
@@ -149,12 +149,12 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+                    await jest.runOnlyPendingTimers(); // wait for component to be instantiated
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
 
-                    wrapper.vm.mouseOverToast();
+                    wrapper.vm.mouseEnterToast();
                     await jest.runOnlyPendingTimers(); // wait for the timeout to be over
 
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
@@ -167,12 +167,12 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+                    await jest.runOnlyPendingTimers(); // wait for component to be instantiated
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
 
-                    wrapper.vm.mouseOverToast();
+                    wrapper.vm.mouseEnterToast();
                     await jest.runOnlyPendingTimers(); // wait for the timeout to be over
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
 
