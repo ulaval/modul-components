@@ -4,7 +4,7 @@ import ButtonPlugin from '../button/button';
 import CheckboxPlugin from '../checkbox/checkbox';
 import { TABLE_NAME } from '../component-names';
 import OptionPlugin from '../option/option';
-import TablePlugin, { MColumnTable, MSortedColumn } from './table';
+import TablePlugin, { MColumnSortDirection, MColumnTable } from './table';
 import WithRender from './table.sandbox.html?style=./table.sandbox.scss';
 
 @WithRender
@@ -15,17 +15,20 @@ export class MTableSandbox extends Vue {
         {
             id: 'name',
             title: 'Name',
-            dataProp: 'name'
+            dataProp: 'name',
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'age',
             title: 'Age',
-            dataProp: 'age'
+            dataProp: 'age',
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'username',
             title: 'Username',
-            dataProp: 'username'
+            dataProp: 'username',
+            sortDirection: MColumnSortDirection.None
         }
     ];
 
@@ -34,28 +37,33 @@ export class MTableSandbox extends Vue {
             id: 'check',
             title: '',
             dataProp: 'check',
-            width: '16px'
+            width: '16px',
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'name',
             title: 'Name',
-            dataProp: 'name'
+            dataProp: 'name',
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'age',
             title: 'Age',
-            dataProp: 'age'
+            dataProp: 'age',
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'username',
             title: 'Username',
-            dataProp: 'username'
+            dataProp: 'username',
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'menu',
             title: '',
             dataProp: 'menu',
-            width: '33px'
+            width: '33px',
+            sortDirection: MColumnSortDirection.None
         }
     ];
 
@@ -97,22 +105,24 @@ export class MTableSandbox extends Vue {
             id: 'name',
             title: 'Name',
             dataProp: 'name',
-            sortable: true
+            sortable: true,
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'age',
             title: 'Age',
             dataProp: 'age',
-            sortable: true
+            sortable: true,
+            sortDirection: MColumnSortDirection.None
         },
         {
             id: 'username',
             title: 'Username',
-            dataProp: 'username'
+            dataProp: 'username',
+            sortable: false,
+            sortDirection: MColumnSortDirection.None
         }
     ];
-
-    sortedColumn: MSortedColumn = { dataProp: 'name', ascending: true };
 
     loading: boolean = false;
 
@@ -134,14 +144,12 @@ export class MTableSandbox extends Vue {
         alert('Check: ' + id);
     }
 
-    launchSorting(): void {
+    launchSorting(column: MColumnTable): void {
         this.loading = true;
         setTimeout(() => {
             this.loading = false;
-            this.$log.log(`Tri: dataProp: ${this.sortedColumn.dataProp} - ascending: ${this.sortedColumn.ascending}`);
+            this.$log.log(`Tri: dataProp: ${column.dataProp} - sortDirection: ${column.sortDirection}`);
         }, 700);
-
-
     }
 }
 

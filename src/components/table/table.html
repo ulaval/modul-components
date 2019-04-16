@@ -4,10 +4,10 @@
     <slot name="header">
         <thead>
             <tr>
-                <th v-for="column in columns"
+                <th v-for="(column, index) in columns"
                     :style="columnWidth(column)"
                     :class="{'m--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column)}"
-                    :key="column.id"
+                    :key="index"
                     scope="col">
                     <slot :name="'header.' + column.dataProp"
                           :column="column">
