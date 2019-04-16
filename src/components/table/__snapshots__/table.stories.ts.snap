@@ -626,6 +626,7 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       <td
         class="m-table-sandbox__show-more"
         colspan="4"
+        style="text-align: center;"
       >
         <button
           class="m-button m-table-sandbox__show-more-button m--is-skin-primary"
@@ -638,7 +639,9 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
           <span
             class="m-button__text"
           >
-            <p>
+            <p
+              class="m-u--no-margin"
+            >
               Show more results
             </p>
              
@@ -857,6 +860,7 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       <td
         class="m-table-sandbox__show-more"
         colspan="4"
+        style="text-align: center;"
       >
         <button
           class="m-button m-table-sandbox__show-more-button m--is-skin-primary"
@@ -869,7 +873,9 @@ exports[`Storyshots components|m-table Custom row 1`] = `
           <span
             class="m-button__text"
           >
-            <p>
+            <p
+              class="m-u--no-margin"
+            >
               Show more results
             </p>
              
