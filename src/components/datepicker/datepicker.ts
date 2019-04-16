@@ -43,10 +43,7 @@ export class MDatepicker extends ModulVue {
     public value: DatePickerSupportedTypes;
     @Prop()
     public label: string;
-    @Prop()
-    public required: boolean;
-    @Prop({ default: 'YYYY/MM/DD' })
-    public format: string;
+
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
     @Prop({ default: () => { return new ModulDate().add(10, 'year'); } })
@@ -178,13 +175,10 @@ export class MDatepicker extends ModulVue {
 
     private showErrorMessage(inputValue: string): boolean {
         if (inputValue === '' || inputValue === undefined || inputValue === null) {
-            if (this.required) {
-                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:required-error');
-                return false;
-            } else {
-                this.internalCalandarErrorMessage = '';
-                return true;
-            }
+
+            this.internalCalandarErrorMessage = '';
+            return true;
+
         } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
             let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
