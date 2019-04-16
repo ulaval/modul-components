@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import WithRender from './{{SINGULAR_KEBAB}}.html';
+import WithRender from './{{SINGULAR_KEBAB}}.html?style=./{{SINGULAR_KEBAB}}.scss';
 import { Prop } from 'vue-property-decorator';
 import { {{SINGULAR_CONSTANT}} } from '../component-names';
 
