@@ -223,6 +223,10 @@ export class MDatepicker extends ModulVue {
         this.emitChange();
     }
 
+    private get model(): string {
+        return this.internalDateModel;
+    }
+
     // override from InputManagement
     public get hasValue(): boolean {
         return !!(this.inputModel || '').toString().trim();
@@ -231,11 +235,6 @@ export class MDatepicker extends ModulVue {
     public emitChange(): void {
         this.$emit('change', this.convertStringToModel(this.internalDateModel));
     }
-
-    private get model(): string {
-        return this.internalDateModel;
-    }
-
 
 
     // Focus management.
@@ -289,9 +288,8 @@ export class MDatepicker extends ModulVue {
             try {
                 return new ModulDate(input).toString();
             } catch (err) {
-                // invalid date
+                return '';
             }
-            return '';
         }
         return '';
     }
@@ -308,9 +306,8 @@ export class MDatepicker extends ModulVue {
                 new ModulDate(dateString).toString();
                 return true;
             } catch (err) {
-                // invalid date
+                return false;
             }
-            return false;
         }
         return false;
     }
