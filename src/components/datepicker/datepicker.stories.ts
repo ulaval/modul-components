@@ -41,12 +41,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         },
         template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
-    .add('v-model as date', () => ({
-        data: () => ({
-            model1: new Date('2011-01-01')
-        }),
-        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
-    }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
     }))
