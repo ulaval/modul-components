@@ -19,10 +19,6 @@ export interface InputManagementFocusable {
     focusInput(): void;
 }
 
-export enum InputManagementAutocomplete {
-    Off = 'off',
-    On = 'on'
-}
 @Component
 export class InputManagement extends ModulVue
     implements InputManagementProps, InputManagementData, InputManagementFocusable {
@@ -34,13 +30,7 @@ export class InputManagement extends ModulVue
     public placeholder: string;
     @Prop()
     public readonly: boolean;
-    @Prop({
-        default: undefined,
-        validator: value =>
-            value === InputManagementAutocomplete.Off ||
-            value === InputManagementAutocomplete.On ||
-            value === undefined
-    })
+    @Prop()
     public autocomplete: string;
     @Prop()
     public focus: boolean;
