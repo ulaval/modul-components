@@ -6,7 +6,7 @@ import { {{SINGULAR_CONSTANT}} } from '../component-names';
 
 @WithRender
 @Component
-export class {{SINGULAR_PASCAL}} extends Vue {
+export class {{PREFIXED_SINGULAR_PASCAL}} extends Vue {
     @Prop()
     public prop1: any;
 }
