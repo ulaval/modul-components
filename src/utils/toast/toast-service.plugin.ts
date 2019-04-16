@@ -10,7 +10,7 @@ declare module 'vue/types/vue' {
 const ToastServicePlugin: PluginObject<any> = {
     install(v): void {
         let toast: ToastService = new ToastService();
-        (v.prototype).$toast = toast;
+        v.prototype.$toast = toast;
     }
 };
 
