@@ -98,18 +98,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
                         <template slot="header.age"> AGE </template>
                         <template slot="body.age" slot-scope="{data}"> {{ data.age }} ans </template>
                         <template slot="body.check" slot-scope="{data}">
-                            <m-checkbox @change="onCheck(data.id)"></m-checkbox>
+                            <m-checkbox></m-checkbox>
                         </template>
                         <template slot="body.menu" slot-scope="{data}">
                             <m-option size="33px">
-                                <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                                <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                                <m-option-item-edit"></m-option-item-edit>
+                                <m-option-item-delete"></m-option-item-delete>
                             </m-option>
                         </template>
                         <template slot="footer">
                             <td class="m-table-sandbox__show-more" colspan="4">
-                                <m-button class="m-table-sandbox__show-more-button"
-                                        @click="">
+                                <m-button class="m-table-sandbox__show-more-button">
                                     <p>Show more results</p>
                                     <span>1-5 of 45</span>
                                 </m-button>
@@ -147,16 +146,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
                             </td>
                             <td>
                                 <m-option size="33px">
-                                    <m-option-item-edit @click="editData(data.id)"></m-option-item-edit>
-                                    <m-option-item-delete @click="deleteData(data.id)"></m-option-item-delete>
+                                    <m-option-item-edit></m-option-item-edit>
+                                    <m-option-item-delete></m-option-item-delete>
                                 </m-option>
                             </td>
                         </template>
                         <template slot="footer">
                             <td class="m-table-sandbox__show-more"
                                 colspan="4">
-                                <m-button class="m-table-sandbox__show-more-button"
-                                            @click="showMore()">
+                                <m-button class="m-table-sandbox__show-more-button">
                                     <p>Show more results</p>
                                     <span>1-5 of 45</span>
                                 </m-button>

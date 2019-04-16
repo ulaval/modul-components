@@ -341,9 +341,9 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
         <m-option
           size="33px"
         >
-          <m-option-item-edit />
+          "&gt;
            
-          <m-option-item-delete />
+          "&gt;
         </m-option>
       </td>
     </tr>
@@ -409,9 +409,9 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
         <m-option
           size="33px"
         >
-          <m-option-item-edit />
+          "&gt;
            
-          <m-option-item-delete />
+          "&gt;
         </m-option>
       </td>
     </tr>
@@ -477,9 +477,9 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
         <m-option
           size="33px"
         >
-          <m-option-item-edit />
+          "&gt;
            
-          <m-option-item-delete />
+          "&gt;
         </m-option>
       </td>
     </tr>
@@ -545,9 +545,9 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
         <m-option
           size="33px"
         >
-          <m-option-item-edit />
+          "&gt;
            
-          <m-option-item-delete />
+          "&gt;
         </m-option>
       </td>
     </tr>
@@ -613,9 +613,9 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
         <m-option
           size="33px"
         >
-          <m-option-item-edit />
+          "&gt;
            
-          <m-option-item-delete />
+          "&gt;
         </m-option>
       </td>
     </tr>
