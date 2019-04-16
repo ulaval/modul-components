@@ -8,8 +8,8 @@ import WithRender from './chip.html?style=./chip.scss';
 @WithRender
 @Component
 export class MChip extends Vue {
-    @Prop()
-    public disposable: boolean = false;
+    @Prop({ default: false })
+    public disposable: boolean;
 
     @Emit('closed')
     public close(): void { }

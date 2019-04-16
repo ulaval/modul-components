@@ -21,7 +21,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHIP_NAME}`, module)
                 default: text('Text', 'test')
             },
             disposable: {
-                default: boolean('Disposable', false)
+                default: boolean('Disposable', true)
             }
         },
         methods: {
