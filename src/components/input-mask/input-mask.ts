@@ -28,8 +28,14 @@ export class MInputMask extends ModulVue {
 
     private cleave: Cleave;
 
+
+    private internalModel = '';
+
     mounted(): void {
+
+        this.internalModel = this.value || '';
         this.cleave = new Cleave(this.$refs.input, this.getOptions());
+
         this.cleave.setRawValue(this.value);
     }
 
@@ -42,7 +48,17 @@ export class MInputMask extends ModulVue {
             ...this.options,
             onValueChanged: (event => {
                 let _value: string = this.raw ? event.target.rawValue : event.target.value;
-                this.$emit('input', _value);
+
+                // only emit if model is changed
+                // when v-model is not masked (raw)
+                if (this.internalModel === _value) {
+                    return;
+                } else {
+                    this.internalModel = _value;
+                    this.$emit('input', _value);
+                }
+
+
             })
         };
     }
@@ -71,6 +87,7 @@ export class MInputMask extends ModulVue {
             return;
         }
 
+        this.internalModel = this.value || '';
         this.cleave.setRawValue(inputValue);
     }
 

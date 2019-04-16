@@ -22,7 +22,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         data: () => ({
             model1: '2011-01-01'
         }),
-        template: `<div><m-datepicker v-model="model1"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        methods: {
+            onInputChange(value: string): string {
+                // tslint:disable-next-line: no-console
+                console.log('MDatePicker.onInputChange=' + value);
+                return value;
+            }
+        },
+        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
     .add('v-model as date', () => ({
         data: () => ({
