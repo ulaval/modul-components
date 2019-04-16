@@ -18,7 +18,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     .add('default', () => ({
         template: `<m-datepicker></m-datepicker>`
     }))
-    .add('v-model', () => ({
+    .add('events', () => ({
         data: () => ({
             model1: '2011-01-01'
         }),
@@ -27,9 +27,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
                 // tslint:disable-next-line: no-console
                 console.log('MDatePicker.onInputChange=' + value);
                 return value;
+            },
+            onFocus(value: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MDatePicker.onFocus!');
+
+            },
+            onBlur(event: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MDatePicker.onBlur!');
+
             }
         },
-        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
     .add('v-model as date', () => ({
         data: () => ({
