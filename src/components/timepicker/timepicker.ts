@@ -194,7 +194,7 @@ export class MTimepicker extends ModulVue {
                 // tslint:disable-next-line: deprecation
                 if (event.srcElement) {
                     // tslint:disable-next-line: deprecation
-                    this.positionScroll(event.srcElement as Element);
+                    this.positionScroll(event.srcElement);
                 }
             }, 300);
         }
@@ -230,7 +230,7 @@ export class MTimepicker extends ModulVue {
         // tslint:disable-next-line: deprecation
         if (event.srcElement) {
             // tslint:disable-next-line: deprecation
-            this.positionScroll(event.srcElement as Element);
+            this.positionScroll(event.srcElement);
         }
     }
 
