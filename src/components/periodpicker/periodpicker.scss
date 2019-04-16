@@ -1,5 +1,13 @@
 @import 'commons';
 
 .m-periodpicker {
-    display: inline-flex;
+    &__body {
+        display: flex;
+    }
+
+    &__item {
+        & + & {
+            margin-left: $m-spacing;
+        }
+    }
 }

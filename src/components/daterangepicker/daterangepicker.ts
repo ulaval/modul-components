@@ -36,7 +36,8 @@ export class MDaterangepicker extends ModulVue {
         default: () => Vue.prototype.$i18n.translate('m-daterangepicker:label.to')
     })
     labelTo: string;
-    @Prop({ default: InputMaxWidth.Regular })
+
+    @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
     get periodPickerProps(): MPeriodpickerProps {

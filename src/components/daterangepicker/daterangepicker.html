@@ -6,11 +6,11 @@
                 :error="error"
                 :valid="valid"
                 :readonly="readonly"
+                :max-width="maxWidth"
                 :error-message="errorMessage"
                 :valid-message="validMessage"
                 :helper-message="helperMessage">
-    <m-datepicker class="m-u--margin-right"
-                  :label="labelFrom"
+    <m-datepicker :label="labelFrom"
                   :max-width="maxWidth"
                   slot="first"
                   slot-scope="{ props, handlers }"

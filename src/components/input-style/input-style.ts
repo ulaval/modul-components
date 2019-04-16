@@ -8,7 +8,7 @@ import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
-export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
+export const CSS_LABEL_DEFAULT_MARGIN: number = 8;
 
 @WithRender
 @Component({
@@ -96,6 +96,10 @@ export class MInputStyle extends ModulVue {
 
     public get isLabelUp(): boolean {
         return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+    }
+
+    public get showPrefix(): boolean {
+        return this.hasLabel ? this.isFocus : true;
     }
 
     private get hasValue(): boolean {
