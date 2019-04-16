@@ -94,7 +94,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.fromIsFocused,
-                value: this.formatIsoDateToLocalString(this.internalValue.from),
+                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.from),
                 min: this.min,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -115,7 +115,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.toIsFocused,
-                value: this.formatIsoDateToLocalString(this.internalValue.to),
+                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.to),
                 min: this.minDateTo,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -225,7 +225,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
      *
      * @param date
      */
-    private formatIsoDateToLocalString(date?: DatePickerSupportedTypes): string {
+    static formatIsoDateToLocalString(date?: DatePickerSupportedTypes): string {
         if (!date) {
             return '';
         }
