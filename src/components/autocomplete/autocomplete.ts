@@ -28,7 +28,8 @@ export class MAutocomplete extends ModulVue {
     minimumChars: number;
     @Prop()
     textNoMatch: string;
-
+    @Prop({ default: 'new-password' })
+    autocomplete: string;
     @Prop()
     maxLength: number;
     @Prop()
