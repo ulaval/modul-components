@@ -1,0 +1,15 @@
+.m-chip {
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 12px;
+    border-radius: 25px;
+    height: 40px;
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        font-weight: 500;
+    }
+}

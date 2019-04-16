@@ -1,0 +1,13 @@
+<div class="m-chip">
+    <div class="m-chip__body">
+        <div :class="{ 'm-u--margin-right' : disposable }">
+            <slot></slot>
+        </div>
+        <m-icon-button v-if="disposable"
+                       skin="primary"
+                       button-size="20px"
+                       icon-size="11px"
+                       @click="close()">
+        </m-icon-button>
+    </div>
+</div>

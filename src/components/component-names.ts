@@ -9,6 +9,7 @@ export const CAROUSEL_NAME: string = 'm-carousel';
 export const CAROUSEL_ITEM_NAME: string = 'm-carousel-item';
 export const CHARACTER_COUNT_NAME: string = 'm-character-count';
 export const CHECKBOX_NAME: string = 'm-checkbox';
+export const CHIP_NAME: string = 'm-chip';
 export const DATEFIELDS_NAME: string = 'm-datefields';
 export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DATERANGEPICKER_NAME: string = 'm-daterangepicker';
