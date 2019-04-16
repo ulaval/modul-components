@@ -82,6 +82,10 @@ export class MTimepicker extends ModulVue {
     private internalTimeErrorMessage: string = '';
     private id: string = `mTimepicker-${uuid.generate()}`;
 
+    private created(): void {
+        this.internalTime = this.value;
+    }
+
     private mounted(): void {
         // create hours
         for (let i: number = -1; i < MAXIMUM_HOURS; i++) {
@@ -107,9 +111,8 @@ export class MTimepicker extends ModulVue {
     }
 
     private validateTime(value: string): boolean {
+        this.internalTimeErrorMessage = '';
         if (validateTimeString(value)) {
-            this.internalTimeErrorMessage = '';
-
             if (this.validateTimeRange(value)) {
                 this.internalTimeErrorMessage = '';
                 return true;
@@ -166,7 +169,9 @@ export class MTimepicker extends ModulVue {
 
     @Watch('value')
     private updateInternalTime(value: string): void {
-        this.currentTime = value;
+        if (!this.as<InputManagement>().isFocus || value) {
+            this.currentTime = value;
+        }
     }
 
     private updatePopupTime(value: string): void {
@@ -259,7 +264,7 @@ export class MTimepicker extends ModulVue {
         let oldTime: string = this.internalTime;
         this.internalTime = value;
 
-        if (validateTimeString(value) && this.validateTime(value)) {
+        if (this.validateTime(value) && validateTimeString(value)) {
             this.updatePopupTime(value);
 
             if (value !== oldTime) {
@@ -297,7 +302,7 @@ export class MTimepicker extends ModulVue {
     }
 
     private get timeErrorMessage(): string {
-        return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : this.internalTimeErrorMessage;
+        return this.internalTimeErrorMessage || this.as<InputState>().errorMessage;
     }
 
     private get open(): boolean {
