@@ -84,7 +84,7 @@ $m-table--icon-vertical-offset: -5px !default;
         &.m--is-centered {
             text-align: center;
 
-            & * {
+            > * {
                 text-align: center;
             }
         }
