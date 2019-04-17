@@ -78,6 +78,9 @@ export class MAutocomplete extends ModulVue {
     @Watch('selection')
     onSelection(): string {
         this.refreshItemsOnSelectionChange(this.selection);
+        if (this.selection === '') {
+            this.inputText = this.selection;
+        }
         return this.selection;
     }
 
