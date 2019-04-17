@@ -273,7 +273,7 @@ export class MTimepicker extends ModulVue {
 
         } else {
             this.resetPopupTime();
-            this.$emit('input', '');
+            this.$emit('input', undefined);
         }
     }
 
