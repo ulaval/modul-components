@@ -31,7 +31,7 @@ export interface TimeObject {
 
 function validateTimeString(value: string): boolean {
     const regex: RegExp = /(\d\d):(\d\d)/g;
-    return value.match(regex) || !value.length ? true : false;
+    return !(value || '').length || value.match(regex) ? true : false;
 }
 
 @WithRender
@@ -264,7 +264,7 @@ export class MTimepicker extends ModulVue {
         let oldTime: string = this.internalTime;
         this.internalTime = value;
 
-        if (this.validateTime(value) && validateTimeString(value)) {
+        if (value && this.validateTime(value) && validateTimeString(value)) {
             this.updatePopupTime(value);
 
             if (value !== oldTime) {
