@@ -99,28 +99,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="light"`, module
                         <m-link :icon="true" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
-    .add('icon-name', () => ({
-        props: {
-            iconName: {
-                default: select('iconName', {
-                    'profile': 'm-svg__profile',
-                    'information': 'm-svg__information',
-                    'confirmation': 'm-svg__confirmation',
-                    'warning': 'm-svg__warning',
-                    'error': 'm-svg__error',
-                    'calendar': 'm-svg__calendar',
-                    'hint': 'm-svg__hint',
-                    'clock': 'm-svg__clock'
-                }, 'profile')
-            },
-        },
-        template: `<div style="background: grey;">
-                        <m-link :icon="true" :icon-name="iconName" mode="link" url="#" skin="light">A link</m-link>
-                   </div>`
-    }))
     .add('icon-position="right"', () => ({
         template: `<div style="background: grey;">
                         <m-link :icon="true" icon-position="right" mode="link" url="#" skin="light">A link</m-link>
+                   </div>`
+    }))
+    .add('icon-name="m-svg__clock"', () => ({
+        template: `<div style="background: grey;">
+                        <m-link :icon="true" icon-name="m-svg__clock" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
     .add('icon-size="20px"', () => ({
