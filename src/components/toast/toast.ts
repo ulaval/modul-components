@@ -100,7 +100,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     };
 
     private buttonMode: MLinkMode = MLinkMode.Button;
-    private timerCloseToast: NodeJS.Timeout;
+    private timerCloseToast: any;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         el.style.position = 'absolute';
