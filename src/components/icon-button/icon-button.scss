@@ -172,6 +172,10 @@
         @include m-button();
     }
 
+    &.m-textfield__reset {
+        stroke-width: 2px;
+    }
+
     &__icon {
         position: relative;
 
