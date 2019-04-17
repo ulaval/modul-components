@@ -38,6 +38,9 @@ export class MDecimalfield extends ModulVue {
     })
     public rounding: number = 2;
 
+    @Prop()
+    public mask: number;
+
     private id: string = `mDecimalfield-${uuid.generate()}`;
 
     private onDropDecimalfield(event: DragEvent): void {
@@ -52,12 +55,20 @@ export class MDecimalfield extends ModulVue {
         return this.as<InputState>().isValid;
     }
 
+    private get propMask(): number {
+        if (this.mask && this.mask.toString().length <= MDECIMAL_MAX_SIGNIFICANT_NUMBER - this.rounding) {
+            return this.mask.toString().length;
+        } else {
+            return MDECIMAL_MAX_SIGNIFICANT_NUMBER - this.rounding;
+        }
+    }
+
     private get inputMaskOptions(): CleaveOptions {
         const decimalFormat: MDecimalFormat = this.$l10n.getDecimalFormat(this.currentLocale);
         return {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand',
-            numeralIntegerScale: MDECIMAL_MAX_SIGNIFICANT_NUMBER - this.rounding,
+            numeralIntegerScale: this.propMask,
             numeralDecimalScale: this.rounding,
             numeralDecimalMark: decimalFormat.decimalMark,
             numeralPositiveOnly: true,
