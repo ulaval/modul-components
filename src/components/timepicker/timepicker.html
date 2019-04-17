@@ -9,7 +9,8 @@
                    :focus="isFocus"
                    :empty="isEmpty"
                    :error="timeError"
-                   :valid="isValid">
+                   :valid="isValid"
+                   @click="focusInput()">
         <m-input-mask v-model="currentTime"
                       aria-haspopup="true"
                       :aria-controls="ariaControls"

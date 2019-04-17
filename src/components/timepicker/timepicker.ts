@@ -250,6 +250,10 @@ export class MTimepicker extends ModulVue {
     private async onPopupOpen(): Promise<void> {
         this.open = true;
         await this.$nextTick();
+        this.focusInput();
+    }
+
+    private focusInput(): void {
         const inputEl: HTMLInputElement = (this.$refs.input as MInputMask).$el as HTMLInputElement;
         inputEl.focus();
     }
