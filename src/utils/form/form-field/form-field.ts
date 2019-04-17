@@ -1,18 +1,8 @@
 import { FormFieldState } from '../form-field-state/form-field-state';
 import { FormFieldValidation } from '../form-field-validation/form-field-validation';
 
-/**
- * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
- */
-export enum FormFieldValidationType {
-    Optimistic = 'optimistic',
-    OnGoing = 'on-going',
-    Correctable = 'correctable',
-    AtExit = 'at-exit'
-}
-
 export interface FormFieldOptions {
-    validationType?: FormFieldValidationType;
+    validationType?: FormControlValidationType;
 }
 
 export type FieldValidationCallback<T> = (formField: FormField<T>) => FormFieldValidation;
@@ -31,7 +21,7 @@ export class FormField<T> {
     private internalValue: T;
     private oldValue: T;
     private internalState: FormFieldState;
-    private validationType: FormFieldValidationType = FormFieldValidationType.OnGoing;
+    private validationType: FormControlValidationType = FormControlValidationType.OnGoing;
     private editionContext: FormFieldEditionContext = FormFieldEditionContext.None;
     private shouldFocusInternal: boolean = false;
     private externalError: string = '';
@@ -215,22 +205,22 @@ export class FormField<T> {
 
         if (this.editionContext === FormFieldEditionContext.EmptyAndValid) {
             switch (this.validationType) {
-                case FormFieldValidationType.OnGoing:
+                case FormControlValidationType.OnGoing:
                     shouldValidate = true;
                     break;
             }
         } else if (this.editionContext === FormFieldEditionContext.PopulateAndValid) {
             switch (this.validationType) {
-                case FormFieldValidationType.Optimistic:
-                case FormFieldValidationType.OnGoing:
+                case FormControlValidationType.Optimistic:
+                case FormControlValidationType.OnGoing:
                     shouldValidate = true;
                     break;
             }
         } else if (this.editionContext === FormFieldEditionContext.NotValid) {
             switch (this.validationType) {
-                case FormFieldValidationType.Optimistic:
-                case FormFieldValidationType.OnGoing:
-                case FormFieldValidationType.Correctable:
+                case FormControlValidationType.Optimistic:
+                case FormControlValidationType.OnGoing:
+                case FormControlValidationType.Correctable:
                     shouldValidate = true;
                     break;
             }
