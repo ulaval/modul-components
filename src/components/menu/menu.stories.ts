@@ -104,6 +104,48 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
                         </m-menu-item>
                  </m-menu>`
     }))
+    .add('skin=light"', () => ({
+        data: () => ({
+            menuIsOpened: true,
+            selectedItem: 'item1'
+        }),
+        template: `<m-menu :closeOnSelection="false" :open.sync="menuIsOpened" :selected.sync="selectedItem" skin="light">
+                        <div slot="trigger">Menu</div>
+                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
+                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
+                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
+                        <m-menu-item label="Item group 1">
+                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
+                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
+                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
+                        </m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
+                        </m-menu-item>
+                 </m-menu>`
+    }))
+    .add('disabled', () => ({
+        data: () => ({
+            menuIsOpened: true,
+            selectedItem: 'item1'
+        }),
+        template: `<m-menu :closeOnSelection="false" :disabled="true" :open.sync="menuIsOpened" :selected.sync="selectedItem" >
+                        <div slot="trigger">Menu</div>
+                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
+                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
+                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
+                        <m-menu-item label="Item group 1">
+                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
+                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
+                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
+                        </m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
+                        </m-menu-item>
+                 </m-menu>`
+    }))
     .add('idAriaControls="ariaTest"', () => ({
         data: () => ({
             menuIsOpened: true,
