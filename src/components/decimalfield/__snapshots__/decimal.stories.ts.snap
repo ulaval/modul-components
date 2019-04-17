@@ -12,7 +12,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -20,14 +20,19 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
                 inputmode="numeric"
               />
-               
+                
               <!---->
                
               <!---->
@@ -66,7 +71,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <label
             class="m-input-style__label"
@@ -86,15 +91,18 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
           <div
             class="m-input-style__body"
           >
+            <!---->
+             
             <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
                 inputmode="numeric"
               />
-               
+                
               <!---->
                
               <!---->
@@ -133,7 +141,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <label
             class="m-input-style__label"
@@ -157,15 +165,18 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
           <div
             class="m-input-style__body"
           >
+            <!---->
+             
             <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
                 inputmode="numeric"
               />
-               
+                
               <!---->
                
               <!---->
@@ -204,7 +215,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -212,14 +223,19 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
                 inputmode="numeric"
               />
-               
+                
               <!---->
                
               <!---->
@@ -281,7 +297,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -289,14 +305,19 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
                 inputmode="numeric"
               />
-               
+                
               <!---->
                
               <!---->
@@ -339,7 +360,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -347,14 +368,19 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
                 inputmode="numeric"
               />
-               
+                
               <!---->
                
               <!---->
@@ -418,7 +444,7 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
@@ -426,14 +452,19 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
         class="m-input-style__body"
       >
         <div
+          class="m-input-style__prefix"
+        />
+         
+        <div
           class="m-input-style__left-content"
         >
+           
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
             inputmode="numeric"
           />
-           
+            
           <!---->
            
           <!---->
@@ -474,7 +505,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -482,8 +513,13 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 disabled="disabled"
@@ -491,7 +527,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
                 inputmode="numeric"
                 placeholder="Disabled"
               />
-               
+                
               <!---->
                
               <!---->
@@ -530,7 +566,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -538,8 +574,13 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
@@ -547,7 +588,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
                 placeholder="Read-only"
                 readonly="readonly"
               />
-               
+                
               <!---->
                
               <!---->
@@ -586,7 +627,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
       >
         <div
           class="m-input-style__content"
-          style="margin-top: 10px;"
+          style="margin-top: 8px;"
         >
           <!---->
            
@@ -594,8 +635,13 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
             class="m-input-style__body"
           >
             <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
               class="m-input-style__left-content"
             >
+               
               <input
                 class="m-decimalfield__input"
                 disabled="disabled"
@@ -603,7 +649,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
                 inputmode="numeric"
                 placeholder="Waiting"
               />
-               
+                
               <!---->
                
               <!---->
@@ -650,7 +696,7 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
@@ -658,14 +704,19 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
         class="m-input-style__body"
       >
         <div
+          class="m-input-style__prefix"
+        />
+         
+        <div
           class="m-input-style__left-content"
         >
+           
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
             inputmode="numeric"
           />
-           
+            
           <!---->
            
           <!---->
@@ -704,7 +755,7 @@ exports[`Storyshots components|m-decimalfield With initial value 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
@@ -712,14 +763,19 @@ exports[`Storyshots components|m-decimalfield With initial value 1`] = `
         class="m-input-style__body"
       >
         <div
+          class="m-input-style__prefix"
+        />
+         
+        <div
           class="m-input-style__left-content"
         >
+           
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
             inputmode="numeric"
           />
-           
+            
           <!---->
            
           <!---->
