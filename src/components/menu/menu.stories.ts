@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
+import { text, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -20,9 +20,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
     .add('default', () => ({
         data: () => ({
             menuIsOpened: false,
-            selectedItem: 'item1'
         }),
-        template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem">
+        template: `<m-menu :open.sync="menuIsOpened">
                         <div slot="trigger">Menu</div>
                         <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
                         <m-menu-item value="item2" label="Item 2"></m-menu-item>
@@ -32,19 +31,43 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
                             <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
                             <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
                         </m-menu-item>
-                        <m-menu-item value="item5" label="Item 5"></m-menu-item>
-                        <m-menu-item label="Item group 2"><m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
                             <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                            <m-menu-item value="subitem6" label="Subitem 6"></m-menu-item>
+                        </m-menu-item>
+                 </m-menu>`
+    }))
+    .add('trigger (slot)', () => ({
+        data: () => ({
+            menuIsOpened: false,
+            selectedItem: ''
+        }),
+        props: {
+            triggerText: {
+                default: text('triggerText', 'Menu')
+            }
+        },
+        template: `<m-menu :closeOnSelection="false" :open.sync="menuIsOpened" :selected.sync="selectedItem">
+                        <div slot="trigger">{{ triggerText}}</div>
+                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
+                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
+                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
+                        <m-menu-item label="Item group 1">
+                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
+                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
+                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
+                        </m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
                         </m-menu-item>
                  </m-menu>`
     }))
     .add('open', () => ({
         data: () => ({
             menuIsOpened: true,
-            selectedItem: 'item1'
         }),
-        template: `<m-menu :open.sync="menuIsOpened" selected.sync="selectedItem" :closeOnSelection="false">
+        template: `<m-menu :open.sync="menuIsOpened" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
                         <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
                         <m-menu-item value="item2" label="Item 2"></m-menu-item>
@@ -54,10 +77,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
                             <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
                             <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
                         </m-menu-item>
-                        <m-menu-item value="item5" label="Item 5"></m-menu-item>
-                        <m-menu-item label="Item group 2"><m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
                             <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                            <m-menu-item value="subitem6" label="Subitem 6"></m-menu-item>
                         </m-menu-item>
                  </m-menu>`
     }))
@@ -76,10 +98,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
                             <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
                             <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
                         </m-menu-item>
-                        <m-menu-item value="item5" label="Item 5"></m-menu-item>
-                        <m-menu-item label="Item group 2"><m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
                             <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                            <m-menu-item value="subitem6" label="Subitem 6"></m-menu-item>
                         </m-menu-item>
                  </m-menu>`
     }))
@@ -98,10 +119,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
                             <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
                             <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
                         </m-menu-item>
-                        <m-menu-item value="item5" label="Item 5"></m-menu-item>
-                        <m-menu-item label="Item group 2"><m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                        <m-menu-item label="Item group 2">
+                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
                             <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                            <m-menu-item value="subitem6" label="Subitem 6"></m-menu-item>
                         </m-menu-item>
                  </m-menu>`
     }));
@@ -109,20 +129,26 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
 
 storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
     .addDecorator(withA11y)
-    .add('value', () => ({
-        data: () => ({
-            menuIsOpened: true,
-            selectedItem: 'item1'
-        }),
-        template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
-                        <div slot="trigger">Menu</div>
-                        <m-menu-item label="Item 1" value="item1" ></m-menu-item>
-                   </m-menu>`
-    }))
+    .addDecorator(withKnobs)
     .add('label', () => ({
         data: () => ({
             menuIsOpened: true,
-            selectedItem: 'item1'
+            selectedItem: 'item1',
+        }),
+        props: {
+            label: {
+                default: text('label', 'label1')
+            }
+        },
+        template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
+                        <div slot="trigger">Menu</div>
+                        <m-menu-item :label="label"></m-menu-item>
+                   </m-menu>`
+    }))
+    .add('value', () => ({
+        data: () => ({
+            menuIsOpened: true,
+            selectedItem: ''
         }),
         template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
@@ -132,21 +158,21 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
     .add('url', () => ({
         data: () => ({
             menuIsOpened: true,
-            selectedItem: 'item1'
+            selectedItem: ''
         }),
         template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
                         <m-menu-item label="Item 1" value="item1" url="http://www.google.ca"></m-menu-item>
                    </m-menu>`
     }))
-    .add('icon-name', () => ({
+    .add('default', () => ({
         data: () => ({
             menuIsOpened: true,
             selectedItem: 'item1'
         }),
-        template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
+        template: `<m-menu :open="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item icon-name="m-svg__calendar" label="Item 1" value="item1"></m-menu-item>
+                        <m-menu-item icon-name="m-svg__profile" label="Item 1" value="item1"></m-menu-item>
                    </m-menu>`
     }))
     .add('disabled', () => ({
@@ -159,14 +185,51 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
                         <m-menu-item :disabled="true" label="Item 1" value="item1"></m-menu-item>
                    </m-menu>`
     }))
-    .add('open', () => ({
+    .add('readonly', () => ({
         data: () => ({
             menuIsOpened: true,
             selectedItem: 'item1'
         }),
         template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item :open="true" label="Item group 1">
+                        <m-menu-item :readonly="true" label="Item 1" value="item1"></m-menu-item>
+                   </m-menu>`
+    }))
+    .add('iconName', () => ({
+        data: () => ({
+            menuIsOpened: true,
+            selectedItem: 'item1'
+        }),
+        props: {
+            iconName: {
+                default: select('iconName', {
+                    'profile': 'm-svg__profile',
+                    'information': 'm-svg__information',
+                    'confirmation': 'm-svg__confirmation',
+                    'warning': 'm-svg__warning',
+                    'error': 'm-svg__error',
+                    'calendar': 'm-svg__calendar',
+                    'hint': 'm-svg__hint',
+                    'clock': 'm-svg__clock'
+                }, 'profile')
+            },
+        },
+        template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
+                        <div slot="trigger">Menu</div>
+                        <m-menu-item :iconName="iconName" label="Item 1" value="item1"></m-menu-item>
+                   </m-menu>`
+    }))
+    .add('open', () => ({
+        data: () => ({
+            menuIsOpened: true,
+            selectedItem: ''
+        }),
+        template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
+                        <div slot="trigger">Menu</div>
+                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
+                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
+                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
+                        <m-menu-item :open="true" label="Item group 1 - :open='true'">
                             <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
                             <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
                             <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
