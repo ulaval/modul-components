@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { select, text, withKnobs } from '@storybook/addon-knobs';
+import { select, text, object, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -59,7 +59,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         },
         template: `<div>
                        <m-icon :svgTitle="svgTitle" name="profile"></m-icon>
-                       <span style="margin-left: 15px">Current svgTitle: <span style="color:red">{{ svgTitle }}</span>
+                       <span style="margin-left: 15px">Current svgTitle: <span style="color:red">{{ svgTitle }}</span></span>
                    </div>`
     }))
     .add('size', () => ({
@@ -70,7 +70,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         },
         template: `<div>
                        <m-icon :size="size" name="profile"></m-icon>
-                       <span style="margin-left: 15px">Current icon size: <span style="color:red">{{ size }}</span>
+                       <span style="margin-left: 15px">Current icon size: <span style="color:red">{{ size }}</span></span>
                    </div>`
     }))
     .add('showNameAsClass', () => ({
@@ -90,6 +90,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         },
         template: `<div>
                        <m-icon :name="name" :showNameAsClass="true"></m-icon>
-                       <span style="margin-left: 15px">Current className on svg Icon: <span style="color:red">{{ name }}</span>
+                       <span style="margin-left: 15px">Current className on svg Icon: <span style="color:red">{{ name }}</span></span>
                    </div>`
+    }))
+    .add('badge', () => ({
+        props: {
+            badge: {
+                default: object('state', 'completed')
+            },
+        },
+        template: '<m-icon :v-m-badge="badge" name="profile"></m-icon>'
     }));
