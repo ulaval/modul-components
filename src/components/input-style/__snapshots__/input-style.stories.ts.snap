@@ -6,7 +6,7 @@ exports[`Storyshots components|m-input-style cursorPointer 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -25,6 +25,8 @@ exports[`Storyshots components|m-input-style cursorPointer 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -50,13 +52,17 @@ exports[`Storyshots components|m-input-style default 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <!---->
      
     <div
       class="m-input-style__body"
     >
+      <div
+        class="m-input-style__prefix"
+      />
+       
       <div
         class="m-input-style__left-content"
       >
@@ -82,7 +88,7 @@ exports[`Storyshots components|m-input-style disabled 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -101,6 +107,8 @@ exports[`Storyshots components|m-input-style disabled 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -126,7 +134,7 @@ exports[`Storyshots components|m-input-style empty 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -145,6 +153,8 @@ exports[`Storyshots components|m-input-style empty 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -171,7 +181,7 @@ exports[`Storyshots components|m-input-style error 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <label
         class="m-input-style__label"
@@ -190,6 +200,8 @@ exports[`Storyshots components|m-input-style error 1`] = `
       <div
         class="m-input-style__body"
       >
+        <!---->
+         
         <div
           class="m-input-style__left-content"
         >
@@ -222,7 +234,7 @@ exports[`Storyshots components|m-input-style error 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <label
         class="m-input-style__label"
@@ -241,6 +253,8 @@ exports[`Storyshots components|m-input-style error 1`] = `
       <div
         class="m-input-style__body"
       >
+        <!---->
+         
         <div
           class="m-input-style__left-content"
         >
@@ -267,7 +281,7 @@ exports[`Storyshots components|m-input-style focus 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -286,6 +300,10 @@ exports[`Storyshots components|m-input-style focus 1`] = `
     <div
       class="m-input-style__body"
     >
+      <div
+        class="m-input-style__prefix"
+      />
+       
       <div
         class="m-input-style__left-content"
       >
@@ -311,7 +329,7 @@ exports[`Storyshots components|m-input-style label 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -330,6 +348,8 @@ exports[`Storyshots components|m-input-style label 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -363,7 +383,7 @@ exports[`Storyshots components|m-input-style labelFor 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <label
         class="m-input-style__label"
@@ -383,6 +403,8 @@ exports[`Storyshots components|m-input-style labelFor 1`] = `
       <div
         class="m-input-style__body"
       >
+        <!---->
+         
         <div
           class="m-input-style__left-content"
         >
@@ -425,7 +447,7 @@ exports[`Storyshots components|m-input-style readonly 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -444,6 +466,8 @@ exports[`Storyshots components|m-input-style readonly 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -469,7 +493,7 @@ exports[`Storyshots components|m-input-style requiredMarker 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -492,6 +516,8 @@ exports[`Storyshots components|m-input-style requiredMarker 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -517,7 +543,7 @@ exports[`Storyshots components|m-input-style tagStyle 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -536,6 +562,8 @@ exports[`Storyshots components|m-input-style tagStyle 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -562,7 +590,7 @@ exports[`Storyshots components|m-input-style testAllProps 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -581,6 +609,8 @@ exports[`Storyshots components|m-input-style testAllProps 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -607,7 +637,7 @@ exports[`Storyshots components|m-input-style valid 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <label
         class="m-input-style__label"
@@ -626,6 +656,8 @@ exports[`Storyshots components|m-input-style valid 1`] = `
       <div
         class="m-input-style__body"
       >
+        <!---->
+         
         <div
           class="m-input-style__left-content"
         >
@@ -658,7 +690,7 @@ exports[`Storyshots components|m-input-style valid 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <label
         class="m-input-style__label"
@@ -677,6 +709,8 @@ exports[`Storyshots components|m-input-style valid 1`] = `
       <div
         class="m-input-style__body"
       >
+        <!---->
+         
         <div
           class="m-input-style__left-content"
         >
@@ -703,7 +737,7 @@ exports[`Storyshots components|m-input-style waiting 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -722,6 +756,8 @@ exports[`Storyshots components|m-input-style waiting 1`] = `
     <div
       class="m-input-style__body"
     >
+      <!---->
+       
       <div
         class="m-input-style__left-content"
       >
@@ -754,7 +790,7 @@ exports[`Storyshots components|m-input-style width 1`] = `
 >
   <div
     class="m-input-style__content"
-    style="margin-top: 10px;"
+    style="margin-top: 8px;"
   >
     <label
       class="m-input-style__label"
@@ -773,6 +809,10 @@ exports[`Storyshots components|m-input-style width 1`] = `
     <div
       class="m-input-style__body"
     >
+      <div
+        class="m-input-style__prefix"
+      />
+       
       <div
         class="m-input-style__left-content"
       >

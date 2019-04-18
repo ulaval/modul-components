@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`m-autocomplete should render correctly 1`] = `
-<m-dropdown filterable="true" clear-invalid-selection-on-close="true" width="100%" max-width="regular" tag-style="default">
+<m-dropdown filterable="true" clear-invalid-selection-on-close="true" width="100%" max-width="regular" tag-style="default" autocomplete="new-password">
   <m-dropdown-item label="" non-filterable="true"></m-dropdown-item>
 </m-dropdown>
 `;

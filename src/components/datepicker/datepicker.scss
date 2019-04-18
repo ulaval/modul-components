@@ -5,6 +5,8 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     display: inline-flex;
     flex-direction: column;
 
+    @include m-input-inline-spacing();
+
     &.m--has-validation-message {
         .m-datepicker__validation-message {
             margin-top: $m-spacing--xs;
