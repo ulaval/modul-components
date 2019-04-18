@@ -163,7 +163,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
                 default: boolean('Error', true)
             }
         },
-        template: '<div><m-input-style label="Label" :error="error" :empty="false">Error ({{error}})</m-input-style><p>Visual when the prop prop <strong>error = true</strong> and prop <strong>valide = true</strong></p><m-input-style label="Label" :error="true" valid="true" :empty="false">Hello</m-input-style></div>'
+        template: '<div><m-input-style label="Label" :error="error" :empty="false">Error ({{error}})</m-input-style><p>Visual when the prop <strong>error = true</strong> and prop <strong>valide = true</strong></p><m-input-style label="Label" :error="true" valid="true" :empty="false">Hello</m-input-style></div>'
     }))
     .add('valid', () => ({
         props: {
@@ -171,7 +171,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
                 default: boolean('Valid', true)
             }
         },
-        template: '<div><m-input-style label="Label" :valid="valid" :empty="false">Valid ({{valid}})</m-input-style><p>Visual when the prop prop <strong>error = true</strong> and prop <strong>valide = true</strong></p><m-input-style label="Label" :error="true" valid="true" :empty="false">Hello</m-input-style></div>'
+        template: '<div><m-input-style label="Label" :valid="valid" :empty="false">Valid ({{valid}})</m-input-style><p>Visual when the prop <strong>error = true</strong> and prop <strong>valide = true</strong></p><m-input-style label="Label" :error="true" valid="true" :empty="false">Hello</m-input-style></div>'
     }))
     .add('tagStyle', () => ({
         props: {

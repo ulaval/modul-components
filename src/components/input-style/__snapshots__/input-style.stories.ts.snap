@@ -208,7 +208,7 @@ exports[`Storyshots components|m-input-style error 1`] = `
     </div>
   </div>
   <p>
-    Visual when the prop prop 
+    Visual when the prop 
     <strong>
       error = true
     </strong>
@@ -644,7 +644,7 @@ exports[`Storyshots components|m-input-style valid 1`] = `
     </div>
   </div>
   <p>
-    Visual when the prop prop 
+    Visual when the prop 
     <strong>
       error = true
     </strong>
