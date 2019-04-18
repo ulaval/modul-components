@@ -1,13 +1,7 @@
 //This file is to handle any visual tweaks not directly supported by Storybook's theme variables
 
 .m-u--app-body {
-    #root {
-        > * {
-            margin: 20px;
-
-            &[class^="m-"] {
-                margin: 0;
-            }
-        }
+    .m-sandboxes {
+        margin: 20px;
     }
 }

@@ -1,0 +1,1891 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-message close-button 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body m--has-close-button"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A Button
+      </div>
+    </div>
+     
+    <button
+      class="m-icon-button m-message__body__close-button m--is-skin-light m--has-ripple"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="10px"
+        width="10px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message default 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for testing purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message icon="false" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <!---->
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A Button
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message title 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        This is a title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A Button
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message visible="false" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A Button
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="confirmation" && title 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Confirmation Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for confirmation purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="confirmation" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for confirmation purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="error" && title 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Error Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for error purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="error" 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for error purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="information" && title 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Information Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for information purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="information" 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for information purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="warning" && title 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Warning Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for warning purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="default" state="warning" 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for warning purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="confirmation" && title 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Confirmation Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for confirmation purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="confirmation" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for confirmation purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="error" && title 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Error Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for error purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="error" 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for error purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="information" && title 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Information Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for information purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="information" 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for information purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="warning" && title 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <h2
+        class="m-message__title"
+      >
+        Warning Title
+      </h2>
+       
+      <div
+        class="m-message__text"
+      >
+        A message for warning purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="light" state="warning" 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-light"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        A message for warning purposes
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="confirmation" && title 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Confirmation Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for confirmation purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="confirmation" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for confirmation purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="error" && title 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Error Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for error purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="error" 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for error purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="information" && title 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-information m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Information Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for information purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="information" 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-information m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for information purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="warning" && title 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Warning Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for warning purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page" state="warning" 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-page"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="130px"
+          width="130px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for warning purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="confirmation" && title 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Confirmation Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for confirmation purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="confirmation" 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-confirmation m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for confirmation purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="error" && title 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-error m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Error Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for error purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="error" 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-error m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for error purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="information" && title 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-information m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Information Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for information purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="information" 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-information m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for information purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="warning" && title 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-warning m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Warning Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for warning purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/skin="page-light" state="warning" 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-page-light"
+>
+  <article
+    class="m-message-page m-message__page m--is-state-warning m--is-skin-light"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <!---->
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-message-page__icon"
+          height="76px"
+          width="76px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+       
+      <div
+        class="m-message-page__details"
+      >
+        A message for warning purposes
+      </div>
+       
+      <!---->
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-message/state default (confirmation) 1`] = `
+<div
+  class="m-message m--is-state-confirmation m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        state: confirmation
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/state state="error" 1`] = `
+<div
+  class="m-message m--is-state-error m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        state: error
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/state state="information" 1`] = `
+<div
+  class="m-message m--is-state-information m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        state: information
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-message/state state="warning" 1`] = `
+<div
+  class="m-message m--is-state-warning m--is-skin-default"
+>
+  <div
+    class="m-message__wrap"
+  >
+    <div
+      class="m-message__icon"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="1em"
+        width="1em"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </div>
+     
+    <div
+      class="m-message__body"
+    >
+      <!---->
+       
+      <div
+        class="m-message__text"
+      >
+        state: warning
+      </div>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
