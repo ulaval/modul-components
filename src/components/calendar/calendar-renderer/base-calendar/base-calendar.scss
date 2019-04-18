@@ -35,7 +35,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
     align-items: center;
 
     @media (max-width: $m-mq--max--s) {
-        padding: m-spacing();
+        padding: m-spacing(s);
     }
 
     @media (min-width: $m-mq--min--s) {
