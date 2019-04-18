@@ -3,7 +3,7 @@
 
     <m-decimalfield v-bind="bindData"
                     v-on="$listeners"
-                    :mask="mask">
+                    :precision="precision">
         <!-- content should stay inline to avoid adding useless white space -->
         <template v-if="currencyDetail.symbolPosition === 'before'"
                   slot="prefix">{{ currencyDetail.localizedSymbol }}</template>

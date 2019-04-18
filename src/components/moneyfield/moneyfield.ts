@@ -31,8 +31,10 @@ export class MMoneyfield extends ModulVue {
     @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
-    @Prop()
-    mask: number;
+    @Prop({
+        default: 11
+    })
+    precision: number;
 
     get currencyDetail(): MCurrency {
         return (this as ModulVue).$l10n.getCurrencyDetail(this.currentLocale);
