@@ -29,13 +29,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}`, module)
         },
         template: '<m-add :underline="isUnderline">item</m-add>'
     }))
-    .add('iconSize', () => ({
+    .add('icon-size', () => ({
         props: {
             iconSize: {
                 default: number('Icon size in px', 60)
             }
         },
         template: '<m-add :icon-size="iconSize + \'px\'">item</m-add>'
+    }))
+    .add('icon-position-left', () => ({
+        template: '<m-add icon-position="left">item</m-add>'
+    }))
+    .add('icon-position-right', () => ({
+        template: '<m-add icon-position="right">item</m-add>'
     }));
 storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}/skin`, module)
     .addDecorator(withA11y)
@@ -48,14 +54,5 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}/skin`, module)
     }))
     .add('text', () => ({
         template: '<m-add skin="text">item</m-add>'
-    }))
-storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}/icon-position`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('left', () => ({
-        template: '<m-add icon-position="left">item</m-add>'
-    }))
-    .add('right', () => ({
-        template: '<m-add icon-position="right">item</m-add>'
     }));
 
