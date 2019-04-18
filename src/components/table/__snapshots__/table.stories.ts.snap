@@ -1,0 +1,1441 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-table Centered 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class="m--is-centered"
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class="m--is-centered"
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+      <th
+        class="m--is-centered"
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr>
+      <td
+        class="m--is-centered"
+      >
+        Jonathan
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        25
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        jonathan.25
+      </td>
+    </tr>
+    <tr>
+      <td
+        class="m--is-centered"
+      >
+        Carl
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        30
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        carl.30
+      </td>
+    </tr>
+    <tr>
+      <td
+        class="m--is-centered"
+      >
+        Jacob
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        26
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        jacob.26
+      </td>
+    </tr>
+    <tr>
+      <td
+        class="m--is-centered"
+      >
+        Vincent
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        34
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        vincent.34
+      </td>
+    </tr>
+    <tr>
+      <td
+        class="m--is-centered"
+      >
+        Manon
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        28
+      </td>
+      <td
+        class="m--is-centered"
+      >
+        manon.28
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table Custom Header 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        colspan="2"
+      >
+        NAME, USERNAME
+      </th>
+       
+      <th>
+        AGE
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <tr>
+      <td
+        colspan="2"
+      >
+        Jonathan - jonathan.25
+      </td>
+       
+      <td>
+        25
+      </td>
+    </tr>
+    <tr>
+      <td
+        colspan="2"
+      >
+        Carl - carl.30
+      </td>
+       
+      <td>
+        30
+      </td>
+    </tr>
+    <tr>
+      <td
+        colspan="2"
+      >
+        Jacob - jacob.26
+      </td>
+       
+      <td>
+        26
+      </td>
+    </tr>
+    <tr>
+      <td
+        colspan="2"
+      >
+        Vincent - vincent.34
+      </td>
+       
+      <td>
+        34
+      </td>
+    </tr>
+    <tr>
+      <td
+        colspan="2"
+      >
+        Manon - manon.28
+      </td>
+       
+      <td>
+        28
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table Custom cell 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+        style="width: 16px;"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+         AGE 
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+        style="width: 33px;"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr>
+      <td
+        class=""
+      >
+        <div
+          class="m-checkbox m--is-checkbox-left"
+        >
+          <input
+            class="m-checkbox__hidden"
+            id="mCheckbox-uuid"
+            type="checkbox"
+          />
+           
+          <!---->
+           
+          <label
+            aria-hidden="true"
+            class="m-checkbox__wrap"
+            for="mCheckbox-uuid"
+          >
+            <span
+              aria-hidden="true"
+              class="m-checkbox__input"
+            >
+              <span
+                class="m-checkbox__input__icon"
+              />
+            </span>
+             
+            <!---->
+          </label>
+           
+          <div
+            class="m-validation-message m-checkbox__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </td>
+      <td
+        class=""
+      >
+        Jonathan
+      </td>
+      <td
+        class=""
+      >
+         25 ans 
+      </td>
+      <td
+        class=""
+      >
+        jonathan.25
+      </td>
+      <td
+        class=""
+      >
+        <m-option
+          size="33px"
+        >
+          "&gt;
+           
+          "&gt;
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        <div
+          class="m-checkbox m--is-checkbox-left"
+        >
+          <input
+            class="m-checkbox__hidden"
+            id="mCheckbox-uuid"
+            type="checkbox"
+          />
+           
+          <!---->
+           
+          <label
+            aria-hidden="true"
+            class="m-checkbox__wrap"
+            for="mCheckbox-uuid"
+          >
+            <span
+              aria-hidden="true"
+              class="m-checkbox__input"
+            >
+              <span
+                class="m-checkbox__input__icon"
+              />
+            </span>
+             
+            <!---->
+          </label>
+           
+          <div
+            class="m-validation-message m-checkbox__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </td>
+      <td
+        class=""
+      >
+        Carl
+      </td>
+      <td
+        class=""
+      >
+         30 ans 
+      </td>
+      <td
+        class=""
+      >
+        carl.30
+      </td>
+      <td
+        class=""
+      >
+        <m-option
+          size="33px"
+        >
+          "&gt;
+           
+          "&gt;
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        <div
+          class="m-checkbox m--is-checkbox-left"
+        >
+          <input
+            class="m-checkbox__hidden"
+            id="mCheckbox-uuid"
+            type="checkbox"
+          />
+           
+          <!---->
+           
+          <label
+            aria-hidden="true"
+            class="m-checkbox__wrap"
+            for="mCheckbox-uuid"
+          >
+            <span
+              aria-hidden="true"
+              class="m-checkbox__input"
+            >
+              <span
+                class="m-checkbox__input__icon"
+              />
+            </span>
+             
+            <!---->
+          </label>
+           
+          <div
+            class="m-validation-message m-checkbox__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </td>
+      <td
+        class=""
+      >
+        Jacob
+      </td>
+      <td
+        class=""
+      >
+         26 ans 
+      </td>
+      <td
+        class=""
+      >
+        jacob.26
+      </td>
+      <td
+        class=""
+      >
+        <m-option
+          size="33px"
+        >
+          "&gt;
+           
+          "&gt;
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        <div
+          class="m-checkbox m--is-checkbox-left"
+        >
+          <input
+            class="m-checkbox__hidden"
+            id="mCheckbox-uuid"
+            type="checkbox"
+          />
+           
+          <!---->
+           
+          <label
+            aria-hidden="true"
+            class="m-checkbox__wrap"
+            for="mCheckbox-uuid"
+          >
+            <span
+              aria-hidden="true"
+              class="m-checkbox__input"
+            >
+              <span
+                class="m-checkbox__input__icon"
+              />
+            </span>
+             
+            <!---->
+          </label>
+           
+          <div
+            class="m-validation-message m-checkbox__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </td>
+      <td
+        class=""
+      >
+        Vincent
+      </td>
+      <td
+        class=""
+      >
+         34 ans 
+      </td>
+      <td
+        class=""
+      >
+        vincent.34
+      </td>
+      <td
+        class=""
+      >
+        <m-option
+          size="33px"
+        >
+          "&gt;
+           
+          "&gt;
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        <div
+          class="m-checkbox m--is-checkbox-left"
+        >
+          <input
+            class="m-checkbox__hidden"
+            id="mCheckbox-uuid"
+            type="checkbox"
+          />
+           
+          <!---->
+           
+          <label
+            aria-hidden="true"
+            class="m-checkbox__wrap"
+            for="mCheckbox-uuid"
+          >
+            <span
+              aria-hidden="true"
+              class="m-checkbox__input"
+            >
+              <span
+                class="m-checkbox__input__icon"
+              />
+            </span>
+             
+            <!---->
+          </label>
+           
+          <div
+            class="m-validation-message m-checkbox__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </td>
+      <td
+        class=""
+      >
+        Manon
+      </td>
+      <td
+        class=""
+      >
+         28 ans 
+      </td>
+      <td
+        class=""
+      >
+        manon.28
+      </td>
+      <td
+        class=""
+      >
+        <m-option
+          size="33px"
+        >
+          "&gt;
+           
+          "&gt;
+        </m-option>
+      </td>
+    </tr>
+  </tbody>
+   
+  <tfoot>
+    <tr>
+      <td
+        class="m-table-sandbox__show-more"
+        colspan="4"
+        style="text-align: center;"
+      >
+        <button
+          class="m-button m-table-sandbox__show-more-button m--is-skin-primary"
+          type="button"
+        >
+          <!---->
+           
+          <!---->
+           
+          <span
+            class="m-button__text"
+          >
+            <p
+              class="m-u--no-margin"
+            >
+              Show more results
+            </p>
+             
+            <span>
+              1-5 of 45
+            </span>
+             
+            <!---->
+          </span>
+           
+          <!---->
+           
+          <!---->
+        </button>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+`;
+
+exports[`Storyshots components|m-table Custom row 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+        style="width: 16px;"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+        style="width: 33px;"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr>
+      <td />
+       
+      <td>
+         Jonathan
+      </td>
+       
+      <td
+        colspan="2"
+      >
+        
+                                25 ans - jonathan.25
+                            
+      </td>
+       
+      <td>
+        <m-option
+          size="33px"
+        >
+          <m-option-item-edit />
+           
+          <m-option-item-delete />
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td />
+       
+      <td>
+         Carl
+      </td>
+       
+      <td
+        colspan="2"
+      >
+        
+                                30 ans - carl.30
+                            
+      </td>
+       
+      <td>
+        <m-option
+          size="33px"
+        >
+          <m-option-item-edit />
+           
+          <m-option-item-delete />
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td />
+       
+      <td>
+         Jacob
+      </td>
+       
+      <td
+        colspan="2"
+      >
+        
+                                26 ans - jacob.26
+                            
+      </td>
+       
+      <td>
+        <m-option
+          size="33px"
+        >
+          <m-option-item-edit />
+           
+          <m-option-item-delete />
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td />
+       
+      <td>
+         Vincent
+      </td>
+       
+      <td
+        colspan="2"
+      >
+        
+                                34 ans - vincent.34
+                            
+      </td>
+       
+      <td>
+        <m-option
+          size="33px"
+        >
+          <m-option-item-edit />
+           
+          <m-option-item-delete />
+        </m-option>
+      </td>
+    </tr>
+    <tr>
+      <td />
+       
+      <td>
+         Manon
+      </td>
+       
+      <td
+        colspan="2"
+      >
+        
+                                28 ans - manon.28
+                            
+      </td>
+       
+      <td>
+        <m-option
+          size="33px"
+        >
+          <m-option-item-edit />
+           
+          <m-option-item-delete />
+        </m-option>
+      </td>
+    </tr>
+  </tbody>
+   
+  <tfoot>
+    <tr>
+      <td
+        class="m-table-sandbox__show-more"
+        colspan="4"
+        style="text-align: center;"
+      >
+        <button
+          class="m-button m-table-sandbox__show-more-button m--is-skin-primary"
+          type="button"
+        >
+          <!---->
+           
+          <!---->
+           
+          <span
+            class="m-button__text"
+          >
+            <p
+              class="m-u--no-margin"
+            >
+              Show more results
+            </p>
+             
+            <span>
+              1-5 of 45
+            </span>
+             
+            <!---->
+          </span>
+           
+          <!---->
+           
+          <!---->
+        </button>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+`;
+
+exports[`Storyshots components|m-table Default 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr>
+      <td
+        class=""
+      >
+        Jonathan
+      </td>
+      <td
+        class=""
+      >
+        25
+      </td>
+      <td
+        class=""
+      >
+        jonathan.25
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Carl
+      </td>
+      <td
+        class=""
+      >
+        30
+      </td>
+      <td
+        class=""
+      >
+        carl.30
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Jacob
+      </td>
+      <td
+        class=""
+      >
+        26
+      </td>
+      <td
+        class=""
+      >
+        jacob.26
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Vincent
+      </td>
+      <td
+        class=""
+      >
+        34
+      </td>
+      <td
+        class=""
+      >
+        vincent.34
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Manon
+      </td>
+      <td
+        class=""
+      >
+        28
+      </td>
+      <td
+        class=""
+      >
+        manon.28
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table Empty table - custom slot 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <tr
+      class="m-table__message"
+    >
+      <td
+        class="m-table-sandbox__empty__cell"
+        colspan="3"
+      >
+        
+                                Empty table
+                            
+      </td>
+    </tr>
+     
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table Empty table - default slot 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <tr
+      class="m-table__message"
+    >
+      <td
+        colspan="3"
+      >
+        <p>
+          Aucune donnée à afficher
+        </p>
+      </td>
+    </tr>
+     
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table Loading 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular m--is-loading"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr
+      class="m-table__loading"
+    >
+      <td
+        colspan="3"
+      >
+        <div
+          class="m-progress m--is-indeterminate m--is-in-progress"
+          style="height: 6px; border-radius: initial;"
+        >
+          <div
+            class="m-progress__bar"
+            style="width: 0%; border-bottom-left-radius: initial; border-top-left-radius: initial;"
+          />
+           
+          <!---->
+        </div>
+      </td>
+    </tr>
+     
+    <tr
+      class="m-table__message"
+    >
+      <td
+        colspan="3"
+      >
+        <p>
+          Chargement en cours
+        </p>
+         
+        <p
+          class="m-table__message__precision"
+        >
+          Veuillez patienter svp.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table Sortable 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class="m--is-sortable"
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name
+        </span>
+         
+        <button
+          class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+          style="width: 12px; height: 12px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </th>
+      <th
+        class="m--is-sortable"
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+         
+        <button
+          class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+          style="width: 12px; height: 12px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </th>
+      <th
+        class="m--is-sortable"
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Username
+        </span>
+         
+        <button
+          class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+          style="width: 12px; height: 12px;"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr>
+      <td
+        class=""
+      >
+        Jonathan
+      </td>
+      <td
+        class=""
+      >
+        25
+      </td>
+      <td
+        class=""
+      >
+        jonathan.25
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Carl
+      </td>
+      <td
+        class=""
+      >
+        30
+      </td>
+      <td
+        class=""
+      >
+        carl.30
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Jacob
+      </td>
+      <td
+        class=""
+      >
+        26
+      </td>
+      <td
+        class=""
+      >
+        jacob.26
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Vincent
+      </td>
+      <td
+        class=""
+      >
+        34
+      </td>
+      <td
+        class=""
+      >
+        vincent.34
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Manon
+      </td>
+      <td
+        class=""
+      >
+        28
+      </td>
+      <td
+        class=""
+      >
+        manon.28
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;

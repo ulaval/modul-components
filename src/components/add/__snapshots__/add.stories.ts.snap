@@ -13,17 +13,17 @@ exports[`Storyshots components|m-add default 1`] = `
     width="24px"
   >
     <!---->
-     
+
     <use
       aria-hidden="true"
       class=""
     />
   </svg>
-   
+
   <span
     class="m-link__text"
   />
-   
+
   <!---->
 </a>
 `;
@@ -41,24 +41,84 @@ exports[`Storyshots components|m-add disabled 1`] = `
     width="24px"
   >
     <!---->
-     
+
     <use
       aria-hidden="true"
       class=""
     />
   </svg>
-   
+
   <span
     class="m-link__text"
   >
     item
   </span>
-   
+
   <!---->
 </a>
 `;
 
-exports[`Storyshots components|m-add iconSize 1`] = `
+exports[`Storyshots components|m-add icon-position-left 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add icon-position-right 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-right-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add icon-size 1`] = `
 <a
   class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
   href="#"
@@ -71,19 +131,19 @@ exports[`Storyshots components|m-add iconSize 1`] = `
     width="60px"
   >
     <!---->
-     
+
     <use
       aria-hidden="true"
       class=""
     />
   </svg>
-   
+
   <span
     class="m-link__text"
   >
     item
   </span>
-   
+
   <!---->
 </a>
 `;
@@ -101,79 +161,19 @@ exports[`Storyshots components|m-add underline 1`] = `
     width="24px"
   >
     <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
-   
-  <span
-    class="m-link__text"
-  >
-    item
-  </span>
-   
-  <!---->
-</a>
-`;
 
-exports[`Storyshots components|m-add/icon-position left 1`] = `
-<a
-  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
-  href="#"
-  tabindex="0"
->
-  <svg
-    aria-hidden="true"
-    class="m-icon m-link__icon"
-    height="24px"
-    width="24px"
-  >
-    <!---->
-     
     <use
       aria-hidden="true"
       class=""
     />
   </svg>
-   
-  <span
-    class="m-link__text"
-  >
-    item
-  </span>
-   
-  <!---->
-</a>
-`;
 
-exports[`Storyshots components|m-add/icon-position right 1`] = `
-<a
-  class="m-link m-add m--is-unvisited m--is-button m--has-right-icon"
-  href="#"
-  tabindex="0"
->
-  <svg
-    aria-hidden="true"
-    class="m-icon m-link__icon"
-    height="24px"
-    width="24px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
-   
   <span
     class="m-link__text"
   >
     item
   </span>
-   
+
   <!---->
 </a>
 `;
@@ -191,19 +191,19 @@ exports[`Storyshots components|m-add/skin default 1`] = `
     width="24px"
   >
     <!---->
-     
+
     <use
       aria-hidden="true"
       class=""
     />
   </svg>
-   
+
   <span
     class="m-link__text"
   >
     item
   </span>
-   
+
   <!---->
 </a>
 `;
@@ -224,19 +224,19 @@ exports[`Storyshots components|m-add/skin light 1`] = `
       width="24px"
     >
       <!---->
-       
+
       <use
         aria-hidden="true"
         class=""
       />
     </svg>
-     
+
     <span
       class="m-link__text"
     >
       item
     </span>
-     
+
     <!---->
   </a>
 </div>
@@ -255,19 +255,19 @@ exports[`Storyshots components|m-add/skin text 1`] = `
     width="24px"
   >
     <!---->
-     
+
     <use
       aria-hidden="true"
       class=""
     />
   </svg>
-   
+
   <span
     class="m-link__text"
   >
     item
   </span>
-   
+
   <!---->
 </a>
 `;

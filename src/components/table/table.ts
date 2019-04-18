@@ -23,7 +23,7 @@ export interface MColumnTable {
     dataProp: string;
     width?: string;
     sortable?: boolean;
-    sortDirection: MColumnSortDirection;
+    sortDirection?: MColumnSortDirection;
 }
 
 @WithRender
@@ -54,20 +54,27 @@ export class MTable extends ModulVue {
     onAdd(): void {
     }
 
+    @Emit('sortApplied')
+    emitSortApplied(columnTable: MColumnTable): void { }
+
     get isEmpty(): boolean {
         return this.rows.length === 0 && !this.loading;
     }
 
     public sort(columnTable: MColumnTable): void {
+        if (this.loading) {
+            return;
+        }
+
+        if (typeof columnTable.sortDirection === 'undefined') {
+            columnTable.sortDirection = MColumnSortDirection.None;
+        }
+
         this.columns.forEach(c => {
             if (c !== columnTable) {
                 c.sortDirection = MColumnSortDirection.None;
             }
         });
-
-        if (this.loading) {
-            return;
-        }
 
         switch (columnTable.sortDirection) {
             case MColumnSortDirection.None:
@@ -81,7 +88,7 @@ export class MTable extends ModulVue {
                 break;
         }
 
-        this.$emit('update:sortedColumn', columnTable);
+        this.emitSortApplied(columnTable);
     }
 
     public isColumnSorted(columnTable: MColumnTable): boolean {
