@@ -6,7 +6,7 @@
             <tr>
                 <th v-for="column in columns"
                     :style="columnWidth(column)"
-                    :class="{'m--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column)}"
+                    :class="{ 'm--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column), 'm--is-centered': column.centered }"
                     :key="column.id"
                     scope="col">
                     <slot :name="'header.' + column.dataProp"
@@ -66,6 +66,7 @@
                 <slot name="row"
                       :data="row">
                     <td v-for="column in columns"
+                        :class="{ 'm--is-centered': column.centered }"
                         :key="'body.' + column.id">
                         <slot :name="'body.' + column.dataProp"
                               :data="row">{{ row[column.dataProp] }}</slot>
