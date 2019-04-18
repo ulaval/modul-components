@@ -117,6 +117,6 @@
     </p>
     <m-table :columns="sortableColumns"
              :loading="loading"
-             @update:sortedColumn="launchSorting($event)"></m-table>
+             @sortApplied="onSortApplied($event)"></m-table>
 
 </div>

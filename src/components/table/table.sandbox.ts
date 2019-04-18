@@ -144,7 +144,7 @@ export class MTableSandbox extends Vue {
         alert('Check: ' + id);
     }
 
-    launchSorting(column: MColumnTable): void {
+    onSortApplied(column: MColumnTable): void {
         this.loading = true;
         setTimeout(() => {
             this.loading = false;
