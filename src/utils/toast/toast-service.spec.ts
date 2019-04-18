@@ -1,5 +1,5 @@
 import { MToast } from '../../components/toast/toast';
-import { ToastParams, ToastService } from './toast-service';
+import ToastService, { ToastParams } from './toast-service';
 
 let mockToast: any = {};
 jest.mock('../../components/toast/toast', () => {
