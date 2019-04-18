@@ -35,15 +35,13 @@ export abstract class AbstractControl {
         public validators: AbstractControlValidator[] = []
     ) { }
 
-    public get isValid(): boolean {
-        return this.validators.filter(v => v.lastCheck === true).length === this.validators.length;
-    }
+    public abstract get isValid(): boolean;
 
-    validate(): void {
+    public validate(): void {
         this.validators.forEach(v => v.lastCheck = v.validationFunction(this));
     }
 
-    reset(): void {
+    public reset(): void {
         this.validators.forEach(v => v.lastCheck = undefined);
     }
 }
@@ -58,10 +56,15 @@ export class FormGroup extends AbstractControl {
     }
 
     public get isValid(): boolean {
-
+        return this.validators.every(v => !!v.lastCheck)
+            &&
+            this.controls
+                .map(c => c.validators)
+                .reduce((acc, curr) => acc.concat(curr), [])
+                .every(v => !!v.lastCheck);
     }
 
-    getControl(name: string): AbstractControl {
+    public getControl(name: string): AbstractControl {
         let control: AbstractControl | undefined = this.controls.find(c => c.name === name);
 
         if (!control) {
@@ -71,7 +74,7 @@ export class FormGroup extends AbstractControl {
         return control;
     }
 
-    addControl(control: AbstractControl): void {
+    public addControl(control: AbstractControl): void {
         if (this.controls.find(c => c.name === control.name)) {
             throw Error(`There is already a control with name ${control.name} in this group`);
         }
@@ -79,7 +82,7 @@ export class FormGroup extends AbstractControl {
         this.controls.push(control);
     }
 
-    removeControl(name: string): void {
+    public removeControl(name: string): void {
         if (this.controls.find(c => c.name === name)) {
             throw Error(`There is no control with name ${name} in this group`);
         }
@@ -87,12 +90,12 @@ export class FormGroup extends AbstractControl {
         this.controls = this.controls.filter(c => c.name === name);
     }
 
-    validate(): void {
+    public validate(): void {
         super.validate();
         this.controls.forEach(c => c.validate());
     }
 
-    reset(): void {
+    public reset(): void {
         super.reset();
         this.controls.forEach(c => c.reset());
     }
@@ -115,7 +118,11 @@ export class FormControl<T> extends AbstractControl {
         }
     }
 
-    initEdition(): void {
+    public get isValid(): boolean {
+        return this.validators.every(v => !!v.lastCheck);
+    }
+
+    public initEdition(): void {
         if (!this.value && this.isValid) {
             this.editionContext = FormControlEditionContext.EmptyAndValid;
         } else if (this.value && this.isValid) {
@@ -125,12 +132,12 @@ export class FormControl<T> extends AbstractControl {
         }
     }
 
-    endEdition(): void {
+    public endEdition(): void {
         this.editionContext = FormControlEditionContext.None;
         this.validate();
     }
 
-    reset(): void {
+    public reset(): void {
         this.value = undefined;
     }
 }
