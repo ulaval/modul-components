@@ -1,0 +1,34 @@
+import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
+
+export const {{SINGULAR_PASCAL}}Directive: DirectiveOptions = {
+    bind(
+        el: HTMLElement,
+        binding: VNodeDirective,
+        vnode: VNode,
+        oldVnode: VNode
+    ): void { },
+    inserted(
+        el: HTMLElement,
+        binding: VNodeDirective,
+        vnode: VNode,
+        oldVnode: VNode
+    ): void { },
+    update(
+        el: HTMLElement,
+        binding: VNodeDirective,
+        vnode: VNode,
+        oldVnode: VNode
+    ): void { },
+    componentUpdated(
+        el: HTMLElement,
+        binding: VNodeDirective,
+        vnode: VNode,
+        oldVnode: VNode
+    ): void { },
+    unbind(
+        el: HTMLElement,
+        binding: VNodeDirective,
+        vnode: VNode,
+        oldVnode: VNode
+    ): void { }
+};

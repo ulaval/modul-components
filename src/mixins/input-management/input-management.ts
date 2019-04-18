@@ -139,7 +139,7 @@ export class InputManagement extends ModulVue
         return this.isFocus || this.hasValue ? false : true;
     }
 
-    private get isFocus(): boolean {
+    public get isFocus(): boolean {
         return this.internalIsFocus;
     }
 }

@@ -1,0 +1,4 @@
+{
+    "{{PREFIXED_SINGULAR_KEBAB}}": {
+    }
+}
