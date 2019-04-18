@@ -250,6 +250,7 @@ export enum FroalaStatus {
     }
 
     protected filesAdded(files: MFile[]): void {
+        this.froalaEditor.opts.modulImageUploaded = true;
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
             if (this.selectedImage) {
                 this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage));
@@ -412,7 +413,7 @@ export enum FroalaStatus {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input', 'img']);
                     }
                 },
                 [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
@@ -441,8 +442,16 @@ export enum FroalaStatus {
                     this.updateModel();
                 },
                 [froalaEvents.ImageInserted]: (_e, _editor, img) => {
-                    img[0].alt = '';
-                    this.updateModel();
+                    if (_editor.opts.modulImageUploaded) {
+                        img[0].alt = '';
+                        this.updateModel();
+                    } else {
+                        setTimeout(() => {
+                            _editor.image.remove(img);
+                        });
+                    }
+
+                    _editor.opts.modulImageUploaded = false;
                 }
             }
         });

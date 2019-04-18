@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-add default 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  />
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add disabled 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-disabled m--is-button m--has-left-icon"
+  href="#"
+  tabindex="-1"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add icon-position-left 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add icon-position-right 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-right-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add icon-size 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="60px"
+    width="60px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add underline 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--no-underline m--is-button m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add/skin default 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-add/skin light 1`] = `
+<div
+  style="background-color: gray; margin: 0px;"
+>
+  <a
+    class="m-link m-add m--is-unvisited m--is-button m--is-skin-light m--has-left-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="24px"
+      width="24px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      item
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-add/skin text 1`] = `
+<a
+  class="m-link m-add m--is-unvisited m--is-button m--is-skin-text m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="24px"
+    width="24px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    item
+  </span>
+   
+  <!---->
+</a>
+`;

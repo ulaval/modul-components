@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-input-mask Event fired 1`] = `<input />`;
+
+exports[`Storyshots components|m-input-mask date field 1`] = `
+<div>
+  <input />
+  <br />
+  <br />
+   model=  
+</div>
+`;
+
+exports[`Storyshots components|m-input-mask decimal integer field 1`] = `
+<div>
+  <input />
+  <br />
+  <br />
+   model=  
+</div>
+`;
+
+exports[`Storyshots components|m-input-mask money field 1`] = `
+<div>
+  <input />
+  <br />
+  <br />
+   model=  
+</div>
+`;
+
+exports[`Storyshots components|m-input-mask positive integer field 1`] = `
+<div>
+  <input />
+  <br />
+  <br />
+   model=  
+</div>
+`;
+
+exports[`Storyshots components|m-input-mask telephone field 1`] = `
+<div>
+  <input />
+  <br />
+  <br />
+   model=  
+</div>
+`;

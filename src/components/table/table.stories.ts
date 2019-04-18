@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { TABLE_NAME } from '../component-names';
-import TablePlugin from './table';
+import TablePlugin, { MColumnTable } from './table';
 Vue.use(TablePlugin);
 
 declare module '@storybook/addon-knobs' {
@@ -235,6 +235,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
         template: `<m-table :columns="columns" :rows="emptyRows" :loading="true" width="100%"></m-table>`
     }))
     .add('Sortable', () => ({
+        data: function(): any {
+            return {
+                rows: [
+                    { id: '1', name: 'Jonathan', age: '25', username: 'jonathan.25' },
+                    { id: '2', name: 'Carl', age: '30', username: 'carl.30' },
+                    { id: '3', name: 'Jacob', age: '26', username: 'jacob.26' },
+                    { id: '4', name: 'Vincent', age: '34', username: 'vincent.34' },
+                    { id: '5', name: 'Manon', age: '28', username: 'manon.28' }
+                ]
+            };
+        },
         props: {
             columns: {
                 default: [
@@ -242,16 +253,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
                     { id: 'age', title: 'Age', dataProp: 'age', sortable: true },
                     { id: 'username', title: 'Username', dataProp: 'username', sortable: true }
                 ]
-            },
-            rows: {
-                default: [
-                    { id: '1', name: 'Jonathan', age: '25', username: 'jonathan.25' },
-                    { id: '2', name: 'Carl', age: '30', username: 'carl.30' },
-                    { id: '3', name: 'Jacob', age: '26', username: 'jacob.26' },
-                    { id: '4', name: 'Vincent', age: '34', username: 'vincent.34' },
-                    { id: '5', name: 'Manon', age: '28', username: 'manon.28' }
-                ]
             }
         },
-        template: '<m-table :columns="columns" :rows="rows" width="100%"></m-table>'
+        template: '<m-table :columns="columns" :rows="rows" width="100%" @sortApplied="onSortApplied($event)"></m-table>',
+        methods: {
+            onSortApplied(columnTable: MColumnTable): void {
+                this.$data.rows.sort((a, b) => {
+                    if (a[columnTable.dataProp] < b[columnTable.dataProp]) {
+                        return 1 * columnTable.sortDirection!;
+                    } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
+                        return -1 * columnTable.sortDirection!;
+                    }
+                    return 0;
+                });
+            }
+        }
     }));

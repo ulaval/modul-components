@@ -4,7 +4,7 @@
     <slot name="header">
         <thead>
             <tr>
-                <th v-for="column in columns"
+                <th v-for="(column, index) in columns"
                     :style="columnWidth(column)"
                     :class="{ 'm--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column), 'm--is-centered': column.centered }"
                     :key="column.id"

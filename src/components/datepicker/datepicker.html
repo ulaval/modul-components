@@ -1,48 +1,46 @@
 <div class="m-datepicker"
      :class="{ 'm--is-disabled': isDisabled,
-'m--is-readonly': isReadonly,
-'m--is-waiting': isWaiting,
-'m--has-error': calandarError,
-'m--is-valid': isValid,
-'m--has-validation-message': hasValidationMessage }"
-     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
-    <m-input-style :label="label"
-                   :label-for="id"
+            'm--is-readonly': isReadonly,
+            'm--is-waiting': isWaiting,
+            'm--has-error': calandarError,
+            'm--is-valid': isValid,
+            'm--has-validation-message': hasValidationMessage }"
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
+     @click="onClick">
+    <m-input-style v-m-popup:popup
                    :disabled="isDisabled"
+                   :label="label"
+                   :label-for="id"
                    :readonly="isReadonly"
                    :waiting="isWaiting"
-                   :focus="open"
+                   :focus="isFocus"
                    :empty="isEmpty"
                    :error="calandarError"
-                   :valid="isValid"
-                   v-m-popup:popup>
-        <input type="text"
-               ref="input"
-               :id="id"
-               aria-haspopup="true"
-               :aria-controls="ariaControls1 + ' ' + ariaControls2"
-               :aria-expanded="open"
-               :disabled="isDisabled || isWaiting"
-               :readonly="isReadonly"
-               :placeholder="placeholder"
-               @keydown.delete="inputOnKeydownDelete"
-               @keydown.enter="inputOnKeydownEnter"
-               @keydown.return="inputOnKeydownEnter"
-               @keydown.esc="inputOnKeydownEsc"
-               @keydown.tab="inputOnKeydownTab"
-               @keydown="inputOnKeydown"
-               @change="validateDate"
-               @focus="inputOnFocus"
-               @blur="onBlur"
-               @click.stop
-               :value="formattedDate" />
-        <m-icon-button slot="right-content"
-                       class="m-datepicker__icon"
-                       icon-name="m-svg__calendar"
-                       :disabled="!active"
-                       button-size="22px"
+                   :valid="isValid">
+        <m-input-mask ref="input"
+                      :id="id"
+                      :aria-haspopup="true"
+                      :aria-expanded="open"
+                      :disabled="isDisabled || isWaiting"
+                      :readonly="isReadonly"
+                      :options="inputOptions"
+                      :placeholder="placeholder"
+                      :raw="false"
+                      :value="inputModel"
+                      autocomplete="off"
+                      @focus="onFocus"
+                      @blur="onBlur"
+                      @input="inputDate($event)"
+                      @keyup="onKeyup"
+                      @keydown="onKeydown">
+        </m-input-mask>
+        <m-icon-button class="m-datepicker__icon"
+                       slot="right-content"
                        :aria-controls="id"
-                       @keydown.enter.prevent="open = !isDisabled">
+                       button-size="22px"
+                       :disabled="!active"
+                       icon-name="m-svg__calendar"
+                       @click="togglePopup">
             <m-i18n k="m-datepicker:open"
                     v-if="!open"></m-i18n>
             <m-i18n k="m-datepicker:close"
@@ -61,14 +59,15 @@
              :disabled="!active"
              :close-on-backdrop="true"
              :focus-management="isMqMaxS"
+             open-trigger="manual"
              :padding="false"
              placement="bottom"
              @open="onOpen"
              @close="onClose">
-        <m-calendar :value="formattedDate"
-                    @input="selectDate"
-                    :min-date="minDateString"
+        <m-calendar :min-date="minDateString"
                     :max-date="maxDateString"
-                    :show-month-before-after="false"></m-calendar>
+                    :show-month-before-after="false"
+                    :value="formattedDate"
+                    @input="selectDate"></m-calendar>
     </m-popup>
 </div>

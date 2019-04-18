@@ -99,7 +99,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.fromIsFocused,
-                value: this.internalValue.from,
+                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.from),
                 min: this.min,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -120,7 +120,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.toIsFocused,
-                value: this.internalValue.to,
+                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.to),
                 min: this.minDateTo,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -222,6 +222,37 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         this.fromIsFocused = false;
         this.toIsFocused = false;
         this.emitNewValue({ from: this.dateFromInternalValue, to: this.dateToInternalValue });
+    }
+
+
+    /**
+     * This method convert a date or a iso string into a local date string with format YYYY-MM-DD
+     *
+     * @param date
+     */
+    static formatIsoDateToLocalString(date?: DatePickerSupportedTypes): string {
+        if (!date) {
+            return '';
+        }
+        let _date: Date;
+        if (date instanceof Date) {
+            _date = date;
+        } else {
+            _date = new Date(date);
+        }
+
+        let month: string = '' + (_date.getMonth() + 1);
+        let day: string = '' + _date.getDate();
+        let year: number = _date.getFullYear();
+
+        if (month.length < 2) {
+            month = '0' + month;
+        }
+        if (day.length < 2) {
+            day = '0' + day;
+        }
+
+        return [year, month, day].join('-');
     }
 }
 

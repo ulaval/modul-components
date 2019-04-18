@@ -39,7 +39,7 @@ export class InputManagement extends ModulVue
 
     public internalValue: string = '';
 
-    private internalIsFocus: boolean = false;
+    public internalIsFocus: boolean = false;
 
     public focusInput(): void {
         let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
