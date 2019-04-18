@@ -133,6 +133,7 @@ export class MDatepicker extends ModulVue {
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.$emit('blur');
+            this.showErrorMessage(this.inputModel);
         }
 
     }
@@ -265,16 +266,17 @@ export class MDatepicker extends ModulVue {
     private onBlur(event: Event): void {
         this.as<InputManagement>().internalIsFocus = false;
 
-        if (!this.open) { // do not emit blur if still open
-            this.$emit('blur', event);
-        }
-
         if (this.inputModel && this.inputModel.length < 10) {
             // clear the model
             this.model = '';
+        }
 
+        if (!this.open) { // do not emit blur if still open
+            this.$emit('blur', event);
             this.showErrorMessage(this.inputModel);
         }
+
+
     }
 
     // override from Input-management
