@@ -16,6 +16,7 @@
             :required-marker="requiredMarker"
             :tag-style="tagStyle"
             :max-length="maxLength"
+            :autocomplete="autocomplete"
             v-model="selection"
             @input="onInputChangeThrottled">
     <m-dropdown-item v-for="i in items"

@@ -38,7 +38,7 @@ export class MTable extends ModulVue {
     skin: MTableSkin;
 
     @Prop({ default: () => [] })
-    columns: c[];
+    columns: MColumnTable[];
 
     @Prop({ default: () => [] })
     rows: any[];

@@ -8,8 +8,7 @@ import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
-export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
-export const CSS_BODY_DEFAULT_MARGIN: string = '0';
+export const CSS_LABEL_DEFAULT_MARGIN: number = 8;
 
 @WithRender
 @Component({
@@ -27,8 +26,6 @@ export class MInputStyle extends ModulVue {
     @Prop()
     public width: string;
     @Prop()
-    public iconName: string;
-    @Prop()
     public requiredMarker: boolean;
     @Prop()
     public readonly: boolean;
@@ -43,8 +40,7 @@ export class MInputStyle extends ModulVue {
         rightContent: HTMLElement
     };
 
-    public labelOffset: string = CSS_LABEL_DEFAULT_MARGIN + 'px';
-    public bodyOffset: string = CSS_BODY_DEFAULT_MARGIN;
+    public labelOffset: string | undefined = CSS_LABEL_DEFAULT_MARGIN + 'px';
     private animReady: boolean = false;
 
     protected created(): void {
@@ -90,24 +86,20 @@ export class MInputStyle extends ModulVue {
 
     @Watch('isLabelUp')
     private calculateLabelOffset(): void {
-        if (this.isLabelUp) {
-            let label: HTMLElement | null = this.$refs.label;
-            let rootStyle: any = window.getComputedStyle(this.$refs.root);
-            if (label) {
-                let labelOffset: number = label.clientHeight / 2;
-                this.labelOffset = labelOffset > CSS_LABEL_DEFAULT_MARGIN ? labelOffset + 'px' : CSS_LABEL_DEFAULT_MARGIN + 'px';
-
-                let bodyOffset: number = labelOffset - (parseFloat(rootStyle.getPropertyValue('padding-top')) + parseFloat(rootStyle.getPropertyValue('padding-bottom')));
-                this.bodyOffset = bodyOffset < 0 ? CSS_BODY_DEFAULT_MARGIN : '-' + bodyOffset + 'px';
-            }
+        if (this.label) {
+            let labelOffset: number = this.$refs.label.clientHeight / 2;
+            this.labelOffset = this.isLabelUp && labelOffset > CSS_LABEL_DEFAULT_MARGIN ? `${labelOffset}px` : `${CSS_LABEL_DEFAULT_MARGIN}px`;
         } else {
-            this.bodyOffset = CSS_BODY_DEFAULT_MARGIN;
-            this.labelOffset = CSS_LABEL_DEFAULT_MARGIN + 'px';
+            this.labelOffset = undefined;
         }
     }
 
     public get isLabelUp(): boolean {
         return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+    }
+
+    public get showPrefix(): boolean {
+        return this.hasLabel ? this.isFocus : true;
     }
 
     private get hasValue(): boolean {
