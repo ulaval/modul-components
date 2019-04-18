@@ -4,19 +4,24 @@ exports[`Storyshots components|m-datepicker date format invalide 1`] = `
 <div>
   <div
     class="m-datepicker m--has-error"
+    style="width: 100%; max-width: 136px;"
   >
     <div
       class="m-input-style m--has-error m--has-value m--is-tag-default"
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 10px;"
+        style="margin-top: 8px;"
       >
         <!---->
          
         <div
           class="m-input-style__body"
         >
+          <div
+            class="m-input-style__prefix"
+          />
+           
           <div
             class="m-input-style__left-content"
           >
@@ -116,19 +121,24 @@ exports[`Storyshots components|m-datepicker date hors limite max 1`] = `
 <div>
   <div
     class="m-datepicker m--has-error"
+    style="width: 100%; max-width: 136px;"
   >
     <div
       class="m-input-style m--has-error m--has-value m--is-tag-default"
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 10px;"
+        style="margin-top: 8px;"
       >
         <!---->
          
         <div
           class="m-input-style__body"
         >
+          <div
+            class="m-input-style__prefix"
+          />
+           
           <div
             class="m-input-style__left-content"
           >
@@ -228,19 +238,24 @@ exports[`Storyshots components|m-datepicker date hors limite min 1`] = `
 <div>
   <div
     class="m-datepicker m--has-error"
+    style="width: 100%; max-width: 136px;"
   >
     <div
       class="m-input-style m--has-error m--has-value m--is-tag-default"
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 10px;"
+        style="margin-top: 8px;"
       >
         <!---->
          
         <div
           class="m-input-style__body"
         >
+          <div
+            class="m-input-style__prefix"
+          />
+           
           <div
             class="m-input-style__left-content"
           >
@@ -339,19 +354,24 @@ exports[`Storyshots components|m-datepicker date hors limite min 1`] = `
 exports[`Storyshots components|m-datepicker default 1`] = `
 <div
   class="m-datepicker"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -425,19 +445,24 @@ exports[`Storyshots components|m-datepicker default 1`] = `
 exports[`Storyshots components|m-datepicker disabled 1`] = `
 <div
   class="m-datepicker m--is-disabled"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-disabled m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -513,19 +538,24 @@ exports[`Storyshots components|m-datepicker disabled 1`] = `
 exports[`Storyshots components|m-datepicker error-message 1`] = `
 <div
   class="m-datepicker m--has-error m--has-validation-message"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--has-error m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -623,19 +653,24 @@ exports[`Storyshots components|m-datepicker events 1`] = `
 <div>
   <div
     class="m-datepicker"
+    style="width: 100%; max-width: 136px;"
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 10px;"
+        style="margin-top: 8px;"
       >
         <!---->
          
         <div
           class="m-input-style__body"
         >
+          <div
+            class="m-input-style__prefix"
+          />
+           
           <div
             class="m-input-style__left-content"
           >
@@ -714,19 +749,24 @@ exports[`Storyshots components|m-datepicker events 1`] = `
 exports[`Storyshots components|m-datepicker helper-message 1`] = `
 <div
   class="m-datepicker m--has-validation-message"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -804,13 +844,14 @@ exports[`Storyshots components|m-datepicker helper-message 1`] = `
 exports[`Storyshots components|m-datepicker label 1`] = `
 <div
   class="m-datepicker"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <label
         class="m-input-style__label"
@@ -830,6 +871,8 @@ exports[`Storyshots components|m-datepicker label 1`] = `
       <div
         class="m-input-style__body"
       >
+        <!---->
+         
         <div
           class="m-input-style__left-content"
         >
@@ -904,19 +947,24 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
 <div>
   <div
     class="m-datepicker"
+    style="width: 100%; max-width: 136px;"
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 10px;"
+        style="margin-top: 8px;"
       >
         <!---->
          
         <div
           class="m-input-style__body"
         >
+          <div
+            class="m-input-style__prefix"
+          />
+           
           <div
             class="m-input-style__left-content"
           >
@@ -992,19 +1040,24 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
 exports[`Storyshots components|m-datepicker placeholder 1`] = `
 <div
   class="m-datepicker"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -1078,19 +1131,24 @@ exports[`Storyshots components|m-datepicker placeholder 1`] = `
 exports[`Storyshots components|m-datepicker readonly 1`] = `
 <div
   class="m-datepicker m--is-readonly"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-readonly m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -1166,19 +1224,24 @@ exports[`Storyshots components|m-datepicker readonly 1`] = `
 exports[`Storyshots components|m-datepicker valid 1`] = `
 <div
   class="m-datepicker m--is-valid"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-valid m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -1252,19 +1315,24 @@ exports[`Storyshots components|m-datepicker valid 1`] = `
 exports[`Storyshots components|m-datepicker waiting 1`] = `
 <div
   class="m-datepicker m--is-waiting"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-waiting m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
