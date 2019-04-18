@@ -4,6 +4,7 @@ import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub } from '../../../tests/helpers/render';
 import ModulPlugin from '../../utils/modul/modul';
 import uuid from '../../utils/uuid/uuid';
+import { MCalendar } from '../calendar/calendar';
 import DatepickerPlugin, { MDatepicker } from './datepicker';
 
 
@@ -32,10 +33,16 @@ describe('MDatepicker', () => {
         });
     });
 
-    it('When the field is click then popup show open and field has focus', async () => {
+    it('When the field is clicked then popup show open and field has focus', async () => {
         wrapper.trigger('click');
 
+
+        expect(wrapper.emitted().click).toBeTruthy();
+        expect(wrapper.emitted().focus).toBeTruthy();
         await Vue.nextTick();
-        wrapper.text();
+
+        const calendar: any = wrapper.find('.m-calendar');
+        expect(calendar.is(MCalendar)).toBe(true);
+
     });
 });

@@ -5,7 +5,8 @@
             'm--has-error': calandarError,
             'm--is-valid': isValid,
             'm--has-validation-message': hasValidationMessage }"
-     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
+     @click="onClick">
     <m-input-style v-m-popup:popup
                    :disabled="isDisabled"
                    :label="label"
