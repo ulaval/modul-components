@@ -218,7 +218,4 @@ export class FormControl<T> extends AbstractControl {
     }
 }
 
-export default {
-
-};
 
