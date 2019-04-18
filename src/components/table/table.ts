@@ -23,7 +23,7 @@ export interface MColumnTable {
     dataProp: string;
     width?: string;
     sortable?: boolean;
-    sortDirection: MColumnSortDirection;
+    sortDirection?: MColumnSortDirection;
 }
 
 @WithRender
@@ -64,6 +64,10 @@ export class MTable extends ModulVue {
     public sort(columnTable: MColumnTable): void {
         if (this.loading) {
             return;
+        }
+
+        if (typeof columnTable.sortDirection === 'undefined') {
+            columnTable.sortDirection = MColumnSortDirection.None;
         }
 
         this.columns.forEach(c => {
