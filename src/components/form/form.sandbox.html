@@ -1,20 +1,13 @@
 <div>
     <h2 class="m-u--no-margin">Basic form</h2>
-    <p>
-        {{formGroup}}
-    </p>
-    <p>
-        {{formGroup.getControl('name').isValid}}
-    </p>
-    <p>
-        {{formGroup.isValid}}
-    </p>
     <m-form class="m-u--margin-top"
             :form-group="formGroup"
             @reset="reset()"
             @submit="submit()">
         <m-textfield v-model.trim="formGroup.getControl('name').value"
-                     label="name">
+                     :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
+                     :label="formGroup.getControl('name').name"
+                     v-m-control="formGroup.getControl('name')">
         </m-textfield>
         <p class="m-u--margin-bottom--l">
             <m-button type="submit"

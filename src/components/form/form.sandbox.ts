@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { FormControl, FormGroup } from '../../utils/form/form-control';
+import { AbstractControlValidationType, FormControl, FormGroup } from '../../utils/form/form-control';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
 import FormPlugin from './form.plugin';
@@ -15,26 +15,31 @@ export class MFormSandbox extends ModulVue {
         'my form',
         [],
         [
-            new FormControl<string>('name', [
+            new FormControl<string>('name',
+                [
+                    {
+                        validationFunction: (formControl: FormControl<string>): boolean => {
+                            return !!formControl.value;
+                        },
+                        error: {
+                            key: 'required',
+                            message: 'this field is required'
+                        }
+                    }
+                ],
+                '',
                 {
-                    validationFunction: (formControl: FormControl<string>): boolean => {
-                        return !!formControl.value;
-                    },
-                    key: 'required',
-                    message: 'error message'
+                    validationType: AbstractControlValidationType.Correctable
                 }
-            ])
+            )
         ]
     );
 
     submit(): void {
-        alert('ok');
     }
 
     reset(): void {
-        // let x: number = 1;
     }
-
 }
 
 const MFormSandboxPlugin: PluginObject<any> = {

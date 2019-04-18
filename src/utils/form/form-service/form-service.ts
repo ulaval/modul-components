@@ -17,32 +17,46 @@ export enum MFormEvents {
     formError
 }
 
-export class MFormListener {
-    constructor(public readonly eventType: MFormEvents, public readonly callback: ListenerCallback) { }
+export interface MFormListener {
+    eventType: MFormEvents;
+    callback: ListenerCallback;
 }
 
-export class FormClearToastBehavior extends MFormListener {
-    constructor() {
-        super(MFormEvents.formErrorClear, () => {
-            (ModulVue.prototype).$toast.clear();
-        });
+export class FormBehavior {
+    static get ClearToast(): MFormListener {
+        return {
+            eventType: MFormEvents.formErrorClear,
+            callback: () => (ModulVue.prototype).$toast.clear()
+        };
     }
-}
+    static get ErrorToastBehavior(): MFormListener {
+        return {
+            eventType: MFormEvents.formError,
+            callback: (params) => {
+                if (params && params.totalNbOfErrors && params.totalNbOfErrors > 1) {
+                    let htmlString: string = (ModulVue.prototype).$i18n.translate('m-form:multipleErrorsToCorrect', { totalNbOfErrors: params.totalNbOfErrors }, undefined, undefined, undefined, FormatMode.Sprintf);
 
-export class FormErrorToastBehavior extends MFormListener {
-    constructor() {
-        super(MFormEvents.formError, (params) => {
-            if (params && params.totalNbOfErrors && params.totalNbOfErrors > 1) {
-                let htmlString: string = (ModulVue.prototype).$i18n.translate('m-form:multipleErrorsToCorrect', { totalNbOfErrors: params.totalNbOfErrors }, undefined, undefined, undefined, FormatMode.Sprintf);
-                (ModulVue.prototype).$toast.show({
-                    position: MToastPosition.TopCenter,
-                    state: MToastState.Error,
-                    text: `<p>${htmlString}</p>`
-                });
+                    (ModulVue.prototype).$toast.show({
+                        position: MToastPosition.TopCenter,
+                        state: MToastState.Error,
+                        text: `<p>${htmlString}</p>`
+                    });
+                }
             }
-        });
+        };
+    },
+    static get ErrorFocusBehavior(): MFormListener {
+        return {
+            eventType: MFormEvents.formError,
+            callback: () => (params) => {
+                if (params && params.form) {
+                    params.form.focusFirstFieldWithError();
+                }
+            }
+        };
     }
 }
+
 
 export class FormErrorFocusBehavior extends MFormListener {
     constructor() {
