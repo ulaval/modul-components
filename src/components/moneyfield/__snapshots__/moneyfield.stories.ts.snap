@@ -1,0 +1,306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-moneyfield Basic 1`] = `
+<div>
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        maxwidth="small"
+        precision="11"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        label="Label"
+        maxwidth="small"
+        precision="11"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        label="Required label"
+        maxwidth="small"
+        precision="11"
+        requiredmarker="true"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        maxwidth="small"
+        precision="11"
+        tagstyle="default"
+        validmessage="Valid message"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        helpermessage="Helper message"
+        maxwidth="small"
+        precision="11"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        errormessage="Error message"
+        maxwidth="small"
+        precision="11"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-moneyfield Custom precision 1`] = `
+<div
+  class="m-moneyfield"
+  style="width: 100%; max-width: 136px;"
+>
+  <m-decimalfield
+    maxwidth="small"
+    precision="7"
+    tagstyle="default"
+    value="99999.99"
+    width="100%"
+  >
+    <template>
+      CA$
+    </template>
+     
+    <!---->
+  </m-decimalfield>
+</div>
+`;
+
+exports[`Storyshots components|m-moneyfield Default precision 1`] = `
+<div
+  class="m-moneyfield"
+  style="width: 100%; max-width: 136px;"
+>
+  <m-decimalfield
+    maxwidth="small"
+    precision="11"
+    tagstyle="default"
+    value="999999999.99"
+    width="100%"
+  >
+    <template>
+      CA$
+    </template>
+     
+    <!---->
+  </m-decimalfield>
+</div>
+`;
+
+exports[`Storyshots components|m-moneyfield Localization 1`] = `
+<div
+  class="m-moneyfield"
+  style="width: 100%; max-width: 136px;"
+>
+  <m-decimalfield
+    maxwidth="small"
+    precision="11"
+    tagstyle="default"
+    value="123456.78"
+    width="100%"
+  >
+    <template>
+      CA$
+    </template>
+     
+    <!---->
+  </m-decimalfield>
+</div>
+`;
+
+exports[`Storyshots components|m-moneyfield States 1`] = `
+<div>
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        disabled="true"
+        maxwidth="small"
+        placeholder="Disabled"
+        precision="11"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        maxwidth="small"
+        placeholder="Read-only"
+        precision="11"
+        readonly="true"
+        tagstyle="default"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <m-decimalfield
+        maxwidth="small"
+        placeholder="Waiting"
+        precision="11"
+        tagstyle="default"
+        waiting="true"
+        width="100%"
+      >
+        <template>
+          CA$
+        </template>
+         
+        <!---->
+      </m-decimalfield>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-moneyfield With initial value (0) 1`] = `
+<div
+  class="m-moneyfield"
+  style="width: 100%; max-width: 136px;"
+>
+  <m-decimalfield
+    maxwidth="small"
+    precision="11"
+    tagstyle="default"
+    value="0"
+    width="100%"
+  >
+    <template>
+      CA$
+    </template>
+     
+    <!---->
+  </m-decimalfield>
+</div>
+`;
+
+exports[`Storyshots components|m-moneyfield With initial value 1`] = `
+<div
+  class="m-moneyfield"
+  style="width: 100%; max-width: 136px;"
+>
+  <m-decimalfield
+    maxwidth="small"
+    precision="11"
+    tagstyle="default"
+    value="123456.78"
+    width="100%"
+  >
+    <template>
+      CA$
+    </template>
+     
+    <!---->
+  </m-decimalfield>
+</div>
+`;

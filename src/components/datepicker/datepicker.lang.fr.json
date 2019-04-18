@@ -1,10 +1,9 @@
 {
     "m-datepicker": {
-        "placeholder": "aaaa/mm/jj",
+        "placeholder": "AAAA-MM-JJ",
         "open": "Ouvrir le calendrier",
         "close": "Fermer le calendrier",
         "out-of-range-error": "Date hors limites",
-        "format-error": "Format invalide",
-        "required-error": "Date requise"
+        "format-error": "Format invalide"
     }
 }

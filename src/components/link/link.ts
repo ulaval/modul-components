@@ -7,7 +7,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { LINK_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconPlugin from '../icon/icon';
-import WithRender from './link.html?style=./link.scss';
+import WithRender from './link.html';
+import './link.scss';
 
 export enum MLinkMode {
     RouterLink = 'router-link',

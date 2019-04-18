@@ -12,7 +12,6 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
