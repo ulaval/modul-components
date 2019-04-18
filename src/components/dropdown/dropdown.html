@@ -43,7 +43,7 @@
                @focusin="onFocusIn"
                @focusout="onFocusOut"
                @input="onInput"
-               v-model.trim="selectedText">
+               v-model.trim="selectedText" />
         <template slot="adjust-width-auto"
                   v-if="width === 'auto'">{{ selectedText }}</template>
         <div class="m-dropdown__arrow"
@@ -53,8 +53,7 @@
             <m-icon class="m-dropdown__arrow__icon"
                     ref="arrow"
                     name="m-svg__arrow-head-filled--down"
-                    button-size="18px"
-                    icon-size="16px"
+                    size="16px"
                     :disabled="!active"
                     @keydown.enter.prevent="open = active">
                 <m-i18n k="m-dropdown:open"
@@ -102,7 +101,7 @@
                        ref="researchInput"
                        v-model="selectedText"
                        :max-length="maxLength"
-                       @input="onInput">
+                       @input="onInput" />
                 <m-icon-button class="m-dropdown__header__research-button"
                                icon-name="m-svg__search"
                                @click="focusOnResearchInput">

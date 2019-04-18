@@ -1,10 +1,11 @@
 <div class="m-datepicker"
      :class="{ 'm--is-disabled': isDisabled,
-               'm--is-readonly': isReadonly,
-               'm--is-waiting': isWaiting,
-               'm--has-error': calandarError,
-               'm--is-valid': isValid,
-               'm--has-validation-message': hasValidationMessage }">
+'m--is-readonly': isReadonly,
+'m--is-waiting': isWaiting,
+'m--has-error': calandarError,
+'m--is-valid': isValid,
+'m--has-validation-message': hasValidationMessage }"
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :label="label"
                    :label-for="id"
                    :disabled="isDisabled"

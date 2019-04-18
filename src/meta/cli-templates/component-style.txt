@@ -1,0 +1,3 @@
+.{{PREFIXED_SINGULAR_KEBAB}} {
+    // todo
+}

@@ -1,8 +1,8 @@
+import { CleaveOptions } from 'cleave.js/options';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
 import PopupDirectivePlugin from '../../directives/popup/popup';
-import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -12,6 +12,7 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { TIMEPICKER_NAME } from '../component-names';
+import { MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -30,7 +31,7 @@ export interface TimeObject {
 
 function validateTimeString(value: string): boolean {
     const regex: RegExp = /(\d\d):(\d\d)/g;
-    return value.match(regex) || !value.length ? true : false;
+    return !(value || '').length || value.match(regex) ? true : false;
 }
 
 @WithRender
@@ -38,10 +39,12 @@ function validateTimeString(value: string): boolean {
     mixins: [
         InputState,
         InputManagement,
-        InputPopup,
         InputWidth,
         MediaQueries
-    ]
+    ],
+    components: {
+        MInputMask
+    }
 })
 export class MTimepicker extends ModulVue {
 
@@ -63,7 +66,6 @@ export class MTimepicker extends ModulVue {
 
     public i18nButton: string = this.$i18n.translate('m-timepicker:button-ok');
     public i18nPlaceHolder: string = this.$i18n.translate('m-timepicker:placeholder');
-    public i18nErrorFormat: string = this.$i18n.translate('m-timepicker:error-format');
     public i18nOutOfBoundsError: string = this.$i18n.translate('m-timepicker:out-of-bounds-error', { min: this.min, max: this.max }, undefined, undefined, undefined, FormatMode.Sprintf);
 
     private hours: number[] = [];
@@ -79,6 +81,10 @@ export class MTimepicker extends ModulVue {
     private internalOpen: boolean = false;
     private internalTimeErrorMessage: string = '';
     private id: string = `mTimepicker-${uuid.generate()}`;
+
+    private created(): void {
+        this.internalTime = this.value;
+    }
 
     private mounted(): void {
         // create hours
@@ -105,9 +111,8 @@ export class MTimepicker extends ModulVue {
     }
 
     private validateTime(value: string): boolean {
+        this.internalTimeErrorMessage = '';
         if (validateTimeString(value)) {
-            this.internalTimeErrorMessage = '';
-
             if (this.validateTimeRange(value)) {
                 this.internalTimeErrorMessage = '';
                 return true;
@@ -115,10 +120,9 @@ export class MTimepicker extends ModulVue {
                 this.internalTimeErrorMessage = this.i18nOutOfBoundsError;
                 return false;
             }
-        } else {
-            this.internalTimeErrorMessage = this.i18nErrorFormat;
-            return false;
         }
+
+        return true;
     }
 
     private validateTimeRange(value: string): boolean {
@@ -165,7 +169,9 @@ export class MTimepicker extends ModulVue {
 
     @Watch('value')
     private updateInternalTime(value: string): void {
-        this.currentTime = value;
+        if (!this.as<InputManagement>().isFocus || value) {
+            this.currentTime = value;
+        }
     }
 
     private updatePopupTime(value: string): void {
@@ -231,14 +237,25 @@ export class MTimepicker extends ModulVue {
     private onOk(): void {
         if (!isNaN(this.internalHour) && !isNaN(this.internalMinute)) {
             this.currentTime = this.formatTimeString();
-            this.open = false;
         }
+        this.open = false;
     }
 
     private onClose(): void {
         if (isNaN(this.internalHour) || isNaN(this.internalMinute)) {
             this.resetPopupTime();
         }
+    }
+
+    private async onPopupOpen(): Promise<void> {
+        this.open = true;
+        this.focusInput();
+    }
+
+    private async focusInput(): Promise<void> {
+        await this.$nextTick();
+        const inputEl: HTMLInputElement = (this.$refs.input as MInputMask).$el as HTMLInputElement;
+        inputEl.focus();
     }
 
     ///////////////////////////////////////
@@ -251,7 +268,7 @@ export class MTimepicker extends ModulVue {
         let oldTime: string = this.internalTime;
         this.internalTime = value;
 
-        if (this.validateTime(value)) {
+        if (value && this.validateTime(value) && validateTimeString(value)) {
             this.updatePopupTime(value);
 
             if (value !== oldTime) {
@@ -260,6 +277,7 @@ export class MTimepicker extends ModulVue {
 
         } else {
             this.resetPopupTime();
+            this.$emit('input', undefined);
         }
     }
 
@@ -288,7 +306,7 @@ export class MTimepicker extends ModulVue {
     }
 
     private get timeErrorMessage(): string {
-        return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : this.internalTimeErrorMessage;
+        return this.internalTimeErrorMessage || this.as<InputState>().errorMessage;
     }
 
     private get open(): boolean {
@@ -308,13 +326,20 @@ export class MTimepicker extends ModulVue {
         });
     }
 
+    private get inputMaskOptions(): CleaveOptions {
+        return {
+            time: true,
+            timePattern: ['h', 'm']
+        };
+    }
+
     private get ariaControls(): string {
         return this.id + '-controls';
     }
 }
 
 const TimepickerPlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v): void {
         v.use(InputStylePlugin);
         v.use(ButtonPlugin);
         v.use(PopupPlugin);

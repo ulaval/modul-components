@@ -2,7 +2,8 @@
         :target-el="portalTargetSelector"
         open-trigger="manual">
     <transition name="m--is">
-        <div class="m-toast"
+        <div v-show="portalMounted && propOpen"
+             class="m-toast"
              :class="{'m--is-state-confirmation': isStateConfirmation,
                     'm--is-state-information': isStateInformation,
                     'm--is-state-warning': isStateWarning,
@@ -14,8 +15,9 @@
                     'm--is-right': isRight,
                     'm--is-mobile': isMqMaxS,
                     'm--is-desktop': !isMqMaxS}"
-             ref="toast"
-             v-show="portalMounted && propOpen">
+             @mouseover="mouseEnterToast"
+             @mouseleave="mouseLeaveToast"
+             ref="toast">
             <div class="m-toast__wrap">
                 <div v-if="icon"
                      class="m-toast__icon">
