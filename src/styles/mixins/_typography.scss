@@ -2,10 +2,10 @@
     @font-face {
         font-family: '#{$font-family}';
         src:
-            url('#{$m-font-path}#{$url}.otf.woff') format('woff'),
-            url('#{$m-font-path}#{$url}.ttf.woff') format('woff'),
             url('#{$m-font-path}#{$url}.otf.woff2') format('woff2'),
-            url('#{$m-font-path}#{$url}.ttf.woff2') format('woff2');
+            url('#{$m-font-path}#{$url}.ttf.woff2') format('woff2'),
+            url('#{$m-font-path}#{$url}.otf.woff') format('woff'),
+            url('#{$m-font-path}#{$url}.ttf.woff') format('woff');
         font-weight: $font-weight;
         font-style: $font-style;
     }

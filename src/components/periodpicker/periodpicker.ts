@@ -2,13 +2,14 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import ModulDate from '../../utils/modul-date/modul-date';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import WithRender from './periodpicker.html';
+import WithRender from './periodpicker.html?style=./periodpicker.scss';
 
 export class MDateRange {
     from: DatePickerSupportedTypes;
@@ -67,7 +68,11 @@ export interface MPeriodpickerProps {
 
 @WithRender
 @Component({
-    mixins: [MediaQueries, InputState]
+    mixins: [
+        MediaQueries,
+        InputState,
+        InputWidth
+    ]
 })
 export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()

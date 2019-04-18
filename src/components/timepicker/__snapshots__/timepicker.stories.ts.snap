@@ -3,20 +3,24 @@
 exports[`Storyshots components|m-timepicker default 1`] = `
 <div
   class="m-timepicker"
-  style="width: 100%; max-width: 144px;"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -94,20 +98,24 @@ exports[`Storyshots components|m-timepicker default 1`] = `
 exports[`Storyshots components|m-timepicker max widht 1`] = `
 <div
   class="m-timepicker"
-  style="width: 100%; max-width: 800px;"
+  style="width: 100%; max-width: 896px;"
 >
   <div
     class="m-input-style m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -185,20 +193,24 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
 exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
 <div
   class="m-timepicker"
-  style="width: 100%; max-width: 144px;"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
@@ -276,20 +288,24 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
 exports[`Storyshots components|m-timepicker step 15m 1`] = `
 <div
   class="m-timepicker"
-  style="width: 100%; max-width: 144px;"
+  style="width: 100%; max-width: 136px;"
 >
   <div
     class="m-input-style m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 10px;"
+      style="margin-top: 8px;"
     >
       <!---->
        
       <div
         class="m-input-style__body"
       >
+        <div
+          class="m-input-style__prefix"
+        />
+         
         <div
           class="m-input-style__left-content"
         >
