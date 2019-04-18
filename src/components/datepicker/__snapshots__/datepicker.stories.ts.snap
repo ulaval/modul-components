@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots components|m-datepicker date format invalide 1`] = `
+exports[`Storyshots components|m-datepicker date format invalid 1`] = `
 <div>
   <div
     class="m-datepicker m--has-error"
@@ -29,7 +29,7 @@ exports[`Storyshots components|m-datepicker date format invalide 1`] = `
               aria-haspopup="true"
               autocomplete="off"
               id="mDatepicker-uuid"
-              placeholder="aaaa-mm-jj"
+              placeholder="AAAA-MM-JJ"
             />
               
             <!---->
@@ -113,11 +113,11 @@ exports[`Storyshots components|m-datepicker date format invalide 1`] = `
       <!---->
     </div>
   </div>
-  model value = 2000-99-99
+  model value = 2000-19-12
 </div>
 `;
 
-exports[`Storyshots components|m-datepicker date hors limite max 1`] = `
+exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
 <div>
   <div
     class="m-datepicker m--has-error"
@@ -146,7 +146,7 @@ exports[`Storyshots components|m-datepicker date hors limite max 1`] = `
               aria-haspopup="true"
               autocomplete="off"
               id="mDatepicker-uuid"
-              placeholder="aaaa-mm-jj"
+              placeholder="AAAA-MM-JJ"
             />
               
             <!---->
@@ -234,7 +234,7 @@ exports[`Storyshots components|m-datepicker date hors limite max 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-datepicker date hors limite min 1`] = `
+exports[`Storyshots components|m-datepicker date off limit min 1`] = `
 <div>
   <div
     class="m-datepicker m--has-error"
@@ -263,7 +263,7 @@ exports[`Storyshots components|m-datepicker date hors limite min 1`] = `
               aria-haspopup="true"
               autocomplete="off"
               id="mDatepicker-uuid"
-              placeholder="aaaa-mm-jj"
+              placeholder="AAAA-MM-JJ"
             />
               
             <!---->
@@ -379,7 +379,7 @@ exports[`Storyshots components|m-datepicker default 1`] = `
             aria-haspopup="true"
             autocomplete="off"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->
@@ -471,7 +471,7 @@ exports[`Storyshots components|m-datepicker disabled 1`] = `
             autocomplete="off"
             disabled="disabled"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->
@@ -563,7 +563,7 @@ exports[`Storyshots components|m-datepicker error-message 1`] = `
             aria-haspopup="true"
             autocomplete="off"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->
@@ -678,7 +678,7 @@ exports[`Storyshots components|m-datepicker events 1`] = `
               aria-haspopup="true"
               autocomplete="off"
               id="mDatepicker-uuid"
-              placeholder="aaaa-mm-jj"
+              placeholder="AAAA-MM-JJ"
             />
               
             <!---->
@@ -774,7 +774,7 @@ exports[`Storyshots components|m-datepicker helper-message 1`] = `
             aria-haspopup="true"
             autocomplete="off"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->
@@ -880,7 +880,7 @@ exports[`Storyshots components|m-datepicker label 1`] = `
             aria-haspopup="true"
             autocomplete="off"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->
@@ -972,7 +972,7 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
               aria-haspopup="true"
               autocomplete="off"
               id="mDatepicker-uuid"
-              placeholder="aaaa-mm-jj"
+              placeholder="AAAA-MM-JJ"
             />
               
             <!---->
@@ -1156,7 +1156,7 @@ exports[`Storyshots components|m-datepicker readonly 1`] = `
             aria-haspopup="true"
             autocomplete="off"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
             readonly="readonly"
           />
             
@@ -1249,7 +1249,7 @@ exports[`Storyshots components|m-datepicker valid 1`] = `
             aria-haspopup="true"
             autocomplete="off"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->
@@ -1341,7 +1341,7 @@ exports[`Storyshots components|m-datepicker waiting 1`] = `
             autocomplete="off"
             disabled="disabled"
             id="mDatepicker-uuid"
-            placeholder="aaaa-mm-jj"
+            placeholder="AAAA-MM-JJ"
           />
             
           <!---->

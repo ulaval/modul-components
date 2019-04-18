@@ -61,7 +61,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('date format invalid', () => ({
         data: () => ({
-            model1: '2000-99-99'
+            model1: '2000-19-12'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
