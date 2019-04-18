@@ -140,6 +140,8 @@ export class MDatepicker extends ModulVue {
     @Emit('open')
     private async onOpen(): Promise<void> {
         let inputMask: MInputMask = this.$refs.input;
+
+        this.clearErrorMessage();
         inputMask.focusAndSelectAll();
     }
 
