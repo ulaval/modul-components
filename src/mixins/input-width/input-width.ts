@@ -28,7 +28,7 @@ export class InputWidth extends ModulVue {
     public width: string;
 
     @Prop({ default: InputMaxWidth.Regular })
-    public maxWidth: string;
+    public maxWidth: InputMaxWidthValues | string;
 
     private get inputMaxWidth(): string | undefined {
         let maxWidth: string | undefined;
