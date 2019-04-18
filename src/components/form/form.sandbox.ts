@@ -17,18 +17,22 @@ export class MFormSandbox extends ModulVue {
         [
             new FormControl<string>('name', [
                 {
-                (formControl: FormCon) =>
-            }
-        ]
+                    validationFunction: (formControl: FormControl<string>): boolean => {
+                        return !!formControl.value;
+                    },
+                    key: 'required',
+                    message: 'error message'
+                }
+            ])
         ]
     );
 
     submit(): void {
-        let x: number = 1;
+        alert('ok');
     }
 
     reset(): void {
-        let x: number = 1;
+        // let x: number = 1;
     }
 
 }

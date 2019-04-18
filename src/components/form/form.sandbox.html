@@ -1,6 +1,14 @@
 <div>
     <h2 class="m-u--no-margin">Basic form</h2>
-    {{formGroup}}
+    <p>
+        {{formGroup}}
+    </p>
+    <p>
+        {{formGroup.getControl('name').isValid}}
+    </p>
+    <p>
+        {{formGroup.isValid}}
+    </p>
     <m-form class="m-u--margin-top"
             :form-group="formGroup"
             @reset="reset()"

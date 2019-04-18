@@ -22,9 +22,9 @@ export enum FormControlEditionContext {
 
 export interface AbstractControlValidator {
     validationFunction: (self: AbstractControl) => boolean;
-    lastCheck?: boolean;
-    message: string;
     key: string;
+    message: string;
+    lastCheck?: boolean;
 }
 
 export abstract class AbstractControl {
@@ -36,7 +36,7 @@ export abstract class AbstractControl {
     ) { }
 
     public get isValid(): boolean {
-        return !!(this.validators.map(v => v.lastCheck).find(lc => lc === false) || true);
+        return this.validators.filter(v => v.lastCheck === true).length === this.validators.length;
     }
 
     validate(): void {
@@ -55,6 +55,10 @@ export class FormGroup extends AbstractControl {
         public controls: AbstractControl[]
     ) {
         super(name, validators);
+    }
+
+    public get isValid(): boolean {
+
     }
 
     getControl(name: string): AbstractControl {
@@ -109,10 +113,6 @@ export class FormControl<T> extends AbstractControl {
             this.validationType = typeof options.validationType === undefined ?
                 this.validationType : options.validationType!;
         }
-    }
-
-    public get isValid(): boolean {
-        return !!this.validators.map(v => v.lastCheck).find(lc => lc === false);
     }
 
     initEdition(): void {
