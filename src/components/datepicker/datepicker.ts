@@ -220,8 +220,10 @@ export class MDatepicker extends ModulVue {
 
     // override from InputManagement
     private set model(value: string) {
-        this.internalDateModel = value;
-        this.emitChange();
+        if (this.internalDateModel !== value) {
+            this.internalDateModel = value;
+            this.emitChange();
+        }
     }
 
     private get model(): string {
