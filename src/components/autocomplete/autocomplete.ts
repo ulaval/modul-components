@@ -28,8 +28,6 @@ export class MAutocomplete extends ModulVue {
     minimumChars: number;
     @Prop()
     textNoMatch: string;
-    @Prop({ default: 'new-password' })
-    autocomplete: string;
     @Prop()
     maxLength: number;
     @Prop()
@@ -63,6 +61,7 @@ export class MAutocomplete extends ModulVue {
     items: MAutoCompleteResult[] = [];
     loading: boolean = false;
     throttleTimeout: any;
+    autocomplete: string = 'new-password';
 
     created(): void {
         this.refreshItemsOnSelectionChange(this.model);

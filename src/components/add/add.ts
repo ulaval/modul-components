@@ -4,7 +4,8 @@ import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { ADD_NAME } from '../component-names';
 import { MLinkIconPosition, MLinkSkin } from '../link/link';
-import WithRender from './add.html?style=./add.scss';
+import WithRender from './add.html';
+import './add.scss';
 
 @WithRender
 @Component

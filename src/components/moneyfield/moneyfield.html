@@ -2,14 +2,12 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
 
     <m-decimalfield v-bind="bindData"
-                    v-on="$listeners">
-
+                    v-on="$listeners"
+                    :precision="precision">
         <!-- content should stay inline to avoid adding useless white space -->
         <template v-if="currencyDetail.symbolPosition === 'before'"
                   slot="prefix">{{ currencyDetail.localizedSymbol }}</template>
         <template v-if="currencyDetail.symbolPosition === 'after'"
                   slot="suffix">{{ currencyDetail.localizedSymbol }}</template>
-
     </m-decimalfield>
-
 </div>

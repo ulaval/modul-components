@@ -4,28 +4,26 @@
     &.m--is-skin-light,
     &.m--is-skin-text {
         &:not(.m--is-disabled) {
-            /deep/ {
-                .m-link__icon {
-                    transition: color $m-transition-duration ease;
-                    color: $m-color--interactive;
-                }
+            .m-link__icon {
+                transition: color $m-transition-duration ease;
+                color: $m-color--interactive;
             }
 
             &:hover,
             &:focus {
-                /deep/ .m-link__icon {
+                .m-link__icon {
                     color: $m-color--interactive-light;
                 }
             }
 
             &:active {
-                /deep/ .m-link__icon {
+                .m-link__icon {
                     color: $m-color--interactive-dark;
                 }
             }
 
             &:not(.m--is-unvisited):not(:hover):not(:focus):visited {
-                /deep/ .m-link__icon {
+                .m-link__icon {
                     color: $m-color--interactive-darker;
                 }
             }
