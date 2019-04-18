@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
@@ -41,7 +41,7 @@ export class MInputStyle extends ModulVue {
     };
 
     public labelOffset: string | undefined = CSS_LABEL_DEFAULT_MARGIN + 'px';
-    private animReady: boolean = false;
+    public animReady: boolean = false;
 
     protected created(): void {
         setTimeout(() => {
@@ -106,35 +106,32 @@ export class MInputStyle extends ModulVue {
         return this.hasDefaultSlot && !this.empty;
     }
 
-    private get hasLabel(): boolean {
+    public get hasLabel(): boolean {
         return !!this.label && this.label !== '';
     }
 
-    private get isFocus(): boolean {
+    public get isFocus(): boolean {
         let focus: boolean = this.focus && this.as<InputState>().active;
         this.$emit('focus', focus);
         return focus;
     }
 
-    private get hasDefaultSlot(): boolean {
+    public get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
 
-    private get hasAdjustWidthAutoSlot(): boolean {
+    public get hasAdjustWidthAutoSlot(): boolean {
         return !!this.$slots['adjust-width-auto'];
     }
 
-    private onClick(event): void {
-        this.$emit('click', event);
-    }
+    @Emit('click')
+    public onClick(event): void { }
 
-    private onMousedown(event): void {
-        this.$emit('mousedown', event);
-    }
+    @Emit('mousedown')
+    public onMousedown(event): void { }
 
-    private onMouseup(event): void {
-        this.$emit('mouseup', event);
-    }
+    @Emit('mouseup')
+    public onMouseup(event): void { }
 }
 
 const InputStylePlugin: PluginObject<any> = {

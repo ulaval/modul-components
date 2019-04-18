@@ -1,0 +1,3 @@
+<div class="{{PREFIXED_SINGULAR_KEBAB}}">
+    {{PREFIXED_SINGULAR_KEBAB}}
+</div>

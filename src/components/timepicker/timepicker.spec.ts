@@ -24,8 +24,7 @@ describe('MTimepicker', () => {
             localVue: localVue
         });
 
-        const textInput: any = timepicker.find(REF_INPUT);
-        textInput.setValue(TESTTIME);
+        timepicker.find(REF_INPUT).vm.$emit('input', TESTTIME);
 
         expect(timepicker.emitted().input).toBeDefined();
         expect(timepicker.vm.currentTime).toEqual(TESTTIME);
