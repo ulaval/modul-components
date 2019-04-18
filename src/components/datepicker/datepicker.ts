@@ -56,7 +56,7 @@ export class MDatepicker extends ModulVue {
     public maxWidth: string;
 
     private internalOpen: boolean = false;
-    private internalCalandarErrorMessage: string = '';
+    private internalCalendarErrorMessage: string = '';
     private inputModel = '';
     private internalDateModel = '';
 
@@ -88,12 +88,12 @@ export class MDatepicker extends ModulVue {
     }
 
     private get calandarError(): boolean {
-        return this.internalCalandarErrorMessage !== '' || this.as<InputState>().hasError;
+        return this.internalCalendarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
     private get calandarErrorMessage(): string {
-        if (this.internalCalandarErrorMessage) {
-            return this.internalCalandarErrorMessage;
+        if (this.internalCalendarErrorMessage) {
+            return this.internalCalendarErrorMessage;
         } else {
             return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : '';
         }
@@ -145,7 +145,7 @@ export class MDatepicker extends ModulVue {
 
 
     private async selectDate(selectedDate: DatePickerSupportedTypes): Promise<void> {
-        this.internalCalandarErrorMessage = '';
+        this.internalCalendarErrorMessage = '';
         this.model = this.convertValueToModel(selectedDate);
         this.inputModel = this.internalDateModel;
         this.open = false;
@@ -174,26 +174,26 @@ export class MDatepicker extends ModulVue {
     }
 
     private clearErrorMessage(): void {
-        this.internalCalandarErrorMessage = '';
+        this.internalCalendarErrorMessage = '';
     }
 
     private showErrorMessage(inputValue: string): boolean {
         if (inputValue === '' || inputValue === undefined || inputValue === null) {
 
-            this.internalCalandarErrorMessage = '';
+            this.internalCalendarErrorMessage = '';
             return true;
 
         } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
             let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
-                this.internalCalandarErrorMessage = '';
+                this.internalCalendarErrorMessage = '';
                 return true;
             } else {
-                this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
+                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
                 return false;
             }
         } else {
-            this.internalCalandarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
+            this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
             return false;
         }
 
