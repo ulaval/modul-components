@@ -59,19 +59,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
-    .add('date format invalide', () => ({
+    .add('date format invalid', () => ({
         data: () => ({
             model1: '2000-99-99'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
-    .add('date hors limite min', () => ({
+    .add('date off limit min', () => ({
         data: () => ({
             model1: '2000-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
-    .add('date hors limite max', () => ({
+    .add('date off limit  max', () => ({
         data: () => ({
             model1: '2015-01-01'
         }),
