@@ -54,8 +54,6 @@ export class MForm extends ModulVue {
     private _triggerFormAction(type: FormActionType): void {
         this.afterActionEffects
             .filter(a => type & a.formActionType)
-            .forEach(a => {
-                a.afterEffect(this);
-            });
+            .forEach(a => a.afterEffect(this));
     }
 }
