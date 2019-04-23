@@ -34,7 +34,7 @@ export class MDecimalfield extends ModulVue {
     @Prop({
         default: 2
     })
-    public rounding;
+    public rounding: number;
 
     @Prop({
         default: 14
