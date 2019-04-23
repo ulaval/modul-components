@@ -147,4 +147,4 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}/badge`, module)
             }
         },
         template: '<m-icon :size="size" v-m-badge="badge" name="profile"></m-icon>'
-    }))
+    }));
