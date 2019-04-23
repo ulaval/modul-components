@@ -19,6 +19,9 @@
                    :readonly="isReadonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
+        <template slot="prefix">
+            <slot name="prefix"></slot>
+        </template>
         <m-input-mask class="m-decimalfield__input"
                       v-model="model"
                       :id="id"
@@ -33,6 +36,10 @@
                       ref="inputMask"
                       :options="inputMaskOptions"
                       inputmode="numeric"></m-input-mask>
+
+        <template slot="right-content">
+            <slot name="suffix"></slot>
+        </template>
     </m-input-style>
     <div class="m-decimalfield__validation">
         <m-validation-message class="m-decimalfield__validation__message"

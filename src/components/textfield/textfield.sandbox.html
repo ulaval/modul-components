@@ -13,7 +13,7 @@
 
     <h3 class="m-u--h6">Waiting</h3>
     <m-textfield :waiting="true"
-                 label="label"></m-textfield>
+                 label="Label"></m-textfield>
 
     <h3 class="m-u--h6">Disabled</h3>
     <m-textfield :disabled="true"
@@ -45,7 +45,6 @@
                  placeholder="https://ulaval.github.io/modul/"></m-textfield><br />
     <m-textfield label="telephone"
                  type="tel"
-                 mask="99"
                  placeholder="123-456-7890"></m-textfield><br />
     <m-textfield type="search"
                  label="search"
@@ -59,9 +58,6 @@
     <m-textfield type="number"
                  label="number"
                  placeholder="Put a number"></m-textfield><br />
-    <m-textfield type="integer"
-                 label="integer"
-                 placeholder="Put a number"></m-textfield>
 
 
     <h2>Characters counter</h2>
@@ -138,7 +134,26 @@
     <m-textfield label="x-small"
                  max-width="x-small"
                  value=""></m-textfield>
+    <m-textfield label="x-small"
+                 max-width="x-small"
+                 value=""></m-textfield>
+    <m-textfield label="x-small"
+                 max-width="x-small"
+                 value=""></m-textfield>
     <br />
+    <m-textfield label="small"
+                 max-width="small"
+                 value=""></m-textfield>
+    <m-textfield label="small"
+                 max-width="small"
+                 value=""></m-textfield>
+    <br />
+    <m-textfield label="regular"
+                 max-width="regular"
+                 value=""></m-textfield>
+    <m-textfield label="regular"
+                 max-width="regular"
+                 value=""></m-textfield>
     <m-textfield label="regular"
                  max-width="regular"
                  value=""></m-textfield>
@@ -159,7 +174,8 @@
 
     <h2>Tag style</h2>
     <m-textfield label="h1"
-                 tag-style="h1">
+                 tag-style="h1"
+                 :word-wrap="true">
     </m-textfield>
     <br />
     <m-textfield label="h2"
@@ -167,7 +183,7 @@
     </m-textfield>
     <br />
     <m-textfield label="h3"
-                 tag-style="h3">
+                 :word-wrap="true">
     </m-textfield>
     <br />
     <m-textfield label="h4"
@@ -185,5 +201,4 @@
     <m-textfield label="p"
                  tag-style="p">
     </m-textfield>
-
 </div>

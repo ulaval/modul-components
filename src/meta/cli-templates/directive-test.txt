@@ -1,0 +1,3 @@
+describe('{{SINGULAR_KEBAB}}', () => {
+    expect(true).toBe(true);
+});

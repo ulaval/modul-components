@@ -1,7 +1,7 @@
 @import 'commons';
 
 $m-modal--max-width--l: $m-max-width !default;
-$m-modal--max-width: 600px !default;
+$m-modal--max-width: 672px !default; // padding + input + margin + input + padding
 $m-modal--max-width--s: 420px !default;
 
 .m-modal {
