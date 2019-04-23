@@ -67,6 +67,7 @@ export const PROGRESS_NAME: string = 'm-progress';
 export const RADIO_NAME: string = 'm-radio';
 export const RADIO_GROUP_NAME: string = 'm-radio-group';
 export const RADIO_STYLE_NAME: string = 'm-radio-style';
+export const REPEATER_NAME: string = 'm-repeater';
 export const RICH_TEXT_NAME: string = 'm-rich-text';
 export const RICH_TEXT_EDITOR_NAME: string = 'm-rich-text-editor';
 export const SCROLL_TOP_NAME: string = 'm-scroll-top';
