@@ -3,7 +3,9 @@ export enum FormActionType {
     InvalidSubmit = 1 << 1,
     ValidSubmit = 2 << 2,
     Reset = 4 << 4,
-    Destroy = 8 << 8,
+    Created = 8 << 8,
+    Updated = 16 << 16,
+    Destroyed = 32 << 32,
     ValidSubmitOrReset = ValidSubmit | Reset,
-    ValidSubmitOrResetOrDestroy = ValidSubmit | Reset | Destroy
+    ValidSubmitOrResetOrDestroyed = ValidSubmit | Reset | Destroyed
 }

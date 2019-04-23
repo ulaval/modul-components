@@ -47,8 +47,16 @@ export class MForm extends ModulVue {
         this.emitReset();
     }
 
+    protected created(): void {
+        this._triggerFormAction(FormActionType.Created);
+    }
+
+    protected updated(): void {
+        this._triggerFormAction(FormActionType.Updated);
+    }
+
     protected beforeDestroy(): void {
-        this._triggerFormAction(FormActionType.Destroy);
+        this._triggerFormAction(FormActionType.Destroyed);
     }
 
     private _triggerFormAction(type: FormActionType): void {
