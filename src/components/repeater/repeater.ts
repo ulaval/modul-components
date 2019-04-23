@@ -76,7 +76,7 @@ export class MRepeater extends ModulVue {
 const RepeaterPlugin: PluginObject<any> = {
     install(v): void {
         v.use(LinkPlugin);
-        v.use(ButtonPlugin)
+        v.use(ButtonPlugin);
         v.component(REPEATER_NAME, MRepeater);
     }
 };
