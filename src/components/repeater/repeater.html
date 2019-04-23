@@ -1,0 +1,36 @@
+<div>
+    <component :is="tag"
+               v-if="list.length">
+        <template v-for="(item, index) in list">
+            <slot :item="item"
+                  :index="index"
+                  :deleteFn="() => onDeleteBtnClick(index)"
+                  name="row">
+                <component :is="'li'"
+                           :key="getRowKey(item, index)">
+                    <slot :item="item"
+                          :index="index"
+                          name="item"></slot>
+                    <button v-if="operations.canDelete"
+                            @click="onDeleteBtnClick(index)">{{ deleteBtnLabel }}</button>
+                </component>
+            </slot>
+        </template>
+    </component>
+
+    <div v-if="emptyMessageDisplayed">
+        {{ emptyMessage }}
+    </div>
+    <!-- TODO: Replace with add component when it becomes available.  -->
+    <m-link class="m-add"
+            v-if="operations.canAdd"
+            mode="button"
+            icon-name="m-svg__add-circle-filled"
+            :icon-position="'left'"
+            :icon-size="'24px'"
+            :skin="'default'"
+            :underline="true"
+            @click="onAddBtnClick()">
+        {{ addBtnLabel }}
+    </m-link>
+</div>

@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-repeater Empty 1`] = `
+<div>
+  <!---->
+   
+  <div>
+    
+        The list is empty
+    
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-repeater Operations 1`] = `
+<div>
+  <ul>
+    <li>
+      
+                    #0 Custom template for item (id: 324525 name: Albert Einstein)
+                 
+      <!---->
+    </li>
+    <li>
+      
+                    #1 Custom template for item (id: 64564556 name: Nikola Tesla)
+                 
+      <!---->
+    </li>
+  </ul>
+   
+  <!---->
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-repeater With items (Custom item template) 1`] = `
+<div>
+  <ul>
+    <li>
+      
+                    Item # 0 uuid
+                 
+      <button>
+        Delete
+      </button>
+    </li>
+    <li>
+      
+                    Item # 1 uuid
+                 
+      <button>
+        Delete
+      </button>
+    </li>
+  </ul>
+   
+  <!---->
+   
+  <a
+    class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="24px"
+      width="24px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      
+        Add
+    
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-repeater With items (Custom row template) 1`] = `
+<div>
+  <ul>
+    <li>
+      <button>
+        Delete
+      </button>
+      
+                    Item # 0 uuid
+                
+    </li>
+    <li>
+      <button>
+        Delete
+      </button>
+      
+                    Item # 1 uuid
+                
+    </li>
+  </ul>
+   
+  <!---->
+   
+  <a
+    class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="24px"
+      width="24px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      
+        Add
+    
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
