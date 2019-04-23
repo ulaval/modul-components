@@ -32,7 +32,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
                 }, 'profile')
             },
         },
-        template: '<m-icon :name="name"></m-icon>'
+        template: `<div>
+                       <m-icon :name="name"></m-icon>
+                       <span style="margin-left: 15px">Current name: <span style="color:red">{{ name }}</span></span>
+                   </div>`
     }))
     .add('name (long)', () => ({
         props: {
@@ -49,7 +52,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
                 }, 'm-svg__profile')
             },
         },
-        template: '<m-icon :name="name"></m-icon>'
+        template: `<div>
+                       <m-icon :name="name"></m-icon>
+                       <span style="margin-left: 15px">Current name: <span style="color:red">{{ name }}</span></span>
+                   </div>`
     }))
     .add('svgTitle', () => ({
         props: {
@@ -65,7 +71,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('size', () => ({
         props: {
             size: {
-                default: text('size', '30px')
+                default: text('size (px)', '30')
             },
         },
         template: `<div>
@@ -77,27 +83,68 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         props: {
             name: {
                 default: select('icon name as class', {
-                        'profile': 'profile',
-                        'information': 'information',
-                        'confirmation': 'confirmation',
-                        'warning': 'warning',
-                        'error': 'error',
-                        'calendar': 'calendar',
-                        'hint': 'hint',
-                        'clock': 'clock'
-                    }, 'profile')
+                    'profile': 'profile',
+                    'information': 'information',
+                    'confirmation': 'confirmation',
+                    'warning': 'warning',
+                    'error': 'error',
+                    'calendar': 'calendar',
+                    'hint': 'hint',
+                    'clock': 'clock'
+                }, 'profile')
             },
         },
         template: `<div>
                        <m-icon :name="name" :showNameAsClass="true"></m-icon>
                        <span style="margin-left: 15px">Current className on svg Icon: <span style="color:red">{{ name }}</span></span>
                    </div>`
-    }))
-    .add('badge', () => ({
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}/badge`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('state', () => ({
         props: {
             badge: {
-                default: object('state', 'completed')
+                default: object("{ state: 'completed|error|warning' }", { state: 'completed' })
             },
+            size: {
+                default: text('size (px)', '30')
+            }
         },
-        template: '<m-icon :v-m-badge="badge" name="profile"></m-icon>'
-    }));
+        template: '<m-icon :size="size" v-m-badge="badge" name="profile"></m-icon>'
+    }))
+    .add('offsetX', () => ({
+        props: {
+            badge: {
+                default: object("{ state: 'completed|error|warning', offsetX: 'valueX' }", {
+                    state: 'completed',
+                    offsetX: '9px'
+                })
+            }
+        },
+        template: '<m-icon size="30px" v-m-badge="badge" name="profile"></m-icon>'
+    }))
+    .add('offsetY', () => ({
+        props: {
+            badge: {
+                default: object("{ state: 'completed|error|warning', offsetY: 'valueY' }", {
+                    state: 'completed',
+                    offsetY: '7px'
+                })
+            }
+        },
+        template: '<m-icon size="30px" v-m-badge="badge" name="profile"></m-icon>'
+    }))
+    .add('state, offsetY, offsetX', () => ({
+        props: {
+            badge: {
+                default: object("{ state: 'completed|error|warning', offsetX: 'valueX', offsetY: 'valueY' }",
+                    { state: 'completed', offsetX: '-5px', offsetY: '-8px' })
+            },
+            size: {
+                default: text('size (px)', '30')
+            }
+        },
+        template: '<m-icon :size="size" v-m-badge="badge" name="profile"></m-icon>'
+    }))
