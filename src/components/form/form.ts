@@ -1,6 +1,6 @@
 import { Component, Emit, Prop } from "vue-property-decorator";
-import { FormGroup } from "../../utils/form/form-control";
-import { FormActionType, FormAfterActionEffect, FormBehavior } from "../../utils/form/form-service/form-service";
+import { FormActionType, FormAfterActionEffect, FormAfterActionEffects } from "../../utils/form/form-after-action-effect";
+import { FormGroup } from "../../utils/form/form-group";
 import { ModulVue } from "../../utils/vue/vue";
 import WithRender from './form.html?style=./form.scss';
 
@@ -9,13 +9,13 @@ import WithRender from './form.html?style=./form.scss';
 export class MForm extends ModulVue {
     @Prop()
     public formGroup: FormGroup;
+    public displaySummary: boolean = false;
 
     @Prop({
         default: () => [
-            FormBehavior.ErrorToast,
-            FormBehavior.ClearToast,
-            FormBehavior.ErrorFocus,
-            FormBehavior.ErrorMessages
+            FormAfterActionEffects.ErrorToast,
+            FormAfterActionEffects.ClearErrorToast,
+            FormAfterActionEffects.FocusOnFirstError
         ]
     })
     public afterActionEffects: FormAfterActionEffect[];
@@ -30,23 +30,30 @@ export class MForm extends ModulVue {
         this.formGroup.validate();
 
         if (!this.formGroup.isValid) {
-            this.afterActionEffects
-                .filter(a => a.formActionType === FormActionType.InvalidSubmit)
-                .forEach(a => {
-                    a.afterEffect(this.formGroup);
-                });
+            this._triggerFormAction(FormActionType.InvalidSubmit);
             return;
         }
 
+        this._triggerFormAction(FormActionType.ValidSubmit);
         this.emitSubmit();
     }
 
     public reset(): void {
         this.formGroup.reset();
 
-        this.afterActionEffects
-            .filter(a => a.formActionType === FormActionType.Reset)
-            .forEach(a => a.afterEffect(this.formGroup));
+        this._triggerFormAction(FormActionType.Reset);
         this.emitReset();
+    }
+
+    protected beforeDestroy(): void {
+        this._triggerFormAction(FormActionType.Destroy);
+    }
+
+    private _triggerFormAction(type: FormActionType): void {
+        this.afterActionEffects
+            .filter(a => type & a.formActionType)
+            .forEach(a => {
+                a.afterEffect(this);
+            });
     }
 }

@@ -3,7 +3,7 @@
       @reset.prevent="reset">
     <m-accordion-transition>
         <m-message class="m-form__message-summary"
-                   v-if="formGroup.errors.length > 0"
+                   v-if="displaySummary"
                    state="error"
                    ref="summary">
             <ul>
@@ -13,7 +13,7 @@
             </ul>
         </m-message>
     </m-accordion-transition>
-    <slot name="serverResponse">
+    <slot name="extra">
     </slot>
     <slot></slot>
 </form>

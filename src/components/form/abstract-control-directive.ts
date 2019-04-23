@@ -1,5 +1,5 @@
 import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
-import { AbstractControl } from '../../utils/form/form-control';
+import { AbstractControl } from '../../utils/form/abstract-control';
 
 const DISTANCE_FROM_TOP: number = -200;
 const scrollToElement: Function = (element: HTMLElement): void => {
@@ -35,11 +35,9 @@ export const AbstractControlDirective: DirectiveOptions = {
             if (el instanceof HTMLInputElement) {
                 scrollToElement(el);
                 el.focus();
-            } else {
-                if (inputElement) {
-                    scrollToElement(inputElement);
-                    (inputElement as HTMLInputElement).focus();
-                }
+            } else if (inputElement) {
+                scrollToElement(inputElement);
+                (inputElement as HTMLInputElement).focus();
             }
 
             AbstractControl.focusGranted = false;
@@ -51,4 +49,5 @@ export const AbstractControlDirective: DirectiveOptions = {
         el.removeEventListener('focus', el['AbstractControlDirectiveListeners'].focusListener, true);
         el.removeEventListener('blur', el['AbstractControlDirectiveListeners'].blurListener, true);
     }
-};
+}
+
