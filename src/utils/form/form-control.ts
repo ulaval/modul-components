@@ -1,4 +1,8 @@
-import { AbstractControl, AbstractControlEditionContext, AbstractControlError, AbstractControlValidationType, AbstractControlValidator } from "./abstract-control";
+import { AbstractControl } from "./abstract-control";
+import { AbstractControlEditionContext } from "./abstract-control-edition-context";
+import { AbstractControlError } from "./abstract-control-error";
+import { AbstractControlValidationType } from "./abstract-control-validation-type";
+import { AbstractControlValidator } from "./abstract-control-validator";
 
 export class FormControl<T> extends AbstractControl {
     private _intialValue?: T;
@@ -46,7 +50,7 @@ export class FormControl<T> extends AbstractControl {
         this._value = this._intialValue;
     }
 
-    protected preventValidation(): boolean {
+    protected _preventValidation(): boolean {
         let preventValidation: boolean = true;
 
         if (this.editionContext === AbstractControlEditionContext.EmptyAndValid) {

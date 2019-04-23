@@ -1,4 +1,8 @@
-import { AbstractControl, AbstractControlEditionContext, AbstractControlError, AbstractControlValidationType, AbstractControlValidator } from "./abstract-control";
+import { AbstractControl } from "./abstract-control";
+import { AbstractControlEditionContext } from "./abstract-control-edition-context";
+import { AbstractControlError } from "./abstract-control-error";
+import { AbstractControlValidationType } from "./abstract-control-validation-type";
+import { AbstractControlValidator } from "./abstract-control-validator";
 import { FormControl } from "./form-control";
 
 export class FormGroup extends AbstractControl {
@@ -55,13 +59,17 @@ export class FormGroup extends AbstractControl {
 
     public initEdition(): void {
         if (
-            !this.controls.filter(c => c instanceof FormControl).every((fc: FormControl<any>) => !!fc.value)
+            !this.controls
+                .filter(c => c instanceof FormControl)
+                .every((fc: FormControl<any>) => !!fc.value)
             &&
             this.isValid
         ) {
             this.editionContext = AbstractControlEditionContext.EmptyAndValid;
         } else if (
-            this.controls.filter(c => c instanceof FormControl).every((fc: FormControl<any>) => !!fc.value)
+            this.controls
+                .filter(c => c instanceof FormControl)
+                .every((fc: FormControl<any>) => !!fc.value)
             &&
             this.isValid
         ) {
@@ -76,7 +84,7 @@ export class FormGroup extends AbstractControl {
         this.controls.forEach(c => c.reset());
     }
 
-    protected preventValidation(): boolean {
+    protected _preventValidation(): boolean {
         return false;
     }
 }

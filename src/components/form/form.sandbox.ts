@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import { AbstractControlValidationType } from '../../utils/form/abstract-control';
+import { AbstractControlValidationType } from '../../utils/form/abstract-control-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { ModulVue } from '../../utils/vue/vue';

@@ -1,31 +1,7 @@
-/**
- * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
- */
-export enum AbstractControlValidationType {
-    Optimistic = 'optimistic',
-    OnGoing = 'on-going',
-    Correctable = 'correctable',
-    AtExit = 'at-exit'
-}
-
-export enum AbstractControlEditionContext {
-    None = 'none',
-    EmptyAndValid = 'empty-and-valid',
-    PopulateAndValid = 'populate-and-valid',
-    NotValid = 'not-valid'
-}
-
-export interface AbstractControlError {
-    key: string;
-    message: string;
-    summaryMessage?: string;
-}
-
-export interface AbstractControlValidator {
-    validationFunction: (self: AbstractControl) => boolean;
-    error: AbstractControlError;
-    lastCheck?: boolean;
-}
+import { AbstractControlEditionContext } from "./abstract-control-edition-context";
+import { AbstractControlError } from "./abstract-control-error";
+import { AbstractControlValidationType } from "./abstract-control-validation-type";
+import { AbstractControlValidator } from "./abstract-control-validator";
 
 export abstract class AbstractControl {
     public editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
@@ -42,7 +18,7 @@ export abstract class AbstractControl {
     public abstract get errors(): AbstractControlError[];
 
     public validate(): void {
-        if (this.preventValidation()) {
+        if (this._preventValidation()) {
             return;
         }
 
@@ -64,5 +40,5 @@ export abstract class AbstractControl {
         this.validate();
     }
 
-    protected abstract preventValidation(): boolean;
+    protected abstract _preventValidation(): boolean;
 }

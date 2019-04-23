@@ -1,7 +1,9 @@
 import { Component, Emit, Prop } from "vue-property-decorator";
-import { FormActionType, FormAfterActionEffect, FormAfterActionEffects } from "../../utils/form/form-after-action-effect";
 import { FormGroup } from "../../utils/form/form-group";
 import { ModulVue } from "../../utils/vue/vue";
+import { FormActionType } from "./form-action-type";
+import { FormAfterActionEffect } from "./form-after-action-effect";
+import { FormAfterActionEffects } from "./form-after-action-effects";
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender

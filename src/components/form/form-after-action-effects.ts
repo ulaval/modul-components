@@ -1,22 +1,9 @@
-import { MForm } from '../../components/form/form';
-import { MToastPosition, MToastState } from '../../components/toast/toast';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
-
-export enum FormActionType {
-    None = 0 << 0,
-    InvalidSubmit = 1 << 1,
-    ValidSubmit = 2 << 2,
-    Reset = 4 << 4,
-    Destroy = 8 << 8,
-    ValidSubmitOrReset = ValidSubmit | Reset,
-    ValidSubmitOrResetOrDestroy = ValidSubmit | Reset | Destroy
-}
-
-export type FormAfterActionEffect = {
-    formActionType: FormActionType,
-    afterEffect: (form: MForm) => void;
-};
+import { MToastPosition, MToastState } from '../toast/toast';
+import { MForm } from './form';
+import { FormActionType } from './form-action-type';
+import { FormAfterActionEffect } from './form-after-action-effect';
 
 export class FormAfterActionEffects {
     public static ClearErrorToast: FormAfterActionEffect = {
