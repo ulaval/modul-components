@@ -208,6 +208,14 @@ export default class ModulDate {
     }
 
     /**
+     * Getter for the Date
+     */
+    public toDate(): Date {
+        return this.innerDate;
+    }
+
+
+    /**
      * Compares if two dates are equals
      *
      * @param otherDate date to compare with

@@ -3,7 +3,7 @@
         "placeholder": "AAAA-MM-JJ",
         "open": "Ouvrir le calendrier",
         "close": "Fermer le calendrier",
-        "out-of-range-error": "Date hors limites",
-        "format-error": "Format invalide"
+        "out-of-range-error": "Entrer une date comprise entre le {0} et le {1}",
+        "format-error": "Le format attendu est AAAA-MM-JJ"
     }
 }

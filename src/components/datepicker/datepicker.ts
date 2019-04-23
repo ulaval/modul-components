@@ -3,10 +3,12 @@ import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import PopupDirectivePlugin from '../../directives/popup/popup';
+import { dateFilter } from '../../filters/date/date/date';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { FormatMode } from '../../utils/i18n/i18n';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import ModulDate from '../../utils/modul-date/modul-date';
 import uuid from '../../utils/uuid/uuid';
@@ -192,7 +194,10 @@ export class MDatepicker extends ModulVue {
                 this.internalCalendarErrorMessage = '';
                 return true;
             } else {
-                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
+
+                const minDateShortString: string = dateFilter(this.minModulDate.toDate(), { shortMode: true });
+                const maxDateShortString: string = dateFilter(this.maxModulDate.toDate(), { shortMode: true });
+                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error', [minDateShortString, maxDateShortString], undefined, undefined, false, FormatMode.Default);
                 return false;
             }
         } else {
