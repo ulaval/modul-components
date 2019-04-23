@@ -9,6 +9,11 @@
                      :label="formGroup.getControl('name').name"
                      v-m-control="formGroup.getControl('name')">
         </m-textfield>
+        <m-integerfield v-model.trim="formGroup.getControl('age').value"
+                        :error-message="formGroup.getControl('age').errors.length > 0 ? formGroup.getControl('age').errors[0].message : null"
+                        :label="formGroup.getControl('age').name"
+                        v-m-control="formGroup.getControl('age')">
+        </m-integerfield>
         <p class="m-u--margin-bottom--l">
             <m-button type="submit"
                       :form="formGroup.id">Submit</m-button>

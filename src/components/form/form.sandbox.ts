@@ -5,7 +5,7 @@ import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
-import { AbstractControlMinLengthValidator, AbstractControlRequiredValidator } from './abstract-control-validations';
+import { MinLengthValidator, MinValidator, RequiredValidator } from './abstract-control-validations';
 import FormPlugin from './form.plugin';
 import WithRender from './form.sandbox.html';
 
@@ -20,13 +20,18 @@ export class MFormSandbox extends ModulVue {
         [
             new FormControl<string>(
                 'name',
-                [
-                    AbstractControlRequiredValidator('name'),
-                    AbstractControlMinLengthValidator('name', 5)
-                ],
+                [RequiredValidator('name'), MinLengthValidator('name', 5)],
                 {
                     validationType: AbstractControlValidationType.AtExit,
                     initialValue: 'Jon Doe'
+                }
+            ),
+            new FormControl<string>(
+                'age',
+                [RequiredValidator('name'), MinValidator('name', 18)],
+                {
+                    validationType: AbstractControlValidationType.AtExit,
+                    initialValue: '12'
                 }
             )
         ]

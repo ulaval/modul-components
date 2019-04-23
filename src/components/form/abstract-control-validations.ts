@@ -3,7 +3,7 @@ import { AbstractControlValidator } from "../../utils/form/abstract-control-vali
 import { FormControl } from "../../utils/form/form-control";
 import { FormGroup } from "../../utils/form/form-group";
 
-export const AbstractControlRequiredValidator: (name: string) => AbstractControlValidator = (name: string): AbstractControlValidator => {
+export const RequiredValidator: (name: string) => AbstractControlValidator = (name: string): AbstractControlValidator => {
     return {
         validationFunction: (control: AbstractControl): boolean => {
             let isPopulate: boolean = false;
@@ -26,7 +26,7 @@ export const AbstractControlRequiredValidator: (name: string) => AbstractControl
     };
 };
 
-export const AbstractControlMinLengthValidator: (name: string, minLength: number) => AbstractControlValidator = (name: string, minLength: number): AbstractControlValidator => {
+export const MinLengthValidator: (name: string, minLength: number) => AbstractControlValidator = (name: string, minLength: number): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
             let isMinLength: boolean = false;
@@ -47,7 +47,7 @@ export const AbstractControlMinLengthValidator: (name: string, minLength: number
     };
 };
 
-export const AbstractControlMaxLengthValidator: (name: string, maxLength: number) => AbstractControlValidator = (name: string, maxLength: number): AbstractControlValidator => {
+export const MaxLengthValidator: (name: string, maxLength: number) => AbstractControlValidator = (name: string, maxLength: number): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
             let isMaxLength: boolean = false;
@@ -68,7 +68,7 @@ export const AbstractControlMaxLengthValidator: (name: string, maxLength: number
     };
 };
 
-export const AbstractControlMinValidator: (name: string, min: number) => AbstractControlValidator = (name: string, min: number): AbstractControlValidator => {
+export const MinValidator: (name: string, min: number) => AbstractControlValidator = (name: string, min: number): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
             let isMin: boolean = false;
@@ -89,7 +89,7 @@ export const AbstractControlMinValidator: (name: string, min: number) => Abstrac
     };
 };
 
-export const AbstractControlMaxValidator: (name: string, max: number) => AbstractControlValidator = (name: string, max: number): AbstractControlValidator => {
+export const MaxValidator: (name: string, max: number) => AbstractControlValidator = (name: string, max: number): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
             let isMax: boolean = false;
@@ -109,6 +109,3 @@ export const AbstractControlMaxValidator: (name: string, max: number) => Abstrac
         }
     };
 };
-
-
-
