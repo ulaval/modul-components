@@ -60,10 +60,6 @@ export class MRepeater extends ModulVue {
         return this.itemKey ? item[this.itemKey] : index;
     }
 
-    get emptyMessageDisplayed(): boolean {
-        return this.list.length <= 0 && !!this.emptyMessage;
-    }
-
     get addBtnLabel(): string {
         return this.addButtonLabel || this.$i18n.translate('m-repeater:add');
     }

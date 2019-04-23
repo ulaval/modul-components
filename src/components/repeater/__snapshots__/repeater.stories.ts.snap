@@ -2,8 +2,6 @@
 
 exports[`Storyshots components|m-repeater Empty 1`] = `
 <div>
-  <!---->
-   
   <div>
     
         The list is empty
@@ -32,8 +30,6 @@ exports[`Storyshots components|m-repeater Operations 1`] = `
   </ul>
    
   <!---->
-   
-  <!---->
 </div>
 `;
 
@@ -57,8 +53,6 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
       </button>
     </li>
   </ul>
-   
-  <!---->
    
   <a
     class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
@@ -112,8 +106,6 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
                 
     </li>
   </ul>
-   
-  <!---->
    
   <a
     class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"

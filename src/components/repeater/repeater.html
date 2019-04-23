@@ -17,8 +17,7 @@
             </slot>
         </template>
     </component>
-
-    <div v-if="emptyMessageDisplayed">
+    <div v-else-if="emptyMessage">
         {{ emptyMessage }}
     </div>
     <!-- TODO: Replace with add component when it becomes available.  -->
