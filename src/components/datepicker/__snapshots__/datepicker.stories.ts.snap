@@ -93,7 +93,7 @@ exports[`Storyshots components|m-datepicker date format invalid 1`] = `
         <span
           class="m-validation-message__text"
         >
-          Format invalide
+          Le format attendu est AAAA-MM-JJ
         </span>
       </p>
        
@@ -210,7 +210,7 @@ exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
         <span
           class="m-validation-message__text"
         >
-          Date hors limites
+          Entrer une date comprise entre le Jan 1, 2008 et le Dec 31, 2014
         </span>
       </p>
        
@@ -327,7 +327,7 @@ exports[`Storyshots components|m-datepicker date off limit min 1`] = `
         <span
           class="m-validation-message__text"
         >
-          Date hors limites
+          Entrer une date comprise entre le Jan 1, 2008 et le Dec 31, 2014
         </span>
       </p>
        
