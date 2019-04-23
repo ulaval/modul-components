@@ -40,16 +40,48 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
       
                     Item # 0 uuid
                  
-      <button>
-        Delete
+      <button
+        class="m-button m--is-skin-primary"
+        type="button"
+      >
+        <!---->
+         
+        <!---->
+         
+        <span
+          class="m-button__text"
+        >
+          Delete 
+          <!---->
+        </span>
+         
+        <!---->
+         
+        <!---->
       </button>
     </li>
     <li>
       
                     Item # 1 uuid
                  
-      <button>
-        Delete
+      <button
+        class="m-button m--is-skin-primary"
+        type="button"
+      >
+        <!---->
+         
+        <!---->
+         
+        <span
+          class="m-button__text"
+        >
+          Delete 
+          <!---->
+        </span>
+         
+        <!---->
+         
+        <!---->
       </button>
     </li>
   </ul>

@@ -1,10 +1,14 @@
+import { PluginObject } from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
+import ButtonPlugin from '../button/button';
+import { REPEATER_NAME } from '../component-names';
+import LinkPlugin from '../link/link';
 import WithRender from './repeater.html';
 
-interface MRepeaterItem { }
+export interface MRepeaterItem { }
 
-interface MRepeaterOperations {
+export interface MRepeaterOperations {
     canAdd: boolean;
     canDelete: boolean;
 }
@@ -68,4 +72,14 @@ export class MRepeater extends ModulVue {
         return this.deleteButtonLabel || this.$i18n.translate('m-repeater:delete');
     }
 }
+
+const RepeaterPlugin: PluginObject<any> = {
+    install(v): void {
+        v.use(LinkPlugin);
+        v.use(ButtonPlugin)
+        v.component(REPEATER_NAME, MRepeater);
+    }
+};
+
+export default RepeaterPlugin;
 
