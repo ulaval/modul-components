@@ -40,7 +40,6 @@ export abstract class AbstractControl {
         this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
 
-
     public reset(): void {
         this.validators.forEach(v => v.lastCheck = undefined);
         this.editionContext = AbstractControlEditionContext.None;

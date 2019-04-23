@@ -28,7 +28,7 @@ export class MFormSandbox extends ModulVue {
             ),
             new FormControl<string>(
                 'age',
-                [RequiredValidator('name'), MinValidator('name', 18)],
+                [RequiredValidator('age'), MinValidator('age', 18)],
                 {
                     validationType: AbstractControlValidationType.AtExit,
                     initialValue: '12'
