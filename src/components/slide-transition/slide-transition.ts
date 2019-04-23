@@ -35,20 +35,20 @@ export class MSlideTransition extends ModulVue {
 
     @Emit('enter')
     private transitionEnter(el: HTMLElement): void {
-        this.$scrollTo.goTo(this.$el, this.scrollToOffset, ScrollToDuration.Regular);
+        this.$scrollTo.goTo(this.$el as HTMLElement, this.scrollToOffset, ScrollToDuration.Regular);
         setTimeout(() => {
             this.transitionBeforeLeave(el);
         }, 100);
     }
 
     private transitionAfterEnter(): void {
-        this.$el.style.removeProperty('height');
-        this.$el.style.removeProperty('overflow');
+        (this.$el as HTMLElement).style.removeProperty('height');
+        (this.$el as HTMLElement).style.removeProperty('overflow');
     }
 
     private transitionBeforeLeave(el: HTMLElement): void {
-        this.$el.style.height = this.getHeightEl(el) + 'px';
-        this.$el.style.overflow = 'hidden';
+        (this.$el as HTMLElement).style.height = this.getHeightEl(el) + 'px';
+        (this.$el as HTMLElement).style.overflow = 'hidden';
     }
 
     @Emit('afterLeave')

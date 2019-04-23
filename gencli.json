@@ -1,0 +1,52 @@
+{
+    "fileNameCase": "kebab",
+    "folderNameCase": "kebab",
+    "templatePath": "/src/meta/cli-templates",
+    "entityConfigs": [
+        {
+            "name": "component",
+            "path": "/src/components",
+            "prefix": "m",
+            "fileConfigs": [
+                {
+                    "name": "*.ts",
+                    "template": "component-vue.txt"
+                },
+                {
+                    "name": "*.html",
+                    "template": "component-template.txt"
+                },
+                {
+                    "name": "*.scss",
+                    "template": "component-style.txt"
+                },
+                {
+                    "name": "*.spec.ts",
+                    "template": "component-test.txt"
+                },
+                {
+                    "name": "*.stories.ts",
+                    "template": "component-stories.txt"
+                },
+                {
+                    "name": "*.lang.fr.json",
+                    "template": "component-locale-fr.txt"
+                }
+            ]
+        },
+        {
+            "name": "directive",
+            "path": "/src/directives",
+            "files": [
+                {
+                    "name": "*.ts",
+                    "template": "directive.txt"
+                },
+                {
+                    "name": "*.spec.ts",
+                    "template": "directive-test.txt"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+@import 'commons';
+
+.m-add {
+    &.m--is-skin-light,
+    &.m--is-skin-text {
+        &:not(.m--is-disabled) {
+            .m-link__icon {
+                transition: color $m-transition-duration ease;
+                color: $m-color--interactive;
+            }
+
+            &:hover,
+            &:focus {
+                .m-link__icon {
+                    color: $m-color--interactive-light;
+                }
+            }
+
+            &:active {
+                .m-link__icon {
+                    color: $m-color--interactive-dark;
+                }
+            }
+
+            &:not(.m--is-unvisited):not(:hover):not(:focus):visited {
+                .m-link__icon {
+                    color: $m-color--interactive-darker;
+                }
+            }
+        }
+    }
+}

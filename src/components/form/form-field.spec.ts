@@ -16,9 +16,11 @@ jest.mock('../../utils/form/form-field/form-field', () => {
         })
     };
 });
-window.scrollTo = jest.fn();
+
+
 
 describe('form-field', () => {
+
     let wrapper: Wrapper<ModulVue>;
 
     beforeEach(() => {
@@ -27,20 +29,25 @@ describe('form-field', () => {
     });
 
     describe(`The form validate its fields`, () => {
-        mockFormField = {
-            shouldFocus: false,
-            isEditing: false,
-            hasError: true,
-            touched: false,
-            touch: jest.fn(),
-            initEdition: jest.fn(),
-            endEdition: jest.fn()
-        };
+
 
         let formField: FormField<any>;
         let form: Form;
 
         beforeEach(() => {
+
+            const scrollTo: jest.SpyInstance = jest.spyOn((Vue.prototype).$scrollTo, 'goTo').mockImplementation(() => { });
+
+            mockFormField = {
+                shouldFocus: false,
+                isEditing: false,
+                hasError: true,
+                touched: false,
+                touch: jest.fn(),
+                initEdition: jest.fn(),
+                endEdition: jest.fn()
+            };
+
             formField = new FormField(() => undefined, [(value: any) => {
                 return new FormFieldValidation(true, [''], ['']);
             }]);
@@ -64,7 +71,7 @@ describe('form-field', () => {
         });
 
         it(`the element should be scrolled to`, async () => {
-            const spy: jest.SpyInstance = jest.spyOn((Vue.prototype).$scrollTo, 'goTo');
+            const spy: jest.SpyInstance = jest.spyOn((Vue.prototype).$scrollTo, 'goTo').mockImplementation(() => { });
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
 
@@ -74,31 +81,37 @@ describe('form-field', () => {
         });
 
         it(`the element should be focused`, async () => {
+
             const spy2: jest.SpyInstance = jest.spyOn(wrapper.find({ ref: 'field' }).element, 'focus');
             form.focusFirstFieldWithError();
             expect(mockFormField.shouldFocus).toBe(true);
 
             await wrapper.vm.$forceUpdate();
-
             expect(mockFormField.shouldFocus).toBe(false);
             expect(spy2).toHaveBeenCalled();
         });
 
-        it(`it should init and end edition on focus and blur`, () => {
+        it(`it should init and end edition on focus and blur`, async () => {
+
             const spy1: jest.SpyInstance = jest.spyOn(mockFormField, 'initEdition');
             const spy2: jest.SpyInstance = jest.spyOn(mockFormField, 'endEdition');
 
-            wrapper.find({ ref: 'field' }).element.focus();
-            wrapper.find({ ref: 'field' }).element.blur();
+            wrapper.find({ ref: 'field' }).trigger('focus');
+            wrapper.find({ ref: 'field' }).trigger('blur');
+
+            await Vue.nextTick();
 
             expect(spy1).toHaveBeenCalled();
             expect(spy2).toHaveBeenCalled();
         });
 
-        it(`it should touch the field on blur`, () => {
+        it(`it should touch the field on blur`, async () => {
+
             const spy: jest.SpyInstance = jest.spyOn(mockFormField, 'touch');
 
-            wrapper.find({ ref: 'field' }).element.blur();
+            wrapper.find({ ref: 'field' }).trigger('blur');
+
+            await Vue.nextTick();
 
             expect(spy).toHaveBeenCalled();
         });

@@ -1,6 +1,7 @@
 export const ACCORDION_GROUP_NAME: string = 'm-accordion-group';
 export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
+export const ADD_NAME: string = 'm-add';
 export const AUTOCOMPLETE_NAME: string = 'm-autocomplete';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
@@ -12,6 +13,7 @@ export const CHECKBOX_NAME: string = 'm-checkbox';
 export const DATEFIELDS_NAME: string = 'm-datefields';
 export const DATEPICKER_NAME: string = 'm-datepicker';
 export const DATERANGEPICKER_NAME: string = 'm-daterangepicker';
+export const DECIMALFIELD_NAME: string = 'm-decimalfield';
 export const DIALOG_NAME: string = 'm-dialog';
 export const DROPDOWN_NAME: string = 'm-dropdown';
 export const DROPDOWN_ITEM_NAME: string = 'm-dropdown-item';

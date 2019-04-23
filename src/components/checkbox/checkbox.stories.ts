@@ -12,7 +12,6 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
@@ -26,9 +25,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     }))
     .add('value', () => ({
         template: '<m-checkbox value="true">A Checkbox</m-checkbox>'
-    }))
-    .add('indeterminate', () => ({
-        template: '<m-checkbox indeterminate="true">A Checkbox</m-checkbox>'
     }))
     .add('position=right', () => ({
         template: '<m-checkbox position="right">A Checkbox</m-checkbox>'

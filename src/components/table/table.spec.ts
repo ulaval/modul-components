@@ -1,7 +1,7 @@
 import { shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { renderComponent } from '../../../tests/helpers/render';
-import { MColumnTable, MTable } from './table';
+import { MColumnSortDirection, MColumnTable, MTable } from './table';
 
 let slots: any = {};
 const SLOT_EMPTY: string = '<td>EMPTY</td>';
@@ -14,8 +14,8 @@ const SLOT_FOOTER: string = '<td>SLOT FOOTER</td>';
 let rows: any[] = [];
 
 const columns: MColumnTable[] = [
-    { id: 'a', title: 'A', dataProp: 'a', width: '10%', sortable: true },
-    { id: 'b', title: 'B', dataProp: 'b' }
+    { id: 'a', title: 'A', dataProp: 'a', width: '10%', sortable: true, sortDirection: MColumnSortDirection.None },
+    { id: 'b', title: 'B', dataProp: 'b', sortDirection: MColumnSortDirection.None }
 ];
 
 const EMPTY_DATA: any[] = [];
@@ -119,7 +119,7 @@ describe(`MTable`, () => {
                     it(`Should emit a action event`, () => {
                         wrapper.find('.m-table__sortable-icon').trigger('click');
 
-                        expect(wrapper.emitted('update:sortedColumn')).toBeTruthy();
+                        expect(wrapper.emitted('sortApplied')).toBeTruthy();
                     });
                 });
             });
