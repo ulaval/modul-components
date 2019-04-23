@@ -49,36 +49,5 @@ export class FormControl<T> extends AbstractControl {
         super.reset();
         this._value = this._intialValue;
     }
-
-    protected _preventValidation(): boolean {
-        let preventValidation: boolean = true;
-
-        if (this.editionContext === AbstractControlEditionContext.EmptyAndValid) {
-            switch (this.validationType) {
-                case AbstractControlValidationType.OnGoing:
-                    preventValidation = false;
-                    break;
-            }
-        } else if (this.editionContext === AbstractControlEditionContext.PopulateAndValid) {
-            switch (this.validationType) {
-                case AbstractControlValidationType.Optimistic:
-                case AbstractControlValidationType.OnGoing:
-                    preventValidation = false;
-                    break;
-            }
-        } else if (this.editionContext === AbstractControlEditionContext.NotValid) {
-            switch (this.validationType) {
-                case AbstractControlValidationType.Optimistic:
-                case AbstractControlValidationType.OnGoing:
-                case AbstractControlValidationType.Correctable:
-                    preventValidation = false;
-                    break;
-            }
-        } else if (this.editionContext === AbstractControlEditionContext.None) {
-            preventValidation = false;
-        }
-
-        return preventValidation;
-    }
 }
 

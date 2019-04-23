@@ -83,8 +83,4 @@ export class FormGroup extends AbstractControl {
         super.reset();
         this.controls.forEach(c => c.reset());
     }
-
-    protected _preventValidation(): boolean {
-        return false;
-    }
 }

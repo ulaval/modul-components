@@ -2,6 +2,7 @@ import { AbstractControlEditionContext } from "./abstract-control-edition-contex
 import { AbstractControlError } from "./abstract-control-error";
 import { AbstractControlValidationType } from "./abstract-control-validation-type";
 import { AbstractControlValidator } from "./abstract-control-validator";
+import { AbstractControlValidationGuard, DefaultValidationGuard } from "./validation-guard";
 
 export abstract class AbstractControl {
     public editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
@@ -11,14 +12,15 @@ export abstract class AbstractControl {
     constructor(
         public readonly name: string,
         public readonly validators: AbstractControlValidator[] = [],
-        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing
+        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing,
+        private readonly _guardAgainstValidation: AbstractControlValidationGuard = DefaultValidationGuard
     ) { }
 
     public abstract get isValid(): boolean;
     public abstract get errors(): AbstractControlError[];
 
     public validate(): void {
-        if (this._preventValidation()) {
+        if (this._guardAgainstValidation(this.editionContext, this.validationType)) {
             return;
         }
 
@@ -39,6 +41,4 @@ export abstract class AbstractControl {
         this.editionContext = AbstractControlEditionContext.None;
         this.validate();
     }
-
-    protected abstract _preventValidation(): boolean;
 }
