@@ -1,92 +1,48 @@
-import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
-import moment from 'moment';
+import { createLocalVue, mount, TransitionStub } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { renderComponent } from '../../../tests/helpers/render';
-import uuid from '../../utils/uuid/uuid';
-import DatepickerPlugin, { MDatepicker } from './datepicker';
+import { PortalStub } from '../../../tests/helpers/render';
 import ModulPlugin from '../../utils/modul/modul';
+import uuid from '../../utils/uuid/uuid';
+import { MCalendar } from '../calendar/calendar';
+import DatepickerPlugin, { MDatepicker } from './datepicker';
 
 
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
 
+
+
 describe('MDatepicker', () => {
     let localVue: VueConstructor<Vue>;
-    let mockDropDown: VueConstructor<Vue>;
+    let wrapper: any;
 
     beforeEach(() => {
         resetModulPlugins();
         localVue = createLocalVue();
         Vue.use(DatepickerPlugin);
         Vue.use(ModulPlugin);
-    });
-
-    it('should render correctly', () => {
-        const tp: Wrapper<MDatepicker> = mount(MDatepicker, {
-            localVue: localVue
-        });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly when waiting is set', () => {
-        const tp: Wrapper<MDatepicker> = mount(MDatepicker, {
+        wrapper = mount(MDatepicker, {
+            sync: false,
             localVue: localVue,
-            propsData: {
-                waiting: true
+            stubs: {
+                transition: TransitionStub as any,
+                portal: PortalStub as any
             }
         });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
     });
 
-    it('should render correctly when disabled is set', () => {
-        const tp: Wrapper<MDatepicker> = mount(MDatepicker, {
-            localVue: localVue,
-            propsData: {
-                disabled: true
-            }
-        });
+    it('When the field is clicked then popup show open and field has focus', async () => {
+        wrapper.trigger('click');
 
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
 
-    it('should render correctly when error is set', () => {
-        const tp: Wrapper<MDatepicker> = mount(MDatepicker, {
-            localVue: localVue,
-            propsData: {
-                error: true,
-                errorMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
-            }
-        });
+        expect(wrapper.emitted().click).toBeTruthy();
+        expect(wrapper.emitted().focus).toBeTruthy();
+        await Vue.nextTick();
 
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
+        const calendar: any = wrapper.find('.m-calendar');
+        expect(calendar.is(MCalendar)).toBe(true);
 
-    it('should render correctly when valid is set', () => {
-        const tp: Wrapper<MDatepicker> = mount(MDatepicker, {
-            localVue: localVue,
-            propsData: {
-                valid: true,
-                validMessage: 'Nostrud laboris quis velit voluptate aute elit elit non.'
-            }
-        });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
-    });
-
-    it('should render correctly min/max time', () => {
-        const tp: Wrapper<MDatepicker> = mount(MDatepicker, {
-            localVue: localVue,
-            propsData: {
-                duration: true,
-                min: moment().subtract(2, 'years'),
-                max: moment().add(2, 'years')
-            }
-        });
-
-        return expect(renderComponent(tp.vm)).resolves.toMatchSnapshot();
     });
 });

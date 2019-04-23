@@ -11,14 +11,13 @@ import WithRender from './input-mask.html';
 @WithRender
 @Component
 export class MInputMask extends ModulVue {
-
     public $refs: {
         input: HTMLInputElement;
     };
 
     @Prop()
     @Model('input')
-    inputValue: string;
+    value: string;
 
     @Prop({ default: true })
     public raw: boolean;
@@ -29,9 +28,15 @@ export class MInputMask extends ModulVue {
 
     private cleave: Cleave;
 
+
+    private internalModel = '';
+
     mounted(): void {
+
+        this.internalModel = this.value || '';
         this.cleave = new Cleave(this.$refs.input, this.getOptions());
-        this.cleave.setRawValue(this.inputValue);
+
+        this.cleave.setRawValue(this.value);
     }
 
     beforeDestroy(): void {
@@ -43,19 +48,35 @@ export class MInputMask extends ModulVue {
             ...this.options,
             onValueChanged: (event => {
                 let _value: string = this.raw ? event.target.rawValue : event.target.value;
-                this.$emit('input', _value);
+
+                // only emit if model is changed
+                // when v-model is not masked (raw)
+                if (this.internalModel === _value) {
+                    return;
+                } else {
+                    this.internalModel = _value;
+                    this.$emit('input', _value);
+                }
+
+
             })
         };
+    }
+
+    public async focusAndSelectAll(): Promise<any> {
+        await this.$nextTick();
+        this.$refs.input.focus();
+        this.$refs.input.setSelectionRange(0, this.$refs.input.value.length);
     }
 
     @Watch('options', { deep: true })
     public optionsChanged(options: CleaveOptions): void {
         this.cleave.destroy();
         this.cleave = new Cleave(this.$el as HTMLElement, this.getOptions());
-        this.cleave.setRawValue(this.inputValue);
+        this.cleave.setRawValue(this.value);
     }
 
-    @Watch('inputValue')
+    @Watch('value')
     public inputValueChanged(inputValue: string): void {
         // when v-model is not masked (raw)
         if (this.raw && inputValue === this.cleave.getRawValue()) {
@@ -66,6 +87,7 @@ export class MInputMask extends ModulVue {
             return;
         }
 
+        this.internalModel = this.value || '';
         this.cleave.setRawValue(inputValue);
     }
 

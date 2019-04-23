@@ -43,6 +43,10 @@ $m-table--icon-vertical-offset: -5px !default;
                     }
                 }
             }
+
+            &.m--is-centered {
+                text-align: center;
+            }
         }
     }
 
@@ -76,6 +80,14 @@ $m-table--icon-vertical-offset: -5px !default;
     td {
         padding: $m-spacing;
         box-sizing: content-box;
+
+        &.m--is-centered {
+            text-align: center;
+
+            > * {
+                text-align: center;
+            }
+        }
     }
 
     &__loading td {

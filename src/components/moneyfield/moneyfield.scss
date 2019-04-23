@@ -1,0 +1,7 @@
+@import 'commons';
+
+.m-moneyfield {
+    display: inline-flex;
+
+    @include m-input-inline-spacing();
+}

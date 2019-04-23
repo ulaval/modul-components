@@ -2,6 +2,7 @@ import Vue, { PluginObject } from 'vue';
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
+import AddPlugin from './add/add';
 import ButtonPlugin from './button/button';
 import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
@@ -99,6 +100,7 @@ const ComponentsPlugin: PluginObject<any> = {
 
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
+        Vue.use(AddPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);

@@ -30,6 +30,12 @@
 
         <div class="m-input-style__body"
              ref="body">
+
+            <div v-if="showPrefix"
+                 class="m-input-style__prefix"
+                 ref="prefix">
+                <slot name="prefix"></slot>
+            </div>
             <div class="m-input-style__left-content">
                 <slot></slot>
                 <m-i18n v-if="!hasDefaultSlot"

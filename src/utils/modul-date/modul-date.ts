@@ -18,6 +18,7 @@ export enum DateComparison {
     IS_AFTER = 1
 }
 
+export const DATE_FORMAT_REGEX: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
 export default class ModulDate {
 
     private innerDate: Date;
@@ -284,9 +285,9 @@ export default class ModulDate {
         }
 
         // Otherwise we try to build the date from a partial date string (2010-12-01 or 2010/12/01)
-        const dateFormat: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
 
-        const parts: string[] = dateFormat.exec(value) as string[];
+
+        const parts: string[] = DATE_FORMAT_REGEX.exec(value) as string[];
         if (!parts || parts.length < 4) {
             throw Error(`Impossible to find date parts in date`);
         }

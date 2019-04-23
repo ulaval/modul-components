@@ -6,9 +6,29 @@
             "request": "launch",
             "name": "Jest All",
             "program": "${workspaceRoot}/node_modules/jest/bin/jest",
-            "args": ["--runInBand"],
+            "args": [
+                "--runInBand"
+            ],
             "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Jest Current File",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+                "${fileBasenameNoExtension}",
+                "--config",
+                "jest.config.js"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "windows": {
+                "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            }
         },
         {
             "name": "Launch Chrome",
