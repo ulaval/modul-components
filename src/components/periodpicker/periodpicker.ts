@@ -2,13 +2,14 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
+import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import ModulDate from '../../utils/modul-date/modul-date';
 import { ModulVue } from '../../utils/vue/vue';
 import { PERIODPICKER_NAME } from '../component-names';
 import { DatePickerSupportedTypes } from '../datepicker/datepicker';
 import ValidationMessagePlugin from '../validation-message/validation-message';
-import WithRender from './periodpicker.html';
+import WithRender from './periodpicker.html?style=./periodpicker.scss';
 
 export class MDateRange {
     from: DatePickerSupportedTypes;
@@ -67,7 +68,11 @@ export interface MPeriodpickerProps {
 
 @WithRender
 @Component({
-    mixins: [MediaQueries, InputState]
+    mixins: [
+        MediaQueries,
+        InputState,
+        InputWidth
+    ]
 })
 export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()
@@ -94,7 +99,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.fromIsFocused,
-                value: this.internalValue.from,
+                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.from),
                 min: this.min,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -115,7 +120,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.toIsFocused,
-                value: this.internalValue.to,
+                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.to),
                 min: this.minDateTo,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -217,6 +222,37 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         this.fromIsFocused = false;
         this.toIsFocused = false;
         this.emitNewValue({ from: this.dateFromInternalValue, to: this.dateToInternalValue });
+    }
+
+
+    /**
+     * This method convert a date or a iso string into a local date string with format YYYY-MM-DD
+     *
+     * @param date
+     */
+    static formatIsoDateToLocalString(date?: DatePickerSupportedTypes): string {
+        if (!date) {
+            return '';
+        }
+        let _date: Date;
+        if (date instanceof Date) {
+            _date = date;
+        } else {
+            _date = new Date(date);
+        }
+
+        let month: string = '' + (_date.getMonth() + 1);
+        let day: string = '' + _date.getDate();
+        let year: number = _date.getFullYear();
+
+        if (month.length < 2) {
+            month = '0' + month;
+        }
+        if (day.length < 2) {
+            day = '0' + day;
+        }
+
+        return [year, month, day].join('-');
     }
 }
 

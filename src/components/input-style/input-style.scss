@@ -347,6 +347,7 @@ $m-input-style-base-height: $m-line-height + em;
 // reserve space for icon
 .m-datepicker .m-input-style__label,
 .m-timepicker .m-input-style__label,
+.m-moneyfield .m-input-style__label,
 .m--is-type-search .m-input-style__label,
 .m--is-type-search .m-input-style__adjust-width-auto {
     padding-right: $m-input-style--icon-button-size + $m-input-style--padding;

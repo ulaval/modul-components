@@ -5,6 +5,9 @@
         model value: {{ model }} is number = {{  isNumber }}
     </div>
 
+    <h2>Base moneyfield with a limit of 9 999,99$</h2>
+    <m-moneyfield precision="9"></m-moneyfield>
+
     <h2>Base moneyfield with initialized model</h2>
     <m-moneyfield v-model="definedModel"></m-moneyfield>
     <div>
