@@ -14,8 +14,10 @@ export class MFormSandbox extends ModulVue {
     formGroup: FormGroup = new FormGroup(
         'my form',
         [],
+        AbstractControlValidationType.Optimistic,
         [
             new FormControl<string>('name',
+                AbstractControlValidationType.Optimistic,
                 [
                     {
                         validationFunction: (formControl: FormControl<string>): boolean => {
@@ -23,14 +25,12 @@ export class MFormSandbox extends ModulVue {
                         },
                         error: {
                             key: 'required',
-                            message: 'this field is required'
+                            message: 'this field is required',
+                            summaryMessage: 'the field name is required'
                         }
                     }
                 ],
-                '',
-                {
-                    validationType: AbstractControlValidationType.Correctable
-                }
+                ''
             )
         ]
     );

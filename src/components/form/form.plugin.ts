@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import { ABSTRACT_CONTROL_NAME } from '../../directives/directive-names';
-import { FormClearToastBehavior, FormErrorFocusBehavior, FormErrorToastBehavior, MFormListener, MFormService } from '../../utils/form/form-service/form-service';
+import { MFormService } from '../../utils/form/form-service/form-service';
 import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
 import ToastServicePlugin from '../../utils/toast/toast-service';
 import { FORM } from '../component-names';
@@ -17,7 +17,6 @@ declare module 'vue/types/vue' {
 }
 
 export interface FormPluginOptions {
-    formListeners: MFormListener[];
 }
 
 export const FormPlugin: PluginObject<any> = {
@@ -33,17 +32,9 @@ export const FormPlugin: PluginObject<any> = {
         v.component(FORM, MForm);
 
         let form: MFormService;
-        if (options && options.formListeners) {
-            form = new MFormService(options.formListeners);
-        } else {
-            form = new MFormService([
-                new FormErrorToastBehavior(),
-                new FormClearToastBehavior(),
-                new FormErrorFocusBehavior()]);
-        }
+        form = new MFormService([]);
 
         (v.prototype).$form = form;
-
     }
 };
 

@@ -1,8 +1,3 @@
-
-export interface AbstractControlOptions {
-    validationType?: AbstractControlValidationType;
-}
-
 /**
  * @see https://wiki.dti.ulaval.ca/pages/viewpage.action?spaceKey=MODUL&title=Gestion+des+erreurs
  */
@@ -23,6 +18,7 @@ export enum FormControlEditionContext {
 export interface AbstractControlError {
     key: string;
     message: string;
+    summaryMessage?: string;
 }
 
 export interface AbstractControlValidator {
@@ -32,16 +28,18 @@ export interface AbstractControlValidator {
 }
 
 export abstract class AbstractControl {
-    public validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing;
-    public editionContext: FormControlEditionContext;
-    public errors: AbstractControlError[] = [];
+    public editionContext: FormControlEditionContext = FormControlEditionContext.None;
+    public focusGranted: boolean = false;
+    protected _errors: AbstractControlError[] = [];
 
     constructor(
-        public name: string,
-        public validators: AbstractControlValidator[] = []
+        public readonly name: string,
+        public readonly validators: AbstractControlValidator[] = [],
+        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing
     ) { }
 
     public abstract get isValid(): boolean;
+    public abstract get errors(): AbstractControlError[];
 
     public validate(): void {
         if (this.preventValidation()) {
@@ -49,12 +47,14 @@ export abstract class AbstractControl {
         }
 
         this.validators.forEach(v => v.lastCheck = v.validationFunction(this));
-        this.errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
+        this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
+
 
     public reset(): void {
         this.validators.forEach(v => v.lastCheck = undefined);
-        this.errors = [];
+        this.editionContext = FormControlEditionContext.None;
+        this._errors = [];
     }
 
     public abstract initEdition(): void;
@@ -69,15 +69,23 @@ export abstract class AbstractControl {
 
 export class FormGroup extends AbstractControl {
     constructor(
-        public name: string,
-        public validators: AbstractControlValidator[] = [],
+        public readonly name: string,
+        public readonly validators: AbstractControlValidator[] = [],
+        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing,
         public controls: AbstractControl[]
     ) {
-        super(name, validators);
+        super(name, validators, validationType);
     }
 
     public get isValid(): boolean {
         return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.isValid);
+    }
+
+    public get errors(): AbstractControlError[] {
+        return this.controls
+            .map(c => c.errors)
+            .reduce((acc, curr) => acc.concat(curr), [])
+            .concat(this._errors);
     }
 
     public getControl(name: string): AbstractControl {
@@ -135,7 +143,7 @@ export class FormGroup extends AbstractControl {
     }
 
     protected preventValidation(): boolean {
-        return true;
+        return false;
     }
 }
 
@@ -143,19 +151,14 @@ export class FormControl<T> extends AbstractControl {
     private _intialValue?: T;
 
     constructor(
-        public name: string,
-        public validators: AbstractControlValidator[] = [],
-        private _value?: T,
-        options?: AbstractControlOptions
+        public readonly name: string,
+        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing,
+        public readonly validators: AbstractControlValidator[] = [],
+        private _value?: T
     ) {
-        super(name, validators);
+        super(name, validators, validationType);
 
         this._intialValue = _value;
-
-        if (options) {
-            this.validationType = typeof options.validationType === undefined ?
-                this.validationType : options.validationType!;
-        }
     }
 
     get value(): T | undefined {
@@ -169,6 +172,10 @@ export class FormControl<T> extends AbstractControl {
 
     public get isValid(): boolean {
         return this.validators.every(v => !!v.lastCheck);
+    }
+
+    public get errors(): AbstractControlError[] {
+        return this._errors;
     }
 
     public initEdition(): void {

@@ -27,23 +27,23 @@ export const AbstractControlDirective: DirectiveOptions = {
         el: HTMLElement,
         binding: VNodeDirective
     ): void {
-        // const AbstractControl: AbstractControl = binding.value;
-        // const selector: string = 'input, textarea, [contenteditable=true]';
-        // const inputElement: Element = el.querySelectorAll(selector)[0];
+        const AbstractControl: AbstractControl = binding.value;
+        const selector: string = 'input, textarea, [contenteditable=true]';
+        const inputElement: Element = el.querySelectorAll(selector)[0];
 
-        // if (AbstractControl.shouldFocus) {
-        //     if (el instanceof HTMLInputElement) {
-        //         scrollToElement(el);
-        //         el.focus();
-        //     } else {
-        //         if (inputElement) {
-        //             scrollToElement(inputElement);
-        //             (inputElement as HTMLInputElement).focus();
-        //         }
-        //     }
+        if (AbstractControl.focusGranted) {
+            if (el instanceof HTMLInputElement) {
+                scrollToElement(el);
+                el.focus();
+            } else {
+                if (inputElement) {
+                    scrollToElement(inputElement);
+                    (inputElement as HTMLInputElement).focus();
+                }
+            }
 
-        //     AbstractControl.shouldFocus = false;
-        // }
+            AbstractControl.focusGranted = false;
+        }
     },
     unbind(
         el: HTMLElement
