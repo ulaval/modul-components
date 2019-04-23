@@ -11,8 +11,9 @@
                     <slot :item="item"
                           :index="index"
                           name="item"></slot>
-                    <button v-if="operations.canDelete"
-                            @click="onDeleteBtnClick(index)">{{ deleteBtnLabel }}</button>
+                    <m-button v-if="operations.canDelete"
+                              :ref="'deleteBtn' + index"
+                              @click="onDeleteBtnClick(index)">{{ deleteBtnLabel }}</m-button>
                 </component>
             </slot>
         </template>
@@ -27,6 +28,7 @@
             icon-name="m-svg__add-circle-filled"
             :icon-position="'left'"
             :icon-size="'24px'"
+            ref="addBtn"
             :skin="'default'"
             :underline="true"
             @click="onAddBtnClick()">
