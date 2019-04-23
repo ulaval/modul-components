@@ -94,7 +94,7 @@ describe(`MToast`, () => {
     describe(`Given that a custom action prop have been passed`, () => {
         beforeEach(async () => {
             initializeWrapper();
-            await jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            await jest.runOnlyPendingTimers(); // wait for component to be instantiated
 
             wrapper.setProps({
                 actionLabel: ACTION_LABEL
@@ -125,21 +125,61 @@ describe(`MToast`, () => {
 
     describe(`Given that a timeout prop have been passed`, () => {
         describe(`When the Toast is created`, () => {
-            it(`Should appear and then disappear`, async () => {
-                initializeWrapper();
-                wrapper.setProps({
-                    timeout: 'short'
+
+            describe(`Then the mouse is not over the toast`, () => {
+                it(`Should appear and then disappear`, async () => {
+                    initializeWrapper();
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    await jest.runOnlyPendingTimers(); // wait for component to be instantiated
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
+
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
                 });
-                jest.runOnlyPendingTimers(); // wait for component to be instancialized
+            });
 
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
-                expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
-                await Vue.nextTick();
-                expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+            describe(`Then the mouse is over the toast`, () => {
+                it(`Should appear and then not disappear`, async () => {
+                    initializeWrapper();
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    await jest.runOnlyPendingTimers(); // wait for component to be instantiated
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
 
-                jest.runOnlyPendingTimers(); // wait for the 5000 ms to be over
+                    wrapper.vm.mouseEnterToast();
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
 
-                expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                });
+            });
+
+            describe(`Then the mouse is over and leave the toast`, () => {
+                it(`Should appear and then not disappear`, async () => {
+                    initializeWrapper();
+                    wrapper.setProps({
+                        timeout: 'short'
+                    });
+                    await jest.runOnlyPendingTimers(); // wait for component to be instantiated
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
+                    expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+
+                    wrapper.vm.mouseEnterToast();
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
+
+                    wrapper.vm.mouseLeaveToast();
+                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
+                    expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
+                });
             });
         });
     });
@@ -166,6 +206,7 @@ describe(`MToast`, () => {
     });
 
     describe(`Given that calling function 'doCustomPropOpen'`, () => {
+        const elementHtml: HTMLElement = createMockHTMLElementStyleAbsolute();
         describe(`with mode desktop'`, () => {
             beforeEach(() => {
                 modeMobile = false;
@@ -177,7 +218,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'long'
                     });
-                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.DesktopLong `, async () => {
@@ -190,7 +231,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.DesktopShort `, async () => {
@@ -209,7 +250,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'long'
                     });
-                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.MobileLong `, async () => {
@@ -222,7 +263,7 @@ describe(`MToast`, () => {
                     wrapper.setProps({
                         timeout: 'short'
                     });
-                    wrapper.vm.doCustomPropOpen(true, (wrapper.vm as any).$el);
+                    wrapper.vm.doCustomPropOpen(true, elementHtml);
                 });
 
                 it(`should appear after MToastDuration.MobileShort `, async () => {
@@ -230,6 +271,14 @@ describe(`MToast`, () => {
                 });
             });
         });
+
+        function createMockHTMLElementStyleAbsolute(): HTMLElement {
+            return {
+                style: {
+                    position: 'absolute'
+                }
+            } as HTMLElement;
+        }
 
     });
 });

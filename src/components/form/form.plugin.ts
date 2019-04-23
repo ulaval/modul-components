@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue';
 import { ABSTRACT_CONTROL_NAME } from '../../directives/directive-names';
 import ScrollToPlugin from '../../utils/scroll-to/scroll-to';
-import ToastServicePlugin from '../../utils/toast/toast-service';
+import ToastServicePlugin from '../../utils/toast/toast-service.plugin';
 import { FORM } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import MessagePlugin from '../message/message';

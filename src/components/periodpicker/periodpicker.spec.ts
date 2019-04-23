@@ -134,7 +134,7 @@ describe(`m-periodpicker`, () => {
         it(`should pass down empty data to the first date`, () => {
             initializeWrapper();
 
-            expect(currentFromScopeProps.props.value).toBe(undefined);
+            expect(currentFromScopeProps.props.value).toBe('');
             expect(currentFromScopeProps.props.min).toBe(undefined);
             expect(currentFromScopeProps.props.max).toBe(undefined);
         });
@@ -142,7 +142,7 @@ describe(`m-periodpicker`, () => {
         it(`should pass down empty data to the second date`, () => {
             initializeWrapper();
 
-            expect(currentToScopeProps.props.value).toBe(undefined);
+            expect(currentToScopeProps.props.value).toBe('');
             expect(currentToScopeProps.props.min).toBe(undefined);
             expect(currentToScopeProps.props.max).toBe(undefined);
         });
@@ -171,7 +171,7 @@ describe(`m-periodpicker`, () => {
                 const newFromDate: Date = new Date();
                 currentFromScopeProps.handlers.change(newFromDate);
 
-                expect(currentFromScopeProps.props.value).toEqual(newFromDate);
+                expect(currentFromScopeProps.props.value).toEqual(MPeriodpicker.formatIsoDateToLocalString(newFromDate));
             });
 
             it(`should emit the new value when closing dateTo picker`, () => {
@@ -224,7 +224,7 @@ describe(`m-periodpicker`, () => {
         it(`should pass down empty data to the first date`, () => {
             initializeWrapper();
 
-            expect(currentFromScopeProps.props.value).toBe(fromDateProp);
+            expect(currentFromScopeProps.props.value).toBe(MPeriodpicker.formatIsoDateToLocalString(fromDateProp));
             expect(currentFromScopeProps.props.min).toBe(minDateProp);
             expect(currentFromScopeProps.props.max).toBe(maxDateProp);
         });
@@ -232,7 +232,7 @@ describe(`m-periodpicker`, () => {
         it(`should pass down empty data to the second date`, () => {
             initializeWrapper();
 
-            expect(currentToScopeProps.props.value).toBe(toDateProp);
+            expect(currentToScopeProps.props.value).toBe(MPeriodpicker.formatIsoDateToLocalString(toDateProp));
             expect(currentToScopeProps.props.min).toBe(fromDateProp);
             expect(currentToScopeProps.props.max).toBe(maxDateProp);
         });
@@ -261,7 +261,7 @@ describe(`m-periodpicker`, () => {
                 const newFromDate: Date = new Date();
                 currentFromScopeProps.handlers.change(newFromDate);
 
-                expect(currentFromScopeProps.props.value).toEqual(newFromDate);
+                expect(currentFromScopeProps.props.value).toEqual(MPeriodpicker.formatIsoDateToLocalString(newFromDate));
             });
 
             it(`should emit the new value when closing dateTo picker`, () => {

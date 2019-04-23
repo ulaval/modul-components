@@ -1,13 +1,5 @@
 import Vue from 'vue';
-import { PluginObject } from 'vue/types/plugin';
 import { MToast, MToastPosition, MToastState, MToastTimeout } from '../../components/toast/toast';
-
-
-declare module 'vue/types/vue' {
-    interface Vue {
-        $toast: ToastService;
-    }
-}
 
 export interface ToastParams {
     text: string; // Can be html, but must start with a root tag: <p> text of toast </p>
@@ -21,7 +13,7 @@ export interface ToastParams {
 
 const TIME_BEFORE_ANIMATION_IS_OVER: number = 300;
 
-export class ToastService {
+export default class ToastService {
     public activeToast?: MToast;
     public toasts: MToast[] = [];
     public baseTopPosition: string = '0';
@@ -81,12 +73,3 @@ export class ToastService {
         return toast;
     }
 }
-
-const ToastServicePlugin: PluginObject<any> = {
-    install(v): void {
-        let toast: ToastService = new ToastService();
-        (v.prototype).$toast = toast;
-    }
-};
-
-export default ToastServicePlugin;

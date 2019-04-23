@@ -15,8 +15,6 @@ import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './decimalfield.html?style=./decimalfield.scss';
 
-export const MDECIMAL_MAX_SIGNIFICANT_NUMBER: number = 15;
-
 @WithRender
 @Component({
     mixins: [
@@ -38,6 +36,11 @@ export class MDecimalfield extends ModulVue {
     })
     public rounding: number = 2;
 
+    @Prop({
+        default: 14
+    })
+    public precision: number;
+
     private id: string = `mDecimalfield-${uuid.generate()}`;
 
     private onDropDecimalfield(event: DragEvent): void {
@@ -57,7 +60,7 @@ export class MDecimalfield extends ModulVue {
         return {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand',
-            numeralIntegerScale: MDECIMAL_MAX_SIGNIFICANT_NUMBER - this.rounding,
+            numeralIntegerScale: this.precision - this.rounding,
             numeralDecimalScale: this.rounding,
             numeralDecimalMark: decimalFormat.decimalMark,
             numeralPositiveOnly: true,
