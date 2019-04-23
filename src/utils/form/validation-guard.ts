@@ -20,7 +20,7 @@ export const DefaultValidationGuard: AbstractControlValidationGuard = (editionCo
                 break;
         }
     } else if (editionContext === AbstractControlEditionContext.NotValid) {
-        switch (this.validationType) {
+        switch (validationType) {
             case AbstractControlValidationType.Optimistic:
             case AbstractControlValidationType.OnGoing:
             case AbstractControlValidationType.Correctable:

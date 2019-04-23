@@ -1,21 +1,23 @@
 import { AbstractControl } from "./abstract-control";
 import { AbstractControlEditionContext } from "./abstract-control-edition-context";
 import { AbstractControlError } from "./abstract-control-error";
-import { AbstractControlValidationType } from "./abstract-control-validation-type";
+import { FormControlOptions } from "./abstract-control-options";
 import { AbstractControlValidator } from "./abstract-control-validator";
 
 export class FormControl<T> extends AbstractControl {
+    private _value?: T;
     private _intialValue?: T;
 
     constructor(
         public readonly name: string,
-        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing,
         public readonly validators: AbstractControlValidator[] = [],
-        private _value?: T
+        options?: FormControlOptions<T>
     ) {
-        super(name, validators, validationType);
+        super(name, validators, options);
 
-        this._intialValue = _value;
+        if (options) {
+            this._intialValue = this._value = options.initialValue;
+        }
     }
 
     get value(): T | undefined {

@@ -5,6 +5,7 @@ import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { ModulVue } from '../../utils/vue/vue';
 import { FORM } from '../component-names';
+import { AbstractControlMinLengthValidator, AbstractControlRequiredValidator } from './abstract-control-validations';
 import FormPlugin from './form.plugin';
 import WithRender from './form.sandbox.html';
 
@@ -16,23 +17,17 @@ export class MFormSandbox extends ModulVue {
     formGroup: FormGroup = new FormGroup(
         'my form',
         [],
-        AbstractControlValidationType.Optimistic,
         [
-            new FormControl<string>('name',
-                AbstractControlValidationType.Optimistic,
+            new FormControl<string>(
+                'name',
                 [
-                    {
-                        validationFunction: (formControl: FormControl<string>): boolean => {
-                            return !!formControl.value;
-                        },
-                        error: {
-                            key: 'required',
-                            message: 'this field is required',
-                            summaryMessage: 'the field name is required'
-                        }
-                    }
+                    AbstractControlRequiredValidator('name'),
+                    AbstractControlMinLengthValidator('name', 5)
                 ],
-                ''
+                {
+                    validationType: AbstractControlValidationType.AtExit,
+                    initialValue: 'Jon Doe'
+                }
             )
         ]
     );

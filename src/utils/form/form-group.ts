@@ -1,7 +1,7 @@
 import { AbstractControl } from "./abstract-control";
 import { AbstractControlEditionContext } from "./abstract-control-edition-context";
 import { AbstractControlError } from "./abstract-control-error";
-import { AbstractControlValidationType } from "./abstract-control-validation-type";
+import { AbstractControlOptions } from "./abstract-control-options";
 import { AbstractControlValidator } from "./abstract-control-validator";
 import { FormControl } from "./form-control";
 
@@ -9,10 +9,10 @@ export class FormGroup extends AbstractControl {
     constructor(
         public readonly name: string,
         public readonly validators: AbstractControlValidator[] = [],
-        public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing,
-        public controls: AbstractControl[]
+        public controls: AbstractControl[],
+        options?: AbstractControlOptions
     ) {
-        super(name, validators, validationType);
+        super(name, validators, options);
     }
 
     public get isValid(): boolean {
