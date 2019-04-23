@@ -7,7 +7,7 @@ import { FormAfterActionEffect } from './form-after-action-effect';
 
 export class FormAfterActionEffects {
     public static ClearErrorToast: FormAfterActionEffect = {
-        formActionType: FormActionType.ValidSubmitOrResetOrDestroy,
+        formActionType: FormActionType.ValidSubmitOrResetOrDestroyed,
         afterEffect: (form: MForm): void => {
             (ModulVue.prototype).$toast.clear();
         }

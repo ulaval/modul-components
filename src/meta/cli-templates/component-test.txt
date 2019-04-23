@@ -8,11 +8,7 @@ describe('{{SINGULAR_PASCAL}}', () => {
         Vue.use({{PREFIXED_SINGULAR_PASCAL}}Plugin);
     });
     it('should render correctly', () => {
-<<<<<<< HEAD:src/meta/cli-templates/component-test.txt
-        const component: Wrapper<{{SINGULAR_PASCAL}}> = mount({{SINGULAR_PASCAL}}, {
-=======
         const component: Wrapper<{{PREFIXED_SINGULAR_PASCAL}}> = mount({{{PREFIXED_SINGULAR_PASCAL}}, {
->>>>>>> origin/develop:src/meta/cli-templates/component-test.txt
             localVue: Vue
         });
 
