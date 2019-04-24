@@ -13,6 +13,30 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
+const iconListShorthand: {} = {
+    'profile': 'profile',
+    'information': 'information',
+    'confirmation': 'confirmation',
+    'warning': 'warning',
+    'error': 'error',
+    'calendar': 'calendar',
+    'hint': 'hint',
+    'clock': 'clock'
+};
+
+const iconListLonghand: {} = {
+    'm-svg__profile': 'm-svg__profile',
+    'm-svg__information': 'm-svg__information',
+    'm-svg__confirmation': 'm-svg__confirmation',
+    'm-svg__warning': 'm-svg__warning',
+    'm-svg__error': 'm-svg__error',
+    'm-svg__calendar': 'm-svg__calendar',
+    'm-svg__hint': 'm-svg__hint',
+    'm-svg__clock': 'm-svg__clock'
+};
+
+
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .addDecorator(withA11y)
@@ -20,16 +44,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('name (short)', () => ({
         props: {
             name: {
-                default: select('name', {
-                    'profile': 'profile',
-                    'information': 'information',
-                    'confirmation': 'confirmation',
-                    'warning': 'warning',
-                    'error': 'error',
-                    'calendar': 'calendar',
-                    'hint': 'hint',
-                    'clock': 'clock'
-                }, 'profile')
+                default: select('name', iconListShorthand, 'profile')
             },
         },
         template: `<div>
@@ -40,16 +55,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('name (long)', () => ({
         props: {
             name: {
-                default: select('name', {
-                    'm-svg__profile': 'm-svg__profile',
-                    'm-svg__information': 'm-svg__information',
-                    'm-svg__confirmation': 'm-svg__confirmation',
-                    'm-svg__warning': 'm-svg__warning',
-                    'm-svg__error': 'm-svg__error',
-                    'm-svg__calendar': 'm-svg__calendar',
-                    'm-svg__hint': 'm-svg__hint',
-                    'm-svg__clock': 'm-svg__clock'
-                }, 'm-svg__profile')
+                default: select('name', iconListLonghand, 'm-svg__profile')
             },
         },
         template: `<div>
@@ -82,16 +88,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('showNameAsClass', () => ({
         props: {
             name: {
-                default: select('icon name as class', {
-                    'profile': 'profile',
-                    'information': 'information',
-                    'confirmation': 'confirmation',
-                    'warning': 'warning',
-                    'error': 'error',
-                    'calendar': 'calendar',
-                    'hint': 'hint',
-                    'clock': 'clock'
-                }, 'profile')
+                default: select('icon name as class', iconListShorthand, 'profile')
             },
         },
         template: `<div>
