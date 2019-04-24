@@ -14,16 +14,16 @@ export const DefaultValidationGuard: AbstractControlValidationGuard = (editionCo
         }
     } else if (editionContext === AbstractControlEditionContext.PopulateAndValid) {
         switch (validationType) {
-            case AbstractControlValidationType.Optimistic:
+            case AbstractControlValidationType.Modification:
             case AbstractControlValidationType.OnGoing:
                 guardAgainstValidation = false;
                 break;
         }
     } else if (editionContext === AbstractControlEditionContext.NotValid) {
         switch (validationType) {
-            case AbstractControlValidationType.Optimistic:
+            case AbstractControlValidationType.Modification:
             case AbstractControlValidationType.OnGoing:
-            case AbstractControlValidationType.Correctable:
+            case AbstractControlValidationType.Correction:
                 guardAgainstValidation = false;
                 break;
         }

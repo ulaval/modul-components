@@ -404,8 +404,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 [],
                 [
                     new FormControl<string>(
-                        'name',
-                        [RequiredValidator('name')]
+                        'email',
+                        [EmailValidator('email')]
                     )
                 ]
             )
@@ -413,11 +413,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('name')['editionContext']}}</p>
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
+            <m-textfield v-model.trim="formGroup.getControl('email').value"
+                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                        :label="formGroup.getControl('email').name"
+                        v-m-control="formGroup.getControl('email')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -429,42 +429,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         </m-form>
         `
     }))
-    .add('at exit', () => ({
-        data: () => ({
-            formGroup: new FormGroup(
-                'my form',
-                [],
-                [
-                    new FormControl<string>(
-                        'name',
-                        [RequiredValidator('name')],
-                        {
-                            validationType: AbstractControlValidationType.AtExit
-                        }
-                    )
-                ]
-            )
-        }),
-        template: `
-        <m-form class="m-u--margin-top"
-        :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('name')['editionContext']}}</p>
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
-            </m-textfield>
-            <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
-                <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
-            </p>
-        </m-form>
-        `
-    }))
-    .add('correctable', () => ({
+    .add('correction', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
@@ -474,7 +439,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         'email',
                         [EmailValidator('email')],
                         {
-                            validationType: AbstractControlValidationType.Correctable
+                            validationType: AbstractControlValidationType.Correction
                         }
                     )
                 ]
@@ -499,7 +464,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         </m-form>
         `
     }))
-    .add('optimistic', () => ({
+    .add('modification', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
@@ -509,7 +474,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         'email',
                         [EmailValidator('email')],
                         {
-                            validationType: AbstractControlValidationType.Optimistic
+                            validationType: AbstractControlValidationType.Modification
                         }
                     )
                 ]

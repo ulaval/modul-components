@@ -25,34 +25,34 @@ export class MForm extends ModulVue {
         this.formGroup.validate();
 
         if (!this.formGroup.isValid) {
-            this._triggerFormActionFallouts(FormActionType.InvalidSubmit);
+            this._triggerActionFallouts(FormActionType.InvalidSubmit);
             return;
         }
 
-        this._triggerFormActionFallouts(FormActionType.ValidSubmit);
+        this._triggerActionFallouts(FormActionType.ValidSubmit);
         this.emitSubmit();
     }
 
     public reset(): void {
         this.formGroup.reset();
 
-        this._triggerFormActionFallouts(FormActionType.Reset);
+        this._triggerActionFallouts(FormActionType.Reset);
         this.emitReset();
     }
 
     protected created(): void {
-        this._triggerFormActionFallouts(FormActionType.Created);
+        this._triggerActionFallouts(FormActionType.Created);
     }
 
     protected updated(): void {
-        this._triggerFormActionFallouts(FormActionType.Updated);
+        this._triggerActionFallouts(FormActionType.Updated);
     }
 
     protected beforeDestroy(): void {
-        this._triggerFormActionFallouts(FormActionType.Destroyed);
+        this._triggerActionFallouts(FormActionType.Destroyed);
     }
 
-    private _triggerFormActionFallouts(type: FormActionType): void {
+    private _triggerActionFallouts(type: FormActionType): void {
         this.actionFallouts
             .filter(a => type & a.type)
             .forEach(a => a.fallout(this));

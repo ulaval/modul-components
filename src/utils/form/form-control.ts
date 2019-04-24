@@ -7,6 +7,7 @@ import { AbstractControlValidator } from "./abstract-control-validator";
 export class FormControl<T> extends AbstractControl {
     private _value?: T;
     private _intialValue?: T;
+    private _oldValue?: T;
 
     constructor(
         public readonly name: string,
@@ -16,7 +17,7 @@ export class FormControl<T> extends AbstractControl {
         super(name, validators, options);
 
         if (options) {
-            this._intialValue = this._value = options.initialValue;
+            this._intialValue = this._value = this._oldValue = options.initialValue;
         }
     }
 
@@ -25,7 +26,13 @@ export class FormControl<T> extends AbstractControl {
     }
 
     set value(value: T | undefined) {
+        if (value === this._oldValue && typeof value !== 'object') {
+            return;
+        }
+
+        this._oldValue = this._value;
         this._value = value;
+
         this.validate();
     }
 
@@ -49,7 +56,7 @@ export class FormControl<T> extends AbstractControl {
 
     public reset(): void {
         super.reset();
-        this._value = this._intialValue;
+        this._value = this._oldValue = this._intialValue;
     }
 }
 
