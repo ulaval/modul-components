@@ -1,13 +1,26 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, select, withKnobs } from '@storybook/addon-knobs';
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { LINK_NAME } from '../component-names';
 import LinkPlugin from './link';
 
 Vue.use(LinkPlugin);
+Vue.use(VueRouter);
 
+const storyRouterDecorator: any = (links = {}, routerProps = {}): any => {
+    return story => {
+        const router: VueRouter = new VueRouter(routerProps);
+        const WrappedComponent: any = story();
+        return Vue.extend({
+            router,
+            components: { WrappedComponent },
+            template: '<wrapped-component/>'
+        });
+    };
+}
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
@@ -17,7 +30,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-            template: '<m-link mode="link" url="#">A link</m-link>'
+        template: '<m-link mode="link" url="#">A link</m-link>'
     }))
     .add('url', () => ({
         props: {
@@ -136,13 +149,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
 
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/mode`, module)
     .addDecorator(withA11y)
-    //TODO Register custom element
-    // .add('default (router-link)', () => ({
-    //     data: () => ({
-    //         routerLink: { name: 'router-storybook', path: 'components/m-link' }
-    //     }),
-    //     template: `<m-link :url="routerLink">A link</m-link>`
-    // }))
+    .addDecorator(storyRouterDecorator())
+    .add('default (router-link)', () => ({
+        data: () => ({
+            routerLink: { name: 'router-storybook', path: 'components/m-link' }
+        }),
+        template: `<m-link :url="routerLink">A link</m-link>`
+    }))
     .add('mode="link', () => ({
         template: '<m-link mode="link" url="http://www.google.ca">A link</m-link>'
     }))
