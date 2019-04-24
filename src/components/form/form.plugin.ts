@@ -8,8 +8,8 @@ import MessagePlugin from '../message/message';
 import ToastPlugin from '../toast/toast';
 import { AbstractControlDirective } from './abstract-control-directive';
 import { MForm } from './form';
-import { FormAfterActionEffect } from './form-after-action-effect';
-import { ClearErrorToast, ErrorToast, FocusOnFirstError } from './form-after-action-effects';
+import { FormActionFallout } from './form-action-fallout';
+import { ClearErrorToast, ErrorToast, FocusOnFirstError } from './form-action-fallouts';
 import { MFormService } from './form-service';
 
 declare module 'vue/types/vue' {
@@ -19,7 +19,7 @@ declare module 'vue/types/vue' {
 }
 
 export interface FormPluginOptions {
-    formAfterActionEffects: FormAfterActionEffect[];
+    formAfterActionEffects: FormActionFallout[];
 }
 
 export const FormPlugin: PluginObject<any> = {

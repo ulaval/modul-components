@@ -6,10 +6,10 @@ import { AbstractControlValidator } from "./abstract-control-validator";
 import { AbstractControlValidationGuard, DefaultValidationGuard } from "./validation-guard";
 
 export abstract class AbstractControl {
-    public editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
     public focusGranted: boolean = false;
     public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing;
     protected readonly _validationGuard: AbstractControlValidationGuard = DefaultValidationGuard;
+    protected editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
     protected _errors: AbstractControlError[] = [];
 
     constructor(

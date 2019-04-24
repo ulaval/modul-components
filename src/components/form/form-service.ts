@@ -1,5 +1,5 @@
-import { FormAfterActionEffect } from "./form-after-action-effect";
+import { FormActionFallout } from "./form-action-fallout";
 
 export class MFormService {
-    constructor(public readonly formAfterActionEffects: FormAfterActionEffect[]) { }
+    constructor(public readonly formActionFallouts: FormActionFallout[]) { }
 }

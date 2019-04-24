@@ -2,20 +2,20 @@ import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { MToastPosition, MToastState } from '../toast/toast';
 import { MForm } from './form';
+import { FormActionFallout } from './form-action-fallout';
 import { FormActionType } from './form-action-type';
-import { FormAfterActionEffect } from './form-after-action-effect';
 
 
-export const ClearErrorToast: FormAfterActionEffect = {
-    formActionType: FormActionType.ValidSubmitOrResetOrDestroyed,
-    afterEffect: (form: MForm): void => {
+export const ClearErrorToast: FormActionFallout = {
+    type: FormActionType.ValidSubmitOrResetOrDestroyed,
+    fallout: (form: MForm): void => {
         (ModulVue.prototype).$toast.clear();
     }
 };
 
-export const ErrorToast: FormAfterActionEffect = {
-    formActionType: FormActionType.InvalidSubmit,
-    afterEffect: (form: MForm): void => {
+export const ErrorToast: FormActionFallout = {
+    type: FormActionType.InvalidSubmit,
+    fallout: (form: MForm): void => {
         let htmlString: string = (ModulVue.prototype).$i18n
             .translate(
                 'm-form:multipleErrorsToCorrect',
@@ -31,23 +31,23 @@ export const ErrorToast: FormAfterActionEffect = {
     }
 };
 
-export const FocusOnFirstError: FormAfterActionEffect = {
-    formActionType: FormActionType.InvalidSubmit,
-    afterEffect: (form: MForm): void => {
+export const FocusOnFirstError: FormActionFallout = {
+    type: FormActionType.InvalidSubmit,
+    fallout: (form: MForm): void => {
         form.formGroup.controls.find(c => !c.isValid)!.focusGranted = true;
     }
 };
 
-export const SummaryMessage: FormAfterActionEffect = {
-    formActionType: FormActionType.InvalidSubmit,
-    afterEffect: (form: MForm): void => {
+export const SummaryMessage: FormActionFallout = {
+    type: FormActionType.InvalidSubmit,
+    fallout: (form: MForm): void => {
         form.displaySummary = true;
     }
 };
 
-export const ClearSummaryMessage: FormAfterActionEffect = {
-    formActionType: FormActionType.ValidSubmitOrReset,
-    afterEffect: (form: MForm): void => {
+export const ClearSummaryMessage: FormActionFallout = {
+    type: FormActionType.ValidSubmitOrReset,
+    fallout: (form: MForm): void => {
         form.displaySummary = false;
     }
 };
