@@ -21,7 +21,7 @@ export const RequiredValidator: Function = (controlName: string): AbstractContro
         error: {
             key: 'required',
             message: 'this field is required',
-            summaryMessage: `the field ${name} is required`
+            summaryMessage: `the field ${controlName} is required`
         }
     };
 };
