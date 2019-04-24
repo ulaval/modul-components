@@ -231,13 +231,13 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 
     public mouseEnterToast(): void {
         if (!this.isMobile && this.timerCloseToast !== undefined) {
-            this.recountInternalTimeout();
+            this.restoreTimeout();
             clearTimeout(this.timerCloseToast);
             this.timerCloseToast = undefined;
         }
     }
 
-    private recountInternalTimeout(): void {
+    private restoreTimeout(): void {
         let instantTimeoutStop: number = Date.now();
         this.internalTimeout -= (instantTimeoutStop - this.instantTimeoutStart);
     }
