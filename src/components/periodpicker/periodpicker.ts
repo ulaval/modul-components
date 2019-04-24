@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Emit, Prop } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -87,7 +87,6 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
 
     dateFromInternalValue: DatePickerSupportedTypes = '';
     dateToInternalValue: DatePickerSupportedTypes = '';
-    selecting: boolean = false;
     fromIsFocused: boolean = false;
     toIsFocused: boolean = false;
     beginSelection: boolean = false;
@@ -139,11 +138,13 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     get internalValue(): MDateRange {
-        if (!this.selecting) {
-            return this.value || {};
-        } else {
-            return { from: this.dateFromInternalValue, to: this.dateToInternalValue };
-        }
+        return { from: this.dateFromInternalValue, to: this.dateToInternalValue };
+    }
+
+    @Watch('value', { immediate: true })
+    private onValueChange(value: MDateRange): void {
+        this.dateFromInternalValue = value.from ? value.from : '';
+        this.dateToInternalValue = value.to ? value.to : '';
     }
 
     get minDateTo(): DatePickerSupportedTypes {
