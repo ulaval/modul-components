@@ -90,6 +90,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     selecting: boolean = false;
     fromIsFocused: boolean = false;
     toIsFocused: boolean = false;
+    beginSelection: boolean = false;
 
     get firstInputState(): MPeriodpickerFromSlotProps {
         return {
@@ -126,7 +127,13 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
             },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),
-                blur: () => { this.toIsFocused = false; }
+                blur: () => {
+                    this.toIsFocused = false;
+                    if (this.beginSelection) {
+                        this.beginSelection = false;
+                        this.endSelection();
+                    }
+                }
             }
         };
     }
@@ -154,13 +161,17 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     onDateFromChange(newValue: DatePickerSupportedTypes): void {
         this.dateFromInternalValue = newValue ? this.getNewModelValue(newValue) : undefined;
 
-        this.endSelection();
+
         if (newValue) {
+            this.beginSelection = true;
             this.toIsFocused = true;
+        } else {
+            this.endSelection();
         }
     }
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
+        this.beginSelection = false;
         this.dateToInternalValue = newValue ? this.getNewModelValue(newValue, true) : undefined;
         this.endSelection();
     }
