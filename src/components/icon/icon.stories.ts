@@ -8,7 +8,6 @@ import IconPlugin from './icon';
 
 Vue.use(IconPlugin);
 
-
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
@@ -34,9 +33,6 @@ const iconListLonghand: {} = {
     'm-svg__hint': 'm-svg__hint',
     'm-svg__clock': 'm-svg__clock'
 };
-
-
-
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .addDecorator(withA11y)
