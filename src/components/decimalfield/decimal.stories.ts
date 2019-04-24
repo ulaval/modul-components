@@ -97,3 +97,25 @@ storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
             (Vue.prototype as ModulVue).$i18n.currentLang(this.originalLang);
         }
     }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('Default precision', () => ({
+        components: { MDecimalfield },
+        template: `
+            <${DECIMALFIELD_NAME} v-model="value"></${DECIMALFIELD_NAME}>
+        `,
+        data: () => ({
+            value: 9999999999999.99
+        })
+    }))
+    .add('Custom precision', () => ({
+        components: { MDecimalfield },
+        template: `
+            <${DECIMALFIELD_NAME} v-model="value" :precision="9" :rounding="4"></${DECIMALFIELD_NAME}>
+        `,
+        data: () => ({
+            value: 99999.9999
+        })
+    }));
