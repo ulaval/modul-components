@@ -3,7 +3,6 @@ import { FormGroup } from "../../utils/form/form-group";
 import { ModulVue } from "../../utils/vue/vue";
 import { FormActionType } from "./form-action-type";
 import { FormAfterActionEffect } from "./form-after-action-effect";
-import { FormAfterActionEffects } from "./form-after-action-effects";
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender
@@ -13,13 +12,7 @@ export class MForm extends ModulVue {
     public formGroup: FormGroup;
     public displaySummary: boolean = false;
 
-    @Prop({
-        default: () => [
-            FormAfterActionEffects.ErrorToast,
-            FormAfterActionEffects.ClearErrorToast,
-            FormAfterActionEffects.FocusOnFirstError
-        ]
-    })
+    @Prop({ default: () => ModulVue.prototype.$form.formAfterActionEffects || [] })
     public afterActionEffects: FormAfterActionEffect[];
 
     @Emit('submit')

@@ -5,50 +5,49 @@ import { MForm } from './form';
 import { FormActionType } from './form-action-type';
 import { FormAfterActionEffect } from './form-after-action-effect';
 
-export class FormAfterActionEffects {
-    public static ClearErrorToast: FormAfterActionEffect = {
-        formActionType: FormActionType.ValidSubmitOrResetOrDestroyed,
-        afterEffect: (form: MForm): void => {
-            (ModulVue.prototype).$toast.clear();
-        }
-    };
 
-    public static ErrorToast: FormAfterActionEffect = {
-        formActionType: FormActionType.InvalidSubmit,
-        afterEffect: (form: MForm): void => {
-            let htmlString: string = (ModulVue.prototype).$i18n
-                .translate(
-                    'm-form:multipleErrorsToCorrect',
-                    { totalNbOfErrors: form.formGroup.errors.length },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                );
+export const ClearErrorToast: FormAfterActionEffect = {
+    formActionType: FormActionType.ValidSubmitOrResetOrDestroyed,
+    afterEffect: (form: MForm): void => {
+        (ModulVue.prototype).$toast.clear();
+    }
+};
 
-            (ModulVue.prototype).$toast.show({
-                position: MToastPosition.TopCenter,
-                state: MToastState.Error,
-                text: `<p>${htmlString}</p>`
-            });
-        }
-    };
+export const ErrorToast: FormAfterActionEffect = {
+    formActionType: FormActionType.InvalidSubmit,
+    afterEffect: (form: MForm): void => {
+        let htmlString: string = (ModulVue.prototype).$i18n
+            .translate(
+                'm-form:multipleErrorsToCorrect',
+                { totalNbOfErrors: form.formGroup.errors.length },
+                undefined, undefined, undefined, FormatMode.Sprintf
+            );
 
-    public static FocusOnFirstError: FormAfterActionEffect = {
-        formActionType: FormActionType.InvalidSubmit,
-        afterEffect: (form: MForm): void => {
-            form.formGroup.controls.find(c => !c.isValid)!.focusGranted = true;
-        }
-    };
+        (ModulVue.prototype).$toast.show({
+            position: MToastPosition.TopCenter,
+            state: MToastState.Error,
+            text: `<p>${htmlString}</p>`
+        });
+    }
+};
 
-    public static SummaryMessage: FormAfterActionEffect = {
-        formActionType: FormActionType.InvalidSubmit,
-        afterEffect: (form: MForm): void => {
-            form.displaySummary = true;
-        }
-    };
+export const FocusOnFirstError: FormAfterActionEffect = {
+    formActionType: FormActionType.InvalidSubmit,
+    afterEffect: (form: MForm): void => {
+        form.formGroup.controls.find(c => !c.isValid)!.focusGranted = true;
+    }
+};
 
-    public static ClearSummaryMessage: FormAfterActionEffect = {
-        formActionType: FormActionType.ValidSubmitOrReset,
-        afterEffect: (form: MForm): void => {
-            form.displaySummary = false;
-        }
-    };
-}
+export const SummaryMessage: FormAfterActionEffect = {
+    formActionType: FormActionType.InvalidSubmit,
+    afterEffect: (form: MForm): void => {
+        form.displaySummary = true;
+    }
+};
+
+export const ClearSummaryMessage: FormAfterActionEffect = {
+    formActionType: FormActionType.ValidSubmitOrReset,
+    afterEffect: (form: MForm): void => {
+        form.displaySummary = false;
+    }
+};
