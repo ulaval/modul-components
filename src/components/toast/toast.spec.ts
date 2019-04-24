@@ -176,14 +176,14 @@ describe(`MToast`, () => {
                     expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
                     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopShort);
 
-                    let customWatingTime: number = 500;
-                    global.Date.now = jest.fn(() => now + customWatingTime); // Fast-forward dates in 500ms
+                    let customWaitingTime: number = 500;
+                    global.Date.now = jest.fn(() => now + customWaitingTime); // Fast-forward dates in 500ms
 
                     wrapper.vm.mouseEnterToast();
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
 
                     wrapper.vm.mouseLeaveToast();
-                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopShort - customWatingTime);
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopShort - customWaitingTime);
 
                     await jest.runOnlyPendingTimers(); // wait for the timeout to be over
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
