@@ -7,7 +7,7 @@ import { AbstractControlValidationType } from '../../utils/form/abstract-control
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { FORM_NAME } from '../component-names';
-import { EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './abstract-control-validations';
+import { CompareControlsValidator, EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './abstract-control-validations';
 import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './form-action-fallouts';
 import FormPlugin from './form.plugin';
 
@@ -392,6 +392,53 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
             </p>
         </m-form>
         `
+    }))
+    .add('compare-controls', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                'my group',
+                [
+                    CompareControlsValidator(['email', 'confirm email'])
+                ],
+                [
+                    new FormControl<number>(
+                        'email',
+                        [EmailValidator('email')]
+                    ),
+                    new FormControl<number>(
+                        'confirm email',
+                        [EmailValidator('confirm email')]
+                    )
+                ]
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-input-group :legend="formGroup.name"
+                :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
+                <div slot-scope="{  }">
+                    <m-textfield v-model.trim="formGroup.getControl('email').value"
+                                :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                                :label="formGroup.getControl('email').name"
+                                v-m-control="formGroup.getControl('email')">
+                    </m-textfield>
+                    <m-textfield v-model.trim="formGroup.getControl('confirm email').value"
+                                :error-message="formGroup.getControl('confirm email').errors.length > 0 ? formGroup.getControl('confirm email').errors[0].message : null"
+                                :label="formGroup.getControl('confirm email').name"
+                                v-m-control="formGroup.getControl('confirm email')">
+                    </m-textfield>
+                </div>
+            </m-input-group>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, module)
@@ -499,3 +546,4 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         </m-form>
         `
     }));
+

@@ -19,11 +19,10 @@ export class FormGroup extends AbstractControl {
         return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.isValid);
     }
 
-    public get errors(): AbstractControlError[] {
+    public get controlsErrors(): AbstractControlError[] {
         return this.controls
             .map(c => c.errors)
-            .reduce((acc, curr) => acc.concat(curr), [])
-            .concat(this._errors);
+            .reduce((acc, curr) => acc.concat(curr), []);
     }
 
     public getControl(name: string): AbstractControl {

@@ -29,7 +29,10 @@ export abstract class AbstractControl {
     }
 
     public abstract get isValid(): boolean;
-    public abstract get errors(): AbstractControlError[];
+
+    public get errors(): AbstractControlError[] {
+        return this._errors;
+    }
 
     public validate(): void {
         if (this._validationGuard(this.editionContext, this.validationType)) {

@@ -112,3 +112,22 @@ export const EmailValidator: Function = (controlName: string): AbstractControlVa
         }
     };
 };
+
+export const CompareControlsValidator: Function = (controlNames: string[]): AbstractControlValidator => {
+    return {
+        validationFunction: (control: FormGroup): boolean => {
+            if (control instanceof FormControl) {
+                throw Error('the compare controls validator should not be attached to a form control');
+            }
+
+            return controlNames
+                .map(cn => (control.getControl(cn) as FormControl<any>))
+                .every(fc => fc.value === (control.controls[0] as FormControl<any>).value);
+        },
+        error: {
+            key: 'compare-controls',
+            message: `the value of ${controlNames.join(', ')} must be the same`,
+            summaryMessage: `the value of ${controlNames.join(', ')} must be the same`
+        }
+    };
+};
