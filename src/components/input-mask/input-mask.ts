@@ -5,6 +5,17 @@ import { Model, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './input-mask.html';
 
+// TODO : Hack en attendant qu'on puisse remettre cleaveOptions.
+export interface InternalCleaveOptions {
+    numeral?: boolean;
+    numeralDecimalScale?: number;
+}
+
+export interface InputMaskOptions extends InternalCleaveOptions {
+    removeTrailingDecimalMark?: boolean;
+    forceDecimalScale?: boolean;
+}
+
 /**
  * inspired from https://github.com/ankurk91/vue-cleave-component/blob/master/src/component.js
  */
@@ -24,7 +35,7 @@ export class MInputMask extends ModulVue {
 
     // https://github.com/nosir/cleave.js/blob/master/doc/options.md
     @Prop()
-    public options: any;
+    public options: InputMaskOptions;
 
     private cleave: Cleave;
 
@@ -32,11 +43,9 @@ export class MInputMask extends ModulVue {
     private internalModel = '';
 
     mounted(): void {
-
         this.internalModel = this.value || '';
         this.cleave = new Cleave(this.$refs.input, this.getOptions());
-
-        this.cleave.setRawValue(this.value);
+        this.updateRawValue(this.value);
     }
 
     beforeDestroy(): void {
@@ -57,8 +66,6 @@ export class MInputMask extends ModulVue {
                     this.internalModel = _value;
                     this.$emit('input', _value);
                 }
-
-
             })
         };
     }
@@ -73,7 +80,7 @@ export class MInputMask extends ModulVue {
     public optionsChanged(options: any): void {
         this.cleave.destroy();
         this.cleave = new Cleave(this.$el as HTMLElement, this.getOptions());
-        this.cleave.setRawValue(this.value);
+        this.updateRawValue(this.value);
     }
 
     @Watch('value')
@@ -88,7 +95,8 @@ export class MInputMask extends ModulVue {
         }
 
         this.internalModel = this.value || '';
-        this.cleave.setRawValue(inputValue);
+        this.updateRawValue(inputValue);
+
     }
 
 
@@ -97,6 +105,7 @@ export class MInputMask extends ModulVue {
     }
 
     onBlur($event: any): void {
+        this.updateRawValue();
         this.$emit('blur', $event);
     }
 
@@ -122,5 +131,20 @@ export class MInputMask extends ModulVue {
 
     onChange($event: any): void {
         this.$emit('change', $event);
+    }
+
+    updateRawValue(rawValue: string = this.cleave.getRawValue()): void {
+        // See what happens with issue https://github.com/nosir/cleave.js/issues/463.
+        // Remove this code if it's resolved.
+        if (this.options.removeTrailingDecimalMark && this.options.numeral === true && rawValue[rawValue.length - 1] === '.') {
+            this.cleave.setRawValue(rawValue.replace('.', ''));
+        } else if (this.options.forceDecimalScale && this.options.numeral && rawValue.includes('.') && this.options.numeralDecimalScale) {
+            const valueStringParts: string[] = rawValue.split('.');
+            const integerPart: string = valueStringParts[0];
+            const decimalPart: string = valueStringParts[1];
+            this.cleave.setRawValue(`${integerPart}.${decimalPart.padEnd(this.options.numeralDecimalScale, '0')}`);
+        } else {
+            this.cleave.setRawValue(rawValue);
+        }
     }
 }
