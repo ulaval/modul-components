@@ -19,7 +19,13 @@ export const DefaultValidationGuard: AbstractControlValidationGuard = (editionCo
                 guardAgainstValidation = false;
                 break;
         }
-    } else if (editionContext === AbstractControlEditionContext.NotValid) {
+    } else if (editionContext === AbstractControlEditionContext.Pristine) {
+        switch (validationType) {
+            case AbstractControlValidationType.Modification:
+                guardAgainstValidation = true;
+                break;
+        }
+    } else if (editionContext === AbstractControlEditionContext.HasErrors) {
         switch (validationType) {
             case AbstractControlValidationType.Modification:
             case AbstractControlValidationType.OnGoing:

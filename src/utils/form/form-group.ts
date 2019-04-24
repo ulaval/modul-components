@@ -75,7 +75,7 @@ export class FormGroup extends AbstractControl {
         ) {
             this.editionContext = AbstractControlEditionContext.PopulateAndValid;
         } else if (!this.isValid) {
-            this.editionContext = AbstractControlEditionContext.NotValid;
+            this.editionContext = AbstractControlEditionContext.HasErrors;
         }
     }
 
