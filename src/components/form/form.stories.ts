@@ -5,8 +5,8 @@ import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
-import { FORM } from '../component-names';
-import { RequiredValidator } from './abstract-control-validations';
+import { FORM_NAME } from '../component-names';
+import { EmailValidator, MaxLengthValidator, MinLengthValidator, RequiredValidator } from './abstract-control-validations';
 import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './form-after-action-effects';
 import FormPlugin from './form.plugin';
 
@@ -16,7 +16,7 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-storiesOf(`${componentsHierarchyRootSeparator}${FORM}`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -61,7 +61,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM}`, module)
         `
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${FORM}/after-action-effects`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/after-action-effects`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
@@ -191,6 +191,134 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM}/after-action-effects`, mod
                         :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
                         :label="formGroup.getControl('name').name"
                         v-m-control="formGroup.getControl('name')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('required', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                'my form',
+                [],
+                [
+                    new FormControl<string>(
+                        'name',
+                        [RequiredValidator('name')]
+                    )
+                ]
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('name').value"
+                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
+                        :label="formGroup.getControl('name').name"
+                        v-m-control="formGroup.getControl('name')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('email', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                'my form',
+                [],
+                [
+                    new FormControl<string>(
+                        'email',
+                        [EmailValidator('email')]
+                    )
+                ]
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('email').value"
+                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                        :label="formGroup.getControl('email').name"
+                        v-m-control="formGroup.getControl('email')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('min-length', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                'my form',
+                [],
+                [
+                    new FormControl<string>(
+                        'min 5',
+                        [MinLengthValidator('min 5', 5)]
+                    )
+                ]
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('min 5').value"
+                        :error-message="formGroup.getControl('min 5').errors.length > 0 ? formGroup.getControl('min 5').errors[0].message : null"
+                        :label="formGroup.getControl('min 5').name"
+                        v-m-control="formGroup.getControl('min 5')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('max-length', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                'my form',
+                [],
+                [
+                    new FormControl<string>(
+                        'max 5',
+                        [MaxLengthValidator('max 5', 5)]
+                    )
+                ]
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('max 5').value"
+                        :error-message="formGroup.getControl('max 5').errors.length > 0 ? formGroup.getControl('max 5').errors[0].message : null"
+                        :label="formGroup.getControl('max 5').name"
+                        v-m-control="formGroup.getControl('max 5')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"

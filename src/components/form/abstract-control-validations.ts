@@ -50,7 +50,7 @@ export const MaxLengthValidator: Function = (controlName: string, maxLength: num
                 throw Error('the max length validator should not be attached to a form group');
             }
 
-            return control.value.length >= maxLength;
+            return control.value.length <= maxLength;
         },
         error: {
             key: 'max-length',
