@@ -41,13 +41,13 @@ export class FormControl<T> extends AbstractControl {
 
     public initEdition(): void {
         if (this.errors.length > 0) {
-            this.editionContext = AbstractControlEditionContext.HasErrors;
+            this._editionContext = AbstractControlEditionContext.HasErrors;
         } else if (this._value === this._oldValue && this._value === this._intialValue) {
-            this.editionContext = AbstractControlEditionContext.Pristine;
+            this._editionContext = AbstractControlEditionContext.Pristine;
         } else if (!this._value && this.isValid) {
-            this.editionContext = AbstractControlEditionContext.EmptyAndValid;
+            this._editionContext = AbstractControlEditionContext.EmptyAndValid;
         } else if (this._value && this.isValid) {
-            this.editionContext = AbstractControlEditionContext.PopulateAndValid;
+            this._editionContext = AbstractControlEditionContext.PopulateAndValid;
         }
     }
 

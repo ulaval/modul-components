@@ -7,9 +7,9 @@ import { AbstractControlValidationGuard, DefaultValidationGuard } from "./valida
 
 export abstract class AbstractControl {
     public focusGranted: boolean = false;
-    public readonly validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing;
+    protected readonly _validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing;
     protected readonly _validationGuard: AbstractControlValidationGuard = DefaultValidationGuard;
-    protected editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
+    protected _editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
     protected _errors: AbstractControlError[] = [];
 
     constructor(
@@ -19,7 +19,7 @@ export abstract class AbstractControl {
     ) {
         if (options) {
             if (options.validationType) {
-                this.validationType = options.validationType;
+                this._validationType = options.validationType;
             }
 
             if (options.validationGuard) {
@@ -35,7 +35,7 @@ export abstract class AbstractControl {
     }
 
     public validate(): void {
-        if (this._validationGuard(this.editionContext, this.validationType)) {
+        if (this._validationGuard(this._editionContext, this._validationType)) {
             return;
         }
 
@@ -45,14 +45,14 @@ export abstract class AbstractControl {
 
     public reset(): void {
         this.validators.forEach(v => v.lastCheck = undefined);
-        this.editionContext = AbstractControlEditionContext.None;
+        this._editionContext = AbstractControlEditionContext.None;
         this._errors = [];
     }
 
     public abstract initEdition(): void;
 
     public endEdition(): void {
-        this.editionContext = AbstractControlEditionContext.None;
+        this._editionContext = AbstractControlEditionContext.None;
         this.validate();
     }
 }

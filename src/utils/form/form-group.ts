@@ -64,7 +64,7 @@ export class FormGroup extends AbstractControl {
             &&
             this.isValid
         ) {
-            this.editionContext = AbstractControlEditionContext.EmptyAndValid;
+            this._editionContext = AbstractControlEditionContext.EmptyAndValid;
         } else if (
             this.controls
                 .filter(c => c instanceof FormControl)
@@ -72,9 +72,9 @@ export class FormGroup extends AbstractControl {
             &&
             this.isValid
         ) {
-            this.editionContext = AbstractControlEditionContext.PopulateAndValid;
+            this._editionContext = AbstractControlEditionContext.PopulateAndValid;
         } else if (!this.isValid) {
-            this.editionContext = AbstractControlEditionContext.HasErrors;
+            this._editionContext = AbstractControlEditionContext.HasErrors;
         }
     }
 
