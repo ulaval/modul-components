@@ -143,8 +143,8 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
 
     @Watch('value', { immediate: true })
     private onValueChange(value: MDateRange): void {
-        this.dateFromInternalValue = value.from ? value.from : '';
-        this.dateToInternalValue = value.to ? value.to : '';
+        this.dateFromInternalValue = (value || {}).from || '';
+        this.dateToInternalValue = (value || {}).to || '';
     }
 
     get minDateTo(): DatePickerSupportedTypes {
