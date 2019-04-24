@@ -24,7 +24,7 @@ export class MInputMask extends ModulVue {
 
     // https://github.com/nosir/cleave.js/blob/master/doc/options.md
     @Prop()
-    public options: CleaveOptions;
+    public options: any;
 
     private cleave: Cleave;
 
@@ -70,7 +70,7 @@ export class MInputMask extends ModulVue {
     }
 
     @Watch('options', { deep: true })
-    public optionsChanged(options: CleaveOptions): void {
+    public optionsChanged(options: any): void {
         this.cleave.destroy();
         this.cleave = new Cleave(this.$el as HTMLElement, this.getOptions());
         this.cleave.setRawValue(this.value);
