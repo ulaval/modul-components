@@ -474,7 +474,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         <m-form class="m-u--margin-top"
                 :form-group="formGroup"
                 v-m-control="formGroup">
-                <p>edition context: {{formGroup['_editionContext']}}</p>
             <m-input-group :legend="formGroup.name"
                 :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
                 <div slot-scope="{  }">

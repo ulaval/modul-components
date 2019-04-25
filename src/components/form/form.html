@@ -9,7 +9,8 @@
             <ul>
                 <li v-for="(error, index) in formGroup.errors.concat(formGroup.controlsErrors)"
                     :key="index"
-                    v-html="error.summaryMessage || error.message"></li>
+                    v-html="error.summaryMessage || error.message">
+                </li>
             </ul>
         </m-message>
     </m-accordion-transition>

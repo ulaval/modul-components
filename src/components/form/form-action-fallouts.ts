@@ -19,7 +19,7 @@ export const ErrorToast: FormActionFallout = {
         let htmlString: string = (ModulVue.prototype).$i18n
             .translate(
                 'm-form:multipleErrorsToCorrect',
-                { totalNbOfErrors: form.formGroup.controlsErrors.length },
+                { totalNbOfErrors: form.formGroup.controls.filter(c => c.errors.length > 0).length },
                 undefined, undefined, undefined, FormatMode.Sprintf
             );
 
