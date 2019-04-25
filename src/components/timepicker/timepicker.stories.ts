@@ -19,10 +19,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
     .add('default', () => ({
         data(): any {
             return {
-                model: '12:22'
+                model: undefined
             };
         },
-        template: '<m-timepicker v-model="model"></m-timepicker>'
+        template: `<m-timepicker v-model="model"></m-timepicker>`
     }))
     .add('min 8:45 / max 15:15', () => ({
         template: '<m-timepicker v-model="model" :min="min" :max="max"></m-timepicker>',
@@ -36,7 +36,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
         },
         data(): any {
             return {
-                model: '12:22'
+                model: '12:05'
             };
         }
     }))
@@ -55,4 +55,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
                 default: 'large'
             }
         }
+    }))
+    .add('reactivity', () => ({
+        data(): any {
+            return {
+                model: undefined
+            };
+        },
+        template: `<div>
+            <m-timepicker v-model="model"></m-timepicker>
+            <m-timepicker v-model="model"></m-timepicker>
+        </div>`
     }));

@@ -84,6 +84,7 @@ export class MTimepicker extends ModulVue {
 
     private created(): void {
         this.internalTime = this.value;
+        this.updatePopupTime(this.internalTime);
     }
 
     private mounted(): void {
@@ -175,8 +176,12 @@ export class MTimepicker extends ModulVue {
     }
 
     private updatePopupTime(value: string): void {
-        this.internalHour = this.timeStringToNumber(value).hour;
-        this.internalMinute = this.timeStringToNumber(value).minute;
+        if (value) {
+            this.internalHour = this.timeStringToNumber(value).hour;
+            this.internalMinute = this.timeStringToNumber(value).minute;
+        } else {
+            this.resetPopupTime();
+        }
     }
 
     private resetPopupTime(): void {
@@ -242,8 +247,12 @@ export class MTimepicker extends ModulVue {
     }
 
     private onClose(): void {
+        // tslint:disable-next-line:no-console
+        console.log('onClose', this.internalTime);
         if (isNaN(this.internalHour) || isNaN(this.internalMinute)) {
             this.resetPopupTime();
+        } else {
+            this.updatePopupTime(this.internalTime);
         }
     }
 
