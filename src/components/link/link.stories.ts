@@ -20,7 +20,8 @@ const storyRouterDecorator: any = (links = {}, routerProps = {}): any => {
             template: '<wrapped-component/>'
         });
     };
-}
+};
+
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
@@ -56,9 +57,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
                     'self': '_self',
                     'blank': '_blank',
                     'parent': '_parent',
-                    'top': '_top',
+                    'top': '_top'
                 }, 'self')
-            },
+            }
         },
         template: '<m-link :target="target" mode="link" url="#" icon-name="iconName">A link</m-link>'
     }))
@@ -86,7 +87,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
                     'hint': 'm-svg__hint',
                     'clock': 'm-svg__clock'
                 }, 'profile')
-            },
+            }
         },
         template: '<m-link :icon-name="iconName" mode="link" url="#" >A link</m-link>'
     }))
