@@ -504,7 +504,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
-    .add('on going', () => ({
+    .add('at-exit', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
@@ -512,7 +512,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')]
+                        [EmailValidator('email')],
+                        {
+                            validationType: AbstractControlValidationType.AtExit
+                        }
                     )
                 ]
             )
@@ -605,6 +608,38 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
             </p>
         </m-form>
         `
+    }))
+    .add('on-going', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                'my form',
+                [],
+                [
+                    new FormControl<string>(
+                        'email',
+                        [EmailValidator('email')]
+                    )
+                ]
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+        :form-group="formGroup">
+            <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
+            <m-textfield v-model.trim="formGroup.getControl('email').value"
+                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                        :label="formGroup.getControl('email').name"
+                        v-m-control="formGroup.getControl('email')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/fields-implementations`, module)
@@ -672,4 +707,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/fields-implementation
         </m-form>
         `
     }));
-

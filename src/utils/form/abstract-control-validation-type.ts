@@ -3,7 +3,8 @@
  */
 export enum AbstractControlValidationType {
     None = 'none',
+    AtExit = 'at-exit',
+    Correction = 'correction',
     Modification = 'modification',
-    OnGoing = 'on-going',
-    Correction = 'correction'
+    OnGoing = 'on-going'
 }
