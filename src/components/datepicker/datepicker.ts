@@ -55,8 +55,8 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
-    @Prop({ default: true })
-    public showInternalValidationError: boolean;
+    @Prop({ default: false })
+    public hideInternalErrorMessage: boolean;
 
     private internalOpen: boolean = false;
     private internalCalendarErrorMessage: string = '';
@@ -95,7 +95,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private get calandarErrorMessage(): string {
-        if (this.internalCalendarErrorMessage && this.showInternalValidationError) {
+        if (this.internalCalendarErrorMessage && !this.hideInternalErrorMessage) {
             return this.internalCalendarErrorMessage;
         } else {
             return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : '';
