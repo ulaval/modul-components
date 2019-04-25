@@ -32,7 +32,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         data: () => ({
-            menuIsOpened: false,
+            menuIsOpened: false
         }),
         template: `<m-menu :open.sync="menuIsOpened">
                         <div slot="trigger">Menu</div>
@@ -78,7 +78,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
     }))
     .add('open', () => ({
         data: () => ({
-            menuIsOpened: true,
+            menuIsOpened: true
         }),
         template: `<m-menu :open.sync="menuIsOpened" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
@@ -189,7 +189,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
     .add('label', () => ({
         data: () => ({
             menuIsOpened: true,
-            selectedItem: 'item1',
+            selectedItem: 'item1'
         }),
         props: {
             label: {
