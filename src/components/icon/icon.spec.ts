@@ -1,7 +1,5 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
-
-import { renderComponent } from '../../../tests/helpers/render';
 import IconPlugin, { MIcon } from './icon';
 
 describe('MIcon', () => {
