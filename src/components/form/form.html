@@ -7,7 +7,7 @@
                    state="error"
                    ref="summary">
             <ul>
-                <li v-for="(error, index) in formGroup.errors.concat(formGroup.controlsErrors)"
+                <li v-for="(error, index) in summaryErrors"
                     :key="index"
                     v-html="error.summaryMessage || error.message">
                 </li>

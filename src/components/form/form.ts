@@ -1,4 +1,5 @@
 import { Component, Emit, Prop } from "vue-property-decorator";
+import { AbstractControlError } from "../../utils/form/abstract-control-error";
 import { FormGroup } from "../../utils/form/form-group";
 import { ModulVue } from "../../utils/vue/vue";
 import { FormActionFallout } from "./form-action-fallout";
@@ -31,6 +32,14 @@ export class MForm extends ModulVue {
 
         this._triggerActionFallouts(FormActionType.ValidSubmit);
         this.emitSubmit();
+    }
+
+    public get summaryErrors(): AbstractControlError[] {
+        return this.formGroup.errors.concat(
+            this.formGroup.controls
+                .map(c => c.errors)
+                .reduce((acc, curr) => acc.concat(curr), [])
+        );
     }
 
     public reset(): void {

@@ -1,6 +1,5 @@
 import { AbstractControl } from "./abstract-control";
 import { AbstractControlEditionContext } from "./abstract-control-edition-context";
-import { AbstractControlError } from "./abstract-control-error";
 import { AbstractControlOptions } from "./abstract-control-options";
 import { AbstractControlValidator } from "./abstract-control-validator";
 import { FormControl } from "./form-control";
@@ -17,12 +16,6 @@ export class FormGroup extends AbstractControl {
 
     public get isValid(): boolean {
         return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.isValid);
-    }
-
-    public get controlsErrors(): AbstractControlError[] {
-        return this.controls
-            .map(c => c.errors)
-            .reduce((acc, curr) => acc.concat(curr), []);
     }
 
     public getControl(name: string): AbstractControl {
