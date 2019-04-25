@@ -1,13 +1,26 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, select, withKnobs } from '@storybook/addon-knobs';
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { MENU_NAME } from '../component-names';
 import MenuPlugin from './menu';
 
 Vue.use(MenuPlugin);
+Vue.use(VueRouter);
 
+const storyRouterDecorator: any = (links = {}, routerProps = {}): any => {
+    return story => {
+        const router: VueRouter = new VueRouter(routerProps);
+        const WrappedComponent: any = story();
+        return Vue.extend({
+            router,
+            components: { WrappedComponent },
+            template: '<wrapped-component/>'
+        });
+    };
+};
 
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
@@ -162,7 +175,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
                             <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
                         </m-menu-item>
                         <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                        <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
                             <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
                         </m-menu-item>
                  </m-menu>`
@@ -172,6 +185,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
 storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
+    .addDecorator(storyRouterDecorator())
     .add('label', () => ({
         data: () => ({
             menuIsOpened: true,
@@ -197,14 +211,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
                         <m-menu-item label="Item 1" value="item1" ></m-menu-item>
                    </m-menu>`
     }))
-    .add('url', () => ({
+    .add('url (router-link)', () => ({
         data: () => ({
+            routerLink: { name: 'router-storybook', path: '/components-m-menu--default' },
             menuIsOpened: true,
             selectedItem: ''
         }),
         template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item label="Item 1" value="item1" url="http://www.google.ca"></m-menu-item>
+                        <m-menu-item label="Item 1" value="item1" :url="routerLink"></m-menu-item>
                    </m-menu>`
     }))
     .add('default', () => ({
@@ -254,7 +269,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
                     'hint': 'm-svg__hint',
                     'clock': 'm-svg__clock'
                 }, 'profile')
-            },
+            }
         },
         template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>

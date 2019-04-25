@@ -2738,7 +2738,7 @@ exports[`Storyshots components|m-menu/menuItem readonly 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-menu/menuItem url 1`] = `
+exports[`Storyshots components|m-menu/menuItem url (router-link) 1`] = `
 <div
   class="m-menu m--is-skin-dark"
 >
@@ -2770,10 +2770,10 @@ exports[`Storyshots components|m-menu/menuItem url 1`] = `
       class="m-menu-item"
       role="none"
     >
-      <router-link
+      <a
         class="m-menu-item__link"
+        href="#/components-m-menu--default"
         role="menuitem"
-        to="http://www.google.ca"
       >
         <!---->
          
@@ -2782,7 +2782,7 @@ exports[`Storyshots components|m-menu/menuItem url 1`] = `
         >
           Item 1
         </span>
-      </router-link>
+      </a>
        
       <ul
         aria-hidden="true"
