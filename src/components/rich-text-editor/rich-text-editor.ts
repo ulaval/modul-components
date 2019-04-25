@@ -81,10 +81,20 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
-    @Prop({ default: 5 })
+    @Prop({
+        default: 5,
+        validator: (level: number) => {
+            return level >= 1 && level <= 6;
+        }
+    })
     public firstHeaderLevel: number;
 
-    @Prop({ default: 6 })
+    @Prop({
+        default: 6,
+        validator: (level: number) => {
+            return level >= 1 && level <= 6;
+        }
+    })
     public lastHeaderLevel: number;
 
     @Emit('fullscreen')
