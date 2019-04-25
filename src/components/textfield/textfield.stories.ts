@@ -12,7 +12,7 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-const textfieldTypes: {} = {
+const TEXTFIELD_TYPES: {} = {
     'text': 'text',
     'password': 'password',
     'email': 'email',
@@ -22,7 +22,7 @@ const textfieldTypes: {} = {
     'number': 'number'
 };
 
-const textfieldWidths: {} = {
+const TEXTFIELD_WIDTHS: {} = {
     'X-Small': 'x-small',
     'Small': 'small',
     'Regular': 'regular',
@@ -30,7 +30,7 @@ const textfieldWidths: {} = {
     'Large': 'large'
 };
 
-const textfieldTagStyles: {} = {
+const TEXTFIELD_STYLES: {} = {
     'h1': 'h1',
     'h2': 'h2',
     'h3': 'h3',
@@ -123,7 +123,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
     .add('all types', () => ({
         props: {
             type: {
-                default: select('input type', textfieldTypes, 'text')
+                default: select('input type', TEXTFIELD_TYPES, 'text')
             }
         },
         template: '<m-textfield :label="type" :placeholder="type" :type="type"></m-textfield>'
@@ -195,7 +195,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/max-width`, modu
     .add('all max-width presets', () => ({
         props: {
             maxWidth: {
-                default: select('textfield width', textfieldWidths, 'text')
+                default: select('textfield width', TEXTFIELD_WIDTHS, 'text')
             }
         },
         template: '<m-textfield :label="maxWidth" :max-width="maxWidth" :placeholder="type" :type="type"></m-textfield>'
@@ -225,8 +225,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/tag-style`, modu
     .add('all tag styles', () => ({
         props: {
             maxWidth: {
-                default: select('textfield tag style', textfieldTagStyles, 'text')
+                default: select('textfield tag style', TEXTFIELD_STYLES, 'text')
             }
         },
-        template: '<m-textfield :label="textfieldTagStyles" :tag-style="textfieldTagStyles"></m-textfield>'
+        template: '<m-textfield :label="TEXTFIELD_STYLES" :tag-style="TEXTFIELD_STYLES"></m-textfield>'
     }));
