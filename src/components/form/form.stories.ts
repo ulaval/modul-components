@@ -7,7 +7,7 @@ import { AbstractControlValidationType } from '../../utils/form/abstract-control
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { FORM_NAME } from '../component-names';
-import { CompareControlsValidator, EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './abstract-control-validations';
+import { CompareValidator, EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './abstract-control-validations';
 import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './form-action-fallouts';
 import FormPlugin from './form.plugin';
 
@@ -393,12 +393,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         </m-form>
         `
     }))
-    .add('compare-controls', () => ({
+    .add('compare', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 'my group',
                 [
-                    CompareControlsValidator(['email', 'confirm email'])
+                    CompareValidator(['email', 'confirm email'])
                 ],
                 [
                     new FormControl<number>(

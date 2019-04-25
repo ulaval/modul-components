@@ -2,17 +2,7 @@ import { AbstractControl } from "../../utils/form/abstract-control";
 import { AbstractControlValidator } from "../../utils/form/abstract-control-validator";
 import { FormControl } from "../../utils/form/form-control";
 import { FormGroup } from "../../utils/form/form-group";
-
-export enum ValidatorErrorKeys {
-    Required = 'required',
-    MinLength = 'min-length',
-    MaxLength = 'max-length',
-    Min = 'min',
-    Max = 'max',
-    Between = 'between',
-    Email = 'email',
-    CompareControls = 'compare-controls'
-}
+import { ValidatorErrorKeys } from "./validator-error-keys";
 
 export const RequiredValidator: Function = (controlName: string): AbstractControlValidator => {
     return {
@@ -30,7 +20,7 @@ export const RequiredValidator: Function = (controlName: string): AbstractContro
             return isPopulate;
         },
         error: {
-            key: 'required',
+            key: ValidatorErrorKeys.Required,
             message: 'this field is required',
             summaryMessage: `the field ${controlName} is required`
         }
@@ -47,7 +37,7 @@ export const MinLengthValidator: Function = (controlName: string, minLength: num
             return control.value.length >= minLength;
         },
         error: {
-            key: 'min-length',
+            key: ValidatorErrorKeys.MaxLength,
             message: `the min length for this field is ${minLength}`,
             summaryMessage: `The min length for ${controlName} is ${minLength}`
         }
@@ -64,7 +54,7 @@ export const MaxLengthValidator: Function = (controlName: string, maxLength: num
             return control.value.length <= maxLength;
         },
         error: {
-            key: 'max-length',
+            key: ValidatorErrorKeys.MaxLength,
             message: `the max length for this field is ${maxLength}`,
             summaryMessage: `The max length for ${controlName} is ${maxLength}`
         }
@@ -81,7 +71,7 @@ export const MinValidator: Function = (controlName: string, min: number | Date):
             return control.value >= min;
         },
         error: {
-            key: 'min',
+            key: ValidatorErrorKeys.Min,
             message: `the min for this field is ${min}`,
             summaryMessage: `The min for ${controlName} is ${min}`
         }
@@ -98,7 +88,7 @@ export const MaxValidator: Function = (controlName: string, max: number | Date):
             return control.value <= max;
         },
         error: {
-            key: 'max',
+            key: ValidatorErrorKeys.Max,
             message: `the max for this field is ${max}`,
             summaryMessage: `The min for ${controlName} is ${max}`
         }
@@ -115,7 +105,7 @@ export const BetweenValidator: Function = (controlName: string, lowerBound: numb
             return control.value >= lowerBound && control.value <= upperBound;
         },
         error: {
-            key: 'max',
+            key: ValidatorErrorKeys.Between,
             message: `the value have to be between ${lowerBound} and ${upperBound}`,
             summaryMessage: `The value for ${controlName} have to be between ${lowerBound} and ${upperBound}`
         }
@@ -134,14 +124,14 @@ export const EmailValidator: Function = (controlName: string): AbstractControlVa
             return re.test(String(control.value).toLowerCase());
         },
         error: {
-            key: 'email',
+            key: ValidatorErrorKeys.Email,
             message: `the email format is not valid`,
             summaryMessage: `The email format for ${controlName} is not valid`
         }
     };
 };
 
-export const CompareControlsValidator: Function = (controlNames: string[]): AbstractControlValidator => {
+export const CompareValidator: Function = (controlNames: string[]): AbstractControlValidator => {
     return {
         validationFunction: (control: FormGroup): boolean => {
             if (control instanceof FormControl) {
@@ -153,7 +143,7 @@ export const CompareControlsValidator: Function = (controlNames: string[]): Abst
                 .every(fc => fc.value === (control.controls[0] as FormControl<any>).value);
         },
         error: {
-            key: 'compare-controls',
+            key: ValidatorErrorKeys.Compare,
             message: `the value of ${controlNames.join(', ')} must be the same`,
             summaryMessage: `the value of ${controlNames.join(', ')} must be the same`
         }
