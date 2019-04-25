@@ -5,6 +5,7 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import { KeyCode } from '../../utils/keycode/keycode';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { INTEGERFIELD_NAME } from '../component-names';
@@ -13,7 +14,17 @@ import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './integerfield.html?style=./integerfield.scss';
 
 
-const ALLOWED_KEYCODE: number[] = [8, 9, 33, 34, 35, 36, 37, 39, 46];
+const ALLOWED_KEYCODE: number[] = [
+    KeyCode.M_BACK_SPACE,
+    KeyCode.M_TAB,
+    KeyCode.M_PAGE_UP,
+    KeyCode.M_PAGE_DOWN,
+    KeyCode.M_END,
+    KeyCode.M_HOME,
+    KeyCode.M_LEFT,
+    KeyCode.M_RIGHT,
+    KeyCode.M_DELETE
+];
 
 @WithRender
 @Component({

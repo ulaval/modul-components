@@ -1,11 +1,12 @@
-import { DirectiveOptions, PluginObject, VNodeDirective } from 'vue';
-
+import { DirectiveOptions, PluginObject } from 'vue';
+import { DirectiveBinding } from 'vue/types/options';
 import { RIPPLE_EFFECT_NAME } from '../directive-names';
 import RippleEffect from './ripple-effect-lib';
 
+
 const MOUSE_DOWN_MODIFIER: string = 'ripple-effect_mouse-down';
 
-interface RippleEffectBinding extends VNodeDirective {
+interface RippleEffectBinding extends DirectiveBinding {
     listener: (event: MouseEvent) => void;
 }
 

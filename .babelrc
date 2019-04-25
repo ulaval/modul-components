@@ -1,0 +1,16 @@
+{
+    "plugins": [
+        "dynamic-import-node",
+        "require-context-hook"
+    ],
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "node": "current"
+                }
+            }
+        ]
+    ]
+}

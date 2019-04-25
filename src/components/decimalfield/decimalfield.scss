@@ -1,0 +1,46 @@
+@import 'commons';
+
+.m-decimalfield {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+    @include m-input-inline-spacing();
+
+    &.m--has-validation-message {
+        .m-decimalfield__validation {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
+    &.m--has-error {
+        .m-decimalfield__validation {
+            color: $m-color--error;
+        }
+    }
+
+    &.m--is-valid {
+        .m-decimalfield__validation {
+            color: $m-color--success;
+        }
+    }
+
+    &__validation {
+        transition: margin-top $m-transition-duration ease;
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
+    }
+
+    &__input {
+        appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: textfield;
+        }
+    }
+}

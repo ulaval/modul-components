@@ -1,10 +1,10 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import { TOUCH_NAME } from '../component-names';
 import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 import WithRender from './touch.html';
 import ZingTouchUtil, { MZingRegion } from './zingtouch';
-import { TOUCH_NAME } from '../component-names';
 
 
 export enum MTouchSwipeDirection {
@@ -50,14 +50,14 @@ export class MTouch extends Vue {
     private initializeZingTouch(): void {
         this.destroyZingTouch();
 
-        this.zingRegion = ZingTouchUtil.setupRegion(this.$el, false, false);
+        this.zingRegion = ZingTouchUtil.setupRegion(this.$el as HTMLElement, false, false);
 
         this.configureZingSwipe();
         this.configureZingTap();
     }
 
     private configureZingSwipe(): void {
-        this.zingRegion!.bind(this.$el,
+        this.zingRegion!.bind(this.$el as HTMLElement,
             ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Swipe, this.internalSwipeOptions),
             (event: CustomEvent) => {
                 switch (this.internalSwipeOptions.direction) {
@@ -85,7 +85,7 @@ export class MTouch extends Vue {
     }
 
     private configureZingTap(): void {
-        this.zingRegion!.bind(this.$el, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: CustomEvent) => {
+        this.zingRegion!.bind(this.$el as HTMLElement, ZingTouchUtil.GestureFactory.getGesture(MZingTouchGestures.Tap), (event: CustomEvent) => {
             switch (ZingTouchUtil.detectTap(event)) {
                 case MZingTapInteractions.Tap:
                     this.handleZingEvent(event);
@@ -100,7 +100,7 @@ export class MTouch extends Vue {
     }
 
     private destroyZingTouch(): void {
-        if (this.zingRegion) { this.zingRegion.unbind(this.$el); }
+        if (this.zingRegion) { this.zingRegion.unbind(this.$el as HTMLElement); }
         this.zingRegion = undefined;
     }
 

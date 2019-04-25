@@ -5,6 +5,15 @@
     </p>
     <div>
         <m-button @click="init()">Show toast</m-button>
+    </div>
+    <p> Timeout:
+        <select v-model="toastTimeout">
+            <option value="long">Long</option>
+            <option value="short">Short</option>
+            <option value="none">None</option>
+        </select>
+    </p>
+    <div>
         <m-button @click="otherToast()">Show other toast</m-button>
         <m-button @click="complex()">Show a complex toast</m-button>
         <m-button @click="error()">Show an error toast</m-button>

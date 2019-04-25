@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import { mount, Wrapper } from '@vue/test-utils';
 import { renderComponent } from '../../../tests/helpers/render';
-import {{plugin}}Plugin, { {{class}} } from './{{file}}';
+import {{PREFIXED_SINGULAR_PASCAL}}Plugin, { {{SINGULAR_PASCAL}} } from './{{SINGULAR_KEBAB}}';
 
-describe('{{class}}', () => {
+describe('{{SINGULAR_PASCAL}}', () => {
     beforeEach(() => {
-        Vue.use({{plugin}}Plugin);
+        Vue.use({{PREFIXED_SINGULAR_PASCAL}}Plugin);
     });
     it('should render correctly', () => {
-        const component: Wrapper<{{class}}> = mount({{class}}, {
+        const component: Wrapper<{{PREFIXED_SINGULAR_PASCAL}}> = mount({{{PREFIXED_SINGULAR_PASCAL}}, {
             localVue: Vue
         });
 
