@@ -160,6 +160,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
             border: 1px solid m-color(interactive);
             opacity: 0;
             transform: translate(-50%, -50%) scale(0.8);
+            transform-origin: center;
         }
 
         // mouse only, to avoid sticky hover on mobile

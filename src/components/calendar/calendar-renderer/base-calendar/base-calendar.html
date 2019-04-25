@@ -7,9 +7,7 @@
                 :mode="modeLinkCurrentMonthAndYear"
                 @click.stop="onYearClick"
                 aria-live="polite"
-                ref="currentDate">
-            {{ currentMonthName }} {{ currentYear }}
-        </m-link>
+                ref="currentDate">{{ currentMonthName }} {{ currentYear }}</m-link>
 
         <div v-if="isPickerModeDay"
              class="m-base-calendar__nav-buttons">
@@ -41,9 +39,7 @@
                  @keyup.enter="onYearSelect(y)"
                  :ref="buildRef('year', y)"
                  role="button"
-                 tabindex="0">
-                {{ y.year }}
-            </div>
+                 tabindex="0">{{ y.year }}</div>
         </div>
         <div v-if="isPickerModeMonth"
              class="m-base-calendar__months">
@@ -56,9 +52,7 @@
                  @keyup.enter="onMonthSelect(m)"
                  :ref="buildRef('month', m)"
                  role="button"
-                 :tabindex="monthTabIndex(m)">
-                {{ monthIndexToShortName(m.month) }}
-            </div>
+                 :tabindex="monthTabIndex(m)">{{ monthIndexToShortName(m.month) }}</div>
         </div>
         <template v-if="isPickerModeDay">
             <div class="m-base-calendar__week">
@@ -89,9 +83,7 @@
                      :tabindex="dayTabIndex(d)">
                     <span class="m-base-calendar__day-content"
                           :class="{ 'm--is-hidden': hideDay(d) }"
-                          tabindex="-1">
-                        {{ d.day }}
-                    </span>
+                          tabindex="-1">{{ d.day }}</span>
                 </div>
             </div>
         </template>
