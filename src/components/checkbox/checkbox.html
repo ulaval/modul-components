@@ -1,7 +1,7 @@
 <div class="m-checkbox"
      :class="{ 'm--is-checkbox-left': hasCheckboxLeft,
                 'm--is-checkbox-right': !hasCheckboxLeft,
-                'm--is-checkbox-top': hasCheckboxAlign === 'top',
+                'm--is-checkbox-top': isAlignTop,
                 'm--is-checked': propValue,
                 'm--is-disabled': isDisabled,
                 'm--is-indeterminate': propIndeterminate,

@@ -88,8 +88,8 @@ export class MCheckbox extends ModulVue {
         return this.position === MCheckboxPosition.Left;
     }
 
-    private get hasCheckboxAlign(): MCheckboxVerticalAlignement {
-        return this.verticalAlign;
+    private get isAlignTop(): boolean {
+        return this.verticalAlign === MCheckboxVerticalAlignement.Top;
     }
 
     private get hasLabelSlot(): boolean {
