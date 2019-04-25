@@ -12,7 +12,7 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-const iconListShorthand: {} = {
+const ICONLIST_SHORTHAND: {} = {
     'profile': 'profile',
     'information': 'information',
     'confirmation': 'confirmation',
@@ -23,7 +23,7 @@ const iconListShorthand: {} = {
     'clock': 'clock'
 };
 
-const iconListLonghand: {} = {
+const ICONLIST_LONGHAND: {} = {
     'm-svg__profile': 'm-svg__profile',
     'm-svg__information': 'm-svg__information',
     'm-svg__confirmation': 'm-svg__confirmation',
@@ -40,7 +40,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('name (short)', () => ({
         props: {
             name: {
-                default: select('name', iconListShorthand, 'profile')
+                default: select('name', ICONLIST_SHORTHAND, 'profile')
             }
         },
         template: `<div>
@@ -51,7 +51,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('name (long)', () => ({
         props: {
             name: {
-                default: select('name', iconListLonghand, 'm-svg__profile')
+                default: select('name', ICONLIST_LONGHAND, 'm-svg__profile')
             }
         },
         template: `<div>
@@ -84,7 +84,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     .add('showNameAsClass', () => ({
         props: {
             name: {
-                default: select('icon name as class', iconListShorthand, 'profile')
+                default: select('icon name as class', ICONLIST_SHORTHAND, 'profile')
             }
         },
         template: `<div>
