@@ -22,6 +22,19 @@ const storyRouterDecorator: any = (links = {}, routerProps = {}): any => {
     };
 };
 
+const defaultMenuItems: string = `<m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
+                                  <m-menu-item value="item2" label="Item 2"></m-menu-item>
+                                  <m-menu-item value="item3" label="Item 3"></m-menu-item>
+                                  <m-menu-item label="Item group 1">
+                                      <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
+                                      <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
+                                      <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
+                                  </m-menu-item>
+                                  <m-menu-item label="Item group 2">
+                                      <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
+                                      <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
+                                  </m-menu-item>`;
+
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
@@ -36,18 +49,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         }),
         template: `<m-menu :open.sync="menuIsOpened">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }))
     .add('trigger (slot)', () => ({
@@ -62,18 +64,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         },
         template: `<m-menu :closeOnSelection="false" :open.sync="menuIsOpened" :selected.sync="selectedItem">
                         <div slot="trigger">{{ triggerText}}</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }))
     .add('open', () => ({
@@ -82,18 +73,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         }),
         template: `<m-menu :open.sync="menuIsOpened" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }))
     .add('closeOnSelection="false"', () => ({
@@ -103,18 +83,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         }),
         template: `<m-menu :open.sync="menuIsOpened" :selected.sync="selectedItem" :closeOnSelection="false">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }))
     .add('skin=light"', () => ({
@@ -124,18 +93,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         }),
         template: `<m-menu :closeOnSelection="false" :open.sync="menuIsOpened" :selected.sync="selectedItem" skin="light">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }))
     .add('disabled', () => ({
@@ -145,18 +103,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         }),
         template: `<m-menu :closeOnSelection="false" :disabled="true" :open.sync="menuIsOpened" :selected.sync="selectedItem" >
                         <div slot="trigger">Menu</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                            <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }))
     .add('idAriaControls="ariaTest"', () => ({
@@ -166,18 +113,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
         }),
         template: `<m-menu :closeOnSelection="false" :open.sync="menuIsOpened" :selected.sync="selectedItem" idAriaControls="ariaTest">
                         <div slot="trigger">Menu</div>
-                        <m-menu-item value="item1" label="Item 1" icon-name="m-svg__profile"></m-menu-item>
-                        <m-menu-item value="item2" label="Item 2"></m-menu-item>
-                        <m-menu-item value="item3" label="Item 3"></m-menu-item>
-                        <m-menu-item label="Item group 1">
-                            <m-menu-item value="subitem1" label="Subitem 1"></m-menu-item>
-                            <m-menu-item value="subitem2" label="Subitem 2"></m-menu-item>
-                            <m-menu-item value="subitem3" label="Subitem 3"></m-menu-item>
-                        </m-menu-item>
-                        <m-menu-item label="Item group 2">
-                        <m-menu-item value="subitem4" label="Subitem 4"></m-menu-item>
-                            <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
-                        </m-menu-item>
+                        ${defaultMenuItems}
                  </m-menu>`
     }));
 
