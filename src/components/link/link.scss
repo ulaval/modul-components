@@ -52,7 +52,8 @@
             color: var(--m-link--color-active);
         }
 
-        &:not(.m--is-unvisited):not(:hover):not(:focus):visited {
+        &:not(.m--is-unvisited):not(:hover):not(:focus):visited,
+        &.m--is-button.m--is-unvisited:not(:hover):not(:focus):not(:visited) {
             color: var(--m-link--color-visited);
         }
     }
