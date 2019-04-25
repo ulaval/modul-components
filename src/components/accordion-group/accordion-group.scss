@@ -3,12 +3,40 @@
 .m-accordion-group {
     &__header {
         display: flex;
-        justify-content: space-between;
         padding: 0 $m-padding $m-margin $m-padding;
 
         &.m--no-title {
             justify-content: flex-end;
         }
+
+        &:not(.m--has-secondary-content):not(.m--no-title) {
+            justify-content: space-between;
+            align-items: flex-end;
+
+            &.m--is-reserve-header {
+                flex-direction: row-reverse;
+            }
+        }
+
+        &.m--has-secondary-content {
+            flex-direction: column;
+
+            &.m--is-reserve-header {
+                .m-accordion-group__secondary-content {
+                    flex-direction: row-reverse;
+                }
+            }
+        }
+    }
+
+    &__secondary-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    &__toggle-link {
+        flex: none;
     }
 
     &__body {

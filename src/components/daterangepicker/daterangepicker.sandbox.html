@@ -6,7 +6,9 @@
     <p>
         <m-button @click="emptyModel(undefined)">Empty model (undefined)</m-button>
         <m-button @click="emptyModel({})">Empty model (Objet vide)</m-button>
-        <m-daterangepicker v-model="model"></m-daterangepicker>
+        <div>
+            <m-daterangepicker v-model="model"></m-daterangepicker>
+        </div>
     </p>
     <p>Selected value: {{ model }}</p>
     <h3>Should manage input states</h3>

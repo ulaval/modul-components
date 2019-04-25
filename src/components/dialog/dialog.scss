@@ -133,6 +133,7 @@ $m-dialog--max-width--l: 500px !default;
                 position: relative;
 
                 &--body {
+                    min-width: 100%;
                     border: 1px solid $m-color--hint;
                     padding: 10px $m-spacing--s;
                     text-align: left;

@@ -5,6 +5,8 @@
     display: inline-flex;
     flex-direction: column;
 
+    @include m-input-inline-spacing();
+
     &.m--has-validation-message {
         .m-textfield__validation {
             margin-top: $m-spacing--xs;

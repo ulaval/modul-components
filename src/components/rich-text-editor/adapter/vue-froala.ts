@@ -203,17 +203,16 @@ export enum FroalaStatus {
     }
 
     protected addImageButton(): void {
-        const EDITOR_INSTANCE: VueFroala = this;
-
         $.FroalaEditor.RegisterCommand('insertImage', {
             title: this.$i18n.translate('m-rich-text-editor:insert-image'),
             undo: true,
             focus: true,
             showOnMobile: true,
-            callback: (): void => {
-                EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
-                EDITOR_INSTANCE.isFileUploadOpen = true;
-                EDITOR_INSTANCE.selectedImage = undefined;
+            callback: function(): void {
+                let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
+                currentInstance.allowedExtensions = currentInstance.imageExtensions;
+                currentInstance.isFileUploadOpen = true;
+                currentInstance.selectedImage = undefined;
             }
         });
 
@@ -224,13 +223,15 @@ export enum FroalaStatus {
             focus: true,
             showOnMobile: true,
             callback: function(): void {
-                EDITOR_INSTANCE.allowedExtensions = EDITOR_INSTANCE.imageExtensions;
-                EDITOR_INSTANCE.isFileUploadOpen = true;
+                let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
+                currentInstance.allowedExtensions = currentInstance.imageExtensions;
+                currentInstance.isFileUploadOpen = true;
             },
             refresh: function(): void {
                 const selectedElement: HTMLElement = this.selection.element();
                 if (selectedElement.tagName === 'IMG') {
-                    EDITOR_INSTANCE.selectedImage = selectedElement;
+                    let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
+                    currentInstance.selectedImage = selectedElement;
                 }
             }
         });
@@ -249,6 +250,7 @@ export enum FroalaStatus {
     }
 
     protected filesAdded(files: MFile[]): void {
+        this.froalaEditor.opts.modulImageUploaded = true;
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
             if (this.selectedImage) {
                 this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage));
@@ -411,7 +413,7 @@ export enum FroalaStatus {
                 [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input']);
+                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input', 'img']);
                     }
                 },
                 [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
@@ -440,8 +442,16 @@ export enum FroalaStatus {
                     this.updateModel();
                 },
                 [froalaEvents.ImageInserted]: (_e, _editor, img) => {
-                    img[0].alt = '';
-                    this.updateModel();
+                    if (_editor.opts.modulImageUploaded) {
+                        img[0].alt = '';
+                        this.updateModel();
+                    } else {
+                        setTimeout(() => {
+                            _editor.image.remove(img);
+                        });
+                    }
+
+                    _editor.opts.modulImageUploaded = false;
                 }
             }
         });
