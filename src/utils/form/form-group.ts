@@ -62,6 +62,7 @@ export class FormGroup extends AbstractControl {
             .every((fc: FormControl<any>) => fc.value);
         const pristine: boolean = this.controls
             .filter(c => c instanceof FormControl)
+            // friendly/internaly accessing FormControl properties
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
 
         if (this.errors.length > 0) {

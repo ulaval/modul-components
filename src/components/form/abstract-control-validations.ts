@@ -68,12 +68,18 @@ export const MinValidator: Function = (controlName: string, min: number | Date):
                 throw Error('the min validator should not be attached to a form group');
             }
 
-            return control.value >= min;
+            let value: number | Date = control.value;
+
+            if (min instanceof Date) {
+                value = new Date(control.value);
+            }
+
+            return value >= min;
         },
         error: {
             key: ValidatorErrorKeys.Min,
-            message: `the min for this field is ${min}`,
-            summaryMessage: `The min for ${controlName} is ${min}`
+            message: `the min for this field is ${min instanceof Date ? min.toLocaleDateString() : min}`,
+            summaryMessage: `The min for ${controlName} is ${min instanceof Date ? min.toLocaleDateString() : min}`
         }
     };
 };
@@ -85,12 +91,18 @@ export const MaxValidator: Function = (controlName: string, max: number | Date):
                 throw Error('the max validator should not be attached to a form group');
             }
 
-            return control.value <= max;
+            let value: number | Date = control.value;
+
+            if (max instanceof Date) {
+                value = new Date(control.value);
+            }
+
+            return value <= max;
         },
         error: {
             key: ValidatorErrorKeys.Max,
-            message: `the max for this field is ${max}`,
-            summaryMessage: `The min for ${controlName} is ${max}`
+            message: `the max for this field is ${max instanceof Date ? max.toLocaleDateString() : max}`,
+            summaryMessage: `The min for ${controlName} is ${max instanceof Date ? max.toLocaleDateString() : max}`
         }
     };
 };
@@ -102,12 +114,18 @@ export const BetweenValidator: Function = (controlName: string, lowerBound: numb
                 throw Error('the max validator should not be attached to a form group');
             }
 
-            return control.value >= lowerBound && control.value <= upperBound;
+            let value: number | Date = control.value;
+
+            if (lowerBound instanceof Date) {
+                value = new Date(control.value);
+            }
+
+            return value >= lowerBound && value <= upperBound;
         },
         error: {
             key: ValidatorErrorKeys.Between,
-            message: `the value have to be between ${lowerBound} and ${upperBound}`,
-            summaryMessage: `The value for ${controlName} have to be between ${lowerBound} and ${upperBound}`
+            message: `the value have to be between ${lowerBound instanceof Date ? new Date(lowerBound).toLocaleDateString() : lowerBound} and ${upperBound instanceof Date ? new Date(upperBound).toLocaleDateString() : upperBound}`,
+            summaryMessage: `The value for ${controlName} have to be between ${lowerBound instanceof Date ? new Date(lowerBound).toLocaleDateString() : lowerBound} and ${upperBound instanceof Date ? new Date(upperBound).toLocaleDateString() : upperBound}`
         }
     };
 };
