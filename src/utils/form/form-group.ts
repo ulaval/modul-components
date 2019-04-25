@@ -57,24 +57,21 @@ export class FormGroup extends AbstractControl {
     }
 
     public initEdition(): void {
-        if (
-            !this.controls
-                .filter(c => c instanceof FormControl)
-                .every((fc: FormControl<any>) => !!fc.value)
-            &&
-            this.isValid
-        ) {
-            this._editionContext = AbstractControlEditionContext.EmptyAndValid;
-        } else if (
-            this.controls
-                .filter(c => c instanceof FormControl)
-                .every((fc: FormControl<any>) => !!fc.value)
-            &&
-            this.isValid
-        ) {
-            this._editionContext = AbstractControlEditionContext.PopulateAndValid;
-        } else if (!this.isValid) {
+        let populate: boolean = this.controls
+            .filter(c => c instanceof FormControl)
+            .every((fc: FormControl<any>) => fc.value);
+        let pristine: boolean = this.controls
+            .filter(c => c instanceof FormControl)
+            .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
+
+        if (this.errors.length > 0) {
             this._editionContext = AbstractControlEditionContext.HasErrors;
+        } else if (pristine) {
+            this._editionContext = AbstractControlEditionContext.Pristine;
+        } else if (!populate && this.isValid) {
+            this._editionContext = AbstractControlEditionContext.EmptyAndValid;
+        } else if (populate && this.isValid) {
+            this._editionContext = AbstractControlEditionContext.PopulateAndValid;
         }
     }
 
