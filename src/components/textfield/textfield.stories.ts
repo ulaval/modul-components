@@ -12,7 +12,7 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-const textfieldTypes = {
+const textfieldTypes: {} = {
     'text': 'text',
     'password': 'password',
     'email': 'email',
@@ -22,22 +22,22 @@ const textfieldTypes = {
     'number': 'number'
 };
 
-const textfieldWidths = {
+const textfieldWidths: {} = {
     'X-Small': 'x-small',
     'Small': 'small',
     'Regular': 'regular',
     'Medium': 'medium',
-    'Large': 'large',
+    'Large': 'large'
 };
 
-const textfieldTagStyles = {
+const textfieldTagStyles: {} = {
     'h1': 'h1',
     'h2': 'h2',
     'h3': 'h3',
     'h4': 'h4',
     'h5': 'h5',
     'h6': 'h6',
-    'h7': 'h7',
+    'h7': 'h7'
 };
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
@@ -168,8 +168,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module
                 default: boolean('length-overflow', false)
             }
         },
-        template: `<m-textfield :character-count="characterCount" :character-count-threshold="characterCountThreshold" 
-                label="Enter a value" :length-overflow="lengthOverflow" :max-length="maxLength" 
+        template: `<m-textfield :character-count="characterCount" :character-count-threshold="characterCountThreshold"
+                label="Enter a value" :length-overflow="lengthOverflow" :max-length="maxLength"
                 placeholder="change knobs to further test"></m-textfield>`
     }))
     .add('max-length="20"', () => ({
@@ -185,7 +185,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module
                     max-length="20"></m-textfield>`
     }))
     .add('character-count-threshold="10"', () => ({
-        template: `<m-textfield :character-count="true" :character-count-threshold="10" max-length="20" 
+        template: `<m-textfield :character-count="true" :character-count-threshold="10" max-length="20"
                     placeholder=":character-count='true' :character-count-threshold='10' max-length='20'"></m-textfield>`
     }));
 
