@@ -41,7 +41,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         props: {
             name: {
                 default: select('name', iconListShorthand, 'profile')
-            },
+            }
         },
         template: `<div>
                        <m-icon :name="name"></m-icon>
@@ -52,7 +52,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         props: {
             name: {
                 default: select('name', iconListLonghand, 'm-svg__profile')
-            },
+            }
         },
         template: `<div>
                        <m-icon :name="name"></m-icon>
@@ -63,7 +63,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         props: {
             svgTitle: {
                 default: text('svgTitle', 'Title1')
-            },
+            }
         },
         template: `<div>
                        <m-icon :svgTitle="svgTitle" name="profile"></m-icon>
@@ -74,7 +74,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         props: {
             size: {
                 default: text('size (px)', '30')
-            },
+            }
         },
         template: `<div>
                        <m-icon :size="size" name="profile"></m-icon>
@@ -85,7 +85,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
         props: {
             name: {
                 default: select('icon name as class', iconListShorthand, 'profile')
-            },
+            }
         },
         template: `<div>
                        <m-icon :name="name" :showNameAsClass="true"></m-icon>
