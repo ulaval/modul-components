@@ -81,6 +81,12 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
+    @Prop({ default: 5 })
+    public firstHeaderLevel: number;
+
+    @Prop({ default: 6 })
+    public lastHeaderLevel: number;
+
     @Emit('fullscreen')
     onFullscreen(fullscreenWasActived: boolean): void { }
 
@@ -117,6 +123,14 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             options.pluginsEnabled.push('image');
             options.toolbarButtons.push('insertImage');
         }
+
+        let headerLevels: any = {};
+        for (let level: number = this.firstHeaderLevel; level <= this.lastHeaderLevel; level++) {
+            headerLevels['m-u--h' + level] = 'Header ' + level;
+        }
+
+        headerLevels[''] = 'Normal';
+        options.paragraphStyles = headerLevels;
 
         return options;
     }
