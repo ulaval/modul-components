@@ -133,6 +133,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
     protected mounted(): void {
         this.setupScrolllH();
         this.as<ElementQueries>().$on('resize', this.setupScrolllH);
+        this.scrollToSelected();
+        this.setDisplayButtonArrrow();
 
         this.$children.forEach((child: Vue) => {
             child.$on('resize', this.setupScrolllH);
@@ -198,9 +200,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
             wrapEl.style.height = this.computedHeight + OVERFLOWOFFSET + 'px';
             contentsEl.style.height = this.computedHeight + 'px';
 
-            this.scrollToSelected();
-            this.setDisplayButtonArrrow();
-
         } else {
             this.showArrowLeft = false;
             this.showArrowRight = false;
@@ -231,7 +230,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
                         if (((element.$el as HTMLElement).offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
                             wrapEl.scrollLeft = scrollPositionAlignLeft;
                             // Check if the selected element exceeds on the right side
-                        } else if (wrapEl.clientWidth < ((element.$el as HTMLElement).offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
+                        } else if (wrapEl.clientWidth < ((element.$el as HTMLElement).offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth)) {
                             wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - (element.$el as HTMLElement).offsetLeft);
                         }
                     } else if (wrapEl) {
@@ -241,7 +240,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
                     if (this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow) {
                         this.setSelectedIndicatorPosition(element, this.skin);
                     }
-                    this.setDisplayButtonArrrow();
                 }
             });
         });
