@@ -247,8 +247,6 @@ export class MTimepicker extends ModulVue {
     }
 
     private onClose(): void {
-        // tslint:disable-next-line:no-console
-        console.log('onClose', this.internalTime);
         if (isNaN(this.internalHour) || isNaN(this.internalMinute)) {
             this.resetPopupTime();
         } else {
