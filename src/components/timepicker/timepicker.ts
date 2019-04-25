@@ -3,6 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
 import PopupDirectivePlugin from '../../directives/popup/popup';
+import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -40,7 +41,8 @@ function validateTimeString(value: string): boolean {
         InputState,
         InputManagement,
         InputWidth,
-        MediaQueries
+        MediaQueries,
+        InputLabel
     ],
     components: {
         MInputMask
