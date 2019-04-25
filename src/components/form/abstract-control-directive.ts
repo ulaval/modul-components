@@ -11,12 +11,18 @@ export const AbstractControlDirective: DirectiveOptions = {
         el: HTMLElement,
         binding: VNodeDirective
     ): void {
-        const AbstractControl: AbstractControl = binding.value;
+        const control: AbstractControl = binding.value;
 
         Object.defineProperty(el, 'AbstractControlDirectiveListeners', {
             value: {
-                focusListener: () => AbstractControl.initEdition(),
-                blurListener: () => AbstractControl.endEdition()
+                focusListener: () => control.initEdition(),
+                blurListener: (event: any) => {
+                    if (event.srcElement instanceof HTMLButtonElement) {
+                        return;
+                    }
+
+                    control.endEdition();
+                }
             }
         });
 

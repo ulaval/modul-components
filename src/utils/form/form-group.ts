@@ -57,10 +57,10 @@ export class FormGroup extends AbstractControl {
     }
 
     public initEdition(): void {
-        let populate: boolean = this.controls
+        const populate: boolean = this.controls
             .filter(c => c instanceof FormControl)
             .every((fc: FormControl<any>) => fc.value);
-        let pristine: boolean = this.controls
+        const pristine: boolean = this.controls
             .filter(c => c instanceof FormControl)
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
 

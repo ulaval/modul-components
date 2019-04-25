@@ -3,6 +3,17 @@ import { AbstractControlValidator } from "../../utils/form/abstract-control-vali
 import { FormControl } from "../../utils/form/form-control";
 import { FormGroup } from "../../utils/form/form-group";
 
+export enum ValidatorErrorKeys {
+    Required = 'required',
+    MinLength = 'min-length',
+    MaxLength = 'max-length',
+    Min = 'min',
+    Max = 'max',
+    Between = 'between',
+    Email = 'email',
+    CompareControls = 'compare-controls'
+}
+
 export const RequiredValidator: Function = (controlName: string): AbstractControlValidator => {
     return {
         validationFunction: (control: AbstractControl): boolean => {
@@ -60,14 +71,14 @@ export const MaxLengthValidator: Function = (controlName: string, maxLength: num
     };
 };
 
-export const MinValidator: Function = (controlName: string, min: number): AbstractControlValidator => {
+export const MinValidator: Function = (controlName: string, min: number | Date): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
-
             if (control instanceof FormGroup) {
                 throw Error('the min validator should not be attached to a form group');
             }
-            return Number(control.value) >= min;
+
+            return control.value >= min;
         },
         error: {
             key: 'min',
@@ -77,19 +88,36 @@ export const MinValidator: Function = (controlName: string, min: number): Abstra
     };
 };
 
-export const MaxValidator: Function = (controlName: string, max: number): AbstractControlValidator => {
+export const MaxValidator: Function = (controlName: string, max: number | Date): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the max validator should not be attached to a form group');
             }
 
-            return Number(control.value) <= max;
+            return control.value <= max;
         },
         error: {
             key: 'max',
             message: `the max for this field is ${max}`,
             summaryMessage: `The min for ${controlName} is ${max}`
+        }
+    };
+};
+
+export const BetweenValidator: Function = (controlName: string, lowerBound: number | Date, upperBound: number | Date): AbstractControlValidator => {
+    return {
+        validationFunction: (control: FormControl<any>): boolean => {
+            if (control instanceof FormGroup) {
+                throw Error('the max validator should not be attached to a form group');
+            }
+
+            return control.value >= lowerBound && control.value <= upperBound;
+        },
+        error: {
+            key: 'max',
+            message: `the value have to be between ${lowerBound} and ${upperBound}`,
+            summaryMessage: `The value for ${controlName} have to be between ${lowerBound} and ${upperBound}`
         }
     };
 };
