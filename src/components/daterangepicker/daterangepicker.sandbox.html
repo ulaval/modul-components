@@ -7,7 +7,8 @@
         <m-button @click="emptyModel(undefined)">Empty model (undefined)</m-button>
         <m-button @click="emptyModel({})">Empty model (Objet vide)</m-button>
         <div>
-            <m-daterangepicker v-model="model"></m-daterangepicker>
+            <m-daterangepicker :show-internal-validation-error="false"
+                               v-model="model"></m-daterangepicker>
         </div>
     </p>
     <p>Selected value: {{ model }}</p>
