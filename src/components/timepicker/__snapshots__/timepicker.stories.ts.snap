@@ -6,11 +6,11 @@ exports[`Storyshots components|m-timepicker default 1`] = `
   style="width: 100%; max-width: 136px;"
 >
   <div
-    class="m-input-style m--has-value m--is-tag-default"
+    class="m-input-style m--is-tag-default"
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -20,6 +20,113 @@ exports[`Storyshots components|m-timepicker default 1`] = `
         <div
           class="m-input-style__prefix"
         />
+         
+        <div
+          class="m-input-style__left-content"
+        >
+          <input
+            aria-controls="mTimepicker-uuid-controls"
+            aria-haspopup="true"
+            id="mTimepicker-uuid"
+            inputmode="decimal"
+            max="23:59"
+            min="00:00"
+            placeholder="hh:mm"
+            step="300"
+            type="text"
+          />
+            
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        >
+          <button
+            aria-controls="mTimepicker-uuid"
+            class="m-icon-button m--is-skin-light m--has-ripple"
+            style="width: 22px; height: 22px;"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="20px"
+              width="20px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-timepicker__validation-message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-timepicker label 1`] = `
+<div
+  class="m-timepicker"
+  style="width: 100%; max-width: 136px;"
+>
+  <div
+    class="m-input-style m--has-label m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="mTimepicker-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Activity start time
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <!---->
          
         <div
           class="m-input-style__left-content"
@@ -106,7 +213,7 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -202,7 +309,7 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -288,6 +395,198 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-timepicker reactivity 1`] = `
+<div>
+  <div
+    class="m-timepicker"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              aria-controls="mTimepicker-uuid-controls"
+              aria-haspopup="true"
+              id="mTimepicker-uuid"
+              inputmode="decimal"
+              max="23:59"
+              min="00:00"
+              placeholder="hh:mm"
+              step="300"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <button
+              aria-controls="mTimepicker-uuid"
+              class="m-icon-button m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-timepicker__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-timepicker"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              aria-controls="mTimepicker-uuid-controls"
+              aria-haspopup="true"
+              id="mTimepicker-uuid"
+              inputmode="decimal"
+              max="23:59"
+              min="00:00"
+              placeholder="hh:mm"
+              step="300"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <button
+              aria-controls="mTimepicker-uuid"
+              class="m-icon-button m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-timepicker__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-timepicker step 15m 1`] = `
 <div
   class="m-timepicker"
@@ -298,7 +597,7 @@ exports[`Storyshots components|m-timepicker step 15m 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
