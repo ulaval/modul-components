@@ -55,6 +55,9 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
+    @Prop({ default: false })
+    public hideInternalErrorMessage: boolean;
+
     private internalOpen: boolean = false;
     private internalCalendarErrorMessage: string = '';
     private inputModel = '';
@@ -83,16 +86,16 @@ export class MDatepicker extends ModulVue {
 
 
 
-    private get formattedDate(): string {
+    get formattedDate(): string {
         return this.convertValueToModel(this.model);
     }
 
-    private get calandarError(): boolean {
+    get calandarError(): boolean {
         return this.internalCalendarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
     private get calandarErrorMessage(): string {
-        if (this.internalCalendarErrorMessage) {
+        if (this.internalCalendarErrorMessage && !this.hideInternalErrorMessage) {
             return this.internalCalendarErrorMessage;
         } else {
             return this.as<InputState>().errorMessage !== undefined ? this.as<InputState>().errorMessage : '';
@@ -118,6 +121,7 @@ export class MDatepicker extends ModulVue {
 
     private get maxModulDate(): ModulDate {
         return new ModulDate(this.max);
+
     }
 
     private set open(open: boolean) {
@@ -166,6 +170,8 @@ export class MDatepicker extends ModulVue {
 
             if (this.showErrorMessage(inputValue)) {
                 this.model = this.inputModel;
+            } else {
+                this.model = '';
             }
         } else {
             // we are editing, clear error message and hide popup
@@ -326,6 +332,21 @@ export class MDatepicker extends ModulVue {
             return new ModulDate(value.toISOString()).toString();
         } else {
             return value as string;
+        }
+    }
+
+    private onKeydown(event: KeyboardEvent): void {
+
+
+        if (this.as<InputStateMixin>().active) {
+            if (event.key === 'Tab') {
+                // close popop if open and tab key is pressed (accessibility)
+                if (this.open) {
+                    this.open = false;
+                }
+            }
+
+            this.$emit('keydown', event);
         }
     }
 }
