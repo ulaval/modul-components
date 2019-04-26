@@ -22,6 +22,14 @@ export class MForm extends ModulVue {
     @Emit('reset')
     public emitReset(): void { }
 
+    public get summaryErrors(): AbstractControlError[] {
+        return this.formGroup.errors.concat(
+            this.formGroup.controls
+                .map(c => c.errors)
+                .reduce((acc, curr) => acc.concat(curr), [])
+        );
+    }
+
     public submit(): void {
         this.formGroup.validate();
 
@@ -32,14 +40,6 @@ export class MForm extends ModulVue {
 
         this._triggerActionFallouts(FormActionType.ValidSubmit);
         this.emitSubmit();
-    }
-
-    public get summaryErrors(): AbstractControlError[] {
-        return this.formGroup.errors.concat(
-            this.formGroup.controls
-                .map(c => c.errors)
-                .reduce((acc, curr) => acc.concat(curr), [])
-        );
     }
 
     public reset(): void {
