@@ -1,4 +1,6 @@
 const webpackBase = require("../webpack.base.js");
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = ({ config, mode }) => {
     let baseConfig = webpackBase(false);
@@ -28,6 +30,19 @@ module.exports = ({ config, mode }) => {
 
 
     config.plugins.push(...(baseConfig.plugins));
+
+
+    // add linter + stylelint
+    config.plugins.push(new ForkTsCheckerWebpackPlugin({
+        tsconfig: 'tsconfig.json',
+        checkSyntacticErrors: true,
+        tslint: true
+    }));
+
+    config.plugins.push(new StyleLintPlugin({
+        configFile: '.stylelintrc',
+        emitErrors: true
+    }));
 
     //Uncomment the following line to display configuration
     // console.dir(config, { depth: null });

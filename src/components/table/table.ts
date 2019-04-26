@@ -23,6 +23,7 @@ export interface MColumnTable {
     dataProp: string;
     width?: string;
     sortable?: boolean;
+    centered?: boolean;
     sortDirection?: MColumnSortDirection;
 }
 
