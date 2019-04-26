@@ -265,6 +265,7 @@ export class MTimepicker extends ModulVue {
         await this.$nextTick();
         const inputEl: HTMLInputElement = (this.$refs.input as MInputMask).$el as HTMLInputElement;
         inputEl.focus();
+        this.open = true;
     }
 
     ///////////////////////////////////////
@@ -276,6 +277,9 @@ export class MTimepicker extends ModulVue {
     public set currentTime(value: string) {
         let oldTime: string = this.internalTime;
         this.internalTime = value;
+
+        // When the user type in something we close de popup.
+        this.open = false;
 
         if (value && this.validateTime(value) && validateTimeString(value)) {
             this.updatePopupTime(value);
