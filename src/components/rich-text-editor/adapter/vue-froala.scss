@@ -225,6 +225,14 @@
                     margin-right: 16px;
                 }
             }
+
+            div[id*="paragraphStyle"] {
+                li {
+                    a {
+                        margin-top: 0;
+                    }
+                }
+              }
         }
 
         .fr-popup {
