@@ -65,7 +65,7 @@
         <div :id="ariaControls"
              class="m-timepicker__body"
              :aria-labelledby="id">
-            <ul class="m-timepicker__body__hours"
+            <ul class="m-timepicker__hours"
                 :aria-activedescendant="currentHour"
                 ref="hours"
                 role="listbox"
@@ -75,7 +75,7 @@
                 <li v-for="(h, hoursIndex) in currentfilteredHours"
                     :key="hoursIndex"
                     :id="h"
-                    class="m-timepicker__body__hours-item"
+                    class="m-timepicker__hours-item"
                     :aria-selected="h == currentHour"
                     role="option"
                     @click="onSelectHour(h)"
@@ -85,7 +85,7 @@
                           tabindex="0">{{formatNumber(h)}}</span>
                 </li>
             </ul>
-            <ul class="m-timepicker__body__minutes"
+            <ul class="m-timepicker__minutes"
                 :aria-activedescendant="currentMinute"
                 ref="minutes"
                 @mousedown="onMousedown"
@@ -94,7 +94,7 @@
                 <li v-for="(m, minutesIndex) in currentFilteredMinutes"
                     :key="minutesIndex"
                     :id="minutesIndex"
-                    class="m-timepicker__body__minutes-item"
+                    class="m-timepicker__minutes-item"
                     :aria-selected="m == currentMinute"
                     role="option"
                     @click="onSelectMinute(m)"
