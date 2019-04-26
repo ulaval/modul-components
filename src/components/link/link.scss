@@ -1,6 +1,6 @@
 @import 'commons';
 
-.m-link {
+.m-u--app-body .m-link {
     --m-link--color-visited: #{$m-color--interactive-darker};
     --m-link--color-active: #{$m-color--interactive-dark};
     --m-link--color: #{$m-color--interactive};
@@ -52,8 +52,7 @@
             color: var(--m-link--color-active);
         }
 
-        &:not(.m--is-unvisited):not(:hover):not(:focus):visited,
-        &.m--is-button.m--is-unvisited:not(:hover):not(:focus):not(:visited) {
+        &:not(.m--is-unvisited):not(:hover):not(:focus):visited {
             color: var(--m-link--color-visited);
         }
     }
