@@ -24,6 +24,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
         },
         template: `<m-timepicker v-model="model"></m-timepicker>`
     }))
+    .add('label', () => ({
+        data(): any {
+            return {
+                model: undefined
+            };
+        },
+        template: `<m-timepicker v-model="model" label="Heure de début"></m-timepicker>`
+    }))
     .add('min 8:45 / max 15:15', () => ({
         template: '<m-timepicker v-model="model" :min="min" :max="max"></m-timepicker>',
         props: {
