@@ -10,7 +10,7 @@ exports[`Storyshots components|m-timepicker default 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -106,7 +106,7 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -202,7 +202,7 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -299,7 +299,7 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 8px;"
+        style="margin-top: 10px;"
       >
         <!---->
          
@@ -393,7 +393,7 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
     >
       <div
         class="m-input-style__content"
-        style="margin-top: 8px;"
+        style="margin-top: 10px;"
       >
         <!---->
          
@@ -490,7 +490,7 @@ exports[`Storyshots components|m-timepicker step 15m 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
