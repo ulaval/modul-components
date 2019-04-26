@@ -18,7 +18,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ERROR_ACCESS_DENIED_NAME}`, modu
     .addDecorator(withKnobs)
     .add('default', () => ({
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
-                        <m-error-browser-not-supported></m-error-browser-not-supported>
+                        <m-error-access-denied></m-error-access-denied>
                    </div>`
     }))
     .add('title', () => ({
@@ -28,7 +28,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ERROR_ACCESS_DENIED_NAME}`, modu
             }
         },
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
-                        <m-error-browser-not-supported :title="title"></m-error-browser-not-supported>
+                        <m-error-access-denied :title="title"></m-error-access-denied>
                    </div>`
     }))
     .add('links', () => ({
@@ -39,7 +39,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ERROR_ACCESS_DENIED_NAME}`, modu
             }
         },
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
-                        <m-error-browser-not-supported :links="links"></m-error-browser-not-supported>
+                        <m-error-access-denied :links="links"></m-error-access-denied>
                    </div>`
     }))
     .add('hints', () => ({
@@ -50,6 +50,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ERROR_ACCESS_DENIED_NAME}`, modu
             }
         },
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
-                        <m-error-browser-not-supported :hints="hints"></m-error-browser-not-supported>
+                        <m-error-access-denied :hints="hints"></m-error-access-denied>
                    </div>`
     }));
