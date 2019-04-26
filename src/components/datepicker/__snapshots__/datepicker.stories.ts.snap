@@ -851,7 +851,7 @@ exports[`Storyshots components|m-datepicker hide-internal-error-message 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
