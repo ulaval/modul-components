@@ -8,7 +8,7 @@ import I18nPlugin from '../i18n/i18n';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
-export const CSS_LABEL_DEFAULT_MARGIN: number = 8;
+export const CSS_LABEL_DEFAULT_MARGIN: number = 10;
 
 @WithRender
 @Component({
