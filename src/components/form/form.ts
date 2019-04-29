@@ -3,7 +3,7 @@ import { AbstractControlError } from "../../utils/form/abstract-control-error";
 import { FormGroup } from "../../utils/form/form-group";
 import { ModulVue } from "../../utils/vue/vue";
 import { FormActionFallout } from "./form-action-fallout";
-import { FormActionType } from "./form-action-type";
+import { FormActions } from "./form-action-type";
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender
@@ -34,36 +34,36 @@ export class MForm extends ModulVue {
         this.formGroup.validate();
 
         if (!this.formGroup.isValid) {
-            this._triggerActionFallouts(FormActionType.InvalidSubmit);
+            this._triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
-        this._triggerActionFallouts(FormActionType.ValidSubmit);
+        this._triggerActionFallouts(FormActions.ValidSubmit);
         this.emitSubmit();
     }
 
     public reset(): void {
         this.formGroup.reset();
 
-        this._triggerActionFallouts(FormActionType.Reset);
+        this._triggerActionFallouts(FormActions.Reset);
         this.emitReset();
     }
 
     protected created(): void {
-        this._triggerActionFallouts(FormActionType.Created);
+        this._triggerActionFallouts(FormActions.Created);
     }
 
     protected updated(): void {
-        this._triggerActionFallouts(FormActionType.Updated);
+        this._triggerActionFallouts(FormActions.Updated);
     }
 
     protected beforeDestroy(): void {
-        this._triggerActionFallouts(FormActionType.Destroyed);
+        this._triggerActionFallouts(FormActions.Destroyed);
     }
 
-    private _triggerActionFallouts(type: FormActionType): void {
+    private _triggerActionFallouts(type: FormActions): void {
         this.actionFallouts
-            .filter(a => type & a.type)
+            .filter(a => type & a.action)
             .forEach(a => a.fallout(this));
     }
 }

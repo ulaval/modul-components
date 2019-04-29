@@ -1,4 +1,4 @@
-export enum FormActionType {
+export enum FormActions {
     None = 1 << 0,
     InvalidSubmit = 1 << 1,
     ValidSubmit = 1 << 2,

@@ -7,8 +7,8 @@ import { AbstractControlValidationType } from '../../utils/form/abstract-control
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { FORM_NAME } from '../component-names';
-import { BetweenValidator, CompareValidator, EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './abstract-control-validations';
-import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './form-action-fallouts';
+import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './build-in-form-action-fallouts';
+import { BetweenValidator, CompareValidator, EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './built-in-control-validators';
 import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);

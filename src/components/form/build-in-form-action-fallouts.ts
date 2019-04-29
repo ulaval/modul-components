@@ -3,18 +3,18 @@ import { ModulVue } from '../../utils/vue/vue';
 import { MToastPosition, MToastState } from '../toast/toast';
 import { MForm } from './form';
 import { FormActionFallout } from './form-action-fallout';
-import { FormActionType } from './form-action-type';
+import { FormActions } from './form-action-type';
 
 
 export const ClearErrorToast: FormActionFallout = {
-    type: FormActionType.ValidSubmitOrResetOrDestroyed,
+    action: FormActions.ValidSubmitOrResetOrDestroyed,
     fallout: (form: MForm): void => {
         (ModulVue.prototype).$toast.clear();
     }
 };
 
 export const ErrorToast: FormActionFallout = {
-    type: FormActionType.InvalidSubmit,
+    action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
         let htmlString: string = (ModulVue.prototype).$i18n
             .translate(
@@ -32,21 +32,21 @@ export const ErrorToast: FormActionFallout = {
 };
 
 export const FocusOnFirstError: FormActionFallout = {
-    type: FormActionType.InvalidSubmit,
+    action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
         form.formGroup.controls.find(c => !c.isValid)!.focusGranted = true;
     }
 };
 
 export const SummaryMessage: FormActionFallout = {
-    type: FormActionType.InvalidSubmit,
+    action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
         form.displaySummary = true;
     }
 };
 
 export const ClearSummaryMessage: FormActionFallout = {
-    type: FormActionType.ValidSubmitOrReset,
+    action: FormActions.ValidSubmitOrReset,
     fallout: (form: MForm): void => {
         form.displaySummary = false;
     }

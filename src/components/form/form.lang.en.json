@@ -1,6 +1,22 @@
 {
     "m-form": {
         "required": "Required",
-        "multipleErrorsToCorrect": "en-Les <strong>%(totalNbOfErrors)s</strong> informations en rouges sont à revoir pour continuer"
+        "multipleErrorsToCorrect": "en-Les <strong>%(totalNbOfErrors)s</strong> informations en rouges sont à revoir pour continuer",
+        "requiredValidatorErrorMessage": "this field is required",
+        "requiredValidatorErrorSummaryMessage": "the field %(controlName)s is required",
+        "minLengthValidatorErrorMessage": "the min length for this field is %(minLength)s",
+        "minLengthValidatorErrorSummaryMessage": "The min length for %(controlName)s is %(minLength)s",
+        "maxLengthValidatorErrorMessage": "the max length for this field is %(maxLength)s",
+        "maxLengthValidatorErrorSummaryMessage": "The max length for %(controlName)s is %(maxLength)s",
+        "minValidatorErrorMessage": "the min for this field is %(min)s",
+        "minValidatorErrorSummaryMessage": "The min for %(controlName)s is %(min)s",
+        "maxValidatorErrorMessage": "the max for this field is %(max)s",
+        "maxValidatorErrorSummaryMessage": "The max for %(controlName)s is %(max)s",
+        "betweenValidatorErrorMessage": "the value have to be between %(lowerBound)s and %(upperBound)s",
+        "betweenValidatorErrorSummaryMessage": "the value for %(controlName)s have to be between %(lowerBound)s and %(upperBound)s",
+        "emailValidatorErrorMessage": "The email format is not valid",
+        "emailValidatorErrorSummaryMessage": "The email format for %(controlName)s is not valid",
+        "compareValidatorErrorMessage": "the value of %(controlNames)s must be the same",
+        "compareValidatorErrorSummaryMessage": "the value of %(controlNames)s must be the same"
     }
 }

@@ -1,7 +1,7 @@
 import { MForm } from "./form";
-import { FormActionType } from "./form-action-type";
+import { FormActions } from "./form-action-type";
 
 export type FormActionFallout = {
-    type: FormActionType,
+    action: FormActions,
     fallout: (form: MForm) => void;
 };
