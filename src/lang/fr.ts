@@ -12,6 +12,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/list-item/list-item.lang.fr.json'),
                 require('../components/modal/modal.lang.fr.json'),
                 require('../components/calendar/calendar.lang.fr.json'),
+                require('../components/chip/chip.lang.fr.json'),
                 require('../components/datefields/datefields.lang.fr.json'),
                 require('../components/datepicker/datepicker.lang.fr.json'),
                 require('../components/daterangepicker/daterangepicker.lang.fr.json'),
