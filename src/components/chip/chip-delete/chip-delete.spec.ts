@@ -1,8 +1,11 @@
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { renderComponent } from '../../../../tests/helpers/render';
+import uuid from '../../../utils/uuid/uuid';
 import MChipDeletePlugin, { MChipDelete } from './chip-delete';
 
+jest.mock('../../../utils/uuid/uuid');
+(uuid.generate as jest.Mock).mockReturnValue('uuid');
 
 describe('Chip', () => {
     beforeEach(() => {
