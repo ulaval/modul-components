@@ -3,6 +3,7 @@ import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
 import PopupDirectivePlugin from '../../directives/popup/popup';
+import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -41,7 +42,8 @@ function validateTimeString(value: string): boolean {
         InputState,
         InputManagement,
         InputWidth,
-        MediaQueries
+        MediaQueries,
+        InputLabel
     ],
     components: {
         MInputMask,
@@ -86,6 +88,7 @@ export class MTimepicker extends ModulVue {
 
     private created(): void {
         this.internalTime = this.value;
+        this.updatePopupTime(this.internalTime);
     }
 
     private mounted(): void {
@@ -177,8 +180,12 @@ export class MTimepicker extends ModulVue {
     }
 
     private updatePopupTime(value: string): void {
-        this.internalHour = this.timeStringToNumber(value).hour;
-        this.internalMinute = this.timeStringToNumber(value).minute;
+        if (value) {
+            this.internalHour = this.timeStringToNumber(value).hour;
+            this.internalMinute = this.timeStringToNumber(value).minute;
+        } else {
+            this.resetPopupTime();
+        }
     }
 
     private resetPopupTime(): void {
@@ -246,6 +253,8 @@ export class MTimepicker extends ModulVue {
     private onClose(): void {
         if (isNaN(this.internalHour) || isNaN(this.internalMinute)) {
             this.resetPopupTime();
+        } else {
+            this.updatePopupTime(this.internalTime);
         }
     }
 
@@ -258,6 +267,7 @@ export class MTimepicker extends ModulVue {
         await this.$nextTick();
         const inputEl: HTMLInputElement = (this.$refs.input as MInputMask).$el as HTMLInputElement;
         inputEl.focus();
+        this.open = true;
     }
 
     ///////////////////////////////////////
@@ -269,6 +279,9 @@ export class MTimepicker extends ModulVue {
     public set currentTime(value: string) {
         let oldTime: string = this.internalTime;
         this.internalTime = value;
+
+        // When the user type in something we close de popup.
+        this.open = false;
 
         if (value && this.validateTime(value) && validateTimeString(value)) {
             this.updatePopupTime(value);
