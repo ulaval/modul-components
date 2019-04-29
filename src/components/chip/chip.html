@@ -1,13 +1,12 @@
-<div class="m-chip">
-    <div class="m-chip__body">
-        <div :class="{ 'm-u--margin-right' : disposable }">
-            <slot></slot>
-        </div>
-        <m-icon-button v-if="disposable"
-                       skin="primary"
-                       button-size="20px"
-                       icon-size="11px"
-                       @click="close()">
-        </m-icon-button>
-    </div>
-</div>
+<m-chip-add v-if="isModeAdd"
+            :disabled="disabled"
+            @click="onClick"
+            @add="onAdd">
+    <slot></slot>
+</m-chip-add>
+<m-chip-delete v-else
+               :disabled="disabled"
+               @click="onClick"
+               @delete="onDelete">
+    <slot></slot>
+</m-chip-delete>

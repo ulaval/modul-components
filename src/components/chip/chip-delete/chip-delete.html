@@ -1,0 +1,16 @@
+<div class="m-chip-delete"
+     :class="{'m--is-disabled': disabled}">
+    <div class="m-chip-delete__body">
+        <span class="m-chip-delete__text">
+            <slot></slot>
+        </span>
+        <button class="m-chip-delete__button"
+                @click="onClick"
+                :disabled="disabled">
+            <m-icon class="m-chip-delete__icon"
+                    size="14px"
+                    name="m-svg__close-clear">
+            </m-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<button class="m-chip-add"
+        :class="{'m--is-disabled': disabled}"
+        @click="onClick"
+        :disabled="disabled">
+    <div class="m-chip-add__body">
+        <slot></slot>
+        <m-icon v-if="icon"
+                class="m-chip-add__icon"
+                size="18px"
+                name="m-svg__add-circle-filled">
+        </m-icon>
+    </div>
+</button>

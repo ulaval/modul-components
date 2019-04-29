@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-chip default 1`] = `
+<div
+  class="m-chip"
+  text="test"
+>
+  <div
+    class="m-chip__body"
+  >
+    <div
+      class="m-u--margin-right"
+    >
+      test
+    </div>
+     
+    <button
+      class="m-icon-button m--is-skin-primary m--has-ripple"
+      style="width: 20px; height: 20px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="11px"
+        width="11px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;

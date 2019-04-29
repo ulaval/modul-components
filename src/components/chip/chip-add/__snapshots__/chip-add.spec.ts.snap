@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip should render correctly 1`] = `
+<div class="m-chip">
+  <div class="m-chip__body">
+    <div></div>
+  </div>
+</div>
+`;
