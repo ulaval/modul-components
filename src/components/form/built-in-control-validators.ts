@@ -50,6 +50,9 @@ export const RequiredValidator: Function = (controlName: string): AbstractContro
     };
 };
 
+/**
+ * Bound included
+ */
 export const MinLengthValidator: Function = (controlName: string, minLength: number): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
@@ -83,6 +86,9 @@ export const MinLengthValidator: Function = (controlName: string, minLength: num
     };
 };
 
+/**
+ * Bound included
+ */
 export const MaxLengthValidator: Function = (controlName: string, maxLength: number): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
@@ -116,6 +122,9 @@ export const MaxLengthValidator: Function = (controlName: string, maxLength: num
     };
 };
 
+/**
+ * Bound inclided
+ */
 export const MinValidator: Function = (controlName: string, min: number | Date): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
@@ -154,6 +163,9 @@ export const MinValidator: Function = (controlName: string, min: number | Date):
     };
 };
 
+/**
+ * Bound included
+ */
 export const MaxValidator: Function = (controlName: string, max: number | Date): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
@@ -192,6 +204,9 @@ export const MaxValidator: Function = (controlName: string, max: number | Date):
     };
 };
 
+/**
+ *  bounds included
+ */
 export const BetweenValidator: Function = (controlName: string, lowerBound: number | Date, upperBound: number | Date): AbstractControlValidator => {
     return {
         validationFunction: (control: FormControl<any>): boolean => {
