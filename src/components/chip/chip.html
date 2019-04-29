@@ -1,12 +1,12 @@
 <m-chip-add v-if="isModeAdd"
             :disabled="disabled"
-            @click="onClick"
-            @add="onAdd">
+            @click="emitClick"
+            @add="emitAdd">
     <slot></slot>
 </m-chip-add>
 <m-chip-delete v-else
                :disabled="disabled"
-               @click="onClick"
-               @delete="onDelete">
+               @click="emitClick"
+               @delete="emitDelete">
     <slot></slot>
 </m-chip-delete>

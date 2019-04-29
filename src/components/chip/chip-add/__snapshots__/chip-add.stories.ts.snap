@@ -1,40 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots components|m-chip default 1`] = `
-<div
-  class="m-chip"
-  text="test"
+exports[`Storyshots components|m-chip-add default 1`] = `
+<button
+  class="m-chip-add"
 >
   <div
-    class="m-chip__body"
+    class="m-chip-add__body"
   >
-    <div
-      class="m-u--margin-right"
+    <span
+      class="m-chip-add__hidden-text"
     >
-      test
-    </div>
-     
-    <button
-      class="m-icon-button m--is-skin-primary m--has-ripple"
-      style="width: 20px; height: 20px;"
-      type="button"
+      Ajouer : 
+    </span>
+     Chip add 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
     >
-      <svg
-        aria-hidden="true"
-        class="m-icon m-icon-button__icon"
-        height="11px"
-        width="11px"
-      >
-        <!---->
-         
-        <use
-          aria-hidden="true"
-          class=""
-        />
-      </svg>
-       
       <!---->
-    </button>
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
   </div>
-</div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip-add disabled 1`] = `
+<button
+  class="m-chip-add m--is-disabled"
+  disabled="disabled"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouer : 
+    </span>
+     Disabled 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+  </div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip-add icon=false 1`] = `
+<button
+  class="m-chip-add"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouer : 
+    </span>
+     Chip 
+    <!---->
+  </div>
+</button>
 `;

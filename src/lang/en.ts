@@ -11,6 +11,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/accordion-group/accordion-group.lang.en.json'),
                 require('../components/list-item/list-item.lang.en.json'),
                 require('../components/modal/modal.lang.en.json'),
+                require('../components/chip/chip.lang.en.json'),
                 require('../components/datefields/datefields.lang.en.json'),
                 require('../components/datepicker/datepicker.lang.en.json'),
                 require('../components/daterangepicker/daterangepicker.lang.en.json'),

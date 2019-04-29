@@ -14,17 +14,17 @@ export class MChipAdd extends Vue {
     icon: boolean;
 
     @Emit('click')
-    public clickEvent(): void { }
+    public emitClick(): void { }
 
     @Emit('add')
-    public addEvent(): void { }
+    public emitAdd(): void { }
 
     public onClick(event: Event): void {
         if (this.disabled) {
             return;
         }
-        this.clickEvent();
-        this.addEvent();
+        this.emitClick();
+        this.emitAdd();
         (this.$el as HTMLElement).blur();
     }
 }

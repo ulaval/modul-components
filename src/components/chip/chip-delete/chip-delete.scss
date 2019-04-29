@@ -69,4 +69,8 @@
         transform: translate(-50%, -50%);
         stroke-width: 3;
     }
+
+    &__hidden-text {
+        @include m-visually-hidden();
+    }
 }

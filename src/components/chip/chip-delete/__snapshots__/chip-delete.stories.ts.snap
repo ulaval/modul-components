@@ -1,29 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots components|m-chip default 1`] = `
+exports[`Storyshots components|m-chip-delete default 1`] = `
 <div
-  class="m-chip"
-  text="test"
+  class="m-chip-delete"
 >
   <div
-    class="m-chip__body"
+    class="m-chip-delete__body"
   >
-    <div
-      class="m-u--margin-right"
+    <span
+      class="m-chip-delete__text"
+      id="mChipDeleteText-uuid"
     >
-      test
-    </div>
+      <span
+        class="m-chip-delete__hidden-text"
+      >
+        Supprimer : 
+      </span>
+       Chip delete
+    </span>
      
     <button
-      class="m-icon-button m--is-skin-primary m--has-ripple"
-      style="width: 20px; height: 20px;"
-      type="button"
+      aria-labelledby="mChipDeleteText-uuid"
+      class="m-chip-delete__button"
     >
       <svg
         aria-hidden="true"
-        class="m-icon m-icon-button__icon"
-        height="11px"
-        width="11px"
+        class="m-icon m-chip-delete__icon"
+        height="14px"
+        width="14px"
       >
         <!---->
          
@@ -32,8 +36,48 @@ exports[`Storyshots components|m-chip default 1`] = `
           class=""
         />
       </svg>
-       
-      <!---->
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-chip-delete disabled 1`] = `
+<div
+  class="m-chip-delete m--is-disabled"
+>
+  <div
+    class="m-chip-delete__body"
+  >
+    <span
+      class="m-chip-delete__text"
+      id="mChipDeleteText-uuid"
+    >
+      <span
+        class="m-chip-delete__hidden-text"
+      >
+        Supprimer : 
+      </span>
+       Disabled
+    </span>
+     
+    <button
+      aria-labelledby="mChipDeleteText-uuid"
+      class="m-chip-delete__button"
+      disabled="disabled"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-chip-delete__icon"
+        height="14px"
+        width="14px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
     </button>
   </div>
 </div>

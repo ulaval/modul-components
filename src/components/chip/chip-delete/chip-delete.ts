@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import uuid from '../../../utils/uuid/uuid';
 import { CHIP_DELETE_NAME } from '../../component-names';
 import WithRender from './chip-delete.html?style=./chip-delete.scss';
 
@@ -11,17 +12,19 @@ export class MChipDelete extends Vue {
     disabled: boolean;
 
     @Emit('click')
-    public clickEvent(): void { }
+    public emitClick(): void { }
 
     @Emit('delete')
-    public deleteEvent(): void { }
+    public emitDelete(): void { }
+
+    public textId: string = `mChipDeleteText-${uuid.generate()}`;
 
     public onClick(event: Event): void {
         if (this.disabled) {
             return;
         }
-        this.clickEvent();
-        this.deleteEvent();
+        this.emitClick();
+        this.emitDelete();
     }
 }
 

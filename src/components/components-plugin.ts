@@ -100,7 +100,6 @@ const ComponentsPlugin: PluginObject<any> = {
 
         v.prototype.$log.error('ComponentsPlugin will be deprecated in modul v.1.0, components should now be installed separately');
 
-
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(AddPlugin);

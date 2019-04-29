@@ -3,11 +3,12 @@
         @click="onClick"
         :disabled="disabled">
     <div class="m-chip-add__body">
+        <span class="m-chip-add__hidden-text">{{ 'chip:add' | f-m-i18n }}&nbsp;: </span>
         <slot></slot>
         <m-icon v-if="icon"
                 class="m-chip-add__icon"
-                size="18px"
-                name="m-svg__add-circle-filled">
+                size="20px"
+                name="m-svg__add-circle">
         </m-icon>
     </div>
 </button>

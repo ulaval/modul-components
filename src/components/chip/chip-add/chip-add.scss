@@ -37,5 +37,10 @@
         transition: color $m-transition-duration ease;
         margin-left: $m-spacing--s;
         color: $m-color--interactive;
+        stroke-width: 2;
+    }
+
+    &__hidden-text {
+        @include m-visually-hidden();
     }
 }

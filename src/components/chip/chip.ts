@@ -25,13 +25,13 @@ export class MChip extends Vue {
     mode: MChipMode;
 
     @Emit('click')
-    public onClick(): void { }
+    public emitClick(): void { }
 
     @Emit('add')
-    public onAdd(): void { }
+    public emitAdd(): void { }
 
     @Emit('delete')
-    public onDelete(): void { }
+    public emitDelete(): void { }
 
     public get isModeAdd(): boolean {
         return this.mode === MChipMode.Add;
