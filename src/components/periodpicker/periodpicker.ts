@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Emit, Prop } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -30,8 +30,7 @@ interface MPeriodpickerFromProps {
 
 interface MPeriodpickerFromHandlers {
     change(newValue: DatePickerSupportedTypes): void;
-    open(): void;
-    close(): void;
+    blur(): void;
 }
 
 export interface MPeriodpickerFromComponentVue extends MPeriodpickerFromProps, MPeriodpickerFromHandlers { }
@@ -50,8 +49,7 @@ interface MPeriodpickerToProps {
 
 interface MPeriodpickerToHandlers {
     change(newValue: DatePickerSupportedTypes): void;
-    open(): void;
-    close(): void;
+    blur(): void;
 }
 
 export interface MPeriodpickerToComponentVue extends MPeriodpickerToProps, MPeriodpickerToHandlers { }
@@ -87,13 +85,11 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Emit('input')
     emitNewValue(newValue: MDateRange): void { }
 
-    dateFromInternalValue: DatePickerSupportedTypes = new Date();
-    dateToInternalValue: DatePickerSupportedTypes = new Date();
-    dateFromChanged: boolean = false;
-    dateToChanged: boolean = false;
-    selecting: boolean = false;
+    dateFromInternalValue: DatePickerSupportedTypes = '';
+    dateToInternalValue: DatePickerSupportedTypes = '';
     fromIsFocused: boolean = false;
     toIsFocused: boolean = false;
+    beginSelection: boolean = false;
 
     get firstInputState(): MPeriodpickerFromSlotProps {
         return {
@@ -110,8 +106,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
             },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
-                open: () => this.onDateFromOpen(),
-                close: () => this.onDateFromClose()
+                blur: () => { this.fromIsFocused = false; }
             }
         };
     }
@@ -131,18 +126,25 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
             },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateToChange(newValue),
-                open: () => this.onDateToOpen(),
-                close: () => this.onDateToClose()
+                blur: () => {
+                    this.toIsFocused = false;
+                    if (this.beginSelection) {
+                        this.beginSelection = false;
+                        this.endSelection();
+                    }
+                }
             }
         };
     }
 
     get internalValue(): MDateRange {
-        if (!this.selecting) {
-            return this.value || {};
-        } else {
-            return { from: this.dateFromInternalValue, to: this.dateToInternalValue };
-        }
+        return { from: this.dateFromInternalValue, to: this.dateToInternalValue };
+    }
+
+    @Watch('value', { immediate: true })
+    private onValueChange(value: MDateRange): void {
+        this.dateFromInternalValue = (value || {}).from || '';
+        this.dateToInternalValue = (value || {}).to || '';
     }
 
     get minDateTo(): DatePickerSupportedTypes {
@@ -158,44 +160,21 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     onDateFromChange(newValue: DatePickerSupportedTypes): void {
-        this.dateFromChanged = true;
-
         this.dateFromInternalValue = newValue ? this.getNewModelValue(newValue) : undefined;
-        if (!newValue) {
-            this.endSelection();
-        } else {
+
+
+        if (newValue) {
+            this.beginSelection = true;
             this.toIsFocused = true;
+        } else {
+            this.endSelection();
         }
-        this.fromIsFocused = false;
     }
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
-        this.dateToChanged = true;
-
+        this.beginSelection = false;
         this.dateToInternalValue = newValue ? this.getNewModelValue(newValue, true) : undefined;
         this.endSelection();
-    }
-
-    onDateFromOpen(): void {
-        this.fromIsFocused = true;
-        this.beginSelection();
-    }
-
-    onDateFromClose(): void {
-        if (!this.dateFromChanged) {
-            this.endSelection();
-        }
-    }
-
-    onDateToOpen(): void {
-        this.toIsFocused = true;
-        this.beginSelection();
-    }
-
-    onDateToClose(): void {
-        if (!this.dateToChanged) {
-            this.endSelection();
-        }
     }
 
     getNewModelValue(newValue: DatePickerSupportedTypes, endOfDay: boolean = false): DatePickerSupportedTypes {
@@ -207,21 +186,8 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return new Date(isoString);
     }
 
-    beginSelection(): void {
-        if (!this.selecting) {
-            this.dateFromChanged = false;
-            this.dateToChanged = false;
-            this.dateFromInternalValue = (this.value || {}).from;
-            this.dateToInternalValue = (this.value || {}).to;
-            this.selecting = true;
-        }
-    }
-
     endSelection(): void {
-        this.selecting = false;
-        this.fromIsFocused = false;
-        this.toIsFocused = false;
-        this.emitNewValue({ from: this.dateFromInternalValue, to: this.dateToInternalValue });
+        this.emitNewValue({ from: this.dateFromInternalValue || undefined, to: this.dateToInternalValue || undefined });
     }
 
 
