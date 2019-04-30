@@ -21,7 +21,7 @@ exports[`Storyshots components|m-periodpicker default 1`] = `
           >
             <div
               class="m-input-style__content"
-              style="margin-top: 8px;"
+              style="margin-top: 10px;"
             >
               <label
                 class="m-input-style__label"
@@ -126,7 +126,7 @@ exports[`Storyshots components|m-periodpicker default 1`] = `
           >
             <div
               class="m-input-style__content"
-              style="margin-top: 8px;"
+              style="margin-top: 10px;"
             >
               <label
                 class="m-input-style__label"
