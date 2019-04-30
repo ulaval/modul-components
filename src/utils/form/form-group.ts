@@ -1,15 +1,15 @@
 import { AbstractControl } from "./abstract-control";
-import { AbstractControlEditionContext } from "./abstract-control-edition-context";
-import { AbstractControlOptions } from "./abstract-control-options";
-import { AbstractControlValidator } from "./abstract-control-validator";
+import { ControlEditionContext } from "./control-edition-context";
+import { ControlOptions } from "./control-options";
 import { FormControl } from "./form-control";
+import { ControlValidator } from "./validators/control-validator";
 
 export class FormGroup extends AbstractControl {
     constructor(
         public readonly name: string,
-        public readonly validators: AbstractControlValidator[] = [],
+        public readonly validators: ControlValidator[] = [],
         public controls: AbstractControl[],
-        options?: AbstractControlOptions
+        options?: ControlOptions
     ) {
         super(name, validators, options);
     }
@@ -59,13 +59,13 @@ export class FormGroup extends AbstractControl {
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
 
         if (this.errors.length > 0) {
-            this._editionContext = AbstractControlEditionContext.HasErrors;
+            this._editionContext = ControlEditionContext.HasErrors;
         } else if (pristine) {
-            this._editionContext = AbstractControlEditionContext.Pristine;
+            this._editionContext = ControlEditionContext.Pristine;
         } else if (!populate && this.isValid) {
-            this._editionContext = AbstractControlEditionContext.EmptyAndValid;
+            this._editionContext = ControlEditionContext.EmptyAndValid;
         } else if (populate && this.isValid) {
-            this._editionContext = AbstractControlEditionContext.PopulateAndValid;
+            this._editionContext = ControlEditionContext.PopulateAndValid;
         }
     }
 

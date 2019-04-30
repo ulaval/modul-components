@@ -3,12 +3,19 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { AbstractControlValidationType } from '../../utils/form/abstract-control-validation-type';
+import { ControlValidationType } from '../../utils/form/control-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
+import { BetweenValidator } from '../../utils/form/validators/between/between';
+import { CompareValidator } from '../../utils/form/validators/compare/compare';
+import { EmailValidator } from '../../utils/form/validators/email/email';
+import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
+import { MaxValidator } from '../../utils/form/validators/max/max';
+import { MinLengthValidator } from '../../utils/form/validators/min-length/min-length';
+import { MinValidator } from '../../utils/form/validators/min/min';
+import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { FORM_NAME } from '../component-names';
-import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './build-in-form-action-fallouts';
-import { BetweenValidator, CompareValidator, EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, RequiredValidator } from './built-in-control-validators';
+import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './fallouts/built-in-form-action-fallouts';
 import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);
@@ -513,7 +520,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         'email',
                         [EmailValidator('email')],
                         {
-                            validationType: AbstractControlValidationType.AtExit
+                            validationType: ControlValidationType.AtExit
                         }
                     )
                 ]
@@ -548,7 +555,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         'email',
                         [EmailValidator('email')],
                         {
-                            validationType: AbstractControlValidationType.Correction
+                            validationType: ControlValidationType.Correction
                         }
                     )
                 ]
@@ -583,7 +590,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         'email',
                         [EmailValidator('email')],
                         {
-                            validationType: AbstractControlValidationType.Modification
+                            validationType: ControlValidationType.Modification
                         }
                     )
                 ]

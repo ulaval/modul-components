@@ -1,4 +1,4 @@
-export enum AbstractControlEditionContext {
+export enum ControlEditionContext {
     None = 'none',
     EmptyAndValid = 'empty-and-valid',
     PopulateAndValid = 'populate-and-valid',

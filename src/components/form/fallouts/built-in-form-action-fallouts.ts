@@ -1,9 +1,9 @@
-import { FormatMode } from '../../utils/i18n/i18n';
-import { ModulVue } from '../../utils/vue/vue';
-import { MToastPosition, MToastState } from '../toast/toast';
-import { MForm } from './form';
-import { FormActionFallout } from './form-action-fallout';
-import { FormActions } from './form-action-type';
+import { FormatMode } from '../../../utils/i18n/i18n';
+import { ModulVue } from '../../../utils/vue/vue';
+import { MToastPosition, MToastState } from '../../toast/toast';
+import { MForm } from '../form';
+import { FormActionFallout } from '../form-action-fallout';
+import { FormActions } from '../form-action-type';
 
 
 export const ClearErrorToast: FormActionFallout = {

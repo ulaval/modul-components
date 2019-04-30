@@ -1,4 +1,4 @@
-export interface AbstractControlError {
+export interface ControlError {
     key: string;
     message: string;
     summaryMessage?: string;

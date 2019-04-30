@@ -1,21 +1,21 @@
-import { AbstractControlEditionContext } from "./abstract-control-edition-context";
-import { AbstractControlError } from "./abstract-control-error";
-import { AbstractControlOptions, FormControlOptions } from "./abstract-control-options";
-import { AbstractControlValidationType } from "./abstract-control-validation-type";
-import { AbstractControlValidator } from "./abstract-control-validator";
-import { AbstractControlValidationGuard, DefaultValidationGuard } from "./validation-guard";
+import { ControlEditionContext } from "./control-edition-context";
+import { ControlError } from "./control-error";
+import { ControlOptions, FormControlOptions } from "./control-options";
+import { ControlValidationType } from "./control-validation-type";
+import { ControlValidationGuard, DefaultValidationGuard } from "./validation-guard";
+import { ControlValidator } from "./validators/control-validator";
 
 export abstract class AbstractControl {
     public focusGranted: boolean = false;
-    protected readonly _validationType: AbstractControlValidationType = AbstractControlValidationType.OnGoing;
-    protected readonly _validationGuard: AbstractControlValidationGuard = DefaultValidationGuard;
-    protected _editionContext: AbstractControlEditionContext = AbstractControlEditionContext.None;
-    protected _errors: AbstractControlError[] = [];
+    protected readonly _validationType: ControlValidationType = ControlValidationType.OnGoing;
+    protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
+    protected _editionContext: ControlEditionContext = ControlEditionContext.None;
+    protected _errors: ControlError[] = [];
 
     constructor(
         public readonly name: string,
-        public readonly validators: AbstractControlValidator[] = [],
-        options?: AbstractControlOptions | FormControlOptions<any>
+        public readonly validators: ControlValidator[] = [],
+        options?: ControlOptions | FormControlOptions<any>
     ) {
         if (options) {
             if (options.validationType) {
@@ -30,7 +30,7 @@ export abstract class AbstractControl {
 
     public abstract get isValid(): boolean;
 
-    public get errors(): AbstractControlError[] {
+    public get errors(): ControlError[] {
         return this._errors;
     }
 
@@ -45,14 +45,14 @@ export abstract class AbstractControl {
 
     public reset(): void {
         this.validators.forEach(v => v.lastCheck = undefined);
-        this._editionContext = AbstractControlEditionContext.None;
+        this._editionContext = ControlEditionContext.None;
         this._errors = [];
     }
 
     public abstract initEdition(): void;
 
     public endEdition(): void {
-        this._editionContext = AbstractControlEditionContext.None;
+        this._editionContext = ControlEditionContext.None;
         this.validate();
     }
 }
