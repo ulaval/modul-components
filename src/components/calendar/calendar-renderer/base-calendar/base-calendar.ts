@@ -144,9 +144,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onDaySelect(day: DayState): void {
         super.onDaySelect(day);
-
-        // TODO when there will be a directive to manage focus, replace this behaviour with it
-        // this.$nextTick(() => (this.$refs[this.buildRef('day', day)][0] as HTMLButtonElement).focus());
     }
 
     onDayMouseEnter(day: DayState): void {
