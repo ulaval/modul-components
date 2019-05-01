@@ -155,16 +155,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/all props`, mo
             }
         },
         template: `<div>
-                    <p><span style="color: blue">skin</span> is set to <span style="color: red">{{ skin }}</span></p>
-                    <p><span style="color: blue">disabled</span> is set to <span style="color: red">{{ disabled }}</span></p>
-                    <p><span style="color: blue">buttonSize</span> is set to <span style="color: red">{{ buttonSize }}</span></p>
-                    <p><span style="color: blue">iconSize</span> is set to <span style="color: red">{{ iconSize }}</span></p>
-                    <p><span style="color: blue">iconName</span> is set to <span style="color: red">{{ iconName }}</span></p>
-                    <p><span style="color: blue">ripple</span> is set to <span style="color: red">{{ ripple }}</span></p>
-                    <br>
-                    <div style="width: 250px; border-bottom: 1px solid black"></div>
-                    <br>
-                    <m-icon-button :buttonSize="buttonSize" :disabled="disabled" :iconName="iconName" :iconSize="iconSize"
-                    :title="title" :ripple="ripple" :skin="skin"></m-icon-button>
-                   </div>`
+                        <p><span style="color: blue">skin</span> is set to <span style="color: red">{{ skin }}</span></p>
+                        <p><span style="color: blue">disabled</span> is set to <span style="color: red">{{ disabled }}</span></p>
+                        <p><span style="color: blue">buttonSize</span> is set to <span style="color: red">{{ buttonSize }}</span></p>
+                        <p><span style="color: blue">iconSize</span> is set to <span style="color: red">{{ iconSize }}</span></p>
+                        <p><span style="color: blue">iconName</span> is set to <span style="color: red">{{ iconName }}</span></p>
+                        <p><span style="color: blue">ripple</span> is set to <span style="color: red">{{ ripple }}</span></p>
+                        <br>
+                        <div style="width: 250px; border-bottom: 1px solid black"></div>
+                        <br>
+                        <m-icon-button :buttonSize="buttonSize" :disabled="disabled" :iconName="iconName" :iconSize="iconSize"
+                        :title="title" :ripple="ripple" :skin="skin"></m-icon-button>
+                  </div>`
     }));
