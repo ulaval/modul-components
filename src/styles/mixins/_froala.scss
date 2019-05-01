@@ -42,7 +42,7 @@
     }
 
     a {
-        @extend %m-u--link;
+        @extend .m-u--link;
 
         &:hover,
         &:focus {
