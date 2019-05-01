@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
+import { number, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import uuid from '../../utils/uuid/uuid';
@@ -45,6 +45,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
         template: `
             <${REPEATER_NAME}
                 :item-key="'id'"
+                :min-item-count="minItemCount"
+                :max-item-count="maxItemCount"
                 :list="list"
                 @add="onAdd"
                 @delete="onDelete">
@@ -56,6 +58,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
         data: () => ({
             list: [{ id: uuid.generate() }, { id: uuid.generate() }]
         }),
+        props: {
+            minItemCount: {
+                default: number('minItemCount', 0)
+            },
+            maxItemCount: {
+                default: number('maxItemCount', Infinity)
+            }
+        },
         methods: {
             onAdd(): void {
                 (this as any).list.push({ id: uuid.generate() });
@@ -73,11 +83,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
         components: { MRepeater },
         template: `
             <${REPEATER_NAME}
+                :min-item-count="minItemCount"
+                :max-item-count="maxItemCount"
                 :list="list"
                 @add="onAdd"
                 @delete="onDelete">
-                <li slot="row" slot-scope="{ item, index, deleteFn }" :key="item.id">
-                    <button @click="deleteFn()">Delete</button>
+                <li slot="row" slot-scope="{ item, index, deleteFn, canDelete }" :key="item.id">
+                    <button @click="deleteFn()" :disabled="!canDelete">Delete</button>
                     Item # {{ index }} {{ item.id }}
                 </li>
             </${REPEATER_NAME}>
@@ -85,6 +97,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
         data: () => ({
             list: [{ id: uuid.generate() }, { id: uuid.generate() }]
         }),
+        props: {
+            minItemCount: {
+                default: number('minItemCount', 0)
+            },
+            maxItemCount: {
+                default: number('maxItemCount', Infinity)
+            }
+        },
         methods: {
             onAdd(): void {
                 (this as any).list.push({ id: uuid.generate() });
