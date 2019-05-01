@@ -165,7 +165,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/all props`, mo
                     <div style="width: 250px; border-bottom: 1px solid black"></div>
                     <br>
                     <m-icon-button :buttonSize="buttonSize" :disabled="disabled" :iconName="iconName" :iconSize="iconSize" 
-                    :title="title" :ripple="ripple" :skin="skin">
-                    </m-icon-button>
+                    :title="title" :ripple="ripple" :skin="skin"></m-icon-button>
                    </div>`
     }));
