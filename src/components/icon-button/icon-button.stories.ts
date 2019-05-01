@@ -152,7 +152,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/all props`, mo
             },
             ripple: {
                 default: boolean('ripple', true)
-            },
+            }
         },
         template: `<div>
                     <p><span style="color: blue">skin</span> is set to <span style="color: red">{{ skin }}</span></p>
@@ -164,7 +164,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/all props`, mo
                     <br>
                     <div style="width: 250px; border-bottom: 1px solid black"></div>
                     <br>
-                    <m-icon-button :buttonSize="buttonSize" :disabled="disabled" :iconName="iconName" :iconSize="iconSize" 
+                    <m-icon-button :buttonSize="buttonSize" :disabled="disabled" :iconName="iconName" :iconSize="iconSize"
                     :title="title" :ripple="ripple" :skin="skin"></m-icon-button>
                    </div>`
     }));
