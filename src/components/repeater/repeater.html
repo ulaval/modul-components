@@ -2,15 +2,12 @@
     <component :is="tag"
                v-if="list.length">
         <template v-for="(item, index) in list">
-            <slot :can-delete="canDelete"
-                  :item="item"
-                  :index="index"
-                  :delete-fn="() => onDeleteBtnClick(index)"
+            <slot :props="getRowProps(item, index)"
+                  :listeners="getRowListeners(item, index)"
                   name="row">
                 <component :is="'li'"
-                           :key="getRowKey(item, index)">
-                    <slot :item="item"
-                          :index="index"
+                           :key="getItemKey(item, index)">
+                    <slot :props="getItemProps(item, index)"
                           name="item"></slot>
                     <m-button v-if="canDelete"
                               :ref="'deleteBtn' + index"

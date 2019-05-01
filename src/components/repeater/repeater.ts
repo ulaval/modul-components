@@ -13,6 +13,19 @@ export interface MRepeaterOperations {
     canDelete: boolean;
 }
 
+export interface MRepeaterItemProps<T = MRepeaterItem> {
+    item: T;
+    index: number;
+}
+
+export interface MRepeaterRowProps<T = MRepeaterItem> extends MRepeaterItemProps<T> {
+    canDelete: boolean;
+}
+
+export interface MRepeaterRowListeners {
+    onDelete(): void;
+}
+
 @WithRender
 @Component
 export class MRepeater extends ModulVue {
@@ -70,8 +83,27 @@ export class MRepeater extends ModulVue {
         this.$emit('delete', index);
     }
 
-    getRowKey(item: MRepeaterItem, index: number): unknown | number {
+    getRowProps(item: MRepeaterItem, index: number): MRepeaterRowProps {
+        return {
+            ...this.getItemProps(item, index),
+            canDelete: this.canDelete
+        };
+    }
+
+    getRowListeners(item: MRepeaterItem, index: number): MRepeaterRowListeners {
+        return {
+            onDelete: () => this.onDeleteBtnClick(index)
+        };
+    }
+
+    getItemKey(item: MRepeaterItem, index: number): unknown | number {
         return this.itemKey ? item[this.itemKey] : index;
+    }
+
+    getItemProps(item: MRepeaterItem, index: number): MRepeaterItemProps {
+        return {
+            item, index
+        };
     }
 
     get addBtnLabel(): string {

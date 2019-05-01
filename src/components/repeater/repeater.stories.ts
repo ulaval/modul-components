@@ -50,8 +50,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
                 :list="list"
                 @add="onAdd"
                 @delete="onDelete">
-                <template slot="item" slot-scope="{ item, index }">
-                    Item # {{ index }} {{ item.id }}
+                <template slot="item" slot-scope="{ props }">
+                    Item # {{ props.index }} {{ props.item.id }}
                 </template>
             </${REPEATER_NAME}>
         `,
@@ -88,9 +88,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
                 :list="list"
                 @add="onAdd"
                 @delete="onDelete">
-                <li slot="row" slot-scope="{ item, index, deleteFn, canDelete }" :key="item.id">
-                    <button @click="deleteFn()" :disabled="!canDelete">Delete</button>
-                    Item # {{ index }} {{ item.id }}
+                <li slot="row" slot-scope="{ props, listeners }" :key="props.item.id">
+                    <button @click="listeners.onDelete" :disabled="!props.canDelete">Delete</button>
+                    Item # {{ props.index }} {{ props.item.id }}
                 </li>
             </${REPEATER_NAME}>
         `,
@@ -125,8 +125,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
                 :item-key="'id'"
                 :list="list"
                 :operations="operations">
-                <template slot="item" slot-scope="{ item, index }">
-                    #{{ index }} Custom template for item (id: {{ item.id }} name: {{ item.name }})
+                <template slot="item" slot-scope="{ props }">
+                    #{{ props.index }} Custom template for item (id: {{ props.item.id }} name: {{ props.item.name }})
                 </template>
             </${REPEATER_NAME}>
         `,
