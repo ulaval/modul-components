@@ -277,6 +277,6 @@ export class MTreeNode extends ModulVue {
     }
 
     private get hasRightIcon(): boolean {
-        return this.withCheckboxes && this.node.rightIconName !== undefined;
+        return this.withCheckboxes && !!this.node.rightIconName;
     }
 }
