@@ -21,6 +21,7 @@ export interface TreeNode {
     children?: TreeNode[];
     hasChildren?: boolean;
     data?: any;
+    rightIconName?: string;
 }
 
 export enum MSelectionMode {
