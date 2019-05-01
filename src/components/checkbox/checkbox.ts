@@ -44,6 +44,11 @@ export class MCheckbox extends ModulVue {
     @Emit('click')
     onClick(event: MouseEvent): void {
         this.$refs['checkbox']['blur']();
+        // NOTE: Edge does not change the checkbox value when indeterminate="true"
+        if (this.propIndeterminate) {
+            this.propValue = true;
+            event.preventDefault();
+        }
     }
 
     @Watch('value')
