@@ -2,16 +2,17 @@
     <component :is="tag"
                v-if="list.length">
         <template v-for="(item, index) in list">
-            <slot :item="item"
+            <slot :can-delete="canDelete"
+                  :item="item"
                   :index="index"
-                  :deleteFn="() => onDeleteBtnClick(index)"
+                  :delete-fn="() => onDeleteBtnClick(index)"
                   name="row">
                 <component :is="'li'"
                            :key="getRowKey(item, index)">
                     <slot :item="item"
                           :index="index"
                           name="item"></slot>
-                    <m-button v-if="operations.canDelete"
+                    <m-button v-if="canDelete"
                               :ref="'deleteBtn' + index"
                               @click="onDeleteBtnClick(index)">{{ deleteBtnLabel }}</m-button>
                 </component>
@@ -23,7 +24,7 @@
     </div>
     <!-- TODO: Replace with add component when it becomes available.  -->
     <m-link class="m-add"
-            v-if="operations.canAdd"
+            v-if="canAdd"
             mode="button"
             icon-name="m-svg__add-circle-filled"
             :icon-position="'left'"

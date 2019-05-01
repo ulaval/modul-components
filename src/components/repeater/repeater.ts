@@ -46,6 +46,16 @@ export class MRepeater extends ModulVue {
     })
     operations: MRepeaterOperations;
 
+    @Prop({
+        default: 0
+    })
+    minItemCount: number;
+
+    @Prop({
+        default: Infinity
+    })
+    maxItemCount: number;
+
     mounted(): void {
         if (!this.$scopedSlots.row && !this.$scopedSlots.item) {
             throw new Error('MRepeater requires content to be provided through row or item slot.');
@@ -70,6 +80,14 @@ export class MRepeater extends ModulVue {
 
     get deleteBtnLabel(): string {
         return this.deleteButtonLabel || this.$i18n.translate('m-repeater:delete');
+    }
+
+    get canAdd(): boolean {
+        return this.operations.canAdd && this.list.length < this.maxItemCount;
+    }
+
+    get canDelete(): boolean {
+        return this.operations.canDelete && this.list.length > this.minItemCount;
     }
 }
 
