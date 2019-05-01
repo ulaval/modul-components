@@ -1,0 +1,478 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-icon-button buttonSize 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button disabled 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple m--is-disabled"
+  disabled="disabled"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button iconName 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button iconSize 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button name (short) 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button ripple 1`] = `
+<div>
+  <p>
+    Ripple effect on click when :ripple=true
+  </p>
+   
+  <br />
+   
+  <button
+    class="m-icon-button m--is-skin-light m--has-ripple"
+    style="width: 44px; height: 44px;"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-icon-button__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-icon-button title 1`] = `
+<div>
+  <button
+    class="m-icon-button m--is-skin-light m--has-ripple"
+    style="width: 44px; height: 44px;"
+    title="This is a custom title"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-icon-button__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <!---->
+  </button>
+   
+  <br />
+   
+  <span>
+    Current title: 
+    <span
+      style="color: red;"
+    >
+      This is a custom title
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Storyshots components|m-icon-button/all props make your own 1`] = `
+<div>
+  <p>
+    <span
+      style="color: blue;"
+    >
+      skin
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      light
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      disabled
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      false
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      buttonSize
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      44
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      iconSize
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      20
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      iconName
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      m-svg__close-clear
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      ripple
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      true
+    </span>
+  </p>
+   
+  <br />
+   
+  <div
+    style="width: 250px; border-bottom: 1px solid black;"
+  />
+   
+  <br />
+   
+  <button
+    class="m-icon-button m--is-skin-light m--has-ripple"
+    title="This is some text"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-icon-button__icon"
+      height="20"
+      width="20"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-icon-button/skin all skins (use knob) 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button/skin skin="bold" 1`] = `
+<button
+  class="m-icon-button m--is-skin-bold m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button/skin skin="dark" 1`] = `
+<button
+  class="m-icon-button m--is-skin-dark m--has-ripple"
+  style="width: 44px; height: 44px; background: black;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button/skin skin="light" 1`] = `
+<button
+  class="m-icon-button m--is-skin-light m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button/skin skin="link" 1`] = `
+<button
+  class="m-icon-button m--is-skin-link m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button/skin skin="primary" 1`] = `
+<button
+  class="m-icon-button m--is-skin-primary m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
+
+exports[`Storyshots components|m-icon-button/skin skin="secondary" 1`] = `
+<button
+  class="m-icon-button m--is-skin-secondary m--has-ripple"
+  style="width: 44px; height: 44px;"
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-icon-button__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <!---->
+</button>
+`;
