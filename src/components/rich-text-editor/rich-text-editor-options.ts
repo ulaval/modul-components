@@ -15,8 +15,8 @@ export class MRichTextEditorDefaultOptions {
     public wordPasteKeepFormatting: boolean = false;
     public placeholderText: string = '';
     public listAdvancedTypes: boolean = false;
-    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', '|', 'listes-sub-menu', 'formatUL',
-        'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', 'paragraphStyle', '|', 'fullscreen'];
+    public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'paragraphStyle', 'bold', 'italic', 'subscript', 'superscript', '|', 'listes-sub-menu', 'formatUL',
+        'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
 
     public paragraphStyles: any = {};
     public paragraphMultipleStyles: boolean = false;

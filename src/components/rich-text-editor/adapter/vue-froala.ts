@@ -4,7 +4,6 @@ import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
-import imageAlignCenterIcon from '../../../assets/icons/svg/Froala-image-align-center.svg';
 import imageAlignLeftIcon from '../../../assets/icons/svg/Froala-image-align-left.svg';
 import imageAlignRightIcon from '../../../assets/icons/svg/Froala-image-align-right.svg';
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
@@ -24,20 +23,21 @@ require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
 
 enum froalaEvents {
-    Initialized = 'froalaEditor.initialized',
-    InitializationDelayed = 'froalaEditor.initializationDelayed',
+    Blur = 'froalaEditor.blur',
+    Click = 'froalaEditor.click',
+    CommandAfter = 'froalaEditor.commands.after',
+    CommandBefore = 'froalaEditor.commands.before',
     ContentChanged = 'froalaEditor.contentChanged',
     Focus = 'froalaEditor.focus',
-    Blur = 'froalaEditor.blur',
+    ImageRemoved = 'froalaEditor.image.removed',
+    ImageInserted = 'froalaEditor.image.inserted',
+    Initialized = 'froalaEditor.initialized',
+    InitializationDelayed = 'froalaEditor.initializationDelayed',
     KeyUp = 'froalaEditor.keyup',
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
-    CommandAfter = 'froalaEditor.commands.after',
-    CommandBefore = 'froalaEditor.commands.before',
-    ShowLinkInsert = 'froalaEditor.popups.show.link.insert',
-    ImageRemoved = 'froalaEditor.image.removed',
-    ImageInserted = 'froalaEditor.image.inserted'
+    ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
 }
 
 enum FroalaElements {
@@ -166,19 +166,20 @@ export enum FroalaStatus {
         }
         $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
         $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('paragraphStyle', { NAME: 'paragraph' });
     }
 
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters', 'insertImage']);
     }
 
     protected addSubMenus(): void {
         // add mobile mode submenus
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
         // we'll use this submodule when we'll support images,tables,...
@@ -333,6 +334,7 @@ export enum FroalaStatus {
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
             this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertImage"]`).show();
+            this.froalaEditor.$tb.find(`.fr-command[data-cmd="paragraphStyle"]`).show();
             // show submit buttons (ex: link insertion submit button)
             this.froalaEditor.$tb.find(`.fr-submit`).show();
         }

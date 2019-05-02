@@ -136,11 +136,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         }
 
         options.paragraphStyles = this.manageHeaderLevels();
-
         return options;
     }
 
-    public manageHeaderLevels(): any {
+    private manageHeaderLevels(): any {
 
         let headerLevels: any = {};
 
