@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import boldIcon from '../../../assets/icons/svg/Froala-bold.svg';
+import imageAlignCenterIcon from '../../../assets/icons/svg/Froala-image-align-center.svg';
 import imageAlignLeftIcon from '../../../assets/icons/svg/Froala-image-align-left.svg';
 import imageAlignRightIcon from '../../../assets/icons/svg/Froala-image-align-right.svg';
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
