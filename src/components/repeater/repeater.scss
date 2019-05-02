@@ -1,0 +1,27 @@
+@import 'commons';
+
+.m-repeater {
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        margin-bottom: $m-spacing;
+    }
+
+    &__col {
+        &:first-child {
+            border: 1px solid $m-color--border;
+            padding: $m-spacing;
+            flex: 1;
+        }
+    }
+
+    &__empty-row {
+        border: 1px solid transparent;
+        padding: $m-spacing;
+    }
+}

@@ -45,6 +45,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
         template: `
             <${REPEATER_NAME}
                 :item-key="'id'"
+                :empty-message="'The list is empty'"
                 :min-item-count="minItemCount"
                 :max-item-count="maxItemCount"
                 :list="list"
