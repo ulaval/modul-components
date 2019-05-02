@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots components|m-repeater Empty 1`] = `
-<div>
-  <div>
+<div
+  class="m-repeater"
+>
+  <div
+    class="m-repeater__empty-row"
+  >
     
         The list is empty
     
@@ -13,18 +17,34 @@ exports[`Storyshots components|m-repeater Empty 1`] = `
 `;
 
 exports[`Storyshots components|m-repeater Operations 1`] = `
-<div>
+<div
+  class="m-repeater"
+>
   <ul>
-    <li>
-      
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
                     #0 Custom template for item (id: 324525 name: Albert Einstein)
-                 
+                
+      </div>
+       
       <!---->
     </li>
-    <li>
-      
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
                     #1 Custom template for item (id: 64564556 name: Nikola Tesla)
-                 
+                
+      </div>
+       
       <!---->
     </li>
   </ul>
@@ -34,52 +54,72 @@ exports[`Storyshots components|m-repeater Operations 1`] = `
 `;
 
 exports[`Storyshots components|m-repeater With items (Custom item template) 1`] = `
-<div>
+<div
+  class="m-repeater"
+>
   <ul>
-    <li>
-      
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
                     Item # 0 uuid
-                 
+                
+      </div>
+       
       <button
-        class="m-button m--is-skin-primary"
+        class="m-icon-button m-repeater__delete m--is-skin-light m--has-ripple"
+        style="width: 44px; height: 44px;"
         type="button"
       >
-        <!---->
-         
-        <!---->
-         
-        <span
-          class="m-button__text"
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
         >
-          Delete 
           <!---->
-        </span>
-         
-        <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
          
         <!---->
       </button>
     </li>
-    <li>
-      
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
                     Item # 1 uuid
-                 
+                
+      </div>
+       
       <button
-        class="m-button m--is-skin-primary"
+        class="m-icon-button m-repeater__delete m--is-skin-light m--has-ripple"
+        style="width: 44px; height: 44px;"
         type="button"
       >
-        <!---->
-         
-        <!---->
-         
-        <span
-          class="m-button__text"
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
         >
-          Delete 
           <!---->
-        </span>
-         
-        <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
          
         <!---->
       </button>
@@ -87,7 +127,7 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
   </ul>
    
   <a
-    class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+    class="m-link m-repeater__add m--is-unvisited m--is-button m--has-left-icon"
     href="#"
     tabindex="0"
   >
@@ -119,7 +159,9 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
 `;
 
 exports[`Storyshots components|m-repeater With items (Custom row template) 1`] = `
-<div>
+<div
+  class="m-repeater"
+>
   <ul>
     <li>
       <button>
@@ -140,7 +182,7 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
   </ul>
    
   <a
-    class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+    class="m-link m-repeater__add m--is-unvisited m--is-button m--has-left-icon"
     href="#"
     tabindex="0"
   >
