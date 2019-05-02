@@ -9,6 +9,7 @@ import { InputManagement, InputManagementData } from '../../mixins/input-managem
 import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MFile } from '../../utils/file/file';
+import { FormatMode } from '../../utils/i18n/i18n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from '../component-names';
@@ -134,15 +135,33 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             options.toolbarButtons.push('insertImage');
         }
 
+        options.paragraphStyles = this.manageHeaderLevels();
+
+        return options;
+    }
+
+    public manageHeaderLevels(): any {
+
         let headerLevels: any = {};
-        for (let level: number = this.firstHeaderLevel; level <= this.lastHeaderLevel; level++) {
-            headerLevels['m-u--h' + level] = 'Header ' + level;
+
+        if (this.firstHeaderLevel === this.lastHeaderLevel) {
+            // One level of header
+            headerLevels['m-u--h' + this.firstHeaderLevel] = this.$i18n.translate('m-rich-text-editor:title');
+        } else if (this.lastHeaderLevel - this.firstHeaderLevel === 1) {
+            // Two level of header
+            headerLevels['m-u--h' + this.firstHeaderLevel] = this.$i18n.translate('m-rich-text-editor:title');
+            headerLevels['m-u--h' + this.lastHeaderLevel] = this.$i18n.translate('m-rich-text-editor:subtitle');
+        } else {
+            // Multiple level of header
+            let levelNumber: number = 1;
+            for (let headerLevel: number = this.firstHeaderLevel; headerLevel <= this.lastHeaderLevel; headerLevel++) {
+                headerLevels['m-u--h' + headerLevel] = this.$i18n.translate('m-rich-text-editor:title-level', { headerLevel: levelNumber }, 1, undefined, undefined, FormatMode.Sprintf);
+                levelNumber++;
+            }
         }
 
         headerLevels[''] = 'Normal';
-        options.paragraphStyles = headerLevels;
-
-        return options;
+        return headerLevels;
     }
 
     public getSelectorErrorMsg(prop: string): string {
