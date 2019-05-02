@@ -10,7 +10,7 @@ exports[`Storyshots components|m-textfield default 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -75,7 +75,7 @@ exports[`Storyshots components|m-textfield disabled 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -141,7 +141,7 @@ exports[`Storyshots components|m-textfield error 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -206,7 +206,7 @@ exports[`Storyshots components|m-textfield error-message 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -294,7 +294,7 @@ exports[`Storyshots components|m-textfield helper-message 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -363,7 +363,7 @@ exports[`Storyshots components|m-textfield label 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -439,7 +439,7 @@ exports[`Storyshots components|m-textfield placeholder 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -505,7 +505,7 @@ exports[`Storyshots components|m-textfield readonly 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -572,7 +572,7 @@ exports[`Storyshots components|m-textfield required 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -637,7 +637,7 @@ exports[`Storyshots components|m-textfield required-marker 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -702,7 +702,7 @@ exports[`Storyshots components|m-textfield valid 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -767,7 +767,7 @@ exports[`Storyshots components|m-textfield valid-message 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -855,7 +855,7 @@ exports[`Storyshots components|m-textfield value 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -920,7 +920,7 @@ exports[`Storyshots components|m-textfield waiting 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -992,7 +992,7 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -1056,7 +1056,7 @@ exports[`Storyshots components|m-textfield/Counter all props 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1133,7 +1133,7 @@ exports[`Storyshots components|m-textfield/Counter character-count 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -1211,7 +1211,7 @@ exports[`Storyshots components|m-textfield/Counter character-count-threshold="10
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -1277,7 +1277,7 @@ exports[`Storyshots components|m-textfield/Counter length-overflow="true" 1`] = 
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -1343,7 +1343,7 @@ exports[`Storyshots components|m-textfield/Counter max-length="20" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -1409,7 +1409,7 @@ exports[`Storyshots components|m-textfield/max-width all max-width presets 1`] =
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1485,7 +1485,7 @@ exports[`Storyshots components|m-textfield/max-width custom width 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1561,7 +1561,7 @@ exports[`Storyshots components|m-textfield/max-width large 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1637,7 +1637,7 @@ exports[`Storyshots components|m-textfield/max-width medium 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1713,7 +1713,7 @@ exports[`Storyshots components|m-textfield/max-width regular 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1789,7 +1789,7 @@ exports[`Storyshots components|m-textfield/max-width small 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1865,7 +1865,7 @@ exports[`Storyshots components|m-textfield/max-width x-small 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -1941,7 +1941,7 @@ exports[`Storyshots components|m-textfield/tag-style all tag styles 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2006,7 +2006,7 @@ exports[`Storyshots components|m-textfield/type all types 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <label
         class="m-input-style__label"
@@ -2083,7 +2083,7 @@ exports[`Storyshots components|m-textfield/type type="email" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2148,7 +2148,7 @@ exports[`Storyshots components|m-textfield/type type="number" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2213,7 +2213,7 @@ exports[`Storyshots components|m-textfield/type type="password" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2302,7 +2302,7 @@ exports[`Storyshots components|m-textfield/type type="search" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2413,7 +2413,7 @@ exports[`Storyshots components|m-textfield/type type="tel" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2478,7 +2478,7 @@ exports[`Storyshots components|m-textfield/type type="text" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
@@ -2543,7 +2543,7 @@ exports[`Storyshots components|m-textfield/type type="url" 1`] = `
   >
     <div
       class="m-input-style__content"
-      style="margin-top: 8px;"
+      style="margin-top: 10px;"
     >
       <!---->
        
