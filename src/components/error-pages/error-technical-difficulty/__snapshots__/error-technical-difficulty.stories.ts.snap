@@ -1,0 +1,1047 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-error-technical-difficulty Error 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty default 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty errorDate (5 days before now) 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty errorReferenceNumber 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty hints 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        My only custom hint
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        My second (long) custom hint.Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit. Nulla egestas urna rhoncus ipsum congue lobortis. 
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty links 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="http://www.ulaval.ca"
+            tabindex="0"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              The first custom link
+            </span>
+             
+            <span
+              class="m-i18n m-link__hidden"
+            >
+              Cet hyperlien s'ouvrira dans un nouvel onglet.
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="http://www.google.com"
+            tabindex="0"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              The second custom
+                link
+            </span>
+             
+            <span
+              class="m-i18n m-link__hidden"
+            >
+              Cet hyperlien s'ouvrira dans un nouvel onglet.
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty showStackTrace 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Un problème technique
+        <br />
+        s'est produit
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-technical-difficulty title 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m-error-technical-difficulty m--is-state-error m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        A Custom Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Essayez de rafraîchir la page.
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        Si le problème persiste, vous pouvez contacter l'équipe de soutien et leur fournir les précisions techniques ci-dessous.
+      </p>
+       
+      <div
+        class="m-message-page__details"
+      >
+        <article
+          class="m-accordion m--is-light m--is-closed m--has-icon-left"
+        >
+          <div
+            aria-controls="uuid-controls"
+            class="m-accordion__header m--has-padding"
+            id="uuid"
+            role="tab"
+            tabindex="0"
+          >
+            <div
+              class="m-accordion__header__content"
+            >
+              <span
+                class="m-i18n"
+              >
+                Précisions techniques
+              </span>
+               
+              <span
+                class="m-i18n m-accordion__hidden"
+              >
+                Cliquer pour afficher le contenu
+              </span>
+               
+              <!---->
+            </div>
+             
+            <span
+              aria-hidden="true"
+              class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"
+              title="Cliquer pour afficher le contenu"
+            />
+          </div>
+           
+          <!---->
+        </article>
+      </div>
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Coordonnées du soutien technique
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
