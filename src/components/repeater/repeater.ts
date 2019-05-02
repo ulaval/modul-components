@@ -1,5 +1,5 @@
 import { PluginObject } from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import { Component, Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { REPEATER_NAME } from '../component-names';
@@ -75,13 +75,11 @@ export class MRepeater extends ModulVue {
         }
     }
 
-    onAddBtnClick(): void {
-        this.$emit('add');
-    }
+    @Emit('add')
+    onAddBtnClick(): void { }
 
-    onDeleteBtnClick(index: number): void {
-        this.$emit('delete', index);
-    }
+    @Emit('delete')
+    onDeleteBtnClick(index: number): void { }
 
     getRowProps(item: MRepeaterItem, index: number): MRepeaterRowProps {
         return {
