@@ -1,10 +1,10 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
-import ButtonPlugin from '../button/button';
 import { REPEATER_NAME } from '../component-names';
+import IconButtonPlugin from '../icon-button/icon-button';
 import LinkPlugin from '../link/link';
-import WithRender from './repeater.html';
+import WithRender from './repeater.html?style=./repeater.scss';
 
 export interface MRepeaterItem { }
 
@@ -124,7 +124,7 @@ export class MRepeater extends ModulVue {
 const RepeaterPlugin: PluginObject<any> = {
     install(v): void {
         v.use(LinkPlugin);
-        v.use(ButtonPlugin);
+        v.use(IconButtonPlugin);
         v.component(REPEATER_NAME, MRepeater);
     }
 };
