@@ -309,7 +309,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get isEmpty(): boolean {
-        return (this.filterable && this.open) || this.as<InputManagement>().hasValue || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
+        return (this.filterable && this.open) || this.as<InputManagement>().hasValue || (this.as<InputPopup>().hasPlaceholder() && this.open) || (!!this.placeholderIconName && this.open) ? false : true;
     }
 
     public get isFilled(): boolean {

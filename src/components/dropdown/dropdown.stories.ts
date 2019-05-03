@@ -37,7 +37,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
         data: () => ({
             model1: ''
         }),
-        template: `<m-dropdown :label-up="true" label="Vegetable" v-model="model1" placeholder="Placeholder" placeholder-icon-name="m-svg__close-clear">
+        template: `<m-dropdown :label-up="true" label="Vegetable" v-model="model1" placeholder="Placeholder" placeholder-icon-name="m-svg__clock">
                         <m-dropdown-item value="1a" label="Asperge"></m-dropdown-item>
                         <m-dropdown-item value="1b" label="Brocoli"></m-dropdown-item>
                     </m-dropdown>`
