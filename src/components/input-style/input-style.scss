@@ -259,6 +259,11 @@ $m-input-style-base-height: $m-line-height + em;
 
     ::placeholder {
         color: $m-color--disabled;
+
+        .m--is-type-search & {
+            color: $m-color--text-light;
+            font-weight: $m-font-weight--light;
+        }
     }
 
     &__body,
@@ -354,6 +359,20 @@ $m-input-style-base-height: $m-line-height + em;
 
         &h6 {
             @include m-h6-font-style();
+        }
+    }
+
+    .m--is-type-search & {
+        background-color: $m-color--grey-lightest;
+        border-color: $m-color--grey-lightest;
+
+        .m-icon-button {
+            color: $m-color--ul-blue;
+        }
+
+        &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
+            background-color: $m-color--white;
+            border-color: $m-color--grey-light;
         }
     }
 }
