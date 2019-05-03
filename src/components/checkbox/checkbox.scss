@@ -253,6 +253,12 @@ $m-checkbox--width: 16px;
         }
     }
 
+    &.m--is-checkbox-top {
+        .m-checkbox__wrap {
+            align-items: flex-start;
+        }
+    }
+
     &__wrap {
         display: inline-flex;
         align-items: center;

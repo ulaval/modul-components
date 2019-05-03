@@ -47,26 +47,25 @@
                                :aria-controls="id"
                                :title="passwordIconDescription"
                                :icon-name="passwordIconName"
+                               @click="togglePasswordVisibility"
                                key="passwordIcon"
-                               button-size="22px"
-                               @click="togglePasswordVisibility"></m-icon-button>
+                               button-size="22px"></m-icon-button>
                 <m-icon-button v-if="isTypeSearch && hasValue"
                                class="m-textfield__reset"
+                               :aria-controls="id"
+                               @click="reset"
                                key="resetIcon"
                                button-size="1em"
-                               :aria-controls="id"
                                icon-size="11px"
-                               icon-name="m-svg__close-clear"
-                               @click="reset"></m-icon-button>
+                               icon-name="m-svg__close-clear"></m-icon-button>
                 <m-icon-button v-if="isTypeSearch && searchIcon"
                                class="m-textfield__search-icon"
-                               key="searchIcon"
-                               button-size="22px"
                                :aria-controls="id"
                                :title="searchIconDescription"
-                               :disabled="!hasValue"
-                               icon-name="m-svg__search"
-                               @click="search"></m-icon-button>
+                               @click="search"
+                               key="searchIcon"
+                               button-size="22px"
+                               icon-name="m-svg__search"></m-icon-button>
             </transition-group>
         </template>
         <textarea v-if="hasWordWrap"
@@ -77,7 +76,6 @@
                   :disabled="isDisabled || isWaiting"
                   :placeholder="placeholder"
                   :readonly="isReadonly"
-                  rows="1"
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
@@ -86,6 +84,7 @@
                   @keydown="onKeydown"
                   @paste="onPaste"
                   v-m-textarea-auto-height
+                  rows="1"
                   ref="input">
         </textarea>
     </m-input-style>

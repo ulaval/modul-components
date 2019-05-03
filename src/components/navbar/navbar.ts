@@ -138,12 +138,12 @@ export class MNavbar extends BaseNavbar implements Navbar {
             child.$on('resize', this.setupScrolllH);
         });
 
-        this.$refs.wrap.addEventListener('scroll', this.setDisplayButtonArrrow);
+        this.$refs.wrap.addEventListener('scroll', this.setDisplayNavigationButtons);
     }
 
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
-        this.$refs.wrap.removeEventListener('scroll', this.setDisplayButtonArrrow);
+        this.$refs.wrap.removeEventListener('scroll', this.setDisplayNavigationButtons);
     }
 
     @Watch('multiline')
@@ -154,14 +154,13 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
     }
 
-    private setDisplayButtonArrrow(): void {
+    private setDisplayNavigationButtons(): void {
+        let spaceBeforeDisplayingButton: number = this.isTabLightSkin ? 5 : 0;
         let wrapEl: HTMLElement = this.$refs.wrap;
         if (wrapEl) {
-            let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
-
-            this.showArrowRight = wrapEl.scrollLeft < maxScrollLeft;
-
-            this.showArrowLeft = wrapEl.scrollLeft > 0;
+            const maxScrollLeft: number = Math.round(wrapEl.scrollWidth - wrapEl.clientWidth - spaceBeforeDisplayingButton);
+            this.showArrowRight = Math.round(wrapEl.scrollLeft) < maxScrollLeft;
+            this.showArrowLeft = wrapEl.scrollLeft > spaceBeforeDisplayingButton;
         }
     }
 
@@ -197,10 +196,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
             this.computedHeight = listEl.clientHeight;
             wrapEl.style.height = this.computedHeight + OVERFLOWOFFSET + 'px';
             contentsEl.style.height = this.computedHeight + 'px';
-
             this.scrollToSelected();
-            this.setDisplayButtonArrrow();
-
         } else {
             this.showArrowLeft = false;
             this.showArrowRight = false;
@@ -216,6 +212,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     }
 
     private scrollToSelected(): void {
+
         this.navbarItems().elements.forEach(element => {
             // Allow time to make sure an item is selected
             setTimeout(() => {
@@ -231,7 +228,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
                         if (((element.$el as HTMLElement).offsetLeft - buttonLeftWidth - wrapEl.scrollLeft) < 0) {
                             wrapEl.scrollLeft = scrollPositionAlignLeft;
                             // Check if the selected element exceeds on the right side
-                        } else if (wrapEl.clientWidth < ((element.$el as HTMLElement).offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth - buttonRightWidth)) {
+                        } else if (wrapEl.clientWidth < ((element.$el as HTMLElement).offsetLeft - wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth)) {
                             wrapEl.scrollLeft = wrapEl.scrollLeft + element.$el.clientWidth + buttonRightWidth - (wrapEl.scrollLeft + wrapEl.clientWidth - (element.$el as HTMLElement).offsetLeft);
                         }
                     } else if (wrapEl) {
@@ -241,7 +238,8 @@ export class MNavbar extends BaseNavbar implements Navbar {
                     if (this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow) {
                         this.setSelectedIndicatorPosition(element, this.skin);
                     }
-                    this.setDisplayButtonArrrow();
+
+                    this.setDisplayNavigationButtons();
                 }
             });
         });
@@ -253,6 +251,10 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private get buttonRipple(): boolean {
         return this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow || this.skin === MNavbarSkin.TabSoft;
+    }
+
+    private get isTabLightSkin(): boolean {
+        return this.skin === MNavbarSkin.TabLight;
     }
 
     private get isTabUnderlineSkin(): boolean {
@@ -298,7 +300,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private scrollRight(): void {
         let wrapEl: HTMLElement = this.$refs.wrap;
-        // let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
         let cRight: number = wrapEl.scrollLeft + wrapEl.clientWidth;
 
         // find the next element outside visible area
