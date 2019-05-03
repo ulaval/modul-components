@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -84,10 +84,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield :value="value"></m-textfield>'
     }))
     .add('required-marker', () => ({
-        template: '<m-textfield :required-marker="true"></m-textfield>'
-    }))
-    .add('required', () => ({
-        template: '<m-textfield :required="true"></m-textfield>'
+        template: '<m-textfield label="Label" :required-marker="true"></m-textfield>'
     }))
     .add('waiting', () => ({
         template: '<m-textfield :waiting="true"></m-textfield>'
@@ -115,6 +112,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }))
     .add('word-wrap', () => ({
         template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
+    }))
+    .add('placeholder-icon', () => ({
+        template: '<m-textfield label="Label" placeholder="Placeholder" placeholder-icon-name="m-svg__search" word-wrap="true"></m-textfield>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)

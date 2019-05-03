@@ -45,4 +45,13 @@
                     v-model="selection2"></m-autocomplete>
 
     Selection: {{selection2}}
+
+    <h4>Placeholder icon</h4>
+    <m-autocomplete placeholder="Type something"
+                    :required-marker="true"
+                    :results="results2"
+                    :max-length="10"
+                    placeholder-icon-name="m-svg__search"
+                    @complete="onComplete2"
+                    v-model="selection2"></m-autocomplete>
 </div>

@@ -18,8 +18,10 @@
                    :label-for="id"
                    :focus="isFocus"
                    :empty="isEmpty"
+                   :filled="isFilled"
                    :readonly="isReadonly"
                    :required-marker="requiredMarker"
+                   :placeholder-icon-name="placeholderIconName"
                    :tag-style="tagStyle">
         <input v-if="!hasWordWrap"
                :id="id"

@@ -5,6 +5,7 @@ import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
+import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
@@ -31,6 +32,10 @@ export class MInputStyle extends ModulVue {
     public readonly: boolean;
     @Prop({ default: false })
     public cursorPointer: boolean;
+    @Prop()
+    public placeholderIconName: string;
+    @Prop({ default: false })
+    public filled: boolean;
 
     public $refs: {
         root: HTMLElement,
@@ -124,6 +129,10 @@ export class MInputStyle extends ModulVue {
         return !!this.$slots['adjust-width-auto'];
     }
 
+    public get hasPlaceholderIcon(): boolean {
+        return !!this.placeholderIconName && !this.filled;
+    }
+
     @Emit('click')
     public onClick(event): void { }
 
@@ -136,6 +145,7 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(IconPlugin);
         v.use(I18nPlugin);
         v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);

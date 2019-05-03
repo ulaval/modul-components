@@ -66,6 +66,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
     public characterCountThreshold: number;
+    @Prop()
+    public placeholderIconName: string;
 
     readonly internalValue: string;
 
@@ -176,7 +178,9 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return !this.as<InputState>().hasErrorMessage;
     }
 
-
+    private get isFilled(): boolean {
+        return this.internalValue !== '';
+    }
 
     private resetModel(): void {
         this.$emit('input', '');

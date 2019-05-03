@@ -154,6 +154,15 @@ $m-input-style-base-height: $m-line-height + em;
         }
     }
 
+    &.m--has-placeholder-icon-text {
+        input,
+        textarea {
+            &::placeholder {
+                padding-left: calc(#{$m-spacing} + #{$m-spacing--xs});
+            }
+        }
+    }
+
     &__label {
         position: relative;
         transform-origin: 0 0;
@@ -221,6 +230,8 @@ $m-input-style-base-height: $m-line-height + em;
         position: relative;
         flex: 1 1 auto;
         max-width: 100%;
+        display: flex;
+        align-items: center;
     }
 
     &__right-content {
@@ -230,6 +241,14 @@ $m-input-style-base-height: $m-line-height + em;
             color: $m-color--grey;
             margin-left: $m-margin--xs;
         }
+    }
+
+    &__placeholder-icon.m-icon.m-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $m-color--disabled !important;
     }
 
     &__prefix {

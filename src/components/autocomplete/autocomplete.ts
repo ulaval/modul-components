@@ -55,6 +55,8 @@ export class MAutocomplete extends ModulVue {
         validator: value => Enums.toValueArray(InputStateTagStyle).indexOf(value) !== -1
     })
     tagStyle: string;
+    @Prop()
+    placeholderIconName: string;
 
     selection: string = '';
     inputText: string = '';
