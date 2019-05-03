@@ -10,6 +10,7 @@ import imageAlignRightIcon from '../../../assets/icons/svg/Froala-image-align-ri
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
 import replaceIcon from '../../../assets/icons/svg/Froala-replace.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
+import smallCaps from '../../../assets/icons/svg/small-caps.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { MFile } from '../../../utils/file/file';
@@ -167,7 +168,7 @@ export enum FroalaStatus {
         }
         $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
         $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('paragraphStyle', { NAME: 'paragraph' });
+        $.FroalaEditor.DefineIcon('paragraphStyle', { SVG: (smallCaps as string), template: 'custom-icons' });
     }
 
     protected addPopups(): void {

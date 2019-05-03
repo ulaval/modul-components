@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+            .a {
+                fill: none;
+                stroke: #000;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 1.5px;
+            }
+    </style>
+  </defs>
+  <path class="a" d="M15.75 3.748A2.25 2.25 0 0 0 13.5 1.5H3A2.25 2.25 0 0 0 .75 3.748M8.25 1.498v21M5.25 22.498h6M11.25 9.748A2.25 2.25 0 0 1 13.5 7.5H21a2.25 2.25 0 0 1 2.25 2.25M17.25 7.498v15M14.219 22.498h6"/>
+</svg>
