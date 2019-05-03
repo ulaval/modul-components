@@ -130,6 +130,7 @@
                 v-m-control="formGroups[5]"
                 @reset="reset(5)"
                 @submit="submit(5)">
+
             <m-textfield v-model.trim="formGroups[5].getControl('Username').value"
                          :label="formGroups[5].getControl('Username').name"
                          :error-message="formGroups[5].getControl('Username').errors.length > 0 ? formGroups[5].getControl('Username').errors[0].message : null"
@@ -203,6 +204,44 @@
                 <m-button type="reset"
                           skin="secondary"
                           :form="formGroups[7].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+
+    <h2 class="m-u--no-margin">{{formGroups[8].name}}</h2>
+    <p></p>
+    <p>
+
+        <m-form :form-group="formGroups[8]"
+                @reset="reset(8)"
+                @submit="submit(8)">
+
+            <m-input-group :error-message="formGroups[8].errors.length > 0 ? formGroups[8].errors[0].message : null"
+                           legend=""
+                           v-m-control="formGroups[8]">
+
+                <m-textfield v-model.trim="formGroups[8].getControl('Email').value"
+                             :label="formGroups[8].getControl('Email').name"
+                             :error-message="formGroups[8].getControl('Email').errors.length > 0 ? formGroups[8].getControl('Email').errors[0].message : null"
+                             v-m-control="formGroups[8].getControl('Email')">
+                </m-textfield>
+
+                <m-textfield v-model.trim="formGroups[8].getControl('Email confirmation').value"
+                             :label="formGroups[8].getControl('Email confirmation').name"
+                             :error-message="formGroups[8].getControl('Email confirmation').errors.length > 0 ? formGroups[8].getControl('Email confirmation').errors[0].message : null"
+                             v-m-control="formGroups[8].getControl('Email confirmation')">
+                </m-textfield>
+
+            </m-input-group>
+
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[8].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[8].id">Reset</m-button>
             </p>
         </m-form>
     </p>

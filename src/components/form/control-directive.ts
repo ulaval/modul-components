@@ -35,6 +35,7 @@ export const AbstractControlDirective: DirectiveOptions = {
         });
 
         let formGroupTimeout: any;
+        let formGroupInterval: any;
 
         Object.defineProperty(el, 'AbstractControlDirectiveListeners', {
             value: {
@@ -45,14 +46,15 @@ export const AbstractControlDirective: DirectiveOptions = {
                         return;
                     }
 
+                    formGroupInterval = setInterval(() => control.validate(true), 100);
                     clearTimeout(formGroupTimeout);
                 },
                 blurListener: (event: any) => {
-                    if (event.srcElement instanceof HTMLButtonElement) {
-                        return;
-                    }
-
-                    if (control.focusGrantedObservable.value) {
+                    if (
+                        event.srcElement instanceof HTMLButtonElement
+                        ||
+                        control.focusGrantedObservable.value
+                    ) {
                         return;
                     }
 
@@ -63,6 +65,7 @@ export const AbstractControlDirective: DirectiveOptions = {
                     ) {
                         formGroupTimeout = setTimeout(() => {
                             control.endEdition();
+                            clearInterval(formGroupInterval);
                         }, 500);
                     } else {
                         control.endEdition();

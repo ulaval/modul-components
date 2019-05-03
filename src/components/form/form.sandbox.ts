@@ -3,6 +3,7 @@ import { Component } from 'vue-property-decorator';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
+import { CompareValidator } from '../../utils/form/validators/compare/compare';
 import { EmailValidator } from '../../utils/form/validators/email/email';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { MinLengthValidator } from '../../utils/form/validators/min-length/min-length';
@@ -191,6 +192,27 @@ export class MFormSandbox extends ModulVue {
                     validationType: ControlValidatorValidationType.OnGoing
                 }
             ]
+        ),
+        new FormGroup(
+            'Email confirmation',
+            [
+                new FormControl<string>(
+                    'Email',
+                    [
+                        RequiredValidator('Email'),
+                        EmailValidator('Email')
+                    ]
+                ),
+                new FormControl<string>(
+                    'Email confirmation',
+                    [
+                        EmailValidator('Email confirmation')
+                    ]
+                )
+            ],
+            [
+                CompareValidator(['Email', 'Email confirmation'])
+            ]
         )
     ];
 
@@ -202,17 +224,22 @@ export class MFormSandbox extends ModulVue {
 
     submit(formGroupIndex: number): void {
         let me: any = this;
+
         if (formGroupIndex === 4) {
             this.waitingStatuses[4] = true;
+
             setTimeout(() => {
                 let control: FormControl<string> = me.formGroups[4].getControl('Course code') as FormControl<string>;
+
                 control.validators
                     .find(v => v.key === 'duplicate-course-code')!
                     .validationFunction = (): Promise<boolean> => Promise.resolve(![
                         'AAA-0000',
                         'AAA-0001'
                     ].includes(control.value || ''));
+
                 (me.$refs[me.formGroups[4].name] as MForm).submit(true);
+
                 me.waitingStatuses[4] = false;
             }, 1000);
         }
