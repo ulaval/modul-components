@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-inplace-edit editMode 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    This is a value
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit editModePadding="32px" 1`] = `
+<div
+  class="m-inplace-edit"
+  style="padding: 32px;"
+>
+  <span>
+    This is a value
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit error 1`] = `
+<div
+  class="m-inplace-edit m--has-erreur"
+>
+  <span>
+    15826cvv5218
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit padding="26px" 1`] = `
+<div
+  class="m-inplace-edit"
+  style="padding: 26px;"
+>
+  <span>
+    This is a value!
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit readmode only 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    This is a value
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit title 1`] = `
+<div>
+  <div
+    class="m-inplace-edit"
+  >
+    <span>
+      This is a value
+    </span>
+     
+    <!---->
+     
+    <div
+      class="m-overlay"
+    >
+       
+      <div
+        class="v-portal"
+        style="display: none;"
+      />
+    </div>
+  </div>
+   
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      title
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      This is a custom title
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit waiting 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    This is a value
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style all tag styles 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h1
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
