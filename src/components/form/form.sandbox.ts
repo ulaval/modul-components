@@ -26,7 +26,7 @@ export class MFormSandbox extends ModulVue {
                     'Title',
                     [
                         RequiredValidator('Title'),
-                        MaxLengthValidator('Title', 5)
+                        MaxLengthValidator('Title', 20)
                     ]
                 )
             ]
@@ -134,6 +134,21 @@ export class MFormSandbox extends ModulVue {
                             },
                             validationType: ControlValidatorValidationType.OnGoing
                         }
+                    ]
+                )
+            ]
+        ),
+        new FormGroup(
+            'Radio buttons required',
+            [
+                new FormControl<string>(
+                    'Value',
+                    [
+                        RequiredValidator('Value', {
+                            error: {
+                                message: 'Selectionnez le rôle'
+                            }
+                        })
                     ]
                 )
             ]
