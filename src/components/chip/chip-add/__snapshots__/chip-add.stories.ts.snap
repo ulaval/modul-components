@@ -10,7 +10,7 @@ exports[`Storyshots components|m-chip-add default 1`] = `
     <span
       class="m-chip-add__hidden-text"
     >
-      Ajouer : 
+      Ajouter : 
     </span>
      Chip add 
     <svg
@@ -41,7 +41,7 @@ exports[`Storyshots components|m-chip-add disabled 1`] = `
     <span
       class="m-chip-add__hidden-text"
     >
-      Ajouer : 
+      Ajouter : 
     </span>
      Disabled 
     <svg
@@ -71,7 +71,7 @@ exports[`Storyshots components|m-chip-add icon=false 1`] = `
     <span
       class="m-chip-add__hidden-text"
     >
-      Ajouer : 
+      Ajouter : 
     </span>
      Chip 
     <!---->
