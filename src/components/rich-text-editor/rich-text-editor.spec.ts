@@ -13,6 +13,10 @@ const froalaLicenseKey: string = 'testKey';
 let wrapper: Wrapper<MRichTextEditor>;
 let richTextEditor: MRichTextEditor;
 let defaultOptions: MRichTextEditorDefaultOptions;
+let headerNormalOption: any = { '': 'Normal' };
+let i18nTitle: string = 'm-rich-text-editor:title';
+let i18nSubtitle: string = 'm-rich-text-editor:subtitle';
+let i18nTitleLevel: string = 'm-rich-text-editor:title-level';
 
 describe('MRichTextEditor', () => {
     beforeEach(() => {
@@ -24,7 +28,9 @@ describe('MRichTextEditor', () => {
                 }
             });
         richTextEditor = wrapper.vm;
+        let headersOptions: any = wrapper.vm.manageHeaderLevels();
         defaultOptions = new MRichTextEditorDefaultOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
+        defaultOptions.paragraphStyles = headersOptions;
     });
 
     it('should have a value for each custom translations key', () => {
@@ -62,6 +68,46 @@ describe('MRichTextEditor', () => {
         it('default options are standard default options', () => {
             expect(richTextEditor.getOptions().pluginsEnabled).toContain('image');
             expect(richTextEditor.getOptions().toolbarButtons).toContain('insertImage');
+        });
+
+    });
+
+    describe(`Given the paragraph style option`, () => {
+
+        describe(`when we want only 1 title`, () => {
+
+            it(`then only 1 title is available`, () => {
+                wrapper.setProps({ firstHeaderLevel: 1, lastHeaderLevel: 1 });
+
+                let headersOptions: any = wrapper.vm.manageHeaderLevels();
+
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'm-u--h1': i18nTitle });
+            });
+
+        });
+
+        describe(`when we want only a title and a subtitle`, () => {
+
+            it(`then a title and a subtitle are available`, () => {
+                wrapper.setProps({ firstHeaderLevel: 1, lastHeaderLevel: 2 });
+
+                let headersOptions: any = wrapper.vm.manageHeaderLevels();
+
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'm-u--h1': i18nTitle, 'm-u--h2': i18nSubtitle });
+            });
+
+        });
+
+        describe(`when we want multiple titles`, () => {
+
+            it(`then multiple titles are available`, () => {
+                wrapper.setProps({ firstHeaderLevel: 1, lastHeaderLevel: 3 });
+
+                let headersOptions: any = wrapper.vm.manageHeaderLevels();
+
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'm-u--h1': i18nTitleLevel, 'm-u--h2': i18nTitleLevel, 'm-u--h3': i18nTitleLevel });
+            });
+
         });
 
     });
