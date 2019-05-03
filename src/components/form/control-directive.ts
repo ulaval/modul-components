@@ -50,7 +50,9 @@ export const AbstractControlDirective: DirectiveOptions = {
         binding: VNodeDirective
     ): void {
         const control: AbstractControl = binding.value;
+
         control.focusGrantedObservable.unsubscribe();
+
         el.removeEventListener('focus', el['AbstractControlDirectiveListeners'].focusListener, true);
         el.removeEventListener('blur', el['AbstractControlDirectiveListeners'].blurListener, true);
     }

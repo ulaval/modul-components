@@ -121,4 +121,30 @@
     </p>
 
     <hr />
+
+    <h2 class="m-u--no-margin">{{formGroups[5].name}}</h2>
+    <p>John Jane Doh is taken already</p>
+    <p>
+        <m-form :form-group="formGroups[5]"
+                :ref="formGroups[5].name"
+                v-m-control="formGroups[5]"
+                @reset="reset(5)"
+                @submit="submit(5)">
+            <m-textfield v-model.trim="formGroups[5].getControl('Username').value"
+                         :label="formGroups[5].getControl('Username').name"
+                         :error-message="formGroups[5].getControl('Username').errors.length > 0 ? formGroups[5].getControl('Username').errors[0].message : null"
+                         :waiting="waitingStatuses[4]"
+                         v-m-control="formGroups[5].getControl('Username')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[5].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[5].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
 </div>

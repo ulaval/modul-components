@@ -111,6 +111,32 @@ export class MFormSandbox extends ModulVue {
                     ]
                 )
             ]
+        ),
+        new FormGroup(
+            'Live check username avaibility (async)',
+            [
+                new FormControl<string>(
+                    'Username',
+                    [
+                        {
+                            key: '',
+                            validationFunction: async (control: FormControl<string>): Promise<boolean> => {
+                                return new Promise(res => {
+                                    setTimeout(() => res(![
+                                        'John',
+                                        'Jane',
+                                        'Doe'
+                                    ].includes(control.value || '')), 1200);
+                                });
+                            },
+                            error: {
+                                message: 'Username is not available'
+                            },
+                            validationType: ControlValidatorValidationType.OnGoing
+                        }
+                    ]
+                )
+            ]
         )
     ];
 
