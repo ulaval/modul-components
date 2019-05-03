@@ -168,8 +168,10 @@ export class MFormSandbox extends ModulVue {
                 {
                     key: 'selection-min-count',
                     validationFunction: (group: FormGroup): Promise<boolean> => {
+                        let previousSelectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c['_oldValue']).length;
                         let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
-                        return Promise.resolve(selectionCount >= 2);
+
+                        return Promise.resolve((selectionCount > previousSelectionCount) || (selectionCount >= 2));
                     },
                     error: {
                         message: 'Select at least 2 roles'
