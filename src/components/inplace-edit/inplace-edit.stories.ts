@@ -160,7 +160,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}/tag-style`, m
         },
         template: `<m-inplace-edit :edit-mode.sync="editMode" :editModePadding="editModePadding">
                        <span slot="readMode">{{ tagStyle }}</span>
-                       <m-textfield :tag-style="tagStyle" slot="editMode" label="Story #7 (Tag Styles)" 
+                       <m-textfield :tag-style="tagStyle" slot="editMode" label="Story #7 (Tag Styles)"
                        v-model="value"></m-textfield>
                    </m-inplace-edit>`
     }));
