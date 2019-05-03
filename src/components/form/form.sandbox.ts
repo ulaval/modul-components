@@ -152,6 +152,43 @@ export class MFormSandbox extends ModulVue {
                     ]
                 )
             ]
+        ),
+        new FormGroup(
+            'Checkbox 2 to 5 selections',
+            [
+                new FormControl<boolean>('Sys admin', [], { initialValue: false }),
+                new FormControl<boolean>('Unit admin', [], { initialValue: false }),
+                new FormControl<boolean>('Conceptor', [], { initialValue: false }),
+                new FormControl<boolean>('Assitant', [], { initialValue: false }),
+                new FormControl<boolean>('Moderator', [], { initialValue: false }),
+                new FormControl<boolean>('Student', [], { initialValue: false }),
+                new FormControl<boolean>('Invited', [], { initialValue: false })
+            ],
+            [
+                {
+                    key: 'selection-min-count',
+                    validationFunction: (group: FormGroup): Promise<boolean> => {
+                        let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
+                        return Promise.resolve(selectionCount >= 2);
+                    },
+                    error: {
+                        message: 'Select at least 2 roles'
+                    },
+                    validationType: ControlValidatorValidationType.OnGoing
+                },
+                {
+                    key: 'selection-max-count',
+                    validationFunction: (group: FormGroup): Promise<boolean> => {
+                        let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
+
+                        return Promise.resolve(selectionCount <= 4);
+                    },
+                    error: {
+                        message: 'Select at 4 roles or less'
+                    },
+                    validationType: ControlValidatorValidationType.OnGoing
+                }
+            ]
         )
     ];
 

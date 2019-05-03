@@ -157,12 +157,14 @@
                 @submit="submit(6)">
 
             <m-radio-group v-model.trim="formGroups[6].getControl('Value').value"
-                           label="Selectionner un rôle parmi les suivants"
+                           :error-message="formGroups[6].getControl('Value').errors.length > 0 ? formGroups[6].getControl('Value').errors[0].message : null"
+                           label="Select a role bellow"
                            v-m-control="formGroups[6].getControl('Value')">
-                <m-radio value="test1">test1</m-radio>
-                <m-radio value="test2">test2</m-radio>
-                <m-validation-message class="p--error"
-                                      :error-message="formGroups[6].getControl('Value').errors.length > 0 ? formGroups[6].getControl('Value').errors[0].message : null"></m-validation-message>
+                <m-radio value="Sys admin">Sys admin</m-radio>
+                <m-radio value="Unit admin">Unit admin</m-radio>
+                <m-radio value="Conceptor">Conceptor</m-radio>
+                <m-radio value="Assistant">Assistant</m-radio>
+                <m-radio value="Student">Student</m-radio>
             </m-radio-group>
 
             <p class="m-u--margin-bottom--l">
@@ -171,6 +173,36 @@
                 <m-button type="reset"
                           skin="secondary"
                           :form="formGroups[6].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+
+    <h2 class="m-u--no-margin">{{formGroups[7].name}}</h2>
+    <p></p>
+    <p>
+
+        <m-form :form-group="formGroups[7]"
+                @reset="reset(7)"
+                @submit="submit(7)">
+
+            <m-input-group :error-message="formGroups[7].errors.length > 0 ? formGroups[7].errors[0].message : null"
+                           legend="Select a role bellow"
+                           v-m-control="formGroups[7]">
+                <m-checkbox v-for="(control, index) in formGroups[7].controls"
+                            v-model="control.value"
+                            v-m-control="control"
+                            :key="index">
+                    {{control.name}}</m-checkbox>
+            </m-input-group>
+
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[7].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[7].id">Reset</m-button>
             </p>
         </m-form>
     </p>

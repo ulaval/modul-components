@@ -18,10 +18,12 @@ export const ClearErrorToast: FormActionFallout = {
 export const ErrorToast: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
+        const formControlErrorsCount: number = form.formGroup.controls.filter(c => c.errors.length > 0).length;
+        const formGroupErrorsCount: number = form.formGroup.errors.length;
         let htmlString: string = (ModulVue.prototype).$i18n
             .translate(
                 'm-form:multipleErrorsToCorrect',
-                { totalNbOfErrors: form.formGroup.controls.filter(c => c.errors.length > 0).length },
+                { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
                 undefined, undefined, undefined, FormatMode.Sprintf
             );
 

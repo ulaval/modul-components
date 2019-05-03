@@ -1,5 +1,7 @@
 import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
+import { ControlEditionContext } from '../../utils/form/control-edition-context';
+import { FormGroup } from '../../utils/form/form-group';
 const DISTANCE_FROM_TOP: number = -200;
 const scrollToElement: Function = (element: HTMLElement): void => {
     (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
@@ -18,6 +20,8 @@ export const AbstractControlDirective: DirectiveOptions = {
             if (!granted) {
                 return;
             }
+
+
             if (el instanceof HTMLInputElement) {
                 scrollToElement(el);
                 el.focus();
@@ -26,18 +30,43 @@ export const AbstractControlDirective: DirectiveOptions = {
                 (inputElement as HTMLInputElement).focus();
             }
 
+
             control.focusGrantedObservable.next(false);
         });
 
+        let formGroupTimeout: any;
+
         Object.defineProperty(el, 'AbstractControlDirectiveListeners', {
             value: {
-                focusListener: () => control.initEdition(),
+                focusListener: (event: any) => {
+                    control.initEdition();
+
+                    if (!(control instanceof FormGroup)) {
+                        return;
+                    }
+
+                    clearTimeout(formGroupTimeout);
+                },
                 blurListener: (event: any) => {
                     if (event.srcElement instanceof HTMLButtonElement) {
                         return;
                     }
 
-                    control.endEdition();
+                    if (control.focusGrantedObservable.value) {
+                        return;
+                    }
+
+                    if (
+                        control instanceof FormGroup
+                        &&
+                        control['_editionContext'] !== ControlEditionContext.None
+                    ) {
+                        formGroupTimeout = setTimeout(() => {
+                            control.endEdition();
+                        }, 500);
+                    } else {
+                        control.endEdition();
+                    }
                 }
             }
         });
