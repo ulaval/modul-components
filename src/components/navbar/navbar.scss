@@ -133,7 +133,7 @@
                 &::after {
                     right: 0;
                     transform: translateX(100%);
-                    background: linear-gradient(to right, rgba($m-color--black, 0.1), rgba($m-color--black, 0));
+                    background: linear-gradient(to right, rgba($m-color--black, 0.05), rgba($m-color--black, 0));
                 }
             }
 
