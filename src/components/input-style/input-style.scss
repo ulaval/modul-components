@@ -225,6 +225,18 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__right-content {
         display: flex;
+
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-left: $m-margin--xs;
+        }
+    }
+
+    &__prefix {
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-right: $m-margin--xs;
+        }
     }
 
     &__transparent-text {
@@ -276,10 +288,12 @@ $m-input-style-base-height: $m-line-height + em;
             display: none;
         }
 
-        &[type="search"]::-webkit-search-decoration,
-        &[type="search"]::-webkit-search-cancel-button,
-        &[type="search"]::-webkit-search-results-button,
-        &[type="search"]::-webkit-search-results-decoration { display: none; }
+        &[type='search']::-webkit-search-decoration,
+        &[type='search']::-webkit-search-cancel-button,
+        &[type='search']::-webkit-search-results-button,
+        &[type='search']::-webkit-search-results-decoration {
+            display: none;
+        }
 
         &:-webkit-autofill {
             background: rgba($m-color--white, 0);

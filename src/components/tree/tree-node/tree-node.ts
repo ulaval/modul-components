@@ -275,4 +275,8 @@ export class MTreeNode extends ModulVue {
     private get isCheckboxAutoSelect(): boolean {
         return this.checkboxes === MCheckboxes.WithCheckboxAutoSelect;
     }
+
+    private get hasRightIcon(): boolean {
+        return this.withCheckboxes && !!this.node.rightIconName;
+    }
 }

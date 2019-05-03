@@ -1,6 +1,7 @@
 <div class="m-checkbox"
      :class="{ 'm--is-checkbox-left': hasCheckboxLeft,
                 'm--is-checkbox-right': !hasCheckboxLeft,
+                'm--is-checkbox-top': isAlignTop,
                 'm--is-checked': propValue,
                 'm--is-disabled': isDisabled,
                 'm--is-indeterminate': propIndeterminate,
@@ -8,21 +9,21 @@
                 'm--is-focus': isFocus,
                 'm--has-error': hasError,
                 'm--is-valid': isValid }">
-    <input class="m-checkbox__hidden"
-           v-if="!readonly"
-           ref="checkbox"
-           type="checkbox"
+    <input v-if="!readonly"
            :id="id"
+           class="m-checkbox__hidden"
            :indeterminate.prop="propIndeterminate"
            :disabled="isDisabled"
            v-model="propValue"
            @click="onClick"
            @focus="setFocus(true)"
-           @blur="setFocus(false)" />
-    <input v-if="readonly"
-           type="hidden"
-           :id="id"
-           :value="propValue" />
+           @blur="setFocus(false)"
+           ref="checkbox"
+           type="checkbox">
+    <input :id="id"
+           v-if="readonly"
+           :value="propValue"
+           type="hidden" />
     <label class="m-checkbox__wrap"
            :for="id"
            :aria-hidden="!hasLabelSlot">
@@ -30,16 +31,16 @@
               aria-hidden="true">
             <span class="m-checkbox__input__icon"></span>
         </span>
-        <span class="m-checkbox__label"
-              v-if="hasLabelSlot">
+        <span v-if="hasLabelSlot"
+              class="m-checkbox__label">
             <slot></slot>
         </span>
     </label>
     <m-validation-message class="m-checkbox__message"
-                          ref="validation"
                           :disabled="isDisabled"
                           :error="hasError"
                           :error-message="errorMessage"
                           :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
+                          :helper-message="helperMessage"
+                          ref="validation"></m-validation-message>
 </div>

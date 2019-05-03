@@ -2,10 +2,9 @@
 
 exports[`Base calendar in day picker mode should render a calendar 1`] = `
 <div id="m-simple-calendar-uuid" class="m-base-calendar">
-  <nav class="m-base-calendar__header"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year">
-      January 2019
-    </button>
-    <div>
+  <nav class="m-base-calendar__header">
+    <m-link mode="button" aria-live="polite" class="m-base-calendar__current-month-and-year">January 2019</m-link>
+    <div class="m-base-calendar__nav-buttons">
       <m-icon-button icon-name="m-svg__chevron--left" skin="link" class="m-base-calendar__previous">Previous month</m-icon-button>
       <m-icon-button icon-name="m-svg__chevron--right" skin="link" class="m-base-calendar__next">Next month</m-icon-button>
     </div>
@@ -13,41 +12,41 @@ exports[`Base calendar in day picker mode should render a calendar 1`] = `
   <div aria-live="polite" class="m-base-calendar__body">
     <div class="m-base-calendar__week"><span class="m-base-calendar__weekday">Sun.</span><span class="m-base-calendar__weekday">Mon.</span><span class="m-base-calendar__weekday">Tue.</span><span class="m-base-calendar__weekday">Wed.</span><span class="m-base-calendar__weekday">Thu.</span><span class="m-base-calendar__weekday">Fri.</span><span class="m-base-calendar__weekday">Sat.</span></div>
     <div class="m-base-calendar__days">
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content"><span>30</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>31</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>1</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>2</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>3</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>4</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>5</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>6</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>7</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>8</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>9</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>10</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>11</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>12</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content m--is-today"><span>13</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>14</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>15</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content m--is-selected"><span>16</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>17</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>18</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>19</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>20</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>21</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>22</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>23</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>24</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>25</span></span></div>
-      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled"><span tabindex="-1" class="m-base-calendar__day-content"><span>26</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>27</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>28</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>29</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>30</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content"><span>31</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content"><span>1</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content"><span>2</span></span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content">30</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">31</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">1</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">2</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">3</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">4</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">5</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">6</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">7</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">8</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">9</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">10</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">11</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">12</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-today"><span tabindex="-1" class="m-base-calendar__day-content">13</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">14</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">15</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-selected"><span tabindex="-1" class="m-base-calendar__day-content">16</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">17</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">18</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">19</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">20</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">21</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">22</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">23</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">24</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">25</span></div>
+      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled"><span tabindex="-1" class="m-base-calendar__day-content">26</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">27</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">28</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">29</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">30</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content">31</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content">1</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content">2</span></div>
     </div>
   </div>
 </div>
@@ -55,10 +54,9 @@ exports[`Base calendar in day picker mode should render a calendar 1`] = `
 
 exports[`Base calendar in day picker mode when hiding days from previous and following month, these days should be hidden 1`] = `
 <div id="m-simple-calendar-uuid" class="m-base-calendar">
-  <nav class="m-base-calendar__header"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year">
-      January 2019
-    </button>
-    <div>
+  <nav class="m-base-calendar__header">
+    <m-link mode="button" aria-live="polite" class="m-base-calendar__current-month-and-year">January 2019</m-link>
+    <div class="m-base-calendar__nav-buttons">
       <m-icon-button icon-name="m-svg__chevron--left" skin="link" class="m-base-calendar__previous">Previous month</m-icon-button>
       <m-icon-button icon-name="m-svg__chevron--right" skin="link" class="m-base-calendar__next">Next month</m-icon-button>
     </div>
@@ -66,41 +64,41 @@ exports[`Base calendar in day picker mode when hiding days from previous and fol
   <div aria-live="polite" class="m-base-calendar__body">
     <div class="m-base-calendar__week"><span class="m-base-calendar__weekday">Sun.</span><span class="m-base-calendar__weekday">Mon.</span><span class="m-base-calendar__weekday">Tue.</span><span class="m-base-calendar__weekday">Wed.</span><span class="m-base-calendar__weekday">Thu.</span><span class="m-base-calendar__weekday">Fri.</span><span class="m-base-calendar__weekday">Sat.</span></div>
     <div class="m-base-calendar__days">
-      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden"><span>30</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>31</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>1</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>2</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>3</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>4</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>5</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>6</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>7</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>8</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>9</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>10</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>11</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>12</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content m--is-today"><span>13</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>14</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>15</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content m--is-selected"><span>16</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>17</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>18</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>19</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>20</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content"><span>21</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>22</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>23</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>24</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>25</span></span></div>
-      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled"><span tabindex="-1" class="m-base-calendar__day-content"><span>26</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>27</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>28</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>29</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content"><span>30</span></span></div>
-      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden"><span>31</span></span></div>
-      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden"><span>1</span></span></div>
-      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden"><span>2</span></span></div>
+      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden">30</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">31</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">1</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">2</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">3</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">4</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">5</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">6</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">7</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">8</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">9</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">10</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">11</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">12</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-today"><span tabindex="-1" class="m-base-calendar__day-content">13</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">14</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">15</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-selected"><span tabindex="-1" class="m-base-calendar__day-content">16</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">17</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">18</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">19</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">20</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day m--is-highlighted"><span tabindex="-1" class="m-base-calendar__day-content">21</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">22</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">23</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">24</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">25</span></div>
+      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled"><span tabindex="-1" class="m-base-calendar__day-content">26</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">27</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">28</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">29</span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__day"><span tabindex="-1" class="m-base-calendar__day-content">30</span></div>
+      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden">31</span></div>
+      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden">1</span></div>
+      <div role="button" tabindex="-1" class="m-base-calendar__day m--is-disabled m--is-other-month"><span tabindex="-1" class="m-base-calendar__day-content m--is-hidden">2</span></div>
     </div>
   </div>
 </div>
@@ -108,48 +106,44 @@ exports[`Base calendar in day picker mode when hiding days from previous and fol
 
 exports[`Base calendar in month picker mode should render a list of months 1`] = `
 <div id="m-simple-calendar-uuid" class="m-base-calendar">
-  <nav class="m-base-calendar__header m--is-select-mode"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year">
-      January 2019
-    </button>
-    <div> </div>
+  <nav class="m-base-calendar__header m--is-select-mode">
+    <m-link mode="button" aria-live="polite" class="m-base-calendar__current-month-and-year">January 2019</m-link>
   </nav>
   <div aria-live="polite" class="m-base-calendar__body">
     <div class="m-base-calendar__months">
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content m--is-selected"><span>Jan.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Feb.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Mar.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Apr.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>May</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>June</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>July</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Aug.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Sept.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Oct.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Nov.</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__month"><span tabindex="-1" class="m-base-calendar__month-content"><span>Dec.</span></span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__month m--is-selected">Jan.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Feb.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Mar.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Apr.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">May</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">June</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">July</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Aug.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Sept.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Oct.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Nov.</div>
+      <div role="button" tabindex="0" class="m-base-calendar__month">Dec.</div>
     </div>
   </div>
 </div>
 `;
 
 exports[`Base calendar in year picker mode should render a list of years 1`] = `
-<div id="m-simple-calendar-uuid" class="m-base-calendar">
-  <nav class="m-base-calendar__header m--is-select-mode"><button aria-live="polite" type="button" class="m-base-calendar__current-month-and-year">
-      January 2019
-    </button>
-    <div> </div>
+<div id="m-simple-calendar-uuid" class="m-base-calendar m--is-picker-mode-year">
+  <nav class="m-base-calendar__header m--is-select-mode">
+    <m-link mode="button" aria-live="polite" class="m-base-calendar__current-month-and-year">January 2019</m-link>
   </nav>
   <div aria-live="polite" class="m-base-calendar__body">
     <div class="m-base-calendar__years">
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2015</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2016</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2017</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2018</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content m--is-selected"><span>2019</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2020</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2021</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2022</span></span></div>
-      <div role="button" tabindex="0" class="m-base-calendar__year"><span tabindex="-1" class="m-base-calendar__year-content"><span>2023</span></span></div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2015</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2016</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2017</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2018</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year m--is-selected">2019</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2020</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2021</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2022</div>
+      <div role="button" tabindex="0" class="m-base-calendar__year">2023</div>
     </div>
   </div>
 </div>

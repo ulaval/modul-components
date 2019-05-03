@@ -1,9 +1,10 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
+import LinkPlugin from '../link/link';
 import MBaseCalendar from './calendar-renderer/base-calendar/base-calendar';
 import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
@@ -83,7 +84,8 @@ export class MCalendar extends ModulVue {
 
 const CalendarPlugin: PluginObject<any> = {
     install(v, options): void {
-        Vue.use(IconButtonPlugin);
+        v.use(IconButtonPlugin);
+        v.use(LinkPlugin);
         v.component(CALENDAR_NAME, MCalendar);
     }
 };
