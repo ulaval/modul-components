@@ -1,4 +1,4 @@
-export enum ValidatorErrorKeys {
+export enum ValidatorKeys {
     Required = 'required',
     MinLength = 'min-length',
     MaxLength = 'max-length',

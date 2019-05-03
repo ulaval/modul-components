@@ -1,14 +1,16 @@
-import { ValidatorErrorKeys } from "../../../../components/form/validator-error-keys";
+import { ValidatorKeys } from "../../../../components/form/validator-error-keys";
 import { FormatMode } from "../../../i18n/i18n";
 import { ModulVue } from "../../../vue/vue";
 import { AbstractControl } from "../../abstract-control";
+import { ControlValidatorValidationType } from "../../control-validator-validation-type";
 import { FormControl } from "../../form-control";
 import { FormGroup } from "../../form-group";
-import { ControlValidator } from "../control-validator";
+import { ControlValidator, ControlValidatorOptions } from "../control-validator";
 
-export const RequiredValidator: Function = (controlName: string): ControlValidator => {
+export const RequiredValidator: Function = (controlName: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
-        validationFunction: (control: AbstractControl): boolean => {
+        key: ValidatorKeys.Required,
+        validationFunction: (control: AbstractControl): Promise<boolean> => {
             let isPopulate: boolean = false;
 
             let assertPopulate: Function = (value: any): boolean => {
@@ -31,20 +33,22 @@ export const RequiredValidator: Function = (controlName: string): ControlValidat
                 isPopulate = assertPopulate((control as FormControl<any>).value);
             }
 
-            return isPopulate;
+            return Promise.resolve(isPopulate);
         },
-        error: {
-            key: ValidatorErrorKeys.Required,
-            message: (ModulVue.prototype.$i18n).translate(
-                'm-form:requiredValidatorErrorMessage',
-                { controlName },
-                undefined, undefined, undefined, FormatMode.Sprintf
-            ),
-            summaryMessage: (ModulVue.prototype.$i18n).translate(
-                'm-form:requiredValidatorErrorSummaryMessage',
-                { controlName },
-                undefined, undefined, undefined, FormatMode.Sprintf
-            )
-        }
+        error: options && options.error ?
+            options.error : {
+                message: (ModulVue.prototype.$i18n).translate(
+                    'm-form:requiredValidatorErrorMessage',
+                    { controlName },
+                    undefined, undefined, undefined, FormatMode.Sprintf
+                ),
+                groupMessage: (ModulVue.prototype.$i18n).translate(
+                    'm-form:requiredValidatorErrorSummaryMessage',
+                    { controlName },
+                    undefined, undefined, undefined, FormatMode.Sprintf
+                )
+            },
+        validationType: options && options.validationType ?
+            options.validationType : ControlValidatorValidationType.OnGoing
     };
 };

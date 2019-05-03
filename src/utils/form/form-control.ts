@@ -1,11 +1,12 @@
 import { AbstractControl } from "./abstract-control";
 import { ControlEditionContext } from "./control-edition-context";
 import { FormControlOptions } from "./control-options";
+import { ControlValidatorValidationType } from "./control-validator-validation-type";
 import { ControlValidator } from "./validators/control-validator";
 
 export class FormControl<T> extends AbstractControl {
     private _value?: T;
-    private _intialValue?: T;
+    private _initialValue?: T;
     private _oldValue?: T;
 
     constructor(
@@ -16,7 +17,7 @@ export class FormControl<T> extends AbstractControl {
         super(name, validators, options);
 
         if (options) {
-            this._intialValue = this._value = this._oldValue = options.initialValue;
+            this._initialValue = this._value = this._oldValue = options.initialValue;
         }
     }
 
@@ -25,7 +26,7 @@ export class FormControl<T> extends AbstractControl {
     }
 
     set value(value: T | undefined) {
-        if (value === this._oldValue && typeof value !== 'object') {
+        if (value === this.value && typeof value !== 'object') {
             return;
         }
 
@@ -36,13 +37,15 @@ export class FormControl<T> extends AbstractControl {
     }
 
     public get isValid(): boolean {
-        return this.validators.every(v => !!v.lastCheck);
+        return this.validators
+            .filter(v => v.validationType !== ControlValidatorValidationType.Manual)
+            .every(v => !!v.lastCheck);
     }
 
     public initEdition(): void {
         if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
-        } else if (this._value === this._oldValue && this._value === this._intialValue) {
+        } else if (this._value === this._oldValue && this._value === this._initialValue) {
             this._editionContext = ControlEditionContext.Pristine;
         } else if (!this._value && this.isValid) {
             this._editionContext = ControlEditionContext.EmptyAndValid;
@@ -53,7 +56,7 @@ export class FormControl<T> extends AbstractControl {
 
     public reset(): void {
         super.reset();
-        this._value = this._oldValue = this._intialValue;
+        this._value = this._oldValue = this._initialValue;
     }
 }
 

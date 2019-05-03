@@ -7,8 +7,8 @@ import { ControlValidator } from "./validators/control-validator";
 export class FormGroup extends AbstractControl {
     constructor(
         public readonly name: string,
-        public readonly validators: ControlValidator[] = [],
         public controls: AbstractControl[],
+        public readonly validators: ControlValidator[] = [],
         options?: ControlOptions
     ) {
         super(name, validators, options);
@@ -44,9 +44,9 @@ export class FormGroup extends AbstractControl {
         this.controls = this.controls.filter(c => c.name === name);
     }
 
-    public validate(): void {
-        super.validate();
-        this.controls.forEach(c => c.validate());
+    public async validate(manualy: boolean = false): Promise<void> {
+        await super.validate(manualy);
+        await Promise.all(this.controls.map(c => c.validate(manualy)));
     }
 
     public initEdition(): void {
@@ -55,7 +55,6 @@ export class FormGroup extends AbstractControl {
             .every((fc: FormControl<any>) => fc.value);
         const pristine: boolean = this.controls
             .filter(c => c instanceof FormControl)
-            // friendly/internaly accessing FormControl properties
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
 
         if (this.errors.length > 0) {

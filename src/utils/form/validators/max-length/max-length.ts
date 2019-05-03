@@ -1,41 +1,48 @@
-import { ValidatorErrorKeys } from "../../../../components/form/validator-error-keys";
+import { ValidatorKeys } from "../../../../components/form/validator-error-keys";
 import { FormatMode } from "../../../i18n/i18n";
 import { ModulVue } from "../../../vue/vue";
+import { ControlValidatorValidationType } from "../../control-validator-validation-type";
 import { FormControl } from "../../form-control";
 import { FormGroup } from "../../form-group";
+import { ControlValidator, ControlValidatorOptions } from "../control-validator";
 
 /**
  * Bound included
  */
-export const MaxLengthValidator: Function = (controlName: string, maxLength: number): AbstractControlValidator => {
+export const MaxLengthValidator: Function = (controlName: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
-        validationFunction: (control: FormControl<any>): boolean => {
+        key: ValidatorKeys.MaxLength,
+        validationFunction: (control: FormControl<any>): Promise<boolean> => {
             if (control instanceof FormGroup) {
                 throw Error('the max length validator should not be attached to a form group');
             }
 
+            let isMaxLength: boolean;
+
             if (!control.value) {
-                return true;
+                isMaxLength = true;
+            } else if (!isNaN(control.value)) {
+                isMaxLength = control.value.toString().length <= maxLength;
+            } else {
+                isMaxLength = control.value.length <= maxLength;
             }
 
-            if (!isNaN(control.value)) {
-                return control.value.toString().length <= maxLength;
-            }
-
-            return control.value.length <= maxLength;
+            return Promise.resolve(isMaxLength);
         },
-        error: {
-            key: ValidatorErrorKeys.MaxLength,
-            message: (ModulVue.prototype.$i18n).translate(
-                'm-form:maxLengthValidatorErrorMessage',
-                { maxLength },
-                undefined, undefined, undefined, FormatMode.Sprintf
-            ),
-            summaryMessage: (ModulVue.prototype.$i18n).translate(
-                'm-form:maxLengthValidatorErrorSummaryMessage',
-                { controlName, maxLength },
-                undefined, undefined, undefined, FormatMode.Sprintf
-            )
-        }
+        error: options && options.error ?
+            options.error : {
+                message: (ModulVue.prototype.$i18n).translate(
+                    'm-form:maxLengthValidatorErrorMessage',
+                    { maxLength },
+                    undefined, undefined, undefined, FormatMode.Sprintf
+                ),
+                groupMessage: (ModulVue.prototype.$i18n).translate(
+                    'm-form:maxLengthValidatorErrorSummaryMessage',
+                    { controlName, maxLength },
+                    undefined, undefined, undefined, FormatMode.Sprintf
+                )
+            },
+        validationType: options && options.validationType ?
+            options.validationType : ControlValidatorValidationType.Correction
     };
 };

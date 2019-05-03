@@ -3,7 +3,6 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { ControlValidationType } from '../../utils/form/control-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { BetweenValidator } from '../../utils/form/validators/between/between';
@@ -39,7 +38,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'name',
@@ -76,7 +74,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'name',
@@ -107,7 +104,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'name',
@@ -143,7 +139,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'name',
@@ -178,7 +173,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'name',
@@ -218,7 +212,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'name',
@@ -249,7 +242,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
+
                 [
                     new FormControl<string>(
                         'email',
@@ -280,7 +273,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
+
                 [
                     new FormControl<string>(
                         'min 5',
@@ -311,7 +304,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'max 5',
@@ -342,7 +334,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<number>(
                         'min 5',
@@ -382,7 +373,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<number>(
                         'max 5',
@@ -422,7 +412,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<number>(
                         'between 2 and 4',
@@ -463,9 +452,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
             formGroup: new FormGroup(
                 'my group',
                 [
-                    CompareValidator(['email', 'confirm email'])
-                ],
-                [
                     new FormControl<number>(
                         'email',
                         [EmailValidator('email')]
@@ -474,6 +460,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                         'confirm email',
                         [EmailValidator('confirm email')]
                     )
+                ],
+                [
+                    CompareValidator(['email', 'confirm email'])
                 ]
             )
         }),
@@ -514,14 +503,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')],
-                        {
-                            validationType: ControlValidationType.AtExit
-                        }
+                        [EmailValidator('email')]
                     )
                 ]
             )
@@ -549,14 +534,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')],
-                        {
-                            validationType: ControlValidationType.Correction
-                        }
+                        [EmailValidator('email')]
                     )
                 ]
             )
@@ -584,14 +565,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')],
-                        {
-                            validationType: ControlValidationType.Modification
-                        }
+                        [EmailValidator('email')]
                     )
                 ]
             )
@@ -619,7 +596,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         data: () => ({
             formGroup: new FormGroup(
                 'my form',
-                [],
                 [
                     new FormControl<string>(
                         'email',
@@ -648,68 +624,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         `
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/fields-implementations`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('textfield', () => ({
-        data: () => ({
-            formGroup: new FormGroup(
-                'my form',
-                [],
-                [
-                    new FormControl<string>(
-                        'name',
-                        [RequiredValidator('name')]
-                    )
-                ]
-            )
-        }),
-        template: `
-        <m-form class="m-u--margin-top"
-        :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
-            </m-textfield>
-            <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
-                <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
-            </p>
-        </m-form>
-        `
-    }))
-    .add('datepicker', () => ({
-        data: () => ({
-            formGroup: new FormGroup(
-                'my form',
-                [],
-                [
-                    new FormControl<string>(
-                        'date',
-                        [RequiredValidator('date')]
-                    )
-                ]
-            )
-        }),
-        template: `
-        <m-form class="m-u--margin-top"
-        :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
-            </m-textfield>
-            <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
-                <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
-            </p>
-        </m-form>
-        `
-    }));

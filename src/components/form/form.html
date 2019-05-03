@@ -1,6 +1,6 @@
 <form :id="formGroup.id"
-      @submit.prevent="submit"
-      @reset.prevent="reset">
+      @submit.prevent="submit(false)"
+      @reset.prevent="reset(false)">
     <m-accordion-transition>
         <m-message class="m-form__message-summary"
                    v-if="displaySummary"
@@ -9,7 +9,7 @@
             <ul>
                 <li v-for="(error, index) in summaryErrors"
                     :key="index"
-                    v-html="error.summaryMessage || error.message">
+                    v-html="error.groupMessage || error.message">
                 </li>
             </ul>
         </m-message>

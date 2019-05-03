@@ -1,0 +1,124 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">{{formGroups[0].name}}</h2>
+    <p></p>
+    <p>
+        <m-form :form-group="formGroups[0]"
+                v-m-control="formGroups[0]"
+                @reset="reset(0)"
+                @submit="submit(0)">
+            <m-textfield v-model.trim="formGroups[0].getControl('Title').value"
+                         :label="formGroups[0].getControl('Title').name"
+                         :error-message="formGroups[0].getControl('Title').errors.length > 0 ? formGroups[0].getControl('Title').errors[0].message : null"
+                         :max-length="20"
+                         :character-count="true"
+                         :character-count-threshold="20 * .75"
+                         v-m-control="formGroups[0].getControl('Title')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[0].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[0].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+
+    <h2 class="m-u--no-margin">{{formGroups[1].name}}</h2>
+    <p></p>
+    <p>
+        <m-form :form-group="formGroups[1]"
+                v-m-control="formGroups[1]"
+                @reset="reset(1)"
+                @submit="submit(1)">
+            <m-textfield v-model.trim="formGroups[1].getControl('Security answer').value"
+                         :label="formGroups[1].getControl('Security answer').name"
+                         :error-message="formGroups[1].getControl('Security answer').errors.length > 0 ? formGroups[1].getControl('Security answer').errors[0].message : null"
+                         v-m-control="formGroups[1].getControl('Security answer')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[1].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[1].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+    <h2 class="m-u--no-margin">{{formGroups[2].name}}</h2>
+    <p>input mask is not ready for this (it should use inputs mixins)</p>
+    <p>
+        <m-form :form-group="formGroups[2]"
+                v-m-control="formGroups[2]"
+                @reset="reset(2)"
+                @submit="submit(2)">
+            <m-textfield v-model.trim="formGroups[2].getControl('Postal code').value"
+                         :label="formGroups[2].getControl('Postal code').name"
+                         :error-message="formGroups[2].getControl('Postal code').errors.length > 0 ? formGroups[2].getControl('Postal code').errors[0].message : null"
+                         v-m-control="formGroups[2].getControl('Postal code')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[2].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[2].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+    <h2 class="m-u--no-margin">{{formGroups[3].name}}</h2>
+    <p>input mask is not ready for this (it should use inputs mixins)</p>
+    <p>
+        <m-form :form-group="formGroups[3]"
+                v-m-control="formGroups[3]"
+                @reset="reset(3)"
+                @submit="submit(3)">
+            <m-textfield v-model.trim="formGroups[3].getControl('Email').value"
+                         :label="formGroups[3].getControl('Email').name"
+                         :error-message="formGroups[3].getControl('Email').errors.length > 0 ? formGroups[3].getControl('Email').errors[0].message : null"
+                         v-m-control="formGroups[3].getControl('Email')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[3].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[3].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+
+    <h2 class="m-u--no-margin">{{formGroups[4].name}}</h2>
+    <p>input mask is not ready for this (it should use inputs mixins)</p>
+    <p>
+        <m-form :form-group="formGroups[4]"
+                :ref="formGroups[4].name"
+                v-m-control="formGroups[4]"
+                @reset="reset(4)"
+                @submit="submit(4)">
+            <m-textfield v-model.trim="formGroups[4].getControl('Course code').value"
+                         :label="formGroups[4].getControl('Course code').name"
+                         :error-message="formGroups[4].getControl('Course code').errors.length > 0 ? formGroups[4].getControl('Course code').errors[0].message : null"
+                         :waiting="waitingStatuses[4]"
+                         v-m-control="formGroups[4].getControl('Course code')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroups[4].id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroups[4].id">Reset</m-button>
+            </p>
+        </m-form>
+    </p>
+
+    <hr />
+</div>

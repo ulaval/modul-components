@@ -1,5 +1,6 @@
 import { Component, Emit, Prop } from "vue-property-decorator";
 import { ControlError } from "../../utils/form/control-error";
+import { ControlValidatorValidationType } from "../../utils/form/control-validator-validation-type";
 import { FormGroup } from "../../utils/form/form-group";
 import { ModulVue } from "../../utils/vue/vue";
 import { FormActionFallout } from "./form-action-fallout";
@@ -30,15 +31,19 @@ export class MForm extends ModulVue {
         );
     }
 
-    public submit(): void {
-        this.formGroup.validate();
-
-        if (!this.formGroup.isValid) {
+    public async submit(manualy: boolean = false): Promise<void> {
+        await this.formGroup.validate(manualy);
+        if (!this._isValid(manualy)) {
             this._triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
         this._triggerActionFallouts(FormActions.ValidSubmit);
+
+        if (manualy) {
+            return;
+        }
+
         this.emitSubmit();
     }
 
@@ -59,6 +64,19 @@ export class MForm extends ModulVue {
 
     protected beforeDestroy(): void {
         this._triggerActionFallouts(FormActions.Destroyed);
+    }
+
+    private _isValid(manual: boolean = false): boolean {
+        if (!manual) {
+            return this.formGroup.isValid;
+        }
+
+        return this.formGroup.isValid &&
+            this.formGroup.controls
+                .map(c => c.validators)
+                .reduce((acc, cur) => acc.concat(cur), [])
+                .filter(v => v.validationType === ControlValidatorValidationType.Manual)
+                .every(v => !!v.lastCheck);
     }
 
     private _triggerActionFallouts(type: FormActions): void {

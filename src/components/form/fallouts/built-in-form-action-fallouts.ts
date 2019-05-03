@@ -1,3 +1,5 @@
+import { AbstractControl } from '../../../utils/form/abstract-control';
+import { ControlValidatorValidationType } from '../../../utils/form/control-validator-validation-type';
 import { FormatMode } from '../../../utils/i18n/i18n';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MToastPosition, MToastState } from '../../toast/toast';
@@ -34,7 +36,21 @@ export const ErrorToast: FormActionFallout = {
 export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-        form.formGroup.controls.find(c => !c.isValid)!.focusGranted = true;
+        let control: AbstractControl | undefined = form.formGroup.controls.find(c => !c.isValid);
+
+        if (control) {
+            control.focusGrantedObservable.next(true);
+            return;
+        }
+
+        control = form.formGroup.controls
+            .find(c =>
+                !!c.validators.find(v => v.validationType === ControlValidatorValidationType.Manual && !v.lastCheck)
+            );
+
+        if (control) {
+            control.focusGrantedObservable.next(true);
+        }
     }
 };
 
