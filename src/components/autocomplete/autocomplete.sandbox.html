@@ -37,12 +37,30 @@
     </m-autocomplete>
 
     <h4>With max length</h4>
+    <div>
+        <m-autocomplete placeholder="Type something"
+                        :required-marker="true"
+                        :results="results2"
+                        :max-length="10"
+                        @complete="onComplete2"
+                        v-model="selection2"></m-autocomplete>
+
+        Selection: {{selection2}}
+    </div>
+
+    <h4>Label-up</h4>
     <m-autocomplete placeholder="Type something"
-                    :required-marker="true"
                     :results="results2"
-                    :max-length="10"
+                    label="Label"
+                    :label-up="true"
                     @complete="onComplete2"
                     v-model="selection2"></m-autocomplete>
 
-    Selection: {{selection2}}
+    <h4>Focus</h4>
+    <m-autocomplete placeholder="Type something"
+                    :results="results2"
+                    label="Label"
+                    :focus="true"
+                    @complete="onComplete2"
+                    v-model="selection2"></m-autocomplete>
 </div>
