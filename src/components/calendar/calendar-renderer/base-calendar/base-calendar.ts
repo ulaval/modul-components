@@ -1,5 +1,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import uuid from '../../../../utils/uuid/uuid';
+import { MLinkMode } from '../../../link/link';
 import { RangeDate } from '../../calendar-state/state/abstract-calendar-state';
 import { CalendarType, DayState, MonthState, YearState } from '../../calendar-state/state/calendar-state';
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
@@ -92,7 +93,9 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     id: string = `m-simple-calendar-${uuid.generate()}`;
 
+    public modeLinkCurrentMonthAndYear: MLinkMode = MLinkMode.Button;
     private currentPickerMode: PickerMode = this.initialPickerMode;
+
 
     onYearClick(): void {
         this.currentPickerMode = this.isPickerModeDay ? this.currentPickerMode = PickerMode.YEAR : this.currentPickerMode = PickerMode.DAY;
