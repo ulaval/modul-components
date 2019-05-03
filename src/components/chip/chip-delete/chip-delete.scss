@@ -1,0 +1,76 @@
+@import '../chip-commons';
+
+.m-chip-delete {
+    @include m-chip-base-style();
+
+    display: inline-block;
+    border: 1px solid $m-color--grey;
+    background: $m-color--grey-lighter;
+
+    &:not(.m--is-disabled) {
+        .m-chip-delete__button {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                color: $m-color--interactive-light;
+            }
+
+            &:active {
+                color: $m-color--interactive-dark;
+            }
+        }
+    }
+
+    &.m--is-disabled {
+        border: 1px solid $m-color--disabled;
+        background: $m-color--grey-lightest;
+
+        &,
+        .m-chip-delete__button {
+            color: $m-color--disabled;
+        }
+    }
+
+    &__body {
+        @include m-chip-body-style();
+    }
+
+    &__button {
+        $m-chip-delete--button-width: 12px;
+
+        transition: color $m-transition-duration ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $m-chip-delete--button-width;
+        height: $m-chip-delete--button-width;
+        padding: 0;
+        margin: 0 $m-spacing--xs;
+        outline: none;
+        appearance: none;
+        border: none;
+        font-size: 1em;
+        font-family: $m-font-family;
+        color: $m-color--interactive;
+        background: none;
+    }
+
+    &__icon {
+        $m-chip-delete--icon-width: 32px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 10px 0 10px 10px; // Magic number: perfect icon size
+        width: $m-chip-delete--icon-width;
+        height: $m-chip-delete--icon-width;
+        transform: translate(-50%, -50%);
+        stroke-width: 3;
+    }
+
+    &__hidden-text {
+        @include m-visually-hidden();
+    }
+}

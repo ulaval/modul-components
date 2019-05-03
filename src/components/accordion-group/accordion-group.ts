@@ -50,7 +50,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
 
     public removeAccordion(id: string): void {
         this.accordions[id].$off('update:open', this.emitValueChange);
-        this.$set(this.accordions, id, undefined);
+        this.$delete(this.accordions, id);
     }
 
     public closeAllAccordions(): void {

@@ -488,6 +488,90 @@ exports[`Storyshots components|m-checkbox value 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-checkbox verticalAlign=center 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-uuid"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam placeat dolores esse libero ipsum, officiis asperiores! Distinctio quis, deleniti placeat, hic aperiam quia magnam accusantium at eaque voluptatum ratione! Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quia culpa quas distinctio sapiente assumenda, soluta obcaecati ipsam reprehenderit aperiam eos blanditiis aspernatur provident libero quod modi quos iusto molestias. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut consequuntur tempore fuga nihil quibusdam officia deleniti nesciunt, ullam eveniet explicabo unde alias, esse asperiores. Corrupti officiis sunt voluptatibus iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, est! Optio ipsum voluptates alias vel quos!
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-checkbox verticalAlign=top 1`] = `
+<div
+  class="m-checkbox m--is-checkbox-left m--is-checkbox-top"
+>
+  <input
+    class="m-checkbox__hidden"
+    id="mCheckbox-uuid"
+    type="checkbox"
+  />
+   
+  <!---->
+   
+  <label
+    class="m-checkbox__wrap"
+    for="mCheckbox-uuid"
+  >
+    <span
+      aria-hidden="true"
+      class="m-checkbox__input"
+    >
+      <span
+        class="m-checkbox__input__icon"
+      />
+    </span>
+     
+    <span
+      class="m-checkbox__label"
+    >
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam placeat dolores esse libero ipsum, officiis asperiores! Distinctio quis, deleniti placeat, hic aperiam quia magnam accusantium at eaque voluptatum ratione! Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quia culpa quas distinctio sapiente assumenda, soluta obcaecati ipsam reprehenderit aperiam eos blanditiis aspernatur provident libero quod modi quos iusto molestias. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut consequuntur tempore fuga nihil quibusdam officia deleniti nesciunt, ullam eveniet explicabo unde alias, esse asperiores. Corrupti officiis sunt voluptatibus iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, est! Optio ipsum voluptates alias vel quos!
+    </span>
+  </label>
+   
+  <div
+    class="m-validation-message m-checkbox__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-checkbox/position=right default 1`] = `
 <div
   class="m-checkbox m--is-checkbox-right"

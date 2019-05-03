@@ -225,6 +225,18 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__right-content {
         display: flex;
+
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-left: $m-margin--xs;
+        }
+    }
+
+    &__prefix {
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-right: $m-margin--xs;
+        }
     }
 
     &__transparent-text {

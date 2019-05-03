@@ -1,4 +1,4 @@
-import { createLocalVue, mount, TransitionStub } from '@vue/test-utils';
+import { createLocalVue, mount, TransitionStub, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
 import { PortalStub } from '../../../tests/helpers/render';
@@ -16,7 +16,7 @@ jest.mock('../../utils/uuid/uuid');
 
 describe('MDatepicker', () => {
     let localVue: VueConstructor<Vue>;
-    let wrapper: any;
+    let wrapper: Wrapper<Vue>;
 
     beforeEach(() => {
         resetModulPlugins();
@@ -43,6 +43,27 @@ describe('MDatepicker', () => {
 
         const calendar: any = wrapper.find('.m-calendar');
         expect(calendar.is(MCalendar)).toBe(true);
+    });
+
+    it('When a invalid date is entered then the field value is cleared and emmited', async () => {
+        wrapper.setProps({ value: '2018-04-25' });
+        await Vue.nextTick();
+        const input: Wrapper<Vue> = wrapper.find('input');
+        expect(input.is('input')).toBe(true);
+
+
+        const inputElement: HTMLInputElement = input.element as HTMLInputElement;
+        expect(inputElement.value).toBe('2018-04-25');
+
+        // change input to a invalid value
+        inputElement.value = '2018-99-99';
+        input.trigger('input');
+        await Vue.nextTick();
+
+        expect((wrapper.vm as MDatepicker).calandarError).toBe(true);
+        expect(wrapper.emitted('change').length).toBe(1);
+        expect(wrapper.emitted('change')[0][0]).toBe('');
 
     });
+
 });

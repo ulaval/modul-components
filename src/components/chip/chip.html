@@ -1,0 +1,14 @@
+<transition :css="false">
+    <m-chip-add v-if="isModeAdd"
+                :disabled="disabled"
+                @click="emitClick"
+                @add="emitAdd">
+        <slot></slot>
+    </m-chip-add>
+    <m-chip-delete v-if="isModeDelete"
+                   :disabled="disabled"
+                   @click="emitClick"
+                   @delete="emitDelete">
+        <slot></slot>
+    </m-chip-delete>
+</transition>

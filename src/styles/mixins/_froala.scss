@@ -1,3 +1,5 @@
+@import '../utils/link';
+
 @mixin m-commons-froala-styles() {
     @include m-titles-styles();
     @include m-text-styles();
@@ -36,6 +38,15 @@
         &.fr-fir {
             float: right;
             margin-left: $m-spacing--s;
+        }
+    }
+
+    a {
+        @extend .m-u--link;
+
+        &:hover,
+        &:focus {
+            @extend %m-u--link-text--hover-focus;
         }
     }
 }

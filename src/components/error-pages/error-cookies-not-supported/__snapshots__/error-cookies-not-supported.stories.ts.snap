@@ -1,0 +1,368 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-error-cookies-not-supported default 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Les cookies sont désactivés
+        <br />
+        dans votre navigateur
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Pour accéder à ce site, modifiez les paramètres de votre navigateur et réessayez.
+      </p>
+       
+      <!---->
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Accueil
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-cookies-not-supported hints 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Les cookies sont désactivés
+        <br />
+        dans votre navigateur
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        My only custom hint
+      </p>
+      <p
+        class="m-message-page__hints"
+      >
+        My second (long) custom hint.Lorem ipsum dolor
+                sit amet, consectetur adipiscing elit. Nulla egestas urna rhoncus ipsum congue lobortis. 
+      </p>
+       
+      <!---->
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Accueil
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-cookies-not-supported links 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        Les cookies sont désactivés
+        <br />
+        dans votre navigateur
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Pour accéder à ce site, modifiez les paramètres de votre navigateur et réessayez.
+      </p>
+       
+      <!---->
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="http://www.ulaval.ca"
+            tabindex="0"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              The first custom link
+            </span>
+             
+            <span
+              class="m-i18n m-link__hidden"
+            >
+              Cet hyperlien s'ouvrira dans un nouvel onglet.
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="http://www.google.com"
+            tabindex="0"
+            target="_blank"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              The second custom
+                link
+            </span>
+             
+            <span
+              class="m-i18n m-link__hidden"
+            >
+              Cet hyperlien s'ouvrira dans un nouvel onglet.
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
+
+exports[`Storyshots components|m-error-cookies-not-supported title 1`] = `
+<div
+  style="border: 1px solid black; padding: 10px; width: 600px;"
+>
+  <article
+    class="m-message-page m--is-state-warning m--is-skin-default"
+  >
+    <header
+      class="m-message-page__header"
+    >
+      <h2
+        class="m-message-page__title"
+      >
+        A Custom Title
+      </h2>
+       
+      <div
+        aria-hidden="true"
+        class="m-message-page__icon-container"
+      >
+        <div
+          class="m-message-page__icon"
+          style="width: 130px;"
+        >
+          {}
+        </div>
+      </div>
+    </header>
+     
+    <div
+      class="m-message-page__body"
+    >
+      <p
+        class="m-message-page__hints"
+      >
+        Pour accéder à ce site, modifiez les paramètres de votre navigateur et réessayez.
+      </p>
+       
+      <!---->
+       
+      <ul
+        class="m-message-page__links"
+      >
+        <li>
+          <a
+            class="m-link m-message-page__link m--has-left-icon"
+            href="\\\\"
+            tabindex="0"
+            target=""
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-link__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-link__text"
+            >
+              Accueil
+            </span>
+             
+            <!---->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</div>
+`;
