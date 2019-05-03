@@ -5,7 +5,6 @@ export class MRichTextEditorDefaultOptions {
     public charCounterCount: boolean = false;
     public tableInsertHelper: boolean = false;
     public lineBreakerTags: string[] = [];
-    public zIndex: number = 200;
     public toolbarSticky: boolean = true;
     public scrollableContainer: string | undefined;
     public toolbarStickyOffset: number = 0;
