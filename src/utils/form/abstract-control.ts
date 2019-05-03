@@ -59,7 +59,7 @@ export abstract class AbstractControl {
         this.validate();
     }
 
-    private _resetManualValidators(): void {
+    protected _resetManualValidators(): void {
         this.validators
             .filter(v => v.validationType === ControlValidatorValidationType.Manual)
             .forEach(v => {
@@ -70,7 +70,7 @@ export abstract class AbstractControl {
         this._updateErrors();
     }
 
-    private _updateErrors(): void {
+    protected _updateErrors(): void {
         this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
 }

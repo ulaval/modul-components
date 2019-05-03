@@ -2,7 +2,11 @@ import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { ControlEditionContext } from '../../utils/form/control-edition-context';
 import { FormGroup } from '../../utils/form/form-group';
+
 const DISTANCE_FROM_TOP: number = -200;
+const INPUT_GROUP_FOCUS_TIME_MILLISECONDS: number = 500;
+const INPUT_GROUP_VALIDATION_TIME_MILLISECONDS: number = 100;
+
 const scrollToElement: Function = (element: HTMLElement): void => {
     (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
 };
@@ -21,7 +25,6 @@ export const AbstractControlDirective: DirectiveOptions = {
                 return;
             }
 
-
             if (el instanceof HTMLInputElement) {
                 scrollToElement(el);
                 el.focus();
@@ -30,25 +33,12 @@ export const AbstractControlDirective: DirectiveOptions = {
                 (inputElement as HTMLInputElement).focus();
             }
 
-
             control.focusGrantedObservable.next(false);
         });
 
-        let formGroupTimeout: any;
-        let formGroupInterval: any;
-
         Object.defineProperty(el, 'AbstractControlDirectiveListeners', {
             value: {
-                focusListener: (event: any) => {
-                    control.initEdition();
-
-                    if (!(control instanceof FormGroup)) {
-                        return;
-                    }
-
-                    formGroupInterval = setInterval(() => control.validate(true), 100);
-                    clearTimeout(formGroupTimeout);
-                },
+                focusListener: () => control.initEdition(),
                 blurListener: (event: any) => {
                     if (
                         event.srcElement instanceof HTMLButtonElement
@@ -59,15 +49,14 @@ export const AbstractControlDirective: DirectiveOptions = {
                     }
 
                     if (
-                        control instanceof FormGroup
-                        &&
-                        control['_editionContext'] !== ControlEditionContext.None
+                        (
+                            control instanceof FormGroup
+                            &&
+                            control['_editionContext'] !== ControlEditionContext.None
+                        )
+                        ||
+                        !(control instanceof FormGroup)
                     ) {
-                        formGroupTimeout = setTimeout(() => {
-                            control.endEdition();
-                            clearInterval(formGroupInterval);
-                        }, 500);
-                    } else {
                         control.endEdition();
                     }
                 }

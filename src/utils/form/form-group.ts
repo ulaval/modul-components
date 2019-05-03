@@ -49,23 +49,45 @@ export class FormGroup extends AbstractControl {
         await Promise.all(this.controls.map(c => c.validate(manualy)));
     }
 
+    private interval: any;
+    private timeout: any;
+
     public initEdition(): void {
+        this.interval = setInterval(() => async () => {
+            await Promise.all(this.validators.map(async v => v.lastCheck = await !!v.validationFunction(control)));
+            this._updateErrors();
+        }, 100);
+
+        clearTimeout(this.timeout);
+
         const populate: boolean = !!this.controls
             .filter(c => c instanceof FormControl)
-            .find((fc: FormControl<any>) => fc.value);
+            .find((fc: FormControl<any>) => !!fc.value === true);
         const pristine: boolean = this.controls
             .filter(c => c instanceof FormControl)
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
+        const isValid: boolean = this.validators.every(v => !!v.lastCheck);
 
         if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (pristine) {
             this._editionContext = ControlEditionContext.Pristine;
-        } else if (!populate && this.isValid) {
+        } else if (!populate && isValid) {
             this._editionContext = ControlEditionContext.EmptyAndValid;
-        } else if (populate && this.isValid) {
+        } else if (populate && isValid) {
             this._editionContext = ControlEditionContext.PopulateAndValid;
         }
+    }
+
+    public endEdition(): void {
+        this.timeout = setTimeout(() => {
+            clearTimeout(this.timeout);
+            clearInterval(this.interval);
+
+            this._editionContext = ControlEditionContext.None;
+            this._resetManualValidators();
+            super.validate();
+        }, 500);
     }
 
     public reset(): void {

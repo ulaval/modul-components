@@ -3,7 +3,6 @@ import { Component } from 'vue-property-decorator';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
-import { CompareValidator } from '../../utils/form/validators/compare/compare';
 import { EmailValidator } from '../../utils/form/validators/email/email';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { MinLengthValidator } from '../../utils/form/validators/min-length/min-length';
@@ -211,7 +210,22 @@ export class MFormSandbox extends ModulVue {
                 )
             ],
             [
-                CompareValidator(['Email', 'Email confirmation'])
+                {
+                    key: 'compare-email',
+                    validationFunction: (control: FormGroup): Promise<boolean> => {
+                        return Promise.resolve(
+                            !(control.getControl('Email') as FormControl<string>).value
+                            ||
+                            ['Email', 'Email confirmation']
+                                .map(cn => (control.getControl(cn) as FormControl<any>))
+                                .every(fc => fc.value === (control.controls[0] as FormControl<any>).value)
+                        );
+                    },
+                    error: {
+                        message: `Emails don't match`
+                    },
+                    validationType: ControlValidatorValidationType.Correction
+                }
             ]
         )
     ];
