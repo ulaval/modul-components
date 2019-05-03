@@ -158,7 +158,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
         let spaceBeforeDisplayingButton: number = this.isTabLightSkin ? 5 : 0;
         let wrapEl: HTMLElement = this.$refs.wrap;
         if (wrapEl) {
-            let maxScrollLeft: number = Math.round(wrapEl.scrollWidth - wrapEl.clientWidth - spaceBeforeDisplayingButton);
+            const maxScrollLeft: number = Math.round(wrapEl.scrollWidth - wrapEl.clientWidth - spaceBeforeDisplayingButton);
             this.showArrowRight = Math.round(wrapEl.scrollLeft) < maxScrollLeft;
             this.showArrowLeft = wrapEl.scrollLeft > spaceBeforeDisplayingButton;
         }
@@ -300,7 +300,6 @@ export class MNavbar extends BaseNavbar implements Navbar {
 
     private scrollRight(): void {
         let wrapEl: HTMLElement = this.$refs.wrap;
-        // let maxScrollLeft: number = wrapEl.scrollWidth - wrapEl.clientWidth;
         let cRight: number = wrapEl.scrollLeft + wrapEl.clientWidth;
 
         // find the next element outside visible area
