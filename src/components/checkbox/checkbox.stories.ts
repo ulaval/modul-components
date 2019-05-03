@@ -12,6 +12,8 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
+const longText: string = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam placeat dolores esse libero ipsum, officiis asperiores! Distinctio quis, deleniti placeat, hic aperiam quia magnam accusantium at eaque voluptatum ratione! Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quia culpa quas distinctio sapiente assumenda, soluta obcaecati ipsam reprehenderit aperiam eos blanditiis aspernatur provident libero quod modi quos iusto molestias. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut consequuntur tempore fuga nihil quibusdam officia deleniti nesciunt, ullam eveniet explicabo unde alias, esse asperiores. Corrupti officiis sunt voluptatibus iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, est! Optio ipsum voluptates alias vel quos!';
+
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
@@ -28,6 +30,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     }))
     .add('position=right', () => ({
         template: '<m-checkbox position="right">A Checkbox</m-checkbox>'
+    }))
+    .add('verticalAlign=top', () => ({
+        template: '<m-checkbox verticalAlign="top">' + longText + '</m-checkbox>'
+    }))
+    .add('verticalAlign=center', () => ({
+        template: '<m-checkbox verticalAlign="center">' + longText + '</m-checkbox>'
     }))
     .add('disabled', () => ({
         template: '<m-checkbox :disabled="true">A Checkbox</m-checkbox>'

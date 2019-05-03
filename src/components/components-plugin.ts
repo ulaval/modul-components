@@ -8,6 +8,9 @@ import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
 import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
+import ChipPlugin from './chip/chip';
+import ChipAddPlugin from './chip/chip-add/chip-add';
+import ChipDeletePlugin from './chip/chip-delete/chip-delete';
 import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
 import DaterangepickerPlugin from './daterangepicker/daterangepicker';
@@ -97,7 +100,6 @@ const ComponentsPlugin: PluginObject<any> = {
 
         v.prototype.$log.error('ComponentsPlugin will be deprecated in modul v.1.0, components should now be installed separately');
 
-
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(AddPlugin);
@@ -106,6 +108,9 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(CarouselPlugin);
         Vue.use(CharacterCountPlugin);
         Vue.use(CheckboxPlugin);
+        Vue.use(ChipPlugin);
+        Vue.use(ChipAddPlugin);
+        Vue.use(ChipDeletePlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(DaterangepickerPlugin);

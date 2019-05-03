@@ -1,0 +1,2854 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-menu closeOnSelection="false" 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu default 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu disabled 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu idAriaControls="ariaTest" 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="ariaTest"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="ariaTest"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu open 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu skin=light" 1`] = `
+<div
+  class="m-menu m--is-skin-light"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu trigger (slot) 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 4
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 5
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem default 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem disabled 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item m--is-disabled"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="-1"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem iconName 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem label 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          label1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem open 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-menu-item__icon"
+          height="1em"
+          width="1em"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 2
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 3
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item group 1 - :open='true'
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      >
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 1
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 2
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+         
+        <li
+          class="m-menu-item"
+          role="none"
+        >
+          <span
+            class="m-menu-item__link"
+            tabindex="0"
+          >
+            <!---->
+             
+            <span
+              class="m-menu-item__label"
+            >
+              Subitem 3
+            </span>
+             
+            <!---->
+          </span>
+           
+          <ul
+            aria-hidden="true"
+            class="m-menu-item__group"
+            id="mMenuItem-uuid-controls"
+            style="display: none;"
+          />
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem readonly 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      readonly="readonly"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem url (router-link) 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <a
+        class="m-menu-item__link"
+        href="#/components-m-menu--default"
+        role="menuitem"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+      </a>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-menu/menuItem value 1`] = `
+<div
+  class="m-menu m--is-skin-dark"
+>
+  <div
+    aria-controls="mMenu-uuid-controls"
+    aria-haspopup="true"
+    class="m-menu__trigger"
+    tabindex="0"
+  >
+    <span
+      class="m-plus m-menu__trigger__plus m--is-skin-current-color m--is-large"
+      title="Ouvrir le menu"
+    />
+     
+    <div>
+      Menu
+    </div>
+  </div>
+   
+  <ul
+    aria-hidden="true"
+    class="m-menu__body"
+    id="mMenu-uuid-controls"
+    role="menu"
+    style="display: none;"
+  >
+     
+    <li
+      class="m-menu-item"
+      role="none"
+    >
+      <span
+        class="m-menu-item__link"
+        tabindex="0"
+      >
+        <!---->
+         
+        <span
+          class="m-menu-item__label"
+        >
+          Item 1
+        </span>
+         
+        <!---->
+      </span>
+       
+      <ul
+        aria-hidden="true"
+        class="m-menu-item__group"
+        id="mMenuItem-uuid-controls"
+        style="display: none;"
+      />
+    </li>
+  </ul>
+</div>
+`;

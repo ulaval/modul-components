@@ -12,12 +12,14 @@
                 :helper-message="helperMessage">
     <m-datepicker :label="labelFrom"
                   :max-width="maxWidth"
+                  :hide-internal-error-message="hideInternalErrorMessage"
                   slot="first"
                   slot-scope="{ props, handlers }"
                   v-on="handlers"
                   v-bind="props"></m-datepicker>
     <m-datepicker :label="labelTo"
                   :max-width="maxWidth"
+                  :hide-internal-error-message="hideInternalErrorMessage"
                   slot="second"
                   slot-scope="{ props, handlers }"
                   v-on="handlers"
