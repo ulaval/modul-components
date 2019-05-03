@@ -1,8 +1,12 @@
 <svg>
     <symbol id="m-svg__add-circle" viewBox="-1 -1 26 26">
-        <circle stroke="currentColor" fill="transparent" cx="12" cy="12" r="11.5"/>
-	    <line stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" x1="7" y1="12" x2="17" y2="12"/>
-	    <line stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" x1="12" y1="17" x2="12" y2="7"/>
+        <g stroke="currentColor">
+            <circle fill="transparent" cx="12" cy="12" r="11.5"/>
+            <g stroke-linecap="round" stroke-miterlimit="10" >
+                <line x1="7" y1="12" x2="17" y2="12"/>
+                <line x1="12" y1="17" x2="12" y2="7"/>
+            </g>
+        </g>
     </symbol>
     <symbol id="m-svg__add-circle-filled" viewBox="-1 -1 26 26">
         <circle fill="currentColor" cx="12" cy="12" r="12"/>

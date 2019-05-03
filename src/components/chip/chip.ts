@@ -36,6 +36,10 @@ export class MChip extends Vue {
     public get isModeAdd(): boolean {
         return this.mode === MChipMode.Add;
     }
+
+    public get isModeDelete(): boolean {
+        return this.mode === MChipMode.Delete;
+    }
 }
 
 const MChipPlugin: PluginObject<any> = {
