@@ -108,6 +108,9 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     protected id: string = `mrich-text-${uuid.generate()}`;
 
+    private i18nHeaderTitle: string = this.$i18n.translate('m-rich-text-editor:title');
+    private i18nHeaderSubtitle: string = this.$i18n.translate('m-rich-text-editor:subtitle');
+
     mounted(): void {
         this.testSelectorProps();
     }
@@ -139,28 +142,28 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         return options;
     }
 
-    private manageHeaderLevels(): any {
+    public manageHeaderLevels(): any {
 
-        let headerLevels: any = {};
+        let headersLevel: any = {};
 
         if (this.firstHeaderLevel === this.lastHeaderLevel) {
             // One level of header
-            headerLevels['m-u--h' + this.firstHeaderLevel] = this.$i18n.translate('m-rich-text-editor:title');
+            headersLevel['m-u--h' + this.firstHeaderLevel] = this.i18nHeaderTitle;
         } else if (this.lastHeaderLevel - this.firstHeaderLevel === 1) {
             // Two level of header
-            headerLevels['m-u--h' + this.firstHeaderLevel] = this.$i18n.translate('m-rich-text-editor:title');
-            headerLevels['m-u--h' + this.lastHeaderLevel] = this.$i18n.translate('m-rich-text-editor:subtitle');
+            headersLevel['m-u--h' + this.firstHeaderLevel] = this.i18nHeaderTitle;
+            headersLevel['m-u--h' + this.lastHeaderLevel] = this.i18nHeaderSubtitle;
         } else {
             // Multiple level of header
             let levelNumber: number = 1;
             for (let headerLevel: number = this.firstHeaderLevel; headerLevel <= this.lastHeaderLevel; headerLevel++) {
-                headerLevels['m-u--h' + headerLevel] = this.$i18n.translate('m-rich-text-editor:title-level', { headerLevel: levelNumber }, 1, undefined, undefined, FormatMode.Sprintf);
+                headersLevel['m-u--h' + headerLevel] = this.$i18n.translate('m-rich-text-editor:title-level', { headerLevel: levelNumber }, 1, undefined, undefined, FormatMode.Sprintf);
                 levelNumber++;
             }
         }
 
-        headerLevels[''] = 'Normal';
-        return headerLevels;
+        headersLevel[''] = 'Normal';
+        return headersLevel;
     }
 
     public getSelectorErrorMsg(prop: string): string {
