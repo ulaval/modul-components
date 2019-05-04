@@ -230,18 +230,10 @@ export class MFormSandbox extends ModulVue {
         )
     ];
 
-    waitingStatuses: boolean[];
-
-    protected created(): void {
-        this.waitingStatuses = new Array(this.formGroups.length).fill(false);
-    }
-
     submit(formGroupIndex: number): void {
         let me: any = this;
 
         if (formGroupIndex === 4) {
-            this.waitingStatuses[4] = true;
-
             setTimeout(() => {
                 let control: FormControl<string> = me.formGroups[4].getControl('Course code') as FormControl<string>;
 
@@ -253,8 +245,6 @@ export class MFormSandbox extends ModulVue {
                     ].includes(control.value || ''));
 
                 (me.$refs[me.formGroups[4].name] as MForm).submit(true);
-
-                me.waitingStatuses[4] = false;
             }, 1000);
         }
     }

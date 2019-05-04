@@ -55,13 +55,12 @@ export class FormGroup extends AbstractControl {
 
     public initEdition(): void {
         clearInterval(this._editionValidationInterval);
+        clearTimeout(this._editionTimeout);
 
         this._editionValidationInterval = setInterval(
             async () => super.validate()
             , ModulVue.prototype.$form.formGroupEditionValidationIntervalInMilliseconds
         );
-
-        clearTimeout(this._editionTimeout);
 
         const populate: boolean = !!this.controls
             .filter(c => c instanceof FormControl)
@@ -86,7 +85,6 @@ export class FormGroup extends AbstractControl {
         this._editionTimeout = setTimeout(() => {
             clearInterval(this._editionValidationInterval);
             clearTimeout(this._editionTimeout);
-
 
             this._editionContext = ControlEditionContext.None;
             this._resetManualValidators();

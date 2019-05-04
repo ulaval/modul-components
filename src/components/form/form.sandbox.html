@@ -107,7 +107,6 @@
             <m-textfield v-model.trim="formGroups[4].getControl('Course code').value"
                          :label="formGroups[4].getControl('Course code').name"
                          :error-message="formGroups[4].getControl('Course code').errors.length > 0 ? formGroups[4].getControl('Course code').errors[0].message : null"
-                         :waiting="waitingStatuses[4]"
                          v-m-control="formGroups[4].getControl('Course code')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -134,7 +133,6 @@
             <m-textfield v-model.trim="formGroups[5].getControl('Username').value"
                          :label="formGroups[5].getControl('Username').name"
                          :error-message="formGroups[5].getControl('Username').errors.length > 0 ? formGroups[5].getControl('Username').errors[0].message : null"
-                         :waiting="waitingStatuses[5]"
                          v-m-control="formGroups[5].getControl('Username')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">

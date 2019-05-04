@@ -33,6 +33,7 @@ export class MForm extends ModulVue {
 
     public async submit(manualy: boolean = false): Promise<void> {
         await this.formGroup.validate(manualy);
+
         if (!this._isValid(manualy)) {
             this._triggerActionFallouts(FormActions.InvalidSubmit);
             return;
@@ -67,8 +68,8 @@ export class MForm extends ModulVue {
         this.formGroup.reset();
     }
 
-    private _isValid(manual: boolean = false): boolean {
-        if (!manual) {
+    private _isValid(manualy: boolean = false): boolean {
+        if (!manualy) {
             return this.formGroup.isValid;
         }
 
