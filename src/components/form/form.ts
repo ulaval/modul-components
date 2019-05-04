@@ -64,6 +64,7 @@ export class MForm extends ModulVue {
 
     protected beforeDestroy(): void {
         this._triggerActionFallouts(FormActions.Destroyed);
+        this.formGroup.reset();
     }
 
     private _isValid(manual: boolean = false): boolean {
