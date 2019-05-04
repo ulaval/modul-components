@@ -19,7 +19,9 @@ declare module 'vue/types/vue' {
 }
 
 export interface FormPluginOptions {
-    formAfterActionEffects: FormActionFallout[];
+    formAfterActionEffects?: FormActionFallout[];
+    formGroupEditionValidationIntervalInMilliseconds?: number;
+    formGroupEditionTimeoutInMilliseconds?: number;
 }
 
 export const FormPlugin: PluginObject<any> = {
@@ -34,18 +36,18 @@ export const FormPlugin: PluginObject<any> = {
         v.directive(ABSTRACT_CONTROL_NAME, AbstractControlDirective);
         v.component(FORM_NAME, MForm);
 
-        let form: MFormService;
-        if (options) {
-            form = new MFormService(options.formAfterActionEffects);
-        } else {
-            form = new MFormService([
-                ErrorToast,
-                ClearErrorToast,
-                FocusOnFirstError
-            ]);
-        }
-
-        (v.prototype).$form = form;
+        (v.prototype).$form = new MFormService(
+            options && options.formAfterActionEffects ?
+                options.formAfterActionEffects : [
+                    ErrorToast,
+                    ClearErrorToast,
+                    FocusOnFirstError
+                ],
+            options && options.formGroupEditionTimeoutInMilliseconds ?
+                options.formGroupEditionTimeoutInMilliseconds : 250,
+            options && options.formGroupEditionValidationIntervalInMilliseconds ?
+                options.formGroupEditionValidationIntervalInMilliseconds : 700
+        );
     }
 };
 

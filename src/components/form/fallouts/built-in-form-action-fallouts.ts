@@ -10,7 +10,7 @@ import { FormActions } from '../form-action-type';
 
 export const ClearErrorToast: FormActionFallout = {
     action: FormActions.ValidSubmitOrResetOrDestroyed,
-    fallout: (form: MForm): void => {
+    fallout: (): void => {
         (ModulVue.prototype).$toast.clear();
     }
 };
@@ -52,7 +52,10 @@ export const FocusOnFirstError: FormActionFallout = {
 
         if (control) {
             control.focusGrantedObservable.next(true);
+            return;
         }
+
+        form.formGroup.focusGrantedObservable.next(true);
     }
 };
 

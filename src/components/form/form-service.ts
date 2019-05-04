@@ -3,7 +3,7 @@ import { FormActionFallout } from "./form-action-fallout";
 export class MFormService {
     constructor(
         public readonly formActionFallouts: FormActionFallout[],
-        public readonly formGroupEditionValidationIntervalInMilliseconds: number = 250,
-        public readonly formGroupEditionTimeoutInMilliseconds: number = 700
+        public readonly formGroupEditionValidationIntervalInMilliseconds: number,
+        public readonly formGroupEditionTimeoutInMilliseconds: number
     ) { }
 }

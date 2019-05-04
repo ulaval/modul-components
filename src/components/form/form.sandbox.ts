@@ -132,7 +132,7 @@ export class MFormSandbox extends ModulVue {
                             error: {
                                 message: 'Username is not available'
                             },
-                            validationType: ControlValidatorValidationType.OnGoing
+                            validationType: ControlValidatorValidationType.AtExit
                         }
                     ]
                 )

@@ -31,6 +31,8 @@ export const AbstractControlDirective: DirectiveOptions = {
             } else if (inputElement) {
                 scrollToElement(inputElement);
                 (inputElement as HTMLInputElement).focus();
+            } else {
+                scrollToElement(el);
             }
 
             control.focusGrantedObservable.next(false);
