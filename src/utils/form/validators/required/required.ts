@@ -1,4 +1,3 @@
-import { ValidatorKeys } from "../../../../components/form/validator-error-keys";
 import { FormatMode } from "../../../i18n/i18n";
 import { ModulVue } from "../../../vue/vue";
 import { AbstractControl } from "../../abstract-control";
@@ -6,6 +5,7 @@ import { ControlValidatorValidationType } from "../../control-validator-validati
 import { FormControl } from "../../form-control";
 import { FormGroup } from "../../form-group";
 import { ControlValidator, ControlValidatorOptions } from "../control-validator";
+import { ValidatorKeys } from "../validator-error-keys";
 
 export const RequiredValidator: Function = (controlName: string, options?: ControlValidatorOptions): ControlValidator => {
     return {

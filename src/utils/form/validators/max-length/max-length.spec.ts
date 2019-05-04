@@ -7,45 +7,52 @@ describe('Max length validator', () => {
         [MaxLengthValidator('test', 3)]
     );
 
-    test('it should return true if value is undefined', () => {
+    test('it should return true if value is undefined', async (done) => {
         expect(formControl.value).toBe(undefined);
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 
-    test('it should return true if value is empty string', () => {
+    test('it should return true if value is empty string', async (done) => {
         formControl.value = '';
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 
-    test('it should return false if is longer', () => {
+    test('it should return false if is longer', async (done) => {
         formControl.value = '1234';
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(false);
+        done();
     });
 
-    test('it should return true is same', () => {
+    test('it should return true is same', async (done) => {
         formControl.value = '123';
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 
-    test('it should return true if number length is shorter', () => {
+    test('it should return true if number length is shorter', async (done) => {
         formControl.value = 12;
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 
-    test('it should return false if array length is longer', () => {
+    test('it should return false if array length is longer', async (done) => {
         formControl.value = [1, 2, 3, 4];
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(false);
+        done();
     });
 
-    test('it should return true if array length is shorter', () => {
+    test('it should return true if array length is shorter', async (done) => {
         formControl.value = [1, 2];
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 });

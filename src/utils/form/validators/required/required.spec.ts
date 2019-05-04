@@ -7,33 +7,38 @@ describe('Required validator', () => {
         [RequiredValidator('test')]
     );
 
-    test('it should return false if value is undefined', () => {
+    test('it should return false if value is undefined', async (done) => {
         expect(formControl.value).toBe(undefined);
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(false);
+        done();
     });
 
-    test('it should return false if value is empty array', () => {
+    test('it should return false if value is empty array', async (done) => {
         formControl.value = [];
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(false);
+        done();
     });
 
-    test('it should return false is value is empty string', () => {
+    test('it should return false is value is empty string', async (done) => {
         formControl.value = '';
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(false);
+        done();
     });
 
-    test('it should return true if value is 0', () => {
+    test('it should return true if value is 0', async (done) => {
         formControl.value = 0;
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 
-    test('it should return true if value is set', () => {
+    test('it should return true if value is set', async (done) => {
         formControl.value = 'test';
-        formControl.validate();
+        await formControl.validate();
         expect(formControl.isValid).toBe(true);
+        done();
     });
 });

@@ -8,7 +8,7 @@ export const DefaultValidationGuard: ControlValidationGuard = (editionContext: C
         return false;
     }
 
-    let guard: Map<ControlEditionContext, ControlValidatorValidationType[]> = new Map<ControlEditionContext, ControlValidatorValidationType[]>(
+    const guard: Map<ControlEditionContext, ControlValidatorValidationType[]> = new Map<ControlEditionContext, ControlValidatorValidationType[]>(
         [
             [
                 ControlEditionContext.EmptyAndValid, [
@@ -51,5 +51,5 @@ export const DefaultValidationGuard: ControlValidationGuard = (editionContext: C
         ]
     );
 
-    return !!guard.get(editionContext)!.find(vt => vt === validationType);
+    return guard.get(editionContext)!.includes(validationType);
 };
