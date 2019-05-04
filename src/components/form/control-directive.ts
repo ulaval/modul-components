@@ -40,11 +40,7 @@ export const AbstractControlDirective: DirectiveOptions = {
             value: {
                 focusListener: () => control.initEdition(),
                 blurListener: (event: any) => {
-                    if (
-                        event.srcElement instanceof HTMLButtonElement
-                        ||
-                        control.focusGrantedObservable.value
-                    ) {
+                    if (event.srcElement instanceof HTMLButtonElement || control.focusGrantedObservable.value) {
                         return;
                     }
 
@@ -52,7 +48,7 @@ export const AbstractControlDirective: DirectiveOptions = {
                         (
                             control instanceof FormGroup
                             &&
-                            control['_editionContext'] !== ControlEditionContext.None
+                            (control['_editionContext'] !== ControlEditionContext.None)
                         )
                         ||
                         !(control instanceof FormGroup)

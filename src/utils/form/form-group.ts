@@ -1,3 +1,4 @@
+import { ModulVue } from "../vue/vue";
 import { AbstractControl } from "./abstract-control";
 import { ControlEditionContext } from "./control-edition-context";
 import { ControlOptions } from "./control-options";
@@ -5,6 +6,9 @@ import { FormControl } from "./form-control";
 import { ControlValidator } from "./validators/control-validator";
 
 export class FormGroup extends AbstractControl {
+    private _editionValidationInterval: any;
+    private _editionTimeout: any;
+
     constructor(
         public readonly name: string,
         public controls: AbstractControl[],
@@ -49,16 +53,15 @@ export class FormGroup extends AbstractControl {
         await Promise.all(this.controls.map(c => c.validate(manualy)));
     }
 
-    private interval: any;
-    private timeout: any;
-
     public initEdition(): void {
-        this.interval = setInterval(() => async () => {
-            await Promise.all(this.validators.map(async v => v.lastCheck = await !!v.validationFunction(control)));
-            this._updateErrors();
-        }, 100);
+        clearInterval(this._editionValidationInterval);
 
-        clearTimeout(this.timeout);
+        this._editionValidationInterval = setInterval(
+            async () => super.validate()
+            , ModulVue.prototype.$form.formGroupEditionValidationIntervalInMilliseconds
+        );
+
+        clearTimeout(this._editionTimeout);
 
         const populate: boolean = !!this.controls
             .filter(c => c instanceof FormControl)
@@ -80,17 +83,21 @@ export class FormGroup extends AbstractControl {
     }
 
     public endEdition(): void {
-        this.timeout = setTimeout(() => {
-            clearTimeout(this.timeout);
-            clearInterval(this.interval);
+        this._editionTimeout = setTimeout(() => {
+            clearInterval(this._editionValidationInterval);
+            clearTimeout(this._editionTimeout);
+
 
             this._editionContext = ControlEditionContext.None;
             this._resetManualValidators();
             super.validate();
-        }, 500);
+        }, ModulVue.prototype.$form.formGroupEditionTimeoutInMilliseconds);
     }
 
     public reset(): void {
+        clearInterval(this._editionValidationInterval);
+        clearTimeout(this._editionTimeout);
+
         super.reset();
         this.controls.forEach(c => c.reset());
     }

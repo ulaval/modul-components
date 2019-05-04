@@ -186,7 +186,7 @@ export class MFormSandbox extends ModulVue {
                         return Promise.resolve(selectionCount <= 4);
                     },
                     error: {
-                        message: 'Select at 4 roles or less'
+                        message: 'Select 4 roles or less'
                     },
                     validationType: ControlValidatorValidationType.OnGoing
                 }
