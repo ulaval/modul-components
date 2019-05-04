@@ -106,7 +106,7 @@ export class MFormSandbox extends ModulVue {
                             error: {
                                 message: 'This course code already exists.'
                             },
-                            validationType: ControlValidatorValidationType.Manual
+                            validationType: ControlValidatorValidationType.External
                         }
                     ]
                 )

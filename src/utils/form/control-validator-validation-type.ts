@@ -7,5 +7,5 @@ export enum ControlValidatorValidationType {
     Correction = 'correction',
     Modification = 'modification',
     OnGoing = 'on-going',
-    Manual = 'manual'
+    External = 'external'
 }

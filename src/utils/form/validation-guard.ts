@@ -1,10 +1,10 @@
 import { ControlEditionContext } from "./control-edition-context";
 import { ControlValidatorValidationType } from "./control-validator-validation-type";
 
-export type ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, manualy?: boolean) => boolean;
+export type ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, external?: boolean) => boolean;
 
-export const DefaultValidationGuard: ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, manualy?: boolean): boolean => {
-    if (manualy && validationType === ControlValidatorValidationType.Manual) {
+export const DefaultValidationGuard: ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, external?: boolean): boolean => {
+    if (external && validationType === ControlValidatorValidationType.External) {
         return false;
     }
 

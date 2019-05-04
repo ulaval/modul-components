@@ -31,17 +31,17 @@ export class MForm extends ModulVue {
         );
     }
 
-    public async submit(manualy: boolean = false): Promise<void> {
-        await this.formGroup.validate(manualy);
+    public async submit(external: boolean = false): Promise<void> {
+        await this.formGroup.validate(external);
 
-        if (!this._isValid(manualy)) {
+        if (!this._isValid(external)) {
             this._triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
         this._triggerActionFallouts(FormActions.ValidSubmit);
 
-        if (manualy) {
+        if (external) {
             return;
         }
 
@@ -68,8 +68,8 @@ export class MForm extends ModulVue {
         this.formGroup.reset();
     }
 
-    private _isValid(manualy: boolean = false): boolean {
-        if (!manualy) {
+    private _isValid(checkExternal: boolean = false): boolean {
+        if (!checkExternal) {
             return this.formGroup.isValid;
         }
 
@@ -77,7 +77,7 @@ export class MForm extends ModulVue {
             this.formGroup.controls
                 .map(c => c.validators)
                 .reduce((acc, cur) => acc.concat(cur), [])
-                .filter(v => v.validationType === ControlValidatorValidationType.Manual)
+                .filter(v => v.validationType === ControlValidatorValidationType.External)
                 .every(v => !!v.lastCheck);
     }
 

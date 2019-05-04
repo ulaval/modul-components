@@ -38,7 +38,7 @@ export class FormControl<T> extends AbstractControl {
 
     public get isValid(): boolean {
         return this.validators
-            .filter(v => v.validationType !== ControlValidatorValidationType.Manual)
+            .filter(v => v.validationType !== ControlValidatorValidationType.External)
             .every(v => !!v.lastCheck);
     }
 

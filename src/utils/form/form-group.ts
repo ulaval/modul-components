@@ -48,9 +48,9 @@ export class FormGroup extends AbstractControl {
         this.controls = this.controls.filter(c => c.name === name);
     }
 
-    public async validate(manualy: boolean = false): Promise<void> {
-        await super.validate(manualy);
-        await Promise.all(this.controls.map(c => c.validate(manualy)));
+    public async validate(external: boolean = false): Promise<void> {
+        await super.validate(external);
+        await Promise.all(this.controls.map(c => c.validate(external)));
     }
 
     public initEdition(): void {

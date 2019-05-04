@@ -30,11 +30,11 @@ export abstract class AbstractControl {
         return this._errors;
     }
 
-    public async validate(manualy: boolean = false): Promise<void> {
+    public async validate(external: boolean = false): Promise<void> {
         await Promise.all(
             this.validators
                 .map(async (v) => {
-                    if (this._validationGuard(this._editionContext, v.validationType, manualy)) {
+                    if (this._validationGuard(this._editionContext, v.validationType, external)) {
                         return;
                     }
 
@@ -61,7 +61,7 @@ export abstract class AbstractControl {
 
     protected _resetManualValidators(): void {
         this.validators
-            .filter(v => v.validationType === ControlValidatorValidationType.Manual)
+            .filter(v => v.validationType === ControlValidatorValidationType.External)
             .forEach(v => {
                 v.lastCheck = undefined;
                 v.validationFunction = () => undefined;
@@ -70,7 +70,7 @@ export abstract class AbstractControl {
         this._updateErrors();
     }
 
-    protected _updateErrors(): void {
+    private _updateErrors(): void {
         this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
 }

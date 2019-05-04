@@ -47,7 +47,7 @@ export const FocusOnFirstError: FormActionFallout = {
 
         control = form.formGroup.controls
             .find(c =>
-                !!c.validators.find(v => v.validationType === ControlValidatorValidationType.Manual && !v.lastCheck)
+                !!c.validators.find(v => v.validationType === ControlValidatorValidationType.External && !v.lastCheck)
             );
 
         if (control) {
