@@ -8,41 +8,36 @@ export const DefaultValidationGuard: ControlValidationGuard = (editionContext: C
         return false;
     }
 
-    let guardAgainstValidation: boolean = true;
+    let guard: Map<ControlEditionContext, ControlValidatorValidationType[]> = new Map<ControlEditionContext, ControlValidatorValidationType[]>();
 
-    if (editionContext === ControlEditionContext.EmptyAndValid ||
-        editionContext === ControlEditionContext.Pristine) {
-        switch (validationType) {
-            case ControlValidatorValidationType.OnGoing:
-                guardAgainstValidation = false;
-                break;
-        }
-    } else if (editionContext === ControlEditionContext.PopulateAndValid) {
-        switch (validationType) {
-            case ControlValidatorValidationType.Modification:
-            case ControlValidatorValidationType.OnGoing:
-                guardAgainstValidation = false;
-                break;
-        }
-    } else if (editionContext === ControlEditionContext.HasErrors) {
-        switch (validationType) {
-            case ControlValidatorValidationType.Modification:
-            case ControlValidatorValidationType.OnGoing:
-            case ControlValidatorValidationType.Correction:
-                guardAgainstValidation = false;
-                break;
-        }
-    } else if (editionContext === ControlEditionContext.None) {
-        switch (validationType) {
-            case ControlValidatorValidationType.Modification:
-            case ControlValidatorValidationType.OnGoing:
-            case ControlValidatorValidationType.Correction:
-            case ControlValidatorValidationType.AtExit:
-            case ControlValidatorValidationType.None:
-                guardAgainstValidation = false;
-                break;
-        }
-    }
+    guard.set(ControlEditionContext.EmptyAndValid, [
+        ControlValidatorValidationType.None,
+        ControlValidatorValidationType.AtExit,
+        ControlValidatorValidationType.Correction,
+        ControlValidatorValidationType.Modification,
+        ControlValidatorValidationType.External
+    ]);
+    guard.set(ControlEditionContext.Pristine, [
+        ControlValidatorValidationType.None,
+        ControlValidatorValidationType.AtExit,
+        ControlValidatorValidationType.Correction,
+        ControlValidatorValidationType.Modification,
+        ControlValidatorValidationType.External
+    ]);
+    guard.set(ControlEditionContext.PopulateAndValid, [
+        ControlValidatorValidationType.None,
+        ControlValidatorValidationType.AtExit,
+        ControlValidatorValidationType.Correction,
+        ControlValidatorValidationType.External
+    ]);
+    guard.set(ControlEditionContext.HasErrors, [
+        ControlValidatorValidationType.None,
+        ControlValidatorValidationType.AtExit,
+        ControlValidatorValidationType.External
+    ]);
+    guard.set(ControlEditionContext.None, [
+        ControlValidatorValidationType.External
+    ]);
 
-    return guardAgainstValidation;
+    return !!guard.get(editionContext)!.find(vt => vt === validationType);
 };
