@@ -20,7 +20,7 @@ export const ErrorToast: FormActionFallout = {
     fallout: (form: MForm): void => {
         const formControlErrorsCount: number = form.formGroup.controls.filter(c => c.errors.length > 0).length;
         const formGroupErrorsCount: number = form.formGroup.errors.length;
-        let htmlString: string = (ModulVue.prototype).$i18n
+        const message: string = (ModulVue.prototype).$i18n
             .translate(
                 'm-form:multipleErrorsToCorrect',
                 { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
@@ -30,7 +30,7 @@ export const ErrorToast: FormActionFallout = {
         (ModulVue.prototype).$toast.show({
             position: MToastPosition.TopCenter,
             state: MToastState.Error,
-            text: `<p>${htmlString}</p>`
+            text: `<p>${message}</p>`
         });
     }
 };

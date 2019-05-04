@@ -3,6 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { BetweenValidator } from '../../utils/form/validators/between/between';
@@ -506,7 +507,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')]
+                        [
+                            EmailValidator('email', {
+                                validationType: ControlValidatorValidationType.AtExit
+                            })
+                        ]
                     )
                 ]
             )
@@ -568,7 +573,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')]
+                        [
+                            EmailValidator('email', {
+                                validationType: ControlValidatorValidationType.Modification
+                            })
+                        ]
                     )
                 ]
             )
@@ -599,7 +608,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 [
                     new FormControl<string>(
                         'email',
-                        [EmailValidator('email')]
+                        [
+                            EmailValidator('email', {
+                                validationType: ControlValidatorValidationType.OnGoing
+                            })
+                        ]
                     )
                 ]
             )

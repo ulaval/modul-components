@@ -68,8 +68,8 @@ export class MForm extends ModulVue {
         this.formGroup.reset();
     }
 
-    private _isValid(checkExternal: boolean = false): boolean {
-        if (!checkExternal) {
+    private _isValid(external: boolean = false): boolean {
+        if (!external) {
             return this.formGroup.isValid;
         }
 

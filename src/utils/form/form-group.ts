@@ -6,7 +6,7 @@ import { FormControl } from "./form-control";
 import { ControlValidator } from "./validators/control-validator";
 
 export class FormGroup extends AbstractControl {
-    private _editionValidationInterval: any;
+    private _validationInterval: any;
     private _editionTimeout: any;
 
     constructor(
@@ -54,12 +54,12 @@ export class FormGroup extends AbstractControl {
     }
 
     public initEdition(): void {
-        clearInterval(this._editionValidationInterval);
+        clearInterval(this._validationInterval);
         clearTimeout(this._editionTimeout);
 
-        this._editionValidationInterval = setInterval(
+        this._validationInterval = setInterval(
             async () => super.validate()
-            , ModulVue.prototype.$form.formGroupEditionValidationIntervalInMilliseconds
+            , ModulVue.prototype.$form.formGroupValidationIntervalInMilliseconds
         );
 
         const populate: boolean = !!this.controls
@@ -83,7 +83,7 @@ export class FormGroup extends AbstractControl {
 
     public endEdition(): void {
         this._editionTimeout = setTimeout(() => {
-            clearInterval(this._editionValidationInterval);
+            clearInterval(this._validationInterval);
             clearTimeout(this._editionTimeout);
 
             this._editionContext = ControlEditionContext.None;
@@ -93,7 +93,7 @@ export class FormGroup extends AbstractControl {
     }
 
     public reset(): void {
-        clearInterval(this._editionValidationInterval);
+        clearInterval(this._validationInterval);
         clearTimeout(this._editionTimeout);
 
         super.reset();

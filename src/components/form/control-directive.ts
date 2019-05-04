@@ -38,7 +38,7 @@ export const AbstractControlDirective: DirectiveOptions = {
             control.focusGrantedObservable.next(false);
         });
 
-        Object.defineProperty(el, 'AbstractControlDirectiveListeners', {
+        Object.defineProperty(el, 'ControlDirectiveListeners', {
             value: {
                 focusListener: () => control.initEdition(),
                 blurListener: (event: any) => {
@@ -61,8 +61,8 @@ export const AbstractControlDirective: DirectiveOptions = {
             }
         });
 
-        el.addEventListener('focus', el['AbstractControlDirectiveListeners'].focusListener, true);
-        el.addEventListener('blur', el['AbstractControlDirectiveListeners'].blurListener, true);
+        el.addEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
+        el.addEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
     },
     unbind(
         el: HTMLElement,
@@ -72,8 +72,8 @@ export const AbstractControlDirective: DirectiveOptions = {
 
         control.focusGrantedObservable.unsubscribe();
 
-        el.removeEventListener('focus', el['AbstractControlDirectiveListeners'].focusListener, true);
-        el.removeEventListener('blur', el['AbstractControlDirectiveListeners'].blurListener, true);
+        el.removeEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
+        el.removeEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
     }
 }
 
