@@ -1,0 +1,27 @@
+@import 'commons';
+
+.m-rich-text-editor-sandbox {
+    /deep/ .rte-h1 {
+        font-size: $m-font-size--h1;
+    }
+
+    /deep/ .rte-h2 {
+        font-size: $m-font-size--h2;
+    }
+
+    /deep/ .rte-h3 {
+        font-size: $m-font-size--h3;
+    }
+
+    /deep/ .rte-h4 {
+        font-size: $m-font-size--h4;
+    }
+
+    /deep/ .rte-h5 {
+        font-size: $m-font-size--h5;
+    }
+
+    /deep/ .rte-h6 {
+        font-size: $m-font-size--h6;
+    }
+}
