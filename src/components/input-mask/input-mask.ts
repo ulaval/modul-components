@@ -9,6 +9,14 @@ import WithRender from './input-mask.html';
 export interface InternalCleaveOptions {
     numeral?: boolean;
     numeralDecimalScale?: number;
+    numeralThousandsGroupStyle: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralIntegerScale: number;
+    numeralDecimalMark: string;
+    numeralPositiveOnly: boolean;
+    stripLeadingZeroes: boolean;
+    delimiter: string;
+    removeTrailingDecimalMark?: boolean;
+    forceDecimalScale?: boolean;
 }
 
 export interface InputMaskOptions extends InternalCleaveOptions {
