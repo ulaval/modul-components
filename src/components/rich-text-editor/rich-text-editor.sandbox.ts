@@ -12,7 +12,7 @@ import RadioPlugin from '../radio/radio';
 import { MRichText } from '../rich-text/rich-text';
 import TextfieldPlugin from '../textfield/textfield';
 import { MRichTextEditor, MRichTextEditorOption, MRichTextEditorOptions } from './rich-text-editor';
-import WithRender from './rich-text-editor.sandbox.html';
+import WithRender from './rich-text-editor.sandbox.html?style=./rich-text-editor.sandbox.scss';
 import RichTextLicensePlugin from './rich-text-license-plugin';
 
 

@@ -2,7 +2,7 @@
 
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Emit, Prop } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
@@ -113,6 +113,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     mounted(): void {
         this.testSelectorProps();
+        this.validateHeaderLevel();
     }
 
     public get internalOptions(): any {
@@ -211,6 +212,14 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
         if (propInError) {
             throw new Error(this.getSelectorErrorMsg(propInError));
+        }
+    }
+
+    @Watch('firstHeaderLevel')
+    @Watch('lastHeaderLevel')
+    private validateHeaderLevel(): void {
+        if (this.firstHeaderLevel > this.lastHeaderLevel) {
+            throw new Error(`${RICH_TEXT_EDITOR_NAME}: first-header-level must be inferior or equal to last-header-level`);
         }
     }
 
