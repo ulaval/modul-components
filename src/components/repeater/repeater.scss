@@ -37,6 +37,12 @@ $m-repeater-translate-offset: 50px;
         position: relative;
         z-index: 2;
         background-color: $m-color--white;
+
+        // fix wierd transition-group behavior.
+        &.m--is-slot-row.m--is-slot-row {
+            transition: none;
+            transform: none;
+        }
     }
 
     .m--is-enter-active,

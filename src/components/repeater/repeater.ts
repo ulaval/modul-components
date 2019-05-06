@@ -120,8 +120,12 @@ export class MRepeater extends ModulVue {
         return this.operations.canDelete && this.list.length > this.minItemCount;
     }
 
-    get childTags(): string {
+    get itemTag(): string {
         return this.tag === 'ul' ? 'li' : 'span';
+    }
+
+    get hasRowSlot(): boolean {
+        return this.$scopedSlots ? true : false;
     }
 }
 

@@ -10,7 +10,7 @@
                   :listeners="getRowListeners(item, index)"
                   name="row">
 
-                <component :is="childTags"
+                <component :is="itemTag"
                            class="m-repeater__row"
                            :key="getItemKey(item, index)">
 
@@ -27,14 +27,15 @@
                 </component>
             </slot>
         </template>
-        <component :is="childTags"
+        <component :is="itemTag"
                    v-if="emptyMessage && list.length === 0"
                    class="m-repeater__row m--is-empty"
                    key="empty-row">
             {{ emptyMessage }}
         </component>
-        <component :is="childTags"
+        <component :is="itemTag"
                    class="m-repeater__footer"
+                   :class="{'m--is-slot-row' : hasRowSlot}"
                    key="footer">
             <m-add v-if="canAdd"
                    ref="addBtn"
