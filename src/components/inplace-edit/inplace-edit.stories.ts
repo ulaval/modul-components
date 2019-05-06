@@ -18,8 +18,7 @@ const INPLACE_EDIT_TAGSTYLES: {} = {
     'h3': 'h3',
     'h4': 'h4',
     'h5': 'h5',
-    'h6': 'h6',
-    'h7': 'h7'
+    'h6': 'h6'
 };
 
 storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}`, module)
