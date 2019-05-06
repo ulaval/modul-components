@@ -8,7 +8,7 @@
         "styles": "styles",
         "subtitle": "Subtitle",
         "title": "Title",
-        "title.p": "Title %(headerLevel)s",
+        "title-level": "Title %(headerLevel)s",
         "URL": "URL or email"
     }
 }
