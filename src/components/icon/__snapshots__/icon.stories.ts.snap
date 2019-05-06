@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-icon name (long) 1`] = `
+<div>
+  <svg
+    aria-hidden="true"
+    class="m-icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    style="margin-left: 15px;"
+  >
+    Current name: 
+    <span
+      style="color: red;"
+    >
+      m-svg__profile
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Storyshots components|m-icon name (short) 1`] = `
+<div>
+  <svg
+    aria-hidden="true"
+    class="m-icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    style="margin-left: 15px;"
+  >
+    Current name: 
+    <span
+      style="color: red;"
+    >
+      profile
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Storyshots components|m-icon showNameAsClass 1`] = `
+<div>
+  <svg
+    aria-hidden="true"
+    class="m-icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class="profile"
+    />
+  </svg>
+   
+  <span
+    style="margin-left: 15px;"
+  >
+    Current className on svg Icon: 
+    <span
+      style="color: red;"
+    >
+      profile
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Storyshots components|m-icon size 1`] = `
+<div>
+  <svg
+    aria-hidden="true"
+    class="m-icon"
+    height="30"
+    width="30"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    style="margin-left: 15px;"
+  >
+    Current icon size: 
+    <span
+      style="color: red;"
+    >
+      30
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Storyshots components|m-icon svgTitle 1`] = `
+<div>
+  <svg
+    class="m-icon"
+    height="20px"
+    width="20px"
+  >
+    <title>
+      Title1
+    </title>
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    style="margin-left: 15px;"
+  >
+    Current svgTitle: 
+    <span
+      style="color: red;"
+    >
+      Title1
+    </span>
+  </span>
+</div>
+`;
+
+exports[`Storyshots components|m-icon/badge offsetX 1`] = `
+<svg
+  aria-hidden="true"
+  class="m-icon"
+  height="30px"
+  width="30px"
+>
+  <!---->
+   
+  <use
+    aria-hidden="true"
+    class=""
+  />
+</svg>
+`;
+
+exports[`Storyshots components|m-icon/badge offsetY 1`] = `
+<svg
+  aria-hidden="true"
+  class="m-icon"
+  height="30px"
+  width="30px"
+>
+  <!---->
+   
+  <use
+    aria-hidden="true"
+    class=""
+  />
+</svg>
+`;
+
+exports[`Storyshots components|m-icon/badge state 1`] = `
+<svg
+  aria-hidden="true"
+  class="m-icon"
+  height="30"
+  width="30"
+>
+  <!---->
+   
+  <use
+    aria-hidden="true"
+    class=""
+  />
+</svg>
+`;
+
+exports[`Storyshots components|m-icon/badge state, offsetY, offsetX 1`] = `
+<svg
+  aria-hidden="true"
+  class="m-icon"
+  height="30"
+  width="30"
+>
+  <!---->
+   
+  <use
+    aria-hidden="true"
+    class=""
+  />
+</svg>
+`;

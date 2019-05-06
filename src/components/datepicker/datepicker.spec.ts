@@ -42,7 +42,6 @@ describe('MDatepicker', () => {
 
         const calendar: any = wrapper.find('.m-calendar');
         expect(calendar.is(MCalendar)).toBe(true);
-
     });
 
     it('When a invalid date is typed the model is cleared and error is shown', async () => {
@@ -112,5 +111,6 @@ describe('MDatepicker', () => {
         expect(validationMessage.props().error).toBe(false);
         expect(validationMessage.props().errorMessage).toBe('');
     });
+
 
 });

@@ -1,25 +1,23 @@
 <div :id="id"
-     class="m-base-calendar">
+     class="m-base-calendar"
+     :class="{'m--is-picker-mode-year': isPickerModeYear}">
     <nav class="m-base-calendar__header"
          :class="{'m--is-select-mode': !isPickerModeDay}">
-        <button class="m-base-calendar__current-month-and-year"
+        <m-link class="m-base-calendar__current-month-and-year"
+                :mode="modeLinkCurrentMonthAndYear"
                 @click.stop="onYearClick"
                 aria-live="polite"
-                ref="currentDate"
-                type="button">
-            {{ currentMonthName }} {{ currentYear }}
-        </button>
+                ref="currentDate">{{ currentMonthName }} {{ currentYear }}</m-link>
 
-        <div>
-            <m-icon-button v-if="isPickerModeDay"
-                           class="m-base-calendar__previous"
+        <div v-if="isPickerModeDay"
+             class="m-base-calendar__nav-buttons">
+            <m-icon-button class="m-base-calendar__previous"
                            @click.stop="onMonthPrevious()"
                            :disabled="isMinMonth"
                            icon-name="m-svg__chevron--left"
                            ref="previousMonth"
                            skin="link">{{ previousMonthLabel }}</m-icon-button>
-            <m-icon-button v-if="isPickerModeDay"
-                           class="m-base-calendar__next"
+            <m-icon-button class="m-base-calendar__next"
                            @click.stop="onMonthNext()"
                            :disabled="isMaxMonth"
                            icon-name="m-svg__chevron--right"
@@ -30,46 +28,32 @@
     <div class="m-base-calendar__body"
          :class="{'m--is-max-row': isMaxRow}"
          aria-live="polite">
-        <template v-if="isPickerModeYear">
 
-            <div class="m-base-calendar__years">
-                <div v-for="(y, yearIndex) in years"
-                     :key="yearIndex"
-                     class="m-base-calendar__year"
-                     @click.stop="onYearSelect(y)"
-                     @keyup.enter="onYearSelect(y)"
-                     :ref="buildRef('year', y)"
-                     role="button"
-                     tabindex="0">
-                    <span class="m-base-calendar__year-content"
-                          :class="{'m--is-selected': y.isCurrent}"
-                          tabindex="-1">
-                        <span>{{ y.year }}</span>
-                    </span>
-                </div>
-            </div>
-        </template>
-        <template v-if="isPickerModeMonth">
-
-            <div class="m-base-calendar__months">
-                <div v-for="(m, monthIndex) in months"
-                     :key="monthIndex"
-                     class="m-base-calendar__month"
-                     :class="{'m--is-disabled': m.isDisabled}"
-                     @click.stop="onMonthSelect(m)"
-                     @keyup.enter="onMonthSelect(m)"
-                     :ref="buildRef('month', m)"
-                     role="button"
-                     :tabindex="monthTabIndex(m)">
-                    <span class="m-base-calendar__month-content"
-                          :class="{'m--is-selected': m.isCurrent}"
-                          tabindex="-1">
-                        <span>{{ monthIndexToShortName(m.month) }}</span>
-                    </span>
-                </div>
-            </div>
-
-        </template>
+        <div v-if="isPickerModeYear"
+             class="m-base-calendar__years">
+            <div v-for="(y, yearIndex) in years"
+                 :key="yearIndex"
+                 class="m-base-calendar__year"
+                 :class="{'m--is-selected': y.isCurrent}"
+                 @click.stop="onYearSelect(y)"
+                 @keyup.enter="onYearSelect(y)"
+                 :ref="buildRef('year', y)"
+                 role="button"
+                 tabindex="0">{{ y.year }}</div>
+        </div>
+        <div v-if="isPickerModeMonth"
+             class="m-base-calendar__months">
+            <div v-for="(m, monthIndex) in months"
+                 :key="monthIndex"
+                 class="m-base-calendar__month"
+                 :class="{'m--is-disabled': m.isDisabled,
+                          'm--is-selected': m.isCurrent}"
+                 @click.stop="onMonthSelect(m)"
+                 @keyup.enter="onMonthSelect(m)"
+                 :ref="buildRef('month', m)"
+                 role="button"
+                 :tabindex="monthTabIndex(m)">{{ monthIndexToShortName(m.month) }}</div>
+        </div>
         <template v-if="isPickerModeDay">
             <div class="m-base-calendar__week">
                 <span v-for="(w, weekdayIndex) in weekdaysLabels"
@@ -86,7 +70,9 @@
                                 'm--is-disabled': d.isDisabled || hideDay(d),
                                 'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
                                 'm--is-selection-start': isSelectionStart(d),
-                                'm--is-selection-end': isSelectionEnd(d) }"
+                                'm--is-selection-end': isSelectionEnd(d),
+                                'm--is-selected': d.isSelected,
+                                'm--is-today': d.isToday,}"
                      @click.stop="onDaySelect(d)"
                      @keyup.enter="onDaySelect(d)"
                      @keyup.tab="onDaykeyboardTab(d)"
@@ -96,12 +82,8 @@
                      role="button"
                      :tabindex="dayTabIndex(d)">
                     <span class="m-base-calendar__day-content"
-                          :class="{ 'm--is-selected': d.isSelected,
-                                    'm--is-today': d.isToday,
-                                    'm--is-hidden': hideDay(d) }"
-                          tabindex="-1">
-                        <span>{{ d.day }}</span>
-                    </span>
+                          :class="{ 'm--is-hidden': hideDay(d) }"
+                          tabindex="-1">{{ d.day }}</span>
                 </div>
             </div>
         </template>

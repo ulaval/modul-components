@@ -1,0 +1,46 @@
+@import '../chip-commons';
+
+.m-chip-add {
+    @include m-chip-base-style();
+
+    border: 1px solid $m-color--interactive;
+    background: none;
+    font-size: 1em;
+    font-family: $m-font-family;
+
+    &:not(.m--is-disabled) {
+        @include m-button--hover();
+
+        &:hover,
+        &:focus,
+        &:active {
+            .m-chip-add__icon {
+                color: $m-color--white;
+            }
+        }
+    }
+
+    &.m--is-disabled {
+        border: 1px solid $m-color--disabled;
+
+        &,
+        .m-chip-add__icon {
+            color: $m-color--disabled;
+        }
+    }
+
+    &__body {
+        @include m-chip-body-style();
+    }
+
+    &__icon {
+        transition: color $m-transition-duration ease;
+        margin-left: $m-spacing--s;
+        color: $m-color--interactive;
+        stroke-width: 2;
+    }
+
+    &__hidden-text {
+        @include m-visually-hidden();
+    }
+}
