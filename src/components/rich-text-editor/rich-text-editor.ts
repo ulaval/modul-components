@@ -148,16 +148,16 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
         if (this.firstHeaderLevel === this.lastHeaderLevel) {
             // One level of header
-            headersLevel['m-u--h' + this.firstHeaderLevel] = this.i18nHeaderTitle;
+            headersLevel['header-' + this.firstHeaderLevel] = this.i18nHeaderTitle;
         } else if (this.lastHeaderLevel - this.firstHeaderLevel === 1) {
             // Two levels of header
-            headersLevel['m-u--h' + this.firstHeaderLevel] = this.i18nHeaderTitle;
-            headersLevel['m-u--h' + this.lastHeaderLevel] = this.i18nHeaderSubtitle;
+            headersLevel['header-' + this.firstHeaderLevel] = this.i18nHeaderTitle;
+            headersLevel['header-' + this.lastHeaderLevel] = this.i18nHeaderSubtitle;
         } else {
             // Multiple levels of header
             let levelNumber: number = 1;
             for (let headerLevel: number = this.firstHeaderLevel; headerLevel <= this.lastHeaderLevel; headerLevel++) {
-                headersLevel['m-u--h' + headerLevel] = this.$i18n.translate('m-rich-text-editor:title-level', { headerLevel: levelNumber }, 1, undefined, undefined, FormatMode.Sprintf);
+                headersLevel['header-' + headerLevel] = this.$i18n.translate('m-rich-text-editor:title-level', { headerLevel: levelNumber }, 1, undefined, undefined, FormatMode.Sprintf);
                 levelNumber++;
             }
         }
