@@ -73,6 +73,10 @@ export class MRepeater extends ModulVue {
         if (!this.$scopedSlots.row && !this.$scopedSlots.item) {
             throw new Error('MRepeater requires content to be provided through row or item slot.');
         }
+
+        // tslint:disable-next-line:no-console
+        console.log(this.$scopedSlots.row);
+
     }
 
     @Emit('add')
@@ -125,7 +129,7 @@ export class MRepeater extends ModulVue {
     }
 
     get hasRowSlot(): boolean {
-        return this.$scopedSlots ? true : false;
+        return this.$scopedSlots.row ? true : false;
     }
 }
 
