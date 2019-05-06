@@ -197,7 +197,7 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
                 
     </li>
     <li
-      class="m-repeater__footer"
+      class="m-repeater__footer m--is-slot-row"
     >
       <a
         class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
