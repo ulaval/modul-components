@@ -101,6 +101,8 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 
     private buttonMode: MLinkMode = MLinkMode.Button;
     private timerCloseToast: any;
+    private internalTimeout: number;
+    private instantTimeoutStart: number;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         el.style.position = 'absolute';
@@ -109,19 +111,20 @@ export class MToast extends ModulVue implements PortalMixinImpl {
                 this.getPortalElement().style.transform = `translateY(${this.offset})`;
             }
 
+            this.internalTimeout = this.convertTimeout(this.timeout);
             this.startCloseToast();
         }
         return true;
     }
 
     private startCloseToast(): void {
-        let internalTimeout: number = this.convertTimeout(this.timeout);
+        this.instantTimeoutStart = Date.now();
 
-        if (internalTimeout > 0) {
+        if (this.internalTimeout > 0) {
             this.timerCloseToast
                 = setTimeout(() => {
                     this.onClose();
-                }, internalTimeout);
+                }, this.internalTimeout);
         }
     }
 
@@ -227,9 +230,16 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     public mouseEnterToast(): void {
-        if (!this.isMobile) {
+        if (!this.isMobile && this.timerCloseToast !== undefined) {
+            this.restoreTimeout();
             clearTimeout(this.timerCloseToast);
+            this.timerCloseToast = undefined;
         }
+    }
+
+    private restoreTimeout(): void {
+        let instantTimeoutStop: number = Date.now();
+        this.internalTimeout -= (instantTimeoutStop - this.instantTimeoutStart);
     }
 
     public mouseLeaveToast(): void {
