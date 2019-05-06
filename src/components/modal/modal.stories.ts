@@ -69,7 +69,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}`, module)
     }))
     .add('paddingHeader', () => ({
         props: {
-            padding: {
+            paddingHeader: {
                 default: boolean('paddingHeader', true)
             }
         },
@@ -80,7 +80,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}`, module)
     }))
     .add('paddingBody', () => ({
         props: {
-            padding: {
+            paddingBody: {
                 default: boolean('paddingBody', true)
             }
         },
@@ -91,7 +91,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}`, module)
     }))
     .add('paddingFooter', () => ({
         props: {
-            padding: {
+            paddingFooter: {
                 default: boolean('paddingFooter', true)
             }
         },
