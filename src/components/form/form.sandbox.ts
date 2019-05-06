@@ -20,7 +20,7 @@ export class MFormSandbox extends ModulVue {
     isDuplicateCourseCode: boolean = false;
     formGroups: FormGroup[] = [
         new FormGroup(
-            'Required and max characters',
+            'Required and 20 characters max',
             [
                 new FormControl<string>(
                     'Title',
@@ -32,7 +32,7 @@ export class MFormSandbox extends ModulVue {
             ]
         ),
         new FormGroup(
-            'Required and min characters',
+            'Required and 5 characters min',
             [
                 new FormControl<string>(
                     'Security answer',
@@ -79,7 +79,7 @@ export class MFormSandbox extends ModulVue {
             ]
         ),
         new FormGroup(
-            'More than one validations',
+            'More than one validations (course code)',
             [
                 new FormControl<string>(
                     'Course code',
@@ -183,10 +183,10 @@ export class MFormSandbox extends ModulVue {
                     validationFunction: (group: FormGroup): Promise<boolean> => {
                         let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
 
-                        return Promise.resolve(selectionCount <= 4);
+                        return Promise.resolve(selectionCount <= 5);
                     },
                     error: {
-                        message: 'Select 4 roles or less'
+                        message: 'Select 5 roles or less'
                     },
                     validationType: ControlValidatorValidationType.OnGoing
                 }
