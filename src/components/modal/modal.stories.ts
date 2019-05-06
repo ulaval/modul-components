@@ -107,7 +107,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/size`, module)
     .add('all sizes', () => ({
         props: {
             size: {
-                default: select('name', MODAL_SIZES, 'regular')
+                default: select('size', MODAL_SIZES, 'regular')
             }
         },
         data: () => ({
