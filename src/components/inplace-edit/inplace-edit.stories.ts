@@ -95,7 +95,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}`, module)
                 default: boolean('editMode', false)
             },
             padding: {
-                default: text('waiting', '26px')
+                default: text('padding', '26px')
             }
         },
         template: `<m-inplace-edit :edit-mode.sync="editMode" :padding="padding">
