@@ -20,8 +20,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
             model1: ''
         }),
         template: `<m-dropdown label="Vegetable" v-model="model1">
-                        <m-dropdown-item value="1a" label="Asperge"></m-dropdown-item>
-                        <m-dropdown-item value="1b" label="Brocoli"></m-dropdown-item>
+                        <m-dropdown-item value="1a" label="Artichoke"></m-dropdown-item>
+                        <m-dropdown-item value="1b" label="Asparagus"></m-dropdown-item>
+                        <m-dropdown-item value="1c" label="Broccoli"></m-dropdown-item>
+                        <m-dropdown-item value="1d" label="Bok choy"></m-dropdown-item>
+                        <m-dropdown-item value="1e" label="Lettuce"></m-dropdown-item>
+                        <m-dropdown-item value="1f" label="Tomato"></m-dropdown-item>
                     </m-dropdown>`
     }))
     .add('focus', () => ({
@@ -29,8 +33,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
             model1: ''
         }),
         template: `<m-dropdown :focus="true" label="Vegetable" v-model="model1">
-                        <m-dropdown-item value="1a" label="Asperge"></m-dropdown-item>
-                        <m-dropdown-item value="1b" label="Brocoli"></m-dropdown-item>
+                        <m-dropdown-item value="1a" label="Artichoke"></m-dropdown-item>
+                        <m-dropdown-item value="1b" label="Asparagus"></m-dropdown-item>
+                        <m-dropdown-item value="1c" label="Broccoli"></m-dropdown-item>
+                        <m-dropdown-item value="1d" label="Bok choy"></m-dropdown-item>
+                        <m-dropdown-item value="1e" label="Lettuce"></m-dropdown-item>
+                        <m-dropdown-item value="1f" label="Tomato"></m-dropdown-item>
                     </m-dropdown>`
     }))
     .add('placeholder-icon-name', () => ({
@@ -39,12 +47,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
         }),
         template: `<m-dropdown :label-up="true" label="Vegetable" v-model="model1" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
         filterable="true">
-                        <m-dropdown-item value="1a" label="Asperge"></m-dropdown-item>
-                        <m-dropdown-item value="1b" label="Brocoli"></m-dropdown-item>
-                        <m-dropdown-item value="1c" label="Carotte"></m-dropdown-item>
-                        <m-dropdown-item value="1d" label="Chou-fleur"></m-dropdown-item>
-                        <m-dropdown-item value="1e" label="Haricot"></m-dropdown-item>
-                        <m-dropdown-item value="1f" label="Oignon"></m-dropdown-item>
+                        <m-dropdown-item value="1a" label="Artichoke"></m-dropdown-item>
+                        <m-dropdown-item value="1b" label="Asparagus"></m-dropdown-item>
+                        <m-dropdown-item value="1c" label="Broccoli"></m-dropdown-item>
+                        <m-dropdown-item value="1d" label="Bok choy"></m-dropdown-item>
+                        <m-dropdown-item value="1e" label="Lettuce"></m-dropdown-item>
+                        <m-dropdown-item value="1f" label="Tomato"></m-dropdown-item>
                     </m-dropdown>`
     }));
 
