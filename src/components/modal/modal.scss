@@ -32,7 +32,7 @@ $m-modal--max-width--s: 420px !default;
         h6 {
             margin: 0;
             font-size: $m-font-size--h4;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
         }
 
         @include m-is-ie() {
@@ -124,7 +124,7 @@ $m-modal--max-width--s: 420px !default;
         max-height: 100%;
 
         @include m-is-ie() {
-            margin: $m-padding--l*2 auto;
+            margin: $m-padding--l * 2 auto;
         }
     }
 

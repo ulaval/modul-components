@@ -26,16 +26,20 @@
     }
 
     &-weight {
-        &--black {
-            font-weight: $m-font-weight--black;
-        }
-
         &--bold {
             font-weight: $m-font-weight--bold;
         }
 
-        &--normal {
-            font-weight: $m-font-weight;
+        &--semi-bold {
+            font-weight: $m-font-weight--semi-bold;
+        }
+
+        &--regular {
+            font-weight: $m-font-weight--regular;
+        }
+
+        &--light {
+            font-weight: $m-font-weight--light;
         }
     }
 }
@@ -56,7 +60,7 @@
     &--highlighting {
         display: inline;
         font-size: $m-font-size--s;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
         background: $m-color--warning-lightest;
         box-shadow: 0 0 0 2px $m-color--warning-lightest;
     }

@@ -9,9 +9,9 @@ $m-step--badge--size-s: 10px;
     display: block;
     padding-bottom: $m-padding--l;
 
-    &[max-width~="#{$m-mq--max--s - $m-padding *2}"] {
+    &[max-width~='#{$m-mq--max--s - $m-padding *2}'] {
         &::before {
-            left: #{ ($m-step--icon--size-s / 2) - 1 }; // Magic number
+            left: #{($m-step--icon--size-s / 2) - 1}; // Magic number
         }
 
         .m-step {
@@ -55,8 +55,8 @@ $m-step--badge--size-s: 10px;
         z-index: 1;
         width: 2px;
         background: $m-color--grey;
-        content: "";
-        left: #{ ($m-step--icon--size / 2) - 1 }; // Magic number
+        content: '';
+        left: #{($m-step--icon--size / 2) - 1}; // Magic number
     }
 
     &:not(.m--is-accordion) {
@@ -93,7 +93,7 @@ $m-step--badge--size-s: 10px;
             z-index: 0;
             width: 0;
             background: none;
-            content: "";
+            content: '';
             left: auto;
         }
     }
@@ -149,7 +149,7 @@ $m-step--badge--size-s: 10px;
                 margin: 0;
                 margin-left: $m-margin;
                 font-size: $m-font-size--h3;
-                font-weight: $m-font-weight--bold;
+                font-weight: $m-font-weight--semi-bold;
                 line-height: 1.1;
             }
         }
