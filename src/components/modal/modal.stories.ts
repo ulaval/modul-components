@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { MODAL_NAME } from '../component-names';
-import ModalPlugin, {MModalSize} from './modal';
+import ModalPlugin, { MModalSize } from './modal';
 
 Vue.use(ModalPlugin);
 
@@ -203,13 +203,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/all props`, module)
                 default: boolean('padding', true)
             },
             paddingHeader: {
-                default: boolean('padding-header', true)
+                default: boolean('padding-header | (no effect if padding === false)', true)
             },
             paddingBody: {
-                default: boolean('padding-body', true)
+                default: boolean('padding-body | (no effect if padding === false)', true)
             },
             paddingFooter: {
-                default: boolean('padding-footer', true)
+                default: boolean('padding-footer | (no effect if padding === false)', true)
             },
             size: {
                 default: select('size', Object.values(MModalSize), MModalSize.Regular)
@@ -217,5 +217,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/all props`, module)
         },
         template: `<m-modal :open.sync="openProp" :close-on-backdrop="closeOnBackdrop"
                     :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody"
-                    :padding-footer="padding-footer" :size="size" :title="title"></m-modal>`
+                    :padding-footer="paddingFooter" :size="size" :title="title">
+                        <m-button slot="trigger">Open the modal (trigger)</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                    </m-modal>`
     }));
