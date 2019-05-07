@@ -1,5 +1,5 @@
-import { FormControl } from "../../form-control";
-import { MinLengthValidator } from "./min-length-";
+import { FormControl } from '../../form-control';
+import { MinLengthValidator } from './min-length';
 
 describe('Min length validator', () => {
     let formControl: FormControl<any> = new FormControl<any>(
