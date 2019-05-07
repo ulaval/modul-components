@@ -37,9 +37,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
         data: () => ({
             model1: ''
         }),
-        template: `<m-dropdown :label-up="true" label="Vegetable" v-model="model1" placeholder="Placeholder" placeholder-icon-name="m-svg__clock">
+        template: `<m-dropdown :label-up="true" label="Vegetable" v-model="model1" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
+        filterable="true">
                         <m-dropdown-item value="1a" label="Asperge"></m-dropdown-item>
                         <m-dropdown-item value="1b" label="Brocoli"></m-dropdown-item>
+                        <m-dropdown-item value="1c" label="Carotte"></m-dropdown-item>
+                        <m-dropdown-item value="1d" label="Chou-fleur"></m-dropdown-item>
+                        <m-dropdown-item value="1e" label="Haricot"></m-dropdown-item>
+                        <m-dropdown-item value="1f" label="Oignon"></m-dropdown-item>
                     </m-dropdown>`
     }));
 
