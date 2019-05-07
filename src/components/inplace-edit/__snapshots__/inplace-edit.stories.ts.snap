@@ -1,11 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots components|m-inplace-edit editMode 1`] = `
+exports[`Storyshots components|m-inplace-edit default 1`] = `
 <div
   class="m-inplace-edit"
 >
   <span>
     This is a value
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit edit-mode-padding="32px" 1`] = `
+<div
+  class="m-inplace-edit"
+  style="padding: 32px;"
+>
+  <span>
+    Value with 32px of padding in edit mode
   </span>
    
   <!---->
@@ -22,10 +42,9 @@ exports[`Storyshots components|m-inplace-edit editMode 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-inplace-edit editModePadding="32px" 1`] = `
+exports[`Storyshots components|m-inplace-edit editMode 1`] = `
 <div
   class="m-inplace-edit"
-  style="padding: 32px;"
 >
   <span>
     This is a value
@@ -50,7 +69,7 @@ exports[`Storyshots components|m-inplace-edit error 1`] = `
   class="m-inplace-edit m--has-erreur"
 >
   <span>
-    15826cvv5218
+    This is a value
   </span>
    
   <!---->
@@ -73,26 +92,7 @@ exports[`Storyshots components|m-inplace-edit padding="26px" 1`] = `
   style="padding: 26px;"
 >
   <span>
-    This is a value!
-  </span>
-   
-  <!---->
-   
-  <div
-    class="m-overlay"
-  >
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-inplace-edit readmode only 1`] = `
-<div
-  class="m-inplace-edit"
->
-  <span>
-    This is a value
+    This is a value with 26px of padding
   </span>
    
   <!---->
@@ -112,7 +112,7 @@ exports[`Storyshots components|m-inplace-edit title 1`] = `
     class="m-inplace-edit"
   >
     <span>
-      This is a value
+      This is a value with a title prop
     </span>
      
     <!---->
@@ -121,10 +121,7 @@ exports[`Storyshots components|m-inplace-edit title 1`] = `
       class="m-overlay"
     >
        
-      <div
-        class="v-portal"
-        style="display: none;"
-      />
+      <!---->
     </div>
   </div>
    
@@ -168,12 +165,163 @@ exports[`Storyshots components|m-inplace-edit waiting 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-inplace-edit/tag-style all tag styles 1`] = `
+exports[`Storyshots components|m-inplace-edit/tag-style all tag styles (knob) 1`] = `
 <div
   class="m-inplace-edit"
 >
   <span>
     h1
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style h1 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h1 tag style
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style h2 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h2 tag style
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style h3 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h3 tag style
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style h4 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h4 tag style
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style h5 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h5 tag style
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style h6 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    h6 tag style
+  </span>
+   
+  <!---->
+   
+  <div
+    class="m-overlay"
+  >
+     
+    <div
+      class="v-portal"
+      style="display: none;"
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/tag-style p 1`] = `
+<div
+  class="m-inplace-edit"
+>
+  <span>
+    p tag style
   </span>
    
   <!---->
