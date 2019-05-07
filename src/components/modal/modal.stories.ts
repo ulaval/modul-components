@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { MODAL_NAME } from '../component-names';
-import ModalPlugin from './modal';
+import ModalPlugin, {MModalSize} from './modal';
 
 Vue.use(ModalPlugin);
 
@@ -12,132 +12,156 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-const MODAL_SIZES: {} = {
-    'small': 'small',
-    'regular': 'regular',
-    'large': 'large',
-    'full-screen': 'full-screen'
-};
-
-
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
-    .add('closeOnBackdrop', () => ({
-        props: {
-            closeOnBackdrop: {
-                default: boolean('closeOnBackdrop', true)
-            }
-        },
+    .add('default', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" :closeOnBackdrop="closeOnBackdrop">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                   </m-modal>`
     }))
-    .add('focusManagement', () => ({
-        props: {
-            focusManagement: {
-                default: boolean('focusManagement', true)
-            }
-        },
+    .add('close-on-backdrop="false"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" :focusManagement="focusManagement">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" :close-on-backdrop="false" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }))
     .add('title', () => ({
+        data: () => ({
+            openProp: true
+        }),
         props: {
             title: {
                 default: text('title', 'This is a custom title')
             }
         },
+        template: `<m-modal :open.sync="openProp" :title="title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
+    }))
+    .add('padding="false"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" :title="title">Some text</m-modal>`
-    }))
-    .add('padding', () => ({
         props: {
             padding: {
                 default: boolean('padding', true)
             }
         },
+        template: `<m-modal :open.sync="openProp" :padding="false" title="A modal title without padding">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text without padding
+                        <p slot="footer">Some footer slot content without padding</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
+    }))
+    .add('padding-header="false"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" :padding="padding">Some text</m-modal>`
-    }))
-    .add('paddingHeader', () => ({
         props: {
             paddingHeader: {
                 default: boolean('paddingHeader', true)
             }
         },
-        data: () => ({
-            openProp: true
-        }),
-        template: `<m-modal :open.sync="openProp" :paddingHeader="paddingHeader">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" :padding-header="false" title="A modal title without padding">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }))
-    .add('paddingBody', () => ({
+    .add('padding-body="false"', () => ({
         props: {
             paddingBody: {
-                default: boolean('paddingBody', true)
+                default: boolean('padding-body', true)
             }
         },
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" :paddingBody="paddingBody">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" :padding-body="false" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text without padding
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }))
-    .add('paddingFooter', () => ({
+    .add('padding-footer', () => ({
         props: {
             paddingFooter: {
-                default: boolean('paddingFooter', true)
+                default: boolean('padding-footer', true)
             }
         },
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" :paddingFooter="paddingFooter">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" :padding-footer="false" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content without padding</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/size`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
-    .add('all sizes', () => ({
-        props: {
-            size: {
-                default: select('size', MODAL_SIZES, 'regular')
-            }
-        },
-        data: () => ({
-            openProp: true
-        }),
-        template: `<m-modal :open.sync="openProp" size="size">Some text</m-modal>`
-    }))
     .add('size="small"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" size="small">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" size="small" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }))
     .add('size="regular"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" size="regular">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" size="regular" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }))
     .add('size="large"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" size="large">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" size="large" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }))
     .add('size="full-screen"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-modal :open.sync="openProp" size="full-screen">Some text</m-modal>`
+        template: `<m-modal :open.sync="openProp" size="full-screen" title="A modal title">
+                        <m-button slot="trigger">Open the modal</m-button>
+                        Some body text
+                        <p slot="footer">Some footer slot content</p>
+                        <m-button slot="footer">Here goes nothing</m-button>
+                   </m-modal>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/slots`, module)
@@ -145,11 +169,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/slots`, module)
     .addDecorator(withKnobs)
     .add('trigger', () => ({
         data: () => ({
-            openProp: true
+            openProp: false
         }),
         template: `<m-modal size="size">
-                        <m-button slot="trigger">Open the modal</m-button>
-                        Some text
+                        <m-button slot="trigger">Open the modal (trigger)</m-button>
                    </m-modal>`
     }))
     .add('footer', () => ({
@@ -157,7 +180,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/slots`, module)
             openProp: true
         }),
         template: `<m-modal :open.sync="openProp">
-                        Some text
                         <p slot="footer">Some footer slot content</p>
                         <m-button slot="footer">Here goes nothing</m-button>
                    </m-modal>`
@@ -167,12 +189,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/all props`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('make your own', () => ({
+        data: () => ({
+            openProp: true
+        }),
         props: {
             closeOnBackdrop: {
-                default: boolean('closeOnBackdrop', true)
-            },
-            focusManagement: {
-                default: boolean('focusManagement', true)
+                default: boolean('close-on-backdrop', true)
             },
             title: {
                 default: text('title', 'This is a custom title')
@@ -181,22 +203,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/all props`, module)
                 default: boolean('padding', true)
             },
             paddingHeader: {
-                default: boolean('paddingHeader', true)
+                default: boolean('padding-header', true)
             },
             paddingBody: {
-                default: boolean('paddingBody', true)
+                default: boolean('padding-body', true)
             },
             paddingFooter: {
-                default: boolean('paddingFooter', true)
+                default: boolean('padding-footer', true)
             },
             size: {
-                default: select('size', MODAL_SIZES, 'regular')
+                default: select('size', Object.values(MModalSize), MModalSize.Regular)
             }
         },
-        data: () => ({
-            openProp: true
-        }),
-        template: `<m-modal :open.sync="openProp" :closeOnBackdrop="closeOnBackdrop" :focusManagement="focusManagement"
-                    :padding="padding" :paddingHeader="paddingHeader" :paddingBody="paddingBody"
-                    :paddingFooter="paddingFooter" :size="size" :title="title"></m-modal>`
+        template: `<m-modal :open.sync="openProp" :close-on-backdrop="closeOnBackdrop"
+                    :padding="padding" :padding-header="paddingHeader" :padding-body="paddingBody"
+                    :padding-footer="padding-footer" :size="size" :title="title"></m-modal>`
     }));
