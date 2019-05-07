@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -217,6 +217,26 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/max-width`, modu
     }))
     .add('custom width', () => ({
         template: `<m-textfield label="width='333px' / max-width='none'" max-width="none" width="333px"></m-textfield>`
+    }))
+    .add('pyramid', () => ({
+        template: `
+        <div>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <m-textfield  max-width="x-small" value=""></m-textfield>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <br />
+            <m-textfield label="small" max-width="small" value=""></m-textfield>
+            <m-textfield max-width="small" value=""></m-textfield>
+            <br />
+            <m-textfield label="regular" max-width="regular" value=""></m-textfield>
+            <m-textfield max-width="regular" value="" :label-offset="false"></m-textfield>
+            <br />
+            <m-textfield label="medium" max-width="medium" value=""></m-textfield>
+            <br />
+            <m-textfield label="large" max-width="large" value=""></m-textfield>
+        </div>
+        `
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/tag-style`, module)
