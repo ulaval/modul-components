@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -44,12 +44,27 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        props: {
-            text: {
-                default: text('Text', 'A Textfield')
+        data: () => ({
+            model: ''
+        }),
+        methods: {
+            onInputChange(value: string): string {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onInputChange=' + value);
+                return value;
+            },
+            onFocus(value: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onFocus');
+
+            },
+            onBlur(event: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onBlur');
+
             }
         },
-        template: '<m-textfield>{{ text }}</m-textfield>'
+        template: '<div><m-textfield v-model="model" @input="model = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-textfield><br/>model value = {{model}}</div>'
     }))
     .add('placeholder', () => ({
         props: {
@@ -114,7 +129,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield helper-message="This message is here to help you" type="tel" value="12345"></m-textfield>'
     }))
     .add('word-wrap', () => ({
-        template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
+        data: () => ({
+            model1: 'abcdefghijklmnopqrstuvwxyz-123456789123456789123456789'
+        }),
+        template: '<div><m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield> <br/> {{model1}}</div>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
