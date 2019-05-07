@@ -1,0 +1,617 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-link default 1`] = `
+<a
+  class="m-link"
+  href="#"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link disabled 1`] = `
+<a
+  class="m-link m--is-disabled"
+  tabindex="-1"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link icon 1`] = `
+<a
+  class="m-link m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link icon-name 1`] = `
+<a
+  class="m-link m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link icon-position="right" 1`] = `
+<a
+  class="m-link m--has-right-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link icon-size 1`] = `
+<a
+  class="m-link m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link skin="default" 1`] = `
+<a
+  class="m-link"
+  href="#"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link tabindex="1" 1`] = `
+<a
+  class="m-link"
+  href="#"
+  tabindex="1"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link target 1`] = `
+<a
+  class="m-link m--has-left-icon"
+  href="#"
+  tabindex="0"
+  target="self"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link underline 1`] = `
+<a
+  class="m-link m--no-underline"
+  href="#"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link unvisited 1`] = `
+<a
+  class="m-link m--is-unvisited"
+  href="#"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link url 1`] = `
+<a
+  class="m-link"
+  href="http://www.google.ca"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/mode default (router-link) 1`] = `
+<a
+  class="m-link"
+  href="#components/m-link"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/mode mode="button" 1`] = `
+<a
+  class="m-link m--is-unvisited m--is-button"
+  href="#"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/mode mode="link 1`] = `
+<a
+  class="m-link"
+  href="http://www.google.ca"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/skin="light" default 1`] = `
+<div>
+  <a
+    class="m-link m--is-skin-light"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      A link
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-link/skin="light" icon 1`] = `
+<div>
+  <a
+    class="m-link m--is-skin-light m--has-left-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="12px"
+      width="12px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      A link
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-link/skin="light" icon-name="m-svg__clock" 1`] = `
+<div>
+  <a
+    class="m-link m--is-skin-light m--has-left-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="12px"
+      width="12px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      A link
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-link/skin="light" icon-position="right" 1`] = `
+<div>
+  <a
+    class="m-link m--is-skin-light m--has-right-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="12px"
+      width="12px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      A link
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-link/skin="light" icon-size="20px" 1`] = `
+<div>
+  <a
+    class="m-link m--is-skin-light m--has-left-icon"
+    href="#"
+    tabindex="0"
+  >
+    <svg
+      aria-hidden="true"
+      class="m-icon m-link__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      A link
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-link/skin="text" default 1`] = `
+<a
+  class="m-link m--is-skin-text"
+  href="#"
+  tabindex="0"
+>
+  <!---->
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/skin="text" icon 1`] = `
+<a
+  class="m-link m--is-skin-text m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/skin="text" icon-name="m-svg__clock" 1`] = `
+<a
+  class="m-link m--is-skin-text m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/skin="text" icon-position="right" 1`] = `
+<a
+  class="m-link m--is-skin-text m--has-right-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/skin="text" icon-size="20px" 1`] = `
+<a
+  class="m-link m--is-skin-text m--has-left-icon"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon"
+    height="20px"
+    width="20px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;

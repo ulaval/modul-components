@@ -225,6 +225,18 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__right-content {
         display: flex;
+
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-left: $m-margin--xs;
+        }
+    }
+
+    &__prefix {
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-right: $m-margin--xs;
+        }
     }
 
     &__transparent-text {
@@ -247,6 +259,11 @@ $m-input-style-base-height: $m-line-height + em;
 
     ::placeholder {
         color: $m-color--disabled;
+
+        .m--is-type-search & {
+            color: $m-color--text-light;
+            font-weight: $m-font-weight--light;
+        }
     }
 
     &__body,
@@ -276,10 +293,12 @@ $m-input-style-base-height: $m-line-height + em;
             display: none;
         }
 
-        &[type="search"]::-webkit-search-decoration,
-        &[type="search"]::-webkit-search-cancel-button,
-        &[type="search"]::-webkit-search-results-button,
-        &[type="search"]::-webkit-search-results-decoration { display: none; }
+        &[type='search']::-webkit-search-decoration,
+        &[type='search']::-webkit-search-cancel-button,
+        &[type='search']::-webkit-search-results-button,
+        &[type='search']::-webkit-search-results-decoration {
+            display: none;
+        }
 
         &:-webkit-autofill {
             background: rgba($m-color--white, 0);
@@ -340,6 +359,20 @@ $m-input-style-base-height: $m-line-height + em;
 
         &h6 {
             @include m-h6-font-style();
+        }
+    }
+
+    .m--is-type-search & {
+        background-color: $m-color--grey-lightest;
+        border-color: $m-color--grey-lightest;
+
+        .m-icon-button {
+            color: $m-color--ul-blue;
+        }
+
+        &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
+            background-color: $m-color--white;
+            border-color: $m-color--grey-light;
         }
     }
 }
