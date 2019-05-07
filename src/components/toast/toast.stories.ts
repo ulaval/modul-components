@@ -50,11 +50,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOAST}`, module)
         template: '<m-toast :action-label="actionLabel">A Toast with an Action Label</m-toast>'
     }))
     .add('offset=40px"', () => ({
-        props: {
-            offset: {
-                default: text('offset', '40px')
-            }
-        },
         template: '<m-toast :offset="offset">A Toast with an offset of {{offset}}</m-toast>'
     }));
 
