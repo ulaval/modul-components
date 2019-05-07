@@ -81,7 +81,7 @@ describe('MRichTextEditor', () => {
 
                 let headersOptions: any = wrapper.vm.manageHeaderLevels();
 
-                expect(headersOptions).toEqual({ ...headerNormalOption, 'm-u--h1': i18nTitle });
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1': i18nTitle });
             });
 
         });
@@ -93,7 +93,7 @@ describe('MRichTextEditor', () => {
 
                 let headersOptions: any = wrapper.vm.manageHeaderLevels();
 
-                expect(headersOptions).toEqual({ ...headerNormalOption, 'm-u--h1': i18nTitle, 'm-u--h2': i18nSubtitle });
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1': i18nTitle, 'rte-h2': i18nSubtitle });
             });
 
         });
@@ -105,7 +105,7 @@ describe('MRichTextEditor', () => {
 
                 let headersOptions: any = wrapper.vm.manageHeaderLevels();
 
-                expect(headersOptions).toEqual({ ...headerNormalOption, 'm-u--h1': i18nTitleLevel, 'm-u--h2': i18nTitleLevel, 'm-u--h3': i18nTitleLevel });
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1': i18nTitleLevel, 'rte-h2': i18nTitleLevel, 'rte-h3': i18nTitleLevel });
             });
 
         });
