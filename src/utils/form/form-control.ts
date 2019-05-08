@@ -36,10 +36,6 @@ export class FormControl<T> extends AbstractControl {
         this.validate();
     }
 
-    public hasError(): boolean {
-        return this.errors.length > 0;
-    }
-
     public get enabled(): boolean {
         return this._enabled;
     }
@@ -62,6 +58,10 @@ export class FormControl<T> extends AbstractControl {
 
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
+    }
+
+    public hasError(): boolean {
+        return this.errors.length > 0;
     }
 
     public get isValid(): boolean {

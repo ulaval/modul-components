@@ -35,12 +35,10 @@ export class FormGroup extends AbstractControl {
     }
 
     public hasError(): boolean {
-
         return (this.errors.length > 0 || this.controls.some(c => {
             return c.hasError();
         }));
     }
-
 
     public get enabled(): boolean {
         return this._enabled;
@@ -57,9 +55,7 @@ export class FormGroup extends AbstractControl {
 
     public set waiting(isWaiting: boolean) {
         this._waiting = isWaiting;
-        this.controls.forEach(c => {
-            c.waiting = isWaiting;
-        });
+        this.controls.forEach(c => c.waiting = isWaiting);
     }
 
     public get readonly(): boolean {
@@ -68,9 +64,7 @@ export class FormGroup extends AbstractControl {
 
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
-        this.controls.forEach(c => {
-            c.readonly = isReadonly;
-        });
+        this.controls.forEach(c => c.readonly = isReadonly);
     }
 
     public getControl(name: string): AbstractControl {
@@ -82,8 +76,6 @@ export class FormGroup extends AbstractControl {
 
         return control;
     }
-
-
 
     public addControl(control: AbstractControl): void {
         if (this.controls.find(c => c.name === control.name)) {

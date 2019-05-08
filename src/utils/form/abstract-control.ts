@@ -29,13 +29,13 @@ export abstract class AbstractControl {
     }
 
     public abstract get isValid(): boolean;
-    public abstract hasError(): boolean;
     public abstract get enabled(): boolean;
     public abstract set enabled(isEnabled: boolean);
     public abstract get waiting(): boolean;
     public abstract set waiting(isWaiting: boolean);
     public abstract get readonly(): boolean;
     public abstract set readonly(isReadonly: boolean);
+    public abstract hasError(): boolean;
 
     public get errors(): ControlError[] {
         return this._errors;

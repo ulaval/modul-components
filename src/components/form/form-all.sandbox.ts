@@ -208,13 +208,11 @@ export class MFormAllSandbox extends ModulVue {
     toggleWaiting(): void {
         this.formAllGroup.waiting = !this.formAllGroup.waiting;
     }
-    private onComplete(value: string): void {
 
+    private onComplete(value: string): void {
         this.autocompleteResults = [...this.autocompleteResults];
     }
-
 }
-
 
 const FormAllSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
