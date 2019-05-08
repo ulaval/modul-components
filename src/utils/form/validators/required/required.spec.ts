@@ -1,5 +1,5 @@
-import { FormControl } from "../../form-control";
-import { RequiredValidator } from "./required";
+import { FormControl } from '../../form-control';
+import { RequiredValidator } from './required';
 
 describe('Required validator', () => {
     let formControl: FormControl<any> = new FormControl<any>(

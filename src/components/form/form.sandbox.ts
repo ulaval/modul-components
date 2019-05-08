@@ -254,11 +254,11 @@ export class MFormSandbox extends ModulVue {
     }
 }
 
-const AddSandboxPlugin: PluginObject<any> = {
+const FormSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
         v.use(FormPlugin);
         v.component(`${FORM_NAME}-sandbox`, MFormSandbox);
     }
 };
 
-export default AddSandboxPlugin;
+export default FormSandboxPlugin;

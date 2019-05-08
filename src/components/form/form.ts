@@ -1,10 +1,10 @@
-import { Component, Emit, Prop } from "vue-property-decorator";
-import { ControlError } from "../../utils/form/control-error";
-import { ControlValidatorValidationType } from "../../utils/form/control-validator-validation-type";
-import { FormGroup } from "../../utils/form/form-group";
-import { ModulVue } from "../../utils/vue/vue";
-import { FormActionFallout } from "./form-action-fallout";
-import { FormActions } from "./form-action-type";
+import { Component, Emit, Prop } from 'vue-property-decorator';
+import { ControlError } from '../../utils/form/control-error';
+import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
+import { FormGroup } from '../../utils/form/form-group';
+import { ModulVue } from '../../utils/vue/vue';
+import { FormActionFallout } from './form-action-fallout';
+import { FormActions } from './form-action-type';
 import WithRender from './form.html?style=./form.scss';
 
 @WithRender

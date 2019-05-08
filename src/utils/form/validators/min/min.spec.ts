@@ -9,7 +9,7 @@ describe('Min validator', () => {
             'test',
             [MinValidator('test', 3)]
         );
-    })
+    });
 
     test('it should return false if value is undefined', async (done) => {
         expect(formControl.value).toBe(undefined);

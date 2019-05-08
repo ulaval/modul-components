@@ -75,5 +75,5 @@ export const AbstractControlDirective: DirectiveOptions = {
         el.removeEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
         el.removeEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
     }
-}
+};
 

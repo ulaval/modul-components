@@ -1,4 +1,4 @@
-import { ControlValidationGuard } from "./validation-guard";
+import { ControlValidationGuard } from './validation-guard';
 
 export interface ControlOptions {
     validationGuard?: ControlValidationGuard;

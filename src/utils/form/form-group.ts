@@ -1,9 +1,9 @@
-import { ModulVue } from "../vue/vue";
-import { AbstractControl } from "./abstract-control";
-import { ControlEditionContext } from "./control-edition-context";
-import { ControlOptions } from "./control-options";
-import { FormControl } from "./form-control";
-import { ControlValidator } from "./validators/control-validator";
+import { ModulVue } from '../vue/vue';
+import { AbstractControl } from './abstract-control';
+import { ControlEditionContext } from './control-edition-context';
+import { ControlOptions } from './control-options';
+import { FormControl } from './form-control';
+import { ControlValidator } from './validators/control-validator';
 
 export class FormGroup extends AbstractControl {
     private _validationInterval: any;
@@ -22,6 +22,57 @@ export class FormGroup extends AbstractControl {
         return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.isValid);
     }
 
+    public get values(): any[] {
+        return this.controls.map(c => {
+            if (c instanceof FormGroup) {
+                return c.values;
+            } else if (c instanceof FormControl) {
+                return c.value;
+            } else {
+                throw new Error('Unknown Abstract control type!');
+            }
+        });
+    }
+
+    public hasError(): boolean {
+
+        return (this.errors.length > 0 || this.controls.some(c => {
+            return c.hasError();
+        }));
+    }
+
+
+    public get enabled(): boolean {
+        return this._enabled;
+    }
+    public set enabled(isEnabled: boolean) {
+        this._enabled = isEnabled;
+        this.controls.forEach(c => {
+            c.enabled = isEnabled;
+        });
+    }
+    public get waiting(): boolean {
+        return this._waiting;
+    }
+
+    public set waiting(isWaiting: boolean) {
+        this._waiting = isWaiting;
+        this.controls.forEach(c => {
+            c.waiting = isWaiting;
+        });
+    }
+
+    public get readonly(): boolean {
+        return this._readonly;
+    }
+
+    public set readonly(isReadonly: boolean) {
+        this._readonly = isReadonly;
+        this.controls.forEach(c => {
+            c.readonly = isReadonly;
+        });
+    }
+
     public getControl(name: string): AbstractControl {
         let control: AbstractControl | undefined = this.controls.find(c => c.name === name);
 
@@ -31,6 +82,8 @@ export class FormGroup extends AbstractControl {
 
         return control;
     }
+
+
 
     public addControl(control: AbstractControl): void {
         if (this.controls.find(c => c.name === control.name)) {

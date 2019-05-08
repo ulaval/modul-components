@@ -1,6 +1,6 @@
-import { AbstractControl } from "../abstract-control";
-import { ControlError } from "../control-error";
-import { ControlValidatorValidationType } from "../control-validator-validation-type";
+import { AbstractControl } from '../abstract-control';
+import { ControlError } from '../control-error';
+import { ControlValidatorValidationType } from '../control-validator-validation-type';
 
 export interface ControlValidator {
     key: string;

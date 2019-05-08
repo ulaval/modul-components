@@ -1,4 +1,4 @@
-import { FormActionFallout } from "./form-action-fallout";
+import { FormActionFallout } from './form-action-fallout';
 
 export class MFormService {
     constructor(

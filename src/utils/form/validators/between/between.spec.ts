@@ -1,5 +1,5 @@
-import { FormControl } from "../../form-control";
-import { BetweenValidator } from "./between";
+import { FormControl } from '../../form-control';
+import { BetweenValidator } from './between';
 
 describe('between validator', () => {
     let formControl: FormControl<any>;

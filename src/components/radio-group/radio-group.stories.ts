@@ -20,15 +20,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
+        data: () => ({
+            model1: 'patate'
+        }),
         props: {
             text: {
                 default: text('Text', 'A Radio Group')
             }
         },
-        template: `<m-radio-group>
-                        <m-radio>Radio Option 1</m-radio>
-                        <m-radio>Radio Option 2</m-radio>
-                        <m-radio>Radio Option 3</m-radio>
+        template: `<m-radio-group v-model='model1'>
+                        <m-radio value='patate'>Radio Option 1</m-radio>
+                        <m-radio value='patate2'>Radio Option 2</m-radio>
+                        <m-radio value='patate3'>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
     .add('inline', () => ({

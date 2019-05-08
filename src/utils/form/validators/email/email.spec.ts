@@ -1,5 +1,5 @@
-import { FormControl } from "../../form-control";
-import { EmailValidator } from "./email";
+import { FormControl } from '../../form-control';
+import { EmailValidator } from './email';
 
 describe('email validator', () => {
     let formControl: FormControl<string>;

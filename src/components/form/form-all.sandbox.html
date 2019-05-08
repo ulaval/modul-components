@@ -45,46 +45,128 @@
                       :waiting="birthdateField.waiting"></m-datepicker>
 
         <h4 class="m-u--h6">Dropdown</h4>
-
-        <!-- <h4 class="m-u--h6">Autocomplete</h4>
-        <m-autocomplete v-model="descriptionField.value"
+        <m-dropdown v-m-control="typeField"
+                    v-model="typeField.value"
                     :required-marker="true"
-                    label="Description"
-                    :error="descriptionField.hasError()"
-                    :error-message="descriptionField.errorMessage"
-                    :disabled="!descriptionField.enabled"
-                    :readonly="descriptionField.readonly"
-                    :waiting="descriptionField.waiting"
-                    v-m-control="descriptionField"></m-autocomplete> -->
-        <!--
+                    label="Type"
+                    :error="typeField.hasError()"
+                    :error-message="typeField.errorMessage"
+                    :disabled="!typeField.enabled"
+                    :readonly="typeField.readonly"
+                    :waiting="typeField.waiting">
+            <m-dropdown-item v-for="type of types"
+                             :value="type"
+                             :label="type"></m-dropdown-item>
+        </m-dropdown>
         <h4 class="m-u--h6">Checkboxes</h4>
-
-
-        <h4 class="m-u--h6">Decimalfield</h4>
-
-
-
-        <h4 class="m-u--h6">Input group</h4>
-
-        <h4 class="m-u--h6">Intergerfield</h4>
-
-        <h4 class="m-u--h6">Moneyfield</h4>
-
-        <h4 class="m-u--h6">Periodpicker</h4>
+        <m-checkbox v-m-control="activeField"
+                    v-model="activeField.value"
+                    :error="activeField.hasError()"
+                    :error-message="activeField.errorMessage"
+                    :disabled="!activeField.enabled"
+                    :readonly="activeField.readonly"
+                    :waiting="activeField.waiting">Is active ?</m-checkbox>
 
         <h4 class="m-u--h6">Radio</h4>
+        <m-radio-group v-m-control="coupeField"
+                       v-model="coupeField.value"
+                       label="Style de coupe"
+                       :error="coupeField.hasError()"
+                       :error-message="coupeField.errorMessage"
+                       :disabled="!coupeField.enabled"
+                       :readonly="coupeField.readonly"
+                       :waiting="coupeField.waiting">
+            <m-radio v-for="coupe of coupes"
+                     :value="coupe">{{coupe}}</m-radio>
 
-        <h4 class="m-u--h6">Richtext editor</h4>
 
-        <h4 class="m-u--h6">Switch</h4>
-
-        <h4 class="m-u--h6">Textarea</h4>
+        </m-radio-group>
 
         <h4 class="m-u--h6">Timepicker</h4>
+        <m-timepicker v-m-control="timeField"
+                      v-model="timeField.value"
+                      :required-marker="true"
+                      label="Time"
+                      :error="timeField.hasError()"
+                      :error-message="timeField.errorMessage"
+                      :disabled="!timeField.enabled"
+                      :readonly="timeField.readonly"
+                      :waiting="timeField.waiting"></m-timepicker>
 
-        <h4 class="m-u--h6">Toogle button</h4> -->
+        <h4 class="m-u--h6">Decimalfield</h4>
+        <m-decimalfield v-m-control="decimalField"
+                        v-model="decimalField.value"
+                        :required-marker="true"
+                        label="Decimal"
+                        :error="decimalField.hasError()"
+                        :error-message="decimalField.errorMessage"
+                        :disabled="!decimalField.enabled"
+                        :readonly="decimalField.readonly"
+                        :waiting="decimalField.waiting">
 
-        <p class="m-u--margin-bottom--l">
+        </m-decimalfield>
+
+        <h4 class="m-u--h6">Moneyfield</h4>
+        <m-moneyfield v-m-control="priceField"
+                      v-model="priceField.value"
+                      :required-marker="true"
+                      label="Price"
+                      :error="priceField.hasError()"
+                      :error-message="priceField.errorMessage"
+                      :disabled="!priceField.enabled"
+                      :readonly="priceField.readonly"
+                      :waiting="priceField.waiting"></m-moneyfield>
+
+        <!-- <h4 class="m-u--h6">Intergerfield</h4>
+        <m-integerfield v-m-control="integerField"
+                        v-model="integerField.value"
+                        :required-marker="true"
+                        label="Integer"
+                        :error="integerField.hasError()"
+                        :error-message="integerField.errorMessage"
+                        :disabled="!integerField.enabled"
+                        :readonly="integerField.readonly"
+                        :waiting="integerField.waiting">
+
+        </m-integerfield> -->
+
+        <h4 class="m-u--h6">Switch</h4>
+        <m-switch v-m-control="switchField"
+                  v-model="switchField.value"
+                  :error="switchField.hasError()"
+                  :error-message="switchField.errorMessage"
+                  :disabled="!switchField.enabled"
+                  :readonly="switchField.readonly"
+                  :waiting="switchField.waiting">État</m-switch>
+
+
+
+        <h4 class="m-u--h6">Autocomplete</h4>
+        <m-autocomplete v-m-control="autocompleteField"
+                        v-model="autocompleteField.value"
+                        :results="autocompleteResults"
+                        @complete="onComplete"
+                        :required-marker="true"
+                        label="Autocomplete"
+                        :error="autocompleteField.hasError()"
+                        :error-message="autocompleteField.errorMessage"
+                        :disabled="!autocompleteField.enabled"
+                        :readonly="autocompleteField.readonly"
+                        :waiting="autocompleteField.waiting"></m-autocomplete>
+
+
+        <h4 class="m-u--h6">DaterangePicker</h4>
+        <m-daterangepicker v-m-control="daterangeField"
+                           v-model="daterangeField.value"
+                           :error="daterangeField.hasError()"
+                           :error-message="daterangeField.errorMessage"
+                           :disabled="!daterangeField.enabled"
+                           :readonly="daterangeField.readonly"
+                           :waiting="daterangeField.waiting">
+        </m-daterangepicker>
+
+
+        <p class="m-u--margin-top--l m-u--margin-bottom--l">
             <m-button type="submit"
                       :form="formAllGroup.id">Submit</m-button>
             <m-button type="reset"

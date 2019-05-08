@@ -1,10 +1,10 @@
-import { FormatMode } from "../../../i18n/i18n";
-import { ModulVue } from "../../../vue/vue";
-import { ControlValidatorValidationType } from "../../control-validator-validation-type";
-import { FormControl } from "../../form-control";
-import { FormGroup } from "../../form-group";
-import { ControlValidator, ControlValidatorOptions } from "../control-validator";
-import { ValidatorKeys } from "../validator-error-keys";
+import { FormatMode } from '../../../i18n/i18n';
+import { ModulVue } from '../../../vue/vue';
+import { ControlValidatorValidationType } from '../../control-validator-validation-type';
+import { FormControl } from '../../form-control';
+import { FormGroup } from '../../form-group';
+import { ControlValidator, ControlValidatorOptions } from '../control-validator';
+import { ValidatorKeys } from '../validator-error-keys';
 
 /**
  * Bound included

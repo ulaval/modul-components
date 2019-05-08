@@ -1,6 +1,6 @@
-import { FormControl } from "../../form-control";
-import { FormGroup } from "../../form-group";
-import { CompareValidator } from "./compare";
+import { FormControl } from '../../form-control';
+import { FormGroup } from '../../form-group';
+import { CompareValidator } from './compare';
 
 describe('compare validator', () => {
     let formGroup: FormGroup;

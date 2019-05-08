@@ -1,5 +1,5 @@
-import { FormControl } from "../../form-control";
-import { MaxLengthValidator } from "./max-length";
+import { FormControl } from '../../form-control';
+import { MaxLengthValidator } from './max-length';
 
 describe('Max length validator', () => {
     let formControl: FormControl<any> = new FormControl<any>(

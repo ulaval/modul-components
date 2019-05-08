@@ -1,5 +1,5 @@
-import { ControlEditionContext } from "./control-edition-context";
-import { ControlValidatorValidationType } from "./control-validator-validation-type";
+import { ControlEditionContext } from './control-edition-context';
+import { ControlValidatorValidationType } from './control-validator-validation-type';
 
 export type ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, external?: boolean) => boolean;
 
