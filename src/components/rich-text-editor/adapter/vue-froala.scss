@@ -93,7 +93,7 @@
 
         .fr-box.fr-basic .fr-element {
             padding: unset;
-            font-weight: $m-font-weight--regular;
+            font-weight: $m-font-weight--light;
             word-wrap: break-word;
             -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
             border-left: 0 transparent;
@@ -120,7 +120,7 @@
         }
 
         .fr-box.fr-basic .fr-element {
-            font-weight: $m-font-weight--regular;
+            font-weight: $m-font-weight--light;
             word-wrap: break-word;
             -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
         }
