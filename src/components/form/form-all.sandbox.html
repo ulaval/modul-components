@@ -1,0 +1,115 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Test for MForm reactivity with all fields</h2>
+    <br />
+    <m-form :form-group="formAllGroup"
+            v-m-control="formAllGroup"
+            @reset="reset()"
+            @submit="submit()">
+
+        <h4 class="m-u--h6">Textfields</h4>
+
+        <m-textfield v-m-control="nameField"
+                     v-model="nameField.value"
+                     :required-marker="true"
+                     label="Name"
+                     :error="nameField.hasError()"
+                     :error-message="nameField.errorMessage"
+                     :disabled="!nameField.enabled"
+                     :readonly="nameField.readonly"
+                     :waiting="nameField.waiting">
+        </m-textfield>
+
+        <h4 class="m-u--h6">Textarea</h4>
+
+        <m-textarea v-m-control="descriptionField"
+                    v-model="descriptionField.value"
+                    :required-marker="true"
+                    label="Description"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage"
+                    :disabled="!descriptionField.enabled"
+                    :readonly="descriptionField.readonly"
+                    :waiting="descriptionField.waiting"></m-textarea>
+
+        <h4 class="m-u--h6">Datepicker</h4>
+        <m-datepicker v-m-control="birthdateField"
+                      v-model="birthdateField.value"
+                      :required-marker="true"
+                      label="Birthdate"
+                      min="1900-01-01"
+                      max="2020-01-01"
+                      :error="birthdateField.hasError()"
+                      :error-message="birthdateField.errorMessage"
+                      :disabled="!birthdateField.enabled"
+                      :readonly="birthdateField.readonly"
+                      :waiting="birthdateField.waiting"></m-datepicker>
+
+        <h4 class="m-u--h6">Dropdown</h4>
+
+        <!-- <h4 class="m-u--h6">Autocomplete</h4>
+        <m-autocomplete v-model="descriptionField.value"
+                    :required-marker="true"
+                    label="Description"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage"
+                    :disabled="!descriptionField.enabled"
+                    :readonly="descriptionField.readonly"
+                    :waiting="descriptionField.waiting"
+                    v-m-control="descriptionField"></m-autocomplete> -->
+        <!--
+        <h4 class="m-u--h6">Checkboxes</h4>
+
+
+        <h4 class="m-u--h6">Decimalfield</h4>
+
+
+
+        <h4 class="m-u--h6">Input group</h4>
+
+        <h4 class="m-u--h6">Intergerfield</h4>
+
+        <h4 class="m-u--h6">Moneyfield</h4>
+
+        <h4 class="m-u--h6">Periodpicker</h4>
+
+        <h4 class="m-u--h6">Radio</h4>
+
+        <h4 class="m-u--h6">Richtext editor</h4>
+
+        <h4 class="m-u--h6">Switch</h4>
+
+        <h4 class="m-u--h6">Textarea</h4>
+
+        <h4 class="m-u--h6">Timepicker</h4>
+
+        <h4 class="m-u--h6">Toogle button</h4> -->
+
+        <p class="m-u--margin-bottom--l">
+            <m-button type="submit"
+                      :form="formAllGroup.id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="formAllGroup.id">Reset</m-button>
+        </p>
+
+        <h4 class="m-u--h6">Form Values</h4>
+        <p>{{ formAllGroup.values }}</p>
+        <h4 class="m-u--h6">Form Validity = {{ formAllGroup.isValid }} </h4>
+        <h4 class="m-u--h6">Form Errors = {{ formAllGroup.hasError() }}</h4>
+        <h4 class="m-u--h6">Form Waiting = {{ formAllGroup.waiting }}</h4>
+        <h4 class="m-u--h6">Form Enabled = {{ formAllGroup.enabled }}</h4>
+        <h4 class="m-u--h6">Form Readonly = {{ formAllGroup.readonly }}</h4>
+
+
+        <p>
+            <m-button skin="secondary"
+                      @click="loadValue()">Load form data</m-button>
+            <m-button skin="secondary"
+                      @click="toggleReadonly()">toggle readonly</m-button>
+            <m-button skin="secondary"
+                      @click="toggleDisabled()">toggle disabled</m-button>
+            <m-button skin="secondary"
+                      @click="toggleWaiting()">toggle waiting</m-button>
+        </p>
+    </m-form>
+</div>
