@@ -68,5 +68,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
                         <m-dropdown-item value="1e" label="Cow"></m-dropdown-item>
                         <m-dropdown-item value="1f" label="Pig"></m-dropdown-item>
                     </m-dropdown>`
+    }))
+    .add('label-up', () => ({
+        data: () => ({
+            model1: ''
+        }),
+        template: `<m-dropdown :label-up="true" label="Name" v-model="model1" placeholder="placeholder">
+                        <m-dropdown-item value="james" label="James"></m-dropdown-item>
+                        <m-dropdown-item value="yvan" label="Yvan"></m-dropdown-item>
+                    </m-dropdown>`
     }));
 

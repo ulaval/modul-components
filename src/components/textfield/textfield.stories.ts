@@ -115,6 +115,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }))
     .add('placeholder-icon', () => ({
         template: '<m-textfield label="Label" placeholder="Placeholder" placeholder-icon-name="m-svg__search" word-wrap="true"></m-textfield>'
+    }))
+    .add('focus', () => ({
+        template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'
+    }))
+    .add('label-up', () => ({
+        template: '<m-textfield label="label" label-up="true" placeholder="placeholder"></m-textfield>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
