@@ -57,7 +57,7 @@ module.exports = function (env) {
         devtool: webpackBase(isLib).devtool,
         module: webpackBase(isLib).module,
         plugins: webpackBase(isLib).plugins
-    }
+    };
 
     if (!isOpenshift) {
         //do not run ts check and stylint in openshift (ressource limit!)

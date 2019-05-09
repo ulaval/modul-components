@@ -92,5 +92,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('helper-message', () => ({
         template: `<m-datepicker helper-message="AAAA-MM-JJ"></m-datepicker>`
+    }))
+    .add('hide-internal-error-message', () => ({
+        data: () => ({
+            model1: '9999-99-99'
+        }),
+        template: `<m-datepicker v-model="model1" :hide-internal-error-message="true"></m-datepicker>`
+    }))
+    .add('label-up', () => ({
+        template: `<m-datepicker label="Date label" :label-up="true"></m-datepicker>`
     }));
 

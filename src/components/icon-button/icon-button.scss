@@ -75,6 +75,31 @@
             &::before {
                 background: $m-color--interactive-lightest;
             }
+
+            &.m-textfield__search-icon {
+                color: $m-color--ul-blue;
+
+                &:hover {
+                    color: $m-color--white;
+                    stroke-width: 2;
+                }
+
+                &::before {
+                    background: $m-color--ul-blue;
+                    border-radius: 0 3px 3px 0;
+                    width: $m-touch-size;
+                    height: $m-touch-size;
+                    transition-delay: 0s;
+                }
+
+                &:hover,
+                &:active,
+                &:focus {
+                    &::before {
+                        opacity: 1;
+                    }
+                }
+            }
         }
 
         &.m--is-skin-bold {
@@ -120,6 +145,10 @@
         &.m--is-skin-bold {
             cursor: inherit;
             color: $m-color--disabled;
+
+            &.m-textfield__search-icon {
+                color: $m-color--ul-blue;
+            }
         }
 
         &.m--is-skin-primary,
@@ -141,6 +170,10 @@
     &.m--is-skin-primary,
     &.m--is-skin-secondary {
         @include m-button();
+    }
+
+    &.m-textfield__reset {
+        stroke-width: 2px;
     }
 
     &__icon {

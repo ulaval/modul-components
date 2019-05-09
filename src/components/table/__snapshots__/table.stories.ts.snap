@@ -1251,97 +1251,109 @@ exports[`Storyshots components|m-table Sortable 1`] = `
         class="m--is-sortable"
         scope="col"
       >
-        <span
-          class="m-table__header-name"
+        <div
+          class="m-table__header-wrap"
         >
-          Name
-        </span>
-         
-        <button
-          class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
-          style="width: 12px; height: 12px;"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="m-icon m-icon-button__icon"
-            height="20px"
-            width="20px"
+          <span
+            class="m-table__header-name"
           >
-            <!---->
-             
-            <use
-              aria-hidden="true"
-              class=""
-            />
-          </svg>
+            Name
+          </span>
            
-          <!---->
-        </button>
+          <button
+            class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+            style="width: 12px; height: 12px;"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="20px"
+              width="20px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
       </th>
       <th
         class="m--is-sortable"
         scope="col"
       >
-        <span
-          class="m-table__header-name"
+        <div
+          class="m-table__header-wrap"
         >
-          Age
-        </span>
-         
-        <button
-          class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
-          style="width: 12px; height: 12px;"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="m-icon m-icon-button__icon"
-            height="20px"
-            width="20px"
+          <span
+            class="m-table__header-name"
           >
-            <!---->
-             
-            <use
-              aria-hidden="true"
-              class=""
-            />
-          </svg>
+            Age
+          </span>
            
-          <!---->
-        </button>
+          <button
+            class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+            style="width: 12px; height: 12px;"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="20px"
+              width="20px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
       </th>
       <th
         class="m--is-sortable"
         scope="col"
       >
-        <span
-          class="m-table__header-name"
+        <div
+          class="m-table__header-wrap"
         >
-          Username
-        </span>
-         
-        <button
-          class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
-          style="width: 12px; height: 12px;"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="m-icon m-icon-button__icon"
-            height="20px"
-            width="20px"
+          <span
+            class="m-table__header-name"
           >
-            <!---->
-             
-            <use
-              aria-hidden="true"
-              class=""
-            />
-          </svg>
+            Username
+          </span>
            
-          <!---->
-        </button>
+          <button
+            class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+            style="width: 12px; height: 12px;"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="20px"
+              width="20px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
       </th>
     </tr>
   </thead>

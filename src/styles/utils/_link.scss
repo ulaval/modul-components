@@ -12,7 +12,7 @@
         color: $m-color--interactive-light;
 
         .m-u--link-text {
-            text-decoration: underline;
+            @extend %m-u--link-text--hover-focus;
         }
     }
 
@@ -28,6 +28,10 @@
 .m-u--link-text {
     position: relative;
     vertical-align: middle;
+}
+
+%m-u--link-text--hover-focus {
+    text-decoration: underline;
 }
 
 .m-u--link-icon-left,
