@@ -31,6 +31,8 @@ export class MInputStyle extends ModulVue {
     public readonly: boolean;
     @Prop({ default: false })
     public cursorPointer: boolean;
+    @Prop({ default: false })
+    public labelUp: boolean;
 
     public $refs: {
         root: HTMLElement,
@@ -95,7 +97,7 @@ export class MInputStyle extends ModulVue {
     }
 
     public get isLabelUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+        return (this.hasValue || (this.isFocus && this.hasValue) || this.labelUp) && this.hasLabel;
     }
 
     public get showPrefix(): boolean {

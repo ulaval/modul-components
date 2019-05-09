@@ -1,9 +1,9 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
+import AddPlugin from '../add/add';
 import { REPEATER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
-import LinkPlugin from '../link/link';
 import WithRender from './repeater.html?style=./repeater.scss';
 
 export interface MRepeaterItem { }
@@ -73,6 +73,10 @@ export class MRepeater extends ModulVue {
         if (!this.$scopedSlots.row && !this.$scopedSlots.item) {
             throw new Error('MRepeater requires content to be provided through row or item slot.');
         }
+
+        // tslint:disable-next-line:no-console
+        console.log(this.$scopedSlots.row);
+
     }
 
     @Emit('add')
@@ -119,11 +123,19 @@ export class MRepeater extends ModulVue {
     get canDelete(): boolean {
         return this.operations.canDelete && this.list.length > this.minItemCount;
     }
+
+    get itemTag(): string {
+        return this.tag === 'ul' ? 'li' : 'span';
+    }
+
+    get hasRowSlot(): boolean {
+        return this.$scopedSlots.row ? true : false;
+    }
 }
 
 const RepeaterPlugin: PluginObject<any> = {
     install(v): void {
-        v.use(LinkPlugin);
+        v.use(AddPlugin);
         v.use(IconButtonPlugin);
         v.component(REPEATER_NAME, MRepeater);
     }
