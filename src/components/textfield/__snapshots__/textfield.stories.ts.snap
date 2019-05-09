@@ -327,6 +327,8 @@ exports[`Storyshots components|m-textfield focus 1`] = `
         <div
           class="m-input-style__left-content"
         >
+          <!---->
+           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -553,6 +555,8 @@ exports[`Storyshots components|m-textfield label-up 1`] = `
         <div
           class="m-input-style__left-content"
         >
+          <!---->
+           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"

@@ -242,6 +242,8 @@ exports[`Storyshots components|m-timepicker label-up 1`] = `
         <div
           class="m-input-style__left-content"
         >
+          <!---->
+           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"

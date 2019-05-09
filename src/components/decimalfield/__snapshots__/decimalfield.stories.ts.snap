@@ -473,7 +473,8 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
             <div
               class="m-input-style__left-content"
             >
-               
+              <!---->
+                
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
