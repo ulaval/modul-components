@@ -12,7 +12,7 @@ $m-table--icon-vertical-offset: -5px !default;
 
         th {
             color: $m-color--grey;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
 
             &.m--is-sortable {
                 cursor: pointer;
@@ -109,7 +109,7 @@ $m-table--icon-vertical-offset: -5px !default;
         height: 260px; // magic number
         color: $m-color--grey;
         font-size: $m-font-size--l;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
 
         &__precision {
             font-size: $m-font-size;

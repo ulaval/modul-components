@@ -1,10 +1,5 @@
 .m-u--app-body {
-    @import
-        'button',
-        'header',
-        'typography',
-        'layout',
-        'link';
+    @import 'button', 'header', 'typography', 'layout', 'link';
 
     // ======================================================================
     //  Visually hidden
@@ -32,7 +27,7 @@
     // ======================================================================
     .m-u--label {
         font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
     }
 
     // ======================================================================
@@ -40,7 +35,7 @@
     // ======================================================================
     .m-u--asterisk {
         color: $m-color--accent;
-        font-weight: $m-font-weight--black;
+        font-weight: $m-font-weight--bold;
     }
 
     .m-u--require {

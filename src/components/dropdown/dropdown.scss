@@ -27,7 +27,7 @@ $m-dropdown--margin: $m-padding--xs !default;
             margin: 0;
             padding: $m-padding--s $m-padding;
             font-size: $m-font-size--s;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
             color: $m-color--white;
             background: $m-color--interactive;
         }
@@ -41,7 +41,7 @@ $m-dropdown--margin: $m-padding--xs !default;
             &-input {
                 width: 100%;
                 font-size: $m-font-size;
-                font-weight: $m-font-weight;
+                font-weight: $m-font-weight--light;
                 border: none;
                 outline: none;
                 background: none;

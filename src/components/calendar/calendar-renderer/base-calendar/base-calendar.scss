@@ -12,7 +12,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
 }
 
 @mixin m-base-calendar__today() {
-    font-weight: $m-font-weight--bold;
+    font-weight: $m-font-weight--semi-bold;
 
     &::before {
         background-color: $m-color--grey-light;
@@ -112,7 +112,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
         @include m-base-calendar__grid(3, minmax($m-base-calendar-dimension, auto));
 
         transition: color $m-transition-duration ease;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
     }
 
     &__week {
@@ -125,7 +125,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
     }
 
     &__weekday {
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
         color: m-color(grey);
     }
 
@@ -224,7 +224,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
 
         &.m--is-selected {
             color: $m-color--white;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
             border-radius: 50%;
 
             &::before {
@@ -267,7 +267,7 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
     }
 
     &__day:not(.m--is-disabled):not(.m--is-other-month) {
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
     }
 
     &__day-content {
