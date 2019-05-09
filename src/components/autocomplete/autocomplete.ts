@@ -35,6 +35,8 @@ export class MAutocomplete extends ModulVue {
     @Prop()
     focus: boolean;
     @Prop()
+    labelUp: boolean;
+    @Prop()
     disabled: boolean;
     @Prop()
     errorMessage: string;

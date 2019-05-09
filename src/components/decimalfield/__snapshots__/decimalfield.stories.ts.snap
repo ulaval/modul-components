@@ -431,6 +431,77 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
       </div>
     </div>
   </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-label"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-label-up m--has-label m--is-tag-default"
+      >
+        <div
+          class="m-input-style__content"
+          style="margin-top: 10px;"
+        >
+          <label
+            class="m-input-style__label"
+            for="mDecimalfield-uuid"
+          >
+            <span
+              class="m-input-style__text"
+            >
+              <span>
+                Label
+              </span>
+               
+              <!---->
+            </span>
+          </label>
+           
+          <div
+            class="m-input-style__body"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__left-content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="numeric"
+                placeholder="Enter a decimal number"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
+            />
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 

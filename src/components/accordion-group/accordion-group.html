@@ -2,7 +2,7 @@
     <div class="m-accordion-group__header"
          :class="{ 'm--no-title' : !hasTitleSlot,
                    'm--has-secondary-content' : hasSecondaryContentSlot,
-                   'm--is-reserve-header' : reverseHeader }"
+                   'm--is-toggle-link-left' : toggleLinkLeft }"
          v-if="hasTitleSlot || !concurrent">
         <div class="m-accordion-group__header-title"
              v-if="hasTitleSlot">
