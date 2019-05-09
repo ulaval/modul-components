@@ -46,8 +46,6 @@ exports[`Storyshots components|m-periodpicker default 1`] = `
                 <div
                   class="m-input-style__left-content"
                 >
-                  <!---->
-                   
                   <input
                     aria-haspopup="true"
                     autocomplete="off"
@@ -153,8 +151,6 @@ exports[`Storyshots components|m-periodpicker default 1`] = `
                 <div
                   class="m-input-style__left-content"
                 >
-                  <!---->
-                   
                   <input
                     aria-haspopup="true"
                     autocomplete="off"

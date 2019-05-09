@@ -34,10 +34,6 @@ export class MInputStyle extends ModulVue {
     public cursorPointer: boolean;
     @Prop({ default: false })
     public labelUp: boolean;
-    @Prop()
-    public placeholderIconName: string;
-    @Prop({ default: false })
-    public filled: boolean;
 
     public $refs: {
         root: HTMLElement,
@@ -129,10 +125,6 @@ export class MInputStyle extends ModulVue {
 
     public get hasAdjustWidthAutoSlot(): boolean {
         return !!this.$slots['adjust-width-auto'];
-    }
-
-    public get hasPlaceholderIcon(): boolean {
-        return !!this.placeholderIconName && !this.filled;
     }
 
     @Emit('click')

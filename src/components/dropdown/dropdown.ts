@@ -64,8 +64,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     public clearInvalidSelectionOnClose: boolean;
     @Prop({ default: true })
     public clearModelOnSelectedText: boolean;
-    @Prop()
-    public placeholderIconName: string;
 
     public $refs: {
         popup: MPopup;
@@ -309,11 +307,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get isEmpty(): boolean {
-        return (this.filterable && this.open) || this.as<InputManagement>().hasValue || (this.as<InputPopup>().hasPlaceholder() && this.open) || (!!this.placeholderIconName && this.open) ? false : true;
-    }
-
-    public get isFilled(): boolean {
-        return this.selectedText !== '';
+        return (this.filterable && this.open) || this.as<InputManagement>().hasValue || (this.as<InputPopup>().hasPlaceholder() && this.open) ? false : true;
     }
 
     private buildItemsMap(): void {
@@ -539,6 +533,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get hasPointer(): boolean {
         return !this.filterable || (this.filterable && !this.open);
+    }
+
+    private get hasPlaceholderIcon(): boolean {
+        return this.filterable && this.selectedText === '';
     }
 
 }

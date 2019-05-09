@@ -41,7 +41,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
                         <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
                     </m-dropdown>`
     }))
-    .add('placeholder-icon-name', () => ({
+    .add('filterable', () => ({
         data: () => ({
             model3: ''
         }),
@@ -55,7 +55,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
                         <m-dropdown-item value="1f" label="Pig"></m-dropdown-item>
                     </m-dropdown>`
     }))
-    .add('placeholder-icon-name and placeholder', () => ({
+    .add('filterable and placeholder', () => ({
         data: () => ({
             model3: ''
         }),

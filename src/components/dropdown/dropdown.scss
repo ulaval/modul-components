@@ -22,6 +22,14 @@ $m-dropdown--margin: $m-padding--xs !default;
         }
     }
 
+    &.m--is-filterable {
+        .m-dropdown__input {
+            &::placeholder {
+                padding-left: calc(#{$m-spacing} + #{$m-spacing--xs});
+            }
+        }
+    }
+
     &__header {
         &__label {
             margin: 0;
@@ -94,6 +102,14 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     &__validation-message {
         transition: margin-top $m-transition-duration ease;
+    }
+
+    &__placeholder-icon.m-icon.m-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $m-color--disabled !important;
     }
 
     .m-input-style {

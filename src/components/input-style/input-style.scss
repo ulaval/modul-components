@@ -154,15 +154,6 @@ $m-input-style-base-height: $m-line-height + em;
         }
     }
 
-    &.m--has-placeholder-icon {
-        input,
-        textarea {
-            &::placeholder {
-                padding-left: calc(#{$m-spacing} + #{$m-spacing--xs});
-            }
-        }
-    }
-
     &__label {
         position: relative;
         transform-origin: 0 0;
@@ -241,14 +232,6 @@ $m-input-style-base-height: $m-line-height + em;
             color: $m-color--grey;
             margin-left: $m-margin--xs;
         }
-    }
-
-    &__placeholder-icon.m-icon.m-icon {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        color: $m-color--disabled !important;
     }
 
     &__prefix {

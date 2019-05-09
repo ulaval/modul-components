@@ -34,8 +34,6 @@ export class InputManagement extends ModulVue
     public autocomplete: string;
     @Prop()
     public focus: boolean;
-    @Prop()
-    public labelUp: boolean;
 
     public trimWordWrap: boolean = false;
 

@@ -24,8 +24,6 @@ exports[`Storyshots components|m-timepicker default 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"
@@ -133,8 +131,6 @@ exports[`Storyshots components|m-timepicker label 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"
@@ -242,8 +238,6 @@ exports[`Storyshots components|m-timepicker label-up 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"
@@ -340,8 +334,6 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"
@@ -438,8 +430,6 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"
@@ -537,8 +527,6 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
           <div
             class="m-input-style__left-content"
           >
-            <!---->
-             
             <input
               aria-controls="mTimepicker-uuid-controls"
               aria-haspopup="true"
@@ -633,8 +621,6 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
           <div
             class="m-input-style__left-content"
           >
-            <!---->
-             
             <input
               aria-controls="mTimepicker-uuid-controls"
               aria-haspopup="true"
@@ -732,8 +718,6 @@ exports[`Storyshots components|m-timepicker step 15m 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             aria-controls="mTimepicker-uuid-controls"
             aria-haspopup="true"

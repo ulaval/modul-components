@@ -24,8 +24,6 @@ exports[`Storyshots components|m-textfield default 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -91,8 +89,6 @@ exports[`Storyshots components|m-textfield disabled 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             disabled="disabled"
@@ -159,8 +155,6 @@ exports[`Storyshots components|m-textfield error 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -226,8 +220,6 @@ exports[`Storyshots components|m-textfield error-message 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -327,8 +319,6 @@ exports[`Storyshots components|m-textfield focus 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -395,8 +385,6 @@ exports[`Storyshots components|m-textfield helper-message 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -477,8 +465,6 @@ exports[`Storyshots components|m-textfield label 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -555,8 +541,6 @@ exports[`Storyshots components|m-textfield label-up 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -623,8 +607,6 @@ exports[`Storyshots components|m-textfield placeholder 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -670,10 +652,11 @@ exports[`Storyshots components|m-textfield placeholder 1`] = `
 exports[`Storyshots components|m-textfield placeholder-icon 1`] = `
 <div
   class="m-textfield m--has-label m--has-word-wrap m--is-type-text"
+  placeholder-icon-name="m-svg__search"
   style="width: 100%; max-width: 288px;"
 >
   <div
-    class="m-input-style m--has-label m--has-placeholder-icon m--is-tag-default"
+    class="m-input-style m--has-label m--is-tag-default"
   >
     <div
       class="m-input-style__content"
@@ -702,20 +685,6 @@ exports[`Storyshots components|m-textfield placeholder-icon 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <svg
-            aria-hidden="true"
-            class="m-icon m-input-style__placeholder-icon"
-            height="16px"
-            width="16px"
-          >
-            <!---->
-             
-            <use
-              aria-hidden="true"
-              class=""
-            />
-          </svg>
-           
           <!---->
            
           <!---->
@@ -781,8 +750,6 @@ exports[`Storyshots components|m-textfield readonly 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -864,8 +831,6 @@ exports[`Storyshots components|m-textfield required-marker 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -931,8 +896,6 @@ exports[`Storyshots components|m-textfield valid 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -998,8 +961,6 @@ exports[`Storyshots components|m-textfield valid-message 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1088,8 +1049,6 @@ exports[`Storyshots components|m-textfield value 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1155,8 +1114,6 @@ exports[`Storyshots components|m-textfield waiting 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             disabled="disabled"
@@ -1233,8 +1190,6 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
            
           <!---->
            
-          <!---->
-           
           <textarea
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1306,8 +1261,6 @@ exports[`Storyshots components|m-textfield/Counter all props 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1374,8 +1327,6 @@ exports[`Storyshots components|m-textfield/Counter character-count 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1454,8 +1405,6 @@ exports[`Storyshots components|m-textfield/Counter character-count-threshold="10
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1522,8 +1471,6 @@ exports[`Storyshots components|m-textfield/Counter length-overflow="true" 1`] = 
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1590,8 +1537,6 @@ exports[`Storyshots components|m-textfield/Counter max-length="20" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1669,8 +1614,6 @@ exports[`Storyshots components|m-textfield/max-width all max-width presets 1`] =
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1747,8 +1690,6 @@ exports[`Storyshots components|m-textfield/max-width custom width 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1825,8 +1766,6 @@ exports[`Storyshots components|m-textfield/max-width large 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1903,8 +1842,6 @@ exports[`Storyshots components|m-textfield/max-width medium 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -1981,8 +1918,6 @@ exports[`Storyshots components|m-textfield/max-width regular 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2059,8 +1994,6 @@ exports[`Storyshots components|m-textfield/max-width small 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2137,8 +2070,6 @@ exports[`Storyshots components|m-textfield/max-width x-small 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2204,8 +2135,6 @@ exports[`Storyshots components|m-textfield/tag-style all tag styles 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2282,8 +2211,6 @@ exports[`Storyshots components|m-textfield/type all types 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2350,8 +2277,6 @@ exports[`Storyshots components|m-textfield/type type="email" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2417,8 +2342,6 @@ exports[`Storyshots components|m-textfield/type type="number" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2484,8 +2407,6 @@ exports[`Storyshots components|m-textfield/type type="password" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2575,8 +2496,6 @@ exports[`Storyshots components|m-textfield/type type="search" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2688,8 +2607,6 @@ exports[`Storyshots components|m-textfield/type type="tel" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2755,8 +2672,6 @@ exports[`Storyshots components|m-textfield/type type="text" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
@@ -2822,8 +2737,6 @@ exports[`Storyshots components|m-textfield/type type="url" 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <!---->
-           
           <input
             class="m-textfield__input"
             id="mTextfield-uuid"
