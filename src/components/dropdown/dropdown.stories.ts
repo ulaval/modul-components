@@ -20,39 +20,39 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
             model1: ''
         }),
         template: `<m-dropdown label="Vegetable" v-model="model1">
-                        <m-dropdown-item value="1a" label="Artichoke"></m-dropdown-item>
-                        <m-dropdown-item value="1b" label="Asparagus"></m-dropdown-item>
-                        <m-dropdown-item value="1c" label="Broccoli"></m-dropdown-item>
-                        <m-dropdown-item value="1d" label="Bok choy"></m-dropdown-item>
-                        <m-dropdown-item value="1e" label="Lettuce"></m-dropdown-item>
-                        <m-dropdown-item value="1f" label="Tomato"></m-dropdown-item>
+                        <m-dropdown-item value="1" label="Artichoke"></m-dropdown-item>
+                        <m-dropdown-item value="2" label="Asparagus"></m-dropdown-item>
+                        <m-dropdown-item value="3" label="Broccoli"></m-dropdown-item>
+                        <m-dropdown-item value="4" label="Bok choy"></m-dropdown-item>
+                        <m-dropdown-item value="5" label="Lettuce"></m-dropdown-item>
+                        <m-dropdown-item value="6" label="Tomato"></m-dropdown-item>
                     </m-dropdown>`
     }))
     .add('focus', () => ({
         data: () => ({
-            model1: ''
+            model2: ''
         }),
-        template: `<m-dropdown :focus="true" label="Vegetable" v-model="model1">
-                        <m-dropdown-item value="1a" label="Artichoke"></m-dropdown-item>
-                        <m-dropdown-item value="1b" label="Asparagus"></m-dropdown-item>
-                        <m-dropdown-item value="1c" label="Broccoli"></m-dropdown-item>
-                        <m-dropdown-item value="1d" label="Bok choy"></m-dropdown-item>
-                        <m-dropdown-item value="1e" label="Lettuce"></m-dropdown-item>
-                        <m-dropdown-item value="1f" label="Tomato"></m-dropdown-item>
+        template: `<m-dropdown :focus="true" label="Avengers" v-model="model2">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
                     </m-dropdown>`
     }))
     .add('placeholder-icon-name', () => ({
         data: () => ({
-            model1: ''
+            model3: ''
         }),
-        template: `<m-dropdown :label-up="true" label="Vegetable" v-model="model1" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
+        template: `<m-dropdown label="Animals" v-model="model3" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
         filterable="true">
-                        <m-dropdown-item value="1a" label="Artichoke"></m-dropdown-item>
-                        <m-dropdown-item value="1b" label="Asparagus"></m-dropdown-item>
-                        <m-dropdown-item value="1c" label="Broccoli"></m-dropdown-item>
-                        <m-dropdown-item value="1d" label="Bok choy"></m-dropdown-item>
-                        <m-dropdown-item value="1e" label="Lettuce"></m-dropdown-item>
-                        <m-dropdown-item value="1f" label="Tomato"></m-dropdown-item>
+                        <m-dropdown-item value="1a" label="Steer"></m-dropdown-item>
+                        <m-dropdown-item value="1b" label="Chameleon"></m-dropdown-item>
+                        <m-dropdown-item value="1c" label="Alpaca"></m-dropdown-item>
+                        <m-dropdown-item value="1d" label="Monkey"></m-dropdown-item>
+                        <m-dropdown-item value="1e" label="Cow"></m-dropdown-item>
+                        <m-dropdown-item value="1f" label="Pig"></m-dropdown-item>
                     </m-dropdown>`
     }));
 

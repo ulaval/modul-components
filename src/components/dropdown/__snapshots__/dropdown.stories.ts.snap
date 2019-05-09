@@ -125,7 +125,7 @@ exports[`Storyshots components|m-dropdown focus 1`] = `
           class="m-input-style__text"
         >
           <span>
-            Vegetable
+            Avengers
           </span>
            
           <!---->
@@ -210,8 +210,7 @@ exports[`Storyshots components|m-dropdown focus 1`] = `
 
 exports[`Storyshots components|m-dropdown placeholder-icon-name 1`] = `
 <div
-  class="m-dropdown"
-  label-up="true"
+  class="m-dropdown m--is-filterable"
   style="width: 100%; max-width: 288px;"
 >
   <div
@@ -230,7 +229,7 @@ exports[`Storyshots components|m-dropdown placeholder-icon-name 1`] = `
           class="m-input-style__text"
         >
           <span>
-            Vegetable
+            Animals
           </span>
            
           <!---->
@@ -264,8 +263,7 @@ exports[`Storyshots components|m-dropdown placeholder-icon-name 1`] = `
             aria-haspopup="true"
             class="m-dropdown__input"
             id="mDropdown-uuid"
-            placeholder="Placeholder"
-            readonly="readonly"
+            placeholder="Type to filter"
             type="text"
           />
            
