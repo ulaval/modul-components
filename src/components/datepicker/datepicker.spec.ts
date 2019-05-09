@@ -51,11 +51,11 @@ describe('MDatepicker', () => {
         let input: Wrapper<any> = wrapper.find('input');
 
         await Vue.nextTick();
-        expect((input.element as any).value).toBe('2019-06-05');
+        expect((input.element as HTMLInputElement).value).toBe('2019-06-05');
 
         expect(wrapper.emitted().change).toBeFalsy();
 
-        (input.element as any).value = '9999-99-99';
+        (input.element as HTMLInputElement).value = '9999-99-99';
         input.trigger('input');
         await Vue.nextTick();
 
@@ -76,11 +76,11 @@ describe('MDatepicker', () => {
         let input: Wrapper<any> = wrapper.find('input');
 
         await Vue.nextTick();
-        expect((input.element as any).value).toBe('2019-06-05');
+        expect((input.element as HTMLInputElement).value).toBe('2019-06-05');
 
         expect(wrapper.emitted().change).toBeFalsy();
 
-        (input.element as any).value = '';
+        (input.element as HTMLInputElement).value = '';
         input.trigger('input');
         await Vue.nextTick();
 
@@ -95,11 +95,11 @@ describe('MDatepicker', () => {
 
     it('When a valid date is typed the model is emmited and error is cleared', async () => {
         let input: Wrapper<any> = wrapper.find('input');
-        expect((input.element as any).value).toBe('');
+        expect((input.element as HTMLInputElement).value).toBe('');
 
         expect(wrapper.emitted().change).toBeFalsy();
 
-        (input.element as any).value = '2019-06-06';
+        (input.element as HTMLInputElement).value = '2019-06-06';
         input.trigger('input');
         await Vue.nextTick();
 
