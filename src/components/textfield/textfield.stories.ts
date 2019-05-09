@@ -99,10 +99,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield :value="value"></m-textfield>'
     }))
     .add('required-marker', () => ({
-        template: '<m-textfield :required-marker="true"></m-textfield>'
-    }))
-    .add('required', () => ({
-        template: '<m-textfield :required="true"></m-textfield>'
+        template: '<m-textfield label="Label" :required-marker="true"></m-textfield>'
     }))
     .add('waiting', () => ({
         template: '<m-textfield :waiting="true"></m-textfield>'
@@ -130,6 +127,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }))
     .add('word-wrap', () => ({
         template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
+    }))
+    .add('placeholder-icon', () => ({
+        template: '<m-textfield label="Label" placeholder="Placeholder" placeholder-icon-name="m-svg__search" word-wrap="true"></m-textfield>'
     }))
     .add('focus', () => ({
         template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'

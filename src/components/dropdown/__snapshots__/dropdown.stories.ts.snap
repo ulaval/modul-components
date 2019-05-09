@@ -36,12 +36,247 @@ exports[`Storyshots components|m-dropdown default 1`] = `
         <div
           class="m-input-style__left-content"
         >
+          <!---->
+           
           <input
             aria-controls="mDropdown-uuid-controls"
             aria-haspopup="true"
             class="m-dropdown__input"
             id="mDropdown-uuid"
             readonly="readonly"
+            type="text"
+          />
+           
+          <!---->
+            
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        >
+          <div
+            class="m-dropdown__arrow"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-dropdown__arrow__icon"
+              height="16px"
+              width="16px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+          </div>
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-dropdown__validation-message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-dropdown filterable 1`] = `
+<div
+  class="m-dropdown m--is-filterable"
+  placeholder-icon-name="m-svg__search"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-cursor-pointer m--has-label m--is-tag-default"
+    style="width: 100%;"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="mDropdown-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Animals
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__left-content"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-dropdown__placeholder-icon"
+            height="16px"
+            width="16px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <input
+            aria-controls="mDropdown-uuid-controls"
+            aria-haspopup="true"
+            class="m-dropdown__input"
+            id="mDropdown-uuid"
+            type="text"
+          />
+           
+          <!---->
+            
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        >
+          <div
+            class="m-dropdown__arrow"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-dropdown__arrow__icon"
+              height="16px"
+              width="16px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+          </div>
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-dropdown__validation-message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-dropdown filterable and placeholder 1`] = `
+<div
+  class="m-dropdown m--is-filterable"
+  placeholder-icon-name="m-svg__search"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-cursor-pointer m--has-label m--is-tag-default"
+    style="width: 100%;"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="mDropdown-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Animals
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__left-content"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-dropdown__placeholder-icon"
+            height="16px"
+            width="16px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <input
+            aria-controls="mDropdown-uuid-controls"
+            aria-haspopup="true"
+            class="m-dropdown__input"
+            id="mDropdown-uuid"
+            placeholder="Type to filter"
             type="text"
           />
            
@@ -123,7 +358,7 @@ exports[`Storyshots components|m-dropdown focus 1`] = `
           class="m-input-style__text"
         >
           <span>
-            Vegetable
+            Avengers
           </span>
            
           <!---->
@@ -138,6 +373,8 @@ exports[`Storyshots components|m-dropdown focus 1`] = `
         <div
           class="m-input-style__left-content"
         >
+          <!---->
+           
           <input
             aria-controls="mDropdown-uuid-controls"
             aria-haspopup="true"
@@ -225,7 +462,7 @@ exports[`Storyshots components|m-dropdown label-up 1`] = `
           class="m-input-style__text"
         >
           <span>
-            Vegetable
+            Name
           </span>
            
           <!---->
@@ -240,6 +477,8 @@ exports[`Storyshots components|m-dropdown label-up 1`] = `
         <div
           class="m-input-style__left-content"
         >
+          <!---->
+           
           <input
             aria-controls="mDropdown-uuid-controls"
             aria-haspopup="true"

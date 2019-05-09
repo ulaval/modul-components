@@ -653,6 +653,83 @@ exports[`Storyshots components|m-textfield placeholder 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-textfield placeholder-icon 1`] = `
+<div
+  class="m-textfield m--has-label m--has-word-wrap m--is-type-text"
+  placeholder-icon-name="m-svg__search"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-label m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="mTextfield-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__left-content"
+        >
+          <!---->
+           
+          <!---->
+           
+          <textarea
+            class="m-textfield__input"
+            id="mTextfield-uuid"
+            placeholder="Placeholder"
+            rows="1"
+          />
+           
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        />
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-textfield__validation"
+  >
+    <div
+      class="m-validation-message m-textfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-textfield readonly 1`] = `
 <div
   class="m-textfield m--is-readonly m--is-type-text"
@@ -719,92 +796,41 @@ exports[`Storyshots components|m-textfield readonly 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-textfield required 1`] = `
-<div
-  class="m-textfield m--is-type-text"
-  required="required"
-  style="width: 100%; max-width: 288px;"
->
-  <div
-    class="m-input-style m--is-tag-default"
-  >
-    <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
-    >
-      <!---->
-       
-      <div
-        class="m-input-style__body"
-      >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <span />
-        </div>
-         
-        <!---->
-      </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
-    >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <!---->
-  </div>
-</div>
-`;
-
 exports[`Storyshots components|m-textfield required-marker 1`] = `
 <div
-  class="m-textfield m--is-type-text"
+  class="m-textfield m--has-label m--is-type-text"
   style="width: 100%; max-width: 288px;"
 >
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-input-style m--has-label m--is-tag-default"
   >
     <div
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <label
+        class="m-input-style__label"
+        for="mTextfield-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Label
+          </span>
+           
+          <sup
+            class="m-input-style__required-marker"
+          >
+            *
+          </sup>
+        </span>
+      </label>
        
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
+        <!---->
          
         <div
           class="m-input-style__left-content"
