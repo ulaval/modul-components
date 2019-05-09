@@ -87,6 +87,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }))
     .add('word-wrap', () => ({
         template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
+    }))
+    .add('focus', () => ({
+        template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'
+    }))
+    .add('label-up', () => ({
+        template: '<m-textfield label="label" label-up="true" placeholder="placeholder"></m-textfield>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
