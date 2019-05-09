@@ -12,7 +12,13 @@ exports[`Storyshots components|m-timepicker default 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -322,7 +328,13 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -418,7 +430,13 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -515,7 +533,13 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -609,7 +633,13 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -706,7 +736,13 @@ exports[`Storyshots components|m-timepicker step 15m 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"

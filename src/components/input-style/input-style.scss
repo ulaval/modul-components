@@ -193,11 +193,8 @@ $m-input-style-base-height: $m-line-height + em;
         font-weight: $m-font-weight--light;
         text-decoration: none;
         background-color: $m-color--white;
-
-        .m-input-style.m--has-label & {
-            min-height: $m-input-style-base-height;
-            margin-top: -$m-input-style-base-height;
-        }
+        min-height: $m-input-style-base-height;
+        margin-top: -$m-input-style-base-height;
 
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {

@@ -13,7 +13,13 @@ exports[`Storyshots components|m-textfield default 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -81,7 +87,13 @@ exports[`Storyshots components|m-textfield disabled 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -147,7 +159,13 @@ exports[`Storyshots components|m-textfield error 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -212,7 +230,13 @@ exports[`Storyshots components|m-textfield error-message 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -377,7 +401,13 @@ exports[`Storyshots components|m-textfield helper-message 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -599,7 +629,13 @@ exports[`Storyshots components|m-textfield placeholder 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -742,7 +778,13 @@ exports[`Storyshots components|m-textfield readonly 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -888,7 +930,13 @@ exports[`Storyshots components|m-textfield valid 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -953,7 +1001,13 @@ exports[`Storyshots components|m-textfield valid-message 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1041,7 +1095,13 @@ exports[`Storyshots components|m-textfield value 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1106,7 +1166,13 @@ exports[`Storyshots components|m-textfield waiting 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1178,7 +1244,13 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1231,362 +1303,600 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
 `;
 
 exports[`Storyshots components|m-textfield/Counter all props 1`] = `
-<div
-  class="m-textfield m--has-label m--is-type-text"
-  style="width: 100%; max-width: 288px;"
->
+<div>
   <div
-    class="m-input-style m--has-label m--is-tag-default"
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style m--has-label m--is-tag-default"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            Enter a value
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              Enter a value
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="20"
+              placeholder="change knobs to further test"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
       >
         <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="20"
-            placeholder="change knobs to further test"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <span />
-        </div>
          
         <!---->
       </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
-    >
-      <!---->
        
       <!---->
     </div>
-     
-    <!---->
   </div>
+   
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      max-length
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      20
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      character-count
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      true
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      character-count-threshold
+    </span>
+     is equal to  
+    <span
+      style="color: red;"
+    >
+      10
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      length-overflow
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      false
+    </span>
+  </p>
 </div>
 `;
 
 exports[`Storyshots components|m-textfield/Counter character-count 1`] = `
-<div
-  class="m-textfield m--is-type-text"
-  style="width: 100%; max-width: 288px;"
->
+<div>
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style m--has-value m--is-tag-default"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__content"
+        style="margin-top: 10px;"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
         >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder=":character-count='true' max-length='20'"
-            type="text"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__body"
         >
-          <span />
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="Enter a value"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
         </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
          
         <!---->
+      </div>
+       
+      <div
+        class="m-character-count m-textfield__validation__character-count"
+      >
+        <div
+          aria-hidden="true"
+          class="m-character-count__wrap"
+        >
+          <span>
+            15
+          </span>
+          /20
+        </div>
       </div>
     </div>
   </div>
    
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
     >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <div
-      class="m-character-count m-textfield__validation__character-count"
+      max-length
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
     >
-      <div
-        aria-hidden="true"
-        class="m-character-count__wrap"
-      >
-        <span>
-          0
-        </span>
-        /20
-      </div>
-    </div>
-  </div>
+      "20"
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      character-count
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      true
+    </span>
+  </p>
 </div>
 `;
 
 exports[`Storyshots components|m-textfield/Counter character-count-threshold="10" 1`] = `
-<div
-  class="m-textfield m--is-type-text"
-  style="width: 100%; max-width: 288px;"
->
+<div>
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style m--has-value m--is-tag-default"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__content"
+        style="margin-top: 10px;"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
         >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder=":character-count='true' :character-count-threshold='10' max-length='20'"
-            type="text"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__body"
         >
-          <span />
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="Enter a value"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
         </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
          
         <!---->
+      </div>
+       
+      <div
+        class="m-character-count m-textfield__validation__character-count"
+      >
+        <div
+          aria-hidden="true"
+          class="m-character-count__wrap"
+        >
+          <span>
+            15
+          </span>
+          /20
+        </div>
       </div>
     </div>
   </div>
    
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
     >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <!---->
-  </div>
+      max-length
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      "20"
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      character-count
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      true
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      character-count-threshold
+    </span>
+     is equal to  
+    <span
+      style="color: red;"
+    >
+      "10"
+    </span>
+  </p>
 </div>
 `;
 
 exports[`Storyshots components|m-textfield/Counter length-overflow="true" 1`] = `
-<div
-  class="m-textfield m--is-type-text"
-  style="width: 100%; max-width: 288px;"
->
+<div>
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style m--has-value m--is-tag-default"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__content"
+        style="margin-top: 10px;"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
         >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder=":length-overflow='true' max-length='20'"
-            type="text"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__body"
         >
-          <span />
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="Enter a value"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
         </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
          
         <!---->
       </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
-    >
-      <!---->
        
       <!---->
     </div>
-     
-    <!---->
   </div>
+   
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      max-length
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      "20"
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      length-overflow
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      true
+    </span>
+  </p>
 </div>
 `;
 
 exports[`Storyshots components|m-textfield/Counter max-length="20" 1`] = `
-<div
-  class="m-textfield m--is-type-text"
-  style="width: 100%; max-width: 288px;"
->
+<div>
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style m--has-value m--is-tag-default"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__content"
+        style="margin-top: 10px;"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
         >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="20"
-            placeholder="max-length='20' length-overflow='false'"
-            type="text"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__body"
         >
-          <span />
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="20"
+              placeholder="Enter a value"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
         </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
          
         <!---->
       </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
-    >
-      <!---->
        
       <!---->
     </div>
-     
-    <!---->
   </div>
+   
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      max-length
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      "20"
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      length-overflow
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      false
+    </span>
+  </p>
 </div>
 `;
 
 exports[`Storyshots components|m-textfield/max-width all max-width presets 1`] = `
 <div
   class="m-textfield m--has-label m--is-type-text"
-  style="width: 100%; max-width: text;"
+  style="width: 100%; max-width: 288px;"
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
@@ -1603,7 +1913,7 @@ exports[`Storyshots components|m-textfield/max-width all max-width presets 1`] =
           class="m-input-style__text"
         >
           <span>
-            text
+            regular
           </span>
            
           <!---->
@@ -1887,6 +2197,758 @@ exports[`Storyshots components|m-textfield/max-width medium 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
+<div>
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 60px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              xs
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 60px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              xs
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 60px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              xs
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 60px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              xs
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <br />
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              small
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              small
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <br />
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              regular
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              regular
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <br />
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 592px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              medium
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <br />
+   
+  <div
+    class="m-textfield m--has-label m--is-type-text"
+    style="width: 100%; max-width: 896px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              large
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-textfield/max-width regular 1`] = `
 <div
   class="m-textfield m--has-label m--is-type-text"
@@ -2117,24 +3179,35 @@ exports[`Storyshots components|m-textfield/max-width x-small 1`] = `
 
 exports[`Storyshots components|m-textfield/tag-style all tag styles 1`] = `
 <div
-  class="m-textfield m--is-type-text"
+  class="m-textfield m--has-label m--is-type-text"
   style="width: 100%; max-width: 288px;"
 >
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h3"
   >
     <div
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <label
+        class="m-input-style__label"
+        for="mTextfield-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            h3
+          </span>
+           
+          <!---->
+        </span>
+      </label>
        
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
+        <!---->
          
         <div
           class="m-input-style__left-content"
@@ -2269,7 +3342,13 @@ exports[`Storyshots components|m-textfield/type type="email" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -2334,7 +3413,13 @@ exports[`Storyshots components|m-textfield/type type="number" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -2399,7 +3484,13 @@ exports[`Storyshots components|m-textfield/type type="password" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -2488,7 +3579,13 @@ exports[`Storyshots components|m-textfield/type type="search" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -2599,7 +3696,13 @@ exports[`Storyshots components|m-textfield/type type="tel" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -2664,7 +3767,13 @@ exports[`Storyshots components|m-textfield/type type="text" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -2729,7 +3838,13 @@ exports[`Storyshots components|m-textfield/type type="url" 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"

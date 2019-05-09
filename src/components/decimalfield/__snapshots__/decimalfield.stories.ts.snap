@@ -14,7 +14,13 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -217,7 +223,13 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -299,7 +311,13 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -362,7 +380,13 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -517,7 +541,13 @@ exports[`Storyshots components|m-decimalfield Custom precision 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -576,7 +606,13 @@ exports[`Storyshots components|m-decimalfield Default precision 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -635,7 +671,13 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -696,7 +738,13 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -757,7 +805,13 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -818,7 +872,13 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <!---->
+          <span
+            class="m-input-style__label"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
             class="m-input-style__body"
@@ -887,7 +947,13 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -946,7 +1012,13 @@ exports[`Storyshots components|m-decimalfield With initial value 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
