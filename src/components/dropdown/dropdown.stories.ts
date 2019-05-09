@@ -45,6 +45,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
         data: () => ({
             model3: ''
         }),
+        template: `<m-dropdown label="Animals" v-model="model3" placeholder-icon-name="m-svg__search"
+        filterable="true">
+                        <m-dropdown-item value="1a" label="Steer"></m-dropdown-item>
+                        <m-dropdown-item value="1b" label="Chameleon"></m-dropdown-item>
+                        <m-dropdown-item value="1c" label="Alpaca"></m-dropdown-item>
+                        <m-dropdown-item value="1d" label="Monkey"></m-dropdown-item>
+                        <m-dropdown-item value="1e" label="Cow"></m-dropdown-item>
+                        <m-dropdown-item value="1f" label="Pig"></m-dropdown-item>
+                    </m-dropdown>`
+    }))
+    .add('placeholder-icon-name and placeholder', () => ({
+        data: () => ({
+            model3: ''
+        }),
         template: `<m-dropdown label="Animals" v-model="model3" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
         filterable="true">
                         <m-dropdown-item value="1a" label="Steer"></m-dropdown-item>

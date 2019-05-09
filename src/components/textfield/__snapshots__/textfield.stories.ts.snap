@@ -515,7 +515,7 @@ exports[`Storyshots components|m-textfield placeholder-icon 1`] = `
   style="width: 100%; max-width: 288px;"
 >
   <div
-    class="m-input-style m--has-label m--has-placeholder-icon-text m--is-tag-default"
+    class="m-input-style m--has-label m--has-placeholder-icon m--is-tag-default"
   >
     <div
       class="m-input-style__content"
