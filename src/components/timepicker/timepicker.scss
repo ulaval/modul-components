@@ -30,7 +30,7 @@ $m-timepicker--height-multiplier: 5;
         height: $m-touch-size;
         padding: $m-margin 0;
         border-bottom: $m-border-width--s solid $m-color--border;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
 
         @media (min-width: #{$m-mq--min--s}) {
             border-top: $m-border-width--s solid $m-color--border;
@@ -75,7 +75,7 @@ $m-timepicker--height-multiplier: 5;
                 align-items: center;
                 justify-content: center;
                 text-decoration: none;
-                font-weight: $m-font-weight--bold;
+                font-weight: $m-font-weight--semi-bold;
             }
         }
     }

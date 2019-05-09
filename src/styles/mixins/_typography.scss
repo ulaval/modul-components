@@ -1,18 +1,14 @@
 @mixin font-face($font-family, $url, $font-weight: normal, $font-style: normal) {
     @font-face {
         font-family: '#{$font-family}';
-        src:
-            url('#{$m-font-path}#{$url}.otf.woff2') format('woff2'),
-            url('#{$m-font-path}#{$url}.ttf.woff2') format('woff2'),
-            url('#{$m-font-path}#{$url}.otf.woff') format('woff'),
-            url('#{$m-font-path}#{$url}.ttf.woff') format('woff');
+        src: url('#{$m-font-path}#{$url}.otf.woff2') format('woff2'), url('#{$m-font-path}#{$url}.ttf.woff2') format('woff2'), url('#{$m-font-path}#{$url}.otf.woff') format('woff'), url('#{$m-font-path}#{$url}.ttf.woff') format('woff');
         font-weight: $font-weight;
         font-style: $font-style;
     }
 }
 
 @mixin m-commons-title-styles() {
-    font-weight: $m-font-weight--bold;
+    font-weight: $m-font-weight--semi-bold;
     line-height: 1.1;
 }
 
@@ -45,7 +41,7 @@
 
     @media (max-width: $m-mq--max--s) {
         font-size: $m-font-size--mobile-h4;
-        font-weight: $m-font-weight--black;
+        font-weight: $m-font-weight--bold;
     }
 }
 
@@ -132,7 +128,7 @@
 
     b,
     strong {
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
     }
 
     i,
@@ -149,7 +145,7 @@
         word-break: break-all;
         word-wrap: break-word;
         font-size: $m-font-size--s;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         color: $m-color--text;
     }
 }

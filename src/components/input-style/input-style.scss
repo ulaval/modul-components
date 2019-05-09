@@ -161,7 +161,7 @@ $m-input-style-base-height: $m-line-height + em;
         transform: translate3d(0, 0, 0);
         align-items: center;
         font-size: $m-font-size;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         color: $m-color--text-light;
 
         .m-icon {
@@ -180,7 +180,7 @@ $m-input-style-base-height: $m-line-height + em;
     &__required-marker {
         color: $m-color--accent;
         font-size: inherit;
-        font-weight: $m-font-weight--black;
+        font-weight: $m-font-weight--bold;
         vertical-align: baseline;
     }
 
@@ -190,7 +190,7 @@ $m-input-style-base-height: $m-line-height + em;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         text-decoration: none;
         background-color: $m-color--white;
         min-height: $m-input-style-base-height;
@@ -218,6 +218,8 @@ $m-input-style-base-height: $m-line-height + em;
         position: relative;
         flex: 1 1 auto;
         max-width: 100%;
+        display: flex;
+        align-items: center;
     }
 
     &__right-content {
@@ -281,7 +283,7 @@ $m-input-style-base-height: $m-line-height + em;
         width: 100%;
         padding: 0;
         font-size: $m-font-size;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         line-height: $m-line-height;
         vertical-align: middle;
 
@@ -319,7 +321,7 @@ $m-input-style-base-height: $m-line-height + em;
         .m-input-style__label,
         .m-input-style__transparent-text {
             font-size: inherit;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
         }
     }
 
@@ -329,7 +331,7 @@ $m-input-style-base-height: $m-line-height + em;
         ::placeholder,
         .m-input-style__label,
         .m-input-style__transparent-text {
-            font-weight: $m-font-weight;
+            font-weight: $m-font-weight--light;
         }
     }
 
