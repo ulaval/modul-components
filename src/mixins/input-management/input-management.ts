@@ -124,7 +124,7 @@ export class InputManagement extends ModulVue
 
     @Watch('value', { immediate: true })
     private onValueChange(value: string): void {
-        this.internalValue = this.getTrimValue(this.value ? this.value : '');
+        this.internalValue = this.getTrimValue(this.value || '');
     }
 
     @Watch('focus')
