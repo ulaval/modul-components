@@ -5,7 +5,6 @@ import { InputState } from '../../mixins/input-state/input-state';
 import { ModulVue } from '../../utils/vue/vue';
 import { INPUT_STYLE_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
-import IconPlugin from '../icon/icon';
 import SpinnerPlugin from '../spinner/spinner';
 import WithRender from './input-style.html?style=./input-style.scss';
 
@@ -139,7 +138,6 @@ export class MInputStyle extends ModulVue {
 
 const InputStylePlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(IconPlugin);
         v.use(I18nPlugin);
         v.use(SpinnerPlugin);
         v.component(INPUT_STYLE_NAME, MInputStyle);
