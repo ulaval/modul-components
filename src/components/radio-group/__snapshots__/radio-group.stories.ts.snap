@@ -26,7 +26,7 @@ exports[`Storyshots components|m-radio-group default 1`] = `
         id="uuid"
         name="uuid"
         type="radio"
-        value="patate"
+        value=""
       />
        
       <label
@@ -47,14 +47,14 @@ exports[`Storyshots components|m-radio-group default 1`] = `
     </li>
      
     <li
-      class="m-radio"
+      class="m-radio m--is-checked"
     >
       <input
         class="m-radio__hidden"
         id="uuid"
         name="uuid"
         type="radio"
-        value="patate2"
+        value=""
       />
        
       <label
@@ -75,14 +75,14 @@ exports[`Storyshots components|m-radio-group default 1`] = `
     </li>
      
     <li
-      class="m-radio"
+      class="m-radio m--is-checked"
     >
       <input
         class="m-radio__hidden"
         id="uuid"
         name="uuid"
         type="radio"
-        value="patate3"
+        value=""
       />
        
       <label
