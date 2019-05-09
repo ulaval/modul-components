@@ -1,4 +1,3 @@
-import { CleaveOptions } from 'cleave.js/options';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
@@ -10,7 +9,7 @@ import L10nPlugin, { MDecimalFormat } from '../../utils/l10n/l10n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { DECIMALFIELD_NAME } from '../component-names';
-import { MInputMask } from '../input-mask/input-mask';
+import { InputMaskOptions, MInputMask } from '../input-mask/input-mask';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './decimalfield.html?style=./decimalfield.scss';
@@ -41,6 +40,9 @@ export class MDecimalfield extends ModulVue {
     })
     public precision: number;
 
+    @Prop({ default: false })
+    public forceRoundingFormat: boolean;
+
     private id: string = `mDecimalfield-${uuid.generate()}`;
 
     private onDropDecimalfield(event: DragEvent): void {
@@ -55,7 +57,7 @@ export class MDecimalfield extends ModulVue {
         return this.as<InputState>().isValid;
     }
 
-    private get inputMaskOptions(): CleaveOptions {
+    private get inputMaskOptions(): InputMaskOptions {
         const decimalFormat: MDecimalFormat = this.$l10n.getDecimalFormat(this.currentLocale);
         return {
             numeral: true,
@@ -65,7 +67,9 @@ export class MDecimalfield extends ModulVue {
             numeralDecimalMark: decimalFormat.decimalMark,
             numeralPositiveOnly: true,
             stripLeadingZeroes: true,
-            delimiter: decimalFormat.thousandSeparator
+            delimiter: decimalFormat.thousandSeparator,
+            removeTrailingDecimalMark: true,
+            forceDecimalScale: this.forceRoundingFormat
         };
     }
 

@@ -3,7 +3,7 @@
 exports[`MTextfield should render correctly 1`] = `
 <div class="m-integerfield" style="width:100%;max-width:288px;">
   <div class="m-input-style m--is-tag-default">
-    <div class="m-input-style__content" style="margin-top:10px;">
+    <div class="m-input-style__content" style="margin-top:10px;"><span class="m-input-style__label"><span class="m-input-style__text"></span></span>
       <div class="m-input-style__body">
         <div class="m-input-style__prefix"></div>
         <div class="m-input-style__left-content"><input id="mIntegerfield-uuid" maxlength="16" pattern="[0-9]*" inputmode="numeric" type="number" value="" class="m-integerfield__input"> </div>

@@ -74,4 +74,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
             <m-timepicker v-model="model"></m-timepicker>
             <m-timepicker v-model="model"></m-timepicker>
         </div>`
+    }))
+    .add('label-up', () => ({
+        data(): any {
+            return {
+                model: undefined
+            };
+        },
+        props: {
+            maxWidth: {
+                default: 'medium'
+            }
+        },
+        template: `<m-timepicker v-model="model" label="Activity start time" :label-up="true" :max-width="maxWidth"></m-timepicker>`
     }));
