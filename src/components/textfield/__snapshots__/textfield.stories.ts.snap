@@ -1,67 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots components|m-textfield default 1`] = `
-<div
-  class="m-textfield m--is-type-text"
-  style="width: 100%; max-width: 288px;"
->
+<div>
   <div
-    class="m-input-style m--is-tag-default"
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style m--is-tag-default"
     >
-      <!---->
-       
       <div
-        class="m-input-style__body"
+        class="m-input-style__content"
+        style="margin-top: 10px;"
       >
-        <div
-          class="m-input-style__prefix"
-        />
+        <!---->
          
         <div
-          class="m-input-style__left-content"
+          class="m-input-style__body"
         >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
+          <div
+            class="m-input-style__prefix"
           />
-            
-          <!---->
            
-          <!---->
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span />
+          </div>
            
           <!---->
         </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <span />
-        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
          
         <!---->
       </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
-    >
-      <!---->
        
       <!---->
     </div>
-     
-    <!---->
   </div>
+  <br />
+  model value = 
 </div>
 `;
 

@@ -44,12 +44,27 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        props: {
-            text: {
-                default: text('Text', 'A Textfield')
+        data: () => ({
+            model: ''
+        }),
+        methods: {
+            onInputChange(value: string): string {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onInputChange=' + value);
+                return value;
+            },
+            onFocus(value: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onFocus');
+
+            },
+            onBlur(event: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onBlur');
+
             }
         },
-        template: '<m-textfield>{{ text }}</m-textfield>'
+        template: '<div><m-textfield v-model="model" @input="model = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-textfield><br/>model value = {{model}}</div>'
     }))
     .add('placeholder', () => ({
         props: {

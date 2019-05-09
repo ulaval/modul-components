@@ -43,6 +43,12 @@ export class InputManagement extends ModulVue
 
     public internalIsFocus: boolean = false;
 
+    private mounted(): void {
+        if (this.focus) {
+            this.focusChanged(this.focus);
+        }
+    }
+
     public focusInput(): void {
         let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
         if (inputEl) {
@@ -54,15 +60,71 @@ export class InputManagement extends ModulVue
         return !!(this.model || '').toString().trim();
     }
 
-    private beforeMount(): void {
-        // Don't use this.model because we don't want to emit 'input' when the component isn't Mount
-        this.internalValue = this.getTrimValue(this.value ? this.value : '');
+    onClick(event: MouseEvent): void {
+        this.internalIsFocus = this.as<InputStateMixin>().active;
+        let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
+        if (this.internalIsFocus && inputEl) {
+            inputEl.focus();
+        }
+        this.$emit('click');
     }
 
-    private mounted(): void {
-        if (this.focus) {
-            this.focusChanged(this.focus);
+    onFocus(event: FocusEvent): void {
+        this.internalIsFocus = this.as<InputStateMixin>().active;
+        if (this.internalIsFocus) {
+            this.$emit('focus', event);
         }
+    }
+
+    onBlur(event: Event): void {
+        this.internalIsFocus = false;
+        this.$emit('blur', event);
+    }
+
+    onKeyup(event: Event): void {
+        if (this.as<InputStateMixin>().active) {
+            this.$emit('keyup', event, this.model);
+        }
+    }
+
+    onKeydown(event: Event): void {
+        if (this.as<InputStateMixin>().active) {
+            this.$emit('keydown', event);
+        }
+    }
+
+    onChange(event: Event): void {
+        this.$emit('change', this.model);
+    }
+
+    onPaste(event: Event): void {
+        this.$emit('paste', event);
+    }
+
+    getTrimValue(value: string): string {
+        return /\n/g.test(value) && this.trimWordWrap ? value.replace(/\n/g, '') : value;
+    }
+
+    set model(value: string) {
+        this.internalValue = this.getTrimValue(value);
+        this.$emit('input', this.internalValue);
+    }
+
+    get model(): string {
+        return this.internalValue;
+    }
+
+    get isEmpty(): boolean {
+        return this.isFocus || this.hasValue ? false : true;
+    }
+
+    get isFocus(): boolean {
+        return this.internalIsFocus;
+    }
+
+    @Watch('value', { immediate: true })
+    private onValueChange(value: string): void {
+        this.internalValue = this.getTrimValue(this.value || '');
     }
 
     @Watch('focus')
@@ -76,72 +138,5 @@ export class InputManagement extends ModulVue
                 inputEl.blur();
             }
         }
-    }
-
-    private onClick(event: MouseEvent): void {
-        this.internalIsFocus = this.as<InputStateMixin>().active;
-        let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
-        if (this.internalIsFocus && inputEl) {
-            inputEl.focus();
-        }
-        this.$emit('click');
-    }
-
-    private onFocus(event: FocusEvent): void {
-        this.internalIsFocus = this.as<InputStateMixin>().active;
-        if (this.internalIsFocus) {
-            this.$emit('focus', event);
-        }
-    }
-
-    private onBlur(event: Event): void {
-        this.internalIsFocus = false;
-        this.$emit('blur', event);
-    }
-
-    private onKeyup(event: Event): void {
-        if (this.as<InputStateMixin>().active) {
-            this.$emit('keyup', event, this.model);
-        }
-    }
-
-    private onKeydown(event: Event): void {
-        if (this.as<InputStateMixin>().active) {
-            this.$emit('keydown', event);
-        }
-    }
-
-    private onChange(event: Event): void {
-        this.$emit('change', this.model);
-    }
-
-    private onPaste(event: Event): void {
-        this.$emit('paste', event);
-    }
-
-    private getTrimValue(value: string): string {
-        return /\n/g.test(value) && this.trimWordWrap ? value.replace(/\n/g, '') : value;
-    }
-
-    @Watch('value')
-    private onValueChange(value: string): void {
-        this.model = value;
-    }
-
-    private set model(value: string) {
-        this.internalValue = this.getTrimValue(value);
-        this.$emit('input', this.internalValue);
-    }
-
-    private get model(): string {
-        return this.internalValue;
-    }
-
-    private get isEmpty(): boolean {
-        return this.isFocus || this.hasValue ? false : true;
-    }
-
-    public get isFocus(): boolean {
-        return this.internalIsFocus;
     }
 }
