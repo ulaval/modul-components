@@ -129,12 +129,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield helper-message="This message is here to help you" type="tel" value="12345"></m-textfield>'
     }))
     .add('word-wrap', () => ({
-<<<<<<< HEAD
-        data: () => ({
-            model1: 'abcdefghijklmnopqrstuvwxyz-123456789123456789123456789'
-        }),
-        template: '<div><m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield> <br/> {{model1}}</div>'
-=======
         template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
     }))
     .add('focus', () => ({
@@ -142,7 +136,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }))
     .add('label-up', () => ({
         template: '<m-textfield label="label" label-up="true" placeholder="placeholder"></m-textfield>'
->>>>>>> develop
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
