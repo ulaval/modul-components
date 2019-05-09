@@ -345,13 +345,16 @@ export class MRootTreeSandbox extends Vue {
                             children: [
                                 {
                                     id: '1111',
-                                    label: 'PRS - Personne'
+                                    label: 'PRS - Personne',
+                                    rightIconName: 'm-svg__warning'
                                 },
                                 {
                                     id: '2222',
-                                    label: 'SMT - Something'
+                                    label: 'SMT - Something',
+                                    rightIconName: 'm-svg__warning'
                                 }
-                            ]
+                            ],
+                            rightIconName: 'm-svg__warning'
                         }
                     ]
                 },

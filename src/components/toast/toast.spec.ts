@@ -163,6 +163,9 @@ describe(`MToast`, () => {
 
             describe(`Then the mouse is over and leave the toast`, () => {
                 it(`Should appear and then not disappear`, async () => {
+                    const now: number = Date.now();
+                    global.Date.now = jest.fn(() => now);
+
                     initializeWrapper();
                     wrapper.setProps({
                         timeout: 'short'
@@ -171,12 +174,17 @@ describe(`MToast`, () => {
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalCreated).toBe(true);
                     expect(((wrapper.vm as any) as Portal).portalMounted).toBe(true);
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopShort);
+
+                    let customWaitingTime: number = 500;
+                    global.Date.now = jest.fn(() => now + customWaitingTime); // Fast-forward dates in 500ms
 
                     wrapper.vm.mouseEnterToast();
-                    await jest.runOnlyPendingTimers(); // wait for the timeout to be over
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBe(true);
 
                     wrapper.vm.mouseLeaveToast();
+                    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), MToastDuration.DesktopShort - customWaitingTime);
+
                     await jest.runOnlyPendingTimers(); // wait for the timeout to be over
                     expect(((wrapper.vm as any) as PortalMixin).propOpen).toBeFalsy();
                 });
