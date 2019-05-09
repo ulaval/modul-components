@@ -65,13 +65,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
-    .add('date off limit min', () => ({
+    .add('date before min error', () => ({
         data: () => ({
             model1: '2000-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
-    .add('date off limit  max', () => ({
+    .add('date after max error', () => ({
         data: () => ({
             model1: '2015-01-01'
         }),
@@ -101,5 +101,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('label-up', () => ({
         template: `<m-datepicker label="Date label" :label-up="true"></m-datepicker>`
+    }))
+    .add('skip-input-validation=true', () => ({
+        data: () => ({
+            model1: '9999-99-99'
+        }),
+        template: `<div><m-datepicker :skip-input-validation="true" min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }));
 

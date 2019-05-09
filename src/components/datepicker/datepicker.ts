@@ -60,6 +60,9 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: false })
     public hideInternalErrorMessage: boolean;
 
+    @Prop({ default: false })
+    public skipInputValidation: boolean;
+
     private internalOpen: boolean = false;
     private internalCalendarErrorMessage: string = '';
     private inputModel = '';
@@ -139,7 +142,10 @@ export class MDatepicker extends ModulVue {
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.$emit('blur');
-            this.showErrorMessage(this.inputModel);
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
+
         }
 
     }
@@ -163,24 +169,28 @@ export class MDatepicker extends ModulVue {
 
     private inputDate(inputValue: string): void {
         this.inputModel = inputValue;
-
-        if (!inputValue || inputValue === '') {
-            this.model = '';
-            this.clearErrorMessage();
-        } else if (inputValue.length === 10) {
-
-            if (this.showErrorMessage(inputValue)) {
-                this.model = this.inputModel;
-            } else {
-                this.model = '';
-            }
+        if (this.skipInputValidation) {
+            this.model = inputValue;
         } else {
-            if (this.open) {
-                this.open = false;
+            if (!inputValue || inputValue === '') {
+                this.model = '';
+                this.clearErrorMessage();
+            } else if (inputValue.length === 10) {
+
+                if (this.showErrorMessage(inputValue)) {
+                    this.model = this.inputModel;
+                } else {
+                    this.model = '';
+                }
+            } else {
+                if (this.open) {
+                    this.open = false;
+                }
+                this.model = '';
+                this.clearErrorMessage();
             }
-            this.model = '';
-            this.clearErrorMessage();
         }
+
     }
 
     private clearErrorMessage(): void {
@@ -198,12 +208,16 @@ export class MDatepicker extends ModulVue {
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';
                 return true;
-            } else {
+            } else if (newDate.isBefore(this.minModulDate)) {
 
                 const minDateShortString: string = dateFilter(this.minModulDate.toDate(), { shortMode: true });
-                const maxDateShortString: string = dateFilter(this.maxModulDate.toDate(), { shortMode: true });
-                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error', [minDateShortString, maxDateShortString], undefined, undefined, false, FormatMode.Default);
+
+                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:before-min-error', [minDateShortString], undefined, undefined, false, FormatMode.Default);
                 return false;
+            } else {
+                const maxDateShortString: string = dateFilter(this.maxModulDate.toDate(), { shortMode: true });
+
+                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:after-max-error', [maxDateShortString], undefined, undefined, false, FormatMode.Default);
             }
         } else {
             this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
@@ -223,7 +237,9 @@ export class MDatepicker extends ModulVue {
         if (this.internalDateModel !== this.convertModelToString(value)) {
             this.internalDateModel = this.convertModelToString(value);
             this.inputModel = this.internalDateModel;
-            this.showErrorMessage(this.inputModel);
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
         }
 
     }
@@ -280,7 +296,9 @@ export class MDatepicker extends ModulVue {
 
         if (!this.open) { // do not emit blur if still open
             this.$emit('blur', event);
-            this.showErrorMessage(this.inputModel);
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
         }
 
 

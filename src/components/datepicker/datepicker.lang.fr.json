@@ -3,7 +3,8 @@
         "placeholder": "AAAA-MM-JJ",
         "open": "Ouvrir le calendrier",
         "close": "Fermer le calendrier",
-        "out-of-range-error": "Entrer une date comprise entre le {0} et le {1}",
-        "format-error": "Le format attendu est AAAA-MM-JJ"
+        "format-error": "Entrez une date avec un format AAAA-MM-JJ",
+        "before-min-error": "Sélectionnez une date après le {0}",
+        "after-max-error": "Sélectionnez une date avant le {0}"
     }
 }

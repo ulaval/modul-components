@@ -3,7 +3,8 @@
         "placeholder": "YYYY-MM-DD",
         "open": "Open calendar",
         "close": "Close calendar",
-        "out-of-range-error": "Enter a date between {0} and {1}",
-        "format-error": "The expected format is YYYY-MM-DD"
+        "format-error": "Enter a date in the format YYYY-MM-DD",
+        "before-min-error": "Select a date after {0}",
+        "after-max-error": "Select a date before {0}"
     }
 }
