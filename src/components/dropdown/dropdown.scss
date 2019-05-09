@@ -22,12 +22,20 @@ $m-dropdown--margin: $m-padding--xs !default;
         }
     }
 
+    &.m--is-filterable {
+        .m-dropdown__input {
+            &::placeholder {
+                padding-left: calc(#{$m-spacing} + #{$m-spacing--xs});
+            }
+        }
+    }
+
     &__header {
         &__label {
             margin: 0;
             padding: $m-padding--s $m-padding;
             font-size: $m-font-size--s;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
             color: $m-color--white;
             background: $m-color--interactive;
         }
@@ -41,7 +49,7 @@ $m-dropdown--margin: $m-padding--xs !default;
             &-input {
                 width: 100%;
                 font-size: $m-font-size;
-                font-weight: $m-font-weight;
+                font-weight: $m-font-weight--light;
                 border: none;
                 outline: none;
                 background: none;
@@ -94,6 +102,14 @@ $m-dropdown--margin: $m-padding--xs !default;
 
     &__validation-message {
         transition: margin-top $m-transition-duration ease;
+    }
+
+    &__placeholder-icon.m-icon.m-icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $m-color--disabled !important;
     }
 
     .m-input-style {

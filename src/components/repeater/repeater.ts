@@ -73,10 +73,6 @@ export class MRepeater extends ModulVue {
         if (!this.$scopedSlots.row && !this.$scopedSlots.item) {
             throw new Error('MRepeater requires content to be provided through row or item slot.');
         }
-
-        // tslint:disable-next-line:no-console
-        console.log(this.$scopedSlots.row);
-
     }
 
     @Emit('add')

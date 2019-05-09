@@ -22,6 +22,11 @@
                    :tag-style="tagStyle"
                    @click="onOpen"
                    v-m-popup:popup>
+        <m-icon class="m-dropdown__placeholder-icon"
+                aria-hidden="true"
+                v-if="hasPlaceholderIcon"
+                name="m-svg__search"
+                size="16px"></m-icon>
         <input type="text"
                ref="input"
                :id="id"
