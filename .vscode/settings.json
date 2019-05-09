@@ -24,5 +24,6 @@
     },
     "html.format.wrapLineLength": 0,
     "html.format.wrapAttributes": "force-aligned",
-    "typescript.updateImportsOnFileMove.enabled": "prompt"
+    "typescript.updateImportsOnFileMove.enabled": "prompt",
+    "typescript.preferences.quoteStyle": "single"
 }

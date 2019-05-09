@@ -1,14 +1,16 @@
 <div class="m-repeater">
 
-    <component :is="tag"
-               v-if="list.length">
+    <transition-group class="m-repeater__list"
+                      name="m--is"
+                      :tag="tag">
+
         <template v-for="(item, index) in list">
 
             <slot :props="getRowProps(item, index)"
                   :listeners="getRowListeners(item, index)"
                   name="row">
 
-                <component :is="'li'"
+                <component :is="itemTag"
                            class="m-repeater__row"
                            :key="getItemKey(item, index)">
 
@@ -25,21 +27,19 @@
                 </component>
             </slot>
         </template>
-    </component>
-
-    <div v-else-if="emptyMessage"
-         class="m-repeater__empty-row">
-        {{ emptyMessage }}
-    </div>
-
-    <!-- TODO: Replace with add component when it becomes available.  -->
-    <m-link class="m-repeater__add"
-            v-if="canAdd"
-            mode="button"
-            icon-name="m-svg__add-circle-filled"
-            icon-size="24px"
-            ref="addBtn"
-            @click="onAddBtnClick()">
-        {{ addBtnLabel }}
-    </m-link>
+        <component :is="itemTag"
+                   v-if="emptyMessage && list.length === 0"
+                   class="m-repeater__row m--is-empty"
+                   key="empty-row">
+            {{ emptyMessage }}
+        </component>
+        <component :is="itemTag"
+                   class="m-repeater__footer"
+                   :class="{'m--is-slot-row' : hasRowSlot}"
+                   key="footer">
+            <m-add v-if="canAdd"
+                   ref="addBtn"
+                   @click="onAddBtnClick()">{{ addBtnLabel }}</m-add>
+        </component>
+    </transition-group>
 </div>
