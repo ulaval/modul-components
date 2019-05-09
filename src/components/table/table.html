@@ -6,22 +6,23 @@
             <tr>
                 <th v-for="(column, index) in columns"
                     :style="columnWidth(column)"
-                    :class="{ 'm--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column), 'm--is-centered': column.centered }"
+                    :class="[{ 'm--is-sortable': column.sortable, 'm--is-sorted': isColumnSorted(column), 'm--is-centered': column.centered }, column.class]"
                     :key="column.id"
+                    @click="sort(column)"
                     scope="col">
                     <slot :name="'header.' + column.dataProp"
                           :column="column">
-                        <template v-if="column.sortable">
-                            <span class="m-table__header-name"
-                                  @click="sort(column)">{{ column.title }}</span>
+                        <div v-if="column.sortable"
+                             class="m-table__header-wrap">
+                            <span class="m-table__header-name">{{ column.title }}</span>
                             <m-icon-button v-if="column.sortable"
                                            class="m-table__sortable-icon"
                                            :disabled="loading"
                                            :icon-name="getIconName(column)"
-                                           @click="sort(column)"
                                            skin="bold"
-                                           button-size="12px"></m-icon-button>
-                        </template>
+                                           button-size="12px"
+                                           @click="sort(column)"></m-icon-button>
+                        </div>
                         <template v-else>
                             <span class="m-table__header-name">{{ column.title }}</span>
                         </template>

@@ -24,6 +24,7 @@ export interface MColumnTable {
     width?: string;
     sortable?: boolean;
     centered?: boolean;
+    class?: string;
     sortDirection?: MColumnSortDirection;
 }
 
@@ -63,7 +64,7 @@ export class MTable extends ModulVue {
     }
 
     public sort(columnTable: MColumnTable): void {
-        if (this.loading) {
+        if (this.loading || !columnTable.sortable) {
             return;
         }
 
