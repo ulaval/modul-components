@@ -63,7 +63,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
         components: { MMoneyfield },
         template: `<${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>`,
         data: () => ({
-            value: 123456.78
+            value: 123456.7
         })
     }));
 
@@ -89,7 +89,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
             }
         },
         data: () => ({
-            value: 123456.78,
+            value: 123456.7,
             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
             i18n: Vue.prototype.$i18n
         }),

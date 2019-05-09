@@ -63,7 +63,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
         components: { MDecimalfield },
         template: `<${DECIMALFIELD_NAME} v-model="value"></${DECIMALFIELD_NAME}>`,
         data: () => ({
-            value: 123456.78
+            value: 123456.1
         })
     }));
 
@@ -89,7 +89,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
             }
         },
         data: () => ({
-            value: 123456.78,
+            value: 123456.1,
             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
             i18n: Vue.prototype.$i18n
         }),

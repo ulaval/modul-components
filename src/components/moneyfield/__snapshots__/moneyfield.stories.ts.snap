@@ -8,6 +8,7 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         maxwidth="small"
         precision="11"
         tagstyle="default"
@@ -28,6 +29,7 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         label="Label"
         maxwidth="small"
         precision="11"
@@ -49,6 +51,7 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         label="Required label"
         maxwidth="small"
         precision="11"
@@ -71,6 +74,7 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         maxwidth="small"
         precision="11"
         tagstyle="default"
@@ -92,6 +96,7 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         helpermessage="Helper message"
         maxwidth="small"
         precision="11"
@@ -114,6 +119,7 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
     >
       <m-decimalfield
         errormessage="Error message"
+        force-rounding-format="true"
         maxwidth="small"
         precision="11"
         tagstyle="default"
@@ -136,6 +142,7 @@ exports[`Storyshots components|m-moneyfield Custom precision 1`] = `
   style="width: 100%; max-width: 136px;"
 >
   <m-decimalfield
+    force-rounding-format="true"
     maxwidth="small"
     precision="7"
     tagstyle="default"
@@ -157,6 +164,7 @@ exports[`Storyshots components|m-moneyfield Default precision 1`] = `
   style="width: 100%; max-width: 136px;"
 >
   <m-decimalfield
+    force-rounding-format="true"
     maxwidth="small"
     precision="11"
     tagstyle="default"
@@ -178,10 +186,11 @@ exports[`Storyshots components|m-moneyfield Localization 1`] = `
   style="width: 100%; max-width: 136px;"
 >
   <m-decimalfield
+    force-rounding-format="true"
     maxwidth="small"
     precision="11"
     tagstyle="default"
-    value="123456.78"
+    value="123456.7"
     width="100%"
   >
     <template>
@@ -202,6 +211,7 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
     >
       <m-decimalfield
         disabled="true"
+        force-rounding-format="true"
         maxwidth="small"
         placeholder="Disabled"
         precision="11"
@@ -223,6 +233,7 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         maxwidth="small"
         placeholder="Read-only"
         precision="11"
@@ -245,6 +256,7 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <m-decimalfield
+        force-rounding-format="true"
         maxwidth="small"
         placeholder="Waiting"
         precision="11"
@@ -269,6 +281,7 @@ exports[`Storyshots components|m-moneyfield With initial value (0) 1`] = `
   style="width: 100%; max-width: 136px;"
 >
   <m-decimalfield
+    force-rounding-format="true"
     maxwidth="small"
     precision="11"
     tagstyle="default"
@@ -290,10 +303,11 @@ exports[`Storyshots components|m-moneyfield With initial value 1`] = `
   style="width: 100%; max-width: 136px;"
 >
   <m-decimalfield
+    force-rounding-format="true"
     maxwidth="small"
     precision="11"
     tagstyle="default"
-    value="123456.78"
+    value="123456.7"
     width="100%"
   >
     <template>
