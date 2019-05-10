@@ -3,9 +3,9 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { InputStateTagStyle } from '../../mixins/input-state/input-state';
 import { INPLACE_EDIT_NAME } from '../component-names';
 import InplaceEditPlugin from './inplace-edit';
-import { InputStateTagStyle } from '../../mixins/input-state/input-state';
 
 Vue.use(InplaceEditPlugin);
 
@@ -126,10 +126,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}`, module)
                        <m-textfield slot="editMode" label="edit-mode-padding" v-model="value"></m-textfield>
                    </m-inplace-edit>`
     }))
+
+
+storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}/mobile`, module)
+    .addParameters({ viewport: { defaultViewport: 'iphone6' } })
     .add('title', () => ({
         data: () => ({
             value: 'This is a value with a title prop',
-            editMode: false
+            editMode: true
         }),
         methods: {
             onClick(): void {
@@ -143,17 +147,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}`, module)
         },
         template: `<div>
                     <m-inplace-edit :edit-mode.sync="editMode" :title="title" @click="onClick">
-                       <span slot="readMode">{{ value }}</span>
-                       <m-textfield slot="editMode" label="Story #7 (title)" v-model="value"></m-textfield>
-                   </m-inplace-edit>
+                    <span slot="readMode">{{ value }}</span>
+                    <m-textfield slot="editMode" label="Story #7 (title)" v-model="value"></m-textfield>
+                </m-inplace-edit>
                     <br>
                     <p><span style="color: blue">title</span> is set to <span style="color: red">{{ title }}</span></p>
-                    </div>`
+                </div>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}/tag-style`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('all tag styles (knob)', () => ({
         data: () => ({
             value: `This is a value with a tag style`,
