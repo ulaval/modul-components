@@ -106,43 +106,6 @@ exports[`Storyshots components|m-inplace-edit padding="26px" 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-inplace-edit title 1`] = `
-<div>
-  <div
-    class="m-inplace-edit"
-  >
-    <span>
-      This is a value with a title prop
-    </span>
-     
-    <!---->
-     
-    <div
-      class="m-overlay"
-    >
-       
-      <!---->
-    </div>
-  </div>
-   
-  <br />
-   
-  <p>
-    <span
-      style="color: blue;"
-    >
-      title
-    </span>
-     is set to 
-    <span
-      style="color: red;"
-    >
-      This is a custom title
-    </span>
-  </p>
-</div>
-`;
-
 exports[`Storyshots components|m-inplace-edit waiting 1`] = `
 <div
   class="m-inplace-edit"
@@ -162,6 +125,46 @@ exports[`Storyshots components|m-inplace-edit waiting 1`] = `
       style="display: none;"
     />
   </div>
+</div>
+`;
+
+exports[`Storyshots components|m-inplace-edit/mobile title 1`] = `
+<div>
+  <div
+    class="m-inplace-edit"
+  >
+    <span>
+      This is a value with a title prop
+    </span>
+     
+    <!---->
+     
+    <div
+      class="m-overlay"
+    >
+       
+      <div
+        class="v-portal"
+        style="display: none;"
+      />
+    </div>
+  </div>
+   
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      title
+    </span>
+     is set to 
+    <span
+      style="color: red;"
+    >
+      This is a custom title
+    </span>
+  </p>
 </div>
 `;
 
