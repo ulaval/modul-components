@@ -13,7 +13,13 @@ exports[`Storyshots components|m-datepicker date format invalid 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -130,7 +136,13 @@ exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -247,7 +259,13 @@ exports[`Storyshots components|m-datepicker date off limit min 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -363,7 +381,13 @@ exports[`Storyshots components|m-datepicker default 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -454,7 +478,13 @@ exports[`Storyshots components|m-datepicker disabled 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -547,7 +577,13 @@ exports[`Storyshots components|m-datepicker error-message 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -662,7 +698,13 @@ exports[`Storyshots components|m-datepicker events 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -758,7 +800,13 @@ exports[`Storyshots components|m-datepicker helper-message 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -853,7 +901,13 @@ exports[`Storyshots components|m-datepicker hide-internal-error-message 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1034,6 +1088,108 @@ exports[`Storyshots components|m-datepicker label 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-datepicker label-up 1`] = `
+<div
+  class="m-datepicker"
+  style="width: 100%; max-width: 136px;"
+>
+  <div
+    class="m-input-style m--is-label-up m--has-label m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="mDatepicker-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Date label
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__left-content"
+        >
+          <input
+            aria-haspopup="true"
+            autocomplete="off"
+            id="mDatepicker-uuid"
+            placeholder="AAAA-MM-JJ"
+          />
+            
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        >
+          <button
+            aria-controls="mDatepicker-uuid"
+            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+            style="width: 22px; height: 22px;"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="20px"
+              width="20px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-datepicker__validation-message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31" 1`] = `
 <div>
   <div
@@ -1047,7 +1203,13 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -1140,7 +1302,13 @@ exports[`Storyshots components|m-datepicker placeholder 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1231,7 +1399,13 @@ exports[`Storyshots components|m-datepicker readonly 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1324,7 +1498,13 @@ exports[`Storyshots components|m-datepicker valid 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -1415,7 +1595,13 @@ exports[`Storyshots components|m-datepicker waiting 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"

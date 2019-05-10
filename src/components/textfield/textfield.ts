@@ -176,8 +176,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return !this.as<InputState>().hasErrorMessage;
     }
 
-
-
     private resetModel(): void {
         this.$emit('input', '');
     }

@@ -12,7 +12,13 @@ exports[`Storyshots components|m-timepicker default 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -203,6 +209,113 @@ exports[`Storyshots components|m-timepicker label 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-timepicker label-up 1`] = `
+<div
+  class="m-timepicker"
+  style="width: 100%; max-width: 592px;"
+>
+  <div
+    class="m-input-style m--is-label-up m--has-label m--is-tag-default"
+  >
+    <div
+      class="m-input-style__content"
+      style="margin-top: 10px;"
+    >
+      <label
+        class="m-input-style__label"
+        for="mTimepicker-uuid"
+      >
+        <span
+          class="m-input-style__text"
+        >
+          <span>
+            Activity start time
+          </span>
+           
+          <!---->
+        </span>
+      </label>
+       
+      <div
+        class="m-input-style__body"
+      >
+        <!---->
+         
+        <div
+          class="m-input-style__left-content"
+        >
+          <input
+            aria-controls="mTimepicker-uuid-controls"
+            aria-haspopup="true"
+            id="mTimepicker-uuid"
+            inputmode="decimal"
+            max="23:59"
+            min="00:00"
+            placeholder="hh:mm"
+            step="300"
+            type="text"
+          />
+            
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-input-style__right-content"
+        >
+          <button
+            aria-controls="mTimepicker-uuid"
+            class="m-icon-button m--is-skin-light m--has-ripple"
+            style="width: 22px; height: 22px;"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="20px"
+              width="20px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-timepicker__validation-message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-timepicker max widht 1`] = `
 <div
   class="m-timepicker"
@@ -215,7 +328,13 @@ exports[`Storyshots components|m-timepicker max widht 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -311,7 +430,13 @@ exports[`Storyshots components|m-timepicker min 8:45 / max 15:15 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"
@@ -408,7 +533,13 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -502,7 +633,13 @@ exports[`Storyshots components|m-timepicker reactivity 1`] = `
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <!---->
+        <span
+          class="m-input-style__label"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
           class="m-input-style__body"
@@ -599,7 +736,13 @@ exports[`Storyshots components|m-timepicker step 15m 1`] = `
       class="m-input-style__content"
       style="margin-top: 10px;"
     >
-      <!---->
+      <span
+        class="m-input-style__label"
+      >
+        <span
+          class="m-input-style__text"
+        />
+      </span>
        
       <div
         class="m-input-style__body"

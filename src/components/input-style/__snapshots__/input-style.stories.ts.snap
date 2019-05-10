@@ -54,7 +54,13 @@ exports[`Storyshots components|m-input-style default 1`] = `
     class="m-input-style__content"
     style="margin-top: 10px;"
   >
-    <!---->
+    <span
+      class="m-input-style__label"
+    >
+      <span
+        class="m-input-style__text"
+      />
+    </span>
      
     <div
       class="m-input-style__body"

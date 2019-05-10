@@ -10,7 +10,7 @@ $m-file-upload-max-height--s: 72px;
         margin-bottom: $m-margin--l;
 
         &__title {
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
         }
 
         &__list {
@@ -85,7 +85,7 @@ $m-file-upload-max-height--s: 72px;
             }
 
             &__title {
-                font-weight: $m-font-weight--bold;
+                font-weight: $m-font-weight--semi-bold;
                 display: flex;
                 align-items: center;
                 margin-top: 0;
@@ -98,7 +98,7 @@ $m-file-upload-max-height--s: 72px;
 
         &__format {
             margin-top: $m-spacing--s;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
         }
     }
 
@@ -167,7 +167,7 @@ $m-file-upload-max-height--s: 72px;
         }
 
         &__name {
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
             word-break: break-all;
             flex: 1 0 0;
             padding-right: $m-padding--xs;
@@ -256,7 +256,7 @@ $m-file-upload-max-height--s: 72px;
         }
 
         &__infos-label {
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
             padding-bottom: $m-padding--xs;
             word-break: break-all;
         }
