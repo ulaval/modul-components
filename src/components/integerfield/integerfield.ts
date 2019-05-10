@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop, Watch } from 'vue-property-decorator';
+import { Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -36,9 +36,7 @@ const ALLOWED_KEYCODE: number[] = [
     ]
 })
 export class MIntegerfield extends ModulVue {
-
     @Prop()
-    @Model('input')
     public value: number;
 
     @Prop()
@@ -60,14 +58,12 @@ export class MIntegerfield extends ModulVue {
     })
     public maxLength: number;
 
-    public internalValue: number;
-
     private id: string = `mIntegerfield-${uuid.generate()}`;
 
     private onPasteIntegerfield(event: Event): void {
         let pasteContent: string = event['clipboardData'].getData('text');
         if (/^\d+$/.test(pasteContent)) {
-            if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + this.internalValue.toString().length <= this.maxLength) {
+            if (!isFinite(this.maxLengthNumber) || isFinite(this.maxLengthNumber) && String(pasteContent).length + this.as<InputManagement>().internalValue.length <= this.maxLength) {
                 this.$emit('paste', event);
             } else {
                 event.preventDefault();
@@ -79,7 +75,7 @@ export class MIntegerfield extends ModulVue {
 
     private onKeydownIntegerfield(event: KeyboardEvent): void {
         // tslint:disable-next-line: deprecation
-        if (isFinite(this.maxLengthNumber) && this.internalValue.toString().length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
+        if (isFinite(this.maxLengthNumber) && this.as<InputManagement>().internalValue.length + 1 > this.maxLengthNumber && !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 || !event.ctrlKey && ALLOWED_KEYCODE.indexOf(event.keyCode) === -1 && this.isNumberKeycode(event.keyCode)) {
             event.preventDefault();
         } else {
             this.$emit('keydown', event);
@@ -115,19 +111,17 @@ export class MIntegerfield extends ModulVue {
         return 'numeric';
     }
 
-    @Watch('value')
-    private onValueChange(value: number): void {
-        this.model = value.toString();
-    }
 
-    private get model(): string {
-        return ((this as any) as InputManagement).internalValue;
-    }
-
-    private set model(value: string) {
-        ((this as any) as InputManagement).internalValue = value;
+    set model(value: string) {
+        this.as<InputManagement>().internalValue = value;
         this.$emit('input', Number.parseInt(value, 10));
     }
+
+
+    get model(): string {
+        return this.as<InputManagement>().internalValue;
+    }
+
 }
 
 const IntegerfieldPlugin: PluginObject<any> = {

@@ -535,6 +535,10 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return !this.filterable || (this.filterable && !this.open);
     }
 
+    private get hasPlaceholderIcon(): boolean {
+        return this.filterable && this.selectedText === '';
+    }
+
 }
 
 const DropdownPlugin: PluginObject<any> = {

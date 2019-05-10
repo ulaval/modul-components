@@ -9,19 +9,14 @@
             justify-content: flex-end;
         }
 
-        &:not(.m--has-secondary-content):not(.m--no-title) {
-            justify-content: space-between;
-            align-items: flex-end;
-
-            &.m--is-reserve-header {
-                flex-direction: row-reverse;
-            }
+        &:not(.m--has-secondary-content):not(.m--no-title).m--is-toggle-link-left {
+            flex-direction: column;
         }
 
         &.m--has-secondary-content {
             flex-direction: column;
 
-            &.m--is-reserve-header {
+            &.m--is-toggle-link-left {
                 .m-accordion-group__secondary-content {
                     flex-direction: row-reverse;
                 }
@@ -29,14 +24,19 @@
         }
     }
 
+    &__header-title {
+        flex: 1 1 auto;
+    }
+
     &__secondary-content {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        flex-shrink: 0;
     }
 
     &__toggle-link {
-        flex: none;
+        flex-shrink: 0;
     }
 
     &__body {
