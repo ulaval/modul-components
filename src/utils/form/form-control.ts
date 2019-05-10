@@ -10,11 +10,10 @@ export class FormControl<T> extends AbstractControl {
     private _oldValue?: T;
 
     constructor(
-        public readonly name: string,
         public readonly validators: ControlValidator[] = [],
         options?: FormControlOptions<T>
     ) {
-        super(name, validators, options);
+        super(validators, options);
 
         if (options) {
             this._initialValue = this._value = this._oldValue = options.initialValue;

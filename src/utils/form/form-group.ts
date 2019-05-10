@@ -10,32 +10,36 @@ export class FormGroup extends AbstractControl {
     private _editionTimeout: any;
 
     constructor(
-        public readonly name: string,
-        public controls: AbstractControl[],
+        public controls: { [name: string]: AbstractControl },
         public readonly validators: ControlValidator[] = [],
         options?: ControlOptions
     ) {
-        super(name, validators, options);
+        super(validators, options);
     }
 
     public get isValid(): boolean {
-        return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.isValid);
+        return this.validators.every(v => !!v.lastCheck) && Object.values(this.controls).every(c => c.isValid);
     }
 
-    public get values(): any[] {
-        return this.controls.map(c => {
-            if (c instanceof FormGroup) {
-                return c.values;
-            } else if (c instanceof FormControl) {
-                return c.value;
+    /**
+     *
+     */
+    public get values(): any {
+        const values: any = { ...this.controls };
+        Object.keys(this.controls).map(c => {
+            if (this.controls[c] instanceof FormGroup) {
+                values[c] = (this.controls[c] as FormGroup).values;
+            } else if (this.controls[c] instanceof FormControl) {
+                values[c] = (this.controls[c] as FormControl<any>).value;
             } else {
                 throw new Error('Unknown Abstract control type!');
             }
         });
+        return values;
     }
 
     public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
+        return (this.errors.length > 0 || Object.values(this.controls).some(c => {
             return c.hasError();
         }));
     }
@@ -45,7 +49,7 @@ export class FormGroup extends AbstractControl {
     }
     public set enabled(isEnabled: boolean) {
         this._enabled = isEnabled;
-        this.controls.forEach(c => {
+        Object.values(this.controls).forEach(c => {
             c.enabled = isEnabled;
         });
     }
@@ -55,7 +59,7 @@ export class FormGroup extends AbstractControl {
 
     public set waiting(isWaiting: boolean) {
         this._waiting = isWaiting;
-        this.controls.forEach(c => c.waiting = isWaiting);
+        Object.values(this.controls).forEach(c => c.waiting = isWaiting);
     }
 
     public get readonly(): boolean {
@@ -64,38 +68,35 @@ export class FormGroup extends AbstractControl {
 
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
-        this.controls.forEach(c => c.readonly = isReadonly);
+        Object.values(this.controls).forEach(c => c.readonly = isReadonly);
     }
 
     public getControl(name: string): AbstractControl {
-        let control: AbstractControl | undefined = this.controls.find(c => c.name === name);
-
-        if (!control) {
+        if (this.controls[name] !== undefined) {
+            return this.controls[name];
+        } else {
             throw Error(`There is no control with the name ${name} in this group`);
         }
-
-        return control;
     }
 
-    public addControl(control: AbstractControl): void {
-        if (this.controls.find(c => c.name === control.name)) {
-            throw Error(`There is already a control with name ${control.name} in this group`);
+    public addControl(name: string, control: AbstractControl): void {
+        if (this.controls[name] !== undefined) {
+            throw Error(`There is already a control with name ${name} in this group`);
         }
 
-        this.controls.push(control);
+        this.controls = Object.assign(this.controls, { name: control });
     }
 
     public removeControl(name: string): void {
-        if (this.controls.find(c => c.name === name)) {
+        if (this.controls[name] === undefined) {
             throw Error(`There is no control with name ${name} in this group`);
         }
-
-        this.controls = this.controls.filter(c => c.name === name);
+        delete this.controls[name];
     }
 
     public async validate(external: boolean = false): Promise<void> {
         await super.validate(external);
-        await Promise.all(this.controls.map(c => c.validate(external)));
+        await Promise.all(Object.values(this.controls).map(c => c.validate(external)));
     }
 
     public initEdition(): void {
@@ -107,10 +108,10 @@ export class FormGroup extends AbstractControl {
             , ModulVue.prototype.$form.formGroupValidationIntervalInMilliseconds
         );
 
-        const populate: boolean = !!this.controls
+        const populate: boolean = !!Object.values(this.controls)
             .filter(c => c instanceof FormControl)
             .find((fc: FormControl<any>) => !!fc.value === true);
-        const pristine: boolean = this.controls
+        const pristine: boolean = Object.values(this.controls)
             .filter(c => c instanceof FormControl)
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
         const isValid: boolean = this.validators.every(v => !!v.lastCheck);
@@ -142,6 +143,6 @@ export class FormGroup extends AbstractControl {
         clearTimeout(this._editionTimeout);
 
         super.reset();
-        this.controls.forEach(c => c.reset());
+        Object.values(this.controls).forEach(c => c.reset());
     }
 }

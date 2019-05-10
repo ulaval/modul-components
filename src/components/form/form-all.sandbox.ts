@@ -36,89 +36,75 @@ export class MFormAllSandbox extends ModulVue {
         autocomplete: 'RandomDog2'
     };
 
-    formAllGroup: FormGroup = new FormGroup('Form with all field example',
-        [
-            new FormControl<string>(
-                'name',
-                [
-                    RequiredValidator('name'),
-                    MaxLengthValidator('name', 20)
-                ]
-            ),
-            new FormControl<string>(
-                'description',
-                [
-                    RequiredValidator('description'),
-                    MaxLengthValidator('description', 255)
-                ]
-            ),
-            new FormControl<string>(
-                'birthdate',
-                [
-                    RequiredValidator('birthdate')
-                ]
-            ),
-            new FormControl<string>(
-                'type',
-                [
-                    RequiredValidator('type')
-                ]
-            ),
-            new FormControl<boolean>(
-                'active',
-                [
-                    RequiredValidator('active')
-                ]
-            ),
-            new FormControl<string>(
-                'coupe',
-                [
-                    RequiredValidator('coupe')
-                ]
-            ),
-            new FormControl<string>(
-                'time',
-                [
-                    RequiredValidator('time')
-                ]
-            ),
-            new FormControl<number>(
-                'decimal',
-                [
-                    RequiredValidator('decimal')
-                ]
-            ),
-            new FormControl<number>(
-                'integer',
-                [
-                    RequiredValidator('integer')
-                ]
-            ),
-            new FormControl<number>(
-                'price',
-                [
-                    RequiredValidator('price')
-                ]
-            ),
-            new FormControl<boolean>(
-                'switch',
-                [
-                    RequiredValidator('switch')
-                ]
-            ),
-            new FormControl<MDateRange>(
-                'daterange',
-                [
-                    RequiredValidator('daterange')
-                ]
-            ),
-            new FormControl<MDateRange>(
-                'autocomplete',
-                [
-                    RequiredValidator('autocomplete')
-                ]
-            )
-        ]);
+    formAllGroup: FormGroup = new FormGroup({
+        name: new FormControl<string>(
+            [
+                RequiredValidator('name'),
+                MaxLengthValidator('name', 20)
+            ]
+        ),
+        description: new FormControl<string>(
+            [
+                RequiredValidator('description'),
+                MaxLengthValidator('description', 255)
+            ]
+        ),
+        birthdate: new FormControl<string>(
+            [
+                RequiredValidator('birthdate')
+            ]
+        ),
+        type: new FormControl<string>(
+            [
+                RequiredValidator('type')
+            ]
+        ),
+        active: new FormControl<boolean>(
+            [
+                RequiredValidator('active')
+            ]
+        ),
+        coupe: new FormControl<string>(
+            [
+                RequiredValidator('coupe')
+            ]
+        ),
+        time: new FormControl<string>(
+            [
+                RequiredValidator('time')
+            ]
+        ),
+        decimal: new FormControl<number>(
+            [
+                RequiredValidator('decimal')
+            ]
+        ),
+        integer: new FormControl<number>(
+            [
+                RequiredValidator('integer')
+            ]
+        ),
+        price: new FormControl<number>(
+            [
+                RequiredValidator('price')
+            ]
+        ),
+        switch: new FormControl<boolean>(
+            [
+                RequiredValidator('switch')
+            ]
+        ),
+        daterange: new FormControl<MDateRange>(
+            [
+                RequiredValidator('daterange')
+            ]
+        ),
+        autocomplete: new FormControl<MDateRange>(
+            [
+                RequiredValidator('autocomplete')
+            ]
+        )
+    });
 
     submit(): void {
         this.$log.info('MFormAllSandbox.submit');

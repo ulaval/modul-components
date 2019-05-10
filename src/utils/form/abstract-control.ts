@@ -17,7 +17,6 @@ export abstract class AbstractControl {
 
 
     constructor(
-        public readonly name: string,
         public readonly validators: ControlValidator[] = [],
         options?: ControlOptions | FormControlOptions<any>
     ) {
