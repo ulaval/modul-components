@@ -25,7 +25,7 @@ const BACKDROP_STYLE_OPACITY: string = '0';
 const BACKDROP_STYLE_OPACITY_VISIBLE: string = '0.7';
 const BACKDROP_STYLE_OPACITY_NOT_VISIBLE: string = '0';
 
-const Z_INDEZ_DEFAULT: number = 100;
+const Z_INDEX_DEFAULT: number = 999;
 const DONE_EVENT_DURATION: number = 100;
 
 interface StackElement {
@@ -49,7 +49,7 @@ export class Modul {
     public scrollUp: boolean = true;
 
     public backdropElement: HTMLElement | undefined;
-    public windowZIndex: number = Z_INDEZ_DEFAULT;
+    public windowZIndex: number = Z_INDEX_DEFAULT;
 
     private windowStack: (string | undefined)[] = [];
     private windowStackMap: StackMap = {};
@@ -118,9 +118,9 @@ export class Modul {
             this.removeBackdrop(!stackElement.backdropIsFast);
         }
 
-        if (this.windowZIndex < Z_INDEZ_DEFAULT) {
+        if (this.windowZIndex < Z_INDEX_DEFAULT) {
             Vue.prototype.$log.warn('$modul: Invalid window ref count');
-            this.windowZIndex = Z_INDEZ_DEFAULT;
+            this.windowZIndex = Z_INDEX_DEFAULT;
         }
 
         delete this.windowStackMap[stackId];
