@@ -60,7 +60,7 @@ exports[`Storyshots components|m-spinner title-message 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-spinner/all props make your own test 1`] = `
+exports[`Storyshots components|m-spinner/knobs all props 1`] = `
 <div>
   <div
     class="m-spinner"
@@ -83,26 +83,6 @@ exports[`Storyshots components|m-spinner/size size="large" 1`] = `
 `;
 
 exports[`Storyshots components|m-spinner/size size="small" 1`] = `
-<div
-  class="m-spinner"
->
-  <!---->
-   
-  <div />
-</div>
-`;
-
-exports[`Storyshots components|m-spinner/size sll sizes (knob) 1`] = `
-<div
-  class="m-spinner"
->
-  <!---->
-   
-  <div />
-</div>
-`;
-
-exports[`Storyshots components|m-spinner/skin all skins (knob) 1`] = `
 <div
   class="m-spinner"
 >
