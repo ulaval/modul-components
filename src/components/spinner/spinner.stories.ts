@@ -14,7 +14,6 @@ declare module '@storybook/addon-knobs' {
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}`, module)
     .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('default', () => ({
         template: '<m-spinner></m-spinner>'
     }))
@@ -61,15 +60,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}`, module)
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/skin`, module)
     .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('all skins (knob)', () => ({
-        props: {
-            skin: {
-                default: select('skin', Object.values(MSpinnerStyle), MSpinnerStyle.Regular)
-            }
-        },
-        template: '<m-spinner :skin="skin"></m-spinner>'
-    }))
     .add('skin="regular"', () => ({
         template: '<m-spinner skin="regular"></m-spinner>'
     }))
@@ -87,15 +77,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/skin`, module)
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/size`, module)
     .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('sll sizes (knob)', () => ({
-        props: {
-            size: {
-                default: select('size', Object.values(MSpinnerSize), MSpinnerSize.Small)
-            }
-        },
-        template: '<m-spinner :size="size"></m-spinner>'
-    }))
     .add('size="small"', () => ({
         template: '<m-spinner size="small"></m-spinner>'
     }))
@@ -103,10 +84,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/size`, module)
         template: '<m-spinner size="large"></m-spinner>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/all props`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/knobs`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
-    .add('make your own test', () => ({
+    .add('all props', () => ({
         props: {
             title: {
                 default: boolean('title', true)
