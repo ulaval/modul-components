@@ -125,7 +125,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}`, module)
                        <span slot="readMode">{{ value }}</span>
                        <m-textfield slot="editMode" label="edit-mode-padding" v-model="value"></m-textfield>
                    </m-inplace-edit>`
-    }))
+    }));
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${INPLACE_EDIT_NAME}/mobile`, module)
