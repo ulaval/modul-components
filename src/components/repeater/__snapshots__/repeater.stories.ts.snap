@@ -4,15 +4,22 @@ exports[`Storyshots components|m-repeater Empty 1`] = `
 <div
   class="m-repeater"
 >
-  <div
-    class="m-repeater__empty-row"
+  <ul
+    class="m-repeater__list"
   >
-    
-        The list is empty
-    
-  </div>
-   
-  <!---->
+    <li
+      class="m-repeater__row m--is-empty"
+    >
+      
+            The list is empty
+        
+    </li>
+    <li
+      class="m-repeater__footer"
+    >
+      <!---->
+    </li>
+  </ul>
 </div>
 `;
 
@@ -20,7 +27,9 @@ exports[`Storyshots components|m-repeater Operations 1`] = `
 <div
   class="m-repeater"
 >
-  <ul>
+  <ul
+    class="m-repeater__list"
+  >
     <li
       class="m-repeater__row"
     >
@@ -47,9 +56,12 @@ exports[`Storyshots components|m-repeater Operations 1`] = `
        
       <!---->
     </li>
+    <li
+      class="m-repeater__footer"
+    >
+      <!---->
+    </li>
   </ul>
-   
-  <!---->
 </div>
 `;
 
@@ -57,7 +69,9 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
 <div
   class="m-repeater"
 >
-  <ul>
+  <ul
+    class="m-repeater__list"
+  >
     <li
       class="m-repeater__row"
     >
@@ -124,37 +138,38 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
         <!---->
       </button>
     </li>
+    <li
+      class="m-repeater__footer"
+    >
+      <a
+        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+        href="#"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-link__icon"
+          height="24px"
+          width="24px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-link__text"
+        >
+          Add
+        </span>
+         
+        <!---->
+      </a>
+    </li>
   </ul>
-   
-  <a
-    class="m-link m-repeater__add m--is-unvisited m--is-button m--has-left-icon"
-    href="#"
-    tabindex="0"
-  >
-    <svg
-      aria-hidden="true"
-      class="m-icon m-link__icon"
-      height="24px"
-      width="24px"
-    >
-      <!---->
-       
-      <use
-        aria-hidden="true"
-        class=""
-      />
-    </svg>
-     
-    <span
-      class="m-link__text"
-    >
-      
-        Add
-    
-    </span>
-     
-    <!---->
-  </a>
 </div>
 `;
 
@@ -162,7 +177,9 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
 <div
   class="m-repeater"
 >
-  <ul>
+  <ul
+    class="m-repeater__list"
+  >
     <li>
       <button>
         Delete
@@ -179,36 +196,37 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
                     Item # 1 uuid
                 
     </li>
+    <li
+      class="m-repeater__footer m--is-slot-row"
+    >
+      <a
+        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+        href="#"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-link__icon"
+          height="24px"
+          width="24px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-link__text"
+        >
+          Add
+        </span>
+         
+        <!---->
+      </a>
+    </li>
   </ul>
-   
-  <a
-    class="m-link m-repeater__add m--is-unvisited m--is-button m--has-left-icon"
-    href="#"
-    tabindex="0"
-  >
-    <svg
-      aria-hidden="true"
-      class="m-icon m-link__icon"
-      height="24px"
-      width="24px"
-    >
-      <!---->
-       
-      <use
-        aria-hidden="true"
-        class=""
-      />
-    </svg>
-     
-    <span
-      class="m-link__text"
-    >
-      
-        Add
-    
-    </span>
-     
-    <!---->
-  </a>
 </div>
 `;
