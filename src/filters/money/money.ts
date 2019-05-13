@@ -9,20 +9,13 @@ export interface FormatCurrencyOptions {
 }
 
 export function formatCurrency(money: number, currency: MCurrencyType): string {
-    if (!isNaN(money)) {
-        return new Number(money).toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
-            style: 'currency',
-            currency: currency
-        });
-    } else {
-        return '';
-    }
+    return formatCurrencyWithOptions(money, { currency });
 }
 
 export function formatCurrencyWithOptions(money: number, options: FormatCurrencyOptions): string {
-    if (!isNaN(money)) {
+    if ((!isNaN(money) && money) || money === 0) {
         const stripDecimalZeroes: boolean = Number.isInteger(money) && !!options.stripDecimalZeroes;
-        return new Number(money).toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
+        return money.toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
             style: 'currency',
             currency: options.currency,
             minimumFractionDigits: stripDecimalZeroes ? 0 : undefined,
