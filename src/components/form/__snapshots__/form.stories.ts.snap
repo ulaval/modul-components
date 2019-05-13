@@ -7,35 +7,30 @@ exports[`Storyshots components|m-form default 1`] = `
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              name
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -133,35 +128,30 @@ exports[`Storyshots components|m-form/built-in action-fallouts default 1`] = `
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              name
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -259,35 +249,30 @@ exports[`Storyshots components|m-form/built-in action-fallouts focus first field
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              name
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -385,35 +370,30 @@ exports[`Storyshots components|m-form/built-in action-fallouts message summary a
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              name
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -511,35 +491,30 @@ exports[`Storyshots components|m-form/built-in action-fallouts toast and clear t
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              name
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -636,40 +611,33 @@ exports[`Storyshots components|m-form/built-in validators between 1`] = `
 >
   <!---->
    
-  <m-integerfield
-    label="between 2 and 4"
-  />
+  <m-integerfield />
    
   <div
     class="m-datepicker"
     style="width: 100%; max-width: 136px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mDatepicker-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              between 1/1/2019 and 1/2/2019
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -792,9 +760,7 @@ exports[`Storyshots components|m-form/built-in validators compare 1`] = `
 >
   <!---->
    
-  <m-input-group
-    legend="my group"
-  />
+  <m-input-group />
    
   <p
     class="m-u--margin-bottom--l"
@@ -849,35 +815,30 @@ exports[`Storyshots components|m-form/built-in validators email 1`] = `
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              email
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -974,40 +935,33 @@ exports[`Storyshots components|m-form/built-in validators max 1`] = `
 >
   <!---->
    
-  <m-integerfield
-    label="max 5"
-  />
+  <m-integerfield />
    
   <div
     class="m-datepicker"
     style="width: 100%; max-width: 136px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mDatepicker-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              max 1/1/2019
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1131,35 +1085,30 @@ exports[`Storyshots components|m-form/built-in validators max-length 1`] = `
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              max 5
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1256,40 +1205,33 @@ exports[`Storyshots components|m-form/built-in validators min 1`] = `
 >
   <!---->
    
-  <m-integerfield
-    label="min 5"
-  />
+  <m-integerfield />
    
   <div
     class="m-datepicker"
     style="width: 100%; max-width: 136px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mDatepicker-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              min 1/1/2019
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1413,35 +1355,30 @@ exports[`Storyshots components|m-form/built-in validators min-length 1`] = `
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              min 5
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1539,35 +1476,30 @@ exports[`Storyshots components|m-form/built-in validators required 1`] = `
   <!---->
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              name
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1669,35 +1601,30 @@ exports[`Storyshots components|m-form/validation-type at-exit 1`] = `
   </p>
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              email
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1799,35 +1726,30 @@ exports[`Storyshots components|m-form/validation-type correction 1`] = `
   </p>
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              email
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -1929,35 +1851,30 @@ exports[`Storyshots components|m-form/validation-type modification 1`] = `
   </p>
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              email
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
@@ -2059,35 +1976,30 @@ exports[`Storyshots components|m-form/validation-type on-going 1`] = `
   </p>
    
   <div
-    class="m-textfield m--has-label m--is-type-text"
+    class="m-textfield m--is-type-text"
     style="width: 100%; max-width: 288px;"
   >
     <div
-      class="m-input-style m--has-label m--is-tag-default"
+      class="m-input-style m--is-tag-default"
     >
       <div
         class="m-input-style__content"
         style="margin-top: 10px;"
       >
-        <label
+        <span
           class="m-input-style__label"
-          for="mTextfield-uuid"
         >
           <span
             class="m-input-style__text"
-          >
-            <span>
-              email
-            </span>
-             
-            <!---->
-          </span>
-        </label>
+          />
+        </span>
          
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
           <div
             class="m-input-style__left-content"
