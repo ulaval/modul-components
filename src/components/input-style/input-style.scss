@@ -218,8 +218,6 @@ $m-input-style-base-height: $m-line-height + em;
         position: relative;
         flex: 1 1 auto;
         max-width: 100%;
-        display: flex;
-        align-items: center;
     }
 
     &__right-content {
