@@ -6,7 +6,6 @@ describe('email validator', () => {
 
     beforeAll(() => {
         formControl = new FormControl<string>(
-            'test',
             [EmailValidator()]
         );
     });
@@ -14,21 +13,21 @@ describe('email validator', () => {
     test('it should return false if value is undefined', async (done) => {
         expect(formControl.value).toBe(undefined);
         await formControl.validate();
-        expect(formControl.isValid).toBe(false);
+        expect(formControl.valid).toBe(false);
         done();
     });
 
     test('it should return false with invalid email', async (done) => {
         formControl.value = 'test';
         await formControl.validate();
-        expect(formControl.isValid).toBe(false);
+        expect(formControl.valid).toBe(false);
         done();
     });
 
     test('it should return true with valid email', async (done) => {
         formControl.value = 'test@test.ulaval.ca';
         await formControl.validate();
-        expect(formControl.isValid).toBe(true);
+        expect(formControl.valid).toBe(true);
         done();
     });
 });

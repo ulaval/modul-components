@@ -63,7 +63,7 @@ export class FormControl<T> extends AbstractControl {
         return this.errors.length > 0;
     }
 
-    public get isValid(): boolean {
+    public get valid(): boolean {
         return this.validators
             .filter(v => v.validationType !== ControlValidatorValidationType.External)
             .every(v => !!v.lastCheck);
@@ -74,9 +74,9 @@ export class FormControl<T> extends AbstractControl {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this._value === this._oldValue && this._value === this._initialValue) {
             this._editionContext = ControlEditionContext.Pristine;
-        } else if (!this._value && this.isValid) {
+        } else if (!this._value && this.valid) {
             this._editionContext = ControlEditionContext.EmptyAndValid;
-        } else if (this._value && this.isValid) {
+        } else if (this._value && this.valid) {
             this._editionContext = ControlEditionContext.PopulateAndValid;
         }
     }

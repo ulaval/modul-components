@@ -27,7 +27,8 @@ export abstract class AbstractControl {
         }
     }
 
-    public abstract get isValid(): boolean;
+    public abstract get value(): any;
+    public abstract get valid(): boolean;
     public abstract get enabled(): boolean;
     public abstract set enabled(isEnabled: boolean);
     public abstract get waiting(): boolean;
