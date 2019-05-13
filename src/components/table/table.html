@@ -14,7 +14,8 @@
                           :column="column">
                         <div v-if="column.sortable"
                              class="m-table__header-wrap">
-                            <span class="m-table__header-name">{{ column.title }}</span>
+                            <span class="m-table__header-name"
+                                  v-html="column.title"></span>
                             <m-icon-button v-if="column.sortable"
                                            class="m-table__sortable-icon"
                                            :disabled="loading"
