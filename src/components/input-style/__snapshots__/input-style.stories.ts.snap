@@ -543,6 +543,8 @@ exports[`Storyshots components|m-input-style requiredMarker 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-input-style rich text editor 1`] = `<!---->`;
+
 exports[`Storyshots components|m-input-style tagStyle 1`] = `
 <div
   class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h1"
