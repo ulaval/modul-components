@@ -1,15 +1,15 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
+import { MAutoCompleteResult } from '../../components/autocomplete/autocomplete';
+import { FORM_NAME } from '../../components/component-names';
+import FormPlugin from '../../components/form/form.plugin';
+import { MDateRange } from '../../components/periodpicker/periodpicker';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { ModulVue } from '../../utils/vue/vue';
-import { MAutoCompleteResult } from '../autocomplete/autocomplete';
-import { FORM_NAME } from '../component-names';
-import { MDateRange } from '../periodpicker/periodpicker';
 import WithRender from './form-all.sandbox.html';
-import FormPlugin from './form.plugin';
 
 @WithRender
 @Component

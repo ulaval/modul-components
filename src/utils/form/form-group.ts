@@ -23,7 +23,9 @@ export class FormGroup extends AbstractControl {
 
     public get value(): any {
         const values: any = { ...this._controls };
-        Object.keys(this._controls).map((c: string) => values[c] = this.controls[c].value);
+        Object.keys(this._controls).map((c: string) => {
+            values[c] = this._controls[c].value;
+        });
         return values;
     }
 

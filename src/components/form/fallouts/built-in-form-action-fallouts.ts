@@ -18,7 +18,7 @@ export const ClearErrorToast: FormActionFallout = {
 export const ErrorToast: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-        const formControlErrorsCount: number = Object.values(form.formGroup.controls).filter(c => c.errors.length > 0).length;
+        const formControlErrorsCount: number = form.formGroup.controls.filter(c => c.errors.length > 0).length;
         const formGroupErrorsCount: number = form.formGroup.errors.length;
         const message: string = (ModulVue.prototype).$i18n
             .translate(
@@ -38,14 +38,14 @@ export const ErrorToast: FormActionFallout = {
 export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-        let control: AbstractControl | undefined = Object.values(form.formGroup.controls).find(c => !c.isValid);
+        let control: AbstractControl | undefined = form.formGroup.controls.find(c => !c.valid);
 
         if (control) {
             control.focusGrantedObservable.next(true);
             return;
         }
 
-        control = Object.values(form.formGroup.controls)
+        control = form.formGroup.controls
             .find(c =>
                 !!c.validators.find(v => v.validationType === ControlValidatorValidationType.External && !v.lastCheck)
             );

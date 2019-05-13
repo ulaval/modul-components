@@ -70,10 +70,10 @@ export class MForm extends ModulVue {
 
     private _isValid(external: boolean = false): boolean {
         if (!external) {
-            return this.formGroup.isValid;
+            return this.formGroup.valid;
         }
 
-        return this.formGroup.isValid &&
+        return this.formGroup.valid &&
             this.formGroup.controls
                 .map(c => c.validators)
                 .reduce((acc, cur) => acc.concat(cur), [])
