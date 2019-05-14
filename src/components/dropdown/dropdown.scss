@@ -107,7 +107,7 @@ $m-dropdown--margin: $m-padding--xs !default;
     &__placeholder-icon.m-icon.m-icon {
         position: absolute;
         left: 0;
-        top: 50%;
+        top: calc(50% + 2px); // magic number
         transform: translateY(-50%);
         color: $m-color--disabled !important;
     }
