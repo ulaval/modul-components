@@ -29,21 +29,17 @@ export class FormGroup extends AbstractControl {
         return values;
     }
 
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
-            return c.hasError();
-        }));
-    }
-
     public get enabled(): boolean {
         return this._enabled;
     }
+
     public set enabled(isEnabled: boolean) {
         this._enabled = isEnabled;
         this.controls.forEach(c => {
             c.enabled = isEnabled;
         });
     }
+
     public get waiting(): boolean {
         return this._waiting;
     }
@@ -62,6 +58,12 @@ export class FormGroup extends AbstractControl {
         this.controls.forEach(c => c.readonly = isReadonly);
     }
 
+    public hasError(): boolean {
+        return (this.errors.length > 0 || this.controls.some(c => {
+            return c.hasError();
+        }));
+    }
+
     public get controls(): AbstractControl[] {
         return Object.values(this._controls);
     }
@@ -75,10 +77,10 @@ export class FormGroup extends AbstractControl {
     }
 
     public addControl(name: string, control: AbstractControl): void {
-
         if (this._controls[name] !== undefined) {
             throw Error(`There is already a control with name ${name} in this group`);
         }
+
         const result: any = Object.assign(this._controls);
         result[name] = control;
         this._controls = result;
@@ -88,6 +90,7 @@ export class FormGroup extends AbstractControl {
         if (this._controls[name] === undefined) {
             throw Error(`There is no control with name ${name} in this group`);
         }
+
         const result: any = Object.assign(this._controls);
         delete result[name];
         this._controls = result;
@@ -96,6 +99,14 @@ export class FormGroup extends AbstractControl {
     public async validate(external: boolean = false): Promise<void> {
         await super.validate(external);
         await Promise.all(this.controls.map(c => c.validate(external)));
+    }
+
+    public reset(): void {
+        clearInterval(this._validationInterval);
+        clearTimeout(this._editionTimeout);
+
+        super.reset();
+        this.controls.forEach(c => c.reset());
     }
 
     public initEdition(): void {
@@ -132,16 +143,8 @@ export class FormGroup extends AbstractControl {
             clearTimeout(this._editionTimeout);
 
             this._editionContext = ControlEditionContext.None;
-            this._resetManualValidators();
+            this._resetExternalValidators();
             super.validate();
         }, ModulVue.prototype.$form.formGroupEditionTimeoutInMilliseconds);
-    }
-
-    public reset(): void {
-        clearInterval(this._validationInterval);
-        clearTimeout(this._editionTimeout);
-
-        super.reset();
-        this.controls.forEach(c => c.reset());
     }
 }

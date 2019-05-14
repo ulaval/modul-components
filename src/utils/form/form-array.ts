@@ -17,18 +17,12 @@ export class FormArray extends AbstractControl {
         super(validators, options);
     }
 
-    public get valid(): boolean {
-        return this.validators.every(v => !!v.lastCheck) && this._controls.every(c => c.valid);
-    }
-
     public get value(): any {
         return this._controls.map((c: AbstractControl) => c.value);
     }
 
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this._controls.some(c => {
-            return c.hasError();
-        }));
+    public get valid(): boolean {
+        return this.validators.every(v => !!v.lastCheck) && this._controls.every(c => c.valid);
     }
 
     public get enabled(): boolean {
@@ -61,6 +55,11 @@ export class FormArray extends AbstractControl {
         this._controls.forEach(c => c.readonly = isReadonly);
     }
 
+    public hasError(): boolean {
+        return (this.errors.length > 0 || this._controls.some(c => {
+            return c.hasError();
+        }));
+    }
 
     public get controls(): AbstractControl[] {
         return this._controls;
@@ -78,13 +77,18 @@ export class FormArray extends AbstractControl {
         }
     }
 
-
-
     public async validate(external: boolean = false): Promise<void> {
         await super.validate(external);
         await Promise.all(this._controls.map(c => c.validate(external)));
     }
 
+    public reset(): void {
+        clearInterval(this._validationInterval);
+        clearTimeout(this._editionTimeout);
+
+        super.reset();
+        this._controls.forEach(c => c.reset());
+    }
 
     public initEdition(): void {
         clearInterval(this._validationInterval);
@@ -120,16 +124,8 @@ export class FormArray extends AbstractControl {
             clearTimeout(this._editionTimeout);
 
             this._editionContext = ControlEditionContext.None;
-            this._resetManualValidators();
+            this._resetExternalValidators();
             super.validate();
         }, ModulVue.prototype.$form.formGroupEditionTimeoutInMilliseconds);
-    }
-
-    public reset(): void {
-        clearInterval(this._validationInterval);
-        clearTimeout(this._editionTimeout);
-
-        super.reset();
-        this._controls.forEach(c => c.reset());
     }
 }

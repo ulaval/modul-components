@@ -35,6 +35,12 @@ export class FormControl<T> extends AbstractControl {
         this.validate();
     }
 
+    public get valid(): boolean {
+        return this.validators
+            .filter(v => v.validationType !== ControlValidatorValidationType.External)
+            .every(v => !!v.lastCheck);
+    }
+
     public get enabled(): boolean {
         return this._enabled;
     }
@@ -59,14 +65,14 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
+
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
-    public get valid(): boolean {
-        return this.validators
-            .filter(v => v.validationType !== ControlValidatorValidationType.External)
-            .every(v => !!v.lastCheck);
+    public reset(): void {
+        super.reset();
+        this._value = this._oldValue = this._initialValue;
     }
 
     public initEdition(): void {
@@ -79,11 +85,6 @@ export class FormControl<T> extends AbstractControl {
         } else if (this._value && this.valid) {
             this._editionContext = ControlEditionContext.PopulateAndValid;
         }
-    }
-
-    public reset(): void {
-        super.reset();
-        this._value = this._oldValue = this._initialValue;
     }
 }
 

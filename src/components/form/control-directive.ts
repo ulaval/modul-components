@@ -4,8 +4,6 @@ import { ControlEditionContext } from '../../utils/form/control-edition-context'
 import { FormGroup } from '../../utils/form/form-group';
 
 const DISTANCE_FROM_TOP: number = -200;
-const INPUT_GROUP_FOCUS_TIME_MILLISECONDS: number = 500;
-const INPUT_GROUP_VALIDATION_TIME_MILLISECONDS: number = 100;
 
 const scrollToElement: Function = (element: HTMLElement): void => {
     (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
