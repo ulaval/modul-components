@@ -1,0 +1,79 @@
+<div class="m-searchfield"
+     :class="[{ 'm--is-disabled': isDisabled,
+                'm--is-readonly': isReadonly,
+                'm--is-waiting': isWaiting,
+                'm--has-error': hasSearchfieldError,
+                'm--is-valid': isSearchfieldValid,
+                'm--has-label': hasLabel,
+                'm--has-validation-message': hasValidationMessage }]"
+     @click="onClick"
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
+    <m-input-style :disabled="isDisabled"
+                   :waiting="isWaiting"
+                   :error="hasSearchfieldError"
+                   :valid="isSearchfieldValid"
+                   :label="label"
+                   :label-for="id"
+                   :focus="isFocus"
+                   :label-up="labelUp"
+                   :empty="isEmpty"
+                   :readonly="isReadonly"
+                   :required-marker="requiredMarker"
+                   :tag-style="tagStyle">
+        <input :id="id"
+               class="m-searchfield__input"
+               v-model="model"
+               :autocomplete="autocomplete"
+               :disabled="isDisabled || isWaiting"
+               :placeholder="placeholder"
+               :readonly="isReadonly"
+               type="search"
+               @blur="onBlur"
+               @change="onChange"
+               @focus="onFocus"
+               @keyup="onKeyup"
+               @keydown="onKeydown"
+               @keydown.enter="onSearch"
+               @paste="onPaste"
+               ref="input" />
+        <template slot="right-content">
+            <transition-group name="m--is"
+                              style="white-space: nowrap;">
+                <m-icon-button v-if="hasValue"
+                               class="m-searchfield__reset"
+                               :aria-controls="id"
+                               @click="reset"
+                               key="resetIcon"
+                               button-size="1em"
+                               icon-size="11px"
+                               icon-name="m-svg__close-clear"></m-icon-button>
+                <m-icon-button class="m-searchfield__search-button"
+                               :aria-controls="id"
+                               :title="searchIconDescription"
+                               @click="onSearch"
+                               key="searchIcon"
+                               button-size="22px"
+                               icon-name="m-svg__search"></m-icon-button>
+
+                <!-- <button class="m-searchfield__search-button"
+                        :aria-controls="id"
+                        @click="onSearch"
+                        key="searchIcon"
+                        :title="searchIconDescription">
+                    <m-icon name="m-svg__search"></m-icon>
+                </button> -->
+
+            </transition-group>
+        </template>
+    </m-input-style>
+    <div class="m-searchfield__validation">
+        <m-validation-message class="m-searchfield__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasSearchfieldError"
+                              :error-message="errorMessage"
+                              :valid="isSearchfieldValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
+</div>

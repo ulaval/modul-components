@@ -1,0 +1,63 @@
+@import 'commons';
+
+.m-searchfield {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+    @include m-input-inline-spacing();
+
+    // &__search-button {
+    //     @include m-button;
+
+    //     border: unset;
+    //     background-color: transparent;
+    //     font-size: 1em;
+    //     display: inline-flex;
+    //     position: absolute;
+    //     top: 0;
+    //     bottom: 0;
+    //     right: 0;
+
+    //     &:hover {
+    //         @include m-button--hover();
+    //     }
+    // }
+
+    &.m--has-validation-message {
+        .m-decimalfield__validation {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
+    &.m--has-error {
+        .m-decimalfield__validation {
+            color: $m-color--error;
+        }
+    }
+
+    &.m--is-valid {
+        .m-decimalfield__validation {
+            color: $m-color--success;
+        }
+    }
+
+    &__validation {
+        transition: margin-top $m-transition-duration ease;
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
+    }
+
+    &__input {
+        appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: textfield;
+        }
+    }
+}

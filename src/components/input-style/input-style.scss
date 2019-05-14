@@ -259,7 +259,7 @@ $m-input-style-base-height: $m-line-height + em;
     ::placeholder {
         color: $m-color--disabled;
 
-        .m--is-type-search & {
+        .m-searchfield & {
             color: $m-color--text-light;
             font-weight: $m-font-weight--light;
         }
@@ -361,7 +361,7 @@ $m-input-style-base-height: $m-line-height + em;
         }
     }
 
-    .m--is-type-search & {
+    .m-searchfield & {
         background-color: $m-color--grey-lightest;
         border-color: $m-color--grey-lightest;
 
@@ -380,7 +380,7 @@ $m-input-style-base-height: $m-line-height + em;
 .m-datepicker .m-input-style__label,
 .m-timepicker .m-input-style__label,
 .m-moneyfield .m-input-style__label,
-.m--is-type-search .m-input-style__label,
-.m--is-type-search .m-input-style__adjust-width-auto {
+.m-searchfield .m-input-style__label,
+.m-searchfield .m-input-style__adjust-width-auto {
     margin-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }
