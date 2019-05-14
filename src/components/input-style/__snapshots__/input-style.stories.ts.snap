@@ -56,6 +56,7 @@ exports[`Storyshots components|m-input-style default 1`] = `
   >
     <span
       class="m-input-style__label"
+      style="z-index: -1;"
     >
       <span
         class="m-input-style__text"

@@ -380,5 +380,5 @@ $m-input-style-base-height: $m-line-height + em;
 .m-moneyfield .m-input-style__label,
 .m--is-type-search .m-input-style__label,
 .m--is-type-search .m-input-style__adjust-width-auto {
-    padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
+    margin-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }
