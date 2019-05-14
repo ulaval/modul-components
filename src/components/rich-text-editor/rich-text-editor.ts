@@ -146,6 +146,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     public manageHeaderLevels(): any {
 
         let headersLevel: any = {};
+        headersLevel[''] = 'Normal';
 
         if (this.firstHeaderLevel === this.lastHeaderLevel) {
             // One level of header
@@ -163,7 +164,6 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             }
         }
 
-        headersLevel[''] = 'Normal';
         return headersLevel;
     }
 
