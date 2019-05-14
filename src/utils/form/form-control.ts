@@ -47,6 +47,12 @@ export class FormControl<T> extends AbstractControl {
         }
     }
 
+    public get valid(): boolean {
+        return this.validators
+            .filter(v => v.validationType !== ControlValidatorValidationType.External)
+            .every(v => !!v.lastCheck);
+    }
+
     public get enabled(): boolean {
         return this._enabled;
     }
@@ -71,15 +77,12 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
+
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
-    public get valid(): boolean {
-        return this.validators
-            .filter(v => v.validationType !== ControlValidatorValidationType.External)
-            .every(v => !!v.lastCheck);
-    }
+
 
     /**
      * This is called on the focus event of the field

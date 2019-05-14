@@ -17,18 +17,12 @@ export class FormArray extends AbstractControl {
         this.setupControlsParent();
     }
 
-    public get valid(): boolean {
-        return this.validators.every(v => !!v.lastCheck) && this._controls.every(c => c.valid);
-    }
-
     public get value(): any {
         return this._controls.map((c: AbstractControl) => c.value);
     }
 
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this._controls.some(c => {
-            return c.hasError();
-        }));
+    public get valid(): boolean {
+        return this.validators.every(v => !!v.lastCheck) && this._controls.every(c => c.valid);
     }
 
     public get enabled(): boolean {
@@ -61,6 +55,11 @@ export class FormArray extends AbstractControl {
         this._controls.forEach(c => c.readonly = isReadonly);
     }
 
+    public hasError(): boolean {
+        return (this.errors.length > 0 || this.controls.some(c => {
+            return c.hasError();
+        }));
+    }
     /**
      * A form group is considered pristine if at least one field is pristine
      */

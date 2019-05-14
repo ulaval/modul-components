@@ -27,7 +27,6 @@ export abstract class AbstractControl {
 
     protected _touched: boolean = false;
 
-
     constructor(
         public readonly validators: ControlValidator[] = [],
         options?: ControlOptions | FormControlOptions<any>
@@ -108,6 +107,7 @@ export abstract class AbstractControl {
     }
 
     protected _resetManualValidators(): void {
+
         this.validators
             .filter(v => v.validationType === ControlValidatorValidationType.External)
             .forEach(v => {

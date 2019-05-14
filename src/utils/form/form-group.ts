@@ -29,21 +29,23 @@ export class FormGroup extends AbstractControl {
         return values;
     }
 
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
-            return c.hasError();
-        }));
-    }
-
     public get enabled(): boolean {
         return this._enabled;
     }
+
     public set enabled(isEnabled: boolean) {
         this._enabled = isEnabled;
         this.controls.forEach(c => {
             c.enabled = isEnabled;
         });
     }
+
+    public hasError(): boolean {
+        return (this.errors.length > 0 || this.controls.some(c => {
+            return c.hasError();
+        }));
+    }
+
     public get waiting(): boolean {
         return this._waiting;
     }
@@ -93,10 +95,10 @@ export class FormGroup extends AbstractControl {
     }
 
     public addControl(name: string, control: AbstractControl): void {
-
         if (this._controls[name] !== undefined) {
             throw Error(`There is already a control with name ${name} in this group`);
         }
+
         const result: any = Object.assign(this._controls);
         result[name] = control;
         result[name].setParent(this);
@@ -107,6 +109,7 @@ export class FormGroup extends AbstractControl {
         if (this._controls[name] === undefined) {
             throw Error(`There is no control with name ${name} in this group`);
         }
+
         const result: any = Object.assign(this._controls);
         delete result[name];
         this._controls = result;

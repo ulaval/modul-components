@@ -1,0 +1,413 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-modal close-on-backdrop="false" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal default 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal padding="false" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal padding-body="false" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal padding-footer 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal padding-header="false" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal title 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/all props make your own 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal (trigger) 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/size size="full-screen" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/size size="large" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/size size="regular" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/size size="small" 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/slots footer 1`] = `
+<div
+  class="m-modal"
+>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-modal/slots trigger 1`] = `
+<div
+  class="m-modal"
+>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Open the modal (trigger) 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <!---->
+</div>
+`;
