@@ -42,7 +42,8 @@
                ref="input" />
         <template v-if="!hasWordWrap"
                   slot="right-content">
-            <transition-group name="m--is">
+            <transition-group name="m--is"
+                              style="white-space: nowrap;">
                 <m-icon-button v-if="passwordIcon && hasValue"
                                class="m-textfield__icon-password"
                                :aria-controls="id"

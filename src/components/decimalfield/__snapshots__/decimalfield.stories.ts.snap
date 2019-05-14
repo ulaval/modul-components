@@ -16,6 +16,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -225,6 +226,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -313,6 +315,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -382,6 +385,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -543,6 +547,7 @@ exports[`Storyshots components|m-decimalfield Custom precision 1`] = `
     >
       <span
         class="m-input-style__label"
+        style="z-index: -1;"
       >
         <span
           class="m-input-style__text"
@@ -608,6 +613,7 @@ exports[`Storyshots components|m-decimalfield Default precision 1`] = `
     >
       <span
         class="m-input-style__label"
+        style="z-index: -1;"
       >
         <span
           class="m-input-style__text"
@@ -673,6 +679,7 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
     >
       <span
         class="m-input-style__label"
+        style="z-index: -1;"
       >
         <span
           class="m-input-style__text"
@@ -740,6 +747,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -807,6 +815,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -874,6 +883,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
         >
           <span
             class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
               class="m-input-style__text"
@@ -949,6 +959,7 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
     >
       <span
         class="m-input-style__label"
+        style="z-index: -1;"
       >
         <span
           class="m-input-style__text"
@@ -1014,6 +1025,7 @@ exports[`Storyshots components|m-decimalfield With initial value 1`] = `
     >
       <span
         class="m-input-style__label"
+        style="z-index: -1;"
       >
         <span
           class="m-input-style__text"
