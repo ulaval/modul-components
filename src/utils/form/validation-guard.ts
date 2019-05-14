@@ -11,15 +11,6 @@ export const DefaultValidationGuard: ControlValidationGuard = (editionContext: C
     const guard: Map<ControlEditionContext, ControlValidatorValidationType[]> = new Map<ControlEditionContext, ControlValidatorValidationType[]>(
         [
             [
-                ControlEditionContext.EmptyAndValid, [
-                    ControlValidatorValidationType.None,
-                    ControlValidatorValidationType.AtExit,
-                    ControlValidatorValidationType.Correction,
-                    ControlValidatorValidationType.Modification,
-                    ControlValidatorValidationType.External
-                ]
-            ],
-            [
                 ControlEditionContext.Pristine, [
                     ControlValidatorValidationType.None,
                     ControlValidatorValidationType.AtExit,
@@ -29,7 +20,7 @@ export const DefaultValidationGuard: ControlValidationGuard = (editionContext: C
                 ]
             ],
             [
-                ControlEditionContext.PopulateAndValid, [
+                ControlEditionContext.Dirty, [
                     ControlValidatorValidationType.None,
                     ControlValidatorValidationType.AtExit,
                     ControlValidatorValidationType.Correction,

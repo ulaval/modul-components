@@ -9,6 +9,7 @@ export class FormControl<T> extends AbstractControl {
     private _initialValue?: T;
     private _oldValue?: T;
 
+
     constructor(
         public readonly validators: ControlValidator[] = [],
         options?: FormControlOptions<T>
@@ -18,6 +19,14 @@ export class FormControl<T> extends AbstractControl {
         if (options) {
             this._initialValue = this._value = this._oldValue = options.initialValue;
         }
+    }
+
+    public get pristine(): boolean {
+        return this._pristine;
+    }
+
+    public get touched(): boolean {
+        return this._touched;
     }
 
     get value(): T | undefined {
@@ -31,8 +40,11 @@ export class FormControl<T> extends AbstractControl {
 
         this._oldValue = this._value;
         this._value = value;
-
+        this._pristine = false;
         this.validate();
+        if (this.parent) {
+            this.parent.updateValidity();
+        }
     }
 
     public get enabled(): boolean {
@@ -69,21 +81,47 @@ export class FormControl<T> extends AbstractControl {
             .every(v => !!v.lastCheck);
     }
 
+    /**
+     * This is called on the focus event of the field
+     */
     public initEdition(): void {
+        console.log('FormControl.initEdition');
+
         if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
-        } else if (this._value === this._oldValue && this._value === this._initialValue) {
+        } else if (this.pristine) {
             this._editionContext = ControlEditionContext.Pristine;
-        } else if (!this._value && this.valid) {
-            this._editionContext = ControlEditionContext.EmptyAndValid;
-        } else if (this._value && this.valid) {
-            this._editionContext = ControlEditionContext.PopulateAndValid;
+        } else {
+            this._editionContext = ControlEditionContext.Dirty;
+        }
+
+        if (this.parent) {
+            this.parent.initEdition();
         }
     }
 
+    /**
+     * This is called on the blur event of the field
+     */
+    public endEdition(): void {
+        console.log('FormControl.endEdition');
+        this._touched = true;
+        this._editionContext = ControlEditionContext.None;
+        this.validate();
+        if (this.parent) {
+            this.parent.endEdition();
+        }
+    }
+
+    public updateValidity(): void { };
+
     public reset(): void {
         super.reset();
+        this._pristine = true;
+        this._touched = false;
         this._value = this._oldValue = this._initialValue;
     }
+
+
 }
 

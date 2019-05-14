@@ -3,9 +3,15 @@ import { ControlEditionContext } from './control-edition-context';
 import { ControlError } from './control-error';
 import { ControlOptions, FormControlOptions } from './control-options';
 import { ControlValidatorValidationType } from './control-validator-validation-type';
+import { FormArray } from './form-array';
+import { FormGroup } from './form-group';
 import { ControlValidationGuard, DefaultValidationGuard } from './validation-guard';
 import { ControlValidator } from './validators/control-validator';
 
+/**
+ * This is the base class for `FormControl`, `FormGroup`, and `FormArray`.
+ *
+ */
 export abstract class AbstractControl {
     public focusGrantedObservable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
@@ -14,6 +20,12 @@ export abstract class AbstractControl {
     protected _waiting: boolean = false;
     protected _enabled: boolean = true;
     protected _readonly: boolean = false;
+    protected _parent: FormGroup | FormArray;
+
+    protected _pristine: boolean = true;
+
+
+    protected _touched: boolean = false;
 
 
     constructor(
@@ -35,12 +47,33 @@ export abstract class AbstractControl {
     public abstract set waiting(isWaiting: boolean);
     public abstract get readonly(): boolean;
     public abstract set readonly(isReadonly: boolean);
+    /** Pristine is when user has not changed it value */
+    public abstract get pristine(): boolean;
+
+    /** Touched is when the field is burred at leat one time  */
+    public abstract get touched(): boolean;
+
     public abstract hasError(): boolean;
+
+    public abstract initEdition(): void;
+    public abstract endEdition(): void;
+    public abstract updateValidity(): void;
+
+    get parent(): FormGroup | FormArray {
+        return this._parent;
+    }
+
+    setParent(parent: FormGroup | FormArray): void {
+        this._parent = parent;
+    }
 
     public get errors(): ControlError[] {
         return this._errors;
     }
 
+    /**
+     * Helper method to get the first error message, if any
+     */
     public get errorMessage(): string {
         if (this.hasError()) {
             return this.errors[0].message;
@@ -49,6 +82,10 @@ export abstract class AbstractControl {
         }
     }
 
+    /**
+     * Run all validatiors
+     * @param external
+     */
     public async validate(external: boolean = false): Promise<void> {
         await Promise.all(
             this.validators
@@ -70,14 +107,6 @@ export abstract class AbstractControl {
         this._errors = [];
     }
 
-    public abstract initEdition(): void;
-
-    public endEdition(): void {
-        this._editionContext = ControlEditionContext.None;
-        this._resetManualValidators();
-        this.validate();
-    }
-
     protected _resetManualValidators(): void {
         this.validators
             .filter(v => v.validationType === ControlValidatorValidationType.External)
@@ -92,4 +121,5 @@ export abstract class AbstractControl {
     private _updateErrors(): void {
         this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
+
 }

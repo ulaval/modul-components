@@ -1,7 +1,6 @@
 export enum ControlEditionContext {
     None = 'none',
-    EmptyAndValid = 'empty-and-valid',
-    PopulateAndValid = 'populate-and-valid',
+    Dirty = 'dirty',
     HasErrors = 'has-errors',
     Pristine = 'pristine'
 }

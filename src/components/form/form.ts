@@ -32,7 +32,7 @@ export class MForm extends ModulVue {
     }
 
     public async submit(external: boolean = false): Promise<void> {
-        await this.formGroup.validate(external);
+        await this.formGroup.validateAllChilds(external);
 
         if (!this._isValid(external)) {
             this._triggerActionFallouts(FormActions.InvalidSubmit);

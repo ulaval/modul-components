@@ -19,6 +19,9 @@ import WithRender from './form.sandbox.html';
 @Component
 export class MFormSandbox extends ModulVue {
     isDuplicateCourseCode: boolean = false;
+    rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
+
+
     formGroups: FormGroup[] = [
         new FormGroup(
             {
@@ -142,15 +145,9 @@ export class MFormSandbox extends ModulVue {
         ),
         new FormGroup(
             {
-                roles: new FormArray([
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false })
-                ],
+                roles: new FormArray(
+                    this.rolesName.map(role => new FormControl<boolean>([], { initialValue: false }))
+                    ,
                     [
                         {
                             key: 'selection-min-count',
@@ -214,7 +211,6 @@ export class MFormSandbox extends ModulVue {
             ]
         )
     ];
-    rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
 
     submit(formGroupIndex: number): void {
         let me: any = this;

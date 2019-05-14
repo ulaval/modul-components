@@ -1,7 +1,6 @@
 import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
-import { ControlEditionContext } from '../../utils/form/control-edition-context';
-import { FormGroup } from '../../utils/form/form-group';
+import { FormControl } from '../../utils/form/form-control';
 
 const DISTANCE_FROM_TOP: number = -200;
 const INPUT_GROUP_FOCUS_TIME_MILLISECONDS: number = 500;
@@ -40,21 +39,17 @@ export const AbstractControlDirective: DirectiveOptions = {
 
         Object.defineProperty(el, 'ControlDirectiveListeners', {
             value: {
-                focusListener: () => control.initEdition(),
+                focusListener: () => {
+                    if (control instanceof FormControl) {
+                        control.initEdition();
+                    }
+                },
                 blurListener: (event: any) => {
                     if (event.srcElement instanceof HTMLButtonElement || control.focusGrantedObservable.value) {
                         return;
                     }
 
-                    if (
-                        (
-                            control instanceof FormGroup
-                            &&
-                            (control['_editionContext'] !== ControlEditionContext.None)
-                        )
-                        ||
-                        !(control instanceof FormGroup)
-                    ) {
+                    if (control instanceof FormControl) {
                         control.endEdition();
                     }
                 }
