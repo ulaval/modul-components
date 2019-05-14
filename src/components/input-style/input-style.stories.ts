@@ -4,8 +4,10 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { INPUT_STYLE_NAME } from '../component-names';
+import RichTextEditorPlugin from '../rich-text-editor/rich-text-editor';
 import InputStylePlugin from './input-style';
 Vue.use(InputStylePlugin);
+Vue.use(RichTextEditorPlugin);
 
 
 declare module '@storybook/addon-knobs' {
@@ -189,4 +191,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
             }
         },
         template: '<m-input-style label="label" :empty="false" :tag-style="tagStyle">Title ({{tagStyle}})</m-input-style>'
+    }))
+    .add('rich text editor', () => ({
+        template: '<m-rich-text-editor max-width="large" label="RTE - test for regressions"></m-rich-text-editor>'
     }));
