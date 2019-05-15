@@ -98,12 +98,15 @@ export class MTable extends ModulVue {
         return columnTable.sortDirection === MColumnSortDirection.Asc || columnTable.sortDirection === MColumnSortDirection.Dsc;
     }
 
-    public getIconName(columnTable: MColumnTable): string | undefined {
-        if (columnTable.sortDirection === MColumnSortDirection.Dsc) {
-            return 'm-svg__arrow-thin--down';
+    public getColumnSortDirectionClass(columnTable: MColumnTable): string | undefined {
+        switch (columnTable.sortDirection) {
+            case MColumnSortDirection.Asc:
+                return 'm--is-sort-asc';
+            case MColumnSortDirection.Dsc:
+                return 'm--is-sort-desc';
+            default:
+                return undefined;
         }
-
-        return 'm-svg__arrow-thin--up';
     }
 
     columnWidth(col: MColumnTable): { width: string } | '' {

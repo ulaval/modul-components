@@ -18,12 +18,14 @@
                                   v-html="column.title"></span>
                             <m-icon-button v-if="column.sortable"
                                            class="m-table__sortable-icon"
+                                           :class="[getColumnSortDirectionClass(column)]"
                                            :disabled="loading"
-                                           :icon-name="getIconName(column)"
+                                           icon-name="m-svg__arrow-thin--up"
                                            skin="bold"
-                                           button-size="12px"
+                                           button-size="14px"
+                                           icon-size="12px"
                                            :title="i18nSort"
-                                           @click="sort(column)"></m-icon-button>
+                                           @click.stop="sort(column)"></m-icon-button>
                         </div>
                         <template v-else>
                             <span class="m-table__header-name">{{ column.title }}</span>
