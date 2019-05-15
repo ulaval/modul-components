@@ -1,6 +1,8 @@
 import { FormControl } from './form-control';
 import { FormGroup } from './form-group';
 
+const TEST: string = 'test';
+
 describe('FormGroup', () => {
     let formGroup: FormGroup;
 
@@ -21,7 +23,7 @@ describe('FormGroup', () => {
         describe('when adding a required control', () => {
 
             beforeAll(() => {
-                formGroup.addControl('test', new FormControl());
+                formGroup.addControl(TEST, new FormControl());
             });
 
             it('should add the controls properly', () => {

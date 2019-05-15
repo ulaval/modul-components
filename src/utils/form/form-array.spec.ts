@@ -1,11 +1,11 @@
 import { FormArray } from './form-array';
 import { FormControl } from './form-control';
 
-describe('FromArray', () => {
+describe('FormArray', () => {
     let formArray: FormArray;
 
 
-    describe('given a FromArray with no controls', () => {
+    describe('given a FormArray with no controls', () => {
         beforeAll(() => {
             formArray = new FormArray([]);
         });
