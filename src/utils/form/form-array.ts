@@ -1,7 +1,6 @@
 import { AbstractControl } from './abstract-control';
 import { ControlEditionContext } from './control-edition-context';
 import { ControlOptions } from './control-options';
-import { FormGroup } from './form-group';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormArray extends AbstractControl {
@@ -101,8 +100,6 @@ export class FormArray extends AbstractControl {
 
 
     public initEdition(): void {
-        console.log('FormArray.initEdition');
-
         if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this.pristine) {
@@ -117,8 +114,6 @@ export class FormArray extends AbstractControl {
     }
 
     public endEdition(): void {
-
-        console.log('FormArray.endEdition');
         // only end edition if all field(s) are touched
         if (this.touched) {
             this._editionContext = ControlEditionContext.None;
@@ -131,7 +126,6 @@ export class FormArray extends AbstractControl {
     }
 
     public updateValidity(): void {
-        console.log('FormArray.updateValidity');
         this.validate();
 
         if (this.parent) {
@@ -139,14 +133,10 @@ export class FormArray extends AbstractControl {
         }
     }
 
-    public async validateAllChilds(external: boolean = false): Promise<void> {
+    public async submit(external: boolean = false): Promise<void> {
         await this.validate();
         await Promise.all(this.controls.map(c => {
-            if (c instanceof FormGroup || c instanceof FormArray) {
-                return c.validateAllChilds(external);
-            } else {
-                return c.validate(external);
-            }
+            return c.submit(external);
         }));
     }
 

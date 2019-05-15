@@ -43,10 +43,6 @@ export const AbstractControlDirective: DirectiveOptions = {
                     }
                 },
                 blurListener: (event: any) => {
-                    if (event.srcElement instanceof HTMLButtonElement || control.focusGrantedObservable.value) {
-                        return;
-                    }
-
                     if (control instanceof FormControl) {
                         control.endEdition();
                     }

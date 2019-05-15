@@ -41,10 +41,7 @@ export class FormControl<T> extends AbstractControl {
         this._oldValue = this._value;
         this._value = value;
         this._pristine = false;
-        this.validate();
-        if (this.parent) {
-            this.parent.updateValidity();
-        }
+        this.updateValidity();
     }
 
     public get valid(): boolean {
@@ -83,13 +80,10 @@ export class FormControl<T> extends AbstractControl {
     }
 
 
-
     /**
      * This is called on the focus event of the field
      */
     public initEdition(): void {
-        console.log('FormControl.initEdition');
-
         if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this.pristine) {
@@ -107,7 +101,6 @@ export class FormControl<T> extends AbstractControl {
      * This is called on the blur event of the field
      */
     public endEdition(): void {
-        console.log('FormControl.endEdition');
         this._touched = true;
         this._editionContext = ControlEditionContext.None;
         this.validate();
@@ -116,7 +109,12 @@ export class FormControl<T> extends AbstractControl {
         }
     }
 
-    public updateValidity(): void { };
+    public updateValidity(): void {
+        this.validate();
+        if (this.parent) {
+            this.parent.updateValidity();
+        }
+    }
 
     public reset(): void {
         super.reset();
@@ -125,6 +123,10 @@ export class FormControl<T> extends AbstractControl {
         this._value = this._oldValue = this._initialValue;
     }
 
+
+    public async submit(external: boolean = false): Promise<void> {
+        await this.validate();
+    }
 
 }
 

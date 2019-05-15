@@ -57,6 +57,7 @@ export abstract class AbstractControl {
     public abstract initEdition(): void;
     public abstract endEdition(): void;
     public abstract updateValidity(): void;
+    public abstract submit(external: boolean): Promise<void>;
 
     get parent(): FormGroup | FormArray {
         return this._parent;
