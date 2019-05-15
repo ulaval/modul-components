@@ -15,9 +15,7 @@ export abstract class AbstractControl {
     protected _enabled: boolean = true;
     protected _readonly: boolean = false;
 
-
     constructor(
-        public readonly name: string,
         public readonly validators: ControlValidator[] = [],
         options?: ControlOptions | FormControlOptions<any>
     ) {
@@ -28,7 +26,8 @@ export abstract class AbstractControl {
         }
     }
 
-    public abstract get isValid(): boolean;
+    public abstract get value(): any;
+    public abstract get valid(): boolean;
     public abstract get enabled(): boolean;
     public abstract set enabled(isEnabled: boolean);
     public abstract get waiting(): boolean;
@@ -74,11 +73,11 @@ export abstract class AbstractControl {
 
     public endEdition(): void {
         this._editionContext = ControlEditionContext.None;
-        this._resetManualValidators();
+        this._resetExternalValidators();
         this.validate();
     }
 
-    protected _resetManualValidators(): void {
+    protected _resetExternalValidators(): void {
         this.validators
             .filter(v => v.validationType === ControlValidatorValidationType.External)
             .forEach(v => {

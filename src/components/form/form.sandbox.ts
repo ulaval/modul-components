@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
+import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { EmailValidator } from '../../utils/form/validators/email/email';
@@ -20,34 +21,28 @@ export class MFormSandbox extends ModulVue {
     isDuplicateCourseCode: boolean = false;
     formGroups: FormGroup[] = [
         new FormGroup(
-            'Required and 20 characters max',
-            [
-                new FormControl<string>(
-                    'Title',
+            {
+                'Title': new FormControl<string>(
                     [
                         RequiredValidator('Title'),
                         MaxLengthValidator('Title', 20)
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'Required and 5 characters min',
-            [
-                new FormControl<string>(
-                    'Security answer',
+            {
+                'Security answer': new FormControl<string>(
                     [
                         RequiredValidator('Security answer'),
                         MinLengthValidator('Security answer', 5)
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'Format with fixed max characters (postal code)',
-            [
-                new FormControl<string>(
-                    'Postal code',
+            {
+                'Postal code': new FormControl<string>(
                     [
                         RequiredValidator('Postal code'),
                         {
@@ -64,25 +59,21 @@ export class MFormSandbox extends ModulVue {
                         }
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'Format without fixed max characters (email)',
-            [
-                new FormControl<string>(
-                    'Email',
+            {
+                'Email': new FormControl<string>(
                     [
                         RequiredValidator('Email'),
                         EmailValidator('Email')
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'More than one validations (course code)',
-            [
-                new FormControl<string>(
-                    'Course code',
+            {
+                'Course code': new FormControl<string>(
                     [
                         RequiredValidator('Course code'),
                         MaxLengthValidator('Course code', 8, {
@@ -110,13 +101,11 @@ export class MFormSandbox extends ModulVue {
                         }
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'Live check username avaibility (async)',
-            [
-                new FormControl<string>(
-                    'Username',
+            {
+                'Username': new FormControl<string>(
                     [
                         {
                             key: '',
@@ -136,13 +125,11 @@ export class MFormSandbox extends ModulVue {
                         }
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'Radio buttons required',
-            [
-                new FormControl<string>(
-                    'Value',
+            {
+                'Value': new FormControl<string>(
                     [
                         RequiredValidator('Value', {
                             error: {
@@ -151,64 +138,62 @@ export class MFormSandbox extends ModulVue {
                         })
                     ]
                 )
-            ]
+            }
         ),
         new FormGroup(
-            'Checkbox 2 to 5 selections',
-            [
-                new FormControl<boolean>('Sys admin', [], { initialValue: false }),
-                new FormControl<boolean>('Unit admin', [], { initialValue: false }),
-                new FormControl<boolean>('Conceptor', [], { initialValue: false }),
-                new FormControl<boolean>('Assitant', [], { initialValue: false }),
-                new FormControl<boolean>('Moderator', [], { initialValue: false }),
-                new FormControl<boolean>('Student', [], { initialValue: false }),
-                new FormControl<boolean>('Invited', [], { initialValue: false })
-            ],
-            [
-                {
-                    key: 'selection-min-count',
-                    validationFunction: (group: FormGroup): Promise<boolean> => {
-                        let previousSelectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c['_oldValue']).length;
-                        let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
+            {
+                roles: new FormArray([
+                    new FormControl<boolean>([], { initialValue: false }),
+                    new FormControl<boolean>([], { initialValue: false }),
+                    new FormControl<boolean>([], { initialValue: false }),
+                    new FormControl<boolean>([], { initialValue: false }),
+                    new FormControl<boolean>([], { initialValue: false }),
+                    new FormControl<boolean>([], { initialValue: false }),
+                    new FormControl<boolean>([], { initialValue: false })
+                ],
+                    [
+                        {
+                            key: 'selection-min-count',
+                            validationFunction: (group: FormGroup): Promise<boolean> => {
+                                let previousSelectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c['_oldValue']).length;
+                                let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
 
-                        return Promise.resolve((selectionCount > previousSelectionCount) || (selectionCount >= 2));
-                    },
-                    error: {
-                        message: 'Select at least 2 roles'
-                    },
-                    validationType: ControlValidatorValidationType.OnGoing
-                },
-                {
-                    key: 'selection-max-count',
-                    validationFunction: (group: FormGroup): Promise<boolean> => {
-                        let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
+                                return Promise.resolve((selectionCount > previousSelectionCount) || (selectionCount >= 2));
+                            },
+                            error: {
+                                message: 'Select at least 2 roles'
+                            },
+                            validationType: ControlValidatorValidationType.OnGoing
+                        },
+                        {
+                            key: 'selection-max-count',
+                            validationFunction: (group: FormGroup): Promise<boolean> => {
+                                let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
 
-                        return Promise.resolve(selectionCount <= 5);
-                    },
-                    error: {
-                        message: 'Select 5 roles or less'
-                    },
-                    validationType: ControlValidatorValidationType.OnGoing
-                }
-            ]
+                                return Promise.resolve(selectionCount <= 5);
+                            },
+                            error: {
+                                message: 'Select 5 roles or less'
+                            },
+                            validationType: ControlValidatorValidationType.OnGoing
+                        }
+                    ])
+            }
         ),
         new FormGroup(
-            'Email confirmation',
-            [
-                new FormControl<string>(
-                    'Email',
+            {
+                'Email': new FormControl<string>(
                     [
                         RequiredValidator('Email'),
                         EmailValidator('Email')
                     ]
                 ),
-                new FormControl<string>(
-                    'Email confirmation',
+                'Email confirmation': new FormControl<string>(
                     [
                         EmailValidator('Email confirmation')
                     ]
                 )
-            ],
+            },
             [
                 {
                     key: 'compare-email',
@@ -229,6 +214,7 @@ export class MFormSandbox extends ModulVue {
             ]
         )
     ];
+    rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
 
     submit(formGroupIndex: number): void {
         let me: any = this;

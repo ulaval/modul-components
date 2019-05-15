@@ -1,5 +1,5 @@
 <div class="m-add-sandbox">
-    <h2 class="m-u--no-margin">{{formGroups[0].name}}</h2>
+    <h2 class="m-u--no-margin">Required and 20 characters max</h2>
     <p></p>
     <p>
         <m-form :form-group="formGroups[0]"
@@ -26,7 +26,7 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">{{formGroups[1].name}}</h2>
+    <h2 class="m-u--no-margin">Required and 5 characters min</h2>
     <p></p>
     <p>
         <m-form :form-group="formGroups[1]"
@@ -49,7 +49,7 @@
     </p>
 
     <hr />
-    <h2 class="m-u--no-margin">{{formGroups[2].name}}</h2>
+    <h2 class="m-u--no-margin">Format with fixed max characters (postal code)</h2>
     <p>input mask is not ready for this (it should use inputs mixins)</p>
     <p>
         <m-form :form-group="formGroups[2]"
@@ -72,7 +72,7 @@
     </p>
 
     <hr />
-    <h2 class="m-u--no-margin">{{formGroups[3].name}}</h2>
+    <h2 class="m-u--no-margin">Format without fixed max characters (email)</h2>
     <p>input mask is not ready for this (it should use inputs mixins)</p>
     <p>
         <m-form :form-group="formGroups[3]"
@@ -96,7 +96,7 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">{{formGroups[4].name}}</h2>
+    <h2 class="m-u--no-margin">More than one validations (course code)</h2>
     <p>input mask is not ready for this (it should use inputs mixins)</p>
     <p>
         <m-form :form-group="formGroups[4]"
@@ -122,7 +122,7 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">{{formGroups[5].name}}</h2>
+    <h2 class="m-u--no-margin">Live check username avaibility (async)</h2>
     <p>John, Jane, Doe are reserved</p>
     <p>
         <m-form :form-group="formGroups[5]"
@@ -148,7 +148,7 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">{{formGroups[6].name}}</h2>
+    <h2 class="m-u--no-margin">Radio buttons required</h2>
     <p></p>
     <p>
         <m-form :form-group="formGroups[6]"
@@ -179,7 +179,7 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">{{formGroups[7].name}}</h2>
+    <h2 class="m-u--no-margin">Checkbox 2 to 5 selections (FormArray)</h2>
     <p></p>
     <p>
 
@@ -187,14 +187,14 @@
                 @reset="reset(7)"
                 @submit="submit(7)">
 
-            <m-input-group :error-message="formGroups[7].errors.length > 0 ? formGroups[7].errors[0].message : null"
+            <m-input-group :error-message="formGroups[7].getControl('roles').errors.length > 0 ? formGroups[7].getControl('roles').errors[0].message : null"
                            legend="Select betweeen 2 and 5 roles"
-                           v-m-control="formGroups[7]">
-                <m-checkbox v-for="(control, index) in formGroups[7].controls"
+                           v-m-control="formGroups[7].getControl('roles')">
+                <m-checkbox v-for="(control, index) in formGroups[7].getControl('roles').controls"
                             v-model="control.value"
                             v-m-control="control"
                             :key="index">
-                    {{control.name}}</m-checkbox>
+                    {{rolesName[index]}}</m-checkbox>
             </m-input-group>
 
             <p class="m-u--margin-bottom--l">
@@ -209,7 +209,7 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">{{formGroups[8].name}}</h2>
+    <h2 class="m-u--no-margin">Email confirmation</h2>
     <p></p>
     <p>
 

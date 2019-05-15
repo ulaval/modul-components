@@ -38,13 +38,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
         },
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'name',
+                {
+                    'name': new FormControl<string>(
                         []
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -74,13 +72,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
     .add('default', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'name',
+                {
+                    'name': new FormControl<string>(
                         [RequiredValidator('name')]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -104,13 +100,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
     .add('toast and clear toast', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'name',
+                {
+                    'name': new FormControl<string>(
                         [RequiredValidator('name')]
                     )
-                ]
+                }
             ),
             actionFallouts: [
                 ErrorToast,
@@ -139,13 +133,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
     .add('focus first field with error', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'name',
+                {
+                    'name': new FormControl<string>(
                         [RequiredValidator('name')]
                     )
-                ]
+                }
             ),
             actionFallouts: [
                 FocusOnFirstError
@@ -173,13 +165,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
     .add('message summary and clear message summary', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'name',
+                {
+                    'name': new FormControl<string>(
                         [RequiredValidator('name')]
                     )
-                ]
+                }
             ),
             actionFallouts: [
                 SummaryMessage,
@@ -212,13 +202,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('required', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'name',
+                {
+                    'name': new FormControl<string>(
                         [RequiredValidator('name')]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -242,14 +230,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('email', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-
-                [
-                    new FormControl<string>(
-                        'email',
+                {
+                    'email': new FormControl<string>(
                         [EmailValidator('email')]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -273,14 +258,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('min-length', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-
-                [
-                    new FormControl<string>(
-                        'min 5',
+                {
+                    'min 5': new FormControl<string>(
                         [MinLengthValidator('min 5', 5)]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -304,13 +286,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('max-length', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'max 5',
+                {
+                    'max 5': new FormControl<string>(
                         [MaxLengthValidator('max 5', 5)]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -334,17 +314,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('min', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<number>(
-                        'min 5',
+                {
+                    'min 5': new FormControl<number>(
                         [MinValidator('min 5', 5)]
                     ),
-                    new FormControl<Date>(
-                        'min 1/1/2019',
+                    'min 1/1/2019': new FormControl<Date>(
                         [MinValidator('min 1/1/2019', new Date(2019, 0, 1))]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -373,17 +350,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('max', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<number>(
-                        'max 5',
+                {
+                    'max 5': new FormControl<number>(
                         [MaxValidator('max 5', 5)]
                     ),
-                    new FormControl<Date>(
-                        'max 1/1/2019',
+                    'max 1/1/2019': new FormControl<Date>(
                         [MaxValidator('max 1/1/2019', new Date(2019, 0, 1))]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -412,31 +386,28 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('between', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<number>(
-                        'between 2 and 4',
-                        [BetweenValidator('between 2 and 4', 2, 4)]
+                {
+                    'between': new FormControl<number>(
+                        [BetweenValidator('between', 2, 4)]
                     ),
-                    new FormControl<Date>(
-                        'between 1/1/2019 and 1/2/2019',
-                        [BetweenValidator('between 2 and 4', new Date(2019, 0, 1), new Date(2019, 1, 1))]
+                    'betweenDate': new FormControl<Date>(
+                        [BetweenValidator('between', new Date(2019, 0, 1), new Date(2019, 1, 1))]
                     )
-                ]
+                }
             )
         }),
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('between 2 and 4').value"
-                        :error-message="formGroup.getControl('between 2 and 4').errors.length > 0 ? formGroup.getControl('between 2 and 4').errors[0].message : null"
-                        :label="formGroup.getControl('between 2 and 4').name"
-                        v-m-control="formGroup.getControl('between 2 and 4')">
+            <m-integerfield v-model.trim="formGroup.getControl('between').value"
+                        :error-message="formGroup.getControl('between').errors.length > 0 ? formGroup.getControl('between').errors[0].message : null"
+                        :label="formGroup.getControl('between').name"
+                        v-m-control="formGroup.getControl('between')">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('between 1/1/2019 and 1/2/2019').value"
-                        :error-message="formGroup.getControl('between 1/1/2019 and 1/2/2019').errors.length > 0 ? formGroup.getControl('between 1/1/2019 and 1/2/2019').errors[0].message : null"
-                        :label="formGroup.getControl('between 1/1/2019 and 1/2/2019').name"
-                        v-m-control="formGroup.getControl('between 1/1/2019 and 1/2/2019')">
+            <m-datepicker v-model.trim="formGroup.getControl(betweenDate').value"
+                        :error-message="formGroup.getControl(betweenDate').errors.length > 0 ? formGroup.getControl(betweenDate').errors[0].message : null"
+                        :label="formGroup.getControl(betweenDate').name"
+                        v-m-control="formGroup.getControl(betweenDate')">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -451,17 +422,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
     .add('compare', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my group',
-                [
-                    new FormControl<number>(
-                        'email',
+                {
+                    'email': new FormControl<number>(
                         [EmailValidator('email')]
                     ),
-                    new FormControl<number>(
-                        'confirm email',
+                    'confirm email': new FormControl<number>(
                         [EmailValidator('confirm email')]
                     )
-                ],
+                },
                 [
                     CompareValidator(['email', 'confirm email'])
                 ]
@@ -503,17 +471,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
     .add('at-exit', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'email',
+                {
+                    'email': new FormControl<string>(
                         [
                             EmailValidator('email', {
                                 validationType: ControlValidatorValidationType.AtExit
                             })
                         ]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -538,13 +504,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
     .add('correction', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'email',
+                {
+                    'email': new FormControl<string>(
                         [EmailValidator('email')]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -569,17 +533,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
     .add('modification', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'email',
+                {
+                    'email': new FormControl<string>(
                         [
                             EmailValidator('email', {
                                 validationType: ControlValidatorValidationType.Modification
                             })
                         ]
                     )
-                ]
+                }
             )
         }),
         template: `
@@ -604,17 +566,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
     .add('on-going', () => ({
         data: () => ({
             formGroup: new FormGroup(
-                'my form',
-                [
-                    new FormControl<string>(
-                        'email',
+                {
+                    'email': new FormControl<string>(
                         [
                             EmailValidator('email', {
                                 validationType: ControlValidatorValidationType.OnGoing
                             })
                         ]
                     )
-                ]
+                }
             )
         }),
         template: `

@@ -6,7 +6,6 @@ describe('Max validator', () => {
 
     beforeAll(() => {
         formControl = new FormControl<any>(
-            'test',
             [MaxValidator('test', 3)]
         );
     });
@@ -14,14 +13,13 @@ describe('Max validator', () => {
     test('it should return true if value is undefined', async (done) => {
         expect(formControl.value).toBe(undefined);
         await formControl.validate();
-        expect(formControl.isValid).toBe(true);
+        expect(formControl.valid).toBe(true);
         done();
     });
 
     describe('number value', () => {
         beforeAll(() => {
             formControl = new FormControl<number>(
-                'test',
                 [MaxValidator('test', 3)]
             );
         });
@@ -29,13 +27,12 @@ describe('Max validator', () => {
         test('it should return true if value is 0 and max value is higher', async (done) => {
             formControl.value = 0;
             await formControl.validate();
-            expect(formControl.isValid).toBe(true);
+            expect(formControl.valid).toBe(true);
             done();
         });
 
         test('it should return false if value is 0 and max value is lower', async (done) => {
             const formControlTest0: FormControl<number> = new FormControl<number>(
-                'test',
                 [MaxValidator('test', -1)],
                 {
                     initialValue: 0
@@ -44,28 +41,28 @@ describe('Max validator', () => {
 
             await formControlTest0.validate();
 
-            expect(formControlTest0.isValid).toBe(false);
+            expect(formControlTest0.valid).toBe(false);
             done();
         });
 
         test('it should return true if value is lower', async (done) => {
             formControl.value = 1;
             await formControl.validate();
-            expect(formControl.isValid).toBe(true);
+            expect(formControl.valid).toBe(true);
             done();
         });
 
         test('it should return true if value is same', async (done) => {
             formControl.value = 3;
             await formControl.validate();
-            expect(formControl.isValid).toBe(true);
+            expect(formControl.valid).toBe(true);
             done();
         });
 
         test('it should return false if value is higher', async (done) => {
             formControl.value = 4;
             await formControl.validate();
-            expect(formControl.isValid).toBe(false);
+            expect(formControl.valid).toBe(false);
             done();
         });
     });
@@ -73,7 +70,6 @@ describe('Max validator', () => {
     describe('date value', () => {
         beforeAll(() => {
             formControl = new FormControl<Date>(
-                'test',
                 [MaxValidator('test', new Date(2019, 0, 1))]
             );
         });
@@ -81,21 +77,21 @@ describe('Max validator', () => {
         test('it should return true if value is lower', async (done) => {
             formControl.value = new Date(2018, 0, 1);
             await formControl.validate();
-            expect(formControl.isValid).toBe(true);
+            expect(formControl.valid).toBe(true);
             done();
         });
 
         test('it should return true if value is same', async (done) => {
             formControl.value = new Date(2019, 0, 1);
             await formControl.validate();
-            expect(formControl.isValid).toBe(true);
+            expect(formControl.valid).toBe(true);
             done();
         });
 
         test('it should return false if value is higher', async (done) => {
             formControl.value = new Date(2019, 1, 1);
             await formControl.validate();
-            expect(formControl.isValid).toBe(false);
+            expect(formControl.valid).toBe(false);
             done();
         });
     });

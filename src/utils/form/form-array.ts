@@ -5,28 +5,24 @@ import { ControlOptions } from './control-options';
 import { FormControl } from './form-control';
 import { ControlValidator } from './validators/control-validator';
 
-export class FormGroup extends AbstractControl {
+export class FormArray extends AbstractControl {
     private _validationInterval: any;
     private _editionTimeout: any;
 
     constructor(
-        private _controls: { [name: string]: AbstractControl },
+        private _controls: AbstractControl[],
         public readonly validators: ControlValidator[] = [],
         options?: ControlOptions
     ) {
         super(validators, options);
     }
 
-    public get valid(): boolean {
-        return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.valid);
+    public get value(): any {
+        return this._controls.map((c: AbstractControl) => c.value);
     }
 
-    public get value(): any {
-        const values: any = { ...this._controls };
-        Object.keys(this._controls).map((c: string) => {
-            values[c] = this._controls[c].value;
-        });
-        return values;
+    public get valid(): boolean {
+        return this.validators.every(v => !!v.lastCheck) && this._controls.every(c => c.valid);
     }
 
     public get enabled(): boolean {
@@ -35,7 +31,7 @@ export class FormGroup extends AbstractControl {
 
     public set enabled(isEnabled: boolean) {
         this._enabled = isEnabled;
-        this.controls.forEach(c => {
+        this._controls.forEach(c => {
             c.enabled = isEnabled;
         });
     }
@@ -46,8 +42,9 @@ export class FormGroup extends AbstractControl {
 
     public set waiting(isWaiting: boolean) {
         this._waiting = isWaiting;
-        this.controls.forEach(c => c.waiting = isWaiting);
+        this._controls.forEach(c => c.waiting = isWaiting);
     }
+
 
     public get readonly(): boolean {
         return this._readonly;
@@ -55,50 +52,34 @@ export class FormGroup extends AbstractControl {
 
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
-        this.controls.forEach(c => c.readonly = isReadonly);
+        this._controls.forEach(c => c.readonly = isReadonly);
     }
 
     public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
+        return (this.errors.length > 0 || this._controls.some(c => {
             return c.hasError();
         }));
     }
 
     public get controls(): AbstractControl[] {
-        return Object.values(this._controls);
+        return this._controls;
     }
 
-    public getControl(name: string): AbstractControl {
-        if (this._controls[name] !== undefined) {
-            return this._controls[name];
+    public addControl(control: AbstractControl): void {
+        this._controls = this._controls.concat(control);
+    }
+
+    public removeControl(index: number): void {
+        if (this._controls[index - 1] !== undefined) {
+            this._controls = this._controls.slice(index);
         } else {
-            throw Error(`There is no control with the name ${name} in this group`);
+            throw Error(`There is no control with index= ${index} in this array`);
         }
-    }
-
-    public addControl(name: string, control: AbstractControl): void {
-        if (this._controls[name] !== undefined) {
-            throw Error(`There is already a control with name ${name} in this group`);
-        }
-
-        const result: any = Object.assign(this._controls);
-        result[name] = control;
-        this._controls = result;
-    }
-
-    public removeControl(name: string): void {
-        if (this._controls[name] === undefined) {
-            throw Error(`There is no control with name ${name} in this group`);
-        }
-
-        const result: any = Object.assign(this._controls);
-        delete result[name];
-        this._controls = result;
     }
 
     public async validate(external: boolean = false): Promise<void> {
         await super.validate(external);
-        await Promise.all(this.controls.map(c => c.validate(external)));
+        await Promise.all(this._controls.map(c => c.validate(external)));
     }
 
     public reset(): void {
@@ -106,7 +87,7 @@ export class FormGroup extends AbstractControl {
         clearTimeout(this._editionTimeout);
 
         super.reset();
-        this.controls.forEach(c => c.reset());
+        this._controls.forEach(c => c.reset());
     }
 
     public initEdition(): void {
@@ -118,10 +99,10 @@ export class FormGroup extends AbstractControl {
             , ModulVue.prototype.$form.formGroupValidationIntervalInMilliseconds
         );
 
-        const populate: boolean = !!this.controls
+        const populate: boolean = !!this._controls
             .filter(c => c instanceof FormControl)
             .find((fc: FormControl<any>) => !!fc.value === true);
-        const pristine: boolean = this.controls
+        const pristine: boolean = this._controls
             .filter(c => c instanceof FormControl)
             .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
         const isValid: boolean = this.validators.every(v => !!v.lastCheck);

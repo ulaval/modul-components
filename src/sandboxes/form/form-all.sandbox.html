@@ -117,7 +117,7 @@
                       :readonly="priceField.readonly"
                       :waiting="priceField.waiting"></m-moneyfield>
 
-        <!-- <h4 class="m-u--h6">Intergerfield</h4>
+        <h4 class="m-u--h6">Integerfield</h4>
         <m-integerfield v-m-control="integerField"
                         v-model="integerField.value"
                         :required-marker="true"
@@ -128,7 +128,7 @@
                         :readonly="integerField.readonly"
                         :waiting="integerField.waiting">
 
-        </m-integerfield> -->
+        </m-integerfield>
 
         <h4 class="m-u--h6">Switch</h4>
         <m-switch v-m-control="switchField"
@@ -175,7 +175,7 @@
         </p>
 
         <h4 class="m-u--h6">Form Values</h4>
-        <p>{{ formAllGroup.values }}</p>
+        <p>{{ formAllGroup.value }}</p>
         <h4 class="m-u--h6">Form Validity = {{ formAllGroup.isValid }} </h4>
         <h4 class="m-u--h6">Form Errors = {{ formAllGroup.hasError() }}</h4>
         <h4 class="m-u--h6">Form Waiting = {{ formAllGroup.waiting }}</h4>

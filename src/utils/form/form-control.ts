@@ -10,11 +10,10 @@ export class FormControl<T> extends AbstractControl {
     private _oldValue?: T;
 
     constructor(
-        public readonly name: string,
         public readonly validators: ControlValidator[] = [],
         options?: FormControlOptions<T>
     ) {
-        super(name, validators, options);
+        super(validators, options);
 
         if (options) {
             this._initialValue = this._value = this._oldValue = options.initialValue;
@@ -34,6 +33,12 @@ export class FormControl<T> extends AbstractControl {
         this._value = value;
 
         this.validate();
+    }
+
+    public get valid(): boolean {
+        return this.validators
+            .filter(v => v.validationType !== ControlValidatorValidationType.External)
+            .every(v => !!v.lastCheck);
     }
 
     public get enabled(): boolean {
@@ -60,14 +65,14 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
+
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
-    public get isValid(): boolean {
-        return this.validators
-            .filter(v => v.validationType !== ControlValidatorValidationType.External)
-            .every(v => !!v.lastCheck);
+    public reset(): void {
+        super.reset();
+        this._value = this._oldValue = this._initialValue;
     }
 
     public initEdition(): void {
@@ -75,16 +80,11 @@ export class FormControl<T> extends AbstractControl {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this._value === this._oldValue && this._value === this._initialValue) {
             this._editionContext = ControlEditionContext.Pristine;
-        } else if (!this._value && this.isValid) {
+        } else if (!this._value && this.valid) {
             this._editionContext = ControlEditionContext.EmptyAndValid;
-        } else if (this._value && this.isValid) {
+        } else if (this._value && this.valid) {
             this._editionContext = ControlEditionContext.PopulateAndValid;
         }
-    }
-
-    public reset(): void {
-        super.reset();
-        this._value = this._oldValue = this._initialValue;
     }
 }
 

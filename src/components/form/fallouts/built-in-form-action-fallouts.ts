@@ -38,7 +38,7 @@ export const ErrorToast: FormActionFallout = {
 export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-        let control: AbstractControl | undefined = form.formGroup.controls.find(c => !c.isValid);
+        let control: AbstractControl | undefined = form.formGroup.controls.find(c => !c.valid);
 
         if (control) {
             control.focusGrantedObservable.next(true);
