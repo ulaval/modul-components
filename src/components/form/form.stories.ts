@@ -387,11 +387,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'between 2 and 4': new FormControl<number>(
-                        [BetweenValidator('between 2 and 4', 2, 4)]
+                    'between': new FormControl<number>(
+                        [BetweenValidator('between', 2, 4)]
                     ),
-                    'between 1/1/2019 and 1/2/2019': new FormControl<Date>(
-                        [BetweenValidator('between 2 and 4', new Date(2019, 0, 1), new Date(2019, 1, 1))]
+                    'betweenDate': new FormControl<Date>(
+                        [BetweenValidator('between', new Date(2019, 0, 1), new Date(2019, 1, 1))]
                     )
                 }
             )
@@ -399,15 +399,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('between 2 and 4').value"
-                        :error-message="formGroup.getControl('between 2 and 4').errors.length > 0 ? formGroup.getControl('between 2 and 4').errors[0].message : null"
-                        :label="formGroup.getControl('between 2 and 4').name"
-                        v-m-control="formGroup.getControl('between 2 and 4')">
+            <m-integerfield v-model.trim="formGroup.getControl('between').value"
+                        :error-message="formGroup.getControl('between').errors.length > 0 ? formGroup.getControl('between').errors[0].message : null"
+                        :label="formGroup.getControl('between').name"
+                        v-m-control="formGroup.getControl('between')">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('between 1/1/2019 and 1/2/2019').value"
-                        :error-message="formGroup.getControl('between 1/1/2019 and 1/2/2019').errors.length > 0 ? formGroup.getControl('between 1/1/2019 and 1/2/2019').errors[0].message : null"
-                        :label="formGroup.getControl('between 1/1/2019 and 1/2/2019').name"
-                        v-m-control="formGroup.getControl('between 1/1/2019 and 1/2/2019')">
+            <m-datepicker v-model.trim="formGroup.getControl(betweenDate').value"
+                        :error-message="formGroup.getControl(betweenDate').errors.length > 0 ? formGroup.getControl(betweenDate').errors[0].message : null"
+                        :label="formGroup.getControl(betweenDate').name"
+                        v-m-control="formGroup.getControl(betweenDate')">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
