@@ -1,11 +1,8 @@
 import { AbstractControl } from './abstract-control';
-import { ControlEditionContext } from './control-edition-context';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormArray extends AbstractControl {
-    private _validationInterval: any;
-    private _editionTimeout: any;
 
     constructor(
         private _controls: AbstractControl[] = [],
@@ -77,8 +74,6 @@ export class FormArray extends AbstractControl {
         });
     }
 
-
-
     public get controls(): AbstractControl[] {
         return this._controls;
     }
@@ -96,33 +91,14 @@ export class FormArray extends AbstractControl {
         }
     }
 
-
-
-
     public initEdition(): void {
-        if (this.errors.length > 0) {
-            this._editionContext = ControlEditionContext.HasErrors;
-        } else if (this.pristine) {
-            this._editionContext = ControlEditionContext.Pristine;
-        } else {
-            this._editionContext = ControlEditionContext.Dirty;
-        }
-
-        if (this.parent) {
-            this.parent.initEdition();
-        }
+        super.initEdition();
     }
 
     public endEdition(): void {
-        // only end edition if all field(s) are touched
         if (this.touched) {
-            this._editionContext = ControlEditionContext.None;
-            this.validate();
-            if (this.parent) {
-                this.parent.endEdition();
-            }
+            super.endEdition();
         }
-
     }
 
     public async submit(external: boolean = false): Promise<void> {

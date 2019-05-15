@@ -21,10 +21,7 @@ export abstract class AbstractControl {
     protected _enabled: boolean = true;
     protected _readonly: boolean = false;
     protected _parent: FormGroup | FormArray;
-
     protected _pristine: boolean = true;
-
-
     protected _touched: boolean = false;
 
     constructor(
@@ -53,11 +50,37 @@ export abstract class AbstractControl {
     public abstract get touched(): boolean;
 
     public abstract hasError(): boolean;
-
-    public abstract initEdition(): void;
-    public abstract endEdition(): void;
-
     public abstract submit(external: boolean): Promise<void>;
+
+    /**
+     * This is called on the focus event of the field
+     */
+    public initEdition(): void {
+        if (this.errors.length > 0) {
+            this._editionContext = ControlEditionContext.HasErrors;
+        } else if (this.pristine) {
+            this._editionContext = ControlEditionContext.Pristine;
+        } else {
+            this._editionContext = ControlEditionContext.Dirty;
+        }
+
+        if (this.parent) {
+            this.parent.initEdition();
+        }
+    }
+
+    /**
+     * This is called on the blur event of the field
+     */
+    public endEdition(): void {
+        this._editionContext = ControlEditionContext.None;
+        this._resetExternalValidators();
+        this.validate();
+        if (this.parent) {
+
+            this.parent.endEdition();
+        }
+    }
 
     get parent(): FormGroup | FormArray {
         return this._parent;
@@ -107,7 +130,7 @@ export abstract class AbstractControl {
         this._errors = [];
     }
 
-    protected _resetManualValidators(): void {
+    protected _resetExternalValidators(): void {
 
         this.validators
             .filter(v => v.validationType === ControlValidatorValidationType.External)
@@ -131,5 +154,4 @@ export abstract class AbstractControl {
             this.parent.validateAndNotifyParent();
         }
     }
-
 }

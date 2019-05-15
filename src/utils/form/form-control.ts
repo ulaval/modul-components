@@ -1,5 +1,4 @@
 import { AbstractControl } from './abstract-control';
-import { ControlEditionContext } from './control-edition-context';
 import { FormControlOptions } from './control-options';
 import { ControlValidatorValidationType } from './control-validator-validation-type';
 import { ControlValidator } from './validators/control-validator';
@@ -74,39 +73,13 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
-
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
-
-    /**
-     * This is called on the focus event of the field
-     */
-    public initEdition(): void {
-        if (this.errors.length > 0) {
-            this._editionContext = ControlEditionContext.HasErrors;
-        } else if (this.pristine) {
-            this._editionContext = ControlEditionContext.Pristine;
-        } else {
-            this._editionContext = ControlEditionContext.Dirty;
-        }
-
-        if (this.parent) {
-            this.parent.initEdition();
-        }
-    }
-
-    /**
-     * This is called on the blur event of the field
-     */
     public endEdition(): void {
         this._touched = true;
-        this._editionContext = ControlEditionContext.None;
-        this.validate();
-        if (this.parent) {
-            this.parent.endEdition();
-        }
+        super.endEdition();
     }
 
     public reset(): void {
@@ -118,7 +91,7 @@ export class FormControl<T> extends AbstractControl {
 
 
     public async submit(external: boolean = false): Promise<void> {
-        await this.validate();
+        await this.validate(external);
     }
 
 }

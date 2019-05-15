@@ -1,11 +1,8 @@
 import { AbstractControl } from './abstract-control';
-import { ControlEditionContext } from './control-edition-context';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormGroup extends AbstractControl {
-    private _validationInterval: any;
-    private _editionTimeout: any;
 
     constructor(
         private _controls: { [name: string]: AbstractControl },
@@ -114,30 +111,9 @@ export class FormGroup extends AbstractControl {
         this._controls = result;
     }
 
-    public initEdition(): void {
-
-
-        if (this.errors.length > 0) {
-            this._editionContext = ControlEditionContext.HasErrors;
-        } else if (this.pristine) {
-            this._editionContext = ControlEditionContext.Pristine;
-        } else {
-            this._editionContext = ControlEditionContext.Dirty;
-        }
-
-        if (this.parent) {
-            this.parent.initEdition();
-        }
-    }
-
     public endEdition(): void {
-        // only end edition if all field(s) are touched
         if (this.touched) {
-            this._editionContext = ControlEditionContext.None;
-            this.validate();
-            if (this.parent) {
-                this.parent.endEdition();
-            }
+            super.endEdition();
         }
     }
 
