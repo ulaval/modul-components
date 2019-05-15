@@ -41,7 +41,7 @@ export class FormControl<T> extends AbstractControl {
         this._oldValue = this._value;
         this._value = value;
         this._pristine = false;
-        this.updateValidity();
+        this.validateAndNotifyParent();
     }
 
     public get valid(): boolean {
@@ -106,13 +106,6 @@ export class FormControl<T> extends AbstractControl {
         this.validate();
         if (this.parent) {
             this.parent.endEdition();
-        }
-    }
-
-    public updateValidity(): void {
-        this.validate();
-        if (this.parent) {
-            this.parent.updateValidity();
         }
     }
 

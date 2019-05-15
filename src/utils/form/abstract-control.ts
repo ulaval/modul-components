@@ -56,7 +56,7 @@ export abstract class AbstractControl {
 
     public abstract initEdition(): void;
     public abstract endEdition(): void;
-    public abstract updateValidity(): void;
+
     public abstract submit(external: boolean): Promise<void>;
 
     get parent(): FormGroup | FormArray {
@@ -121,6 +121,15 @@ export abstract class AbstractControl {
 
     private _updateErrors(): void {
         this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
+    }
+
+
+    public validateAndNotifyParent(): void {
+        this.validate();
+
+        if (this.parent) {
+            this.parent.validateAndNotifyParent();
+        }
     }
 
 }

@@ -141,16 +141,6 @@ export class FormGroup extends AbstractControl {
         }
     }
 
-
-    public updateValidity(): void {
-        this.validate();
-
-        if (this.parent) {
-            this.parent.updateValidity();
-        }
-    }
-
-
     public async submit(external: boolean = false): Promise<void> {
         await this.validate();
         await Promise.all(this.controls.map(c => {
