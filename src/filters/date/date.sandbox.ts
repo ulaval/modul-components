@@ -71,6 +71,17 @@ export class MDateSandbox extends Vue {
         return PeriodFilter.formatPeriod(period);
     }
 
+    get formattedPeriodShortDate(): string {
+        let period: ModulPeriod;
+
+        period = {
+            start: this.current.year ? this.date : undefined,
+            end: this.later.year ? this.dateLater : undefined
+        };
+
+        return PeriodFilter.formatPeriod(period, true);
+    }
+
     get periodThroughFilter(): ModulPeriod {
         return {
             start: this.current.year ? this.date : undefined,
