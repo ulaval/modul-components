@@ -7,7 +7,7 @@ exports[`MTextfield should render correctly 1`] = `
       <div class="m-input-style__content" style="margin-top:10px;"><span class="m-input-style__label" style="z-index:-1;"><span class="m-input-style__text"></span></span>
         <div class="m-input-style__body">
           <div class="m-input-style__prefix">CA$</div>
-          <div class="m-input-style__left-content"> <input id="mDecimalfield-uuid" inputmode="numeric" class="m-decimalfield__input"> </div>
+          <div class="m-input-style__left-content"> <input id="mDecimalfield-uuid" inputmode="decimal" class="m-decimalfield__input"> </div>
           <div class="m-input-style__right-content"></div>
         </div>
       </div>
