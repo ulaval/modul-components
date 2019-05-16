@@ -1,4 +1,4 @@
-import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { FormControl } from '../../utils/form/form-control';
 
@@ -11,7 +11,8 @@ const scrollToElement: Function = (element: HTMLElement): void => {
 export const AbstractControlDirective: DirectiveOptions = {
     inserted(
         el: HTMLElement,
-        binding: VNodeDirective
+        binding: VNodeDirective,
+        vnode: VNode
     ): void {
         const control: AbstractControl = binding.value;
         const selector: string = 'input, textarea, [contenteditable=true]';
@@ -35,34 +36,32 @@ export const AbstractControlDirective: DirectiveOptions = {
             control.focusGrantedObservable.next(false);
         });
 
-        Object.defineProperty(el, 'ControlDirectiveListeners', {
-            value: {
-                focusListener: () => {
-                    if (control instanceof FormControl) {
-                        control.initEdition();
-                    }
-                },
-                blurListener: (event: any) => {
-                    if (control instanceof FormControl) {
-                        control.endEdition();
-                    }
+        if (control instanceof FormControl) {
+            Object.defineProperty(el, 'ControlDirectiveListeners', {
+                value: {
+                    focusListener: () => control.initEdition(),
+                    blurListener: (event: any) => control.endEdition()
                 }
-            }
-        });
-
-        el.addEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
-        el.addEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
+            });
+            (vnode.componentInstance as Vue).$on('focus', el['ControlDirectiveListeners'].focusListener);
+            (vnode.componentInstance as Vue).$on('blur', el['ControlDirectiveListeners'].blurListener);
+        }
     },
     unbind(
         el: HTMLElement,
-        binding: VNodeDirective
+        binding: VNodeDirective,
+        vnode: VNode
     ): void {
         const control: AbstractControl = binding.value;
 
         control.focusGrantedObservable.unsubscribe();
 
-        el.removeEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
-        el.removeEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
+        if (control instanceof FormControl) {
+            (vnode.componentInstance as Vue).$off('focus', el['ControlDirectiveListeners'].focusListener);
+            (vnode.componentInstance as Vue).$off('blur', el['ControlDirectiveListeners'].blurListener);
+        }
+
+
     }
 };
 
