@@ -37,7 +37,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
               />
                 
               <!---->
@@ -107,7 +107,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
               />
                 
               <!---->
@@ -181,7 +181,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
               />
                 
               <!---->
@@ -247,7 +247,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
               />
                 
               <!---->
@@ -336,7 +336,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
               />
                 
               <!---->
@@ -406,7 +406,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
               />
                 
               <!---->
@@ -499,7 +499,7 @@ exports[`Storyshots components|m-decimalfield Basic 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
                 placeholder="Enter a decimal number"
               />
                 
@@ -568,7 +568,7 @@ exports[`Storyshots components|m-decimalfield Custom precision 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
-            inputmode="numeric"
+            inputmode="decimal"
           />
             
           <!---->
@@ -634,7 +634,7 @@ exports[`Storyshots components|m-decimalfield Default precision 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
-            inputmode="numeric"
+            inputmode="decimal"
           />
             
           <!---->
@@ -700,7 +700,7 @@ exports[`Storyshots components|m-decimalfield Localization 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
-            inputmode="numeric"
+            inputmode="decimal"
           />
             
           <!---->
@@ -769,7 +769,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
                 class="m-decimalfield__input"
                 disabled="disabled"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
                 placeholder="Disabled"
               />
                 
@@ -836,7 +836,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
               <input
                 class="m-decimalfield__input"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
                 placeholder="Read-only"
                 readonly="readonly"
               />
@@ -905,7 +905,7 @@ exports[`Storyshots components|m-decimalfield States 1`] = `
                 class="m-decimalfield__input"
                 disabled="disabled"
                 id="mDecimalfield-uuid"
-                inputmode="numeric"
+                inputmode="decimal"
                 placeholder="Waiting"
               />
                 
@@ -980,7 +980,7 @@ exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
-            inputmode="numeric"
+            inputmode="decimal"
           />
             
           <!---->
@@ -1046,7 +1046,7 @@ exports[`Storyshots components|m-decimalfield With initial value 1`] = `
           <input
             class="m-decimalfield__input"
             id="mDecimalfield-uuid"
-            inputmode="numeric"
+            inputmode="decimal"
           />
             
           <!---->
