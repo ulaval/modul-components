@@ -12,7 +12,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const BetweenValidator: Function = (controlName: string, lowerBound: number | Date, upperBound: number | Date, options: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Between,
-        validationFunction: (control: FormControl<any>): Promise<boolean> => {
+        validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the between validator should not be attached to a form group');
             }
@@ -31,7 +31,7 @@ export const BetweenValidator: Function = (controlName: string, lowerBound: numb
                 isBetween = value >= lowerBound && value <= upperBound;
             }
 
-            return Promise.resolve(isBetween);
+            return isBetween;
         },
         error: options && options.error ?
             options.error : {

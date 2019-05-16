@@ -65,7 +65,7 @@ describe('FromControl', () => {
                 [{
                     key: 'always-false',
                     validationFunction: (control: FormControl<string>) => {
-                        return Promise.resolve(false);
+                        return false;
                     },
                     error: {
                         message: 'Always false'
@@ -75,10 +75,12 @@ describe('FromControl', () => {
             );
         });
 
-        it('should be invalid and no error', () => {
+        it('should be invalid and no error', async () => {
             expect(formControl.valid).toBe(false);
             expect(formControl.hasError()).toBe(false);
             expect(formControl.errorMessage).toBe('');
+            formControl.validate();
+            expect(formControl.hasError()).toBe(true);
         });
 
         describe('when edited', () => {

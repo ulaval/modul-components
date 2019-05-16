@@ -96,11 +96,11 @@
 
     <hr />
 
-    <h2 class="m-u--no-margin">More than one validations (course code)</h2>
+    <h2 class="m-u--no-margin">More than one validations (external) </h2>
     <p>input mask is not ready for this (it should use inputs mixins)</p>
     <p>
         <m-form :form-group="formGroups[4]"
-                :ref="formGroups[4].name"
+                ref="form4"
                 v-m-control="formGroups[4]"
                 @reset="reset(4)"
                 @submit="submit(4)">
@@ -127,12 +127,14 @@
     <p>
         <m-form :form-group="formGroups[5]"
                 :ref="formGroups[5].name"
-                v-m-control="formGroups[5]"
                 @reset="reset(5)"
                 @submit="submit(5)">
 
             <m-textfield v-model.trim="formGroups[5].getControl('Username').value"
                          :label="formGroups[5].getControl('Username').name"
+                         :waiting="formGroups[5].getControl('Username').waiting"
+                         :valid-message="formGroups[5].getControl('Username').valid? 'Le nom d\'utilisateur est disponible' : ''"
+                         :valid="formGroups[5].getControl('Username').valid"
                          :error-message="formGroups[5].getControl('Username').errors.length > 0 ? formGroups[5].getControl('Username').errors[0].message : null"
                          v-m-control="formGroups[5].getControl('Username')">
             </m-textfield>

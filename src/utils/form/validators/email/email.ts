@@ -9,14 +9,14 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const EmailValidator: Function = (controlName: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Email,
-        validationFunction: (control: FormControl<any>): Promise<boolean> => {
+        validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the email validator should not be attached to a form group');
             }
 
             let re: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-            return Promise.resolve(re.test(String(control.value).toLowerCase()));
+            return re.test(String(control.value).toLowerCase());
         },
         error: options && options.error ?
             options.error : {

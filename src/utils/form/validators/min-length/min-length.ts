@@ -12,7 +12,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const MinLengthValidator: Function = (controlName: string, minLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
-        validationFunction: (control: FormControl<any>): Promise<boolean> => {
+        validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the min length validator should not be attached to a form group');
             }
@@ -27,7 +27,7 @@ export const MinLengthValidator: Function = (controlName: string, minLength: num
                 isMinLength = control.value.length >= minLength;
             }
 
-            return Promise.resolve(isMinLength);
+            return isMinLength;
         },
         error: options && options.error ?
             options.error : {

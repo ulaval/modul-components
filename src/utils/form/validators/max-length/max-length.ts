@@ -12,7 +12,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const MaxLengthValidator: Function = (controlName: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
-        validationFunction: (control: FormControl<any>): Promise<boolean> => {
+        validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the max length validator should not be attached to a form group');
             }
@@ -27,7 +27,7 @@ export const MaxLengthValidator: Function = (controlName: string, maxLength: num
                 isMaxLength = control.value.length <= maxLength;
             }
 
-            return Promise.resolve(isMaxLength);
+            return isMaxLength;
         },
         error: options && options.error ?
             options.error : {
