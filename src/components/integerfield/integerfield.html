@@ -1,17 +1,17 @@
-<div class="m-integerfield"
+<div class="m-decimalfield"
      :class="[{ 'm--is-disabled': isDisabled,
                 'm--is-waiting': isWaiting,
                 'm--is-readonly': isReadonly,
-                'm--has-error': hasIntegerfieldError,
-                'm--is-valid': isIntegerfieldValid,
+                'm--has-error': hasDecimalfieldError,
+                'm--is-valid': isDecimalfieldValid,
                 'm--has-label': hasLabel,
                 'm--has-validation-message': hasValidationMessage } ]"
      @click="onClick"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
-                   :error="hasIntegerfieldError"
-                   :valid="isIntegerfieldValid"
+                   :error="hasDecimalfieldError"
+                   :valid="isDecimalfieldValid"
                    :label="label"
                    :label-for="id"
                    :focus="isFocus"
@@ -20,31 +20,33 @@
                    :readonly="isReadonly"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
-        <input class="m-integerfield__input"
-               v-model="model"
-               :id="id"
-               :disabled="isDisabled || isWaiting"
-               :placeholder="placeholder"
-               :readonly="isReadonly"
-               :maxlength="maxLengthNumber"
-               :pattern="inputPattern"
-               :inputmode="inputMode"
-               type="number"
-               @focus="onFocus"
-               @blur="onBlur"
-               @keyup="onKeyup"
-               @keydown="onKeydownIntegerfield"
-               @change="onChange"
-               @paste="onPasteIntegerfield"
-               @drop="onDropIntegerfield" />
+        <template slot="prefix">
+            <slot name="prefix"></slot>
+        </template>
+        <m-input-mask class="m-decimalfield__input"
+                      v-model="model"
+                      :id="id"
+                      :disabled="isDisabled || isWaiting"
+                      :placeholder="placeholder"
+                      :readonly="isReadonly"
+                      @focus="onFocus"
+                      @blur="onBlur"
+                      @keyup="onKeyup"
+                      @change="onChange"
+                      ref="inputMask"
+                      :options="inputMaskOptions"
+                      inputmode="decimal"></m-input-mask>
+        <template slot="right-content">
+            <slot name="suffix"></slot>
+        </template>
     </m-input-style>
-    <div class="m-integerfield__validation">
-        <m-validation-message class="m-integerfield__validation__message"
+    <div class="m-decimalfield__validation">
+        <m-validation-message class="m-decimalfield__validation__message"
                               :disabled="isDisabled"
                               :waiting="isWaiting"
-                              :error="hasIntegerfieldError"
+                              :error="hasDecimalfieldError"
                               :error-message="errorMessage"
-                              :valid="isIntegerfieldValid"
+                              :valid="isDecimalfieldValid"
                               :valid-message="validMessage"
                               :helper-message="helperMessage"></m-validation-message>
     </div>
