@@ -1,6 +1,8 @@
 import { ControlValidatorValidationType } from './control-validator-validation-type';
 import { FormControl } from './form-control';
 
+const ALWAYS_FALSE: string = 'Always false';
+
 describe('FromControl', () => {
     let formControl: FormControl<any>;
 
@@ -63,12 +65,12 @@ describe('FromControl', () => {
         beforeAll(() => {
             formControl = new FormControl<string>(
                 [{
-                    key: 'always-false',
+                    key: ALWAYS_FALSE,
                     validationFunction: (control: FormControl<string>) => {
                         return false;
                     },
                     error: {
-                        message: 'Always false'
+                        message: ALWAYS_FALSE
                     },
                     validationType: ControlValidatorValidationType.OnGoing
                 }]
@@ -93,7 +95,7 @@ describe('FromControl', () => {
             it('should be invalid and no error', () => {
                 expect(formControl.valid).toBe(false);
                 expect(formControl.hasError()).toBe(true);
-                expect(formControl.errorMessage).toBe('Always false');
+                expect(formControl.errorMessage).toBe(ALWAYS_FALSE);
             });
 
             it('should reset message inital value on reset', () => {

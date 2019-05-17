@@ -8,7 +8,6 @@ export class FormControl<T> extends AbstractControl {
     private _initialValue?: T;
     private _oldValue?: T;
 
-
     constructor(
         public readonly validators: ControlValidator[] = [],
         options?: FormControlOptions<T>

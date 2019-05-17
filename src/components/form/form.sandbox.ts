@@ -20,8 +20,6 @@ import WithRender from './form.sandbox.html';
 export class MFormSandbox extends ModulVue {
     isDuplicateCourseCode: boolean = false;
     rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
-
-
     formGroups: FormGroup[] = [
         new FormGroup(
             {

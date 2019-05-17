@@ -131,7 +131,6 @@ export abstract class AbstractControl {
 
         });
 
-
         this._updateErrors();
     }
 
@@ -162,8 +161,6 @@ export abstract class AbstractControl {
                     }
 
                 })
-
-
         );
 
         this._updateErrors();
