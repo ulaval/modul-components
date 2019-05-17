@@ -16,13 +16,13 @@ const scrollToElement: Function = (element: HTMLElement, offset: number): void =
  * Recursive fonction to return the first formControl in error. If none is returned then the control is return (in case of an error in the formGroup).
  * @param formGroup
  */
-const getFirstFormControlInError: (formGroup: FormGroup | FormArray) => AbstractControl = (formGroup: FormGroup | FormArray): AbstractControl => {
-    let invalidControl: AbstractControl | undefined = formGroup.controls.find(c => !c.valid);
+const getFirstControlInError: (formGroup: FormGroup | FormArray) => AbstractControl = (formGroup: FormGroup | FormArray): AbstractControl => {
+    let invalidControl: AbstractControl | undefined = formGroup.controls.find(c => !c.hasError());
     if (invalidControl) {
         if (invalidControl instanceof FormControl) {
             return invalidControl;
         } else {
-            return getFirstFormControlInError(invalidControl as FormGroup | FormArray);
+            return getFirstControlInError(invalidControl as FormGroup | FormArray);
         }
     } else {
         return formGroup;
@@ -47,7 +47,7 @@ export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
 
-        let control: AbstractControl | undefined = getFirstFormControlInError(form.formGroup);
+        let control: AbstractControl | undefined = getFirstControlInError(form.formGroup);
         if (control) {
             if (control.focusableElement instanceof HTMLInputElement) {
                 scrollToElement(control.focusableElement, form.scrollToOffset);

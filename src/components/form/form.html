@@ -3,7 +3,7 @@
       @reset.prevent="reset(false)">
     <m-accordion-transition>
         <m-message class="m-form__message-summary"
-                   v-if="displaySummary && hasErrors()"
+                   v-if="displaySummary"
                    state="error"
                    ref="summary">
             <ul>
@@ -16,8 +16,9 @@
     </m-accordion-transition>
 
 
-    <m-toast :open="displayToast && hasErrors()"
+    <m-toast :open.sync="displayToast"
              position="top-center"
+             @action-button="onCloseToast()"
              state="error">
         <p v-html="toastMessage"></p>
     </m-toast>
