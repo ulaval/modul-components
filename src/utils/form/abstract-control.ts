@@ -122,7 +122,6 @@ export abstract class AbstractControl {
                 return;
             }
 
-            // type validationFunction = ReturnType<v.validationFunction>;
             const validationResult: Promise<boolean> | boolean | undefined = v.validationFunction(this);
 
             if (!(validationResult instanceof Promise)) {
