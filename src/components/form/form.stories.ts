@@ -25,8 +25,6 @@ declare module '@storybook/addon-knobs' {
 }
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('default', () => ({
         methods: {
             submit: () => {
@@ -55,6 +53,44 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
                         :label="formGroup.getControl('name').name"
                         v-m-control="formGroup.getControl('name')">
             </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/fields`, module)
+    .add('datepicker', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [
+                            RequiredValidator('date')
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+                <m-datepicker   v-m-control="formGroup.getControl('date')"
+                                v-model="formGroup.getControl('date').value"
+                                :required-marker="true"
+                                label="Birthdate"
+                                min="1900-01-01"
+                                max="2020-01-01"
+                                :error="formGroup.getControl('date').hasError()"
+                                :error-message="formGroup.getControl('date').errorMessage"
+                                :disabled="!formGroup.getControl('date').enabled"
+                                :readonly="formGroup.getControl('date').readonly"
+                                :waiting="formGroup.getControl('date').waiting"></m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
                         :form="formGroup.id">Submit</m-button>
@@ -437,8 +473,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         }),
         template: `
         <m-form class="m-u--margin-top"
-                :form-group="formGroup"
-                v-m-control="formGroup">
+                :form-group="formGroup">
             <m-input-group :legend="formGroup.name"
                 :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
                 <div slot-scope="{  }">
@@ -484,7 +519,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         }),
         template: `
         <m-form class="m-u--margin-top"
-        :form-group="formGroup">
+                 :form-group="formGroup">
             <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
             <m-textfield v-model.trim="formGroup.getControl('email').value"
                         :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"

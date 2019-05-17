@@ -1,4 +1,3 @@
-import { BehaviorSubject } from 'rxjs';
 import { ControlEditionContext } from './control-edition-context';
 import { ControlError } from './control-error';
 import { ControlOptions, FormControlOptions } from './control-options';
@@ -13,7 +12,7 @@ import { ControlValidator } from './validators/control-validator';
  *
  */
 export abstract class AbstractControl {
-    public focusGrantedObservable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public focusableElement: HTMLElement | undefined;
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;
     protected _errors: ControlError[] = [];

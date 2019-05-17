@@ -1,61 +1,61 @@
+import Vue from 'vue';
 import { AbstractControl } from '../../../utils/form/abstract-control';
-import { ControlValidatorValidationType } from '../../../utils/form/control-validator-validation-type';
-import { FormatMode } from '../../../utils/i18n/i18n';
-import { ModulVue } from '../../../utils/vue/vue';
-import { MToastPosition, MToastState } from '../../toast/toast';
+import { FormArray } from '../../../utils/form/form-array';
+import { FormControl } from '../../../utils/form/form-control';
+import { FormGroup } from '../../../utils/form/form-group';
 import { MForm } from '../form';
 import { FormActionFallout } from '../form-action-fallout';
 import { FormActions } from '../form-action-type';
 
 
+const scrollToElement: Function = (element: HTMLElement, offset: number): void => {
+    (Vue.prototype).$scrollTo.goTo(element, offset);
+};
+
+/**
+ * Recursive fonction to return the first formControl in error. If none is returned then the control is return (in case of an error in the formGroup).
+ * @param formGroup
+ */
+const getFirstControlInError: (formGroup: FormGroup | FormArray) => AbstractControl = (formGroup: FormGroup | FormArray): AbstractControl => {
+    let invalidControl: AbstractControl | undefined = formGroup.controls.find(c => c.hasError());
+    if (invalidControl) {
+        if (invalidControl instanceof FormControl) {
+            return invalidControl;
+        } else {
+            return getFirstControlInError(invalidControl as FormGroup | FormArray);
+        }
+    } else {
+        return formGroup;
+    }
+};
+
 export const ClearErrorToast: FormActionFallout = {
     action: FormActions.ValidSubmitOrResetOrDestroyed,
-    fallout: (): void => {
-        (ModulVue.prototype).$toast.clear();
+    fallout: (form: MForm): void => {
+        form.displayToast = false;
     }
 };
 
 export const ErrorToast: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-        const formControlErrorsCount: number = form.formGroup.controls.filter(c => c.errors.length > 0).length;
-        const formGroupErrorsCount: number = form.formGroup.errors.length;
-        const message: string = (ModulVue.prototype).$i18n
-            .translate(
-                'm-form:multipleErrorsToCorrect',
-                { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
-                undefined, undefined, undefined, FormatMode.Sprintf
-            );
-
-        (ModulVue.prototype).$toast.show({
-            position: MToastPosition.TopCenter,
-            state: MToastState.Error,
-            text: `<p>${message}</p>`
-        });
+        form.displayToast = true;
     }
 };
 
 export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-        let control: AbstractControl | undefined = form.formGroup.controls.find(c => !c.valid);
 
+        let control: AbstractControl | undefined = getFirstControlInError(form.formGroup);
         if (control) {
-            control.focusGrantedObservable.next(true);
-            return;
+            if (control.focusableElement instanceof HTMLInputElement) {
+                scrollToElement(control.focusableElement, form.scrollToOffset);
+                control.focusableElement.focus();
+            } else if (control.focusableElement) {
+                scrollToElement(control.focusableElement, form.scrollToOffset);
+            }
         }
-
-        control = form.formGroup.controls
-            .find(c =>
-                !!c.validators.find(v => v.validationType === ControlValidatorValidationType.External && !v.lastCheck)
-            );
-
-        if (control) {
-            control.focusGrantedObservable.next(true);
-            return;
-        }
-
-        form.formGroup.focusGrantedObservable.next(true);
     }
 };
 
