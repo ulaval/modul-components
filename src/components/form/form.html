@@ -18,7 +18,6 @@
 
     <m-toast :open.sync="displayToast"
              position="top-center"
-             @action-button="onCloseToast()"
              state="error">
         <p v-html="toastMessage"></p>
     </m-toast>
