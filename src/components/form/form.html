@@ -5,6 +5,7 @@
         <m-message class="m-form__message-summary"
                    v-if="displaySummary"
                    state="error"
+                   :close-button="true"
                    ref="summary">
             <ul>
                 <li v-for="(error, index) in summaryErrors"
@@ -14,5 +15,12 @@
             </ul>
         </m-message>
     </m-accordion-transition>
+
+
+    <m-toast :open.sync="displayToast"
+             position="top-center"
+             state="error">
+        <p v-html="toastMessage"></p>
+    </m-toast>
     <slot></slot>
 </form>
