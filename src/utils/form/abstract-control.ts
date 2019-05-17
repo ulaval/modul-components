@@ -1,4 +1,3 @@
-import { BehaviorSubject } from 'rxjs';
 import { ControlEditionContext } from './control-edition-context';
 import { ControlError } from './control-error';
 import { ControlOptions, FormControlOptions } from './control-options';
@@ -13,7 +12,7 @@ import { ControlValidator } from './validators/control-validator';
  *
  */
 export abstract class AbstractControl {
-    public focusGrantedObservable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public focusableElement: HTMLElement | undefined;
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;
     protected _errors: ControlError[] = [];
@@ -76,6 +75,7 @@ export abstract class AbstractControl {
         this._editionContext = ControlEditionContext.None;
         this._resetExternalValidators();
         this.validate();
+        this.validateAsync();
         if (this.parent) {
 
             this.parent.endEdition();
@@ -109,7 +109,38 @@ export abstract class AbstractControl {
      * Run all validatiors
      * @param external
      */
-    public async validate(external: boolean = false): Promise<void> {
+    public validate(external: boolean = false): void {
+
+
+        this.validators.map((v) => {
+            if (this._validationGuard(this._editionContext, v.validationType, external)) {
+                return;
+            }
+
+            if (v.async) {
+                return;
+            }
+
+            const validationResult: Promise<boolean> | boolean | undefined = v.validationFunction(this);
+
+            if (!(validationResult instanceof Promise)) {
+                v.lastCheck = v.validationFunction(this) as boolean | undefined;
+            } else {
+                throw new Error('if you are using a async validation function  you must set the async flag to true');
+            }
+
+        });
+
+
+        this._updateErrors();
+    }
+
+    /**
+     *
+     * @param external
+     */
+    public async validateAsync(external: boolean = false): Promise<void> {
+
         await Promise.all(
             this.validators
                 .map(async (v) => {
@@ -117,8 +148,22 @@ export abstract class AbstractControl {
                         return;
                     }
 
-                    v.lastCheck = await v.validationFunction(this);
+                    if (!v.async) {
+                        return;
+                    }
+
+                    const validationResult: Promise<boolean> | boolean | undefined = v.validationFunction(this);
+                    if (validationResult instanceof Promise) {
+                        this._waiting = true;
+                        v.lastCheck = await v.validationFunction(this);
+                        this._waiting = false;
+                    } else {
+                        throw new Error('Async validation function should return a Promise<boolan>');
+                    }
+
                 })
+
+
         );
 
         this._updateErrors();
@@ -149,7 +194,7 @@ export abstract class AbstractControl {
 
     public validateAndNotifyParent(): void {
         this.validate();
-
+        this.validateAsync();
         if (this.parent) {
             this.parent.validateAndNotifyParent();
         }

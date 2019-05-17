@@ -91,7 +91,8 @@ export class FormControl<T> extends AbstractControl {
 
 
     public async submit(external: boolean = false): Promise<void> {
-        await this.validate(external);
+        this.validate(external);
+        await this.validateAsync(external);
     }
 
 }
