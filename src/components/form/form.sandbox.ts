@@ -161,7 +161,7 @@ export class MFormSandbox extends ModulVue {
                         {
                             key: 'selection-min-count',
                             validationFunction: (array: FormArray): boolean => {
-                                return array.value.filter((c: FormControl<boolean>) => c.value).length >= 2;
+                                return array.value.filter((v: boolean) => v).length >= 2;
                             },
                             error: {
                                 message: 'Select at least 2 roles'
@@ -171,7 +171,7 @@ export class MFormSandbox extends ModulVue {
                         {
                             key: 'selection-max-count',
                             validationFunction: (array: FormArray): boolean => {
-                                return array.value.filter((c: FormControl<boolean>) => c.value).length <= 5;
+                                return array.value.filter((v: boolean) => v).length <= 5;
                             },
                             error: {
                                 message: 'Select 5 roles or less'
