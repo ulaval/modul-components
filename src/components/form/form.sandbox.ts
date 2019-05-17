@@ -19,6 +19,7 @@ import WithRender from './form.sandbox.html';
 @Component
 export class MFormSandbox extends ModulVue {
     isDuplicateCourseCode: boolean = false;
+    rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
     formGroups: FormGroup[] = [
         new FormGroup(
             {
@@ -47,10 +48,10 @@ export class MFormSandbox extends ModulVue {
                         RequiredValidator('Postal code'),
                         {
                             key: 'postal-code-format',
-                            validationFunction: (control: FormControl<string>): Promise<boolean> => {
+                            validationFunction: (control: FormControl<string>): boolean => {
                                 const regex: RegExp = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
 
-                                return Promise.resolve(regex.test(control.value || ''));
+                                return regex.test(control.value || '');
                             },
                             error: {
                                 message: 'Enter postal code.'
@@ -81,10 +82,10 @@ export class MFormSandbox extends ModulVue {
                         }),
                         {
                             key: 'course-code-format',
-                            validationFunction: (control: FormControl<string>): Promise<boolean> => {
+                            validationFunction: (control: FormControl<string>): boolean => {
                                 const regex: RegExp = /^[A-Za-z]{3}[-]?\d{4}$/;
 
-                                return Promise.resolve(regex.test(control.value || ''));
+                                return regex.test(control.value || '');
                             },
                             error: {
                                 message: 'Enter a valid course format (ex. : MAT-1000).'
@@ -107,22 +108,35 @@ export class MFormSandbox extends ModulVue {
             {
                 'Username': new FormControl<string>(
                     [
+                        RequiredValidator('Value', {
+                            error: {
+                                message: 'Username is required'
+                            },
+                            validationType: ControlValidatorValidationType.AtExit
+                        }),
                         {
                             key: '',
                             validationFunction: async (control: FormControl<string>): Promise<boolean> => {
                                 return new Promise(res => {
-                                    setTimeout(() => res(![
-                                        'John',
-                                        'Jane',
-                                        'Doe'
-                                    ].includes(control.value || '')), 1200);
+                                    if (control.value) {
+                                        setTimeout(() => res(![
+                                            'John',
+                                            'Jane',
+                                            'Doe'
+                                        ].includes(control.value || '')), 2000);
+                                    } else {
+                                        res(false);
+                                    }
+
                                 });
                             },
+                            async: true,
                             error: {
                                 message: 'Username is not available'
                             },
                             validationType: ControlValidatorValidationType.AtExit
                         }
+
                     ]
                 )
             }
@@ -142,23 +156,14 @@ export class MFormSandbox extends ModulVue {
         ),
         new FormGroup(
             {
-                roles: new FormArray([
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false }),
-                    new FormControl<boolean>([], { initialValue: false })
-                ],
+                roles: new FormArray(
+                    this.rolesName.map(role => new FormControl<boolean>([], { initialValue: false }))
+                    ,
                     [
                         {
                             key: 'selection-min-count',
-                            validationFunction: (group: FormGroup): Promise<boolean> => {
-                                let previousSelectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c['_oldValue']).length;
-                                let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
-
-                                return Promise.resolve((selectionCount > previousSelectionCount) || (selectionCount >= 2));
+                            validationFunction: (array: FormArray): boolean => {
+                                return array.value.filter(c => c).length >= 2;
                             },
                             error: {
                                 message: 'Select at least 2 roles'
@@ -167,10 +172,8 @@ export class MFormSandbox extends ModulVue {
                         },
                         {
                             key: 'selection-max-count',
-                            validationFunction: (group: FormGroup): Promise<boolean> => {
-                                let selectionCount: number = group.controls.filter((c: FormControl<boolean>) => !!c.value).length;
-
-                                return Promise.resolve(selectionCount <= 5);
+                            validationFunction: (array: FormArray): boolean => {
+                                return array.value.filter(c => c).length <= 5;
                             },
                             error: {
                                 message: 'Select 5 roles or less'
@@ -197,8 +200,8 @@ export class MFormSandbox extends ModulVue {
             [
                 {
                     key: 'compare-email',
-                    validationFunction: (control: FormGroup): Promise<boolean> => {
-                        return Promise.resolve(
+                    validationFunction: (control: FormGroup): boolean => {
+                        return (
                             !(control.getControl('Email') as FormControl<string>).value
                             ||
                             ['Email', 'Email confirmation']
@@ -214,7 +217,8 @@ export class MFormSandbox extends ModulVue {
             ]
         )
     ];
-    rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
+
+
 
     submit(formGroupIndex: number): void {
         let me: any = this;
@@ -225,12 +229,12 @@ export class MFormSandbox extends ModulVue {
 
                 control.validators
                     .find(v => v.key === 'duplicate-course-code')!
-                    .validationFunction = (): Promise<boolean> => Promise.resolve(![
+                    .validationFunction = (): boolean => (![
                         'AAA-0000',
                         'AAA-0001'
                     ].includes(control.value || ''));
 
-                (me.$refs[me.formGroups[4].name] as MForm).submit(true);
+                (me.$refs['form4'] as MForm).submit(true);
             }, 1000);
         }
     }

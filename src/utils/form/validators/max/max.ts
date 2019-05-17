@@ -12,7 +12,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const MaxValidator: Function = (controlName: string, max: number | Date, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Max,
-        validationFunction: (control: FormControl<any>): Promise<boolean> => {
+        validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the max validator should not be attached to a form group');
             }
@@ -31,7 +31,7 @@ export const MaxValidator: Function = (controlName: string, max: number | Date, 
                 isMax = value <= max;
             }
 
-            return Promise.resolve(isMax);
+            return isMax;
         },
         error: options && options.error ?
             options.error : {

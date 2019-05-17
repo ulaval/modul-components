@@ -10,7 +10,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const RequiredValidator: Function = (controlName: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Required,
-        validationFunction: (control: AbstractControl): Promise<boolean> => {
+        validationFunction: (control: AbstractControl): boolean => {
             let isPopulate: boolean = false;
 
             let assertPopulate: Function = (value: any): boolean => {
@@ -33,7 +33,7 @@ export const RequiredValidator: Function = (controlName: string, options?: Contr
                 isPopulate = assertPopulate((control as FormControl<any>).value);
             }
 
-            return Promise.resolve(isPopulate);
+            return isPopulate;
         },
         error: options && options.error ?
             options.error : {

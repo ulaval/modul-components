@@ -4,10 +4,11 @@ import { ControlValidatorValidationType } from '../control-validator-validation-
 
 export interface ControlValidator {
     key: string;
-    validationFunction: (self: AbstractControl) => Promise<boolean> | undefined;
+    validationFunction: (self: AbstractControl) => boolean | Promise<boolean> | undefined;
     error: ControlError;
     validationType: ControlValidatorValidationType;
     lastCheck?: boolean;
+    async?: boolean;
 }
 
 export interface ControlValidatorOptions {

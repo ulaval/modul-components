@@ -9,14 +9,14 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const CompareValidator: Function = (controlNames: string[], options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Compare,
-        validationFunction: (control: FormGroup): Promise<boolean> => {
+        validationFunction: (control: FormGroup): boolean => {
             if (control instanceof FormControl) {
                 throw Error('the compare controls validator should not be attached to a form control');
             }
 
-            return Promise.resolve(controlNames
+            return controlNames
                 .map(cn => (control.getControl(cn) as FormControl<any>))
-                .every(fc => fc.value === (control.controls[0] as FormControl<any>).value));
+                .every(fc => fc.value === (control.controls[0] as FormControl<any>).value);
         },
         error: options && options.error ?
             options.error : {

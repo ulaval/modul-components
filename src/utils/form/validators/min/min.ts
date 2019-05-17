@@ -12,7 +12,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 export const MinValidator: Function = (controlName: string, min: number | Date, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Min,
-        validationFunction: (control: FormControl<any>): Promise<boolean> => {
+        validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
                 throw Error('the min validator should not be attached to a form group');
             }
@@ -32,7 +32,7 @@ export const MinValidator: Function = (controlName: string, min: number | Date, 
             }
 
 
-            return Promise.resolve(isMin);
+            return isMin;
         },
         error: options && options.error ?
             options.error : {

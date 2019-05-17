@@ -2,6 +2,7 @@ import { Component, Emit, Prop } from 'vue-property-decorator';
 import { ControlError } from '../../utils/form/control-error';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormGroup } from '../../utils/form/form-group';
+import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { FormActionFallout } from './form-action-fallout';
 import { FormActions } from './form-action-type';
@@ -11,11 +12,15 @@ import WithRender from './form.html?style=./form.scss';
 @Component
 export class MForm extends ModulVue {
     @Prop()
-    public formGroup: FormGroup;
+    public readonly formGroup!: FormGroup;
     public displaySummary: boolean = false;
+    public displayToast: boolean = false;
 
     @Prop({ default: () => ModulVue.prototype.$form.formActionFallouts || [] })
     public actionFallouts: FormActionFallout[];
+
+    @Prop({ default: -200 })
+    public scrollToOffset: number;
 
     @Emit('submit')
     public emitSubmit(): void { }
@@ -31,8 +36,23 @@ export class MForm extends ModulVue {
         );
     }
 
+    public hasErrors(): boolean {
+        return this.summaryErrors.length > 0;
+    }
+
+    public get toastMessage(): string {
+        const formControlErrorsCount: number = this.formGroup.controls.filter(c => c.errors.length > 0).length;
+        const formGroupErrorsCount: number = this.formGroup.errors.length;
+        return (ModulVue.prototype).$i18n
+            .translate(
+                'm-form:multipleErrorsToCorrect',
+                { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
+                undefined, undefined, undefined, FormatMode.Sprintf
+            );
+    }
+
     public async submit(external: boolean = false): Promise<void> {
-        await this.formGroup.validate(external);
+        await this.formGroup.submit(external);
 
         if (!this._isValid(external)) {
             this._triggerActionFallouts(FormActions.InvalidSubmit);
@@ -86,4 +106,5 @@ export class MForm extends ModulVue {
             .filter(a => type & a.action)
             .forEach(a => a.fallout(this));
     }
+
 }

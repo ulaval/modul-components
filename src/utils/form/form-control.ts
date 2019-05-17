@@ -1,5 +1,4 @@
 import { AbstractControl } from './abstract-control';
-import { ControlEditionContext } from './control-edition-context';
 import { FormControlOptions } from './control-options';
 import { ControlValidatorValidationType } from './control-validator-validation-type';
 import { ControlValidator } from './validators/control-validator';
@@ -20,6 +19,14 @@ export class FormControl<T> extends AbstractControl {
         }
     }
 
+    public get pristine(): boolean {
+        return this._pristine;
+    }
+
+    public get touched(): boolean {
+        return this._touched;
+    }
+
     get value(): T | undefined {
         return this._value;
     }
@@ -31,8 +38,8 @@ export class FormControl<T> extends AbstractControl {
 
         this._oldValue = this._value;
         this._value = value;
-
-        this.validate();
+        this._pristine = false;
+        this.validateAndNotifyParent();
     }
 
     public get valid(): boolean {
@@ -65,26 +72,27 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
-
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
+    public endEdition(): void {
+        this._touched = true;
+        super.endEdition();
+    }
+
     public reset(): void {
         super.reset();
+        this._pristine = true;
+        this._touched = false;
         this._value = this._oldValue = this._initialValue;
     }
 
-    public initEdition(): void {
-        if (this.errors.length > 0) {
-            this._editionContext = ControlEditionContext.HasErrors;
-        } else if (this._value === this._oldValue && this._value === this._initialValue) {
-            this._editionContext = ControlEditionContext.Pristine;
-        } else if (!this._value && this.valid) {
-            this._editionContext = ControlEditionContext.EmptyAndValid;
-        } else if (this._value && this.valid) {
-            this._editionContext = ControlEditionContext.PopulateAndValid;
-        }
+
+    public async submit(external: boolean = false): Promise<void> {
+        this.validate(external);
+        await this.validateAsync(external);
     }
+
 }
 

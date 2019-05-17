@@ -1,13 +1,8 @@
-import { ModulVue } from '../vue/vue';
 import { AbstractControl } from './abstract-control';
-import { ControlEditionContext } from './control-edition-context';
 import { ControlOptions } from './control-options';
-import { FormControl } from './form-control';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormGroup extends AbstractControl {
-    private _validationInterval: any;
-    private _editionTimeout: any;
 
     constructor(
         private _controls: { [name: string]: AbstractControl },
@@ -15,6 +10,7 @@ export class FormGroup extends AbstractControl {
         options?: ControlOptions
     ) {
         super(validators, options);
+        this.setupControlsParent();
     }
 
     public get valid(): boolean {
@@ -40,6 +36,12 @@ export class FormGroup extends AbstractControl {
         });
     }
 
+    public hasError(): boolean {
+        return (this.errors.length > 0 || this.controls.some(c => {
+            return c.hasError();
+        }));
+    }
+
     public get waiting(): boolean {
         return this._waiting;
     }
@@ -58,10 +60,22 @@ export class FormGroup extends AbstractControl {
         this.controls.forEach(c => c.readonly = isReadonly);
     }
 
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
-            return c.hasError();
-        }));
+    /**
+     * A form group is considered pristine if at least one field is pristine
+     */
+    public get pristine(): boolean {
+        return this.controls.some(c => {
+            return c.pristine;
+        });
+    }
+
+    /**
+     * A form group is considrered touched when every fields on the group are touched
+     */
+    public get touched(): boolean {
+        return this.controls.every(c => {
+            return c.touched;
+        });
     }
 
     public get controls(): AbstractControl[] {
@@ -83,6 +97,7 @@ export class FormGroup extends AbstractControl {
 
         const result: any = Object.assign(this._controls);
         result[name] = control;
+        result[name].setParent(this);
         this._controls = result;
     }
 
@@ -96,55 +111,28 @@ export class FormGroup extends AbstractControl {
         this._controls = result;
     }
 
-    public async validate(external: boolean = false): Promise<void> {
-        await super.validate(external);
-        await Promise.all(this.controls.map(c => c.validate(external)));
+    public endEdition(): void {
+        if (this.touched) {
+            super.endEdition();
+        }
+    }
+
+    public async submit(external: boolean = false): Promise<void> {
+        this.validate();
+        await this.validateAsync();
+        await Promise.all(this.controls.map(c => {
+            return c.submit(external);
+        }));
     }
 
     public reset(): void {
-        clearInterval(this._validationInterval);
-        clearTimeout(this._editionTimeout);
-
         super.reset();
         this.controls.forEach(c => c.reset());
     }
 
-    public initEdition(): void {
-        clearInterval(this._validationInterval);
-        clearTimeout(this._editionTimeout);
-
-        this._validationInterval = setInterval(
-            async () => super.validate()
-            , ModulVue.prototype.$form.formGroupValidationIntervalInMilliseconds
-        );
-
-        const populate: boolean = !!this.controls
-            .filter(c => c instanceof FormControl)
-            .find((fc: FormControl<any>) => !!fc.value === true);
-        const pristine: boolean = this.controls
-            .filter(c => c instanceof FormControl)
-            .every((fc: FormControl<any>) => fc.value === fc['_oldValue'] && fc.value === fc['_initialValue']);
-        const isValid: boolean = this.validators.every(v => !!v.lastCheck);
-
-        if (this.errors.length > 0) {
-            this._editionContext = ControlEditionContext.HasErrors;
-        } else if (pristine) {
-            this._editionContext = ControlEditionContext.Pristine;
-        } else if (!populate && isValid) {
-            this._editionContext = ControlEditionContext.EmptyAndValid;
-        } else if (populate && isValid) {
-            this._editionContext = ControlEditionContext.PopulateAndValid;
-        }
+    private setupControlsParent(): void {
+        this.controls.forEach(c => c.setParent(this));
     }
 
-    public endEdition(): void {
-        this._editionTimeout = setTimeout(() => {
-            clearInterval(this._validationInterval);
-            clearTimeout(this._editionTimeout);
 
-            this._editionContext = ControlEditionContext.None;
-            this._resetExternalValidators();
-            super.validate();
-        }, ModulVue.prototype.$form.formGroupEditionTimeoutInMilliseconds);
-    }
 }

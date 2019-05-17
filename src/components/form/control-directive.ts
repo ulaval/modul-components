@@ -1,77 +1,53 @@
-import Vue, { DirectiveOptions, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
-import { ControlEditionContext } from '../../utils/form/control-edition-context';
-import { FormGroup } from '../../utils/form/form-group';
+import { FormControl } from '../../utils/form/form-control';
 
-const DISTANCE_FROM_TOP: number = -200;
+const INPUT_SELECTOR: string = 'input, textarea, [contenteditable=true]';
 
-const scrollToElement: Function = (element: HTMLElement): void => {
-    (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
-};
+
+
 
 export const AbstractControlDirective: DirectiveOptions = {
     inserted(
         el: HTMLElement,
-        binding: VNodeDirective
+        binding: VNodeDirective,
+        vnode: VNode
     ): void {
         const control: AbstractControl = binding.value;
-        const selector: string = 'input, textarea, [contenteditable=true]';
-        const inputElement: Element = el.querySelectorAll(selector)[0];
 
-        control.focusGrantedObservable.subscribe(granted => {
-            if (!granted) {
-                return;
-            }
+        const inputElements: NodeListOf<Element> = el.querySelectorAll(INPUT_SELECTOR);
+        if (inputElements.length > 0) {
+            control.focusableElement = inputElements[0] as HTMLElement;
+        } else {
+            control.focusableElement = el;
+        }
 
-            if (el instanceof HTMLInputElement) {
-                scrollToElement(el);
-                el.focus();
-            } else if (inputElement) {
-                scrollToElement(inputElement);
-                (inputElement as HTMLInputElement).focus();
-            } else {
-                scrollToElement(el);
-            }
-
-            control.focusGrantedObservable.next(false);
-        });
-
-        Object.defineProperty(el, 'ControlDirectiveListeners', {
-            value: {
-                focusListener: () => control.initEdition(),
-                blurListener: (event: any) => {
-                    if (event.srcElement instanceof HTMLButtonElement || control.focusGrantedObservable.value) {
-                        return;
-                    }
-
-                    if (
-                        (
-                            control instanceof FormGroup
-                            &&
-                            (control['_editionContext'] !== ControlEditionContext.None)
-                        )
-                        ||
-                        !(control instanceof FormGroup)
-                    ) {
-                        control.endEdition();
-                    }
+        if (control instanceof FormControl) {
+            Object.defineProperty(el, 'ControlDirectiveListeners', {
+                value: {
+                    focusListener: () => control.initEdition(),
+                    blurListener: (event: any) => control.endEdition()
                 }
-            }
-        });
-
-        el.addEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
-        el.addEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
+            });
+            (vnode.componentInstance as Vue).$on('focus', el['ControlDirectiveListeners'].focusListener);
+            (vnode.componentInstance as Vue).$on('blur', el['ControlDirectiveListeners'].blurListener);
+        }
     },
     unbind(
         el: HTMLElement,
-        binding: VNodeDirective
+        binding: VNodeDirective,
+        vnode: VNode
     ): void {
         const control: AbstractControl = binding.value;
 
-        control.focusGrantedObservable.unsubscribe();
+        control.focusableElement = undefined;
 
-        el.removeEventListener('focus', el['ControlDirectiveListeners'].focusListener, true);
-        el.removeEventListener('blur', el['ControlDirectiveListeners'].blurListener, true);
+        if (control instanceof FormControl) {
+            (vnode.componentInstance as Vue).$off('focus', el['ControlDirectiveListeners'].focusListener);
+            (vnode.componentInstance as Vue).$off('blur', el['ControlDirectiveListeners'].blurListener);
+        }
+
+
     }
 };
 
