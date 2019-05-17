@@ -2,11 +2,10 @@ import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { FormControl } from '../../utils/form/form-control';
 
-const DISTANCE_FROM_TOP: number = -200;
+const INPUT_SELECTOR: string = 'input, textarea, [contenteditable=true]';
 
-const scrollToElement: Function = (element: HTMLElement): void => {
-    (Vue.prototype).$scrollTo.goTo(element, DISTANCE_FROM_TOP);
-};
+
+
 
 export const AbstractControlDirective: DirectiveOptions = {
     inserted(
@@ -15,26 +14,13 @@ export const AbstractControlDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         const control: AbstractControl = binding.value;
-        const selector: string = 'input, textarea, [contenteditable=true]';
-        const inputElement: Element = el.querySelectorAll(selector)[0];
 
-        control.focusGrantedObservable.subscribe(granted => {
-            if (!granted) {
-                return;
-            }
-
-            if (el instanceof HTMLInputElement) {
-                scrollToElement(el);
-                el.focus();
-            } else if (inputElement) {
-                scrollToElement(inputElement);
-                (inputElement as HTMLInputElement).focus();
-            } else {
-                scrollToElement(el);
-            }
-
-            control.focusGrantedObservable.next(false);
-        });
+        const inputElements: NodeListOf<Element> = el.querySelectorAll(INPUT_SELECTOR);
+        if (inputElements.length > 0) {
+            control.focusableElement = inputElements[0] as HTMLElement;
+        } else {
+            control.focusableElement = el;
+        }
 
         if (control instanceof FormControl) {
             Object.defineProperty(el, 'ControlDirectiveListeners', {
@@ -54,7 +40,7 @@ export const AbstractControlDirective: DirectiveOptions = {
     ): void {
         const control: AbstractControl = binding.value;
 
-        control.focusGrantedObservable.unsubscribe();
+        control.focusableElement = undefined;
 
         if (control instanceof FormControl) {
             (vnode.componentInstance as Vue).$off('focus', el['ControlDirectiveListeners'].focusListener);
