@@ -17,7 +17,7 @@ const scrollToElement: Function = (element: HTMLElement, offset: number): void =
  * @param formGroup
  */
 const getFirstControlInError: (formGroup: FormGroup | FormArray) => AbstractControl = (formGroup: FormGroup | FormArray): AbstractControl => {
-    let invalidControl: AbstractControl | undefined = formGroup.controls.find(c => !c.hasError());
+    let invalidControl: AbstractControl | undefined = formGroup.controls.find(c => c.hasError());
     if (invalidControl) {
         if (invalidControl instanceof FormControl) {
             return invalidControl;

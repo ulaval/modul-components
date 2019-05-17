@@ -133,7 +133,7 @@
             <m-textfield v-model.trim="formGroups[5].getControl('Username').value"
                          :label="formGroups[5].getControl('Username').name"
                          :waiting="formGroups[5].getControl('Username').waiting"
-                         :valid-message="formGroups[5].getControl('Username').valid? 'Le nom d\'utilisateur est disponible' : ''"
+                         :valid-message="formGroups[5].getControl('Username').valid ? 'Le nom d\'utilisateur est disponible' : ''"
                          :valid="formGroups[5].getControl('Username').valid"
                          :error-message="formGroups[5].getControl('Username').errors.length > 0 ? formGroups[5].getControl('Username').errors[0].message : null"
                          v-m-control="formGroups[5].getControl('Username')">

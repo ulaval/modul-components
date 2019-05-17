@@ -5,6 +5,7 @@
         <m-message class="m-form__message-summary"
                    v-if="displaySummary"
                    state="error"
+                   :close-button="true"
                    ref="summary">
             <ul>
                 <li v-for="(error, index) in summaryErrors"
