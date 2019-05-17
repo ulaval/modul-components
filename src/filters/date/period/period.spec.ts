@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { addMessages } from '../../../../tests/helpers/lang';
 import { PERIOD_NAME } from '../../filter-names';
-import { ModulPeriod, PeriodFilter } from './period';
+import { MFormatMode, ModulPeriod, PeriodFilter } from './period';
 
 describe(PERIOD_NAME, () => {
     beforeEach(() => {
@@ -35,7 +35,7 @@ describe(PERIOD_NAME, () => {
                     startDate.toLocaleDateString = jest.fn(() => '8 sept. 2019');
                     endDate.toLocaleDateString = jest.fn(() => '8 sept. 2019');
 
-                    expect(PeriodFilter.formatPeriod(period, true)).toEqual('Le 8 sept. 2019');
+                    expect(PeriodFilter.formatPeriod(period, MFormatMode.ShortMonth)).toEqual('Le 8 sept. 2019');
                 });
             });
 
@@ -70,7 +70,7 @@ describe(PERIOD_NAME, () => {
                     endDate.toLocaleDateString = jest.fn(() => '14 sept. 2019');
                     jest.spyOn(Vue.prototype.$i18n, 'getCurrentLocale').mockReturnValue('fr-CA');
 
-                    expect(PeriodFilter.formatPeriod(period)).toEqual('Du 8 au 14 sept. 2019');
+                    expect(PeriodFilter.formatPeriod(period, MFormatMode.ShortMonth)).toEqual('Du 8 au 14 sept. 2019');
                     expect(startDate.toLocaleDateString).toHaveBeenCalledWith(['fr-CA'], {
                         year: undefined,
                         month: undefined,
@@ -110,10 +110,10 @@ describe(PERIOD_NAME, () => {
                     endDate.toLocaleDateString = jest.fn(() => '14 sept. 2019');
                     jest.spyOn(Vue.prototype.$i18n, 'getCurrentLocale').mockReturnValue('fr-CA');
 
-                    expect(PeriodFilter.formatPeriod(period)).toEqual('Du 8 avril au 14 sept. 2019');
+                    expect(PeriodFilter.formatPeriod(period, MFormatMode.ShortMonth)).toEqual('Du 8 avril au 14 sept. 2019');
                     expect(startDate.toLocaleDateString).toHaveBeenCalledWith(['fr-CA'], {
                         year: undefined,
-                        month: 'long',
+                        month: 'short',
                         day: 'numeric'
                     });
                 });
@@ -145,7 +145,7 @@ describe(PERIOD_NAME, () => {
                     startDate.toLocaleDateString = jest.fn(() => '8 avril 2019');
                     endDate.toLocaleDateString = jest.fn(() => '14 nov. 2020');
 
-                    expect(PeriodFilter.formatPeriod(period)).toEqual('Du 8 avril 2019 au 14 nov. 2020');
+                    expect(PeriodFilter.formatPeriod(period, MFormatMode.ShortMonth)).toEqual('Du 8 avril 2019 au 14 nov. 2020');
                 });
             });
         });

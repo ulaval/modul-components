@@ -8,13 +8,18 @@ export type ModulPeriod = {
     end?: Date
 };
 
+export enum MFormatMode {
+    LongMonth = 'long-month',
+    ShortMonth = 'short-month'
+}
+
 export class PeriodFilter {
 
-    static formatPeriod(period: ModulPeriod, shortMode?: boolean): string {
+    static formatPeriod(period: ModulPeriod, formatMode?: MFormatMode): string {
         let formattedPeriod: string;
         let shortModeParams: DateFilterParams = {};
 
-        if (shortMode) {
+        if (formatMode === MFormatMode.ShortMonth) {
             shortModeParams = { shortMode: true };
         }
 
