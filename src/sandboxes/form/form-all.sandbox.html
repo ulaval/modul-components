@@ -10,8 +10,8 @@
 
         <m-textfield v-m-control="nameField"
                      v-model="nameField.value"
-                     :required-marker="true"
                      label="Name"
+                     :required-marker="true"
                      :error="nameField.hasError()"
                      :error-message="nameField.errorMessage"
                      :disabled="!nameField.enabled"
@@ -23,8 +23,8 @@
 
         <m-textarea v-m-control="descriptionField"
                     v-model="descriptionField.value"
-                    :required-marker="true"
                     label="Description"
+                    :required-marker="true"
                     :error="descriptionField.hasError()"
                     :error-message="descriptionField.errorMessage"
                     :disabled="!descriptionField.enabled"
@@ -34,10 +34,10 @@
         <h4 class="m-u--h6">Datepicker</h4>
         <m-datepicker v-m-control="birthdateField"
                       v-model="birthdateField.value"
-                      :required-marker="true"
                       label="Birthdate"
                       min="1900-01-01"
                       max="2020-01-01"
+                      :required-marker="true"
                       :error="birthdateField.hasError()"
                       :error-message="birthdateField.errorMessage"
                       :disabled="!birthdateField.enabled"
@@ -47,8 +47,8 @@
         <h4 class="m-u--h6">Dropdown</h4>
         <m-dropdown v-m-control="typeField"
                     v-model="typeField.value"
-                    :required-marker="true"
                     label="Type"
+                    :required-marker="true"
                     :error="typeField.hasError()"
                     :error-message="typeField.errorMessage"
                     :disabled="!typeField.enabled"
@@ -85,8 +85,8 @@
         <h4 class="m-u--h6">Timepicker</h4>
         <m-timepicker v-m-control="timeField"
                       v-model="timeField.value"
-                      :required-marker="true"
                       label="Time"
+                      :required-marker="true"
                       :error="timeField.hasError()"
                       :error-message="timeField.errorMessage"
                       :disabled="!timeField.enabled"
@@ -96,8 +96,8 @@
         <h4 class="m-u--h6">Decimalfield</h4>
         <m-decimalfield v-m-control="decimalField"
                         v-model="decimalField.value"
-                        :required-marker="true"
                         label="Decimal"
+                        :required-marker="true"
                         :error="decimalField.hasError()"
                         :error-message="decimalField.errorMessage"
                         :disabled="!decimalField.enabled"
@@ -109,8 +109,8 @@
         <h4 class="m-u--h6">Moneyfield</h4>
         <m-moneyfield v-m-control="priceField"
                       v-model="priceField.value"
-                      :required-marker="true"
                       label="Price"
+                      :required-marker="true"
                       :error="priceField.hasError()"
                       :error-message="priceField.errorMessage"
                       :disabled="!priceField.enabled"
@@ -120,8 +120,8 @@
         <h4 class="m-u--h6">Integerfield</h4>
         <m-integerfield v-m-control="integerField"
                         v-model="integerField.value"
-                        :required-marker="true"
                         label="Integer"
+                        :required-marker="true"
                         :error="integerField.hasError()"
                         :error-message="integerField.errorMessage"
                         :disabled="!integerField.enabled"
@@ -144,15 +144,15 @@
         <h4 class="m-u--h6">Autocomplete</h4>
         <m-autocomplete v-m-control="autocompleteField"
                         v-model="autocompleteField.value"
-                        :results="autocompleteResults"
-                        @complete="onComplete"
-                        :required-marker="true"
                         label="Autocomplete"
+                        :results="autocompleteResults"
+                        :required-marker="true"
                         :error="autocompleteField.hasError()"
                         :error-message="autocompleteField.errorMessage"
                         :disabled="!autocompleteField.enabled"
                         :readonly="autocompleteField.readonly"
-                        :waiting="autocompleteField.waiting"></m-autocomplete>
+                        :waiting="autocompleteField.waiting"
+                        @complete="onComplete"></m-autocomplete>
 
 
         <h4 class="m-u--h6">DaterangePicker</h4>

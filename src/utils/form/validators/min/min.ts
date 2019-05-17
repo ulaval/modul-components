@@ -31,7 +31,6 @@ export const MinValidator: Function = (controlName: string, min: number | Date, 
                 isMin = value >= min;
             }
 
-
             return isMin;
         },
         error: options && options.error ?

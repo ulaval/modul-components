@@ -20,8 +20,6 @@ declare module 'vue/types/vue' {
 
 export interface FormPluginOptions {
     formAfterActionEffects?: FormActionFallout[];
-    formGroupValidationIntervalInMilliseconds?: number;
-    formGroupEditionTimeoutInMilliseconds?: number;
 }
 
 export const FormPlugin: PluginObject<any> = {
@@ -42,11 +40,7 @@ export const FormPlugin: PluginObject<any> = {
                     ErrorToast,
                     ClearErrorToast,
                     FocusOnFirstError
-                ],
-            options && options.formGroupEditionTimeoutInMilliseconds ?
-                options.formGroupEditionTimeoutInMilliseconds : 250,
-            options && options.formGroupValidationIntervalInMilliseconds ?
-                options.formGroupValidationIntervalInMilliseconds : 700
+                ]
         );
     }
 };

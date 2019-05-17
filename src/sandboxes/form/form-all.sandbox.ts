@@ -14,7 +14,6 @@ import WithRender from './form-all.sandbox.html';
 @WithRender
 @Component
 export class MFormAllSandbox extends ModulVue {
-
     types: string[] = ['douce', 'blanche', 'sec'];
     coupes: string[] = ['régulière', 'julienne', 'ondulé'];
 

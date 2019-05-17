@@ -39,7 +39,8 @@ export class FormControl<T> extends AbstractControl {
         this._oldValue = this._value;
         this._value = value;
         this._pristine = false;
-        this.validateAndNotifyParent();
+
+        this.upwardValidationPropagation();
     }
 
     public get valid(): boolean {

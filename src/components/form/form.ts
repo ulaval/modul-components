@@ -19,9 +19,6 @@ export class MForm extends ModulVue {
     @Prop({ default: () => ModulVue.prototype.$form.formActionFallouts || [] })
     public actionFallouts: FormActionFallout[];
 
-    @Prop({ default: -200 })
-    public scrollToOffset: number;
-
     @Emit('submit')
     public emitSubmit(): void { }
 
@@ -36,19 +33,20 @@ export class MForm extends ModulVue {
         );
     }
 
-    public hasErrors(): boolean {
-        return this.summaryErrors.length > 0;
-    }
-
     public get toastMessage(): string {
-        const formControlErrorsCount: number = this.formGroup.controls.filter(c => c.errors.length > 0).length;
+        const formControlErrorsCount: number = this.formGroup.controls
+            .filter(c => c.errors.length > 0).length;
         const formGroupErrorsCount: number = this.formGroup.errors.length;
-        return (ModulVue.prototype).$i18n
-            .translate(
+
+        return this.$i18n.translate(
                 'm-form:multipleErrorsToCorrect',
                 { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
                 undefined, undefined, undefined, FormatMode.Sprintf
             );
+    }
+
+    public hasErrors(): boolean {
+        return this.summaryErrors.length > 0;
     }
 
     public async submit(external: boolean = false): Promise<void> {

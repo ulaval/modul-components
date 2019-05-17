@@ -127,7 +127,6 @@ export class MFormSandbox extends ModulVue {
                                     } else {
                                         res(false);
                                     }
-
                                 });
                             },
                             async: true,
@@ -147,7 +146,7 @@ export class MFormSandbox extends ModulVue {
                     [
                         RequiredValidator('Value', {
                             error: {
-                                message: 'Selectionnez le rôle'
+                                message: 'Select a role'
                             }
                         })
                     ]
@@ -157,13 +156,12 @@ export class MFormSandbox extends ModulVue {
         new FormGroup(
             {
                 roles: new FormArray(
-                    this.rolesName.map(role => new FormControl<boolean>([], { initialValue: false }))
-                    ,
+                    this.rolesName.map(() => new FormControl<boolean>([], { initialValue: false })),
                     [
                         {
                             key: 'selection-min-count',
                             validationFunction: (array: FormArray): boolean => {
-                                return array.value.filter(c => c).length >= 2;
+                                return array.value.filter((c: FormControl<boolean>) => c.value).length >= 2;
                             },
                             error: {
                                 message: 'Select at least 2 roles'
@@ -173,7 +171,7 @@ export class MFormSandbox extends ModulVue {
                         {
                             key: 'selection-max-count',
                             validationFunction: (array: FormArray): boolean => {
-                                return array.value.filter(c => c).length <= 5;
+                                return array.value.filter((c: FormControl<boolean>) => c.value).length <= 5;
                             },
                             error: {
                                 message: 'Select 5 roles or less'

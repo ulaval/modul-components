@@ -4,9 +4,6 @@ import { FormControl } from '../../utils/form/form-control';
 
 const INPUT_SELECTOR: string = 'input, textarea, [contenteditable=true]';
 
-
-
-
 export const AbstractControlDirective: DirectiveOptions = {
     inserted(
         el: HTMLElement,
@@ -14,10 +11,10 @@ export const AbstractControlDirective: DirectiveOptions = {
         vnode: VNode
     ): void {
         const control: AbstractControl = binding.value;
+        const inputElements: NodeListOf<HTMLElement> = el.querySelectorAll(INPUT_SELECTOR);
 
-        const inputElements: NodeListOf<Element> = el.querySelectorAll(INPUT_SELECTOR);
         if (inputElements.length > 0) {
-            control.focusableElement = inputElements[0] as HTMLElement;
+            control.focusableElement = inputElements[0];
         } else {
             control.focusableElement = el;
         }
@@ -46,8 +43,5 @@ export const AbstractControlDirective: DirectiveOptions = {
             (vnode.componentInstance as Vue).$off('focus', el['ControlDirectiveListeners'].focusListener);
             (vnode.componentInstance as Vue).$off('blur', el['ControlDirectiveListeners'].blurListener);
         }
-
-
     }
 };
-

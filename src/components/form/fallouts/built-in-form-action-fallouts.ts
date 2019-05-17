@@ -46,14 +46,13 @@ export const ErrorToast: FormActionFallout = {
 export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
-
         let control: AbstractControl | undefined = getFirstControlInError(form.formGroup);
         if (control) {
             if (control.focusableElement instanceof HTMLInputElement) {
-                scrollToElement(control.focusableElement, form.scrollToOffset);
+                scrollToElement(control.focusableElement, form.$form.scrollToOffset);
                 control.focusableElement.focus();
             } else if (control.focusableElement) {
-                scrollToElement(control.focusableElement, form.scrollToOffset);
+                scrollToElement(control.focusableElement, form.$form.scrollToOffset);
             }
         }
     }

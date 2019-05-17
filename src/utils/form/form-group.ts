@@ -3,7 +3,6 @@ import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormGroup extends AbstractControl {
-
     constructor(
         private _controls: { [name: string]: AbstractControl },
         public readonly validators: ControlValidator[] = [],
@@ -13,16 +12,24 @@ export class FormGroup extends AbstractControl {
         this.setupControlsParent();
     }
 
-    public get valid(): boolean {
-        return this.validators.every(v => !!v.lastCheck) && this.controls.every(c => c.valid);
+    private setupControlsParent(): void {
+        this.controls.forEach(c => c.parent = this);
     }
 
     public get value(): any {
         const values: any = { ...this._controls };
-        Object.keys(this._controls).map((c: string) => {
-            values[c] = this._controls[c].value;
-        });
+
+        Object.keys(this._controls).map((c: string) => values[c] = this._controls[c].value);
+
         return values;
+    }
+
+    public get valid(): boolean {
+        return (
+            this.validators.every(v => !!v.lastCheck)
+            &&
+            this.controls.every(c => c.valid)
+        );
     }
 
     public get enabled(): boolean {
@@ -31,15 +38,7 @@ export class FormGroup extends AbstractControl {
 
     public set enabled(isEnabled: boolean) {
         this._enabled = isEnabled;
-        this.controls.forEach(c => {
-            c.enabled = isEnabled;
-        });
-    }
-
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
-            return c.hasError();
-        }));
+        this.controls.forEach(c => c.enabled = isEnabled);
     }
 
     public get waiting(): boolean {
@@ -60,22 +59,39 @@ export class FormGroup extends AbstractControl {
         this.controls.forEach(c => c.readonly = isReadonly);
     }
 
-    /**
-     * A form group is considered pristine if at least one field is pristine
-     */
     public get pristine(): boolean {
-        return this.controls.some(c => {
-            return c.pristine;
-        });
+        return this.controls.some(c => c.pristine);
     }
 
-    /**
-     * A form group is considrered touched when every fields on the group are touched
-     */
     public get touched(): boolean {
-        return this.controls.every(c => {
-            return c.touched;
-        });
+        return this.controls.every(c => c.touched);
+    }
+
+    public hasError(): boolean {
+        return (
+            this.errors.length > 0
+            ||
+            this.controls.some(c => c.hasError())
+        );
+    }
+
+    public async submit(external: boolean = false): Promise<void> {
+        this.validate();
+        await this.validateAsync();
+        await Promise.all(this.controls.map(c => c.submit(external)));
+    }
+
+    public reset(): void {
+        super.reset();
+        this.controls.forEach(c => c.reset());
+    }
+
+    public endEdition(): void {
+        if (!this.touched) {
+            return;
+        }
+
+        super.endEdition();
     }
 
     public get controls(): AbstractControl[] {
@@ -96,8 +112,10 @@ export class FormGroup extends AbstractControl {
         }
 
         const result: any = Object.assign(this._controls);
+
+        control.parent = this;
         result[name] = control;
-        result[name].setParent(this);
+
         this._controls = result;
     }
 
@@ -107,32 +125,9 @@ export class FormGroup extends AbstractControl {
         }
 
         const result: any = Object.assign(this._controls);
+
         delete result[name];
+
         this._controls = result;
     }
-
-    public endEdition(): void {
-        if (this.touched) {
-            super.endEdition();
-        }
-    }
-
-    public async submit(external: boolean = false): Promise<void> {
-        this.validate();
-        await this.validateAsync();
-        await Promise.all(this.controls.map(c => {
-            return c.submit(external);
-        }));
-    }
-
-    public reset(): void {
-        super.reset();
-        this.controls.forEach(c => c.reset());
-    }
-
-    private setupControlsParent(): void {
-        this.controls.forEach(c => c.setParent(this));
-    }
-
-
 }

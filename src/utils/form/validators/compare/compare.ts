@@ -16,7 +16,7 @@ export const CompareValidator: Function = (controlNames: string[], options?: Con
 
             return controlNames
                 .map(cn => (control.getControl(cn) as FormControl<any>))
-                .every(fc => fc.value === (control.controls[0] as FormControl<any>).value);
+                .every(fc => fc.value === control.controls[0].value);
         },
         error: options && options.error ?
             options.error : {

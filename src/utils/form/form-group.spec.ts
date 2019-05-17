@@ -1,13 +1,12 @@
 import { FormControl } from './form-control';
 import { FormGroup } from './form-group';
 
-const TEST: string = 'test';
+const TEST_CONTROL_NAME: string = 'test';
 
 describe('FormGroup', () => {
     let formGroup: FormGroup;
 
     describe('given a FormGroup with no control', () => {
-
         beforeAll(() => {
             formGroup = new FormGroup({});
         });
@@ -21,22 +20,21 @@ describe('FormGroup', () => {
         });
 
         describe('when adding a required control', () => {
-
             beforeAll(() => {
-                formGroup.addControl(TEST, new FormControl());
+                formGroup.addControl(TEST_CONTROL_NAME, new FormControl());
             });
 
             it('should add the controls properly', () => {
                 expect(formGroup.controls.length).toBe(1);
-                expect(formGroup.getControl('test')).toBeDefined();
+                expect(formGroup.getControl(TEST_CONTROL_NAME)).toBeDefined();
             });
         });
-
     });
+
     describe('given an FormGroup with a control', () => {
         beforeAll(() => {
             formGroup = new FormGroup({
-                'test': new FormControl()
+                [TEST_CONTROL_NAME]: new FormControl()
             });
         });
 
@@ -51,12 +49,8 @@ describe('FormGroup', () => {
         it('when removing it should removing the control properly', () => {
             formGroup.removeControl('test');
 
-            expect(() => formGroup.getControl('test')).toThrow();
-
+            expect(() => formGroup.getControl(TEST_CONTROL_NAME)).toThrow(Error);
             expect(formGroup.controls.length).toBe(0);
         });
-
     });
-
 });
-

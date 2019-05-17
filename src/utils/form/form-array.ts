@@ -3,22 +3,30 @@ import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormArray extends AbstractControl {
-
     constructor(
         private _controls: AbstractControl[] = [],
         public readonly validators: ControlValidator[] = [],
         options?: ControlOptions
     ) {
         super(validators, options);
+
         this.setupControlsParent();
     }
 
+    private setupControlsParent(): void {
+        this.controls.forEach(c => c.parent = this);
+    }
+
     public get value(): any {
-        return this._controls.map((c: AbstractControl) => c.value);
+        return this._controls.map(c => c.value);
     }
 
     public get valid(): boolean {
-        return this.validators.every(v => !!v.lastCheck) && this._controls.every(c => c.valid);
+        return (
+            this.validators.every(v => !!v.lastCheck)
+            &&
+            this._controls.every(c => c.valid)
+        );
     }
 
     public get enabled(): boolean {
@@ -27,9 +35,7 @@ export class FormArray extends AbstractControl {
 
     public set enabled(isEnabled: boolean) {
         this._enabled = isEnabled;
-        this._controls.forEach(c => {
-            c.enabled = isEnabled;
-        });
+        this._controls.forEach(c => c.enabled = isEnabled);
     }
 
     public get waiting(): boolean {
@@ -41,7 +47,6 @@ export class FormArray extends AbstractControl {
         this._controls.forEach(c => c.waiting = isWaiting);
     }
 
-
     public get readonly(): boolean {
         return this._readonly;
     }
@@ -51,27 +56,43 @@ export class FormArray extends AbstractControl {
         this._controls.forEach(c => c.readonly = isReadonly);
     }
 
-    public hasError(): boolean {
-        return (this.errors.length > 0 || this.controls.some(c => {
-            return c.hasError();
-        }));
-    }
-    /**
-     * A form group is considered pristine if at least one field is pristine
-     */
     public get pristine(): boolean {
-        return this.controls.some(c => {
-            return c.pristine;
-        });
+        return this.controls.some(c => c.pristine);
     }
 
-    /**
-     * A form group is considrered touched when every fields on the group are touched
-     */
     public get touched(): boolean {
-        return this.controls.every(c => {
-            return c.touched;
-        });
+        return this.controls.every(c => c.touched);
+    }
+
+    public hasError(): boolean {
+        return (
+            this.errors.length > 0
+            ||
+            this.controls.some(c => c.hasError())
+        );
+    }
+
+    public async submit(external: boolean = false): Promise<void> {
+        this.validate();
+        await this.validateAsync();
+        await Promise.all(this.controls.map(c => c.submit(external)));
+    }
+
+    public reset(): void {
+        super.reset();
+        this._controls.forEach(c => c.reset());
+    }
+
+    public initEdition(): void {
+        super.initEdition();
+    }
+
+    public endEdition(): void {
+        if (!this.touched) {
+            return;
+        }
+
+        super.endEdition();
     }
 
     public get controls(): AbstractControl[] {
@@ -79,7 +100,7 @@ export class FormArray extends AbstractControl {
     }
 
     public addControl(control: AbstractControl): void {
-        control.setParent(this);
+        control.parent = this;
         this._controls = this._controls.concat(control);
     }
 
@@ -90,33 +111,4 @@ export class FormArray extends AbstractControl {
             throw Error(`There is no control with index= ${index} in this array`);
         }
     }
-
-    public initEdition(): void {
-        super.initEdition();
-    }
-
-    public endEdition(): void {
-        if (this.touched) {
-            super.endEdition();
-        }
-    }
-
-    public async submit(external: boolean = false): Promise<void> {
-        this.validate();
-        await this.validateAsync();
-        await Promise.all(this.controls.map(c => {
-            return c.submit(external);
-        }));
-    }
-
-
-    public reset(): void {
-        super.reset();
-        this._controls.forEach(c => c.reset());
-    }
-
-    private setupControlsParent(): void {
-        this.controls.forEach(c => c.setParent(this));
-    }
-
 }

@@ -37,9 +37,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'name': new FormControl<string>(
-                        []
-                    )
+                    'name': new FormControl<string>()
                 }
             )
         }),
