@@ -215,8 +215,8 @@ export class MDatepicker extends ModulVue {
     @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
 
-        if (this.internalDateModel !== this.convertModelToString(value ? value : '')) {
-            this.internalDateModel = this.convertModelToString(value ? value : '');
+        if (this.internalDateModel !== this.convertModelToString(value)) {
+            this.internalDateModel = this.convertModelToString(value);
             this.inputModel = this.internalDateModel;
             this.showErrorMessage(this.inputModel);
         }
