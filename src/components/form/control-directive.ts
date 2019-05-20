@@ -14,9 +14,9 @@ export const AbstractControlDirective: DirectiveOptions = {
         const inputElements: NodeListOf<HTMLElement> = el.querySelectorAll(INPUT_SELECTOR);
 
         if (inputElements.length > 0) {
-            control.focusableElement = inputElements[0];
+            control.htmlElement = inputElements[0];
         } else {
-            control.focusableElement = el;
+            control.htmlElement = el;
         }
 
         if (control instanceof FormControl) {
@@ -37,7 +37,7 @@ export const AbstractControlDirective: DirectiveOptions = {
     ): void {
         const control: AbstractControl = binding.value;
 
-        control.focusableElement = undefined;
+        control.htmlElement = undefined;
 
         if (control instanceof FormControl) {
             (vnode.componentInstance as Vue).$off('focus', el['ControlDirectiveListeners'].focusListener);

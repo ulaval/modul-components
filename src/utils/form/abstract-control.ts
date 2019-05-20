@@ -12,7 +12,7 @@ import { ControlValidator } from './validators/control-validator';
  *
  */
 export abstract class AbstractControl {
-    public focusableElement: HTMLElement | undefined;
+    public htmlElement: HTMLElement | undefined;
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;

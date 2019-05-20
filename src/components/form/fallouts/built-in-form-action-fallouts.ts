@@ -48,11 +48,11 @@ export const FocusOnFirstError: FormActionFallout = {
     fallout: (form: MForm): void => {
         let control: AbstractControl | undefined = getFirstControlInError(form.formGroup);
         if (control) {
-            if (control.focusableElement instanceof HTMLInputElement) {
-                scrollToElement(control.focusableElement, form.$form.scrollToOffset);
-                control.focusableElement.focus();
-            } else if (control.focusableElement) {
-                scrollToElement(control.focusableElement, form.$form.scrollToOffset);
+            if (control.htmlElement instanceof HTMLInputElement) {
+                scrollToElement(control.htmlElement, form.$form.scrollToOffset);
+                control.htmlElement.focus();
+            } else if (control.htmlElement) {
+                scrollToElement(control.htmlElement, form.$form.scrollToOffset);
             }
         }
     }
