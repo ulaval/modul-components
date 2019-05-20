@@ -425,7 +425,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                         [BetweenValidator('between', 2, 4)]
                     ),
                     'betweenDate': new FormControl<Date>(
-                        [BetweenValidator('between', new Date(2019, 0, 1), new Date(2019, 1, 1))]
+                        [BetweenValidator('betweenDate', new Date(2019, 0, 1), new Date(2019, 1, 1))]
                     )
                 }
             )
@@ -438,10 +438,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                         :label="formGroup.getControl('between').name"
                         v-m-control="formGroup.getControl('between')">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl(betweenDate').value"
-                        :error-message="formGroup.getControl(betweenDate').errors.length > 0 ? formGroup.getControl(betweenDate').errors[0].message : null"
-                        :label="formGroup.getControl(betweenDate').name"
-                        v-m-control="formGroup.getControl(betweenDate')">
+            <m-datepicker v-model.trim="formGroup.getControl('betweenDate').value"
+                        :error-message="formGroup.getControl('betweenDate').errors.length > 0 ? formGroup.getControl('betweenDate').errors[0].message : null"
+                        :label="formGroup.getControl('betweenDate').name"
+                        v-m-control="formGroup.getControl('betweenDate')">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
