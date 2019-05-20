@@ -39,10 +39,10 @@ export class MForm extends ModulVue {
         const formGroupErrorsCount: number = this.formGroup.errors.length;
 
         return this.$i18n.translate(
-                'm-form:multipleErrorsToCorrect',
-                { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
-                undefined, undefined, undefined, FormatMode.Sprintf
-            );
+            'm-form:multipleErrorsToCorrect',
+            { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
+            undefined, undefined, undefined, FormatMode.Sprintf
+        );
     }
 
     public hasErrors(): boolean {

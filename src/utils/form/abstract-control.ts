@@ -87,11 +87,11 @@ export abstract class AbstractControl {
 
     public validate(external: boolean = false): void {
         this.validators.map((v) => {
-            if (this._validationGuard(this._editionContext, v.validationType, external)) {
-                return;
-            }
-
-            if (v.async) {
+            if (
+                v.async
+                ||
+                this._validationGuard(this._editionContext, v.validationType, external)
+            ) {
                 return;
             }
 
