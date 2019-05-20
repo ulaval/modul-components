@@ -1,7 +1,7 @@
 {
     "m-form": {
-        "required": "Obligatoire",
-        "multipleErrorsToCorrect": "Les <strong>%(totalNbOfErrors)s</strong> informations en rouges sont à revoir pour continuer",
+        "multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> est à revoir pour continuer",
+        "multipleErrorsToCorrect.p": "<strong>%(totalNbOfErrors)s informations</strong> sont à revoir pour continuer",
         "requiredValidatorErrorMessage": "this field is required",
         "requiredValidatorErrorSummaryMessage": "the field %(controlName)s is required",
         "minLengthValidatorErrorMessage": "the min length for this field is %(minLength)s",

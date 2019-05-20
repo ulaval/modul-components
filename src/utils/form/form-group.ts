@@ -12,10 +12,6 @@ export class FormGroup extends AbstractControl {
         this.setupControlsParent();
     }
 
-    private setupControlsParent(): void {
-        this.controls.forEach(c => c.parent = this);
-    }
-
     public get value(): any {
         const values: any = { ...this._controls };
 
@@ -129,5 +125,9 @@ export class FormGroup extends AbstractControl {
         delete result[name];
 
         this._controls = result;
+    }
+
+    private setupControlsParent(): void {
+        this.controls.forEach(c => c.parent = this);
     }
 }

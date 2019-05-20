@@ -8,15 +8,13 @@
                    :close-button="true"
                    ref="summary">
             <ul>
-                <li v-for="(error, index) in summaryErrors"
+                <li v-for="(error, index) in formErrors"
                     :key="index"
                     v-html="error.groupMessage || error.message">
                 </li>
             </ul>
         </m-message>
     </m-accordion-transition>
-
-
     <m-toast :open.sync="displayToast"
              position="top-center"
              state="error">

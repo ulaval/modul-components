@@ -1,12 +1,41 @@
-import { Component, Emit, Prop } from 'vue-property-decorator';
+import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { ControlError } from '../../utils/form/control-error';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
+import { FormArray } from '../../utils/form/form-array';
+import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
+import { ControlValidator } from '../../utils/form/validators/control-validator';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { FormActionFallout } from './form-action-fallout';
 import { FormActions } from './form-action-type';
 import WithRender from './form.html?style=./form.scss';
+
+
+const getAllFormErrors: (formGroup: FormGroup | FormArray) => ControlError[] = (formGroup: FormGroup | FormArray): ControlError[] => {
+    let result: ControlError[] = formGroup.errors;
+    formGroup.controls.forEach(c => {
+        if (c instanceof FormControl) {
+            result = result.concat(c.errors);
+        } else {
+            result = result.concat(getAllFormErrors(c as FormGroup | FormArray));
+        }
+    });
+    return result;
+};
+
+const getAllFormValidators: (formGroup: FormGroup | FormArray) => ControlValidator[] = (formGroup: FormGroup | FormArray): ControlValidator[] => {
+    let result: ControlValidator[] = formGroup.validators;
+    formGroup.controls.forEach(c => {
+        if (c instanceof FormControl) {
+            result = result.concat(c.validators);
+        } else {
+            result = result.concat(getAllFormValidators(c as FormGroup | FormArray));
+        }
+    });
+    return result;
+};
+
 
 @WithRender
 @Component
@@ -25,28 +54,19 @@ export class MForm extends ModulVue {
     @Emit('reset')
     public emitReset(): void { }
 
-    public get summaryErrors(): ControlError[] {
-        return this.formGroup.errors.concat(
-            this.formGroup.controls
-                .map(c => c.errors)
-                .reduce((acc, curr) => acc.concat(curr), [])
-        );
+    public get formErrors(): ControlError[] {
+        return getAllFormErrors(this.formGroup);
     }
 
     public get toastMessage(): string {
-        const formControlErrorsCount: number = this.formGroup.controls
-            .filter(c => c.errors.length > 0).length;
-        const formGroupErrorsCount: number = this.formGroup.errors.length;
+
+        const formControlErrorsCount: number = this.formErrors.length;
 
         return this.$i18n.translate(
-            'm-form:multipleErrorsToCorrect',
-            { totalNbOfErrors: formControlErrorsCount + formGroupErrorsCount },
+            formControlErrorsCount === 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
+            { totalNbOfErrors: formControlErrorsCount },
             undefined, undefined, undefined, FormatMode.Sprintf
         );
-    }
-
-    public hasErrors(): boolean {
-        return this.summaryErrors.length > 0;
     }
 
     public async submit(external: boolean = false): Promise<void> {
@@ -92,9 +112,7 @@ export class MForm extends ModulVue {
         }
 
         return this.formGroup.valid &&
-            this.formGroup.controls
-                .map(c => c.validators)
-                .reduce((acc, cur) => acc.concat(cur), [])
+            getAllFormValidators(this.formGroup)
                 .filter(v => v.validationType === ControlValidatorValidationType.External)
                 .every(v => !!v.lastCheck);
     }
@@ -103,6 +121,13 @@ export class MForm extends ModulVue {
         this.actionFallouts
             .filter(a => type & a.action)
             .forEach(a => a.fallout(this));
+    }
+
+    @Watch('formErrors')
+    public onFormGroupChange(formErrors: ControlError[], oldVal: any): void {
+        if (formErrors.length === 0) {
+            this.displaySummary = this.displayToast = false;
+        }
     }
 
 }
