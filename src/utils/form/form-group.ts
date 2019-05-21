@@ -63,14 +63,6 @@ export class FormGroup extends AbstractControl {
         return this.controls.every(c => c.touched);
     }
 
-    public hasError(): boolean {
-        return (
-            this.errors.length > 0
-            ||
-            this.controls.some(c => c.hasError())
-        );
-    }
-
     public async submit(external: boolean = false): Promise<void> {
         this.validate();
         await this.validateAsync();

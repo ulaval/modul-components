@@ -73,10 +73,6 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
-    public hasError(): boolean {
-        return this.errors.length > 0;
-    }
-
     public endEdition(): void {
         this._touched = true;
         super.endEdition();

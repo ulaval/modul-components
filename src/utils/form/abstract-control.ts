@@ -49,6 +49,10 @@ export abstract class AbstractControl {
         return this._errors;
     }
 
+    public hasError(): boolean {
+        return this.errors.length > 0;
+    }
+
     public get errorMessage(): string {
         if (this.hasError()) {
             return this.errors[0].message;
@@ -65,7 +69,6 @@ export abstract class AbstractControl {
         this._parent = parent;
     }
 
-    public abstract hasError(): boolean;
     public abstract submit(external: boolean): Promise<void>;
 
     public reset(): void {

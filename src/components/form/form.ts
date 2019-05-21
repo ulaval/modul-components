@@ -1,4 +1,5 @@
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
+import { AbstractControl } from '../../utils/form/abstract-control';
 import { ControlError } from '../../utils/form/control-error';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormArray } from '../../utils/form/form-array';
@@ -36,6 +37,27 @@ const getAllFormValidators: (formGroup: FormGroup | FormArray) => ControlValidat
     return result;
 };
 
+const getAllControlsInError: (formGroup: FormGroup | FormArray) => AbstractControl[] = (formGroup: FormGroup | FormArray): AbstractControl[] => {
+    let controls: AbstractControl[] = [];
+
+    if (formGroup.hasError()) {
+        controls = controls.concat(formGroup);
+    }
+
+    formGroup.controls.forEach(c => {
+        if (c.hasError()) {
+            controls = controls.concat(c);
+        }
+
+        // search in childs
+        if (!(c instanceof FormControl)) {
+            controls = controls.concat(getAllControlsInError(c as FormGroup | FormArray));
+        }
+
+    });
+    return controls;
+};
+
 
 @WithRender
 @Component
@@ -58,13 +80,18 @@ export class MForm extends ModulVue {
         return getAllFormErrors(this.formGroup);
     }
 
+    public get formControlsInError(): AbstractControl[] {
+        return getAllControlsInError(this.formGroup);
+    }
+
     public get toastMessage(): string {
 
-        const formControlErrorsCount: number = this.formErrors.length;
+        let errorCount: number = this.formControlsInError.length;
+
 
         return this.$i18n.translate(
-            formControlErrorsCount === 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
-            { totalNbOfErrors: formControlErrorsCount },
+            errorCount === 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
+            { totalNbOfErrors: errorCount },
             undefined, undefined, undefined, FormatMode.Sprintf
         );
     }
