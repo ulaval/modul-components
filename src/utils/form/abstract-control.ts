@@ -42,8 +42,12 @@ export abstract class AbstractControl {
     public abstract set waiting(isWaiting: boolean);
     public abstract get readonly(): boolean;
     public abstract set readonly(isReadonly: boolean);
-    public abstract get pristine(): boolean;
     public abstract get touched(): boolean;
+
+
+    public get pristine(): boolean {
+        return this._pristine;
+    }
 
     public get errors(): ControlError[] {
         return this._errors;
@@ -72,20 +76,24 @@ export abstract class AbstractControl {
     public abstract submit(external: boolean): Promise<void>;
 
     public reset(): void {
+        this._pristine = true;
         this.validators.forEach(v => v.lastCheck = undefined);
         this._editionContext = ControlEditionContext.None;
         this._errors = [];
     }
 
-    public upwardValidationPropagation(): void {
-        this.validate();
-        this.validateAsync();
+    public upwardValueChanged(): void {
 
-        if (!this._parent) {
-            return;
+        this._pristine = false;
+        if (!this._hasAnyControlsInError()) {
+            this.validate();
         }
 
-        this._parent.upwardValidationPropagation();
+
+        if (this._parent) {
+            this._parent.upwardValueChanged();
+        }
+
     }
 
     public validate(external: boolean = false): void {
@@ -159,8 +167,7 @@ export abstract class AbstractControl {
         this._editionContext = ControlEditionContext.None;
         this._resetExternalValidators();
 
-        // do not validate if field still pristine MODUL-1007
-        if (!this.pristine) {
+        if (!this.pristine && !this._hasAnyControlsInError()) {
             this.validate();
             this.validateAsync();
         }
@@ -184,5 +191,9 @@ export abstract class AbstractControl {
 
     private _updateErrors(): void {
         this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
+    }
+
+    protected _hasAnyControlsInError(): boolean {
+        return false;
     }
 }

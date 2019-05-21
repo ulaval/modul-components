@@ -19,10 +19,6 @@ export class FormControl<T> extends AbstractControl {
         }
     }
 
-    public get pristine(): boolean {
-        return this._pristine;
-    }
-
     public get touched(): boolean {
         return this._touched;
     }
@@ -38,9 +34,8 @@ export class FormControl<T> extends AbstractControl {
 
         this._oldValue = this._value;
         this._value = value;
-        this._pristine = false;
 
-        this.upwardValidationPropagation();
+        this.upwardValueChanged();
     }
 
     public get valid(): boolean {
@@ -80,7 +75,6 @@ export class FormControl<T> extends AbstractControl {
 
     public reset(): void {
         super.reset();
-        this._pristine = true;
         this._touched = false;
         this._value = this._oldValue = this._initialValue;
     }

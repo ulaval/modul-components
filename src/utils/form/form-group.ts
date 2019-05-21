@@ -55,18 +55,16 @@ export class FormGroup extends AbstractControl {
         this.controls.forEach(c => c.readonly = isReadonly);
     }
 
-    public get pristine(): boolean {
-        return this.controls.some(c => c.pristine);
-    }
-
     public get touched(): boolean {
         return this.controls.every(c => c.touched);
     }
 
     public async submit(external: boolean = false): Promise<void> {
-        this.validate();
-        await this.validateAsync();
         await Promise.all(this.controls.map(c => c.submit(external)));
+        if (!this._hasAnyControlsInError()) {
+            this.validate();
+            await this.validateAsync();
+        }
     }
 
     public reset(): void {
@@ -121,5 +119,9 @@ export class FormGroup extends AbstractControl {
 
     private setupControlsParent(): void {
         this.controls.forEach(c => c.parent = this);
+    }
+
+    protected _hasAnyControlsInError(): boolean {
+        return this.controls.some(c => c.hasError());
     }
 }
