@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
+import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { BetweenValidator } from '../../utils/form/validators/between/between';
@@ -15,15 +16,8 @@ import { MinLengthValidator } from '../../utils/form/validators/min-length/min-l
 import { MinValidator } from '../../utils/form/validators/min/min';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { FORM_NAME } from '../component-names';
-import {
-    ClearErrorToast,
-    ClearSummaryMessage,
-    ErrorToast,
-    FocusOnFirstError,
-    SummaryMessage
-} from './fallouts/built-in-form-action-fallouts';
+import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './fallouts/built-in-form-action-fallouts';
 import FormPlugin from './form.plugin';
-import { FormArray } from '../../utils/form/form-array';
 
 Vue.use(FormPlugin);
 
@@ -31,7 +25,7 @@ declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
 
-const rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
+const ROLE_NAMES: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     .add('default', () => ({
@@ -988,10 +982,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
     }))
     .add('Checkbox 2 to 5 selections', () => ({
         data: () => ({
+            rolesName: [...ROLE_NAMES],
             formGroup: new FormGroup(
                 {
                     roles: new FormArray(
-                        rolesName.map(() => new FormControl<boolean>([], { initialValue: false })),
+                        ROLE_NAMES.map(() => new FormControl<boolean>([], { initialValue: false })),
                         [
                             {
                                 key: 'selection-min-count',
@@ -1029,7 +1024,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                             v-model="control.value"
                             v-m-control="control"
                             :key="index">
-<!--                    {{rolesName[i]}}--> test</m-checkbox>
+                            {{rolesName[index]}}</m-checkbox>
             </m-input-group>
 
             <p class="m-u--margin-bottom--l">
