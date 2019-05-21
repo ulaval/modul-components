@@ -149,25 +149,26 @@ export abstract class AbstractControl {
             this._editionContext = ControlEditionContext.Dirty;
         }
 
-        if (!this._parent) {
-            return;
+        if (this._parent) {
+            this._parent.initEdition();
         }
 
-        this._parent.initEdition();
     }
 
     public endEdition(): void {
         this._editionContext = ControlEditionContext.None;
         this._resetExternalValidators();
 
-        this.validate();
-        this.validateAsync();
-
-        if (!this._parent) {
-            return;
+        // do not validate if field still pristine MODUL-1007
+        if (!this.pristine) {
+            this.validate();
+            this.validateAsync();
         }
 
-        this._parent.endEdition();
+        if (this._parent) {
+            this._parent.endEdition();
+        }
+
     }
 
     protected _resetExternalValidators(): void {
