@@ -17,16 +17,26 @@ export class FormArray extends AbstractControl {
         this.controls.forEach(c => c.parent = this);
     }
 
+    /**
+     * Return an agregate values of all enabled controls.
+     *
+     */
     public get value(): any {
-        return this._controls.map(c => c.value);
+        return this._controls.filter(c => c.enabled).map(c => c.value);
     }
 
     public get valid(): boolean {
-        return (
-            this.validators.every(v => !!v.lastCheck)
-            &&
-            this._controls.every(c => c.valid)
-        );
+        if (!this.enabled || this.readonly) {
+            return true;
+        } else {
+            return (
+                this.validators.every(v => !!v.lastCheck)
+                &&
+                this._controls.every(c => c.valid)
+            );
+        }
+
+
     }
 
     public get enabled(): boolean {

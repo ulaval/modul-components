@@ -12,20 +12,36 @@ export class FormGroup extends AbstractControl {
         this.setupControlsParent();
     }
 
+    /**
+     * Return an agregate values of all enabled controls.
+     *
+     */
     public get value(): any {
-        const values: any = { ...this._controls };
+        const values: any = {};
+        const enabledControls: { [name: string]: AbstractControl } = Object.keys(this._controls)
+            .filter(c => this._controls[c].enabled)
+            .reduce((obj, key) => {
+                obj[key] = this._controls[key];
+                return obj;
+            }, {});
 
-        Object.keys(this._controls).map((c: string) => values[c] = this._controls[c].value);
+        Object.keys(enabledControls).map((c: string) => values[c] = enabledControls[c].value);
 
         return values;
     }
 
     public get valid(): boolean {
-        return (
-            this.validators.every(v => !!v.lastCheck)
-            &&
-            this.controls.every(c => c.valid)
-        );
+
+        if (!this.enabled || this.readonly) {
+            return true;
+        } else {
+            return (
+                this.validators.every(v => !!v.lastCheck)
+                &&
+                this.controls.every(c => c.valid)
+            );
+        }
+
     }
 
     public get enabled(): boolean {

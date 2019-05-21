@@ -27,6 +27,7 @@ describe('FromControl', () => {
             expect(formControl.value).toBe('foo');
         });
 
+
         describe('when edited', () => {
             beforeAll(() => {
                 formControl.initEdition();
@@ -57,6 +58,7 @@ describe('FromControl', () => {
                 expect(formControl.touched).toBe(false);
                 expect(formControl.value).toBe('foo');
             });
+
         });
     });
 
@@ -92,7 +94,7 @@ describe('FromControl', () => {
                 formControl.endEdition();
             });
 
-            it('should be invalid and no error', () => {
+            it('should be invalid and has error', () => {
                 expect(formControl.valid).toBe(false);
                 expect(formControl.hasError()).toBe(true);
                 expect(formControl.errorMessage).toBe(ALWAYS_FALSE);
@@ -106,6 +108,22 @@ describe('FromControl', () => {
                 expect(formControl.hasError()).toBe(false);
                 expect(formControl.errorMessage).toBe('');
             });
+
+            it('should be valid when readonly', () => {
+                formControl.readonly = true;
+                expect(formControl.valid).toBe(true);
+                expect(formControl.hasError()).toBe(false);
+                expect(formControl.errorMessage).toBe('');
+            });
+
+
+            it('should be valid when disabled', () => {
+                formControl.enabled = false;
+                expect(formControl.valid).toBe(true);
+                expect(formControl.hasError()).toBe(false);
+                expect(formControl.errorMessage).toBe('');
+            });
+
         });
     });
 });

@@ -39,9 +39,16 @@ export class FormControl<T> extends AbstractControl {
     }
 
     public get valid(): boolean {
-        return this.validators
-            .filter(v => v.validationType !== ControlValidatorValidationType.External)
-            .every(v => !!v.lastCheck);
+
+        if (!this.enabled || this.readonly) {
+            return true;
+        } else {
+            return this.validators
+                .filter(v => v.validationType !== ControlValidatorValidationType.External)
+                .every(v => !!v.lastCheck);
+        }
+
+
     }
 
     public get enabled(): boolean {

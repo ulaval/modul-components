@@ -50,7 +50,7 @@ export abstract class AbstractControl {
     }
 
     public get errors(): ControlError[] {
-        return this._errors;
+        return (this.enabled && !this.readonly) ? this._errors : [];
     }
 
     public hasError(): boolean {
@@ -85,7 +85,7 @@ export abstract class AbstractControl {
     public upwardValueChanged(): void {
 
         this._pristine = false;
-        if (!this._hasAnyControlsInError()) {
+        if (!this._hasAnyControlsInError() && this.enabled && !this.readonly) {
             this.validate();
         }
 
@@ -97,6 +97,7 @@ export abstract class AbstractControl {
     }
 
     public validate(external: boolean = false): void {
+
         this.validators.map((v) => {
             if (
                 v.async
@@ -119,6 +120,7 @@ export abstract class AbstractControl {
     }
 
     public async validateAsync(external: boolean = false): Promise<void> {
+
         await Promise.all(
             this.validators
                 .map(async (v) => {
@@ -149,6 +151,11 @@ export abstract class AbstractControl {
     }
 
     public initEdition(): void {
+
+        if (!this.enabled || this.readonly) {
+            return;
+        }
+
         if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this.pristine) {
@@ -164,6 +171,10 @@ export abstract class AbstractControl {
     }
 
     public endEdition(): void {
+        if (!this.enabled || this.readonly) {
+            return;
+        }
+
         this._editionContext = ControlEditionContext.None;
         this._resetExternalValidators();
 
