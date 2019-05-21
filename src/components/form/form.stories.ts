@@ -518,7 +518,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         template: `
         <m-form class="m-u--margin-top"
                  :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
+            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
             <m-textfield v-model.trim="formGroup.getControl('email').value"
                         :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
                         :label="formGroup.getControl('email').name"
@@ -547,7 +547,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
+            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
             <m-textfield v-model.trim="formGroup.getControl('email').value"
                         :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
                         :label="formGroup.getControl('email').name"
@@ -580,7 +580,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
+            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
             <m-textfield v-model.trim="formGroup.getControl('email').value"
                         :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
                         :label="formGroup.getControl('email').name"
@@ -613,7 +613,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['editionContext']}}</p>
+            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
             <m-textfield v-model.trim="formGroup.getControl('email').value"
                         :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
                         :label="formGroup.getControl('email').name"

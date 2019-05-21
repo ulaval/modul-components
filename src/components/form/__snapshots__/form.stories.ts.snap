@@ -1809,7 +1809,7 @@ exports[`Storyshots components|m-form/validation-type at-exit 1`] = `
   <!---->
    
   <p>
-    edition context: 
+    edition context: none
   </p>
    
   <div
@@ -1939,7 +1939,7 @@ exports[`Storyshots components|m-form/validation-type correction 1`] = `
   <!---->
    
   <p>
-    edition context: 
+    edition context: none
   </p>
    
   <div
@@ -2069,7 +2069,7 @@ exports[`Storyshots components|m-form/validation-type modification 1`] = `
   <!---->
    
   <p>
-    edition context: 
+    edition context: none
   </p>
    
   <div
@@ -2199,7 +2199,7 @@ exports[`Storyshots components|m-form/validation-type on-going 1`] = `
   <!---->
    
   <p>
-    edition context: 
+    edition context: none
   </p>
    
   <div
