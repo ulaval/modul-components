@@ -962,11 +962,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         template: `
         <div>
         <h2>Radio button required</h2>
-        <m-form :form-group="formGroup"
-                v-m-control="formGroup"
-                @reset="reset"
-                @submit="submit">
-
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
             <m-radio-group v-model.trim="formGroup.getControl('radio required').value"
                            :error-message="formGroup.getControl('radio required').errors.length > 0 ? formGroup.getControl('radio required').errors[0].message : null"
                            label="Select a role"
@@ -1023,10 +1020,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         template: `
         <div>
         <h2>Checkbox 2 to 5 selections</h2>
-        <m-form :form-group="formGroup"
-                @reset="reset"
-                @submit="submit">
-
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
             <m-input-group :error-message="formGroup.getControl('roles').errors.length > 0 ? formGroup.getControl('roles').errors[0].message : null"
                            legend="Select between 2 and 5 roles"
                            v-m-control="formGroup.getControl('roles')">
@@ -1100,9 +1095,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <div>
         <h2>Email confirmation</h2>
         <m-form :form-group="formGroup"
-                @reset="reset"
-                @submit="submit">
-
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
             <m-input-group :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null"
                            legend=""
                            v-m-control="formGroup">
