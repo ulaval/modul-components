@@ -15,14 +15,23 @@ import { MinLengthValidator } from '../../utils/form/validators/min-length/min-l
 import { MinValidator } from '../../utils/form/validators/min/min';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { FORM_NAME } from '../component-names';
-import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './fallouts/built-in-form-action-fallouts';
+import {
+    ClearErrorToast,
+    ClearSummaryMessage,
+    ErrorToast,
+    FocusOnFirstError,
+    SummaryMessage
+} from './fallouts/built-in-form-action-fallouts';
 import FormPlugin from './form.plugin';
+import { FormArray } from '../../utils/form/form-array';
 
 Vue.use(FormPlugin);
 
 declare module '@storybook/addon-knobs' {
     export function withKnobs(): any;
 }
+
+const rolesName: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     .add('default', () => ({
@@ -630,3 +639,496 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
         `
     }));
 
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('required and 20 characters max', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'required max20': new FormControl<string>(
+                        [
+                            RequiredValidator('', {
+                                error: {
+                                    message: 'Enter a title'
+                                }
+                            }),
+                            MaxLengthValidator('', 20, {
+                                error: {
+                                    message: 'Enter a title less than 20 characters'
+                                }
+                            })
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Required and 20 characters max</h2>
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('required max20').value"
+                        :max-length="20"
+                        :character-count="true"
+                        :character-count-threshold="20 * .75"
+                        :error-message="formGroup.getControl('required max20').errors.length > 0 ? formGroup.getControl('required max20').errors[0].message : null"
+                        :label="formGroup.getControl('required max20').name"
+                        v-m-control="formGroup.getControl('required max20')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('required and 5 characters min', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'required min5': new FormControl<string>(
+                        [
+                            RequiredValidator('required min5', {
+                                error: {
+                                    message: 'Enter a security answer'
+                                }
+                            }),
+                            MinLengthValidator('', 5, {
+                                error: {
+                                    message: 'Enter a security answer at least 5 characters long'
+                                }
+                            })
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Required and 5 characters min</h2>
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('required min5').value"
+                        :error-message="formGroup.getControl('required min5').errors.length > 0 ? formGroup.getControl('required min5').errors[0].message : null"
+                        :label="formGroup.getControl('required min5').name"
+                        v-m-control="formGroup.getControl('required min5')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('Format with fixed max characters (postal code)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'postal code': new FormControl<string>(
+                        [
+                            RequiredValidator(''),
+                            {
+                                key: 'postal-code-format',
+                                validationFunction: (control: FormControl<string>): boolean => {
+                                    const regex: RegExp = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+
+                                    return regex.test(control.value || '');
+                                },
+                                error: {
+                                    message: 'Enter postal code.'
+                                },
+                                validationType: ControlValidatorValidationType.OnGoing
+                            }
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Format with fixed max characters (postal code)</h2>
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('postal code').value"
+                        :error-message="formGroup.getControl('postal code').errors.length > 0 ? formGroup.getControl('postal code').errors[0].message : null"
+                        :label="formGroup.getControl('postal code').name"
+                        v-m-control="formGroup.getControl('postal code')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('Format without fixed max characters (email)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'email': new FormControl<string>(
+                        [
+                            RequiredValidator('', {
+                                error: {
+                                    message: 'Enter an email address'
+                                }
+                            }),
+                            EmailValidator('', {
+                                error: {
+                                    message: 'Enter a valid email address'
+                                }
+                            })
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Format without fixed max characters (email)</h2>
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('email').value"
+                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                        :label="formGroup.getControl('email').name"
+                        v-m-control="formGroup.getControl('email')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('More than one validations (course code)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'course code': new FormControl<string>(
+                        [
+                            RequiredValidator('', {
+                                error: {
+                                    message: 'Enter a course code'
+                                }
+                            }),
+                            MaxLengthValidator('course code', 8, {
+                                error: {
+                                    message: 'Enter a 7 characters long course code'
+                                },
+                                validationType: ControlValidatorValidationType.OnGoing
+                            }),
+                            {
+                                key: 'course-code-format',
+                                validationFunction: (control: FormControl<string>): boolean => {
+                                    const regex: RegExp = /^[A-Za-z]{3}[-]?\d{4}$/;
+
+                                    return regex.test(control.value || '');
+                                },
+                                error: {
+                                    message: 'Enter a course in the format AAA-0000'
+                                },
+                                validationType: ControlValidatorValidationType.Correction
+                            },
+                            {
+                                key: 'duplicate-course-code',
+                                validationFunction: undefined,
+                                error: {
+                                    message: 'This course code already exists.'
+                                },
+                                validationType: ControlValidatorValidationType.External
+                            }
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>More than one validations (course code)</h2>
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('course code').value"
+                        :error-message="formGroup.getControl('course code').errors.length > 0 ? formGroup.getControl('course code').errors[0].message : null"
+                        :label="formGroup.getControl('course code').name"
+                        v-m-control="formGroup.getControl('course code')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('Live check username availability (async)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'username': new FormControl<string>(
+                        [
+                            RequiredValidator('Value', {
+                                error: {
+                                    message: 'Username is required'
+                                },
+                                validationType: ControlValidatorValidationType.AtExit
+                            }),
+                            {
+                                key: '',
+                                validationFunction: async (control: FormControl<string>): Promise<boolean> => {
+                                    return new Promise(res => {
+                                        if (control.value) {
+                                            setTimeout(() => res(![
+                                                'John',
+                                                'Jane',
+                                                'Doe'
+                                            ].includes(control.value || '')), 2000);
+                                        } else {
+                                            res(false);
+                                        }
+                                    });
+                                },
+                                async: true,
+                                error: {
+                                    message: 'Username is not available'
+                                },
+                                validationType: ControlValidatorValidationType.AtExit
+                            }
+
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Live check username availability (async)</h2>
+        <p>'John', 'Jane' and 'Doe' are reserved</p>
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <m-textfield v-model.trim="formGroup.getControl('username').value"
+                        :error-message="formGroup.getControl('username').errors.length > 0 ? formGroup.getControl('username').errors[0].message : null"
+                        :label="formGroup.getControl('username').name"
+                        :valid="formGroup.getControl('username').valid"
+                        :valid-message="formGroup.getControl('username').valid ? 'Username is available' : ''"
+                        :waiting="formGroup.getControl('username').waiting"
+                        v-m-control="formGroup.getControl('username')">
+            </m-textfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('Radio button required', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'radio required': new FormControl<string>(
+                        [
+                            RequiredValidator('Value', {
+                                error: {
+                                    message: 'Select a role'
+                                }
+                            })
+                        ]
+                    )
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Radio button required</h2>
+        <m-form :form-group="formGroup"
+                v-m-control="formGroup"
+                @reset="reset"
+                @submit="submit">
+
+            <m-radio-group v-model.trim="formGroup.getControl('radio required').value"
+                           :error-message="formGroup.getControl('radio required').errors.length > 0 ? formGroup.getControl('radio required').errors[0].message : null"
+                           label="Select a role"
+                           v-m-control="formGroup.getControl('radio required')">
+                <m-radio value="Sys admin">Sys admin</m-radio>
+                <m-radio value="Unit admin">Unit admin</m-radio>
+                <m-radio value="Conceptor">Conceptor</m-radio>
+                <m-radio value="Assistant">Assistant</m-radio>
+                <m-radio value="Student">Student</m-radio>
+            </m-radio-group>
+
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('Checkbox 2 to 5 selections', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    roles: new FormArray(
+                        rolesName.map(() => new FormControl<boolean>([], { initialValue: false })),
+                        [
+                            {
+                                key: 'selection-min-count',
+                                validationFunction: (array: FormArray): boolean => {
+                                    return array.value.filter((v: boolean) => v).length >= 2;
+                                },
+                                error: {
+                                    message: 'Select at least 2 roles'
+                                },
+                                validationType: ControlValidatorValidationType.OnGoing
+                            },
+                            {
+                                key: 'selection-max-count',
+                                validationFunction: (array: FormArray): boolean => {
+                                    return array.value.filter((v: boolean) => v).length <= 5;
+                                },
+                                error: {
+                                    message: 'Select 5 roles or less'
+                                },
+                                validationType: ControlValidatorValidationType.OnGoing
+                            }
+                        ])
+                }
+            )
+        }),
+        template: `
+        <div>
+        <h2>Checkbox 2 to 5 selections</h2>
+        <m-form :form-group="formGroup"
+                @reset="reset"
+                @submit="submit">
+
+            <m-input-group :error-message="formGroup.getControl('roles').errors.length > 0 ? formGroup.getControl('roles').errors[0].message : null"
+                           legend="Select between 2 and 5 roles"
+                           v-m-control="formGroup.getControl('roles')">
+                <m-checkbox v-for="(control, index) in formGroup.getControl('roles').controls"
+                            v-model="control.value"
+                            v-m-control="control"
+                            :key="index">
+<!--                    {{rolesName[i]}}--> test</m-checkbox>
+            </m-input-group>
+
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }))
+    .add('Email confirmation', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'email': new FormControl<string>(
+                        [
+                            RequiredValidator('', {
+                                error: {
+                                    message: 'Enter an email address'
+                                }
+                            }),
+                            EmailValidator('', {
+                                error: {
+                                    message: 'Enter a valid email address'
+                                }
+                            })
+                        ]
+                    ),
+                    'email confirmation': new FormControl<string>(
+                        [
+                            EmailValidator('', {
+                                error: {
+                                    message: 'Confirm email address'
+                                }
+                            })
+                        ]
+                    )
+                },
+                [
+                    {
+                        key: 'compare-email',
+                        validationFunction: (control: FormGroup): boolean => {
+                            return (
+                                !(control.getControl('email') as FormControl<string>).value
+                                ||
+                                ['email', 'email confirmation']
+                                    .map(cn => (control.getControl(cn) as FormControl<any>))
+                                    .every(fc => fc.value === (control.controls[0] as FormControl<any>).value)
+                            );
+                        },
+                        error: {
+                            message: `Emails don't match`
+                        },
+                        validationType: ControlValidatorValidationType.Correction
+                    }
+                ]
+            )
+        }),
+        template: `
+        <div>
+        <h2>Email confirmation</h2>
+        <m-form :form-group="formGroup"
+                @reset="reset"
+                @submit="submit">
+
+            <m-input-group :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null"
+                           legend=""
+                           v-m-control="formGroup">
+
+                <m-textfield v-model.trim="formGroup.getControl('email').value"
+                             :label="formGroup.getControl('email').name"
+                             :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                             v-m-control="formGroup.getControl('email')">
+                </m-textfield>
+
+                <m-textfield v-model.trim="formGroup.getControl('email confirmation').value"
+                             :label="formGroup.getControl('email confirmation').name"
+                             :error-message="formGroup.getControl('email confirmation').errors.length > 0 ? formGroup.getControl('email confirmation').errors[0].message : null"
+                             v-m-control="formGroup.getControl('email confirmation')">
+                </m-textfield>
+
+            </m-input-group>
+
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        </div>
+        `
+    }));
