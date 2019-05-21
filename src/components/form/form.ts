@@ -90,7 +90,7 @@ export class MForm extends ModulVue {
         let errorCount: number = this.formControlsInError.length;
 
         return this.$i18n.translate(
-            errorCount === 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
+            errorCount <= 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
             { totalNbOfErrors: errorCount <= 1 ? 1 : errorCount },
             undefined, undefined, undefined, FormatMode.Sprintf
         );
