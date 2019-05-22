@@ -1813,290 +1813,312 @@ exports[`Storyshots components|m-form/rules Checkbox 2 to 5 selections 1`] = `
      
     <!---->
      
-    <m-input-group
-      legend="Select between 2 and 5 roles"
+    <p>
+      <strong>
+        Select 2 to 5 roles :
+      </strong>
+    </p>
+     
+    <ul
+      class="m-u--no-margin"
     >
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+      <m-input-group>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Sys admin
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Unit admin
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Conceptor
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Assitant
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Moderator
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Student
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-      <div
-        class="m-checkbox m--is-checkbox-left"
-      >
-        <input
-          class="m-checkbox__hidden"
-          id="mCheckbox-uuid"
-          type="checkbox"
-        />
-         
-        <!---->
-         
-        <label
-          class="m-checkbox__wrap"
-          for="mCheckbox-uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-checkbox__input"
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+        <li>
+          <div
+            class="m-checkbox m--is-checkbox-left"
           >
-            <span
-              class="m-checkbox__input__icon"
+            <input
+              class="m-checkbox__hidden"
+              id="mCheckbox-uuid"
+              type="checkbox"
             />
-          </span>
-           
-          <span
-            class="m-checkbox__label"
-          >
-            
+             
+            <!---->
+             
+            <label
+              class="m-checkbox__wrap"
+              for="mCheckbox-uuid"
+            >
+              <span
+                aria-hidden="true"
+                class="m-checkbox__input"
+              >
+                <span
+                  class="m-checkbox__input__icon"
+                />
+              </span>
+               
+              <span
+                class="m-checkbox__label"
+              >
+                
                             Invited
-          </span>
-        </label>
-         
-        <div
-          class="m-validation-message m-checkbox__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-      </div>
-    </m-input-group>
+              </span>
+            </label>
+             
+            <div
+              class="m-validation-message m-checkbox__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
+        </li>
+      </m-input-group>
+    </ul>
      
     <p
       class="m-u--margin-bottom--l"
@@ -2162,31 +2184,35 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
       legend=""
     >
       <div
-        class="m-textfield m--is-type-text"
+        class="m-textfield m--has-label m--is-type-text"
         style="width: 100%; max-width: 288px;"
       >
         <div
-          class="m-input-style m--is-tag-default"
+          class="m-input-style m--has-label m--is-tag-default"
         >
           <div
             class="m-input-style__content"
             style="margin-top: 10px;"
           >
-            <span
+            <label
               class="m-input-style__label"
-              style="z-index: -1;"
+              for="mTextfield-uuid"
             >
               <span
                 class="m-input-style__text"
-              />
-            </span>
+              >
+                <span>
+                  Email
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
              
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
-              />
+              <!---->
                
               <div
                 class="m-input-style__left-content"
@@ -2234,31 +2260,35 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
       </div>
        
       <div
-        class="m-textfield m--is-type-text"
+        class="m-textfield m--has-label m--is-type-text"
         style="width: 100%; max-width: 288px;"
       >
         <div
-          class="m-input-style m--is-tag-default"
+          class="m-input-style m--has-label m--is-tag-default"
         >
           <div
             class="m-input-style__content"
             style="margin-top: 10px;"
           >
-            <span
+            <label
               class="m-input-style__label"
-              style="z-index: -1;"
+              for="mTextfield-uuid"
             >
               <span
                 class="m-input-style__text"
-              />
-            </span>
+              >
+                <span>
+                  Email confirmation
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
              
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
-              />
+              <!---->
                
               <div
                 class="m-input-style__left-content"
@@ -2367,31 +2397,35 @@ exports[`Storyshots components|m-form/rules Format with fixed max characters (po
     <!---->
      
     <div
-      class="m-textfield m--is-type-text"
+      class="m-textfield m--has-label m--is-type-text"
       style="width: 100%; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-tag-default"
+        class="m-input-style m--has-label m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="mTextfield-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Postal code
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -2499,31 +2533,35 @@ exports[`Storyshots components|m-form/rules Format without fixed max characters 
     <!---->
      
     <div
-      class="m-textfield m--is-type-text"
+      class="m-textfield m--has-label m--is-type-text"
       style="width: 100%; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-tag-default"
+        class="m-input-style m--has-label m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="mTextfield-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Email
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -2635,31 +2673,35 @@ exports[`Storyshots components|m-form/rules Live check username availability (as
     <!---->
      
     <div
-      class="m-textfield m--is-type-text"
+      class="m-textfield m--has-label m--is-type-text"
       style="width: 100%; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-tag-default"
+        class="m-input-style m--has-label m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="mTextfield-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Username
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -2759,6 +2801,10 @@ exports[`Storyshots components|m-form/rules More than one validations (course co
     More than one validations (course code)
   </h2>
    
+  <p>
+    'MAT-0000' and 'MAT-0001' are reserved
+  </p>
+   
   <form
     class="m-u--margin-top"
   >
@@ -2767,31 +2813,35 @@ exports[`Storyshots components|m-form/rules More than one validations (course co
     <!---->
      
     <div
-      class="m-textfield m--is-type-text"
+      class="m-textfield m--has-label m--is-type-text"
       style="width: 100%; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-tag-default"
+        class="m-input-style m--has-label m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="mTextfield-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Course code (ex. : MAT-1000)
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -2906,7 +2956,7 @@ exports[`Storyshots components|m-form/rules Radio button required 1`] = `
         id="uuid"
       >
         <span>
-          Select a role
+          Select a role :
         </span>
          
         <span
@@ -3130,31 +3180,35 @@ exports[`Storyshots components|m-form/rules required and 5 characters min 1`] = 
     <!---->
      
     <div
-      class="m-textfield m--is-type-text"
+      class="m-textfield m--has-label m--is-type-text"
       style="width: 100%; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-tag-default"
+        class="m-input-style m--has-label m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="mTextfield-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Security answer
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -3262,31 +3316,35 @@ exports[`Storyshots components|m-form/rules required and 20 characters max 1`] =
     <!---->
      
     <div
-      class="m-textfield m--is-type-text"
+      class="m-textfield m--has-label m--is-type-text"
       style="width: 100%; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-tag-default"
+        class="m-input-style m--has-label m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="mTextfield-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Title
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
