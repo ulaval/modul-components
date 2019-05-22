@@ -105,8 +105,8 @@ export class FormArray extends AbstractControl {
     }
 
     public removeControl(index: number): void {
-        if (this._controls[index - 1] !== undefined) {
-            this._controls = this._controls.slice(index);
+        if (this._controls[index] !== undefined) {
+            this._controls.splice(index, 1);
         } else {
             throw Error(`There is no control with index= ${index} in this array`);
         }

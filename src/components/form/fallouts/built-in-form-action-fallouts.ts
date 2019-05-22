@@ -13,20 +13,29 @@ const scrollToElement: Function = (element: HTMLElement, offset: number): void =
 };
 
 /**
- * Recursive fonction to return the first formControl in error. If none is returned then the control is return (in case of an error in the formGroup).
+ * Recursive fonction to return the first formControl in error. If none is returned then undefined is returned (in case of an error in the formGroup).
  * @param formGroup
  */
-const getFirstControlInError: (formGroup: FormGroup | FormArray) => AbstractControl = (formGroup: FormGroup | FormArray): AbstractControl => {
-    let invalidControl: AbstractControl | undefined = formGroup.controls.find(c => c.hasError());
-    if (invalidControl) {
-        if (invalidControl instanceof FormControl) {
-            return invalidControl;
-        } else {
-            return getFirstControlInError(invalidControl as FormGroup | FormArray);
+const getFirstControlInError: (formGroup: FormGroup | FormArray) => AbstractControl | undefined = (formGroup: FormGroup | FormArray): AbstractControl | undefined => {
+    let invalidControl: AbstractControl | undefined;
+
+    let controls: AbstractControl[] = formGroup.controls;
+    if (controls && controls.length > 0) {
+        for (let index: number = 0; index < controls.length; ++index) {
+            if (controls[index] instanceof FormControl) {
+                if (controls[index].hasError()) {
+                    return controls[index];
+                }
+            } else {
+                let invalidControlInGroup: AbstractControl | undefined = getFirstControlInError(controls[index] as FormGroup | FormArray);
+                if (invalidControlInGroup) {
+                    return invalidControlInGroup;
+                }
+            }
         }
-    } else {
-        return formGroup;
     }
+
+    return invalidControl;
 };
 
 export const ClearErrorToast: FormActionFallout = {

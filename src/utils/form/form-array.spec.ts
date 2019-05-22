@@ -31,12 +31,12 @@ describe('FormArray', () => {
         let formArray: FormArray;
 
         beforeAll(() => {
-            formArray = new FormArray([new FormControl()]);
+            formArray = new FormArray([new FormControl(), new FormControl(), new FormControl()]);
         });
 
         it('when removing a control it should remove the control', () => {
-            formArray.removeControl(1);
-            expect(formArray.controls.length).toBe(0);
+            formArray.removeControl(0);
+            expect(formArray.controls.length).toBe(2);
         });
     });
 });
