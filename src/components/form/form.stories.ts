@@ -662,12 +662,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <h2>Required and 20 characters max</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('required max20').value"
+            <m-textfield label="Title"
+                        v-model.trim="formGroup.getControl('required max20').value"
                         :max-length="20"
                         :character-count="true"
                         :character-count-threshold="20 * .75"
                         :error-message="formGroup.getControl('required max20').errors.length > 0 ? formGroup.getControl('required max20').errors[0].message : null"
-                        :label="formGroup.getControl('required max20').name"
                         v-m-control="formGroup.getControl('required max20')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -707,9 +707,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <h2>Required and 5 characters min</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('required min5').value"
+            <m-textfield label="Security answer"
+                        v-model.trim="formGroup.getControl('required min5').value"
                         :error-message="formGroup.getControl('required min5').errors.length > 0 ? formGroup.getControl('required min5').errors[0].message : null"
-                        :label="formGroup.getControl('required min5').name"
                         v-m-control="formGroup.getControl('required min5')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -752,9 +752,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <h2>Format with fixed max characters (postal code)</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('postal code').value"
+            <m-textfield label="Postal code"
+                        v-model.trim="formGroup.getControl('postal code').value"
                         :error-message="formGroup.getControl('postal code').errors.length > 0 ? formGroup.getControl('postal code').errors[0].message : null"
-                        :label="formGroup.getControl('postal code').name"
                         v-m-control="formGroup.getControl('postal code')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -794,9 +794,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <h2>Format without fixed max characters (email)</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('email').value"
+            <m-textfield label="Email"
+                        v-model.trim="formGroup.getControl('email').value"
                         :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        :label="formGroup.getControl('email').name"
                         v-m-control="formGroup.getControl('email')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -855,11 +855,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         template: `
         <div>
         <h2>More than one validations (course code)</h2>
+        <p>'MAT-0000' and 'MAT-0001' are reserved</p>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('course code').value"
+            <m-textfield label="Course code (ex. : MAT-1000)"
+                        v-model.trim="formGroup.getControl('course code').value"
                         :error-message="formGroup.getControl('course code').errors.length > 0 ? formGroup.getControl('course code').errors[0].message : null"
-                        :label="formGroup.getControl('course code').name"
                         v-m-control="formGroup.getControl('course code')">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -918,9 +919,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <p>'John', 'Jane' and 'Doe' are reserved</p>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('username').value"
+            <m-textfield label="Username"
+                        v-model.trim="formGroup.getControl('username').value"
                         :error-message="formGroup.getControl('username').errors.length > 0 ? formGroup.getControl('username').errors[0].message : null"
-                        :label="formGroup.getControl('username').name"
                         :valid="formGroup.getControl('username').valid"
                         :valid-message="formGroup.getControl('username').valid ? 'Username is available' : ''"
                         :waiting="formGroup.getControl('username').waiting"
@@ -958,9 +959,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <h2>Radio button required</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-radio-group v-model.trim="formGroup.getControl('radio required').value"
+            <m-radio-group label="Select a role :"
+                            v-model.trim="formGroup.getControl('radio required').value"
                            :error-message="formGroup.getControl('radio required').errors.length > 0 ? formGroup.getControl('radio required').errors[0].message : null"
-                           label="Select a role"
                            v-m-control="formGroup.getControl('radio required')">
                 <m-radio value="Sys admin">Sys admin</m-radio>
                 <m-radio value="Unit admin">Unit admin</m-radio>
@@ -1017,15 +1018,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <h2>Checkbox 2 to 5 selections</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-input-group :error-message="formGroup.getControl('roles').errors.length > 0 ? formGroup.getControl('roles').errors[0].message : null"
-                           legend="Select between 2 and 5 roles"
-                           v-m-control="formGroup.getControl('roles')">
-                <m-checkbox v-for="(control, index) in formGroup.getControl('roles').controls"
+            <p><strong>Select 2 to 5 roles :</strong></p>
+            <ul class="m-u--no-margin">
+                <m-input-group :error-message="formGroup.getControl('roles').errors.length > 0 ?                       formGroup.getControl('roles').errors[0].message : null"
+                v-m-control="formGroup.getControl('roles')"
+                :visible="false">
+                    <li v-for="(control, index) in formGroup.getControl('roles').controls">
+                        <m-checkbox
                             v-model="control.value"
                             v-m-control="control"
                             :key="index">
                             {{rolesName[index]}}</m-checkbox>
-            </m-input-group>
+                    </li>
+    </m-input-group>
+            </ul>
 
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -1096,14 +1102,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                            legend=""
                            v-m-control="formGroup">
 
-                <m-textfield v-model.trim="formGroup.getControl('email').value"
-                             :label="formGroup.getControl('email').name"
-                             :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                             v-m-control="formGroup.getControl('email')">
+                <m-textfield label="Email"
+                            v-model.trim="formGroup.getControl('email').value"
+                            :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
+                            v-m-control="formGroup.getControl('email')">
                 </m-textfield>
 
-                <m-textfield v-model.trim="formGroup.getControl('email confirmation').value"
-                             :label="formGroup.getControl('email confirmation').name"
+                <m-textfield label="Email confirmation"
+                            v-model.trim="formGroup.getControl('email confirmation').value"
                              :error-message="formGroup.getControl('email confirmation').errors.length > 0 ? formGroup.getControl('email confirmation').errors[0].message : null"
                              v-m-control="formGroup.getControl('email confirmation')">
                 </m-textfield>
