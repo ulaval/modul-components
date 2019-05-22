@@ -16,7 +16,12 @@ export class FormControl<T> extends AbstractControl {
 
         if (options) {
             this._initialValue = this._value = this._oldValue = options.initialValue;
+        } else {
+            // ensure reactivity!
+            this._value = undefined;
         }
+
+
     }
 
     public get touched(): boolean {
