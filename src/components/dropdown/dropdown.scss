@@ -22,7 +22,7 @@ $m-dropdown--margin: $m-padding--xs !default;
         }
     }
 
-    &.m--is-filterable {
+    &.m--has-placeholder-icon {
         .m-dropdown__input {
             &::placeholder {
                 padding-left: calc(#{$m-spacing} + #{$m-spacing--xs});

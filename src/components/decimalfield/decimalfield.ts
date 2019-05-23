@@ -43,11 +43,7 @@ export class MDecimalfield extends ModulVue {
     @Prop({ default: false })
     public forceRoundingFormat: boolean;
 
-    private id: string = `mDecimalfield-${uuid.generate()}`;
-
-    private onDropDecimalfield(event: DragEvent): void {
-        event.preventDefault();
-    }
+    protected id: string = `mDecimalfield-${uuid.generate()}`;
 
     private get hasDecimalfieldError(): boolean {
         return this.as<InputState>().hasError;
@@ -91,7 +87,7 @@ export class MDecimalfield extends ModulVue {
 }
 
 const DecimalfieldPlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v): void {
         v.use(L10nPlugin);
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);

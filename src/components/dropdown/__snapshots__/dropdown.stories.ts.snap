@@ -106,7 +106,7 @@ exports[`Storyshots components|m-dropdown default 1`] = `
 
 exports[`Storyshots components|m-dropdown filterable 1`] = `
 <div
-  class="m-dropdown m--is-filterable"
+  class="m-dropdown m--has-placeholder-icon"
   placeholder-icon-name="m-svg__search"
   style="width: 100%; max-width: 288px;"
 >
@@ -222,7 +222,7 @@ exports[`Storyshots components|m-dropdown filterable 1`] = `
 
 exports[`Storyshots components|m-dropdown filterable and placeholder 1`] = `
 <div
-  class="m-dropdown m--is-filterable"
+  class="m-dropdown"
   placeholder-icon-name="m-svg__search"
   style="width: 100%; max-width: 288px;"
 >
@@ -257,19 +257,7 @@ exports[`Storyshots components|m-dropdown filterable and placeholder 1`] = `
         <div
           class="m-input-style__left-content"
         >
-          <svg
-            aria-hidden="true"
-            class="m-icon m-dropdown__placeholder-icon"
-            height="16px"
-            width="16px"
-          >
-            <!---->
-             
-            <use
-              aria-hidden="true"
-              class=""
-            />
-          </svg>
+          <!---->
            
           <input
             aria-controls="mDropdown-uuid-controls"

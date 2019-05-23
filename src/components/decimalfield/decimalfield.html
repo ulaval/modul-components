@@ -33,11 +33,9 @@
                       @blur="onBlur"
                       @keyup="onKeyup"
                       @change="onChange"
-                      @drop="onDropDecimalfield"
                       ref="inputMask"
                       :options="inputMaskOptions"
-                      inputmode="numeric"></m-input-mask>
-
+                      inputmode="decimal"></m-input-mask>
         <template slot="right-content">
             <slot name="suffix"></slot>
         </template>

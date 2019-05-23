@@ -27,6 +27,8 @@ export class MOverlay extends ModulVue {
     public paddingFooter: boolean;
     @Prop({ default: false })
     public disableSaveButton: boolean;
+    @Prop({ default: false })
+    public waiting: boolean;
 
     public hasKeyboard: boolean = false;
 
@@ -83,6 +85,10 @@ export class MOverlay extends ModulVue {
 
     private get isSaveButtonDisabled(): boolean {
         return this.disableSaveButton;
+    }
+
+    private get isWaiting(): boolean {
+        return this.waiting;
     }
 
     private save(e: MouseEvent): void {

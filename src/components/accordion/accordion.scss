@@ -170,7 +170,7 @@ $m-accordion--color-default: $m-color--interactive !default;
         }
 
         &.m--is-left {
-            margin-right: $m-margin;
+            margin-right: $m-spacing;
         }
 
         .m-accordion.m--is-dark.m--has-icon-left &,
@@ -198,7 +198,7 @@ $m-accordion--color-default: $m-color--interactive !default;
             &.m-accordion-enter,
             &.m-accordion-leave-to {
                 .m-accordion__body {
-                    transform: translate3d(0, $m-margin--l, 0);
+                    transform: translate3d(0, $m-spacing--l, 0);
                     opacity: 0;
                 }
             }
@@ -244,16 +244,15 @@ $m-accordion--color-default: $m-color--interactive !default;
             }
 
             .m-accordion.m--is-light > .m-accordion__body-wrap > & {
-                padding-top: $m-margin--s;
-                padding-bottom: $m-margin;
+                padding-top: $m-spacing--s;
             }
 
             .m-accordion.m--is-light.m--has-icon-left > .m-accordion__body-wrap > & {
-                padding-left: 32px; // Magic number
+                padding-left: 36px; // Magic number
             }
 
             .m-accordion.m--is-light.m--has-icon-left.m--has-icon-large > .m-accordion__body-wrap > & {
-                padding-left: 36px; // Magic number
+                padding-left: 40px; // Magic number
             }
 
             .m-error-technical-difficulty & {
