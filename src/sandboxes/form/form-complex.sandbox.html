@@ -114,7 +114,9 @@
         <h4 class="m-u--h6">Form Validity = {{ formGroup.valid }} / Form Waiting = {{ formGroup.waiting }} / Form Enabled = {{ formGroup.enabled }} / Form Readonly = {{ formGroup.readonly }}</h4>
         <p>
             <m-button skin="secondary"
-                      @click="loadValue()">Load form data</m-button>
+                      @click="loadValue()">Load form initial data</m-button>
+            <m-button skin="secondary"
+                      @click="clearValue()">Clearform initial data</m-button>
         </p>
     </m-form>
 </div>
