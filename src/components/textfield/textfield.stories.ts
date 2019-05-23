@@ -3,10 +3,10 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { InputStateTagStyle } from '../../mixins/input-state/input-state';
+import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { TEXTFIELD_NAME } from '../component-names';
 import TextfieldPlugin, { MTextfieldType } from './textfield';
-import { InputMaxWidth } from '../../mixins/input-width/input-width';
-import { InputStateTagStyle } from '../../mixins/input-state/input-state';
 
 
 Vue.use(TextfieldPlugin);

@@ -25,13 +25,13 @@
             Ullamco labore do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud.
             Proident aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit
             irure.Culpa laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat
-            esse veniam. Ullamco labore do sit sit commodo.
-        </m-limit-text>
+            esse veniam. Ullamco labore do sit sit commodo.</m-limit-text>
     </div>
     <h3>limit-text with raw html data</h3>
     <p class="m-u--margin-bottom">Limit-text with :html prop to use raw html</p>
     <div>
-        <m-limit-text :html="vhtml" lines="2">
+        <m-limit-text :html="vhtml"
+                      lines="2">
         </m-limit-text>
     </div>
     <h3>Only text, 2 lines</h3>
@@ -59,8 +59,7 @@
             Ullamco labore do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud.
             Proident aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit
             irure.Culpa laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id consequat
-            esse veniam. Ullamco labore do sit sit commodo.
-        </m-limit-text>
+            esse veniam. Ullamco labore do sit sit commodo.</m-limit-text>
     </div>
     <h3>Multi paragraph, 4 lines</h3>
     <p class="m-u--margin-bottom">Limit-text with paragraph, 4 lines limit</p>
@@ -136,7 +135,9 @@
     <h3>Custom label, 4 lines</h3>
     <p class="m-u--margin-bottom">Limit-text with custom label, 4 lines limit</p>
     <div>
-        <m-limit-text lines="4" open-label="open it" close-label="close it">
+        <m-limit-text lines="4"
+                      open-label="open it"
+                      close-label="close it">
             <p>Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor
                 ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum
                 ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id Eiusmod sint minim eu id
@@ -170,8 +171,7 @@
             veniam. Ullamco labore do sit sit commodo. Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum
             aliqua nostrud. Proident aliqua anim tempor ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam
             amet reprehenderit irure.Culpa laborum ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint
-            minim eu id consequat esse veniam.
-        </m-limit-text>
+            minim eu id consequat esse veniam.</m-limit-text>
     </div>
     <h3>Text with link, 2 lines</h3>
     <p class="m-u--margin-bottom">Limit-text with text and links, 2 lines limit.</p>
@@ -210,7 +210,8 @@
     <p class="m-u--margin-bottom">Limit-text with text and bold text, 2 lines limit, open param.</p>
     <div>
         <m-button @click="testOpen = !testOpen">Toggle open</m-button>
-        <m-limit-text :open="testOpen"lines="2">
+        <m-limit-text :open="testOpen"
+                      lines="2">
             <p>Deserunt ad amet sint in esse aute. Ut est cupidatat mollit ipsum aliqua nostrud. Proident aliqua anim tempor
                 ut excepteur tempor ipsum qui eu. Anim culpa voluptate occaecat veniam amet reprehenderit irure.Culpa laborum
                 ullamco sint quis exercitation amet ad est sunt commodo. Eiusmod sint minim eu id Eiusmod sint minim eu id

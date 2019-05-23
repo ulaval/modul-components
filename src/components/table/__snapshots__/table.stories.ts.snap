@@ -1262,14 +1262,15 @@ exports[`Storyshots components|m-table Sortable 1`] = `
            
           <button
             class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
-            style="width: 12px; height: 12px;"
+            style="width: 14px; height: 14px;"
+            title="Trier la colonne"
             type="button"
           >
             <svg
               aria-hidden="true"
               class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
+              height="12px"
+              width="12px"
             >
               <!---->
                
@@ -1298,14 +1299,15 @@ exports[`Storyshots components|m-table Sortable 1`] = `
            
           <button
             class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
-            style="width: 12px; height: 12px;"
+            style="width: 14px; height: 14px;"
+            title="Trier la colonne"
             type="button"
           >
             <svg
               aria-hidden="true"
               class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
+              height="12px"
+              width="12px"
             >
               <!---->
                
@@ -1334,14 +1336,15 @@ exports[`Storyshots components|m-table Sortable 1`] = `
            
           <button
             class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
-            style="width: 12px; height: 12px;"
+            style="width: 14px; height: 14px;"
+            title="Trier la colonne"
             type="button"
           >
             <svg
               aria-hidden="true"
               class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
+              height="12px"
+              width="12px"
             >
               <!---->
                
