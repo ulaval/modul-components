@@ -226,7 +226,8 @@ export class MDatepicker extends ModulVue {
 
         if (this.internalDateModel !== this.convertModelToString(value)) {
             this.internalDateModel = this.convertModelToString(value);
-            this.inputModel = this.internalDateModel;
+
+            this.inputModel = this.internalDateModel ? this.internalDateModel : '';
             if (!this.skipInputValidation) {
                 this.showErrorMessage(this.inputModel);
             }
