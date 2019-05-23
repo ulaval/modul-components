@@ -51,8 +51,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('reverse-header', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+    .add('toggle-link-left', () => ({
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h2 slot="title">An Accordion Group Title</h2>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -175,8 +175,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('reverse-header', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+    .add('toggle-link-left', () => ({
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h2 slot="title">An Accordion Group Title</h2>
                         <h3 slot="secondary-content">An Accordion Group Title</h3>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -185,7 +185,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-
     </m-accordion-group>`
     }))
     .add('m-link', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h2 slot="title">An Accordion Group Title</h2>
                         <m-link icon-name="m-svg__add-circle-filled" icon-size="22px" mode="button" slot="secondary-content">Add content</m-link>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -201,8 +201,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('no-title-reverse-header', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+    .add('no-title-toggle-link-left', () => ({
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h3 slot="secondary-content">An Accordion Group Title</h3>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>

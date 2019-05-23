@@ -36,7 +36,7 @@ export class MAccordionGroup extends Vue implements AccordionGroupGateway {
     @Prop({
         default: false
     })
-    public reverseHeader: boolean;
+    public toggleLinkLeft: boolean;
 
     private accordions: { [id: string]: AccordionGateway } = {};
 

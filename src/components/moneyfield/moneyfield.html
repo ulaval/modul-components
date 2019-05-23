@@ -1,8 +1,8 @@
 <div class="m-moneyfield"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
-
     <m-decimalfield v-bind="bindData"
                     v-on="$listeners"
+                    :force-rounding-format="true"
                     :precision="precision">
         <!-- content should stay inline to avoid adding useless white space -->
         <template v-if="currencyDetail.symbolPosition === 'before'"

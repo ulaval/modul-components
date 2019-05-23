@@ -265,7 +265,7 @@ export enum FroalaStatus {
 
     protected created(): void {
         document.addEventListener('mousedown', this.mousedownListener);
-        document.addEventListener('mouseup', this.mouseupListener);
+        document.addEventListener('mouseup', this.mouseupListener, true);
         this.currentTag = this.tag || this.currentTag;
     }
 
@@ -273,7 +273,6 @@ export enum FroalaStatus {
         this.mousedownTriggered = true;
         if (this.$el.contains(event.target as HTMLElement) || $('.fr-modal.fr-active').length > 0) {
             this.mousedownInsideEditor = true;
-            this.activateRichText();
         } else {
             this.mousedownInsideEditor = false;
         }
@@ -281,7 +280,8 @@ export enum FroalaStatus {
 
     protected mouseupListener(event: MouseEvent): void {
         this.mousedownTriggered = false;
-        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused && this.selectedImage === undefined) {
+        if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused
+            && !this.isFileUploadOpen && $('.fr-image-resizer.fr-active').length === 0) {
             this.closeEditor();
         }
     }
@@ -396,7 +396,7 @@ export enum FroalaStatus {
                     this.activateRichText();
                 },
                 [froalaEvents.Blur]: () => {
-                    if (!this.mousedownTriggered || !this.mousedownInsideEditor) {
+                    if (!this.mousedownTriggered && !this.isFileUploadOpen) {
                         this.closeEditor();
                     }
                 },
