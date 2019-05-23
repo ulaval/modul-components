@@ -204,7 +204,7 @@ exports[`MTable Given an empty table When we use the default template Then shoul
   <tbody>
     <tr class="m-table__message">
       <td colspan="2">
-        <p>m-table:empty-table</p>
+        <p>m-table:no-data</p>
       </td>
     </tr>
   </tbody>

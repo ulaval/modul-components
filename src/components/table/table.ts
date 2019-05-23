@@ -48,7 +48,7 @@ export class MTable extends ModulVue {
     @Prop({ default: false })
     loading: boolean;
 
-    i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
+    i18nEmptyTable: string = this.$i18n.translate('m-table:no-data');
     i18nLoading: string = this.$i18n.translate('m-table:loading');
     i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
     i18nSort: string = this.$i18n.translate('m-table:sort');
