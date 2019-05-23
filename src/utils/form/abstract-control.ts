@@ -44,7 +44,6 @@ export abstract class AbstractControl {
     public abstract set readonly(isReadonly: boolean);
     public abstract get touched(): boolean;
 
-
     public get pristine(): boolean {
         return this._pristine;
     }
@@ -83,21 +82,18 @@ export abstract class AbstractControl {
     }
 
     public upwardValueChanged(): void {
-
         this._pristine = false;
+
         if (!this._hasAnyControlsInError() && this.enabled && !this.readonly) {
             this.validate();
         }
 
-
         if (this._parent) {
             this._parent.upwardValueChanged();
         }
-
     }
 
     public validate(external: boolean = false): void {
-
         this.validators.map((v) => {
             if (
                 v.async
@@ -120,7 +116,6 @@ export abstract class AbstractControl {
     }
 
     public async validateAsync(external: boolean = false): Promise<void> {
-
         await Promise.all(
             this.validators
                 .map(async (v) => {
@@ -151,7 +146,6 @@ export abstract class AbstractControl {
     }
 
     public initEdition(): void {
-
         if (!this.enabled || this.readonly) {
             return;
         }
@@ -167,7 +161,6 @@ export abstract class AbstractControl {
         if (this._parent) {
             this._parent.initEdition();
         }
-
     }
 
     public endEdition(): void {
@@ -186,7 +179,6 @@ export abstract class AbstractControl {
         if (this._parent) {
             this._parent.endEdition();
         }
-
     }
 
     protected _resetExternalValidators(): void {

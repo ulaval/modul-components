@@ -19,7 +19,6 @@ export class FormArray extends AbstractControl {
 
     /**
      * Return an agregate values of all enabled controls.
-     *
      */
     public get value(): any {
         return this._controls.filter(c => c.enabled).map(c => c.value);
@@ -35,8 +34,6 @@ export class FormArray extends AbstractControl {
                 this._controls.every(c => c.valid)
             );
         }
-
-
     }
 
     public get enabled(): boolean {

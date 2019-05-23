@@ -228,8 +228,6 @@ export class MFormAllSandbox extends ModulVue {
             )
         });
     }
-
-
 }
 
 const FormAllSandboxPlugin: PluginObject<any> = {

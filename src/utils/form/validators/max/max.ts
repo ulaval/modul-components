@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  * Bound included
  */
-export const MaxValidator: Function = (controlName: string, max: number | Date, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxValidator: Function = (controlLabel: string, max: number | Date, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Max,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -43,7 +43,7 @@ export const MaxValidator: Function = (controlName: string, max: number | Date, 
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:maxValidatorErrorSummaryMessage',
                     {
-                        controlName,
+                        controlLabel,
                         max: max instanceof Date ? max.toLocaleDateString() : max
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf

@@ -6,7 +6,7 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
-export const EmailValidator: Function = (controlName: string, options?: ControlValidatorOptions): ControlValidator => {
+export const EmailValidator: Function = (controlLabel: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Email,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -25,7 +25,7 @@ export const EmailValidator: Function = (controlName: string, options?: ControlV
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:emailValidatorErrorSummaryMessage',
-                    { controlName },
+                    { controlLabel },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )
             },

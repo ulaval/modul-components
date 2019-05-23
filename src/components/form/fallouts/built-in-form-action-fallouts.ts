@@ -7,7 +7,6 @@ import { MForm } from '../form';
 import { FormActionFallout } from '../form-action-fallout';
 import { FormActions } from '../form-action-type';
 
-
 const scrollToElement: Function = (element: HTMLElement, offset: number): void => {
     (Vue.prototype).$scrollTo.goTo(element, offset);
 };
@@ -56,6 +55,7 @@ export const FocusOnFirstError: FormActionFallout = {
     action: FormActions.InvalidSubmit,
     fallout: (form: MForm): void => {
         let control: AbstractControl | undefined = getFirstControlInError(form.formGroup);
+
         if (control) {
             if (control.htmlElement instanceof HTMLInputElement) {
                 scrollToElement(control.htmlElement, form.$form.scrollToOffset);

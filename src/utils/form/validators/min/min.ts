@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  * Bound included
  */
-export const MinValidator: Function = (controlName: string, min: number | Date, options?: ControlValidatorOptions): ControlValidator => {
+export const MinValidator: Function = (controlLabel: string, min: number | Date, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Min,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -43,7 +43,7 @@ export const MinValidator: Function = (controlName: string, min: number | Date, 
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:minValidatorErrorSummaryMessage',
                     {
-                        controlName,
+                        controlLabel,
                         min: min instanceof Date ? min.toLocaleDateString() : min
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf

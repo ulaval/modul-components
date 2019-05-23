@@ -17,11 +17,9 @@ export class FormControl<T> extends AbstractControl {
         if (options) {
             this._initialValue = this._value = this._oldValue = options.initialValue;
         } else {
-            // ensure reactivity!
+            // ensure reactivity
             this._value = undefined;
         }
-
-
     }
 
     public get touched(): boolean {
@@ -44,7 +42,6 @@ export class FormControl<T> extends AbstractControl {
     }
 
     public get valid(): boolean {
-
         if (!this.enabled || this.readonly) {
             return true;
         } else {
@@ -52,8 +49,6 @@ export class FormControl<T> extends AbstractControl {
                 .filter(v => v.validationType !== ControlValidatorValidationType.External)
                 .every(v => !!v.lastCheck);
         }
-
-
     }
 
     public get enabled(): boolean {
@@ -91,11 +86,8 @@ export class FormControl<T> extends AbstractControl {
         this._value = this._oldValue = this._initialValue;
     }
 
-
     public async submit(external: boolean = false): Promise<void> {
         this.validate(external);
         await this.validateAsync(external);
     }
-
 }
-

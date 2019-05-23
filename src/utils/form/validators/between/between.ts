@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  *  bounds included
  */
-export const BetweenValidator: Function = (controlName: string, lowerBound: number | Date, upperBound: number | Date, options: ControlValidatorOptions): ControlValidator => {
+export const BetweenValidator: Function = (controlLabel: string, lowerBound: number | Date, upperBound: number | Date, options: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Between,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -45,7 +45,7 @@ export const BetweenValidator: Function = (controlName: string, lowerBound: numb
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:betweenValidatorErrorSummaryMessage',
-                    { controlName, lowerBound, upperBound },
+                    { controlLabel, lowerBound, upperBound },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )
             },

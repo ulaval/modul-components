@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  * Bound included
  */
-export const MinLengthValidator: Function = (controlName: string, minLength: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MinLengthValidator: Function = (controlLabel: string, minLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -38,7 +38,7 @@ export const MinLengthValidator: Function = (controlName: string, minLength: num
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:minLengthValidatorErrorSummaryMessage',
-                    { controlName, minLength },
+                    { controlLabel, minLength },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )
             },

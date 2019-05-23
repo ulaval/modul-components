@@ -14,7 +14,6 @@ export class FormGroup extends AbstractControl {
 
     /**
      * Return an agregate values of all enabled controls.
-     *
      */
     public get value(): any {
         const values: any = {};
@@ -41,7 +40,6 @@ export class FormGroup extends AbstractControl {
                 this.controls.every(c => c.valid)
             );
         }
-
     }
 
     public get enabled(): boolean {

@@ -7,7 +7,7 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
-export const RequiredValidator: Function = (controlName: string, options?: ControlValidatorOptions): ControlValidator => {
+export const RequiredValidator: Function = (controlLabel: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Required,
         validationFunction: (control: AbstractControl): boolean => {
@@ -39,12 +39,12 @@ export const RequiredValidator: Function = (controlName: string, options?: Contr
             options.error : {
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:requiredValidatorErrorMessage',
-                    { controlName },
+                    { controlLabel },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:requiredValidatorErrorSummaryMessage',
-                    { controlName },
+                    { controlLabel },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )
             },

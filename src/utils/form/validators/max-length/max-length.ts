@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  * Bound included
  */
-export const MaxLengthValidator: Function = (controlName: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxLengthValidator: Function = (controlLabel: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -38,7 +38,7 @@ export const MaxLengthValidator: Function = (controlName: string, maxLength: num
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:maxLengthValidatorErrorSummaryMessage',
-                    { controlName, maxLength },
+                    { controlLabel, maxLength },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )
             },
