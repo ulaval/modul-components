@@ -2,10 +2,10 @@
 
 @mixin m-table-sortable-icon-select() {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate(0, 0);
 
     &.m--is-sort-desc {
-        transform: translate3d(0, 0, 0) rotate(180deg);
+        transform: translate(0, 0) rotate(180deg);
     }
 }
 
@@ -107,12 +107,12 @@
         z-index: 0;
         opacity: 0;
         margin-left: $m-spacing--xs;
-        transform: translate3d(0, 4px, 0);
+        transform: translate(0, 4px);
 
         &:focus {
             color: $m-color--text;
             opacity: 1;
-            transform: translate3d(0, 0, 0);
+            transform: translate(0, 0);
         }
     }
 
