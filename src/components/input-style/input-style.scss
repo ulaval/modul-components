@@ -161,7 +161,7 @@ $m-input-style-base-height: $m-line-height + em;
         transform: translate3d(0, 0, 0);
         align-items: center;
         font-size: $m-font-size;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         color: $m-color--text-light;
 
         .m-icon {
@@ -180,7 +180,7 @@ $m-input-style-base-height: $m-line-height + em;
     &__required-marker {
         color: $m-color--accent;
         font-size: inherit;
-        font-weight: $m-font-weight--black;
+        font-weight: $m-font-weight--bold;
         vertical-align: baseline;
     }
 
@@ -190,14 +190,11 @@ $m-input-style-base-height: $m-line-height + em;
         align-items: center;
         flex: 1 1 auto;
         width: 100%;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         text-decoration: none;
         background-color: $m-color--white;
-
-        .m-input-style.m--has-label & {
-            min-height: $m-input-style-base-height;
-            margin-top: -$m-input-style-base-height;
-        }
+        min-height: $m-input-style-base-height;
+        margin-top: -$m-input-style-base-height;
 
         .m-icon-button.m-icon-button,
         .m-icon.m-icon {
@@ -225,6 +222,18 @@ $m-input-style-base-height: $m-line-height + em;
 
     &__right-content {
         display: flex;
+
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-left: $m-margin--xs;
+        }
+    }
+
+    &__prefix {
+        .m-moneyfield & {
+            color: $m-color--grey;
+            margin-right: $m-margin--xs;
+        }
     }
 
     &__transparent-text {
@@ -247,6 +256,11 @@ $m-input-style-base-height: $m-line-height + em;
 
     ::placeholder {
         color: $m-color--disabled;
+
+        .m--is-type-search & {
+            color: $m-color--text-light;
+            font-weight: $m-font-weight--light;
+        }
     }
 
     &__body,
@@ -267,7 +281,7 @@ $m-input-style-base-height: $m-line-height + em;
         width: 100%;
         padding: 0;
         font-size: $m-font-size;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         line-height: $m-line-height;
         vertical-align: middle;
 
@@ -276,10 +290,12 @@ $m-input-style-base-height: $m-line-height + em;
             display: none;
         }
 
-        &[type="search"]::-webkit-search-decoration,
-        &[type="search"]::-webkit-search-cancel-button,
-        &[type="search"]::-webkit-search-results-button,
-        &[type="search"]::-webkit-search-results-decoration { display: none; }
+        &[type='search']::-webkit-search-decoration,
+        &[type='search']::-webkit-search-cancel-button,
+        &[type='search']::-webkit-search-results-button,
+        &[type='search']::-webkit-search-results-decoration {
+            display: none;
+        }
 
         &:-webkit-autofill {
             background: rgba($m-color--white, 0);
@@ -303,7 +319,7 @@ $m-input-style-base-height: $m-line-height + em;
         .m-input-style__label,
         .m-input-style__transparent-text {
             font-size: inherit;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
         }
     }
 
@@ -313,7 +329,7 @@ $m-input-style-base-height: $m-line-height + em;
         ::placeholder,
         .m-input-style__label,
         .m-input-style__transparent-text {
-            font-weight: $m-font-weight;
+            font-weight: $m-font-weight--light;
         }
     }
 
@@ -342,6 +358,20 @@ $m-input-style-base-height: $m-line-height + em;
             @include m-h6-font-style();
         }
     }
+
+    .m--is-type-search & {
+        background-color: $m-color--grey-lightest;
+        border-color: $m-color--grey-lightest;
+
+        .m-icon-button {
+            color: $m-color--ul-blue;
+        }
+
+        &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
+            background-color: $m-color--white;
+            border-color: $m-color--grey-light;
+        }
+    }
 }
 
 // reserve space for icon
@@ -350,5 +380,5 @@ $m-input-style-base-height: $m-line-height + em;
 .m-moneyfield .m-input-style__label,
 .m--is-type-search .m-input-style__label,
 .m--is-type-search .m-input-style__adjust-width-auto {
-    padding-right: $m-input-style--icon-button-size + $m-input-style--padding;
+    margin-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }

@@ -1,7 +1,6 @@
 import { mount, shallowMount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
 import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent } from '../../../tests/helpers/render';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import InplaceEditPlugin, { MInplaceEdit } from './inplace-edit';
 
@@ -225,13 +224,6 @@ describe('Component inplace-edit - Complete component mobile', () => {
     describe('when in editMode', () => {
         beforeEach(() => {
             wrapper.setProps({ editMode: 'true' });
-        });
-        it('should render correctly', () => {
-            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
-        it('should render correctly in waiting mode', () => {
-            wrapper.setProps({ waiting: 'true' });
-            return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         it(`should cancel on overlay close`, () => {

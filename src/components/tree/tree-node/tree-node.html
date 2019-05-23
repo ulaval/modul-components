@@ -29,6 +29,10 @@
                     @change="onCheckboxClick"></m-checkbox>
         <span class="m-tree-node__item-label">{{label}}</span>
         <span class="m-tree-node__item-check"></span>
+        <m-icon v-if="hasRightIcon"
+                class="m-tree-node__warning-icon"
+                :name="node.rightIconName"
+                size="1em"></m-icon>
     </div>
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">

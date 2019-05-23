@@ -21,7 +21,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
 <div class="m-tree">
   <ul class="m-tree__content">
     <li class="m-tree-node m--is-selected">
-      <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span></div>
+      <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span> </div>
     </li>
     <li class="m-tree-node m-tree-node__has-children">
       <div role="button" tabindex="0" class="m-tree-node__item">
@@ -30,7 +30,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
       <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
           <li class="m-tree-node m-tree-node__child m--is-selected">
-            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span></div>
+            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span> </div>
           </li>
         </ul>
       </m-accordion-transition>
@@ -43,7 +43,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
 <div class="m-tree">
   <ul class="m-tree__content">
     <li class="m-tree-node m--is-selected m--is-read-only">
-      <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span></div>
+      <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">index.html</span> <span class="m-tree-node__item-check"></span> </div>
     </li>
     <li class="m-tree-node m--is-read-only m-tree-node__has-children">
       <div role="button" tabindex="0" class="m-tree-node__item">
@@ -52,7 +52,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
       <m-accordion-transition>
         <ul class="m-tree-node__children" style="display:none;">
           <li class="m-tree-node m-tree-node__child m--is-selected m--is-read-only">
-            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span></div>
+            <div role="button" tabindex="0" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span class="m-tree-node__item-check"></span> </div>
           </li>
         </ul>
       </m-accordion-transition>

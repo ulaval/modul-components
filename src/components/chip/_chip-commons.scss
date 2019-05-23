@@ -1,0 +1,18 @@
+@import 'commons';
+
+@mixin m-chip-base-style() {
+    transition: background $m-transition-duration ease, color $m-transition-duration ease, border-color $m-transition-duration ease;
+    padding: ($m-spacing--s + $m-spacing--xs/2) $m-spacing;
+    border-radius: 25px;
+    outline: none;
+    user-select: none;
+    appearance: none;
+    height: 42px; // Magic number: chip height;
+}
+
+@mixin m-chip-body-style() {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}

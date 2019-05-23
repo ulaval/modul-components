@@ -1,0 +1,83 @@
+@import 'commons';
+
+$m-repeater-translate-offset: 50px;
+
+.m-repeater {
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        background-color: $m-color--white;
+        margin-top: $m-spacing;
+        position: relative;
+        z-index: 3;
+
+        &.m--is-empty {
+            border: 1px solid transparent;
+            padding: $m-spacing;
+            z-index: 1;
+        }
+    }
+
+    &__col {
+        &:first-child {
+            border: 1px solid $m-color--border;
+            padding: $m-spacing;
+            flex: 1;
+        }
+    }
+
+    &__footer {
+        display: block;
+        padding: $m-spacing;
+        position: relative;
+        z-index: 2;
+        background-color: $m-color--white;
+
+        // fix wierd transition-group behavior.
+        &.m--is-slot-row.m--is-slot-row {
+            transition: none;
+            transform: none;
+        }
+    }
+
+    .m--is-enter-active,
+    .m--is-leave-active,
+    .m--is-move {
+        transition: 0.5s cubic-bezier(0.59, 0.12, 0.34, 0.95);
+        transition-property: opacity, transform;
+    }
+
+    .m--is-enter {
+        opacity: 0;
+        transform: translateX($m-repeater-translate-offset) scaleY(0.5);
+
+        &.m--is-empty {
+            transform: translateY($m-repeater-translate-offset);
+        }
+    }
+
+    .m--is-enter-to {
+        opacity: 1;
+        transform: translateX(0) scaleY(1);
+    }
+
+    .m--is-leave-active {
+        position: absolute;
+        width: 100%;
+    }
+
+    .m--is-leave-to {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: center top;
+
+        &.m--is-empty {
+            transform: translateY($m-repeater-translate-offset);
+        }
+    }
+}
