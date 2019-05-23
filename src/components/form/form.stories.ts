@@ -16,7 +16,13 @@ import { MinLengthValidator } from '../../utils/form/validators/min-length/min-l
 import { MinValidator } from '../../utils/form/validators/min/min';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { FORM_NAME } from '../component-names';
-import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './fallouts/built-in-form-action-fallouts';
+import {
+    ClearErrorToast,
+    ClearSummaryMessage,
+    ErrorToast,
+    FocusOnFirstError,
+    SummaryMessage
+} from './fallouts/built-in-form-action-fallouts';
 import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);
@@ -26,6 +32,8 @@ declare module '@storybook/addon-knobs' {
 }
 
 const ROLE_NAMES: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
+const TYPE_NAMES: string[] = ['douce', 'blanche', 'sec'];
+const COUPE_NAMES: string[] = ['régulière', 'julienne', 'ondulé'];
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     .add('default', () => ({
@@ -1125,5 +1133,267 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
             </p>
         </m-form>
         </div>
+        `
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
+    .addDecorator(withA11y)
+    .addDecorator(withKnobs)
+    .add('textfield (name)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'name': new FormControl<string>(
+                        [
+                            RequiredValidator('name'),
+                            MaxLengthValidator('name', 20)
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Textfield (name)</h4>
+            <p>edition context: {{nameField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+            <m-textfield v-m-control="nameField"
+                         v-model="nameField.value"
+                         label="Name Field"
+                         :required-marker="true"
+                         :error="nameField.hasError()"
+                         :error-message="nameField.errorMessage"
+                         :disabled="!nameField.enabled"
+                         :readonly="nameField.readonly"
+                         :waiting="nameField.waiting">
+            </m-textfield>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('textarea (description)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'description': new FormControl<string>(
+                        [
+                            RequiredValidator('description'),
+                            MaxLengthValidator('description', 255)
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            descriptionField(): void {
+                return this.$data.formGroup.getControl('description');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">TextArea (description)</h4>
+            <p>edition context: {{descriptionField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-textarea v-m-control="descriptionField"
+                    v-model="descriptionField.value"
+                    label="Description Field"
+                    :required-marker="true"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage"
+                    :disabled="!descriptionField.enabled"
+                    :readonly="descriptionField.readonly"
+                    :waiting="descriptionField.waiting"></m-textarea>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('datepicker (birthdate)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'birthDate': new FormControl<string>(
+                        [
+                            RequiredValidator('birthDate')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            birthDateField(): void {
+                return this.$data.formGroup.getControl('birthDate');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Datepicker (birthdate)</h4>
+            <p>edition context: {{birthDateField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-datepicker v-m-control="birthDateField"
+                      v-model="birthDateField.value"
+                      label="Birthdate"
+                      min="1900-01-01"
+                      max="2020-01-01"
+                      :required-marker="true"
+                      :error="birthDateField.hasError()"
+                      :error-message="birthDateField.errorMessage"
+                      :disabled="!birthDateField.enabled"
+                      :readonly="birthDateField.readonly"
+                      :waiting="birthDateField.waiting"></m-datepicker>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('dropdown (type)', () => ({
+        data: () => ({
+            types: [...TYPE_NAMES],
+            formGroup: new FormGroup(
+                {
+                    'type': new FormControl<string>(
+                        [
+                            RequiredValidator('type')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            typeField(): void {
+                return this.$data.formGroup.getControl('type');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Dropdown (type)</h4>
+            <p>edition context: {{typeField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-dropdown v-m-control="typeField"
+                    v-model="typeField.value"
+                    label="Type"
+                    :required-marker="true"
+                    :error="typeField.hasError()"
+                    :error-message="typeField.errorMessage"
+                    :disabled="!typeField.enabled"
+                    :readonly="typeField.readonly"
+                    :waiting="typeField.waiting">
+            <m-dropdown-item v-for="type of types"
+                             :value="type"
+                             :label="type"></m-dropdown-item>
+        </m-dropdown>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('checkbox (active)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'active': new FormControl<string>(
+                        [
+                            RequiredValidator('active')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            activeField(): void {
+                return this.$data.formGroup.getControl('active');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Checkbox (active)</h4>
+            <p>edition context: {{activeField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-checkbox v-m-control="activeField"
+                    v-model="activeField.value"
+                    :error="activeField.hasError()"
+                    :error-message="activeField.errorMessage"
+                    :disabled="!activeField.enabled"
+                    :readonly="activeField.readonly"
+                    :waiting="activeField.waiting">Is active ?</m-checkbox>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('radio (coupe)', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'coupe': new FormControl<string>(
+                        [
+                            RequiredValidator('coupe')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            coupeField(): void {
+                return this.$data.formGroup.getControl('coupe');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Radio (coupe)</h4>
+            <p>edition context: {{coupeField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-checkbox v-m-control="coupeField"
+                    v-model="coupeField.value"
+                    :error="coupeField.hasError()"
+                    :error-message="coupeField.errorMessage"
+                    :disabled="!coupeField.enabled"
+                    :readonly="coupeField.readonly"
+                    :waiting="coupeField.waiting">Is active ?</m-checkbox>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
         `
     }));
