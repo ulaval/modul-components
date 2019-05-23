@@ -11,6 +11,11 @@ import WithRender from './overlay.sandbox.html';
 @WithRender
 @Component
 export class MOverlaySandbox extends Vue {
+    waiting: boolean = false;
+
+    private toggleWaiting(): void {
+        this.waiting = !this.waiting;
+    }
 }
 
 const OverlaySandboxPlugin: PluginObject<any> = {

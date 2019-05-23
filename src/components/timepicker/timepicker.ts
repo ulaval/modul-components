@@ -271,7 +271,7 @@ export class MTimepicker extends ModulVue {
     ///////////////////////////////////////
 
     public get currentTime(): string {
-        return this.internalTime;
+        return this.internalTime ? this.internalTime : '';
     }
 
     public set currentTime(value: string) {
