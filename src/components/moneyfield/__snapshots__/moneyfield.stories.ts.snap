@@ -180,6 +180,33 @@ exports[`Storyshots components|m-moneyfield Default precision 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-moneyfield Format 1`] = `
+<div>
+  <div
+    class="m-moneyfield"
+    style="width: 100%; max-width: 136px;"
+  >
+    <m-decimalfield
+      force-rounding-format="true"
+      maxwidth="small"
+      precision="11"
+      tagstyle="default"
+      value="123456.7"
+      width="100%"
+    >
+      <template>
+        CA$
+      </template>
+       
+      <!---->
+    </m-decimalfield>
+  </div>
+  
+                =&gt; CA$123,456.70
+            
+</div>
+`;
+
 exports[`Storyshots components|m-moneyfield Localization 1`] = `
 <div
   class="m-moneyfield"
