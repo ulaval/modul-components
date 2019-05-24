@@ -1,4 +1,5 @@
 import Vue, { PluginObject } from 'vue';
+import AddressLookupPlugin from '../utils/address-lookup/address-lookup.plugin';
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
@@ -104,6 +105,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(AddPlugin);
+        Vue.use(AddressLookupPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);
