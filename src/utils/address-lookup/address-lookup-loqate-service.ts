@@ -1,6 +1,5 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import Address from './address';
-import AddressLookupService from './address-lookup-service';
+import AddressLookupService, { RetrieveResponse } from './address-lookup-service';
 
 interface LoqateFindResult {
     Items: LoqateFindItem[];
@@ -44,7 +43,7 @@ interface LoqateRetrieveItem {
 
 export interface LoqateFindQuery {
     id?: string;
-    text: string;
+    input: string;
 }
 
 export interface LoqateFindResponse {
@@ -60,9 +59,9 @@ export interface LoqateRetrieveQuery {
     id: string;
 }
 
-export interface LoqateRetrieveResponse extends Address {
+export interface LoqateRetrieveResponse extends RetrieveResponse {
     language: string;
-    label: string;
+    alternativeLanguages: string[];
 }
 
 
@@ -76,12 +75,12 @@ export default class AddressLookupLoqateService implements AddressLookupService<
         this.key = key;
     }
 
-    async find(address: LoqateFindQuery): Promise<LoqateFindResponse[]> {
+    async find(query: LoqateFindQuery): Promise<LoqateFindResponse[]> {
 
         let params: LoqateFindRequest = {
             Key: this.key,
-            Text: address.text,
-            Container: (address.id) ? address.id : undefined
+            Text: query.input,
+            Container: (query.id) ? query.id : undefined
         };
 
         const results: AxiosResponse<LoqateFindResult> = await this.axios.get(
@@ -112,6 +111,7 @@ export default class AddressLookupLoqateService implements AddressLookupService<
 
         return results.data.Items.map((row: LoqateRetrieveItem) => ({
             language: row.Language,
+            alternativeLanguages: row.LanguageAlternatives.split(','),
             label: row.Label,
             street: row.Street,
             city: row.City,

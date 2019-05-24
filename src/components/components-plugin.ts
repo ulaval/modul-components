@@ -1,9 +1,10 @@
 import Vue, { PluginObject } from 'vue';
-import AddressLookupPlugin from '../utils/address-lookup/address-lookup.plugin';
+import AddressLookupPlugin, { LoqateLicensePluginOptions } from '../utils/address-lookup/address-lookup.plugin';
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import AddPlugin from './add/add';
+import AddressLookupFieldPlugin from './address-lookup-field/address-lookup-field';
 import ButtonPlugin from './button/button';
 import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
@@ -92,6 +93,7 @@ import ValidationMessagePlugin from './validation-message/validation-message';
 
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
+    loquateOptions?: LoqateLicensePluginOptions;
 }
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -105,7 +107,8 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
         Vue.use(AddPlugin);
-        Vue.use(AddressLookupPlugin);
+        Vue.use(AddressLookupFieldPlugin);
+        Vue.use(AddressLookupPlugin, { key: options.loquateOptions ? options.loquateOptions.key : undefined });
         Vue.use(ButtonPlugin);
         Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);

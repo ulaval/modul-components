@@ -15,11 +15,11 @@ export class MAddressLookupServiceSandbox extends ModulVue {
     addressDetail: LoqateRetrieveResponse[] = [];
 
     async created(): Promise<void> {
-        this.addresses = await this.$addressLookup.find({ text: '325 rue des bouleaux o' });
+        this.addresses = await this.$addressLookup.find({ input: '325 rue des bouleaux o' });
 
         this.addressDrillDown = await this.$addressLookup.find({
             id: 'CA|CP|ENG|QC-QUÉBEC-RUE_DES_BOULEAUX_O-325',
-            text: '325 rue des bouleaux o'
+            input: '325 rue des bouleaux o'
         });
 
         this.addressDetail = await this.$addressLookup.retrieve({
