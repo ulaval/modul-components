@@ -16,7 +16,7 @@ export const EmailValidator: Function = (controlLabel: string, options?: Control
 
             let re: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-            return re.test(String(control.value).toLowerCase());
+            return control.value ? re.test(String(control.value).toLowerCase()) : true;
         },
         error: options && options.error ?
             options.error : {
