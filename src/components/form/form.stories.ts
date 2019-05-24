@@ -16,7 +16,13 @@ import { MinLengthValidator } from '../../utils/form/validators/min-length/min-l
 import { MinValidator } from '../../utils/form/validators/min/min';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { FORM_NAME } from '../component-names';
-import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './fallouts/built-in-form-action-fallouts';
+import {
+    ClearErrorToast,
+    ClearSummaryMessage,
+    ErrorToast,
+    FocusOnFirstError,
+    SummaryMessage
+} from './fallouts/built-in-form-action-fallouts';
 import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);
@@ -46,15 +52,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
                 }
             )
         }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup"
                 @reset="reset()"
                 @submit="submit()">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <m-textfield v-model.trim="nameField.value"
+                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+                        :label="nameField.name"
+                        v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -80,20 +91,25 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/fields`, module)
                 }
             )
         }),
+        computed: {
+            dateField(): void {
+                return this.$data.formGroup.getControl('date');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-                <m-datepicker   v-m-control="formGroup.getControl('date')"
-                                v-model="formGroup.getControl('date').value"
+                <m-datepicker   v-m-control="dateField"
+                                v-model="dateField.value"
                                 :required-marker="true"
                                 label="Birthdate"
                                 min="1900-01-01"
                                 max="2020-01-01"
-                                :error="formGroup.getControl('date').hasError()"
-                                :error-message="formGroup.getControl('date').errorMessage"
-                                :disabled="!formGroup.getControl('date').enabled"
-                                :readonly="formGroup.getControl('date').readonly"
-                                :waiting="formGroup.getControl('date').waiting"></m-datepicker>
+                                :error="dateField.hasError()"
+                                :error-message="dateField.errorMessage"
+                                :disabled="!dateField.enabled"
+                                :readonly="dateField.readonly"
+                                :waiting="dateField.waiting"></m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
                         :form="formGroup.id">Submit</m-button>
@@ -118,13 +134,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                 }
             )
         }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <m-textfield v-model.trim="nameField.value"
+                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+                        :label="nameField.name"
+                        v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -150,14 +171,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                 ClearErrorToast
             ]
         }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup"
                 :action-fallouts="actionFallouts">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <m-textfield v-model.trim="nameField.value"
+                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+                        :label="nameField.name"
+                        v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -182,14 +208,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                 FocusOnFirstError
             ]
         }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup"
                 :action-fallouts="actionFallouts">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <m-textfield v-model.trim="nameField.value"
+                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+                        :label="nameField.name"
+                        v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -215,14 +246,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                 ClearSummaryMessage
             ]
         }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup"
                 :action-fallouts="actionFallouts">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <m-textfield v-model.trim="nameField.value"
+                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+                        :label="nameField.name"
+                        v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -248,13 +284,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            nameField(): void {
+                return this.$data.formGroup.getControl('name');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('name').value"
-                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
-                        :label="formGroup.getControl('name').name"
-                        v-m-control="formGroup.getControl('name')">
+            <m-textfield v-model.trim="nameField.value"
+                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+                        :label="nameField.name"
+                        v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -276,13 +317,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            emailField(): void {
+                return this.$data.formGroup.getControl('email');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('email').value"
-                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        :label="formGroup.getControl('email').name"
-                        v-m-control="formGroup.getControl('email')">
+            <m-textfield v-model.trim="emailField.value"
+                        :error-message="emailField.errors.length > 0 ? emailField.errors[0].message : null"
+                        :label="emailField.name"
+                        v-m-control="emailField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -304,13 +350,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            min5(): void {
+                return this.$data.formGroup.getControl('min 5');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('min 5').value"
-                        :error-message="formGroup.getControl('min 5').errors.length > 0 ? formGroup.getControl('min 5').errors[0].message : null"
-                        :label="formGroup.getControl('min 5').name"
-                        v-m-control="formGroup.getControl('min 5')">
+            <m-textfield v-model.trim="min5.value"
+                        :error-message="min5.errors.length > 0 ? min5.errors[0].message : null"
+                        :label="min5.name"
+                        v-m-control="min5">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -332,13 +383,18 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            max5(): void {
+                return this.$data.formGroup.getControl('max 5');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="formGroup.getControl('max 5').value"
-                        :error-message="formGroup.getControl('max 5').errors.length > 0 ? formGroup.getControl('max 5').errors[0].message : null"
-                        :label="formGroup.getControl('max 5').name"
-                        v-m-control="formGroup.getControl('max 5')">
+            <m-textfield v-model.trim="max5.value"
+                        :error-message="max5.errors.length > 0 ? max5.errors[0].message : null"
+                        :label="max5.name"
+                        v-m-control="max5">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -363,18 +419,26 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            min5(): void {
+                return this.$data.formGroup.getControl('min 5');
+            },
+            minDate(): void {
+                return this.$data.formGroup.getControl('min 1/1/2019');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('min 5').value"
-                        :error-message="formGroup.getControl('min 5').errors.length > 0 ? formGroup.getControl('min 5').errors[0].message : null"
-                        :label="formGroup.getControl('min 5').name"
-                        v-m-control="formGroup.getControl('min 5')">
+            <m-integerfield v-model.trim="min5.value"
+                        :error-message="min5.errors.length > 0 ? min5.errors[0].message : null"
+                        :label="min5.name"
+                        v-m-control="min5">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('min 1/1/2019').value"
-                        :error-message="formGroup.getControl('min 1/1/2019').errors.length > 0 ? formGroup.getControl('min 1/1/2019').errors[0].message : null"
-                        :label="formGroup.getControl('min 1/1/2019').name"
-                        v-m-control="formGroup.getControl('min 1/1/2019')">
+            <m-datepicker v-model.trim="minDate.value"
+                        :error-message="minDate.errors.length > 0 ? minDate.errors[0].message : null"
+                        :label="minDate.name"
+                        v-m-control="minDate">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -399,18 +463,26 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            max5(): void {
+                return this.$data.formGroup.getControl('max 5');
+            },
+            maxDate(): void {
+                return this.$data.formGroup.getControl('max 1/1/2019');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('max 5').value"
-                        :error-message="formGroup.getControl('max 5').errors.length > 0 ? formGroup.getControl('max 5').errors[0].message : null"
-                        :label="formGroup.getControl('max 5').name"
-                        v-m-control="formGroup.getControl('max 5')">
+            <m-integerfield v-model.trim="max5.value"
+                        :error-message="max5.errors.length > 0 ? max5.errors[0].message : null"
+                        :label="max5.name"
+                        v-m-control="max5">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('max 1/1/2019').value"
-                        :error-message="formGroup.getControl('max 1/1/2019').errors.length > 0 ? formGroup.getControl('max 1/1/2019').errors[0].message : null"
-                        :label="formGroup.getControl('max 1/1/2019').name"
-                        v-m-control="formGroup.getControl('max 1/1/2019')">
+            <m-datepicker v-model.trim="maxDate.value"
+                        :error-message="maxDate.errors.length > 0 ? maxDate.errors[0].message : null"
+                        :label="maxDate.name"
+                        v-m-control="maxDate">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -435,18 +507,26 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 }
             )
         }),
+        computed: {
+            between(): void {
+                return this.$data.formGroup.getControl('between');
+            },
+            betweenDate(): void {
+                return this.$data.formGroup.getControl('betweenDate');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('between').value"
-                        :error-message="formGroup.getControl('between').errors.length > 0 ? formGroup.getControl('between').errors[0].message : null"
-                        :label="formGroup.getControl('between').name"
-                        v-m-control="formGroup.getControl('between')">
+            <m-integerfield v-model.trim="between.value"
+                        :error-message="between.errors.length > 0 ? between.errors[0].message : null"
+                        :label="between.name"
+                        v-m-control="between">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('betweenDate').value"
-                        :error-message="formGroup.getControl('betweenDate').errors.length > 0 ? formGroup.getControl('betweenDate').errors[0].message : null"
-                        :label="formGroup.getControl('betweenDate').name"
-                        v-m-control="formGroup.getControl('betweenDate')">
+            <m-datepicker v-model.trim="betweenDate.value"
+                        :error-message="betweenDate.errors.length > 0 ? betweenDate.errors[0].message : null"
+                        :label="betweenDate.name"
+                        v-m-control="betweenDate">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -474,21 +554,29 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
                 ]
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            },
+            confirmEmail(): void {
+                return this.$data.formGroup.getControl('confirm email');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-input-group :legend="formGroup.name"
                 :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
                 <div slot-scope="{  }">
-                    <m-textfield v-model.trim="formGroup.getControl('email').value"
-                                :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                                :label="formGroup.getControl('email').name"
-                                v-m-control="formGroup.getControl('email')">
+                    <m-textfield v-model.trim="email.value"
+                                :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                                :label="email.name"
+                                v-m-control="email">
                     </m-textfield>
-                    <m-textfield v-model.trim="formGroup.getControl('confirm email').value"
-                                :error-message="formGroup.getControl('confirm email').errors.length > 0 ? formGroup.getControl('confirm email').errors[0].message : null"
-                                :label="formGroup.getControl('confirm email').name"
-                                v-m-control="formGroup.getControl('confirm email')">
+                    <m-textfield v-model.trim="confirmEmail.value"
+                                :error-message="confirmEmail.errors.length > 0 ? confirmEmail.errors[0].message : null"
+                                :label="confirmEmail.name"
+                                v-m-control="confirmEmail">
                     </m-textfield>
                 </div>
             </m-input-group>
@@ -520,14 +608,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 }
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                  :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
-            <m-textfield v-model.trim="formGroup.getControl('email').value"
-                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        :label="formGroup.getControl('email').name"
-                        v-m-control="formGroup.getControl('email')">
+            <p>edition context: {{email['_editionContext']}}</p>
+            <m-textfield v-model.trim="email.value"
+                        :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                        :label="email.name"
+                        v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -549,14 +642,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 }
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
-            <m-textfield v-model.trim="formGroup.getControl('email').value"
-                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        :label="formGroup.getControl('email').name"
-                        v-m-control="formGroup.getControl('email')">
+            <p>edition context: {{email['_editionContext']}}</p>
+            <m-textfield v-model.trim="email.value"
+                        :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                        :label="email.name"
+                        v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -582,14 +680,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 }
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
-            <m-textfield v-model.trim="formGroup.getControl('email').value"
-                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        :label="formGroup.getControl('email').name"
-                        v-m-control="formGroup.getControl('email')">
+            <p>edition context: {{email['_editionContext']}}</p>
+            <m-textfield v-model.trim="email.value"
+                        :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                        :label="email.name"
+                        v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -615,14 +718,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 }
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
         :form-group="formGroup">
-            <p>edition context: {{formGroup.getControl('email')['_editionContext']}}</p>
-            <m-textfield v-model.trim="formGroup.getControl('email').value"
-                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        :label="formGroup.getControl('email').name"
-                        v-m-control="formGroup.getControl('email')">
+            <p>edition context: {{email['_editionContext']}}</p>
+            <m-textfield v-model.trim="email.value"
+                        :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                        :label="email.name"
+                        v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -659,18 +767,23 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            requiredMax20(): void {
+                return this.$data.formGroup.getControl('required max20');
+            }
+        },
         template: `
         <div>
         <h2>Required and 20 characters max</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-textfield label="Title"
-                        v-model.trim="formGroup.getControl('required max20').value"
+                        v-model.trim="requiredMax20.value"
                         :max-length="20"
                         :character-count="true"
                         :character-count-threshold="20 * .75"
-                        :error-message="formGroup.getControl('required max20').errors.length > 0 ? formGroup.getControl('required max20').errors[0].message : null"
-                        v-m-control="formGroup.getControl('required max20')">
+                        :error-message="requiredMax20.errors.length > 0 ? requiredMax20.errors[0].message : null"
+                        v-m-control="requiredMax20">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -704,15 +817,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            requiredMin5(): void {
+                return this.$data.formGroup.getControl('required min5');
+            }
+        },
         template: `
         <div>
         <h2>Required and 5 characters min</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-textfield label="Security answer"
-                        v-model.trim="formGroup.getControl('required min5').value"
-                        :error-message="formGroup.getControl('required min5').errors.length > 0 ? formGroup.getControl('required min5').errors[0].message : null"
-                        v-m-control="formGroup.getControl('required min5')">
+                        v-model.trim="requiredMin5.value"
+                        :error-message="requiredMin5.errors.length > 0 ? requiredMin5.errors[0].message : null"
+                        v-m-control="requiredMin5">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -749,15 +867,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            postalCode(): void {
+                return this.$data.formGroup.getControl('postal code');
+            }
+        },
         template: `
         <div>
         <h2>Format with fixed max characters (postal code)</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-textfield label="Postal code"
-                        v-model.trim="formGroup.getControl('postal code').value"
-                        :error-message="formGroup.getControl('postal code').errors.length > 0 ? formGroup.getControl('postal code').errors[0].message : null"
-                        v-m-control="formGroup.getControl('postal code')">
+                        v-model.trim="postalCode.value"
+                        :error-message="postalCode.errors.length > 0 ? postalCode.errors[0].message : null"
+                        v-m-control="postalCode">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -791,15 +914,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            }
+        },
         template: `
         <div>
         <h2>Format without fixed max characters (email)</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-textfield label="Email"
-                        v-model.trim="formGroup.getControl('email').value"
-                        :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                        v-m-control="formGroup.getControl('email')">
+                        v-model.trim="email.value"
+                        :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                        v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -854,6 +982,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            courseCode(): void {
+                return this.$data.formGroup.getControl('course code');
+            }
+        },
         template: `
         <div>
         <h2>More than one validations (course code)</h2>
@@ -861,9 +994,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-textfield label="Course code (ex. : MAT-1000)"
-                        v-model.trim="formGroup.getControl('course code').value"
-                        :error-message="formGroup.getControl('course code').errors.length > 0 ? formGroup.getControl('course code').errors[0].message : null"
-                        v-m-control="formGroup.getControl('course code')">
+                        v-model.trim="courseCode.value"
+                        :error-message="courseCode.errors.length > 0 ? courseCode.errors[0].message : null"
+                        v-m-control="courseCode">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -915,6 +1048,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            username(): void {
+                return this.$data.formGroup.getControl('username');
+            }
+        },
         template: `
         <div>
         <h2>Live check username availability (async)</h2>
@@ -922,12 +1060,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-textfield label="Username"
-                        v-model.trim="formGroup.getControl('username').value"
-                        :error-message="formGroup.getControl('username').errors.length > 0 ? formGroup.getControl('username').errors[0].message : null"
-                        :valid="formGroup.getControl('username').valid"
-                        :valid-message="formGroup.getControl('username').valid ? 'Username is available' : ''"
-                        :waiting="formGroup.getControl('username').waiting"
-                        v-m-control="formGroup.getControl('username')">
+                        v-model.trim="username.value"
+                        :error-message="username.errors.length > 0 ? username.errors[0].message : null"
+                        :valid="username.valid"
+                        :valid-message="username.valid ? 'Username is available' : ''"
+                        :waiting="username.waiting"
+                        v-m-control="username">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -956,15 +1094,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            radioRequired(): void {
+                return this.$data.formGroup.getControl('radio required');
+            }
+        },
         template: `
         <div>
         <h2>Radio button required</h2>
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
             <m-radio-group label="Select a role :"
-                            v-model.trim="formGroup.getControl('radio required').value"
-                           :error-message="formGroup.getControl('radio required').errors.length > 0 ? formGroup.getControl('radio required').errors[0].message : null"
-                           v-m-control="formGroup.getControl('radio required')">
+                            v-model.trim="radioRequired.value"
+                           :error-message="radioRequired.errors.length > 0 ? radioRequired.errors[0].message : null"
+                           v-m-control="radioRequired">
                 <m-radio value="Sys admin">Sys admin</m-radio>
                 <m-radio value="Unit admin">Unit admin</m-radio>
                 <m-radio value="Conceptor">Conceptor</m-radio>
@@ -1015,6 +1158,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 }
             )
         }),
+        computed: {
+            roles(): void {
+                return this.$data.formGroup.getControl('roles');
+            }
+        },
         template: `
         <div>
         <h2>Checkbox 2 to 5 selections</h2>
@@ -1022,10 +1170,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 :form-group="formGroup">
             <p><strong>Select 2 to 5 roles :</strong></p>
             <ul class="m-u--no-margin">
-                <m-input-group :error-message="formGroup.getControl('roles').errors.length > 0 ?                       formGroup.getControl('roles').errors[0].message : null"
-                v-m-control="formGroup.getControl('roles')"
+                <m-input-group :error-message="roles.errors.length > 0 ? roles.errors[0].message : null"
+                v-m-control="roles"
                 :visible="false">
-                    <li v-for="(control, index) in formGroup.getControl('roles').controls">
+                    <li v-for="(control, index) in roles.controls">
                         <m-checkbox
                             v-model="control.value"
                             v-m-control="control"
@@ -1094,6 +1242,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 ]
             )
         }),
+        computed: {
+            email(): void {
+                return this.$data.formGroup.getControl('email');
+            },
+            emailConfirmation(): void {
+                return this.$data.formGroup.getControl('email confirmation');
+            }
+        },
         template: `
         <div>
         <h2>Email confirmation</h2>
@@ -1105,15 +1261,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                            v-m-control="formGroup">
 
                 <m-textfield label="Email"
-                            v-model.trim="formGroup.getControl('email').value"
-                            :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                            v-m-control="formGroup.getControl('email')">
+                            v-model.trim="email.value"
+                            :error-message="email.errors.length > 0 ? email.errors[0].message : null"
+                            v-m-control="email">
                 </m-textfield>
 
                 <m-textfield label="Email confirmation"
-                            v-model.trim="formGroup.getControl('email confirmation').value"
-                             :error-message="formGroup.getControl('email confirmation').errors.length > 0 ? formGroup.getControl('email confirmation').errors[0].message : null"
-                             v-m-control="formGroup.getControl('email confirmation')">
+                            v-model.trim="emailConfirmation.value"
+                             :error-message="emailConfirmation.errors.length > 0 ? emailConfirmation.errors[0].message : null"
+                             v-m-control="emailConfirmation">
                 </m-textfield>
 
             </m-input-group>
@@ -1610,7 +1766,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
     }))
     .add('autocomplete', () => ({
         data: () => ({
-            autocompleteResults: [{ label: 'RandomDog', value: 'RandomDog' }, { label: 'RandomDog2', value: 'RandomDog2' }],
+            autocompleteResults: [{ label: 'RandomDog', value: 'RandomDog' }, {
+                label: 'RandomDog2',
+                value: 'RandomDog2'
+            }],
             formGroup: new FormGroup(
                 {
                     'autocomplete': new FormControl<string>(
