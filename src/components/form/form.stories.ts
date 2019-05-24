@@ -1133,7 +1133,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
-    .add('textfield (name)', () => ({
+    .add('textfield', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
@@ -1154,7 +1154,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         template: `
     <m-form :form-group="formGroup"
             v-m-control="formGroup">
-            <h4 class="m-u--h6">Textfield (name)</h4>
+            <h4 class="m-u--h6">Textfield</h4>
             <p>edition context: {{nameField['_editionContext']}}</p>
             <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
             <m-textfield v-m-control="nameField"
@@ -1177,7 +1177,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-form>
         `
     }))
-    .add('textarea (description)', () => ({
+    .add('textarea', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
@@ -1198,7 +1198,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         template: `
     <m-form :form-group="formGroup"
             v-m-control="formGroup">
-            <h4 class="m-u--h6">TextArea (description)</h4>
+            <h4 class="m-u--h6">TextArea</h4>
             <p>edition context: {{descriptionField['_editionContext']}}</p>
             <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
         <m-textarea v-m-control="descriptionField"
@@ -1220,7 +1220,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-form>
         `
     }))
-    .add('datepicker (birthdate)', () => ({
+    .add('datepicker', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
@@ -1240,7 +1240,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         template: `
     <m-form :form-group="formGroup"
             v-m-control="formGroup">
-            <h4 class="m-u--h6">Datepicker (birthdate)</h4>
+            <h4 class="m-u--h6">Datepicker</h4>
             <p>edition context: {{birthDateField['_editionContext']}}</p>
             <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
         <m-datepicker v-m-control="birthDateField"
@@ -1264,7 +1264,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-form>
         `
     }))
-    .add('dropdown (type)', () => ({
+    .add('dropdown', () => ({
         data: () => ({
             types: [...TYPE_NAMES],
             formGroup: new FormGroup(
@@ -1285,7 +1285,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         template: `
     <m-form :form-group="formGroup"
             v-m-control="formGroup">
-            <h4 class="m-u--h6">Dropdown (type)</h4>
+            <h4 class="m-u--h6">Dropdown</h4>
             <p>edition context: {{typeField['_editionContext']}}</p>
             <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
         <m-dropdown v-m-control="typeField"
@@ -1311,7 +1311,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-form>
         `
     }))
-    .add('checkbox (active)', () => ({
+    .add('checkbox', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
@@ -1331,7 +1331,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         template: `
     <m-form :form-group="formGroup"
             v-m-control="formGroup">
-            <h4 class="m-u--h6">Checkbox (active)</h4>
+            <h4 class="m-u--h6">Checkbox</h4>
             <p>edition context: {{activeField['_editionContext']}}</p>
             <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
         <m-checkbox v-m-control="activeField"
@@ -1351,8 +1351,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-form>
         `
     }))
-    .add('radio (coupe)', () => ({
+    .add('radio', () => ({
         data: () => ({
+            coupes: [...COUPE_NAMES],
             formGroup: new FormGroup(
                 {
                     'coupe': new FormControl<string>(
@@ -1371,16 +1372,323 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         template: `
     <m-form :form-group="formGroup"
             v-m-control="formGroup">
-            <h4 class="m-u--h6">Radio (coupe)</h4>
+            <h4 class="m-u--h6">Radio</h4>
             <p>edition context: {{coupeField['_editionContext']}}</p>
             <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
-        <m-checkbox v-m-control="coupeField"
-                    v-model="coupeField.value"
-                    :error="coupeField.hasError()"
-                    :error-message="coupeField.errorMessage"
-                    :disabled="!coupeField.enabled"
-                    :readonly="coupeField.readonly"
-                    :waiting="coupeField.waiting">Is active ?</m-checkbox>
+        <m-radio-group v-m-control="coupeField"
+                       v-model="coupeField.value"
+                       label="Style de coupe"
+                       :error="coupeField.hasError()"
+                       :error-message="coupeField.errorMessage"
+                       :disabled="!coupeField.enabled"
+                       :readonly="coupeField.readonly"
+                       :waiting="coupeField.waiting">
+            <m-radio v-for="coupe of coupes"
+                     :value="coupe">{{coupe}}</m-radio>
+         </m-radio-group>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('timepicker', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'time': new FormControl<string>(
+                        [
+                            RequiredValidator('time')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            timeField(): void {
+                return this.$data.formGroup.getControl('time');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Timepicker</h4>
+            <p>edition context: {{timeField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-timepicker v-m-control="timeField"
+                      v-model="timeField.value"
+                      label="Time"
+                      :required-marker="true"
+                      :error="timeField.hasError()"
+                      :error-message="timeField.errorMessage"
+                      :disabled="!timeField.enabled"
+                      :readonly="timeField.readonly"
+                      :waiting="timeField.waiting"></m-timepicker>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('decimalfield', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'decimal': new FormControl<string>(
+                        [
+                            RequiredValidator('decimal')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            decimalField(): void {
+                return this.$data.formGroup.getControl('decimal');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Decimalfield</h4>
+            <p>edition context: {{decimalField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-decimalfield v-m-control="decimalField"
+                        v-model="decimalField.value"
+                        label="Decimal"
+                        :required-marker="true"
+                        :error="decimalField.hasError()"
+                        :error-message="decimalField.errorMessage"
+                        :disabled="!decimalField.enabled"
+                        :readonly="decimalField.readonly"
+                        :waiting="decimalField.waiting">
+
+        </m-decimalfield>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('moneyfield', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'money': new FormControl<string>(
+                        [
+                            RequiredValidator('money')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            priceField(): void {
+                return this.$data.formGroup.getControl('money');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Moneyfield</h4>
+            <p>edition context: {{priceField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-moneyfield v-m-control="priceField"
+                      v-model="priceField.value"
+                      label="Price"
+                      :required-marker="true"
+                      :error="priceField.hasError()"
+                      :error-message="priceField.errorMessage"
+                      :disabled="!priceField.enabled"
+                      :readonly="priceField.readonly"
+                      :waiting="priceField.waiting"></m-moneyfield>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('integerfield', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'integer': new FormControl<string>(
+                        [
+                            RequiredValidator('integer')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            integerField(): void {
+                return this.$data.formGroup.getControl('integer');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Integerfield</h4>
+            <p>edition context: {{integerField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-integerfield v-m-control="integerField"
+                        v-model="integerField.value"
+                        label="Integer"
+                        :required-marker="true"
+                        :error="integerField.hasError()"
+                        :error-message="integerField.errorMessage"
+                        :disabled="!integerField.enabled"
+                        :readonly="integerField.readonly"
+                        :waiting="integerField.waiting">
+
+        </m-integerfield>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('switch', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'switch': new FormControl<string>(
+                        [
+                            RequiredValidator('switch')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            switchField(): void {
+                return this.$data.formGroup.getControl('switch');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Switch</h4>
+            <p>edition context: {{switchField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-switch v-m-control="switchField"
+                  v-model="switchField.value"
+                  :error="switchField.hasError()"
+                  :error-message="switchField.errorMessage"
+                  :disabled="!switchField.enabled"
+                  :readonly="switchField.readonly"
+                  :waiting="switchField.waiting">État</m-switch>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('autocomplete', () => ({
+        data: () => ({
+            autocompleteResults: [{ label: 'RandomDog', value: 'RandomDog' }, { label: 'RandomDog2', value: 'RandomDog2' }],
+            formGroup: new FormGroup(
+                {
+                    'autocomplete': new FormControl<string>(
+                        [
+                            RequiredValidator('autocomplete')
+                        ]
+                    )
+                }
+            )
+        }),
+        methods: {
+            onComplete(): void {
+                this.$data.autocompleteResults = [...this.$data.autocompleteResults];
+            }
+        },
+        computed: {
+            autocompleteField(): void {
+                return this.$data.formGroup.getControl('autocomplete');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Autocomplete</h4>
+            <p>edition context: {{autocompleteField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-autocomplete v-m-control="autocompleteField"
+                        v-model="autocompleteField.value"
+                        label="Autocomplete"
+                        :results="autocompleteResults"
+                        :required-marker="true"
+                        :error="autocompleteField.hasError()"
+                        :error-message="autocompleteField.errorMessage"
+                        :disabled="!autocompleteField.enabled"
+                        :readonly="autocompleteField.readonly"
+                        :waiting="autocompleteField.waiting"
+                        @complete="onComplete"></m-autocomplete>
+            <div class="m-u--margin-top--l m-u--margin-bottom--l">
+                <m-button type="submit"
+                          :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                          skin="secondary"
+                          :form="formGroup.id">Reset</m-button>
+            </div>
+        </m-form>
+        `
+    }))
+    .add('daterangepicker', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'daterange': new FormControl<string>(
+                        [
+                            RequiredValidator('daterange')
+                        ]
+                    )
+                }
+            )
+        }),
+        computed: {
+            daterangeField(): void {
+                return this.$data.formGroup.getControl('daterange');
+            }
+        },
+        template: `
+    <m-form :form-group="formGroup"
+            v-m-control="formGroup">
+            <h4 class="m-u--h6">Daterangepicker</h4>
+            <p>edition context: {{daterangeField['_editionContext']}}</p>
+            <span style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px"></span>
+        <m-daterangepicker v-m-control="daterangeField"
+                           v-model="daterangeField.value"
+                           :error="daterangeField.hasError()"
+                           :error-message="daterangeField.errorMessage"
+                           :disabled="!daterangeField.enabled"
+                           :readonly="daterangeField.readonly"
+                           :waiting="daterangeField.waiting">
+        </m-daterangepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
