@@ -222,7 +222,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
         `
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('required', () => ({
@@ -236,16 +236,19 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
             )
         }),
         computed: {
-            nameField(): void {
-                return this.$data.formGroup.getControl('name');
+            nameField(): FormControl<string> {
+                return this.formGroup.getControl('name');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="nameField.value"
-                        :error-message="nameField.errors.length > 0 ? nameField.errors[0].message : null"
+            <p>default validationType =  {{ nameField.validators[0].validationType }}</p>
+            <m-textfield v-model="nameField.value"
+                        :error="nameField.hasError()"
+                        :error-message="nameField.errorMessage"
                         :label="nameField.name"
+                        :valid="nameField.valid"
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
@@ -269,17 +272,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
             )
         }),
         computed: {
-            emailField(): void {
-                return this.$data.formGroup.getControl('email');
+            emailField(): FormControl<string> {
+                return this.formGroup.getControl('email');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="emailField.value"
-                        :error-message="emailField.errors.length > 0 ? emailField.errors[0].message : null"
-                        :label="emailField.name"
-                        v-m-control="emailField">
+            <p>default validationType =  {{ emailField.validators[0].validationType }}</p>
+            <m-textfield    v-model="emailField.value"
+                            :error="emailField.hasError()"
+                            :error-message="emailField.errorMessage"
+                            :label="emailField.name"
+                            :valid="emailField.valid"
+                            v-m-control="emailField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -295,24 +301,27 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'min 5': new FormControl<string>(
-                        [MinLengthValidator('min 5', 5)]
+                    'min5': new FormControl<string>(
+                        [MinLengthValidator('min5', 5)]
                     )
                 }
             )
         }),
         computed: {
-            min5(): void {
-                return this.$data.formGroup.getControl('min 5');
+            min5Field(): FormControl<string> {
+                return this.formGroup.getControl('min5');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="min5.value"
-                        :error-message="min5.errors.length > 0 ? min5.errors[0].message : null"
-                        :label="min5.name"
-                        v-m-control="min5">
+            <p>default validationType =  {{ min5Field.validators[0].validationType }}</p>
+            <m-textfield    v-model="min5Field.value"
+                            :error="min5Field.hasError()"
+                            :error-message="min5Field.errorMessage"
+                            :label="min5Field.name"
+                            :valid="min5Field.valid"
+                            v-m-control="min5Field">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -328,24 +337,27 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in validators`,
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'max 5': new FormControl<string>(
-                        [MaxLengthValidator('max 5', 5)]
+                    'max5': new FormControl<string>(
+                        [MaxLengthValidator('max5', 5)]
                     )
                 }
             )
         }),
         computed: {
-            max5(): void {
-                return this.$data.formGroup.getControl('max 5');
+            max5Field(): FormControl<string> {
+                return this.formGroup.getControl('max5');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-textfield v-model.trim="max5.value"
-                        :error-message="max5.errors.length > 0 ? max5.errors[0].message : null"
-                        :label="max5.name"
-                        v-m-control="max5">
+            <p>default validationType =  {{ max5Field.validators[0].validationType }}</p>
+            <m-textfield v-model="max5Field.value"
+                        :error="max5Field.hasError()"
+                        :error-message="max5Field.errorMessage"
+                        :label="max5Field.name"
+                        :valid="max5Field.valid"
+                        v-m-control="max5Field">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"

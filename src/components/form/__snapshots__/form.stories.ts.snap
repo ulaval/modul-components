@@ -2068,1022 +2068,6 @@ exports[`Storyshots components|m-form/built-in action-fallouts toast and clear t
 </form>
 `;
 
-exports[`Storyshots components|m-form/built-in validators between 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <m-integerfield />
-   
-  <div
-    class="m-datepicker"
-    style="width: 100%; max-width: 136px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
-            />
-              
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-validation-message m-datepicker__validation-message"
-    >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <div
-      class="m-popup"
-    >
-      <div
-        class="m-popper"
-      >
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators compare 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <m-input-group />
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators email 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <div
-    class="m-textfield m--is-type-text"
-    style="width: 100%; max-width: 288px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <span
-              style="white-space: nowrap;"
-            />
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-textfield__validation"
-    >
-      <div
-        class="m-validation-message m-textfield__validation__message"
-      >
-        <!---->
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators max 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <m-integerfield />
-   
-  <div
-    class="m-datepicker"
-    style="width: 100%; max-width: 136px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
-            />
-              
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-validation-message m-datepicker__validation-message"
-    >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <div
-      class="m-popup"
-    >
-      <div
-        class="m-popper"
-      >
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators max-length 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <div
-    class="m-textfield m--is-type-text"
-    style="width: 100%; max-width: 288px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <span
-              style="white-space: nowrap;"
-            />
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-textfield__validation"
-    >
-      <div
-        class="m-validation-message m-textfield__validation__message"
-      >
-        <!---->
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators min 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <m-integerfield />
-   
-  <div
-    class="m-datepicker"
-    style="width: 100%; max-width: 136px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
-            />
-              
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-validation-message m-datepicker__validation-message"
-    >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <div
-      class="m-popup"
-    >
-      <div
-        class="m-popper"
-      >
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators min-length 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <div
-    class="m-textfield m--is-type-text"
-    style="width: 100%; max-width: 288px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <span
-              style="white-space: nowrap;"
-            />
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-textfield__validation"
-    >
-      <div
-        class="m-validation-message m-textfield__validation__message"
-      >
-        <!---->
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
-exports[`Storyshots components|m-form/built-in validators required 1`] = `
-<form
-  class="m-u--margin-top"
->
-  <!---->
-   
-  <!---->
-   
-  <div
-    class="m-textfield m--is-type-text"
-    style="width: 100%; max-width: 288px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <span
-              style="white-space: nowrap;"
-            />
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-textfield__validation"
-    >
-      <div
-        class="m-validation-message m-textfield__validation__message"
-      >
-        <!---->
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
-   
-  <p
-    class="m-u--margin-bottom--l"
-  >
-    <button
-      class="m-button m--is-skin-primary"
-      type="submit"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Submit 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-     
-    <button
-      class="m-button m--is-skin-secondary"
-      type="reset"
-    >
-      <!---->
-       
-      <!---->
-       
-      <span
-        class="m-button__text"
-      >
-        Reset 
-        <!---->
-      </span>
-       
-      <!---->
-       
-      <!---->
-    </button>
-  </p>
-</form>
-`;
-
 exports[`Storyshots components|m-form/rules Checkbox 2 to 5 selections 1`] = `
 <div>
   <h2>
@@ -5122,6 +4106,1038 @@ exports[`Storyshots components|m-form/validation-type on-going 1`] = `
    
   <p>
     edition context: none
+  </p>
+   
+  <div
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span
+              style="white-space: nowrap;"
+            />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators between 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <m-integerfield />
+   
+  <div
+    class="m-datepicker"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-datepicker__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators compare 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <m-input-group />
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators email 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <p>
+    default validationType =  correction
+  </p>
+   
+  <div
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span
+              style="white-space: nowrap;"
+            />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators max 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <m-integerfield />
+   
+  <div
+    class="m-datepicker"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-datepicker__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators max-length 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <p>
+    default validationType =  correction
+  </p>
+   
+  <div
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span
+              style="white-space: nowrap;"
+            />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators min 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <m-integerfield />
+   
+  <div
+    class="m-datepicker"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-datepicker__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators min-length 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <p>
+    default validationType =  modification
+  </p>
+   
+  <div
+    class="m-textfield m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <span
+              style="white-space: nowrap;"
+            />
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators required 1`] = `
+<form
+  class="m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <p>
+    default validationType =  on-going
   </p>
    
   <div
