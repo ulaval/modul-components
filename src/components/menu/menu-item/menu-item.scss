@@ -83,7 +83,7 @@
     &.m--is-group-selected {
         > .m-menu-item__link {
             color: $m-color--white;
-            font-weight: $m-font-weight--black;
+            font-weight: $m-font-weight--bold;
 
             > .m-menu-item__icon {
                 stroke-width: 1.5px;
@@ -156,7 +156,7 @@
     &__link {
         position: relative;
         display: flex;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         align-items: center;
         text-decoration: none;
         padding: $m-spacing--s $m-spacing;

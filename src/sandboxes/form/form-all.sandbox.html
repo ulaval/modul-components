@@ -1,0 +1,196 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Test for MForm reactivity with all fields</h2>
+    <br />
+    <m-form :form-group="formAllGroup"
+            v-m-control="formAllGroup"
+            @reset="reset()"
+            @submit="submit()">
+
+        <h4 class="m-u--h6">Textfields</h4>
+
+        <m-textfield v-m-control="nameField"
+                     v-model="nameField.value"
+                     label="Name"
+                     :required-marker="true"
+                     :error="nameField.hasError()"
+                     :error-message="nameField.errorMessage"
+                     :disabled="!nameField.enabled"
+                     :readonly="nameField.readonly"
+                     :waiting="nameField.waiting">
+        </m-textfield>
+
+        <h4 class="m-u--h6">Textarea</h4>
+
+        <m-textarea v-m-control="descriptionField"
+                    v-model="descriptionField.value"
+                    label="Description"
+                    :required-marker="true"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage"
+                    :disabled="!descriptionField.enabled"
+                    :readonly="descriptionField.readonly"
+                    :waiting="descriptionField.waiting"></m-textarea>
+
+        <h4 class="m-u--h6">Datepicker</h4>
+        <m-datepicker v-m-control="birthdateField"
+                      v-model="birthdateField.value"
+                      label="Birthdate"
+                      min="1900-01-01"
+                      max="2020-01-01"
+                      :required-marker="true"
+                      :error="birthdateField.hasError()"
+                      :error-message="birthdateField.errorMessage"
+                      :disabled="!birthdateField.enabled"
+                      :readonly="birthdateField.readonly"
+                      :waiting="birthdateField.waiting"></m-datepicker>
+
+        <h4 class="m-u--h6">Dropdown</h4>
+        <m-dropdown v-m-control="typeField"
+                    v-model="typeField.value"
+                    label="Type"
+                    :required-marker="true"
+                    :error="typeField.hasError()"
+                    :error-message="typeField.errorMessage"
+                    :disabled="!typeField.enabled"
+                    :readonly="typeField.readonly"
+                    :waiting="typeField.waiting">
+            <m-dropdown-item v-for="type of types"
+                             :value="type"
+                             :label="type"></m-dropdown-item>
+        </m-dropdown>
+        <h4 class="m-u--h6">Checkboxes</h4>
+        <m-checkbox v-m-control="activeField"
+                    v-model="activeField.value"
+                    :error="activeField.hasError()"
+                    :error-message="activeField.errorMessage"
+                    :disabled="!activeField.enabled"
+                    :readonly="activeField.readonly"
+                    :waiting="activeField.waiting">Is active ?</m-checkbox>
+
+        <h4 class="m-u--h6">Radio</h4>
+        <m-radio-group v-m-control="coupeField"
+                       v-model="coupeField.value"
+                       label="Style de coupe"
+                       :error="coupeField.hasError()"
+                       :error-message="coupeField.errorMessage"
+                       :disabled="!coupeField.enabled"
+                       :readonly="coupeField.readonly"
+                       :waiting="coupeField.waiting">
+            <m-radio v-for="coupe of coupes"
+                     :value="coupe">{{coupe}}</m-radio>
+
+
+        </m-radio-group>
+
+        <h4 class="m-u--h6">Timepicker</h4>
+        <m-timepicker v-m-control="timeField"
+                      v-model="timeField.value"
+                      label="Time"
+                      :required-marker="true"
+                      :error="timeField.hasError()"
+                      :error-message="timeField.errorMessage"
+                      :disabled="!timeField.enabled"
+                      :readonly="timeField.readonly"
+                      :waiting="timeField.waiting"></m-timepicker>
+
+        <h4 class="m-u--h6">Decimalfield</h4>
+        <m-decimalfield v-m-control="decimalField"
+                        v-model="decimalField.value"
+                        label="Decimal"
+                        :required-marker="true"
+                        :error="decimalField.hasError()"
+                        :error-message="decimalField.errorMessage"
+                        :disabled="!decimalField.enabled"
+                        :readonly="decimalField.readonly"
+                        :waiting="decimalField.waiting">
+
+        </m-decimalfield>
+
+        <h4 class="m-u--h6">Moneyfield</h4>
+        <m-moneyfield v-m-control="priceField"
+                      v-model="priceField.value"
+                      label="Price"
+                      :required-marker="true"
+                      :error="priceField.hasError()"
+                      :error-message="priceField.errorMessage"
+                      :disabled="!priceField.enabled"
+                      :readonly="priceField.readonly"
+                      :waiting="priceField.waiting"></m-moneyfield>
+
+        <h4 class="m-u--h6">Integerfield</h4>
+        <m-integerfield v-m-control="integerField"
+                        v-model="integerField.value"
+                        label="Integer"
+                        :required-marker="true"
+                        :error="integerField.hasError()"
+                        :error-message="integerField.errorMessage"
+                        :disabled="!integerField.enabled"
+                        :readonly="integerField.readonly"
+                        :waiting="integerField.waiting">
+
+        </m-integerfield>
+
+        <h4 class="m-u--h6">Switch</h4>
+        <m-switch v-m-control="switchField"
+                  v-model="switchField.value"
+                  :error="switchField.hasError()"
+                  :error-message="switchField.errorMessage"
+                  :disabled="!switchField.enabled"
+                  :readonly="switchField.readonly"
+                  :waiting="switchField.waiting">État</m-switch>
+
+
+
+        <h4 class="m-u--h6">Autocomplete</h4>
+        <m-autocomplete v-m-control="autocompleteField"
+                        v-model="autocompleteField.value"
+                        label="Autocomplete"
+                        :results="autocompleteResults"
+                        :required-marker="true"
+                        :error="autocompleteField.hasError()"
+                        :error-message="autocompleteField.errorMessage"
+                        :disabled="!autocompleteField.enabled"
+                        :readonly="autocompleteField.readonly"
+                        :waiting="autocompleteField.waiting"
+                        @complete="onComplete"></m-autocomplete>
+
+
+        <h4 class="m-u--h6">DaterangePicker</h4>
+        <m-daterangepicker v-m-control="daterangeField"
+                           v-model="daterangeField.value"
+                           :error="daterangeField.hasError()"
+                           :error-message="daterangeField.errorMessage"
+                           :disabled="!daterangeField.enabled"
+                           :readonly="daterangeField.readonly"
+                           :waiting="daterangeField.waiting">
+        </m-daterangepicker>
+
+
+        <p class="m-u--margin-top--l m-u--margin-bottom--l">
+            <m-button type="submit"
+                      :form="formAllGroup.id">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary"
+                      :form="formAllGroup.id">Reset</m-button>
+        </p>
+
+        <h4 class="m-u--h6">Form Values</h4>
+        <p>{{ formAllGroup.value }}</p>
+        <h4 class="m-u--h6">Form Validity = {{ formAllGroup.valid }} </h4>
+        <h4 class="m-u--h6">Form Waiting = {{ formAllGroup.waiting }}</h4>
+        <h4 class="m-u--h6">Form Enabled = {{ formAllGroup.enabled }}</h4>
+        <h4 class="m-u--h6">Form Readonly = {{ formAllGroup.readonly }}</h4>
+
+
+        <p>
+            <m-button skin="secondary"
+                      @click="loadValue()">Load form data</m-button>
+            <m-button skin="secondary"
+                      @click="toggleReadonly()">toggle readonly</m-button>
+            <m-button skin="secondary"
+                      @click="toggleDisabled()">toggle disabled</m-button>
+            <m-button skin="secondary"
+                      @click="toggleWaiting()">toggle waiting</m-button>
+        </p>
+    </m-form>
+</div>

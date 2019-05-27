@@ -389,152 +389,6 @@ exports[`Storyshots components|m-accordion-group header 1`] = `
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group reverse-header 1`] = `
-<article
-  class="m-accordion-group"
->
-  <div
-    class="m-accordion-group__header m--is-reserve-header"
-  >
-    <div
-      class="m-accordion-group__header-title"
-    >
-      <h2>
-        An Accordion Group Title
-      </h2>
-    </div>
-     
-    <div
-      class="m-accordion-group__secondary-content"
-    >
-       
-      <div
-        class="m-accordion-group__toggle-link"
-      >
-        <!---->
-         
-        <!---->
-         
-        <!---->
-      </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-accordion-group__body"
-  >
-     
-    <article
-      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
-    >
-      <div
-        aria-controls="uuid-controls"
-        class="m-accordion__header m--has-padding"
-        id="uuid"
-        role="tab"
-        tabindex="0"
-      >
-        <div
-          class="m-accordion__header__content"
-        >
-          <h3>
-            An Accordion Title
-          </h3>
-           
-          <span
-            class="m-i18n m-accordion__hidden"
-          >
-            Cliquer pour afficher le contenu
-          </span>
-           
-          <!---->
-        </div>
-         
-        <span
-          aria-hidden="true"
-          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
-          title="Cliquer pour afficher le contenu"
-        />
-      </div>
-       
-      <!---->
-    </article>
-     
-    <article
-      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
-    >
-      <div
-        aria-controls="uuid-controls"
-        class="m-accordion__header m--has-padding"
-        id="uuid"
-        role="tab"
-        tabindex="0"
-      >
-        <div
-          class="m-accordion__header__content"
-        >
-          <h3>
-            An Accordion Title
-          </h3>
-           
-          <span
-            class="m-i18n m-accordion__hidden"
-          >
-            Cliquer pour afficher le contenu
-          </span>
-           
-          <!---->
-        </div>
-         
-        <span
-          aria-hidden="true"
-          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
-          title="Cliquer pour afficher le contenu"
-        />
-      </div>
-       
-      <!---->
-    </article>
-     
-    <article
-      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
-    >
-      <div
-        aria-controls="uuid-controls"
-        class="m-accordion__header m--has-padding"
-        id="uuid"
-        role="tab"
-        tabindex="0"
-      >
-        <div
-          class="m-accordion__header__content"
-        >
-          <h3>
-            An Accordion Title
-          </h3>
-           
-          <span
-            class="m-i18n m-accordion__hidden"
-          >
-            Cliquer pour afficher le contenu
-          </span>
-           
-          <!---->
-        </div>
-         
-        <span
-          aria-hidden="true"
-          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
-          title="Cliquer pour afficher le contenu"
-        />
-      </div>
-       
-      <!---->
-    </article>
-  </div>
-</article>
-`;
-
 exports[`Storyshots components|m-accordion-group secondary-content 1`] = `
 <article
   class="m-accordion-group"
@@ -690,6 +544,152 @@ exports[`Storyshots components|m-accordion-group title 1`] = `
 >
   <div
     class="m-accordion-group__header"
+  >
+    <div
+      class="m-accordion-group__header-title"
+    >
+      <h2>
+        An Accordion Group Title
+      </h2>
+    </div>
+     
+    <div
+      class="m-accordion-group__secondary-content"
+    >
+       
+      <div
+        class="m-accordion-group__toggle-link"
+      >
+        <!---->
+         
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-accordion-group__body"
+  >
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+     
+    <article
+      class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+    >
+      <div
+        aria-controls="uuid-controls"
+        class="m-accordion__header m--has-padding"
+        id="uuid"
+        role="tab"
+        tabindex="0"
+      >
+        <div
+          class="m-accordion__header__content"
+        >
+          <h3>
+            An Accordion Title
+          </h3>
+           
+          <span
+            class="m-i18n m-accordion__hidden"
+          >
+            Cliquer pour afficher le contenu
+          </span>
+           
+          <!---->
+        </div>
+         
+        <span
+          aria-hidden="true"
+          class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+          title="Cliquer pour afficher le contenu"
+        />
+      </div>
+       
+      <!---->
+    </article>
+  </div>
+</article>
+`;
+
+exports[`Storyshots components|m-accordion-group toggle-link-left 1`] = `
+<article
+  class="m-accordion-group"
+>
+  <div
+    class="m-accordion-group__header m--is-toggle-link-left"
   >
     <div
       class="m-accordion-group__header-title"
@@ -2271,7 +2271,7 @@ exports[`Storyshots components|m-accordion-group/secondary-content m-link 1`] = 
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--has-secondary-content m--is-reserve-header"
+    class="m-accordion-group__header m--has-secondary-content m--is-toggle-link-left"
   >
     <div
       class="m-accordion-group__header-title"
@@ -2582,12 +2582,12 @@ exports[`Storyshots components|m-accordion-group/secondary-content no-title 1`] 
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group/secondary-content no-title-reverse-header 1`] = `
+exports[`Storyshots components|m-accordion-group/secondary-content no-title-toggle-link-left 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--no-title m--has-secondary-content m--is-reserve-header"
+    class="m-accordion-group__header m--no-title m--has-secondary-content m--is-toggle-link-left"
   >
     <!---->
      
@@ -2725,12 +2725,12 @@ exports[`Storyshots components|m-accordion-group/secondary-content no-title-reve
 </article>
 `;
 
-exports[`Storyshots components|m-accordion-group/secondary-content reverse-header 1`] = `
+exports[`Storyshots components|m-accordion-group/secondary-content toggle-link-left 1`] = `
 <article
   class="m-accordion-group"
 >
   <div
-    class="m-accordion-group__header m--has-secondary-content m--is-reserve-header"
+    class="m-accordion-group__header m--has-secondary-content m--is-toggle-link-left"
   >
     <div
       class="m-accordion-group__header-title"

@@ -1,30 +1,31 @@
 import Vue, { PluginObject } from 'vue';
+import { MCurrencyType } from '../../utils/money/money';
 import { ModulVue } from '../../utils/vue/vue';
 import { MONEY_NAME } from '../filter-names';
 
-
-// ISO 4217  https://www.currency-iso.org/en/home/tables/table-a1.html
-export enum MCurrencyType {
-    CAD = 'CAD',
-    USD = 'USD',
-    EUR = 'EUR'
+export interface FormatCurrencyOptions {
+    currency: MCurrencyType;
+    stripDecimalZeroes?: boolean;
 }
 
-export function formatCurrency(money: number, currency = MCurrencyType.CAD): string {
+export function formatCurrency(money: number, currency: MCurrencyType): string {
+    return formatCurrencyWithOptions(money, { currency });
+}
 
-    if (!isNaN(money)) {
-
-        let numberString: string = new Number(money).toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
+export function formatCurrencyWithOptions(money: number, options: FormatCurrencyOptions): string {
+    if ((!isNaN(money) && money) || money === 0) {
+        const stripDecimalZeroes: boolean = Number.isInteger(money) && !!options.stripDecimalZeroes;
+        return money.toLocaleString((Vue.prototype as ModulVue).$i18n.getCurrentLocale(), {
             style: 'currency',
-            currency: currency
+            currency: options.currency,
+            minimumFractionDigits: stripDecimalZeroes ? 0 : undefined,
+            maximumFractionDigits: stripDecimalZeroes ? 0 : undefined
         });
-
-        return numberString;
     } else {
         return '';
     }
-
 }
+
 
 
 const MoneyPlugin: PluginObject<any> = {

@@ -39,6 +39,9 @@
     <h3>Period Format</h3>
 
     <h4>Compact Mode</h4>
+    <h5>short format</h5>
+    <p v-html="formattedPeriodShortDate"></p>
+    <h5>Long format</h5>
     <p v-html="formattedPeriod"></p>
     <p v-html="$options.filters['f-m-period'](periodThroughFilter)"></p>
 

@@ -260,9 +260,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
             onSortApplied(columnTable: MColumnTable): void {
                 this.$data.rows.sort((a, b) => {
                     if (a[columnTable.dataProp] < b[columnTable.dataProp]) {
-                        return 1 * columnTable.sortDirection!;
-                    } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
                         return -1 * columnTable.sortDirection!;
+                    } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
+                        return 1 * columnTable.sortDirection!;
                     }
                     return 0;
                 });

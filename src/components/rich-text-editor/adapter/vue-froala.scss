@@ -1,5 +1,5 @@
 @import 'commons';
-@import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css"); /* FA CSS import */
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css'); /* FA CSS import */
 
 .vue-froala {
     overflow: hidden;
@@ -11,7 +11,7 @@
 
     // to overcome input-style base padding, minus space for the label.
     .m-input-style.m--is-label-up.m--is-focus & {
-        margin-top: -4px // magic number
+        margin-top: -4px; // magic number
     }
 
     // basic body padding for all states
@@ -19,9 +19,11 @@
         padding: $m-input-style--padding;
     }
 
-    /deep/ .fas { font-style: normal; }
+    /deep/ .fas {
+        font-style: normal;
+    }
 
-    /deep/ button[id^=fullscreen] {
+    /deep/ button[id^='fullscreen'] {
         float: right;
     }
 
@@ -50,7 +52,9 @@
             box-shadow: unset;
         }
 
-        .fr-wrapper.show-placeholder .fr-placeholder { display: none; }
+        .fr-wrapper.show-placeholder .fr-placeholder {
+            display: none;
+        }
     }
 
     &.m--is-disabled /deep/ {
@@ -89,7 +93,7 @@
 
         .fr-box.fr-basic .fr-element {
             padding: unset;
-            font-weight: $m-font-weight;
+            font-weight: $m-font-weight--light;
             word-wrap: break-word;
             -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
             border-left: 0 transparent;
@@ -112,11 +116,11 @@
     &.m--is-focus /deep/ {
         .fr-placeholder {
             color: $m-color--disabled;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
         }
 
         .fr-box.fr-basic .fr-element {
-            font-weight: $m-font-weight;
+            font-weight: $m-font-weight--light;
             word-wrap: break-word;
             -moz-user-select: text; // Dirty fix for text selection in firefox if the rich-text is in a draggable container.
         }
@@ -237,19 +241,19 @@
         }
 
         .fr-input-line {
-            input[type=text],
+            input[type='text'],
             textarea {
                 transition: border-color $m-transition-duration ease;
                 position: relative;
                 font-family: inherit;
                 font-size: $m-font-size;
-                font-weight: $m-font-weight--bold;
+                font-weight: $m-font-weight--semi-bold;
                 color: $m-color--text;
                 border-bottom-color: $m-color--grey;
 
                 &::placeholder {
                     color: $m-color--disabled;
-                    font-weight: $m-font-weight--bold;
+                    font-weight: $m-font-weight--semi-bold;
                 }
 
                 &:disabled {
@@ -278,11 +282,11 @@
         /deep/ .fr-command {
             display: none;
 
-            &[data-cmd*="-sub-menu"],
-            &[data-cmd="fullscreen"],
-            &[data-cmd="insertLink"],
-            &[data-cmd="insertImage"],
-            &[data-cmd="specialCharacters"] {
+            &[data-cmd*='-sub-menu'],
+            &[data-cmd='fullscreen'],
+            &[data-cmd='insertLink'],
+            &[data-cmd='insertImage'],
+            &[data-cmd='specialCharacters'] {
                 display: inline-block;
             }
 
@@ -310,8 +314,8 @@
         /deep/ .fr-command {
             display: inline-block;
 
-            &[data-cmd*="-sub-menu"],
-            &[data-cmd="hide"] {
+            &[data-cmd*='-sub-menu'],
+            &[data-cmd='hide'] {
                 display: none;
             }
         }

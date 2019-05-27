@@ -1,6 +1,13 @@
 @import 'commons';
 
-$m-table--icon-vertical-offset: -5px !default;
+@mixin m-table-sortable-icon-select() {
+    opacity: 1;
+    transform: translate(0, 0);
+
+    &.m--is-sort-desc {
+        transform: translate(0, 0) rotate(180deg);
+    }
+}
 
 .m-table {
     thead {
@@ -12,25 +19,18 @@ $m-table--icon-vertical-offset: -5px !default;
 
         th {
             color: $m-color--grey;
-            font-weight: $m-font-weight--bold;
+            font-weight: $m-font-weight--semi-bold;
 
             &.m--is-sortable {
-                .m-table__header-name {
-                    cursor: pointer;
-                }
-
-                .m-table__sortable-icon {
-                    position: relative;
-                    top: $m-table--icon-vertical-offset;
-                    opacity: 0;
-                }
+                cursor: pointer;
 
                 &:hover {
                     color: $m-color--grey-darker;
 
                     .m-table__sortable-icon {
                         color: $m-color--grey;
-                        opacity: 0.6;
+
+                        @include m-table-sortable-icon-select();
                     }
                 }
 
@@ -39,7 +39,8 @@ $m-table--icon-vertical-offset: -5px !default;
 
                     .m-table__sortable-icon {
                         color: $m-color--grey-darker;
-                        opacity: 1;
+
+                        @include m-table-sortable-icon-select();
                     }
                 }
             }
@@ -90,6 +91,31 @@ $m-table--icon-vertical-offset: -5px !default;
         }
     }
 
+    &__header-wrap {
+        display: flex;
+        align-items: center;
+    }
+
+    &__header-name {
+        position: relative;
+        z-index: 1;
+    }
+
+    .m-table__sortable-icon {
+        transition: transform $m-transition-duration ease, opacity $m-transition-duration ease;
+        position: relative;
+        z-index: 0;
+        opacity: 0;
+        margin-left: $m-spacing--xs;
+        transform: translate(0, 4px);
+
+        &:focus {
+            color: $m-color--text;
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    }
+
     &__loading td {
         padding: 0;
         height: auto;
@@ -101,7 +127,7 @@ $m-table--icon-vertical-offset: -5px !default;
         height: 260px; // magic number
         color: $m-color--grey;
         font-size: $m-font-size--l;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
 
         &__precision {
             font-size: $m-font-size;

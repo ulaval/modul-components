@@ -535,6 +535,24 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         return !this.filterable || (this.filterable && !this.open);
     }
 
+    private get hasPlaceholderIcon(): boolean {
+        if (UserAgentUtil.isEdge() && !UserAgentUtil.isBlink()) {
+            return this.filterable && this.selectedText === '' && this.isEdgeSupport;
+        } else if (UserAgentUtil.isGecko() && !UserAgentUtil.isBlink()) {
+            return this.filterable && this.selectedText === '' && this.isFirefoxSupport;
+        } else {
+            return this.filterable && this.selectedText === '';
+        }
+    }
+
+    private get isEdgeSupport(): boolean {
+        return UserAgentUtil.isEdge() && this.placeholder === '' || this.placeholder === undefined;
+    }
+
+    private get isFirefoxSupport(): boolean {
+        return UserAgentUtil.isGecko() && this.placeholder === '' || this.placeholder === undefined;
+    }
+
 }
 
 const DropdownPlugin: PluginObject<any> = {

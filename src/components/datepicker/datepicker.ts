@@ -58,6 +58,9 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: false })
     public hideInternalErrorMessage: boolean;
 
+    @Prop({ default: false })
+    public skipInputValidation: boolean;
+
     private internalOpen: boolean = false;
     private internalCalendarErrorMessage: string = '';
     private inputModel = '';
@@ -137,7 +140,9 @@ export class MDatepicker extends ModulVue {
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.$emit('blur');
-            this.showErrorMessage(this.inputModel);
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
         }
 
     }
@@ -161,25 +166,28 @@ export class MDatepicker extends ModulVue {
 
     private inputDate(inputValue: string): void {
         this.inputModel = inputValue;
-
-        if (!inputValue || inputValue === '') {
-            // clear the value
-            this.model = '';
-            this.clearErrorMessage();
-        } else if (inputValue.length === 10) {
-
-            if (this.showErrorMessage(inputValue)) {
-                this.model = this.inputModel;
-            } else {
-                this.model = '';
-            }
+        if (this.skipInputValidation) {
+            this.model = inputValue;
         } else {
-            // we are editing, clear error message and hide popup
-            if (this.open) {
-                this.open = false;
+            if (!inputValue || inputValue === '') {
+                this.model = '';
+                this.clearErrorMessage();
+            } else if (inputValue.length === 10) {
+
+                if (this.showErrorMessage(inputValue)) {
+                    this.model = this.inputModel;
+                } else {
+                    this.model = '';
+                }
+            } else {
+                if (this.open) {
+                    this.open = false;
+                }
+                this.model = '';
+                this.clearErrorMessage();
             }
-            this.clearErrorMessage();
         }
+
     }
 
     private clearErrorMessage(): void {
@@ -218,8 +226,11 @@ export class MDatepicker extends ModulVue {
 
         if (this.internalDateModel !== this.convertModelToString(value)) {
             this.internalDateModel = this.convertModelToString(value);
-            this.inputModel = this.internalDateModel;
-            this.showErrorMessage(this.inputModel);
+
+            this.inputModel = this.internalDateModel ? this.internalDateModel : '';
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
         }
 
     }
@@ -274,14 +285,11 @@ export class MDatepicker extends ModulVue {
     private onBlur(event: Event): void {
         this.as<InputManagement>().internalIsFocus = false;
 
-        if (this.inputModel && this.inputModel.length < 10) {
-            // clear the model
-            this.model = '';
-        }
-
         if (!this.open) { // do not emit blur if still open
             this.$emit('blur', event);
-            this.showErrorMessage(this.inputModel);
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
         }
 
 
