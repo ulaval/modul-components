@@ -21,7 +21,7 @@
         "compareValidatorErrorMessageNoName": "the values in this group must be the same",
         "dateFormatValidatorErrorMessage": "Entrez une date avec un format AAAA-MM-JJ",
         "dateFormValidatorErrorSummaryMessage": "Le format de la date est AAAA-MM-JJ pour %(controlLabel)s",
-        "dateBetweenValidatorErrorMessage": "Entrez une date comprise %(formattedPeriod)s",
-        "dateBetweenValidatorErrorSummaryMessage": "La date doit être comprise %(formattedPeriod)s pour %(controlLabel)s"
+        "dateBetweenValidatorErrorMessage": "Entrez une date comprise entre le %(start)s et le %(end)s",
+        "dateBetweenValidatorErrorSummaryMessage": "La date doit être comprise entre le %(start)s et le %(end)s pour %(controlLabel)s"
     }
 }

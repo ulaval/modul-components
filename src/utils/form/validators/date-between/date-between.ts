@@ -1,4 +1,4 @@
-import { PeriodFilter } from '../../../../filters/date/period/period';
+import { dateFilter } from '../../../../filters/date/date/date';
 import { FormatMode } from '../../../i18n/i18n';
 import ModulDate from '../../../modul-date/modul-date';
 import { ModulVue } from '../../../vue/vue';
@@ -10,7 +10,10 @@ import { ValidatorKeys } from '../validator-error-keys';
 
 
 export const DateBetweenValidator: Function = (controlLabel: string, start: string, end: string, options: ControlValidatorOptions): ControlValidator => {
-    const formattedPeriod: string = PeriodFilter.formatPeriod({ start: new Date(start), end: new Date(end) });
+
+    const startFormatted: string = dateFilter(new ModulDate(start).toDate());
+    const endFormatted: string = dateFilter(new ModulDate(end).toDate());
+
     return {
         key: ValidatorKeys.Date,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -32,7 +35,8 @@ export const DateBetweenValidator: Function = (controlLabel: string, start: stri
                     'm-form:dateBetweenValidatorErrorMessage',
                     {
                         controlLabel,
-                        formattedPeriod
+                        start: startFormatted,
+                        end: endFormatted
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
@@ -40,7 +44,8 @@ export const DateBetweenValidator: Function = (controlLabel: string, start: stri
                     'm-form:dateBetweenValidatorErrorSummaryMessage',
                     {
                         controlLabel,
-                        formattedPeriod
+                        start: startFormatted,
+                        end: endFormatted
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )

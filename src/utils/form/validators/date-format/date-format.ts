@@ -29,14 +29,14 @@ export const DateFormatValidator: Function = (controlLabel: string, options: Con
         error: options && options.error ?
             options.error : {
                 message: (ModulVue.prototype.$i18n).translate(
-                    'm-form:betweenValidatorErrorMessage',
+                    'm-form:dateFormatValidatorErrorMessage',
                     {
                         controlLabel
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:betweenValidatorErrorSummaryMessage',
+                    'm-form:dateFormValidatorErrorSummaryMessage',
                     { controlLabel },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )

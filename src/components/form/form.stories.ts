@@ -9,6 +9,8 @@ import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { BetweenValidator } from '../../utils/form/validators/between/between';
 import { CompareValidator } from '../../utils/form/validators/compare/compare';
+import { DateBetweenValidator } from '../../utils/form/validators/date-between/date-between';
+import { DateFormatValidator } from '../../utils/form/validators/date-format/date-format';
 import { EmailValidator } from '../../utils/form/validators/email/email';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { MaxValidator } from '../../utils/form/validators/max/max';
@@ -468,6 +470,85 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
                             :valid="betweenField.valid"
                             v-m-control="betweenField">
             </m-integerfield>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('date format', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [DateFormatValidator('date')]
+                    )
+                }
+            )
+        }),
+        computed: {
+            dateField(): FormControl<string> {
+                return this.formGroup.getControl('date');
+            }
+        },
+
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <p>default validationType =  {{ dateField.validators[0].validationType }}</p>
+            <m-datepicker v-model="dateField.value"
+                            :skip-input-validation="true"
+                            :error="dateField.hasError()"
+                            :error-message="dateField.errorMessage"
+                            :label="dateField.name"
+                            :valid="dateField.valid"
+                            v-m-control="dateField">
+            </m-datepicker>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('date between', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [DateBetweenValidator('date', '2019-05-20', '2019-05-30')]
+                    )
+                }
+            )
+        }),
+        computed: {
+            dateField(): FormControl<string> {
+                return this.formGroup.getControl('date');
+            }
+        },
+
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <p> min = 2019-05-20  max = 2019-05-30</p>
+            <p>default validationType =  {{ dateField.validators[0].validationType }}</p>
+            <m-datepicker v-model="dateField.value"
+                            :skip-input-validation="true"
+                            min="2008-01-01"
+                            max="2019-05-30"
+                            :error="dateField.hasError()"
+                            :error-message="dateField.errorMessage"
+                            :label="dateField.name"
+                            :valid="dateField.valid"
+                            v-m-control="dateField">
+            </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
                         :form="formGroup.id">Submit</m-button>

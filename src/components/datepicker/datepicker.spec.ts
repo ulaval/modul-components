@@ -24,7 +24,6 @@ describe('MDatepicker', () => {
         Vue.use(DatepickerPlugin);
         Vue.use(ModulPlugin);
         wrapper = mount(MDatepicker, {
-            sync: false,
             localVue: localVue,
             stubs: {
                 transition: TransitionStub as any,
@@ -45,11 +44,10 @@ describe('MDatepicker', () => {
     });
 
     it('When a invalid date is typed the model is cleared and error is shown', async () => {
-        wrapper.trigger('click');
+
         wrapper.setProps({ value: '2019-06-05' });
 
         let input: Wrapper<any> = wrapper.find('input');
-
         await Vue.nextTick();
         expect((input.element as HTMLInputElement).value).toBe('2019-06-05');
 
