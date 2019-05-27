@@ -78,49 +78,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
         `
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/fields`, module)
-    .add('datepicker', () => ({
-        data: () => ({
-            formGroup: new FormGroup(
-                {
-                    'date': new FormControl<string>(
-                        [
-                            RequiredValidator('date')
-                        ]
-                    )
-                }
-            )
-        }),
-        computed: {
-            dateField(): void {
-                return this.$data.formGroup.getControl('date');
-            }
-        },
-        template: `
-        <m-form class="m-u--margin-top"
-                :form-group="formGroup">
-                <m-datepicker   v-m-control="dateField"
-                                v-model="dateField.value"
-                                :required-marker="true"
-                                label="Birthdate"
-                                min="1900-01-01"
-                                max="2020-01-01"
-                                :error="dateField.hasError()"
-                                :error-message="dateField.errorMessage"
-                                :disabled="!dateField.enabled"
-                                :readonly="dateField.readonly"
-                                :waiting="dateField.waiting"></m-datepicker>
-            <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
-                <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
-            </p>
-        </m-form>
-        `
-    }));
-
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallouts`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
@@ -1316,12 +1273,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
             <m-textfield v-m-control="nameField"
                          v-model="nameField.value"
                          label="Name Field"
-                         :required-marker="true"
                          :error="nameField.hasError()"
-                         :error-message="nameField.errorMessage"
-                         :disabled="!nameField.enabled"
-                         :readonly="nameField.readonly"
-                         :waiting="nameField.waiting">
+                         :error-message="nameField.errorMessage"">
             </m-textfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -1360,12 +1313,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         <m-textarea v-m-control="descriptionField"
                     v-model="descriptionField.value"
                     label="Description Field"
-                    :required-marker="true"
                     :error="descriptionField.hasError()"
-                    :error-message="descriptionField.errorMessage"
-                    :disabled="!descriptionField.enabled"
-                    :readonly="descriptionField.readonly"
-                    :waiting="descriptionField.waiting"></m-textarea>
+                    :error-message="descriptionField.errorMessage""></m-textarea>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
@@ -1406,10 +1355,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       max="2020-01-01"
                       :required-marker="true"
                       :error="birthDateField.hasError()"
-                      :error-message="birthDateField.errorMessage"
-                      :disabled="!birthDateField.enabled"
-                      :readonly="birthDateField.readonly"
-                      :waiting="birthDateField.waiting"></m-datepicker>
+                      :error-message="birthDateField.errorMessage"></m-datepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
@@ -1449,10 +1395,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                     label="Type"
                     :required-marker="true"
                     :error="typeField.hasError()"
-                    :error-message="typeField.errorMessage"
-                    :disabled="!typeField.enabled"
-                    :readonly="typeField.readonly"
-                    :waiting="typeField.waiting">
+                    :error-message="typeField.errorMessage">
             <m-dropdown-item v-for="type of types"
                              :value="type"
                              :label="type"></m-dropdown-item>
@@ -1493,10 +1436,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         <m-checkbox v-m-control="activeField"
                     v-model="activeField.value"
                     :error="activeField.hasError()"
-                    :error-message="activeField.errorMessage"
-                    :disabled="!activeField.enabled"
-                    :readonly="activeField.readonly"
-                    :waiting="activeField.waiting">Is active ?</m-checkbox>
+                    :error-message="activeField.errorMessage">Is active ?</m-checkbox>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
@@ -1535,10 +1475,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                        v-model="coupeField.value"
                        label="Style de coupe"
                        :error="coupeField.hasError()"
-                       :error-message="coupeField.errorMessage"
-                       :disabled="!coupeField.enabled"
-                       :readonly="coupeField.readonly"
-                       :waiting="coupeField.waiting">
+                       :error-message="coupeField.errorMessage">
             <m-radio v-for="coupe of coupes"
                      :value="coupe">{{coupe}}</m-radio>
          </m-radio-group>
@@ -1580,10 +1517,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       label="Time"
                       :required-marker="true"
                       :error="timeField.hasError()"
-                      :error-message="timeField.errorMessage"
-                      :disabled="!timeField.enabled"
-                      :readonly="timeField.readonly"
-                      :waiting="timeField.waiting"></m-timepicker>
+                      :error-message="timeField.errorMessage"></m-timepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
@@ -1622,10 +1556,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                         label="Decimal"
                         :required-marker="true"
                         :error="decimalField.hasError()"
-                        :error-message="decimalField.errorMessage"
-                        :disabled="!decimalField.enabled"
-                        :readonly="decimalField.readonly"
-                        :waiting="decimalField.waiting">
+                        :error-message="decimalField.errorMessage">
 
         </m-decimalfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
@@ -1666,10 +1597,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       label="Price"
                       :required-marker="true"
                       :error="priceField.hasError()"
-                      :error-message="priceField.errorMessage"
-                      :disabled="!priceField.enabled"
-                      :readonly="priceField.readonly"
-                      :waiting="priceField.waiting"></m-moneyfield>
+                      :error-message="priceField.errorMessage"></m-moneyfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
@@ -1708,10 +1636,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                         label="Integer"
                         :required-marker="true"
                         :error="integerField.hasError()"
-                        :error-message="integerField.errorMessage"
-                        :disabled="!integerField.enabled"
-                        :readonly="integerField.readonly"
-                        :waiting="integerField.waiting">
+                        :error-message="integerField.errorMessage">
 
         </m-integerfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
@@ -1750,10 +1675,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         <m-switch v-m-control="switchField"
                   v-model="switchField.value"
                   :error="switchField.hasError()"
-                  :error-message="switchField.errorMessage"
-                  :disabled="!switchField.enabled"
-                  :readonly="switchField.readonly"
-                  :waiting="switchField.waiting">État</m-switch>
+                  :error-message="switchField.errorMessage">État</m-switch>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
                           :form="formGroup.id">Submit</m-button>
@@ -1803,9 +1725,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                         :required-marker="true"
                         :error="autocompleteField.hasError()"
                         :error-message="autocompleteField.errorMessage"
-                        :disabled="!autocompleteField.enabled"
-                        :readonly="autocompleteField.readonly"
-                        :waiting="autocompleteField.waiting"
                         @complete="onComplete"></m-autocomplete>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -1843,10 +1762,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         <m-daterangepicker v-m-control="daterangeField"
                            v-model="daterangeField.value"
                            :error="daterangeField.hasError()"
-                           :error-message="daterangeField.errorMessage"
-                           :disabled="!daterangeField.enabled"
-                           :readonly="daterangeField.readonly"
-                           :waiting="daterangeField.waiting">
+                           :error-message="daterangeField.errorMessage">
         </m-daterangepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
