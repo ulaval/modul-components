@@ -1,5 +1,4 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -20,11 +19,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${PAGINATION_NAME}`, module)
             itemsTotal: 500
 
         }),
-        template: '<m-pagination v-model="model1" :items-total="itemsTotal"></m-pagination>'
+        template: `<m-pagination v-model="model1" :items-total="itemsTotal"></m-pagination>`
     }))
     .add('value', () => ({
         data: () => ({
-            model1: 38,
+            model1: 12,
             itemsTotal: 500
         }),
         template: '<m-pagination v-model="model1" :value="model1" :items-total="itemsTotal"></m-pagination>'
@@ -44,27 +43,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${PAGINATION_NAME}`, module)
         template: '<m-pagination v-model="model1" :loading="true" :items-total="itemsTotal"></m-pagination>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${PAGINATION_NAME}/all props`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('make your own test (knobs)', () => ({
-        data: () => ({
-            model1: 1
-        }),
-        props: {
-            value: {
-                default: number('value', 4)
-            },
-            itemsTotal: {
-                default: number('value', 666)
-            },
-            itemsPerPage: {
-                default: number('value', 25)
-            },
-            loading: {
-                default: boolean('loading', false)
-            }
-        },
-        template: `<m-pagination v-model="model1" :items-per-page="itemsPerPage" :items-total="itemsTotal"
-                   :loading="loading" :value="value"></m-pagination>`
-    }));
