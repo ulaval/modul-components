@@ -536,7 +536,21 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get hasPlaceholderIcon(): boolean {
-        return this.filterable && this.selectedText === '';
+        if (UserAgentUtil.isEdge() && !UserAgentUtil.isBlink()) {
+            return this.filterable && this.selectedText === '' && this.isEdgeSupport;
+        } else if (UserAgentUtil.isGecko() && !UserAgentUtil.isBlink()) {
+            return this.filterable && this.selectedText === '' && this.isFirefoxSupport;
+        } else {
+            return this.filterable && this.selectedText === '';
+        }
+    }
+
+    private get isEdgeSupport(): boolean {
+        return UserAgentUtil.isEdge() && this.placeholder === '' || this.placeholder === undefined;
+    }
+
+    private get isFirefoxSupport(): boolean {
+        return UserAgentUtil.isGecko() && this.placeholder === '' || this.placeholder === undefined;
     }
 
 }

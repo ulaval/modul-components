@@ -6,7 +6,7 @@ exports[`MTable Given a table full of data When using a footer Then should rende
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button icon-name="m-svg__arrow-thin--down" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon m--is-sort-asc"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -36,7 +36,7 @@ exports[`MTable Given a table full of data When using slot to replace a td Then 
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button icon-name="m-svg__arrow-thin--down" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon m--is-sort-asc"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -102,7 +102,7 @@ exports[`MTable Given a table full of data When using slot to replace the tbody 
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button icon-name="m-svg__arrow-thin--down" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon m--is-sort-asc"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -122,7 +122,7 @@ exports[`MTable Given a table full of data When we don't use slots Then should r
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -147,7 +147,7 @@ exports[`MTable Given an empty table When a custom slot is given Then should ren
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -167,7 +167,7 @@ exports[`MTable Given an empty table When loading Then should render correctly 1
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button disabled="disabled" icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button disabled="disabled" icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -195,7 +195,7 @@ exports[`MTable Given an empty table When we use the default template Then shoul
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
         <div class="m-table__header-wrap"><span class="m-table__header-name">A</span>
-          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="12px" class="m-table__sortable-icon"></m-icon-button>
+          <m-icon-button icon-name="m-svg__arrow-thin--up" skin="bold" button-size="14px" icon-size="12px" title="m-table:sort" class="m-table__sortable-icon"></m-icon-button>
         </div>
       </th>
       <th scope="col"><span class="m-table__header-name">B</span></th>
@@ -204,7 +204,7 @@ exports[`MTable Given an empty table When we use the default template Then shoul
   <tbody>
     <tr class="m-table__message">
       <td colspan="2">
-        <p>m-table:empty-table</p>
+        <p>m-table:no-data</p>
       </td>
     </tr>
   </tbody>

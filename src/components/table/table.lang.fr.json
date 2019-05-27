@@ -1,7 +1,8 @@
 {
     "m-table": {
-        "empty-table": "Aucune donnée à afficher",
+        "no-data": "Aucune donnée à afficher",
         "loading": "Chargement en cours",
-        "please-wait": "Veuillez patienter svp."
+        "please-wait": "Veuillez patienter svp.",
+        "sort": "Trier la colonne"
     }
 }

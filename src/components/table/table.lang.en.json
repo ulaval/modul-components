@@ -1,7 +1,8 @@
 {
     "m-table": {
-        "empty-table": "No data to display",
+        "no-data": "No data to display",
         "loading": "Loading",
-        "please-wait": "Please wait."
+        "please-wait": "Please wait.",
+        "sort": "Sort column"
     }
 }

@@ -1,26 +1,24 @@
-<form :id="form.id"
-      class="m-form"
-      @submit.prevent="submit"
-      @reset.prevent="reset">
+<form :id="formGroup.id"
+      @submit.prevent="submit(false)"
+      @reset.prevent="reset(false)">
     <m-accordion-transition>
         <m-message class="m-form__message-summary"
-                   v-if="errors.length > 0"
-                   :state="messageStateError"
+                   v-if="displaySummary"
+                   state="error"
+                   :close-button="true"
                    ref="summary">
             <ul>
-                <li v-for="(error, index) in errors"
+                <li v-for="(error, index) in formErrors"
                     :key="index"
-                    v-html="error"></li>
+                    v-html="error.groupMessage || error.message">
+                </li>
             </ul>
         </m-message>
     </m-accordion-transition>
-    <slot name="serverResponse">
-    </slot>
-    <p class="m-form__required"
-       v-if="requiredMarker">
-        <span class="m-form__required-marker">*</span>
-        <span class="m-form__required-label">{{ 'm-form:required' | f-m-i18n }}</span>
-    </p>
-
+    <m-toast :open.sync="displayToast"
+             position="top-center"
+             state="error">
+        <p v-html="toastMessage"></p>
+    </m-toast>
     <slot></slot>
 </form>

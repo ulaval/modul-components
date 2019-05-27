@@ -40,11 +40,13 @@
                                 <div>
                                     <m-button @click="save()"
                                               :disabled="isSaveButtonDisabled"
+                                              :waiting="isWaiting"
                                               class="m-overlay__footer__save-button">
                                         <m-i18n k="m-overlay:save"></m-i18n>
                                     </m-button>
                                     <m-button @click="cancel()"
-                                              skin="secondary">
+                                              skin="secondary"
+                                              :disabled="isWaiting">
                                         <m-i18n k="m-overlay:cancel"></m-i18n>
                                     </m-button>
                                 </div>
@@ -59,11 +61,13 @@
                             <div>
                                 <m-button @click="save()"
                                           :disabled="isSaveButtonDisabled"
+                                          :waiting="isWaiting"
                                           class="m-overlay__footer__save-button">
                                     <m-i18n k="m-overlay:save"></m-i18n>
                                 </m-button>
                                 <m-button @click="cancel()"
-                                          skin="secondary">
+                                          skin="secondary"
+                                          :disabled="isWaiting">
                                     <m-i18n k="m-overlay:cancel"></m-i18n>
                                 </m-button>
                             </div>
