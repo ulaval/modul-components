@@ -1,6 +1,6 @@
 import { FormControl } from '../../form-control';
 import { ControlValidator } from '../control-validator';
-import { DateValidator } from './date-format';
+import { DateFormatValidator } from './date-format';
 
 describe('Required validator', () => {
 
@@ -8,15 +8,31 @@ describe('Required validator', () => {
     let formControl: FormControl<string>;
 
     beforeEach(() => {
-        this.formControl = new FormControl<string>();
+        formControl = new FormControl<string>();
 
-        this.validator = DateValidator('controlLabel');
+        validator = DateFormatValidator('controlLabel');
     });
 
 
     it('should return true when undefined', () => {
         formControl.value = undefined;
-        validator.validationFunction(formControl);
+        expect(validator.validationFunction(formControl)).toBe(true);
+    });
+
+
+    it('should return false when unfinished ', () => {
+        formControl.value = '2001-01';
+        expect(validator.validationFunction(formControl)).toBe(false);
+    });
+
+    it('should return false when invalid ', () => {
+        formControl.value = '2001-01-99';
+        expect(validator.validationFunction(formControl)).toBe(false);
+    });
+
+    it('should return true when valid ', () => {
+        formControl.value = '2001-01-01';
+        expect(validator.validationFunction(formControl)).toBe(true);
     });
 
 });

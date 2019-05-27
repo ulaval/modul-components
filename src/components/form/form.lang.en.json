@@ -18,6 +18,10 @@
         "emailValidatorErrorSummaryMessage": "The email format for %(controlLabel)s is not valid",
         "compareValidatorErrorMessage": "the values of %(controlLabels)s must be the same",
         "compareValidatorErrorSummaryMessage": "the values of %(controlLabels)s must be the same",
-        "compareValidatorErrorMessageNoName": "the values in this group must be the same"
+        "compareValidatorErrorMessageNoName": "the values in this group must be the same",
+        "dateFormatValidatorErrorMessage": "Enter a date in the format YYYY-MM-DD",
+        "dateFormValidatorErrorSummaryMessage": "The date format is YYYY-MM-DD for %(controlLabel)s ",
+        "dateBetweenValidatorErrorMessage": "Enter a date between %(formattedPeriod)s",
+        "dateBetweenValidatorErrorSummaryMessage": "The date must be between %(formattedPeriod)s for %(controlLabel)s"
     }
 }
