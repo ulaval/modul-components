@@ -16,13 +16,7 @@ import { MinLengthValidator } from '../../utils/form/validators/min-length/min-l
 import { MinValidator } from '../../utils/form/validators/min/min';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { FORM_NAME } from '../component-names';
-import {
-    ClearErrorToast,
-    ClearSummaryMessage,
-    ErrorToast,
-    FocusOnFirstError,
-    SummaryMessage
-} from './fallouts/built-in-form-action-fallouts';
+import { ClearErrorToast, ClearSummaryMessage, ErrorToast, FocusOnFirstError, SummaryMessage } from './fallouts/built-in-form-action-fallouts';
 import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);
