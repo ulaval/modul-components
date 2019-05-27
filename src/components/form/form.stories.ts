@@ -380,32 +380,32 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('min', () => ({
+    .add('min number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'min 5': new FormControl<number>(
-                        [MinValidator('min 5', 5)]
-                    ),
-                    'min 1/1/2019': new FormControl<Date>(
-                        [MinValidator('min 1/1/2019', new Date(2019, 0, 1))]
+                    'min5': new FormControl<number>(
+                        [MinValidator('min5', 5)]
                     )
                 }
             )
         }),
+        computed: {
+            min5Field(): FormControl<string> {
+                return this.formGroup.getControl('min5');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('min 5').value"
-                        :error-message="formGroup.getControl('min 5').errors.length > 0 ? formGroup.getControl('min 5').errors[0].message : null"
-                        :label="formGroup.getControl('min 5').name"
-                        v-m-control="formGroup.getControl('min 5')">
+            <p>default validationType =  {{ min5Field.validators[0].validationType }}</p>
+            <m-integerfield v-model="min5Field.value"
+                            :error="min5Field.hasError()"
+                            :error-message="min5Field.errorMessage"
+                            :label="min5Field.name"
+                            :valid="min5Field.valid"
+                            v-m-control="min5Field">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('min 1/1/2019').value"
-                        :error-message="formGroup.getControl('min 1/1/2019').errors.length > 0 ? formGroup.getControl('min 1/1/2019').errors[0].message : null"
-                        :label="formGroup.getControl('min 1/1/2019').name"
-                        v-m-control="formGroup.getControl('min 1/1/2019')">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
                         :form="formGroup.id">Submit</m-button>
@@ -416,32 +416,32 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('max', () => ({
+    .add('max number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'max 5': new FormControl<number>(
-                        [MaxValidator('max 5', 5)]
-                    ),
-                    'max 1/1/2019': new FormControl<Date>(
-                        [MaxValidator('max 1/1/2019', new Date(2019, 0, 1))]
+                    'max5': new FormControl<number>(
+                        [MaxValidator('max5', 5)]
                     )
                 }
             )
         }),
+        computed: {
+            max5Field(): FormControl<string> {
+                return this.formGroup.getControl('max5');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('max 5').value"
-                        :error-message="formGroup.getControl('max 5').errors.length > 0 ? formGroup.getControl('max 5').errors[0].message : null"
-                        :label="formGroup.getControl('max 5').name"
-                        v-m-control="formGroup.getControl('max 5')">
+            <p>default validationType =  {{ max5Field.validators[0].validationType }}</p>
+            <m-integerfield v-model="max5Field.value"
+                            :error="max5Field.hasError()"
+                            :error-message="max5Field.errorMessage"
+                            :label="max5Field.name"
+                            :valid="max5Field.valid"
+                            v-m-control="max5Field">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('max 1/1/2019').value"
-                        :error-message="formGroup.getControl('max 1/1/2019').errors.length > 0 ? formGroup.getControl('max 1/1/2019').errors[0].message : null"
-                        :label="formGroup.getControl('max 1/1/2019').name"
-                        v-m-control="formGroup.getControl('max 1/1/2019')">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
                         :form="formGroup.id">Submit</m-button>
@@ -452,32 +452,33 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('between', () => ({
+    .add('between number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'between': new FormControl<number>(
                         [BetweenValidator('between', 2, 4)]
-                    ),
-                    'betweenDate': new FormControl<Date>(
-                        [BetweenValidator('betweenDate', new Date(2019, 0, 1), new Date(2019, 1, 1))]
                     )
                 }
             )
         }),
+        computed: {
+            betweenField(): FormControl<string> {
+                return this.formGroup.getControl('between');
+            }
+        },
+
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="formGroup.getControl('between').value"
-                        :error-message="formGroup.getControl('between').errors.length > 0 ? formGroup.getControl('between').errors[0].message : null"
-                        :label="formGroup.getControl('between').name"
-                        v-m-control="formGroup.getControl('between')">
+            <p>default validationType =  {{ betweenField.validators[0].validationType }}</p>
+            <m-integerfield v-model="betweenField.value"
+                            :error="betweenField.hasError()"
+                            :error-message="betweenField.errorMessage"
+                            :label="betweenField.name"
+                            :valid="betweenField.valid"
+                            v-m-control="betweenField">
             </m-integerfield>
-            <m-datepicker v-model.trim="formGroup.getControl('betweenDate').value"
-                        :error-message="formGroup.getControl('betweenDate').errors.length > 0 ? formGroup.getControl('betweenDate').errors[0].message : null"
-                        :label="formGroup.getControl('betweenDate').name"
-                        v-m-control="formGroup.getControl('betweenDate')">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
                         :form="formGroup.id">Submit</m-button>
@@ -488,37 +489,52 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('compare', () => ({
+    .add('compare fields', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<number>(
                         [EmailValidator('email')]
                     ),
-                    'confirm email': new FormControl<number>(
-                        [EmailValidator('confirm email')]
+                    'confirmemail': new FormControl<number>(
+                        [EmailValidator('confirmemail')]
                     )
                 },
                 [
-                    CompareValidator(['email', 'confirm email'])
+                    CompareValidator(['email', 'confirmemail'])
                 ]
             )
         }),
+        computed: {
+            emailField(): FormControl<string> {
+                return this.formGroup.getControl('email');
+            },
+            confirmemailField(): FormControl<string> {
+                return this.formGroup.getControl('confirmemail');
+            }
+        },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-input-group :legend="formGroup.name"
-                :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
+            <p>default validationType =  {{ formGroup.validators[0].validationType }}</p>
+            <m-input-group legend="compare two field"
+                           :valid="formGroup.valid"
+                           :error="formGroup.hasError()"
+                           :error-message="formGroup.errorMessage">
                 <div slot-scope="{  }">
-                    <m-textfield v-model.trim="formGroup.getControl('email').value"
-                                :error-message="formGroup.getControl('email').errors.length > 0 ? formGroup.getControl('email').errors[0].message : null"
-                                :label="formGroup.getControl('email').name"
-                                v-m-control="formGroup.getControl('email')">
+                    <m-textfield v-model="emailField.value"
+                                    :error="emailField.hasError()"
+                                    :error-message="emailField.errorMessage"
+                                    label="email"
+                                    :valid="emailField.valid"
+                                    v-m-control="emailField">
                     </m-textfield>
-                    <m-textfield v-model.trim="formGroup.getControl('confirm email').value"
-                                :error-message="formGroup.getControl('confirm email').errors.length > 0 ? formGroup.getControl('confirm email').errors[0].message : null"
-                                :label="formGroup.getControl('confirm email').name"
-                                v-m-control="formGroup.getControl('confirm email')">
+                    <m-textfield v-model="confirmemailField.value"
+                                    :error="confirmemailField.hasError()"
+                                    :error-message="confirmemailField.errorMessage"
+                                    label="confirm email"
+                                    :valid="confirmemailField.valid"
+                                    v-m-control="confirmemailField">
                     </m-textfield>
                 </div>
             </m-input-group>

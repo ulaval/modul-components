@@ -10,10 +10,10 @@ describe('Min validator', () => {
         );
     });
 
-    test('it should return false if value is undefined', async (done) => {
+    test('it should return true if value is undefined', async (done) => {
         expect(formControl.value).toBe(undefined);
         await formControl.validate();
-        expect(formControl.valid).toBe(false);
+        expect(formControl.valid).toBe(true);
         done();
     });
 

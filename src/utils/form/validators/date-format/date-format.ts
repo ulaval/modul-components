@@ -6,41 +6,37 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
+
 /**
- * Bound included
+ *  bounds included
  */
-export const MinValidator: Function = (controlLabel: string, min: number, options?: ControlValidatorOptions): ControlValidator => {
+export const DateValidator: Function = (controlLabel: string, options: ControlValidatorOptions): ControlValidator => {
     return {
-        key: ValidatorKeys.Min,
+        key: ValidatorKeys.Date,
         validationFunction: (control: FormControl<any>): boolean => {
             if (control instanceof FormGroup) {
-                throw Error('the min validator should not be attached to a form group');
+                throw Error('the DateValidator should not be attached to a form group');
             }
 
-            let isMin: boolean;
-
-            if (!control.value && control.value !== 0) {
-                isMin = true;
+            if (!control.value) {
+                return true;
             } else {
-                let value: number = control.value;
-                isMin = value >= min;
+                return !isNaN(Date.parse(control.value));
             }
 
-            return isMin;
         },
         error: options && options.error ?
             options.error : {
                 message: (ModulVue.prototype.$i18n).translate(
-                    'm-form:minValidatorErrorMessage',
-                    { min },
+                    'm-form:betweenValidatorErrorMessage',
+                    {
+                        controlLabel
+                    },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:minValidatorErrorSummaryMessage',
-                    {
-                        controlLabel,
-                        min
-                    },
+                    'm-form:betweenValidatorErrorSummaryMessage',
+                    { controlLabel },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )
             },
