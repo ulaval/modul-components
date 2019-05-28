@@ -19,9 +19,14 @@ export interface InputManagementFocusable {
     focusInput(): void;
 }
 
+
+const FOCUS_OUT_TIMEOUT_MS: number = 200;
+
 @Component
 export class InputManagement extends ModulVue
     implements InputManagementProps, InputManagementData, InputManagementFocusable {
+
+    hasFocusInTimeout: number;
 
     @Prop()
     @Model('input')
@@ -59,22 +64,43 @@ export class InputManagement extends ModulVue
     }
 
     onClick(event: MouseEvent): void {
-        this.internalIsFocus = this.as<InputStateMixin>().active;
+
         let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
-        if (this.internalIsFocus && inputEl) {
+        if (inputEl) {
             inputEl.focus();
         }
         this.$emit('click');
     }
 
     onFocus(event: FocusEvent): void {
+
         this.internalIsFocus = this.as<InputStateMixin>().active;
         if (this.internalIsFocus) {
             this.$emit('focus', event);
         }
     }
 
+    onFocusIn(event: FocusEvent): void {
+        window.clearTimeout(this.hasFocusInTimeout);
+
+        if (!this.internalIsFocus && this.as<InputStateMixin>().active) {
+            this.internalIsFocus = true;
+            this.$emit('focus', event);
+        }
+    }
+
+    onFocusOut(event: FocusEvent): void {
+
+        this.hasFocusInTimeout = window.setTimeout(() => {
+            this.internalIsFocus = false;
+            this.$emit('blur', event);
+        }, FOCUS_OUT_TIMEOUT_MS);
+
+    }
+
+
     onBlur(event: Event): void {
+
         this.internalIsFocus = false;
         this.$emit('blur', event);
     }

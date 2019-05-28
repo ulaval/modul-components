@@ -50,7 +50,7 @@
             </div>
         </m-input-group>
     </p>
-    <h3>Utilisation avec des champs textes (m-textfield)</h3>
+    <h3>Utilisation avec des champs textes (m-textfield) et gestion du focus</h3>
     <p class="m-u--margin-bottom">
         Un exemple de validation de données est inclut
     </p>
@@ -64,7 +64,10 @@
                        :helper-message="helperMessage"
                        :disabled="isDisabled"
                        :waiting="isWaiting"
-                       :readonly="isReadonly">
+                       :readonly="isReadonly"
+                       :display-focus="true"
+                       @focus="onFocus"
+                       @blur="onBlur">
             <div slot-scope="{ disabled, waiting, readonly, valid, error }">
                 <m-textfield label="Prénom"
                              :disabled="disabled"
@@ -152,7 +155,8 @@
                        :helper-message="helperMessage"
                        :disabled="isDisabled"
                        :waiting="isWaiting"
-                       :readonly="isReadonly">
+                       :readonly="isReadonly"
+                       :display-focus="true">
             <div slot-scope="{ disabled, waiting, readonly, valid, error }">
                 <m-rich-text-editor v-model="texteRiche"
                                     :label="'texte riche'"

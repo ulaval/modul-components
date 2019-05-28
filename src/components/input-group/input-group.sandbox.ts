@@ -63,6 +63,16 @@ export class MInputGroupSandbox extends Vue {
     validerPrenom(): void {
         this.errorMessage = (this.errorMessagePrenom) ? this.errorMessagePrenom : this.errorMessage;
     }
+
+    onFocus(): void {
+        // tslint:disable-next-line: no-console
+        console.log('OnFocus!');
+    }
+
+    onBlur(): void {
+        // tslint:disable-next-line: no-console
+        console.log('OnBlur!');
+    }
 }
 
 const InputGroupSandboxPlugin: PluginObject<any> = {

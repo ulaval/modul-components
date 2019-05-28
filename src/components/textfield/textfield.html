@@ -9,6 +9,8 @@
                 'm--has-validation-message': hasValidationMessage },
                 'm--is-type-' + inputType ]"
      @click="onClick"
+     @focusin="onFocusIn"
+     @focusout="onFocusOut"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
     <m-input-style :disabled="isDisabled"
                    :waiting="isWaiting"
@@ -32,9 +34,7 @@
                :readonly="isReadonly"
                :maxlength="maxLengthNumber"
                :type="inputType"
-               @blur="onBlur"
                @change="onChange"
-               @focus="onFocus"
                @keyup="onKeyup"
                @keydown="onKeydown"
                @keydown.enter="onEnter"
@@ -78,8 +78,6 @@
                   :disabled="isDisabled || isWaiting"
                   :placeholder="placeholder"
                   :readonly="isReadonly"
-                  @focus="onFocus"
-                  @blur="onBlur"
                   @change="onChange"
                   @keypress.enter.prevent
                   @keyup="onKeyup"

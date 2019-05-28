@@ -1,5 +1,7 @@
 <fieldset class="m-input-group"
-          :class="classes">
+          :class="classes"
+          @focusin="onFocusIn"
+          @focusout="onFocusOut">
     <legend v-if="legend && visible"
             class="m-input-group__legend">{{ legend }}</legend>
     <slot :disabled="isDisabled"

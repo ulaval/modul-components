@@ -588,8 +588,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
                 :form-group="formGroup">
             <p>default validationType =  {{ formGroup.validators[0].validationType }}</p>
             <m-input-group legend="compare two field"
+                            v-m-control="formGroup"
                            :valid="formGroup.valid"
                            :error="formGroup.hasError()"
+                           :display-focus="true"
                            :error-message="formGroup.errorMessage">
                 <div slot-scope="{  }">
                     <m-textfield v-model="emailField.value"
@@ -1200,7 +1202,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
             <ul class="m-u--no-margin">
                 <m-input-group :error-message="roles.errors.length > 0 ? roles.errors[0].message : null"
                 v-m-control="roles"
-                :visible="false">
+                :display-focus="true">
                     <li v-for="(control, index) in roles.controls">
                         <m-checkbox
                             v-model="control.value"
@@ -1208,7 +1210,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                             :key="index">
                             {{rolesName[index]}}</m-checkbox>
                     </li>
-    </m-input-group>
+                </m-input-group>
             </ul>
 
             <p class="m-u--margin-bottom--l">
@@ -1286,6 +1288,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 :form-group="formGroup">
             <m-input-group :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null"
                            legend=""
+                           :display-focus="true"
                            v-m-control="formGroup">
 
                 <m-textfield label="Email"

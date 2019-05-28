@@ -20,6 +20,7 @@ describe('MInputStyle', () => {
     });
 
     it('should render correctly', () => {
+
         expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
     });
 
