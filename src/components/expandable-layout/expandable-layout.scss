@@ -1,0 +1,28 @@
+@import 'commons';
+
+.m-expandable-layout {
+    position: relative;
+    overflow: hidden;
+
+    &__panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    &.m--has-right-panel {
+        transition: padding-right $m-transition-duration ease;
+
+        .m-expandable-layout__panel {
+            transition: right $m-transition-duration ease;
+        }
+    }
+
+    &.m--has-left-panel {
+        transition: padding-left $m-transition-duration ease;
+
+        .m-expandable-layout__panel {
+            transition: left $m-transition-duration ease;
+        }
+    }
+}
