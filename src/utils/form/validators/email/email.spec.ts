@@ -10,24 +10,22 @@ describe('email validator', () => {
         );
     });
 
-    test('it should return false if value is undefined', async (done) => {
+    test('it should return true if value is empty', () => {
         expect(formControl.value).toBe(undefined);
-        await formControl.validate();
-        expect(formControl.valid).toBe(false);
-        done();
-    });
-
-    test('it should return false with invalid email', async (done) => {
-        formControl.value = 'test';
-        await formControl.validate();
-        expect(formControl.valid).toBe(false);
-        done();
-    });
-
-    test('it should return true with valid email', async (done) => {
-        formControl.value = 'test@test.ulaval.ca';
-        await formControl.validate();
+        formControl.validate();
         expect(formControl.valid).toBe(true);
-        done();
+    });
+
+    test('it should return false with invalid email', () => {
+        formControl.value = 'test';
+        formControl.validate();
+        expect(formControl.valid).toBe(false);
+    });
+
+    test('it should return true with valid email', () => {
+        formControl.value = 'test@test.ulaval.ca';
+        formControl.validate();
+        expect(formControl.valid).toBe(true);
+
     });
 });
