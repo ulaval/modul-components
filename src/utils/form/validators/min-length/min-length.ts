@@ -20,7 +20,7 @@ export const MinLengthValidator: Function = (controlLabel: string, minLength: nu
             let isMinLength: boolean;
 
             if (!control.value) {
-                isMinLength = false;
+                isMinLength = true;
             } else if (!isNaN(control.value)) {
                 isMinLength = control.value.toString().length >= minLength;
             } else {
