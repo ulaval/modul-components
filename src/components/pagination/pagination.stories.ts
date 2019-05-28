@@ -42,4 +42,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${PAGINATION_NAME}`, module)
         }),
         template: '<m-pagination v-model="model1" :loading="true" :items-total="itemsTotal"></m-pagination>'
     }));
-
