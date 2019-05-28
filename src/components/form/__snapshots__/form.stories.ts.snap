@@ -2090,7 +2090,9 @@ exports[`Storyshots components|m-form/rules Checkbox 2 to 5 selections 1`] = `
     <ul
       class="m-u--no-margin"
     >
-      <m-input-group>
+      <m-input-group
+        display-focus="true"
+      >
         <li>
           <div
             class="m-checkbox m--is-checkbox-left"
@@ -2449,6 +2451,7 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
     <!---->
      
     <m-input-group
+      display-focus="true"
       legend=""
     >
       <div
@@ -4301,6 +4304,7 @@ exports[`Storyshots components|m-form/validators compare fields 1`] = `
   </p>
    
   <m-input-group
+    display-focus="true"
     error-message=""
     legend="compare two field"
   />
