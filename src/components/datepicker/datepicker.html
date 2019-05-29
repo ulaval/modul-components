@@ -6,7 +6,9 @@
             'm--is-valid': isValid,
             'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
-     @click="onClick">
+     @click="onClick"
+     @focusin="onFocusIn"
+     @focusout="onFocusOut">
     <m-input-style v-m-popup:popup
                    :disabled="isDisabled"
                    :label="label"

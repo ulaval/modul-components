@@ -263,46 +263,55 @@ export class MDatepicker extends ModulVue {
     // Focus management.
 
     // override from InputManagement
-    private onFocus(event: FocusEvent): void {
-        if (!this.open) { // open on focus
-            this.open = true;
-        }
-
-        this.as<InputManagement>().internalIsFocus = this.as<InputStateMixin>().active;
-        if (this.as<InputManagement>().internalIsFocus) {
-            this.$emit('focus', event);
-        }
-    }
-
-    // override from InputManagement
     private onClick(event: MouseEvent): void {
-        this.as<InputManagement>().internalIsFocus = this.as<InputStateMixin>().active;
+
         let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
-        if (this.as<InputManagement>().internalIsFocus && inputEl) {
+        if (!this.as<InputManagement>().internalIsFocus && inputEl) {
             inputEl.focus();
         }
         this.$emit('click');
     }
 
+
+
+
+    // override from InputManagement
+    private onFocus(event: FocusEvent): void {
+        if (!this.open) { // open on focus
+            this.open = true;
+        }
+    }
+
     // override from InputManagement
     private onBlur(event: Event): void {
-        this.as<InputManagement>().internalIsFocus = false;
+    }
 
-        if (!this.open) { // do not emit blur if still open
-            this.$emit('blur', event);
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+    hasFocusInTimeout: any;
+
+    private onFocusIn(event: MouseEvent): void {
+        clearTimeout(this.hasFocusInTimeout);
+        if (!this.as<InputManagement>().internalIsFocus && this.as<InputStateMixin>().active) {
+            this.as<InputManagement>().internalIsFocus = true;
+            this.$emit('focus', event);
         }
+    }
 
-
+    private onFocusOut(event: MouseEvent): void {
+        this.hasFocusInTimeout = setTimeout(() => {
+            this.as<InputManagement>().internalIsFocus = false;
+            if (!this.open) { // do not emit blur if still open
+                this.$emit('blur', event);
+                if (!this.skipInputValidation) {
+                    this.showErrorMessage(this.inputModel);
+                }
+            }
+        }, 20);
     }
 
     // override from Input-management
     private get isFocus(): boolean {
         return this.as<InputManagement>().internalIsFocus || this.open;
     }
-
 
     private convertValueToModel(input: DatePickerSupportedTypes): string {
         if (input) {

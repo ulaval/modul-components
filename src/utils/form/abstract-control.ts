@@ -157,10 +157,6 @@ export abstract class AbstractControl {
         } else {
             this._editionContext = ControlEditionContext.Dirty;
         }
-
-        if (this._parent) {
-            this._parent.initEdition();
-        }
     }
 
     public endEdition(): void {
@@ -174,10 +170,6 @@ export abstract class AbstractControl {
         if (!this.pristine && !this._hasAnyControlsInError()) {
             this.validate();
             this.validateAsync();
-        }
-
-        if (this._parent) {
-            this._parent.endEdition();
         }
     }
 

@@ -42,6 +42,14 @@
         }
     }
 
+    &.m--has-focus {
+        border-color: $m-input-style--color-focus;
+
+        .m-input-group__legend {
+            color: $m-input-style--color-focus;
+        }
+    }
+
     &__validation__message {
         margin-top: $m-spacing--xs;
     }

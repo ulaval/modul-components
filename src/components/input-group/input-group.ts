@@ -27,8 +27,12 @@ export class MInputGroup extends ModulVue {
     @Prop({ default: true })
     displayValidation: boolean;
 
+    @Prop({ default: false })
+    displayFocus: boolean;
+
     get classes(): { [name: string]: boolean } {
         return {
+            'm--has-focus': this.displayFocus && this.as<InputManagement>().isFocus,
             'm--is-readonly': this.as<InputState>().readonly,
             'm--is-disabled': this.as<InputState>().isDisabled,
             'm--is-waiting': this.as<InputState>().isWaiting,
