@@ -1,4 +1,4 @@
-<div class="m-decimalfield"
+<div class="m-integerfield"
      :class="[{ 'm--is-disabled': isDisabled,
                 'm--is-waiting': isWaiting,
                 'm--is-readonly': isReadonly,
@@ -23,7 +23,7 @@
         <template slot="prefix">
             <slot name="prefix"></slot>
         </template>
-        <m-input-mask class="m-decimalfield__input"
+        <m-input-mask class="m-integerfield__input"
                       v-model="model"
                       :id="id"
                       :disabled="isDisabled || isWaiting"
@@ -40,8 +40,8 @@
             <slot name="suffix"></slot>
         </template>
     </m-input-style>
-    <div class="m-decimalfield__validation">
-        <m-validation-message class="m-decimalfield__validation__message"
+    <div class="m-integerfield__validation">
+        <m-validation-message class="m-integerfield__validation__message"
                               :disabled="isDisabled"
                               :waiting="isWaiting"
                               :error="hasDecimalfieldError"
