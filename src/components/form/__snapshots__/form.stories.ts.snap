@@ -129,7 +129,7 @@ exports[`Storyshots components|m-form default 1`] = `
 exports[`Storyshots components|m-form submit outside-form 1`] = `
 <div>
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
     id="123-456"
   >
     <!---->
