@@ -17,7 +17,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_LOOKUP_FIELD_NAME}`, mod
     .addDecorator(withKnobs)
     .add('default', () => ({
         data: () => ({
-            model: ''
+            model: '',
+            origin: 'CA',
+            language: 'fr'
         }),
-        template: '<div><m-address-lookup-field></m-address-lookup-field></div>'
+        template: '<div><m-address-lookup-field :origin="origin" :language="language"></m-address-lookup-field></div>'
     }));

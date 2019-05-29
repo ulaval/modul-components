@@ -17,6 +17,8 @@ interface LoqateFindRequest {
     Key: string;
     Text: string;
     Container?: string;
+    Origin?: string;
+    Language?: string;
 }
 
 interface LoqateRetriveResult {
@@ -44,6 +46,8 @@ interface LoqateRetrieveItem {
 export interface LoqateFindQuery {
     id?: string;
     input: string;
+    origin?: string;
+    language?: string;
 }
 
 export interface LoqateFindResponse {
@@ -80,7 +84,9 @@ export default class AddressLookupLoqateService implements AddressLookupService<
         let params: LoqateFindRequest = {
             Key: this.key,
             Text: query.input,
-            Container: (query.id) ? query.id : undefined
+            Container: (query.id) ? query.id : undefined,
+            Origin: (query.origin) ? query.origin : undefined,
+            Language: (query.language) ? query.language : undefined
         };
 
         const results: AxiosResponse<LoqateFindResult> = await this.axios.get(
