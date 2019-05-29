@@ -2,7 +2,7 @@
 
 exports[`Storyshots components|m-form default 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -129,7 +129,7 @@ exports[`Storyshots components|m-form default 1`] = `
 exports[`Storyshots components|m-form submit outside-form 1`] = `
 <div>
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
     id="123-456"
   >
     <!---->
@@ -258,7 +258,9 @@ exports[`Storyshots components|m-form submit outside-form 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields autocomplete 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -331,7 +333,9 @@ exports[`Storyshots components|m-form/all fields autocomplete 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields checkbox 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -437,7 +441,9 @@ exports[`Storyshots components|m-form/all fields checkbox 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields datepicker 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -603,7 +609,9 @@ exports[`Storyshots components|m-form/all fields datepicker 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields daterangepicker 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -673,7 +681,9 @@ exports[`Storyshots components|m-form/all fields daterangepicker 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields decimalfield 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -745,7 +755,9 @@ exports[`Storyshots components|m-form/all fields decimalfield 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields dropdown 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -917,7 +929,9 @@ exports[`Storyshots components|m-form/all fields dropdown 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields integerfield 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -989,7 +1003,9 @@ exports[`Storyshots components|m-form/all fields integerfield 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields moneyfield 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -1061,7 +1077,9 @@ exports[`Storyshots components|m-form/all fields moneyfield 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields radio 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -1240,7 +1258,9 @@ exports[`Storyshots components|m-form/all fields radio 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields switch 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -1312,7 +1332,9 @@ exports[`Storyshots components|m-form/all fields switch 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields textarea 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -1383,7 +1405,9 @@ exports[`Storyshots components|m-form/all fields textarea 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields textfield 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -1525,7 +1549,9 @@ exports[`Storyshots components|m-form/all fields textfield 1`] = `
 `;
 
 exports[`Storyshots components|m-form/all fields timepicker 1`] = `
-<form>
+<form
+  class="m-form"
+>
   <!---->
    
   <!---->
@@ -1697,7 +1723,7 @@ exports[`Storyshots components|m-form/all fields timepicker 1`] = `
 
 exports[`Storyshots components|m-form/built-in action-fallouts default 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -1823,7 +1849,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts default 1`] = `
 
 exports[`Storyshots components|m-form/built-in action-fallouts focus first field with error 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -1949,7 +1975,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts focus first field
 
 exports[`Storyshots components|m-form/built-in action-fallouts message summary and clear message summary 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -2075,7 +2101,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts message summary a
 
 exports[`Storyshots components|m-form/built-in action-fallouts toast and clear toast 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -2206,7 +2232,7 @@ exports[`Storyshots components|m-form/rules Checkbox 2 to 5 selections 1`] = `
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -2573,7 +2599,7 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -2789,7 +2815,7 @@ exports[`Storyshots components|m-form/rules Format with fixed max characters (po
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -2925,7 +2951,7 @@ exports[`Storyshots components|m-form/rules Format without fixed max characters 
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -3065,7 +3091,7 @@ exports[`Storyshots components|m-form/rules Live check username availability (as
   </p>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -3205,7 +3231,7 @@ exports[`Storyshots components|m-form/rules More than one validations (course co
   </p>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -3341,7 +3367,7 @@ exports[`Storyshots components|m-form/rules Radio button required 1`] = `
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -3572,7 +3598,7 @@ exports[`Storyshots components|m-form/rules required and 5 characters min 1`] = 
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -3708,7 +3734,7 @@ exports[`Storyshots components|m-form/rules required and 20 characters max 1`] =
   </h2>
    
   <form
-    class="m-u--margin-top"
+    class="m-form m-u--margin-top"
   >
     <!---->
      
@@ -3839,7 +3865,7 @@ exports[`Storyshots components|m-form/rules required and 20 characters max 1`] =
 
 exports[`Storyshots components|m-form/validation-type at-exit 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -3969,7 +3995,7 @@ exports[`Storyshots components|m-form/validation-type at-exit 1`] = `
 
 exports[`Storyshots components|m-form/validation-type correction 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4099,7 +4125,7 @@ exports[`Storyshots components|m-form/validation-type correction 1`] = `
 
 exports[`Storyshots components|m-form/validation-type modification 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4229,7 +4255,7 @@ exports[`Storyshots components|m-form/validation-type modification 1`] = `
 
 exports[`Storyshots components|m-form/validation-type on-going 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4359,7 +4385,7 @@ exports[`Storyshots components|m-form/validation-type on-going 1`] = `
 
 exports[`Storyshots components|m-form/validators between 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4511,7 +4537,7 @@ exports[`Storyshots components|m-form/validators between 1`] = `
 
 exports[`Storyshots components|m-form/validators compare 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4567,7 +4593,7 @@ exports[`Storyshots components|m-form/validators compare 1`] = `
 
 exports[`Storyshots components|m-form/validators email 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4697,7 +4723,7 @@ exports[`Storyshots components|m-form/validators email 1`] = `
 
 exports[`Storyshots components|m-form/validators max 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4849,7 +4875,7 @@ exports[`Storyshots components|m-form/validators max 1`] = `
 
 exports[`Storyshots components|m-form/validators max-length 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -4979,7 +5005,7 @@ exports[`Storyshots components|m-form/validators max-length 1`] = `
 
 exports[`Storyshots components|m-form/validators min 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -5131,7 +5157,7 @@ exports[`Storyshots components|m-form/validators min 1`] = `
 
 exports[`Storyshots components|m-form/validators min-length 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
@@ -5261,7 +5287,7 @@ exports[`Storyshots components|m-form/validators min-length 1`] = `
 
 exports[`Storyshots components|m-form/validators required 1`] = `
 <form
-  class="m-u--margin-top"
+  class="m-form m-u--margin-top"
 >
   <!---->
    
