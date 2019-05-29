@@ -71,7 +71,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
-    .add('outside-form', () => ({
+    .add('submit outside-form', () => ({
         methods: {
             submit: () => {
                 Vue.prototype.$log.log('submited');
@@ -1273,11 +1273,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                          :error-message="nameField.errorMessage"">
             </m-textfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1312,11 +1310,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                     :error="descriptionField.hasError()"
                     :error-message="descriptionField.errorMessage""></m-textarea>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1353,11 +1349,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       :error="birthDateField.hasError()"
                       :error-message="birthDateField.errorMessage"></m-datepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1397,11 +1391,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                              :label="type"></m-dropdown-item>
         </m-dropdown>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1434,11 +1426,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                     :error="activeField.hasError()"
                     :error-message="activeField.errorMessage">Is active ?</m-checkbox>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1476,11 +1466,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                      :value="coupe">{{coupe}}</m-radio>
          </m-radio-group>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1516,10 +1504,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       :error-message="timeField.errorMessage"></m-timepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                         >Submit</m-button>
                 <m-button type="reset"
                           skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          >Reset</m-button>
             </div>
         </m-form>
         `
@@ -1557,10 +1545,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-decimalfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                          >Submit</m-button>
                 <m-button type="reset"
                           skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          >Reset</m-button>
             </div>
         </m-form>
         `
@@ -1595,11 +1583,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       :error="priceField.hasError()"
                       :error-message="priceField.errorMessage"></m-moneyfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1636,11 +1622,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
 
         </m-integerfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1673,11 +1657,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                   :error="switchField.hasError()"
                   :error-message="switchField.errorMessage">État</m-switch>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1723,11 +1705,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                         :error-message="autocompleteField.errorMessage"
                         @complete="onComplete"></m-autocomplete>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1761,11 +1741,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                            :error-message="daterangeField.errorMessage">
         </m-daterangepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `

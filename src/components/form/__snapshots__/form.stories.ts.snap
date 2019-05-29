@@ -126,7 +126,7 @@ exports[`Storyshots components|m-form default 1`] = `
 </form>
 `;
 
-exports[`Storyshots components|m-form outside-form 1`] = `
+exports[`Storyshots components|m-form submit outside-form 1`] = `
 <div>
   <form
     class="m-u--margin-top"
