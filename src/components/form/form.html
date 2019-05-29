@@ -1,4 +1,4 @@
-<form :id="formGroup.id"
+<form class="m-form"
       @submit.prevent="submit(false)"
       @reset.prevent="reset(false)">
     <m-accordion-transition>
@@ -18,7 +18,8 @@
     <m-toast :open.sync="displayToast"
              position="top-center"
              state="error">
-        <p v-html="toastMessage"></p>
+        <p class="m-form__toast-message"
+           v-html="toastMessage"></p>
     </m-toast>
     <slot></slot>
 </form>

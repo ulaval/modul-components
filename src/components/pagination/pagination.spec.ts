@@ -68,10 +68,6 @@ describe('MPagination', () => {
             expect(wrapper.vm.$refs.status).toBeTruthy();
             expect(wrapper.vm.$props.value).toEqual(1);
         });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
     });
 
     describe(`Given enough items to have more than 1 page`, () => {
@@ -111,10 +107,6 @@ describe('MPagination', () => {
                 expect(wrapper.emitted('change')).toBeTruthy();
             });
         });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
     });
 
     describe(`Given showing less item per page`, () => {
@@ -128,10 +120,6 @@ describe('MPagination', () => {
         it(`Then the pagination should have more than 3 pages`, () => {
             expect(wrapper.findAll('.m-pagination__item').length).toBeGreaterThan(3);
         });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
     });
 
     describe(`Given a lot of pages`, () => {
@@ -144,10 +132,6 @@ describe('MPagination', () => {
 
         it(`Then the ellipsis should be displayed on both side`, () => {
             expect(wrapper.findAll('.m-pagination__item--text').length).toEqual(3);
-        });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
     });
 
@@ -169,10 +153,6 @@ describe('MPagination', () => {
 
             expect(previousElement.props().disabled).toBeTruthy();
             expect(nextElement.props().disabled).toBeTruthy();
-        });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
     });
 });

@@ -12,18 +12,7 @@
         }
     }
 
-    &__required {
-        margin: 0;
-        float: right;
-    }
-
-    &__required-marker {
-        color: $m-color--accent;
-        font-weight: $m-font-weight--bold;
-    }
-
-    &__required-label {
-        font-size: $m-font-size--s;
-        color: $m-color--text-light;
+    &__toast-message {
+        margin-top: 0;
     }
 }
