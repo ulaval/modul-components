@@ -94,6 +94,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
             i18n: Vue.prototype.$i18n
         }),
+        created(): void {
+            this.i18n.currentLang('fr');
+        },
         destroyed(): void {
             (Vue.prototype as ModulVue).$i18n.currentLang(this.originalLang);
         }
