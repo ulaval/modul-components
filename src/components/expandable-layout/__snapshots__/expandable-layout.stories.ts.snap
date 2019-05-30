@@ -3,14 +3,32 @@
 exports[`Storyshots components|m-expandable-layout default 1`] = `
 <div
   class="m-expandable-layout m--has-left-panel"
-  style="padding-left: 0px;"
 >
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusamus sint minus, modi rerum pariatur molestiae repellat ipsam suscipit id, accusantium a neque mollitia ab culpa! Quisquam maiores inventore reprehenderit?  
+  <div
+    class="m-expandable-layout__main"
+  >
+    <div
+      style="height: 200vh;"
+    >
+      main content
+    </div>
+     
+  </div>
+   
   <div
     class="m-expandable-layout__panel"
-    style="left: -320px; width: 320px;"
+    style="width: 0px; height: auto;"
   >
-    panel content
+    <div
+      class="m-expandable-layout__panel__content"
+      style="width: 320px;"
+    >
+      <div
+        style="background: yellow; height: 100vh;"
+      >
+        panel content
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -18,14 +36,23 @@ exports[`Storyshots components|m-expandable-layout default 1`] = `
 exports[`Storyshots components|m-expandable-layout open 1`] = `
 <div
   class="m-expandable-layout m--has-left-panel"
-  style="padding-left: 320px;"
 >
-  main content 
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
   <div
     class="m-expandable-layout__panel"
-    style="left: 0px; width: 320px;"
+    style="width: 320px; height: auto;"
   >
-    panel content
+    <div
+      class="m-expandable-layout__panel__content"
+      style="width: 320px;"
+    >
+      panel content
+    </div>
   </div>
 </div>
 `;
@@ -33,29 +60,46 @@ exports[`Storyshots components|m-expandable-layout open 1`] = `
 exports[`Storyshots components|m-expandable-layout panel-position="right" 1`] = `
 <div
   class="m-expandable-layout m--has-right-panel"
-  style="padding-right: 320px;"
 >
-  main content 
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
   <div
     class="m-expandable-layout__panel"
-    style="right: 0px; width: 320px;"
+    style="width: 320px; height: auto;"
   >
-    panel content
+    <div
+      class="m-expandable-layout__panel__content"
+      style="width: 320px;"
+    >
+      panel content
+    </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots components|m-expandable-layout size 1`] = `
+exports[`Storyshots components|m-expandable-layout panel-width="600" 1`] = `
 <div
   class="m-expandable-layout m--has-left-panel"
-  style="padding-left: 600px;"
 >
-  main content 
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
   <div
     class="m-expandable-layout__panel"
-    style="left: 0px; width: 600px;"
+    style="height: auto;"
   >
-    panel content
+    <div
+      class="m-expandable-layout__panel__content"
+    >
+      panel content
+    </div>
   </div>
 </div>
 `;
