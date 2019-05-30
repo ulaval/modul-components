@@ -103,9 +103,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     .add('word-wrap', () => ({
         template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
     }))
-    .add('placeholder-icon', () => ({
-        template: '<m-textfield label="Label" placeholder="Placeholder" placeholder-icon-name="m-svg__search" word-wrap="true"></m-textfield>'
-    }))
     .add('focus', () => ({
         template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'
     }))

@@ -45,6 +45,12 @@ $m-accordion--color-default: $m-color--interactive !default;
             text-decoration: none;
         }
 
+        .m-accordion.m--is-empty-content > &,
+        .m-accordion.m--is-disabled > & {
+            cursor: auto;
+            outline: none;
+        }
+
         .m-accordion.m--is-dark > &,
         .m-accordion.m--is-dark-b > &,
         .m-accordion.m--is-default > & {
@@ -72,7 +78,7 @@ $m-accordion--color-default: $m-color--interactive !default;
 
         .m-accordion.m--is-dark-b > & {
             &::after {
-                background: #fff;
+                background: $m-color--white;
                 transition: background-color 0.4s ease;
             }
         }
@@ -190,7 +196,7 @@ $m-accordion--color-default: $m-color--interactive !default;
         .m-accordion.m--is-default > & {
             &.m-accordion-enter-to {
                 .m-accordion__body {
-                    transform: translate3d(0, 0, 0);
+                    transform: translate(0, 0);
                     opacity: 1;
                 }
             }
@@ -198,7 +204,7 @@ $m-accordion--color-default: $m-color--interactive !default;
             &.m-accordion-enter,
             &.m-accordion-leave-to {
                 .m-accordion__body {
-                    transform: translate3d(0, $m-spacing--l, 0);
+                    transform: translate(0, $m-spacing--l);
                     opacity: 0;
                 }
             }
