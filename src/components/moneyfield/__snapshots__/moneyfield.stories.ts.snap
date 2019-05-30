@@ -202,7 +202,7 @@ exports[`Storyshots components|m-moneyfield Format 1`] = `
     </m-decimalfield>
   </div>
   
-                =&gt; CA$ 123,456.70
+                =&gt; CA$123,456.70
             
 </div>
 `;
