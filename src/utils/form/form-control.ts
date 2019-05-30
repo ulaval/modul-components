@@ -5,7 +5,7 @@ import { ControlValidator } from './validators/control-validator';
 
 export class FormControl<T> extends AbstractControl {
     private _value?: T;
-    private _initialValue?: T;
+    private _initialValue?: T | (() => T);
     private _oldValue?: T;
 
     constructor(
@@ -15,7 +15,14 @@ export class FormControl<T> extends AbstractControl {
         super(validators, options);
 
         if (options) {
-            this._initialValue = this._value = this._oldValue = options.initialValue;
+            if (options.initialValue) {
+                if (options.initialValue instanceof Function) {
+                    this._initialValue = options.initialValue;
+                    this._value = this._oldValue = options.initialValue();
+                } else {
+                    this._initialValue = this._value = this._oldValue = options.initialValue;
+                }
+            }
         } else {
             // ensure reactivity
             this._value = undefined;
@@ -83,7 +90,11 @@ export class FormControl<T> extends AbstractControl {
     public reset(): void {
         super.reset();
         this._touched = false;
-        this._value = this._oldValue = this._initialValue;
+        if (this._initialValue instanceof Function) {
+            this._value = this._oldValue = this._initialValue();
+        } else {
+            this._value = this._oldValue = this._initialValue;
+        }
     }
 
     public async submit(external: boolean = false): Promise<void> {

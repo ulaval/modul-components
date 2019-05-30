@@ -35,7 +35,7 @@ describe('Max validator', () => {
             const formControlTest0: FormControl<number> = new FormControl<number>(
                 [MaxValidator('test', -1)],
                 {
-                    initialValue: 0
+                    initialValue: () => 0
                 }
             );
 

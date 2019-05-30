@@ -113,6 +113,46 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
 
         `
     }));
+let reactiveVariable: string = 'blabla';
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
+    .add('reactive initial value', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'name': new FormControl<string>([], { initialValue: () => reactiveVariable })
+                }
+            )
+        }),
+        methods: {
+            submit: (value: string) => {
+                Vue.prototype.$log.log('submited');
+                reactiveVariable = value;
+            },
+            reset: () => {
+                Vue.prototype.$log.log('reseted');
+            }
+        },
+        template: `
+            <div>
+                <m-form class="m-u--margin-top"
+                    :form-group="formGroup"
+                    @reset="reset()"
+                    @submit="submit(formGroup.getControl('name').value)">
+                <m-textfield v-model.trim="formGroup.getControl('name').value"
+                            :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
+                            :label="formGroup.getControl('name').name"
+                            v-m-control="formGroup.getControl('name')">
+                </m-textfield>
+                <p class="m-u--margin-bottom--l">
+                    <m-button type="submit">Submit</m-button>
+                    <m-button type="reset"
+                            skin="secondary">Reset</m-button>
+                </p>
+                </m-form>
+            </div>
+
+            `
+    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallouts`, module)
     .addDecorator(withA11y)
