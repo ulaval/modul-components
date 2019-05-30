@@ -68,7 +68,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
             value === MDialogState.Information ||
             value === MDialogState.Error
     })
-    public type: MDialogState;
+    public state: MDialogState;
 
     public handlesFocus(): boolean {
         return true;
@@ -157,7 +157,7 @@ export class MDialog extends ModulVue implements PortalMixinImpl {
 
     private get getState(): string {
         let state: string = '';
-        switch (this.type) {
+        switch (this.state) {
             case MDialogState.Confirmation:
                 state = 'confirmation';
                 break;

@@ -112,37 +112,37 @@ storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}`, module)
                    </m-dialog>`
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/type`, module)
+storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/state`, module)
     .addDecorator(withA11y)
     .add('default', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-dialog :open.sync="openProp">A default Dialog without a specified type</m-dialog>`
+        template: `<m-dialog :open.sync="openProp">A default Dialog without a specified state</m-dialog>`
     }))
-    .add('type="warning"', () => ({
+    .add('state="warning"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-dialog :open.sync="openProp" type="warning">A Dialog with type="warning"</m-dialog>`
+        template: `<m-dialog :open.sync="openProp" state="warning">A Dialog with state="warning"</m-dialog>`
     }))
-    .add('type="confirmation"', () => ({
+    .add('state="confirmation"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-dialog :open.sync="openProp" type="confirmation">A Dialog with type="confirmation"</m-dialog>`
+        template: `<m-dialog :open.sync="openProp" state="confirmation">A Dialog with state="confirmation"</m-dialog>`
     }))
-    .add('type="information"', () => ({
+    .add('state="information"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-dialog :open.sync="openProp" type="information">A Dialog with type="information"</m-dialog>`
+        template: `<m-dialog :open.sync="openProp" state="information">A Dialog with state="information"</m-dialog>`
     }))
-    .add('type="error"', () => ({
+    .add('state="error"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<m-dialog :open.sync="openProp" type="error">A Dialog with type="error"</m-dialog>`
+        template: `<m-dialog :open.sync="openProp" state="error">A Dialog with state="error"</m-dialog>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/Btn-Link Combos`, module)

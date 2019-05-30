@@ -49,7 +49,7 @@ export class DialogService {
 
         document.body.appendChild(confirmInstance.$el);
         confirmInstance.message = message;
-        confirmInstance.type = MDialogState.Confirmation;
+        confirmInstance.state = MDialogState.Confirmation;
         confirmInstance.title = title ? title : '';
         confirmInstance.okLabel = okLabel ? okLabel : undefined;
         confirmInstance.cancelLabel = cancelLabel ? cancelLabel : undefined;
