@@ -1,12 +1,11 @@
-import '../../utils/polyfills';
-
 import { mount, Wrapper } from '@vue/test-utils';
 import Vue from 'vue';
-
 import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent } from '../../../tests/helpers/render';
+import '../../utils/polyfills';
 import uuid from '../../utils/uuid/uuid';
-import AccordionPlugin, { MAccordion, MAccordionIconPosition, MAccordionIconSize, MAccordionSkin } from './accordion';
+import AccordionPlugin, { MAccordion } from './accordion';
+
+
 
 jest.mock('../../utils/uuid/uuid');
 (uuid.generate as jest.Mock).mockReturnValue('uuid');
@@ -19,7 +18,11 @@ describe('MAcordion', () => {
 
 
     it('should emit click event when it is opened or closed', () => {
-        const acn: Wrapper<MAccordion> = mount(MAccordion);
+        const acn: Wrapper<MAccordion> = mount(MAccordion, {
+            slots: {
+                default: `<p>body</p>`
+            }
+        });
 
         acn.find('.m-accordion__header').trigger('click');
         expect(acn.emitted('click')).toBeTruthy();
@@ -35,7 +38,11 @@ describe('MAcordion', () => {
     });
 
     it('should react to open prop changes', () => {
-        const acn: Wrapper<MAccordion> = mount(MAccordion);
+        const acn: Wrapper<MAccordion> = mount(MAccordion, {
+            slots: {
+                default: `<p>body</p>`
+            }
+        });
 
         acn.setProps({ open: false });
         expect(acn.find('.m-accordion__body').exists()).toBeFalsy();
@@ -45,7 +52,11 @@ describe('MAcordion', () => {
     });
 
     it('should sync open prop', () => {
-        const acn: Wrapper<MAccordion> = mount(MAccordion);
+        const acn: Wrapper<MAccordion> = mount(MAccordion, {
+            slots: {
+                default: `<p>body</p>`
+            }
+        });
 
         acn.find('.m-accordion__header').trigger('click');
 

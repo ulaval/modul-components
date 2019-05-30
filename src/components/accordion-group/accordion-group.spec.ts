@@ -1,7 +1,6 @@
 import { mount, Slots, Wrapper, WrapperArray } from '@vue/test-utils';
 import Vue from 'vue';
 import { addMessages } from '../../../tests/helpers/lang';
-import { renderComponent } from '../../../tests/helpers/render';
 import '../../utils/polyfills';
 import uuid from '../../utils/uuid/uuid';
 import { MAccordion, MAccordionSkin } from '../accordion/accordion';
@@ -61,8 +60,8 @@ describe('MAcordionGroup', () => {
         const acn: Wrapper<MAccordionGroup> = mountGroup({
             concurrent: true
         });
-        const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
 
+        const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
         acrds
             .at(0)
             .find('.m-accordion__header')
@@ -107,10 +106,12 @@ describe('MAcordionGroup', () => {
             slots: {
                 default: `<m-accordion :disabled="true">
                                 <span slot="header">A</span>
+                                <p>Body</p>
                             </m-accordion>
                             <m-accordion>
                                 <span slot="header">B</span>
-                            </m-accordion>'`
+                                <p>Body</p>
+                            </m-accordion>`
             }
         });
 
@@ -133,7 +134,9 @@ describe('MAcordionGroup', () => {
             openedIds: []
         });
 
-        const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({ name: 'MAccordion' });
+        const acrds: WrapperArray<MAccordion> = acn.findAll<MAccordion>({
+            name: 'MAccordion'
+        });
         acrds
             .at(0)
             .find('.m-accordion__header')
@@ -148,9 +151,11 @@ describe('MAcordionGroup', () => {
             slots: {
                 default: `<m-accordion id="a">
                                 <span slot="header">A</span>
+                                <p>Body</p>
                             </m-accordion>
                             <m-accordion id="b">
                                 <span slot="header">B</span>
+                                <p>Body</p>
                             </m-accordion>'`,
                 ...slots
             }
