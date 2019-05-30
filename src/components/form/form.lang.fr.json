@@ -18,6 +18,10 @@
         "emailValidatorErrorSummaryMessage": "Le format de l'adresse courriel pour %(controlLabel)s est invalide.",
         "compareValidatorErrorMessage": "Les valeurs du groupe %(controlLabels)s doivent être identiques.",
         "compareValidatorErrorSummaryMessage": "Les valeurs du groupe %(controlLabels)s doivent être identiques.",
-        "compareValidatorErrorMessageNoName": "Les valeurs de ce groupe doivent être identiques."
+        "compareValidatorErrorMessageNoName": "Les valeurs de ce groupe doivent être identiques.",
+        "dateFormatValidatorErrorMessage": "Entrez une date avec un format AAAA-MM-JJ",
+        "dateFormValidatorErrorSummaryMessage": "Le format de la date est AAAA-MM-JJ pour %(controlLabel)s",
+        "dateBetweenValidatorErrorMessage": "Entrez une date comprise entre le %(start)s et le %(end)s",
+        "dateBetweenValidatorErrorSummaryMessage": "La date doit être comprise entre le %(start)s et le %(end)s pour %(controlLabel)s"
     }
 }

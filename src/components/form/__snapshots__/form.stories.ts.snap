@@ -4383,7 +4383,7 @@ exports[`Storyshots components|m-form/validation-type on-going 1`] = `
 </form>
 `;
 
-exports[`Storyshots components|m-form/validators between 1`] = `
+exports[`Storyshots components|m-form/validators between number 1`] = `
 <form
   class="m-form m-u--margin-top"
 >
@@ -4391,7 +4391,138 @@ exports[`Storyshots components|m-form/validators between 1`] = `
    
   <!---->
    
-  <m-integerfield />
+  <p>
+    default validationType =  correction
+  </p>
+   
+  <m-integerfield
+    error-message=""
+  />
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators compare fields 1`] = `
+<form
+  class="m-form m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <p>
+    default validationType =  correction
+  </p>
+   
+  <m-input-group
+    error-message=""
+    legend="compare two field"
+  />
+   
+  <p
+    class="m-u--margin-bottom--l"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="submit"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Submit 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m--is-skin-secondary"
+      type="reset"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+</form>
+`;
+
+exports[`Storyshots components|m-form/validators date between 1`] = `
+<form
+  class="m-form m-u--margin-top"
+>
+  <!---->
+   
+  <!---->
+   
+  <p>
+     min = 2019-05-20  max = 2019-05-30
+  </p>
+   
+  <p>
+    default validationType =  correction
+  </p>
    
   <div
     class="m-datepicker"
@@ -4535,7 +4666,7 @@ exports[`Storyshots components|m-form/validators between 1`] = `
 </form>
 `;
 
-exports[`Storyshots components|m-form/validators compare 1`] = `
+exports[`Storyshots components|m-form/validators date format 1`] = `
 <form
   class="m-form m-u--margin-top"
 >
@@ -4543,7 +4674,105 @@ exports[`Storyshots components|m-form/validators compare 1`] = `
    
   <!---->
    
-  <m-input-group />
+  <p>
+    default validationType =  correction
+  </p>
+   
+  <div
+    class="m-datepicker"
+    style="width: 100%; max-width: 136px;"
+  >
+    <div
+      class="m-input-style m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-datepicker__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
    
   <p
     class="m-u--margin-bottom--l"
@@ -4721,7 +4950,7 @@ exports[`Storyshots components|m-form/validators email 1`] = `
 </form>
 `;
 
-exports[`Storyshots components|m-form/validators max 1`] = `
+exports[`Storyshots components|m-form/validators max number 1`] = `
 <form
   class="m-form m-u--margin-top"
 >
@@ -4729,103 +4958,13 @@ exports[`Storyshots components|m-form/validators max 1`] = `
    
   <!---->
    
-  <m-integerfield />
+  <p>
+    default validationType =  correction
+  </p>
    
-  <div
-    class="m-datepicker"
-    style="width: 100%; max-width: 136px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
-            />
-              
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-validation-message m-datepicker__validation-message"
-    >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <div
-      class="m-popup"
-    >
-      <div
-        class="m-popper"
-      >
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
+  <m-integerfield
+    error-message=""
+  />
    
   <p
     class="m-u--margin-bottom--l"
@@ -5003,7 +5142,7 @@ exports[`Storyshots components|m-form/validators max-length 1`] = `
 </form>
 `;
 
-exports[`Storyshots components|m-form/validators min 1`] = `
+exports[`Storyshots components|m-form/validators min number 1`] = `
 <form
   class="m-form m-u--margin-top"
 >
@@ -5011,103 +5150,13 @@ exports[`Storyshots components|m-form/validators min 1`] = `
    
   <!---->
    
-  <m-integerfield />
+  <p>
+    default validationType =  correction
+  </p>
    
-  <div
-    class="m-datepicker"
-    style="width: 100%; max-width: 136px;"
-  >
-    <div
-      class="m-input-style m--is-tag-default"
-    >
-      <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
-      >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
-        <div
-          class="m-input-style__body"
-        >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
-            />
-              
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
-          >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-          </div>
-           
-          <!---->
-        </div>
-      </div>
-    </div>
-     
-    <div
-      class="m-validation-message m-datepicker__validation-message"
-    >
-      <!---->
-       
-      <!---->
-    </div>
-     
-    <div
-      class="m-popup"
-    >
-      <div
-        class="m-popper"
-      >
-         
-        <!---->
-      </div>
-       
-      <!---->
-    </div>
-  </div>
+  <m-integerfield
+    error-message=""
+  />
    
   <p
     class="m-u--margin-bottom--l"

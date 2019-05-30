@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  *  bounds included
  */
-export const BetweenValidator: Function = (controlLabel: string, lowerBound: number | Date, upperBound: number | Date, options: ControlValidatorOptions): ControlValidator => {
+export const BetweenValidator: Function = (controlLabel: string, lowerBound: number, upperBound: number, options: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Between,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -20,13 +20,9 @@ export const BetweenValidator: Function = (controlLabel: string, lowerBound: num
             let isBetween: boolean;
 
             if (!control.value && control.value !== 0) {
-                isBetween = false;
+                isBetween = true;
             } else {
                 let value: number | Date = control.value;
-
-                if (lowerBound instanceof Date) {
-                    value = new Date(control.value);
-                }
 
                 isBetween = value >= lowerBound && value <= upperBound;
             }
@@ -38,8 +34,8 @@ export const BetweenValidator: Function = (controlLabel: string, lowerBound: num
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:betweenValidatorErrorMessage',
                     {
-                        lowerBound: lowerBound instanceof Date ? lowerBound.toLocaleDateString() : lowerBound,
-                        upperBound: upperBound instanceof Date ? upperBound.toLocaleDateString() : upperBound
+                        lowerBound,
+                        upperBound
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),

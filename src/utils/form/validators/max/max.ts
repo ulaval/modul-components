@@ -9,7 +9,7 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  * Bound included
  */
-export const MaxValidator: Function = (controlLabel: string, max: number | Date, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxValidator: Function = (controlLabel: string, max: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Max,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -22,11 +22,7 @@ export const MaxValidator: Function = (controlLabel: string, max: number | Date,
             if (!control.value && control.value !== 0) {
                 isMax = true;
             } else {
-                let value: number | Date = control.value;
-
-                if (max instanceof Date) {
-                    value = new Date(control.value);
-                }
+                let value: number = control.value;
 
                 isMax = value <= max;
             }
@@ -37,14 +33,14 @@ export const MaxValidator: Function = (controlLabel: string, max: number | Date,
             options.error : {
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:maxValidatorErrorMessage',
-                    { max: max instanceof Date ? max.toLocaleDateString() : max },
+                    { max },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
                 groupMessage: (ModulVue.prototype.$i18n).translate(
                     'm-form:maxValidatorErrorSummaryMessage',
                     {
                         controlLabel,
-                        max: max instanceof Date ? max.toLocaleDateString() : max
+                        max
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 )

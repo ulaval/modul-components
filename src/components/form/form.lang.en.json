@@ -1,6 +1,7 @@
 {
     "m-form": {
-        "multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> needs your attention.",
+<<<<<<< HEAD
+"multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> needs your attention.",
         "multipleErrorsToCorrect.p": "<strong>%(totalNbOfErrors)s informations</strong> need your attention.",
         "requiredValidatorErrorMessage": "this field is required.",
         "requiredValidatorErrorSummaryMessage": "The field %(controlLabel)s is required.",
@@ -18,6 +19,9 @@
         "emailValidatorErrorSummaryMessage": "The email format for %(controlLabel)s is not valid.",
         "compareValidatorErrorMessage": "The values of %(controlLabels)s must be the same.",
         "compareValidatorErrorSummaryMessage": "The values of %(controlLabels)s must be the same.",
-        "compareValidatorErrorMessageNoName": "The values in this group must be the same."
+        "compareValidatorErrorMessageNoName": "The values in this group must be the same.",
+        "dateFormValidatorErrorSummaryMessage": "The date format is YYYY-MM-DD for %(controlLabel)s ",
+        "dateBetweenValidatorErrorMessage": "Enter a date between %(start)s and %(end)s",
+        "dateBetweenValidatorErrorSummaryMessage": "The date must be between %(start)s and %(end)s for %(controlLabel)s"
     }
 }
