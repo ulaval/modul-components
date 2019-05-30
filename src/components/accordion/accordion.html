@@ -4,7 +4,8 @@
             'm--is-open': propOpen,
             'm--is-disabled': propDisabled,
             'm--has-icon-left': iconPosition !== 'right',
-            'm--has-icon-large': iconSize=='large' }]">
+            'm--has-icon-large': iconSize=='large',
+            'm--is-empty-content': !hasContent() }]">
     <div :id="propId"
          class="m-accordion__header"
          :class="{ 'm--has-padding': paddingHeader && padding }"
@@ -12,7 +13,7 @@
          :aria-controls="propId + '-controls'"
          @click.prevent="toggleAccordion"
          @keyup.self.enter="toggleAccordion"
-         tabindex="0"
+         :tabindex="headerTabindex"
          role="tab"
          ref="accordionHeader">
         <div class="m-accordion__header__content">
@@ -24,7 +25,8 @@
                     class="m-accordion__hidden"
                     k="m-accordion:close"></m-i18n>
         </div>
-        <m-plus class="m-accordion__header-icon"
+        <m-plus v-if="hasContent()"
+                class="m-accordion__header-icon"
                 :class="{ 'm--is-left': iconPosition !== 'right' }"
                 :border="hasIconBorder"
                 :large="iconSize=='large'"
@@ -34,7 +36,8 @@
                 :title-close="titleMenuClose"
                 aria-hidden="true"></m-plus>
     </div>
-    <m-accordion-transition :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 24 : 0">
+    <m-accordion-transition v-if="hasContent()"
+                            :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 24 : 0">
         <div v-if="propOpen"
              :id="propId + '-controls'"
              class="m-accordion__body-wrap"

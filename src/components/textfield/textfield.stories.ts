@@ -3,10 +3,10 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { InputStateTagStyle } from '../../mixins/input-state/input-state';
+import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { TEXTFIELD_NAME } from '../component-names';
 import TextfieldPlugin, { MTextfieldType } from './textfield';
-import { InputMaxWidth } from '../../mixins/input-width/input-width';
-import { InputStateTagStyle } from '../../mixins/input-state/input-state';
 
 
 Vue.use(TextfieldPlugin);
@@ -102,9 +102,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }))
     .add('word-wrap', () => ({
         template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
-    }))
-    .add('placeholder-icon', () => ({
-        template: '<m-textfield label="Label" placeholder="Placeholder" placeholder-icon-name="m-svg__search" word-wrap="true"></m-textfield>'
     }))
     .add('focus', () => ({
         template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'

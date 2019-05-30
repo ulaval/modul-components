@@ -104,9 +104,7 @@ export class MInputMask extends ModulVue {
 
         this.internalModel = this.value || '';
         this.updateRawValue(inputValue);
-
     }
-
 
     onFocus($event: any): void {
         this.$emit('focus', $event);
@@ -117,11 +115,27 @@ export class MInputMask extends ModulVue {
         this.$emit('blur', $event);
     }
 
-    onKeyup($event: any): void {
+    onKeyup($event: KeyboardEvent): void {
         this.$emit('keyup', $event);
     }
 
-    onKeydownTextfield($event: any): void {
+    onKeydownTextfield($event: KeyboardEvent): void {
+        const rawValue: string = this.cleave.getRawValue();
+        if (($event.key === '.' || $event.key === ',') && !rawValue.endsWith('.')) {
+            this.cleave.setRawValue(`${rawValue}.`);
+        }
+
+        this.$emit('keydown', $event);
+    }
+
+    // Hack pour android qui lève toujours le key code 229.
+    onTextInput($event: KeyboardEvent): void {
+        const key: string = ($event as any).data;
+        const rawValue: string = this.cleave.getRawValue();
+        if (key === '.' && !rawValue.endsWith('.')) {
+            this.cleave.setRawValue(`${rawValue}.`);
+        }
+
         this.$emit('keydown', $event);
     }
 

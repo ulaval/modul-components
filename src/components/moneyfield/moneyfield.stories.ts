@@ -98,6 +98,51 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
         }
     }));
 
+// storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
+//     .addDecorator(withA11y)
+//     .addDecorator(withKnobs)
+//     .add('Format', () => ({
+//         components: { MMoneyfield },
+//         template: `<div>
+//                 <${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>
+//                 => {{ formatedOuput }}
+//             </div>
+//         `,
+//         props: {
+//             lang: {
+//                 default: select('Language', {
+//                     [FRENCH]: FRENCH,
+//                     [ENGLISH]: ENGLISH
+//                 }, (Vue.prototype as ModulVue).$i18n.currentLang())
+//             },
+//             stripDecimalZeroes: {
+//                 default: boolean('Strip decimal zeroes', false)
+//             }
+//         },
+//         watch: {
+//             lang: function(): void {
+//                 this.i18n.currentLang(this.lang);
+//             }
+//         },
+//         computed: {
+//             formatedOuput(): string {
+//                 return formatCurrencyWithOptions(this.value, {
+//                     currency: (Vue.prototype as ModulVue).$l10n.currentCurrency,
+//                     stripDecimalZeroes: this.stripDecimalZeroes
+//                 });
+//             }
+//         },
+//         data: () => ({
+//             value: 123456.7,
+//             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
+//             i18n: Vue.prototype.$i18n,
+//             l10n: Vue.prototype.$l10n
+//         }),
+//         destroyed(): void {
+//             (Vue.prototype as ModulVue).$i18n.currentLang(this.originalLang);
+//         }
+//     }));
+
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)

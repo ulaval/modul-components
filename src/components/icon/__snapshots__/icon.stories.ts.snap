@@ -151,6 +151,7 @@ exports[`Storyshots components|m-icon/badge offsetX 1`] = `
   aria-hidden="true"
   class="m-icon"
   height="30px"
+  style="overflow: visible;"
   width="30px"
 >
   <!---->
@@ -167,6 +168,7 @@ exports[`Storyshots components|m-icon/badge offsetY 1`] = `
   aria-hidden="true"
   class="m-icon"
   height="30px"
+  style="overflow: visible;"
   width="30px"
 >
   <!---->
@@ -183,6 +185,7 @@ exports[`Storyshots components|m-icon/badge state 1`] = `
   aria-hidden="true"
   class="m-icon"
   height="30"
+  style="overflow: visible;"
   width="30"
 >
   <!---->
@@ -199,6 +202,7 @@ exports[`Storyshots components|m-icon/badge state, offsetY, offsetX 1`] = `
   aria-hidden="true"
   class="m-icon"
   height="30"
+  style="overflow: visible;"
   width="30"
 >
   <!---->

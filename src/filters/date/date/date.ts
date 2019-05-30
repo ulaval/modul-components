@@ -4,18 +4,20 @@ export interface DateFilterParams {
     shortMode?: boolean;
     showMonth?: boolean;
     showYear?: boolean;
+    showDay?: boolean;
 }
 export let dateFilter: (date: Date, params?: DateFilterParams) => string = (date, params) => {
     const defaultParams: DateFilterParams = {
         shortMode: false,
         showMonth: true,
-        showYear: true
+        showYear: true,
+        showDay: true
     };
     const appliedParams: DateFilterParams = Object.assign(defaultParams, params);
     const options: Intl.DateTimeFormatOptions = {
         year: appliedParams.showYear ? 'numeric' : undefined,
         month: appliedParams.showMonth ? (appliedParams.shortMode ? 'short' : 'long') : undefined,
-        day: 'numeric'
+        day: appliedParams.showDay ? 'numeric' : undefined
     };
     const locale: string = (Vue.prototype).$i18n.getCurrentLocale();
     let formattedDate: string = date.toLocaleDateString([locale], options);

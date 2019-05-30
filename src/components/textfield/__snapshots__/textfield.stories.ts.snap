@@ -759,15 +759,7 @@ exports[`Storyshots components|m-textfield placeholder-icon 1`] = `
             placeholder="Placeholder"
             rows="1"
           />
-           
-          <!---->
-           
-          <!---->
         </div>
-         
-        <div
-          class="m-input-style__right-content"
-        />
          
         <!---->
       </div>

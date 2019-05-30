@@ -9,6 +9,9 @@
     <h3>Long format</h3>
     <p v-html="formattedDateLong"></p>
 
+    <h3>Show year and month</h3>
+    <p>{{ date | f-m-date({showDay: false}) }}</p>
+
     <h3>Short format</h3>
     <p v-html="formattedDateShort"></p>
 
@@ -39,6 +42,9 @@
     <h3>Period Format</h3>
 
     <h4>Compact Mode</h4>
+    <h5>short format</h5>
+    <p v-html="formattedPeriodShortDate"></p>
+    <h5>Long format</h5>
     <p v-html="formattedPeriod"></p>
     <p v-html="$options.filters['f-m-period'](periodThroughFilter)"></p>
 
