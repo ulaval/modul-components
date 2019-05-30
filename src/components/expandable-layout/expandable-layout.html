@@ -1,9 +1,13 @@
 <div class="m-expandable-layout"
-     :class="panelPositionClass"
-     :style="containerStyle">
-    <slot></slot>
+     :class="panelPositionClass">
+    <div class="m-expandable-layout__main">
+        <slot></slot>
+    </div>
     <div class="m-expandable-layout__panel"
          :style="panelStyle">
-        <slot name="panel"></slot>
+        <div class="m-expandable-layout__panel__content"
+             :style="panelContentStyle">
+            <slot name="panel"></slot>
+        </div>
     </div>
 </div>

@@ -1,28 +1,29 @@
 @import 'commons';
 
 .m-expandable-layout {
-    position: relative;
-    overflow: hidden;
+    display: grid;
 
-    &__panel {
-        position: absolute;
-        top: 0;
-        bottom: 0;
+    &.m--has-left-panel {
+        grid-template-areas: 'panel main';
+        grid-template-columns: auto 1fr;
     }
 
     &.m--has-right-panel {
-        transition: padding-right $m-transition-duration ease;
-
-        .m-expandable-layout__panel {
-            transition: right $m-transition-duration ease;
-        }
+        grid-template-areas: 'main panel';
+        grid-template-columns: 1fr auto;
     }
 
-    &.m--has-left-panel {
-        transition: padding-left $m-transition-duration ease;
+    &__main {
+        grid-area: main;
+    }
 
-        .m-expandable-layout__panel {
-            transition: left $m-transition-duration ease;
-        }
+    &__panel {
+        grid-area: panel;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: sticky;
+        top: 0;
+        align-self: start;
+        transition: width $m-transition-duration ease;
     }
 }

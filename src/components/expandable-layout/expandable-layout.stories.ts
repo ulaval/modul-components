@@ -16,23 +16,30 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
     .addDecorator(withKnobs)
     .add('default', () => ({
         props: {
-            mainContent: {
-                default: text('default slot', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusamus sint minus, modi rerum pariatur molestiae repellat ipsam suscipit id, accusantium a neque mollitia ab culpa! Quisquam maiores inventore reprehenderit?')
-            },
-            panelContent: {
-                default: text('panel slot', `panel content`)
-            },
             open: {
                 default: boolean('open', false)
             },
             panelPosition: {
-                default: radios('panel position', { left: MExpandableLayoutPanelPosition.Left, right: MExpandableLayoutPanelPosition.Right }, MExpandableLayoutPanelPosition.Left)
+                default: radios('panel-position', { left: MExpandableLayoutPanelPosition.Left, right: MExpandableLayoutPanelPosition.Right }, MExpandableLayoutPanelPosition.Left)
             },
-            size: {
-                default: knob('size', { type: 'number', value: 320 })
+            panelWidth: {
+                default: text('panel-width', '320px')
+            },
+            panelHeight: {
+                default: text('panel-height', 'auto')
+            },
+            mainContentHeight: {
+                default: text('simulated main content height', '200vh')
+            },
+            panelContentHeight: {
+                default: text('simulated panel content height', '100vh')
             }
         },
-        template: '<m-expandable-layout :open="open" :panel-position="panelPosition" :size="size">{{ mainContent }} <template slot="panel">{{ panelContent }}</template></m-expandable-layout>'
+        template: `
+        <m-expandable-layout :open="open" :panel-position="panelPosition" :panel-width="panelWidth" :panel-height="panelHeight">
+            <div :style="{background: 'lightgrey', height: mainContentHeight}">main content</div>
+            <div slot="panel" :style="{background: 'yellow', height: panelContentHeight}">panel content</div>
+        </m-expandable-layout>`
     }))
 
     .add('open', () => ({
@@ -41,6 +48,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
     .add('panel-position="right"', () => ({
         template: '<m-expandable-layout panel-position="right" :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
     }))
-    .add('size', () => ({
-        template: '<m-expandable-layout :size="600" :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
+    .add('panel-width="600"', () => ({
+        template: '<m-expandable-layout :panel-width="600" :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
     }));

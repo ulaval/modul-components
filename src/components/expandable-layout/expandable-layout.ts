@@ -25,21 +25,26 @@ export class MExpandableLayout extends ModulVue {
     })
     public panelPosition: MExpandableLayoutPanelPosition;
 
-    @Prop({ default: 320 })
-    size: number;
+    @Prop({ default: '320px' })
+    panelWidth: string;
+
+    @Prop({ default: 'auto' })
+    panelHeight: string;
 
     get panelPositionClass(): string {
         return `m--has-${this.panelPosition}-panel`;
     }
 
-    get containerStyle(): { [prop: string]: string } {
-        return { ['padding-' + this.panelPosition]: (this.open ? this.size : 0) + 'px' };
-    }
-
     get panelStyle(): { [prop: string]: string } {
         return {
-            [this.panelPosition]: (this.open ? 0 : -this.size) + 'px',
-            width: this.size + 'px'
+            width: this.open ? this.panelWidth : '0',
+            height: this.panelHeight
+        };
+    }
+
+    get panelContentStyle(): { width: string } {
+        return {
+            width: this.panelWidth
         };
     }
 }
