@@ -270,6 +270,10 @@ export default class ModulDate {
         return new Date(this.innerDate.getFullYear(), this.innerDate.getMonth(), this.innerDate.getDate(), 23, 59, 59, 999);
     }
 
+    public toDate(): Date {
+        return this.innerDate;
+    }
+
     private dateFromString(value: string): void {
         if (value === '') {
             this.innerDate = new Date();

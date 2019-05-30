@@ -9,6 +9,8 @@ import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { BetweenValidator } from '../../utils/form/validators/between/between';
 import { CompareValidator } from '../../utils/form/validators/compare/compare';
+import { DateBetweenValidator } from '../../utils/form/validators/date-between/date-between';
+import { DateFormatValidator } from '../../utils/form/validators/date-format/date-format';
 import { EmailValidator } from '../../utils/form/validators/email/email';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { MaxValidator } from '../../utils/form/validators/max/max';
@@ -62,13 +64,53 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
+        `
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
+    .add('submit outside-form', () => ({
+        methods: {
+            submit: () => {
+                Vue.prototype.$log.log('submited');
+            },
+            reset: () => {
+                Vue.prototype.$log.log('reseted');
+            }
+        },
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'name': new FormControl<string>()
+                }
+            )
+        }),
+        template: `
+        <div>
+            <m-form class="m-u--margin-top"
+                id="123-456"
+                :form-group="formGroup"
+                @reset="reset()"
+                @submit="submit()">
+            <m-textfield v-model.trim="formGroup.getControl('name').value"
+                        :error-message="formGroup.getControl('name').errors.length > 0 ? formGroup.getControl('name').errors[0].message : null"
+                        :label="formGroup.getControl('name').name"
+                        v-m-control="formGroup.getControl('name')">
+            </m-textfield>
+            </m-form>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        form="123-456">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        form="123-456">Reset</m-button>
+            </p>
+        </div>
+
         `
     }));
 
@@ -99,11 +141,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -137,11 +177,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -174,11 +212,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -212,11 +248,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -252,11 +286,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
                         v-m-control="nameField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -288,11 +320,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
                             v-m-control="emailField">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -324,11 +354,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
                             v-m-control="min5Field">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -360,136 +388,145 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
                         v-m-control="max5Field">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
     }))
-    .add('min', () => ({
+    .add('min number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'min 5': new FormControl<number>(
-                        [MinValidator('min 5', 5)]
-                    ),
-                    'min 1/1/2019': new FormControl<Date>(
-                        [MinValidator('min 1/1/2019', new Date(2019, 0, 1))]
+                    'min5': new FormControl<number>(
+                        [MinValidator('min5', 5)]
                     )
                 }
             )
         }),
         computed: {
-            min5(): void {
-                return this.$data.formGroup.getControl('min 5');
-            },
-            minDate(): void {
-                return this.$data.formGroup.getControl('min 1/1/2019');
+            min5Field(): FormControl<string> {
+                return this.formGroup.getControl('min5');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="min5.value"
-                        :error-message="min5.errors.length > 0 ? min5.errors[0].message : null"
-                        :label="min5.name"
-                        v-m-control="min5">
+            <p>default validationType =  {{ min5Field.validators[0].validationType }}</p>
+            <m-integerfield v-model="min5Field.value"
+                            :error="min5Field.hasError()"
+                            :error-message="min5Field.errorMessage"
+                            :label="min5Field.name"
+                            :valid="min5Field.valid"
+                            v-m-control="min5Field">
             </m-integerfield>
-            <m-datepicker v-model.trim="minDate.value"
-                        :error-message="minDate.errors.length > 0 ? minDate.errors[0].message : null"
-                        :label="minDate.name"
-                        v-m-control="minDate">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
     }))
-    .add('max', () => ({
+    .add('max number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'max 5': new FormControl<number>(
-                        [MaxValidator('max 5', 5)]
-                    ),
-                    'max 1/1/2019': new FormControl<Date>(
-                        [MaxValidator('max 1/1/2019', new Date(2019, 0, 1))]
+                    'max5': new FormControl<number>(
+                        [MaxValidator('max5', 5)]
                     )
                 }
             )
         }),
         computed: {
-            max5(): void {
-                return this.$data.formGroup.getControl('max 5');
-            },
-            maxDate(): void {
-                return this.$data.formGroup.getControl('max 1/1/2019');
+            max5Field(): FormControl<string> {
+                return this.formGroup.getControl('max5');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="max5.value"
-                        :error-message="max5.errors.length > 0 ? max5.errors[0].message : null"
-                        :label="max5.name"
-                        v-m-control="max5">
+            <p>default validationType =  {{ max5Field.validators[0].validationType }}</p>
+            <m-integerfield v-model="max5Field.value"
+                            :error="max5Field.hasError()"
+                            :error-message="max5Field.errorMessage"
+                            :label="max5Field.name"
+                            :valid="max5Field.valid"
+                            v-m-control="max5Field">
             </m-integerfield>
-            <m-datepicker v-model.trim="maxDate.value"
-                        :error-message="maxDate.errors.length > 0 ? maxDate.errors[0].message : null"
-                        :label="maxDate.name"
-                        v-m-control="maxDate">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
     }))
-    .add('between', () => ({
+    .add('between number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'between': new FormControl<number>(
                         [BetweenValidator('between', 2, 4)]
-                    ),
-                    'betweenDate': new FormControl<Date>(
-                        [BetweenValidator('betweenDate', new Date(2019, 0, 1), new Date(2019, 1, 1))]
                     )
                 }
             )
         }),
         computed: {
-            between(): void {
-                return this.$data.formGroup.getControl('between');
-            },
-            betweenDate(): void {
-                return this.$data.formGroup.getControl('betweenDate');
+            betweenField(): FormControl<string> {
+                return this.formGroup.getControl('between');
             }
         },
+
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="between.value"
-                        :error-message="between.errors.length > 0 ? between.errors[0].message : null"
-                        :label="between.name"
-                        v-m-control="between">
+            <p>default validationType =  {{ betweenField.validators[0].validationType }}</p>
+            <m-integerfield v-model="betweenField.value"
+                            :error="betweenField.hasError()"
+                            :error-message="betweenField.errorMessage"
+                            :label="betweenField.name"
+                            :valid="betweenField.valid"
+                            v-m-control="betweenField">
             </m-integerfield>
-            <m-datepicker v-model.trim="betweenDate.value"
-                        :error-message="betweenDate.errors.length > 0 ? betweenDate.errors[0].message : null"
-                        :label="betweenDate.name"
-                        v-m-control="betweenDate">
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('date format', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [DateFormatValidator('date')]
+                    )
+                }
+            )
+        }),
+        computed: {
+            dateField(): FormControl<string> {
+                return this.formGroup.getControl('date');
+            }
+        },
+
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <p>default validationType =  {{ dateField.validators[0].validationType }}</p>
+            <m-datepicker v-model="dateField.value"
+                            :skip-input-validation="true"
+                            :error="dateField.hasError()"
+                            :error-message="dateField.errorMessage"
+                            :label="dateField.name"
+                            :valid="dateField.valid"
+                            v-m-control="dateField">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit"
@@ -501,54 +538,98 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('compare', () => ({
+    .add('date between', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [DateBetweenValidator('date', '2019-05-20', '2019-05-30')]
+                    )
+                }
+            )
+        }),
+        computed: {
+            dateField(): FormControl<string> {
+                return this.formGroup.getControl('date');
+            }
+        },
+
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <p> min = 2019-05-20  max = 2019-05-30</p>
+            <p>default validationType =  {{ dateField.validators[0].validationType }}</p>
+            <m-datepicker v-model="dateField.value"
+                            :skip-input-validation="true"
+                            min="2008-01-01"
+                            max="2019-05-30"
+                            :error="dateField.hasError()"
+                            :error-message="dateField.errorMessage"
+                            :label="dateField.name"
+                            :valid="dateField.valid"
+                            v-m-control="dateField">
+            </m-datepicker>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit">Submit</m-button>
+                <m-button type="reset"
+                            skin="secondary">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('compare fields', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<number>(
                         [EmailValidator('email')]
                     ),
-                    'confirm email': new FormControl<number>(
-                        [EmailValidator('confirm email')]
+                    'confirmemail': new FormControl<number>(
+                        [EmailValidator('confirmemail')]
                     )
                 },
                 [
-                    CompareValidator(['email', 'confirm email'])
+                    CompareValidator(['email', 'confirmemail'])
                 ]
             )
         }),
         computed: {
-            email(): void {
-                return this.$data.formGroup.getControl('email');
+            emailField(): FormControl<string> {
+                return this.formGroup.getControl('email');
             },
-            confirmEmail(): void {
-                return this.$data.formGroup.getControl('confirm email');
+            confirmemailField(): FormControl<string> {
+                return this.formGroup.getControl('confirmemail');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-input-group :legend="formGroup.name"
-                :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
+            <p>default validationType =  {{ formGroup.validators[0].validationType }}</p>
+            <m-input-group legend="compare two field"
+                           :valid="formGroup.valid"
+                           :error="formGroup.hasError()"
+                           :error-message="formGroup.errorMessage">
                 <div slot-scope="{  }">
-                    <m-textfield v-model.trim="email.value"
-                                :error-message="email.errors.length > 0 ? email.errors[0].message : null"
-                                :label="email.name"
-                                v-m-control="email">
+                    <m-textfield v-model="emailField.value"
+                                    :error="emailField.hasError()"
+                                    :error-message="emailField.errorMessage"
+                                    label="email"
+                                    :valid="emailField.valid"
+                                    v-m-control="emailField">
                     </m-textfield>
-                    <m-textfield v-model.trim="confirmEmail.value"
-                                :error-message="confirmEmail.errors.length > 0 ? confirmEmail.errors[0].message : null"
-                                :label="confirmEmail.name"
-                                v-m-control="confirmEmail">
+                    <m-textfield v-model="confirmemailField.value"
+                                    :error="confirmemailField.hasError()"
+                                    :error-message="confirmemailField.errorMessage"
+                                    label="confirm email"
+                                    :valid="confirmemailField.valid"
+                                    v-m-control="confirmemailField">
                     </m-textfield>
                 </div>
             </m-input-group>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -586,11 +667,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -620,11 +699,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -658,11 +735,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -696,11 +771,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                         v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         `
@@ -749,11 +822,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                         v-m-control="requiredMax20">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -796,11 +867,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                         v-m-control="requiredMin5">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -846,11 +915,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                         v-m-control="postalCode">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -893,11 +960,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                         v-m-control="email">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -962,11 +1027,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                         v-m-control="courseCode">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -1031,11 +1094,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                         v-m-control="username">
             </m-textfield>
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                        :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                        skin="secondary"
-                        :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -1079,11 +1140,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
             </m-radio-group>
 
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -1147,11 +1206,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
             </ul>
 
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -1238,11 +1295,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
             </m-input-group>
 
             <p class="m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                            skin="secondary">Reset</m-button>
             </p>
         </m-form>
         </div>
@@ -1283,11 +1338,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                          :error-message="nameField.errorMessage"">
             </m-textfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1322,11 +1375,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                     :error="descriptionField.hasError()"
                     :error-message="descriptionField.errorMessage""></m-textarea>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1363,11 +1414,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       :error="birthDateField.hasError()"
                       :error-message="birthDateField.errorMessage"></m-datepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1407,11 +1456,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                              :label="type"></m-dropdown-item>
         </m-dropdown>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1444,11 +1491,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                     :error="activeField.hasError()"
                     :error-message="activeField.errorMessage">Is active ?</m-checkbox>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1486,11 +1531,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                      :value="coupe">{{coupe}}</m-radio>
          </m-radio-group>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1526,10 +1569,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       :error-message="timeField.errorMessage"></m-timepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                         >Submit</m-button>
                 <m-button type="reset"
                           skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          >Reset</m-button>
             </div>
         </m-form>
         `
@@ -1567,10 +1610,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         </m-decimalfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
                 <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                          >Submit</m-button>
                 <m-button type="reset"
                           skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          >Reset</m-button>
             </div>
         </m-form>
         `
@@ -1605,11 +1648,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                       :error="priceField.hasError()"
                       :error-message="priceField.errorMessage"></m-moneyfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1646,11 +1687,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
 
         </m-integerfield>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1683,11 +1722,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                   :error="switchField.hasError()"
                   :error-message="switchField.errorMessage">État</m-switch>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1733,11 +1770,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                         :error-message="autocompleteField.errorMessage"
                         @complete="onComplete"></m-autocomplete>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
@@ -1771,11 +1806,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                            :error-message="daterangeField.errorMessage">
         </m-daterangepicker>
             <div class="m-u--margin-top--l m-u--margin-bottom--l">
-                <m-button type="submit"
-                          :form="formGroup.id">Submit</m-button>
+                <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
-                          skin="secondary"
-                          :form="formGroup.id">Reset</m-button>
+                          skin="secondary">Reset</m-button>
             </div>
         </m-form>
         `
