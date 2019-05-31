@@ -79,11 +79,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
                 :country-key="countryKey"
                 :province-key="provinceKey"
                 :filters="filters"
-                v-slot:default="{ filteredAddress }">
-                {{ filteredAddress.postalCode }} <br />
-                {{ filteredAddress.country }} <br />
-                {{ filteredAddress.city }}, {{ filteredAddress.province }} <br />
-                {{ filteredAddress.buildingNumber }} {{ filteredAddress.street }} <template v-if="filteredAddress.subBuilding !== ''">Appartement / bureau : {{ filteredAddress.subBuilding }} </template>
+                v-slot:default="{ filteredAddress : address }">
+                {{ address.postalCode }} <br />
+                {{ address.country }} <br />
+                {{ address.city }}, {{ address.province }} <br />
+                {{ address.buildingNumber }} {{ address.street }} <template v-if="address.subBuilding !== ''">Appartement / bureau : {{ address.subBuilding }} </template>
             </${ADDRESS_READER}>
         </div>`
     }));
