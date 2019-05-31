@@ -15,7 +15,7 @@ export class FormControl<T> extends AbstractControl {
         super(validators, options);
 
         if (options) {
-            if (options.initialValue) {
+            if (options.initialValue !== undefined) {
                 this._initialValue = this._value = this._oldValue = options.initialValue;
             }
         } else {
@@ -82,7 +82,7 @@ export class FormControl<T> extends AbstractControl {
     }
 
     /**
-     * This specify the ennd of a edition context. (a blur event)
+     * This specify the ennd of a edition context.
      */
     public endEdition(): void {
         this._touched = true;
@@ -103,12 +103,10 @@ export class FormControl<T> extends AbstractControl {
         } else {
             this._initialValue = this._value = this._oldValue = initialValue;
         }
-
-
     }
 
     /**
-     * Run all validatior
+     * Run all validators
      *
      * @param [external] run external validator
      */
