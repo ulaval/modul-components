@@ -126,6 +126,154 @@ exports[`Storyshots components|m-form default 1`] = `
 </form>
 `;
 
+exports[`Storyshots components|m-form reactive initial value 1`] = `
+<div>
+  <form
+    class="m-form m-u--margin-top"
+  >
+    <!---->
+     
+    <!---->
+     
+    <div
+      class="m-textfield m--is-type-text"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-value m--is-tag-default"
+      >
+        <div
+          class="m-input-style__content"
+          style="margin-top: 10px;"
+        >
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
+           
+          <div
+            class="m-input-style__body"
+          >
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__left-content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__right-content"
+            >
+              <span
+                style="white-space: nowrap;"
+              />
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <div
+        class="m-textfield__validation"
+      >
+        <div
+          class="m-validation-message m-textfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <p
+      class="m-u--margin-bottom--l"
+    >
+      <button
+        class="m-button m--is-skin-primary"
+        type="submit"
+      >
+        <!---->
+         
+        <!---->
+         
+        <span
+          class="m-button__text"
+        >
+          Submit 
+          <!---->
+        </span>
+         
+        <!---->
+         
+        <!---->
+      </button>
+       
+      <button
+        class="m-button m--is-skin-primary"
+        type="reset"
+      >
+        <!---->
+         
+        <!---->
+         
+        <span
+          class="m-button__text"
+        >
+          Reset 
+          <!---->
+        </span>
+         
+        <!---->
+         
+        <!---->
+      </button>
+       
+      <button
+        class="m-button m--is-skin-secondary"
+        type="button"
+      >
+        <!---->
+         
+        <!---->
+         
+        <span
+          class="m-button__text"
+        >
+          Reset to new value 
+          <!---->
+        </span>
+         
+        <!---->
+         
+        <!---->
+      </button>
+    </p>
+  </form>
+</div>
+`;
+
 exports[`Storyshots components|m-form submit outside-form 1`] = `
 <div>
   <form
