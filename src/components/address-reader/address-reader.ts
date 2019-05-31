@@ -4,13 +4,23 @@ import Address from '../../utils/address-lookup/address';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './address-reader.html';
 
-const BUILDING_NUMBER = 'buildingNumber';
-const STREET = 'street';
-const CITY = 'city';
-const POSTAL_CODE = 'postalCode';
-const SUB_BUILDING = 'subBuilding';
-const COUNTRY = 'country';
-const PROVINCE = 'province';
+const BUILDING_NUMBER: string = 'buildingNumber';
+const STREET: string = 'street';
+const CITY: string = 'city';
+const POSTAL_CODE: string = 'postalCode';
+const SUB_BUILDING: string = 'subBuilding';
+const COUNTRY: string = 'country';
+const PROVINCE: string = 'province';
+
+export interface DisplayableAddress {
+    buildingNumber: string;
+    street: string;
+    city: string;
+    postalCode: string;
+    subBuilding: string;
+    country: string;
+    province: string;
+}
 @WithRender
 @Component
 export class MAddressReader extends ModulVue {
@@ -55,6 +65,18 @@ export class MAddressReader extends ModulVue {
 
     get province(): string {
         return this.filterString(PROVINCE, this.provinceKey);
+    }
+
+    get filteredAddress(): DisplayableAddress {
+        return {
+            buildingNumber: this.buildingNumber,
+            street: this.street,
+            city: this.city,
+            postalCode: this.postalCode,
+            subBuilding: this.subBuilding,
+            country: this.country,
+            province: this.province
+        };
     }
 
     private filterString(key: string, subKey: string = ''): string {
