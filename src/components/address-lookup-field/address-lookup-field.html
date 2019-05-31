@@ -2,16 +2,14 @@
     <m-autocomplete placeholder="Input address to lookup !translation"
                     label="Address Lookup"
                     :results="results"
-                    throttle="0"
                     :open.sync="open"
-                    :clear-invalid-selection-on-close="false"
                     @complete="onComplete"
                     @change="onSelect"
                     v-model="selection">
         <template slot-scope="{item}">
             <div :class="item.classesToggle">
                 <b>{{item.label}}</b>
-                <div>{{item.description}} - {{ item.type }}</div>
+                <div v-html="item.description"></div>
             </div>
         </template></m-autocomplete>
 

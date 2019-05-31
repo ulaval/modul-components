@@ -119,6 +119,7 @@ export default class AddressLookupLoqateService implements AddressLookupService<
             language: row.Language,
             alternativeLanguages: row.LanguageAlternatives.split(','),
             label: row.Label,
+            buildingNumber: row.BuildingNumber,
             street: row.Street,
             city: row.City,
             postalCode: row.PostalCode,

@@ -1,14 +1,5 @@
 @import 'commons';
 
-.m-address-lookup-field__item--children {
-    border-left: solid 3px $m-color--accent-light;
-    padding-left: $m-padding--s;
-}
-
 .m-address-lookup-field__item--expandable {
     background-color: $m-color--accent-light;
-}
-
-.m-address-lookup-field__item--expanded {
-    background-color: $m-color--accent-lightest;
 }

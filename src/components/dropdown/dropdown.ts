@@ -93,8 +93,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Watch('forceOpen')
     onForceOpenUpdate(): void {
         if (this.forceOpen) {
-            // tslint:disable-next-line: no-console
-            console.log('forceOpen');
             this.internalOpen = this.forceOpen;
         }
     }
