@@ -22,7 +22,7 @@ describe('Required validator', () => {
 
     it('should return false when unfinished ', () => {
         formControl.value = '2001-01';
-        expect(validator.validationFunction(formControl)).toBe(false);
+        expect(validator.validationFunction(formControl)).toBe(true);
     });
 
     it('should return false when invalid ', () => {

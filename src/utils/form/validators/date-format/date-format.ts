@@ -18,7 +18,7 @@ export const DateFormatValidator: Function = (controlLabel: string, options: Con
                 return true;
             } else {
                 if (control.value.length < 10) {
-                    return false;
+                    return true;
                 } else {
                     return !isNaN(Date.parse(control.value));
                 }
@@ -42,6 +42,6 @@ export const DateFormatValidator: Function = (controlLabel: string, options: Con
                 )
             },
         validationType: options && options.validationType ?
-            options.validationType : ControlValidatorValidationType.Correction
+            options.validationType : ControlValidatorValidationType.OnGoing
     };
 };

@@ -552,7 +552,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'date': new FormControl<string>(
-                        [DateFormatValidator('date')]
+                        [MinLengthValidator('date', 10, {
+                            validationType: ControlValidatorValidationType.Correction
+                        }), DateFormatValidator('date')]
                     )
                 }
             )
