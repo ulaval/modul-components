@@ -5,5 +5,5 @@ export interface ControlOptions {
 }
 
 export interface FormControlOptions<T> extends ControlOptions {
-    initialValue?: T | (() => T);
+    initialValue?: T;
 }

@@ -113,24 +113,29 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
 
         `
     }));
-let reactiveVariable: string = 'blabla';
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     .add('reactive initial value', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'name': new FormControl<string>([], { initialValue: () => reactiveVariable })
+                    'name': new FormControl<string>([RequiredValidator('name')], { initialValue: 'blabla' })
                 }
+
             )
         }),
         methods: {
-            submit: (value: string) => {
+            submit(value: string): void {
                 Vue.prototype.$log.log('submited');
-                reactiveVariable = value;
+                this.$data.formGroup.getControl('name').initalValue = value;
             },
-            reset: () => {
+            reset(): void {
                 Vue.prototype.$log.log('reseted');
+            },
+            resetToNewValue(): void {
+                this.$data.formGroup.getControl('name').reset('newValue');
+                Vue.prototype.$log.log('resetToNewValue');
             }
+
         },
         template: `
             <div>
@@ -146,7 +151,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
                 <p class="m-u--margin-bottom--l">
                     <m-button type="submit">Submit</m-button>
                     <m-button type="reset"
-                            skin="secondary">Reset</m-button>
+                            >Reset</m-button>
+                    <m-button skin="secondary"
+                            @click="resetToNewValue">Reset to new value</m-button>
                 </p>
                 </m-form>
             </div>

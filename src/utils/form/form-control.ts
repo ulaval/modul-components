@@ -5,7 +5,7 @@ import { ControlValidator } from './validators/control-validator';
 
 export class FormControl<T> extends AbstractControl {
     private _value?: T;
-    private _initialValue?: T | (() => T);
+    private _initialValue?: T;
     private _oldValue?: T;
 
     constructor(
@@ -16,12 +16,7 @@ export class FormControl<T> extends AbstractControl {
 
         if (options) {
             if (options.initialValue) {
-                if (options.initialValue instanceof Function) {
-                    this._initialValue = options.initialValue;
-                    this._value = this._oldValue = options.initialValue();
-                } else {
-                    this._initialValue = this._value = this._oldValue = options.initialValue;
-                }
+                this._initialValue = this._value = this._oldValue = options.initialValue;
             }
         } else {
             // ensure reactivity
@@ -46,6 +41,10 @@ export class FormControl<T> extends AbstractControl {
         this._value = value;
 
         this.upwardValueChanged();
+    }
+
+    set initalValue(initalValue: T) {
+        this._initialValue = initalValue;
     }
 
     public get valid(): boolean {
@@ -82,21 +81,37 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
+    /**
+     * This specify the ennd of a edition context. (a blur event)
+     */
     public endEdition(): void {
         this._touched = true;
         super.endEdition();
     }
 
-    public reset(): void {
+    /**
+     * Reset the field to it's orginal pristine state.
+     *
+     * @param {T} [initialValue]  a new initial value for the field
+     */
+    public reset(initialValue?: T): void {
         super.reset();
         this._touched = false;
-        if (this._initialValue instanceof Function) {
-            this._value = this._oldValue = this._initialValue();
-        } else {
+
+        if (!initialValue) {
             this._value = this._oldValue = this._initialValue;
+        } else {
+            this._initialValue = this._value = this._oldValue = initialValue;
         }
+
+
     }
 
+    /**
+     * Run all validatior
+     *
+     * @param [external] run external validator
+     */
     public async submit(external: boolean = false): Promise<void> {
         this.validate(external);
         await this.validateAsync(external);

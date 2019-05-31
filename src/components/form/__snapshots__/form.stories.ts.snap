@@ -231,7 +231,7 @@ exports[`Storyshots components|m-form reactive initial value 1`] = `
       </button>
        
       <button
-        class="m-button m--is-skin-secondary"
+        class="m-button m--is-skin-primary"
         type="reset"
       >
         <!---->
@@ -242,6 +242,26 @@ exports[`Storyshots components|m-form reactive initial value 1`] = `
           class="m-button__text"
         >
           Reset 
+          <!---->
+        </span>
+         
+        <!---->
+         
+        <!---->
+      </button>
+       
+      <button
+        class="m-button m--is-skin-secondary"
+        type="button"
+      >
+        <!---->
+         
+        <!---->
+         
+        <span
+          class="m-button__text"
+        >
+          Reset to new value 
           <!---->
         </span>
          
