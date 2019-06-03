@@ -137,9 +137,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
     .add('type="tel"', () => ({
         template: '<m-textfield type="tel" value="123456789"></m-textfield>'
     }))
-    .add('type="search"', () => ({
-        template: '<m-textfield type="search" value="Search Query"></m-textfield>'
-    }))
     .add('type="number"', () => ({
         template: '<m-textfield type="number" value="156168468"></m-textfield>'
     }));
