@@ -23,7 +23,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${SEARCHFIELD_NAME}`, module)
         components: { MSearchfield },
         template: `
             <div>
-                <div><${SEARCHFIELD_NAME} v-model="value" label="label de crotte vraiment trop long et stupide"></${SEARCHFIELD_NAME}></div>
+                <div><${SEARCHFIELD_NAME} v-model="value" label="What are you look for today ?"></${SEARCHFIELD_NAME}></div>
             </div>
         `,
         data: () => ({

@@ -126,7 +126,7 @@ exports[`Storyshots components|m-searchfield with label 1`] = `
                 class="m-input-style__text"
               >
                 <span>
-                  label de crotte vraiment trop long et stupide
+                  What are you look for today ?
                 </span>
                  
                 <!---->
