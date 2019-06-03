@@ -21,6 +21,8 @@ export class MInputStyle extends ModulVue {
     public labelFor: string;
     @Prop({ default: false })
     public focus: boolean;
+    @Prop({ default: false })
+    public append: boolean;
     @Prop({ default: true })
     public empty: boolean;
     @Prop()
@@ -39,10 +41,11 @@ export class MInputStyle extends ModulVue {
         label: HTMLElement,
         body: HTMLElement,
         adjustWidthAuto: HTMLElement,
-        rightContent: HTMLElement
+        suffix: HTMLElement
     };
 
     public labelOffset: string | undefined = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public suffixOffset: string | undefined = '0px';
     public animReady: boolean = false;
 
     protected created(): void {
@@ -53,7 +56,8 @@ export class MInputStyle extends ModulVue {
     }
 
     protected mounted(): void {
-        this.calculateLabelOffset();
+        this.computeLabelOffset();
+        this.computeSuffixOffset();
     }
 
     public setInputWidth(): void {
@@ -87,12 +91,21 @@ export class MInputStyle extends ModulVue {
     }
 
     @Watch('isLabelUp')
-    private calculateLabelOffset(): void {
+    private computeLabelOffset(): void {
         if (this.label) {
             let labelOffset: number = this.$refs.label.clientHeight / 2;
             this.labelOffset = this.isLabelUp && labelOffset > CSS_LABEL_DEFAULT_MARGIN ? `${labelOffset}px` : `${CSS_LABEL_DEFAULT_MARGIN}px`;
         } else {
             this.labelOffset = undefined;
+        }
+    }
+
+    public async computeSuffixOffset(): Promise<void> {
+        await this.$nextTick();
+        if (this.label && this.$refs.suffix) {
+            this.suffixOffset = this.$refs.suffix.clientWidth + 'px';
+        } else {
+            this.suffixOffset = undefined;
         }
     }
 

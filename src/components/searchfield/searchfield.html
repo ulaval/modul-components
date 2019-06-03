@@ -18,52 +18,46 @@
                    :label-up="labelUp"
                    :empty="isEmpty"
                    :readonly="isReadonly"
+                   :word-wrap="true"
+                   :append="true"
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <input :id="id"
-               class="m-searchfield__input"
+               class="m-textfield__input"
                v-model="model"
                :autocomplete="autocomplete"
                :disabled="isDisabled || isWaiting"
                :placeholder="placeholder"
                :readonly="isReadonly"
-               type="search"
+               @focus="onFocus"
                @blur="onBlur"
                @change="onChange"
-               @focus="onFocus"
+               @keypress.enter.prevent
                @keyup="onKeyup"
                @keydown="onKeydown"
-               @keydown.enter="onSearch"
                @paste="onPaste"
+               v-m-textarea-auto-height
+               rows="1"
                ref="input" />
-        <template slot="right-content">
-            <transition-group name="m--is"
-                              style="white-space: nowrap;">
-                <m-icon-button v-if="hasValue"
-                               class="m-searchfield__reset"
-                               :aria-controls="id"
-                               @click="reset"
-                               key="resetIcon"
-                               button-size="1em"
-                               icon-size="11px"
-                               icon-name="m-svg__close-clear"></m-icon-button>
-                <m-icon-button class="m-searchfield__search-button"
-                               :aria-controls="id"
-                               :title="searchIconDescription"
-                               @click="onSearch"
-                               key="searchIcon"
-                               button-size="22px"
-                               icon-name="m-svg__search"></m-icon-button>
-
-                <!-- <button class="m-searchfield__search-button"
-                        :aria-controls="id"
-                        @click="onSearch"
-                        key="searchIcon"
-                        :title="searchIconDescription">
-                    <m-icon name="m-svg__search"></m-icon>
-                </button> -->
-
-            </transition-group>
+        <template slot="suffix">
+            <m-icon-button v-if="hasValue"
+                           class="m-searchfield__reset"
+                           :aria-controls="id"
+                           @click="reset"
+                           key="resetIcon"
+                           button-size="1em"
+                           icon-size="11px"
+                           icon-name="m-svg__close-clear"></m-icon-button>
+        </template>
+        <template slot="append">
+            <button class="m-searchfield__search-button"
+                    :aria-controls="id"
+                    @click="onSearch"
+                    key="searchIcon"
+                    :title="searchIconDescription">
+                <m-icon name="m-svg__search"
+                        size="22px"></m-icon>
+            </button>
         </template>
     </m-input-style>
     <div class="m-searchfield__validation">

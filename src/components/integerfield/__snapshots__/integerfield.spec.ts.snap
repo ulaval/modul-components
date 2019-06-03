@@ -2,12 +2,14 @@
 
 exports[`MTextfield should render correctly 1`] = `
 <div class="m-integerfield" style="width:100%;max-width:288px;">
-  <div class="m-input-style m--is-tag-default">
-    <div class="m-input-style__content" style="margin-top:10px;"><span class="m-input-style__label" style="z-index:-1;"><span class="m-input-style__text"></span></span>
-      <div class="m-input-style__body">
-        <div class="m-input-style__prefix"></div>
-        <div class="m-input-style__left-content"> <input id="mIntegerfield-uuid" inputmode="decimal" class="m-integerfield__input"> </div>
-        <div class="m-input-style__right-content"></div>
+  <div class="m-input-style m--is-tag-default" style="margin-top:10px;">
+    <div class="m-input-style__main">
+      <div class="m-input-style__body"><span class="m-input-style__label" style="z-index:-1;"><span class="m-input-style__text"></span></span>
+        <div class="m-input-style__input">
+          <div class="m-input-style__prefix"></div>
+          <div class="m-input-style__content"> <input id="mIntegerfield-uuid" inputmode="decimal" class="m-integerfield__input"> </div>
+          <div class="m-input-style__suffix"> </div>
+        </div>
       </div>
     </div>
   </div>

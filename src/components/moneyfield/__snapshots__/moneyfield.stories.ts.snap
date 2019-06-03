@@ -15,7 +15,13 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -37,7 +43,13 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -60,7 +72,13 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -82,7 +100,13 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -104,7 +128,13 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -126,7 +156,13 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -150,7 +186,13 @@ exports[`Storyshots components|m-moneyfield Custom precision 1`] = `
     width="100%"
   >
     <template>
-      CA$
+      <span
+        class="m-moneyfield__currency-symbol"
+      >
+        
+                CA$
+            
+      </span>
     </template>
      
     <!---->
@@ -172,7 +214,13 @@ exports[`Storyshots components|m-moneyfield Default precision 1`] = `
     width="100%"
   >
     <template>
-      CA$
+      <span
+        class="m-moneyfield__currency-symbol"
+      >
+        
+                CA$
+            
+      </span>
     </template>
      
     <!---->
@@ -194,7 +242,13 @@ exports[`Storyshots components|m-moneyfield Localization 1`] = `
     width="100%"
   >
     <template>
-      CA$
+      <span
+        class="m-moneyfield__currency-symbol"
+      >
+        
+                CA$
+            
+      </span>
     </template>
      
     <!---->
@@ -219,7 +273,13 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -242,7 +302,13 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -257,6 +323,7 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
     >
       <m-decimalfield
         force-rounding-format="true"
+        label="label bla label"
         maxwidth="small"
         placeholder="Waiting"
         precision="11"
@@ -265,7 +332,13 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
         width="100%"
       >
         <template>
-          CA$
+          <span
+            class="m-moneyfield__currency-symbol"
+          >
+            
+                CA$
+            
+          </span>
         </template>
          
         <!---->
@@ -289,7 +362,13 @@ exports[`Storyshots components|m-moneyfield With initial value (0) 1`] = `
     width="100%"
   >
     <template>
-      CA$
+      <span
+        class="m-moneyfield__currency-symbol"
+      >
+        
+                CA$
+            
+      </span>
     </template>
      
     <!---->
@@ -311,7 +390,13 @@ exports[`Storyshots components|m-moneyfield With initial value 1`] = `
     width="100%"
   >
     <template>
-      CA$
+      <span
+        class="m-moneyfield__currency-symbol"
+      >
+        
+                CA$
+            
+      </span>
     </template>
      
     <!---->

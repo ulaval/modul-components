@@ -15,55 +15,66 @@
      @mousedown="onMousedown"
      @mouseup="onMouseup"
      ref="root"
-     :style="{ width: width }">
-    <div class="m-input-style__content"
-         :style="{ marginTop: labelOffset }">
-        <label v-if="hasLabel"
-               class="m-input-style__label"
-               :for="labelFor"
-               ref="label">
-            <span class="m-input-style__text">
-                <span>{{ label }}</span>&nbsp;<sup v-if="requiredMarker"
-                     class="m-input-style__required-marker">*</sup>
+     :style="{ width: width, marginTop: labelOffset }">
+    <div class="m-input-style__main">
+        <div class="m-input-style__body">
+            <label v-if="hasLabel"
+                   class="m-input-style__label"
+                   :style="{ marginRight: suffixOffset }"
+                   :for="labelFor"
+                   ref="label">
+                <span class="m-input-style__text">
+                    <span>{{ label }}</span>&nbsp;<sup v-if="requiredMarker"
+                         class="m-input-style__required-marker">*</sup>
+                </span>
+            </label>
+
+            <span v-else
+                  class="m-input-style__label"
+                  style="z-index: -1;">
+                <span class="m-input-style__text">
+                    <!-- this markup is mandatory to maintain content height and alignment -->
+                </span>
             </span>
-        </label>
 
-        <span v-else
-              class="m-input-style__label"
-              style="z-index: -1;">
-            <span class="m-input-style__text">
-                <!-- this markup is mandatory to maintain content height and alignment -->
-            </span>
-        </span>
+            <div class="m-input-style__input"
+                 ref="input">
 
-        <div class="m-input-style__body"
-             ref="body">
+                <div v-if="showPrefix"
+                     class="m-input-style__prefix"
+                     ref="prefix">
+                    <slot name="prefix"></slot>
+                </div>
 
-            <div v-if="showPrefix"
-                 class="m-input-style__prefix"
-                 ref="prefix">
-                <slot name="prefix"></slot>
-            </div>
-            <div class="m-input-style__left-content">
-                <slot></slot>
-                <m-i18n v-if="!hasDefaultSlot"
-                        class="m-input-style__transparent-text"
-                        k="m-input-style:empty-value"
-                        aria-hidden="true"></m-i18n>
-                <div v-if="hasAdjustWidthAutoSlot"
-                     class="m-input-style__adjust-width-auto"
-                     aria-hidden="true"
-                     ref="adjustWidthAuto">
-                    <slot name="adjust-width-auto"></slot>
+                <div class="m-input-style__content">
+                    <slot></slot>
+                    <m-i18n v-if="!hasDefaultSlot"
+                            class="m-input-style__transparent-text"
+                            k="m-input-style:empty-value"
+                            aria-hidden="true"></m-i18n>
+                    <div v-if="hasAdjustWidthAutoSlot"
+                         class="m-input-style__adjust-width-auto"
+                         aria-hidden="true"
+                         ref="adjustWidthAuto">
+                        <slot name="adjust-width-auto"></slot>
+                    </div>
+                </div>
+
+                <div class="m-input-style__suffix"
+                     ref="suffix">
+
+                    <slot name="suffix"></slot>
+
+                    <m-spinner v-if="isWaiting"
+                               class="m-input-style__spinner"
+                               size="small"></m-spinner>
                 </div>
             </div>
-            <div class="m-input-style__right-content"
-                 ref="rightContent">
-                <slot name="right-content"></slot>
-            </div>
-            <m-spinner v-if="isWaiting"
-                       class="m-input-style__spinner"
-                       size="small"></m-spinner>
+        </div>
+        <div v-if="append"
+             ref="append"
+             class="m-input-style__append">
+            <slot name="append"></slot>
         </div>
     </div>
 </div>

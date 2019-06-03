@@ -18,4 +18,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${SEARCHFIELD_NAME}`, module)
         data: () => ({
             value: undefined
         })
+    }))
+    .add('with label', () => ({
+        components: { MSearchfield },
+        template: `
+            <div>
+                <div><${SEARCHFIELD_NAME} v-model="value" label="label de crotte vraiment trop long et stupide"></${SEARCHFIELD_NAME}></div>
+            </div>
+        `,
+        data: () => ({
+            value: undefined
+        })
     }));
