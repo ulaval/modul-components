@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
+import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
 import WithRender from './expandable-layout.html?style=./expandable-layout.scss';
@@ -28,8 +29,33 @@ export class MExpandableLayout extends ModulVue {
     @Prop({ default: '320px' })
     panelWidth: string;
 
-    @Prop({ default: 'auto' })
-    panelHeight: string;
+    $refs: {
+        panelContent: HTMLDivElement
+    };
+
+    mounted(): void {
+        this.$modul.event.$on('scroll', this.setPanelPosition);
+        this.$modul.event.$on('resize', this.setPanelPosition);
+    }
+
+    beforeDestroy(): void {
+        this.$modul.event.$off('scroll', this.setPanelPosition);
+        this.$modul.event.$off('resize', this.setPanelPosition);
+    }
+
+    setPanelPosition(): void {
+        let { top, bottom } = this.$el.getBoundingClientRect();
+        if (top < 0) {
+            this.$refs.panelContent.style.top = -top + 'px';
+        } else {
+            this.$refs.panelContent.style.top = '';
+        }
+        if (bottom > document.documentElement.clientHeight) {
+            this.$refs.panelContent.style.bottom = (bottom - document.documentElement.clientHeight) + 'px';
+        } else {
+            this.$refs.panelContent.style.bottom = '';
+        }
+    }
 
     get panelPositionClass(): string {
         return `m--has-${this.panelPosition}-panel`;
@@ -37,8 +63,7 @@ export class MExpandableLayout extends ModulVue {
 
     get panelStyle(): { [prop: string]: string } {
         return {
-            width: this.open ? this.panelWidth : '0',
-            height: this.panelHeight
+            width: this.open ? this.panelWidth : '0'
         };
     }
 
@@ -51,6 +76,7 @@ export class MExpandableLayout extends ModulVue {
 
 const ExpandableLayoutPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.use(ModulPlugin);
         v.component(EXPANDABLE_LAYOUT_NAME, MExpandableLayout);
     }
 };

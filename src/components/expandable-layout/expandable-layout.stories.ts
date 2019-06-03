@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { boolean, knob, radios, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, radios, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -17,7 +17,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
     .add('default', () => ({
         props: {
             open: {
-                default: boolean('open', false)
+                default: boolean('open', true)
             },
             panelPosition: {
                 default: radios('panel-position', { left: MExpandableLayoutPanelPosition.Left, right: MExpandableLayoutPanelPosition.Right }, MExpandableLayoutPanelPosition.Left)
@@ -25,20 +25,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
             panelWidth: {
                 default: text('panel-width', '320px')
             },
-            panelHeight: {
-                default: text('panel-height', 'auto')
-            },
             mainContentHeight: {
                 default: text('simulated main content height', '200vh')
             },
             panelContentHeight: {
-                default: text('simulated panel content height', '100vh')
+                default: text('simulated panel content height', '300vh')
             }
         },
         template: `
-        <m-expandable-layout :open="open" :panel-position="panelPosition" :panel-width="panelWidth" :panel-height="panelHeight">
+        <m-expandable-layout :open="open" :panel-position="panelPosition" :panel-width="panelWidth" style="background: yellow;">
             <div :style="{background: 'lightgrey', height: mainContentHeight}">main content</div>
-            <div slot="panel" :style="{background: 'yellow', height: panelContentHeight}">panel content</div>
+            <div slot="panel" :style="{height: panelContentHeight}">panel content</div>
         </m-expandable-layout>`
     }))
 

@@ -19,11 +19,18 @@
 
     &__panel {
         grid-area: panel;
-        overflow-x: hidden;
-        overflow-y: auto;
-        position: sticky;
-        top: 0;
-        align-self: start;
+        overflow: hidden;
+        position: relative;
         transition: width $m-transition-duration ease;
+
+        &__content {
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
     }
 }

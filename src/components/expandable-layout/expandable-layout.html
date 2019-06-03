@@ -6,7 +6,8 @@
     <div class="m-expandable-layout__panel"
          :style="panelStyle">
         <div class="m-expandable-layout__panel__content"
-             :style="panelContentStyle">
+             :style="panelContentStyle"
+             ref="panelContent">
             <slot name="panel"></slot>
         </div>
     </div>
