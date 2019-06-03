@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { ADDRESS_READER } from '../component-names';
-import { MAddressReader } from './address-reader';
+import { CountryKey, MAddressReader, ProvinceKey } from './address-reader';
 
 storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
     .addDecorator(withA11y)
@@ -12,8 +12,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
         components: { MAddressReader },
         data: () => ({
             address: {
-                language: 'FRE',
-                alternativeLanguages: ['FRE', 'ENG'],
                 buildingNumber: '2325',
                 city: 'Québec',
                 country: {
@@ -27,11 +25,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
                 },
                 street: `Rue de l'Université`,
                 postalCode: 'G1V 0A6',
-                subBuilding: '',
-                label: `2325 Rue de l'Université`
+                subBuilding: ''
             },
-            countryKey: 'country',
-            provinceKey: 'provinceCode',
+            countryKey: CountryKey.COUNTRY,
+            provinceKey: ProvinceKey.PROVINCE_CODE,
             filters: {
                 street: (value: string): string => value.charAt(0).toLowerCase() + value.slice(1)
             }
@@ -49,8 +46,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
         components: { MAddressReader },
         data: () => ({
             address: {
-                language: 'FRE',
-                alternativeLanguages: ['FRE', 'ENG'],
                 buildingNumber: '2325',
                 city: 'Québec',
                 country: {
@@ -64,11 +59,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
                 },
                 street: `Rue de l'Université`,
                 postalCode: 'G1V 0A6',
-                subBuilding: '',
-                label: `2325 Rue de l'Université`
+                subBuilding: ''
             },
-            countryKey: 'countryIso2',
-            provinceKey: 'province',
+            countryKey: CountryKey.COUNTRY,
+            provinceKey: ProvinceKey.PROVINCE_CODE,
             filters: {
                 street: (value: string): string => value.charAt(0).toLowerCase() + value.slice(1)
             }

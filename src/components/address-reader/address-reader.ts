@@ -21,6 +21,17 @@ export interface DisplayableAddress {
     country: string;
     province: string;
 }
+
+export enum ProvinceKey {
+    PROVINCE = 'province',
+    PROVINCE_CODE = 'provinceCode'
+}
+
+export enum CountryKey {
+    COUNTRY = 'country',
+    COUNTRY_ISO2 = 'countryIso2',
+    COUNTRY_ISO3 = 'countryIso3'
+}
 @WithRender
 @Component
 export class MAddressReader extends ModulVue {
@@ -33,10 +44,19 @@ export class MAddressReader extends ModulVue {
     @Prop({ default: () => { } })
     filters: { [field: string]: (value: string) => string };
 
-    @Prop({ default: 'country' })
+    @Prop({
+        default: CountryKey.COUNTRY,
+        validator: (value: string) => value === CountryKey.COUNTRY
+            || value === CountryKey.COUNTRY_ISO2
+            || value === CountryKey.COUNTRY_ISO3
+    })
     countryKey: string;
 
-    @Prop({ default: 'province' })
+    @Prop({
+        default: ProvinceKey.PROVINCE,
+        validator: (value: string) => value === ProvinceKey.PROVINCE
+            || value === ProvinceKey.PROVINCE_CODE
+    })
     provinceKey: string;
 
     get buildingNumber(): string {
