@@ -23,7 +23,7 @@
                :for="labelFor"
                ref="label">
             <span class="m-input-style__text">
-                <span>{{ label }}</span>&nbsp;<sup v-if="requiredMarker"
+                <span v-html="label"></span>&nbsp;<sup v-if="requiredMarker"
                      class="m-input-style__required-marker">*</sup>
             </span>
         </label>
