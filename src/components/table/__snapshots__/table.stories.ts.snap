@@ -3,7 +3,7 @@
 exports[`Storyshots components|m-table Centered 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -138,7 +138,7 @@ exports[`Storyshots components|m-table Centered 1`] = `
 exports[`Storyshots components|m-table Custom Header 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -204,7 +204,7 @@ exports[`Storyshots components|m-table Custom Header 1`] = `
       <td
         colspan="2"
       >
-        Manon - manon.28
+        Manon - manon.34
       </td>
        
       <td>
@@ -220,7 +220,7 @@ exports[`Storyshots components|m-table Custom Header 1`] = `
 exports[`Storyshots components|m-table Custom cell 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -232,9 +232,7 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       >
         <span
           class="m-table__header-name"
-        >
-          
-        </span>
+        />
       </th>
       <th
         class=""
@@ -269,9 +267,7 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       >
         <span
           class="m-table__header-name"
-        >
-          
-        </span>
+        />
       </th>
     </tr>
   </thead>
@@ -665,7 +661,7 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
 exports[`Storyshots components|m-table Custom row 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -677,9 +673,7 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       >
         <span
           class="m-table__header-name"
-        >
-          
-        </span>
+        />
       </th>
       <th
         class=""
@@ -718,9 +712,7 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       >
         <span
           class="m-table__header-name"
-        >
-          
-        </span>
+        />
       </th>
     </tr>
   </thead>
@@ -899,7 +891,7 @@ exports[`Storyshots components|m-table Custom row 1`] = `
 exports[`Storyshots components|m-table Default 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -1034,7 +1026,7 @@ exports[`Storyshots components|m-table Default 1`] = `
 exports[`Storyshots components|m-table Empty table - custom slot 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -1095,7 +1087,7 @@ exports[`Storyshots components|m-table Empty table - custom slot 1`] = `
 exports[`Storyshots components|m-table Empty table - default slot 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -1155,7 +1147,7 @@ exports[`Storyshots components|m-table Empty table - default slot 1`] = `
 exports[`Storyshots components|m-table Loading 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular m--is-loading"
+  class="m-table m--is-skin-regular m--is-loading m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -1242,7 +1234,7 @@ exports[`Storyshots components|m-table Loading 1`] = `
 exports[`Storyshots components|m-table Sortable 1`] = `
 <table
   cellspacing="0"
-  class="m-table m--is-skin-regular"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
   width="100%"
 >
   <thead>
@@ -1447,6 +1439,81 @@ exports[`Storyshots components|m-table Sortable 1`] = `
         class=""
       >
         manon.28
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
+exports[`Storyshots components|m-table skin="simple" 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-simple m--is-row-highlighted-on-hover"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class=""
+        scope="col"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Name, Username
+        </span>
+      </th>
+      <th
+        class=""
+        scope="col"
+        style="width: 80px;"
+      >
+        <span
+          class="m-table__header-name"
+        >
+          Age
+        </span>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <tr>
+      <td>
+        Jonathan - jonathan.25
+      </td>
+       
+      <td>
+        25
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Carl - carl.30
+      </td>
+       
+      <td>
+        30
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Jacob - jacob.26
+      </td>
+       
+      <td>
+        26
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Vincent - vincent.34
+      </td>
+       
+      <td>
+        34
       </td>
     </tr>
   </tbody>
