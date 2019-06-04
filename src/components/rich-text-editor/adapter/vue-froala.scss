@@ -234,6 +234,14 @@
                 li {
                     a {
                         margin-top: 0;
+                        font-family: $m-font-family;
+                    }
+
+                    &:first-child {
+                        a {
+                            font-weight: $m-font-weight--light;
+                            font-size: $m-font-size;
+                        }
                     }
                 }
             }
