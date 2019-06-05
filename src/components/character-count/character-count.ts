@@ -27,7 +27,7 @@ export class MCharacterCount extends Vue {
     @Prop({ default: true })
     public transition: boolean;
 
-    private get hasCounter(): boolean {
+    public get hasCounter(): boolean {
         return this.maxLength > 0 && this.valueLength >= Math.max(0, Math.min(this.threshold, this.maxLength));
     }
 }
