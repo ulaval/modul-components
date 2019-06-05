@@ -1,14 +1,14 @@
 @import 'commons';
 
 .m-expandable-layout {
-    display: grid;
-
     &.m--has-left-panel {
+        display: grid;
         grid-template-areas: 'panel main';
         grid-template-columns: auto 1fr;
     }
 
     &.m--has-right-panel {
+        display: grid;
         grid-template-areas: 'main panel';
         grid-template-columns: 1fr auto;
     }

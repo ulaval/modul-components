@@ -1,15 +1,21 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Prop, Watch } from 'vue-property-decorator';
 import ModulPlugin from '../../utils/modul/modul';
 import { ModulVue } from '../../utils/vue/vue';
 import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
 import WithRender from './expandable-layout.html?style=./expandable-layout.scss';
 
+export enum MExpandableLayoutMode {
+    Follow = 'follow',
+    Static = 'static'
+}
+
 export enum MExpandableLayoutPanelPosition {
     Left = 'left',
     Right = 'right'
 }
+
 @WithRender
 @Component
 export class MExpandableLayout extends ModulVue {
@@ -17,6 +23,14 @@ export class MExpandableLayout extends ModulVue {
         default: false
     })
     public open: boolean;
+
+    @Prop({
+        default: MExpandableLayoutMode.Static,
+        validator: value =>
+            value === MExpandableLayoutMode.Static ||
+            value === MExpandableLayoutMode.Follow
+    })
+    public mode: MExpandableLayoutMode;
 
     @Prop({
         default: MExpandableLayoutPanelPosition.Left,
@@ -33,6 +47,14 @@ export class MExpandableLayout extends ModulVue {
         panelContent: HTMLDivElement
     };
 
+    @Watch('mode')
+    updateMode(): void {
+        if (this.mode === MExpandableLayoutMode.Static) {
+            this.$refs.panelContent.style.top = '';
+            this.$refs.panelContent.style.bottom = '';
+        }
+    }
+
     mounted(): void {
         this.$modul.event.$on('scroll', this.setPanelPosition);
         this.$modul.event.$on('resize', this.setPanelPosition);
@@ -44,21 +66,23 @@ export class MExpandableLayout extends ModulVue {
     }
 
     setPanelPosition(): void {
-        let { top, bottom } = this.$el.getBoundingClientRect();
-        if (top < 0) {
-            this.$refs.panelContent.style.top = -top + 'px';
-        } else {
-            this.$refs.panelContent.style.top = '';
-        }
-        if (bottom > document.documentElement.clientHeight) {
-            this.$refs.panelContent.style.bottom = (bottom - document.documentElement.clientHeight) + 'px';
-        } else {
-            this.$refs.panelContent.style.bottom = '';
+        if (this.mode === MExpandableLayoutMode.Follow) {
+            let { top, bottom } = this.$el.getBoundingClientRect();
+            if (top < 0) {
+                this.$refs.panelContent.style.top = -top + 'px';
+            } else {
+                this.$refs.panelContent.style.top = '';
+            }
+            if (bottom > document.documentElement.clientHeight) {
+                this.$refs.panelContent.style.bottom = (bottom - document.documentElement.clientHeight) + 'px';
+            } else {
+                this.$refs.panelContent.style.bottom = '';
+            }
         }
     }
 
     get panelPositionClass(): string {
-        return `m--has-${this.panelPosition}-panel`;
+        return this.$slots.panel ? `m--has-${this.panelPosition}-panel` : '';
     }
 
     get panelStyle(): { [prop: string]: string } {

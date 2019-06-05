@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
-import ExpandableLayoutPlugin, { MExpandableLayoutPanelPosition } from './expandable-layout';
+import ExpandableLayoutPlugin, { MExpandableLayoutMode, MExpandableLayoutPanelPosition } from './expandable-layout';
 Vue.use(ExpandableLayoutPlugin);
 
 declare module '@storybook/addon-knobs' {
@@ -18,6 +18,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
         props: {
             open: {
                 default: boolean('open', true)
+            },
+            mode: {
+                default: radios('mode', { static: MExpandableLayoutMode.Static, follow: MExpandableLayoutMode.Follow }, MExpandableLayoutMode.Static)
             },
             panelPosition: {
                 default: radios('panel-position', { left: MExpandableLayoutPanelPosition.Left, right: MExpandableLayoutPanelPosition.Right }, MExpandableLayoutPanelPosition.Left)
@@ -33,12 +36,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
             }
         },
         template: `
-        <m-expandable-layout :open="open" :panel-position="panelPosition" :panel-width="panelWidth" style="background: yellow;">
+        <m-expandable-layout :open="open" :mode="mode" :panel-position="panelPosition" :panel-width="panelWidth" style="background: yellow;">
             <div :style="{background: 'lightgrey', height: mainContentHeight}">main content</div>
             <div slot="panel" :style="{height: panelContentHeight}">panel content</div>
         </m-expandable-layout>`
     }))
-
     .add('open', () => ({
         template: '<m-expandable-layout :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
     }))
@@ -47,4 +49,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
     }))
     .add('panel-width="600"', () => ({
         template: '<m-expandable-layout :panel-width="600" :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
+    }))
+    .add('without panel slot', () => ({
+        template: '<m-expandable-layout :panel-width="600" :open="true">main content</m-expandable-layout>'
     }));
