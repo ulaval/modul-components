@@ -57,6 +57,8 @@ export enum FroalaStatus {
     Focused = 'focused'
 }
 
+const ENTER_KEYCODE: number = 13;
+
 @WithRender
 @Component({
     mixins: [
@@ -424,9 +426,12 @@ export enum FroalaStatus {
                     }
                     this.$emit('keyup');
                 },
-                [froalaEvents.KeyDown]: (_e, _editor) => {
+                [froalaEvents.KeyDown]: (_e, editor, key) => {
                     this.$emit('keydown');
                     this.isDirty = true;
+                    if (key.keyCode === ENTER_KEYCODE) {
+                        editor.paragraphStyle.apply('');
+                    }
                 },
                 [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');
