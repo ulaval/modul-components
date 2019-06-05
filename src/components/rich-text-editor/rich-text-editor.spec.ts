@@ -13,7 +13,7 @@ const froalaLicenseKey: string = 'testKey';
 let wrapper: Wrapper<MRichTextEditor>;
 let richTextEditor: MRichTextEditor;
 let defaultOptions: MRichTextEditorDefaultOptions;
-let headerNormalOption: any = { '': 'Normal' };
+let headerNormalOption: any = { '': 'm-rich-text-editor:normal-level' };
 let i18nTitle: string = 'm-rich-text-editor:title';
 let i18nSubtitle: string = 'm-rich-text-editor:subtitle';
 let i18nTitleLevel: string = 'm-rich-text-editor:title-level';
@@ -81,7 +81,7 @@ describe('MRichTextEditor', () => {
 
                 let headersOptions: any = wrapper.vm.manageHeaderLevels();
 
-                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1': i18nTitle });
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1 rte_h_level1': i18nTitle });
             });
 
         });
@@ -93,7 +93,7 @@ describe('MRichTextEditor', () => {
 
                 let headersOptions: any = wrapper.vm.manageHeaderLevels();
 
-                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1': i18nTitle, 'rte-h2': i18nSubtitle });
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1 rte_h_level1': i18nTitle, 'rte-h2 rte_h_level2': i18nSubtitle });
             });
 
         });
@@ -105,7 +105,7 @@ describe('MRichTextEditor', () => {
 
                 let headersOptions: any = wrapper.vm.manageHeaderLevels();
 
-                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1': i18nTitleLevel, 'rte-h2': i18nTitleLevel, 'rte-h3': i18nTitleLevel });
+                expect(headersOptions).toEqual({ ...headerNormalOption, 'rte-h1 rte_h_level1': i18nTitleLevel, 'rte-h2 rte_h_level2': i18nTitleLevel, 'rte-h3 rte_h_level3': i18nTitleLevel });
             });
 
         });
