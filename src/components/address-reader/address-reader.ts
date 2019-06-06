@@ -32,17 +32,28 @@ export enum CountryKey {
     COUNTRY_ISO2 = 'countryIso2',
     COUNTRY_ISO3 = 'countryIso3'
 }
+
+export type addressFieldFilter = (value: string) => string;
+export type addressesFilters = { [field: string]: addressFieldFilter };
+
+export interface AddressReaderProps {
+    address: Address;
+    filters: { [field: string]: addressFieldFilter };
+    countryKey: CountryKey;
+    provinceKey: ProvinceKey;
+}
+
 @WithRender
 @Component
-export class MAddressReader extends ModulVue {
+export class MAddressReader extends ModulVue implements AddressReaderProps {
     @Prop({
         required: true,
         validator: (value: any) => value !== undefined
     })
     address: Address;
 
-    @Prop({ default: () => { } })
-    filters: { [field: string]: (value: string) => string };
+    @Prop({ default: () => ({}) })
+    filters: addressesFilters;
 
     @Prop({
         default: CountryKey.COUNTRY,
@@ -50,14 +61,14 @@ export class MAddressReader extends ModulVue {
             || value === CountryKey.COUNTRY_ISO2
             || value === CountryKey.COUNTRY_ISO3
     })
-    countryKey: string;
+    countryKey: CountryKey;
 
     @Prop({
         default: ProvinceKey.PROVINCE,
         validator: (value: string) => value === ProvinceKey.PROVINCE
             || value === ProvinceKey.PROVINCE_CODE
     })
-    provinceKey: string;
+    provinceKey: ProvinceKey;
 
     get buildingNumber(): string {
         return this.filterString(BUILDING_NUMBER);

@@ -18,3 +18,10 @@ export interface Country {
     countryIso2?: string;
     countryIso3?: string;
 }
+
+
+export function copyAddress(source: Address): Address {
+    const country: Country = { ...source.country };
+    const province: Province = { ...source.province };
+    return { ...source, province, country };
+}

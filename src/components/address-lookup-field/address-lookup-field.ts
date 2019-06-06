@@ -18,6 +18,10 @@ interface MAutocompleteAddressResult {
     classesToggle?: { [className: string]: boolean };
 }
 
+export interface AddressLookupFieldProps {
+    origin: string | undefined;
+    language: string | undefined;
+}
 @WithRender
 @Component
 export class MAddressLookupField extends ModulVue {
