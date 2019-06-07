@@ -42,14 +42,25 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
         </m-expandable-layout>`
     }))
     .add('open', () => ({
-        template: '<m-expandable-layout :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
+        template: `<m-expandable-layout :open="true" style="background: yellow;">
+            <div style="background: lightgrey">main content</div>
+            <template slot="panel">panel content</template>
+        </m-expandable-layout>`
     }))
     .add('panel-position="right"', () => ({
-        template: '<m-expandable-layout panel-position="right" :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
+        template: `<m-expandable-layout panel-position="right" :open="true" style="background: yellow;">
+            <div style="background: lightgrey">main content</div>
+            <template slot="panel">panel content</template>
+        </m-expandable-layout>`
     }))
-    .add('panel-width="600"', () => ({
-        template: '<m-expandable-layout :panel-width="600" :open="true">main content<template slot="panel">panel content</template></m-expandable-layout>'
+    .add('panel-width="600px"', () => ({
+        template: `<m-expandable-layout panel-width="600px" :open="true" style="background: yellow;">
+            <div style="background: lightgrey">main content</div>
+            <template slot="panel">panel content</template>
+        </m-expandable-layout>`
     }))
     .add('without panel slot', () => ({
-        template: '<m-expandable-layout :panel-width="600" :open="true">main content</m-expandable-layout>'
+        template: `<m-expandable-layout :panel-width="600" :open="true" style="background: yellow;">
+            <div style="background: lightgrey">main content</div>
+        </m-expandable-layout>`
     }));
