@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MTable Given a table full of data When using a footer Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">
@@ -31,7 +31,7 @@ exports[`MTable Given a table full of data When using a footer Then should rende
 `;
 
 exports[`MTable Given a table full of data When using slot to replace a td Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">
@@ -56,7 +56,7 @@ exports[`MTable Given a table full of data When using slot to replace a td Then 
 `;
 
 exports[`MTable Given a table full of data When using slot to replace a th Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">SLOT TH</th>
@@ -77,7 +77,7 @@ exports[`MTable Given a table full of data When using slot to replace a th Then 
 `;
 
 exports[`MTable Given a table full of data When using slot to replace the header Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th>SLOT THEAD</th>
@@ -97,7 +97,7 @@ exports[`MTable Given a table full of data When using slot to replace the header
 `;
 
 exports[`MTable Given a table full of data When using slot to replace the tbody Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable m--is-sorted" style="width:10%;">
@@ -117,7 +117,7 @@ exports[`MTable Given a table full of data When using slot to replace the tbody 
 `;
 
 exports[`MTable Given a table full of data When we don't use slots Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
@@ -142,7 +142,7 @@ exports[`MTable Given a table full of data When we don't use slots Then should r
 `;
 
 exports[`MTable Given an empty table When a custom slot is given Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
@@ -162,7 +162,7 @@ exports[`MTable Given an empty table When a custom slot is given Then should ren
 `;
 
 exports[`MTable Given an empty table When loading Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular m--is-loading">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-loading m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">
@@ -190,7 +190,7 @@ exports[`MTable Given an empty table When loading Then should render correctly 1
 `;
 
 exports[`MTable Given an empty table When we use the default template Then should render correctly 1`] = `
-<table cellspacing="0" class="m-table m--is-skin-regular">
+<table cellspacing="0" class="m-table m--is-skin-regular m--is-row-highlighted-on-hover">
   <thead>
     <tr>
       <th scope="col" class="m--is-sortable" style="width:10%;">

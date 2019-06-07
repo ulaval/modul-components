@@ -10,6 +10,32 @@
 }
 
 .m-table {
+    border-collapse: collapse;
+
+    &.m--is-loading {
+        thead {
+            th {
+                &.m--is-sortable {
+                    .m-table__header-name {
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+
+    &.m--is-row-highlighted-on-hover {
+        tbody {
+            tr {
+                transition: background $m-transition-duration ease;
+            }
+
+            tr:hover:not(.m-table__message):not(.m-table__loading) {
+                background-color: $m-color--interactive-lightest;
+            }
+        }
+    }
+
     thead {
         text-align: left;
 
@@ -51,36 +77,31 @@
         }
     }
 
-    &.m--is-loading {
-        thead {
-            th {
-                &.m--is-sortable {
-                    .m-table__header-name {
-                        cursor: default;
-                    }
-                }
-            }
-        }
-    }
-
     tbody {
         color: $m-color--grey-darker;
-
-        tr {
-            &:nth-child(even) {
-                background-color: $m-color--grey-lightest;
-            }
-
-            &:hover:not(.m-table__message):not(.m-table__loading) {
-                background-color: $m-color--interactive-lightest;
-            }
-        }
     }
 
     th,
-    td {
-        padding: $m-spacing;
+    tr td {
         box-sizing: content-box;
+        padding-top: $m-spacing;
+        padding-bottom: $m-spacing;
+
+        &:first-child {
+            padding-left: $m-spacing;
+        }
+
+        &:last-child {
+            padding-right: $m-spacing;
+        }
+
+        &:not(:first-child) {
+            padding-left: $m-spacing--s;
+        }
+
+        &:not(:last-child) {
+            padding-right: $m-spacing--s;
+        }
 
         &.m--is-centered {
             text-align: center;
@@ -136,6 +157,24 @@
 
         p {
             margin-top: 0;
+        }
+    }
+}
+
+.m-table.m--is-skin-regular {
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: $m-color--grey-lightest;
+            }
+        }
+    }
+}
+
+.m-table.m--is-skin-simple {
+    tbody {
+        tr:not(:first-child) {
+            border-top: 1px solid $m-color--grey-lighter;
         }
     }
 }
