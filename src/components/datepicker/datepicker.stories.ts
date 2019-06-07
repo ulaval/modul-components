@@ -78,6 +78,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
 
+    .add('date big min and max limit', () => ({
+        data: () => ({
+            model1: '2000-01-01'
+        }),
+        template: `<div><m-datepicker min="1901-01-01" max="2250-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+    }))
+
     .add('disabled', () => ({
         template: `<m-datepicker :disabled="true"></m-datepicker>`
     }))
