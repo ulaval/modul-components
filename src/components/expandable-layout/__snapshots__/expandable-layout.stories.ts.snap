@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-expandable-layout default 1`] = `
+<div
+  class="m-expandable-layout m--has-left-panel"
+  style="background: yellow;"
+>
+  <div
+    class="m-expandable-layout__main"
+  >
+    <div
+      style="height: 200vh;"
+    >
+      main content
+    </div>
+     
+  </div>
+   
+  <div
+    class="m-expandable-layout__panel"
+    style="width: 320px;"
+  >
+    <div
+      class="m-expandable-layout__panel__content"
+      style="width: 320px;"
+    >
+      <div
+        style="height: 300vh;"
+      >
+        panel content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-expandable-layout open 1`] = `
+<div
+  class="m-expandable-layout m--has-left-panel"
+>
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
+  <div
+    class="m-expandable-layout__panel"
+    style="width: 320px;"
+  >
+    <div
+      class="m-expandable-layout__panel__content"
+      style="width: 320px;"
+    >
+      panel content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-expandable-layout panel-position="right" 1`] = `
+<div
+  class="m-expandable-layout m--has-right-panel"
+>
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
+  <div
+    class="m-expandable-layout__panel"
+    style="width: 320px;"
+  >
+    <div
+      class="m-expandable-layout__panel__content"
+      style="width: 320px;"
+    >
+      panel content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-expandable-layout panel-width="600" 1`] = `
+<div
+  class="m-expandable-layout m--has-left-panel"
+>
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
+  <div
+    class="m-expandable-layout__panel"
+  >
+    <div
+      class="m-expandable-layout__panel__content"
+    >
+      panel content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-expandable-layout without panel slot 1`] = `
+<div
+  class="m-expandable-layout"
+>
+  <div
+    class="m-expandable-layout__main"
+  >
+    main content
+  </div>
+   
+  <div
+    class="m-expandable-layout__panel"
+  >
+    <div
+      class="m-expandable-layout__panel__content"
+    />
+  </div>
+</div>
+`;
