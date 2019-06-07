@@ -6,7 +6,15 @@ import { ModulVue } from '../../utils/vue/vue';
 import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
 import WithRender from './expandable-layout.html?style=./expandable-layout.scss';
 
+/**
+ * @deprecated
+ */
 export enum MExpandableLayoutMode {
+    Follow = 'follow',
+    Static = 'static'
+}
+
+export enum MExpandableLayoutPanelScrollMode {
     Follow = 'follow',
     Static = 'static'
 }
@@ -24,6 +32,9 @@ export class MExpandableLayout extends ModulVue {
     })
     public open: boolean;
 
+    /**
+     * @deprecated
+     */
     @Prop({
         default: MExpandableLayoutMode.Static,
         validator: value =>
@@ -31,6 +42,14 @@ export class MExpandableLayout extends ModulVue {
             value === MExpandableLayoutMode.Follow
     })
     public mode: MExpandableLayoutMode;
+
+    @Prop({
+        default: MExpandableLayoutPanelScrollMode.Static,
+        validator: value =>
+            value === MExpandableLayoutPanelScrollMode.Static ||
+            value === MExpandableLayoutPanelScrollMode.Follow
+    })
+    public panelScrollMode: MExpandableLayoutPanelScrollMode;
 
     @Prop({
         default: MExpandableLayoutPanelPosition.Left,
@@ -47,9 +66,17 @@ export class MExpandableLayout extends ModulVue {
         panelContent: HTMLDivElement
     };
 
-    @Watch('mode')
+    get computedMode(): MExpandableLayoutPanelScrollMode {
+        if (this.panelScrollMode === MExpandableLayoutPanelScrollMode.Follow || this.mode === MExpandableLayoutMode.Follow) {
+            return MExpandableLayoutPanelScrollMode.Follow;
+        } else {
+            return MExpandableLayoutPanelScrollMode.Static;
+        }
+    }
+
+    @Watch('computedMode')
     updateMode(): void {
-        if (this.mode === MExpandableLayoutMode.Static) {
+        if (this.computedMode === MExpandableLayoutPanelScrollMode.Static) {
             this.$refs.panelContent.style.top = '';
             this.$refs.panelContent.style.bottom = '';
         }
@@ -66,7 +93,7 @@ export class MExpandableLayout extends ModulVue {
     }
 
     setPanelPosition(): void {
-        if (this.mode === MExpandableLayoutMode.Follow) {
+        if (this.computedMode === MExpandableLayoutPanelScrollMode.Follow) {
             let { top, bottom } = this.$el.getBoundingClientRect();
             if (top < 0) {
                 this.$refs.panelContent.style.top = -top + 'px';
@@ -100,6 +127,7 @@ export class MExpandableLayout extends ModulVue {
 
 const ExpandableLayoutPlugin: PluginObject<any> = {
     install(v, options): void {
+        v.prototype.$log.error('Mode prop and MExpandableLayoutMode enum are deprecated. Please use panelScrollMode and MExpandableLayoutPanelScrollMode instead.');
         v.use(ModulPlugin);
         v.component(EXPANDABLE_LAYOUT_NAME, MExpandableLayout);
     }

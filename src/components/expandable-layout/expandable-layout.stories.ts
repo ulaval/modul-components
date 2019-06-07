@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
-import ExpandableLayoutPlugin, { MExpandableLayoutMode, MExpandableLayoutPanelPosition } from './expandable-layout';
+import ExpandableLayoutPlugin, { MExpandableLayoutPanelPosition, MExpandableLayoutPanelScrollMode } from './expandable-layout';
 Vue.use(ExpandableLayoutPlugin);
 
 declare module '@storybook/addon-knobs' {
@@ -19,8 +19,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
             open: {
                 default: boolean('open', true)
             },
-            mode: {
-                default: radios('mode', { static: MExpandableLayoutMode.Static, follow: MExpandableLayoutMode.Follow }, MExpandableLayoutMode.Static)
+            panelScrollMode: {
+                default: radios('panel-scroll-mode', { static: MExpandableLayoutPanelScrollMode.Static, follow: MExpandableLayoutPanelScrollMode.Follow }, MExpandableLayoutPanelScrollMode.Static)
             },
             panelPosition: {
                 default: radios('panel-position', { left: MExpandableLayoutPanelPosition.Left, right: MExpandableLayoutPanelPosition.Right }, MExpandableLayoutPanelPosition.Left)
@@ -36,7 +36,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module
             }
         },
         template: `
-        <m-expandable-layout :open="open" :mode="mode" :panel-position="panelPosition" :panel-width="panelWidth" style="background: yellow;">
+        <m-expandable-layout :open="open" :panel-scroll-mode="panelScrollMode" :panel-position="panelPosition" :panel-width="panelWidth" style="background: yellow;">
             <div :style="{background: 'lightgrey', height: mainContentHeight}">main content</div>
             <div slot="panel" :style="{height: panelContentHeight}">panel content</div>
         </m-expandable-layout>`
