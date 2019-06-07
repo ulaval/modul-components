@@ -47,8 +47,8 @@ enum FroalaElements {
 }
 
 enum FroalaBreakingPoint {
-    isMinDefault = 545,
-    isMinOneMode = 565
+    minDefault = 545,
+    minOneMode = 565
 }
 
 export enum FroalaStatus {
@@ -128,9 +128,9 @@ const ENTER_KEYCODE: number = 13;
 
     protected get isDesktop(): boolean {
         if (this.config && this.config.pluginsEnabled.includes('image')) {
-            return this.froalaClientWidth >= FroalaBreakingPoint.isMinOneMode;
+            return this.froalaClientWidth >= FroalaBreakingPoint.minOneMode;
         }
-        return this.froalaClientWidth >= FroalaBreakingPoint.isMinDefault;
+        return this.froalaClientWidth >= FroalaBreakingPoint.minDefault;
     }
 
     public get isEmpty(): boolean {

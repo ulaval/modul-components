@@ -28,9 +28,10 @@ describe('MRichTextEditor', () => {
                 }
             });
         richTextEditor = wrapper.vm;
-        let headersOptions: any = wrapper.vm.manageHeaderLevels();
         defaultOptions = new MRichTextEditorDefaultOptions(froalaLicenseKey, richTextEditor.$i18n.currentLang());
-        defaultOptions.paragraphStyles = headersOptions;
+        if (wrapper.vm.titleAvailable) {
+            defaultOptions.paragraphStyles = wrapper.vm.manageHeaderLevels();
+        }
     });
 
     it('should have a value for each custom translations key', () => {

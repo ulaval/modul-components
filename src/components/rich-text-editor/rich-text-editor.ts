@@ -98,6 +98,9 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     })
     public lastHeaderLevel: number;
 
+    @Prop({ default: false })
+    public titleAvailable: boolean; // temporary
+
     @Emit('fullscreen')
     onFullscreen(fullscreenWasActived: boolean): void { }
 
@@ -142,7 +145,11 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             options.toolbarButtons.push('insertImage');
         }
 
-        options.paragraphStyles = this.manageHeaderLevels();
+        if (this.titleAvailable) {
+            options.toolbarButtons.splice(2, 0, 'paragraphStyle');
+            options.paragraphStyles = this.manageHeaderLevels();
+        }
+
         return options;
     }
 
