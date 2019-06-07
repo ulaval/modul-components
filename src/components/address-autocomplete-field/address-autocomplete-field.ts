@@ -1,9 +1,9 @@
 import Component from 'vue-class-component';
-import { Emit, Model, Prop } from 'vue-property-decorator';
-import Address, { copyAddress } from '../../utils/address-lookup/address';
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
+import Address, { copyAddress, CountryKey, ProvinceKey } from '../../utils/address-lookup/address';
 import { ModulVue } from '../../utils/vue/vue';
 import { AddressLookupFieldProps, MAddressLookupField } from '../address-lookup-field/address-lookup-field';
-import { addressesFilters, AddressReaderProps, CountryKey, MAddressReader, ProvinceKey } from '../address-reader/address-reader';
+import { addressesFilters, AddressReaderProps, MAddressReader } from '../address-reader/address-reader';
 import { MInplaceEdit } from '../inplace-edit/inplace-edit';
 import WithRender from './address-autocomplete-field.html';
 
@@ -47,7 +47,7 @@ export default class MAddressAutocompleteField extends ModulVue implements Addre
     private current: Address = this.address;
     private editAddress: Address = this.address;
 
-    // @Watch('address')
+    @Watch('address')
     onAddressChange(): void {
         this.current = this.address;
     }

@@ -129,8 +129,7 @@ export default class AddressLookupLoqateService implements AddressLookupService<
             },
             country: {
                 country: row.CountryName,
-                countryIso2: row.CountryIso2,
-                countryIso3: row.CountryIso3
+                countryIso2: row.CountryIso2
             },
             subBuilding: row.SubBuilding
         }));

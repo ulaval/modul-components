@@ -3,6 +3,7 @@ export const ACCORDION_NAME: string = 'm-accordion';
 export const ACCORDION_TRANSITION_NAME: string = 'm-accordion-transition';
 export const ADD_NAME: string = 'm-add';
 export const ADDRESS_AUTOCOMPLETE_FIELD_NAME: string = 'm-address-autocomplete-field';
+export const ADDRESS_EDITOR_NAME: string = 'm-address-editor';
 export const ADDRESS_LOOKUP_FIELD_NAME: string = 'm-address-lookup-field';
 export const ADDRESS_READER: string = 'm-address-reader';
 export const AUTOCOMPLETE_NAME: string = 'm-autocomplete';

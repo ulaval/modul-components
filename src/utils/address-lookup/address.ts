@@ -15,10 +15,29 @@ export interface Province {
 
 export interface Country {
     country: string;
-    countryIso2?: string;
-    countryIso3?: string;
+    countryIso2: string;
 }
 
+export enum AddressField {
+    BUILDING_NUMBER = 'buildingNumber',
+    STREET = 'street',
+    CITY = 'city',
+    POSTAL_CODE = 'postalCode',
+    SUB_BUILDING = 'subBuilding',
+    COUNTRY = 'country',
+    PROVINCE = 'province'
+}
+
+export enum ProvinceKey {
+    PROVINCE = 'province',
+    PROVINCE_CODE = 'provinceCode'
+}
+
+export enum CountryKey {
+    COUNTRY = 'country',
+    COUNTRY_ISO2 = 'countryIso2',
+    COUNTRY_ISO3 = 'countryIso3'
+}
 
 export function copyAddress(source: Address): Address {
     const country: Country = { ...source.country };

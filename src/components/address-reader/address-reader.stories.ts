@@ -2,8 +2,9 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { CountryKey, ProvinceKey } from '../../utils/address-lookup/address';
 import { ADDRESS_READER } from '../component-names';
-import { CountryKey, MAddressReader, ProvinceKey } from './address-reader';
+import { MAddressReader } from './address-reader';
 
 storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
     .addDecorator(withA11y)
@@ -16,8 +17,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
                 city: 'Québec',
                 country: {
                     country: 'Canada',
-                    countryIso2: 'CA',
-                    countryIso3: 'CAN'
+                    countryIso2: 'CA'
                 },
                 province: {
                     province: 'Québec',

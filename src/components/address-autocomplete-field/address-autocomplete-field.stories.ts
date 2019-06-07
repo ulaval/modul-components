@@ -2,10 +2,9 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { CountryKey, ProvinceKey } from '../address-reader/address-reader';
+import { CountryKey, ProvinceKey } from '../../utils/address-lookup/address';
 import { ADDRESS_AUTOCOMPLETE_FIELD_NAME } from '../component-names';
 import MAddressAutocompleteField from './address-autocomplete-field';
-
 
 storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_AUTOCOMPLETE_FIELD_NAME}`, module)
     .addDecorator(withA11y)

@@ -76,7 +76,7 @@ export class MAddressLookupField extends ModulVue {
                 description: row['description'] ? this.formatHTMLDescription(row) : undefined,
                 type: row['type'],
                 classesToggle: {
-                    'm-address-lookup-field__item--address': row['type'] === KEY_ADDRESS_TYPE,
+                    'm-address-lookup-field__item--address': row['type'] === KEY_ADDRESS_TYPE || row['type'] === undefined,
                     'm-address-lookup-field__item--expandable': row['type'] !== KEY_ADDRESS_TYPE
                 }
             }));
@@ -105,10 +105,16 @@ export class MAddressLookupField extends ModulVue {
             origin: this.origin,
             language: this.language
         });
-        return addresses.map((address: LoqateFindResponse) => {
-            address.type = address.type.toLowerCase();
-            return address;
-        });
+        if (addresses) {
+            return addresses.map((address: LoqateFindResponse) => {
+                if (address.type) {
+                    address.type = address.type.toLowerCase();
+                }
+                return address;
+            });
+        } else {
+            return [];
+        }
     }
 }
 

@@ -1,0 +1,38 @@
+<div class="m-address-editor">
+    <m-textfield label="Building number !translation"
+                 :value="buildingNumber"
+                 @input="onBuildingNumberChange"></m-textfield><br />
+    <m-textfield label="Sub building !translation"
+                 :value="subBuilding"
+                 @input="onSubBuildingChange"></m-textfield><br />
+    <m-textfield label="Street !translation"
+                 :value="street"
+                 @input="onStreetChange"></m-textfield><br />
+
+    <m-textfield label="City !translation"
+                 :value="city"
+                 @input="onCityChange"></m-textfield><br />
+
+    <m-dropdown label="Country !translation"
+                :value="country"
+                @change="onCountryChange">
+        <m-dropdown-item v-for="country in countries"
+                         :key="country.countryIso2"
+                         :value="country.countryIso2"
+                         :label="country.country"></m-dropdown-item>
+    </m-dropdown><br />
+
+    <div v-if="provinces.length > 0">
+        <m-dropdown label="Province !translation"
+                    :value="province"
+                    @change="onProvinceChange">
+            <m-dropdown-item v-for="province in provinces"
+                             :key="province.provinceCode"
+                             :value="province.provinceCode"
+                             :label="province.province"></m-dropdown-item>
+        </m-dropdown><br />
+    </div>
+    <m-textfield label="Postal code !translation"
+                 :value="postalCode"
+                 @input="onPostalCodeChange"></m-textfield><br />
+</div>
