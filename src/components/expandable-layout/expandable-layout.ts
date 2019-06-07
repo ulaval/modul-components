@@ -6,9 +6,6 @@ import { ModulVue } from '../../utils/vue/vue';
 import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
 import WithRender from './expandable-layout.html?style=./expandable-layout.scss';
 
-/**
- * @deprecated
- */
 export enum MExpandableLayoutMode {
     Follow = 'follow',
     Static = 'static'
@@ -32,9 +29,6 @@ export class MExpandableLayout extends ModulVue {
     })
     public open: boolean;
 
-    /**
-     * @deprecated
-     */
     @Prop({
         default: MExpandableLayoutMode.Static,
         validator: value =>
