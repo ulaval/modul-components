@@ -1,0 +1,33 @@
+@import 'commons';
+
+.m-rich-text-editor-sandbox {
+    /deep/ .rte-h1 {
+        @include m-h1-font-style;
+        @include m-commons-title-styles;
+    }
+
+    /deep/ .rte-h2 {
+        @include m-h2-font-style;
+        @include m-commons-title-styles;
+    }
+
+    /deep/ .rte-h3 {
+        @include m-h3-font-style;
+        @include m-commons-title-styles;
+    }
+
+    /deep/ .rte-h4 {
+        @include m-h4-font-style;
+        @include m-commons-title-styles;
+    }
+
+    /deep/ .rte-h5 {
+        @include m-h5-font-style;
+        @include m-commons-title-styles;
+    }
+
+    /deep/ .rte-h6 {
+        @include m-h6-font-style;
+        @include m-commons-title-styles;
+    }
+}

@@ -3,7 +3,8 @@ enum FROALA_CMD {
     LINK_CMD = 'insertLink',
     SPECIAL_CMD = 'specialCharacters',
     HIDE_CMD = 'hide',
-    SUBMENU_CMD = '-sub-menu'
+    SUBMENU_CMD = '-sub-menu',
+    IMAGE_CMD = 'insertImage'
 }
 
 export default class SubMenuPlugin {
@@ -22,6 +23,7 @@ export default class SubMenuPlugin {
             this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.FULLSCREEN_CMD}"]`).hide(this.HIDE_ANIMATION_DURATION);
             this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.LINK_CMD}"]`).hide(this.HIDE_ANIMATION_DURATION);
             this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.SPECIAL_CMD}"]`).hide(this.HIDE_ANIMATION_DURATION);
+            this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.IMAGE_CMD}"]`).hide(this.HIDE_ANIMATION_DURATION);
             // hide toggle buttons
             this.editor.$tb.find(`.fr-command[data-cmd*="${FROALA_CMD.SUBMENU_CMD}"]`).hide(this.HIDE_ANIMATION_DURATION, () => {
                 // show hide button
@@ -47,6 +49,7 @@ export default class SubMenuPlugin {
                 this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.FULLSCREEN_CMD}"]`).show(this.SHOW_ANIMATION_DURATION);
                 this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.LINK_CMD}"]`).show(this.SHOW_ANIMATION_DURATION);
                 this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.SPECIAL_CMD}"]`).show(this.SHOW_ANIMATION_DURATION);
+                this.editor.$tb.find(`.fr-command[data-cmd="${FROALA_CMD.IMAGE_CMD}"]`).show(this.SHOW_ANIMATION_DURATION);
             });
             this.isSubmenuVisible = false;
         }

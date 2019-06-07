@@ -9,6 +9,7 @@ import { InputManagement, InputManagementData } from '../../mixins/input-managem
 import { InputState, InputStateInputSelector } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MFile } from '../../utils/file/file';
+import { FormatMode } from '../../utils/i18n/i18n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { RICH_TEXT_EDITOR_NAME } from '../component-names';
@@ -81,6 +82,25 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
     @Prop()
     public scrollableContainer: string | undefined;
 
+    @Prop({
+        default: 5,
+        validator: (level: number) => {
+            return level >= 1 && level <= 6;
+        }
+    })
+    public firstHeaderLevel: number;
+
+    @Prop({
+        default: 6,
+        validator: (level: number) => {
+            return level >= 1 && level <= 6;
+        }
+    })
+    public lastHeaderLevel: number;
+
+    @Prop({ default: false })
+    public titleAvailable: boolean; // temporary
+
     @Emit('fullscreen')
     onFullscreen(fullscreenWasActived: boolean): void { }
 
@@ -91,8 +111,15 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
     protected id: string = `mrich-text-${uuid.generate()}`;
 
+    private i18nHeaderTitle: string = this.$i18n.translate('m-rich-text-editor:title');
+    private i18nHeaderSubtitle: string = this.$i18n.translate('m-rich-text-editor:subtitle');
+
     mounted(): void {
         this.testSelectorProps();
+
+        if (!this.headerLevelValid) {
+            throw new Error(`${RICH_TEXT_EDITOR_NAME}: first-header-level must be inferior or equal to last-header-level`);
+        }
     }
 
     public get internalOptions(): any {
@@ -118,7 +145,40 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
             options.toolbarButtons.push('insertImage');
         }
 
+        if (this.titleAvailable) {
+            options.toolbarButtons.splice(2, 0, 'paragraphStyle');
+            options.paragraphStyles = this.manageHeaderLevels();
+        }
+
         return options;
+    }
+
+    public manageHeaderLevels(): any {
+
+        let headersLevel: any = {};
+        headersLevel[''] = this.$i18n.translate('m-rich-text-editor:normal-level');
+
+        if (this.firstHeaderLevel === this.lastHeaderLevel) {
+            // One level of header
+            headersLevel['rte-h' + this.firstHeaderLevel + this.getClassLevel(1)] = this.i18nHeaderTitle;
+        } else if (this.lastHeaderLevel - this.firstHeaderLevel === 1) {
+            // Two levels of header
+            headersLevel['rte-h' + this.firstHeaderLevel + this.getClassLevel(1)] = this.i18nHeaderTitle;
+            headersLevel['rte-h' + this.lastHeaderLevel + this.getClassLevel(2)] = this.i18nHeaderSubtitle;
+        } else {
+            // Multiple levels of header
+            let levelNumber: number = 1;
+            for (let headerLevel: number = this.firstHeaderLevel; headerLevel <= this.lastHeaderLevel; headerLevel++) {
+                headersLevel['rte-h' + headerLevel + this.getClassLevel(levelNumber)] = this.$i18n.translate('m-rich-text-editor:title-level', { headerLevel: levelNumber }, 1, undefined, undefined, FormatMode.Sprintf);
+                levelNumber++;
+            }
+        }
+
+        return headersLevel;
+    }
+    private getClassLevel(level: number): string {
+        const classLevel: string = ' rte_h_level';
+        return classLevel + level;
     }
 
     public getSelectorErrorMsg(prop: string): string {
@@ -167,6 +227,10 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         if (propInError) {
             throw new Error(this.getSelectorErrorMsg(propInError));
         }
+    }
+
+    private get headerLevelValid(): boolean {
+        return this.firstHeaderLevel <= this.lastHeaderLevel;
     }
 
     @Emit('image-ready')

@@ -5,7 +5,6 @@ export class MRichTextEditorDefaultOptions {
     public charCounterCount: boolean = false;
     public tableInsertHelper: boolean = false;
     public lineBreakerTags: string[] = [];
-    public zIndex: number = 200;
     public toolbarSticky: boolean = true;
     public scrollableContainer: string | undefined;
     public toolbarStickyOffset: number = 0;
@@ -17,6 +16,9 @@ export class MRichTextEditorDefaultOptions {
     public listAdvancedTypes: boolean = false;
     public toolbarButtons: string[] = ['hide', 'styles-sub-menu', 'bold', 'italic', 'subscript', 'superscript', '|', 'listes-sub-menu', 'formatUL',
         'formatOL', 'outdent', 'indent', '|', 'insertLink', 'specialCharacters', '|', 'fullscreen'];
+
+    public paragraphStyles: any = {};
+    public paragraphMultipleStyles: boolean = false;
 
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
     public linkInsertButtons: string[] = [];
