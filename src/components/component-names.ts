@@ -32,6 +32,7 @@ export const ERROR_TECHNICAL_DIFFICULTY_NAME: string = 'm-error-technical-diffic
 export const EXPANDABLE_LAYOUT_NAME: string = 'm-expandable-layout';
 export const FILE_SELECT_NAME: string = 'm-file-select';
 export const FILE_UPLOAD_NAME: string = 'm-file-upload';
+export const FLAG_NAME: string = 'm-flag';
 export const FORM_NAME: string = 'm-form';
 export const OVERLAY_NAME: string = 'm-overlay';
 export const FLEX_TEMPLATE_NAME: string = 'm-flex-template';
