@@ -37,11 +37,15 @@ exports[`Storyshots components|m-expandable-layout default 1`] = `
 exports[`Storyshots components|m-expandable-layout open 1`] = `
 <div
   class="m-expandable-layout m--has-left-panel"
+  style="background: yellow;"
 >
   <div
     class="m-expandable-layout__main"
   >
-    main content
+    <div>
+      main content
+    </div>
+     
   </div>
    
   <div
@@ -61,11 +65,15 @@ exports[`Storyshots components|m-expandable-layout open 1`] = `
 exports[`Storyshots components|m-expandable-layout panel-position="right" 1`] = `
 <div
   class="m-expandable-layout m--has-right-panel"
+  style="background: yellow;"
 >
   <div
     class="m-expandable-layout__main"
   >
-    main content
+    <div>
+      main content
+    </div>
+     
   </div>
    
   <div
@@ -82,21 +90,27 @@ exports[`Storyshots components|m-expandable-layout panel-position="right" 1`] = 
 </div>
 `;
 
-exports[`Storyshots components|m-expandable-layout panel-width="600" 1`] = `
+exports[`Storyshots components|m-expandable-layout panel-width="600px" 1`] = `
 <div
   class="m-expandable-layout m--has-left-panel"
+  style="background: yellow;"
 >
   <div
     class="m-expandable-layout__main"
   >
-    main content
+    <div>
+      main content
+    </div>
+     
   </div>
    
   <div
     class="m-expandable-layout__panel"
+    style="width: 600px;"
   >
     <div
       class="m-expandable-layout__panel__content"
+      style="width: 600px;"
     >
       panel content
     </div>
@@ -107,11 +121,14 @@ exports[`Storyshots components|m-expandable-layout panel-width="600" 1`] = `
 exports[`Storyshots components|m-expandable-layout without panel slot 1`] = `
 <div
   class="m-expandable-layout"
+  style="background: yellow;"
 >
   <div
     class="m-expandable-layout__main"
   >
-    main content
+    <div>
+      main content
+    </div>
   </div>
    
   <div
