@@ -22,6 +22,7 @@ exports[`Storyshots components|m-chip-delete default 1`] = `
     <button
       aria-labelledby="mChipDeleteText-uuid"
       class="m-chip-delete__button"
+      type="button"
     >
       <svg
         aria-hidden="true"
@@ -64,6 +65,7 @@ exports[`Storyshots components|m-chip-delete disabled 1`] = `
       aria-labelledby="mChipDeleteText-uuid"
       class="m-chip-delete__button"
       disabled="disabled"
+      type="button"
     >
       <svg
         aria-hidden="true"

@@ -1,7 +1,8 @@
 <button class="m-chip-add"
         :class="{'m--is-disabled': disabled}"
+        :disabled="disabled"
         @click="onClick"
-        :disabled="disabled">
+        type="button">
     <div class="m-chip-add__body">
         <span class="m-chip-add__hidden-text">{{ 'chip:add' | f-m-i18n }}&nbsp;: </span>
         <slot></slot>

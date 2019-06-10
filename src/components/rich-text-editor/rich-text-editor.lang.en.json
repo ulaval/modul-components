@@ -3,9 +3,13 @@
         "hide-submenu": "hide submenu",
         "insert": "insertions",
         "insert-image": "Insert image",
+        "lists": "listes",
+        "normal-level": "Normal",
         "replace-image": "Replace image",
         "styles": "styles",
-        "lists": "listes",
+        "subtitle": "Subtitle",
+        "title": "Title",
+        "title-level": "Title %(headerLevel)s",
         "URL": "URL or email"
     }
 }
