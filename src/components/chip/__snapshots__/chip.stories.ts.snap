@@ -135,3 +135,21 @@ exports[`Storyshots components|m-chip mode="delete" 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots components|m-chip without icons 1`] = `
+<button
+  class="m-chip-selectable"
+  type="button"
+>
+  <div
+    class="m-chip-selectable__body"
+  >
+    <span
+      class="m-chip-selectable__hidden-text"
+    >
+      Sélectionner : 
+    </span>
+     Default chip
+  </div>
+</button>
+`;
