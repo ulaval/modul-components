@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, radios, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -73,4 +73,23 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHIP_NAME}`, module)
             }
         },
         template: '<m-chip :mode="mode" @delete="onDelete()" @click="onClick()">Delete mode</m-chip>'
+    }))
+    .add('without icons', () => ({
+        props: {
+            text: {
+                default: text('Text', 'Default chip')
+            },
+            mode: {
+                default: radios('Mode', { Add: MChipMode.Add, Delete: MChipMode.Delete }, MChipMode.Add)
+            },
+            disabled: {
+                default: boolean('Disabled', false)
+            }
+        },
+        methods: {
+            onClick(): void {
+                alert('@Emit(\'click\')');
+            }
+        },
+        template: '<m-chip :icons="false" :mode="mode" :disabled="disabled" @click="onClick()">{{ text }}</m-chip>'
     }));

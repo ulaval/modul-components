@@ -1,0 +1,30 @@
+@import '../chip-commons';
+
+.m-chip-selectable {
+    @include m-chip-base-style();
+
+    border: 1px solid $m-color--interactive;
+    background: none;
+    font-size: 1em;
+    font-family: $m-font-family;
+
+    &:not(.m--is-disabled) {
+        @include m-button--hover();
+
+        &.m--is-selected {
+            @include m-button--active();
+        }
+    }
+
+    &.m--is-disabled {
+        border: 1px solid $m-color--disabled;
+    }
+
+    &__body {
+        @include m-chip-body-style();
+    }
+
+    &__hidden-text {
+        @include m-visually-hidden();
+    }
+}

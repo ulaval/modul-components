@@ -1,0 +1,10 @@
+<button class="m-chip-selectable"
+        :class="{'m--is-disabled': disabled, 'm--is-selected': selected}"
+        :disabled="disabled"
+        @click="onClick"
+        type="button">
+    <div class="m-chip-selectable__body">
+        <span class="m-chip-selectable__hidden-text">{{ hiddenText }}&nbsp;: </span>
+        <slot></slot>
+    </div>
+</button>

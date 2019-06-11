@@ -1,4 +1,5 @@
-<transition :css="false">
+<transition v-if="icons"
+            :css="false">
     <m-chip-add v-if="isModeAdd"
                 :disabled="disabled"
                 @click="emitClick"
@@ -12,3 +13,9 @@
         <slot></slot>
     </m-chip-delete>
 </transition>
+<m-chip-selectable v-else
+                   :selected="isModeDelete"
+                   :disabled="disabled"
+                   @click="emitClick">
+    <slot></slot>
+</m-chip-selectable>

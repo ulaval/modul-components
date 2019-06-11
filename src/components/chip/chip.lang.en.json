@@ -1,6 +1,8 @@
 {
     "chip": {
         "add": "Add",
-        "delete": "Delete"
+        "delete": "Delete",
+        "deselect": "Deselect",
+        "select": "Select"
     }
 }

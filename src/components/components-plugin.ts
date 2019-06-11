@@ -11,6 +11,7 @@ import CheckboxPlugin from './checkbox/checkbox';
 import ChipPlugin from './chip/chip';
 import ChipAddPlugin from './chip/chip-add/chip-add';
 import ChipDeletePlugin from './chip/chip-delete/chip-delete';
+import ChipSelectablePlugin from './chip/chip-selectable/chip-selectable';
 import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
 import DaterangepickerPlugin from './daterangepicker/daterangepicker';
@@ -112,6 +113,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ChipPlugin);
         Vue.use(ChipAddPlugin);
         Vue.use(ChipDeletePlugin);
+        Vue.use(ChipSelectablePlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(DaterangepickerPlugin);
