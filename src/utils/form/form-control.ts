@@ -98,7 +98,7 @@ export class FormControl<T> extends AbstractControl {
         super.reset();
         this._touched = false;
 
-        if (!initialValue) {
+        if (typeof initialValue === 'undefined') {
             this._value = this._oldValue = this._initialValue;
         } else {
             this._initialValue = this._value = this._oldValue = initialValue;
