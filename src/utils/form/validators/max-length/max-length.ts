@@ -7,9 +7,12 @@ import { ControlValidator, ControlValidatorOptions } from '../control-validator'
 import { ValidatorKeys } from '../validator-error-keys';
 
 /**
- * Bound included
+ *
+ * @param controlLabel Id by which the validator can be accesses, must be unique within the same AbstractControl validators.
+ * @param maxLength Max length (inclusive)
+ * @param options Options to configure the validator
  */
-export const MaxLengthValidator: Function = (controlLabel: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxLengthValidator: (controlLabel: string, maxLength: number, options?: ControlValidatorOptions) => ControlValidator = (controlLabel: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
