@@ -71,9 +71,6 @@ export class MPhonefield extends ModulVue {
     }
 
     private get inputMaskOptions(): InputMaskOptions {
-        // tslint:disable-next-line: no-console
-        console.log(this.internalCountry.dialCode, this.internalCountry.iso2);
-
         return {
             phone: true,
             phoneRegionCode: this.phoneRegionCode,
