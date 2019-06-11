@@ -5,7 +5,14 @@
                     :max-width="countryDropdownMaxWidth">
             <m-dropdown-item v-for="country in countries"
                              :value="country.iso2"
-                             :label="country.name">{{ country.name }}</m-dropdown-item>
+                             :label="country.name">
+                <span class="m-phonefield__item-wrapper">
+                    <m-flag class="m-phonefield__item-flag"
+                            :iso="country.iso2"></m-flag>
+                    <span>{{ country.name }}</span>
+                </span>
+
+            </m-dropdown-item>
         </m-dropdown>
         <m-input-style class="m-phonefield__number"
                        :disabled="isDisabled"

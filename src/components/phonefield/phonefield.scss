@@ -6,6 +6,15 @@
         align-items: flex-end;
     }
 
+    &__item-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__item-flag {
+        margin-right: $m-spacing--s;
+    }
+
     &__country {
         /deep/ .m-input-style__content {
             border-top-right-radius: 0;

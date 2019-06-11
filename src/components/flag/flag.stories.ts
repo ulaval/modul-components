@@ -17,5 +17,5 @@ storiesOf(`${componentsHierarchyRootSeparator}${FLAG_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        template: '<m-flag iso="ae"></m-flag>'
+        template: '<m-flag iso="ca"></m-flag>'
     }));
