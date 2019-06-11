@@ -153,7 +153,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
         // mouseup will always be caught even if click is stopped.
         document.addEventListener('mouseup', this.onDocumentClick);
 
-        this.$on('portal-content-mounted', this.setPopperMutationObserver);
+        this.$on('portal-mounted', this.setPopperMutationObserver);
 
     }
 
@@ -163,7 +163,7 @@ export class MPopper extends ModulVue implements PortalMixinImpl {
 
         if (this.observer) { this.observer.disconnect(); }
 
-        this.$off('portal-content-mounted', this.setPopperMutationObserver);
+        this.$off('portal-mounted', this.setPopperMutationObserver);
 
         this.destroyPopper();
     }

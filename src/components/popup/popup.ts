@@ -106,12 +106,12 @@ export class MPopup extends ModulVue {
         return this.trigger || this.as<OpenTriggerMixin>().triggerHook || undefined;
     }
 
-    private onPortalContentMounted(): void {
-        this.$emit('portal-content-mounted');
+    private onPortalMounted(): void {
+        this.$emit('portal-mounted');
     }
 
-    private onPortalContentVisible(): void {
-        this.$emit('portal-content-visible');
+    private onPortalAfterOpen(): void {
+        this.$emit('portal-after-open');
     }
 
     private get hasTriggerSlot(): boolean {

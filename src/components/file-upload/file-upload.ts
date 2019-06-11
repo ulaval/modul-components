@@ -144,7 +144,7 @@ export class MFileUpload extends ModulVue {
         }
     }
 
-    private onPortalContentVisible(): void {
+    private onPortalAfterOpen(): void {
         this.dropEvents.forEach((evt) => {
             this.$refs.modal.$refs.modalWrap.addEventListener(evt, defaultDragEvent);
         });

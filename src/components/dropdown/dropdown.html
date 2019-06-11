@@ -93,8 +93,8 @@
              :lazy="false"
              @open="onOpen"
              @close="onClose"
-             @portal-content-visible="calculateFilterableListeHeight"
-             @portal-content-mounted="portalContentMounted">
+             @portal-after-open="calculateFilterableListeHeight"
+             @portal-mounted="portalMounted">
         <template slot="header"
                   v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label"
