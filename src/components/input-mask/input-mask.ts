@@ -1,4 +1,5 @@
 import Cleave from 'cleave.js';
+import 'cleave.js/dist/addons/cleave-phone.i18n.js';
 import { CleaveOptions } from 'cleave.js/options';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
@@ -17,6 +18,9 @@ export interface InternalCleaveOptions {
     delimiter: string;
     removeTrailingDecimalMark?: boolean;
     forceDecimalScale?: boolean;
+    phone?: boolean;
+    phoneRegionCode?: string;
+    prefix?: string;
 }
 
 export interface InputMaskOptions extends InternalCleaveOptions {

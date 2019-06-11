@@ -1,3 +1,35 @@
 <div class="m-phonefield">
-    phonefield template
+    <m-input-style :disabled="isDisabled"
+                   :waiting="isWaiting"
+                   :error="hasPhonefieldError"
+                   :valid="isPhonefieldValid"
+                   :label="label"
+                   :label-for="id"
+                   :focus="isFocus"
+                   :label-up="labelUp"
+                   :empty="isEmpty"
+                   :readonly="isReadonly"
+                   :required-marker="requiredMarker"
+                   :tag-style="tagStyle">
+        <m-input-mask class="m-phonefield__input"
+                      v-model="model"
+                      :id="id"
+                      :disabled="isDisabled || isWaiting"
+                      :placeholder="placeholder"
+                      :readonly="isReadonly"
+                      :options="inputMaskOptions"
+                      @focus="onFocus"
+                      @blur="onBlur"
+                      @keyup="onKeyup"
+                      @change="onChange"
+                      ref="inputMask"></m-input-mask>
+    </m-input-style>
+    <m-validation-message class="m-phonefield__validation"
+                          :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasPhonefieldError"
+                          :error-message="errorMessage"
+                          :valid="isPhonefieldValid"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
 </div>
