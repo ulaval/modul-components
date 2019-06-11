@@ -1,5 +1,22 @@
 @import 'commons';
 
 .m-phonefield {
-    display: flex;
+    &__wrapper {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__country {
+        /deep/ .m-input-style__content {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    &__number {
+        /deep/ .m-input-style__content {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
 }

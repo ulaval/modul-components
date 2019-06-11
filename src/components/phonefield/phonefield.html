@@ -1,29 +1,40 @@
 <div class="m-phonefield">
-    <m-input-style :disabled="isDisabled"
-                   :waiting="isWaiting"
-                   :error="hasPhonefieldError"
-                   :valid="isPhonefieldValid"
-                   :label="label"
-                   :label-for="id"
-                   :focus="isFocus"
-                   :label-up="labelUp"
-                   :empty="isEmpty"
-                   :readonly="isReadonly"
-                   :required-marker="requiredMarker"
-                   :tag-style="tagStyle">
-        <m-input-mask class="m-phonefield__input"
-                      v-model="model"
-                      :id="id"
-                      :disabled="isDisabled || isWaiting"
-                      :placeholder="placeholder"
-                      :readonly="isReadonly"
-                      :options="inputMaskOptions"
-                      @focus="onFocus"
-                      @blur="onBlur"
-                      @keyup="onKeyup"
-                      @change="onChange"
-                      ref="inputMask"></m-input-mask>
-    </m-input-style>
+    <div class="m-phonefield__wrapper">
+        <m-dropdown class="m-phonefield__country"
+                    v-model="countryModel"
+                    :max-width="countryDropdownMaxWidth">
+            <m-dropdown-item v-for="country in countries"
+                             :value="country.iso2"
+                             :label="country.name">{{ country.name }}</m-dropdown-item>
+        </m-dropdown>
+        <m-input-style class="m-phonefield__number"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :error="hasPhonefieldError"
+                       :valid="isPhonefieldValid"
+                       :label="propLabel"
+                       :label-for="id"
+                       :focus="isFocus"
+                       :label-up="true"
+                       :empty="isEmpty"
+                       :readonly="isReadonly"
+                       :required-marker="requiredMarker"
+                       :tag-style="tagStyle">
+            <m-input-mask class="m-phonefield__input"
+                          v-model="model"
+                          :id="id"
+                          :disabled="isDisabled || isWaiting"
+                          :placeholder="placeholder"
+                          :readonly="isReadonly"
+                          :options="inputMaskOptions"
+                          @focus="onFocus"
+                          @blur="onBlur"
+                          @keyup="onKeyup"
+                          @change="onChange"
+                          ref="inputMask"></m-input-mask>
+        </m-input-style>
+    </div>
+
     <m-validation-message class="m-phonefield__validation"
                           :disabled="isDisabled"
                           :waiting="isWaiting"

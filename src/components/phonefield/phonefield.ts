@@ -4,15 +4,23 @@ import { Emit, Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
-import { InputWidth } from '../../mixins/input-width/input-width';
+import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { PHONEFIELD_NAME } from '../component-names';
 import { InputMaskOptions, MInputMask } from '../input-mask/input-mask';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
+import allCountries from './assets/all-countries';
 import WithRender from './phonefield.html?style=./phonefield.scss';
 
+interface CountryOptions {
+    name: string;
+    iso2: string;
+    dialCode: string;
+    priority?: number;
+    areaCodes?: string[];
+}
 
 @WithRender
 @Component({
@@ -30,15 +38,28 @@ export class MPhonefield extends ModulVue {
     @Prop()
     public value: string;
 
-    private countryLabel: string = this.$i18n.translate('m-phone-number:label.country');
-    private phoneLabel: string = this.$i18n.translate('m-phone-number:label.phone');
-    private extensionLabel: string = this.$i18n.translate('m-phone-number:label.extension');
-    private countryPlaceholder: string = this.$i18n.translate('m-phone-number:placeholder.country');
-    private numberPlaceholder: string = this.$i18n.translate('m-phone-number:placeholder.number');
-    private extensionPlaceholder: string = this.$i18n.translate('m-phone-number:placeholder.extension');
-    private phoneExample: string = this.$i18n.translate('m-phone-number:example');
+    @Prop()
+    public label: string;
 
+    private i18nInternalLabel: string = this.$i18n.translate('m-phone-number:label.phone');
+    private countryDropdownMaxWidth: InputMaxWidth = InputMaxWidth.Regular;
+    private countryModelInternal: string = '';
+    private internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
+    private internalPrefix: string = '';
     protected id: string = `mIntegerfield-${uuid.generate()}`;
+
+    created(): void {
+        this.countryModelInternal = 'ca';
+        this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
+    }
+
+    private get countries(): CountryOptions[] {
+        return allCountries;
+    }
+
+    private get propLabel(): string {
+        return this.label ? this.label : this.i18nInternalLabel;
+    }
 
     private get hasPhonefieldError(): boolean {
         return this.as<InputState>().hasError;
@@ -49,27 +70,31 @@ export class MPhonefield extends ModulVue {
     }
 
     private get inputMaskOptions(): InputMaskOptions {
+        // tslint:disable-next-line: no-console
+        console.log(this.internalCountry.dialCode, this.internalCountry.iso2);
+
         return {
-            numeral: false,
-            numeralThousandsGroupStyle: 'none',
-            numeralIntegerScale: 0,
-            numeralDecimalScale: 0,
-            numeralDecimalMark: '',
-            numeralPositiveOnly: false,
-            stripLeadingZeroes: false,
-            delimiter: '',
-            phoneRegionCode: this.phoneRegionCode,
             phone: true,
+            phoneRegionCode: this.phoneRegionCode,
             prefix: this.prefix
         };
     }
 
-    private get prefix(): string {
-        return '+1';
+    private get phoneRegionCode(): string {
+        return this.internalCountry.iso2.toUpperCase();
     }
 
-    private get phoneRegionCode(): string {
-        return 'CA';
+    private get prefix(): string {
+        return this.internalCountry.dialCode;
+    }
+
+    private get countryModel(): string {
+        return this.countryModelInternal;
+    }
+
+    private set countryModel(value: string) {
+        this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === value)!;
+        this.countryModelInternal = value;
     }
 
     private get model(): string {
