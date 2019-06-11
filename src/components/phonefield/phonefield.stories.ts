@@ -18,4 +18,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${PHONEFIELD_NAME}`, module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         template: '<m-phonefield></m-phonefield>'
+    }))
+    .add('disabled', () => ({
+        template: '<m-phonefield :disabled="true"></m-phonefield>'
+    }))
+    .add('waiting', () => ({
+        template: '<m-phonefield :waiting="true"></m-phonefield>'
     }));

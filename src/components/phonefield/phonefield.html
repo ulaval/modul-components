@@ -2,6 +2,8 @@
     <div class="m-phonefield__wrapper">
         <m-dropdown class="m-phonefield__country"
                     v-model="countryModel"
+                    :disabled="isDisabled"
+                    :waiting="isWaiting"
                     :max-width="countryDropdownMaxWidth">
             <m-dropdown-item v-for="country in countries"
                              :value="country.iso2"
