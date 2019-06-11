@@ -79,13 +79,22 @@ module.exports = function (isLib) {
                         }
                     ]
                 },
+                // {
+                //     test: /\.svg$/,
+                //     loader: 'svg-inline-loader',
+                //     options: {
+                //         removeTags: true,
+                //         removingTags: ['desc', 'defs', 'style'],
+                //         removeSVGTagAttrs: true
+                //     }
+                // },
+
+
                 {
                     test: /\.svg$/,
-                    loader: 'svg-inline-loader',
+                    loader: 'file-loader',
                     options: {
-                        removeTags: true,
-                        removingTags: ['desc', 'defs', 'style'],
-                        removeSVGTagAttrs: true
+                        name: 'img/[name].[hash:8].[ext]'
                     }
                 },
                 {
