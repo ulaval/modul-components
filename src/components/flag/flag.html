@@ -1,3 +1,10 @@
-<span class="flag-icon"
-      :class="flagIconClass"
-      :title="title || iso"></span>
+<svg class="m-flag"
+     @click="onClick"
+     @keydown="onKeydown"
+     :aria-hidden="!hasTitle"
+     :width="width"
+     :height="height">
+    <title v-if="hasTitle">{{ title }}</title>
+    <use :xlink:href="spriteId"
+         aria-hidden="true"></use>
+</svg>
