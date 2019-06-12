@@ -27,9 +27,9 @@
         float: right;
     }
 
-    /deep/ .fr-separator:last-of-type {
-        display: none;
-    }
+    // /deep/ .fr-separator:last-of-type {
+    //     display: none;
+    // }
 
     &.m--is-dirty {
         overflow: unset;
@@ -41,15 +41,15 @@
         }
     }
 
+    /deep/.fr-box.fr-basic.fr-top .fr-wrapper {
+        border: 0;
+    }
+
     &.m--is-collapsed /deep/ {
         .fr-box.fr-basic .fr-element {
             padding: 0;
             min-height: unset;
             height: 0;
-        }
-
-        .fr-box.fr-basic.fr-top .fr-wrapper {
-            box-shadow: unset;
         }
 
         .fr-wrapper.show-placeholder .fr-placeholder {
@@ -169,6 +169,9 @@
             transition: padding $m-transition-duration--l ease;
             min-height: unset;
             overflow-x: unset;
+            font-family: unset;
+            font-size: unset;
+            line-height: unset;
         }
 
         .fr-wrapper {
@@ -276,47 +279,28 @@
                 }
             }
         }
-    }
 
-    &.m--is-mobile {
-        /deep/ .fr-command {
-            display: none;
+        .second-toolbar {
+            display: none; // hide second toolbar in Froala (V3)
+        }
 
-            &[data-cmd*='-sub-menu'],
-            &[data-cmd='fullscreen'],
-            &[data-cmd='insertLink'],
-            &[data-cmd='insertImage'],
-            &[data-cmd='specialCharacters'] {
-                display: inline-block;
-            }
+        .fr-command.fr-btn {
+            width: 38px;
+            height: 38px;
+            margin: 0 2px;
 
-            &.fr-submit {
-                display: inline-block;
+            &.fr-active {
+                color: $m-color--interactive;
             }
         }
 
-        /deep/ .fr-separator {
-            display: none;
-        }
-
-        &.m--is-focus {
-            /deep/ .fr-placeholder {
-                padding-top: 50px !important;
+        .fr-btn-grp {
+            &.fr-float-left {
+                margin-left: 0;
             }
 
-            /deep/ .fr-box.fr-basic .fr-element {
-                padding-top: 50px;
-            }
-        }
-    }
-
-    &.m--is-desktop {
-        /deep/ .fr-command {
-            display: inline-block;
-
-            &[data-cmd*='-sub-menu'],
-            &[data-cmd='hide'] {
-                display: none;
+            &.fr-float-right {
+                margin-right: 0;
             }
         }
     }
