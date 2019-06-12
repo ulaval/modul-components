@@ -9,6 +9,9 @@
     <h3>Long format</h3>
     <p v-html="formattedDateLong"></p>
 
+    <h3>Show year and month</h3>
+    <p>{{ date | f-m-date({showDay: false}) }}</p>
+
     <h3>Short format</h3>
     <p v-html="formattedDateShort"></p>
 

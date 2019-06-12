@@ -29,11 +29,13 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
     display: flex;
     align-items: center;
     justify-content: center;
+    background: none;
     font-family: $m-font-family;
     font-size: 1em;
     border: none;
     appearance: none;
     outline: none;
+    padding: 0;
 
     &::before {
         transition: transform $m-transition-duration--l ease, opacity $m-transition-duration ease, background-color $m-transition-duration ease, border-color $m-transition-duration ease;

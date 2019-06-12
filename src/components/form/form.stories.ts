@@ -9,6 +9,8 @@ import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { BetweenValidator } from '../../utils/form/validators/between/between';
 import { CompareValidator } from '../../utils/form/validators/compare/compare';
+import { DateBetweenValidator } from '../../utils/form/validators/date-between/date-between';
+import { DateFormatValidator } from '../../utils/form/validators/date-format/date-format';
 import { EmailValidator } from '../../utils/form/validators/email/email';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { MaxValidator } from '../../utils/form/validators/max/max';
@@ -393,40 +395,32 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('min', () => ({
+    .add('min number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'min 5': new FormControl<number>(
-                        [MinValidator('min 5', 5)]
-                    ),
-                    'min 1/1/2019': new FormControl<Date>(
-                        [MinValidator('min 1/1/2019', new Date(2019, 0, 1))]
+                    'min5': new FormControl<number>(
+                        [MinValidator('min5', 5)]
                     )
                 }
             )
         }),
         computed: {
-            min5(): void {
-                return this.$data.formGroup.getControl('min 5');
-            },
-            minDate(): void {
-                return this.$data.formGroup.getControl('min 1/1/2019');
+            min5Field(): FormControl<string> {
+                return this.formGroup.getControl('min5');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="min5.value"
-                        :error-message="min5.errors.length > 0 ? min5.errors[0].message : null"
-                        :label="min5.name"
-                        v-m-control="min5">
+            <p>default validationType =  {{ min5Field.validators[0].validationType }}</p>
+            <m-integerfield v-model="min5Field.value"
+                            :error="min5Field.hasError()"
+                            :error-message="min5Field.errorMessage"
+                            :label="min5Field.name"
+                            :valid="min5Field.valid"
+                            v-m-control="min5Field">
             </m-integerfield>
-            <m-datepicker v-model.trim="minDate.value"
-                        :error-message="minDate.errors.length > 0 ? minDate.errors[0].message : null"
-                        :label="minDate.name"
-                        v-m-control="minDate">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
@@ -435,40 +429,32 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('max', () => ({
+    .add('max number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'max 5': new FormControl<number>(
-                        [MaxValidator('max 5', 5)]
-                    ),
-                    'max 1/1/2019': new FormControl<Date>(
-                        [MaxValidator('max 1/1/2019', new Date(2019, 0, 1))]
+                    'max5': new FormControl<number>(
+                        [MaxValidator('max5', 5)]
                     )
                 }
             )
         }),
         computed: {
-            max5(): void {
-                return this.$data.formGroup.getControl('max 5');
-            },
-            maxDate(): void {
-                return this.$data.formGroup.getControl('max 1/1/2019');
+            max5Field(): FormControl<string> {
+                return this.formGroup.getControl('max5');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="max5.value"
-                        :error-message="max5.errors.length > 0 ? max5.errors[0].message : null"
-                        :label="max5.name"
-                        v-m-control="max5">
+            <p>default validationType =  {{ max5Field.validators[0].validationType }}</p>
+            <m-integerfield v-model="max5Field.value"
+                            :error="max5Field.hasError()"
+                            :error-message="max5Field.errorMessage"
+                            :label="max5Field.name"
+                            :valid="max5Field.valid"
+                            v-m-control="max5Field">
             </m-integerfield>
-            <m-datepicker v-model.trim="maxDate.value"
-                        :error-message="maxDate.errors.length > 0 ? maxDate.errors[0].message : null"
-                        :label="maxDate.name"
-                        v-m-control="maxDate">
-            </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit">Submit</m-button>
                 <m-button type="reset"
@@ -477,39 +463,111 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('between', () => ({
+    .add('between number', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'between': new FormControl<number>(
                         [BetweenValidator('between', 2, 4)]
-                    ),
-                    'betweenDate': new FormControl<Date>(
-                        [BetweenValidator('betweenDate', new Date(2019, 0, 1), new Date(2019, 1, 1))]
                     )
                 }
             )
         }),
         computed: {
-            between(): void {
-                return this.$data.formGroup.getControl('between');
-            },
-            betweenDate(): void {
-                return this.$data.formGroup.getControl('betweenDate');
+            betweenField(): FormControl<string> {
+                return this.formGroup.getControl('between');
             }
         },
+
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-integerfield v-model.trim="between.value"
-                        :error-message="between.errors.length > 0 ? between.errors[0].message : null"
-                        :label="between.name"
-                        v-m-control="between">
+            <p>default validationType =  {{ betweenField.validators[0].validationType }}</p>
+            <m-integerfield v-model="betweenField.value"
+                            :error="betweenField.hasError()"
+                            :error-message="betweenField.errorMessage"
+                            :label="betweenField.name"
+                            :valid="betweenField.valid"
+                            v-m-control="betweenField">
             </m-integerfield>
-            <m-datepicker v-model.trim="betweenDate.value"
-                        :error-message="betweenDate.errors.length > 0 ? betweenDate.errors[0].message : null"
-                        :label="betweenDate.name"
-                        v-m-control="betweenDate">
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('date format', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [DateFormatValidator('date')]
+                    )
+                }
+            )
+        }),
+        computed: {
+            dateField(): FormControl<string> {
+                return this.formGroup.getControl('date');
+            }
+        },
+
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <p>default validationType =  {{ dateField.validators[0].validationType }}</p>
+            <m-datepicker v-model="dateField.value"
+                            :skip-input-validation="true"
+                            :error="dateField.hasError()"
+                            :error-message="dateField.errorMessage"
+                            :label="dateField.name"
+                            :valid="dateField.valid"
+                            v-m-control="dateField">
+            </m-datepicker>
+            <p class="m-u--margin-bottom--l">
+                <m-button type="submit"
+                        :form="formGroup.id">Submit</m-button>
+                <m-button type="reset"
+                        skin="secondary"
+                        :form="formGroup.id">Reset</m-button>
+            </p>
+        </m-form>
+        `
+    }))
+    .add('date between', () => ({
+        data: () => ({
+            formGroup: new FormGroup(
+                {
+                    'date': new FormControl<string>(
+                        [DateBetweenValidator('date', '2019-05-20', '2019-05-30')]
+                    )
+                }
+            )
+        }),
+        computed: {
+            dateField(): FormControl<string> {
+                return this.formGroup.getControl('date');
+            }
+        },
+
+        template: `
+        <m-form class="m-u--margin-top"
+                :form-group="formGroup">
+            <p> min = 2019-05-20  max = 2019-05-30</p>
+            <p>default validationType =  {{ dateField.validators[0].validationType }}</p>
+            <m-datepicker v-model="dateField.value"
+                            :skip-input-validation="true"
+                            min="2008-01-01"
+                            max="2019-05-30"
+                            :error="dateField.hasError()"
+                            :error-message="dateField.errorMessage"
+                            :label="dateField.name"
+                            :valid="dateField.valid"
+                            v-m-control="dateField">
             </m-datepicker>
             <p class="m-u--margin-bottom--l">
                 <m-button type="submit">Submit</m-button>
@@ -519,45 +577,52 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         </m-form>
         `
     }))
-    .add('compare', () => ({
+    .add('compare fields', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<number>(
                         [EmailValidator('email')]
                     ),
-                    'confirm email': new FormControl<number>(
-                        [EmailValidator('confirm email')]
+                    'confirmemail': new FormControl<number>(
+                        [EmailValidator('confirmemail')]
                     )
                 },
                 [
-                    CompareValidator(['email', 'confirm email'])
+                    CompareValidator(['email', 'confirmemail'])
                 ]
             )
         }),
         computed: {
-            email(): void {
-                return this.$data.formGroup.getControl('email');
+            emailField(): FormControl<string> {
+                return this.formGroup.getControl('email');
             },
-            confirmEmail(): void {
-                return this.$data.formGroup.getControl('confirm email');
+            confirmemailField(): FormControl<string> {
+                return this.formGroup.getControl('confirmemail');
             }
         },
         template: `
         <m-form class="m-u--margin-top"
                 :form-group="formGroup">
-            <m-input-group :legend="formGroup.name"
-                :error-message="formGroup.errors.length > 0 ? formGroup.errors[0].message : null">
+            <p>default validationType =  {{ formGroup.validators[0].validationType }}</p>
+            <m-input-group legend="compare two field"
+                           :valid="formGroup.valid"
+                           :error="formGroup.hasError()"
+                           :error-message="formGroup.errorMessage">
                 <div slot-scope="{  }">
-                    <m-textfield v-model.trim="email.value"
-                                :error-message="email.errors.length > 0 ? email.errors[0].message : null"
-                                :label="email.name"
-                                v-m-control="email">
+                    <m-textfield v-model="emailField.value"
+                                    :error="emailField.hasError()"
+                                    :error-message="emailField.errorMessage"
+                                    label="email"
+                                    :valid="emailField.valid"
+                                    v-m-control="emailField">
                     </m-textfield>
-                    <m-textfield v-model.trim="confirmEmail.value"
-                                :error-message="confirmEmail.errors.length > 0 ? confirmEmail.errors[0].message : null"
-                                :label="confirmEmail.name"
-                                v-m-control="confirmEmail">
+                    <m-textfield v-model="confirmemailField.value"
+                                    :error="confirmemailField.hasError()"
+                                    :error-message="confirmemailField.errorMessage"
+                                    label="confirm email"
+                                    :valid="confirmemailField.valid"
+                                    v-m-control="confirmemailField">
                     </m-textfield>
                 </div>
             </m-input-group>
