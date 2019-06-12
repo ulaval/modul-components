@@ -147,7 +147,7 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
         }
 
         if (this.titleAvailable) {
-            options.toolbarButtons.splice(2, 0, 'paragraphStyle');
+            options.toolbarButtons.moreText.buttons.splice(0, 0, 'paragraphStyle');
             options.paragraphStyles = this.manageHeaderLevels();
         }
 

@@ -29,21 +29,21 @@ import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 
 enum froalaEvents {
-    Initialized = 'initialized',
-    InitializationDelayed = 'initializationDelayed',
+    Blur = 'blur',
+    Click = 'click',
+    CommandAfter = 'commands.after',
+    CommandBefore = 'commands.before',
     ContentChanged = 'contentChanged',
     Focus = 'focus',
-    Blur = 'blur',
-    KeyUp = 'keyup',
-    KeyDown = 'keydown',
-    PasteAfter = 'paste.after',
-    CommandAfter = 'commands.after',
-    PasteAfterCleanup = 'paste.afterCleanup',
-    ShowLinkInsert = 'popups.show.link.insert',
-    CommandBefore = 'commands.before',
+    ImageInserted = 'image.inserted',
     ImageRemoved = 'image.removed',
-    ImageInserted = 'image.inserted'
-    Click = 'froalaEditor.click',
+    Initialized = 'initialized',
+    InitializationDelayed = 'initializationDelayed',
+    KeyDown = 'keydown',
+    KeyUp = 'keyup',
+    PasteAfter = 'paste.after',
+    PasteAfterCleanup = 'paste.afterCleanup',
+    ShowLinkInsert = 'popups.show.link.insert'
 }
 
 enum FroalaElements {
@@ -179,6 +179,7 @@ const ENTER_KEYCODE: number = 13;
             this.addImageButton();
         }
 
+        FroalaEditor.DefineIcon('paragraphStyle', { SVG: (titleIcon as string), template: 'custom-icons' });
         FroalaEditor.DefineIcon('moreText', { SVG: (stylesIcon as string), template: 'custom-icons' });
         FroalaEditor.DefineIcon('moreParagraph', { SVG: (listsIcon as string), template: 'custom-icons' });
     }
@@ -347,12 +348,13 @@ const ENTER_KEYCODE: number = 13;
                     }
                     this.$emit('keyup');
                 },
-                [froalaEvents.KeyDown]: () => {
+                [froalaEvents.KeyDown]: (key) => {
                     global.console.log('RTE EVENT KeyDown!');
                     this.$emit('keydown');
                     this.isDirty = true;
+                    // fix me
                     if (key.keyCode === ENTER_KEYCODE) {
-                        editor.paragraphStyle.apply('');
+                        this.froalaEditor.paragraphStyle.apply('');
                     }
                 },
                 [froalaEvents.PasteAfter]: () => {

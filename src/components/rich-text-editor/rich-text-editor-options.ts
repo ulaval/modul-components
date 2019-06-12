@@ -6,7 +6,7 @@ export class MRichTextEditorDefaultOptions {
     public charCounterCount: boolean = false;
     public tableInsertHelper: boolean = false;
     // public lineBreakerTags: string[] = []; //dont need that, because we dont import the plugin lineBreaker.
-    public zIndex: number = 200;
+    // public zIndex: number = 200;
     public toolbarSticky: boolean = true;
     public scrollableContainer: string | undefined;
     public toolbarStickyOffset: number = 0;
@@ -31,7 +31,7 @@ export class MRichTextEditorDefaultOptions {
     // The list of buttons that appear in the rich text editor's toolbar on large devices (≥ 1200px). 'styles-sub-menu', 'listes-sub-menu'
     public toolbarButtons: any = {
         moreText: {
-            buttons: ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript', '|'],
+            buttons: ['bold', 'italic', 'subscript', 'superscript'],
             buttonsVisible: 6
         },
         moreParagraph: {
@@ -91,7 +91,7 @@ export class MRichTextEditorDefaultOptions {
     // The list of buttons that appear in the rich text editor's toolbar on extra small devices (< 768px).
     public toolbarButtonsXS: any = {
         moreText: {
-            buttons: ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript'],
+            buttons: ['bold', 'italic', 'subscript', 'superscript'],
             buttonsVisible: 0
         },
         moreParagraph: {
