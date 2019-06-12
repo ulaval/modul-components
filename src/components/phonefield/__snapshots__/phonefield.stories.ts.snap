@@ -159,7 +159,7 @@ exports[`Storyshots components|m-phonefield default 1`] = `
     class="m-phonefield__example"
     style="margin-left: 592px;"
   >
-    Ex: +1 418-123-1234
+    Ex: +1 506 234 5678
   </p>
    
   <div
@@ -321,7 +321,7 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
     class="m-phonefield__example"
     style="margin-left: 592px;"
   >
-    Ex: +1 418-123-1234
+    Ex: +1 506 234 5678
   </p>
    
   <div
@@ -497,7 +497,7 @@ exports[`Storyshots components|m-phonefield error 1`] = `
     class="m-phonefield__example"
     style="margin-left: 592px;"
   >
-    Ex: +1 418-123-1234
+    Ex: +1 506 234 5678
   </p>
    
   <div
@@ -673,7 +673,7 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
     class="m-phonefield__example"
     style="margin-left: 592px;"
   >
-    Ex: +1 418-123-1234
+    Ex: +1 506 234 5678
   </p>
    
   <div
@@ -870,7 +870,7 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
     class="m-phonefield__example"
     style="margin-left: 592px;"
   >
-    Ex: +1 418-123-1234
+    Ex: +1 506 234 5678
   </p>
    
   <div
