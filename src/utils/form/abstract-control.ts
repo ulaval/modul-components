@@ -52,6 +52,10 @@ export abstract class AbstractControl {
         return (this.enabled && !this.readonly) ? this._errors : [];
     }
 
+    public set errors(error: ControlError[]) {
+        this._errors = [...error];
+    }
+
     public hasError(): boolean {
         return this.errors.length > 0;
     }

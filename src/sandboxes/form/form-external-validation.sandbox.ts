@@ -2,6 +2,7 @@ import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { FORM_NAME } from '../../components/component-names';
 import { MForm } from '../../components/form/form';
+import { FormActions } from '../../components/form/form-action-type';
 import FormPlugin from '../../components/form/form.plugin';
 import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormControl } from '../../utils/form/form-control';
@@ -60,20 +61,15 @@ export class MFormExternalValidationSandbox extends ModulVue {
             this.$log.info();
         } catch (e) {
 
-            // interpret error, assign failing validation function and correct error message
+            // interpret error and correct error message
             if (e.message.includes(errorOnName)) {
-                let validator: ControlValidator = this.formGroup.getControl(ID_FORM_CONTROL_NAME).validators.find(v => v.key === KEY_NAME_VALIDATOR_EXTERNAL)!;
-                validator.validationFunction = (): boolean => false;
-                validator.error = { message: 'Updated error message using value returned be external call : ' + e.message };
+                this.formGroup.setControlInError(ID_FORM_CONTROL_NAME, { message: 'Updated error message using value returned be external call : ' + e.message });
             }
             if (e.message.includes(errorOnDescription)) {
-                let validator: ControlValidator = this.formGroup.getControl(ID_FORM_CONTROL_DESCRIPTION).validators.find(v => v.key === KEY_DESCRIPTION_VALIDATOR_EXTERNAL)!;
-                validator.validationFunction = (): boolean => false;
-                validator.error = { message: 'Updated error message using value returned be external call : ' + e.message };
+                this.formGroup.setControlInError(ID_FORM_CONTROL_DESCRIPTION, { message: 'Updated error message using value returned be external call : ' + e.message });
             }
 
-            // resubmit the form and validate external validations
-            (this.$refs[this.refMForm] as MForm).submit(true);
+            (this.$refs[this.refMForm] as MForm).triggerAction(FormActions.InvalidSubmit);
         }
 
     }

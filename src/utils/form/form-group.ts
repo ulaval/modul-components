@@ -1,4 +1,5 @@
 import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
@@ -129,6 +130,13 @@ export class FormGroup extends AbstractControl {
         delete result[name];
 
         this._controls = result;
+    }
+
+    public setControlInError(name: string, error: ControlError): void {
+        if (this._controls[name] === undefined) {
+            throw Error(`There is no control with name ${name} in this group`);
+        }
+        this._controls[name].errors = [error];
     }
 
     private setupControlsParent(): void {

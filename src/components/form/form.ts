@@ -47,6 +47,10 @@ export class MForm extends ModulVue {
         );
     }
 
+    public triggerAction(action: FormActions): void {
+        this._triggerActionFallouts(action);
+    }
+
     public async submit(external: boolean = false): Promise<void> {
         await this.formGroup.submit(external);
 
