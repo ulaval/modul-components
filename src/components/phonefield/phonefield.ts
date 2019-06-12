@@ -43,6 +43,9 @@ export class MPhonefield extends ModulVue {
     @Prop()
     public label: string;
 
+    @Prop({ default: 'ca' })
+    public defaultCountry: string;
+
     private i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
     private i18nExample: string = this.$i18n.translate('m-phonefield:example');
 
@@ -52,9 +55,10 @@ export class MPhonefield extends ModulVue {
     private internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     private internalPrefix: string = '';
     protected id: string = `mIntegerfield-${uuid.generate()}`;
+    protected exemples: any = require('libphonenumber-js/examples.mobile.json');
 
     created(): void {
-        this.countryModelInternal = 'ca';
+        this.countryModelInternal = this.defaultCountry;
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
     }
 
@@ -91,7 +95,7 @@ export class MPhonefield extends ModulVue {
     }
 
     private get example(): string {
-        const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, require('libphonenumber-js/examples.mobile.json'));
+        const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, this.exemples);
         return phoneNumber ? phoneNumber.formatInternational() : '';
     }
 
