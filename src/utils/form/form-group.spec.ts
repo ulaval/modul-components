@@ -60,6 +60,6 @@ describe('FormGroup', () => {
             formGroup.setControlInError(TEST_CONTROL_NAME, { message: ERROR_MESSAGE });
 
             expect(spy).toHaveBeenCalledWith([{ message: ERROR_MESSAGE }]);
-        })
+        });
     });
 });
