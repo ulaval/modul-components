@@ -12,10 +12,9 @@ import { ValidatorKeys } from '../validator-error-keys';
  *
  * @param start Start of the period during witch the date must be to be valid. Inclusive.
  * @param end End of the period during witch the date must be to be valid. Inclusive.
- * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
- * @param options
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const DateBetweenValidator: (start: string, end: string, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (start: string, end: string, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
+export const DateBetweenValidator: (start: string, end: string, options?: ControlValidatorOptions) => ControlValidator = (start: string, end: string, options?: ControlValidatorOptions): ControlValidator => {
 
     const startFormatted: string = dateFilter(new ModulDate(start).toDate());
     const endFormatted: string = dateFilter(new ModulDate(end).toDate());
@@ -45,11 +44,11 @@ export const DateBetweenValidator: (start: string, end: string, controlLabel?: s
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: controlLabel ?
+                groupMessage: options && options.controlLabel ?
                     (ModulVue.prototype.$i18n).translate(
                         'm-form:dateBetweenValidatorErrorSummaryMessage',
                         {
-                            controlLabel,
+                            controlLabel: options.controlLabel,
                             start: startFormatted,
                             end: endFormatted
                         },

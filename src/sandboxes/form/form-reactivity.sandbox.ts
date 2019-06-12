@@ -12,7 +12,6 @@ import WithRender from './form-reactivity.sandbox.html';
 
 const ID_FORM_CONTROL_NAME: string = 'name';
 const ID_FORM_CONTROL_DESCRIPTION: string = 'description';
-const KEY_NAME_REQUIRED: string = 'key_name_required';
 const KEY_DESCRIPTION_RESTRICTED: string = 'key_description_restricted';
 
 @WithRender
@@ -53,7 +52,7 @@ export class MFormReactivitySandbox extends ModulVue {
     private buildFormGroup(): FormGroup {
         const formGroup: FormGroup = new FormGroup({
             [ID_FORM_CONTROL_NAME]: new FormControl<string>(
-                [RequiredValidator(KEY_NAME_REQUIRED)]
+                [RequiredValidator()]
             )
         });
 

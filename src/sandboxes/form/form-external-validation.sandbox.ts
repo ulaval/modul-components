@@ -94,11 +94,12 @@ export class MFormExternalValidationSandbox extends ModulVue {
     private buildFormGroup(): FormGroup {
         const formGroup: FormGroup = new FormGroup({
             [ID_FORM_CONTROL_NAME]: new FormControl<string>([
-                MaxLengthValidator(ID_FORM_CONTROL_NAME, MAX_NAME_LENGTH, {
-                    error: {
-                        message: 'Max length : ' + MAX_NAME_LENGTH + ' (custom message)' // setting custom error message on existing validator
-                    }
-                }),
+                MaxLengthValidator(MAX_NAME_LENGTH,
+                    {
+                        error: {
+                            message: 'Max length : ' + MAX_NAME_LENGTH + ' (custom message)' // setting custom error message on existing validator
+                        }
+                    }),
                 {
                     // custom external validator
                     key: KEY_NAME_VALIDATOR_EXTERNAL,

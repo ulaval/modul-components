@@ -6,7 +6,7 @@ describe('Required validator', () => {
 
     beforeEach(() => {
         formControl = new FormControl<any>(
-            [RequiredValidator('test')]
+            [RequiredValidator()]
         );
     });
 

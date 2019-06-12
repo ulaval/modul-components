@@ -9,10 +9,9 @@ import { ValidatorKeys } from '../validator-error-keys';
 /**
  *
  * @param min The maximum value required to be valid. Bound included.
- * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
- * @param options
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const MaxValidator: (max: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (max: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxValidator: (max: number, options?: ControlValidatorOptions) => ControlValidator = (max: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Max,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -39,11 +38,11 @@ export const MaxValidator: (max: number, controlLabel?: string, options?: Contro
                     { max },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: controlLabel ?
+                groupMessage: options && options.controlLabel ?
                     (ModulVue.prototype.$i18n).translate(
                         'm-form:maxValidatorErrorSummaryMessage',
                         {
-                            controlLabel,
+                            controlLabel: options.controlLabel,
                             max
                         },
                         undefined,

@@ -8,11 +8,10 @@ import { ValidatorKeys } from '../validator-error-keys';
 
 /**
  *
- * @param controlLabel Id by which the validator can be accesses, must be unique within the same AbstractControl validators.
  * @param maxLength Max length (inclusive)
- * @param options Options to configure the validator
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const MaxLengthValidator: (maxLength: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (maxLength: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxLengthValidator: (maxLength: number, options?: ControlValidatorOptions) => ControlValidator = (maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -39,11 +38,11 @@ export const MaxLengthValidator: (maxLength: number, controlLabel?: string, opti
                     { maxLength },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: controlLabel ?
+                groupMessage: options && options.controlLabel ?
                     (ModulVue.prototype.$i18n).translate(
                         'm-form:maxLengthValidatorErrorSummaryMessage',
                         {
-                            controlLabel,
+                            controlLabel: options.controlLabel,
                             maxLength
                         },
                         undefined,

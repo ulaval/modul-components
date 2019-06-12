@@ -11,7 +11,7 @@ import { ValidatorKeys } from '../validator-error-keys';
  *
  * @param controlNames
  * @param controlLabels
- * @param options
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
 export const CompareValidator: (controlNames: string[], controlLabels?: string[], options?: ControlValidatorOptions) => ControlValidator = (controlNames: string[], controlLabels?: string[], options?: ControlValidatorOptions): ControlValidator => {
     let error: ControlError;

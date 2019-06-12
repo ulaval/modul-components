@@ -8,10 +8,9 @@ import { ControlValidator, ControlValidatorOptions } from '../control-validator'
 import { ValidatorKeys } from '../validator-error-keys';
 /**
  *
- * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
- * @param options
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const RequiredValidator: (controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
+export const RequiredValidator: (options?: ControlValidatorOptions) => ControlValidator = (options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Required,
         validationFunction: (control: AbstractControl): boolean => {
@@ -48,10 +47,10 @@ export const RequiredValidator: (controlLabel?: string, options?: ControlValidat
                     undefined,
                     undefined,
                     FormatMode.Sprintf),
-                groupMessage: controlLabel ?
+                groupMessage: options && options.controlLabel ?
                     (ModulVue.prototype.$i18n).translate(
                         'm-form:requiredValidatorErrorSummaryMessage',
-                        { controlLabel },
+                        { controlLabel: options.controlLabel },
                         undefined,
                         undefined,
                         undefined,

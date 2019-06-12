@@ -19,5 +19,12 @@ export interface ControlValidator {
 
 export interface ControlValidatorOptions {
     validationType?: ControlValidatorValidationType;
+    /**
+     * Contains the string to be displayed to the user when the field is invalid
+     */
     error?: ControlError;
+    /**
+     * The label displayed to the user for the field. Used only with the default GroupMessage.
+     */
+    controlLabel?: string;
 }

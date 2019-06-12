@@ -8,10 +8,9 @@ import { ValidatorKeys } from '../validator-error-keys';
 
 /**
  *
- * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
- * @param options
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const DateFormatValidator: (controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
+export const DateFormatValidator: (options?: ControlValidatorOptions) => ControlValidator = (options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Date,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -35,15 +34,13 @@ export const DateFormatValidator: (controlLabel?: string, options?: ControlValid
             options.error : {
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:dateFormatValidatorErrorMessage',
-                    {
-                        controlLabel
-                    },
+                    undefined,
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: controlLabel ?
+                groupMessage: options && options.controlLabel ?
                     (ModulVue.prototype.$i18n).translate(
                         'm-form:dateFormValidatorErrorSummaryMessage',
-                        { controlLabel },
+                        { controlLabel: options.controlLabel },
                         undefined,
                         undefined,
                         undefined,

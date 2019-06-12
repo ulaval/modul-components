@@ -10,10 +10,9 @@ import { ValidatorKeys } from '../validator-error-keys';
  *
  * @param lowerBound Minimum value of the range within which the value must be to be valid. Inclusive.
  * @param upperBound Maximum value of the range within which the value must be to be valid. Inclusive.
- * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
- * @param options
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const BetweenValidator: (lowerBound: number, upperBound: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (lowerBound: number, upperBound: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
+export const BetweenValidator: (lowerBound: number, upperBound: number, options?: ControlValidatorOptions) => ControlValidator = (lowerBound: number, upperBound: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Between,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -43,10 +42,14 @@ export const BetweenValidator: (lowerBound: number, upperBound: number, controlL
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: controlLabel ?
+                groupMessage: options && options.controlLabel ?
                     (ModulVue.prototype.$i18n).translate(
                         'm-form:betweenValidatorErrorSummaryMessage',
-                        { controlLabel, lowerBound, upperBound },
+                        {
+                            controlLabel: options.controlLabel,
+                            lowerBound,
+                            upperBound
+                        },
                         undefined,
                         undefined,
                         undefined,
