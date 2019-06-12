@@ -1,6 +1,12 @@
 @import 'commons';
 
 .m-phonefield {
+    &.m--has-validation-message {
+        .m-phonefield__validation {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
     &__wrapper {
         display: flex;
         align-items: flex-end;
@@ -27,5 +33,15 @@
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
+    }
+
+    &__validation {
+        transition: margin-top $m-transition-duration ease;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__validation-message {
+        flex: 1 1 auto;
     }
 }

@@ -14,7 +14,7 @@
 //    Order (if >1 country with same dial code),
 //    Area codes
 // ]
-const allCountries = [
+const allCountries: any = [
     [
         'Afghanistan (‫افغانستان‬‎)',
         'af',

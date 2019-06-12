@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots components|m-flag default 1`] = `
-<div
+<svg
+  aria-hidden="true"
   class="m-flag"
+  height="20px"
+  width="26.666666666666668px"
 >
-  
-    flag template
-
-</div>
+  <!---->
+   
+  <use
+    aria-hidden="true"
+  />
+</svg>
 `;

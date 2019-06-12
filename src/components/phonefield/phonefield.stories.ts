@@ -24,4 +24,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${PHONEFIELD_NAME}`, module)
     }))
     .add('waiting', () => ({
         template: '<m-phonefield :waiting="true"></m-phonefield>'
+    }))
+    .add('error', () => ({
+        template: '<m-phonefield :error="true"></m-phonefield>'
+    }))
+    .add('error message', () => ({
+        template: '<m-phonefield :error="true" error-message="Error message"></m-phonefield>'
     }));

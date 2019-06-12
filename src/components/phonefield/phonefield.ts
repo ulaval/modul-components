@@ -91,6 +91,7 @@ export class MPhonefield extends ModulVue {
     }
 
     private set countryModel(value: string) {
+        this.model = '';
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === value)!;
         this.countryModelInternal = value;
     }
