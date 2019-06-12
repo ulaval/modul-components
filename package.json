@@ -48,6 +48,7 @@
         "flag-icon-css": "^3.3.0",
         "froala-editor": "2.9.3",
         "jquery": "^3.3.1",
+        "libphonenumber-js": "^1.7.19",
         "mobile-drag-drop": "^2.3.0-rc.1",
         "moment": "^2.19.3",
         "popper.js": "^1.12.9",

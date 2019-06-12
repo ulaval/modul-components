@@ -1,3 +1,4 @@
+import { CountryCode, getExampleNumber, PhoneNumber } from 'libphonenumber-js';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
@@ -82,7 +83,7 @@ export class MPhonefield extends ModulVue {
     }
 
     private get phoneRegionCode(): string {
-        return this.internalCountry.iso2.toUpperCase();
+        return this.internalCountry ? this.internalCountry.iso2.toUpperCase() : '';
     }
 
     private get prefix(): string {
@@ -90,7 +91,8 @@ export class MPhonefield extends ModulVue {
     }
 
     private get example(): string {
-        return this.prefix + ' ' + '418-123-1234';
+        const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, require('libphonenumber-js/examples.mobile.json'));
+        return phoneNumber ? phoneNumber.formatInternational() : '';
     }
 
     private get countryModel(): string {
