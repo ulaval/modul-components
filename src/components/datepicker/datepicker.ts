@@ -199,8 +199,6 @@ export class MDatepicker extends ModulVue {
             this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
             return false;
         }
-
-        return true;
     }
 
 
@@ -209,9 +207,11 @@ export class MDatepicker extends ModulVue {
     // override from InputManagement
     @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
-        // console.log('----test convertModelToString', this.convertModelToString(value as any));
-        // console.log('----test SABS', value);
-        this.inputDate(this.convertModelToString(value as any));
+        let newValue: string = this.convertModelToString(value);
+
+        if (this.internalDateModel !== newValue) {
+            this.inputDate(newValue);
+        }
     }
 
     // override from InputManagement
