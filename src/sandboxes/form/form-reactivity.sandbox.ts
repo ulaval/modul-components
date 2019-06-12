@@ -23,7 +23,6 @@ export class MFormReactivitySandbox extends ModulVue {
     formGroup: FormGroup = this.buildFormGroup();
     formGroup2: FormGroup = this.buildFormGroup2();
     name: string = 'John';
-    errorMessage: string = 'Bla';
 
     pendingSubmit: boolean = false;
 
@@ -41,7 +40,6 @@ export class MFormReactivitySandbox extends ModulVue {
 
     submit(): void {
         this.name = this.nameField.value!;
-        this.errorMessage = this.descriptionField.value!;
         alert('Submit');
     }
 
@@ -55,10 +53,7 @@ export class MFormReactivitySandbox extends ModulVue {
     private buildFormGroup(): FormGroup {
         const formGroup: FormGroup = new FormGroup({
             [ID_FORM_CONTROL_NAME]: new FormControl<string>(
-                [RequiredValidator(KEY_NAME_REQUIRED)],
-                {
-                    initialValue: ''
-                }
+                [RequiredValidator(KEY_NAME_REQUIRED)]
             )
         });
 
