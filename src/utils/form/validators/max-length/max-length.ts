@@ -12,7 +12,7 @@ import { ValidatorKeys } from '../validator-error-keys';
  * @param maxLength Max length (inclusive)
  * @param options Options to configure the validator
  */
-export const MaxLengthValidator: (controlLabel: string, maxLength: number, options?: ControlValidatorOptions) => ControlValidator = (controlLabel: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxLengthValidator: (maxLength: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (maxLength: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -39,11 +39,18 @@ export const MaxLengthValidator: (controlLabel: string, maxLength: number, optio
                     { maxLength },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:maxLengthValidatorErrorSummaryMessage',
-                    { controlLabel, maxLength },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:maxLengthValidatorErrorSummaryMessage',
+                        {
+                            controlLabel,
+                            maxLength
+                        },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Correction

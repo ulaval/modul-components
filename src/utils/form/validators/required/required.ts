@@ -6,8 +6,12 @@ import { FormControl } from '../../form-control';
 import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
-
-export const RequiredValidator: Function = (controlLabel: string, options?: ControlValidatorOptions): ControlValidator => {
+/**
+ *
+ * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
+ * @param options
+ */
+export const RequiredValidator: (controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Required,
         validationFunction: (control: AbstractControl): boolean => {
@@ -39,14 +43,20 @@ export const RequiredValidator: Function = (controlLabel: string, options?: Cont
             options.error : {
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:requiredValidatorErrorMessage',
-                    { controlLabel },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:requiredValidatorErrorSummaryMessage',
-                    { controlLabel },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    FormatMode.Sprintf),
+                groupMessage: controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:requiredValidatorErrorSummaryMessage',
+                        { controlLabel },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.OnGoing

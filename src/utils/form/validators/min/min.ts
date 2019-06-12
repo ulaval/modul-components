@@ -7,9 +7,12 @@ import { ControlValidator, ControlValidatorOptions } from '../control-validator'
 import { ValidatorKeys } from '../validator-error-keys';
 
 /**
- * Bound included
+ *
+ * @param min The minimum value required to be valid. Bound included.
+ * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
+ * @param options
  */
-export const MinValidator: Function = (controlLabel: string, min: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MinValidator: (min: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (min: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Min,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -35,14 +38,18 @@ export const MinValidator: Function = (controlLabel: string, min: number, option
                     { min },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:minValidatorErrorSummaryMessage',
-                    {
-                        controlLabel,
-                        min
-                    },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:minValidatorErrorSummaryMessage',
+                        {
+                            controlLabel,
+                            min
+                        },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Correction

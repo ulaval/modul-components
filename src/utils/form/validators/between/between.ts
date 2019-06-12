@@ -7,9 +7,13 @@ import { ControlValidator, ControlValidatorOptions } from '../control-validator'
 import { ValidatorKeys } from '../validator-error-keys';
 
 /**
- *  bounds included
+ *
+ * @param lowerBound Minimum value of the range within which the value must be to be valid. Inclusive.
+ * @param upperBound Maximum value of the range within which the value must be to be valid. Inclusive.
+ * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
+ * @param options
  */
-export const BetweenValidator: Function = (controlLabel: string, lowerBound: number, upperBound: number, options: ControlValidatorOptions): ControlValidator => {
+export const BetweenValidator: (lowerBound: number, upperBound: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (lowerBound: number, upperBound: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Between,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -39,11 +43,15 @@ export const BetweenValidator: Function = (controlLabel: string, lowerBound: num
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:betweenValidatorErrorSummaryMessage',
-                    { controlLabel, lowerBound, upperBound },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:betweenValidatorErrorSummaryMessage',
+                        { controlLabel, lowerBound, upperBound },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Correction

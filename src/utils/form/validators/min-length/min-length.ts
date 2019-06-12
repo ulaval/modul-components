@@ -7,9 +7,12 @@ import { ControlValidator, ControlValidatorOptions } from '../control-validator'
 import { ValidatorKeys } from '../validator-error-keys';
 
 /**
- * Bound included
+ *
+ * @param minLength The minimum length required to be valid. Bound included.
+ * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
+ * @param options
  */
-export const MinLengthValidator: Function = (controlLabel: string, minLength: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MinLengthValidator: (minLength: number, controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (minLength: number, controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -36,11 +39,18 @@ export const MinLengthValidator: Function = (controlLabel: string, minLength: nu
                     { minLength },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:minLengthValidatorErrorSummaryMessage',
-                    { controlLabel, minLength },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:minLengthValidatorErrorSummaryMessage',
+                        {
+                            controlLabel,
+                            minLength
+                        },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Modification

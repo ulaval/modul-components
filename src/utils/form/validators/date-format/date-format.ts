@@ -6,7 +6,12 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
-export const DateFormatValidator: Function = (controlLabel: string, options: ControlValidatorOptions): ControlValidator => {
+/**
+ *
+ * @param controlLabel The label displayed to the user for the field. Used only with the default GroupMessage.
+ * @param options
+ */
+export const DateFormatValidator: (controlLabel?: string, options?: ControlValidatorOptions) => ControlValidator = (controlLabel?: string, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Date,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -35,11 +40,15 @@ export const DateFormatValidator: Function = (controlLabel: string, options: Con
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:dateFormValidatorErrorSummaryMessage',
-                    { controlLabel },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:dateFormValidatorErrorSummaryMessage',
+                        { controlLabel },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.OnGoing
