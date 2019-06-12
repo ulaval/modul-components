@@ -1,0 +1,38 @@
+@import 'commons';
+
+.m-expandable-layout {
+    &.m--has-left-panel {
+        display: grid;
+        grid-template-areas: 'panel main';
+        grid-template-columns: auto 1fr;
+    }
+
+    &.m--has-right-panel {
+        display: grid;
+        grid-template-areas: 'main panel';
+        grid-template-columns: 1fr auto;
+    }
+
+    &__main {
+        grid-area: main;
+    }
+
+    &__panel {
+        grid-area: panel;
+        overflow: hidden;
+        position: relative;
+        transition: width $m-transition-duration ease;
+
+        &__content {
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            @include m-scrollbar();
+        }
+    }
+}

@@ -17,6 +17,10 @@ export class MRichTextEditorDefaultOptions {
     public placeholderText: string = '';
     // public toolbarContainer: string = '#toolbarContainer';
     public listAdvancedTypes: boolean = false;
+
+    public paragraphStyles: any = {};
+    public paragraphMultipleStyles: boolean = false;
+
     public linkEditButtons: string[] = ['linkOpen', 'linkEdit', 'linkRemove'];
     public linkInsertButtons: string[] = [];
     public imageResizeWithPercent: boolean = true;

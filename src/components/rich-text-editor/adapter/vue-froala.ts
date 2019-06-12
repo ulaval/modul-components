@@ -17,6 +17,7 @@ import imageAlignRightIcon from '../../../assets/icons/svg/Froala-image-align-ri
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
 import replaceIcon from '../../../assets/icons/svg/Froala-replace.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
+import titleIcon from '../../../assets/icons/svg/Froala-title.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { MFile } from '../../../utils/file/file';
@@ -36,16 +37,22 @@ enum froalaEvents {
     KeyUp = 'keyup',
     KeyDown = 'keydown',
     PasteAfter = 'paste.after',
-    PasteAfterCleanup = 'paste.afterCleanup',
     CommandAfter = 'commands.after',
-    CommandBefore = 'commands.before',
+    PasteAfterCleanup = 'paste.afterCleanup',
     ShowLinkInsert = 'popups.show.link.insert',
+    CommandBefore = 'commands.before',
     ImageRemoved = 'image.removed',
     ImageInserted = 'image.inserted'
+    Click = 'froalaEditor.click',
 }
 
 enum FroalaElements {
     TOOLBAR = '.fr-toolbar'
+}
+
+enum FroalaBreakingPoint {
+    minDefault = 545,
+    minOneMode = 565
 }
 
 export enum FroalaStatus {
@@ -53,6 +60,8 @@ export enum FroalaStatus {
     Blurred = 'blurred',
     Focused = 'focused'
 }
+
+const ENTER_KEYCODE: number = 13;
 
 @WithRender
 @Component({
@@ -100,6 +109,7 @@ export enum FroalaStatus {
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
     protected isLoaded: boolean = false;
+    protected froalaClientWidth: number = 0;
 
     protected isDirty: boolean = false;
     protected status: FroalaStatus = FroalaStatus.Blurred;
@@ -116,6 +126,17 @@ export enum FroalaStatus {
     @Watch('value')
     public refreshValue(): void {
         this.htmlSet();
+    }
+
+    protected setClientWidth(): void {
+        this.froalaClientWidth = (this.$el as HTMLElement).clientWidth;
+    }
+
+    protected get isDesktop(): boolean {
+        if (this.config && this.config.pluginsEnabled.includes('image')) {
+            return this.froalaClientWidth >= FroalaBreakingPoint.minOneMode;
+        }
+        return this.froalaClientWidth >= FroalaBreakingPoint.minDefault;
     }
 
     public get isEmpty(): boolean {
@@ -281,6 +302,7 @@ export enum FroalaStatus {
     }
 
     protected onResize(): void {
+        this.setClientWidth();
         if (!this.isFocused) {
             this.adjusteToolbarPosition();
         }
@@ -291,6 +313,7 @@ export enum FroalaStatus {
             return;
         }
 
+        this.setClientWidth();
         this.addCustomIcons();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
@@ -328,6 +351,9 @@ export enum FroalaStatus {
                     global.console.log('RTE EVENT KeyDown!');
                     this.$emit('keydown');
                     this.isDirty = true;
+                    if (key.keyCode === ENTER_KEYCODE) {
+                        editor.paragraphStyle.apply('');
+                    }
                 },
                 [froalaEvents.PasteAfter]: () => {
                     global.console.log('RTE EVENT PasteAfter!');
