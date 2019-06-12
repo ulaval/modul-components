@@ -22,8 +22,9 @@ import ValidationMessagePlugin from '../validation-message/validation-message';
 import { InputManagement } from './../../mixins/input-management/input-management';
 import WithRender from './datepicker.html?style=./datepicker.scss';
 
-
 export type DatePickerSupportedTypes = Date | string | undefined;
+
+export const MAX_LENGTH_DATE_VALUE: number = 10;
 
 @WithRender
 @Component({
@@ -81,23 +82,20 @@ export class MDatepicker extends ModulVue {
     }
 
     protected created(): void {
-
         if (this.value instanceof Date) {
             this.$log.warn('Using a Date as value for datepicker is not recommended and will be deprecated in 1.0, the value should use a string with the format "YYYY-MM-DD". Using a Date object can lead to timezone issue in your projet see -> https://stackoverflow.com/questions/29174810/javascript-date-timezone-issue');
         }
     }
 
-
-
-    get formattedDate(): string {
+    public get formattedDate(): string {
         return this.convertValueToModel(this.model);
     }
 
-    get calandarError(): boolean {
+    public get calandarError(): boolean {
         return this.internalCalendarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
-    private get calandarErrorMessage(): string {
+    public get calandarErrorMessage(): string {
         if (this.internalCalendarErrorMessage && !this.hideInternalErrorMessage) {
             return this.internalCalendarErrorMessage;
         } else {
@@ -106,15 +104,21 @@ export class MDatepicker extends ModulVue {
 
     }
 
-    private get open(): boolean {
+    public get open(): boolean {
         return this.internalOpen;
     }
 
-    private get minDateString(): string {
+    public set open(open: boolean) {
+        if (this.as<InputState>().active) {
+            this.internalOpen = open;
+        }
+    }
+
+    public get minDateString(): string {
         return this.convertValueToModel(this.min);
     }
 
-    private get maxDateString(): string {
+    public get maxDateString(): string {
         return this.convertValueToModel(this.max);
     }
 
@@ -124,19 +128,10 @@ export class MDatepicker extends ModulVue {
 
     private get maxModulDate(): ModulDate {
         return new ModulDate(this.max);
-
     }
-
-    private set open(open: boolean) {
-        if (this.as<InputState>().active) {
-            this.internalOpen = open;
-        }
-    }
-
 
     @Emit('close')
     private async onClose(): Promise<void> {
-
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.$emit('blur');
@@ -144,7 +139,6 @@ export class MDatepicker extends ModulVue {
                 this.showErrorMessage(this.inputModel);
             }
         }
-
     }
 
     @Emit('open')
@@ -165,6 +159,7 @@ export class MDatepicker extends ModulVue {
 
     private inputDate(inputValue: string): void {
         this.inputModel = inputValue;
+        this.model = inputValue;
 
         if (!inputValue || inputValue === '') {
             this.model = '';
@@ -175,22 +170,10 @@ export class MDatepicker extends ModulVue {
                 this.open = false;
             }
 
-            if (this.skipInputValidation) {
-                this.model = inputValue;
-            } else {
-                if (inputValue.length === 10) {
-                    if (this.showErrorMessage(inputValue)) {
-                        this.model = this.inputModel;
-                    } else {
-                        this.model = '';
-                    }
-                } else {
-                    this.model = '';
-                }
+            if (!this.skipInputValidation && inputValue.length === MAX_LENGTH_DATE_VALUE) {
+                this.showErrorMessage(inputValue);
             }
         }
-
-
     }
 
     private clearErrorMessage(): void {
@@ -203,7 +186,7 @@ export class MDatepicker extends ModulVue {
             this.internalCalendarErrorMessage = '';
             return true;
 
-        } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
+        } else if (inputValue.length === MAX_LENGTH_DATE_VALUE && this.validateDateFormat(inputValue)) {
             let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';
@@ -226,16 +209,9 @@ export class MDatepicker extends ModulVue {
     // override from InputManagement
     @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
-
-        if (this.internalDateModel !== this.convertModelToString(value)) {
-            this.internalDateModel = this.convertModelToString(value);
-
-            this.inputModel = this.internalDateModel ? this.internalDateModel : '';
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
-        }
-
+        // console.log('----test convertModelToString', this.convertModelToString(value as any));
+        // console.log('----test SABS', value);
+        this.inputDate(this.convertModelToString(value as any));
     }
 
     // override from InputManagement
@@ -263,7 +239,7 @@ export class MDatepicker extends ModulVue {
     // Focus management.
 
     // override from InputManagement
-    private onFocus(event: FocusEvent): void {
+    public onFocus(event: FocusEvent): void {
         if (!this.open) { // open on focus
             this.open = true;
         }
@@ -275,7 +251,7 @@ export class MDatepicker extends ModulVue {
     }
 
     // override from InputManagement
-    private onClick(event: MouseEvent): void {
+    public onClick(event: MouseEvent): void {
         this.as<InputManagement>().internalIsFocus = this.as<InputStateMixin>().active;
         let inputEl: HTMLElement | undefined = this.as<InputStateMixin>().getInput();
         if (this.as<InputManagement>().internalIsFocus && inputEl) {
@@ -285,7 +261,7 @@ export class MDatepicker extends ModulVue {
     }
 
     // override from InputManagement
-    private onBlur(event: Event): void {
+    public onBlur(event: Event): void {
         this.as<InputManagement>().internalIsFocus = false;
 
         if (!this.open) { // do not emit blur if still open
@@ -294,15 +270,12 @@ export class MDatepicker extends ModulVue {
                 this.showErrorMessage(this.inputModel);
             }
         }
-
-
     }
 
     // override from Input-management
     private get isFocus(): boolean {
         return this.as<InputManagement>().internalIsFocus || this.open;
     }
-
 
     private convertValueToModel(input: DatePickerSupportedTypes): string {
         if (input) {
@@ -315,7 +288,7 @@ export class MDatepicker extends ModulVue {
         return '';
     }
 
-    togglePopup(event: Event): void {
+    public togglePopup(event: Event): void {
         this.open = !this.open;
         // stop event propagation to parent.
         event.stopPropagation();
@@ -347,13 +320,10 @@ export class MDatepicker extends ModulVue {
             } else {
                 return '';
             }
-
         }
     }
 
     private onKeydown(event: KeyboardEvent): void {
-
-
         if (this.as<InputStateMixin>().active) {
             if (event.key === 'Tab') {
                 // close popop if open and tab key is pressed (accessibility)
@@ -361,7 +331,6 @@ export class MDatepicker extends ModulVue {
                     this.open = false;
                 }
             }
-
             this.$emit('keydown', event);
         }
     }

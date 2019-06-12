@@ -41,7 +41,7 @@
                        button-size="22px"
                        :disabled="!active"
                        icon-name="m-svg__calendar"
-                       @click="togglePopup">
+                       @click="togglePopup($event)">
             <m-i18n k="m-datepicker:open"
                     v-if="!open"></m-i18n>
             <m-i18n k="m-datepicker:close"

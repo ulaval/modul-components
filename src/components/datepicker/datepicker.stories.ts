@@ -53,24 +53,51 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         template: `<m-datepicker :waiting="true"></m-datepicker>`
     }))
 
-    .add('min="2008-01-01" && max="2014-12-31"', () => ({
+    .add('min and max', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            value: '2008-02-02',
+            dateMin: '2000-01-10',
+            dateMax: '2008-03-20'
         }),
-        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+        methods: {
+            resetValue(): void {
+                this.$data.value = '';
+            },
+            setValueInRange(): void {
+                this.$data.value = '2008-02-07';
+            },
+            setValueOutOfRange(): void {
+                this.$data.value = '2010-02-07';
+            }
+        },
+        template: `
+        <div>
+            <p><strong>Model value:</strong> {{value}}</p>
+            <p><strong>Date min:</strong> {{dateMin}}</p>
+            <p><strong>Date max:</strong> {{dateMax}}</p>
+            <m-datepicker class="m-u--margin-top" :min="dateMin" :max="dateMax" v-model="value"></m-datepicker>
+            <div class="m-u--margin-top">
+                <m-button class="m-u--margin-right" @click="resetValue()">Reset value</m-button>
+                <m-button class="m-u--margin-right" skin="secondary" @click="setValueInRange()">Date in the range</m-button>
+                <m-button class="m-u--margin-right" skin="secondary" @click="setValueOutOfRange()">Date out de range</m-button>
+            </div>
+        </div>`
     }))
+
     .add('date format invalid', () => ({
         data: () => ({
             model1: '2000-19-12'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
+
     .add('date off limit min', () => ({
         data: () => ({
             model1: '2000-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
+
     .add('date off limit  max', () => ({
         data: () => ({
             model1: '2015-01-01'
