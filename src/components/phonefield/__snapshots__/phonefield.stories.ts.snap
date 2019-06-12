@@ -9,7 +9,7 @@ exports[`Storyshots components|m-phonefield default 1`] = `
   >
     <div
       class="m-dropdown m-phonefield__country"
-      style="width: 100%; max-width: 592px;"
+      style="width: 592px;"
     >
       <div
         class="m-input-style m--has-cursor-pointer m--has-value m--is-tag-default"
@@ -155,6 +155,13 @@ exports[`Storyshots components|m-phonefield default 1`] = `
     </div>
   </div>
    
+  <p
+    class="m-phonefield__example"
+    style="margin-left: 592px;"
+  >
+    Ex: +1 418-123-1234
+  </p>
+   
   <div
     class="m-phonefield__validation"
   >
@@ -178,7 +185,7 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
   >
     <div
       class="m-dropdown m-phonefield__country m--is-disabled"
-      style="width: 100%; max-width: 592px;"
+      style="width: 592px;"
     >
       <div
         class="m-input-style m--is-disabled m--has-cursor-pointer m--has-value m--is-tag-default"
@@ -310,6 +317,13 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
     </div>
   </div>
    
+  <p
+    class="m-phonefield__example"
+    style="margin-left: 592px;"
+  >
+    Ex: +1 418-123-1234
+  </p>
+   
   <div
     class="m-phonefield__validation"
   >
@@ -333,7 +347,7 @@ exports[`Storyshots components|m-phonefield error 1`] = `
   >
     <div
       class="m-dropdown m-phonefield__country"
-      style="width: 100%; max-width: 592px;"
+      style="width: 592px;"
     >
       <div
         class="m-input-style m--has-cursor-pointer m--has-error m--has-value m--is-tag-default"
@@ -479,6 +493,13 @@ exports[`Storyshots components|m-phonefield error 1`] = `
     </div>
   </div>
    
+  <p
+    class="m-phonefield__example"
+    style="margin-left: 592px;"
+  >
+    Ex: +1 418-123-1234
+  </p>
+   
   <div
     class="m-phonefield__validation"
   >
@@ -502,7 +523,7 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
   >
     <div
       class="m-dropdown m-phonefield__country"
-      style="width: 100%; max-width: 592px;"
+      style="width: 592px;"
     >
       <div
         class="m-input-style m--has-cursor-pointer m--has-error m--has-value m--is-tag-default"
@@ -647,6 +668,13 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
       </div>
     </div>
   </div>
+   
+  <p
+    class="m-phonefield__example"
+    style="margin-left: 592px;"
+  >
+    Ex: +1 418-123-1234
+  </p>
    
   <div
     class="m-phonefield__validation"
@@ -694,7 +722,7 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
   >
     <div
       class="m-dropdown m-phonefield__country m--is-waiting"
-      style="width: 100%; max-width: 592px;"
+      style="width: 592px;"
     >
       <div
         class="m-input-style m--is-waiting m--has-cursor-pointer m--has-value m--is-tag-default"
@@ -837,6 +865,13 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
       </div>
     </div>
   </div>
+   
+  <p
+    class="m-phonefield__example"
+    style="margin-left: 592px;"
+  >
+    Ex: +1 418-123-1234
+  </p>
    
   <div
     class="m-phonefield__validation"

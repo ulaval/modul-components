@@ -13,6 +13,7 @@
                     :readonly="isReadonly"
                     :error="hasPhonefieldError"
                     :valid="isPhonefieldValid"
+                    :width="countryDropdownWidth"
                     :max-width="countryDropdownMaxWidth">
             <m-dropdown-item v-for="country in countries"
                              :value="country.iso2"
@@ -52,6 +53,8 @@
                           ref="inputMask"></m-input-mask>
         </m-input-style>
     </div>
+    <p class="m-phonefield__example"
+       :style="{ 'margin-left': countryDropdownWidth }">{{ i18nExample }}{{ example }}</p>
     <div class="m-phonefield__validation">
         <m-validation-message class="m-phonefield__validation-message"
                               :disabled="isDisabled"

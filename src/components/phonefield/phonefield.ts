@@ -4,7 +4,7 @@ import { Emit, Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
-import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
+import { InputMaxWidth, InputMaxWidthValues, InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { PHONEFIELD_NAME } from '../component-names';
@@ -42,8 +42,11 @@ export class MPhonefield extends ModulVue {
     @Prop()
     public label: string;
 
-    private i18nInternalLabel: string = this.$i18n.translate('m-phone-number:label.phone');
-    private countryDropdownMaxWidth: InputMaxWidth = InputMaxWidth.Medium;
+    private i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
+    private i18nExample: string = this.$i18n.translate('m-phonefield:example');
+
+    private countryDropdownWidth: InputMaxWidthValues = InputMaxWidthValues.Medium;
+    private countryDropdownMaxWidth: InputMaxWidth = InputMaxWidth.None;
     private countryModelInternal: string = '';
     private internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     private internalPrefix: string = '';
@@ -83,7 +86,11 @@ export class MPhonefield extends ModulVue {
     }
 
     private get prefix(): string {
-        return this.internalCountry.dialCode;
+        return '+' + this.internalCountry.dialCode;
+    }
+
+    private get example(): string {
+        return this.prefix + ' ' + '418-123-1234';
     }
 
     private get countryModel(): string {

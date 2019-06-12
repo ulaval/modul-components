@@ -1,6 +1,9 @@
 @import 'commons';
 
 .m-phonefield {
+    display: inline-flex;
+    flex-direction: column;
+
     &.m--has-validation-message {
         .m-phonefield__validation {
             margin-top: $m-spacing--xs;
@@ -22,6 +25,8 @@
     }
 
     &__country {
+        flex-grow: 1;
+
         /deep/ .m-input-style__content {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -29,10 +34,19 @@
     }
 
     &__number {
+        flex-shrink: 0;
+
         /deep/ .m-input-style__content {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
+    }
+
+    &__example {
+        margin-top: $m-spacing--xs;
+        color: $m-color--grey-dark;
+        font-size: $m-font-size--xs;
+        padding-left: calc(#{$m-input-style--padding} + #{$m-border-width--s});
     }
 
     &__validation {
