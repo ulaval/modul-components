@@ -7,9 +7,9 @@ import { ControlValidatorValidationType } from '../control-validator-validation-
  */
 export interface ControlValidator {
     /**
-     * Key used to retrieve the validator within the list of a given FormGroup
+     * (Optional) Key used to retrieve the validator within the list of a given FormGroup
      */
-    key: string;
+    key?: string;
     validationFunction: (self: AbstractControl) => boolean | Promise<boolean> | undefined;
     error: ControlError;
     validationType: ControlValidatorValidationType;

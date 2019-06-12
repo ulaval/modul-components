@@ -4,18 +4,14 @@ import { FORM_NAME } from '../../components/component-names';
 import { MForm } from '../../components/form/form';
 import { FormActions } from '../../components/form/form-action-type';
 import FormPlugin from '../../components/form/form.plugin';
-import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
-import { ControlValidator } from '../../utils/form/validators/control-validator';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './form-external-validation.sandbox.html';
 
 const ID_FORM_CONTROL_NAME: string = 'name';
 const ID_FORM_CONTROL_DESCRIPTION: string = 'description';
-const KEY_NAME_VALIDATOR_EXTERNAL: string = 'key_name_validator';
-const KEY_DESCRIPTION_VALIDATOR_EXTERNAL: string = 'key_description_validator';
 const MAX_NAME_LENGTH: number = 20;
 
 @WithRender
@@ -99,30 +95,12 @@ export class MFormExternalValidationSandbox extends ModulVue {
                         error: {
                             message: 'Max length : ' + MAX_NAME_LENGTH + ' (custom message)' // setting custom error message on existing validator
                         }
-                    }),
-                {
-                    // custom external validator
-                    key: KEY_NAME_VALIDATOR_EXTERNAL,
-                    validationType: ControlValidatorValidationType.External,
-                    validationFunction: (): boolean => true,  // must be true as no error currently
-                    error: { message: '' }
-                }],
+                    })],
                 {
                     initialValue: ''
                 }
             ),
-            [ID_FORM_CONTROL_DESCRIPTION]: new FormControl<string>([
-                {
-                    // custom external validator
-                    key: KEY_DESCRIPTION_VALIDATOR_EXTERNAL,
-                    validationType: ControlValidatorValidationType.External,
-                    validationFunction: (): boolean => true,  // must be true as no error currently
-                    error: { message: '' }
-                } as ControlValidator],
-                {
-                    initialValue: ''
-                }
-            )
+            [ID_FORM_CONTROL_DESCRIPTION]: new FormControl<string>([])
         });
 
         return formGroup;

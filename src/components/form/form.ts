@@ -1,7 +1,6 @@
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { ControlError } from '../../utils/form/control-error';
-import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
@@ -51,19 +50,15 @@ export class MForm extends ModulVue {
         this._triggerActionFallouts(action);
     }
 
-    public async submit(external: boolean = false): Promise<void> {
-        await this.formGroup.submit(external);
+    public async submit(): Promise<void> {
+        await this.formGroup.submit();
 
-        if (!this._isValid(external)) {
+        if (!this._isValid()) {
             this._triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
         this._triggerActionFallouts(FormActions.ValidSubmit);
-
-        if (external) {
-            return;
-        }
 
         this.emitSubmit();
     }
@@ -89,14 +84,7 @@ export class MForm extends ModulVue {
     }
 
     private _isValid(external: boolean = false): boolean {
-        if (!external) {
-            return this.formGroup.valid;
-        }
-
-        return this.formGroup.valid &&
-            this._getAllFormValidators(this.formGroup)
-                .filter(v => v.validationType === ControlValidatorValidationType.External)
-                .every(v => !!v.lastCheck);
+        return this.formGroup.valid;
     }
 
     private _triggerActionFallouts(type: FormActions): void {

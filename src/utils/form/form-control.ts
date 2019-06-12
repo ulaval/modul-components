@@ -1,6 +1,5 @@
 import { AbstractControl } from './abstract-control';
 import { FormControlOptions } from './control-options';
-import { ControlValidatorValidationType } from './control-validator-validation-type';
 import { ControlValidator } from './validators/control-validator';
 
 export class FormControl<T> extends AbstractControl {
@@ -51,9 +50,7 @@ export class FormControl<T> extends AbstractControl {
         if (!this.enabled || this.readonly) {
             return true;
         } else {
-            return this.validators
-                .filter(v => v.validationType !== ControlValidatorValidationType.External)
-                .every(v => !!v.lastCheck);
+            return this.validators.every(v => !!v.lastCheck);
         }
     }
 
@@ -108,10 +105,9 @@ export class FormControl<T> extends AbstractControl {
     /**
      * Run all validators
      *
-     * @param [external] run external validator
      */
-    public async submit(external: boolean = false): Promise<void> {
-        this.validate(external);
-        await this.validateAsync(external);
+    public async submit(): Promise<void> {
+        this.validate();
+        await this.validateAsync();
     }
 }
