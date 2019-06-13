@@ -1,6 +1,5 @@
 {
     "m-select": {
-        "no-data": "Aucune donnée",
         "open": "Ouvrir la liste déroulante",
         "close": "Fermer la liste déroulante"
     }

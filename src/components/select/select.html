@@ -17,9 +17,7 @@
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle"
                    v-m-popup:popup>
-        <div>
-            Slot 1
-        </div>
+        <slot name="selection">{{ internalValue }}</slot>
         <div class="m-select__arrow"
              slot="right-content"
              :class="{ 'm--is-open': open }"
@@ -60,13 +58,13 @@
             ref="items"
             :aria-labelledby="id"
             aria-live="polite">
-            <template v-if="!hasItems">
-                <m-select-item :readonly="true">{{ propTextNoData }}</m-select-item>
-            </template>
             <template v-if="hasItems">
-                <m-select-item v-for="(option, index) of options">
+                <m-select-item v-for="(option, index) of options"
+                               @click="select(option, index)"
+                               :selected="isSelected(option)">
                     <slot name="option"
-                          :data="option">{{ option }}</slot>
+                          :option="option"
+                          :index="index">{{ option }}</slot>
                 </m-select-item>
             </template>
         </ul>

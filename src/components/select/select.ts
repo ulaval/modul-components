@@ -3,7 +3,6 @@ import Component from 'vue-class-component';
 import { Model, Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
-import { InputPopup } from '../../mixins/input-popup/input-popup';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
@@ -22,7 +21,6 @@ import WithRender from './select.html?style=./select.scss';
     },
     mixins: [
         InputState,
-        InputPopup,
         MediaQueries,
         InputManagement,
         InputWidth,
@@ -31,15 +29,19 @@ import WithRender from './select.html?style=./select.scss';
 })
 export class MSelect extends ModulVue {
 
-    @Model('change')
+    @Model('input')
     @Prop()
     public value: any;
 
     @Prop()
-    public options: [];
+    public options: any[];
 
-    @Prop()
-    public textNoData: string;
+    // @Prop({
+    //     default: 'value'
+    // })
+    // public trackBy: string;
+
+    private internalOpen: boolean = false;
 
     private id: string = `${SELECT_NAME}-${uuid.generate()}`;
 
@@ -52,10 +54,31 @@ export class MSelect extends ModulVue {
         return this.options && this.options.length > 0;
     }
 
-    private get propTextNoData(): string {
-        return (this.textNoData ? this.textNoData : this.$i18n.translate('m-select:no-data'));
+    public get isEmpty(): boolean {
+        return this.as<InputManagement>().hasValue || (this.open) ? false : true;
+    }
+
+    private get open(): boolean {
+        return this.internalOpen;
+    }
+
+    private set open(open: boolean) {
+        if (this.as<InputState>().active) {
+            this.internalOpen = open;
+        }
+    }
+
+    select(option: any, index: number): void {
+        this.as<InputManagement>().model = this.options[index];
+        this.open = false;
+    }
+
+    isSelected(option: any): boolean {
+        return this.as<InputManagement>().internalValue.indexOf(option) > -1;
+
     }
 }
+
 const SelectPlugin: PluginObject<any> = {
     install(v, options): void {
         Vue.use(I18nPlugin);
