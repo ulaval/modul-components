@@ -53,13 +53,5 @@ describe('FormGroup', () => {
             expect(() => formGroup.getControl(TEST_CONTROL_NAME)).toThrow(Error);
             expect(formGroup.controls.length).toBe(0);
         });
-
-        it(`when setting a control in error it should set the control in error`, () => {
-            const spy: jest.SpyInstance = jest.spyOn(formGroup.controls[0], 'errors', 'set');
-
-            formGroup.setControlInError(TEST_CONTROL_NAME, { message: ERROR_MESSAGE });
-
-            expect(spy).toHaveBeenCalledWith([{ message: ERROR_MESSAGE }]);
-        });
     });
 });
