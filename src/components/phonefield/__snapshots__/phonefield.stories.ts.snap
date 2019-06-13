@@ -8,12 +8,11 @@ exports[`Storyshots components|m-phonefield default 1`] = `
     class="m-phonefield__wrapper"
   >
     <div
-      class="m-dropdown m-phonefield__country"
-      style="width: 592px;"
+      class="m-select m-phonefield__country"
+      style="width: auto; max-width: 288px;"
     >
       <div
         class="m-input-style m--has-cursor-pointer m--has-value m--is-tag-default"
-        style="width: 100%;"
       >
         <div
           class="m-input-style__content"
@@ -38,18 +37,18 @@ exports[`Storyshots components|m-phonefield default 1`] = `
             <div
               class="m-input-style__left-content"
             >
-              <!---->
-               
-              <input
-                aria-controls="mDropdown-uuid-controls"
-                aria-haspopup="true"
-                class="m-dropdown__input"
-                id="mDropdown-uuid"
-                readonly="readonly"
-                type="text"
-              />
-               
-              <!---->
+              <svg
+                aria-hidden="true"
+                class="m-flag m-phonefield__item-flag"
+                height="20px"
+                width="26.666666666666668px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                />
+              </svg>
                 
               <!---->
                
@@ -60,11 +59,11 @@ exports[`Storyshots components|m-phonefield default 1`] = `
               class="m-input-style__right-content"
             >
               <div
-                class="m-dropdown__arrow"
+                class="m-select__arrow"
               >
                 <svg
                   aria-hidden="true"
-                  class="m-icon m-dropdown__arrow__icon"
+                  class="m-icon m-select__arrow__icon"
                   height="16px"
                   width="16px"
                 >
@@ -84,7 +83,7 @@ exports[`Storyshots components|m-phonefield default 1`] = `
       </div>
        
       <div
-        class="m-validation-message m-dropdown__validation-message"
+        class="m-validation-message m-select__validation-message"
       >
         <!---->
          
@@ -184,12 +183,11 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
     class="m-phonefield__wrapper"
   >
     <div
-      class="m-dropdown m-phonefield__country m--is-disabled"
-      style="width: 592px;"
+      class="m-select m-phonefield__country m--is-disabled"
+      style="width: auto; max-width: 288px;"
     >
       <div
         class="m-input-style m--is-disabled m--has-cursor-pointer m--has-value m--is-tag-default"
-        style="width: 100%;"
       >
         <div
           class="m-input-style__content"
@@ -214,19 +212,18 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
             <div
               class="m-input-style__left-content"
             >
-              <!---->
-               
-              <input
-                aria-controls="mDropdown-uuid-controls"
-                aria-haspopup="true"
-                class="m-dropdown__input"
-                disabled="disabled"
-                id="mDropdown-uuid"
-                readonly="readonly"
-                type="text"
-              />
-               
-              <!---->
+              <svg
+                aria-hidden="true"
+                class="m-flag m-phonefield__item-flag"
+                height="20px"
+                width="26.666666666666668px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                />
+              </svg>
                
               <!---->
                
@@ -245,7 +242,7 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
       </div>
        
       <div
-        class="m-validation-message m-dropdown__validation-message"
+        class="m-validation-message m-select__validation-message"
       >
         <!---->
          
@@ -346,12 +343,11 @@ exports[`Storyshots components|m-phonefield error 1`] = `
     class="m-phonefield__wrapper"
   >
     <div
-      class="m-dropdown m-phonefield__country"
-      style="width: 592px;"
+      class="m-select m-phonefield__country"
+      style="width: auto; max-width: 288px;"
     >
       <div
         class="m-input-style m--has-cursor-pointer m--has-error m--has-value m--is-tag-default"
-        style="width: 100%;"
       >
         <div
           class="m-input-style__content"
@@ -376,18 +372,18 @@ exports[`Storyshots components|m-phonefield error 1`] = `
             <div
               class="m-input-style__left-content"
             >
-              <!---->
-               
-              <input
-                aria-controls="mDropdown-uuid-controls"
-                aria-haspopup="true"
-                class="m-dropdown__input"
-                id="mDropdown-uuid"
-                readonly="readonly"
-                type="text"
-              />
-               
-              <!---->
+              <svg
+                aria-hidden="true"
+                class="m-flag m-phonefield__item-flag"
+                height="20px"
+                width="26.666666666666668px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                />
+              </svg>
                 
               <!---->
                
@@ -398,11 +394,11 @@ exports[`Storyshots components|m-phonefield error 1`] = `
               class="m-input-style__right-content"
             >
               <div
-                class="m-dropdown__arrow"
+                class="m-select__arrow"
               >
                 <svg
                   aria-hidden="true"
-                  class="m-icon m-dropdown__arrow__icon"
+                  class="m-icon m-select__arrow__icon"
                   height="16px"
                   width="16px"
                 >
@@ -422,7 +418,7 @@ exports[`Storyshots components|m-phonefield error 1`] = `
       </div>
        
       <div
-        class="m-validation-message m-dropdown__validation-message"
+        class="m-validation-message m-select__validation-message"
       >
         <!---->
          
@@ -522,12 +518,11 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
     class="m-phonefield__wrapper"
   >
     <div
-      class="m-dropdown m-phonefield__country"
-      style="width: 592px;"
+      class="m-select m-phonefield__country"
+      style="width: auto; max-width: 288px;"
     >
       <div
         class="m-input-style m--has-cursor-pointer m--has-error m--has-value m--is-tag-default"
-        style="width: 100%;"
       >
         <div
           class="m-input-style__content"
@@ -552,18 +547,18 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
             <div
               class="m-input-style__left-content"
             >
-              <!---->
-               
-              <input
-                aria-controls="mDropdown-uuid-controls"
-                aria-haspopup="true"
-                class="m-dropdown__input"
-                id="mDropdown-uuid"
-                readonly="readonly"
-                type="text"
-              />
-               
-              <!---->
+              <svg
+                aria-hidden="true"
+                class="m-flag m-phonefield__item-flag"
+                height="20px"
+                width="26.666666666666668px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                />
+              </svg>
                 
               <!---->
                
@@ -574,11 +569,11 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
               class="m-input-style__right-content"
             >
               <div
-                class="m-dropdown__arrow"
+                class="m-select__arrow"
               >
                 <svg
                   aria-hidden="true"
-                  class="m-icon m-dropdown__arrow__icon"
+                  class="m-icon m-select__arrow__icon"
                   height="16px"
                   width="16px"
                 >
@@ -598,7 +593,7 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
       </div>
        
       <div
-        class="m-validation-message m-dropdown__validation-message"
+        class="m-validation-message m-select__validation-message"
       >
         <!---->
          
@@ -721,12 +716,11 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
     class="m-phonefield__wrapper"
   >
     <div
-      class="m-dropdown m-phonefield__country m--is-waiting"
-      style="width: 592px;"
+      class="m-select m-phonefield__country m--is-waiting"
+      style="width: auto; max-width: 288px;"
     >
       <div
         class="m-input-style m--is-waiting m--has-cursor-pointer m--has-value m--is-tag-default"
-        style="width: 100%;"
       >
         <div
           class="m-input-style__content"
@@ -751,19 +745,18 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
             <div
               class="m-input-style__left-content"
             >
-              <!---->
-               
-              <input
-                aria-controls="mDropdown-uuid-controls"
-                aria-haspopup="true"
-                class="m-dropdown__input"
-                disabled="disabled"
-                id="mDropdown-uuid"
-                readonly="readonly"
-                type="text"
-              />
-               
-              <!---->
+              <svg
+                aria-hidden="true"
+                class="m-flag m-phonefield__item-flag"
+                height="20px"
+                width="26.666666666666668px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                />
+              </svg>
                
               <!---->
                
@@ -788,7 +781,7 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
       </div>
        
       <div
-        class="m-validation-message m-dropdown__validation-message"
+        class="m-validation-message m-select__validation-message"
       >
         <!---->
          

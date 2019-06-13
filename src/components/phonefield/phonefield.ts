@@ -13,6 +13,7 @@ import { PHONEFIELD_NAME } from '../component-names';
 import FlagPlugin from '../flag/flag';
 import { InputMaskOptions, MInputMask } from '../input-mask/input-mask';
 import InputStyle from '../input-style/input-style';
+import SelectPlugin from '../select/select';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import allCountries from './assets/all-countries';
 import WithRender from './phonefield.html?style=./phonefield.scss';
@@ -65,6 +66,10 @@ export class MPhonefield extends ModulVue {
 
     private get countries(): CountryOptions[] {
         return allCountries;
+    }
+
+    private get isoCountries(): CountryOptions[] {
+        return allCountries.map(contry => contry.iso2);
     }
 
     private get propLabel(): string {
@@ -125,6 +130,7 @@ export class MPhonefield extends ModulVue {
 const PhonefieldPlugin: PluginObject<any> = {
     install(v): void {
         v.use(InputStyle);
+        v.use(SelectPlugin);
         v.use(FlagPlugin);
         v.use(ValidationMesagePlugin);
         v.component(PHONEFIELD_NAME, MPhonefield);

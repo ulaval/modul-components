@@ -48,6 +48,7 @@ const FrenchPlugin: PluginObject<any> = {
                 require('../components/table/table.lang.fr.json'),
                 require('../components/toast/toast.lang.fr.json'),
                 require('../components/tree/tree.lang.fr.json'),
+                require('../components/select/select.lang.fr.json'),
                 require('../components/scroll-top/scroll-top.lang.fr.json'),
                 require('../components/session-expired/session-expired.lang.fr.json'),
                 require('../components/show-more/show-more.lang.fr.json'),

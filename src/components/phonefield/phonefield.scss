@@ -24,14 +24,14 @@
         margin-right: $m-spacing--s;
     }
 
-    &__country {
-        flex-grow: 1;
+    // &__country {
+    //     flex-grow: 1;
 
-        /deep/ .m-input-style__content {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
+    //     /deep/ .m-input-style__content {
+    //         border-top-right-radius: 0;
+    //         border-bottom-right-radius: 0;
+    //     }
+    // }
 
     &__number {
         flex-shrink: 0;
