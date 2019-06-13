@@ -5,8 +5,7 @@ $m-select-item--color-active: $m-color--grey-lightest !default;
 
 .m-select-item {
     transition: background $m-transition-duration ease;
-    display: inline-block;
-    width: 100%;
+    display: block;
     padding: $m-padding;
     margin: 0;
     color: $m-color--text;

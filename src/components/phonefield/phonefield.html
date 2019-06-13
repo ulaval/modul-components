@@ -20,8 +20,10 @@
 
             <template slot="option"
                       slot-scope="{option, index}">
+
                 <m-flag class="m-phonefield__item-flag"
                         :iso="option"></m-flag> {{ countries[index].name }}
+
             </template>
             <!-- <m-dropdown-item v-for="country in countries"
                              :value="country.iso2"

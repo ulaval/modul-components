@@ -45,7 +45,6 @@
                           :helper-message="helperMessage"></m-validation-message>
 
     <m-popup ref="popup"
-             width="auto"
              placement="bottom-start"
              :open.sync="open"
              :disabled="!active"
@@ -58,7 +57,8 @@
             class="m-select__list"
             ref="items"
             :aria-labelledby="id"
-            aria-live="polite">
+            aria-live="polite"
+            :style="{ minWidth: inputMaxWidth }">
             <template v-if="hasItems">
                 <m-select-item v-for="(option, index) of options"
                                @click="select(option, index)"

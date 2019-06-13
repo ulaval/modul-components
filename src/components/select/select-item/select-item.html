@@ -7,10 +7,9 @@
     :aria-selected="selected"
     :tabindex="tabindex"
     @click.prevent="onClick">
-    <span class="m-select-item__element-text"
-          v-if="isMqMinS || readonly">
-        <slot>{{ propLabel }}</slot>
-    </span>
+
+    <slot v-if="isMqMinS || readonly"><span class="m-select-item__element-text">{{ propLabel }}</span></slot>
+
     <m-radio-style :full-width="true"
                    radio-position="right"
                    :focus="focused"
@@ -18,8 +17,8 @@
                    :disabled="disabled"
                    tabindex="0"
                    v-else>
-        <span class="m-select-item__element-text">
-            <slot>{{ propLabel }}</slot>
-        </span>
+
+        <slot><span class="m-select-item__element-text">{{ propLabel }}</span></slot>
+
     </m-radio-style>
 </li>
