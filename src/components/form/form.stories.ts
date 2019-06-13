@@ -1527,7 +1527,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         }),
         computed: {
             activeField(): void {
-                return this.$data.formGroup.getControl();
+                return this.$data.formGroup.getControl('active');
             }
         },
         template: `
@@ -1555,7 +1555,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'coupe': new FormControl<string>(
                         [
-                            RequiredValidator({ controlLabel: 'coupe' })
+                            RequiredValidator({ controlLabel: 'Style de coupe' })
                         ]
                     )
                 }
@@ -1563,7 +1563,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         }),
         computed: {
             coupeField(): void {
-                return this.$data.formGroup.getControl('Style de coupe');
+                return this.$data.formGroup.getControl('coupe');
             }
         },
         template: `
@@ -1641,11 +1641,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
         }),
         computed: {
             decimalField(): void {
-                return this.$data.formGroup.getControl('Decimal');
+                return this.$data.formGroup.getControl('decimal');
             }
         },
-        template: `
-    <m-form :form-group="formGroup"
+        template: `<m-form :form-group="formGroup"
             v-m-control="formGroup">
             <h4 class="m-u--h6">Decimalfield</h4>
             <p>edition context: {{decimalField['_editionContext']}}</p>
@@ -1665,8 +1664,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                           skin="secondary"
                           >Reset</m-button>
             </div>
-        </m-form>
-        `
+        </m-form>`
     }))
     .add('moneyfield', () => ({
         data: () => ({
