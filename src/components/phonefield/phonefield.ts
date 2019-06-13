@@ -1,10 +1,12 @@
+import 'cleave.js/dist/addons/cleave-phone.i18n.js';
+import { CountryCode, getExampleNumber, PhoneNumber } from 'libphonenumber-js';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
-import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
+import { InputMaxWidth, InputMaxWidthValues, InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { PHONEFIELD_NAME } from '../component-names';
@@ -42,15 +44,22 @@ export class MPhonefield extends ModulVue {
     @Prop()
     public label: string;
 
-    private i18nInternalLabel: string = this.$i18n.translate('m-phone-number:label.phone');
-    private countryDropdownMaxWidth: InputMaxWidth = InputMaxWidth.Medium;
+    @Prop({ default: 'ca' })
+    public defaultCountry: string;
+
+    private i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
+    private i18nExample: string = this.$i18n.translate('m-phonefield:example');
+
+    private countryDropdownWidth: InputMaxWidthValues = InputMaxWidthValues.Medium;
+    private countryDropdownMaxWidth: InputMaxWidth = InputMaxWidth.None;
     private countryModelInternal: string = '';
     private internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     private internalPrefix: string = '';
     protected id: string = `mIntegerfield-${uuid.generate()}`;
+    protected exemples: any = require('libphonenumber-js/examples.mobile.json');
 
     created(): void {
-        this.countryModelInternal = 'ca';
+        this.countryModelInternal = this.defaultCountry;
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
     }
 
@@ -79,11 +88,16 @@ export class MPhonefield extends ModulVue {
     }
 
     private get phoneRegionCode(): string {
-        return this.internalCountry.iso2.toUpperCase();
+        return this.internalCountry ? this.internalCountry.iso2.toUpperCase() : '';
     }
 
     private get prefix(): string {
-        return this.internalCountry.dialCode;
+        return '+' + this.internalCountry.dialCode;
+    }
+
+    private get example(): string {
+        const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, this.exemples);
+        return phoneNumber ? phoneNumber.formatInternational() : '';
     }
 
     private get countryModel(): string {
