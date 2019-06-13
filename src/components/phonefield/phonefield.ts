@@ -1,3 +1,4 @@
+import 'cleave.js/dist/addons/cleave-phone.i18n.js';
 import { CountryCode, getExampleNumber, PhoneNumber } from 'libphonenumber-js';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
