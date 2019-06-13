@@ -40,6 +40,11 @@
         margin-right: $m-spacing--s;
     }
 
+    &__item-dialCode {
+        margin-left: $m-spacing--s;
+        color: $m-color--grey;
+    }
+
     &__number {
         flex-shrink: 0;
 

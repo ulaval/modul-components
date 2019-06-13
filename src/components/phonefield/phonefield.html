@@ -24,7 +24,8 @@
                 <div class="m-phonefield__item-wrapper">
                     <m-flag class="m-phonefield__item-flag"
                             :iso="option"></m-flag>
-                    <span class="m-phonefield__item-country">{{ countries[index].name }}</span>
+                    <span class="m-phonefield__item-name">{{ countries[index].name }}</span>
+                    <span class="m-phonefield__item-dialCode">+{{ countries[index].dialCode }}</span>
                 </div>
             </template>
 
