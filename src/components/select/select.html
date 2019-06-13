@@ -61,6 +61,7 @@
             :style="{ minWidth: inputMaxWidth }">
             <template v-if="hasItems">
                 <m-select-item v-for="(option, index) of options"
+                               :key="index"
                                @click="select(option, index)"
                                :selected="isSelected(option)">
                     <slot name="option"
