@@ -13,6 +13,22 @@
     &__wrapper {
         display: flex;
         align-items: flex-end;
+        padding-bottom: $m-spacing;
+    }
+
+    &__country {
+        /deep/ .m-input-style__content {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    &__flag-wrapper {
+        position: relative;
+        height: 22px; // Magic number
+        display: flex;
+        align-items: center;
+        margin-right: $m-spacing--s;
     }
 
     &__item-wrapper {
@@ -24,15 +40,6 @@
         margin-right: $m-spacing--s;
     }
 
-    // &__country {
-    //     flex-grow: 1;
-
-    //     /deep/ .m-input-style__content {
-    //         border-top-right-radius: 0;
-    //         border-bottom-right-radius: 0;
-    //     }
-    // }
-
     &__number {
         flex-shrink: 0;
 
@@ -43,6 +50,7 @@
     }
 
     &__example {
+        position: absolute;
         margin-top: $m-spacing--xs;
         color: $m-color--grey-dark;
         font-size: $m-font-size--xs;

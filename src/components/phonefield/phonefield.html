@@ -15,55 +15,49 @@
                   :error="hasPhonefieldError"
                   :valid="isPhonefieldValid"
                   width="auto">
-            <m-flag class="m-phonefield__item-flag"
-                    :iso="countryModel"></m-flag>
+            <div class="m-phonefield__flag-wrapper">
+                <m-flag :iso="countryModel"></m-flag>
+            </div>
 
             <template slot="option"
                       slot-scope="{option, index}">
-
-                <m-flag class="m-phonefield__item-flag"
-                        :iso="option"></m-flag> {{ countries[index].name }}
-
+                <div class="m-phonefield__item-wrapper">
+                    <m-flag class="m-phonefield__item-flag"
+                            :iso="option"></m-flag>
+                    <span class="m-phonefield__item-country">{{ countries[index].name }}</span>
+                </div>
             </template>
-            <!-- <m-dropdown-item v-for="country in countries"
-                             :value="country.iso2"
-                             :label="country.name">
-                <span class="m-phonefield__item-wrapper">
 
-                    <span>{{ country.name }}</span>
-                </span>
-
-            </m-dropdown-item> -->
         </m-select>
-        <m-input-style class="m-phonefield__number"
-                       :disabled="isDisabled"
-                       :waiting="isWaiting"
-                       :error="hasPhonefieldError"
-                       :valid="isPhonefieldValid"
-                       :label="propLabel"
-                       :label-for="id"
-                       :focus="isFocus"
-                       :label-up="true"
-                       :empty="isEmpty"
-                       :readonly="isReadonly"
-                       :required-marker="requiredMarker"
-                       :tag-style="tagStyle">
-            <m-input-mask class="m-phonefield__input"
-                          v-model="model"
-                          :id="id"
-                          :disabled="isDisabled || isWaiting"
-                          :placeholder="placeholder"
-                          :readonly="isReadonly"
-                          :options="inputMaskOptions"
-                          @focus="onFocus"
-                          @blur="onBlur"
-                          @keyup="onKeyup"
-                          @change="onChange"
-                          ref="inputMask"></m-input-mask>
-        </m-input-style>
+        <div>
+            <m-input-style class="m-phonefield__number"
+                           :disabled="isDisabled"
+                           :waiting="isWaiting"
+                           :error="hasPhonefieldError"
+                           :valid="isPhonefieldValid"
+                           :label="propLabel"
+                           :label-for="id"
+                           :focus="isFocus"
+                           :label-up="true"
+                           :empty="isEmpty"
+                           :readonly="isReadonly"
+                           :required-marker="requiredMarker"
+                           :tag-style="tagStyle">
+                <m-input-mask v-model="model"
+                              :id="id"
+                              :disabled="isDisabled || isWaiting"
+                              :placeholder="placeholder"
+                              :readonly="isReadonly"
+                              :options="inputMaskOptions"
+                              @focus="onFocus"
+                              @blur="onBlur"
+                              @keyup="onKeyup"
+                              @change="onChange"
+                              ref="inputMask"></m-input-mask>
+            </m-input-style>
+            <p class="m-phonefield__example">{{ i18nExample }}{{ example }}</p>
+        </div>
     </div>
-    <p class="m-phonefield__example"
-       :style="{ 'margin-left': countryDropdownWidth }">{{ i18nExample }}{{ example }}</p>
     <div class="m-phonefield__validation">
         <m-validation-message class="m-phonefield__validation-message"
                               :disabled="isDisabled"
