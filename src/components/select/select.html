@@ -17,7 +17,7 @@
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle"
                    v-m-popup:popup>
-        <slot name="selection">{{ internalValue }}</slot>
+        <slot>{{ internalValue }}</slot>
         <div class="m-select__arrow"
              slot="right-content"
              :class="{ 'm--is-open': open }"
@@ -45,6 +45,7 @@
                           :helper-message="helperMessage"></m-validation-message>
 
     <m-popup ref="popup"
+             width="auto"
              placement="bottom-start"
              :open.sync="open"
              :disabled="!active"

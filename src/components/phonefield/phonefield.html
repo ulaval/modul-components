@@ -6,26 +6,33 @@
                 'm--is-valid': isPhonefieldValid,
                 'm--has-validation-message': hasValidationMessage } ]">
     <div class="m-phonefield__wrapper">
-        <m-dropdown class="m-phonefield__country"
-                    v-model="countryModel"
-                    :disabled="isDisabled"
-                    :waiting="isWaiting"
-                    :readonly="isReadonly"
-                    :error="hasPhonefieldError"
-                    :valid="isPhonefieldValid"
-                    :width="countryDropdownWidth"
-                    :max-width="countryDropdownMaxWidth">
-            <m-dropdown-item v-for="country in countries"
+        <m-select class="m-phonefield__country"
+                  v-model="countryModel"
+                  :options="isoCountries"
+                  :disabled="isDisabled"
+                  :waiting="isWaiting"
+                  :readonly="isReadonly"
+                  :error="hasPhonefieldError"
+                  :valid="isPhonefieldValid"
+                  width="auto">
+            <m-flag class="m-phonefield__item-flag"
+                    :iso="countryModel"></m-flag>
+
+            <template slot="option"
+                      slot-scope="{option, index}">
+                <m-flag class="m-phonefield__item-flag"
+                        :iso="option"></m-flag> {{ countries[index].name }}
+            </template>
+            <!-- <m-dropdown-item v-for="country in countries"
                              :value="country.iso2"
                              :label="country.name">
                 <span class="m-phonefield__item-wrapper">
-                    <m-flag class="m-phonefield__item-flag"
-                            :iso="country.iso2"></m-flag>
+
                     <span>{{ country.name }}</span>
                 </span>
 
-            </m-dropdown-item>
-        </m-dropdown>
+            </m-dropdown-item> -->
+        </m-select>
         <m-input-style class="m-phonefield__number"
                        :disabled="isDisabled"
                        :waiting="isWaiting"
