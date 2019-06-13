@@ -5,9 +5,9 @@ export interface ControlError {
     /**
      * The message specific to and attached to the field
      */
-    message: string;
+    message: string | (() => string);
     /**
      * A general error specifying the error and the name of the field affected. Required a ControlLabel in the validator.
      */
-    groupMessage?: string;
+    groupMessage?: string | (() => string);
 }

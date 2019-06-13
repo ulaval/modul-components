@@ -6,6 +6,7 @@ import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { ControlValidator } from '../../utils/form/validators/control-validator';
 import { FormatMode } from '../../utils/i18n/i18n';
+import { getString } from '../../utils/str/str';
 import { ModulVue } from '../../utils/vue/vue';
 import { FormActionFallout } from './form-action-fallout';
 import { FormActions } from './form-action-type';
@@ -28,8 +29,20 @@ export class MForm extends ModulVue {
     @Emit('reset')
     public emitReset(): void { }
 
+
+    @Watch('formErrors')
+    public onFormGroupChange(formErrors: ControlError[], oldVal: any): void {
+        if (formErrors.length === 0) {
+            this.displaySummary = this.displayToast = false;
+        }
+    }
+
     public get formErrors(): ControlError[] {
         return this._getAllFormErrors(this.formGroup);
+    }
+
+    public get errorsMessages(): string[] {
+        return this.formErrors.map<string>(error => getString(error.groupMessage) || getString(error.message));
     }
 
     public get formControlsInError(): AbstractControl[] {
@@ -139,12 +152,5 @@ export class MForm extends ModulVue {
         });
 
         return controls;
-    }
-
-    @Watch('formErrors')
-    public onFormGroupChange(formErrors: ControlError[], oldVal: any): void {
-        if (formErrors.length === 0) {
-            this.displaySummary = this.displayToast = false;
-        }
     }
 }

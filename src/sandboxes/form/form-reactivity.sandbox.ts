@@ -46,7 +46,10 @@ export class MFormReactivitySandbox extends ModulVue {
     @Watch('name', { immediate: true })
     mettreAJourChamp(): void {
         this.nameField.reset(this.name); // this.name will be the value you get after pressing reset from now on.
-        this.descriptionField.validators[0].error.message = `Erreur: ${this.name} does not like that`;
+    }
+
+    public erreurMessageDescriptionField(): string {
+        return `Erreur: ` + this.name + ` does not like that`;
     }
 
     private buildFormGroup(): FormGroup {
@@ -67,7 +70,7 @@ export class MFormReactivitySandbox extends ModulVue {
                         validationFunction: (control: FormControl<string>): boolean => {
                             return 'poulet' === control.value!;
                         },
-                        error: { message: '' },
+                        error: { message: this.erreurMessageDescriptionField },
                         validationType: ControlValidatorValidationType.Correction
                     } as ControlValidator]
             )

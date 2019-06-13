@@ -1,3 +1,4 @@
+import { getString } from '../str/str';
 import { ControlEditionContext } from './control-edition-context';
 import { ControlError } from './control-error';
 import { ControlOptions, FormControlOptions } from './control-options';
@@ -61,7 +62,7 @@ export abstract class AbstractControl {
 
     public get errorMessage(): string {
         if (this.hasError()) {
-            return this.errors[0].message;
+            return getString(this.errors[0].message);
         } else {
             return '';
         }
