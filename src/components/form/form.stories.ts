@@ -1052,14 +1052,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                                     message: 'Enter a course in the format AAA-0000'
                                 },
                                 validationType: ControlValidatorValidationType.Correction
-                            },
-                            {
-                                key: 'duplicate-course-code',
-                                validationFunction: () => undefined,
-                                error: {
-                                    message: 'This course code already exists.'
-                                },
-                                validationType: ControlValidatorValidationType.External
                             }
                         ]
                     )
