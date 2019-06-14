@@ -33,7 +33,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}`, module)
             openProp: true
         }),
         template: `<span>Lorem Ipsum<m-tooltip :disabled="true">This is some random text</m-tooltip></span>`
-    }))
+    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
     .addDecorator(withA11y)
