@@ -30,9 +30,9 @@ export class MForm extends ModulVue {
     public emitReset(): void { }
 
     @Watch('formErrors')
-    public onFormGroupChange(formErrors: ControlError[], _oldVal: any): void {
+    public onFormGroupErrorsChange(formErrors: ControlError[]): void {
         if (formErrors.length === 0) {
-            this.displaySummary = this.displayToast = false;
+            this._hideToast();
         }
     }
 
@@ -58,19 +58,21 @@ export class MForm extends ModulVue {
         );
     }
 
-    public triggerAction(action: FormActions): void {
-        this._triggerActionFallouts(action);
+    public triggerActionFallouts(action: FormActions): void {
+        this.actionFallouts
+            .filter(a => action & a.action)
+            .forEach(a => a.fallout(this));
     }
 
     public async submit(): Promise<void> {
         await this.formGroup.submit();
 
-        if (!this._isValid()) {
-            this._triggerActionFallouts(FormActions.InvalidSubmit);
+        if (!this.formGroup.valid) {
+            this.triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
-        this._triggerActionFallouts(FormActions.ValidSubmit);
+        this.triggerActionFallouts(FormActions.ValidSubmit);
 
         this.emitSubmit();
     }
@@ -78,31 +80,21 @@ export class MForm extends ModulVue {
     public reset(): void {
         this.formGroup.reset();
 
-        this._triggerActionFallouts(FormActions.Reset);
+        this.triggerActionFallouts(FormActions.Reset);
         this.emitReset();
     }
 
     protected created(): void {
-        this._triggerActionFallouts(FormActions.Created);
+        this.triggerActionFallouts(FormActions.Created);
     }
 
     protected updated(): void {
-        this._triggerActionFallouts(FormActions.Updated);
+        this.triggerActionFallouts(FormActions.Updated);
     }
 
     protected beforeDestroy(): void {
-        this._triggerActionFallouts(FormActions.Destroyed);
+        this.triggerActionFallouts(FormActions.Destroyed);
         this.formGroup.reset();
-    }
-
-    private _isValid(): boolean {
-        return this.formGroup.valid;
-    }
-
-    private _triggerActionFallouts(type: FormActions): void {
-        this.actionFallouts
-            .filter(a => type & a.action)
-            .forEach(a => a.fallout(this));
     }
 
     private _getAllFormErrors(formGroup: FormGroup | FormArray): ControlError[] {
@@ -151,5 +143,9 @@ export class MForm extends ModulVue {
         });
 
         return controls;
+    }
+
+    private _hideToast(): void {
+        this.displaySummary = this.displayToast = false;
     }
 }

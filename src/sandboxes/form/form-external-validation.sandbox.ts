@@ -65,7 +65,7 @@ export class MFormExternalValidationSandbox extends ModulVue {
                 this.formGroup.getControl(ID_FORM_CONTROL_DESCRIPTION).errors = [{ message: 'Updated error message using value returned be external call : ' + e.message }];
             }
 
-            (this.$refs[this.refMForm] as MForm).triggerAction(FormActions.InvalidSubmit);
+            (this.$refs[this.refMForm] as MForm).triggerActionFallouts(FormActions.InvalidSubmit);
         }
 
     }
