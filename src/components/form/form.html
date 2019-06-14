@@ -8,9 +8,9 @@
                    :close-button="true"
                    ref="summary">
             <ul>
-                <li v-for="(error, index) in formErrors"
+                <li v-for="(errorMessage, index) in errorMessages"
                     :key="index"
-                    v-html="error.groupMessage || error.message">
+                    v-html="errorMessage">
                 </li>
             </ul>
         </m-message>

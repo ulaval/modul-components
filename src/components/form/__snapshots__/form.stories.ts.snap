@@ -3960,7 +3960,11 @@ exports[`Storyshots components|m-form/rules required and 20 characters max 1`] =
           <!---->
         </div>
          
-        <!---->
+        <div
+          class="m-character-count m-textfield__validation__character-count"
+        >
+          <!---->
+        </div>
       </div>
     </div>
      

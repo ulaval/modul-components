@@ -266,6 +266,15 @@ export default class ModulDate {
      *
      * @return A new Date
      */
+    public beginOfDay(): Date {
+        return new Date(this.innerDate.getFullYear(), this.innerDate.getMonth(), this.innerDate.getDate(), 0, 0, 0, 0);
+    }
+
+    /**
+     * Return a date representing the end of the day of a given date (23:59:59).
+     *
+     * @return A new Date
+     */
     public endOfDay(): Date {
         return new Date(this.innerDate.getFullYear(), this.innerDate.getMonth(), this.innerDate.getDate(), 23, 59, 59, 999);
     }

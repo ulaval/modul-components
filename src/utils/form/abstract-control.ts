@@ -1,7 +1,7 @@
+import { getString } from '../str/str';
 import { ControlEditionContext } from './control-edition-context';
 import { ControlError } from './control-error';
 import { ControlOptions, FormControlOptions } from './control-options';
-import { ControlValidatorValidationType } from './control-validator-validation-type';
 import { FormArray } from './form-array';
 import { FormGroup } from './form-group';
 import { ControlValidationGuard, DefaultValidationGuard } from './validation-guard';
@@ -52,13 +52,17 @@ export abstract class AbstractControl {
         return (this.enabled && !this.readonly) ? this._errors : [];
     }
 
+    public set errors(errors: ControlError[]) {
+        this._errors = [...errors];
+    }
+
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
     public get errorMessage(): string {
         if (this.hasError()) {
-            return this.errors[0].message;
+            return getString(this.errors[0].message);
         } else {
             return '';
         }
@@ -72,7 +76,7 @@ export abstract class AbstractControl {
         this._parent = parent;
     }
 
-    public abstract submit(external: boolean): Promise<void>;
+    public abstract submit(): Promise<void>;
 
     public reset(): void {
         this._pristine = true;
@@ -93,12 +97,12 @@ export abstract class AbstractControl {
         }
     }
 
-    public validate(external: boolean = false): void {
+    public validate(): void {
         this.validators.map((v) => {
             if (
                 v.async
                 ||
-                this._validationGuard(this._editionContext, v.validationType, external)
+                this._validationGuard(this._editionContext, v.validationType)
             ) {
                 return;
             }
@@ -115,14 +119,14 @@ export abstract class AbstractControl {
         this._updateErrors();
     }
 
-    public async validateAsync(external: boolean = false): Promise<void> {
+    public async validateAsync(): Promise<void> {
         await Promise.all(
             this.validators
                 .map(async (v) => {
                     if (
                         !v.async
                         ||
-                        this._validationGuard(this._editionContext, v.validationType, external)
+                        this._validationGuard(this._editionContext, v.validationType)
                     ) {
                         return;
                     }
@@ -169,7 +173,7 @@ export abstract class AbstractControl {
         }
 
         this._editionContext = ControlEditionContext.None;
-        this._resetExternalValidators();
+        this._updateErrors();
 
         if (!this.pristine && !this._hasAnyControlsInError()) {
             this.validate();
@@ -179,17 +183,6 @@ export abstract class AbstractControl {
         if (this._parent) {
             this._parent.endEdition();
         }
-    }
-
-    protected _resetExternalValidators(): void {
-        this.validators
-            .filter(v => v.validationType === ControlValidatorValidationType.External)
-            .forEach(v => {
-                v.lastCheck = undefined;
-                v.validationFunction = () => undefined;
-            });
-
-        this._updateErrors();
     }
 
     private _updateErrors(): void {

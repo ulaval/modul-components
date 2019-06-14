@@ -137,9 +137,9 @@ export class MFormAllSandbox extends ModulVue {
         const _formGroup: FormGroup = new FormGroup({
             name: new FormControl<string>(
                 [
-                    RequiredValidator('name'),
-                    MaxLengthValidator('name', 20),
-                    MinLengthValidator('name', 2)
+                    RequiredValidator(),
+                    MaxLengthValidator(20),
+                    MinLengthValidator(2)
                 ],
                 {
                     initialValue: data.name ? data.name : ''
@@ -147,8 +147,8 @@ export class MFormAllSandbox extends ModulVue {
             ),
             description: new FormControl<string>(
                 [
-                    RequiredValidator('description'),
-                    MaxLengthValidator('description', 255)
+                    RequiredValidator(),
+                    MaxLengthValidator(255)
                 ],
                 {
                     initialValue: data.description ? data.description : ''
@@ -156,7 +156,7 @@ export class MFormAllSandbox extends ModulVue {
             ),
             birthdate: new FormControl<string>(
                 [
-                    RequiredValidator('birthdate')
+                    RequiredValidator()
                 ],
                 {
                     initialValue: data.birthday ? data.birthday : ''
@@ -164,7 +164,7 @@ export class MFormAllSandbox extends ModulVue {
             ),
             type: new FormControl<string>(
                 [
-                    RequiredValidator('type')
+                    RequiredValidator()
                 ],
                 {
                     initialValue: data.type ? data.type : ''
@@ -191,7 +191,7 @@ export class MFormAllSandbox extends ModulVue {
     private buildChampSupplFormGroup(data: any = {}): FormGroup {
         return new FormGroup({
             supplField1: new FormControl<string>([
-                RequiredValidator('supplField1')],
+                RequiredValidator()],
                 {
                     initialValue: data.supplField1 ? data.supplField1 : ''
                 }),
@@ -210,9 +210,9 @@ export class MFormAllSandbox extends ModulVue {
         return new FormGroup({
             name: new FormControl<string>(
                 [
-                    RequiredValidator('name'),
-                    MaxLengthValidator('name', 20),
-                    MinLengthValidator('name', 2)
+                    RequiredValidator(),
+                    MaxLengthValidator(20),
+                    MinLengthValidator(2)
                 ],
                 {
                     initialValue: data.name ? data.name : ''
@@ -220,7 +220,7 @@ export class MFormAllSandbox extends ModulVue {
             ),
             optionalData: new FormControl<string>(
                 [
-                    MaxLengthValidator('optionalData', 255)
+                    MaxLengthValidator(255)
                 ],
                 {
                     initialValue: data.optionalData ? data.optionalData : ''

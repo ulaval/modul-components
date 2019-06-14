@@ -1,0 +1,125 @@
+@import 'commons';
+
+$m-base-calendar-week-length: 7 !default;
+$m-base-calendar-dimension: $m-touch-size !default;
+$m-base-calendar-weekday-height: 33px !default; // magic number
+$m-base-calendar-min-width: $m-base-calendar-dimension * $m-base-calendar-week-length !default;
+$m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
+
+@mixin m-calendar-button__show-indicator() {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@mixin m-calendar-button__today() {
+    font-weight: $m-font-weight--bold;
+
+    &::before {
+        background-color: $m-color--grey-light;
+        border-color: $m-color--grey-light;
+
+        @include m-calendar-button__show-indicator();
+    }
+}
+
+.m-calendar-button {
+    transition: background-color $m-transition-duration ease, color $m-transition-duration ease;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    font-family: $m-font-family;
+    font-size: 1em;
+    border: none;
+    appearance: none;
+    outline: none;
+    padding: 0;
+
+    &::before {
+        transition: transform $m-transition-duration--l ease, opacity $m-transition-duration ease, background-color $m-transition-duration ease, border-color $m-transition-duration ease;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        display: block;
+        width: $m-base-calendar-dimension;
+        height: $m-base-calendar-dimension;
+        border-radius: 50%;
+        border: 1px solid m-color(interactive);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+        transform-origin: center;
+    }
+
+    // mouse only, to avoid sticky hover on mobile
+    @media (pointer: fine) {
+        &:not(.m--is-disabled):not(.m--is-selected) {
+            &:hover,
+            &:focus {
+                color: m-color(interactive);
+            }
+
+            &:active {
+                color: m-color(white);
+            }
+        }
+
+        &:not(.m--is-disabled) {
+            cursor: pointer;
+
+            &:hover,
+            &:focus {
+                &::before {
+                    @include m-calendar-button__show-indicator();
+                }
+            }
+
+            &:active {
+                &::before {
+                    transform: translate(-50%, -50%) scale(0.9);
+                    border-color: m-color(interactive, dark);
+                    background: m-color(interactive, dark);
+                }
+            }
+        }
+    }
+
+    &.m--is-today:not(.m--is-selected) {
+        // today style shouldn't be visible on hover
+        &:not(:hover) {
+            @include m-calendar-button__today();
+
+            &:focus {
+                border: $m-base-calendar--border-focus;
+            }
+        }
+
+        // when today is outside of min or max date
+        &.m--is-disabled {
+            @include m-calendar-button__today();
+
+            color: $m-color--white;
+        }
+    }
+
+    &.m--is-selected {
+        color: $m-color--white;
+        font-weight: $m-font-weight--bold;
+        border-radius: 50%;
+
+        &::before {
+            background-color: m-color(interactive);
+
+            @include m-calendar-button__show-indicator();
+        }
+    }
+
+    &.m--is-disabled {
+        background-color: transparent;
+        color: $m-color--grey-light;
+        cursor: default;
+    }
+}

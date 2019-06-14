@@ -12,6 +12,7 @@ import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
+import { MCalendarButton } from '../calendar/calendar-button/calendar-button';
 import { TIMEPICKER_NAME } from '../component-names';
 import { MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
@@ -45,7 +46,8 @@ function validateTimeString(value: string): boolean {
         InputLabel
     ],
     components: {
-        MInputMask
+        MInputMask,
+        MCalendarButton
     }
 })
 export class MTimepicker extends ModulVue {

@@ -2271,7 +2271,7 @@ exports[`Storyshots components|m-accordion-group/secondary-content m-link 1`] = 
       class="m-accordion-group__secondary-content"
     >
       <a
-        class="m-link m--is-unvisited m--is-button m--has-left-icon"
+        class="m-link m--is-unvisited m--is-button m--has-left-icon m--has-content"
         href="#"
         tabindex="0"
       >

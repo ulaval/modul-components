@@ -10,7 +10,6 @@ import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
 import WithRender from './calendar.html?style=./calendar.scss';
 
-
 export enum CalendarMode {
     SINGLE_DATE = 'single-date',
     DATE_RANGE = 'date-range'

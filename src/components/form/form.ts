@@ -1,12 +1,12 @@
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { ControlError } from '../../utils/form/control-error';
-import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { ControlValidator } from '../../utils/form/validators/control-validator';
 import { FormatMode } from '../../utils/i18n/i18n';
+import { getString } from '../../utils/str/str';
 import { ModulVue } from '../../utils/vue/vue';
 import { FormActionFallout } from './form-action-fallout';
 import { FormActions } from './form-action-type';
@@ -29,8 +29,19 @@ export class MForm extends ModulVue {
     @Emit('reset')
     public emitReset(): void { }
 
+    @Watch('formErrors')
+    public onFormGroupErrorsChange(formErrors: ControlError[]): void {
+        if (formErrors.length === 0) {
+            this._hideToast();
+        }
+    }
+
     public get formErrors(): ControlError[] {
         return this._getAllFormErrors(this.formGroup);
+    }
+
+    public get errorMessages(): string[] {
+        return this.formErrors.map(error => getString(error.groupMessage) || getString(error.message));
     }
 
     public get formControlsInError(): AbstractControl[] {
@@ -47,19 +58,21 @@ export class MForm extends ModulVue {
         );
     }
 
-    public async submit(external: boolean = false): Promise<void> {
-        await this.formGroup.submit(external);
+    public triggerActionFallouts(action: FormActions): void {
+        this.actionFallouts
+            .filter(a => action & a.action)
+            .forEach(a => a.fallout(this));
+    }
 
-        if (!this._isValid(external)) {
-            this._triggerActionFallouts(FormActions.InvalidSubmit);
+    public async submit(): Promise<void> {
+        await this.formGroup.submit();
+
+        if (!this.formGroup.valid) {
+            this.triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
-        this._triggerActionFallouts(FormActions.ValidSubmit);
-
-        if (external) {
-            return;
-        }
+        this.triggerActionFallouts(FormActions.ValidSubmit);
 
         this.emitSubmit();
     }
@@ -67,38 +80,21 @@ export class MForm extends ModulVue {
     public reset(): void {
         this.formGroup.reset();
 
-        this._triggerActionFallouts(FormActions.Reset);
+        this.triggerActionFallouts(FormActions.Reset);
         this.emitReset();
     }
 
     protected created(): void {
-        this._triggerActionFallouts(FormActions.Created);
+        this.triggerActionFallouts(FormActions.Created);
     }
 
     protected updated(): void {
-        this._triggerActionFallouts(FormActions.Updated);
+        this.triggerActionFallouts(FormActions.Updated);
     }
 
     protected beforeDestroy(): void {
-        this._triggerActionFallouts(FormActions.Destroyed);
+        this.triggerActionFallouts(FormActions.Destroyed);
         this.formGroup.reset();
-    }
-
-    private _isValid(external: boolean = false): boolean {
-        if (!external) {
-            return this.formGroup.valid;
-        }
-
-        return this.formGroup.valid &&
-            this._getAllFormValidators(this.formGroup)
-                .filter(v => v.validationType === ControlValidatorValidationType.External)
-                .every(v => !!v.lastCheck);
-    }
-
-    private _triggerActionFallouts(type: FormActions): void {
-        this.actionFallouts
-            .filter(a => type & a.action)
-            .forEach(a => a.fallout(this));
     }
 
     private _getAllFormErrors(formGroup: FormGroup | FormArray): ControlError[] {
@@ -149,10 +145,7 @@ export class MForm extends ModulVue {
         return controls;
     }
 
-    @Watch('formErrors')
-    public onFormGroupChange(formErrors: ControlError[], oldVal: any): void {
-        if (formErrors.length === 0) {
-            this.displaySummary = this.displayToast = false;
-        }
+    private _hideToast(): void {
+        this.displaySummary = this.displayToast = false;
     }
 }

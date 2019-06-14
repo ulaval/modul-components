@@ -1234,6 +1234,7 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
           <textarea
             class="m-textfield__input"
             id="mTextfield-uuid"
+            maxlength="Infinity"
             rows="1"
           />
            
@@ -1342,7 +1343,11 @@ exports[`Storyshots components|m-textfield/Counter all props 1`] = `
         <!---->
       </div>
        
-      <!---->
+      <div
+        class="m-character-count m-textfield__validation__character-count"
+      >
+        <!---->
+      </div>
     </div>
   </div>
    
@@ -1867,6 +1872,125 @@ exports[`Storyshots components|m-textfield/Counter max-length="20" 1`] = `
       style="color: red;"
     >
       false
+    </span>
+  </p>
+</div>
+`;
+
+exports[`Storyshots components|m-textfield/Counter max-length="200" and :word-wrap="true" 1`] = `
+<div>
+  <div
+    class="m-textfield m--has-word-wrap m--is-type-text"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--has-value m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__left-content"
+          >
+            <!---->
+             
+            <!---->
+             
+            <textarea
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="200"
+              placeholder="Enter a value"
+              rows="1"
+            />
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-textfield__validation"
+    >
+      <div
+        class="m-validation-message m-textfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <br />
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      max-length
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      "200"
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      length-overflow
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      false
+    </span>
+  </p>
+   
+  <p>
+    <span
+      style="color: blue;"
+    >
+      word-wrap
+    </span>
+     is equal to 
+    <span
+      style="color: red;"
+    >
+      true
     </span>
   </p>
 </div>

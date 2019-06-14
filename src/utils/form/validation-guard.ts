@@ -1,12 +1,9 @@
 import { ControlEditionContext } from './control-edition-context';
 import { ControlValidatorValidationType } from './control-validator-validation-type';
 
-export type ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, external?: boolean) => boolean;
+export type ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType) => boolean;
 
-export const DefaultValidationGuard: ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType, external?: boolean): boolean => {
-    if (external && validationType === ControlValidatorValidationType.External) {
-        return false;
-    }
+export const DefaultValidationGuard: ControlValidationGuard = (editionContext: ControlEditionContext, validationType: ControlValidatorValidationType): boolean => {
 
     const guard: Map<ControlEditionContext, ControlValidatorValidationType[]> = new Map<ControlEditionContext, ControlValidatorValidationType[]>(
         [
@@ -15,29 +12,24 @@ export const DefaultValidationGuard: ControlValidationGuard = (editionContext: C
                     ControlValidatorValidationType.None,
                     ControlValidatorValidationType.AtExit,
                     ControlValidatorValidationType.Correction,
-                    ControlValidatorValidationType.Modification,
-                    ControlValidatorValidationType.External
+                    ControlValidatorValidationType.Modification
                 ]
             ],
             [
                 ControlEditionContext.Dirty, [
                     ControlValidatorValidationType.None,
                     ControlValidatorValidationType.AtExit,
-                    ControlValidatorValidationType.Correction,
-                    ControlValidatorValidationType.External
+                    ControlValidatorValidationType.Correction
                 ]
             ],
             [
                 ControlEditionContext.HasErrors, [
                     ControlValidatorValidationType.None,
-                    ControlValidatorValidationType.AtExit,
-                    ControlValidatorValidationType.External
+                    ControlValidatorValidationType.AtExit
                 ]
             ],
             [
-                ControlEditionContext.None, [
-                    ControlValidatorValidationType.External
-                ]
+                ControlEditionContext.None, []
             ]
         ]
     );
