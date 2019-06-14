@@ -12,6 +12,17 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
 }
 
 @mixin m-base-calendar__today() {
+    font-weight: $m-font-weight--bold;
+
+    &::before {
+        background-color: $m-color--grey-light;
+        border-color: $m-color--grey-light;
+
+        @include m-base-calendar__show-indicator();
+    }
+}
+
+@mixin m-base-calendar__today() {
     font-weight: $m-font-weight--semi-bold;
 
     &::before {
@@ -135,72 +146,9 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
         overflow: hidden;
     }
 
-    &__year,
-    &__month,
     &__day {
-        transition: background-color $m-transition-duration ease, color $m-transition-duration ease;
-        position: relative;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        outline: none;
-
-        &::before {
-            transition: transform $m-transition-duration--l ease, opacity $m-transition-duration ease, background-color $m-transition-duration ease, border-color $m-transition-duration ease;
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: -1;
-            display: block;
-            width: $m-base-calendar-dimension;
-            height: $m-base-calendar-dimension;
-            border-radius: 50%;
-            border: 1px solid m-color(interactive);
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.8);
-            transform-origin: center;
-        }
-
-        // mouse only, to avoid sticky hover on mobile
-        @media (pointer: fine) {
-            &:not(.m--is-disabled):not(.m--is-selected) {
-                &:hover,
-                &:focus {
-                    color: m-color(interactive);
-                }
-
-                &:active {
-                    color: m-color(white);
-                }
-            }
-
-            &:not(.m--is-disabled) {
-                cursor: pointer;
-
-                &:hover,
-                &:focus {
-                    &::before {
-                        @include m-base-calendar__show-indicator();
-                    }
-                }
-
-                &:active {
-                    &::before {
-                        transform: translate(-50%, -50%) scale(0.9);
-                        border-color: m-color(interactive, dark);
-                        background: m-color(interactive, dark);
-                    }
-                }
-            }
-        }
-
         &.m--is-today:not(.m--is-selected) {
-            // today style shouldn't be visible on hover
             &:not(:hover) {
-                @include m-base-calendar__today();
-
                 // when inside a daterange selection
                 &.m--is-highlighted {
                     &::before {
@@ -209,16 +157,9 @@ $m-base-calendar--border-focus: 1px solid m-color(interactive, darker);
                     }
                 }
 
-                &:focus {
-                    border: $m-base-calendar--border-focus;
+                &:active {
+                    color: m-color(white);
                 }
-            }
-
-            // when today is outside of min or max date
-            &.m--is-disabled {
-                @include m-base-calendar__today();
-
-                color: $m-color--white;
             }
         }
 
