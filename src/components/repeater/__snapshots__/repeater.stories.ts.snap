@@ -142,7 +142,7 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
       class="m-repeater__footer"
     >
       <a
-        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
         href="#"
         tabindex="0"
       >
@@ -200,7 +200,7 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
       class="m-repeater__footer m--is-slot-row"
     >
       <a
-        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
         href="#"
         tabindex="0"
       >
