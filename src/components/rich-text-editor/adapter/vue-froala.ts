@@ -1,7 +1,5 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
-// require('froala-editor/js/froala_editor.min');
-// require('froala-editor/css/froala_editor.pkgd.min.css');
 import FroalaEditor from 'froala-editor';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/css/froala_style.min.css';
