@@ -1,0 +1,51 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Test reactivity of MForm</h2>
+    <span v-model="name">Welcome {{ name }} !</span>
+    <br />
+
+    <m-form :form-group="formGroup2"
+            :ref="refMForm"
+            @reset="reset()"
+            @submit="submit()">
+
+        <h4 class="m-u--h6">Step 1 : click on submit to display error message (you can leave blank or type anything other the "poulet")</h4>
+
+        <m-textarea v-m-control="descriptionField"
+                    v-model="descriptionField.value"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage"
+                    :required-marker="true"
+                    helper-message="Only the word 'poulet' will work"
+                    :label="name + '\'s Favorite food'">
+        </m-textarea> <br />
+
+        <p class="m-u--margin-top--l m-u--margin-bottom--l">
+            <m-button type="submit"
+                      :waiting="pendingSubmit">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary">Reset</m-button>
+        </p>
+    </m-form>
+    <m-form :form-group="formGroup"
+            :ref="refMForm"
+            @reset="reset()"
+            @submit="submit()">
+
+        <h4 class="m-u--h6">Step 2: change the name and submit - should change the error message and the greeting at the top</h4>
+
+        <m-textfield v-m-control="nameField"
+                     v-model="nameField.value"
+                     :error="nameField.hasError()"
+                     :error-message="nameField.errorMessage"
+                     :required-marker="true"
+                     :character-count="true"
+                     label="New Name">
+        </m-textfield>
+        <p class="m-u--margin-top--l m-u--margin-bottom--l">
+            <m-button type="submit"
+                      :waiting="pendingSubmit">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary">Reset</m-button>
+        </p>
+    </m-form>
+</div>

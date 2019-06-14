@@ -7,9 +7,11 @@ import { ControlValidator, ControlValidatorOptions } from '../control-validator'
 import { ValidatorKeys } from '../validator-error-keys';
 
 /**
- * Bound included
+ *
+ * @param maxLength Max length (inclusive)
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
  */
-export const MaxLengthValidator: Function = (controlLabel: string, maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
+export const MaxLengthValidator: (maxLength: number, options?: ControlValidatorOptions) => ControlValidator = (maxLength: number, options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.MaxLength,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -36,11 +38,18 @@ export const MaxLengthValidator: Function = (controlLabel: string, maxLength: nu
                     { maxLength },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:maxLengthValidatorErrorSummaryMessage',
-                    { controlLabel, maxLength },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: options && options.controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:maxLengthValidatorErrorSummaryMessage',
+                        {
+                            controlLabel: options.controlLabel,
+                            maxLength
+                        },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Correction

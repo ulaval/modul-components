@@ -1,7 +1,6 @@
 {
     "m-form": {
-<<<<<<< HEAD
-"multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> needs your attention.",
+        "multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> needs your attention.",
         "multipleErrorsToCorrect.p": "<strong>%(totalNbOfErrors)s informations</strong> need your attention.",
         "requiredValidatorErrorMessage": "this field is required.",
         "requiredValidatorErrorSummaryMessage": "The field %(controlLabel)s is required.",
