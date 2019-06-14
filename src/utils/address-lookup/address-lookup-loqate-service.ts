@@ -1,5 +1,6 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import AddressLookupService, { RetrieveResponse } from './address-lookup-service';
+import Address from './address';
+import AddressLookupService from './address-lookup-service';
 
 interface LoqateFindResult {
     Items: LoqateFindItem[];
@@ -63,13 +64,8 @@ export interface LoqateRetrieveQuery {
     id: string;
 }
 
-export interface LoqateRetrieveResponse extends RetrieveResponse {
-    language: string;
-    alternativeLanguages: string[];
-}
 
-
-export default class AddressLookupLoqateService implements AddressLookupService<LoqateFindQuery, LoqateFindResponse, LoqateRetrieveQuery, LoqateRetrieveResponse> {
+export default class AddressLookupLoqateService implements AddressLookupService<LoqateFindQuery, LoqateFindResponse, LoqateRetrieveQuery, Address> {
 
     private axios: AxiosInstance;
     private key: string;
@@ -105,7 +101,7 @@ export default class AddressLookupLoqateService implements AddressLookupService<
         }));
     }
 
-    async retrieve(query: LoqateRetrieveQuery): Promise<LoqateRetrieveResponse[]> {
+    async retrieve(query: LoqateRetrieveQuery): Promise<Address[]> {
         const results: AxiosResponse<LoqateRetriveResult> = await this.axios.get(
             `https://api.addressy.com/Capture/Interactive/Retrieve/v1/json3.ws`, {
                 params: {
@@ -116,9 +112,6 @@ export default class AddressLookupLoqateService implements AddressLookupService<
         );
 
         return results.data.Items.map((row: LoqateRetrieveItem) => ({
-            language: row.Language,
-            alternativeLanguages: row.LanguageAlternatives.split(','),
-            label: row.Label,
             buildingNumber: row.BuildingNumber,
             street: row.Street,
             city: row.City,

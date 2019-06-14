@@ -2,7 +2,7 @@ export default interface Address {
     buildingNumber: string;
     street: string;
     city: string;
-    province: Province;
+    province?: Province;
     postalCode: string;
     country: Country;
     subBuilding: string;
@@ -41,6 +41,10 @@ export enum CountryKey {
 
 export function copyAddress(source: Address): Address {
     const country: Country = { ...source.country };
-    const province: Province = { ...source.province };
-    return { ...source, province, country };
+    if (source.province !== undefined) {
+        const province: Province = { ...source.province };
+        return { ...source, province, country };
+    } else {
+        return { ...source, country };
+    }
 }

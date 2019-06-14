@@ -1,7 +1,8 @@
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
-import Address, { copyAddress, CountryKey, ProvinceKey } from '../../utils/address-lookup/address';
+import Address, { AddressField, copyAddress, Country, CountryKey, Province, ProvinceKey } from '../../utils/address-lookup/address';
 import { ModulVue } from '../../utils/vue/vue';
+import MAddressEditor, { AddressEditorValidator } from '../address-editor/address-editor';
 import { AddressLookupFieldProps, MAddressLookupField } from '../address-lookup-field/address-lookup-field';
 import { addressesFilters, AddressReaderProps, MAddressReader } from '../address-reader/address-reader';
 import { MInplaceEdit } from '../inplace-edit/inplace-edit';
@@ -11,12 +12,12 @@ import WithRender from './address-autocomplete-field.html';
 export interface AddressLookupConfig extends AddressLookupFieldProps { }
 
 export interface AddressReaderConfig extends AddressReaderProps { }
-
 @WithRender
 @Component({
     components: {
         MAddressLookupField,
         MAddressReader,
+        MAddressEditor,
         MInplaceEdit
     }
 })
@@ -34,22 +35,43 @@ export default class MAddressAutocompleteField extends ModulVue implements Addre
     @Prop() // filters to apply when displaying address
     readonly filters: addressesFilters;
 
-    @Prop() // value to take from address sub-object country
+    @Prop() // value to use from address sub-object country
     readonly countryKey: CountryKey;
 
-    @Prop() // value to take from address sub-object province
+    @Prop() // value to use from address sub-object province
     readonly provinceKey: ProvinceKey;
+
+    @Prop() // list of countries for use in dropdown of edit form
+    readonly countries: Country[];
+
+    @Prop()// list of provinces for use in dropdown of edit form
+    readonly provinces: { [countryIso2: string]: Province[] };
+
+    @Prop({ default: () => ({}) }) // validators to apply on form
+    readonly validations: { [field: string]: AddressEditorValidator[] };
+
+    editAddress: Address = this.address;
 
     editing: boolean = false;
     error: string = '';
     editFormTitle: string = 'Edit address !translation';
+    currentProvinces: Province[] = [];
 
-    private current: Address = this.address;
-    private editAddress: Address = this.address;
+    private current: Address = copyAddress(this.address);
+    private canSubmit: boolean = true;
+
+    mounted(): void {
+        if (this.address && this.address.country) {
+            this.onCountryChange(this.address.country.countryIso2);
+        }
+    }
 
     @Watch('address')
     onAddressChange(): void {
-        this.current = this.address;
+        this.current = copyAddress(this.address);
+        if (this.current && this.current.country) {
+            this.onCountryChange(this.current.country.countryIso2);
+        }
     }
 
     onRetrieve(address: Address): void {
@@ -58,8 +80,11 @@ export default class MAddressAutocompleteField extends ModulVue implements Addre
     }
 
     onConfirm(): void {
-        this.updateAddress(this.editAddress);
-        this.editing = false;
+        if (this.canSubmit) {
+            this.updateAddress(this.editAddress);
+            this.current = copyAddress(this.editAddress);
+            this.editing = false;
+        }
     }
 
     onCancel(): void {
@@ -68,10 +93,18 @@ export default class MAddressAutocompleteField extends ModulVue implements Addre
     }
 
     onClick(): void {
-        this.editing = (this.editing) ? this.editing : !this.editing;
-        if (this.editing) {
+        if (!this.editing) {
             this.editAddress = copyAddress(this.current);
         }
+        this.editing = (this.editing) ? this.editing : !this.editing;
+    }
+
+    onIsValid(value: boolean): void {
+        this.canSubmit = value;
+    }
+
+    onCountryChange(code: string): void {
+        this.currentProvinces = this.provinces[code];
     }
 
     @Emit('change')
@@ -81,7 +114,8 @@ export default class MAddressAutocompleteField extends ModulVue implements Addre
         return this.current;
     }
 
-    get addressFound(): boolean {
-        return Object.keys(this.current).length > 0;
+    get hasValue(): boolean {
+        return Object.keys(this.current).map((key: string) => key !== AddressField.COUNTRY && this.current[key] !== '' && this.current[key] !== undefined)
+            .reduce((acc: boolean, data: boolean) => (data) ? data : acc, false);
     }
 }

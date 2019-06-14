@@ -64,7 +64,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_READER}`, module)
             countryKey: CountryKey.COUNTRY,
             provinceKey: ProvinceKey.PROVINCE_CODE,
             filters: {
-                street: (value: string): string => value.charAt(0).toLowerCase() + value.slice(1)
+                street: (value: string): string => (value !== '') ? value.charAt(0).toLowerCase() + value.slice(1) : ''
             }
         }),
         template: `<div>

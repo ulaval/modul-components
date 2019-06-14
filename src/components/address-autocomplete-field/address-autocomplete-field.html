@@ -5,7 +5,7 @@
                                 @address-retrieved="onRetrieve">
         </m-address-lookup-field>
     </slot>
-    <div v-if="addressFound">
+    <div v-if="hasValue">
         <slot name="edit-section">
             <m-inplace-edit :edit-mode="editing"
                             :error="error"
@@ -22,7 +22,12 @@
                 </slot>
                 <div slot="editMode">
                     <slot name="form">
-                        Editing...
+                        <m-address-editor v-model="editAddress"
+                                          :countries="countries"
+                                          :provinces="currentProvinces"
+                                          :validations="validations"
+                                          @country-change="onCountryChange"
+                                          @is-valid="onIsValid"></m-address-editor>
                     </slot>
                 </div>
             </m-inplace-edit>

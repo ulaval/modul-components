@@ -93,11 +93,11 @@ export class MAddressReader extends ModulVue implements AddressReaderProps {
 
     private filterString(key: string, subKey: string = ''): string {
         let value: string = '';
-        if (subKey !== '') {
+        if (subKey !== '' && this.address[key] && this.address[key][subKey]) {
             value = this.address[key][subKey];
-        } else {
+        } else if (this.address[key]) {
             value = this.address[key];
         }
-        return (this.filters[key]) ? this.filters[key](value) : value;
+        return (this.filters[key] && value.length > 0) ? this.filters[key](value) : value;
     }
 }
