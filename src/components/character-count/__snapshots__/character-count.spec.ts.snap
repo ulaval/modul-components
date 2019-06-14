@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MCharacterCount should render correctly 1`] = `""`;
+exports[`MCharacterCount should render correctly 1`] = `<div class="m-character-count"></div>`;
 
 exports[`MCharacterCount should render correctly when maxLength prop is set 1`] = `
 <div class="m-character-count">

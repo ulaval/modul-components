@@ -53,77 +53,30 @@ $m-timepicker--height-multiplier: 5;
             width: 210px;
             height: $m-touch-size * $m-timepicker--height-multiplier;
         }
-
-        &__hours,
-        &__minutes {
-            width: 50%;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
-
-            @include m-scrollbar();
-
-            &-item {
-                transition: background $m-transition-duration ease;
-                outline: 0;
-                color: inherit;
-                height: $m-touch-size;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                font-weight: $m-font-weight--semi-bold;
-            }
-        }
     }
 
-    &__hours-number,
-    &__minutes-number {
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: $m-touch-size;
-        width: $m-touch-size;
-        outline: none;
-        background-color: $m-color--white;
-        transition: color $m-transition-duration--s ease, background-color $m-transition-duration--s ease, border-color $m-transition-duration--s ease;
-        border: 1px solid transparent;
-        cursor: pointer;
+    &__hours,
+    &__minutes {
+        width: 50%;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
 
-        @media (pointer: fine) {
-            &:hover {
-                border-color: $m-color--interactive-darker;
-                background-color: $m-color--white;
-            }
+        @include m-scrollbar();
 
-            &:focus {
-                background-color: $m-color--interactive-lightest;
-            }
-        }
-
-        &.m--is-selected {
-            @media (pointer: fine) {
-                cursor: default;
-                color: $m-color--white;
-                background-color: $m-timepicker--color-select;
-
-                &:focus {
-                    border: 1px solid $m-color--interactive-darker;
-
-                    &:hover {
-                        border-width: 2px;
-                    }
-                }
-            }
-
-            @media not all and (pointer: fine) {
-                color: $m-color--white;
-                background-color: $m-timepicker--color-select;
-            }
+        &-item {
+            transition: background $m-transition-duration ease;
+            outline: 0;
+            color: inherit;
+            height: $m-touch-size;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: $m-font-weight--bold;
         }
     }
 

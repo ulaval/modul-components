@@ -12,8 +12,31 @@ import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './periodpicker.html?style=./periodpicker.scss';
 
 export class MDateRange {
-    from: DatePickerSupportedTypes;
-    to: DatePickerSupportedTypes;
+    constructor(public from?: DatePickerSupportedTypes, public to?: DatePickerSupportedTypes, public hasValidFormat?: boolean) { }
+
+    get fromIsoString(): string | undefined {
+        if (!this.from) {
+            return undefined;
+        }
+
+        if (typeof this.from === 'string') {
+            return this.from.includes('T') ? this.from : new ModulDate(this.from).toISOString();
+        } else {
+            return this.from.toISOString();
+        }
+    }
+
+    get toIsoString(): string | undefined {
+        if (!this.from) {
+            return undefined;
+        }
+
+        if (typeof this.from === 'string') {
+            return this.from.includes('T') ? this.from : new ModulDate(this.from).endOfDay().toISOString();
+        } else {
+            return this.from.toISOString();
+        }
+    }
 }
 
 interface MPeriodpickerFromProps {
@@ -82,6 +105,11 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     @Prop()
     max: DatePickerSupportedTypes;
 
+    @Prop({
+        default: true
+    })
+    convertToIso: boolean;
+
     @Emit('input')
     emitNewValue(newValue: MDateRange): void { }
 
@@ -95,7 +123,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.fromIsFocused,
-                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.from),
+                value: this.dateFromInternalValue,
                 min: this.min,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -106,7 +134,12 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
             },
             handlers: {
                 change: (newValue: DatePickerSupportedTypes) => this.onDateFromChange(newValue),
-                blur: () => { this.fromIsFocused = false; }
+                blur: () => {
+                    this.fromIsFocused = false;
+                    if (!this.toIsFocused) {
+                        this.endSelection();
+                    }
+                }
             }
         };
     }
@@ -115,7 +148,7 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
         return {
             props: {
                 focus: this.toIsFocused,
-                value: MPeriodpicker.formatIsoDateToLocalString(this.internalValue.to),
+                value: this.dateToInternalValue,
                 min: this.minDateTo,
                 max: this.max,
                 disabled: this.as<InputState>().isDisabled,
@@ -138,13 +171,14 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     get internalValue(): MDateRange {
-        return { from: this.dateFromInternalValue, to: this.dateToInternalValue };
+        return new MDateRange(this.dateFromInternalValue, this.dateToInternalValue, MPeriodpicker.validateDateFormat(this.dateFromInternalValue)
+            && MPeriodpicker.validateDateFormat(this.dateToInternalValue));
     }
 
     @Watch('value', { immediate: true })
     private onValueChange(value: MDateRange): void {
-        this.dateFromInternalValue = (value || {}).from || '';
-        this.dateToInternalValue = (value || {}).to || '';
+        this.dateFromInternalValue = MPeriodpicker.formatIsoDateToLocalString(this.value.from);
+        this.dateToInternalValue = MPeriodpicker.formatIsoDateToLocalString(this.value.to);
     }
 
     get minDateTo(): DatePickerSupportedTypes {
@@ -160,52 +194,90 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
     }
 
     onDateFromChange(newValue: DatePickerSupportedTypes): void {
-        this.dateFromInternalValue = newValue ? this.getNewModelValue(newValue) : undefined;
-
-
+        this.beginSelection = true;
+        this.dateFromInternalValue = newValue;
         if (newValue) {
-            this.beginSelection = true;
-            this.toIsFocused = true;
-        } else {
-            this.endSelection();
+            const newDateValue: DatePickerSupportedTypes = this.getNewModelValue(newValue);
+            if (newValue && newDateValue) {
+                this.toIsFocused = true;
+            }
         }
     }
 
     onDateToChange(newValue: DatePickerSupportedTypes): void {
-        this.beginSelection = false;
-        this.dateToInternalValue = newValue ? this.getNewModelValue(newValue, true) : undefined;
-        this.endSelection();
+        this.beginSelection = true;
+        this.dateToInternalValue = newValue;
+        if (newValue) {
+            const newDateValue: DatePickerSupportedTypes = this.getNewModelValue(newValue, true);
+            if (newValue && newDateValue) {
+                this.endSelection();
+            }
+        }
     }
 
     getNewModelValue(newValue: DatePickerSupportedTypes, endOfDay: boolean = false): DatePickerSupportedTypes {
-        if (!newValue) { return; }
+        if (!newValue
+            || (newValue.toString().length !== 10 && !(newValue instanceof Date) && !isFinite(newValue as any))
+            || !MPeriodpicker.validateDateFormat(newValue.toString())) { return; }
 
         const modulDate: ModulDate = new ModulDate(newValue);
-        const isoString: string = endOfDay ? modulDate.endOfDay().toISOString() : modulDate.toISOString();
+        const isoString: string = endOfDay ? modulDate.endOfDay().toISOString() : modulDate.beginOfDay().toISOString();
 
         return new Date(isoString);
     }
 
     endSelection(): void {
-        this.emitNewValue({ from: this.dateFromInternalValue || undefined, to: this.dateToInternalValue || undefined });
+        const newDateFrom: DatePickerSupportedTypes = this.convertToIso ? this.internalDateFromIsoString : this.dateFromInternalValue;
+        const newDateTo: DatePickerSupportedTypes = this.convertToIso ? this.internalDateToIsoString : this.dateToInternalValue;
+
+        const isDateFromValid: boolean = MPeriodpicker.validateDateFormat(this.dateFromInternalValue);
+        const isDateToValid: boolean = MPeriodpicker.validateDateFormat(this.dateToInternalValue);
+        this.emitNewValue(new MDateRange(
+            isDateFromValid ? newDateFrom : this.dateFromInternalValue,
+            isDateToValid ? newDateTo : this.dateToInternalValue,
+            isDateFromValid && isDateToValid
+        ));
+        this.beginSelection = false;
     }
 
+    get internalDateFromIsoString(): DatePickerSupportedTypes {
+        return this.getNewModelValue(this.dateFromInternalValue);
+    }
+
+    get internalDateToIsoString(): DatePickerSupportedTypes {
+        return this.getNewModelValue(this.dateToInternalValue, true);
+    }
+
+    static validateDateFormat(dateString: DatePickerSupportedTypes): boolean {
+        try {
+            return new ModulDate(dateString) ? true : false;
+        } catch {
+            return false;
+        }
+    }
 
     /**
      * This method convert a date or a iso string into a local date string with format YYYY-MM-DD
      *
      * @param date
      */
-    static formatIsoDateToLocalString(date?: DatePickerSupportedTypes): string {
+    static formatIsoDateToLocalString(date: DatePickerSupportedTypes): DatePickerSupportedTypes {
         if (!date) {
             return '';
         }
-        let _date: Date;
-        if (date instanceof Date) {
-            _date = date;
-        } else {
-            _date = new Date(date);
+
+        if (!this.validateDateFormat(date)) {
+            return date;
         }
+
+        let _date: Date | undefined = undefined;
+        if (typeof date === 'string') {
+            _date = new Date(date.includes('T') ? date : new Date(`${date}T00:00`));
+        } else if (date instanceof Date) {
+            _date = date;
+        }
+
+        if (!_date) { return; }
 
         let month: string = '' + (_date.getMonth() + 1);
         let day: string = '' + _date.getDate();

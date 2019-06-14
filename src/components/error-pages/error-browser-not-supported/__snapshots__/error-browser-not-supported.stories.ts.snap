@@ -245,7 +245,7 @@ exports[`Storyshots components|m-error-browser-not-supported linksMobile 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon"
+            class="m-link m-message-page__link m--has-left-icon m--has-content"
             href="http://www.ulaval.ca"
             tabindex="0"
             target="_blank"
@@ -279,7 +279,7 @@ exports[`Storyshots components|m-error-browser-not-supported linksMobile 1`] = `
         </li>
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon"
+            class="m-link m-message-page__link m--has-left-icon m--has-content"
             href="http://www.google.com"
             tabindex="0"
             target="_blank"

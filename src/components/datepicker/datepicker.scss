@@ -17,4 +17,13 @@ $m-datepicker--item-dimension: $m-touch-size !default;
         margin-top: $m-margin--xs;
         transition: margin-top $m-transition-duration ease;
     }
+
+    &__header-label {
+        margin: 0;
+        padding: $m-padding--s $m-padding;
+        font-size: $m-font-size--s;
+        font-weight: $m-font-weight--semi-bold;
+        color: $m-color--white;
+        background: $m-color--interactive;
+    }
 }

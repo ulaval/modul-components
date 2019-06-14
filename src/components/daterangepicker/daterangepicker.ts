@@ -37,11 +37,19 @@ export class MDaterangepicker extends ModulVue {
     })
     labelTo: string;
 
+    @Prop({
+        default: true
+    })
+    convertToIso: boolean;
+
     @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
     @Prop({ default: false })
     public hideInternalErrorMessage: boolean;
+
+    @Prop({ default: false })
+    public skipInputValidation: boolean;
 
     get periodPickerProps(): MPeriodpickerProps {
         return { value: this.value, min: this.min, max: this.max };
