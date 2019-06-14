@@ -147,7 +147,7 @@ exports[`Storyshots components|m-tooltip/mode mode="definition" 1`] = `
         <a
           aria-controls="mTooltip-uuid-controls"
           aria-haspopup="true"
-          class="m-link m-tooltip__link m--is-unvisited m--no-underline m--is-button"
+          class="m-link m-tooltip__link m--is-unvisited m--no-underline m--is-button m--has-content"
           href="#"
           id="mTooltip-uuid"
           tabindex="0"
@@ -239,7 +239,7 @@ exports[`Storyshots components|m-tooltip/mode mode="link" 1`] = `
         <a
           aria-controls="mTooltip-uuid-controls"
           aria-haspopup="true"
-          class="m-link m-tooltip__link m--is-unvisited m--is-button"
+          class="m-link m-tooltip__link m--is-unvisited m--is-button m--has-content"
           href="#"
           id="mTooltip-uuid"
           tabindex="0"
