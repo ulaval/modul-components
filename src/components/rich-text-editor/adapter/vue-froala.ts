@@ -5,8 +5,10 @@
 import FroalaEditor from 'froala-editor';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/third_party/embedly.min.css';
 import 'froala-editor/js/languages/fr.js';
 import 'froala-editor/js/plugins.pkgd.min.js';
+import 'froala-editor/js/third_party/embedly.min.js';
 import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
@@ -24,7 +26,6 @@ import { MFile } from '../../../utils/file/file';
 import { ScrollToDuration } from '../../../utils/scroll-to/scroll-to';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
-import { PopupPlugin } from './popup-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 
 
@@ -59,6 +60,17 @@ export enum FroalaStatus {
     Blurring = 'blurring',
     Blurred = 'blurred',
     Focused = 'focused'
+}
+// fr-more-toolbar fr-expanded fr-sticky-off
+export enum FroalaToolbarButtons {
+    moreTextVisible = 6,
+    moreTextVisibleXS = 0,
+    moreParagraphVisible = 4,
+    moreParagraphVisibleXS = 0,
+    moreRichVisible = 3,
+    moreRichVisibleXS = 3,
+    moreMiscVisible = 1,
+    moreMiscVisibleXS = 1
 }
 
 const ENTER_KEYCODE: number = 13;
@@ -132,40 +144,8 @@ const ENTER_KEYCODE: number = 13;
         this.froalaClientWidth = (this.$el as HTMLElement).clientWidth;
     }
 
-    protected get isDesktop(): boolean {
-        if (this.config && this.config.pluginsEnabled.includes('image')) {
-            return this.froalaClientWidth >= FroalaBreakingPoint.minOneMode;
-        }
-        return this.froalaClientWidth >= FroalaBreakingPoint.minDefault;
-    }
-
     public get isEmpty(): boolean {
         return this.value.length === 0;
-    }
-
-    // watch "Clicking on full screen throws exception if toolbar is customized" in https://github.com/froala/wysiwyg-editor/issues/3483
-    // watch "Links should not be disabled when editor is disabled" https://github.com/froala/wysiwyg-editor/issues/3457
-
-    protected addPopup(name: string, icon: string, buttonList: string[]): void {
-        const buttonName: string = `${name}Popup`;
-        const pluginName: string = `${name}Plugin`;
-
-        FroalaEditor.POPUP_TEMPLATES[`${pluginName}.popup`] = '[_BUTTONS_]';
-
-        // The custom popup is defined inside a plugin (new or existing).
-        FroalaEditor.PLUGINS[pluginName] = (editor: any) => { return new PopupPlugin(name, editor, buttonList); };
-
-        // Create the button that'll open the popup
-        FroalaEditor.RegisterCommand(buttonName, {
-            title: name,
-            icon: icon,
-            undo: false,
-            focus: false,
-            plugin: pluginName,
-            callback: function(): void {
-                this[pluginName].showPopup();
-            }
-        });
     }
 
     protected addCustomIcons(): void {
@@ -185,8 +165,6 @@ const ENTER_KEYCODE: number = 13;
     }
 
     protected addImageButton(): void {
-        // fix me
-        global.console.log('RTE IMAGE addImageButton!');
         FroalaEditor.RegisterCommand('insertImage', {
             title: this.$i18n.translate('m-rich-text-editor:insert-image'),
             undo: true,
@@ -194,7 +172,6 @@ const ENTER_KEYCODE: number = 13;
             showOnMobile: true,
             refreshAfterCallback: false,
             callback: function(): void {
-                global.console.log('RTE CALLBACK insertImage!');
                 let vueFroala: VueFroala = this.$oel[0].parentNode.__vue__;
                 vueFroala.allowedExtensions = this.imageExtensions;
                 vueFroala.isFileUploadOpen = true;
@@ -209,13 +186,11 @@ const ENTER_KEYCODE: number = 13;
             focus: true,
             showOnMobile: true,
             callback: function(): void {
-                global.console.log('RTE CALLBACK imageReplace!');
                 let vueFroala: VueFroala = this.$oel[0].parentNode.__vue__;
                 vueFroala.allowedExtensions = this.imageExtensions;
                 vueFroala.isFileUploadOpen = true;
             },
             refresh: function(): void {
-                global.console.log('RTE REFRESH imageReplace !');
                 let vueFroala: VueFroala = this.$oel[0].parentNode.__vue__;
                 let selectedElement: HTMLElement = vueFroala.froalaEditor.selection.element();
                 if (selectedElement.tagName === 'IMG') {
@@ -230,7 +205,6 @@ const ENTER_KEYCODE: number = 13;
     }
 
     protected filesReady(files: MFile[]): void {
-        global.console.log('RTE IMAGE filesReady!');
         this.$emit('image-ready', files[0], this.fileUploadStoreName);
     }
 
@@ -241,9 +215,6 @@ const ENTER_KEYCODE: number = 13;
     protected filesAdded(files: MFile[]): void {
         this.froalaEditor.opts.modulImageUploaded = true;
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
-            global.console.log('RTE IMAGE filesAdded !');
-            global.console.log(this.selectedImage);
-
             if (this.selectedImage) {
                 this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage));
             } else {
@@ -260,7 +231,8 @@ const ENTER_KEYCODE: number = 13;
 
     protected mousedownListener(event: MouseEvent): void {
         this.mousedownTriggered = true;
-        // TODO fix me
+        // TODO fix me, enlever le jquery d'ici
+        global.console.log('RTE mouseDOWNistener !');
         if (this.$el.contains(event.target as HTMLElement) || $('.fr-modal.fr-active').length > 0) {
             this.mousedownInsideEditor = true;
         } else {
@@ -271,7 +243,7 @@ const ENTER_KEYCODE: number = 13;
     protected mouseupListener(event: MouseEvent): void {
         this.mousedownTriggered = false;
         if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused
-            // TODO fix me
+            // TODO fix me, enlever le jquery d'ici
             && !this.isFileUploadOpen && $('.fr-image-resizer.fr-active').length === 0) {
             this.closeEditor();
         }
@@ -309,12 +281,14 @@ const ENTER_KEYCODE: number = 13;
         }
     }
 
+
     private createEditor(): void {
         if (this.isInitialized) {
             return;
         }
 
         this.setClientWidth();
+        this.setFroalaToolbarDesktop();
         this.addCustomIcons();
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
@@ -325,60 +299,50 @@ const ENTER_KEYCODE: number = 13;
                     this.setReadOnly();
                     this.htmlSet();
                     window.addEventListener('resize', this.onResize);
-                    global.console.log('RTE EVENT InitializationDelayed!');
                 },
                 [froalaEvents.ContentChanged]: () => {
                     this.updateModel();
-                    global.console.log('RTE EVENT ContentChanged!');
                 },
                 [froalaEvents.Focus]: () => {
                     this.activateRichText();
-                    global.console.log('RTE EVENT Focus!');
                 },
                 [froalaEvents.Blur]: () => {
-                    global.console.log('RTE EVENT Blur!');
                     if (!this.mousedownTriggered && !this.isFileUploadOpen) {
                         this.closeEditor();
                     }
                 },
-                [froalaEvents.KeyUp]: () => {
-                    global.console.log('RTE EVENT KeyUp!');
+                [froalaEvents.KeyUp]: (key: any) => {
                     if (this.currentConfig.immediateVueModelUpdate) {
                         this.updateModel();
                     }
                     this.$emit('keyup');
                 },
-                [froalaEvents.KeyDown]: (key) => {
-                    global.console.log('RTE EVENT KeyDown!');
+                [froalaEvents.KeyDown]: (key: any) => {
                     this.$emit('keydown');
                     this.isDirty = true;
-                    // fix me
                     if (key.keyCode === ENTER_KEYCODE) {
                         this.froalaEditor.paragraphStyle.apply('');
                     }
                 },
                 [froalaEvents.PasteAfter]: () => {
-                    global.console.log('RTE EVENT PasteAfter!');
                     this.$emit('paste');
                 },
                 // if we use pasteBeforeCleanup, there's an error in froala's code
                 [froalaEvents.PasteAfterCleanup]: (data: string) => {
-                    global.console.log('RTE EVENT PasteAfterCleanup!');
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
                         return this.froalaEditor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input', 'img']);
                     }
                 },
                 [froalaEvents.CommandBefore]: (cmd: any, param1: any, param2: any) => {
-                    global.console.log('RTE EVENT CommandBefore!');
-                    global.console.log('cmd -> ' + cmd);
-                    global.console.log('param1 -> ' + param1);
-                    global.console.log('param2 -> ' + param2);
                     if (cmd === 'fullscreen') {
                         let fullscreenWasActivated: boolean = !this.froalaEditor.fullscreen.isActive();
                         if (!this.froalaEditor.fullscreen.isActive()) {
-                            // fix me
-                            // this.froalaEditor.toolbar.hide();
+                            // TODO fix me
+                            this.froalaEditor.toolbar.hide();
+                            setTimeout(() => {
+                                this.froalaEditor.toolbar.show();
+                            }, 50);
                         } else {
                             this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant);
                         }
@@ -386,13 +350,7 @@ const ENTER_KEYCODE: number = 13;
                     }
                 },
                 [froalaEvents.CommandAfter]: (cmd: any, param1: any, param2: any) => {
-                    // fix me, il y a un bug, l'event n'est pas appelé correctement
-                    // plain écren n'est pas completament affiché =(
-                    global.console.log('RTE EVENT CommandAfter! ');
-                    global.console.log('cmd -> ' + cmd);
-                    global.console.log('param1 -> ' + param1);
-                    global.console.log('param2 -> ' + param2);
-
+                    // Bug, watch "Clicking on full screen throws exception if toolbar is customized" in https://github.com/froala/wysiwyg-editor/issues/3483
                     if (cmd === 'fullscreen') {
                         if (this.froalaEditor.fullscreen.isActive()) {
                             this.froalaEditor.toolbar.show();
@@ -400,16 +358,13 @@ const ENTER_KEYCODE: number = 13;
                     }
                 },
                 [froalaEvents.ShowLinkInsert]: () => {
-                    global.console.log('RTE EVENT ShowLinkInsert!');
                     this.manageLinkInsert();
                 },
                 [froalaEvents.ImageRemoved]: ($img) => {
-                    global.console.log('RTE EVENT ImageRemoved! ');
                     this.$emit('image-removed', $img[0].dataset.id, this.fileUploadStoreName);
                     this.updateModel();
                 },
                 [froalaEvents.ImageInserted]: ($img) => {
-                    global.console.log('RTE EVENT ImageInserted! ');
                     if (this.froalaEditor.opts.modulImageUploaded) {
                         $img[0].alt = '';
                         this.updateModel();
@@ -424,21 +379,28 @@ const ENTER_KEYCODE: number = 13;
             }
         });
 
-        // this.registerEvents();
-
-        global.console.log('RTE CREATE EDITOR!');
-
         this.froalaEditor = new FroalaEditor(this.$refs.editor, this.currentConfig, () => {
-            global.console.log('RTE EVENT INITIALIZED! -> ' + this.isInitialized);
             this.isInitialized = true;
 
-            // We have to delay the initialization of disabled until the rich text is initialized.
-            // It will remain glitchy otherwise when combined with init on click.
-            // See comment https://github.com/froala/angular-froala-wysiwyg/issues/75#issuecomment-310709095
-            this.isDisabled = this.disabled;
-
+            this.setDisabled();
             this.manageInitialFocus();
         });
+    }
+
+    private setFroalaToolbarDesktop(): void {
+        if (this.froalaClientWidth < 550) {
+            // toolbar for desktop devices with RTE Width with less then 550 px
+            this.config.toolbarButtons.moreText.buttonsVisible = FroalaToolbarButtons.moreTextVisibleXS;
+            this.config.toolbarButtons.moreParagraph.buttonsVisible = FroalaToolbarButtons.moreParagraphVisibleXS;
+            this.config.toolbarButtons.moreRich.buttonsVisible = FroalaToolbarButtons.moreRichVisibleXS;
+            this.config.toolbarButtons.moreMisc.buttonsVisible = FroalaToolbarButtons.moreMiscVisibleXS;
+        } else {
+            // toolbar for desktop devices with RTE Width with or more then 550 px
+            this.config.toolbarButtons.moreText.buttonsVisible = FroalaToolbarButtons.moreTextVisible;
+            this.config.toolbarButtons.moreParagraph.buttonsVisible = FroalaToolbarButtons.moreParagraphVisible;
+            this.config.toolbarButtons.moreRich.buttonsVisible = FroalaToolbarButtons.moreRichVisible;
+            this.config.toolbarButtons.moreMisc.buttonsVisible = FroalaToolbarButtons.moreMiscVisible;
+        }
     }
 
     private closeEditor(): void {
@@ -469,7 +431,6 @@ const ENTER_KEYCODE: number = 13;
         return this.disabled;
     }
 
-    // fix me
     private set isDisabled(value: boolean) {
         if (value) {
             this.froalaEditor.edit.off();
@@ -478,18 +439,15 @@ const ENTER_KEYCODE: number = 13;
         }
     }
 
-    // fix me
     @Watch('readonly')
     private setReadOnly(): void {
         this.internalReadonly = this.readonly;
     }
 
     private simulateReadonlyBlur(event: Event): void {
-        // fix me
         if (!this.$el.contains(event.target as Node)) {
             if (this.isFocused) {
                 this.froalaEditor.edit.on();
-                global.console.log('RTE BLUR!!!');
                 this.froalaEditor.events.trigger('blur');
             }
             document.removeEventListener('mousedown', this.simulateReadonlyBlur, true);
@@ -529,9 +487,6 @@ const ENTER_KEYCODE: number = 13;
     }
 
     private manageLinkInsert(): void {
-        global.console.log('----------------------------------------');
-        global.console.log('RTE manageLinkInsert!!!');
-        global.console.log('----------------------------------------');
         const popup: HTMLElement = this.froalaEditor.popups.get('link.insert')[0];
         const urlField: HTMLInputElement = popup.querySelector(`[name="href"]`) as HTMLInputElement;
 
@@ -566,7 +521,6 @@ const ENTER_KEYCODE: number = 13;
         this.isLoaded = false;
         this.isInitialized = false;
         this.isFocused = false;
-        // this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
         if (this.froalaEditor) {
             this.froalaEditor.destroy();
         }
@@ -606,33 +560,6 @@ const ENTER_KEYCODE: number = 13;
         }
         return '';
     }
-
-    // fix me?
-    private registerEvent(eventName: any, callback: any): void {
-        if (!eventName || !callback) {
-            return;
-        }
-
-        if (this.currentConfig.events === undefined) {
-            this.currentConfig.events = {};
-        }
-
-        this.currentConfig.events[eventName] = callback;
-    }
-
-    private registerEvents(): void {
-        const events: any = this.currentConfig.events;
-        if (!events) {
-            return;
-        }
-
-        for (let event in events) {
-            if (events.hasOwnProperty(event)) {
-                this.registerEvent(event, events[event]);
-            }
-        }
-    }
-
 
     private htmlSet(): void {
         if (this.internalValue === this.value || !this.isLoaded) { return; }

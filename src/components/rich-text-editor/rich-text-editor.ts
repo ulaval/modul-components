@@ -142,13 +142,20 @@ export class MRichTextEditor extends ModulVue implements InputManagementData, In
 
         if (this.options.includes(MRichTextEditorOption.IMAGE) || this.mode === MRichTextEditorMode.MEDIA) {
             options.pluginsEnabled.push('image');
+
+            // toolbar for desktop devices
             options.toolbarButtons.moreRich.buttons.push('insertImage');
-            options.toolbarButtons.moreRich.buttonsVisible++;
+            // for mobile devices
+            options.toolbarButtonsXS.moreRich.buttons.push('insertImage');
         }
 
         if (this.titleAvailable) {
-            options.toolbarButtons.moreText.buttons.splice(0, 0, 'paragraphStyle');
             options.paragraphStyles = this.manageHeaderLevels();
+
+            // toolbar for desktop devices
+            options.toolbarButtons.moreText.buttons.splice(0, 0, 'paragraphStyle');
+            // for mobile devices
+            options.toolbarButtonsXS.moreText.buttons.splice(0, 0, 'paragraphStyle');
         }
 
         return options;

@@ -127,6 +127,12 @@
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
             background: $m-color--white;
+            transition: margin $m-transition-duration--l ease;
+        }
+
+        .fr-box.fr-basic.fr-top.fr-toolbar-open .fr-wrapper {
+            transition: margin $m-transition-duration--l ease;
+            margin-top: $m-margin--xl;
         }
 
         .fr-toolbar {
@@ -296,9 +302,9 @@
             }
         }
 
-        .second-toolbar {
-            display: none; // hide second toolbar in Froala (V3)
-        }
+        // .second-toolbar {
+        //     display: none; // hide second toolbar in Froala (V3)
+        // }
 
         .fr-command.fr-btn {
             width: 38px;
