@@ -51,9 +51,9 @@ const allCountriesFr: any = [
         '1264'
     ],
     [
-        'Antigue and Barbude',
+        'Antigua-et-Barbuda',
         'ag',
-        '1268'
+        ''
     ],
     [
         'Argentine',
@@ -77,7 +77,7 @@ const allCountriesFr: any = [
         0
     ],
     [
-        'Austriche (Österreich)',
+        'Autriche (Österreich)',
         'at',
         '43'
     ],
