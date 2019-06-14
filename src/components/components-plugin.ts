@@ -25,6 +25,7 @@ import ErrorConfigNotSupported from './error-pages/error-config-not-supported/er
 import ErrorCookiesNotSupported from './error-pages/error-cookies-not-supported/error-cookies-not-supported';
 import ErrorPageNotFoundPlugin from './error-pages/error-page-not-found/error-page-not-found';
 import ErrorTechnicalDifficultyPlugin from './error-pages/error-technical-difficulty/error-technical-difficulty';
+import ExpandableLayoutPlugin from './expandable-layout/expandable-layout';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
@@ -126,6 +127,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ErrorMessage);
         Vue.use(ErrorPageNotFoundPlugin);
         Vue.use(ErrorTechnicalDifficultyPlugin);
+        Vue.use(ExpandableLayoutPlugin);
         Vue.use(MessagePagePlugin);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);

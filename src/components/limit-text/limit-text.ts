@@ -83,9 +83,9 @@ export class MLimitText extends ModulVue {
             // Generate the full content - Add the close link if an HTML tag is present
             if (this.testingContent.match('</')) {
                 let tagIndex: number = this.testingContent.lastIndexOf('</');
-                this.fullContent = this.testingContent.substring(0, tagIndex) + '&nbsp;' + this.closeLink + this.testingContent.substring(tagIndex);
+                this.fullContent = this.testingContent.substring(0, tagIndex) + this.closeLink + this.testingContent.substring(tagIndex);
             } else {
-                this.fullContent = this.testingContent + '&nbsp;' + this.closeLink;
+                this.fullContent = this.testingContent + this.closeLink;
             }
             // Get the limited text
             this.adjustText();
@@ -190,8 +190,8 @@ export class MLimitText extends ModulVue {
     }
 
     private get closeLink(): string {
-        return this.closeLabel ? `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + this.closeLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
-            `<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + '\xa0-\xa0' + `]</m-link>`;
+        return this.closeLabel ? `&nbsp;<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + this.closeLabel.replace(/\s/g, '\xa0') + `]</m-link>` :
+            `&nbsp;<m-link mode="button" title="` + this.getCloseLabelTitle + `" hiddenText="` + this.getCloseLabelTitle + `" :underline="false">[` + '\xa0-\xa0' + `]</m-link>`;
     }
 
     private get getOpenLabelTitle(): string {

@@ -1,4 +1,4 @@
-<div>
+<div class="m-rich-text-editor-sandbox">
     <!-- Sandbox template -->
     <h3>Froala Text Editor</h3>
     <h5 class="m-u--margin-bottom">fonctionne sans option spécifiée</h5>
@@ -57,6 +57,12 @@
                             :readonly="readonly"></m-rich-text-editor>
     </div>
     <div class="m-u--margin-bottom">
+        <h5>Résultat dans le lecteur</h5>
+        <div>
+            <m-rich-text :value="initializedModel"></m-rich-text>
+        </div>
+    </div>
+    <div class="m-u--margin-bottom">
         <h5>Mode media</h5>
         <m-rich-text-editor v-model="mediaModel"
                             :options="options"
@@ -74,6 +80,42 @@
                             @image-ready="imageReady"
                             @image-added="imageAdded"
                             @image-removed="imageRemoved"></m-rich-text-editor>
+    </div>
+    <div class="m-u--margin-bottom">
+        <h5>One title</h5>
+        <div>
+            <m-rich-text-editor v-model="modelTitle1"
+                                :title-available="true"
+                                :options="options"
+                                label="rich text"
+                                max-width="large"
+                                first-header-level="1"
+                                last-header-level="1"></m-rich-text-editor>
+        </div>
+    </div>
+    <div class="m-u--margin-bottom">
+        <h5>Title and subtitle</h5>
+        <div>
+            <m-rich-text-editor v-model="modelTitle2"
+                                :options="options"
+                                :title-available="true"
+                                label="rich text"
+                                max-width="large"
+                                first-header-level="2"
+                                last-header-level="3"></m-rich-text-editor>
+        </div>
+    </div>
+    <div class="m-u--margin-bottom">
+        <h5>Multiple titles</h5>
+        <div>
+            <m-rich-text-editor v-model="modelTitle3"
+                                :options="options"
+                                :title-available="true"
+                                label="rich text"
+                                max-width="large"
+                                first-header-level="1"
+                                last-header-level="6"></m-rich-text-editor>
+        </div>
     </div>
     <div class="m-u--margin-bottom">
         <h5>Résultat dans le lecteur</h5>
@@ -94,12 +136,6 @@
                             :helper-message="helperMessage"
                             :waiting="waiting"
                             :disabled="disabled"></m-rich-text-editor>
-    </div>
-    <div class="m-u--margin-bottom">
-        <h5>Résultat dans le lecteur</h5>
-        <div>
-            <m-rich-text :value="initializedModel"></m-rich-text>
-        </div>
     </div>
     <div>
         <h5 class="m-u--margin-bottom">fonctionne dans un formulaire pleine page</h5>

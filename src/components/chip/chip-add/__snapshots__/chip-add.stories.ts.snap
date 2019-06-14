@@ -3,6 +3,7 @@
 exports[`Storyshots components|m-chip-add default 1`] = `
 <button
   class="m-chip-add"
+  type="button"
 >
   <div
     class="m-chip-add__body"
@@ -34,6 +35,7 @@ exports[`Storyshots components|m-chip-add disabled 1`] = `
 <button
   class="m-chip-add m--is-disabled"
   disabled="disabled"
+  type="button"
 >
   <div
     class="m-chip-add__body"
@@ -64,6 +66,7 @@ exports[`Storyshots components|m-chip-add disabled 1`] = `
 exports[`Storyshots components|m-chip-add icon=false 1`] = `
 <button
   class="m-chip-add"
+  type="button"
 >
   <div
     class="m-chip-add__body"

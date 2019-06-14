@@ -12,7 +12,7 @@ import RadioPlugin from '../radio/radio';
 import { MRichText } from '../rich-text/rich-text';
 import TextfieldPlugin from '../textfield/textfield';
 import { MRichTextEditor, MRichTextEditorOption, MRichTextEditorOptions } from './rich-text-editor';
-import WithRender from './rich-text-editor.sandbox.html';
+import WithRender from './rich-text-editor.sandbox.html?style=./rich-text-editor.sandbox.scss';
 import RichTextLicensePlugin from './rich-text-license-plugin';
 
 
@@ -24,6 +24,9 @@ export class MRichTextEditorSandBox extends ModulVue {
     public model: string = '';
     public mediaModel: string = '';
     public mediaModel2: string = '';
+    public modelTitle1: string = '';
+    public modelTitle2: string = '';
+    public modelTitle3: string = '';
     public focus: boolean = false;
     public error: boolean = false;
     public errorMessage: string = '';

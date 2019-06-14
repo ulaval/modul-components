@@ -1,9 +1,8 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { boolean, select, withKnobs } from '@storybook/addon-knobs';
+import { select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import { formatCurrencyWithOptions } from '../../filters/money/money';
 import { ENGLISH, FRENCH } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { MONEYFIELD_NAME } from './../component-names';
@@ -99,50 +98,50 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
         }
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('Format', () => ({
-        components: { MMoneyfield },
-        template: `<div>
-                <${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>
-                => {{ formatedOuput }}
-            </div>
-        `,
-        props: {
-            lang: {
-                default: select('Language', {
-                    [FRENCH]: FRENCH,
-                    [ENGLISH]: ENGLISH
-                }, (Vue.prototype as ModulVue).$i18n.currentLang())
-            },
-            stripDecimalZeroes: {
-                default: boolean('Strip decimal zeroes', false)
-            }
-        },
-        watch: {
-            lang: function(): void {
-                this.i18n.currentLang(this.lang);
-            }
-        },
-        computed: {
-            formatedOuput(): string {
-                return formatCurrencyWithOptions(this.value, {
-                    currency: (Vue.prototype as ModulVue).$l10n.currentCurrency,
-                    stripDecimalZeroes: this.stripDecimalZeroes
-                });
-            }
-        },
-        data: () => ({
-            value: 123456.7,
-            originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
-            i18n: Vue.prototype.$i18n,
-            l10n: Vue.prototype.$l10n
-        }),
-        destroyed(): void {
-            (Vue.prototype as ModulVue).$i18n.currentLang(this.originalLang);
-        }
-    }));
+// storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
+//     .addDecorator(withA11y)
+//     .addDecorator(withKnobs)
+//     .add('Format', () => ({
+//         components: { MMoneyfield },
+//         template: `<div>
+//                 <${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>
+//                 => {{ formatedOuput }}
+//             </div>
+//         `,
+//         props: {
+//             lang: {
+//                 default: select('Language', {
+//                     [FRENCH]: FRENCH,
+//                     [ENGLISH]: ENGLISH
+//                 }, (Vue.prototype as ModulVue).$i18n.currentLang())
+//             },
+//             stripDecimalZeroes: {
+//                 default: boolean('Strip decimal zeroes', false)
+//             }
+//         },
+//         watch: {
+//             lang: function(): void {
+//                 this.i18n.currentLang(this.lang);
+//             }
+//         },
+//         computed: {
+//             formatedOuput(): string {
+//                 return formatCurrencyWithOptions(this.value, {
+//                     currency: (Vue.prototype as ModulVue).$l10n.currentCurrency,
+//                     stripDecimalZeroes: this.stripDecimalZeroes
+//                 });
+//             }
+//         },
+//         data: () => ({
+//             value: 123456.7,
+//             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
+//             i18n: Vue.prototype.$i18n,
+//             l10n: Vue.prototype.$l10n
+//         }),
+//         destroyed(): void {
+//             (Vue.prototype as ModulVue).$i18n.currentLang(this.originalLang);
+//         }
+//     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     .addDecorator(withA11y)

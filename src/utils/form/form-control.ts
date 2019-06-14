@@ -15,7 +15,9 @@ export class FormControl<T> extends AbstractControl {
         super(validators, options);
 
         if (options) {
-            this._initialValue = this._value = this._oldValue = options.initialValue;
+            if (options.initialValue !== undefined) {
+                this._initialValue = this._value = this._oldValue = options.initialValue;
+            }
         } else {
             // ensure reactivity
             this._value = undefined;
@@ -39,6 +41,10 @@ export class FormControl<T> extends AbstractControl {
         this._value = value;
 
         this.upwardValueChanged();
+    }
+
+    set initalValue(initalValue: T) {
+        this._initialValue = initalValue;
     }
 
     public get valid(): boolean {
@@ -75,17 +81,35 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
+    /**
+     * This specify the ennd of a edition context.
+     */
     public endEdition(): void {
         this._touched = true;
         super.endEdition();
     }
 
-    public reset(): void {
+    /**
+     * Reset the field to it's orginal pristine state.
+     *
+     * @param {T} [initialValue]  a new initial value for the field
+     */
+    public reset(initialValue?: T): void {
         super.reset();
         this._touched = false;
-        this._value = this._oldValue = this._initialValue;
+
+        if (!initialValue) {
+            this._value = this._oldValue = this._initialValue;
+        } else {
+            this._initialValue = this._value = this._oldValue = initialValue;
+        }
     }
 
+    /**
+     * Run all validators
+     *
+     * @param [external] run external validator
+     */
     public async submit(external: boolean = false): Promise<void> {
         this.validate(external);
         await this.validateAsync(external);

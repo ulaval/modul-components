@@ -151,7 +151,6 @@ export class MDatepicker extends ModulVue {
     private async onOpen(): Promise<void> {
         let inputMask: MInputMask = this.$refs.input;
 
-        this.clearErrorMessage();
         inputMask.focusAndSelectAll();
     }
 
@@ -166,27 +165,31 @@ export class MDatepicker extends ModulVue {
 
     private inputDate(inputValue: string): void {
         this.inputModel = inputValue;
-        if (this.skipInputValidation) {
-            this.model = inputValue;
-        } else {
-            if (!inputValue || inputValue === '') {
-                this.model = '';
-                this.clearErrorMessage();
-            } else if (inputValue.length === 10) {
 
-                if (this.showErrorMessage(inputValue)) {
-                    this.model = this.inputModel;
+        if (!inputValue || inputValue === '') {
+            this.model = '';
+            this.clearErrorMessage();
+        } else {
+
+            if (this.open) {
+                this.open = false;
+            }
+
+            if (this.skipInputValidation) {
+                this.model = inputValue;
+            } else {
+                if (inputValue.length === 10) {
+                    if (this.showErrorMessage(inputValue)) {
+                        this.model = this.inputModel;
+                    } else {
+                        this.model = '';
+                    }
                 } else {
                     this.model = '';
                 }
-            } else {
-                if (this.open) {
-                    this.open = false;
-                }
-                this.model = '';
-                this.clearErrorMessage();
             }
         }
+
 
     }
 
@@ -339,7 +342,12 @@ export class MDatepicker extends ModulVue {
         if (value instanceof Date) {
             return new ModulDate(value.toISOString()).toString();
         } else {
-            return value as string;
+            if (value) {
+                return value;
+            } else {
+                return '';
+            }
+
         }
     }
 

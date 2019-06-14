@@ -10,6 +10,7 @@ import imageAlignRightIcon from '../../../assets/icons/svg/Froala-image-align-ri
 import listsIcon from '../../../assets/icons/svg/Froala-lists.svg';
 import replaceIcon from '../../../assets/icons/svg/Froala-replace.svg';
 import stylesIcon from '../../../assets/icons/svg/Froala-styles.svg';
+import titleIcon from '../../../assets/icons/svg/Froala-title.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { MFile } from '../../../utils/file/file';
@@ -24,24 +25,30 @@ require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
 
 enum froalaEvents {
-    Initialized = 'froalaEditor.initialized',
-    InitializationDelayed = 'froalaEditor.initializationDelayed',
+    Blur = 'froalaEditor.blur',
+    Click = 'froalaEditor.click',
+    CommandAfter = 'froalaEditor.commands.after',
+    CommandBefore = 'froalaEditor.commands.before',
     ContentChanged = 'froalaEditor.contentChanged',
     Focus = 'froalaEditor.focus',
-    Blur = 'froalaEditor.blur',
+    ImageRemoved = 'froalaEditor.image.removed',
+    ImageInserted = 'froalaEditor.image.inserted',
+    Initialized = 'froalaEditor.initialized',
+    InitializationDelayed = 'froalaEditor.initializationDelayed',
     KeyUp = 'froalaEditor.keyup',
     KeyDown = 'froalaEditor.keydown',
     PasteAfter = 'froalaEditor.paste.after',
     PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
-    CommandAfter = 'froalaEditor.commands.after',
-    CommandBefore = 'froalaEditor.commands.before',
-    ShowLinkInsert = 'froalaEditor.popups.show.link.insert',
-    ImageRemoved = 'froalaEditor.image.removed',
-    ImageInserted = 'froalaEditor.image.inserted'
+    ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
 }
 
 enum FroalaElements {
     TOOLBAR = '.fr-toolbar'
+}
+
+enum FroalaBreakingPoint {
+    minDefault = 545,
+    minOneMode = 565
 }
 
 export enum FroalaStatus {
@@ -49,6 +56,8 @@ export enum FroalaStatus {
     Blurred = 'blurred',
     Focused = 'focused'
 }
+
+const ENTER_KEYCODE: number = 13;
 
 @WithRender
 @Component({
@@ -94,6 +103,7 @@ export enum FroalaStatus {
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
     protected isLoaded: boolean = false;
+    protected froalaClientWidth: number = 0;
 
     protected isDirty: boolean = false;
     protected status: FroalaStatus = FroalaStatus.Blurred;
@@ -110,6 +120,17 @@ export enum FroalaStatus {
     @Watch('value')
     public refreshValue(): void {
         this.htmlSet();
+    }
+
+    protected setClientWidth(): void {
+        this.froalaClientWidth = (this.$el as HTMLElement).clientWidth;
+    }
+
+    protected get isDesktop(): boolean {
+        if (this.config && this.config.pluginsEnabled.includes('image')) {
+            return this.froalaClientWidth >= FroalaBreakingPoint.minOneMode;
+        }
+        return this.froalaClientWidth >= FroalaBreakingPoint.minDefault;
     }
 
     public get isEmpty(): boolean {
@@ -166,19 +187,20 @@ export enum FroalaStatus {
         }
         $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
         $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
+        $.FroalaEditor.DefineIcon('paragraphStyle', { SVG: (titleIcon as string), template: 'custom-icons' });
     }
 
     protected addPopups(): void {
         // add mobile mode popups
         $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
         this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters', 'insertImage']);
     }
 
     protected addSubMenus(): void {
         // add mobile mode submenus
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['bold', 'italic', 'subscript', 'superscript']);
+        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript']);
         this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
 
         // we'll use this submodule when we'll support images,tables,...
@@ -312,6 +334,7 @@ export enum FroalaStatus {
     }
 
     protected onResize(): void {
+        this.setClientWidth();
         if (!this.isFocused) {
             this.adjusteToolbarPosition();
         }
@@ -338,10 +361,10 @@ export enum FroalaStatus {
         }
     }
 
-    @Watch('isEqMinXS')
+    @Watch('isDesktop')
     private changeMode(): void {
         // mode desktop
-        if (this.as<ElementQueries>().isEqMinXS) {
+        if (this.isDesktop) {
             this.desktopMode();
             // hide hide button
             if (this.froalaEditor && this.froalaEditor.$tb) {
@@ -357,6 +380,7 @@ export enum FroalaStatus {
             return;
         }
 
+        this.setClientWidth();
         this.addCustomIcons();
         this.addSubMenus();
 
@@ -402,9 +426,12 @@ export enum FroalaStatus {
                     }
                     this.$emit('keyup');
                 },
-                [froalaEvents.KeyDown]: (_e, _editor) => {
+                [froalaEvents.KeyDown]: (_e, editor, key) => {
                     this.$emit('keydown');
                     this.isDirty = true;
+                    if (key.keyCode === ENTER_KEYCODE) {
+                        editor.paragraphStyle.apply('');
+                    }
                 },
                 [froalaEvents.PasteAfter]: (_e, _editor) => {
                     this.$emit('paste');

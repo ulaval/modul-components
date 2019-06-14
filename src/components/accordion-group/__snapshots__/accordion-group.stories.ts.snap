@@ -858,7 +858,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -894,7 +893,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -930,7 +928,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -989,7 +986,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1025,7 +1021,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1061,7 +1056,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" all childrens d
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1120,7 +1114,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" childrens disab
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1156,7 +1149,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" childrens disab
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1192,7 +1184,6 @@ exports[`Storyshots components|m-accordion-group/disabled="true" childrens disab
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1398,7 +1389,6 @@ exports[`Storyshots components|m-accordion-group/disabled=false all childrens di
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1434,7 +1424,6 @@ exports[`Storyshots components|m-accordion-group/disabled=false all childrens di
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1470,7 +1459,6 @@ exports[`Storyshots components|m-accordion-group/disabled=false all childrens di
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1537,7 +1525,6 @@ exports[`Storyshots components|m-accordion-group/disabled=false childrens disabl
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
@@ -1609,7 +1596,6 @@ exports[`Storyshots components|m-accordion-group/disabled=false childrens disabl
         class="m-accordion__header m--has-padding"
         id="uuid"
         role="tab"
-        tabindex="0"
       >
         <div
           class="m-accordion__header__content"
