@@ -25,9 +25,9 @@ export class MPeriodpickerSandbox extends Vue {
     readonly: boolean = false;
     error: boolean = false;
 
-    model: MDateRange = { from: this.from, to: this.to };
-    defaultStringValueModel: MDateRange = { from: this.fromDefaultStringValue, to: this.toDefaultStringValue };
-    defaultDateValueModel: MDateRange = { from: this.fromDefaultDateValue, to: this.toDefaultDateValue };
+    model: MDateRange = new MDateRange(this.from, this.to);
+    defaultStringValueModel: MDateRange = new MDateRange(this.fromDefaultStringValue, this.toDefaultStringValue);
+    defaultDateValueModel: MDateRange = new MDateRange(this.fromDefaultDateValue, this.toDefaultDateValue);
 
     get min(): Date {
         const date: Date = new Date();
