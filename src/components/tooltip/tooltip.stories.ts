@@ -20,13 +20,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}`, module)
         data: () => ({
             openProp: true
         }),
-        template: `<span>Lorem Ipsum<m-tooltip>This is some random text</m-tooltip></span>`
+        template: `<span>Lorem Ipsum<m-tooltip :open="openProp">This is some random text</m-tooltip></span>`
     }))
     .add('close-button="false"', () => ({
         data: () => ({
             openProp: true
         }),
-        template: `<span>Lorem Ipsum<m-tooltip :close-button="false">This is some random text</m-tooltip></span>`
+        template: `<span>Lorem Ipsum<m-tooltip :close-button="false" :open="openProp">This is some random text</m-tooltip></span>`
     }))
     .add('disabled', () => ({
         data: () => ({
@@ -34,42 +34,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}`, module)
         }),
         template: `<span>Lorem Ipsum<m-tooltip :disabled="true">This is some random text</m-tooltip></span>`
     }))
-    .add('open-title="custom-open-title"', () => ({
-        data: () => ({
-            openProp: true,
-            openTitle: 'custom-open-title'
-        }),
-        template: `<div>
-                        <span>Lorem Ipsum
-                            <m-tooltip :open-title="openTitle">This is some random text</m-tooltip>
-                        </span>
-                        <span style="display: flex; margin-top: 15px"><span style="color: blue">Current open-title:</span><span style="color: red"> {{openTitle}}</span></span>
-                   </div>`
-    }))
-    .add('close-title="custom-close-title"', () => ({
-        data: () => ({
-            openProp: true,
-            closeTitle: 'custom-close-title'
-        }),
-        template: `<div>
-                        <span>Lorem Ipsum
-                            <m-tooltip :close-title="closeTitle">This is some random text</m-tooltip>
-                        </span>
-                        <span style="display: flex; margin-top: 15px"><span style="color: blue">Current close-title:</span><span style="color: red"> {{closeTitle}}</span></span>
-                   </div>`
-    }))
-    .add('class-name="custom-class-name"', () => ({
-        data: () => ({
-            openProp: true,
-            className: 'custom-class-name'
-        }),
-        template: `<div>
-                        <span>Lorem Ipsum
-                            <m-tooltip :class-name="className">This is some random text</m-tooltip>
-                        </span>
-                        <span style="display: flex; margin-top: 15px"><span style="color: blue">Current class-name:</span><span style="color: red">{{className}}</span></span>
-                   </div>`
-    }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
     .addDecorator(withA11y)
@@ -78,14 +42,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
         data: () => ({
             openProp: true
         }),
-        template: `<span>Lorem Ipsum<m-tooltip mode="icon">This is some random text</m-tooltip></span>`
+        template: `<span>Lorem Ipsum<m-tooltip mode="icon" :open="openProp">This is some random text</m-tooltip></span>`
     }))
     .add('mode="link"', () => ({
         data: () => ({
             openProp: true
         }),
         template: `<span>Spicy jalapeno
-                        <m-tooltip mode="link">
+                        <m-tooltip mode="link" :open="openProp">
                         <span slot="link">bacon ipsum</span>
                         <p class="m-u--no-margin">What is Bacon Ipsum?</p>
                         <p>Simply put, it’s a take on the lorem ipsum filler text used when doing design mockups.
@@ -103,7 +67,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
             openProp: true
         }),
         template: `<span>Spicy jalapeno
-                        <m-tooltip mode="definition">
+                        <m-tooltip mode="definition" :open="openProp">
                         <span slot="link">bacon ipsum</span>
                         <p class="m-u--no-margin">What is Bacon Ipsum?</p>
                         <p>Simply put, it’s a take on the lorem ipsum filler text used when doing design mockups.
@@ -133,150 +97,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/size`, module)
         template: '<span>Lorem Ipsum<m-tooltip :open.sync="openProp" size="large">This is some random text</m-tooltip></span>'
     }));
 
-storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/placement`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('placement="top"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="top">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="top-start"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="top-start">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="top-end"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="top-end">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="right"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="right">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="right-start"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="right-start">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="right-end"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="right-end">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="bottom"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="bottom">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="bottom-start"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="bottom-start">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="bottom-end"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="bottom-end">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="left"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="left">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="left-start"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="left-start">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }))
-    .add('placement="left-end"', () => ({
-        data: () => ({
-            openProp: true
-        }),
-        template: `<div style="position: relative; height: 500px; width: 875px; background: #f7f7f7">
-                        <span style="position: absolute; top: 40%">Prow scuttle parrel provost Sail ho shrouds spirits
-                        boom mizzenmast yardarm.
-                                <m-tooltip :open.sync="openProp" placement="left-end">Deadlights jack lad schooner scallywag
-                                 dance the hempen jig carouser broadside cable strike colors.</m-tooltip>
-                        </span>
-                    </div>`
-    }));
