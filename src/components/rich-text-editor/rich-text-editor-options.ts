@@ -69,13 +69,9 @@ export class MRichTextEditorDefaultOptions {
         }
     };
 
-    public embedlyKey: string = '';
-
     constructor(public key: string, public language: string = 'en_CA') {
         if (!key) {
             throw new Error('In order to use the rich-text-editor you need to provide a valid froala key.');
-        } else {
-            this.embedlyKey = key;
         }
     }
 }
