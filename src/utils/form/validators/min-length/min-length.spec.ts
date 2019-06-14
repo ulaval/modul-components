@@ -12,14 +12,14 @@ describe('Min length validator', () => {
         );
     });
 
-    test('if value is undefined, it should be valid', () => {
+    it('if value is undefined, it should be valid', () => {
 
         formControl.validate();
 
         expect(formControl.valid).toBe(true);
     });
 
-    test('if value is empty string, it should be valid', () => {
+    it('if value is empty string, it should be valid', () => {
         formControl.value = '';
 
         formControl.validate();
@@ -27,7 +27,7 @@ describe('Min length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('if is longer, it should be valid', () => {
+    it('if is longer, it should be valid', () => {
         formControl.value = '1234';
 
         formControl.validate();
@@ -35,7 +35,7 @@ describe('Min length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should return true is same', () => {
+    it('it should return true is same', () => {
         formControl.value = '123';
 
         formControl.validate();
@@ -43,7 +43,7 @@ describe('Min length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('if number length is longer, it should be valid', () => {
+    it('if number length is longer, it should be valid', () => {
         formControl.value = 1234;
 
         formControl.validate();
@@ -51,7 +51,7 @@ describe('Min length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('if array length is smaller, it should be invalid', () => {
+    it('if array length is smaller, it should be invalid', () => {
         formControl.value = [1];
 
         formControl.validate();
@@ -59,7 +59,7 @@ describe('Min length validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('if array length is longer, it should be valid', () => {
+    it('if array length is longer, it should be valid', () => {
         formControl.value = [1, 2, 3, 4];
 
         formControl.validate();

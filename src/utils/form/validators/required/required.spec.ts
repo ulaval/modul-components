@@ -10,14 +10,14 @@ describe('Required validator', () => {
         );
     });
 
-    test('if value is undefined, it should be invalid', () => {
+    it('if value is undefined, it should be invalid', () => {
 
         formControl.validate();
 
         expect(formControl.valid).toBe(false);
     });
 
-    test('if value is empty array, it should be invalid', () => {
+    it('if value is empty array, it should be invalid', () => {
         formControl.value = [];
 
         formControl.validate();
@@ -25,7 +25,7 @@ describe('Required validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('is value is empty string, it should be invalid', () => {
+    it('is value is empty string, it should be invalid', () => {
         formControl.value = '';
 
         formControl.validate();
@@ -33,7 +33,7 @@ describe('Required validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('if value is 0, it should be valid', () => {
+    it('if value is 0, it should be valid', () => {
         formControl.value = 0;
 
         formControl.validate();
@@ -41,7 +41,7 @@ describe('Required validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('if value is set, it should be valid', () => {
+    it('if value is set, it should be valid', () => {
         formControl.value = 'test';
 
         formControl.validate();

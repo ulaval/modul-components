@@ -16,7 +16,7 @@ describe('compare validator', () => {
         );
     });
 
-    test('it should return true if all controls are undefined', () => {
+    it('it should return true if all controls are undefined', () => {
         expect((formGroup.getControl('test1') as FormControl<string>).value).toBe(undefined);
         expect((formGroup.getControl('test2') as FormControl<string>).value).toBe(undefined);
         expect((formGroup.getControl('test3') as FormControl<string>).value).toBe(undefined);
@@ -27,7 +27,7 @@ describe('compare validator', () => {
 
     });
 
-    test('it should return false if one value is different', () => {
+    it('it should return false if one value is different', () => {
         (formGroup.getControl('test1') as FormControl<string>).value = 'test';
 
         formGroup.validate();
@@ -36,7 +36,7 @@ describe('compare validator', () => {
 
     });
 
-    test('it should return true if all values are the same', () => {
+    it('it should return true if all values are the same', () => {
         (formGroup.getControl('test1') as FormControl<string>).value = 'test';
         (formGroup.getControl('test2') as FormControl<string>).value = 'test';
         (formGroup.getControl('test3') as FormControl<string>).value = 'test';

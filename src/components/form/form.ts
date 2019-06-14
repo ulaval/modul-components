@@ -29,9 +29,8 @@ export class MForm extends ModulVue {
     @Emit('reset')
     public emitReset(): void { }
 
-
     @Watch('formErrors')
-    public onFormGroupChange(formErrors: ControlError[], oldVal: any): void {
+    public onFormGroupChange(formErrors: ControlError[], _oldVal: any): void {
         if (formErrors.length === 0) {
             this.displaySummary = this.displayToast = false;
         }
@@ -41,8 +40,8 @@ export class MForm extends ModulVue {
         return this._getAllFormErrors(this.formGroup);
     }
 
-    public get errorsMessages(): string[] {
-        return this.formErrors.map<string>(error => getString(error.groupMessage) || getString(error.message));
+    public get errorMessages(): string[] {
+        return this.formErrors.map(error => getString(error.groupMessage) || getString(error.message));
     }
 
     public get formControlsInError(): AbstractControl[] {
@@ -96,7 +95,7 @@ export class MForm extends ModulVue {
         this.formGroup.reset();
     }
 
-    private _isValid(external: boolean = false): boolean {
+    private _isValid(): boolean {
         return this.formGroup.valid;
     }
 

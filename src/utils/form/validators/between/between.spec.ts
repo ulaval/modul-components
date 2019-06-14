@@ -6,7 +6,7 @@ describe('between validator', () => {
 
     describe('any type', () => {
         describe('Given an undefined value', () => {
-            test('it should be valid', () => {
+            it('it should be valid', () => {
                 formControl = new FormControl<any>(
                     [BetweenValidator(1, 3)]
                 );
@@ -30,7 +30,7 @@ describe('between validator', () => {
         });
 
         describe('Given a value lower than the lower bound', () => {
-            test('it should be invalid', () => {
+            it('it should be invalid', () => {
                 formControl.value = LOWER_BOUND - 1;
 
                 formControl.validate();
@@ -40,7 +40,7 @@ describe('between validator', () => {
         });
 
         describe('Given a value higher than the upper bound', () => {
-            test('it should be invalid', () => {
+            it('it should be invalid', () => {
                 formControl.value = UPPER_BOUND + 1;
 
                 formControl.validate();
@@ -50,7 +50,7 @@ describe('between validator', () => {
         });
 
         describe('Given a value between the bounds', () => {
-            test('it should be valid', () => {
+            it('it should be valid', () => {
                 formControl.value = UPPER_BOUND - 1;
 
                 formControl.validate();
@@ -60,7 +60,7 @@ describe('between validator', () => {
         });
 
         describe('Given a value equal to the lower bound', () => {
-            test('it should be valid', () => {
+            it('it should be valid', () => {
                 formControl.value = LOWER_BOUND;
 
                 formControl.validate();
@@ -70,7 +70,7 @@ describe('between validator', () => {
         });
 
         describe('Given a value equal to the upper bound', () => {
-            test('it should be valid', () => {
+            it('it should be valid', () => {
                 formControl.value = UPPER_BOUND;
 
                 formControl.validate();
@@ -80,7 +80,7 @@ describe('between validator', () => {
         });
 
         describe('Given a value equal to 0 and betweent the bounds the bounds', () => {
-            test('it should be valid', () => {
+            it('it should be valid', () => {
                 formControl = new FormControl<number>(
                     [BetweenValidator(-1, 1)],
                     { initialValue: 0 }
@@ -103,7 +103,7 @@ describe('between validator', () => {
             );
         });
 
-        test('if value is lower than the lower bound, it should be invalid', () => {
+        it('if value is lower than the lower bound, it should be invalid', () => {
             formControl.value = LOWER_BOUND.valueOf() - 1;
 
             formControl.validate();
@@ -111,7 +111,7 @@ describe('between validator', () => {
             expect(formControl.valid).toBe(false);
         });
 
-        test('if value is higher than the upper bound, it should be invalid', () => {
+        it('if value is higher than the upper bound, it should be invalid', () => {
             formControl.value = UPPER_BOUND.valueOf() + 1;
 
             formControl.validate();
@@ -120,7 +120,7 @@ describe('between validator', () => {
 
         });
 
-        test('if value is between the bounds, it should be valid', () => {
+        it('if value is between the bounds, it should be valid', () => {
             formControl.value = UPPER_BOUND.valueOf() - 1;
 
             formControl.validate();
@@ -128,7 +128,7 @@ describe('between validator', () => {
             expect(formControl.valid).toBe(true);
         });
 
-        test('if value is equal to the lower bound, it should be valid', () => {
+        it('if value is equal to the lower bound, it should be valid', () => {
             formControl.value = LOWER_BOUND;
 
             formControl.validate();
@@ -136,7 +136,7 @@ describe('between validator', () => {
             expect(formControl.valid).toBe(true);
         });
 
-        test('if value is equal to the upper bound, it should be valid', () => {
+        it('if value is equal to the upper bound, it should be valid', () => {
             formControl.value = UPPER_BOUND;
 
             formControl.validate();

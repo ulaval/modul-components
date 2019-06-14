@@ -10,14 +10,14 @@ describe('email validator', () => {
         );
     });
 
-    test('it should be valid if value is empty', () => {
+    it('it should be valid if value is empty', () => {
 
         formControl.validate();
 
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should be invalid with email missing "@"', () => {
+    it('it should be invalid with email missing "@"', () => {
         formControl.value = 'test.com';
 
         formControl.validate();
@@ -25,7 +25,7 @@ describe('email validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should be invalid with email missing "."', () => {
+    it('it should be invalid with email missing "."', () => {
         formControl.value = 'test@ul';
 
         formControl.validate();
@@ -33,7 +33,7 @@ describe('email validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return true with valid email', () => {
+    it('it should return true with valid email', () => {
         formControl.value = 'test@test.ulaval.ca';
 
         formControl.validate();

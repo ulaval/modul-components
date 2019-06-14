@@ -5,7 +5,7 @@ describe('Max validator', () => {
     let formControl: FormControl<any>;
 
     describe('"any" type form ', () => {
-        test('it should return true if value is undefined', () => {
+        it('it should return true if value is undefined', () => {
             formControl = new FormControl<any>(
                 [MaxValidator(3)]
             );
@@ -26,13 +26,13 @@ describe('Max validator', () => {
             );
         });
 
-        test('it should return true if value is 0 and max value is higher', () => {
+        it('it should return true if value is 0 and max value is higher', () => {
             formControl.value = 0;
             formControl.validate();
             expect(formControl.valid).toBe(true);
         });
 
-        test('it should return false if value is 0 and max value is lower', () => {
+        it('it should return false if value is 0 and max value is lower', () => {
             formControl = new FormControl<number>(
                 [MaxValidator(-1)],
                 {
@@ -45,7 +45,7 @@ describe('Max validator', () => {
             expect(formControl.valid).toBe(false);
         });
 
-        test('it should return true if value is lower than max value', () => {
+        it('it should return true if value is lower than max value', () => {
             formControl.value = MAX_VALUE - 1;
 
             formControl.validate();
@@ -53,7 +53,7 @@ describe('Max validator', () => {
             expect(formControl.valid).toBe(true);
         });
 
-        test('it should return true if value is same', () => {
+        it('it should return true if value is same', () => {
             formControl.value = MAX_VALUE;
 
             formControl.validate();
@@ -61,7 +61,7 @@ describe('Max validator', () => {
             expect(formControl.valid).toBe(true);
         });
 
-        test('it should return false if value is higher', () => {
+        it('it should return false if value is higher', () => {
             formControl.value = MAX_VALUE + 1;
 
             formControl.validate();

@@ -11,7 +11,7 @@ describe('Max length validator', () => {
         );
     });
 
-    test('it should return true if value is undefined', () => {
+    it('it should return true if value is undefined', () => {
         expect(formControl.value).toBe(undefined);
 
         formControl.validate();
@@ -19,7 +19,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should return true if value is empty string', () => {
+    it('it should return true if value is empty string', () => {
         formControl.value = '';
 
         formControl.validate();
@@ -27,7 +27,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should return false if is longer', () => {
+    it('it should return false if is longer', () => {
         formControl.value = '1234';
 
         formControl.validate();
@@ -35,7 +35,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return true is same', () => {
+    it('it should return true is same', () => {
         formControl.value = '123';
 
         formControl.validate();
@@ -43,7 +43,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should return true if number length is shorter', () => {
+    it('it should return true if number length is shorter', () => {
         formControl.value = 12;
 
         formControl.validate();
@@ -51,7 +51,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should return false if number length is longer', () => {
+    it('it should return false if number length is longer', () => {
         formControl.value = 1234;
 
         formControl.validate();
@@ -59,7 +59,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return false if array length is longer', () => {
+    it('it should return false if array length is longer', () => {
         formControl.value = [12, 2, 33, 4];
 
         formControl.validate();
@@ -67,7 +67,7 @@ describe('Max length validator', () => {
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return true if array length is shorter', () => {
+    it('it should return true if array length is shorter', () => {
         formControl.value = ['12', '222'];
 
         formControl.validate();
