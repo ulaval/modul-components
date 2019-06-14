@@ -181,6 +181,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module
                         <p><span style="color: blue">length-overflow</span> is equal to <span style="color: red">false</span></p>
                    </div>`
     }))
+    .add('max-length="200" and :word-wrap="true"', () => ({
+        template: `<div>
+                        <m-textfield :word-wrap="true" :length-overflow="false" placeholder="Enter a value" max-length="200"
+                        value="This is a value"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">"200"</span></p>
+                        <p><span style="color: blue">length-overflow</span> is equal to <span style="color: red">false</span></p>
+                        <p><span style="color: blue">word-wrap</span> is equal to <span style="color: red">true</span></p>
+                   </div>`
+    }))
     .add('character-count', () => ({
         template: `<div>
                         <m-textfield :character-count="true" placeholder="Enter a value" max-length="20"
