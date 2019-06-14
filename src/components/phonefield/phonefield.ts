@@ -7,6 +7,7 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import { FRENCH } from '../../utils/i18n/i18n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { PHONEFIELD_NAME } from '../component-names';
@@ -15,7 +16,8 @@ import { InputMaskOptions, MInputMask } from '../input-mask/input-mask';
 import InputStyle from '../input-style/input-style';
 import SelectPlugin from '../select/select';
 import ValidationMesagePlugin from '../validation-message/validation-message';
-import allCountries from './assets/all-countries';
+import allCountriesEn from './assets/all-countries-en';
+import allCountriesFr from './assets/all-countries-fr';
 import WithRender from './phonefield.html?style=./phonefield.scss';
 
 interface CountryOptions {
@@ -63,11 +65,11 @@ export class MPhonefield extends ModulVue {
     }
 
     private get countries(): CountryOptions[] {
-        return allCountries;
+        return this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
     }
 
-    private get isoCountries(): CountryOptions[] {
-        return allCountries.map(contry => contry.iso2);
+    private get isoCountries(): string[] {
+        return this.countries.map(contry => contry.iso2);
     }
 
     private get propLabel(): string {

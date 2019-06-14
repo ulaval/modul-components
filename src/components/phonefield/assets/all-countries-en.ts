@@ -14,7 +14,7 @@
 //    Order (if >1 country with same dial code),
 //    Area codes
 // ]
-const allCountries: any = [
+const allCountriesEn: any = [
     [
         'Afghanistan (‫افغانستان‬‎)',
         'af',
@@ -1262,7 +1262,7 @@ const allCountries: any = [
     ]
 ];
 
-export default allCountries.map(country => ({
+export default allCountriesEn.map(country => ({
     name: country[0],
     iso2: country[1],
     dialCode: country[2],
