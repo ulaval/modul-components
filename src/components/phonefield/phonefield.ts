@@ -67,7 +67,7 @@ export class MPhonefield extends ModulVue {
 
     private get countries(): CountryOptions[] {
         const countries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
-        return countries.sort((a, b) => (a.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '') > b.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')) ? 1 : ((b.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '') > a.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')) ? -1 : 0));
+        return countries.sort((a, b) => (this.nameNormalize(a.name) > this.nameNormalize(b.name)) ? 1 : ((this.nameNormalize(b.name) > this.nameNormalize(a.name)) ? -1 : 0));
     }
 
     private get isoCountries(): string[] {
@@ -123,6 +123,10 @@ export class MPhonefield extends ModulVue {
 
     private set model(value: string) {
         this.emitNewValue(value);
+    }
+
+    private nameNormalize(name: string): string {
+        return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
     @Emit('input')
