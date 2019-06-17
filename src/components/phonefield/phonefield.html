@@ -14,6 +14,8 @@
                   :readonly="isReadonly"
                   :error="hasPhonefieldError"
                   :valid="isPhonefieldValid"
+                  :label-up="true"
+                  :label="i18nCountryLabel"
                   width="auto">
             <div class="m-phonefield__flag-wrapper">
                 <m-flag :iso="countryModel"></m-flag>
@@ -56,7 +58,8 @@
                               @change="onChange"
                               ref="inputMask"></m-input-mask>
             </m-input-style>
-            <p class="m-phonefield__example">{{ i18nExample }}{{ example }}</p>
+            <p class="m-phonefield__example"
+               x-ms-format-detection="none">{{ i18nExample }}{{ example }}</p>
         </div>
     </div>
     <div class="m-phonefield__validation">

@@ -51,6 +51,7 @@ export class MPhonefield extends ModulVue {
     public defaultCountry: string;
 
     private i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
+    private i18nCountryLabel: string = this.$i18n.translate('m-phonefield:country-label');
     private i18nExample: string = this.$i18n.translate('m-phonefield:example');
 
     private countryModelInternal: string = '';
@@ -65,7 +66,8 @@ export class MPhonefield extends ModulVue {
     }
 
     private get countries(): CountryOptions[] {
-        return this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
+        const countries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
+        return countries.sort((a, b) => (a.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '') > b.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')) ? 1 : ((b.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '') > a.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')) ? -1 : 0));
     }
 
     private get isoCountries(): string[] {

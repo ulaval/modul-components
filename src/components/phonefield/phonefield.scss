@@ -12,11 +12,17 @@
 
     &__wrapper {
         display: flex;
-        align-items: flex-end;
+        flex-wrap: wrap;
         padding-bottom: $m-spacing;
     }
 
     &__country {
+        flex-direction: row;
+
+        /deep/ .m-input-style__label {
+            visibility: hidden;
+        }
+
         /deep/ .m-input-style__content {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -25,7 +31,6 @@
 
     &__flag-wrapper {
         position: relative;
-        height: 22px; // Magic number
         display: flex;
         align-items: center;
         margin-right: $m-spacing--s;

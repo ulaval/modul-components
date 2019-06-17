@@ -12,27 +12,31 @@ exports[`Storyshots components|m-phonefield default 1`] = `
       style="width: auto; max-width: 288px;"
     >
       <div
-        class="m-input-style m--has-cursor-pointer m--has-value m--is-tag-default"
+        class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="m-select-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Pays
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -191,27 +195,31 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
       style="width: auto; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-disabled m--has-cursor-pointer m--has-value m--is-tag-default"
+        class="m-input-style m--is-label-up m--is-disabled m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="m-select-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Pays
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -355,27 +363,31 @@ exports[`Storyshots components|m-phonefield error 1`] = `
       style="width: auto; max-width: 288px;"
     >
       <div
-        class="m-input-style m--has-cursor-pointer m--has-error m--has-value m--is-tag-default"
+        class="m-input-style m--is-label-up m--has-cursor-pointer m--has-error m--has-label m--has-value m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="m-select-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Pays
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -534,27 +546,31 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
       style="width: auto; max-width: 288px;"
     >
       <div
-        class="m-input-style m--has-cursor-pointer m--has-error m--has-value m--is-tag-default"
+        class="m-input-style m--is-label-up m--has-cursor-pointer m--has-error m--has-label m--has-value m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="m-select-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Pays
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
@@ -736,27 +752,31 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
       style="width: auto; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-waiting m--has-cursor-pointer m--has-value m--is-tag-default"
+        class="m-input-style m--is-label-up m--is-waiting m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
       >
         <div
           class="m-input-style__content"
           style="margin-top: 10px;"
         >
-          <span
+          <label
             class="m-input-style__label"
-            style="z-index: -1;"
+            for="m-select-uuid"
           >
             <span
               class="m-input-style__text"
-            />
-          </span>
+            >
+              <span>
+                Pays
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
           <div
             class="m-input-style__body"
           >
-            <div
-              class="m-input-style__prefix"
-            />
+            <!---->
              
             <div
               class="m-input-style__left-content"
