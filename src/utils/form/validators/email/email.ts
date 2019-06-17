@@ -6,7 +6,11 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
-export const EmailValidator: Function = (controlLabel: string, options?: ControlValidatorOptions): ControlValidator => {
+/**
+ *
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
+ */
+export const EmailValidator: (options?: ControlValidatorOptions) => ControlValidator = (options?: ControlValidatorOptions): ControlValidator => {
     return {
         key: ValidatorKeys.Email,
         validationFunction: (control: FormControl<any>): boolean => {
@@ -23,11 +27,15 @@ export const EmailValidator: Function = (controlLabel: string, options?: Control
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:emailValidatorErrorMessage'
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:emailValidatorErrorSummaryMessage',
-                    { controlLabel },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: options && options.controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:emailValidatorErrorSummaryMessage',
+                        { controlLabel: options.controlLabel },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Correction

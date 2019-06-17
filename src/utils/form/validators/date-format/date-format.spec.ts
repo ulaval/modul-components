@@ -10,7 +10,7 @@ describe('Required validator', () => {
     beforeEach(() => {
         formControl = new FormControl<string>();
 
-        validator = DateFormatValidator('controlLabel');
+        validator = DateFormatValidator();
     });
 
 

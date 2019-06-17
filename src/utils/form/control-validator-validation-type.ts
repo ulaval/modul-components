@@ -6,6 +6,5 @@ export enum ControlValidatorValidationType {
     AtExit = 'at-exit',
     Correction = 'correction',
     Modification = 'modification',
-    OnGoing = 'on-going',
-    External = 'external'
+    OnGoing = 'on-going'
 }

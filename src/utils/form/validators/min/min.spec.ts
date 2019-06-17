@@ -4,67 +4,71 @@ import { MinValidator } from './min';
 describe('Min validator', () => {
     let formControl: FormControl<any>;
 
-    beforeAll(() => {
-        formControl = new FormControl<any>(
-            [MinValidator('test', 3)]
-        );
+    describe('type "any" FormControl', () => {
+        it('it should return true if value is undefined', async (done) => {
+            formControl = new FormControl<any>(
+                [MinValidator(3)]
+            );
+            expect(formControl.value).toBe(undefined);
+            await formControl.validate();
+            expect(formControl.valid).toBe(true);
+            done();
+        });
     });
 
-    test('it should return true if value is undefined', async (done) => {
-        expect(formControl.value).toBe(undefined);
-        await formControl.validate();
-        expect(formControl.valid).toBe(true);
-        done();
-    });
+    describe('numeric FormControl', () => {
+        const MIN_VALUE: number = 3;
 
-    describe('number value', () => {
-        beforeAll(() => {
+        beforeEach(() => {
             formControl = new FormControl<number>(
-                [MinValidator('test', 3)]
+                [MinValidator(MIN_VALUE)]
             );
         });
 
-        test('it should return false if value is 0 and min value is higher', async (done) => {
+        it('it should return false if value is 0 and min value is higher', () => {
             formControl.value = 0;
-            await formControl.validate();
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(false);
-            done();
         });
 
-        test('it should return true if value is 0 and min value is lower', async (done) => {
+        it('it should return true if value is 0 and min value is lower', () => {
             const formControlTest0: FormControl<number> = new FormControl<number>(
-                [MinValidator('test', -1)],
+                [MinValidator(-1)],
                 {
                     initialValue: 0
                 }
             );
 
-            await formControlTest0.validate();
+            formControlTest0.validate();
 
             expect(formControlTest0.valid).toBe(true);
-            done();
         });
 
-        test('it should return false if value is lower', async (done) => {
-            formControl.value = 1;
-            await formControl.validate();
+        it('it should return false if value is lower', () => {
+            formControl.value = MIN_VALUE - 1;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(false);
-            done();
         });
 
-        test('it should return true if value is same', async (done) => {
-            formControl.value = 3;
-            await formControl.validate();
+        it('it should return true if value is same', () => {
+            formControl.value = MIN_VALUE;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(true);
-            done();
+
         });
 
-        test('it should return true if value is higher', async (done) => {
-            formControl.value = 4;
-            await formControl.validate();
+        it('it should return true if value is higher', () => {
+            formControl.value = MIN_VALUE + 1;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(true);
-            done();
         });
     });
-
 });

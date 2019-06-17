@@ -7,7 +7,13 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
-export const CompareValidator: Function = (controlNames: string[], controlLabels?: string[], options?: ControlValidatorOptions): ControlValidator => {
+/**
+ *
+ * @param controlNames
+ * @param controlLabels
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
+ */
+export const CompareValidator: (controlNames: string[], controlLabels?: string[], options?: ControlValidatorOptions) => ControlValidator = (controlNames: string[], controlLabels?: string[], options?: ControlValidatorOptions): ControlValidator => {
     let error: ControlError;
 
     if (controlLabels) {

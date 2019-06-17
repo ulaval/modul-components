@@ -82,7 +82,7 @@
     }
 
     th,
-    tr td {
+    td {
         box-sizing: content-box;
         padding-top: $m-spacing;
         padding-bottom: $m-spacing;
@@ -137,7 +137,7 @@
         }
     }
 
-    &__loading td {
+    &__loading.m-table__loading > td {
         padding: 0;
         height: auto;
     }

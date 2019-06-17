@@ -65,6 +65,9 @@
              placement="bottom"
              @open="onOpen"
              @close="onClose">
+        <h2 v-if="label && isMqMaxS"
+            class="m-datepicker__header-label"
+            slot="header">{{label}}</h2>
         <m-calendar :min-date="minDateString"
                     :max-date="maxDateString"
                     :show-month-before-after="false"
