@@ -62,10 +62,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/skin`, module)
         template: '<m-spinner skin="light"></m-spinner>'
     }))
     .add('skin="lighter"', () => ({
-        template: `<div style="background: black">
-                        <m-spinner skin="lighter"></m-spinner>
-                   </div>`
-    }))
+        template: `<m-spinner skin="lighter"></m-spinner>`
+    }), { backgrounds: [{ name: 'dark', value: '#222222', default: true }] }
+    )
     .add('skin="dark"', () => ({
         template: '<m-spinner skin="dark"></m-spinner>'
     }));

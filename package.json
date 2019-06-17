@@ -64,6 +64,7 @@
         "@babel/core": "^7.3.4",
         "@storybook/addon-a11y": "^5.1.8",
         "@storybook/addon-actions": "^5.1.8",
+        "@storybook/addon-backgrounds": "^5.1.8",
         "@storybook/addon-knobs": "^5.1.8",
         "@storybook/addon-notes": "^5.1.8",
         "@storybook/addon-storyshots": "^5.1.8",
