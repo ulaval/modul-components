@@ -6,6 +6,8 @@ $m-timepicker--height-multiplier: 5;
     display: inline-flex;
     flex-direction: column;
 
+    @include m-input-inline-spacing();
+
     &.m--has-validation-message {
         .m-timepicker__validation-message {
             margin-top: $m-spacing--xs;
