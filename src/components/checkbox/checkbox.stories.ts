@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,15 +7,12 @@ import CheckboxPlugin from './checkbox';
 Vue.use(CheckboxPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 const longText: string = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque ipsam placeat dolores esse libero ipsum, officiis asperiores! Distinctio quis, deleniti placeat, hic aperiam quia magnam accusantium at eaque voluptatum ratione! Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quia culpa quas distinctio sapiente assumenda, soluta obcaecati ipsam reprehenderit aperiam eos blanditiis aspernatur provident libero quod modi quos iusto molestias. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ut consequuntur tempore fuga nihil quibusdam officia deleniti nesciunt, ullam eveniet explicabo unde alias, esse asperiores. Corrupti officiis sunt voluptatibus iure? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, est! Optio ipsum voluptates alias vel quos!';
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         props: {
             text: {
@@ -63,7 +59,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/value`, module)
-    .addDecorator(withA11y)
     .add('disabled', () => ({
         template: '<m-checkbox :disabled="true" value="true">A Checkbox</m-checkbox>'
     }))
@@ -87,7 +82,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/value`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHECKBOX_NAME}/position=right`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-checkbox position="right">A Checkbox</m-checkbox>'
     }))

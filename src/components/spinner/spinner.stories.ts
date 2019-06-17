@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,12 +7,9 @@ import SpinnerPlugin, { MSpinnerSize, MSpinnerStyle } from './spinner';
 
 Vue.use(SpinnerPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-spinner></m-spinner>'
     }))
@@ -59,7 +55,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/skin`, module)
-    .addDecorator(withA11y)
     .add('skin="regular"', () => ({
         template: '<m-spinner skin="regular"></m-spinner>'
     }))
@@ -76,7 +71,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/skin`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/size`, module)
-    .addDecorator(withA11y)
     .add('size="small"', () => ({
         template: '<m-spinner size="small"></m-spinner>'
     }))
@@ -85,8 +79,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/size`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${SPINNER_NAME}/knobs`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all props', () => ({
         props: {
             title: {

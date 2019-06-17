@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,14 +6,11 @@ import TooltipPlugin from './tooltip';
 Vue.use(TooltipPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         data: () => ({
             openProp: true
@@ -36,8 +31,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('mode="icon"', () => ({
         data: () => ({
             openProp: true
@@ -82,8 +76,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/size`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('size="small"', () => ({
         data: () => ({
             openProp: true

@@ -1,22 +1,19 @@
-import moment from 'moment';
-import { withA11y } from '@storybook/addon-a11y';
-import { array, boolean, text, object, withKnobs } from '@storybook/addon-knobs';
+import { array, boolean, object, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
+import moment from 'moment';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
-import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty';
 import { ERROR_TECHNICAL_DIFFICULTY_NAME } from '../../component-names';
 import { Link } from '../../message-page/message-page';
+import ErrorTechnicalDifficultyPlugin from './error-technical-difficulty';
 
 Vue.use(ErrorTechnicalDifficultyPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${ERROR_TECHNICAL_DIFFICULTY_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
                         <m-error-technical-difficulty></m-error-technical-difficulty>

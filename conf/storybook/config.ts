@@ -1,5 +1,7 @@
 
-import { addParameters, configure } from '@storybook/vue';
+import { withA11y } from '@storybook/addon-a11y';
+import { withKnobs } from '@storybook/addon-knobs';
+import { addDecorator, addParameters, configure } from '@storybook/vue';
 import Vue from 'vue';
 import { loadStories } from './all.storybook';
 import { ModulPlugin } from './modul';
@@ -8,6 +10,10 @@ import { getSandboxPlugin } from './sandbox-loader';
 import { loadSandboxStories } from './sandboxes.storybook';
 import { hierarchyRootSeparatorRegex, hierarchySeparatorRegex } from './utils';
 
+
+declare module '@storybook/addon-knobs' {
+    export function withKnobs(): any;
+}
 
 Vue.use(ModulPlugin);
 
@@ -35,10 +41,10 @@ addParameters({
          */
         showPanel: true,
         /**
-         * sorts stories
-         * @type {Boolean}
+         * where to show the addon panel
+         * @type {('bottom'|'right')}
          */
-        sortStoriesByKind: true,
+        panelPosition: 'bottom',
         /**
          * regex for finding the hierarchy separator
          * @example:
@@ -66,12 +72,15 @@ addParameters({
          * enable/disable shortcuts
          * @type {Boolean}
          */
-        enableShortcuts: true,
+        enableShortcuts: false,
 
         theme: modulTheme
     }
 });
 
+
+addDecorator(withA11y);
+addDecorator(withKnobs);
 
 configure(() => {
     return [loadStories(), loadSandboxStories()];
