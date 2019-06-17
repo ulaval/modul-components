@@ -63,6 +63,7 @@
     "devDependencies": {
         "@babel/core": "^7.3.4",
         "@storybook/addon-a11y": "^5.1.8",
+        "@storybook/addon-actions": "^5.1.8",
         "@storybook/addon-knobs": "^5.1.8",
         "@storybook/addon-notes": "^5.1.8",
         "@storybook/addon-storyshots": "^5.1.8",
@@ -74,6 +75,7 @@
         "@types/jest": "^23.3.14",
         "@types/node": "^10.12.20",
         "@types/sprintf-js": "^1.1.0",
+        "@types/storybook__addon-actions": "^3.4.3",
         "@types/storybook__addon-knobs": "^5.0.1",
         "@types/storybook__addon-notes": "^4.0.2",
         "@types/storybook__addon-storyshots": "^3.4.8",

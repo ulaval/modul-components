@@ -5,7 +5,10 @@ import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils'
 import { ENGLISH, FRENCH } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { DECIMALFIELD_NAME } from '../component-names';
-import { MDecimalfield } from './decimalfield';
+import DecimalfieldPlugin, { MDecimalfield } from './decimalfield';
+
+Vue.use(DecimalfieldPlugin);
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${DECIMALFIELD_NAME}`, module)
 

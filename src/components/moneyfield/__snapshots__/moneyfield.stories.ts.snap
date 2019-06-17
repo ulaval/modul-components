@@ -7,19 +7,71 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        maxwidth="small"
-        precision="11"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -28,20 +80,73 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        label="Label"
-        maxwidth="small"
-        precision="11"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield m--has-label"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <label
+              class="m-input-style__label"
+              for="mDecimalfield-uuid"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Label
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -50,21 +155,77 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        label="Required label"
-        maxwidth="small"
-        precision="11"
-        requiredmarker="true"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield m--has-label"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <label
+              class="m-input-style__label"
+              for="mDecimalfield-uuid"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Required label
+                </span>
+                 
+                <sup
+                  class="m-input-style__required-marker"
+                >
+                  *
+                </sup>
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -73,20 +234,94 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        maxwidth="small"
-        precision="11"
-        tagstyle="default"
-        validmessage="Valid message"
-        width="100%"
+      <div
+        class="m-decimalfield m--is-valid m--has-validation-message"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--is-valid m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <p
+              class="m-validation-message__valid"
+            >
+              <svg
+                class="m-icon m-validation-message__icon"
+                height="1em"
+                width="1em"
+              >
+                <title>
+                  Valide
+                </title>
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <span
+                class="m-validation-message__text"
+              >
+                Valid message
+              </span>
+            </p>
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -95,20 +330,75 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        helpermessage="Helper message"
-        maxwidth="small"
-        precision="11"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield m--has-validation-message"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <p
+              class="m-validation-message__helper"
+            >
+              Helper message
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -117,20 +407,94 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        errormessage="Error message"
-        force-rounding-format="true"
-        maxwidth="small"
-        precision="11"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield m--has-error m--has-validation-message"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--has-error m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <p
+              class="m-validation-message__error"
+            >
+              <svg
+                class="m-icon m-validation-message__icon"
+                height="1em"
+                width="1em"
+              >
+                <title>
+                  Erreur
+                </title>
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <span
+                class="m-validation-message__text"
+              >
+                Error message
+              </span>
+            </p>
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -141,20 +505,71 @@ exports[`Storyshots components|m-moneyfield Custom precision 1`] = `
   class="m-moneyfield"
   style="width: 100%; max-width: 136px;"
 >
-  <m-decimalfield
-    force-rounding-format="true"
-    maxwidth="small"
-    precision="7"
-    tagstyle="default"
-    value="99999.99"
-    width="100%"
+  <div
+    class="m-decimalfield"
+    style="width: 100%; max-width: 136px;"
   >
-    <template>
-      CA$
-    </template>
+    <div
+      class="m-input-style m--has-value m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          >
+            CA$
+          </div>
+           
+          <div
+            class="m-input-style__left-content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
      
-    <!---->
-  </m-decimalfield>
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -163,20 +578,71 @@ exports[`Storyshots components|m-moneyfield Default precision 1`] = `
   class="m-moneyfield"
   style="width: 100%; max-width: 136px;"
 >
-  <m-decimalfield
-    force-rounding-format="true"
-    maxwidth="small"
-    precision="11"
-    tagstyle="default"
-    value="999999999.99"
-    width="100%"
+  <div
+    class="m-decimalfield"
+    style="width: 100%; max-width: 136px;"
   >
-    <template>
-      CA$
-    </template>
+    <div
+      class="m-input-style m--has-value m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          >
+            CA$
+          </div>
+           
+          <div
+            class="m-input-style__left-content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
      
-    <!---->
-  </m-decimalfield>
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -185,20 +651,71 @@ exports[`Storyshots components|m-moneyfield Localization 1`] = `
   class="m-moneyfield"
   style="width: 100%; max-width: 136px;"
 >
-  <m-decimalfield
-    force-rounding-format="true"
-    maxwidth="small"
-    precision="11"
-    tagstyle="default"
-    value="123456.7"
-    width="100%"
+  <div
+    class="m-decimalfield"
+    style="width: 100%; max-width: 136px;"
   >
-    <template>
-      CA$
-    </template>
+    <div
+      class="m-input-style m--has-value m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          >
+            CA$
+          </div>
+           
+          <div
+            class="m-input-style__left-content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
      
-    <!---->
-  </m-decimalfield>
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -209,21 +726,73 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        disabled="true"
-        force-rounding-format="true"
-        maxwidth="small"
-        placeholder="Disabled"
-        precision="11"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield m--is-disabled"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--is-disabled m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  disabled="disabled"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Disabled"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -232,21 +801,73 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        maxwidth="small"
-        placeholder="Read-only"
-        precision="11"
-        readonly="true"
-        tagstyle="default"
-        width="100%"
+      <div
+        class="m-decimalfield m--is-readonly"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--is-readonly m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Read-only"
+                  readonly="readonly"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <!---->
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
    
@@ -255,21 +876,79 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       class="m-moneyfield"
       style="width: 100%; max-width: 136px;"
     >
-      <m-decimalfield
-        force-rounding-format="true"
-        maxwidth="small"
-        placeholder="Waiting"
-        precision="11"
-        tagstyle="default"
-        waiting="true"
-        width="100%"
+      <div
+        class="m-decimalfield m--is-waiting"
+        style="width: 100%; max-width: 136px;"
       >
-        <template>
-          CA$
-        </template>
+        <div
+          class="m-input-style m--is-waiting m--is-tag-default"
+        >
+          <div
+            class="m-input-style__content"
+            style="margin-top: 10px;"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__body"
+            >
+              <div
+                class="m-input-style__prefix"
+              >
+                CA$
+              </div>
+               
+              <div
+                class="m-input-style__left-content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  disabled="disabled"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Waiting"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__right-content"
+              />
+               
+              <div
+                class="m-spinner m-input-style__spinner"
+              >
+                <!---->
+                 
+                <div />
+              </div>
+            </div>
+          </div>
+        </div>
          
-        <!---->
-      </m-decimalfield>
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -280,20 +959,71 @@ exports[`Storyshots components|m-moneyfield With initial value (0) 1`] = `
   class="m-moneyfield"
   style="width: 100%; max-width: 136px;"
 >
-  <m-decimalfield
-    force-rounding-format="true"
-    maxwidth="small"
-    precision="11"
-    tagstyle="default"
-    value="0"
-    width="100%"
+  <div
+    class="m-decimalfield"
+    style="width: 100%; max-width: 136px;"
   >
-    <template>
-      CA$
-    </template>
+    <div
+      class="m-input-style m--has-value m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          >
+            CA$
+          </div>
+           
+          <div
+            class="m-input-style__left-content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
      
-    <!---->
-  </m-decimalfield>
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -302,19 +1032,70 @@ exports[`Storyshots components|m-moneyfield With initial value 1`] = `
   class="m-moneyfield"
   style="width: 100%; max-width: 136px;"
 >
-  <m-decimalfield
-    force-rounding-format="true"
-    maxwidth="small"
-    precision="11"
-    tagstyle="default"
-    value="123456.7"
-    width="100%"
+  <div
+    class="m-decimalfield"
+    style="width: 100%; max-width: 136px;"
   >
-    <template>
-      CA$
-    </template>
+    <div
+      class="m-input-style m--has-value m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <div
+            class="m-input-style__prefix"
+          >
+            CA$
+          </div>
+           
+          <div
+            class="m-input-style__left-content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
      
-    <!---->
-  </m-decimalfield>
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
 </div>
 `;

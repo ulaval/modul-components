@@ -54,7 +54,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
                     dolor amet irure deserunt dolore bacon, ribeye turkey salami tongue consectetur meatball turducken
                     ball tip jowl. Chicken laborum strip steak ut picanha adipisicing turducken do doner ad prosciutto
                     pastrami ullamco.</p>
-                    <span>`
+                    </span>`
     }))
     .add('mode="definition"', () => ({
         data: () => ({
@@ -72,7 +72,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/mode`, module)
                     dolor amet irure deserunt dolore bacon, ribeye turkey salami tongue consectetur meatball turducken
                     ball tip jowl. Chicken laborum strip steak ut picanha adipisicing turducken do doner ad prosciutto
                     pastrami ullamco.</p>
-                    <span>`
+                    </span>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOOLTIP_NAME}/size`, module)

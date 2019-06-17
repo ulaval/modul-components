@@ -1,13 +1,12 @@
+import { actions } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { BUTTON_NAME } from '../component-names';
 import ButtonPlugin from './button';
+
 Vue.use(ButtonPlugin);
-
-
-
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}`, module)
@@ -18,7 +17,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${BUTTON_NAME}`, module)
                 default: text('Text', 'A Button')
             }
         },
-        template: '<m-button>{{ text }}</m-button>'
+        methods: actions(
+            'click',
+            'focus',
+            'blur'
+        ),
+        template: '<m-button @click="click" @focus="focus" @blur="blur">{{ text }}</m-button>'
     }))
     .add('disabled', () => ({
         template: '<m-button :disabled="true">A Button</m-button>'
