@@ -259,6 +259,11 @@ export class MDatepicker extends ModulVue {
         this.$emit('change', this.convertStringToModel(this.internalDateModel));
     }
 
+    public get hasErrorMessage(): boolean {
+        return (!!this.as<InputState>().errorMessage || this.as<InputState>().errorMessage === ' '
+            || !!(this.internalCalendarErrorMessage || '').trim()) &&
+            !this.as<InputState>().disabled && !this.as<InputState>().waiting;
+    }
 
     // Focus management.
 
