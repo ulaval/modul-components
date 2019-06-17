@@ -75,7 +75,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
             <p><strong>Model value:</strong> {{value}}</p>
             <p><strong>Date min:</strong> {{dateMin}}</p>
             <p><strong>Date max:</strong> {{dateMax}}</p>
-            <m-datepicker class="m-u--margin-top" :min="dateMin" :max="dateMax" v-model="value"></m-datepicker>
+            <m-datepicker v-model="value" class="m-u--margin-top" :min="dateMin" :max="dateMax"></m-datepicker>
             <div class="m-u--margin-top">
                 <m-button class="m-u--margin-right" @click="resetValue()">Reset value</m-button>
                 <m-button class="m-u--margin-right" skin="secondary" @click="setValueInRange()">Date in the range</m-button>

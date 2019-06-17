@@ -134,10 +134,7 @@ export class MDatepicker extends ModulVue {
     private async onClose(): Promise<void> {
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
-            this.$emit('blur');
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+            this.emitBlur();
         }
     }
 
@@ -146,6 +143,13 @@ export class MDatepicker extends ModulVue {
         let inputMask: MInputMask = this.$refs.input;
 
         inputMask.focusAndSelectAll();
+    }
+
+    @Emit('blur')
+    private emitBlur(): void {
+        if (!this.skipInputValidation) {
+            this.showErrorMessage(this.inputModel);
+        }
     }
 
 
@@ -180,24 +184,18 @@ export class MDatepicker extends ModulVue {
         this.internalCalendarErrorMessage = '';
     }
 
-    private showErrorMessage(inputValue: string): boolean {
+    private showErrorMessage(inputValue: string): void {
         if (inputValue === '' || inputValue === undefined || inputValue === null) {
-
             this.internalCalendarErrorMessage = '';
-            return true;
-
         } else if (inputValue.length === MAX_LENGTH_DATE_VALUE && this.validateDateFormat(inputValue)) {
             let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';
-                return true;
             } else {
                 this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
-                return false;
             }
         } else {
             this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
-            return false;
         }
     }
 
@@ -265,10 +263,7 @@ export class MDatepicker extends ModulVue {
         this.as<InputManagement>().internalIsFocus = false;
 
         if (!this.open) { // do not emit blur if still open
-            this.$emit('blur', event);
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+            this.emitBlur();
         }
     }
 
