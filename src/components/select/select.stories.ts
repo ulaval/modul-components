@@ -6,8 +6,6 @@ import SelectPlugin from './select';
 
 Vue.use(SelectPlugin);
 
-
-
 storiesOf(`${componentsHierarchyRootSeparator}${SELECT_NAME}`, module)
     .add('default', () => ({
         data: () => ({

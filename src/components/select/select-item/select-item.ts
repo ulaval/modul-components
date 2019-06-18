@@ -10,27 +10,27 @@ import WithRender from './select-item.html?style=./select-item.scss';
     mixins: [MediaQueries]
 })
 export class MSelectItem extends ModulVue {
-
     @Prop()
     public label: string;
+
     @Prop()
     public value: any;
+
     @Prop()
     public disabled: boolean;
+
     @Prop()
     public readonly: boolean;
+
     @Prop()
     public selected: boolean;
+
     @Prop()
     public focused: boolean;
-
-    @Emit('click')
-    onClick(): void { }
 
     public get propLabel(): string | undefined {
         return this.label;
     }
-
 
     public get tabindex(): number | undefined {
         return this.disabled || this.readonly ? undefined : 0;
@@ -41,4 +41,7 @@ export class MSelectItem extends ModulVue {
             this.onClick();
         }
     }
+
+    @Emit('click')
+    onClick(): void { }
 }

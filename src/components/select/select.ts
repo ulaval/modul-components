@@ -36,11 +36,6 @@ export class MSelect extends ModulVue {
     @Prop()
     public options: any[];
 
-    // @Prop({
-    //     default: 'value'
-    // })
-    // public trackBy: string;
-
     private internalOpen: boolean = false;
 
     private id: string = `${SELECT_NAME}-${uuid.generate()}`;
@@ -75,7 +70,6 @@ export class MSelect extends ModulVue {
 
     isSelected(option: any): boolean {
         return this.as<InputManagement>().internalValue.indexOf(option) > -1;
-
     }
 }
 

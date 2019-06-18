@@ -62,8 +62,10 @@ export class MPhonefield extends ModulVue {
     private countryModelInternal: string = '';
     private internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     private internalPrefix: string = '';
+    private selectedCountries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
+    private countries: CountryOptions[] = this.selectedCountries.sort((a, b) => (this.nameNormalize(a.name) > this.nameNormalize(b.name)) ? 1 : ((this.nameNormalize(b.name) > this.nameNormalize(a.name)) ? -1 : 0));
     protected id: string = `mIntegerfield-${uuid.generate()}`;
-    protected exemples: any = require('libphonenumber-js/examples.mobile.json');
+    protected examples: any = require('libphonenumber-js/examples.mobile.json');
 
     @Emit('input')
     emitNewValue(_newValue: string): void { }
@@ -73,12 +75,7 @@ export class MPhonefield extends ModulVue {
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
     }
 
-    get countries(): CountryOptions[] {
-        const countries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
-        return countries.sort((a, b) => (this.nameNormalize(a.name) > this.nameNormalize(b.name)) ? 1 : ((this.nameNormalize(b.name) > this.nameNormalize(a.name)) ? -1 : 0));
-    }
-
-    get isoCountries(): string[] {
+    private get isoCountries(): string[] {
         return this.countries.map(contry => contry.iso2);
     }
 
@@ -110,8 +107,8 @@ export class MPhonefield extends ModulVue {
         return '+' + this.internalCountry.dialCode;
     }
 
-    get example(): string {
-        const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, this.exemples);
+    private get example(): string {
+        const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, this.examples);
         return phoneNumber ? phoneNumber.formatInternational() : '';
     }
 
