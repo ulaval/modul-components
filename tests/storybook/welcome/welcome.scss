@@ -1,3 +1,5 @@
 .m-welcome {
-    display: block;
+    &__logo {
+        width: 70%;
+    }
 }

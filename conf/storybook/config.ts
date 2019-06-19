@@ -72,6 +72,8 @@ addParameters({
          */
         enableShortcuts: false,
 
+        isToolshown: true,
+
         theme: modulTheme
     }
 });
