@@ -39,7 +39,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
             }
         },
-        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><p class="m-u--no-margin">model value = {{model1}}</p><m-datepicker class="m-u--margin-top" :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur" min="2019-05-10" max="2019-05-24"></m-datepicker></div>`
     }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
