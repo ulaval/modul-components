@@ -76,4 +76,11 @@
     &__validation-message {
         flex: 1 1 auto;
     }
+
+    .m-flag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+    }
 }

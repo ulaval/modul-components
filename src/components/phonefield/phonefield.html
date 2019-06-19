@@ -7,7 +7,8 @@
                 'm--has-validation-message': hasValidationMessage } ]">
     <div class="m-phonefield__wrapper">
         <m-select class="m-phonefield__country"
-                  v-model="countryModel"
+                  :value="countryModel"
+                  @input="onContryChanged($event)"
                   :options="isoCountries"
                   :disabled="isDisabled"
                   :waiting="isWaiting"
@@ -18,14 +19,24 @@
                   :label="i18nCountryLabel"
                   width="auto">
             <div class="m-phonefield__flag-wrapper">
-                <m-flag :iso="countryModel"></m-flag>
+                <svg class="m-flag"
+                     width="27px"
+                     height="20px">
+                    <use :xlink:href="spriteId(countryModel)"
+                         aria-hidden="true"></use>
+                </svg>
+
             </div>
 
             <template slot="option"
                       slot-scope="{option, index}">
                 <div class="m-phonefield__item-wrapper">
-                    <m-flag class="m-phonefield__item-flag"
-                            :iso="option"></m-flag>
+                    <svg class="m-phonefield__item-flag"
+                         width="27px"
+                         height="20px">
+                        <use :xlink:href="spriteId(option)"
+                             aria-hidden="true"></use>
+                    </svg>
                     <span class="m-phonefield__item-name">{{ countries[index].name }}</span>
                     <span class="m-phonefield__item-dialCode">+{{ countries[index].dialCode }}</span>
                 </div>
@@ -46,7 +57,8 @@
                            :readonly="isReadonly"
                            :required-marker="requiredMarker"
                            :tag-style="tagStyle">
-                <m-input-mask v-model="model"
+                <m-input-mask ref="inputMask"
+                              v-model="model"
                               :id="id"
                               :disabled="isDisabled || isWaiting"
                               :placeholder="placeholder"
@@ -55,8 +67,7 @@
                               @focus="onFocus"
                               @blur="onBlur"
                               @keyup="onKeyup"
-                              @change="onChange"
-                              ref="inputMask"></m-input-mask>
+                              @change="onChange"></m-input-mask>
             </m-input-style>
             <p class="m-phonefield__example"
                x-ms-format-detection="none">{{ i18nExample }}{{ example }}</p>
