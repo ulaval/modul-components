@@ -55,17 +55,17 @@ export class MPhonefield extends ModulVue {
         inputMask: MInputMask;
     };
 
-    private i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
-    private i18nCountryLabel: string = this.$i18n.translate('m-phonefield:country-label');
-    private i18nExample: string = this.$i18n.translate('m-phonefield:example');
-
-    private countryModelInternal: string = '';
-    private internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
-    private internalPrefix: string = '';
-    private selectedCountries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
-    private countries: CountryOptions[] = this.selectedCountries.sort((a, b) => (this.nameNormalize(a.name) > this.nameNormalize(b.name)) ? 1 : ((this.nameNormalize(b.name) > this.nameNormalize(a.name)) ? -1 : 0));
     protected id: string = `mIntegerfield-${uuid.generate()}`;
-    protected examples: any = require('libphonenumber-js/examples.mobile.json');
+    private examples: any = require('libphonenumber-js/examples.mobile.json');
+
+    countryModelInternal: string = '';
+    internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
+    selectedCountries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
+    countries: CountryOptions[] = this.selectedCountries.sort((a, b) => (this.nameNormalize(a.name) > this.nameNormalize(b.name)) ? 1 : ((this.nameNormalize(b.name) > this.nameNormalize(a.name)) ? -1 : 0));
+
+    i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
+    i18nCountryLabel: string = this.$i18n.translate('m-phonefield:country-label');
+    i18nExample: string = this.$i18n.translate('m-phonefield:example');
 
     @Emit('input')
     emitNewValue(_newValue: string): void { }
@@ -75,7 +75,7 @@ export class MPhonefield extends ModulVue {
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
     }
 
-    private get isoCountries(): string[] {
+    get isoCountries(): string[] {
         return this.countries.map(contry => contry.iso2);
     }
 
@@ -107,7 +107,7 @@ export class MPhonefield extends ModulVue {
         return '+' + this.internalCountry.dialCode;
     }
 
-    private get example(): string {
+    get example(): string {
         const phoneNumber: PhoneNumber | undefined = getExampleNumber(this.phoneRegionCode as CountryCode, this.examples);
         return phoneNumber ? phoneNumber.formatInternational() : '';
     }
@@ -120,11 +120,6 @@ export class MPhonefield extends ModulVue {
         this.model = '';
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === value)!;
         this.countryModelInternal = value;
-    }
-
-    onContryChanged(contryIso): void {
-        this.countryModel = contryIso;
-        this.focusInput();
     }
 
     get model(): string {
@@ -145,6 +140,11 @@ export class MPhonefield extends ModulVue {
         } else if (iso) {
             this.$log.warn('"' + iso + '" is not a valid iso country. Make sure that the sprite has been loaded via the $svg instance service.');
         }
+    }
+
+    onContryChanged(contryIso: string): void {
+        this.countryModel = contryIso;
+        this.focusInput();
     }
 
 
