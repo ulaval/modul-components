@@ -25,6 +25,11 @@ import WithRender from './datepicker.html?style=./datepicker.scss';
 
 export type DatePickerSupportedTypes = Date | string | undefined;
 
+export enum DatepickerView {
+    Month = 'month',
+    Day = 'day'
+}
+
 @WithRender
 @Component({
     components: {
@@ -45,6 +50,9 @@ export class MDatepicker extends ModulVue {
     public value: DatePickerSupportedTypes;
     @Prop()
     public label: string;
+
+    @Prop()
+    public view: string;
 
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
