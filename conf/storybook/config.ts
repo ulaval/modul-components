@@ -20,8 +20,6 @@ Vue.use(ModulPlugin);
 // load all sandboxes
 Vue.use(getSandboxPlugin());
 
-
-
 // Option defaults:
 addParameters({
     options: {
@@ -83,5 +81,5 @@ addDecorator(withA11y);
 addDecorator(withKnobs);
 
 configure(() => {
-    return [loadStories(), loadSandboxStories()];
+    return [require('../../tests/storybook/welcome.stories.ts'), loadStories(), loadSandboxStories()];
 }, module);
