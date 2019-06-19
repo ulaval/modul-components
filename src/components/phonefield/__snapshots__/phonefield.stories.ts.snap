@@ -740,11 +740,11 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
     class="m-phonefield__wrapper"
   >
     <div
-      class="m-select m-phonefield__country m--is-waiting"
+      class="m-select m-phonefield__country m--is-disabled"
       style="width: auto; max-width: 288px;"
     >
       <div
-        class="m-input-style m--is-label-up m--is-waiting m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+        class="m-input-style m--is-label-up m--is-disabled m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
       >
         <div
           class="m-input-style__content"
@@ -798,13 +798,7 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
               class="m-input-style__right-content"
             />
              
-            <div
-              class="m-spinner m-input-style__spinner"
-            >
-              <!---->
-               
-              <div />
-            </div>
+            <!---->
           </div>
         </div>
       </div>
