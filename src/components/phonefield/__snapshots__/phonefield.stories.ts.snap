@@ -45,13 +45,10 @@ exports[`Storyshots components|m-phonefield default 1`] = `
                 class="m-phonefield__flag-wrapper"
               >
                 <svg
-                  aria-hidden="true"
                   class="m-flag"
                   height="20px"
-                  width="26.666666666666668px"
+                  width="27px"
                 >
-                  <!---->
-                   
                   <use
                     aria-hidden="true"
                   />
@@ -229,13 +226,10 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
                 class="m-phonefield__flag-wrapper"
               >
                 <svg
-                  aria-hidden="true"
                   class="m-flag"
                   height="20px"
-                  width="26.666666666666668px"
+                  width="27px"
                 >
-                  <!---->
-                   
                   <use
                     aria-hidden="true"
                   />
@@ -398,13 +392,10 @@ exports[`Storyshots components|m-phonefield error 1`] = `
                 class="m-phonefield__flag-wrapper"
               >
                 <svg
-                  aria-hidden="true"
                   class="m-flag"
                   height="20px"
-                  width="26.666666666666668px"
+                  width="27px"
                 >
-                  <!---->
-                   
                   <use
                     aria-hidden="true"
                   />
@@ -582,13 +573,10 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
                 class="m-phonefield__flag-wrapper"
               >
                 <svg
-                  aria-hidden="true"
                   class="m-flag"
                   height="20px"
-                  width="26.666666666666668px"
+                  width="27px"
                 >
-                  <!---->
-                   
                   <use
                     aria-hidden="true"
                   />
@@ -789,13 +777,10 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
                 class="m-phonefield__flag-wrapper"
               >
                 <svg
-                  aria-hidden="true"
                   class="m-flag"
                   height="20px"
-                  width="26.666666666666668px"
+                  width="27px"
                 >
-                  <!---->
-                   
                   <use
                     aria-hidden="true"
                   />
