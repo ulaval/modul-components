@@ -57,7 +57,8 @@
                            :required-marker="requiredMarker"
                            :tag-style="tagStyle">
                 <m-input-mask ref="inputMask"
-                              v-model="model"
+                              :value="internalValue"
+                              @input="inputChanged($event)"
                               :id="id"
                               :disabled="isDisabled || isWaiting"
                               :placeholder="placeholder"

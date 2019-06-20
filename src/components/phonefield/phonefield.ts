@@ -2,7 +2,7 @@ import 'cleave.js/dist/addons/cleave-phone.i18n.js';
 import { CountryCode, getExampleNumber, PhoneNumber } from 'libphonenumber-js';
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Emit, Model, Prop } from 'vue-property-decorator';
+import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -28,6 +28,13 @@ interface CountryOptions {
     areaCodes?: string[];
 }
 
+
+export interface Country {
+    iso: string;
+    prefix: string;
+}
+
+
 @WithRender
 @Component({
     mixins: [
@@ -48,8 +55,13 @@ export class MPhonefield extends ModulVue {
     @Prop()
     public label: string;
 
-    @Prop({ default: 'ca' })
-    public defaultCountry: string;
+    @Prop({
+        default: () => ({
+            iso: 'ca',
+            prefix: '+1'
+        })
+    })
+    public country: any;
 
     public $refs: {
         inputMask: MInputMask;
@@ -70,10 +82,10 @@ export class MPhonefield extends ModulVue {
     @Emit('input')
     emitNewValue(_newValue: string): void { }
 
-    created(): void {
-        this.countryModelInternal = this.defaultCountry;
-        this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
-    }
+    @Emit('update:country')
+    emitContrySelected(country: Country): void { }
+
+
 
     get isoCountries(): string[] {
         return this.countries.map(contry => contry.iso2);
@@ -94,8 +106,7 @@ export class MPhonefield extends ModulVue {
     get inputMaskOptions(): InputMaskOptions {
         return {
             phone: true,
-            phoneRegionCode: this.phoneRegionCode,
-            prefix: this.prefix
+            phoneRegionCode: this.phoneRegionCode
         };
     }
 
@@ -117,16 +128,12 @@ export class MPhonefield extends ModulVue {
     }
 
     set countryModel(value: string) {
-        this.model = '';
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === value)!;
+        this.as<InputManagement>().internalValue = '+' + this.internalCountry.dialCode;
         this.countryModelInternal = value;
     }
 
-    get model(): string {
-        return !this.value ? '' : this.value;
-    }
-
-    set model(value: string) {
+    inputChanged(value): void {
         this.emitNewValue(value);
     }
 
@@ -144,16 +151,29 @@ export class MPhonefield extends ModulVue {
 
     onContryChanged(contryIso: string): void {
         this.countryModel = contryIso;
+        this.emitContrySelected({
+            iso: this.internalCountry.iso2,
+            prefix: this.internalCountry.dialCode
+        });
         this.focusInput();
     }
 
 
     public async focusInput(): Promise<any> {
         await this.$nextTick();
-        this.$refs.inputMask.focusAndSelectAll();
+        this.$refs.inputMask.focus();
+    }
+
+    @Watch('country', { immediate: true })
+    onContryChange(country: Country): void {
+        this.countryModelInternal = country.iso;
+        this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
+        this.as<InputManagement>().internalValue = '+' + this.internalCountry.dialCode;
     }
 
 }
+
+
 
 const PhonefieldPlugin: PluginObject<any> = {
     install(v): void {

@@ -17,7 +17,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${PHONEFIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({
-        template: '<m-phonefield></m-phonefield>'
+        data: () => ({
+            model: '',
+            country: {
+                iso: 'ca',
+                prefix: '+1'
+            }
+        }),
+        template: '<div></m-phonefield><m-phonefield v-model="model" :country.sync="country"></m-phonefield><p>v-model = {{model}}</p><p>country selected = {{JSON.stringify(country)}}</p></div>'
     }))
     .add('disabled', () => ({
         template: '<m-phonefield :disabled="true"></m-phonefield>'

@@ -87,6 +87,11 @@ export class MInputMask extends ModulVue {
         this.$refs.input.setSelectionRange(0, this.$refs.input.value.length);
     }
 
+    public async focus(): Promise<any> {
+        await this.$nextTick();
+        this.$refs.input.focus();
+    }
+
     @Watch('options', { deep: true })
     public optionsChanged(options: any): void {
         this.cleave.destroy();
