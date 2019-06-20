@@ -57,7 +57,7 @@ export enum FroalaStatus {
     Blurred = 'blurred',
     Focused = 'focused'
 }
-// fr-more-toolbar fr-expanded fr-sticky-off
+
 export enum FroalaToolbarButtons {
     moreTextVisible = 6,
     moreTextVisibleXS = 0,
@@ -212,7 +212,7 @@ const ENTER_KEYCODE: number = 13;
         this.froalaEditor.opts.modulImageUploaded = true;
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
             if (this.selectedImage) {
-                this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage));
+                this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage)); // We need jquery for that function
             } else {
                 this.froalaEditor.image.insert(file.url, false, { id });
             }
@@ -227,9 +227,7 @@ const ENTER_KEYCODE: number = 13;
 
     protected mousedownListener(event: MouseEvent): void {
         this.mousedownTriggered = true;
-        // TODO fix me, enlever le jquery d'ici
-        global.console.log('RTE mouseDOWNistener !');
-        if (this.$el.contains(event.target as HTMLElement) || $('.fr-modal.fr-active').length > 0) {
+        if (this.$el.contains(event.target as HTMLElement) || document.body.querySelector('.fr-modal.fr-active')) {
             this.mousedownInsideEditor = true;
         } else {
             this.mousedownInsideEditor = false;
@@ -239,21 +237,19 @@ const ENTER_KEYCODE: number = 13;
     protected mouseupListener(event: MouseEvent): void {
         this.mousedownTriggered = false;
         if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused
-            // TODO fix me, enlever le jquery d'ici
-            && !this.isFileUploadOpen && $('.fr-image-resizer.fr-active').length === 0) {
+            && !this.isFileUploadOpen && !document.body.querySelector('.fr-image-resizer.fr-active')) {
             this.closeEditor();
         }
     }
 
     protected mounted(): void {
-        if (FroalaEditor !== undefined
-            && FroalaEditor.LANGUAGE[this.config.language] !== undefined
-            && this.customTranslations !== undefined
-        ) {
-            Object.assign(FroalaEditor.LANGUAGE[this.config.language].translation, this.customTranslations);
-        }
+        if (FroalaEditor !== undefined && this.config !== undefined) {
+            if (FroalaEditor.LANGUAGE[this.config.language] !== undefined && this.customTranslations !== undefined) {
+                Object.assign(FroalaEditor.LANGUAGE[this.config.language].translation, this.customTranslations);
+            }
 
-        this.createEditor();
+            this.createEditor();
+        }
     }
 
     protected destroyed(): void {
@@ -334,8 +330,8 @@ const ENTER_KEYCODE: number = 13;
                     if (cmd === 'fullscreen') {
                         let fullscreenWasActivated: boolean = !this.froalaEditor.fullscreen.isActive();
                         if (!this.froalaEditor.fullscreen.isActive()) {
-                            // TODO fix me
                             this.froalaEditor.toolbar.hide();
+                            // Hot fix for bug
                             setTimeout(() => {
                                 this.froalaEditor.toolbar.show();
                             }, 50);
