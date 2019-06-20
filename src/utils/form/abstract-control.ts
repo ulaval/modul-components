@@ -98,7 +98,7 @@ export abstract class AbstractControl {
     }
 
     public validate(): void {
-        this.validators.map((v) => {
+        this.validators.map(v => {
             if (
                 v.async
                 ||
@@ -107,10 +107,10 @@ export abstract class AbstractControl {
                 return;
             }
 
-            const validationResult: Promise<boolean> | boolean | undefined = v.validationFunction(this);
+            const validationResult: Promise<boolean> | boolean = v.validationFunction(this);
 
             if (!(validationResult instanceof Promise)) {
-                v.lastCheck = v.validationFunction(this) as boolean | undefined;
+                v.lastCheck = v.validationFunction(this) as boolean;
             } else {
                 throw new Error('if you are using a async validation function  you must set the async flag to true');
             }
@@ -131,7 +131,7 @@ export abstract class AbstractControl {
                         return;
                     }
 
-                    const validationResult: Promise<boolean> | boolean | undefined = v.validationFunction(this);
+                    const validationResult: Promise<boolean> | boolean = v.validationFunction(this);
 
                     if (validationResult instanceof Promise) {
                         this._waiting = true;
@@ -142,7 +142,6 @@ export abstract class AbstractControl {
                     } else {
                         throw new Error('Async validation function should return a Promise<boolan>');
                     }
-
                 })
         );
 

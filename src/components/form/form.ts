@@ -30,9 +30,9 @@ export class MForm extends ModulVue {
     public emitReset(): void { }
 
     @Watch('formErrors')
-    public onFormGroupErrorsChange(formErrors: ControlError[]): void {
-        if (formErrors.length === 0) {
-            this._hideToast();
+    public onFormGroupErrorsChange(controlErrors: ControlError[]): void {
+        if (controlErrors.length === 0) {
+            this._hideSummaryAndToast();
         }
     }
 
@@ -40,16 +40,12 @@ export class MForm extends ModulVue {
         return this._getAllFormErrors(this.formGroup);
     }
 
-    public get errorMessages(): string[] {
+    public get summaryMessages(): string[] {
         return this.formErrors.map(error => getString(error.groupMessage) || getString(error.message));
     }
 
-    public get formControlsInError(): AbstractControl[] {
-        return this._getAllControlsInError(this.formGroup);
-    }
-
     public get toastMessage(): string {
-        let errorCount: number = this.formControlsInError.length;
+        let errorCount: number = this._getAllControlsInError(this.formGroup).length;
 
         return this.$i18n.translate(
             errorCount <= 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
@@ -97,55 +93,55 @@ export class MForm extends ModulVue {
         this.formGroup.reset();
     }
 
-    private _getAllFormErrors(formGroup: FormGroup | FormArray): ControlError[] {
-        let result: ControlError[] = formGroup.errors;
+    private _getAllFormErrors(control: FormGroup | FormArray): ControlError[] {
+        let result: ControlError[] = control.errors;
 
-        formGroup.controls.forEach(c => {
+        control.controls.forEach(c => {
             if (c instanceof FormControl) {
                 result = result.concat(c.errors);
-            } else {
-                result = result.concat(this._getAllFormErrors(c as FormGroup | FormArray));
+            } else if (c instanceof FormGroup || c instanceof FormArray) {
+                result = result.concat(this._getAllFormErrors(c));
             }
         });
 
         return result;
     }
 
-    private _getAllFormValidators(formGroup: FormGroup | FormArray): ControlValidator[] {
-        let result: ControlValidator[] = formGroup.validators;
+    private _getAllFormValidators(control: FormGroup | FormArray): ControlValidator[] {
+        let result: ControlValidator[] = control.validators;
 
-        formGroup.controls.forEach(c => {
+        control.controls.forEach(c => {
             if (c instanceof FormControl) {
                 result = result.concat(c.validators);
-            } else {
-                result = result.concat(this._getAllFormValidators(c as FormGroup | FormArray));
+            } else if (c instanceof FormGroup || c instanceof FormArray) {
+                result = result.concat(this._getAllFormValidators(c));
             }
         });
 
         return result;
     }
 
-    private _getAllControlsInError(formGroup: FormGroup | FormArray): AbstractControl[] {
+    private _getAllControlsInError(control: FormGroup | FormArray): AbstractControl[] {
         let controls: AbstractControl[] = [];
 
-        if (formGroup.hasError()) {
-            controls = controls.concat(formGroup);
+        if (control.hasError()) {
+            controls.push(control);
         }
 
-        formGroup.controls.forEach(c => {
+        control.controls.forEach(c => {
             if (c.hasError()) {
-                controls = controls.concat(c);
+                controls.push(c);
             }
 
-            if (!(c instanceof FormControl)) {
-                controls = controls.concat(this._getAllControlsInError(c as FormGroup | FormArray));
+            if (c instanceof FormGroup || c instanceof FormArray) {
+                controls = controls.concat(this._getAllControlsInError(c));
             }
         });
 
         return controls;
     }
 
-    private _hideToast(): void {
+    private _hideSummaryAndToast(): void {
         this.displaySummary = this.displayToast = false;
     }
 }
