@@ -44,15 +44,19 @@ export class MDatepicker extends ModulVue {
     @Model('change')
     @Prop()
     public value: DatePickerSupportedTypes;
+
     @Prop()
     public label: string;
 
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
+
     @Prop({ default: () => { return new ModulDate().add(10, 'year'); } })
     public max: DatePickerSupportedTypes;
+
     @Prop({ default: () => Vue.prototype.$i18n.translate('m-datepicker:placeholder') })
     public placeholder: string;
+
     @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
@@ -62,24 +66,15 @@ export class MDatepicker extends ModulVue {
     @Prop({ default: false })
     public skipInputValidation: boolean;
 
-    private internalOpen: boolean = false;
-    private internalCalendarErrorMessage: string = '';
-    private inputModel = '';
-    private internalDateModel = '';
-
-    private id: string = `mDatepicker-${uuid.generate()}`;
-
+    public id: string = `mDatepicker-${uuid.generate()}`;
     public $refs: {
         input: MInputMask;
     };
 
-    private get inputOptions(): CleaveOptions {
-        return {
-            numericOnly: true,
-            delimiters: ['-', '-'],
-            blocks: [4, 2, 2]
-        };
-    }
+    private internalOpen: boolean = false;
+    private internalCalendarErrorMessage: string = '';
+    private inputModel = '';
+    private internalDateModel = '';
 
     protected created(): void {
         if (this.value instanceof Date) {
@@ -87,11 +82,19 @@ export class MDatepicker extends ModulVue {
         }
     }
 
+    public get inputOptions(): CleaveOptions {
+        return {
+            numericOnly: true,
+            delimiters: ['-', '-'],
+            blocks: [4, 2, 2]
+        };
+    }
+
     public get formattedDate(): string {
         return this.convertValueToModel(this.model);
     }
 
-    public get calandarError(): boolean {
+    public get hasCalandarError(): boolean {
         return this.internalCalendarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
@@ -130,19 +133,18 @@ export class MDatepicker extends ModulVue {
         return new ModulDate(this.max);
     }
 
+    @Emit('open')
+    public async onOpen(): Promise<void> {
+        let inputMask: MInputMask = this.$refs.input;
+        inputMask.focusAndSelectAll();
+    }
+
     @Emit('close')
-    private async onClose(): Promise<void> {
+    public async onClose(): Promise<void> {
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.emitBlur();
         }
-    }
-
-    @Emit('open')
-    private async onOpen(): Promise<void> {
-        let inputMask: MInputMask = this.$refs.input;
-
-        inputMask.focusAndSelectAll();
     }
 
     @Emit('blur')
@@ -152,18 +154,27 @@ export class MDatepicker extends ModulVue {
         }
     }
 
+    @Emit('click')
+    private emitClick(event: Event): void { }
 
-    private async selectDate(selectedDate: DatePickerSupportedTypes): Promise<void> {
+    @Emit('keydown')
+    private emitKeydown(event: Event): void { }
+
+    @Watch('skipInputValidation')
+    private onSkipInputValidationChangement(skipInputValidation): void {
+        this.inputDate(this.inputModel);
+        this.showErrorMessage(this.inputModel);
+    }
+
+    public async selectDate(selectedDate: DatePickerSupportedTypes): Promise<void> {
         this.internalCalendarErrorMessage = '';
         this.model = this.convertValueToModel(selectedDate);
         this.inputModel = this.internalDateModel;
         this.open = false;
     }
 
-
-    private inputDate(inputValue: string): void {
+    public inputDate(inputValue: string): void {
         this.inputModel = inputValue;
-        this.model = inputValue;
 
         if (!inputValue || inputValue === '') {
             this.model = '';
@@ -174,53 +185,43 @@ export class MDatepicker extends ModulVue {
                 this.open = false;
             }
 
-            if (!this.skipInputValidation && inputValue.length === MAX_LENGTH_DATE_VALUE) {
-                this.showErrorMessage(inputValue);
-            }
-        }
-    }
-
-    private clearErrorMessage(): void {
-        this.internalCalendarErrorMessage = '';
-    }
-
-    private showErrorMessage(inputValue: string): void {
-        if (inputValue === '' || inputValue === undefined || inputValue === null) {
-            this.internalCalendarErrorMessage = '';
-        } else if (inputValue.length === MAX_LENGTH_DATE_VALUE && this.validateDateFormat(inputValue)) {
-            let newDate: ModulDate = new ModulDate(inputValue);
-            if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
-                this.internalCalendarErrorMessage = '';
+            if (this.skipInputValidation) {
+                this.model = inputValue;
             } else {
-                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
+                if (inputValue.length === MAX_LENGTH_DATE_VALUE && this.showErrorMessage(inputValue)) {
+                    this.model = this.inputModel;
+                } else {
+                    this.model = '';
+                }
             }
-        } else {
-            this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
         }
     }
-
 
     // Model management
 
     // override from InputManagement
+    // override from InputManagement
     @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
-        let newValue: string = this.convertModelToString(value);
+        if (this.internalDateModel !== this.convertModelToString(value)) {
+            this.internalDateModel = this.convertModelToString(value);
 
-        if (this.internalDateModel !== newValue) {
-            this.inputDate(newValue);
+            this.inputModel = this.internalDateModel ? this.internalDateModel : '';
+            if (!this.skipInputValidation) {
+                this.showErrorMessage(this.inputModel);
+            }
         }
     }
 
     // override from InputManagement
-    private set model(value: string) {
+    public set model(value: string) {
         if (this.internalDateModel !== value) {
             this.internalDateModel = value;
             this.emitChange();
         }
     }
 
-    private get model(): string {
+    public get model(): string {
         return this.internalDateModel;
     }
 
@@ -229,8 +230,26 @@ export class MDatepicker extends ModulVue {
         return !!(this.inputModel || '').toString().trim();
     }
 
+    public togglePopup(event: Event): void {
+        this.open = !this.open;
+        // stop event propagation to parent.
+        event.stopPropagation();
+    }
+
     public emitChange(): void {
         this.$emit('change', this.convertStringToModel(this.internalDateModel));
+    }
+
+    public onKeydown(event: KeyboardEvent): void {
+        if (this.as<InputStateMixin>().active) {
+            if (event.key === 'Tab') {
+                // close popop if open and tab key is pressed (accessibility)
+                if (this.open) {
+                    this.open = false;
+                }
+            }
+            this.emitKeydown(event);
+        }
     }
 
 
@@ -255,7 +274,7 @@ export class MDatepicker extends ModulVue {
         if (this.as<InputManagement>().internalIsFocus && inputEl) {
             inputEl.focus();
         }
-        this.$emit('click');
+        this.emitClick(event);
     }
 
     // override from InputManagement
@@ -268,7 +287,7 @@ export class MDatepicker extends ModulVue {
     }
 
     // override from Input-management
-    private get isFocus(): boolean {
+    public get isFocus(): boolean {
         return this.as<InputManagement>().internalIsFocus || this.open;
     }
 
@@ -281,12 +300,6 @@ export class MDatepicker extends ModulVue {
             }
         }
         return '';
-    }
-
-    public togglePopup(event: Event): void {
-        this.open = !this.open;
-        // stop event propagation to parent.
-        event.stopPropagation();
     }
 
     private validateDateFormat(dateString: string): boolean {
@@ -318,15 +331,26 @@ export class MDatepicker extends ModulVue {
         }
     }
 
-    private onKeydown(event: KeyboardEvent): void {
-        if (this.as<InputStateMixin>().active) {
-            if (event.key === 'Tab') {
-                // close popop if open and tab key is pressed (accessibility)
-                if (this.open) {
-                    this.open = false;
-                }
+    private clearErrorMessage(): void {
+        this.internalCalendarErrorMessage = '';
+    }
+
+    private showErrorMessage(inputValue: string): boolean {
+        if (inputValue === '' || inputValue === undefined || inputValue === null || this.skipInputValidation) {
+            this.internalCalendarErrorMessage = '';
+            return true;
+        } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
+            let newDate: ModulDate = new ModulDate(inputValue);
+            if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
+                this.internalCalendarErrorMessage = '';
+                return true;
+            } else {
+                this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:out-of-range-error');
+                return false;
             }
-            this.$emit('keydown', event);
+        } else {
+            this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
+            return false;
         }
     }
 }

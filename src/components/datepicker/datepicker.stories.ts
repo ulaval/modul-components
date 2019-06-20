@@ -20,13 +20,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('events', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            model: '2011-01-01',
+            skipInputValidation: true
         }),
         methods: {
             onInputChange(value: string): string {
                 // tslint:disable-next-line: no-console
                 console.log('MDatePicker.onInputChange=' + value);
                 return value;
+            },
+            onResetModel(): void {
+                this.$data.model = '';
             },
             onFocus(value: Event): void {
                 // tslint:disable-next-line: no-console
@@ -39,7 +43,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
             }
         },
-        template: `<div><p class="m-u--no-margin">model value = {{model1}}</p><m-datepicker class="m-u--margin-top" :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur" min="2019-05-10" max="2019-05-24"></m-datepicker></div>`
+        template: `<div><p class="m-u--no-margin">Model value = "{{model}}"<br>skipInputValidation = "{{skipInputValidation}}"</p><m-datepicker class="m-u--margin-top" :value="model" @change="model = onInputChange($event)" @focus="onFocus" @blur="onBlur" min="2019-05-10" max="2019-05-24" :skip-input-validation="skipInputValidation"></m-datepicker><p><m-button @click="onResetModel">Reset model</m-button></p><p><m-checkbox v-model="skipInputValidation">skipInputValidation</m-checkbox></p></div>`
     }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
