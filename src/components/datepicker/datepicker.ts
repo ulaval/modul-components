@@ -7,6 +7,7 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { Enums } from '../../utils/enums/enums';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import ModulDate from '../../utils/modul-date/modul-date';
 import uuid from '../../utils/uuid/uuid';
@@ -25,9 +26,14 @@ import WithRender from './datepicker.html?style=./datepicker.scss';
 
 export type DatePickerSupportedTypes = Date | string | undefined;
 
-export enum DatepickerView {
+export enum MDatepickerDefaultView {
     Month = 'month',
     Day = 'day'
+}
+
+export enum MDatepickerFormat {
+    YYYYMMDD = 'YYYY-MM-DD',
+    YYYYMM = 'YYYY-MM'
 }
 
 @WithRender
@@ -51,8 +57,17 @@ export class MDatepicker extends ModulVue {
     @Prop()
     public label: string;
 
-    @Prop()
-    public view: string;
+    @Prop({
+        default: MDatepickerDefaultView.Day,
+        validator: value => Enums.toValueArray(MDatepickerDefaultView).includes(value)
+    })
+    public defaultView: MDatepickerDefaultView;
+
+    @Prop({
+        default: MDatepickerFormat.YYYYMM,
+        validator: value => Enums.toValueArray(MDatepickerFormat).includes(value)
+    })
+    public format: MDatepickerFormat;
 
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
@@ -81,6 +96,14 @@ export class MDatepicker extends ModulVue {
     };
 
     private get inputOptions(): CleaveOptions {
+        if (this.isFormatYYYYMM) {
+            return {
+                numericOnly: true,
+                delimiters: ['-'],
+                blocks: [4, 2]
+            };
+        }
+
         return {
             numericOnly: true,
             delimiters: ['-', '-'],
@@ -89,13 +112,14 @@ export class MDatepicker extends ModulVue {
     }
 
     protected created(): void {
-
         if (this.value instanceof Date) {
             this.$log.warn('Using a Date as value for datepicker is not recommended and will be deprecated in 1.0, the value should use a string with the format "YYYY-MM-DD". Using a Date object can lead to timezone issue in your projet see -> https://stackoverflow.com/questions/29174810/javascript-date-timezone-issue');
         }
     }
 
-
+    get isFormatYYYYMM(): boolean {
+        return this.format === MDatepickerFormat.YYYYMM;
+    }
 
     get formattedDate(): string {
         return this.convertValueToModel(this.model);
@@ -141,10 +165,8 @@ export class MDatepicker extends ModulVue {
         }
     }
 
-
     @Emit('close')
     private async onClose(): Promise<void> {
-
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.$emit('blur');
@@ -152,7 +174,6 @@ export class MDatepicker extends ModulVue {
                 this.showErrorMessage(this.inputModel);
             }
         }
-
     }
 
     @Emit('open')
@@ -197,8 +218,6 @@ export class MDatepicker extends ModulVue {
                 }
             }
         }
-
-
     }
 
     private clearErrorMessage(): void {
@@ -302,8 +321,6 @@ export class MDatepicker extends ModulVue {
                 this.showErrorMessage(this.inputModel);
             }
         }
-
-
     }
 
     // override from Input-management
@@ -360,8 +377,6 @@ export class MDatepicker extends ModulVue {
     }
 
     private onKeydown(event: KeyboardEvent): void {
-
-
         if (this.as<InputStateMixin>().active) {
             if (event.key === 'Tab') {
                 // close popop if open and tab key is pressed (accessibility)
