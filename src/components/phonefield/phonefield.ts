@@ -70,6 +70,7 @@ export class MPhonefield extends ModulVue {
     protected id: string = `mIntegerfield-${uuid.generate()}`;
     private examples: any = require('libphonenumber-js/examples.mobile.json');
 
+    isFlagDisplay: boolean = false;
     countryModelInternal: string = '';
     internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     selectedCountries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
@@ -158,6 +159,13 @@ export class MPhonefield extends ModulVue {
         this.focusInput();
     }
 
+    async onOpen(): Promise<void> {
+        await this.$nextTick(() => this.isFlagDisplay = true);
+    }
+
+    onClose(): void {
+        this.isFlagDisplay = false;
+    }
 
     public async focusInput(): Promise<any> {
         await this.$nextTick();

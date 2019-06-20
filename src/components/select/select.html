@@ -51,7 +51,10 @@
              :padding="false"
              :focus-management="false"
              :close-on-backdrop="true"
-             :open-trigger="'mousedown'">
+             :open-trigger="'mousedown'"
+             @open="onOpen"
+             @close="onClose"
+             @portal-content-visible="onPortalContentVisible">
 
         <ul :id="ariaControls"
             class="m-select__list"

@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Model, Prop } from 'vue-property-decorator';
+import { Emit, Model, Prop } from 'vue-property-decorator';
 import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
@@ -71,6 +71,15 @@ export class MSelect extends ModulVue {
     isSelected(option: any): boolean {
         return this.as<InputManagement>().internalValue.indexOf(option) > -1;
     }
+
+    @Emit('open')
+    private onOpen(): void { }
+
+    @Emit('close')
+    private onClose(): void { }
+
+    @Emit('portal-content-visible')
+    private onPortalContentVisible(): void { }
 }
 
 const SelectPlugin: PluginObject<any> = {

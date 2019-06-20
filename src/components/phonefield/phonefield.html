@@ -8,7 +8,6 @@
     <div class="m-phonefield__wrapper">
         <m-select class="m-phonefield__country"
                   :value="countryModel"
-                  @input="onContryChanged($event)"
                   :options="isoCountries"
                   :disabled="isDisabled || isWaiting"
                   :readonly="isReadonly"
@@ -16,9 +15,12 @@
                   :valid="isPhonefieldValid"
                   :label-up="true"
                   :label="i18nCountryLabel"
-                  width="auto">
+                  width="auto"
+                  @input="onContryChanged($event)"
+                  @portal-content-visible="onOpen"
+                  @close="onClose">
             <div class="m-phonefield__flag-wrapper">
-                <svg class="m-flag"
+                <svg class="m-phonefield__flag"
                      width="27px"
                      height="20px">
                     <use :xlink:href="spriteId(countryModel)"
@@ -30,12 +32,14 @@
             <template slot="option"
                       slot-scope="{option, index}">
                 <div class="m-phonefield__item-wrapper">
-                    <svg class="m-phonefield__item-flag"
-                         width="27px"
-                         height="20px">
-                        <use :xlink:href="spriteId(option)"
-                             aria-hidden="true"></use>
-                    </svg>
+                    <div class="m-phonefield__item-flag-wrapper">
+                        <svg v-if="isFlagDisplay"
+                             width="27px"
+                             height="20px">
+                            <use :xlink:href="spriteId(option)"
+                                 aria-hidden="true"></use>
+                        </svg>
+                    </div>
                     <span class="m-phonefield__item-name">{{ countries[index].name }}</span>
                     <span class="m-phonefield__item-dialCode">+{{ countries[index].dialCode }}</span>
                 </div>
