@@ -42,7 +42,16 @@
         align-items: center;
     }
 
-    &__item-flag {
+    &__flag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+    }
+
+    &__item-flag-wrapper {
+        width: 27px;
+        height: 20px;
         margin-right: $m-spacing--s;
     }
 
@@ -76,12 +85,5 @@
 
     &__validation-message {
         flex: 1 1 auto;
-    }
-
-    .m-flag {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        outline: none;
     }
 }
