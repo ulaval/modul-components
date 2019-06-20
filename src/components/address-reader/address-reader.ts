@@ -79,6 +79,10 @@ export class MAddressReader extends ModulVue implements AddressReaderProps {
         return this.filterString(AddressField.PROVINCE, this.provinceKey);
     }
 
+    get hasProvince(): boolean {
+        return this.filterString(AddressField.PROVINCE, this.provinceKey).length > 0;
+    }
+
     get filteredAddress(): DisplayableAddress {
         return {
             buildingNumber: this.buildingNumber,
@@ -95,7 +99,7 @@ export class MAddressReader extends ModulVue implements AddressReaderProps {
         let value: string = '';
         if (subKey !== '' && this.address[key] && this.address[key][subKey]) {
             value = this.address[key][subKey];
-        } else if (this.address[key]) {
+        } else if (subKey === '' && this.address[key]) {
             value = this.address[key];
         }
         return (this.filters[key] && value.length > 0) ? this.filters[key](value) : value;

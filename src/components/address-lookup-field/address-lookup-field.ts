@@ -1,7 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
-import { LoqateFindResponse, LoqateRetrieveResponse } from '../../utils/address-lookup/address-lookup-loqate-service';
+import Address from '../../utils/address-lookup/address';
+import { LoqateFindResponse } from '../../utils/address-lookup/address-lookup-loqate-service';
 import AddressLookupPlugin from '../../utils/address-lookup/address-lookup.plugin';
 import { ModulVue } from '../../utils/vue/vue';
 import AutoCompletePlugin from '../autocomplete/autocomplete';
@@ -34,6 +35,9 @@ export class MAddressLookupField extends ModulVue {
     @Prop()
     language: string | undefined;
 
+    i18nSearch: string = this.$i18n.translate('m-address-lookup-field:search-field');
+    i18nPlaceholder: string = this.$i18n.translate('m-address-lookup-field:placeholder');
+
     selection: string = '';
 
     open: boolean = false;
@@ -55,7 +59,7 @@ export class MAddressLookupField extends ModulVue {
                 this.open = false;
             }
             if (currentAddress.type === KEY_ADDRESS_TYPE && this.selection === currentAddress.id) {
-                const results: LoqateRetrieveResponse[] = await this.$addressLookup.retrieve({ id: currentAddress.id });
+                const results: Address[] = await this.$addressLookup.retrieve({ id: currentAddress.id });
                 if (results.length > 0) {
                     this.emitSelection(results[0]);
                 }
@@ -65,7 +69,7 @@ export class MAddressLookupField extends ModulVue {
     }
 
     @Emit('address-retrieved')
-    private emitSelection(_currentAddress: LoqateRetrieveResponse): void {
+    private emitSelection(_currentAddress: Address): void {
     }
 
     get results(): MAutocompleteAddressResult[] {

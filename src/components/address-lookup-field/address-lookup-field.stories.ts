@@ -6,7 +6,7 @@ import { ADDRESS_LOOKUP_FIELD_NAME } from '../component-names';
 import { MAddressLookupField } from './address-lookup-field';
 
 
-storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_LOOKUP_FIELD_NAME}`, module)
+storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({

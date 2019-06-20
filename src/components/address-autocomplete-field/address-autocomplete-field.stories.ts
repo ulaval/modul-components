@@ -119,7 +119,7 @@ const validations: { [field: string]: AddressEditorValidator[] } = {
 };
 
 
-storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_AUTOCOMPLETE_FIELD_NAME}`, module)
+storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_AUTOCOMPLETE_FIELD_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({

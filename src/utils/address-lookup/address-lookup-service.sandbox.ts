@@ -1,7 +1,8 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { ModulVue } from '../vue/vue';
-import { LoqateFindResponse, LoqateRetrieveResponse } from './address-lookup-loqate-service';
+import Address from './address';
+import { LoqateFindResponse } from './address-lookup-loqate-service';
 import WithRender from './address-lookup-service.sandbox.html';
 import AddressLookupPlugin from './address-lookup.plugin';
 
@@ -12,10 +13,10 @@ export class MAddressLookupServiceSandbox extends ModulVue {
     addresses: LoqateFindResponse[] = [];
     addressDrillDown: LoqateFindResponse[] = [];
 
-    addressDetail: LoqateRetrieveResponse[] = [];
+    addressDetail: Address[] = [];
 
     async created(): Promise<void> {
-        this.addresses = await this.$addressLookup.find({ input: '325 rue des bouleaux o' });
+        this.addresses = await this.$addressLookup.find({ input: `2325 rue de l'Université` });
 
         this.addressDrillDown = await this.$addressLookup.find({
             id: 'CA|CP|ENG|QC-QUÉBEC-RUE_DES_BOULEAUX_O-325',
@@ -23,7 +24,7 @@ export class MAddressLookupServiceSandbox extends ModulVue {
         });
 
         this.addressDetail = await this.$addressLookup.retrieve({
-            id: 'CA|CP|B|802920093'
+            id: 'CA|CP|B|5103540'
         });
         // tslint:disable-next-line: no-console
         console.log(this.addressDetail);

@@ -117,7 +117,7 @@ const validations: { [field: string]: AddressEditorValidator[] } = {
     ]
 };
 
-storiesOf(`${componentsHierarchyRootSeparator}${ADDRESS_EDITOR_NAME}`, module)
+storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_EDITOR_NAME}`, module)
     .addDecorator(withA11y)
     .addDecorator(withKnobs)
     .add('default', () => ({

@@ -1,6 +1,6 @@
 <div class="m-address-lookup-field">
-    <m-autocomplete placeholder="Input address to lookup !translation"
-                    label="Address Lookup"
+    <m-autocomplete :placeholder="i18nPlaceholder"
+                    :label="i18nSearch"
                     :results="results"
                     :open.sync="open"
                     @complete="onComplete"

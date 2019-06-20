@@ -6,7 +6,7 @@ import { MDropdown } from '../dropdown/dropdown';
 import { MTextfield } from '../textfield/textfield';
 import WithRender from './address-editor.html';
 
-export type AddressEditorValidator = (value: string, context?: Address, provinces?: Province[]) => string;
+export type AddressEditorValidator = (value?: string, context?: Address, provinces?: Province[]) => string;
 
 @WithRender
 @Component({
@@ -32,6 +32,15 @@ export default class MAddressEditor extends ModulVue {
 
     @Prop({ default: () => ({}) })
     validations: { [field: string]: AddressEditorValidator[] };
+
+    i18nBuildingNumber: string = this.$i18n.translate('m-address-editor:building-number');
+    i18nSubBuilding: string = this.$i18n.translate('m-address-editor:sub-building');
+    i18nStreet: string = this.$i18n.translate('m-address-editor:street');
+    i18nCity: string = this.$i18n.translate('m-address-editor:city');
+    i18nCountry: string = this.$i18n.translate('m-address-editor:country');
+    i18nProvince: string = this.$i18n.translate('m-address-editor:province');
+    i18nPostalCode: string = this.$i18n.translate('m-address-editor:postal-code');
+
 
     currentAddress: Address = copyAddress(this.address);
     private errors: { [field: string]: string[] } = {
@@ -62,6 +71,11 @@ export default class MAddressEditor extends ModulVue {
     onAddressChange(): void {
         this.currentAddress = this.address;
         this.updateCountryCode(this.currentAddress[AddressField.COUNTRY][CountryKey.COUNTRY_ISO2]);
+    }
+
+    @Watch('province')
+    onProvincesChange(): void {
+        this.validate(AddressField.PROVINCE);
     }
 
     onBuildingNumberChange(value: string): void {
@@ -130,8 +144,11 @@ export default class MAddressEditor extends ModulVue {
     onCountryChange(value: string): void {
         this.touched[AddressField.COUNTRY] = true;
         this.validate(AddressField.COUNTRY, value);
+        if (this.currentAddress.country.countryIso2 !== value) {
+            this.clearProvinceValue();
+            this.onProvinceChange();
+        }
         this.updateCountryValue(value);
-        this.clearProvinceValue();
         this.validate(AddressField.PROVINCE, value);
     }
 
@@ -150,7 +167,7 @@ export default class MAddressEditor extends ModulVue {
         return '';
     }
 
-    onProvinceChange(value: string): void {
+    onProvinceChange(value?: string): void {
         this.touched[AddressField.PROVINCE] = true;
         this.validate(AddressField.PROVINCE, value);
         this.updateProvinceValue(value);
@@ -257,14 +274,14 @@ export default class MAddressEditor extends ModulVue {
         }
     }
 
-    private updateProvinceValue(value: string): void {
+    private updateProvinceValue(value?: string): void {
         const province: Province | undefined = this.provinces.find((province: Province) => province.provinceCode === value);
         this.currentAddress[AddressField.PROVINCE] = province;
         this.updateAddress(this.currentAddress);
         this.validate(AddressField.PROVINCE, '');
     }
 
-    private validate(field: string, value: string): void {
+    private validate(field: string, value?: string): void {
         if (this.validations[field]) {
             this.errors[field] = this.validations[field]
                 .reduce((acc: string[], validation: AddressEditorValidator) => {
