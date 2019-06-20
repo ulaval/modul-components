@@ -7,6 +7,7 @@
         :disabled="disabled || isWaiting"
         :type="type"
         @click="onClick"
+        @mousedown="onMousedown"
         @focus="onFocus"
         @blur="onBlur">
     <m-icon aria-hidden="true"

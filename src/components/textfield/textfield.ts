@@ -38,7 +38,6 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
     ]
 })
 export class MTextfield extends ModulVue implements InputManagementData {
-
     @Prop({
         default: MTextfieldType.Text,
         validator: value =>
@@ -94,7 +93,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
     private wordWrapChanged(wordWrap: boolean): void {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
-
 
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;

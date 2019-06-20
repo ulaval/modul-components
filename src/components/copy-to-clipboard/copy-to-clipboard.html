@@ -1,0 +1,14 @@
+<div>
+    <slot name="input"
+          :props="inputProps"
+          :handlers="inputHandlers">
+        <m-textfield v-bind="inputProps"
+                     v-on="inputHandlers">
+        </m-textfield>
+    </slot>
+    <slot name="button"
+          :handlers="buttonHandlers">
+        <m-button v-on="buttonHandlers"
+                  @mousedown.prevent>{{ labelCopyBtn }}</m-button>
+    </slot>
+</div>
