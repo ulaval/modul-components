@@ -69,6 +69,7 @@ export class FormArray extends AbstractControl {
 
     public async submit(): Promise<void> {
         await Promise.all(this.controls.map(c => c.submit()));
+
         if (!this._hasAnyControlsInError()) {
             this.validate();
             await this.validateAsync();
