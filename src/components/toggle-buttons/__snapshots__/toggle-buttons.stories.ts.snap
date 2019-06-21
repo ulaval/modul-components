@@ -2,7 +2,7 @@
 
 exports[`Storyshots components|m-toggle-buttons default 1`] = `
 <div
-  class="m-toggle-buttons m-toggle-buttons__default"
+  class="m-toggle-buttons m--is-default"
 >
   <button
     aria-pressed="false"
@@ -89,7 +89,7 @@ exports[`Storyshots components|m-toggle-buttons default 1`] = `
 
 exports[`Storyshots components|m-toggle-buttons disabled 1`] = `
 <div
-  class="m-toggle-buttons m-toggle-buttons__default"
+  class="m-toggle-buttons m--is-default"
 >
   <button
     aria-pressed="false"
@@ -180,7 +180,7 @@ exports[`Storyshots components|m-toggle-buttons disabled 1`] = `
 
 exports[`Storyshots components|m-toggle-buttons multiple selection 1`] = `
 <div
-  class="m-toggle-buttons m-toggle-buttons__default"
+  class="m-toggle-buttons m--is-default"
 >
   <button
     aria-pressed="false"
@@ -267,7 +267,7 @@ exports[`Storyshots components|m-toggle-buttons multiple selection 1`] = `
 
 exports[`Storyshots components|m-toggle-buttons single selection 1`] = `
 <div
-  class="m-toggle-buttons m-toggle-buttons__default"
+  class="m-toggle-buttons m--is-default"
 >
   <button
     aria-pressed="false"
@@ -354,7 +354,7 @@ exports[`Storyshots components|m-toggle-buttons single selection 1`] = `
 
 exports[`Storyshots components|m-toggle-buttons skin rounded 1`] = `
 <div
-  class="m-toggle-buttons m-toggle-buttons__rounded"
+  class="m-toggle-buttons m--is-rounded"
 >
   <button
     aria-pressed="false"
@@ -441,7 +441,7 @@ exports[`Storyshots components|m-toggle-buttons skin rounded 1`] = `
 
 exports[`Storyshots components|m-toggle-buttons with slots 1`] = `
 <div
-  class="m-toggle-buttons m-toggle-buttons__default"
+  class="m-toggle-buttons m--is-default"
 >
   <button
     aria-pressed="false"

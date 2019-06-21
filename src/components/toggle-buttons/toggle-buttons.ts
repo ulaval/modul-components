@@ -57,10 +57,10 @@ export class MToggleButtons extends Vue {
         return this.skin === MToggleButtonSkin.ROUNDED;
     }
 
-    get toggleButtonsClass(): { [key: string]: boolean } {
+    get skinButtons(): { [key: string]: boolean } {
         return {
-            'm-toggle-buttons__default': this.skin === MToggleButtonSkin.DEFAULT,
-            'm-toggle-buttons__rounded': this.skin === MToggleButtonSkin.ROUNDED
+            'm--is-default': this.skin === MToggleButtonSkin.DEFAULT,
+            'm--is-rounded': this.skin === MToggleButtonSkin.ROUNDED
         };
     }
 }

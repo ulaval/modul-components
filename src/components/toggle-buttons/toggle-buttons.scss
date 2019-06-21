@@ -4,7 +4,7 @@
 .m-toggle-buttons {
     display: inline-block;
 
-    &__default {
+    &.m--is-default {
         .m-button {
             border-radius: 0;
 
@@ -22,10 +22,10 @@
         }
     }
 
-    &__rounded {
+    &.m--is-rounded {
         .m-button {
-            border-radius: 25px;
-            margin: 0 4px 8px 0;
+            border-radius: 25px; // magic number
+            margin: 0 $m-spacing--xs $m-spacing--s 0;
         }
     }
 }
