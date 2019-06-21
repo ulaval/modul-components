@@ -27,7 +27,7 @@
         "storybook": "start-storybook --config-dir ./conf/storybook --static-dir ./conf/storybook/public",
         "file-gen-cli": "./node_modules/.bin/file-gen-cli",
         "sandboxes": "rimraf dist/**/* && webpack-dev-server --progress --config conf/webpack.config.js  --colors --port 8082 --open --history-api-fallback",
-        "storybook:openshift": "start-storybook --ci --port 8080 --config-dir ./conf/storybook",
+        "storybook:openshift": "start-storybook --ci --port 8080 --config-dir ./conf/storybook --static-dir ./conf/storybook/public",
         "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose",
         "storybook:unit:update": "jest --config ./conf/storybook/jest.config.storybook.js --verbose --updateSnapshot"
     },
