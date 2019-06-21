@@ -689,11 +689,15 @@ exports[`Storyshots components|m-form/all fields datepicker 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
@@ -4751,11 +4755,15 @@ exports[`Storyshots components|m-form/validators date between 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
@@ -4905,11 +4913,15 @@ exports[`Storyshots components|m-form/validators date format 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
