@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -11,13 +10,10 @@ import TextfieldPlugin, { MTextfieldType } from './textfield';
 
 Vue.use(TextfieldPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         data: () => ({
             model: ''
@@ -56,14 +52,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
             }
         },
         template: '<m-textfield :label="label"></m-textfield>'
-    }))
-    .add('placeholder', () => ({
-        props: {
-            placeholder: {
-                default: text('Text', 'A placeholder')
-            }
-        },
-        template: '<m-textfield :placeholder="placeholder"></m-textfield>'
     }))
     .add('value', () => ({
         props: {
@@ -111,8 +99,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all types', () => ({
         props: {
             type: {
@@ -144,8 +131,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all props', () => ({
         props: {
             maxLength: {
@@ -221,8 +207,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/max-width`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all max-width presets', () => ({
         props: {
             maxWidth: {
@@ -271,8 +256,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/max-width`, modu
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/tag-style`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all tag styles', () => ({
         props: {
             tagStyle: {

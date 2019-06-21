@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
@@ -8,13 +7,10 @@ import ChipAddPlugin from './chip-add';
 
 Vue.use(ChipAddPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${CHIP_ADD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         props: {
             text: {

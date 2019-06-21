@@ -1,4 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -9,7 +8,6 @@ import PeriodpickerPlugin from './periodpicker';
 Vue.use(PeriodpickerPlugin);
 
 storiesOf(`${componentsHierarchyRootSeparator}${PERIODPICKER_NAME}`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         data: () => ({
             model1: {}

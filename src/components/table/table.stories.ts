@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -7,13 +5,10 @@ import { TABLE_NAME } from '../component-names';
 import TablePlugin, { MColumnTable } from './table';
 Vue.use(TablePlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Default', () => ({
         props: {
             columns: {

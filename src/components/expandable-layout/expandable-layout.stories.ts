@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, radios, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, radios, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -7,13 +6,11 @@ import { EXPANDABLE_LAYOUT_NAME } from '../component-names';
 import ExpandableLayoutPlugin, { MExpandableLayoutPanelPosition, MExpandableLayoutPanelScrollMode } from './expandable-layout';
 Vue.use(ExpandableLayoutPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${EXPANDABLE_LAYOUT_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         props: {
             open: {

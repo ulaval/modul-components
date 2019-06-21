@@ -177,8 +177,8 @@ export class MPeriodpicker extends ModulVue implements MPeriodpickerProps {
 
     @Watch('value', { immediate: true })
     private onValueChange(value: MDateRange): void {
-        this.dateFromInternalValue = MPeriodpicker.formatIsoDateToLocalString(this.value.from);
-        this.dateToInternalValue = MPeriodpicker.formatIsoDateToLocalString(this.value.to);
+        this.dateFromInternalValue = MPeriodpicker.formatIsoDateToLocalString((this.value || { from: undefined }).from);
+        this.dateToInternalValue = MPeriodpicker.formatIsoDateToLocalString((this.value || { to: undefined }).to);
     }
 
     get minDateTo(): DatePickerSupportedTypes {
