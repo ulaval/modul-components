@@ -19,7 +19,7 @@
         align-items: center;
     }
 
-    &.m--has-right-icon {
+    &.m--has-right-icon.m--has-content {
         flex-direction: row-reverse;
 
         .m-link__icon {
@@ -27,7 +27,7 @@
         }
     }
 
-    &.m--has-left-icon {
+    &.m--has-left-icon.m--has-content {
         .m-link__icon {
             margin-right: $m-margin--s;
         }

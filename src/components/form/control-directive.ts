@@ -23,7 +23,7 @@ export const AbstractControlDirective: DirectiveOptions = {
             Object.defineProperty(el, 'ControlDirectiveListeners', {
                 value: {
                     focusListener: () => control.initEdition(),
-                    blurListener: (event: any) => control.endEdition()
+                    blurListener: () => control.endEdition()
                 }
             });
             (vnode.componentInstance as Vue).$on('focus', el['ControlDirectiveListeners'].focusListener);

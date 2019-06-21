@@ -6,7 +6,8 @@
                            'm--is-skin-text': isSkinText,
                            'm--is-skin-light': isSkinLight,
                            'm--has-right-icon' : isIconPositionRight,
-                           'm--has-left-icon' : isIconPositionLeft }"
+                           'm--has-left-icon' : isIconPositionLeft,
+                           'm--has-content': $slots.default }"
                  :to="routerLinkUrl"
                  :target="target"
                  v-if="isRouterLink"
@@ -33,7 +34,8 @@
                  'm--is-skin-text': isSkinText,
                  'm--is-skin-light': isSkinLight,
                  'm--has-right-icon' : isIconPositionRight,
-                 'm--has-left-icon' : isIconPositionLeft }"
+                 'm--has-left-icon' : isIconPositionLeft,
+                 'm--has-content': $slots.default }"
        :href="propUrl"
        :target="target"
        @click="onClick"

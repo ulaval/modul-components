@@ -2,12 +2,13 @@ import { FormControl } from './form-control';
 import { FormGroup } from './form-group';
 
 const TEST_CONTROL_NAME: string = 'test';
+const ERROR_MESSAGE: string = 'error';
 
 describe('FormGroup', () => {
     let formGroup: FormGroup;
 
     describe('given a FormGroup with no control', () => {
-        beforeAll(() => {
+        beforeEach(() => {
             formGroup = new FormGroup({});
         });
 
@@ -20,7 +21,7 @@ describe('FormGroup', () => {
         });
 
         describe('when adding a required control', () => {
-            beforeAll(() => {
+            beforeEach(() => {
                 formGroup.addControl(TEST_CONTROL_NAME, new FormControl());
             });
 
@@ -32,7 +33,7 @@ describe('FormGroup', () => {
     });
 
     describe('given an FormGroup with a control', () => {
-        beforeAll(() => {
+        beforeEach(() => {
             formGroup = new FormGroup({
                 [TEST_CONTROL_NAME]: new FormControl()
             });

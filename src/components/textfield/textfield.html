@@ -78,6 +78,7 @@
                   :disabled="isDisabled || isWaiting"
                   :placeholder="placeholder"
                   :readonly="isReadonly"
+                  :maxlength="maxLengthNumber"
                   @focus="onFocus"
                   @blur="onBlur"
                   @change="onChange"
@@ -103,7 +104,6 @@
                            class="m-textfield__validation__character-count"
                            :value-length="valueLength"
                            :max-length="maxLength"
-                           :threshold="characterCountThreshold"
-                           :transition="hasCounterTransition"></m-character-count>
+                           :threshold="characterCountThreshold"></m-character-count>
     </div>
 </div>

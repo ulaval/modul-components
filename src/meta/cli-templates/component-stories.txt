@@ -8,13 +8,10 @@ import {{SINGULAR_PASCAL}}Plugin from './{{SINGULAR_KEBAB}}';
 
 Vue.use({{SINGULAR_PASCAL}}Plugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentshierarchyRootSeparator}${{{SINGULAR_CONSTANT}}_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         template: '<{{PREFIXED_SINGULAR_KEBAB}}></{{PREFIXED_SINGULAR_KEBAB}}>'
     }));

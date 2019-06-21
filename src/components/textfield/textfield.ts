@@ -172,10 +172,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return this.type === MTextfieldType.Search;
     }
 
-    private get hasCounterTransition(): boolean {
-        return !this.as<InputState>().hasErrorMessage;
-    }
-
     private resetModel(): void {
         this.$emit('input', '');
     }

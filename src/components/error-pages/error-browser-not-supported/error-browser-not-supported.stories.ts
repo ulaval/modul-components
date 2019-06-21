@@ -1,21 +1,17 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { array, text, withKnobs } from '@storybook/addon-knobs';
+import { array, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
-import ErrorBrowserNotSupported from './error-browser-not-supported';
 import { ERROR_BROWSER_NOT_SUPPORTED_NAME } from '../../component-names';
 import { Link } from '../../message-page/message-page';
+import ErrorBrowserNotSupported from './error-browser-not-supported';
 
 Vue.use(ErrorBrowserNotSupported);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${ERROR_BROWSER_NOT_SUPPORTED_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
                         <m-error-browser-not-supported></m-error-browser-not-supported>

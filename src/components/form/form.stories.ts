@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -23,9 +21,7 @@ import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 const ROLE_NAMES: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
 const TYPE_NAMES: string[] = ['douce', 'blanche', 'sec'];
@@ -118,7 +114,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'name': new FormControl<string>([RequiredValidator('name')], { initialValue: 'blabla' })
+                    'name': new FormControl<string>([RequiredValidator({ controlLabel: 'name' })], { initialValue: 'blabla' })
                 }
 
             )
@@ -162,14 +158,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallouts`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'name': new FormControl<string>(
-                        [RequiredValidator('name')]
+                        [RequiredValidator({ controlLabel: 'name' })]
                     )
                 }
             )
@@ -200,7 +196,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
             formGroup: new FormGroup(
                 {
                     'name': new FormControl<string>(
-                        [RequiredValidator('name')]
+                        [RequiredValidator({ controlLabel: 'name' })]
                     )
                 }
             ),
@@ -236,7 +232,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
             formGroup: new FormGroup(
                 {
                     'name': new FormControl<string>(
-                        [RequiredValidator('name')]
+                        [RequiredValidator({ controlLabel: 'name' })]
                     )
                 }
             ),
@@ -249,8 +245,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                 return this.$data.formGroup.getControl('name');
             }
         },
-        template: `
-        <m-form class="m-u--margin-top"
+        template:
+            ` <m-form class="m-u--margin-top"
                 :form-group="formGroup"
                 :action-fallouts="actionFallouts">
             <m-textfield v-model.trim="nameField.value"
@@ -263,15 +259,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
                 <m-button type="reset"
                             skin="secondary">Reset</m-button>
             </p>
-        </m-form>
-        `
+        </m-form>`
+
     }))
     .add('message summary and clear message summary', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'name': new FormControl<string>(
-                        [RequiredValidator('name')]
+                        [RequiredValidator({ controlLabel: 'name' })]
                     )
                 }
             ),
@@ -304,14 +300,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('required', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'name': new FormControl<string>(
-                        [RequiredValidator('name')]
+                        [RequiredValidator({ controlLabel: 'name' })]
                     )
                 }
             )
@@ -345,7 +341,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<string>(
-                        [EmailValidator('email')]
+                        [EmailValidator({ controlLabel: 'email' })]
                     )
                 }
             )
@@ -379,7 +375,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'min5': new FormControl<string>(
-                        [MinLengthValidator('min5', 5)]
+                        [MinLengthValidator(5, { controlLabel: 'min5' })]
                     )
                 }
             )
@@ -413,7 +409,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'max5': new FormControl<string>(
-                        [MaxLengthValidator('max5', 5)]
+                        [MaxLengthValidator(5, { controlLabel: 'max5' })]
                     )
                 }
             )
@@ -447,7 +443,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'min5': new FormControl<number>(
-                        [MinValidator('min5', 5)]
+                        [MinValidator(5, { controlLabel: 'min5' })]
                     )
                 }
             )
@@ -481,7 +477,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'max5': new FormControl<number>(
-                        [MaxValidator('max5', 5)]
+                        [MaxValidator(5, { controlLabel: 'max5' })]
                     )
                 }
             )
@@ -515,7 +511,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'between': new FormControl<number>(
-                        [BetweenValidator('between', 2, 4)]
+                        [BetweenValidator(2, 4, { controlLabel: 'between' })]
                     )
                 }
             )
@@ -551,10 +547,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
         data: () => ({
             formGroup: new FormGroup(
                 {
-                    'date': new FormControl<string>(
-                        [MinLengthValidator('date', 10, {
+                    'date': new FormControl<string>([
+                        MinLengthValidator(10, {
+                            controlLabel: 'date',
                             validationType: ControlValidatorValidationType.Correction
-                        }), DateFormatValidator('date')]
+                        }),
+                        DateFormatValidator({ controlLabel: 'date' })]
                     )
                 }
             )
@@ -592,7 +590,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'date': new FormControl<string>(
-                        [DateBetweenValidator('date', '2019-05-20', '2019-05-30')]
+                        [DateBetweenValidator('2019-05-20', '2019-05-30', { controlLabel: 'date' })]
                     )
                 }
             )
@@ -631,10 +629,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<number>(
-                        [EmailValidator('email')]
+                        [EmailValidator({ controlLabel: 'email' })]
                     ),
                     'confirmemail': new FormControl<number>(
-                        [EmailValidator('confirmemail')]
+                        [EmailValidator({ controlLabel: 'confirmemail' })]
                     )
                 },
                 [
@@ -685,15 +683,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('at-exit', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<string>(
                         [
-                            EmailValidator('email', {
+                            EmailValidator({
+                                controlLabel: 'email',
                                 validationType: ControlValidatorValidationType.AtExit
                             })
                         ]
@@ -728,7 +727,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
             formGroup: new FormGroup(
                 {
                     'email': new FormControl<string>(
-                        [EmailValidator('email')]
+                        [EmailValidator({ controlLabel: 'email' })]
                     )
                 }
             )
@@ -761,7 +760,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 {
                     'email': new FormControl<string>(
                         [
-                            EmailValidator('email', {
+                            EmailValidator({
+                                controlLabel: 'email',
                                 validationType: ControlValidatorValidationType.Modification
                             })
                         ]
@@ -797,7 +797,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
                 {
                     'email': new FormControl<string>(
                         [
-                            EmailValidator('email', {
+                            EmailValidator({
+                                controlLabel: 'email',
                                 validationType: ControlValidatorValidationType.OnGoing
                             })
                         ]
@@ -829,20 +830,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('required and 20 characters max', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'required max20': new FormControl<string>(
                         [
-                            RequiredValidator('', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Enter a title'
                                 }
                             }),
-                            MaxLengthValidator('', 20, {
+                            MaxLengthValidator(20, {
                                 error: {
                                     message: 'Enter a title less than 20 characters'
                                 }
@@ -885,15 +886,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'required min5': new FormControl<string>(
                         [
-                            RequiredValidator('required min5', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Enter a security answer'
-                                }
+                                },
+                                controlLabel: 'required min5'
                             }),
-                            MinLengthValidator('', 5, {
+                            MinLengthValidator(5, {
                                 error: {
                                     message: 'Enter a security answer at least 5 characters long'
-                                }
+                                },
+                                controlLabel: 'required min5'
                             })
                         ]
                     )
@@ -930,7 +933,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'postal code': new FormControl<string>(
                         [
-                            RequiredValidator(''),
+                            RequiredValidator(),
                             {
                                 key: 'postal-code-format',
                                 validationFunction: (control: FormControl<string>): boolean => {
@@ -978,12 +981,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'email': new FormControl<string>(
                         [
-                            RequiredValidator('', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Enter an email address'
                                 }
                             }),
-                            EmailValidator('', {
+                            EmailValidator({
                                 error: {
                                     message: 'Enter a valid email address'
                                 }
@@ -1023,12 +1026,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'course code': new FormControl<string>(
                         [
-                            RequiredValidator('', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Enter a course code'
                                 }
                             }),
-                            MaxLengthValidator('course code', 8, {
+                            MaxLengthValidator(8, {
                                 error: {
                                     message: 'Enter a 7 characters long course code'
                                 },
@@ -1045,14 +1048,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                                     message: 'Enter a course in the format AAA-0000'
                                 },
                                 validationType: ControlValidatorValidationType.Correction
-                            },
-                            {
-                                key: 'duplicate-course-code',
-                                validationFunction: undefined,
-                                error: {
-                                    message: 'This course code already exists.'
-                                },
-                                validationType: ControlValidatorValidationType.External
                             }
                         ]
                     )
@@ -1090,11 +1085,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'username': new FormControl<string>(
                         [
-                            RequiredValidator('Value', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Username is required'
                                 },
-                                validationType: ControlValidatorValidationType.AtExit
+                                validationType: ControlValidatorValidationType.AtExit,
+                                controlLabel: 'Value'
                             }),
                             {
                                 key: '',
@@ -1157,10 +1153,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'radio required': new FormControl<string>(
                         [
-                            RequiredValidator('Value', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Select a role'
-                                }
+                                },
+                                controlLabel: 'Value'
                             })
                         ]
                     )
@@ -1269,12 +1266,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                 {
                     'email': new FormControl<string>(
                         [
-                            RequiredValidator('', {
+                            RequiredValidator({
                                 error: {
                                     message: 'Enter an email address'
                                 }
                             }),
-                            EmailValidator('', {
+                            EmailValidator({
                                 error: {
                                     message: 'Enter a valid email address'
                                 }
@@ -1283,7 +1280,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
                     ),
                     'email confirmation': new FormControl<string>(
                         [
-                            EmailValidator('', {
+                            EmailValidator({
                                 error: {
                                     message: 'Confirm email address'
                                 }
@@ -1354,16 +1351,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('textfield', () => ({
         data: () => ({
             formGroup: new FormGroup(
                 {
                     'name': new FormControl<string>(
                         [
-                            RequiredValidator('name'),
-                            MaxLengthValidator('name', 20)
+                            RequiredValidator({ controlLabel: 'name' }),
+                            MaxLengthValidator(20, { controlLabel: 'name' })
                         ]
                     )
                 }
@@ -1400,8 +1397,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'description': new FormControl<string>(
                         [
-                            RequiredValidator('description'),
-                            MaxLengthValidator('description', 255)
+                            RequiredValidator({ controlLabel: 'description' }),
+                            MaxLengthValidator(255, { controlLabel: 'description' })
                         ]
                     )
                 }
@@ -1437,7 +1434,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'birthDate': new FormControl<string>(
                         [
-                            RequiredValidator('birthDate')
+                            RequiredValidator()
                         ]
                     )
                 }
@@ -1477,7 +1474,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'type': new FormControl<string>(
                         [
-                            RequiredValidator('type')
+                            RequiredValidator({ controlLabel: 'type' })
                         ]
                     )
                 }
@@ -1518,7 +1515,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'active': new FormControl<string>(
                         [
-                            RequiredValidator('active')
+                            RequiredValidator({ controlLabel: 'active' })
                         ]
                     )
                 }
@@ -1554,7 +1551,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'coupe': new FormControl<string>(
                         [
-                            RequiredValidator('coupe')
+                            RequiredValidator({ controlLabel: 'Style de coupe' })
                         ]
                     )
                 }
@@ -1593,7 +1590,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'time': new FormControl<string>(
                         [
-                            RequiredValidator('time')
+                            RequiredValidator({ controlLabel: 'Time' })
                         ]
                     )
                 }
@@ -1632,7 +1629,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'decimal': new FormControl<string>(
                         [
-                            RequiredValidator('decimal')
+                            RequiredValidator({ controlLabel: 'decimal' })
                         ]
                     )
                 }
@@ -1643,8 +1640,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 return this.$data.formGroup.getControl('decimal');
             }
         },
-        template: `
-    <m-form :form-group="formGroup"
+        template: `<m-form :form-group="formGroup"
             v-m-control="formGroup">
             <h4 class="m-u--h6">Decimalfield</h4>
             <p>edition context: {{decimalField['_editionContext']}}</p>
@@ -1664,8 +1660,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                           skin="secondary"
                           >Reset</m-button>
             </div>
-        </m-form>
-        `
+        </m-form>`
     }))
     .add('moneyfield', () => ({
         data: () => ({
@@ -1673,7 +1668,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'money': new FormControl<string>(
                         [
-                            RequiredValidator('money')
+                            RequiredValidator({ controlLabel: 'Price' })
                         ]
                     )
                 }
@@ -1710,7 +1705,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'integer': new FormControl<string>(
                         [
-                            RequiredValidator('integer')
+                            RequiredValidator({ controlLabel: 'Integer' })
                         ]
                     )
                 }
@@ -1749,7 +1744,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'switch': new FormControl<string>(
                         [
-                            RequiredValidator('switch')
+                            RequiredValidator({ controlLabel: 'switch' })
                         ]
                     )
                 }
@@ -1788,7 +1783,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'autocomplete': new FormControl<string>(
                         [
-                            RequiredValidator('autocomplete')
+                            RequiredValidator({ controlLabel: 'autocomplete' })
                         ]
                     )
                 }
@@ -1832,7 +1827,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
                 {
                     'daterange': new FormControl<string>(
                         [
-                            RequiredValidator('daterange')
+                            RequiredValidator({ controlLabel: 'daterange' })
                         ]
                     )
                 }
