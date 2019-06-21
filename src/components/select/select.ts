@@ -78,8 +78,6 @@ export class MSelect extends ModulVue {
     @Emit('close')
     private onClose(): void { }
 
-    @Emit('portal-content-visible')
-    private onPortalContentVisible(): void { }
 }
 
 const SelectPlugin: PluginObject<any> = {

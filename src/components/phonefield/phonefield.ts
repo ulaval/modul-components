@@ -58,7 +58,7 @@ export class MPhonefield extends ModulVue {
     @Prop({
         default: () => ({
             iso: 'ca',
-            prefix: '+1'
+            prefix: '1'
         })
     })
     public country: any;
@@ -70,7 +70,7 @@ export class MPhonefield extends ModulVue {
     protected id: string = `mIntegerfield-${uuid.generate()}`;
     private examples: any = require('libphonenumber-js/examples.mobile.json');
 
-    isFlagDisplay: boolean = false;
+
     countryModelInternal: string = '';
     internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     selectedCountries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
@@ -85,8 +85,6 @@ export class MPhonefield extends ModulVue {
 
     @Emit('update:country')
     emitContrySelected(country: Country): void { }
-
-
 
     get isoCountries(): string[] {
         return this.countries.map(contry => contry.iso2);
@@ -159,13 +157,6 @@ export class MPhonefield extends ModulVue {
         this.focusInput();
     }
 
-    async onOpen(): Promise<void> {
-        await this.$nextTick(() => this.isFlagDisplay = true);
-    }
-
-    onClose(): void {
-        this.isFlagDisplay = false;
-    }
 
     public async focusInput(): Promise<any> {
         await this.$nextTick();
@@ -176,7 +167,10 @@ export class MPhonefield extends ModulVue {
     onContryChange(country: Country): void {
         this.countryModelInternal = country.iso;
         this.internalCountry = this.countries.find((country: CountryOptions) => country.iso2 === this.countryModelInternal)!;
-        this.as<InputManagement>().internalValue = '+' + this.internalCountry.dialCode;
+        if (!this.as<InputManagement>().internalValue) {
+            this.as<InputManagement>().internalValue = '+' + this.internalCountry.dialCode;
+        }
+
     }
 
 }

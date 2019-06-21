@@ -16,9 +16,7 @@
                   :label-up="true"
                   :label="i18nCountryLabel"
                   width="auto"
-                  @input="onContryChanged($event)"
-                  @portal-content-visible="onOpen"
-                  @close="onClose">
+                  @input="onContryChanged($event)">
             <div class="m-phonefield__flag-wrapper">
                 <svg class="m-phonefield__flag"
                      width="27px"
@@ -33,8 +31,7 @@
                       slot-scope="{option, index}">
                 <div class="m-phonefield__item-wrapper">
                     <div class="m-phonefield__item-flag-wrapper">
-                        <svg v-if="isFlagDisplay"
-                             width="27px"
+                        <svg width="27px"
                              height="20px">
                             <use :xlink:href="spriteId(option)"
                                  aria-hidden="true"></use>
