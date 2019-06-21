@@ -1,5 +1,5 @@
 import { CleaveOptions } from 'cleave.js/options';
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import PopupDirectivePlugin from '../../directives/popup/popup';
@@ -54,6 +54,7 @@ export class MDatepicker extends ModulVue {
     @Model('change')
     @Prop()
     public value: DatePickerSupportedTypes;
+
     @Prop()
     public label: string;
 
@@ -64,17 +65,20 @@ export class MDatepicker extends ModulVue {
     public defaultView: MDatepickerDefaultView;
 
     @Prop({
-        default: MDatepickerFormat.YYYYMM,
+        default: MDatepickerFormat.YYYYMMDD,
         validator: value => Enums.toValueArray(MDatepickerFormat).includes(value)
     })
     public format: MDatepickerFormat;
 
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
+
     @Prop({ default: () => { return new ModulDate().add(10, 'year'); } })
     public max: DatePickerSupportedTypes;
-    @Prop({ default: () => Vue.prototype.$i18n.translate('m-datepicker:placeholder') })
+
+    @Prop()
     public placeholder: string;
+
     @Prop({ default: InputMaxWidth.Small })
     public maxWidth: string;
 
@@ -95,7 +99,13 @@ export class MDatepicker extends ModulVue {
         input: MInputMask;
     };
 
-    private get inputOptions(): CleaveOptions {
+    protected created(): void {
+        if (this.value instanceof Date) {
+            this.$log.warn('Using a Date as value for datepicker is not recommended and will be deprecated in 1.0, the value should use a string with the format "YYYY-MM-DD". Using a Date object can lead to timezone issue in your projet see -> https://stackoverflow.com/questions/29174810/javascript-date-timezone-issue');
+        }
+    }
+
+    public get inputOptions(): CleaveOptions {
         if (this.isFormatYYYYMM) {
             return {
                 numericOnly: true,
@@ -111,21 +121,22 @@ export class MDatepicker extends ModulVue {
         };
     }
 
-    protected created(): void {
-        if (this.value instanceof Date) {
-            this.$log.warn('Using a Date as value for datepicker is not recommended and will be deprecated in 1.0, the value should use a string with the format "YYYY-MM-DD". Using a Date object can lead to timezone issue in your projet see -> https://stackoverflow.com/questions/29174810/javascript-date-timezone-issue');
-        }
-    }
-
-    get isFormatYYYYMM(): boolean {
+    public get isFormatYYYYMM(): boolean {
         return this.format === MDatepickerFormat.YYYYMM;
     }
 
-    get formattedDate(): string {
+    public get propPlaceholder(): string {
+        if (this.placeholder) {
+            return this.placeholder;
+        }
+        return this.isFormatYYYYMM ? this.$i18n.translate('m-datepicker:placeholder-aaaa-mm') : this.$i18n.translate('m-datepicker:placeholder-aaaa-mm-jj');
+    }
+
+    public get formattedDate(): string {
         return this.convertValueToModel(this.model);
     }
 
-    get calandarError(): boolean {
+    public get calandarError(): boolean {
         return this.internalCalendarErrorMessage !== '' || this.as<InputState>().hasError;
     }
 
@@ -156,7 +167,10 @@ export class MDatepicker extends ModulVue {
 
     private get maxModulDate(): ModulDate {
         return new ModulDate(this.max);
+    }
 
+    private get maxInputLenght(): number {
+        return this.isFormatYYYYMM ? 7 : 10;
     }
 
     private set open(open: boolean) {
@@ -170,9 +184,7 @@ export class MDatepicker extends ModulVue {
         // emit blur if not focus and still open
         if (!this.as<InputManagement>().internalIsFocus) {
             this.$emit('blur');
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+            this.showErrorMessage(this.inputModel);
         }
     }
 
@@ -207,7 +219,7 @@ export class MDatepicker extends ModulVue {
             if (this.skipInputValidation) {
                 this.model = inputValue;
             } else {
-                if (inputValue.length === 10) {
+                if (inputValue.length === this.maxInputLenght) {
                     if (this.showErrorMessage(inputValue)) {
                         this.model = this.inputModel;
                     } else {
@@ -225,13 +237,13 @@ export class MDatepicker extends ModulVue {
     }
 
     private showErrorMessage(inputValue: string): boolean {
-        if (inputValue === '' || inputValue === undefined || inputValue === null) {
+        if (inputValue === '' || inputValue === undefined || inputValue === null || this.skipInputValidation) {
 
             this.internalCalendarErrorMessage = '';
             return true;
 
-        } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
-            let newDate: ModulDate = new ModulDate(inputValue);
+        } else if (inputValue.length >= this.maxInputLenght && this.validateDateFormat(inputValue)) {
+            let newDate: ModulDate = new ModulDate(this.isFormatYYYYMM ? `${inputValue}-01` : inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';
                 return true;
@@ -243,26 +255,20 @@ export class MDatepicker extends ModulVue {
             this.internalCalendarErrorMessage = this.$i18n.translate('m-datepicker:format-error');
             return false;
         }
-
-        return true;
     }
 
 
     // Model management
 
     // override from InputManagement
-    @Watch('value', { immediate: true })
+    @Watch('value')
     private onValueChange(value: DatePickerSupportedTypes): void {
-
         if (this.internalDateModel !== this.convertModelToString(value)) {
             this.internalDateModel = this.convertModelToString(value);
 
             this.inputModel = this.internalDateModel ? this.internalDateModel : '';
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+            this.showErrorMessage(this.inputModel);
         }
-
     }
 
     // override from InputManagement
@@ -317,9 +323,7 @@ export class MDatepicker extends ModulVue {
 
         if (!this.open) { // do not emit blur if still open
             this.$emit('blur', event);
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+            this.showErrorMessage(this.inputModel);
         }
     }
 
@@ -347,12 +351,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private validateDateFormat(dateString: string): boolean {
-        if (dateString) {
-            if (!isNaN(Date.parse(dateString))) {
-                return true;
-            }
-        }
-        return false;
+        return !!dateString && !isNaN(Date.parse(dateString));
     }
 
     private convertStringToModel(newValue: string): DatePickerSupportedTypes {
