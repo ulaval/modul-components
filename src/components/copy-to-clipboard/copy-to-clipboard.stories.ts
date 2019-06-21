@@ -26,7 +26,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${COPY_TO_CLIPBOARD_NAME}`, module
                 </m-textfield>
             </template>
             <template slot="button" slot-scope="{ handlers }">
-                <m-button v-on="handlers" skin="secondary" @mousedown.prevent>Custom Copy Button</m-button>
+                <m-button v-on="handlers" skin="secondary">Custom Copy Button</m-button>
             </template>
         </${componentName}>`,
         data: () => ({

@@ -15,6 +15,7 @@ import WithRender from './toast.html?style=./toast.scss';
 
 export enum MToastTimeout {
     none = 'none',
+    xshort = 'xshort',
     short = 'short',
     long = 'long'
 }
@@ -38,8 +39,10 @@ export enum MToastState {
 export enum MToastDuration {
     MobileLong = 5000,
     MobileShort = 3000,
+    MobileXShort = 1500,
     DesktopLong = 8000,
     DesktopShort = 5000,
+    DesktopXShort = 2500,
     None = 0
 }
 
@@ -152,6 +155,8 @@ export class MToast extends ModulVue implements PortalMixinImpl {
                 return this.isMobile ? MToastDuration.MobileLong : MToastDuration.DesktopLong;
             case MToastTimeout.short:
                 return this.isMobile ? MToastDuration.MobileShort : MToastDuration.DesktopShort;
+            case MToastTimeout.xshort:
+                return this.isMobile ? MToastDuration.MobileXShort : MToastDuration.DesktopXShort;
             case MToastTimeout.none:
             default:
                 return MToastDuration.None;

@@ -8,7 +8,6 @@
     </slot>
     <slot name="button"
           :handlers="buttonHandlers">
-        <m-button v-on="buttonHandlers"
-                  @mousedown.prevent>{{ labelCopyBtn }}</m-button>
+        <m-button v-on="buttonHandlers">{{ labelCopyBtn }}</m-button>
     </slot>
 </div>

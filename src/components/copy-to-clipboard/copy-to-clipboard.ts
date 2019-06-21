@@ -6,6 +6,7 @@ import ButtonPlugin from '../button/button';
 import { COPY_TO_CLIPBOARD_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import TextfieldPlugin from '../textfield/textfield';
+import ToastPlugin, { MToastPosition, MToastTimeout } from '../toast/toast';
 import WithRender from './copy-to-clipboard.html';
 
 export interface CopyToClipboardInputSupport {
@@ -59,14 +60,14 @@ export class MCopyToClipboard extends ModulVue {
 
     get inputHandlers(): { [key: string]: (value: string) => void } {
         return {
-            click: this.copyText
+            click: this.selectText
         };
     }
 
     get buttonHandlers(): { [key: string]: (value: string) => void } {
         return {
             click: this.copyText,
-            mousedown: this.selectText
+            mousedown: () => requestAnimationFrame(() => this.selectText()) // Avoid selection flicker when spamming copy button.
         };
     }
 
@@ -80,6 +81,11 @@ export class MCopyToClipboard extends ModulVue {
     copyText(): void {
         copyToClipboard(this.value);
         this.selectText();
+        this.$toast.show({
+            text: this.$i18n.translate('m-copy-to-clipboard:copied'),
+            position: MToastPosition.TopCenter,
+            timeout: MToastTimeout.xshort
+        });
     }
 }
 
@@ -89,6 +95,7 @@ const CopyToClipboardPlugin: PluginObject<any> = {
         v.use(I18nPlugin);
         v.use(TextfieldPlugin);
         v.use(ButtonPlugin);
+        v.use(ToastPlugin);
     }
 };
 

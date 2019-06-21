@@ -187,7 +187,7 @@ exports[`Storyshots components|m-copy-to-clipboard default 1`] = `
     <span
       class="m-button__text"
     >
-      Copy 
+      Copier 
       <!---->
     </span>
      
@@ -284,7 +284,7 @@ exports[`Storyshots components|m-copy-to-clipboard default with value 1`] = `
     <span
       class="m-button__text"
     >
-      Copy 
+      Copier 
       <!---->
     </span>
      

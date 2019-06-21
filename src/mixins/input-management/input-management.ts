@@ -64,9 +64,8 @@ export class InputManagement extends ModulVue
     private updateSelection(): void {
         const inputElement: HTMLInputElement = this.as<InputState>().getInput() as HTMLInputElement;
         if (inputElement && this.selection) {
+            inputElement.focus();
             inputElement.select();
-            const selectionIndex: number = this.as<InputManagement>().value.indexOf(this.selection);
-            inputElement.setSelectionRange(selectionIndex, selectionIndex + this.selection.length);
         }
     }
 

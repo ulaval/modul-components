@@ -1,5 +1,6 @@
 {
     "m-copy-to-clipboard": {
-        "copy": "Copy"
+        "copy": "Copier",
+        "copied": "Copié"
     }
 }
