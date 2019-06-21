@@ -9,7 +9,6 @@ import AutoCompletePlugin from '../autocomplete/autocomplete';
 import { ADDRESS_LOOKUP_FIELD_NAME } from '../component-names';
 import WithRender from './address-lookup-field.html?style=./address-lookup-field.scss';
 
-// tslint:disable: no-console
 const KEY_ADDRESS_TYPE: string = 'address';
 interface MAutocompleteAddressResult {
     value: string;

@@ -2,6 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import Address from '../../utils/address-lookup/address';
 import { ADDRESS_LOOKUP_FIELD_NAME } from '../component-names';
 import { MAddressLookupField } from './address-lookup-field';
 
@@ -17,7 +18,7 @@ storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NA
             retrievedValue: 'nothing'
         }),
         methods: {
-            onRetrieve(value: any): void {
+            onRetrieve(value: Address): void {
                 (this as any).retrievedValue = value;
             }
         },

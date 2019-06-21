@@ -26,8 +26,6 @@ export class MAddressLookupServiceSandbox extends ModulVue {
         this.addressDetail = await this.$addressLookup.retrieve({
             id: 'CA|CP|B|5103540'
         });
-        // tslint:disable-next-line: no-console
-        console.log(this.addressDetail);
     }
 }
 
