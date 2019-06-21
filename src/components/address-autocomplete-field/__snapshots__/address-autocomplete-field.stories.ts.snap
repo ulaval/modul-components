@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|/address/m-address-autocomplete-field default 1`] = `
+<div>
+  <div>
+    <div
+      class="m-address-autocomplete-field"
+    >
+      <div
+        class="m-address-lookup-field"
+      >
+        <m-autocomplete
+          label="Rechercher une adresse"
+          placeholder="Entrez une adresse à rechercher"
+          results=""
+        />
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    style="border-top: 1px solid #000; margin-top: 50px;"
+  >
+    Address from autocomplete field : {}
+  </div>
+   
+  <div>
+    <a>
+      clear result
+    </a>
+  </div>
+</div>
+`;
