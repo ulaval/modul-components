@@ -236,12 +236,28 @@ export default abstract class AbstractCalendarState implements CalendarState {
         return months;
     }
 
-    /**
-     *
-     * [ yearState : {}, monthState: [{}]]
-    */
     private yearsMonths(): YearMonthState[] {
-        return [];
+        let yearsMonths: YearMonthState[] = [];
+        for (let year: number = this.currentMinDate.fullYear(); year <= this.currentMaxDate.fullYear(); year++) {
+            let months: MonthState[] = [];
+            let date: ModulDate;
+            let isYearsCurrent: boolean = this.currentlyDisplayedDate.fullYear() === year;
+            let isYearMinOrMax: boolean = (year === this.currentMinDate.fullYear()) || (year === this.currentMaxDate.fullYear());
+            for (let monthIndex: number = FIRST_MONTH_INDEX; monthIndex <= LAST_MONTH_INDEX; monthIndex++) {
+                date = new ModulDate(year, monthIndex, 1);
+                months.push({
+                    month: monthIndex,
+                    isCurrent: isYearsCurrent && (this.currentlyDisplayedMonth() === monthIndex),
+                    isDisabled: isYearMinOrMax && !date.isBetween(this.currentMinDate, this.currentMaxDate, DatePrecision.MONTH)
+                });
+            }
+
+            yearsMonths.push({
+                year: { year: year, isCurrent: this.currentlyDisplayedYear() === year },
+                months: months
+            });
+        }
+        return yearsMonths;
     }
 
     private daysOfMonth(): DayState[] {

@@ -41,7 +41,8 @@ enum WeekdayNames {
 export enum PickerMode {
     DAY = 'day',
     MONTH = 'month',
-    YEAR = 'year'
+    YEAR = 'year',
+    YEAR_MONTH = 'year-month'
 }
 
 @WithRender
@@ -98,17 +99,37 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     id: string = `m-simple-calendar-${uuid.generate()}`;
 
+    $refs: {
+        body: HTMLElement;
+    };
+
     public modeLinkCurrentMonthAndYear: MLinkMode = MLinkMode.Button;
     private currentPickerMode: PickerMode = this.initialPickerMode;
-
 
     onYearClick(): void {
         this.currentPickerMode = this.isPickerModeDay ? this.currentPickerMode = PickerMode.YEAR : this.currentPickerMode = PickerMode.DAY;
     }
 
+    onToogleView(): void {
+        this.currentPickerMode = this.isPickerModeDay ? this.currentPickerMode = PickerMode.YEAR_MONTH : this.currentPickerMode = PickerMode.DAY;
+    }
+
     onYearSelect(year: YearState): void {
         super.onYearSelect(year);
         this.currentPickerMode = PickerMode.MONTH;
+    }
+
+    onYearMonthSelect(year: YearState, month: MonthState): void {
+        if (!month.isDisabled) {
+            month.isCurrent = true;
+
+            // Delay to show the user selection
+            setTimeout(() => {
+                super.onYearSelect(year);
+                super.onMonthSelect(month);
+                this.currentPickerMode = PickerMode.DAY;
+            }, 300);
+        }
     }
 
     onYearNext(event: Event): void {
@@ -117,10 +138,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onYearPrevious(event: Event): void {
         super.onYearPrevious(event);
-    }
-
-    onMonthClick(): void {
-        this.currentPickerMode = PickerMode.MONTH;
     }
 
     onMonthSelect(month: MonthState): void {
@@ -138,10 +155,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         super.onMonthPrevious(event);
     }
 
-    monthTabIndex(month: MonthState): string {
-        return month.isDisabled ? '-1' : '0';
-    }
-
     onDaySelect(day: DayState): void {
         super.onDaySelect(day);
     }
@@ -156,10 +169,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onDayMouseLeave(day: DayState): void {
         super.onDayMouseLeave(day);
-    }
-
-    dayTabIndex(day: DayState): string {
-        return day.isDisabled || this.hideDay(day) ? '-1' : '0';
     }
 
     isDateInFuture(day: DayState): boolean {
@@ -207,6 +216,16 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return this.monthsNames[index];
     }
 
+    scrollToCurrentYear(): void {
+        this.$nextTick(() => {
+            let bodyEl: HTMLElement = this.$refs.body;
+            const spacingBeforeCurrentYear: number = 16;
+            if (bodyEl) {
+                bodyEl.scrollTop = (bodyEl.querySelector('[data-current-year="true"]') as HTMLElement).offsetTop - spacingBeforeCurrentYear || 0;
+            }
+        });
+    }
+
     get currentYear(): number {
         return this.calendar.dates.current.fullYear();
     }
@@ -227,6 +246,10 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return this.calendar.years;
     }
 
+    get yearsMonths(): {} {
+        return this.calendar.yearsMonths;
+    }
+
     get months(): {} {
         return this.calendar.months;
     }
@@ -237,6 +260,14 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     get isPickerModeMonth(): boolean {
         return this.currentPickerMode === PickerMode.MONTH;
+    }
+
+    get isPickerModeYearMonth(): boolean {
+        let isPickerModeYearMonth: boolean = this.currentPickerMode === PickerMode.YEAR_MONTH;
+        if (isPickerModeYearMonth) {
+            this.scrollToCurrentYear();
+        }
+        return isPickerModeYearMonth;
     }
 
     get isPickerModeDay(): boolean {
@@ -266,6 +297,10 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     get days(): DayState[] {
         return this.calendar.days;
+    }
+
+    get isButtonToogleViewDisabled(): boolean {
+        return this.isMinMonth && this.isMaxYear;
     }
 
     private padString(value: any, length: number = 2): string {

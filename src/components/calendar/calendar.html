@@ -1,9 +1,7 @@
 <div :id="id"
      class="m-calendar"
-     :class="{
-    'm-calendar-single-date': isSingleDate,
-    'm-calendar-date-range': isDateRange
-}">
+     :class="{ 'm-calendar-single-date': isSingleDate,
+               'm-calendar-date-range': isDateRange}">
     <m-calendar-state-machine v-model="innerValue"
                               @input="onInput"
                               :mode="mode"
