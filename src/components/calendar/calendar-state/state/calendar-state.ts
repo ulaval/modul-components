@@ -37,6 +37,7 @@ export interface Calendar {
     dates: { min: ModulDate, current: ModulDate, max: ModulDate };
     years: YearState[];
     months: MonthState[];
+    yearsMonths: YearMonthState[];
     days: DayState[];
     type?: CalendarType;
 }
@@ -63,6 +64,11 @@ export interface MonthState {
     month: number;
     isCurrent: boolean;
     isDisabled: boolean;
+}
+
+export interface YearMonthState {
+    year: YearState;
+    months: MonthState[];
 }
 
 export interface DayState {
