@@ -28,6 +28,7 @@
         background: $m-color--white;
 
         @media (min-width: $m-mq--min--s) {
+            // Magic number: Height of 4 items
             max-height: 208px;
         }
 

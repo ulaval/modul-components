@@ -24,7 +24,6 @@
                     <use :xlink:href="spriteId(countryModel)"
                          aria-hidden="true"></use>
                 </svg>
-
             </div>
 
             <template slot="option"
@@ -43,36 +42,35 @@
             </template>
 
         </m-select>
-        <div>
-            <m-input-style class="m-phonefield__number"
-                           :disabled="isDisabled"
-                           :waiting="isWaiting"
-                           :error="hasPhonefieldError"
-                           :valid="isPhonefieldValid"
-                           :label="propLabel"
-                           :label-for="id"
-                           :focus="isFocus"
-                           :label-up="true"
-                           :empty="isEmpty"
-                           :readonly="isReadonly"
-                           :required-marker="requiredMarker"
-                           :tag-style="tagStyle">
-                <m-input-mask ref="inputMask"
-                              :value="internalValue"
-                              @input="inputChanged($event)"
-                              :id="id"
-                              :disabled="isDisabled || isWaiting"
-                              :placeholder="placeholder"
-                              :readonly="isReadonly"
-                              :options="inputMaskOptions"
-                              @focus="onFocus"
-                              @blur="onBlur"
-                              @keyup="onKeyup"
-                              @change="onChange"></m-input-mask>
-            </m-input-style>
-            <p class="m-phonefield__example"
-               x-ms-format-detection="none">{{ i18nExample }}{{ example }}</p>
-        </div>
+        <m-input-style class="m-phonefield__number"
+                       :disabled="isDisabled"
+                       :waiting="isWaiting"
+                       :error="hasPhonefieldError"
+                       :valid="isPhonefieldValid"
+                       :label="propLabel"
+                       :label-for="id"
+                       :focus="isFocus"
+                       :label-up="true"
+                       :empty="isEmpty"
+                       :readonly="isReadonly"
+                       :required-marker="requiredMarker"
+                       :tag-style="tagStyle">
+            <m-input-mask ref="inputMask"
+                          :value="internalValue"
+                          @input="inputChanged($event)"
+                          :id="id"
+                          :disabled="isDisabled || isWaiting"
+                          :placeholder="placeholder"
+                          :readonly="isReadonly"
+                          :options="inputMaskOptions"
+                          @focus="onFocus"
+                          @blur="onBlur"
+                          @keyup="onKeyup"
+                          @change="onChange"></m-input-mask>
+        </m-input-style>
+        <p class="m-phonefield__example"
+           x-ms-format-detection="none">{{ i18nExample }}{{ example }}</p>
+
     </div>
     <div class="m-phonefield__validation">
         <m-validation-message class="m-phonefield__validation-message"

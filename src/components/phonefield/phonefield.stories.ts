@@ -18,7 +18,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${PHONEFIELD_NAME}`, module)
     .addDecorator(withKnobs)
     .add('default', () => ({
         data: () => ({
-            model: '4188062749',
+            model: '',
             country: {
                 iso: 'ca',
                 prefix: '1'

@@ -14,7 +14,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { PHONEFIELD_NAME } from '../component-names';
 import { InputMaskOptions, MInputMask } from '../input-mask/input-mask';
 import InputStyle from '../input-style/input-style';
-import SelectPlugin from '../select/select';
+import { MSelect } from '../select/select';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import allCountriesEn from './assets/all-countries-en';
 import allCountriesFr from './assets/all-countries-fr';
@@ -44,7 +44,8 @@ export interface Country {
         InputManagement
     ],
     components: {
-        MInputMask
+        MInputMask,
+        MSelect
     }
 })
 export class MPhonefield extends ModulVue {
@@ -158,6 +159,7 @@ export class MPhonefield extends ModulVue {
     }
 
 
+
     public async focusInput(): Promise<any> {
         await this.$nextTick();
         this.$refs.inputMask.focus();
@@ -180,7 +182,6 @@ export class MPhonefield extends ModulVue {
 const PhonefieldPlugin: PluginObject<any> = {
     install(v): void {
         v.use(InputStyle);
-        v.use(SelectPlugin);
         v.use(ValidationMesagePlugin);
 
         const svg: SpritesService = (v.prototype).$svg;

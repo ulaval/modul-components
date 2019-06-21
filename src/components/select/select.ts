@@ -36,28 +36,32 @@ export class MSelect extends ModulVue {
     @Prop()
     public options: any[];
 
-    private internalOpen: boolean = false;
+    internalOpen: boolean = false;
+    id: string = `${SELECT_NAME}-${uuid.generate()}`;
 
-    private id: string = `${SELECT_NAME}-${uuid.generate()}`;
+    @Emit('open')
+    private onOpen(): void { }
 
+    @Emit('close')
+    private onClose(): void { }
 
-    private get ariaControls(): string {
+    get ariaControls(): string {
         return this.id + '-controls';
     }
 
-    private get hasItems(): boolean {
+    get hasItems(): boolean {
         return this.options && this.options.length > 0;
     }
 
-    public get isEmpty(): boolean {
+    get isEmpty(): boolean {
         return this.as<InputManagement>().hasValue || (this.open) ? false : true;
     }
 
-    private get open(): boolean {
+    get open(): boolean {
         return this.internalOpen;
     }
 
-    private set open(open: boolean) {
+    set open(open: boolean) {
         if (this.as<InputState>().active) {
             this.internalOpen = open;
         }
@@ -71,13 +75,6 @@ export class MSelect extends ModulVue {
     isSelected(option: any): boolean {
         return this.as<InputManagement>().internalValue.indexOf(option) > -1;
     }
-
-    @Emit('open')
-    private onOpen(): void { }
-
-    @Emit('close')
-    private onClose(): void { }
-
 }
 
 const SelectPlugin: PluginObject<any> = {
