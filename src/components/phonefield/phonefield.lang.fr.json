@@ -2,6 +2,6 @@
     "m-phonefield": {
         "country-label": "Pays",
         "phone-label": "Numéro de téléphone",
-        "example": "Ex.%(_NBSP_):%(_NBSP_)"
+        "example": "Ex. : "
     }
 }
