@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -23,9 +21,7 @@ import FormPlugin from './form.plugin';
 
 Vue.use(FormPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 const ROLE_NAMES: string[] = ['Sys admin', 'Unit admin', 'Conceptor', 'Assitant', 'Moderator', 'Student', 'Invited'];
 const TYPE_NAMES: string[] = ['douce', 'blanche', 'sec'];
@@ -162,8 +158,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallouts`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         data: () => ({
             formGroup: new FormGroup(
@@ -304,8 +300,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/built-in action-fallo
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('required', () => ({
         data: () => ({
             formGroup: new FormGroup(
@@ -687,8 +683,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validators`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('at-exit', () => ({
         data: () => ({
             formGroup: new FormGroup(
@@ -834,8 +830,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/validation-type`, mod
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('required and 20 characters max', () => ({
         data: () => ({
             formGroup: new FormGroup(
@@ -1355,8 +1351,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/rules`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${FORM_NAME}/all fields`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('textfield', () => ({
         data: () => ({
             formGroup: new FormGroup(

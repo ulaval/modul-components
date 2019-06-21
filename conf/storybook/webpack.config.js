@@ -16,19 +16,6 @@ module.exports = ({ config, mode }) => {
     // Par contre, ce dernier offrait automatiquement le support des fichiers .md (markdown). Utile si on veut faire marcher le addon-notes avec du markdown
     config.module.rules = baseConfig.module.rules;
 
-    //addon sources
-    config.module.rules.push({
-        test: /\.stories\.ts?$/,
-        loaders: [
-            {
-                loader: require.resolve('@storybook/addon-storysource/loader'),
-                options: { parser: 'typescript' }
-            }
-        ],
-        enforce: 'pre',
-    });
-
-
     config.plugins.push(...(baseConfig.plugins));
 
 

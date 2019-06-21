@@ -854,11 +854,77 @@ exports[`Storyshots components|m-form/all fields decimalfield 1`] = `
     style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px;"
   />
    
-  <m-decimalfield
-    error-message=""
-    label="Decimal"
-    required-marker="true"
-  />
+  <div
+    class="m-decimalfield m--has-label"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--has-label m--is-tag-default"
+    >
+      <div
+        class="m-input-style__content"
+        style="margin-top: 10px;"
+      >
+        <label
+          class="m-input-style__label"
+          for="mDecimalfield-uuid"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              Decimal
+            </span>
+             
+            <sup
+              class="m-input-style__required-marker"
+            >
+              *
+            </sup>
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__body"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__left-content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__right-content"
+          />
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+     
+    <div
+      class="m-decimalfield__validation"
+    >
+      <div
+        class="m-validation-message m-decimalfield__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
    
   <div
     class="m-u--margin-top--l m-u--margin-bottom--l"
