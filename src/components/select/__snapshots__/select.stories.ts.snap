@@ -34,7 +34,7 @@ exports[`Storyshots components|m-select default 1`] = `
             class="m-input-style__left-content"
           >
             <div>
-              apple
+              avocados
             </div>
               
             <!---->
@@ -92,7 +92,7 @@ exports[`Storyshots components|m-select default 1`] = `
   </div>
    
   <p>
-    v-model = apple
+    v-model = avocados
   </p>
 </div>
 `;
