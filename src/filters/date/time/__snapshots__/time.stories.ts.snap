@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots filters|f-m-time Pouet 1`] = `
+<div>
+  <div>
+    at the top of the hour (AM): mock-intl-dateTimeFormat-Tue Jun 25 2019 11:00:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    hour with minutes (AM): mock-intl-dateTimeFormat-Tue Jun 25 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    at the top of the hour (PM): mock-intl-dateTimeFormat-Tue Jun 25 2019 14:00:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    hour with minutes (PM): mock-intl-dateTimeFormat-Tue Jun 25 2019 14:59:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+</div>
+`;
+
+exports[`Storyshots filters|f-m-time Simple 1`] = `
+<div>
+  <div>
+    at the top of the hour (AM): mock-intl-dateTimeFormat-Tue Jun 25 2019 11:00:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    hour with minutes (AM): mock-intl-dateTimeFormat-Tue Jun 25 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    at the top of the hour (PM): mock-intl-dateTimeFormat-Tue Jun 25 2019 14:00:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    hour with minutes (PM): mock-intl-dateTimeFormat-Tue Jun 25 2019 14:59:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    at the top of the hour (Midnight): mock-intl-dateTimeFormat-Tue Jun 25 2019 00:00:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+   
+  <div>
+    hour with minutes (Midnight): mock-intl-dateTimeFormat-Tue Jun 25 2019 00:59:00 GMT-0400 (Eastern Daylight Time)
+  </div>
+</div>
+`;
