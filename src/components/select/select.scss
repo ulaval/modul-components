@@ -4,6 +4,10 @@
     display: inline-flex;
     flex-direction: column;
 
+    &:focus {
+        outline: 0 solid transparent;
+    }
+
     &.m--has-validation-message {
         .m-select__validation-message {
             margin-top: $m-spacing--xs;

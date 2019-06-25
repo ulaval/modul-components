@@ -75,6 +75,7 @@ export class MSelect extends ModulVue {
     isSelected(option: any): boolean {
         return this.as<InputManagement>().internalValue.indexOf(option) > -1;
     }
+
 }
 
 const SelectPlugin: PluginObject<any> = {

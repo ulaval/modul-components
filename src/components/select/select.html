@@ -3,7 +3,10 @@
                'm--is-disabled': isDisabled,
                'm--is-waiting': isWaiting,
                'm--has-validation-message': hasValidationMessage }"
-     :style="{ width: inputWidth, maxWidth: inputMaxWidth }">
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
+     @focus="onFocus"
+     @blur="onBlur"
+     tabindex="0">
     <m-input-style :label="label"
                    :label-for="id"
                    :disabled="isDisabled"
@@ -17,7 +20,9 @@
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle"
                    v-m-popup:popup>
-        <slot>{{ internalValue }}</slot>
+        <div>
+            <slot>{{ internalValue }}</slot>
+        </div>
         <div class="m-select__arrow"
              slot="right-content"
              :class="{ 'm--is-open': open }"
