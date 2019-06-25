@@ -10,6 +10,16 @@
         }
     }
 
+    &.m--is-country-focus {
+        .m-phonefield {
+            &__number {
+                /deep/ .m-input-style__content {
+                    border-left-color: $m-color--interactive;
+                }
+            }
+        }
+    }
+
     &__wrapper {
         display: flex;
         flex-wrap: wrap;
@@ -18,6 +28,7 @@
 
     &__country {
         flex-direction: row;
+        margin-right: -1px; // Magic Number
 
         /deep/ .m-input-style__label {
             visibility: hidden;

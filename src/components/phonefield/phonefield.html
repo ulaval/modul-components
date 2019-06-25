@@ -4,6 +4,7 @@
                 'm--is-readonly': isReadonly,
                 'm--has-error': hasPhonefieldError,
                 'm--is-valid': isPhonefieldValid,
+                'm--is-country-focus': internalFocus,
                 'm--has-validation-message': hasValidationMessage } ]">
     <div class="m-phonefield__wrapper">
 
@@ -17,7 +18,9 @@
                   :label-up="true"
                   :label="i18nCountryLabel"
                   width="auto"
-                  @input="onContryChanged($event)">
+                  @input="onContryChanged($event)"
+                  @focus="onSelectFocus"
+                  @blur="onSelectBlur">
             <div class="m-phonefield__flag-wrapper">
                 <svg class="m-phonefield__flag"
                      width="27px"
