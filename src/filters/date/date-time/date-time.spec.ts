@@ -16,11 +16,6 @@ describe(DATE_TIME_NAME, () => {
         const date: Date = new Date(2018, 8, 27, 17, 5);
         date.toLocaleDateString = jest.fn(() => '27 septembre');
 
-        const test1: any = dateTimeFilter(date);
-        const test2: any = `27 septembre à ${new Intl.DateTimeFormat().format(date)}`;
-        const test3: boolean = test1 === test2;
-        // tslint:disable-next-line:no-console
-        console.log(test3);
         expect(dateTimeFilter(date)).toBe(`27 septembre à ${new Intl.DateTimeFormat().format(date)}`);
     });
 
