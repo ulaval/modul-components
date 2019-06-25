@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,13 +6,10 @@ import DatepickerPlugin from './datepicker';
 
 Vue.use(DatepickerPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         template: `<m-datepicker></m-datepicker>`
     }))
@@ -76,6 +71,13 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
             model1: '2015-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+    }))
+
+    .add('date big min and max limit', () => ({
+        data: () => ({
+            model1: '2000-01-01'
+        }),
+        template: `<div><m-datepicker min="1901-01-01" max="2250-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
 
     .add('disabled', () => ({

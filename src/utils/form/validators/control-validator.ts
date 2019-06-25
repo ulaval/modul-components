@@ -3,8 +3,8 @@ import { ControlError } from '../control-error';
 import { ControlValidatorValidationType } from '../control-validator-validation-type';
 
 export interface ControlValidator {
-    key: string;
-    validationFunction: (self: AbstractControl) => boolean | Promise<boolean> | undefined;
+    key?: string;
+    validationFunction: (self: AbstractControl) => boolean | Promise<boolean>;
     error: ControlError;
     validationType: ControlValidatorValidationType;
     lastCheck?: boolean;
@@ -14,4 +14,5 @@ export interface ControlValidator {
 export interface ControlValidatorOptions {
     validationType?: ControlValidatorValidationType;
     error?: ControlError;
+    controlLabel?: string;
 }

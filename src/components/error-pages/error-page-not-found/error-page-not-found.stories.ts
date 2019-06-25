@@ -1,21 +1,18 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { array, text, withKnobs } from '@storybook/addon-knobs';
+import { array, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
-import ErrorPageNotFoundPlugin from './error-page-not-found';
 import { ERROR_PAGE_NOT_FOUND_NAME } from '../../component-names';
 import { Link } from '../../message-page/message-page';
+import ErrorPageNotFoundPlugin from './error-page-not-found';
 
 Vue.use(ErrorPageNotFoundPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${ERROR_PAGE_NOT_FOUND_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
                         <m-error-page-not-found></m-error-page-not-found>

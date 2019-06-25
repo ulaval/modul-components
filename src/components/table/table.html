@@ -1,5 +1,5 @@
 <table class="m-table"
-       :class="['m--is-skin-' + skin, {'m--is-loading': loading}]"
+       :class="['m--is-skin-' + skin, {'m--is-loading': loading, 'm--is-row-highlighted-on-hover': rowHighlightedOnHover}]"
        cellspacing="0">
     <slot name="header">
         <thead>
@@ -28,7 +28,8 @@
                                            @click.stop="sort(column)"></m-icon-button>
                         </div>
                         <template v-else>
-                            <span class="m-table__header-name">{{ column.title }}</span>
+                            <span class="m-table__header-name"
+                                  v-html="column.title"></span>
                         </template>
                     </slot>
 

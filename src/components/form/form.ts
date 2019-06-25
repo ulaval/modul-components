@@ -1,12 +1,12 @@
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { ControlError } from '../../utils/form/control-error';
-import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { ControlValidator } from '../../utils/form/validators/control-validator';
 import { FormatMode } from '../../utils/i18n/i18n';
+import { getString } from '../../utils/str/str';
 import { ModulVue } from '../../utils/vue/vue';
 import { FormActionFallout } from './form-action-fallout';
 import { FormActions } from './form-action-type';
@@ -29,16 +29,23 @@ export class MForm extends ModulVue {
     @Emit('reset')
     public emitReset(): void { }
 
+    @Watch('formErrors')
+    public onFormGroupErrorsChange(controlErrors: ControlError[]): void {
+        if (controlErrors.length === 0) {
+            this._hideSummaryAndToast();
+        }
+    }
+
     public get formErrors(): ControlError[] {
         return this._getAllFormErrors(this.formGroup);
     }
 
-    public get formControlsInError(): AbstractControl[] {
-        return this._getAllControlsInError(this.formGroup);
+    public get summaryMessages(): string[] {
+        return this.formErrors.map(error => getString(error.groupMessage) || getString(error.message));
     }
 
     public get toastMessage(): string {
-        let errorCount: number = this.formControlsInError.length;
+        let errorCount: number = this._getAllControlsInError(this.formGroup).length;
 
         return this.$i18n.translate(
             errorCount <= 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
@@ -47,19 +54,21 @@ export class MForm extends ModulVue {
         );
     }
 
-    public async submit(external: boolean = false): Promise<void> {
-        await this.formGroup.submit(external);
+    public triggerActionFallouts(action: FormActions): void {
+        this.actionFallouts
+            .filter(a => action & a.action)
+            .forEach(a => a.fallout(this));
+    }
 
-        if (!this._isValid(external)) {
-            this._triggerActionFallouts(FormActions.InvalidSubmit);
+    public async submit(): Promise<void> {
+        await this.formGroup.submit();
+
+        if (!this.formGroup.valid) {
+            this.triggerActionFallouts(FormActions.InvalidSubmit);
             return;
         }
 
-        this._triggerActionFallouts(FormActions.ValidSubmit);
-
-        if (external) {
-            return;
-        }
+        this.triggerActionFallouts(FormActions.ValidSubmit);
 
         this.emitSubmit();
     }
@@ -67,92 +76,72 @@ export class MForm extends ModulVue {
     public reset(): void {
         this.formGroup.reset();
 
-        this._triggerActionFallouts(FormActions.Reset);
+        this.triggerActionFallouts(FormActions.Reset);
         this.emitReset();
     }
 
     protected created(): void {
-        this._triggerActionFallouts(FormActions.Created);
+        this.triggerActionFallouts(FormActions.Created);
     }
 
     protected updated(): void {
-        this._triggerActionFallouts(FormActions.Updated);
+        this.triggerActionFallouts(FormActions.Updated);
     }
 
     protected beforeDestroy(): void {
-        this._triggerActionFallouts(FormActions.Destroyed);
+        this.triggerActionFallouts(FormActions.Destroyed);
         this.formGroup.reset();
     }
 
-    private _isValid(external: boolean = false): boolean {
-        if (!external) {
-            return this.formGroup.valid;
-        }
+    private _getAllFormErrors(control: FormGroup | FormArray): ControlError[] {
+        let result: ControlError[] = control.errors;
 
-        return this.formGroup.valid &&
-            this._getAllFormValidators(this.formGroup)
-                .filter(v => v.validationType === ControlValidatorValidationType.External)
-                .every(v => !!v.lastCheck);
-    }
-
-    private _triggerActionFallouts(type: FormActions): void {
-        this.actionFallouts
-            .filter(a => type & a.action)
-            .forEach(a => a.fallout(this));
-    }
-
-    private _getAllFormErrors(formGroup: FormGroup | FormArray): ControlError[] {
-        let result: ControlError[] = formGroup.errors;
-
-        formGroup.controls.forEach(c => {
+        control.controls.forEach(c => {
             if (c instanceof FormControl) {
                 result = result.concat(c.errors);
-            } else {
-                result = result.concat(this._getAllFormErrors(c as FormGroup | FormArray));
+            } else if (c instanceof FormGroup || c instanceof FormArray) {
+                result = result.concat(this._getAllFormErrors(c));
             }
         });
 
         return result;
     }
 
-    private _getAllFormValidators(formGroup: FormGroup | FormArray): ControlValidator[] {
-        let result: ControlValidator[] = formGroup.validators;
+    private _getAllFormValidators(control: FormGroup | FormArray): ControlValidator[] {
+        let result: ControlValidator[] = control.validators;
 
-        formGroup.controls.forEach(c => {
+        control.controls.forEach(c => {
             if (c instanceof FormControl) {
                 result = result.concat(c.validators);
-            } else {
-                result = result.concat(this._getAllFormValidators(c as FormGroup | FormArray));
+            } else if (c instanceof FormGroup || c instanceof FormArray) {
+                result = result.concat(this._getAllFormValidators(c));
             }
         });
 
         return result;
     }
 
-    private _getAllControlsInError(formGroup: FormGroup | FormArray): AbstractControl[] {
+    private _getAllControlsInError(control: FormGroup | FormArray): AbstractControl[] {
         let controls: AbstractControl[] = [];
 
-        if (formGroup.hasError()) {
-            controls = controls.concat(formGroup);
+        if (control.hasError()) {
+            controls.push(control);
         }
 
-        formGroup.controls.forEach(c => {
+        control.controls.forEach(c => {
             if (c.hasError()) {
-                controls = controls.concat(c);
+                controls.push(c);
             }
 
-            if (!(c instanceof FormControl)) {
-                controls = controls.concat(this._getAllControlsInError(c as FormGroup | FormArray));
+            if (c instanceof FormGroup || c instanceof FormArray) {
+                controls = controls.concat(this._getAllControlsInError(c));
             }
         });
 
         return controls;
     }
 
-    @Watch('formErrors')
-    public onFormGroupChange(formErrors: ControlError[], oldVal: any): void {
-        if (formErrors.length === 0) {
-            this.displaySummary = this.displayToast = false;
-        }
+    private _hideSummaryAndToast(): void {
+        this.displaySummary = this.displayToast = false;
     }
 }

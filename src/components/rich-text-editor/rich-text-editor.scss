@@ -14,9 +14,4 @@
     &__validation-message {
         transition: margin-top $m-transition-duration ease;
     }
-
-    /deep/ .m-input-style__label,
-    /deep/ .m-input-style__body {
-        z-index: 202; // fix animation overlap
-    }
 }

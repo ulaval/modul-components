@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { select, withKnobs } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -9,8 +8,7 @@ import { MONEYFIELD_NAME } from './../component-names';
 import { MMoneyfield } from './moneyfield';
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Basic', () => ({
         components: { MMoneyfield },
         template: `
@@ -29,8 +27,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('States', () => ({
         components: { MMoneyfield },
         template: `
@@ -46,8 +43,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('With initial value (0)', () => ({
         components: { MMoneyfield },
         template: `<${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>`,
@@ -57,8 +53,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('With initial value', () => ({
         components: { MMoneyfield },
         template: `<${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>`,
@@ -68,8 +63,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Localization', () => ({
         components: { MMoneyfield },
         template: `
@@ -99,8 +93,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 // storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-//     .addDecorator(withA11y)
-//     .addDecorator(withKnobs)
+//
 //     .add('Format', () => ({
 //         components: { MMoneyfield },
 //         template: `<div>
@@ -144,8 +137,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
 //     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Default precision', () => ({
         components: { MMoneyfield },
         template: `

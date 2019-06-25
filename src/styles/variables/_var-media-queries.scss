@@ -7,6 +7,12 @@ $m-mq--min--m: 1024px !default;
 $m-mq--min--l: 1200px !default;
 $m-mq--min--xl: 1600px !default;
 
+$m-mq--from-phone-portrait: $m-mq--min--xs !default;
+$m-mq--from-tablet-portrait: $m-mq--min--s !default;
+$m-mq--from-tablet-landscape: $m-mq--min--m !default;
+$m-mq--from-laptop: $m-mq--min--l !default;
+$m-mq--from-desktop: $m-mq--min--xl !default;
+
 // ======================================================================
 //  Max-width
 // ======================================================================
@@ -15,3 +21,9 @@ $m-mq--max--s: 767px !default;
 $m-mq--max--m: 1023px !default;
 $m-mq--max--l: 1199px !default;
 $m-mq--max--xl: 1599px !default;
+
+$m-mq--less-than-phone-portrait: $m-mq--max--xs !default;
+$m-mq--less-than-tablet-portrait: $m-mq--max--s !default;
+$m-mq--less-than-tablet-landscape: $m-mq--max--m !default;
+$m-mq--less-than-laptop: $m-mq--max--l !default;
+$m-mq--less-than-desktop: $m-mq--max--xl !default;

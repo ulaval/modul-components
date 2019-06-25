@@ -30,7 +30,7 @@ exports[`Storyshots components|m-add default 1`] = `
 
 exports[`Storyshots components|m-add disabled 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--is-disabled m--is-button m--has-left-icon"
+  class="m-link m-add m--is-unvisited m--is-disabled m--is-button m--has-left-icon m--has-content"
   href="#"
   tabindex="-1"
 >
@@ -60,7 +60,7 @@ exports[`Storyshots components|m-add disabled 1`] = `
 
 exports[`Storyshots components|m-add icon-position-left 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -90,7 +90,7 @@ exports[`Storyshots components|m-add icon-position-left 1`] = `
 
 exports[`Storyshots components|m-add icon-position-right 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--is-button m--has-right-icon"
+  class="m-link m-add m--is-unvisited m--is-button m--has-right-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -120,7 +120,7 @@ exports[`Storyshots components|m-add icon-position-right 1`] = `
 
 exports[`Storyshots components|m-add icon-size 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -150,7 +150,7 @@ exports[`Storyshots components|m-add icon-size 1`] = `
 
 exports[`Storyshots components|m-add underline 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--no-underline m--is-button m--has-left-icon"
+  class="m-link m-add m--is-unvisited m--no-underline m--is-button m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -180,7 +180,7 @@ exports[`Storyshots components|m-add underline 1`] = `
 
 exports[`Storyshots components|m-add/skin default 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon"
+  class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -213,7 +213,7 @@ exports[`Storyshots components|m-add/skin light 1`] = `
   style="background-color: gray; margin: 0px;"
 >
   <a
-    class="m-link m-add m--is-unvisited m--is-button m--is-skin-light m--has-left-icon"
+    class="m-link m-add m--is-unvisited m--is-button m--is-skin-light m--has-left-icon m--has-content"
     href="#"
     tabindex="0"
   >
@@ -244,7 +244,7 @@ exports[`Storyshots components|m-add/skin light 1`] = `
 
 exports[`Storyshots components|m-add/skin text 1`] = `
 <a
-  class="m-link m-add m--is-unvisited m--is-button m--is-skin-text m--has-left-icon"
+  class="m-link m-add m--is-unvisited m--is-button m--is-skin-text m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >

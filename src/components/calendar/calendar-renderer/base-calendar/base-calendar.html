@@ -8,7 +8,6 @@
                 @click.stop="onYearClick"
                 aria-live="polite"
                 ref="currentDate">{{ currentMonthName }} {{ currentYear }}</m-link>
-
         <div v-if="isPickerModeDay"
              class="m-base-calendar__nav-buttons">
             <m-icon-button class="m-base-calendar__previous"
@@ -31,28 +30,23 @@
 
         <div v-if="isPickerModeYear"
              class="m-base-calendar__years">
-            <div v-for="(y, yearIndex) in years"
-                 :key="yearIndex"
-                 class="m-base-calendar__year"
-                 :class="{'m--is-selected': y.isCurrent}"
-                 @click.stop="onYearSelect(y)"
-                 @keyup.enter="onYearSelect(y)"
-                 :ref="buildRef('year', y)"
-                 role="button"
-                 tabindex="0">{{ y.year }}</div>
+            <m-calendar-button v-for="(y, yearIndex) in years"
+                               :key="yearIndex"
+                               @click.stop="onYearSelect(y)"
+                               @keyup.enter="onYearSelect(y)"
+                               :selected="y.isCurrent"
+                               :ref="buildRef('year', y)">{{ y.year }}</m-calendar-button>
         </div>
         <div v-if="isPickerModeMonth"
              class="m-base-calendar__months">
-            <div v-for="(m, monthIndex) in months"
-                 :key="monthIndex"
-                 class="m-base-calendar__month"
-                 :class="{'m--is-disabled': m.isDisabled,
-                          'm--is-selected': m.isCurrent}"
-                 @click.stop="onMonthSelect(m)"
-                 @keyup.enter="onMonthSelect(m)"
-                 :ref="buildRef('month', m)"
-                 role="button"
-                 :tabindex="monthTabIndex(m)">{{ monthIndexToShortName(m.month) }}</div>
+            <m-calendar-button v-for="(m, monthIndex) in months"
+                               :key="monthIndex"
+                               :disabled="m.isDisabled"
+                               :selected="m.isCurrent"
+                               @click.stop="onMonthSelect(m)"
+                               @keyup.enter="onMonthSelect(m)"
+                               :ref="buildRef('month', m)"
+                               :tabindex="monthTabIndex(m)">{{ monthIndexToShortName(m.month) }}</m-calendar-button>
         </div>
         <template v-if="isPickerModeDay">
             <div class="m-base-calendar__week">
@@ -61,30 +55,28 @@
                       class="m-base-calendar__weekday">{{ w }}</span>
             </div>
             <div class="m-base-calendar__days">
-                <div v-for="(d, dayIndex) in days"
-                     :key="dayIndex"
-                     class="m-base-calendar__day"
-                     :class="{ 'm--is-highlighted': d.isHighlighted,
-                                'm--is-in-future': isDateInFuture(d),
-                                'm--is-inside-range': isInsideRange(d),
-                                'm--is-disabled': d.isDisabled || hideDay(d),
-                                'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
-                                'm--is-selection-start': isSelectionStart(d),
-                                'm--is-selection-end': isSelectionEnd(d),
-                                'm--is-selected': d.isSelected,
-                                'm--is-today': d.isToday,}"
-                     @click.stop="onDaySelect(d)"
-                     @keyup.enter="onDaySelect(d)"
-                     @keyup.tab="onDaykeyboardTab(d)"
-                     @mouseenter="onDayMouseEnter(d)"
-                     @mouseleave="onDayMouseLeave(d)"
-                     :ref="buildRef('day', d)"
-                     role="button"
-                     :tabindex="dayTabIndex(d)">
+                <m-calendar-button v-for="(d, dayIndex) in days"
+                                   :key="dayIndex"
+                                   class="m-base-calendar__day"
+                                   :class="{ 'm--is-highlighted': d.isHighlighted,
+                                             'm--is-in-future': isDateInFuture(d),
+                                             'm--is-inside-range': isInsideRange(d),
+                                             'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
+                                             'm--is-selection-start': isSelectionStart(d),
+                                             'm--is-selection-end': isSelectionEnd(d)}"
+                                   :disabled="d.isDisabled || hideDay(d)"
+                                   :selected="d.isSelected"
+                                   :today="d.isToday"
+                                   @click.stop="onDaySelect(d)"
+                                   @keyup.enter="onDaySelect(d)"
+                                   @keyup.tab="onDaykeyboardTab(d)"
+                                   @mouseenter="onDayMouseEnter(d)"
+                                   @mouseleave="onDayMouseLeave(d)"
+                                   :ref="buildRef('day', d)"
+                                   :tabindex="dayTabIndex(d)">
                     <span class="m-base-calendar__day-content"
-                          :class="{ 'm--is-hidden': hideDay(d) }"
-                          tabindex="-1">{{ d.day }}</span>
-                </div>
+                          :class="{ 'm--is-hidden': hideDay(d) }">{{ d.day }}</span>
+                </m-calendar-button>
             </div>
         </template>
     </div>

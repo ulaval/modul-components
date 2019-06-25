@@ -10,9 +10,10 @@ const PERIODPICKER_REF: RefSelector = { ref: 'periodpicker' };
 let wrapper: Wrapper<MDaterangepicker>;
 
 export class MPeriodpickerPropsStub implements MPeriodpickerProps {
-    constructor(public value: MDateRange = { from: undefined, to: undefined },
+    constructor(public value: MDateRange = new MDateRange(),
         public min: DatePickerSupportedTypes = undefined,
-        public max: DatePickerSupportedTypes = undefined) { }
+        public max: DatePickerSupportedTypes = undefined,
+        public convertToIso: boolean = false) { }
 }
 
 const initializeWrapper: () => Wrapper<MDaterangepicker> = () => {
@@ -45,7 +46,7 @@ describe(`m-daterangepicker`, () => {
     });
 
     describe(`considering all periodpicker props are present`, () => {
-        const periodpickerProps: MPeriodpickerProps = new MPeriodpickerPropsStub({ from: new Date(), to: new Date() }, 'minProp', 'maxProp');
+        const periodpickerProps: MPeriodpickerProps = new MPeriodpickerPropsStub(new MDateRange(new Date(), new Date()), 'minProp', 'maxProp');
 
         it(`should pass down its props to the periodpicker`, () => {
             initializeWrapper();

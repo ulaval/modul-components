@@ -1,0 +1,39 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Test for MForm with external validations example</h2>
+    <br />
+    <m-form :form-group="formGroup"
+            :ref="refMForm"
+            @reset="reset()"
+            @submit="submit()">
+
+        <h3 class="m-u--h6">General</h3>
+
+        <m-textfield v-m-control="nameField"
+                     v-model="nameField.value"
+                     :error="nameField.hasError()"
+                     :error-message="nameField.errorMessage"
+                     :required-marker="true"
+                     :character-count="true"
+                     :max-length="maxNameLength"
+                     label="Name"
+                     helper-message="Required field validated through external call (backend server for example)">
+        </m-textfield>
+        <br />
+
+        <m-textarea v-m-control="descriptionField"
+                    v-model="descriptionField.value"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage"
+                    :required-marker="true"
+                    label="Description"
+                    helper-message="Required field validated through external call (backend server for example)">
+        </m-textarea> <br />
+
+        <p class="m-u--margin-top--l m-u--margin-bottom--l">
+            <m-button type="submit"
+                      :waiting="pendingSubmit">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary">Reset</m-button>
+        </p>
+    </m-form>
+</div>

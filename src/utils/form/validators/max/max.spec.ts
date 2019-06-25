@@ -4,67 +4,69 @@ import { MaxValidator } from './max';
 describe('Max validator', () => {
     let formControl: FormControl<any>;
 
-    beforeAll(() => {
-        formControl = new FormControl<any>(
-            [MaxValidator('test', 3)]
-        );
-    });
+    describe('"any" type form ', () => {
+        it('it should return true if value is undefined', () => {
+            formControl = new FormControl<any>(
+                [MaxValidator(3)]
+            );
 
-    test('it should return true if value is undefined', async (done) => {
-        expect(formControl.value).toBe(undefined);
-        await formControl.validate();
-        expect(formControl.valid).toBe(true);
-        done();
+            formControl.validate();
+
+            expect(formControl.valid).toBe(true);
+        });
     });
 
     describe('number value', () => {
-        beforeAll(() => {
+
+        const MAX_VALUE: number = 3;
+
+        beforeEach(() => {
             formControl = new FormControl<number>(
-                [MaxValidator('test', 3)]
+                [MaxValidator(MAX_VALUE)]
             );
         });
 
-        test('it should return true if value is 0 and max value is higher', async (done) => {
+        it('it should return true if value is 0 and max value is higher', () => {
             formControl.value = 0;
-            await formControl.validate();
+            formControl.validate();
             expect(formControl.valid).toBe(true);
-            done();
         });
 
-        test('it should return false if value is 0 and max value is lower', async (done) => {
-            const formControlTest0: FormControl<number> = new FormControl<number>(
-                [MaxValidator('test', -1)],
+        it('it should return false if value is 0 and max value is lower', () => {
+            formControl = new FormControl<number>(
+                [MaxValidator(-1)],
                 {
                     initialValue: 0
                 }
             );
 
-            await formControlTest0.validate();
+            formControl.validate();
 
-            expect(formControlTest0.valid).toBe(false);
-            done();
-        });
-
-        test('it should return true if value is lower', async (done) => {
-            formControl.value = 1;
-            await formControl.validate();
-            expect(formControl.valid).toBe(true);
-            done();
-        });
-
-        test('it should return true if value is same', async (done) => {
-            formControl.value = 3;
-            await formControl.validate();
-            expect(formControl.valid).toBe(true);
-            done();
-        });
-
-        test('it should return false if value is higher', async (done) => {
-            formControl.value = 4;
-            await formControl.validate();
             expect(formControl.valid).toBe(false);
-            done();
+        });
+
+        it('it should return true if value is lower than max value', () => {
+            formControl.value = MAX_VALUE - 1;
+
+            formControl.validate();
+
+            expect(formControl.valid).toBe(true);
+        });
+
+        it('it should return true if value is same', () => {
+            formControl.value = MAX_VALUE;
+
+            formControl.validate();
+
+            expect(formControl.valid).toBe(true);
+        });
+
+        it('it should return false if value is higher', () => {
+            formControl.value = MAX_VALUE + 1;
+
+            formControl.validate();
+
+            expect(formControl.valid).toBe(false);
         });
     });
-
 });

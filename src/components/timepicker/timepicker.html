@@ -68,7 +68,7 @@
         <div :id="ariaControls"
              class="m-timepicker__body"
              :aria-labelledby="id">
-            <ul class="m-timepicker__body__hours"
+            <ul class="m-timepicker__hours"
                 :aria-activedescendant="currentHour"
                 ref="hours"
                 role="listbox"
@@ -78,17 +78,14 @@
                 <li v-for="(h, hoursIndex) in currentfilteredHours"
                     :key="hoursIndex"
                     :id="h"
-                    class="m-timepicker__body__hours-item"
-                    :aria-selected="h == currentHour"
-                    role="option"
-                    @click="onSelectHour(h)"
-                    @keyup.enter="onSelectHour(h)">
-                    <span class="m-timepicker__hours-number"
-                          :class="{'m--is-selected': h == currentHour}"
-                          tabindex="0">{{formatNumber(h)}}</span>
+                    class="m-timepicker__hours-item">
+                    <m-calendar-button :selected="h == currentHour"
+                                       @click="onSelectHour(h)"
+                                       @keyup.enter="onSelectHour(h)"
+                                       role="option">{{formatNumber(h)}}</m-calendar-button>
                 </li>
             </ul>
-            <ul class="m-timepicker__body__minutes"
+            <ul class="m-timepicker__minutes"
                 :aria-activedescendant="currentMinute"
                 ref="minutes"
                 @mousedown="onMousedown"
@@ -97,14 +94,11 @@
                 <li v-for="(m, minutesIndex) in currentFilteredMinutes"
                     :key="minutesIndex"
                     :id="minutesIndex"
-                    class="m-timepicker__body__minutes-item"
-                    :aria-selected="m == currentMinute"
-                    role="option"
-                    @click="onSelectMinute(m)"
-                    @keyup.enter="onSelectMinute(m)">
-                    <span class="m-timepicker__minutes-number"
-                          :class="{'m--is-selected': m == currentMinute}"
-                          tabindex="0">{{formatNumber(m)}}</span>
+                    class="m-timepicker__minutes-item">
+                    <m-calendar-button :selected="m == currentMinute"
+                                       @click="onSelectMinute(m)"
+                                       @keyup.enter="onSelectMinute(m)"
+                                       role="option">{{formatNumber(m)}}</m-calendar-button>
                 </li>
             </ul>
         </div>

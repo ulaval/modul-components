@@ -10,7 +10,7 @@ import WithRender from './daterangepicker.sandbox.html';
 export class MDaterangepickerSandbox extends Vue {
     from: any = undefined;
     to: any = undefined;
-    model: MDateRange = { to: this.to, from: this.from };
+    model: MDateRange = new MDateRange(this.from, this.to);
     errorMessage: string = '';
     validMessage: string = '';
     helperMessage: string = '';

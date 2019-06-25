@@ -4,115 +4,144 @@ import { BetweenValidator } from './between';
 describe('between validator', () => {
     let formControl: FormControl<any>;
 
-    beforeAll(() => {
-        formControl = new FormControl<any>(
-            [BetweenValidator('test', 1, 3)]
-        );
-    });
+    describe('any type', () => {
+        describe('Given an undefined value', () => {
+            it('it should be valid', () => {
+                formControl = new FormControl<any>(
+                    [BetweenValidator(1, 3)]
+                );
 
-    test('it should return false if value is undefined', async (done) => {
-        expect(formControl.value).toBe(undefined);
-        await formControl.validate();
-        expect(formControl.valid).toBe(true);
-        done();
+                formControl.validate();
+
+                expect(formControl.valid).toBe(true);
+            });
+        });
+
     });
 
     describe('number value', () => {
-        beforeAll(() => {
+        const LOWER_BOUND: number = 1;
+        const UPPER_BOUND: number = 3;
+
+        beforeEach(() => {
             formControl = new FormControl<number>(
-                [BetweenValidator('test', 1, 3)]
+                [BetweenValidator(LOWER_BOUND, UPPER_BOUND)]
             );
         });
 
-        test('it should return false if value is lower than the lower bound', async (done) => {
-            formControl.value = -1;
-            await formControl.validate();
-            expect(formControl.valid).toBe(false);
-            done();
+        describe('Given a value lower than the lower bound', () => {
+            it('it should be invalid', () => {
+                formControl.value = LOWER_BOUND - 1;
+
+                formControl.validate();
+
+                expect(formControl.valid).toBe(false);
+            });
         });
 
-        test('it should return false if value is higher than the upper bound', async (done) => {
-            formControl.value = 4;
-            await formControl.validate();
-            expect(formControl.valid).toBe(false);
-            done();
+        describe('Given a value higher than the upper bound', () => {
+            it('it should be invalid', () => {
+                formControl.value = UPPER_BOUND + 1;
+
+                formControl.validate();
+
+                expect(formControl.valid).toBe(false);
+            });
         });
 
-        test('it should return true if value is between the bounds', async (done) => {
-            formControl.value = 2;
-            await formControl.validate();
-            expect(formControl.valid).toBe(true);
-            done();
+        describe('Given a value between the bounds', () => {
+            it('it should be valid', () => {
+                formControl.value = UPPER_BOUND - 1;
+
+                formControl.validate();
+
+                expect(formControl.valid).toBe(true);
+            });
         });
 
-        test('it should return true if value is equal to the lower bound', async (done) => {
-            formControl.value = 1;
-            await formControl.validate();
-            expect(formControl.valid).toBe(true);
-            done();
+        describe('Given a value equal to the lower bound', () => {
+            it('it should be valid', () => {
+                formControl.value = LOWER_BOUND;
+
+                formControl.validate();
+
+                expect(formControl.valid).toBe(true);
+            });
         });
 
-        test('it should return true if value is equal to the upper bound', async (done) => {
-            formControl.value = 3;
-            await formControl.validate();
-            expect(formControl.valid).toBe(true);
-            done();
+        describe('Given a value equal to the upper bound', () => {
+            it('it should be valid', () => {
+                formControl.value = UPPER_BOUND;
+
+                formControl.validate();
+
+                expect(formControl.valid).toBe(true);
+            });
         });
 
-        test('it should return true if value is 0 and between the bounds', async (done) => {
-            let formControlTest0: FormControl<number> = new FormControl<number>(
-                [BetweenValidator('test', -1, 1)],
-                {
-                    initialValue: 0
-                }
-            );
+        describe('Given a value equal to 0 and betweent the bounds the bounds', () => {
+            it('it should be valid', () => {
+                formControl = new FormControl<number>(
+                    [BetweenValidator(-1, 1)],
+                    { initialValue: 0 }
+                );
 
-            await formControlTest0.validate();
-            expect(formControlTest0.valid).toBe(true);
-            done();
+                formControl.validate();
+
+                expect(formControl.valid).toBe(true);
+            });
         });
     });
 
     describe('date value', () => {
-        beforeAll(() => {
+        const LOWER_BOUND: Date = new Date(2019, 0, 1);
+        const UPPER_BOUND: Date = new Date(2019, 1, 1);
+
+        beforeEach(() => {
             formControl = new FormControl<Date>(
-                [BetweenValidator('test', new Date(2019, 0, 1), new Date(2019, 1, 1))]
+                [BetweenValidator(LOWER_BOUND.valueOf(), UPPER_BOUND.valueOf())]
             );
         });
 
-        test('it should return false if value is lower than the lower bound', async (done) => {
-            formControl.value = new Date(2018, 0, 1);
-            await formControl.validate();
+        it('if value is lower than the lower bound, it should be invalid', () => {
+            formControl.value = LOWER_BOUND.valueOf() - 1;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(false);
-            done();
         });
 
-        test('it should return false if value is higher than the upper bound', async (done) => {
-            formControl.value = new Date(2020, 0, 1);
-            await formControl.validate();
+        it('if value is higher than the upper bound, it should be invalid', () => {
+            formControl.value = UPPER_BOUND.valueOf() + 1;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(false);
-            done();
+
         });
 
-        test('it should return true if value is between the bounds', async (done) => {
-            formControl.value = new Date(2019, 0, 2);
-            await formControl.validate();
+        it('if value is between the bounds, it should be valid', () => {
+            formControl.value = UPPER_BOUND.valueOf() - 1;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(true);
-            done();
         });
 
-        test('it should return true if value is equal to the lower bound', async (done) => {
-            formControl.value = new Date(2019, 0, 1);
-            await formControl.validate();
+        it('if value is equal to the lower bound, it should be valid', () => {
+            formControl.value = LOWER_BOUND;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(true);
-            done();
         });
 
-        test('it should return true if value is equal to the upper bound', async (done) => {
-            formControl.value = new Date(2019, 1, 1);
-            await formControl.validate();
+        it('if value is equal to the upper bound, it should be valid', () => {
+            formControl.value = UPPER_BOUND;
+
+            formControl.validate();
+
             expect(formControl.valid).toBe(true);
-            done();
         });
     });
 });
