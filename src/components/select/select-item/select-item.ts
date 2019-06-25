@@ -32,9 +32,6 @@ export class MSelectItem extends ModulVue {
         return this.label;
     }
 
-    public get tabindex(): number | undefined {
-        return this.disabled || this.readonly ? undefined : 0;
-    }
 
     private _onClick(): void {
         if (!this.disabled) {

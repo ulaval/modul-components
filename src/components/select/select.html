@@ -6,6 +6,12 @@
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
      @focus="onFocus"
      @blur="onBlur"
+     @keydown.up.prevent="onKeydownUp"
+     @keydown.down.prevent="onKeydownDown"
+     @keydown.enter.prevent="onKeydownEnter"
+     @keydown.return.prevent="onKeydownEnter"
+     @keydown.esc="onKeydownEsc"
+     @keydown.tab="onKeydownTab"
      tabindex="0">
     <m-input-style :label="label"
                    :label-for="id"
@@ -54,28 +60,34 @@
              :open.sync="open"
              :disabled="!active"
              :padding="false"
+             :preload="true"
+             :lazy="false"
              :focus-management="false"
              :close-on-backdrop="true"
              :open-trigger="'mousedown'"
              @open="onOpen"
              @close="onClose">
 
-        <ul :id="ariaControls"
-            class="m-select__list"
-            ref="items"
-            :aria-labelledby="id"
-            aria-live="polite"
-            :style="{ minWidth: inputMaxWidth }">
-            <template v-if="hasItems">
+        <div>
+            <ul :id="ariaControls"
+                class="m-select__list"
+                ref="items"
+                :aria-labelledby="id"
+                aria-live="polite"
+                :style="{ minWidth: inputMaxWidth }">
+
+
                 <m-select-item v-for="(option, index) of options"
                                :key="index"
-                               @click="select(option, index)"
-                               :selected="isSelected(option)">
+                               :focused="index === focusedIndex"
+                               :selected="isSelected(option)"
+                               @click="select(option, index)">
                     <slot name="option"
                           :option="option"
                           :index="index">{{ option }}</slot>
                 </m-select-item>
-            </template>
-        </ul>
+            </ul>
+        </div>
+
     </m-popup>
 </div>

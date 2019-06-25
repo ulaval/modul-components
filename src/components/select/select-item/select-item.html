@@ -5,7 +5,6 @@
               'm--readonly': readonly }"
     role="option"
     :aria-selected="selected"
-    :tabindex="tabindex"
     @click.prevent="onClick">
 
     <slot v-if="isMqMinS || readonly"><span class="m-select-item__element-text">{{ propLabel }}</span></slot>
