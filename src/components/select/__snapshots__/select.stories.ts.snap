@@ -5,6 +5,7 @@ exports[`Storyshots components|m-select default 1`] = `
   <div
     class="m-select"
     style="width: 100%; max-width: 288px;"
+    tabindex="0"
   >
     <div
       class="m-input-style m--has-cursor-pointer m--has-value m--is-tag-default"
@@ -32,7 +33,10 @@ exports[`Storyshots components|m-select default 1`] = `
           <div
             class="m-input-style__left-content"
           >
-            apple  
+            <div>
+              apple
+            </div>
+              
             <!---->
              
             <!---->
@@ -86,6 +90,9 @@ exports[`Storyshots components|m-select default 1`] = `
       <!---->
     </div>
   </div>
-   apple
+   
+  <p>
+    v-model = apple
+  </p>
 </div>
 `;

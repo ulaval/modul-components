@@ -76,6 +76,7 @@ export class MPhonefield extends ModulVue {
     internalCountry: CountryOptions = { name: '', iso2: '', dialCode: '' };
     selectedCountries: CountryOptions[] = this.$i18n.currentLang() === FRENCH ? allCountriesFr : allCountriesEn;
     countries: CountryOptions[] = this.selectedCountries.sort((a, b) => (this.nameNormalize(a.name) > this.nameNormalize(b.name)) ? 1 : ((this.nameNormalize(b.name) > this.nameNormalize(a.name)) ? -1 : 0));
+    internalFocus: boolean = false;
 
     i18nInternalLabel: string = this.$i18n.translate('m-phonefield:phone-label');
     i18nCountryLabel: string = this.$i18n.translate('m-phonefield:country-label');
@@ -158,7 +159,13 @@ export class MPhonefield extends ModulVue {
         this.focusInput();
     }
 
+    onSelectFocus(): void {
+        this.internalFocus = true;
+    }
 
+    onSelectBlur(): void {
+        this.internalFocus = false;
+    }
 
     public async focusInput(): Promise<any> {
         await this.$nextTick();
