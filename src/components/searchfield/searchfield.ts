@@ -51,7 +51,7 @@ export class MSearchfield extends ModulVue {
     }
 
     @Emit('input')
-    private emitNewValue(_newValue: string): void { }
+    private emitNewValue(newValue?: string): void { }
 
     @Emit('search')
     private search(model: string): void { }

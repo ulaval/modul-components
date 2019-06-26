@@ -26,12 +26,19 @@ $m-searchfield-color: $m-color--grey-lightest;
     &__main {
         border: 1px solid $m-color--grey-light;
         border-radius: $m-input-style-border-radius;
-        transition: border-color $m-transition-duration--l ease-in-out, margin-top $m-transition-duration ease;
+        transition: border-color $m-transition-duration ease-in-out, margin-top $m-transition-duration ease;
         display: inline-flex;
         width: 100%;
 
         .m-searchfield & {
             background-color: $m-searchfield-color;
+
+            &:hover {
+                border-color: $m-input-style--color-hover;
+            }
+        }
+
+        .m-searchfield .m-input-style:not(.m--is-label-up) & {
             border-color: $m-color--white;
         }
     }
