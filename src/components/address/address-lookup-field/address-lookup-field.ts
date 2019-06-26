@@ -1,12 +1,8 @@
-import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
-import Address from '../../utils/address-lookup/address';
-import { LoqateFindResponse } from '../../utils/address-lookup/address-lookup-loqate-service';
-import AddressLookupPlugin from '../../utils/address-lookup/address-lookup.plugin';
-import { ModulVue } from '../../utils/vue/vue';
-import AutoCompletePlugin from '../autocomplete/autocomplete';
-import { ADDRESS_LOOKUP_FIELD_NAME } from '../component-names';
+import Address from '../../../utils/address-lookup/address';
+import { LoqateFindResponse } from '../../../utils/address-lookup/address-lookup-loqate-service';
+import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './address-lookup-field.html?style=./address-lookup-field.scss';
 
 const KEY_ADDRESS_TYPE: string = 'address';
@@ -121,14 +117,3 @@ export class MAddressLookupField extends ModulVue {
     }
 }
 
-const AddressLookupFieldPlugin: PluginObject<any> = {
-    install(v, options): void {
-        if (!Vue.prototype.$addressLookup) {
-            v.use(AddressLookupPlugin, { key: process.env.LOQATE_KEY });
-        }
-        v.use(AutoCompletePlugin);
-        v.component(ADDRESS_LOOKUP_FIELD_NAME, MAddressLookupField);
-    }
-};
-
-export default AddressLookupFieldPlugin;

@@ -1,7 +1,7 @@
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import Address, { AddressField, CountryKey, ProvinceKey } from '../../utils/address-lookup/address';
-import { ModulVue } from '../../utils/vue/vue';
+import Address, { AddressField, CountryKey, ProvinceKey } from '../../../utils/address-lookup/address';
+import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './address-reader.html';
 
 export interface DisplayableAddress {

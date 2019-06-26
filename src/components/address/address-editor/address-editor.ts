@@ -1,9 +1,9 @@
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
-import Address, { AddressField, copyAddress, Country, CountryKey, Province } from '../../utils/address-lookup/address';
-import { ModulVue } from '../../utils/vue/vue';
-import { MDropdown } from '../dropdown/dropdown';
-import { MTextfield } from '../textfield/textfield';
+import Address, { AddressField, copyAddress, Country, CountryKey, Province } from '../../../utils/address-lookup/address';
+import { ModulVue } from '../../../utils/vue/vue';
+import { MDropdown } from '../../dropdown/dropdown';
+import { MTextfield } from '../../textfield/textfield';
 import WithRender from './address-editor.html';
 
 export type AddressEditorValidator = (value?: string, context?: Address, provinces?: Province[]) => string;

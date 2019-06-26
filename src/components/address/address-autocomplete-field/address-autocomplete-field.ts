@@ -1,11 +1,11 @@
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
-import Address, { AddressField, copyAddress, Country, CountryKey, Province, ProvinceKey } from '../../utils/address-lookup/address';
-import { ModulVue } from '../../utils/vue/vue';
+import Address, { AddressField, copyAddress, Country, CountryKey, Province, ProvinceKey } from '../../../utils/address-lookup/address';
+import { ModulVue } from '../../../utils/vue/vue';
+import { MInplaceEdit } from '../../inplace-edit/inplace-edit';
 import MAddressEditor, { AddressEditorValidator } from '../address-editor/address-editor';
 import { AddressLookupFieldProps, MAddressLookupField } from '../address-lookup-field/address-lookup-field';
 import { addressesFilters, AddressReaderProps, MAddressReader } from '../address-reader/address-reader';
-import { MInplaceEdit } from '../inplace-edit/inplace-edit';
 import WithRender from './address-autocomplete-field.html';
 
 

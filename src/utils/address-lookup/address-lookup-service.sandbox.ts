@@ -4,7 +4,6 @@ import { ModulVue } from '../vue/vue';
 import Address from './address';
 import { LoqateFindResponse } from './address-lookup-loqate-service';
 import WithRender from './address-lookup-service.sandbox.html';
-import AddressLookupPlugin from './address-lookup.plugin';
 
 @WithRender
 @Component
@@ -32,7 +31,6 @@ export class MAddressLookupServiceSandbox extends ModulVue {
 
 const MAddressLookupServiceSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.use(AddressLookupPlugin, { key: process.env.LOQATE_KEY });
         v.component(`m-address-lookup-service-sandbox`, MAddressLookupServiceSandbox);
     }
 };

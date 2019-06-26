@@ -1,11 +1,8 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
-import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import Address, { AddressField, Country, CountryKey, Province, ProvinceKey } from '../../utils/address-lookup/address';
-import { AddressEditorValidator } from '../address-editor/address-editor';
-import { ADDRESS_AUTOCOMPLETE_FIELD_NAME } from '../component-names';
-import MAddressAutocompleteField from './address-autocomplete-field';
+import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
+import Address, { AddressField, Country, Province } from '../../../utils/address-lookup/address';
+import { ADDRESS_EDITOR_NAME } from '../../component-names';
+import MAddressEditor, { AddressEditorValidator } from './address-editor';
 
 const countries: Country[] = [
     { countryIso2: 'US', country: 'United-States of America' },
@@ -118,39 +115,101 @@ const validations: { [field: string]: AddressEditorValidator[] } = {
     ]
 };
 
-
-storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_AUTOCOMPLETE_FIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_EDITOR_NAME}`, module)
     .add('default', () => ({
-        components: { MAddressAutocompleteField },
+        components: { MAddressEditor },
         data: () => ({
-            address: {},
-            props: {
-                language: 'fr',
-                origin: 'canada',
-                filters: {
-                    'street': (value: string) => (value.length > 1) ? value.charAt(0).toLowerCase() + value.slice(1) : ''
+            address: {
+                buildingNumber: '2325',
+                city: 'Québec',
+                country: {
+                    country: 'Canada',
+                    countryIso2: 'CA'
                 },
-                countryKey: CountryKey.COUNTRY,
-                provinceKey: ProvinceKey.PROVINCE_CODE,
-                countries,
-                provinces,
-                validations
-            }
+                province: {
+                    province: 'Québec',
+                    provinceCode: 'QC'
+                },
+                street: `Rue de l'Université`,
+                postalCode: 'G1V 0A6',
+                subBuilding: ''
+            },
+            countries: countries,
+            provincesList: provinces,
+            currentProvinces: [],
+            validations,
+            isValid: true
         }),
+        mounted(): void {
+            this.onCountryChange(this.address.country.countryIso2);
+        },
         methods: {
-            clear(): void {
-                (this as any).address = {};
+            onCountryChange(code: string): void {
+                (this as any).currentProvinces = (this as any).provincesList[code];
+            },
+            onIsValid(isValid: boolean): void {
+                (this as any).isValid = isValid;
             }
         },
         template: `
         <div>
             <div>
-                <${ADDRESS_AUTOCOMPLETE_FIELD_NAME} v-model="address" v-bind="props">
-                </${ADDRESS_AUTOCOMPLETE_FIELD_NAME}>
+                <${ADDRESS_EDITOR_NAME} v-model='address'
+                                        :countries='countries'
+                                        :provinces='currentProvinces'
+                                        :validations='validations'
+                                        @country-change='onCountryChange'
+                                        @is-valid='onIsValid'
+                >
+                </${ADDRESS_EDITOR_NAME}>
             </div>
-            <div style="border-top: 1px solid #000; margin-top: 50px;">Address from autocomplete field : {{ address }}</div>
-            <div><a @click.prevent="clear">clear result</a></div>
+
+            <div style='border-top: 1px solid #000; margin-top: 50px;'>
+                <div>Current address valid : {{ isValid }}</div>
+                <div>Address from editor : {{ address }}</div>
+            </div>
+        </div>`
+    }))
+    .add('empty address', () => ({
+        components: { MAddressEditor },
+        data: () => ({
+            address: {
+                buildingNumber: '',
+                city: '',
+                country: {
+                    country: 'Canada',
+                    countryIso2: 'CA'
+                },
+                province: undefined,
+                street: '',
+                postalCode: '',
+                subBuilding: ''
+            },
+            countries: countries,
+            provincesList: provinces,
+            currentProvinces: [],
+            validations
+        }),
+        mounted(): void {
+            this.onCountryChange(this.address.country.countryIso2);
+        },
+        methods: {
+            onCountryChange(code: string): void {
+                (this as any).currentProvinces = (this as any).provincesList[code];
+            }
+        },
+        template: `
+        <div>
+            <div>
+                <${ADDRESS_EDITOR_NAME} v-model='address'
+                                        :countries='countries'
+                                        :provinces='currentProvinces'
+                                        :validations='validations'
+                                        @country-change='onCountryChange'
+                >
+                </${ADDRESS_EDITOR_NAME}>
+            </div>
+            <div style='border-top: 1px solid #000; margin-top: 50px;'>Address from editor : {{ address }}</div>
         </div>`
     }));
+

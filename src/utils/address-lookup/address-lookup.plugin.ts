@@ -10,18 +10,18 @@ declare module 'vue/types/vue' {
     }
 }
 
-export interface LoqateLicensePluginOptions {
-    key: string;
+export interface AddressLookupPluginOptions {
+    loqateKey: string;
 }
 
 export const LOQATE_LICENSE_KEY: string = 'm-loqate-license-key';
 
 const AddressLookupPlugin: PluginObject<any> = {
-    install(v, options: LoqateLicensePluginOptions | undefined = { key: '' }): void {
-        if (!options.key) {
+    install(v, options: AddressLookupPluginOptions | undefined = { loqateKey: '' }): void {
+        if (!options.loqateKey) {
             v.prototype.$log.error('The API key for Loqate Web Service must be provided');
         }
-        let addressLookup: AddressLookupLoqateService = new AddressLookupLoqateService(axios, options.key);
+        let addressLookup: AddressLookupLoqateService = new AddressLookupLoqateService(axios, options.loqateKey);
         v.prototype.$addressLookup = addressLookup;
     }
 };

@@ -1,17 +1,14 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
-import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
-import Address from '../../utils/address-lookup/address';
-import { ADDRESS_LOOKUP_FIELD_NAME } from '../component-names';
-import { MAddressLookupField } from './address-lookup-field';
+import Vue from 'vue';
+import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
+import Address from '../../../utils/address-lookup/address';
+import { ADDRESS_LOOKUP_FIELD_NAME } from '../../component-names';
+import AddressPlugin from '../address';
 
+Vue.use(AddressPlugin, { loqateKey: 'someKey' });
 
 storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('default', () => ({
-        components: { MAddressLookupField },
         data: () => ({
             origin: 'CA',
             language: 'fr',
@@ -23,6 +20,7 @@ storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NA
             }
         },
         template: `<div>
+            current key is: {{ $addressLookup.key }}
             <${ADDRESS_LOOKUP_FIELD_NAME}
                 :origin="origin"
                 :language="language"
