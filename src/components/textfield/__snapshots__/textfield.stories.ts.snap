@@ -1287,15 +1287,8 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
         <div
           class="m-input-style__input"
         >
-          <!---->
-           
-          <!---->
-           
-          <textarea
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            rows="1"
+          <div
+            class="m-input-style__prefix"
           />
            
           <div
@@ -1309,6 +1302,7 @@ exports[`Storyshots components|m-textfield word-wrap 1`] = `
               class="m-textfield__input"
               disabled="disabled"
               id="mTextfield-uuid"
+              maxlength="Infinity"
               rows="1"
             />
              
@@ -1990,53 +1984,60 @@ exports[`Storyshots components|m-textfield/Counter max-length="200" and :word-wr
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
-            class="m-input-style__left-content"
+            class="m-input-style__input"
           >
-            <!---->
-             
-            <!---->
-             
-            <textarea
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="200"
-              placeholder="Enter a value"
-              rows="1"
+            <div
+              class="m-input-style__prefix"
             />
              
-            <!---->
+            <div
+              class="m-input-style__content"
+            >
+              <!---->
+               
+              <!---->
+               
+              <textarea
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="200"
+                placeholder="Enter a value"
+                rows="1"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
              
-            <!---->
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
           </div>
-           
-          <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      

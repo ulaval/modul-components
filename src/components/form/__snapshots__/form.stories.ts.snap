@@ -879,56 +879,64 @@ exports[`Storyshots components|m-form/all fields decimalfield 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mDecimalfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              Decimal
-            </span>
-             
-            <sup
-              class="m-input-style__required-marker"
-            >
-              *
-            </sup>
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
+          <label
+            class="m-input-style__label"
+            for="mDecimalfield-uuid"
+            style="margin-right: 0px;"
           >
-             
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="decimal"
-            />
-              
-            <!---->
-             
-            <!---->
-          </div>
+            <span
+              class="m-input-style__text"
+            >
+              <span>
+                Decimal
+              </span>
+               
+              <sup
+                class="m-input-style__required-marker"
+              >
+                *
+              </sup>
+            </span>
+          </label>
            
           <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="decimal"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
