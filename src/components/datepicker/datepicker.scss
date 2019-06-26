@@ -8,14 +8,19 @@ $m-datepicker--item-dimension: $m-touch-size !default;
     @include m-input-inline-spacing();
 
     &.m--has-validation-message {
-        .m-datepicker__validation-message {
+        .m-datepicker__validation {
             margin-top: $m-spacing--xs;
         }
     }
 
-    &__validation-message {
-        margin-top: $m-margin--xs;
+    &__validation {
         transition: margin-top $m-transition-duration ease;
+        display: flex;
+        justify-content: flex-end;
+
+        &__message {
+            flex: 1 1 auto;
+        }
     }
 
     &__header-label {

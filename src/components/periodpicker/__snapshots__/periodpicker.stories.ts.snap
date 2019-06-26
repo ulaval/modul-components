@@ -91,11 +91,15 @@ exports[`Storyshots components|m-periodpicker default 1`] = `
           </div>
            
           <div
-            class="m-validation-message m-datepicker__validation-message"
+            class="m-datepicker__validation"
           >
-            <!---->
-             
-            <!---->
+            <div
+              class="m-validation-message m-datepicker__validation__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
           </div>
            
           <div
@@ -196,11 +200,15 @@ exports[`Storyshots components|m-periodpicker default 1`] = `
           </div>
            
           <div
-            class="m-validation-message m-datepicker__validation-message"
+            class="m-datepicker__validation"
           >
-            <!---->
-             
-            <!---->
+            <div
+              class="m-validation-message m-datepicker__validation__message"
+            >
+              <!---->
+               
+              <!---->
+            </div>
           </div>
            
           <div

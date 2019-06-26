@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { select, text, withKnobs } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -9,13 +8,10 @@ import ToastPlugin, { MToastPosition, MToastState } from './toast';
 Vue.use(ToastPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOAST}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         props: {
             text: {
@@ -55,7 +51,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOAST}`, module)
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOAST}/timeout`, module)
-    .addDecorator(withA11y)
     .add('timeout="long"', () => ({
         template: '<m-toast timeout="long">A toast with a long timeout</m-toast>'
     }))
@@ -67,8 +62,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOAST}/timeout`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOAST}/state`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all states (knob)', () => ({
         props: {
             state: {
@@ -91,8 +85,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TOAST}/state`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOAST}/position`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all positions (knob)', () => ({
         props: {
             position: {

@@ -77,11 +77,15 @@ exports[`Storyshots components|m-datepicker date big min and max limit 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
@@ -104,7 +108,7 @@ exports[`Storyshots components|m-datepicker date big min and max limit 1`] = `
 exports[`Storyshots components|m-datepicker date format invalid 1`] = `
 <div>
   <div
-    class="m-datepicker m--has-error"
+    class="m-datepicker m--has-error m--has-validation-message"
     style="width: 100%; max-width: 136px;"
   >
     <div
@@ -178,34 +182,38 @@ exports[`Storyshots components|m-datepicker date format invalid 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <p
-        class="m-validation-message__error"
+      <div
+        class="m-validation-message m-datepicker__validation__message"
       >
-        <svg
-          class="m-icon m-validation-message__icon"
-          height="1em"
-          width="1em"
+        <p
+          class="m-validation-message__error"
         >
-          <title>
-            Erreur
-          </title>
+          <svg
+            class="m-icon m-validation-message__icon"
+            height="1em"
+            width="1em"
+          >
+            <title>
+              Erreur
+            </title>
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
            
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
+          <span
+            class="m-validation-message__text"
+          >
+            Format invalide
+          </span>
+        </p>
          
-        <span
-          class="m-validation-message__text"
-        >
-          Format invalide
-        </span>
-      </p>
-       
-      <!---->
+        <!---->
+      </div>
     </div>
      
     <div
@@ -228,7 +236,7 @@ exports[`Storyshots components|m-datepicker date format invalid 1`] = `
 exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
 <div>
   <div
-    class="m-datepicker m--has-error"
+    class="m-datepicker m--has-error m--has-validation-message"
     style="width: 100%; max-width: 136px;"
   >
     <div
@@ -302,34 +310,38 @@ exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <p
-        class="m-validation-message__error"
+      <div
+        class="m-validation-message m-datepicker__validation__message"
       >
-        <svg
-          class="m-icon m-validation-message__icon"
-          height="1em"
-          width="1em"
+        <p
+          class="m-validation-message__error"
         >
-          <title>
-            Erreur
-          </title>
+          <svg
+            class="m-icon m-validation-message__icon"
+            height="1em"
+            width="1em"
+          >
+            <title>
+              Erreur
+            </title>
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
            
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
+          <span
+            class="m-validation-message__text"
+          >
+            Date hors limites
+          </span>
+        </p>
          
-        <span
-          class="m-validation-message__text"
-        >
-          Date hors limites
-        </span>
-      </p>
-       
-      <!---->
+        <!---->
+      </div>
     </div>
      
     <div
@@ -352,7 +364,7 @@ exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
 exports[`Storyshots components|m-datepicker date off limit min 1`] = `
 <div>
   <div
-    class="m-datepicker m--has-error"
+    class="m-datepicker m--has-error m--has-validation-message"
     style="width: 100%; max-width: 136px;"
   >
     <div
@@ -426,34 +438,38 @@ exports[`Storyshots components|m-datepicker date off limit min 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <p
-        class="m-validation-message__error"
+      <div
+        class="m-validation-message m-datepicker__validation__message"
       >
-        <svg
-          class="m-icon m-validation-message__icon"
-          height="1em"
-          width="1em"
+        <p
+          class="m-validation-message__error"
         >
-          <title>
-            Erreur
-          </title>
+          <svg
+            class="m-icon m-validation-message__icon"
+            height="1em"
+            width="1em"
+          >
+            <title>
+              Erreur
+            </title>
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
            
-          <use
-            aria-hidden="true"
-            class=""
-          />
-        </svg>
+          <span
+            class="m-validation-message__text"
+          >
+            Date hors limites
+          </span>
+        </p>
          
-        <span
-          class="m-validation-message__text"
-        >
-          Date hors limites
-        </span>
-      </p>
-       
-      <!---->
+        <!---->
+      </div>
     </div>
      
     <div
@@ -549,11 +565,15 @@ exports[`Storyshots components|m-datepicker default 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -649,11 +669,15 @@ exports[`Storyshots components|m-datepicker disabled 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -747,34 +771,38 @@ exports[`Storyshots components|m-datepicker error-message 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <p
-      class="m-validation-message__error"
+    <div
+      class="m-validation-message m-datepicker__validation__message"
     >
-      <svg
-        class="m-icon m-validation-message__icon"
-        height="1em"
-        width="1em"
+      <p
+        class="m-validation-message__error"
       >
-        <title>
-          Erreur
-        </title>
+        <svg
+          class="m-icon m-validation-message__icon"
+          height="1em"
+          width="1em"
+        >
+          <title>
+            Erreur
+          </title>
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
          
-        <use
-          aria-hidden="true"
-          class=""
-        />
-      </svg>
+        <span
+          class="m-validation-message__text"
+        >
+          this is an error
+        </span>
+      </p>
        
-      <span
-        class="m-validation-message__text"
-      >
-        this is an error
-      </span>
-    </p>
-     
-    <!---->
+      <!---->
+    </div>
   </div>
    
   <div
@@ -869,11 +897,15 @@ exports[`Storyshots components|m-datepicker events 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
@@ -972,15 +1004,19 @@ exports[`Storyshots components|m-datepicker helper-message 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <p
-      class="m-validation-message__helper"
+    <div
+      class="m-validation-message m-datepicker__validation__message"
     >
-      AAAA-MM-JJ
-    </p>
+      <!---->
+       
+      <p
+        class="m-validation-message__helper"
+      >
+        AAAA-MM-JJ
+      </p>
+    </div>
   </div>
    
   <div
@@ -1000,7 +1036,7 @@ exports[`Storyshots components|m-datepicker helper-message 1`] = `
 
 exports[`Storyshots components|m-datepicker hide-internal-error-message 1`] = `
 <div
-  class="m-datepicker m--has-error"
+  class="m-datepicker m--has-error m--has-validation-message"
   style="width: 100%; max-width: 136px;"
 >
   <div
@@ -1074,11 +1110,15 @@ exports[`Storyshots components|m-datepicker hide-internal-error-message 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1176,11 +1216,15 @@ exports[`Storyshots components|m-datepicker label 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1278,11 +1322,15 @@ exports[`Storyshots components|m-datepicker label-up 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1377,11 +1425,15 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
@@ -1477,11 +1529,15 @@ exports[`Storyshots components|m-datepicker placeholder 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1577,11 +1633,15 @@ exports[`Storyshots components|m-datepicker readonly 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1676,11 +1736,15 @@ exports[`Storyshots components|m-datepicker skip-input-validation=true 1`] = `
     </div>
      
     <div
-      class="m-validation-message m-datepicker__validation-message"
+      class="m-datepicker__validation"
     >
-      <!---->
-       
-      <!---->
+      <div
+        class="m-validation-message m-datepicker__validation__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
     </div>
      
     <div
@@ -1776,11 +1840,15 @@ exports[`Storyshots components|m-datepicker valid 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div
@@ -1882,11 +1950,15 @@ exports[`Storyshots components|m-datepicker waiting 1`] = `
   </div>
    
   <div
-    class="m-validation-message m-datepicker__validation-message"
+    class="m-datepicker__validation"
   >
-    <!---->
-     
-    <!---->
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
   </div>
    
   <div

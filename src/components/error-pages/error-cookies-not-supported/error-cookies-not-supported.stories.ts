@@ -1,21 +1,18 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { array, text, withKnobs } from '@storybook/addon-knobs';
+import { array, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
-import ErrorCookiesNotSupportedPlugin from './error-cookies-not-supported';
 import { ERROR_COOKIES_NOT_SUPPORTED_NAME } from '../../component-names';
 import { Link } from '../../message-page/message-page';
+import ErrorCookiesNotSupportedPlugin from './error-cookies-not-supported';
 
 Vue.use(ErrorCookiesNotSupportedPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${ERROR_COOKIES_NOT_SUPPORTED_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         template: `<div style="border: solid 1px black; padding: 10px; width: 600px;">
                         <m-error-cookies-not-supported></m-error-cookies-not-supported>

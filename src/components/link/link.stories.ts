@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { select, text, withKnobs } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -22,14 +21,12 @@ const storyRouterDecorator: any = (links = {}, routerProps = {}): any => {
     };
 };
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         template: '<m-link mode="link" url="#">A link</m-link>'
     }))
@@ -102,7 +99,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="light"`, module)
-    .addDecorator(withA11y)
+
     .add('default', () => ({
         template: `<div style="background: grey;">
                         <m-link mode="link" url="#" skin="light">A link</m-link>
@@ -131,7 +128,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="light"`, module
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
-    .addDecorator(withA11y)
+
     .add('default', () => ({
         template: '<m-link mode="link" url="#" skin="text">A link</m-link>'
     }))
@@ -149,7 +146,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/mode`, module)
-    .addDecorator(withA11y)
+
     .addDecorator(storyRouterDecorator())
     .add('default (router-link)', () => ({
         data: () => ({
