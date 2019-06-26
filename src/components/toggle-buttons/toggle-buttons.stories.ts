@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -7,10 +5,6 @@ import { TOGGLE_BUTTONS_NAME } from '../component-names';
 import ToggleButtonsPlugin, { MToggleButton, MToggleButtonSkin } from './toggle-buttons';
 
 Vue.use(ToggleButtonsPlugin);
-
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
 
 const JUNE: MToggleButton = { id: 'june', title: 'June' };
 const JULY: MToggleButton = { id: 'july', title: 'July' };
@@ -25,8 +19,6 @@ const monthsMultipleSelection: MToggleButton[] = [SEPTEMBER, OCTOBER, NOVEMBER, 
 const monthsSingleSelection: MToggleButton[] = [AUGUST, SEPTEMBER, OCTOBER, NOVEMBER];
 
 storiesOf(`${componentsHierarchyRootSeparator}${TOGGLE_BUTTONS_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('default', () => ({
         data: () => ({
             buttons: monthsDefault

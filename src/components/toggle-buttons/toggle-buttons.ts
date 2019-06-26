@@ -12,7 +12,7 @@ export interface MToggleButton {
 }
 
 export enum MToggleButtonSkin {
-    DEFAULT = 'default',
+    SQUARED = 'default',
     ROUNDED = 'rounded'
 }
 
@@ -30,9 +30,9 @@ export class MToggleButtons extends Vue {
     disabled: boolean;
 
     @Prop({
-        default: MToggleButtonSkin.DEFAULT,
+        default: MToggleButtonSkin.SQUARED,
         validator: value =>
-            value === MToggleButtonSkin.DEFAULT ||
+            value === MToggleButtonSkin.SQUARED ||
             value === MToggleButtonSkin.ROUNDED
     })
     skin: MToggleButtonSkin;
@@ -53,13 +53,9 @@ export class MToggleButtons extends Vue {
         return !button.pressed ? MButtonSkin.Secondary : MButtonSkin.Primary;
     }
 
-    get isRounded(): boolean {
-        return this.skin === MToggleButtonSkin.ROUNDED;
-    }
-
     get skinButtons(): { [key: string]: boolean } {
         return {
-            'm--is-default': this.skin === MToggleButtonSkin.DEFAULT,
+            'm--is-default': this.skin === MToggleButtonSkin.SQUARED,
             'm--is-rounded': this.skin === MToggleButtonSkin.ROUNDED
         };
     }
