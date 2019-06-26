@@ -11,19 +11,19 @@ exports[`Storyshots filters|f-m-time Period (from dates) 1`] = `
   </div>
    
   <div>
-    from only: mock-intl-dateTimeFormat-Sun Jun 23 2019 11:00:00 GMT-0400 (Eastern Daylight Time)
+    from only: mock-intl-dateTimeFormat-2019-05-23T11:00
   </div>
    
   <div>
-    to only: mock-intl-dateTimeFormat-Sun Jun 23 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+    to only: mock-intl-dateTimeFormat-2019-05-23T11:59
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-Sun Jun 23 2019 11:59:00 GMT-0400 (Eastern Daylight Time) à mock-intl-dateTimeFormat-Sun Jun 23 2019 14:15:00 GMT-0400 (Eastern Daylight Time)
+    full period: mock-intl-dateTimeFormat-2019-05-23T11:59 à mock-intl-dateTimeFormat-2019-05-23T14:15
   </div>
    
   <div>
-    full period, same time: mock-intl-dateTimeFormat-Sun Jun 23 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+    full period, same time: mock-intl-dateTimeFormat-2019-05-23T11:59
   </div>
 </div>
 `;
@@ -39,19 +39,19 @@ exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
   </div>
    
   <div>
-    from only: mock-intl-dateTimeFormat-Wed Jun 26 2019 11:00:00 GMT-0400 (Eastern Daylight Time)
+    from only: mock-intl-dateTimeFormat-2019-05-26T11:00
   </div>
    
   <div>
-    to only: mock-intl-dateTimeFormat-Wed Jun 26 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+    to only: mock-intl-dateTimeFormat-2019-05-26T11:59
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-Wed Jun 26 2019 11:59:00 GMT-0400 (Eastern Daylight Time) à mock-intl-dateTimeFormat-Wed Jun 26 2019 14:15:00 GMT-0400 (Eastern Daylight Time)
+    full period: mock-intl-dateTimeFormat-2019-05-26T11:59 à mock-intl-dateTimeFormat-2019-05-26T14:15
   </div>
    
   <div>
-    full period, same time: mock-intl-dateTimeFormat-Wed Jun 26 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+    full period, same time: mock-intl-dateTimeFormat-2019-05-26T11:59
   </div>
 </div>
 `;
@@ -59,27 +59,27 @@ exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
 exports[`Storyshots filters|f-m-time Simple (from Dates) 1`] = `
 <div>
   <div>
-    at the top of the hour (AM): mock-intl-dateTimeFormat-Sun Jun 23 2019 11:00:00 GMT-0400 (Eastern Daylight Time)
+    at the top of the hour (AM): mock-intl-dateTimeFormat-2019-05-23T11:00
   </div>
    
   <div>
-    hour with minutes (AM): mock-intl-dateTimeFormat-Sun Jun 23 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+    hour with minutes (AM): mock-intl-dateTimeFormat-2019-05-23T11:59
   </div>
    
   <div>
-    at the top of the hour (PM): mock-intl-dateTimeFormat-Sun Jun 23 2019 14:00:00 GMT-0400 (Eastern Daylight Time)
+    at the top of the hour (PM): mock-intl-dateTimeFormat-2019-05-23T14:00
   </div>
    
   <div>
-    hour with minutes (PM): mock-intl-dateTimeFormat-Sun Jun 23 2019 14:59:00 GMT-0400 (Eastern Daylight Time)
+    hour with minutes (PM): mock-intl-dateTimeFormat-2019-05-23T14:59
   </div>
    
   <div>
-    at the top of the hour (Midnight): mock-intl-dateTimeFormat-Sun Jun 23 2019 00:00:00 GMT-0400 (Eastern Daylight Time)
+    at the top of the hour (Midnight): mock-intl-dateTimeFormat-2019-05-23T00:00
   </div>
    
   <div>
-    hour with minutes (Midnight): mock-intl-dateTimeFormat-Sun Jun 23 2019 00:59:00 GMT-0400 (Eastern Daylight Time)
+    hour with minutes (Midnight): mock-intl-dateTimeFormat-2019-05-23T00:59
   </div>
 </div>
 `;
@@ -87,27 +87,27 @@ exports[`Storyshots filters|f-m-time Simple (from Dates) 1`] = `
 exports[`Storyshots filters|f-m-time Simple (from strings) 1`] = `
 <div>
   <div>
-    at the top of the hour (AM): mock-intl-dateTimeFormat-Wed Jun 26 2019 11:00:00 GMT-0400 (Eastern Daylight Time)
+    at the top of the hour (AM): mock-intl-dateTimeFormat-2019-05-26T11:00
   </div>
    
   <div>
-    hour with minutes (AM): mock-intl-dateTimeFormat-Wed Jun 26 2019 11:59:00 GMT-0400 (Eastern Daylight Time)
+    hour with minutes (AM): mock-intl-dateTimeFormat-2019-05-26T11:59
   </div>
    
   <div>
-    at the top of the hour (PM): mock-intl-dateTimeFormat-Wed Jun 26 2019 14:00:00 GMT-0400 (Eastern Daylight Time)
+    at the top of the hour (PM): mock-intl-dateTimeFormat-2019-05-26T14:00
   </div>
    
   <div>
-    hour with minutes (PM): mock-intl-dateTimeFormat-Wed Jun 26 2019 14:59:00 GMT-0400 (Eastern Daylight Time)
+    hour with minutes (PM): mock-intl-dateTimeFormat-2019-05-26T14:59
   </div>
    
   <div>
-    at the top of the hour (Midnight): mock-intl-dateTimeFormat-Wed Jun 26 2019 00:00:00 GMT-0400 (Eastern Daylight Time)
+    at the top of the hour (Midnight): mock-intl-dateTimeFormat-2019-05-26T00:00
   </div>
    
   <div>
-    hour with minutes (Midnight): mock-intl-dateTimeFormat-Wed Jun 26 2019 00:59:00 GMT-0400 (Eastern Daylight Time)
+    hour with minutes (Midnight): mock-intl-dateTimeFormat-2019-05-26T00:59
   </div>
 </div>
 `;
