@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -9,14 +8,12 @@ import DialogPlugin from './dialog';
 Vue.use(DialogPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         props: {
             text: {
@@ -113,7 +110,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/state`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         data: () => ({
             openProp: true
@@ -146,7 +142,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/state`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${DIALOG_NAME}/Btn-Link Combos`, module)
-    .addDecorator(withA11y)
+
     .add('default', () => ({
         data: () => ({
             openProp: true

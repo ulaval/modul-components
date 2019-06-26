@@ -1,17 +1,13 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { MInputMask } from './input-mask';
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}m-input-mask`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('Event fired', () => ({
 
         data(): any {

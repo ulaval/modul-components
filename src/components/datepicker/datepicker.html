@@ -48,13 +48,15 @@
                     v-if="open"></m-i18n>
         </m-icon-button>
     </m-input-style>
-    <m-validation-message class="m-datepicker__validation-message"
-                          :disabled="isDisabled"
-                          :waiting="isWaiting"
-                          :error="calandarError"
-                          :error-message="calandarErrorMessage"
-                          :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
+    <div class="m-datepicker__validation">
+        <m-validation-message class="m-datepicker__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="calandarError"
+                              :error-message="calandarErrorMessage"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
     <m-popup ref="popup"
              :open.sync="open"
              :disabled="!active"

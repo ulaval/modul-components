@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, number, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,13 +7,11 @@ import AddPlugin from './add';
 
 Vue.use(AddPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         template: '<m-add></m-add>'
     }))
@@ -44,8 +41,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}`, module)
         template: '<m-add icon-position="right">item</m-add>'
     }));
 storiesOf(`${componentsHierarchyRootSeparator}${ADD_NAME}/skin`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('default', () => ({
         template: '<m-add skin="default">item</m-add>'
     }))
