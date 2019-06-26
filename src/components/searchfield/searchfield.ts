@@ -5,10 +5,9 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
-import L10nPlugin from '../../utils/l10n/l10n';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import { DECIMALFIELD_NAME } from '../component-names';
+import { SEARCHFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './searchfield.html?style=./searchfield.scss';
@@ -58,11 +57,10 @@ export class MSearchfield extends ModulVue {
 }
 
 const SearchfieldPlugin: PluginObject<any> = {
-    install(v, options): void {
-        v.use(L10nPlugin);
+    install(v): void {
         v.use(InputStyle);
         v.use(ValidationMesagePlugin);
-        v.component(DECIMALFIELD_NAME, MSearchfield);
+        v.component(SEARCHFIELD_NAME, MSearchfield);
     }
 };
 

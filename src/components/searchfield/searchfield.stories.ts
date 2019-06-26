@@ -1,15 +1,13 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
+import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { SEARCHFIELD_NAME } from '../component-names';
-import { MSearchfield } from './searchfield';
+import SearchfieldPlugin from './searchfield';
+
+Vue.use(SearchfieldPlugin);
 
 storiesOf(`${componentsHierarchyRootSeparator}${SEARCHFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
-    .add('Basic', () => ({
-        components: { MSearchfield },
+    .add('default', () => ({
         template: `
             <div>
                 <div><${SEARCHFIELD_NAME} v-model="value"></${SEARCHFIELD_NAME}></div>
@@ -20,7 +18,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${SEARCHFIELD_NAME}`, module)
         })
     }))
     .add('with label', () => ({
-        components: { MSearchfield },
         template: `
             <div>
                 <div><${SEARCHFIELD_NAME} v-model="value" label="What are you look for today ?"></${SEARCHFIELD_NAME}></div>

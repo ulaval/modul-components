@@ -38,7 +38,7 @@ $m-searchfield-color: $m-color--grey-lightest;
             }
         }
 
-        .m-searchfield .m-input-style:not(.m--is-label-up) & {
+        .m-searchfield .m-input-style:not(.m--is-label-up):not(:hover) & {
             border-color: $m-color--white;
         }
     }
