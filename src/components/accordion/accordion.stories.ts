@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,14 +7,9 @@ import AccordionPlugin from './accordion';
 Vue.use(AccordionPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
-
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         props: {
             text: {
@@ -46,7 +40,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}`, module)
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/icon-size="small"`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-accordion icon-size="small"><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
@@ -56,7 +49,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/icon-size="small
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/icon-position="right"`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-accordion icon-position="right"><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
@@ -72,7 +64,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/icon-position="r
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/padding`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-accordion :padding="true"><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))
@@ -85,7 +76,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/padding`, module
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/skin`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: '<m-accordion skin="default"><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }))

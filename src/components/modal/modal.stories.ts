@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,13 +7,11 @@ import ModalPlugin, { MModalSize } from './modal';
 
 Vue.use(ModalPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         data: () => ({
             openProp: true
@@ -117,8 +114,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/size`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('size="small"', () => ({
         data: () => ({
             openProp: true
@@ -165,8 +162,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/size`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/slots`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('trigger', () => ({
         data: () => ({
             openProp: false
@@ -186,8 +183,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/slots`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MODAL_NAME}/all props`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('make your own', () => ({
         data: () => ({
             openProp: true

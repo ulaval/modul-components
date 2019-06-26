@@ -200,7 +200,6 @@ export class MDatepicker extends ModulVue {
     // Model management
 
     // override from InputManagement
-    // override from InputManagement
     @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
         if (this.internalDateModel !== this.convertModelToString(value)) {
@@ -251,7 +250,6 @@ export class MDatepicker extends ModulVue {
             this.emitKeydown(event);
         }
     }
-
 
     // Focus management.
 

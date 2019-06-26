@@ -176,8 +176,6 @@ exports[`Storyshots components|m-tooltip/mode mode="definition" 1`] = `
                     ball tip jowl. Chicken laborum strip steak ut picanha adipisicing turducken do doner ad prosciutto
                     pastrami ullamco.
   <p />
-   
-  <span />
 </span>
 `;
 
@@ -268,8 +266,6 @@ exports[`Storyshots components|m-tooltip/mode mode="link" 1`] = `
                     ball tip jowl. Chicken laborum strip steak ut picanha adipisicing turducken do doner ad prosciutto
                     pastrami ullamco.
   <p />
-   
-  <span />
 </span>
 `;
 

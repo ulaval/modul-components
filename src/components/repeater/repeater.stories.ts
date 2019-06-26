@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { number, withKnobs } from '@storybook/addon-knobs';
+import { number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import uuid from '../../utils/uuid/uuid';
@@ -7,8 +6,7 @@ import { REPEATER_NAME } from '../component-names';
 import { MRepeater } from './repeater';
 
 storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Empty', () => ({
         components: { MRepeater },
         template: `
@@ -38,8 +36,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('With items (Custom item template)', () => ({
         components: { MRepeater },
         template: `
@@ -78,8 +75,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('With items (Custom row template)', () => ({
         components: { MRepeater },
         template: `
@@ -117,8 +113,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${REPEATER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Operations', () => ({
         components: { MRepeater },
         template: `

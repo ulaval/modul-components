@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,14 +6,12 @@ import MessagePlugin from './message';
 Vue.use(MessagePlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         template: '<m-message>A message for testing purposes</m-message>'
     }))
@@ -34,7 +30,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}`, module)
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/state`, module)
-    .addDecorator(withA11y)
+
     .add('default (confirmation)', () => ({
         template: '<m-message>state: confirmation</m-message>'
     }))
@@ -49,7 +45,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/state`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="default"`, module)
-    .addDecorator(withA11y)
+
     .add('state="confirmation"', () => ({
         template: '<m-message state="confirmation">A message for confirmation purposes</m-message>'
     }))
@@ -76,7 +72,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="default"`, m
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="light"`, module)
-    .addDecorator(withA11y)
+
     .add('state="confirmation"', () => ({
         template: '<m-message skin="light" state="confirmation">A message for confirmation purposes</m-message>'
     }))
@@ -103,7 +99,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="light"`, mod
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="page-light"`, module)
-    .addDecorator(withA11y)
+
     .add('state="confirmation"', () => ({
         template: '<m-message skin="page-light" state="confirmation">A message for confirmation purposes</m-message>'
     }))
@@ -131,7 +127,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="page-light"`
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${MESSAGE_NAME}/skin="page"`, module)
-    .addDecorator(withA11y)
+
     .add('state="confirmation"', () => ({
         template: '<m-message skin="page" state="confirmation">A message for confirmation purposes</m-message>'
     }))

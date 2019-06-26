@@ -1,4 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -7,12 +6,9 @@ import PaginationPlugin from './pagination';
 
 Vue.use(PaginationPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${PAGINATION_NAME}`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         data: () => ({
             model1: 1,

@@ -60,7 +60,7 @@ describe('MDatepicker', () => {
         expect(wrapper.emitted().change).toBeTruthy();
         expect(wrapper.emitted().change[0]).toEqual(['']);
 
-        let validationMessage: Wrapper<any> = wrapper.find('.m-datepicker__validation-message');
+        let validationMessage: Wrapper<any> = wrapper.find('.m-datepicker__validation__message');
 
         expect(validationMessage.props().error).toBe(true);
         expect(validationMessage.props().errorMessage).toBe('m-datepicker:format-error');
@@ -85,7 +85,7 @@ describe('MDatepicker', () => {
         expect(wrapper.emitted().change).toBeTruthy();
         expect(wrapper.emitted().change[0]).toEqual(['']);
 
-        let validationMessage: Wrapper<any> = wrapper.find('.m-datepicker__validation-message');
+        let validationMessage: Wrapper<any> = wrapper.find('.m-datepicker__validation__message');
 
         expect(validationMessage.props().error).toBe(false);
         expect(validationMessage.props().errorMessage).toBe('');
@@ -104,7 +104,7 @@ describe('MDatepicker', () => {
         expect(wrapper.emitted().change).toBeTruthy();
         expect(wrapper.emitted().change[0]).toEqual(['2019-06-06']);
 
-        let validationMessage: Wrapper<any> = wrapper.find('.m-datepicker__validation-message');
+        let validationMessage: Wrapper<any> = wrapper.find('.m-datepicker__validation__message');
 
         expect(validationMessage.props().error).toBe(false);
         expect(validationMessage.props().errorMessage).toBe('');

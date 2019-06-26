@@ -30,7 +30,6 @@ export class FormGroup extends AbstractControl {
     }
 
     public get valid(): boolean {
-
         if (!this.enabled || this.readonly) {
             return true;
         } else {
@@ -75,6 +74,7 @@ export class FormGroup extends AbstractControl {
 
     public async submit(): Promise<void> {
         await Promise.all(this.controls.map(c => c.submit()));
+
         if (!this._hasAnyControlsInError()) {
             this.validate();
             await this.validateAsync();
