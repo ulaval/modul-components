@@ -14,6 +14,7 @@ import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import CalendarPlugin from '../calendar/calendar';
+import { MBaseCalendarType, MBaseCalendarView } from '../calendar/calendar-renderer/base-calendar/base-calendar';
 import { DATEPICKER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import { MInputMask } from '../input-mask/input-mask';
@@ -29,11 +30,6 @@ export type DatePickerSupportedTypes = Date | string | undefined;
 export enum MDatepickerDefaultView {
     Month = 'month',
     Day = 'day'
-}
-
-export enum MDatepickerFormat {
-    YYYYMMDD = 'YYYY-MM-DD',
-    YYYYMM = 'YYYY-MM'
 }
 
 @WithRender
@@ -59,16 +55,16 @@ export class MDatepicker extends ModulVue {
     public label: string;
 
     @Prop({
-        default: MDatepickerDefaultView.Day,
-        validator: value => Enums.toValueArray(MDatepickerDefaultView).includes(value)
+        default: MBaseCalendarView.DAYS,
+        validator: value => Enums.toValueArray(MBaseCalendarView).includes(value)
     })
-    public defaultView: MDatepickerDefaultView;
+    public initialView: MBaseCalendarView;
 
     @Prop({
-        default: MDatepickerFormat.YYYYMMDD,
-        validator: value => Enums.toValueArray(MDatepickerFormat).includes(value)
+        default: MBaseCalendarType.FULL_DATE,
+        validator: value => Enums.toValueArray(MBaseCalendarType).includes(value)
     })
-    public format: MDatepickerFormat;
+    public type: MBaseCalendarType;
 
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
@@ -106,7 +102,7 @@ export class MDatepicker extends ModulVue {
     }
 
     public get inputOptions(): CleaveOptions {
-        if (this.isFormatYYYYMM) {
+        if (this.isTypeYearsMonths) {
             return {
                 numericOnly: true,
                 delimiters: ['-'],
@@ -121,15 +117,15 @@ export class MDatepicker extends ModulVue {
         };
     }
 
-    public get isFormatYYYYMM(): boolean {
-        return this.format === MDatepickerFormat.YYYYMM;
+    public get isTypeYearsMonths(): boolean {
+        return this.type === MBaseCalendarType.YEARS_MONTHS;
     }
 
     public get propPlaceholder(): string {
         if (this.placeholder) {
             return this.placeholder;
         }
-        return this.isFormatYYYYMM ? this.$i18n.translate('m-datepicker:placeholder-aaaa-mm') : this.$i18n.translate('m-datepicker:placeholder-aaaa-mm-jj');
+        return this.isTypeYearsMonths ? this.$i18n.translate('m-datepicker:placeholder-aaaa-mm') : this.$i18n.translate('m-datepicker:placeholder-aaaa-mm-jj');
     }
 
     public get formattedDate(): string {
@@ -170,7 +166,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private get maxInputLenght(): number {
-        return this.isFormatYYYYMM ? 7 : 10;
+        return this.isTypeYearsMonths ? 7 : 10;
     }
 
     private set open(open: boolean) {
@@ -243,7 +239,7 @@ export class MDatepicker extends ModulVue {
             return true;
 
         } else if (inputValue.length >= this.maxInputLenght && this.validateDateFormat(inputValue)) {
-            let newDate: ModulDate = new ModulDate(this.isFormatYYYYMM ? `${inputValue}-01` : inputValue);
+            let newDate: ModulDate = new ModulDate(this.isTypeYearsMonths ? `${inputValue}-01` : inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';
                 return true;

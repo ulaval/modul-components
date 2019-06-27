@@ -10,9 +10,12 @@
                               ref="calendarState">
         <m-base-calendar slot-scope="{ calendar, calendarEvents }"
                          v-on="calendarEvents"
-                         :calendar="calendar"
                          class="m-calendar__renderer"
-                         ref="calendarRenderer"
-                         :show-month-before-after="showMonthBeforeAfter"></m-base-calendar>
+                         :calendar="calendar"
+                         :type="type"
+                         :visible="visible"
+                         :initial-view="initialView"
+                         :show-month-before-after="showMonthBeforeAfter"
+                         ref="calendarRenderer"></m-base-calendar>
     </m-calendar-state-machine>
 </div>
