@@ -22,6 +22,7 @@
                    :required-marker="requiredMarker"
                    :tag-style="tagStyle">
         <input :id="id"
+               type="search"
                class="m-textfield__input"
                v-model="model"
                :autocomplete="autocomplete"
@@ -55,8 +56,7 @@
         </template>
     </m-input-style>
     <div class="m-searchfield__validation">
-        <m-validation-message class="m-searchfield__validation__message"
-                              :disabled="isDisabled"
+        <m-validation-message :disabled="isDisabled"
                               :waiting="isWaiting"
                               :error="hasSearchfieldError"
                               :error-message="errorMessage"

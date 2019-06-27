@@ -2,9 +2,16 @@
 @import '../input-style/input-style';
 
 .m-searchfield {
+    $m-searchfield-color: $m-color--grey-lightest;
+
     position: relative;
     display: inline-flex;
     flex-direction: column;
+
+    ::placeholder {
+        color: $m-color--text-light;
+        font-weight: $m-font-weight--light;
+    }
 
     @include m-input-inline-spacing();
 
@@ -25,40 +32,60 @@
         margin-left: $m-spacing--s;
     }
 
-    &.m--has-validation-message {
-        .m-decimalfield__validation {
+    &__validation {
+        transition: margin-top $m-transition-duration ease;
+        display: flex;
+
+        .m--has-validation-message & {
             margin-top: $m-spacing--xs;
         }
-    }
 
-    &.m--has-error {
-        .m-decimalfield__validation {
+        .m--has-error & {
             color: $m-color--error;
         }
-    }
 
-    &.m--is-valid {
-        .m-decimalfield__validation {
+        .m--is-valid & {
             color: $m-color--success;
         }
     }
 
-    &__validation {
-        transition: margin-top $m-transition-duration ease;
-        display: flex;
-        justify-content: flex-end;
+    input {
+        &[type='search']::-webkit-search-decoration,
+        &[type='search']::-webkit-search-cancel-button,
+        &[type='search']::-webkit-search-results-button,
+        &[type='search']::-webkit-search-results-decoration {
+            display: none;
+        }
 
-        &__message {
-            flex: 1 1 auto;
+        &[type='search']::-webkit-textfield-decoration-container {
+            background-color: $m-searchfield-color;
         }
     }
 
-    &__input {
-        appearance: textfield;
+    // overrides :-(
+    .m-input-style {
+        .m-input-style__main {
+            background-color: $m-searchfield-color;
+        }
 
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            appearance: textfield;
+        &.m--is-label-up {
+            .m-input-style__text {
+                background: $m-searchfield-color;
+            }
+        }
+
+        &:not(.m--has-error):not(.m--is-valid) {
+            .m-input-style__main {
+                &:hover {
+                    border-color: $m-input-style--color-hover;
+                }
+            }
+        }
+
+        &:not(.m--is-label-up):not(.m--has-error):not(.m--is-valid):not(:hover) {
+            .m-input-style__main {
+                border-color: $m-color--white;
+            }
         }
     }
 }

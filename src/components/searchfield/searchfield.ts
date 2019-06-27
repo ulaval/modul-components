@@ -10,7 +10,8 @@ import { ModulVue } from '../../utils/vue/vue';
 import { SEARCHFIELD_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
-import WithRender from './searchfield.html?style=./searchfield.scss';
+import WithRender from './searchfield.html';
+import './searchfield.scss';
 
 @WithRender
 @Component({

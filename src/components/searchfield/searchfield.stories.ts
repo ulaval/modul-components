@@ -26,4 +26,24 @@ storiesOf(`${componentsHierarchyRootSeparator}${SEARCHFIELD_NAME}`, module)
         data: () => ({
             value: undefined
         })
+    }))
+    .add('error state', () => ({
+        template: `
+            <div>
+                <div><${SEARCHFIELD_NAME} v-model="value" :error="true" max-width="medium" error-message="these kinds of weird searches are not permitted..." label="What are you look for today ?"></${SEARCHFIELD_NAME}></div>
+            </div>
+        `,
+        data: () => ({
+            value: 'Something not work safe'
+        })
+    }))
+    .add('valid state', () => ({
+        template: `
+            <div>
+                <div><${SEARCHFIELD_NAME} v-model="value" :valid="true" max-width="medium" valid-message="370 billions results found" label="What are you look for today ?"></${SEARCHFIELD_NAME}></div>
+            </div>
+        `,
+        data: () => ({
+            value: 'Cats'
+        })
     }));
