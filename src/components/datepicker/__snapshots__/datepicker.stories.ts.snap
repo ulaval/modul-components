@@ -864,8 +864,15 @@ exports[`Storyshots components|m-datepicker error-message 1`] = `
 
 exports[`Storyshots components|m-datepicker events 1`] = `
 <div>
+  <p
+    class="m-u--no-margin"
+  >
+    Model value = "2011-01-01"
+    <br />
+    skipInputValidation = "true"
+  </p>
   <div
-    class="m-datepicker"
+    class="m-datepicker m-u--margin-top"
     style="width: 100%; max-width: 136px;"
   >
     <div
@@ -969,10 +976,68 @@ exports[`Storyshots components|m-datepicker events 1`] = `
       <!---->
     </div>
   </div>
-   
-  <br />
-  <br />
-  model value = 2011-01-01
+  <p>
+    <button
+      class="m-button m--is-skin-primary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset model 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </p>
+  <p>
+    <div
+      class="m-checkbox m--is-checkbox-left m--is-checked"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          skipInputValidation
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </p>
 </div>
 `;
 
@@ -1422,10 +1487,31 @@ exports[`Storyshots components|m-datepicker label-up 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31" 1`] = `
+exports[`Storyshots components|m-datepicker min and max 1`] = `
 <div>
+  <p>
+    <strong>
+      Model value:
+    </strong>
+     2008-02-02
+  </p>
+   
+  <p>
+    <strong>
+      Date min:
+    </strong>
+     2000-01-10
+  </p>
+   
+  <p>
+    <strong>
+      Date max:
+    </strong>
+     2008-03-20
+  </p>
+   
   <div
-    class="m-datepicker"
+    class="m-datepicker m-u--margin-top"
     style="width: 100%; max-width: 136px;"
   >
     <div
@@ -1529,7 +1615,70 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
       <!---->
     </div>
   </div>
-  model value = 2011-01-01
+   
+  <div
+    class="m-u--margin-top"
+  >
+    <button
+      class="m-button m-u--margin-right m--is-skin-primary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Reset value 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m-u--margin-right m--is-skin-secondary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Date in the range 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m-u--margin-right m--is-skin-secondary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Date out de range 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </div>
 </div>
 `;
 

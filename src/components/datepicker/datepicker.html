@@ -2,7 +2,7 @@
      :class="{ 'm--is-disabled': isDisabled,
             'm--is-readonly': isReadonly,
             'm--is-waiting': isWaiting,
-            'm--has-error': calandarError,
+            'm--has-error': hasCalandarError,
             'm--is-valid': isValid,
             'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
@@ -16,7 +16,7 @@
                    :focus="isFocus"
                    :label-up="labelUp"
                    :empty="isEmpty"
-                   :error="calandarError"
+                   :error="hasCalandarError"
                    :valid="isValid">
         <m-input-mask ref="input"
                       :id="id"
@@ -41,22 +41,24 @@
                        button-size="22px"
                        :disabled="!active"
                        icon-name="m-svg__calendar"
-                       @click="togglePopup">
+                       @click="togglePopup($event)">
             <m-i18n k="m-datepicker:open"
                     v-if="!open"></m-i18n>
             <m-i18n k="m-datepicker:close"
                     v-if="open"></m-i18n>
         </m-icon-button>
     </m-input-style>
+
     <div class="m-datepicker__validation">
         <m-validation-message class="m-datepicker__validation__message"
                               :disabled="isDisabled"
                               :waiting="isWaiting"
-                              :error="calandarError"
+                              :error="hasCalandarError"
                               :error-message="calandarErrorMessage"
                               :valid-message="validMessage"
                               :helper-message="helperMessage"></m-validation-message>
     </div>
+
     <m-popup ref="popup"
              :open.sync="open"
              :disabled="!active"
