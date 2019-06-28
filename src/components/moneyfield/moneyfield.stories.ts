@@ -34,7 +34,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
             <div>
                 <div><${MONEYFIELD_NAME} v-model="value" :disabled="true" :placeholder="'Disabled'"></${MONEYFIELD_NAME}></div>
                 <div><${MONEYFIELD_NAME} v-model="value" :placeholder="'Read-only'" :readonly="true"></${MONEYFIELD_NAME}></div>
-                <div><${MONEYFIELD_NAME} v-model="value" :placeholder="'Waiting'" :waiting="true"></${MONEYFIELD_NAME}></div>
+                <div><${MONEYFIELD_NAME} v-model="value" label="label bla label" :placeholder="'Waiting'" :waiting="true"></${MONEYFIELD_NAME}></div>
             </div>
         `,
         data: () => ({

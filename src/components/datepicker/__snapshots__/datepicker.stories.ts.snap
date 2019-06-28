@@ -8,71 +8,77 @@ exports[`Storyshots components|m-datepicker date big min and max limit 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -113,71 +119,77 @@ exports[`Storyshots components|m-datepicker date format invalid 1`] = `
   >
     <div
       class="m-input-style m--has-error m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -241,71 +253,77 @@ exports[`Storyshots components|m-datepicker date off limit  max 1`] = `
   >
     <div
       class="m-input-style m--has-error m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -369,71 +387,77 @@ exports[`Storyshots components|m-datepicker date off limit min 1`] = `
   >
     <div
       class="m-input-style m--has-error m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -496,71 +520,77 @@ exports[`Storyshots components|m-datepicker default 1`] = `
 >
   <div
     class="m-input-style m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -598,73 +628,79 @@ exports[`Storyshots components|m-datepicker disabled 1`] = `
 >
   <div
     class="m-input-style m--is-disabled m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            disabled="disabled"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled"
-            disabled="disabled"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              disabled="disabled"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled"
+              disabled="disabled"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -702,71 +738,77 @@ exports[`Storyshots components|m-datepicker error-message 1`] = `
 >
   <div
     class="m-input-style m--has-error m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -828,71 +870,77 @@ exports[`Storyshots components|m-datepicker events 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -935,71 +983,77 @@ exports[`Storyshots components|m-datepicker helper-message 1`] = `
 >
   <div
     class="m-input-style m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1041,71 +1095,77 @@ exports[`Storyshots components|m-datepicker hide-internal-error-message 1`] = `
 >
   <div
     class="m-input-style m--has-error m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1143,75 +1203,82 @@ exports[`Storyshots components|m-datepicker label 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mDatepicker-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            Date label
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
+        <label
+          class="m-input-style__label"
+          for="mDatepicker-uuid"
+          style="margin-right: 0px;"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              Date label
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
         <div
-          class="m-input-style__left-content"
+          class="m-input-style__input"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
-          />
-            
           <!---->
            
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1249,75 +1316,82 @@ exports[`Storyshots components|m-datepicker label-up 1`] = `
 >
   <div
     class="m-input-style m--is-label-up m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mDatepicker-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            Date label
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
+        <label
+          class="m-input-style__label"
+          for="mDatepicker-uuid"
+          style="margin-right: 0px;"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              Date label
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
         <div
-          class="m-input-style__left-content"
+          class="m-input-style__input"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
-          />
-            
           <!---->
            
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1356,71 +1430,77 @@ exports[`Storyshots components|m-datepicker min="2008-01-01" && max="2014-12-31"
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1460,71 +1540,77 @@ exports[`Storyshots components|m-datepicker placeholder 1`] = `
 >
   <div
     class="m-input-style m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="Lorem Ipsum"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="Lorem Ipsum"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1562,73 +1648,79 @@ exports[`Storyshots components|m-datepicker readonly 1`] = `
 >
   <div
     class="m-input-style m--is-readonly m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
-            readonly="readonly"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled"
-            disabled="disabled"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+              readonly="readonly"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled"
+              disabled="disabled"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1667,71 +1759,77 @@ exports[`Storyshots components|m-datepicker skip-input-validation=true 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <input
-              aria-haspopup="true"
-              autocomplete="off"
-              id="mDatepicker-uuid"
-              placeholder="AAAA-MM-JJ"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
-            <button
-              aria-controls="mDatepicker-uuid"
-              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              type="button"
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <input
+                aria-haspopup="true"
+                autocomplete="off"
+                id="mDatepicker-uuid"
+                placeholder="AAAA-MM-JJ"
+              />
+                
+              <!---->
                
               <!---->
-            </button>
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <button
+                aria-controls="mDatepicker-uuid"
+                class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+                style="width: 22px; height: 22px;"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+               
+              <!---->
+            </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1771,71 +1869,77 @@ exports[`Storyshots components|m-datepicker valid 1`] = `
 >
   <div
     class="m-input-style m--is-valid m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
-            >
-              <!---->
-               
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
              
             <!---->
-          </button>
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1873,79 +1977,85 @@ exports[`Storyshots components|m-datepicker waiting 1`] = `
 >
   <div
     class="m-input-style m--is-waiting m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
-          <input
-            aria-haspopup="true"
-            autocomplete="off"
-            disabled="disabled"
-            id="mDatepicker-uuid"
-            placeholder="AAAA-MM-JJ"
+          <span
+            class="m-input-style__text"
           />
-            
-          <!---->
-           
-          <!---->
-        </div>
+        </span>
          
         <div
-          class="m-input-style__right-content"
+          class="m-input-style__input"
         >
-          <button
-            aria-controls="mDatepicker-uuid"
-            class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled"
-            disabled="disabled"
-            style="width: 22px; height: 22px;"
-            type="button"
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-icon-button__icon"
-              height="20px"
-              width="20px"
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              disabled="disabled"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple m--is-disabled"
+              disabled="disabled"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <div
+              class="m-spinner m-input-style__spinner"
             >
               <!---->
                
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
-             
-            <!---->
-          </button>
-        </div>
-         
-        <div
-          class="m-spinner m-input-style__spinner"
-        >
-          <!---->
-           
-          <div />
+              <div />
+            </div>
+          </div>
         </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    

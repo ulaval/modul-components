@@ -63,6 +63,7 @@ import RichTextEditorPlugin from './rich-text-editor/rich-text-editor';
 import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-editor/rich-text-license-plugin';
 import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
+import SearchfieldPlugin from './searchfield/searchfield';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import ShowMorePlugin from './show-more/show-more';
 import SidebarPlugin from './sidebar/sidebar';
@@ -180,6 +181,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
         Vue.use(TextfieldPlugin);
+        Vue.use(SearchfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(ToastPlugin);
         Vue.use(ToggleButtonsPlugin);

@@ -89,7 +89,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield helper-message="This message is here to help you" type="tel" value="12345"></m-textfield>'
     }))
     .add('word-wrap', () => ({
-        template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
+        template: `<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true" waiting="true">
+        </m-textfield>`
     }))
     .add('focus', () => ({
         template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'
@@ -112,7 +113,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
         template: '<m-textfield type="text" value="Text"></m-textfield>'
     }))
     .add('type="password"', () => ({
-        template: '<m-textfield type="password" value="password"></m-textfield>'
+        template: '<m-textfield type="password" value="password" label="lsdhfasdj khgjkd fhjkghj kadfhgf jkdghdfjk ghdfjkg hdfjk ghd fjkghdj k gh djh"></m-textfield>'
     }))
     .add('type="email"', () => ({
         template: '<m-textfield type="email" value="john.doe@gmail.com"></m-textfield>'
@@ -122,9 +123,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
     }))
     .add('type="tel"', () => ({
         template: '<m-textfield type="tel" value="123456789"></m-textfield>'
-    }))
-    .add('type="search"', () => ({
-        template: '<m-textfield type="search" value="Search Query"></m-textfield>'
     }))
     .add('type="number"', () => ({
         template: '<m-textfield type="number" value="156168468"></m-textfield>'

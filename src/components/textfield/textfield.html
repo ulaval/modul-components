@@ -41,9 +41,9 @@
                @paste="onPaste"
                ref="input" />
         <template v-if="!hasWordWrap"
-                  slot="right-content">
-            <transition-group name="m--is"
-                              style="white-space: nowrap;">
+                  slot="suffix">
+            <transition name="m--is"
+                        style="white-space: nowrap;">
                 <m-icon-button v-if="passwordIcon && hasValue"
                                class="m-textfield__icon-password"
                                :aria-controls="id"
@@ -52,23 +52,7 @@
                                @click="togglePasswordVisibility"
                                key="passwordIcon"
                                button-size="22px"></m-icon-button>
-                <m-icon-button v-if="isTypeSearch && hasValue"
-                               class="m-textfield__reset"
-                               :aria-controls="id"
-                               @click="reset"
-                               key="resetIcon"
-                               button-size="1em"
-                               icon-size="11px"
-                               icon-name="m-svg__close-clear"></m-icon-button>
-                <m-icon-button v-if="isTypeSearch && searchIcon"
-                               class="m-textfield__search-icon"
-                               :aria-controls="id"
-                               :title="searchIconDescription"
-                               @click="search"
-                               key="searchIcon"
-                               button-size="22px"
-                               icon-name="m-svg__search"></m-icon-button>
-            </transition-group>
+            </transition>
         </template>
         <textarea v-if="hasWordWrap"
                   :id="id"

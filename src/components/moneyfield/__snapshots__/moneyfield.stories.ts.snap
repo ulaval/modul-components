@@ -13,204 +13,233 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       >
         <div
           class="m-input-style m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
-              >
-                CA$
-              </div>
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
-                />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
-            </div>
-          </div>
-        </div>
-         
-        <div
-          class="m-decimalfield__validation"
-        >
-          <div
-            class="m-validation-message m-decimalfield__validation__message"
-          >
-            <!---->
-             
-            <!---->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-   
-  <div>
-    <div
-      class="m-moneyfield"
-      style="width: 100%; max-width: 136px;"
-    >
-      <div
-        class="m-decimalfield m--has-label"
-        style="width: 100%; max-width: 136px;"
-      >
-        <div
-          class="m-input-style m--has-label m--is-tag-default"
-        >
-          <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
-          >
-            <label
-              class="m-input-style__label"
-              for="mDecimalfield-uuid"
-            >
               <span
-                class="m-input-style__text"
+                class="m-input-style__label"
+                style="z-index: -1;"
               >
-                <span>
-                  Label
-                </span>
-                 
-                <!---->
+                <span
+                  class="m-input-style__text"
+                />
               </span>
-            </label>
-             
-            <div
-              class="m-input-style__body"
-            >
-              <!---->
                
               <div
-                class="m-input-style__left-content"
+                class="m-input-style__input"
               >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
-                />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
-            </div>
-          </div>
-        </div>
-         
-        <div
-          class="m-decimalfield__validation"
-        >
-          <div
-            class="m-validation-message m-decimalfield__validation__message"
-          >
-            <!---->
-             
-            <!---->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-   
-  <div>
-    <div
-      class="m-moneyfield"
-      style="width: 100%; max-width: 136px;"
-    >
-      <div
-        class="m-decimalfield m--has-label"
-        style="width: 100%; max-width: 136px;"
-      >
-        <div
-          class="m-input-style m--has-label m--is-tag-default"
-        >
-          <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
-          >
-            <label
-              class="m-input-style__label"
-              for="mDecimalfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Required label
-                </span>
-                 
-                <sup
-                  class="m-input-style__required-marker"
+                <div
+                  class="m-input-style__prefix"
                 >
-                  *
-                </sup>
-              </span>
-            </label>
+                  <span
+                    class="m-moneyfield__currency-symbol"
+                  >
+                    
+                CA$
+            
+                  </span>
+                </div>
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
              
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <div
+        class="m-decimalfield m--has-label"
+        style="width: 100%; max-width: 136px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
+              <label
+                class="m-input-style__label"
+                for="mDecimalfield-uuid"
+                style="margin-right: 0px;"
               >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
-                />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Label
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
               <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-decimalfield__validation"
+        >
+          <div
+            class="m-validation-message m-decimalfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-moneyfield"
+      style="width: 100%; max-width: 136px;"
+    >
+      <div
+        class="m-decimalfield m--has-label"
+        style="width: 100%; max-width: 136px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mDecimalfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Required label
+                  </span>
+                   
+                  <sup
+                    class="m-input-style__required-marker"
+                  >
+                    *
+                  </sup>
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -240,50 +269,63 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       >
         <div
           class="m-input-style m--is-valid m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
+              <span
+                class="m-input-style__label"
+                style="z-index: -1;"
               >
-                CA$
-              </div>
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
+                <span
+                  class="m-input-style__text"
                 />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
+              </span>
                
               <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
+                class="m-input-style__input"
+              >
+                <div
+                  class="m-input-style__prefix"
+                >
+                  <span
+                    class="m-moneyfield__currency-symbol"
+                  >
+                    
+                CA$
+            
+                  </span>
+                </div>
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -336,50 +378,63 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       >
         <div
           class="m-input-style m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
+              <span
+                class="m-input-style__label"
+                style="z-index: -1;"
               >
-                CA$
-              </div>
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
+                <span
+                  class="m-input-style__text"
                 />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
+              </span>
                
               <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
+                class="m-input-style__input"
+              >
+                <div
+                  class="m-input-style__prefix"
+                >
+                  <span
+                    class="m-moneyfield__currency-symbol"
+                  >
+                    
+                CA$
+            
+                  </span>
+                </div>
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -413,50 +468,63 @@ exports[`Storyshots components|m-moneyfield Basic 1`] = `
       >
         <div
           class="m-input-style m--has-error m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
+              <span
+                class="m-input-style__label"
+                style="z-index: -1;"
               >
-                CA$
-              </div>
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
+                <span
+                  class="m-input-style__text"
                 />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
+              </span>
                
               <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
+                class="m-input-style__input"
+              >
+                <div
+                  class="m-input-style__prefix"
+                >
+                  <span
+                    class="m-moneyfield__currency-symbol"
+                  >
+                    
+                CA$
+            
+                  </span>
+                </div>
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -511,50 +579,63 @@ exports[`Storyshots components|m-moneyfield Custom precision 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            CA$
-          </div>
-           
-          <div
-            class="m-input-style__left-content"
-          >
-             
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="decimal"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            >
+              <span
+                class="m-moneyfield__currency-symbol"
+              >
+                
+                CA$
+            
+              </span>
+            </div>
+             
+            <div
+              class="m-input-style__content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="decimal"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -584,50 +665,63 @@ exports[`Storyshots components|m-moneyfield Default precision 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            CA$
-          </div>
-           
-          <div
-            class="m-input-style__left-content"
-          >
-             
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="decimal"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            >
+              <span
+                class="m-moneyfield__currency-symbol"
+              >
+                
+                CA$
+            
+              </span>
+            </div>
+             
+            <div
+              class="m-input-style__content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="decimal"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -657,50 +751,63 @@ exports[`Storyshots components|m-moneyfield Localization 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            CA$
-          </div>
-           
-          <div
-            class="m-input-style__left-content"
-          >
-             
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="decimal"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            >
+              <span
+                class="m-moneyfield__currency-symbol"
+              >
+                
+                CA$
+            
+              </span>
+            </div>
+             
+            <div
+              class="m-input-style__content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="decimal"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -732,52 +839,65 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       >
         <div
           class="m-input-style m--is-disabled m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
+              <span
+                class="m-input-style__label"
+                style="z-index: -1;"
               >
-                CA$
-              </div>
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  disabled="disabled"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
-                  placeholder="Disabled"
+                <span
+                  class="m-input-style__text"
                 />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
+              </span>
                
               <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
+                class="m-input-style__input"
+              >
+                <div
+                  class="m-input-style__prefix"
+                >
+                  <span
+                    class="m-moneyfield__currency-symbol"
+                  >
+                    
+                CA$
+            
+                  </span>
+                </div>
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    disabled="disabled"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                    placeholder="Disabled"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -807,52 +927,65 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       >
         <div
           class="m-input-style m--is-readonly m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
+              <span
+                class="m-input-style__label"
+                style="z-index: -1;"
               >
-                CA$
-              </div>
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
-                  placeholder="Read-only"
-                  readonly="readonly"
+                <span
+                  class="m-input-style__text"
                 />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
+              </span>
                
               <div
-                class="m-input-style__right-content"
-              />
-               
-              <!---->
+                class="m-input-style__input"
+              >
+                <div
+                  class="m-input-style__prefix"
+                >
+                  <span
+                    class="m-moneyfield__currency-symbol"
+                  >
+                    
+                CA$
+            
+                  </span>
+                </div>
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                    placeholder="Read-only"
+                    readonly="readonly"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -877,63 +1010,73 @@ exports[`Storyshots components|m-moneyfield States 1`] = `
       style="width: 100%; max-width: 136px;"
     >
       <div
-        class="m-decimalfield m--is-waiting"
+        class="m-decimalfield m--is-waiting m--has-label"
         style="width: 100%; max-width: 136px;"
       >
         <div
-          class="m-input-style m--is-waiting m--is-tag-default"
+          class="m-input-style m--is-waiting m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <span
-              class="m-input-style__label"
-              style="z-index: -1;"
-            >
-              <span
-                class="m-input-style__text"
-              />
-            </span>
-             
             <div
               class="m-input-style__body"
             >
-              <div
-                class="m-input-style__prefix"
+              <label
+                class="m-input-style__label"
+                for="mDecimalfield-uuid"
+                style="margin-right: 0px;"
               >
-                CA$
-              </div>
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    label bla label
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
               <div
-                class="m-input-style__left-content"
-              >
-                 
-                <input
-                  class="m-decimalfield__input"
-                  disabled="disabled"
-                  id="mDecimalfield-uuid"
-                  inputmode="decimal"
-                  placeholder="Waiting"
-                />
-                  
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
-              />
-               
-              <div
-                class="m-spinner m-input-style__spinner"
+                class="m-input-style__input"
               >
                 <!---->
                  
-                <div />
+                <div
+                  class="m-input-style__content"
+                >
+                   
+                  <input
+                    class="m-decimalfield__input"
+                    disabled="disabled"
+                    id="mDecimalfield-uuid"
+                    inputmode="decimal"
+                    placeholder="Waiting"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <div
+                    class="m-spinner m-input-style__spinner"
+                  >
+                    <!---->
+                     
+                    <div />
+                  </div>
+                </div>
               </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -965,50 +1108,63 @@ exports[`Storyshots components|m-moneyfield With initial value (0) 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            CA$
-          </div>
-           
-          <div
-            class="m-input-style__left-content"
-          >
-             
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="decimal"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            >
+              <span
+                class="m-moneyfield__currency-symbol"
+              >
+                
+                CA$
+            
+              </span>
+            </div>
+             
+            <div
+              class="m-input-style__content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="decimal"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1038,50 +1194,63 @@ exports[`Storyshots components|m-moneyfield With initial value 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            CA$
-          </div>
-           
-          <div
-            class="m-input-style__left-content"
-          >
-             
-            <input
-              class="m-decimalfield__input"
-              id="mDecimalfield-uuid"
-              inputmode="decimal"
+            <span
+              class="m-input-style__text"
             />
-              
-            <!---->
-             
-            <!---->
-          </div>
+          </span>
            
           <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            >
+              <span
+                class="m-moneyfield__currency-symbol"
+              >
+                
+                CA$
+            
+              </span>
+            </div>
+             
+            <div
+              class="m-input-style__content"
+            >
+               
+              <input
+                class="m-decimalfield__input"
+                id="mDecimalfield-uuid"
+                inputmode="decimal"
+              />
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
