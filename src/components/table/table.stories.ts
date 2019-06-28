@@ -8,7 +8,6 @@ Vue.use(TablePlugin);
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
-
     .add('Default', () => ({
         props: {
             columns: {

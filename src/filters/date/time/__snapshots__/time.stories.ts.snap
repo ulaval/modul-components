@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots filters|f-m-time Period (from dates) 1`] = `
+<div>
+  <div>
+    undefined period: 
+  </div>
+   
+  <div>
+    empty period: 
+  </div>
+   
+  <div>
+    from only: mock-intl-dateTimeFormat-2019-05-23T11:00
+  </div>
+   
+  <div>
+    to only: mock-intl-dateTimeFormat-2019-05-23T11:59
+  </div>
+   
+  <div>
+    full period: mock-intl-dateTimeFormat-2019-05-23T11:59 à mock-intl-dateTimeFormat-2019-05-23T14:15
+  </div>
+   
+  <div>
+    full period, same time: mock-intl-dateTimeFormat-2019-05-23T11:59
+  </div>
+</div>
+`;
+
+exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
+<div>
+  <div>
+    undefined period: 
+  </div>
+   
+  <div>
+    empty period: 
+  </div>
+   
+  <div>
+    from only: mock-intl-dateTimeFormat-2019-05-26T11:00
+  </div>
+   
+  <div>
+    to only: mock-intl-dateTimeFormat-2019-05-26T11:59
+  </div>
+   
+  <div>
+    full period: mock-intl-dateTimeFormat-2019-05-26T11:59 à mock-intl-dateTimeFormat-2019-05-26T14:15
+  </div>
+   
+  <div>
+    full period, same time: mock-intl-dateTimeFormat-2019-05-26T11:59
+  </div>
+</div>
+`;
+
+exports[`Storyshots filters|f-m-time Simple (from Dates) 1`] = `
+<div>
+  <div>
+    at the top of the hour (AM): mock-intl-dateTimeFormat-2019-05-23T11:00
+  </div>
+   
+  <div>
+    hour with minutes (AM): mock-intl-dateTimeFormat-2019-05-23T11:59
+  </div>
+   
+  <div>
+    at the top of the hour (PM): mock-intl-dateTimeFormat-2019-05-23T14:00
+  </div>
+   
+  <div>
+    hour with minutes (PM): mock-intl-dateTimeFormat-2019-05-23T14:59
+  </div>
+   
+  <div>
+    at the top of the hour (Midnight): mock-intl-dateTimeFormat-2019-05-23T00:00
+  </div>
+   
+  <div>
+    hour with minutes (Midnight): mock-intl-dateTimeFormat-2019-05-23T00:59
+  </div>
+</div>
+`;
+
+exports[`Storyshots filters|f-m-time Simple (from strings) 1`] = `
+<div>
+  <div>
+    at the top of the hour (AM): mock-intl-dateTimeFormat-2019-05-26T11:00
+  </div>
+   
+  <div>
+    hour with minutes (AM): mock-intl-dateTimeFormat-2019-05-26T11:59
+  </div>
+   
+  <div>
+    at the top of the hour (PM): mock-intl-dateTimeFormat-2019-05-26T14:00
+  </div>
+   
+  <div>
+    hour with minutes (PM): mock-intl-dateTimeFormat-2019-05-26T14:59
+  </div>
+   
+  <div>
+    at the top of the hour (Midnight): mock-intl-dateTimeFormat-2019-05-26T00:00
+  </div>
+   
+  <div>
+    hour with minutes (Midnight): mock-intl-dateTimeFormat-2019-05-26T00:59
+  </div>
+</div>
+`;
