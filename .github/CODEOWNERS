@@ -1,7 +1,10 @@
-* @chuckmah @fredduguay
+* @chuckmah
 /package.json @chuckmah
 /package-lock.json @chuckmah
 
 # m-form
 /src/components/form/ @guignol1981
 /utils/form/ @guignol1981
+
+# documentations
+doc/ @jipigi
