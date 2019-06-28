@@ -39,19 +39,19 @@ exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
   </div>
    
   <div>
-    from only: mock-intl-dateTimeFormat-2019-05-26T11:00
+    from only: mock-intl-dateTimeFormat-2019-05-28T11:00
   </div>
    
   <div>
-    to only: mock-intl-dateTimeFormat-2019-05-26T11:59
+    to only: mock-intl-dateTimeFormat-2019-05-28T11:59
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-2019-05-26T11:59 à mock-intl-dateTimeFormat-2019-05-26T14:15
+    full period: mock-intl-dateTimeFormat-2019-05-28T11:59 à mock-intl-dateTimeFormat-2019-05-28T14:15
   </div>
    
   <div>
-    full period, same time: mock-intl-dateTimeFormat-2019-05-26T11:59
+    full period, same time: mock-intl-dateTimeFormat-2019-05-28T11:59
   </div>
 </div>
 `;
@@ -87,27 +87,27 @@ exports[`Storyshots filters|f-m-time Simple (from Dates) 1`] = `
 exports[`Storyshots filters|f-m-time Simple (from strings) 1`] = `
 <div>
   <div>
-    at the top of the hour (AM): mock-intl-dateTimeFormat-2019-05-26T11:00
+    at the top of the hour (AM): mock-intl-dateTimeFormat-2019-05-28T11:00
   </div>
    
   <div>
-    hour with minutes (AM): mock-intl-dateTimeFormat-2019-05-26T11:59
+    hour with minutes (AM): mock-intl-dateTimeFormat-2019-05-28T11:59
   </div>
    
   <div>
-    at the top of the hour (PM): mock-intl-dateTimeFormat-2019-05-26T14:00
+    at the top of the hour (PM): mock-intl-dateTimeFormat-2019-05-28T14:00
   </div>
    
   <div>
-    hour with minutes (PM): mock-intl-dateTimeFormat-2019-05-26T14:59
+    hour with minutes (PM): mock-intl-dateTimeFormat-2019-05-28T14:59
   </div>
    
   <div>
-    at the top of the hour (Midnight): mock-intl-dateTimeFormat-2019-05-26T00:00
+    at the top of the hour (Midnight): mock-intl-dateTimeFormat-2019-05-28T00:00
   </div>
    
   <div>
-    hour with minutes (Midnight): mock-intl-dateTimeFormat-2019-05-26T00:59
+    hour with minutes (Midnight): mock-intl-dateTimeFormat-2019-05-28T00:59
   </div>
 </div>
 `;

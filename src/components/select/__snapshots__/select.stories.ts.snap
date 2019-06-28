@@ -9,63 +9,52 @@ exports[`Storyshots components|m-select default 1`] = `
   >
     <div
       class="m-input-style m--has-cursor-pointer m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
-            <div>
-              avocados
-            </div>
-              
-            <!---->
-             
-            <!---->
-          </div>
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
-            class="m-input-style__right-content"
+            class="m-input-style__input"
           >
             <div
-              class="m-select__arrow"
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
             >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-select__arrow__icon"
-                height="16px"
-                width="16px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
+              <div>
+                avocados
+              </div>
+                
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
             </div>
           </div>
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
