@@ -3,7 +3,6 @@
 import FroalaEditor from 'froala-editor';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/js/languages/fr.js';
 import 'froala-editor/js/plugins.pkgd.min.js';
 import $ from 'jquery';
 import Component from 'vue-class-component';
@@ -23,7 +22,10 @@ import { ScrollToDuration } from '../../../utils/scroll-to/scroll-to';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
+require('froala-editor/js/languages/fr.js');
 
+
+// Bug watch The button "Special Characters" isn't work in mobile  https://github.com/froala/angular-froala-wysiwyg/issues/317
 
 enum froalaEvents {
     Blur = 'blur',
@@ -214,7 +216,7 @@ const ENTER_KEYCODE: number = 13;
             if (this.selectedImage) {
                 this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage)); // We need jquery for that function
             } else {
-                this.froalaEditor.image.insert(file.url, false, { id });
+                this.froalaEditor.image.insert(file.url, false, { id, batata: 'batata' });
             }
         });
     }
@@ -235,9 +237,9 @@ const ENTER_KEYCODE: number = 13;
     }
 
     protected mouseupListener(event: MouseEvent): void {
-        this.mousedownTriggered = false;
         if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused
             && !this.isFileUploadOpen && !document.body.querySelector('.fr-image-resizer.fr-active')) {
+            this.mousedownTriggered = false;
             this.closeEditor();
         }
     }
@@ -329,14 +331,16 @@ const ENTER_KEYCODE: number = 13;
                 [froalaEvents.CommandBefore]: (cmd: any, param1: any, param2: any) => {
                     if (cmd === 'fullscreen') {
                         let fullscreenWasActivated: boolean = !this.froalaEditor.fullscreen.isActive();
-                        if (!this.froalaEditor.fullscreen.isActive()) {
+                        if (fullscreenWasActivated) {
                             this.froalaEditor.toolbar.hide();
-                            // Hot fix for bug
                             setTimeout(() => {
-                                this.froalaEditor.toolbar.show();
+                                this.froalaEditor.toolbar.show(); // Hot fix for bug
                             }, 50);
                         } else {
-                            this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant);
+                            this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant); // Hot fix for bug
+                            setTimeout(() => {
+                                this.froalaEditor.events.focus(); // Hot fix for bug
+                            }, 50);
                         }
                         this.onFullscreen(fullscreenWasActivated);
                     }
@@ -346,6 +350,9 @@ const ENTER_KEYCODE: number = 13;
                     if (cmd === 'fullscreen') {
                         if (this.froalaEditor.fullscreen.isActive()) {
                             this.froalaEditor.toolbar.show();
+                        } else {
+                            this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant);
+                            this.froalaEditor.events.focus();
                         }
                     }
                 },

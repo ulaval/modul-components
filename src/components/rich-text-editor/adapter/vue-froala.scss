@@ -298,9 +298,9 @@
             }
         }
 
-        // .second-toolbar {
-        //     display: none; // hide second toolbar in Froala (V3)
-        // }
+        .second-toolbar {
+            border: 0; // hide second toolbar in Froala (V3)
+        }
 
         .fr-command.fr-btn {
             width: 38px;
