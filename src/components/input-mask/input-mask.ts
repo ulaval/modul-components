@@ -9,14 +9,17 @@ import WithRender from './input-mask.html';
 export interface InternalCleaveOptions {
     numeral?: boolean;
     numeralDecimalScale?: number;
-    numeralThousandsGroupStyle: 'lakh' | 'thousand' | 'wan' | 'none';
-    numeralIntegerScale: number;
-    numeralDecimalMark: string;
-    numeralPositiveOnly: boolean;
-    stripLeadingZeroes: boolean;
-    delimiter: string;
+    numeralThousandsGroupStyle?: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralIntegerScale?: number;
+    numeralDecimalMark?: string;
+    numeralPositiveOnly?: boolean;
+    stripLeadingZeroes?: boolean;
+    delimiter?: string;
     removeTrailingDecimalMark?: boolean;
     forceDecimalScale?: boolean;
+    phone?: boolean;
+    phoneRegionCode?: string;
+    prefix?: string;
 }
 
 export interface InputMaskOptions extends InternalCleaveOptions {
@@ -82,6 +85,11 @@ export class MInputMask extends ModulVue {
         await this.$nextTick();
         this.$refs.input.focus();
         this.$refs.input.setSelectionRange(0, this.$refs.input.value.length);
+    }
+
+    public async focus(): Promise<any> {
+        await this.$nextTick();
+        this.$refs.input.focus();
     }
 
     @Watch('options', { deep: true })

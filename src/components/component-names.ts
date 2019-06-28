@@ -63,6 +63,7 @@ export const PAGE_NOT_FOUND_NAME: string = 'm-page-not-found';
 export const PANEL_NAME: string = 'm-panel';
 export const PAGINATION_NAME: string = 'm-pagination';
 export const PERIODPICKER_NAME: string = 'm-periodpicker';
+export const PHONEFIELD_NAME: string = 'm-phonefield';
 export const PHONE_NUMBER_NAME: string = 'm-phone-number';
 export const PLUS_NAME: string = 'm-plus';
 export const POPPER_NAME: string = 'm-popper';
@@ -104,4 +105,5 @@ export const TREE_ICON_NAME: string = 'm-tree-icon';
 export const TREE_NAME_NODE: string = 'm-tree-node';
 export const VALIDATION_MESSAGE_NAME: string = 'm-validation-message';
 export const INTEGERFIELD_NAME: string = 'm-integerfield';
+export const SELECT_NAME: string = 'm-select';
 
