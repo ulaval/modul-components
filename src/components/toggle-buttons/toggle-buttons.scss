@@ -4,19 +4,28 @@
 .m-toggle-buttons {
     display: inline-block;
 
-    .m-button {
-        border-radius: 0;
+    &.m--is-default {
+        .m-button {
+            border-radius: 0;
 
-        &:not(:nth-last-child(1)) {
-            border-right: none;
+            &:not(:nth-last-child(1)) {
+                border-right: none;
+            }
+
+            &:nth-child(1) {
+                border-radius: $m-button--border-radius 0 0 $m-button--border-radius;
+            }
+
+            &:nth-last-child(1) {
+                border-radius: 0 $m-button--border-radius $m-button--border-radius 0;
+            }
         }
+    }
 
-        &:nth-child(1) {
-            border-radius: $m-button--border-radius 0 0 $m-button--border-radius;
-        }
-
-        &:nth-last-child(1) {
-            border-radius: 0 $m-button--border-radius $m-button--border-radius 0;
+    &.m--is-rounded {
+        .m-button {
+            border-radius: 25px; // magic number
+            margin: 0 $m-spacing--xs $m-spacing--s 0;
         }
     }
 }

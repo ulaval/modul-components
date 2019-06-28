@@ -1,7 +1,6 @@
 import { createLocalVue, mount, Wrapper } from '@vue/test-utils';
 import Vue, { VueConstructor } from 'vue';
 import { resetModulPlugins } from '../../../tests/helpers/component';
-import { renderComponent } from '../../../tests/helpers/render';
 import ButtonPlugin from '../../components/button/button';
 import ModulPlugin from '../../utils/modul/modul';
 import ToggleButtonsPlugin, { MToggleButton, MToggleButtons } from './toggle-buttons';
@@ -56,10 +55,6 @@ describe('MToggleButtons', () => {
             expect(wrapper.vm.$refs.toggle).toBeTruthy();
             expect(wrapper.findAll('.m-toggle-buttons__button').length).toEqual(0);
         });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-        });
     });
 
     describe(`Given 5 buttons and multiple selection allow`, () => {
@@ -77,10 +72,6 @@ describe('MToggleButtons', () => {
 
         it(`Then no button should be pressed`, () => {
             expect(wrapper.findAll('.CLASS_BTN_PRIMARY').length).toEqual(0);
-        });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         describe(`When the first button is clicked`, () => {
@@ -118,10 +109,6 @@ describe('MToggleButtons', () => {
 
         it(`Then no button should be pressed`, () => {
             expect(wrapper.findAll('.CLASS_BTN_PRIMARY').length).toEqual(0);
-        });
-
-        it(`Then should render correctly`, () => {
-            expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
         });
 
         describe(`When the first button is clicked`, () => {
