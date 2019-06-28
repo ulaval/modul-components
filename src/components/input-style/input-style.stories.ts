@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, number, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -10,14 +9,12 @@ Vue.use(InputStylePlugin);
 Vue.use(RichTextEditorPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         props: {
             defaultSlot: {
@@ -157,7 +154,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
                 default: boolean('Waiting', true)
             }
         },
-        template: '<m-input-style label="Label" :waiting="waiting" :empty="false">Waiting ({{waiting}})</m-input-style>'
+        template: '<m-input-style label="Label tres long et bla bla bla" :waiting="waiting" :empty="false">Waiting ({{waiting}})</m-input-style>'
     }))
     .add('error', () => ({
         props: {

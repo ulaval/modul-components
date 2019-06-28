@@ -8,8 +8,13 @@ import { FormGroup } from '../../form-group';
 import { ControlValidator, ControlValidatorOptions } from '../control-validator';
 import { ValidatorKeys } from '../validator-error-keys';
 
-
-export const DateBetweenValidator: Function = (controlLabel: string, start: string, end: string, options: ControlValidatorOptions): ControlValidator => {
+/**
+ *
+ * @param start Start of the period during witch the date must be to be valid. Inclusive.
+ * @param end End of the period during witch the date must be to be valid. Inclusive.
+ * @param options options required to personnalise the validator, like the timing of the validation or the error messages to display.
+ */
+export const DateBetweenValidator: (start: string, end: string, options?: ControlValidatorOptions) => ControlValidator = (start: string, end: string, options?: ControlValidatorOptions): ControlValidator => {
 
     const startFormatted: string = dateFilter(new ModulDate(start).toDate());
     const endFormatted: string = dateFilter(new ModulDate(end).toDate());
@@ -34,21 +39,24 @@ export const DateBetweenValidator: Function = (controlLabel: string, start: stri
                 message: (ModulVue.prototype.$i18n).translate(
                     'm-form:dateBetweenValidatorErrorMessage',
                     {
-                        controlLabel,
                         start: startFormatted,
                         end: endFormatted
                     },
                     undefined, undefined, undefined, FormatMode.Sprintf
                 ),
-                groupMessage: (ModulVue.prototype.$i18n).translate(
-                    'm-form:dateBetweenValidatorErrorSummaryMessage',
-                    {
-                        controlLabel,
-                        start: startFormatted,
-                        end: endFormatted
-                    },
-                    undefined, undefined, undefined, FormatMode.Sprintf
-                )
+                groupMessage: options && options.controlLabel ?
+                    (ModulVue.prototype.$i18n).translate(
+                        'm-form:dateBetweenValidatorErrorSummaryMessage',
+                        {
+                            controlLabel: options.controlLabel,
+                            start: startFormatted,
+                            end: endFormatted
+                        },
+                        undefined,
+                        undefined,
+                        undefined,
+                        FormatMode.Sprintf)
+                    : undefined
             },
         validationType: options && options.validationType ?
             options.validationType : ControlValidatorValidationType.Correction

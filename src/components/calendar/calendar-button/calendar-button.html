@@ -1,0 +1,14 @@
+<button class="m-calendar-button"
+        :class="{ 'm--is-selected': selected,
+                  'm--is-disabled': disabled,
+                  'm--is-today': today }"
+        :disabled="disabled"
+        :aria-selected="selected"
+        @click="onClick"
+        @keyup="onKeyup"
+        @mouseenter="onMouseenter"
+        @mouseleave="onMouseleave">
+    <span>
+        <slot></slot>
+    </span>
+</button>

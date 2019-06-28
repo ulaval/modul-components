@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { select, text, object, withKnobs } from '@storybook/addon-knobs';
+import { object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,9 +7,7 @@ import IconPlugin from './icon';
 
 Vue.use(IconPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 const ICONLIST_SHORTHAND: {} = {
     'profile': 'profile',
@@ -35,8 +32,8 @@ const ICONLIST_LONGHAND: {} = {
 };
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('name (short)', () => ({
         props: {
             name: {
@@ -94,8 +91,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_NAME}/badge`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('state', () => ({
         props: {
             badge: {

@@ -240,7 +240,10 @@ export class Modul {
                 this.backdropElement.style.opacity = BACKDROP_STYLE_OPACITY_NOT_VISIBLE;
                 let b: HTMLElement = this.backdropElement;
                 this.backdropElement = undefined;
-                this.scrollActive = true;
+
+                if (!lastScrollId) {
+                    this.scrollActive = true;
+                }
 
                 setTimeout(() => {
                     if (b && b.parentNode) {

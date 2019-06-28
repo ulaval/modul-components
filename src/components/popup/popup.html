@@ -3,7 +3,7 @@
     <m-popper :open.sync="propOpen"
               @open="onOpen"
               @close="onClose"
-              @portal-content-visible="onPortalContentVisible"
+              @portal-after-open="onPortalAfterOpen"
               :disabled="disabled"
               :id="id"
               ref="popper"
@@ -30,7 +30,7 @@
               :background="background"
               :lazy="lazy"
               v-if="!isMqMaxS"
-              @portal-content-mounted="onPortalContentMounted">
+              @portal-mounted="onPortalMounted">
         <div slot="trigger"
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>
@@ -44,7 +44,7 @@
     <m-sidebar :open.sync="propOpen"
                @open="onOpen()"
                @close="onClose()"
-               @portal-content-visible="onPortalContentVisible"
+               @portal-after-open="onPortalAfterOpen"
                :close-on-backdrop="closeOnBackdrop"
                :disabled="disabled"
                :focus-management="focusManagement"
@@ -59,7 +59,7 @@
                :preload="preload"
                v-if="isMqMaxS"
                :lazy="lazy"
-               @portal-content-mounted="onPortalContentMounted">
+               @portal-mounted="onPortalMounted">
         <div slot="trigger"
              v-if="hasTriggerSlot">
             <slot name="trigger"></slot>

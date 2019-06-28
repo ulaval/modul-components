@@ -2,37 +2,50 @@ import { FormControl } from '../../form-control';
 import { RequiredValidator } from './required';
 
 describe('Required validator', () => {
-    let formControl: FormControl<any> = new FormControl<any>(
-        [RequiredValidator('test')]
-    );
+    let formControl: FormControl<any>;
 
-    test('it should return false if value is undefined', () => {
-        expect(formControl.value).toBe(undefined);
+    beforeEach(() => {
+        formControl = new FormControl<any>(
+            [RequiredValidator()]
+        );
+    });
+
+    it('if value is undefined, it should be invalid', () => {
+
         formControl.validate();
+
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return false if value is empty array', () => {
+    it('if value is empty array, it should be invalid', () => {
         formControl.value = [];
+
         formControl.validate();
+
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return false is value is empty string', () => {
+    it('is value is empty string, it should be invalid', () => {
         formControl.value = '';
+
         formControl.validate();
+
         expect(formControl.valid).toBe(false);
     });
 
-    test('it should return true if value is 0', () => {
+    it('if value is 0, it should be valid', () => {
         formControl.value = 0;
+
         formControl.validate();
+
         expect(formControl.valid).toBe(true);
     });
 
-    test('it should return true if value is set', () => {
+    it('if value is set, it should be valid', () => {
         formControl.value = 'test';
+
         formControl.validate();
+
         expect(formControl.valid).toBe(true);
     });
 });

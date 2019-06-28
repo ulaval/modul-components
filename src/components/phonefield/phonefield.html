@@ -1,0 +1,92 @@
+<div class="m-phonefield"
+     :class="[{ 'm--is-disabled': isDisabled,
+                'm--is-waiting': isWaiting,
+                'm--is-readonly': isReadonly,
+                'm--has-error': hasPhonefieldError,
+                'm--is-valid': isPhonefieldValid,
+                'm--is-country-focus': internalFocus,
+                'm--has-validation-message': hasValidationMessage } ]">
+    <div class="m-phonefield__wrapper">
+
+        <m-select class="m-phonefield__country"
+                  :value="countryModel"
+                  :options="isoCountries"
+                  :disabled="isDisabled || isWaiting"
+                  :readonly="isReadonly"
+                  :error="hasPhonefieldError"
+                  :valid="isPhonefieldValid"
+                  :label-up="true"
+                  :label="i18nCountryLabel"
+                  width="auto"
+                  @input="onContryChanged($event)"
+                  @focus="onSelectFocus"
+                  @blur="onSelectBlur">
+            <div class="m-phonefield__flag-wrapper">
+                <svg class="m-phonefield__flag"
+                     width="27px"
+                     height="20px">
+                    <use :xlink:href="spriteId(countryModel)"
+                         aria-hidden="true"></use>
+                </svg>
+            </div>
+
+            <template slot="option"
+                      slot-scope="{option, index}">
+                <div class="m-phonefield__item-wrapper">
+                    <div class="m-phonefield__item-flag-wrapper">
+                        <svg width="27px"
+                             height="20px">
+                            <use :xlink:href="spriteId(option)"
+                                 aria-hidden="true"></use>
+                        </svg>
+                    </div>
+                    <span class="m-phonefield__item-name">{{ countries[index].name }}</span>
+                    <span class="m-phonefield__item-dialCode">+{{ countries[index].dialCode }}</span>
+                </div>
+            </template>
+
+        </m-select>
+        <div>
+            <m-input-style class="m-phonefield__number"
+                           :disabled="isDisabled"
+                           :waiting="isWaiting"
+                           :error="hasPhonefieldError"
+                           :valid="isPhonefieldValid"
+                           :label="propLabel"
+                           :label-for="id"
+                           :focus="isFocus"
+                           :label-up="true"
+                           :empty="isEmpty"
+                           :readonly="isReadonly"
+                           :required-marker="requiredMarker"
+                           :tag-style="tagStyle">
+                <m-input-mask ref="inputMask"
+                              :value="internalValue"
+                              @input="inputChanged($event)"
+                              :id="id"
+                              :disabled="isDisabled || isWaiting"
+                              :placeholder="placeholder"
+                              :readonly="isReadonly"
+                              :options="inputMaskOptions"
+                              @focus="onFocus"
+                              @blur="onBlur"
+                              @keyup="onKeyup"
+                              @change="onChange"></m-input-mask>
+            </m-input-style>
+            <p class="m-phonefield__example"
+               x-ms-format-detection="none">{{ i18nExample }}{{ example }}</p>
+
+        </div>
+    </div>
+    <div class="m-phonefield__validation">
+        <m-validation-message class="m-phonefield__validation-message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasPhonefieldError"
+                              :error-message="errorMessage"
+                              :valid="isPhonefieldValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
+
+</div>

@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,14 +6,11 @@ import TimepickerPlugin from './timepicker';
 Vue.use(TimepickerPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         data(): any {
             return {
@@ -30,7 +25,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TIMEPICKER_NAME}`, module)
                 model: undefined
             };
         },
-        template: `<m-timepicker v-model="model" label="Activity start time"></m-timepicker>`
+        template: `<m-timepicker v-model="model" label="Activity start time" max-width="regular"></m-timepicker>`
     }))
     .add('min 8:45 / max 15:15', () => ({
         template: '<m-timepicker v-model="model" :min="min" :max="max"></m-timepicker>',

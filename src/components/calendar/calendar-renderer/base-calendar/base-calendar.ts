@@ -1,6 +1,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import uuid from '../../../../utils/uuid/uuid';
 import { MLinkMode } from '../../../link/link';
+import { MCalendarButton } from '../../calendar-button/calendar-button';
 import { RangeDate } from '../../calendar-state/state/abstract-calendar-state';
 import { CalendarType, DayState, MonthState, YearState } from '../../calendar-state/state/calendar-state';
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
@@ -44,7 +45,11 @@ export enum PickerMode {
 }
 
 @WithRender
-@Component
+@Component({
+    components: {
+        MCalendarButton
+    }
+})
 export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     @Prop({ default: PickerMode.DAY })
@@ -139,9 +144,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onDaySelect(day: DayState): void {
         super.onDaySelect(day);
-
-        // TODO when there will be a directive to manage focus, replace this behaviour with it
-        this.$nextTick(() => (this.$refs[this.buildRef('day', day)][0] as HTMLButtonElement).focus());
     }
 
     onDayMouseEnter(day: DayState): void {

@@ -1,3 +1,14 @@
+/**
+ * Obtains the string value from different source types.
+ * @param text The value from witch the string must be extracted.
+ */
+export function getString(text?: string | (() => string)): string {
+    if (!text) {
+        return '';
+    }
+    return typeof text === 'string' ? text : text();
+}
+
 export function startsWith(text: string | undefined, startsWith: string | undefined): boolean {
     let undef: string | undefined = undefined;
     return (text === undef && startsWith === undef) // both undef
@@ -468,3 +479,4 @@ export function normalizeString(str: string): string {
 export const NBSP: string = '\xa0';
 
 export { sprintf, vsprintf } from 'sprintf-js';
+

@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-
 import TextareaAutoHeightPlugin from '../../directives/textarea-auto-height/textarea-auto-height';
 import { ElementQueries } from '../../mixins/element-queries/element-queries';
 import { InputLabel } from '../../mixins/input-label/input-label';
@@ -10,11 +9,12 @@ import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
+import CharacterCountPlugin from '../character-count/character-count';
 import { TEXTAREA_NAME } from '../component-names';
 import InputStyle from '../input-style/input-style';
 import ValidationMesagePlugin from '../validation-message/validation-message';
 import WithRender from './textarea.html?style=./textarea.scss';
-import CharacterCountPlugin from '../character-count/character-count';
+
 
 @WithRender
 @Component({
@@ -54,10 +54,6 @@ export class MTextarea extends ModulVue implements InputManagementData {
 
     private get isTextareaValid(): boolean {
         return this.as<InputState>().isValid;
-    }
-
-    private get hasCounterTransition(): boolean {
-        return !this.as<InputState>().hasErrorMessage;
     }
 }
 

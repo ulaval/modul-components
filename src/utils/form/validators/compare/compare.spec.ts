@@ -5,7 +5,7 @@ import { CompareValidator } from './compare';
 describe('compare validator', () => {
     let formGroup: FormGroup;
 
-    beforeAll(() => {
+    beforeEach(() => {
         formGroup = new FormGroup(
             {
                 'test1': new FormControl<string>([]),
@@ -16,35 +16,33 @@ describe('compare validator', () => {
         );
     });
 
-    test('it should return true if all controls are undefined', async (done) => {
+    it('it should return true if all controls are undefined', () => {
         expect((formGroup.getControl('test1') as FormControl<string>).value).toBe(undefined);
         expect((formGroup.getControl('test2') as FormControl<string>).value).toBe(undefined);
         expect((formGroup.getControl('test3') as FormControl<string>).value).toBe(undefined);
 
-        await formGroup.validate();
+        formGroup.validate();
 
         expect(formGroup.valid).toBe(true);
-        done();
+
     });
 
-
-    test('it should return false if one value is different', async (done) => {
+    it('it should return false if one value is different', () => {
         (formGroup.getControl('test1') as FormControl<string>).value = 'test';
 
-        await formGroup.validate();
+        formGroup.validate();
 
         expect(formGroup.valid).toBe(false);
-        done();
+
     });
 
-    test('it should return true if all values are the same', async (done) => {
+    it('it should return true if all values are the same', () => {
         (formGroup.getControl('test1') as FormControl<string>).value = 'test';
         (formGroup.getControl('test2') as FormControl<string>).value = 'test';
         (formGroup.getControl('test3') as FormControl<string>).value = 'test';
 
-        await formGroup.validate();
+        formGroup.validate();
 
         expect(formGroup.valid).toBe(true);
-        done();
     });
 });

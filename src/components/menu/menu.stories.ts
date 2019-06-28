@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { select, text, withKnobs } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -35,14 +34,12 @@ const DEFAULT_MENU_ITEMS: string = `<m-menu-item value="item1" label="Item 1" ic
                                       <m-menu-item value="subitem5" label="Subitem 5"></m-menu-item>
                                   </m-menu-item>`;
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('default', () => ({
         data: () => ({
             menuIsOpened: false
@@ -119,8 +116,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}`, module)
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${MENU_NAME}/menuItem`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .addDecorator(storyRouterDecorator())
     .add('label', () => ({
         data: () => ({

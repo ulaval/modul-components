@@ -1,13 +1,14 @@
 @import 'commons';
 
 $m-input-style-base-height: $m-line-height + em;
+$m-input-style-border-radius: 3px;
 
 @mixin input-style-cursor($cursor: default) {
     &,
     .m-input-style__label,
-    .m-input-style__body,
-    .m-input-style__body input,
-    .m-input-style__body textarea {
+    .m-input-style__input,
+    .m-input-style__input input,
+    .m-input-style__input textarea {
         cursor: $cursor;
 
         @content;
@@ -15,22 +16,33 @@ $m-input-style-base-height: $m-line-height + em;
 }
 
 .m-input-style {
+    @include input-style-cursor(text);
+
     position: relative;
     display: inline-flex;
     outline: none;
 
-    &__content {
+    &__main {
+        border: 1px solid $m-color--grey-light;
+        border-radius: $m-input-style-border-radius;
+        transition: border-color $m-transition-duration--l ease-in-out, margin-top $m-transition-duration ease;
+        display: inline-flex;
+        width: 100%;
+    }
+
+    &__body {
         position: relative;
         display: inline-flex;
         flex-direction: column;
         width: 100%;
-        border: 1px solid $m-color--grey-light;
-        border-radius: 3px;
         padding: $m-input-style--padding;
         transition: border-color $m-transition-duration--l ease-in-out, margin-top $m-transition-duration ease;
     }
 
-    @include input-style-cursor(text);
+    &__append {
+        display: flex;
+        justify-content: flex-end;
+    }
 
     &:hover:not(.m--is-disabled):not(.m--is-waiting):not(.m--has-error):not(.m--is-valid):not(.m--is-focus):not(.m--is-readonly) {
         .m-input-style__label {
@@ -39,14 +51,19 @@ $m-input-style-base-height: $m-line-height + em;
     }
 
     &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
-        .m-input-style__content {
+        .m-input-style__main {
             border-color: $m-input-style--color-focus;
         }
 
-        .m-input-style__label,
-        .m-icon-button.m-icon-button,
-        .m-icon.m-icon {
+        .m-input-style__label {
             color: $m-input-style--color-focus;
+        }
+
+        .m-input-style__input {
+            .m-icon-button.m-icon-button,
+            .m-icon.m-icon {
+                color: $m-input-style--color-focus;
+            }
         }
     }
 
@@ -55,7 +72,7 @@ $m-input-style-base-height: $m-line-height + em;
     }
 
     &.m--has-label:not(.m--is-label-up) {
-        .m-input-style__left-content {
+        .m-input-style__content {
             opacity: 0;
         }
     }
@@ -68,7 +85,7 @@ $m-input-style-base-height: $m-line-height + em;
         .m-input-style__text {
             background: $m-color--white;
             left: -$m-spacing--xs; // Magic number: align label with text zone
-            padding: 0 $m-spacing--xs;
+            padding-left: $m-spacing--xs;
 
             .m-inplace-edit & {
                 background: $m-color--information;
@@ -77,33 +94,44 @@ $m-input-style-base-height: $m-line-height + em;
     }
 
     &.m--has-error {
-        .m-input-style__content {
+        .m-input-style__main {
             border-color: $m-input-style--color-error;
         }
 
-        .m-input-style__label,
-        .m-icon-button.m-icon-button,
-        .m-icon.m-icon {
+        .m-input-style__label {
             color: $m-input-style--color-error;
+        }
+
+        .m-input-style__input {
+            .m-icon-button.m-icon-button,
+            .m-icon.m-icon {
+                color: $m-input-style--color-error;
+            }
         }
     }
 
     &.m--is-valid {
-        .m-input-style__content {
+        .m-input-style__main {
             border-color: $m-input-style--color-valid;
         }
 
-        .m-input-style__label,
-        .m-icon-button.m-icon-button,
-        .m-icon.m-icon {
+        .m-input-style__label {
             color: $m-input-style--color-valid;
+        }
+
+        .m-input-style__input {
+            .m-input-style__label,
+            .m-icon-button.m-icon-button,
+            .m-icon.m-icon {
+                color: $m-input-style--color-valid;
+            }
         }
     }
 
     &.m--is-disabled,
     &.m--is-waiting,
     &.m--is-readonly {
-        .m-input-style__content {
+        .m-input-style__main {
             border-style: dashed;
         }
 
@@ -116,7 +144,7 @@ $m-input-style-base-height: $m-line-height + em;
     &.m--is-disabled,
     &.m--is-waiting {
         .m-input-style__label,
-        .m-input-style__body,
+        .m-input-style__input,
         .m-icon-button.m-icon-button,
         .m-icon.m-icon,
         input,
@@ -149,7 +177,7 @@ $m-input-style-base-height: $m-line-height + em;
             transition-timing-function: ease;
         }
 
-        .m-input-style__left-content {
+        .m-input-style__content {
             transition: opacity 0.3s ease;
         }
     }
@@ -184,7 +212,7 @@ $m-input-style-base-height: $m-line-height + em;
         vertical-align: baseline;
     }
 
-    &__body {
+    &__input {
         display: flex;
         position: relative;
         align-items: center;
@@ -214,26 +242,15 @@ $m-input-style-base-height: $m-line-height + em;
         }
     }
 
-    &__left-content {
+    &__content {
         position: relative;
         flex: 1 1 auto;
         max-width: 100%;
     }
 
-    &__right-content {
-        display: flex;
-
-        .m-moneyfield & {
-            color: $m-color--grey;
-            margin-left: $m-margin--xs;
-        }
-    }
-
-    &__prefix {
-        .m-moneyfield & {
-            color: $m-color--grey;
-            margin-right: $m-margin--xs;
-        }
+    &__suffix {
+        display: inline-flex;
+        align-items: center;
     }
 
     &__transparent-text {
@@ -256,14 +273,9 @@ $m-input-style-base-height: $m-line-height + em;
 
     ::placeholder {
         color: $m-color--disabled;
-
-        .m--is-type-search & {
-            color: $m-color--text-light;
-            font-weight: $m-font-weight--light;
-        }
     }
 
-    &__body,
+    &__input,
     input,
     textarea {
         outline: none;
@@ -287,13 +299,6 @@ $m-input-style-base-height: $m-line-height + em;
 
         &::-ms-clear,
         &::-ms-reveal {
-            display: none;
-        }
-
-        &[type='search']::-webkit-search-decoration,
-        &[type='search']::-webkit-search-cancel-button,
-        &[type='search']::-webkit-search-results-button,
-        &[type='search']::-webkit-search-results-decoration {
             display: none;
         }
 
@@ -358,27 +363,4 @@ $m-input-style-base-height: $m-line-height + em;
             @include m-h6-font-style();
         }
     }
-
-    .m--is-type-search & {
-        background-color: $m-color--grey-lightest;
-        border-color: $m-color--grey-lightest;
-
-        .m-icon-button {
-            color: $m-color--ul-blue;
-        }
-
-        &.m--is-focus:not(.m--has-error):not(.m--is-valid) {
-            background-color: $m-color--white;
-            border-color: $m-color--grey-light;
-        }
-    }
-}
-
-// reserve space for icon
-.m-datepicker .m-input-style__label,
-.m-timepicker .m-input-style__label,
-.m-moneyfield .m-input-style__label,
-.m--is-type-search .m-input-style__label,
-.m--is-type-search .m-input-style__adjust-width-auto {
-    margin-right: $m-input-style--icon-button-size + $m-input-style--padding;
 }
