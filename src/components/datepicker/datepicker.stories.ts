@@ -15,13 +15,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('events', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            model: '2011-01-01',
+            skipInputValidation: true
         }),
         methods: {
             onInputChange(value: string): string {
                 // tslint:disable-next-line: no-console
                 console.log('MDatePicker.onInputChange=' + value);
                 return value;
+            },
+            onResetModel(): void {
+                this.$data.model = '';
             },
             onFocus(value: Event): void {
                 // tslint:disable-next-line: no-console
@@ -34,7 +38,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
             }
         },
-        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><p class="m-u--no-margin">Model value = "{{model}}"<br>skipInputValidation = "{{skipInputValidation}}"</p><m-datepicker class="m-u--margin-top" :value="model" @change="model = onInputChange($event)" @focus="onFocus" @blur="onBlur" min="2019-05-10" max="2019-05-24" :skip-input-validation="skipInputValidation"></m-datepicker><p><m-button @click="onResetModel">Reset model</m-button></p><p><m-checkbox v-model="skipInputValidation">skipInputValidation</m-checkbox></p></div>`
     }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
@@ -48,24 +52,51 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         template: `<m-datepicker :waiting="true"></m-datepicker>`
     }))
 
-    .add('min="2008-01-01" && max="2014-12-31"', () => ({
+    .add('min and max', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            value: '2008-02-02',
+            dateMin: '2000-01-10',
+            dateMax: '2008-03-20'
         }),
-        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+        methods: {
+            resetValue(): void {
+                this.$data.value = '';
+            },
+            setValueInRange(): void {
+                this.$data.value = '2008-02-07';
+            },
+            setValueOutOfRange(): void {
+                this.$data.value = '2010-02-07';
+            }
+        },
+        template: `
+        <div>
+            <p><strong>Model value:</strong> {{value}}</p>
+            <p><strong>Date min:</strong> {{dateMin}}</p>
+            <p><strong>Date max:</strong> {{dateMax}}</p>
+            <m-datepicker v-model="value" class="m-u--margin-top" :min="dateMin" :max="dateMax"></m-datepicker>
+            <div class="m-u--margin-top">
+                <m-button class="m-u--margin-right" @click="resetValue()">Reset value</m-button>
+                <m-button class="m-u--margin-right" skin="secondary" @click="setValueInRange()">Date in the range</m-button>
+                <m-button class="m-u--margin-right" skin="secondary" @click="setValueOutOfRange()">Date out de range</m-button>
+            </div>
+        </div>`
     }))
+
     .add('date format invalid', () => ({
         data: () => ({
             model1: '2000-19-12'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
+
     .add('date off limit min', () => ({
         data: () => ({
             model1: '2000-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
+
     .add('date off limit  max', () => ({
         data: () => ({
             model1: '2015-01-01'

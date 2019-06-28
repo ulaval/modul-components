@@ -8,54 +8,58 @@ exports[`Storyshots components|m-textfield default 1`] = `
   >
     <div
       class="m-input-style m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
-              style="white-space: nowrap;"
+              class="m-input-style__text"
             />
-          </div>
+          </span>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -85,55 +89,59 @@ exports[`Storyshots components|m-textfield disabled 1`] = `
 >
   <div
     class="m-input-style m--is-disabled m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            disabled="disabled"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              disabled="disabled"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -160,54 +168,58 @@ exports[`Storyshots components|m-textfield error 1`] = `
 >
   <div
     class="m-input-style m--has-error m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="tel"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="tel"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -234,54 +246,58 @@ exports[`Storyshots components|m-textfield error-message 1`] = `
 >
   <div
     class="m-input-style m--has-error m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="tel"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="tel"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -331,59 +347,64 @@ exports[`Storyshots components|m-textfield focus 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            label
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder="placeholder"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              label
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="placeholder"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -410,54 +431,58 @@ exports[`Storyshots components|m-textfield helper-message 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="tel"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="tel"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -488,58 +513,63 @@ exports[`Storyshots components|m-textfield label 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            A Label
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              A Label
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -566,59 +596,64 @@ exports[`Storyshots components|m-textfield label-up 1`] = `
 >
   <div
     class="m-input-style m--is-label-up m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            label
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder="placeholder"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              label
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="placeholder"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -645,55 +680,59 @@ exports[`Storyshots components|m-textfield placeholder 1`] = `
 >
   <div
     class="m-input-style m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder="A placeholder"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="A placeholder"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -720,55 +759,59 @@ exports[`Storyshots components|m-textfield readonly 1`] = `
 >
   <div
     class="m-input-style m--is-readonly m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            readonly="readonly"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              readonly="readonly"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -795,62 +838,67 @@ exports[`Storyshots components|m-textfield required-marker 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            Label
-          </span>
-           
-          <sup
-            class="m-input-style__required-marker"
-          >
-            *
-          </sup>
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              Label
+            </span>
+             
+            <sup
+              class="m-input-style__required-marker"
+            >
+              *
+            </sup>
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -877,54 +925,58 @@ exports[`Storyshots components|m-textfield valid 1`] = `
 >
   <div
     class="m-input-style m--is-valid m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="tel"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="tel"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -951,54 +1003,58 @@ exports[`Storyshots components|m-textfield valid-message 1`] = `
 >
   <div
     class="m-input-style m--is-valid m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="tel"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="tel"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1048,54 +1104,58 @@ exports[`Storyshots components|m-textfield value 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1122,61 +1182,65 @@ exports[`Storyshots components|m-textfield waiting 1`] = `
 >
   <div
     class="m-input-style m--is-waiting m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            disabled="disabled"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
         <div
-          class="m-spinner m-input-style__spinner"
+          class="m-input-style__input"
         >
-          <!---->
+          <div
+            class="m-input-style__prefix"
+          />
            
-          <div />
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              disabled="disabled"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <div
+              class="m-spinner m-input-style__spinner"
+            >
+              <!---->
+               
+              <div />
+            </div>
+          </div>
         </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1198,57 +1262,71 @@ exports[`Storyshots components|m-textfield waiting 1`] = `
 
 exports[`Storyshots components|m-textfield word-wrap 1`] = `
 <div
-  class="m-textfield m--has-word-wrap m--is-type-text"
+  class="m-textfield m--is-waiting m--has-word-wrap m--is-type-text"
   style="width: 100%; max-width: 288px;"
 >
   <div
-    class="m-input-style m--has-value m--is-tag-default"
+    class="m-input-style m--is-waiting m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
          
         <div
-          class="m-input-style__left-content"
+          class="m-input-style__input"
         >
-          <!---->
-           
-          <!---->
-           
-          <textarea
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            rows="1"
+          <div
+            class="m-input-style__prefix"
           />
            
-          <!---->
+          <div
+            class="m-input-style__content"
+          >
+            <!---->
+             
+            <!---->
+             
+            <textarea
+              class="m-textfield__input"
+              disabled="disabled"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              rows="1"
+            />
+             
+            <!---->
+             
+            <!---->
+          </div>
            
-          <!---->
+          <div
+            class="m-input-style__suffix"
+          >
+             
+            <div
+              class="m-spinner m-input-style__spinner"
+            >
+              <!---->
+               
+              <div />
+            </div>
+          </div>
         </div>
-         
-        <div
-          class="m-input-style__right-content"
-        />
-         
-        <!---->
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -1276,59 +1354,64 @@ exports[`Storyshots components|m-textfield/Counter all props 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              Enter a value
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="20"
-              placeholder="change knobs to further test"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                Enter a value
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="20"
+                placeholder="change knobs to further test"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1419,55 +1502,59 @@ exports[`Storyshots components|m-textfield/Counter character-count 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              placeholder="Enter a value"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
-              style="white-space: nowrap;"
+              class="m-input-style__text"
             />
-          </div>
+          </span>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                placeholder="Enter a value"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1538,55 +1625,59 @@ exports[`Storyshots components|m-textfield/Counter character-count-threshold="10
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              placeholder="Enter a value"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
-              style="white-space: nowrap;"
+              class="m-input-style__text"
             />
-          </div>
+          </span>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                placeholder="Enter a value"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1671,55 +1762,59 @@ exports[`Storyshots components|m-textfield/Counter length-overflow="true" 1`] = 
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              placeholder="Enter a value"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
-              style="white-space: nowrap;"
+              class="m-input-style__text"
             />
-          </div>
+          </span>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                placeholder="Enter a value"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1778,55 +1873,59 @@ exports[`Storyshots components|m-textfield/Counter max-length="20" 1`] = `
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="20"
-              placeholder="Enter a value"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
           >
             <span
-              style="white-space: nowrap;"
+              class="m-input-style__text"
             />
-          </div>
+          </span>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <div
+              class="m-input-style__prefix"
+            />
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="20"
+                placeholder="Enter a value"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -1885,53 +1984,60 @@ exports[`Storyshots components|m-textfield/Counter max-length="200" and :word-wr
   >
     <div
       class="m-input-style m--has-value m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <span
-          class="m-input-style__label"
-          style="z-index: -1;"
-        >
-          <span
-            class="m-input-style__text"
-          />
-        </span>
-         
         <div
           class="m-input-style__body"
         >
-          <div
-            class="m-input-style__prefix"
-          />
+          <span
+            class="m-input-style__label"
+            style="z-index: -1;"
+          >
+            <span
+              class="m-input-style__text"
+            />
+          </span>
            
           <div
-            class="m-input-style__left-content"
+            class="m-input-style__input"
           >
-            <!---->
-             
-            <!---->
-             
-            <textarea
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="200"
-              placeholder="Enter a value"
-              rows="1"
+            <div
+              class="m-input-style__prefix"
             />
              
-            <!---->
+            <div
+              class="m-input-style__content"
+            >
+              <!---->
+               
+              <!---->
+               
+              <textarea
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="200"
+                placeholder="Enter a value"
+                rows="1"
+              />
+               
+              <!---->
+               
+              <!---->
+            </div>
              
-            <!---->
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
           </div>
-           
-          <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2003,58 +2109,63 @@ exports[`Storyshots components|m-textfield/max-width all max-width presets 1`] =
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            regular
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              regular
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -2081,58 +2192,63 @@ exports[`Storyshots components|m-textfield/max-width custom width 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            width='333px' / max-width='none'
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              width='333px' / max-width='none'
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -2159,58 +2275,63 @@ exports[`Storyshots components|m-textfield/max-width large 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            large
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              large
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -2237,58 +2358,63 @@ exports[`Storyshots components|m-textfield/max-width medium 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            medium
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              medium
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -2316,58 +2442,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              xs
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                xs
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2392,58 +2523,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              xs
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                xs
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2468,58 +2604,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              xs
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                xs
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2544,58 +2685,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              xs
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                xs
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2622,58 +2768,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              small
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                small
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2698,58 +2849,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              small
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                small
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2776,58 +2932,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              regular
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                regular
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2852,58 +3013,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              regular
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                regular
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -2930,58 +3096,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              medium
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                medium
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -3008,58 +3179,63 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
   >
     <div
       class="m-input-style m--has-label m--is-tag-default"
+      style="margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mTextfield-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              large
-            </span>
-             
-            <!---->
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
-           
-          <div
-            class="m-input-style__left-content"
-          >
-            <input
-              class="m-textfield__input"
-              id="mTextfield-uuid"
-              maxlength="Infinity"
-              type="text"
-            />
-              
-            <!---->
-             
-            <!---->
-             
-            <!---->
-          </div>
-           
-          <div
-            class="m-input-style__right-content"
+          <label
+            class="m-input-style__label"
+            for="mTextfield-uuid"
+            style="margin-right: 0px;"
           >
             <span
-              style="white-space: nowrap;"
-            />
-          </div>
+              class="m-input-style__text"
+            >
+              <span>
+                large
+              </span>
+               
+              <!---->
+            </span>
+          </label>
            
-          <!---->
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <input
+                class="m-textfield__input"
+                id="mTextfield-uuid"
+                maxlength="Infinity"
+                type="text"
+              />
+                
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+              <!---->
+               
+              <!---->
+            </div>
+          </div>
         </div>
+         
+        <!---->
       </div>
     </div>
      
@@ -3087,58 +3263,63 @@ exports[`Storyshots components|m-textfield/max-width regular 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            regular
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              regular
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3165,58 +3346,63 @@ exports[`Storyshots components|m-textfield/max-width small 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            small
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              small
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3243,58 +3429,63 @@ exports[`Storyshots components|m-textfield/max-width x-small 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            x-small
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              x-small
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3321,58 +3512,63 @@ exports[`Storyshots components|m-textfield/tag-style all tag styles 1`] = `
 >
   <div
     class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-h3"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            h3
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              h3
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3399,59 +3595,64 @@ exports[`Storyshots components|m-textfield/type all types 1`] = `
 >
   <div
     class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <label
-        class="m-input-style__label"
-        for="mTextfield-uuid"
-      >
-        <span
-          class="m-input-style__text"
-        >
-          <span>
-            text
-          </span>
-           
-          <!---->
-        </span>
-      </label>
-       
       <div
         class="m-input-style__body"
       >
-        <!---->
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            placeholder="text"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
-          />
-        </div>
+            class="m-input-style__text"
+          >
+            <span>
+              text
+            </span>
+             
+            <!---->
+          </span>
+        </label>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              placeholder="text"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3478,54 +3679,58 @@ exports[`Storyshots components|m-textfield/type type="email" 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="email"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="email"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3552,54 +3757,58 @@ exports[`Storyshots components|m-textfield/type type="number" 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="number"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="number"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3621,54 +3830,59 @@ exports[`Storyshots components|m-textfield/type type="number" 1`] = `
 
 exports[`Storyshots components|m-textfield/type type="password" 1`] = `
 <div
-  class="m-textfield m--is-type-password"
+  class="m-textfield m--has-label m--is-type-password"
   style="width: 100%; max-width: 288px;"
 >
   <div
-    class="m-input-style m--has-value m--is-tag-default"
+    class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="password"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <label
+          class="m-input-style__label"
+          for="mTextfield-uuid"
+          style="margin-right: 0px;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
+          >
+            <span>
+              lsdhfasdj khgjkd fhjkghj kadfhgf jkdghdfjk ghdfjkg hdfjk ghd fjkghdj k gh djh
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="password"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
           >
             <button
               aria-controls="mTextfield-uuid"
@@ -3693,131 +3907,13 @@ exports[`Storyshots components|m-textfield/type type="password" 1`] = `
                
               <!---->
             </button>
-          </span>
+             
+            <!---->
+          </div>
         </div>
-         
-        <!---->
       </div>
-    </div>
-  </div>
-   
-  <div
-    class="m-textfield__validation"
-  >
-    <div
-      class="m-validation-message m-textfield__validation__message"
-    >
-      <!---->
        
       <!---->
-    </div>
-     
-    <!---->
-  </div>
-</div>
-`;
-
-exports[`Storyshots components|m-textfield/type type="search" 1`] = `
-<div
-  class="m-textfield m--is-type-search"
-  style="width: 100%; max-width: 288px;"
->
-  <div
-    class="m-input-style m--has-value m--is-tag-default"
-  >
-    <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
-    >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
-      <div
-        class="m-input-style__body"
-      >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="search"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
-        >
-          <span
-            style="white-space: nowrap;"
-          >
-            <button
-              aria-controls="mTextfield-uuid"
-              class="m-icon-button m-textfield__reset m--is-skin-light m--has-ripple"
-              style="width: 1em; height: 1em;"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="11px"
-                width="11px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-            <button
-              aria-controls="mTextfield-uuid"
-              class="m-icon-button m-textfield__search-icon m--is-skin-light m--has-ripple"
-              style="width: 22px; height: 22px;"
-              title="Rechercher"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="m-icon m-icon-button__icon"
-                height="20px"
-                width="20px"
-              >
-                <!---->
-                 
-                <use
-                  aria-hidden="true"
-                  class=""
-                />
-              </svg>
-               
-              <!---->
-            </button>
-          </span>
-        </div>
-         
-        <!---->
-      </div>
     </div>
   </div>
    
@@ -3844,54 +3940,58 @@ exports[`Storyshots components|m-textfield/type type="tel" 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="tel"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="tel"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3918,54 +4018,58 @@ exports[`Storyshots components|m-textfield/type type="text" 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="text"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="text"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    
@@ -3992,54 +4096,58 @@ exports[`Storyshots components|m-textfield/type type="url" 1`] = `
 >
   <div
     class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
   >
     <div
-      class="m-input-style__content"
-      style="margin-top: 10px;"
+      class="m-input-style__main"
     >
-      <span
-        class="m-input-style__label"
-        style="z-index: -1;"
-      >
-        <span
-          class="m-input-style__text"
-        />
-      </span>
-       
       <div
         class="m-input-style__body"
       >
-        <div
-          class="m-input-style__prefix"
-        />
-         
-        <div
-          class="m-input-style__left-content"
-        >
-          <input
-            class="m-textfield__input"
-            id="mTextfield-uuid"
-            maxlength="Infinity"
-            type="url"
-          />
-            
-          <!---->
-           
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
-          class="m-input-style__right-content"
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
         >
           <span
-            style="white-space: nowrap;"
+            class="m-input-style__text"
           />
-        </div>
+        </span>
          
-        <!---->
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              class="m-textfield__input"
+              id="mTextfield-uuid"
+              maxlength="Infinity"
+              type="url"
+            />
+              
+            <!---->
+             
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+        </div>
       </div>
+       
+      <!---->
     </div>
   </div>
    

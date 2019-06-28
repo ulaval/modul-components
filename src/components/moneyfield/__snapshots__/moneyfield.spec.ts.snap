@@ -3,12 +3,16 @@
 exports[`MTextfield should render correctly 1`] = `
 <div class="m-moneyfield" style="width:100%;max-width:136px;">
   <div class="m-decimalfield" style="width:100%;max-width:136px;">
-    <div class="m-input-style m--is-tag-default">
-      <div class="m-input-style__content" style="margin-top:10px;"><span class="m-input-style__label" style="z-index:-1;"><span class="m-input-style__text"></span></span>
-        <div class="m-input-style__body">
-          <div class="m-input-style__prefix">CA$</div>
-          <div class="m-input-style__left-content"> <input id="mDecimalfield-uuid" inputmode="decimal" class="m-decimalfield__input"> </div>
-          <div class="m-input-style__right-content"></div>
+    <div class="m-input-style m--is-tag-default" style="margin-top:10px;">
+      <div class="m-input-style__main">
+        <div class="m-input-style__body"><span class="m-input-style__label" style="z-index:-1;"><span class="m-input-style__text"></span></span>
+          <div class="m-input-style__input">
+            <div class="m-input-style__prefix"><span class="m-moneyfield__currency-symbol">
+                CA$
+            </span></div>
+            <div class="m-input-style__content"> <input id="mDecimalfield-uuid" inputmode="decimal" class="m-decimalfield__input"> </div>
+            <div class="m-input-style__suffix"> </div>
+          </div>
         </div>
       </div>
     </div>

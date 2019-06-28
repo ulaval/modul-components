@@ -1,6 +1,6 @@
 {
     "name": "@ulaval/modul-components",
-    "version": "1.0.0-beta.107",
+    "version": "1.0.0-beta.108",
     "description": "Component library",
     "author": "Martin Simard <martin.simard@dti.ulaval.ca>",
     "private": false,
@@ -27,7 +27,7 @@
         "storybook": "start-storybook --config-dir ./conf/storybook --static-dir ./conf/storybook/public",
         "file-gen-cli": "./node_modules/.bin/file-gen-cli",
         "sandboxes": "rimraf dist/**/* && webpack-dev-server --progress --config conf/webpack.config.js  --colors --port 8082 --open --history-api-fallback",
-        "storybook:openshift": "start-storybook --ci --port 8080 --config-dir ./conf/storybook",
+        "storybook:openshift": "start-storybook --ci --port 8080 --config-dir ./conf/storybook --static-dir ./conf/storybook/public",
         "storybook:unit": "jest --config ./conf/storybook/jest.config.storybook.js --verbose",
         "storybook:unit:update": "jest --config ./conf/storybook/jest.config.storybook.js --verbose --updateSnapshot"
     },
@@ -40,13 +40,14 @@
     },
     "dependencies": {
         "axios": "^0.17.1",
-        "cleave.js": "^1.4.7",
+        "cleave.js": "^1.5.0",
         "css-element-queries": "^0.4.0",
         "enquire.js": "^2.1.6",
         "es6-promise": "^4.1.1",
         "filesize": "^3.6.0",
         "froala-editor": "2.9.3",
         "jquery": "^3.3.1",
+        "libphonenumber-js": "^1.7.19",
         "mobile-drag-drop": "^2.3.0-rc.1",
         "moment": "^2.19.3",
         "popper.js": "^1.12.9",

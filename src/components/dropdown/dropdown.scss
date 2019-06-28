@@ -10,6 +10,8 @@ $m-dropdown--margin: $m-padding--xs !default;
     display: inline-flex;
     flex-direction: column;
 
+    @include m-input-inline-spacing();
+
     &.m--has-validation-message {
         .m-dropdown__validation-message {
             margin-top: $m-spacing--xs;

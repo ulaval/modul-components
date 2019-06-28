@@ -43,3 +43,20 @@ window.getComputedStyle = function getComputedStyleStub(el) {
         getPropertyValue: getComputedStyle(el).getPropertyValue
     });
 }
+
+// Mock DateTimeFormat because of partial NodeJs locale support when running jest.
+Intl.DateTimeFormat = class {
+    constructor(locale, options) {
+        this.locale = locale;
+        this.options = options;
+    }
+
+    format() {
+        return `mock-intl-dateTimeFormat-${JSON.stringify(this.options)}}`;
+    }
+}
+
+document.createRange = () => ({
+    setStart() {},
+    setEnd() {}
+});

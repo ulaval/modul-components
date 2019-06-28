@@ -22,14 +22,11 @@ export enum MTextfieldType {
     Email = 'email',
     Url = 'url',
     Telephone = 'tel',
-    Search = 'search',
     Number = 'number'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
-
-
 
 @WithRender
 @Component({
@@ -50,7 +47,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Telephone ||
             value === MTextfieldType.Text ||
             value === MTextfieldType.Url ||
-            value === MTextfieldType.Search ||
             value === MTextfieldType.Number
     })
     public type: MTextfieldType;
@@ -72,7 +68,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
     private passwordAsText: boolean = false;
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
-    private searchIconDescription: string = this.$i18n.translate('m-textfield:search');
     private id: string = `mTextfield-${uuid.generate()}`;
 
     protected created(): void {
@@ -105,20 +100,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.passwordAsText = !this.passwordAsText;
     }
 
-    private onEnter(): void {
-        if (this.isTypeSearch) {
-            this.search();
-        }
-    }
-
-    private search(): void {
-        this.$emit('search');
-    }
-
-    private reset(): void {
-        this.$emit('input', '');
-    }
-
     public get inputType(): MTextfieldType {
         switch (this.type) {
             case MTextfieldType.Password:
@@ -138,10 +119,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get passwordIconDescription(): string {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
-    }
-
-    private get searchIcon(): boolean {
-        return this.icon && this.type === MTextfieldType.Search;
     }
 
     private get hasWordWrap(): boolean {
@@ -168,8 +145,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return this.as<InputState>().isValid;
     }
 
-    private get isTypeSearch(): boolean {
-        return this.type === MTextfieldType.Search;
+    private get hasCounterTransition(): boolean {
+        return !this.as<InputState>().hasErrorMessage;
     }
 
     private resetModel(): void {

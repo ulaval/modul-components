@@ -154,7 +154,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_STYLE_NAME}`, module)
                 default: boolean('Waiting', true)
             }
         },
-        template: '<m-input-style label="Label" :waiting="waiting" :empty="false">Waiting ({{waiting}})</m-input-style>'
+        template: '<m-input-style label="Label tres long et bla bla bla" :waiting="waiting" :empty="false">Waiting ({{waiting}})</m-input-style>'
     }))
     .add('error', () => ({
         props: {

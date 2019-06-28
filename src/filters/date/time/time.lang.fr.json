@@ -1,6 +1,10 @@
 {
     "f-m-time": {
-        "hours": "H [h]",
-        "hours-minutes": "H [h] mm"
+        "timeOnly": "%(time)s",
+        "atTime": "À %(time)s",
+        "fromTime": "À partir de %(time)s",
+        "untilTime": "Jusqu'à %(time)s",
+        "timePeriod": "%(from)s à %(to)s",
+        "timePeriodWithPreposition": "De %(from)s à %(to)s"
     }
 }

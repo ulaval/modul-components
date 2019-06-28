@@ -88,6 +88,19 @@ export class MDateSandbox extends Vue {
             end: this.later.year ? this.dateLater : undefined
         };
     }
+
+    get timeString(): string {
+        if (!this.current.hours) {
+            return '';
+        }
+
+        let timeString: string = this.current.hours.toString().padStart(2, '0');
+        if (this.current.minutes) {
+            timeString += `:${this.current.minutes.toString().padStart(2, '0')}`;
+        }
+
+        return timeString;
+    }
 }
 
 const DateSandboxPlugin: PluginObject<any> = {
