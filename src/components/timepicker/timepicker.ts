@@ -1,4 +1,4 @@
-import { CleaveOptions } from 'cleave.js/options';
+
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
@@ -14,7 +14,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { MCalendarButton } from '../calendar/calendar-button/calendar-button';
 import { TIMEPICKER_NAME } from '../component-names';
-import { MInputMask } from '../input-mask/input-mask';
+import { InternalCleaveOptions, MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -341,7 +341,7 @@ export class MTimepicker extends ModulVue {
         });
     }
 
-    private get inputMaskOptions(): CleaveOptions {
+    private get inputMaskOptions(): InternalCleaveOptions {
         return {
             time: true,
             timePattern: ['h', 'm']
