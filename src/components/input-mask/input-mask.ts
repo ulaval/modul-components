@@ -5,18 +5,25 @@ import { Model, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './input-mask.html';
 
-// TODO : Hack en attendant qu'on puisse remettre cleaveOptions.
 export interface InternalCleaveOptions {
+    numericOnly?: boolean;
+    delimiters?: ReadonlyArray<string>;
+    blocks?: ReadonlyArray<number>;
     numeral?: boolean;
     numeralDecimalScale?: number;
-    numeralThousandsGroupStyle: 'lakh' | 'thousand' | 'wan' | 'none';
-    numeralIntegerScale: number;
-    numeralDecimalMark: string;
-    numeralPositiveOnly: boolean;
-    stripLeadingZeroes: boolean;
-    delimiter: string;
+    numeralThousandsGroupStyle?: 'lakh' | 'thousand' | 'wan' | 'none';
+    numeralIntegerScale?: number;
+    numeralDecimalMark?: string;
+    numeralPositiveOnly?: boolean;
+    stripLeadingZeroes?: boolean;
     removeTrailingDecimalMark?: boolean;
     forceDecimalScale?: boolean;
+    phone?: boolean;
+    phoneRegionCode?: string;
+    prefix?: string;
+    time?: boolean;
+    timePattern?: ReadonlyArray<string>;
+    delimiter?: string;
 }
 
 export interface InputMaskOptions extends InternalCleaveOptions {
@@ -82,6 +89,11 @@ export class MInputMask extends ModulVue {
         await this.$nextTick();
         this.$refs.input.focus();
         this.$refs.input.setSelectionRange(0, this.$refs.input.value.length);
+    }
+
+    public async focus(): Promise<any> {
+        await this.$nextTick();
+        this.$refs.input.focus();
     }
 
     @Watch('options', { deep: true })

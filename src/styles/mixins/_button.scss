@@ -1,6 +1,6 @@
 @mixin m-button() {
     transition-property: background, border-color, color;
-    transition-duration: 0.3s;
+    transition-duration: $m-transition-duration;
     transition-timing-function: ease;
     border: 1px solid $m-color--interactive;
     appearance: none;

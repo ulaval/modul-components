@@ -6,8 +6,16 @@
                     :precision="precision">
         <!-- content should stay inline to avoid adding useless white space -->
         <template v-if="currencyDetail.symbolPosition === 'before'"
-                  slot="prefix">{{ currencyDetail.localizedSymbol }}</template>
+                  slot="prefix">
+            <span class="m-moneyfield__currency-symbol">
+                {{ currencyDetail.localizedSymbol }}
+            </span>
+        </template>
         <template v-if="currencyDetail.symbolPosition === 'after'"
-                  slot="suffix">{{ currencyDetail.localizedSymbol }}</template>
+                  slot="suffix">
+            <span class="m-moneyfield__currency-symbol">
+                {{ currencyDetail.localizedSymbol }}
+            </span>
+        </template>
     </m-decimalfield>
 </div>

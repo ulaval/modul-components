@@ -1,0 +1,23 @@
+<li class="m-select-item"
+    :class="{ 'm--is-selected': selected,
+              'm--is-disabled': disabled,
+              'm--is-focus': focused,
+              'm--readonly': readonly }"
+    role="option"
+    :aria-selected="selected"
+    @click.prevent="onClick">
+
+    <slot v-if="isMqMinS || readonly"><span class="m-select-item__element-text">{{ propLabel }}</span></slot>
+
+    <m-radio-style :full-width="true"
+                   radio-position="right"
+                   :focus="focused"
+                   :checked="selected"
+                   :disabled="disabled"
+                   tabindex="0"
+                   v-else>
+
+        <slot><span class="m-select-item__element-text">{{ propLabel }}</span></slot>
+
+    </m-radio-style>
+</li>

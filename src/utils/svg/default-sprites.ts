@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
-
 import { SpritesService } from './sprites';
+
 
 const DefaultSpritesPlugin: PluginObject<any> = {
     install(v, options): void {
@@ -8,6 +8,7 @@ const DefaultSpritesPlugin: PluginObject<any> = {
         const svg: SpritesService = (v.prototype).$svg;
         if (svg) {
             svg.addSprites(require('../../assets/icons/sprites-default.svg'));
+
         } else {
             v.prototype.$log.error(
                 'DefaultSpritesPlugin.install -> You must use the svg plugin.'
