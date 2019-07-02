@@ -7,7 +7,6 @@ import DatepickerPlugin from './datepicker';
 Vue.use(DatepickerPlugin);
 
 
-
 storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
     .add('default', () => ({
@@ -15,7 +14,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }))
     .add('events', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            model1: '2012-01-01'
         }),
         methods: {
             onInputChange(value: string): string {
@@ -34,7 +33,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
             }
         },
-        template: `<div><m-datepicker :value="model1" min="2008-06-06" max="2008-06-23" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
     }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
@@ -112,3 +111,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }));
 
 
+storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/type`, module)
+    .add('full-date', () => ({
+        template: `<m-datepicker type="full-date"></m-datepicker>`
+    }))
+    .add('years-months', () => ({
+        template: `<m-datepicker type="years-months"></m-datepicker>`
+    }));

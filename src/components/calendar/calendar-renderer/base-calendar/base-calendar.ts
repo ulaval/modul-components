@@ -141,13 +141,18 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     onYearMonthSelect(year: YearState, month: MonthState): void {
         if (!month.isDisabled) {
             month.isCurrent = true;
-            super.onYearSelect(year);
-            super.onMonthSelect(month);
 
-            // Delay to show the user selection
-            setTimeout(() => {
-                this.currentView = MBaseCalendarView.DAYS;
-            }, 300);
+            if (this.isTypeYearsMonths) {
+                super.onYearMonthSelect(year, month);
+            } else {
+                super.onYearSelect(year);
+                super.onMonthSelect(month);
+
+                // Delay to show the user selection
+                setTimeout(() => {
+                    this.currentView = MBaseCalendarView.DAYS;
+                }, 300);
+            }
         }
     }
 

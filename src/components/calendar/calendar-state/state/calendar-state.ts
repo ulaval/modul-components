@@ -10,6 +10,7 @@ export enum CalendarEvent {
     MONTH_NEXT = 'month-next',
     MONTH_PREVIOUS = 'month-previous',
     YEAR_SELECT = 'year-select',
+    YEAR_MONTH_SELECT = 'year-month-select',
     YEAR_NEXT = 'year-next',
     YEAR_PREVIOUS = 'year-previous'
 }

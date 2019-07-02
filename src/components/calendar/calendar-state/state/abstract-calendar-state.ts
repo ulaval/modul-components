@@ -109,6 +109,10 @@ export default abstract class AbstractCalendarState implements CalendarState {
         this.updateCurrentlyDisplayedDate(year.year, this.currentlyDisplayedMonth(), this.currentlyDisplayedDay());
     }
 
+    protected selectYearMonth(year: YearState, month: MonthState): void {
+        this.updateCurrentlyDisplayedDate(year.year, month.month, this.currentlyDisplayedDay());
+    }
+
     protected selectMonth(month: MonthState): void {
         this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear(), month.month, this.currentlyDisplayedDay());
     }
@@ -146,6 +150,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
                 [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth.bind(this),
                 [CalendarEvent.MONTH_NEXT]: this.nextMonth.bind(this),
                 [CalendarEvent.YEAR_SELECT]: this.selectYear.bind(this),
+                [CalendarEvent.YEAR_MONTH_SELECT]: this.selectYearMonth.bind(this),
                 [CalendarEvent.YEAR_PREVIOUS]: this.previousYear.bind(this),
                 [CalendarEvent.YEAR_NEXT]: this.nextYear.bind(this)
             } as CalendarEvents;

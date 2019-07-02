@@ -1,6 +1,6 @@
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
 import AbstractCalendarState, { SingleDate } from './abstract-calendar-state';
-import { CalendarType } from './calendar-state';
+import { CalendarType, MonthState, YearState } from './calendar-state';
 
 export default class CalendarSingleDateState extends AbstractCalendarState {
 
@@ -12,6 +12,13 @@ export default class CalendarSingleDateState extends AbstractCalendarState {
 
     protected assembleValue(): SingleDate {
         return this.currentDate ? this.currentDate.toString() : '';
+    }
+
+    protected selectYearMonth(year: YearState, month: MonthState): void {
+        this.currentDate = new ModulDate(year.year, month.month, 1);
+        this.emitUpdate(this.assembleValue());
+
+        super.selectYearMonth(year, month);
     }
 
     protected selectDay(selectedDay: any): void {
