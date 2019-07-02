@@ -5,7 +5,6 @@ import { Model, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './input-mask.html';
 
-// TODO : Hack en attendant qu'on puisse remettre cleaveOptions.
 export interface InternalCleaveOptions {
     numericOnly?: boolean;
     delimiters?: ReadonlyArray<string>;
@@ -24,6 +23,7 @@ export interface InternalCleaveOptions {
     prefix?: string;
     time?: boolean;
     timePattern?: ReadonlyArray<string>;
+    delimiter?: string;
 }
 
 export interface InputMaskOptions extends InternalCleaveOptions {
