@@ -1,4 +1,3 @@
-import { CleaveOptions } from 'cleave.js/options';
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
@@ -15,7 +14,7 @@ import ButtonPlugin from '../button/button';
 import CalendarPlugin from '../calendar/calendar';
 import { DATEPICKER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
-import { MInputMask } from '../input-mask/input-mask';
+import { InternalCleaveOptions, MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -82,7 +81,7 @@ export class MDatepicker extends ModulVue {
         }
     }
 
-    public get inputOptions(): CleaveOptions {
+    public get inputOptions(): InternalCleaveOptions {
         return {
             numericOnly: true,
             delimiters: ['-', '-'],
