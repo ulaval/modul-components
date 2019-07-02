@@ -1,6 +1,6 @@
 export interface Meta {
     modulVersion?: string;
-    components: MetaComponent[];
+    components?: MetaComponent[];
 }
 
 export interface MetaComponent {
@@ -42,7 +42,7 @@ export class MetaV2 {
 
     findMetaComponentByComponentName(componentName: string): MetaComponent {
 
-        let component: any = this._meta.components.find((metaComponent: MetaComponent) => {
+        let component: any = this._meta.components!.find((metaComponent: MetaComponent) => {
             return metaComponent.componentName.toLowerCase() === componentName.toLowerCase();
         });
         if (component) {
@@ -54,7 +54,7 @@ export class MetaV2 {
     findMetaComponentByTagName(tagName: string): MetaComponent {
 
         // a tag name is in Pascal case
-        let component: any = this._meta.components.find((metaComponent: MetaComponent) => {
+        let component: any = this._meta.components!.find((metaComponent: MetaComponent) => {
             return this.camelToKebab(metaComponent.componentName) === tagName;
         });
         if (component) {
