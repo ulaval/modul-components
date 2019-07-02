@@ -8,7 +8,7 @@
     display: inline-flex;
     flex-direction: column;
 
-    ::placeholder {
+    .m-input-style input::placeholder {
         color: $m-color--text-light;
         font-weight: $m-font-weight--light;
     }
