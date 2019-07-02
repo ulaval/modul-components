@@ -77,6 +77,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         default: MToastTimeout.none,
         validator: value =>
             value === MToastTimeout.none ||
+            value === MToastTimeout.xshort ||
             value === MToastTimeout.short ||
             value === MToastTimeout.long
     })

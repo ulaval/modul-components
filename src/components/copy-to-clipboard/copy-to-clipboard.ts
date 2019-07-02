@@ -3,10 +3,9 @@ import { PluginObject } from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
 import { COPY_TO_CLIPBOARD_NAME } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import TextfieldPlugin from '../textfield/textfield';
-import ToastPlugin, { MToastPosition, MToastTimeout } from '../toast/toast';
+import CopyToClipboardFeedbackPlugin from './copy-to-clipboard-feedback';
 import WithRender from './copy-to-clipboard.html';
 import './copy-to-clipboard.scss';
 
@@ -82,21 +81,16 @@ export class MCopyToClipboard extends ModulVue {
     copyText(): void {
         copyToClipboard(this.value);
         this.selectText();
-        this.$toast.show({
-            text: this.$i18n.translate('m-copy-to-clipboard:copied'),
-            position: MToastPosition.BottomLeft,
-            timeout: MToastTimeout.xshort
-        });
+        this.$emit('copy');
     }
 }
 
 const CopyToClipboardPlugin: PluginObject<any> = {
     install(v): void {
         v.component(COPY_TO_CLIPBOARD_NAME, MCopyToClipboard);
-        v.use(I18nPlugin);
         v.use(TextfieldPlugin);
         v.use(LinkPlugin);
-        v.use(ToastPlugin);
+        v.use(CopyToClipboardFeedbackPlugin);
     }
 };
 

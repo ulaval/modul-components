@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
@@ -111,6 +111,9 @@ export class MLink extends ModulVue {
             this.$emit('click', event);
         }
     }
+
+    @Emit('mousedown')
+    private onMousedown(): void { }
 
     private get isRouterLink(): boolean {
         return this.mode === MLinkMode.RouterLink;
