@@ -1,7 +1,4 @@
 {
-    "type": "component",
-    "beta": false,
-    "category": "button",
     "website-name": "Bouton",
     "props": {
         "type": "Type de bouton",
