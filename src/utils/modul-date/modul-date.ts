@@ -18,7 +18,7 @@ export enum DateComparison {
     IS_AFTER = 1
 }
 
-export const DATE_FORMAT_REGEX: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
+export const DATE_FORMAT_REGEX: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})(([\.|\\/|-](\d{1,4})))?).*$/;
 export default class ModulDate {
 
     private innerDate: Date;
@@ -301,13 +301,13 @@ export default class ModulDate {
 
 
         const parts: string[] = DATE_FORMAT_REGEX.exec(value) as string[];
-        if (!parts || parts.length < 4) {
+        if (!parts || parts.length < 3) {
             throw Error(`Impossible to find date parts in date`);
         }
 
         let first: string = parts[2];
         let second: string = parts[3];
-        let third: string = parts[4];
+        let third: string = parts[4] || '01';
 
         if (parseInt(first, 10) > 12 && parseInt(second, 10) > 12 && parseInt(third, 10) > 12) {
             throw Error(`No suitable month value`);

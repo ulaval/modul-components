@@ -239,7 +239,7 @@ export class MDatepicker extends ModulVue {
             return true;
 
         } else if (inputValue.length >= this.maxInputLenght && this.validateDateFormat(inputValue)) {
-            let newDate: ModulDate = new ModulDate(this.isTypeYearsMonths ? `${inputValue}-01` : inputValue);
+            let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';
                 return true;
