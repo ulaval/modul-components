@@ -1,0 +1,1 @@
+<m-button>Bouton primaire</m-button>

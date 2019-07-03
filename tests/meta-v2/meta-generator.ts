@@ -56,7 +56,7 @@ export class MetaGenerator {
 
                 // If the class has the @Component decorator
                 if (componentDecorator) {
-                    output.components.push(this.generateComponentMeta(classDeclaration, this.getTemplateAsString(`${sourceFile.getFilePath().slice(0, -3)}.html`)));
+                    output.components!.push(this.generateComponentMeta(classDeclaration, this.getTemplateAsString(`${sourceFile.getFilePath().slice(0, -3)}.html`)));
                 }
 
             });

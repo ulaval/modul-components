@@ -73,39 +73,39 @@ export class MButton extends Vue {
     @Emit('blur')
     onBlur(event: Event): void { }
 
-    private get isSkinPrimary(): boolean {
+    get isSkinPrimary(): boolean {
         return this.skin === MButtonSkin.Primary;
     }
 
-    private get isSkinSecondary(): boolean {
+    get isSkinSecondary(): boolean {
         return this.skin === MButtonSkin.Secondary;
     }
 
-    private get isWaiting(): boolean {
+    get isWaiting(): boolean {
         return !this.disabled ? this.waiting : false;
     }
 
-    private get hasIcone(): boolean {
+    get hasIcone(): boolean {
         return !!this.iconName;
     }
 
-    private get hasIconLeft(): boolean {
+    get hasIconLeft(): boolean {
         return this.iconPosition === MButtonIconPosition.Left && this.hasIcone && !this.waiting;
     }
 
-    private get hasIconRight(): boolean {
+    get hasIconRight(): boolean {
         return this.iconPosition === MButtonIconPosition.Right && this.hasIcone && !this.waiting;
     }
 
-    private get hasWaitingIconLeft(): boolean {
+    get hasWaitingIconLeft(): boolean {
         return this.iconPosition === MButtonIconPosition.Left && this.waiting;
     }
 
-    private get hasWaitingIconRight(): boolean {
+    get hasWaitingIconRight(): boolean {
         return this.iconPosition === MButtonIconPosition.Right && this.waiting;
     }
 
-    private get hasPrecision(): boolean {
+    get hasPrecision(): boolean {
         return !!this.precision || !!this.$slots.precision;
     }
 }

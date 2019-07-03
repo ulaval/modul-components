@@ -1,0 +1,18 @@
+{
+    "website-name": "Bouton",
+    "components": {
+        "button": {
+            "componentName": "Bouton",
+            "props": {
+                "type": "Type de bouton",
+                "skin": "Propriété pour changer le visuel du bouton",
+                "disabled": "Propriété pour désactiver le bouton",
+                "waiting": "Propriété pour mettre le bouton en attente",
+                "fullSize": "Propriété pour mettre le bouton pleine largeur",
+                "iconName": "Nom de l'icône",
+                "iconPosition": "Propriété pour positioner l'icône",
+                "iconSize": "Propriété pour changer la grosse de l'icône"
+            }
+        }
+    }
+}

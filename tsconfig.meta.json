@@ -26,6 +26,7 @@
     "exclude": [
         "src/**/*.spec.*",
         "src/**/*.sandbox.*",
+        "src/**/*.stories.*",
         "tests/**/*"
     ]
 }
