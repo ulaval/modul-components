@@ -38,15 +38,29 @@
     </div>
     <m-accordion-transition v-if="hasContent()"
                             :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 24 : 0">
-        <div v-if="propOpen"
-             :id="propId + '-controls'"
-             class="m-accordion__body-wrap"
-             :aria-labelledby="propId"
-             role="tabpanel">
-            <div class="m-accordion__body"
-                 :class="{ 'm--has-padding': paddingBody && padding }">
-                <slot></slot>
+        <template v-if="!keepContentAlive">
+            <div v-if="propOpen"
+                 :id="propId + '-controls'"
+                 class="m-accordion__body-wrap"
+                 :aria-labelledby="propId"
+                 role="tabpanel">
+                <div class="m-accordion__body"
+                     :class="{ 'm--has-padding': paddingBody && padding }">
+                    <slot></slot>
+                </div>
             </div>
-        </div>
+        </template>
+        <template v-else>
+            <div v-show="propOpen"
+                 :id="propId + '-controls'"
+                 class="m-accordion__body-wrap"
+                 :aria-labelledby="propId"
+                 role="tabpanel">
+                <div class="m-accordion__body"
+                     :class="{ 'm--has-padding': paddingBody && padding }">
+                    <slot></slot>
+                </div>
+            </div>
+        </template>
     </m-accordion-transition>
 </article>
