@@ -6,7 +6,6 @@ import { NAVBAR_NAME } from '../component-names';
 import NavbarPlugin from './navbar';
 import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
 
-
 @WithRender
 @Component
 export class MNavbarSandbox extends Vue {

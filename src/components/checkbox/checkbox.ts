@@ -97,7 +97,7 @@ export class MCheckbox extends ModulVue {
         return this.verticalAlign === MCheckboxVerticalAlignement.Top;
     }
 
-    private get hasLabelSlot(): boolean {
+    private hasLabelSlot(): boolean {
         return !!this.$slots.default;
     }
 
