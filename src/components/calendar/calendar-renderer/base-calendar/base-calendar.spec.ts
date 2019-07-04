@@ -30,9 +30,8 @@ const padString: Function = (value: any): string => {
     return ('000' + value).slice(-2);
 };
 
-const SELECTABLE_DAY_REF: RefSelector = { ref: `day${CURRENT_YEAR}${padString(CURRENT_MONTH_INDEX + 1)}${padString(CURRENT_DAY)}` };
-const SELECTABLE_MONTH_REF: RefSelector = { ref: `month${padString(CURRENT_MONTH_INDEX + 1)}` };
-const SELECTABLE_YEAR_REF: RefSelector = { ref: `year${CURRENT_YEAR}` };
+const SELECTABLE_DAY_REF: RefSelector = { ref: `${MBaseCalendarView.DAYS}-${CURRENT_YEAR}-${padString(CURRENT_MONTH_INDEX + 1)}-${padString(CURRENT_DAY)}` };
+const SELECTABLE_YEAR_MONTH_REF: RefSelector = { ref: `${MBaseCalendarView.YEARS_MONTHS}-${CURRENT_YEAR}-${padString(CURRENT_MONTH_INDEX + 1)}` };
 
 let wrapper: Wrapper<MBaseCalendar>;
 let calendar: Calendar;
@@ -78,21 +77,7 @@ const initCalendar: Function = (): Calendar => {
                 isCurrent: month === CURRENT_MONTH_INDEX
             };
         }),
-        yearsMonths: [
-            // {
-            //     years: {
-            //         year: 1999,
-            //         isCurrent: false
-            //     },
-            //     months: [
-            //         {
-            //             month: 2,
-            //             isDisabled: false,
-            //             isCurrent: false
-            //         }
-            //     ]
-            // }
-        ],
+        yearsMonths: [{ 'year': { 'year': 2009, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': true }, { 'month': 1, 'isCurrent': false, 'isDisabled': true }, { 'month': 2, 'isCurrent': false, 'isDisabled': true }, { 'month': 3, 'isCurrent': false, 'isDisabled': true }, { 'month': 4, 'isCurrent': false, 'isDisabled': true }, { 'month': 5, 'isCurrent': false, 'isDisabled': true }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2010, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2011, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2012, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2013, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2014, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2015, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2016, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2017, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2018, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2019, 'isCurrent': true }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': true, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2020, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2021, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2022, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2023, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2024, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2025, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2026, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2027, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2028, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': false }, { 'month': 8, 'isCurrent': false, 'isDisabled': false }, { 'month': 9, 'isCurrent': false, 'isDisabled': false }, { 'month': 10, 'isCurrent': false, 'isDisabled': false }, { 'month': 11, 'isCurrent': false, 'isDisabled': false }] }, { 'year': { 'year': 2029, 'isCurrent': false }, 'months': [{ 'month': 0, 'isCurrent': false, 'isDisabled': false }, { 'month': 1, 'isCurrent': false, 'isDisabled': false }, { 'month': 2, 'isCurrent': false, 'isDisabled': false }, { 'month': 3, 'isCurrent': false, 'isDisabled': false }, { 'month': 4, 'isCurrent': false, 'isDisabled': false }, { 'month': 5, 'isCurrent': false, 'isDisabled': false }, { 'month': 6, 'isCurrent': false, 'isDisabled': false }, { 'month': 7, 'isCurrent': false, 'isDisabled': true }, { 'month': 8, 'isCurrent': false, 'isDisabled': true }, { 'month': 9, 'isCurrent': false, 'isDisabled': true }, { 'month': 10, 'isCurrent': false, 'isDisabled': true }, { 'month': 11, 'isCurrent': false, 'isDisabled': true }] }],
         days: range(1, 35).map((day: number) => {
             const currentDay: number = ((day + DAY_OFFSET) % CURRENT_MONTH_LENGTH) + 1;
 
@@ -269,94 +254,46 @@ describe('Base calendar', () => {
     });
 });
 
-// describe(`in month picker mode`, () => {
-//     beforeEach(() => {
-//         initialView = PickerMode.MONTH;
-//     });
+describe(`in years-months view`, () => {
+    beforeAll(() => {
+        initialView = MBaseCalendarView.YEARS_MONTHS;
+        calendar = initCalendar();
+    });
 
-//     it(`should render a list of months`, async () => {
-//         initializeWrapper();
-//         return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-//     });
+    it(`should render a list of months`, async () => {
+        initializeWrapper();
+        return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
+    });
 
-//     describe(`when selecting a month`, () => {
-//         beforeEach(() => {
-//             initializeWrapper();
-//         });
+    describe(`when selecting a month`, () => {
+        beforeEach(() => {
+            initializeWrapper();
+        });
 
-//         it(`will call event handler`, () => {
-//             wrapper.setMethods({ 'onMonthSelect': jest.fn() });
-//             const monthElement: Wrapper<Vue> = wrapper.find(SELECTABLE_MONTH_REF);
+        it(`will call event handler`, () => {
+            wrapper.setMethods({ 'onYearMonthSelect': jest.fn() });
+            const monthElement: Wrapper<Vue> = wrapper.find(SELECTABLE_YEAR_MONTH_REF);
+            monthElement.trigger('click', calendar.months[CURRENT_MONTH_INDEX]);
+            expect(wrapper.vm.onYearMonthSelect).toHaveBeenCalledTimes(1);
+        });
 
-//             monthElement.trigger('click', calendar.months[CURRENT_MONTH_INDEX]);
+        it(`will throw related calendar event`, () => {
+            const monthElement: Wrapper<Vue> = wrapper.find(SELECTABLE_YEAR_MONTH_REF);
 
-//             expect(wrapper.vm.onMonthSelect).toHaveBeenCalledTimes(1);
-//         });
+            monthElement.trigger('click', calendar.months[CURRENT_MONTH_INDEX]);
 
-//         it(`will throw related calendar event`, () => {
-//             const monthElement: Wrapper<Vue> = wrapper.find(SELECTABLE_MONTH_REF);
+            expect(wrapper.emitted(CalendarEvent.MONTH_SELECT)).toEqual([[calendar.months[CURRENT_MONTH_INDEX]]]);
+        });
 
-//             monthElement.trigger('click', calendar.months[CURRENT_MONTH_INDEX]);
+        it(`will switch picker mode to day`, async (done) => {
+            const monthElement: Wrapper<Vue> = wrapper.find(SELECTABLE_YEAR_MONTH_REF);
 
-//             expect(wrapper.emitted(CalendarEvent.MONTH_SELECT)).toEqual([[calendar.months[CURRENT_MONTH_INDEX]]]);
-//         });
-
-//         it(`will switch picker mode to day`, () => {
-//             const monthElement: Wrapper<Vue> = wrapper.find(SELECTABLE_MONTH_REF);
-
-//             monthElement.trigger('click', calendar.months[CURRENT_MONTH_INDEX]);
-
-//             expect(wrapper.vm.isPickerModeDay).toBe(true);
-//             expect(wrapper.vm.isPickerModeMonth).toBe(false);
-//             expect(wrapper.vm.isPickerModeYear).toBe(false);
-//         });
-//     });
-// });
-
-// describe(`in year picker mode`, () => {
-//     beforeEach(() => {
-//         initialView = PickerMode.YEAR;
-//     });
-
-//     it(`should render a list of years`, async () => {
-//         initializeWrapper();
-//         return expect(renderComponent(wrapper.vm)).resolves.toMatchSnapshot();
-//     });
-
-//     describe(`when selecting a year`, () => {
-//         let year: YearState | undefined;
-
-//         beforeEach(() => {
-//             initializeWrapper();
-//             year = calendar.years.find((value: YearState) => value.year === CURRENT_YEAR);
-//         });
-
-//         it(`will call event handler`, () => {
-//             wrapper.setMethods({ 'onYearSelect': jest.fn() });
-//             const yearElement: Wrapper<Vue> = wrapper.find(SELECTABLE_YEAR_REF);
-
-//             yearElement.trigger('click', year);
-
-//             expect(wrapper.vm.onYearSelect).toHaveBeenCalledTimes(1);
-//         });
-
-//         it(`will throw related calendar event`, () => {
-//             const yearElement: Wrapper<Vue> = wrapper.find(SELECTABLE_YEAR_REF);
-
-//             yearElement.trigger('click', year);
-
-//             expect(wrapper.emitted(CalendarEvent.YEAR_SELECT)).toEqual([[year]]);
-//         });
-
-//         it(`will switch picker mode to month`, () => {
-//             const yearElement: Wrapper<Vue> = wrapper.find(SELECTABLE_YEAR_REF);
-
-//             yearElement.trigger('click', year);
-
-//             expect(wrapper.vm.isPickerModeDay).toBe(false);
-//             expect(wrapper.vm.isPickerModeMonth).toBe(true);
-//             expect(wrapper.vm.isPickerModeYear).toBe(false);
-//         });
-//     });
-// });
-// });
+            monthElement.trigger('click', calendar.months[CURRENT_MONTH_INDEX]);
+            setTimeout(() => {
+                expect(wrapper.vm.isYearsMonthsView).toBe(false);
+                expect(wrapper.vm.isDaysView).toBe(true);
+                done();
+            }, 300);
+        });
+    });
+});

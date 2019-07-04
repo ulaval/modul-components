@@ -60,7 +60,7 @@
                                        @keyup.tab="onDaykeyboardTab(d)"
                                        @mouseenter="onDayMouseEnter(d)"
                                        @mouseleave="onDayMouseLeave(d)"
-                                       :ref="buildRef('day', d)">
+                                       :ref="buildRef(mBaseCalendarView.DAYS, currentYear, currentMonth + 1, d.day)">
                         <span class="m-base-calendar__day-content"
                               :class="{ 'm--is-hidden': hideDay(d) }">{{ d.day }}</span>
                     </m-calendar-button>
@@ -83,7 +83,7 @@
                                            @click.stop="onYearMonthSelect(yM.year, m)"
                                            @keyup.enter="onYearMonthSelect(yM.year.year, m)"
                                            :selected="m.isCurrent"
-                                           :ref="buildRef('month', m)">{{ monthIndexToShortName(m.month) }}</m-calendar-button>
+                                           :ref="buildRef(mBaseCalendarView.YEARS_MONTHS, yM.year.year, m.month + 1)">{{ monthIndexToShortName(m.month) }}</m-calendar-button>
                     </div>
                 </template>
             </div>

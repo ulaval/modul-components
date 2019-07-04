@@ -108,6 +108,7 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     @Prop({ default: true })
     visible: boolean;
 
+    mBaseCalendarView = MBaseCalendarView;
     previousMonthLabel: string = this.$i18n.translate('m-calendar:previous.month');
     nextMonthLabel: string = this.$i18n.translate('m-calendar:next.month');
     previousYearLabel: string = this.$i18n.translate('m-calendar:previous.year');
@@ -213,20 +214,12 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return (day.isInNextMonth || day.isInPreviousMonth) && !this.showMonthBeforeAfter;
     }
 
-    buildRef(prefix: string, state: DayState | MonthState | YearState): string {
-        const parts: string[] = [prefix];
-
-        if ('year' in state) {
-            parts.push(this.padString(state.year.toString(), 4));
+    buildRef(refPrefix: MBaseCalendarView, year: number, month: number, day?: number): string {
+        let refName: string = `${refPrefix}-${this.padString(year, 4)}-${this.padString(month, 2)}`;
+        if (refPrefix === MBaseCalendarView.DAYS) {
+            return `${refName}-${this.padString(day, 2)}`;
         }
-        if ('month' in state) {
-            parts.push(this.padString((state.month + 1).toString()));
-        }
-        if ('day' in state) {
-            parts.push(this.padString(state.day.toString()));
-        }
-
-        return parts.join('');
+        return refName;
     }
 
     monthIndexToShortName(index: number): string {
@@ -280,11 +273,16 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     }
 
     get yearsMonths(): {} {
+        this.$log.log('yearsMonths', JSON.stringify(this.calendar.yearsMonths));
         return this.calendar.yearsMonths;
     }
 
     get months(): {} {
         return this.calendar.months;
+    }
+
+    get days(): {} {
+        return this.calendar.days;
     }
 
     get isYearsMonthsView(): boolean {
@@ -317,10 +315,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         }
         let numberOfDays: number = this.calendar.days.length;
         return numberOfDays / 7 > 5 ? true : false;
-    }
-
-    get days(): DayState[] {
-        return this.calendar.days;
     }
 
     get isButtonToogleViewDisabled(): boolean {
