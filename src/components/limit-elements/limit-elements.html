@@ -1,0 +1,14 @@
+<div class="m-limit-elements">
+    <ul class="m-limit-elements__list">
+        <li v-if="isLimitedElementDisplay"
+            v-for="(element, index) in limitedElements">{{ element }}</li>
+
+        <li v-if="isExtraElementDisplay"
+            v-for="(element, index) in elements">{{ element }}</li>
+    </ul>
+
+    <m-link v-if="isLinkDisplay"
+            :mode="mLinkModeButton"
+            @click="toggleOpen"
+            ref="link">{{ i18nLinkLabel }}</m-link>
+</div>
