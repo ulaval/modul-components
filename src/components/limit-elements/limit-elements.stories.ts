@@ -24,7 +24,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}`, module)
         },
         template: '<m-limit-elements :elements="elements"></m-limit-elements>'
     }))
-    .add('3 elements, limit of 3', () => ({
+    .add('3 elements, limit of 2', () => ({
         props: {
             elements: {
                 default: ['Element 1', 'Element 2', 'Element 3']
@@ -39,12 +39,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}`, module)
             }
         },
         template: '<m-limit-elements :elements="elements"></m-limit-elements>'
+    }))
+    .add('5 elements, limit of 2', () => ({
+        props: {
+            elements: {
+                default: ['Element 1', 'Element 2', 'Element 3', 'Element 4', 'Element 5']
+            }
+        },
+        template: '<m-limit-elements :elements="elements"></m-limit-elements>'
     }));
 storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}/open="false"`, module)
     .add('default', () => ({
         props: {
             elements: {
-                default: ['Element 1', 'Element 2', 'Element 3', 'Element 4']
+                default: ['Element 1', 'Element 2', 'Element 3', 'Element 4', 'Element 5']
             }
         },
         template: '<m-limit-elements :elements="elements" :open="false"></m-limit-elements>'
@@ -52,7 +60,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}/open="false"`, m
     .add('true', () => ({
         props: {
             elements: {
-                default: ['Element 1', 'Element 2', 'Element 3', 'Element 4']
+                default: ['Element 1', 'Element 2', 'Element 3', 'Element 4', 'Element 5']
             }
         },
         template: '<m-limit-elements :elements="elements" :open="true"></m-limit-elements>'
@@ -67,7 +75,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}/limit="2"`, modu
         },
         template: '<m-limit-elements :elements="elements" :limit="2"></m-limit-elements>'
     }))
-    .add('3', () => ({
+    .add('limit of 3', () => ({
         props: {
             elements: {
                 default: ['Element 1', 'Element 2', 'Element 3', 'Element 4', 'Element 5']
@@ -75,7 +83,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}/limit="2"`, modu
         },
         template: '<m-limit-elements :elements="elements" :limit="3"></m-limit-elements>'
     }))
-    .add('4', () => ({
+    .add('limit of 4', () => ({
         props: {
             elements: {
                 default: ['Element 1', 'Element 2', 'Element 3', 'Element 4', 'Element 5']
