@@ -9,7 +9,8 @@
          :class="{ 'm--no-hover': moveSelectionZoneToCheckbox }"
          :tabindex="isDisabled || withCheckboxes ? '-1' : 0"
          @click="onClick"
-         @keyup.enter="onClick"
+         @keypress.enter="onClick"
+         @keypress.space.prevent="onClick"
          ref="item"
          role="button">
         <m-tree-icon v-if="useFilesIcons"
@@ -43,7 +44,8 @@
             <ul class="m-tree-node__children"
                 :class="{'m--has-line-extension' : hasSibling}"
                 ref="children"
-                v-show="internalOpen">
+                v-show="internalOpen"
+                role="tabpanel">
                 <m-tree-node v-for="(childNode, index) in node.children"
                              :key="childNode.id"
                              class="m-tree-node__child"
@@ -65,7 +67,8 @@
         <m-accordion-transition v-else>
             <ul v-show="internalOpen"
                 class="m-tree-node__children"
-                :class="{'m--has-line-extension' : hasSibling}">
+                :class="{'m--has-line-extension' : hasSibling}"
+                role="tabpanel">
                 <li class="m-tree-node__child-empty">
                     {{emptyContentMessage}}
                 </li>
