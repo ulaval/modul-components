@@ -158,6 +158,16 @@ $m-tree-node--child-indentation: 20px;
                     background: $m-color--information;
                     cursor: pointer;
                 }
+
+                &:active {
+                    background: $m-color--interactive-dark;
+                    color: $m-color--white;
+
+                    .m-tree-node__item-check::before,
+                    .m-tree-node__item-check::after {
+                        background: $m-color--white;
+                    }
+                }
             }
         }
 
