@@ -17,6 +17,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${SEARCHFIELD_NAME}`, module)
             value: undefined
         })
     }))
+    .add('placeholder', () => ({
+        template: `
+            <div>
+                <div><${SEARCHFIELD_NAME} v-model="value" placeholder="placeholder"></${SEARCHFIELD_NAME}></div>
+            </div>
+        `,
+        data: () => ({
+            value: undefined
+        })
+    }))
     .add('with label', () => ({
         template: `
             <div>
