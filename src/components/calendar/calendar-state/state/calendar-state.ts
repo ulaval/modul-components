@@ -10,9 +10,9 @@ export enum CalendarEvent {
     MONTH_NEXT = 'month-next',
     MONTH_PREVIOUS = 'month-previous',
     YEAR_SELECT = 'year-select',
-    YEAR_MONTH_SELECT = 'year-month-select',
     YEAR_NEXT = 'year-next',
-    YEAR_PREVIOUS = 'year-previous'
+    YEAR_PREVIOUS = 'year-previous',
+    YEAR_MONTH_SELECT = 'year-month-select'
 }
 
 export enum CalendarType {
@@ -54,6 +54,7 @@ export interface CalendarEvents {
     [CalendarEvent.YEAR_SELECT]: (event: YearState) => void;
     [CalendarEvent.YEAR_PREVIOUS]: (event: Event) => void;
     [CalendarEvent.YEAR_NEXT]: (event: Event) => void;
+    [CalendarEvent.YEAR_MONTH_SELECT]: (event: Event) => void;
 }
 
 export interface YearState {
