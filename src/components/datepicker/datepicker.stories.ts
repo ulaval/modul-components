@@ -149,3 +149,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/type`, module)
     .add('years-months', () => ({
         template: `<m-datepicker type="years-months"></m-datepicker>`
     }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/initial-view`, module)
+    .add('days', () => ({
+        template: `<m-datepicker initial-view="days"></m-datepicker>`
+    }))
+    .add('years-months', () => ({
+        template: `<m-datepicker initial-view="years-months"></m-datepicker>`
+    }));
