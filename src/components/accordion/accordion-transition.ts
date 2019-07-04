@@ -1,53 +1,55 @@
-import Vue, { PluginObject, VNode, VNodeData, VueConstructor } from 'vue';
+import { PluginObject } from 'vue';
+import Component from 'vue-class-component';
+import { Prop } from 'vue-property-decorator';
+import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_TRANSITION_NAME } from '../component-names';
+import WithRender from './accordion-transition.html?style=./accordion-transition.scss';
 
+const CLASS_HAS_TRANSITION: string = 'm--has-transition';
 
-interface MAccordionTransitionProps {
-    heightDelta?: number;
-    transition?: boolean;
-}
+@WithRender
+@Component
+export class MAccordionTransition extends ModulVue {
+    @Prop()
+    public heightDelta: number;
 
-export const MAccordionTransition: VueConstructor<Vue> = Vue.extend({
-    functional: true,
-    render(createElement, context): VNode {
-        const props: MAccordionTransitionProps = context.props as MAccordionTransitionProps;
-        const CLASS_HAS_TRANSITION: string = 'm-accordion--has-transition';
-        let data: VNodeData = {
-            props: {
-                name: 'm-accordion'
-            },
-            on: {
-                beforeEnter(el: HTMLElement): void {
-                    if (props.transition || props.transition === undefined) {
-                        el.classList.add(CLASS_HAS_TRANSITION);
-                    } else if (el.classList.contains(CLASS_HAS_TRANSITION)) {
-                        el.classList.remove(CLASS_HAS_TRANSITION);
-                    }
-                },
-                enter(el: HTMLElement): void {
-                    const heightDelta: number = props.heightDelta
-                        ? props.heightDelta
-                        : 0;
+    @Prop({ default: true })
+    public transition: boolean;
 
-                    el.style.height = el.scrollHeight - heightDelta + 'px';
-                },
-                afterEnter(el: HTMLElement): void {
-                    el.style.removeProperty('height');
-                },
-                beforeLeave(el: HTMLElement): void {
-                    el.style.height = parseInt((window.getComputedStyle(el).height as string), 10) + 'px';
-                    if (props.transition === false && el.classList.contains(CLASS_HAS_TRANSITION)) {
-                        el.classList.remove(CLASS_HAS_TRANSITION);
-                    }
-                },
-                afterLeave(el: HTMLElement): void {
-                    el.style.removeProperty('height');
-                }
-            }
-        };
-        return createElement('transition', data, context.children);
+    public setClassHasTransition(el: HTMLElement): void {
+        if (!el.classList.contains(ACCORDION_TRANSITION_NAME)) {
+            el.classList.add(ACCORDION_TRANSITION_NAME);
+        }
+
+        if (this.transition) {
+            el.classList.add(CLASS_HAS_TRANSITION);
+        } else if (el.classList.contains(CLASS_HAS_TRANSITION)) {
+            el.classList.remove(CLASS_HAS_TRANSITION);
+        }
     }
-});
+
+    public beforeEnter(el: HTMLElement): void {
+        this.setClassHasTransition(el);
+    }
+
+    public enter(el: HTMLElement): void {
+        const heightDelta: number = this.heightDelta || 0;
+        el.style.height = `${el.scrollHeight - heightDelta}px`;
+    }
+
+    public afterEnter(el: HTMLElement): void {
+        el.style.removeProperty('height');
+    }
+
+    public beforeLeave(el: HTMLElement): void {
+        el.style.height = parseInt((window.getComputedStyle(el).height as string), 10) + 'px';
+        this.setClassHasTransition(el);
+    }
+
+    public afterLeave(el: HTMLElement): void {
+        el.style.removeProperty('height');
+    }
+}
 
 const AccordionTransitionPlugin: PluginObject<any> = {
     install(v, options): void {

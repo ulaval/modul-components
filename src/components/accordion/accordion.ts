@@ -142,6 +142,16 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         return this.id || this.uuid;
     }
 
+    public get idBodyWrap(): string {
+        return `${this.propId}-body-wrap`;
+    }
+
+    public get classBody(): Object {
+        return {
+            'm--has-padding': this.paddingBody && this.padding
+        };
+    }
+
     public get propOpen(): boolean {
         return this.internalPropOpen;
     }

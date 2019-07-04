@@ -4,8 +4,7 @@ import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import ButtonPlugin from '../button/button';
 import { NAVBAR_NAME } from '../component-names';
 import NavbarPlugin from './navbar';
-import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
-
+import WithRender from './navbar.sandbox.html';
 
 @WithRender
 @Component

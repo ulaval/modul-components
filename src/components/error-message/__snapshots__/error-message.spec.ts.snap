@@ -110,6 +110,7 @@ exports[`MErrorMessage should render correctly collapsed 1`] = `
     <div id="uuid" aria-controls="uuid-controls" tabindex="0" role="tab" class="m-accordion__header m--has-padding">
       <div class="m-accordion__header__content"><span class="m-i18n">Détails de l'erreur</span> <span class="m-i18n m-accordion__hidden">m-accordion:open</span> </div> <span title="m-accordion:open" aria-hidden="true" class="m-plus m-accordion__header-icon m--is-skin-default m--has-border m--is-left"></span>
     </div>
+    <div></div>
   </article> <a href="/" tabindex="0" class="m-link m--has-content"> <span class="m-link__text"><span class="m-i18n">Pour obtenir de l'aide, contactez le soutien technique</span></span> </a>
 </div>
 `;
