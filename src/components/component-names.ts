@@ -48,6 +48,7 @@ export const ICON_FILE_NAME: string = 'm-icon-file';
 export const INPLACE_EDIT_NAME: string = 'm-inplace-edit';
 export const INPUT_GROUP_NAME: string = 'm-input-group';
 export const INPUT_STYLE_NAME: string = 'm-input-style';
+export const LIMIT_ELEMENTS: string = 'm-limit-elements';
 export const LIMIT_TEXT_NAME: string = 'm-limit-text';
 export const LINK_NAME: string = 'm-link';
 export const LIST_ITEM_NAME: string = 'm-list-item';

@@ -27,6 +27,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/inplace-edit/inplace-edit.lang.en.json'),
                 require('../components/input-style/input-style.lang.en.json'),
                 require('../components/link/link.lang.en.json'),
+                require('../components/limit-elements/limit-elements.lang.en.json'),
                 require('../components/limit-text/limit-text.lang.en.json'),
                 require('../components/login/login.lang.en.json'),
                 require('../components/message/message.lang.en.json'),
