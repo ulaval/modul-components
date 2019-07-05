@@ -1,0 +1,17 @@
+<div class="m-limit-elements">
+    <ul class="m-limit-elements__list">
+        <template v-if="!internalOpen">
+            <li v-for="(element, indexLimited) in limitedElements"
+                :key="indexLimited">{{ element }}</li>
+        </template>
+        <template v-else>
+            <li v-for="(element, indexExtra) in elements"
+                :key="indexExtra">{{ element }}</li>
+        </template>
+    </ul>
+
+    <m-link v-if="isLinkDisplay"
+            :mode="mLinkModeButton"
+            @click="toggleOpen"
+            ref="link">{{ i18nLinkLabel }}</m-link>
+</div>
