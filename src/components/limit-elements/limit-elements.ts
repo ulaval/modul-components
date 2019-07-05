@@ -1,6 +1,6 @@
 
 import { PluginObject } from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
+import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { FormatMode } from '../../utils/i18n/i18n';
 import { ModulVue } from '../../utils/vue/vue';
 import { LIMIT_ELEMENTS } from '../component-names';
@@ -24,6 +24,12 @@ export class MLimitElements extends ModulVue {
 
     readonly mLinkModeButton: MLinkMode = MLinkMode.Button;
     readonly i18nCloseLabel: string = this.$i18n.translate('m-limit-elements:show-less-label');
+
+    @Emit('list-opened')
+    onListOpened(): void { }
+
+    @Emit('list-closed')
+    onListClosed(): void { }
 
     get i18nOpenLabel(): string {
         return this.$i18n.translate('m-limit-elements:show-more-label', { nbElements: this.numberOfExtraElements }, undefined, undefined, undefined, FormatMode.Sprintf);
@@ -55,11 +61,11 @@ export class MLimitElements extends ModulVue {
 
     toggleOpen(): void {
         this.internalOpen = !this.internalOpen;
-        this.$emit('update:ouvert', this.internalOpen);
+        this.$emit('update:open', this.internalOpen);
         if (this.internalOpen) {
-            this.$emit('list-opened');
+            this.onListOpened();
         } else {
-            this.$emit('list-closed');
+            this.onListClosed();
         }
     }
 

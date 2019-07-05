@@ -1,10 +1,13 @@
 <div class="m-limit-elements">
     <ul class="m-limit-elements__list">
-        <li v-if="isLimitedElementDisplay"
-            v-for="(element, index) in limitedElements">{{ element }}</li>
-
-        <li v-if="isExtraElementDisplay"
-            v-for="(element, index) in elements">{{ element }}</li>
+        <template v-if="!internalOpen">
+            <li v-for="(element, indexLimited) in limitedElements"
+                :key="indexLimited">{{ element }}</li>
+        </template>
+        <template v-else>
+            <li v-for="(element, indexExtra) in elements"
+                :key="indexExtra">{{ element }}</li>
+        </template>
     </ul>
 
     <m-link v-if="isLinkDisplay"

@@ -25,7 +25,7 @@ describe('MLimitElements', () => {
         expect(wrapper.emitted('list-opened')).toBeTruthy();
     });
 
-    it('should emit list-opened when list is open', async () => {
+    it('should emit list-closed when list is open', async () => {
         const wrapper: Wrapper<MLimitElements> = mount(MLimitElements, {
             localVue: localVue,
             propsData: {

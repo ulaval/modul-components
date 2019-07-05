@@ -47,6 +47,25 @@ storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}`, module)
             }
         },
         template: '<m-limit-elements :elements="elements"></m-limit-elements>'
+    }))
+    .add('open sync', () => ({
+        data: () => ({
+            openProp: false
+        }),
+        props: {
+            elements: {
+                default: ['Element 1', 'Element 2', 'Element 3', 'Element 4', 'Element 5']
+            }
+        },
+        methods: {
+            onClick(): void {
+                this.$data.openProp = !this.$data.openProp;
+            }
+        },
+        template: `<div>
+                        <m-button @click="onClick">Toggle open</m-button>
+                        <m-limit-elements :elements="elements" :open.sync="openProp"></m-limit-elements>
+                   </div>`
     }));
 storiesOf(`${componentsHierarchyRootSeparator}${LIMIT_ELEMENTS}/open="false"`, module)
     .add('default', () => ({
