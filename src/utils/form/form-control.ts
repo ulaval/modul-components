@@ -27,6 +27,14 @@ export class FormControl<T> extends AbstractControl {
         return this._touched;
     }
 
+    public get controls(): AbstractControl[] {
+        throw Error('FormControl do not contain other controls');
+    }
+
+    public getControl<T = any>(name: string): AbstractControl<T> {
+        throw Error('FormControl do not contain other controls');
+    }
+
     get value(): T | undefined {
         return this._value;
     }

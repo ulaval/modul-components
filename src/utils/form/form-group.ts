@@ -29,6 +29,10 @@ export class FormGroup extends AbstractControl {
         return values;
     }
 
+    public set value(value: any) {
+        throw Error('Assigning a value to a FormGroup is not yet implemented');
+    }
+
     public get valid(): boolean {
         if (!this.enabled || this.readonly) {
             return true;
@@ -98,9 +102,9 @@ export class FormGroup extends AbstractControl {
         return Object.values(this._controls);
     }
 
-    public getControl(name: string): AbstractControl {
+    public getControl<T = any>(name: string): AbstractControl<T> {
         if (this._controls[name] !== undefined) {
-            return this._controls[name];
+            return this._controls[name] as AbstractControl<T>;
         } else {
             throw Error(`There is no control with the name ${name} in this group`);
         }

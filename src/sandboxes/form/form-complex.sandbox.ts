@@ -2,6 +2,8 @@ import { PluginObject } from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import { FORM_NAME } from '../../components/component-names';
 import FormPlugin from '../../components/form/form.plugin';
+import { AbstractControl } from '../../utils/form/abstract-control';
+import { ControlValidatorValidationType } from '../../utils/form/control-validator-validation-type';
 import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
@@ -29,51 +31,55 @@ export class MFormAllSandbox extends ModulVue {
             supplField3: 'suppl field 3'
         },
         items: [
-            { name: 'Joe', optionalData: 'blow' },
-            { name: 'John' }
+            { name: 'Joe', apples: 4, bananas: 10 },
+            { name: 'John', apples: 3, bananas: 11 }
         ]
     };
 
     formGroup: FormGroup = this.buildFormGroup();
 
-    get nameField(): FormControl<string> {
-        return this.formGroup.getControl('name') as FormControl<string>;
+    get nameField(): AbstractControl<string> {
+        return this.formGroup.getControl<string>('name');
     }
 
-    get descriptionField(): FormControl<string> {
-        return this.formGroup.getControl('description') as FormControl<string>;
+    get descriptionField(): AbstractControl<string> {
+        return this.formGroup.getControl<string>('description');
     }
 
-    get birthdateField(): FormControl<string> {
-        return this.formGroup.getControl('birthdate') as FormControl<string>;
+    get birthdateField(): AbstractControl<string> {
+        return this.formGroup.getControl<string>('birthdate');
     }
 
-    get typeField(): FormControl<string> {
-        return this.formGroup.getControl('type') as FormControl<string>;
+    get typeField(): AbstractControl<string> {
+        return this.formGroup.getControl<string>('type');
     }
 
-    get champSupplActive(): FormControl<boolean> {
-        return this.formGroup.getControl('champSupplActive') as FormControl<boolean>;
+    get champSupplActive(): AbstractControl<boolean> {
+        return this.formGroup.getControl<boolean>('champSupplActive');
     }
 
-    get supplActiveValue(): boolean | undefined {
+    get supplActiveValue(): boolean {
         return this.champSupplActive.value;
     }
 
-    get champSupplGroup(): FormGroup {
-        return this.formGroup.getControl('champSuppl') as FormGroup;
+    set supplActiveValue(value: boolean) {
+        this.champSupplActive.value = value;
     }
 
-    get supplField1(): FormControl<string> {
-        return this.champSupplGroup.getControl('supplField1') as FormControl<string>;
+    get champSupplGroup(): AbstractControl {
+        return this.formGroup.getControl('champSuppl');
     }
 
-    get supplField2(): FormControl<string> {
-        return this.champSupplGroup.getControl('supplField2') as FormControl<string>;
+    get supplField1(): AbstractControl<number> {
+        return this.champSupplGroup.getControl<number>('supplField1');
     }
 
-    get supplField3(): FormControl<string> {
-        return this.champSupplGroup.getControl('supplField3') as FormControl<string>;
+    get supplField2(): AbstractControl<number> {
+        return this.champSupplGroup.getControl<number>('supplField2');
+    }
+
+    get supplField3(): AbstractControl<number> {
+        return this.champSupplGroup.getControl<number>('supplField3');
     }
 
     get itemsArray(): FormArray {
@@ -120,6 +126,7 @@ export class MFormAllSandbox extends ModulVue {
 
     deleteItem(index): void {
         this.itemsArray.removeControl(index);
+        this.itemsArray.validate();
     }
 
     @Watch('supplActiveValue', { immediate: true })
@@ -175,7 +182,20 @@ export class MFormAllSandbox extends ModulVue {
                     initialValue: data.champSupplActive ? data.champSupplActive : false
                 }),
             champSuppl: this.buildChampSupplFormGroup(data.champSuppl ? data.champSuppl : {}),
-            items: new FormArray()
+            items: new FormArray([],
+                [{
+                    validationFunction: (self: AbstractControl): boolean => {
+                        let valeur: number = 0;
+                        self.controls.forEach((control) => {
+                            valeur = valeur + control.getControl('fruits').getControl('bananas').value;
+                        });
+                        return valeur <= 24;
+                    },
+                    error: {
+                        message: 'There are only 24 bananas available in the store'
+                    },
+                    validationType: ControlValidatorValidationType.OnGoing
+                }])
         });
 
         if (data.items && data.items.length > 0) {
@@ -218,14 +238,36 @@ export class MFormAllSandbox extends ModulVue {
                     initialValue: data.name ? data.name : ''
                 }
             ),
-            optionalData: new FormControl<string>(
-                [
-                    MaxLengthValidator(255)
-                ],
-                {
-                    initialValue: data.optionalData ? data.optionalData : ''
-                }
-            )
+            fruits: new FormGroup({
+                apples: new FormControl<number>(
+                    [
+                        RequiredValidator()
+                    ],
+                    {
+                        initialValue: data.apples ? data.apples : ''
+                    }
+                ),
+                bananas: new FormControl<number>(
+                    [
+                        RequiredValidator()
+                    ],
+                    {
+                        initialValue: data.bananas ? data.bananas : ''
+                    }
+                )
+            }, [{
+                validationFunction: (self: AbstractControl): boolean => {
+                    let valeur: number = 0;
+                    self.controls.forEach((obj) => {
+                        valeur = valeur + obj.value;
+                    });
+                    return valeur <= 24;
+                },
+                error: {
+                    message: 'You can only put 24 fruits in this cart.'
+                },
+                validationType: ControlValidatorValidationType.OnGoing
+            }])
         });
     }
 }

@@ -24,6 +24,10 @@ export class FormArray extends AbstractControl {
         return this._controls.filter(c => c.enabled).map(c => c.value);
     }
 
+    public set value(value: any) {
+        throw Error('Assigning a value to a FormArray is not yet implemented');
+    }
+
     public get valid(): boolean {
         if (!this.enabled || this.readonly) {
             return true;
@@ -65,6 +69,10 @@ export class FormArray extends AbstractControl {
 
     public get touched(): boolean {
         return this.controls.every(c => c.touched);
+    }
+
+    public getControl<T = any>(name: string): AbstractControl<T> {
+        throw Error('Getting a control from a FormArray is not yet implemented');
     }
 
     public async submit(): Promise<void> {

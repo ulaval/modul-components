@@ -11,7 +11,7 @@ import { ControlValidator } from './validators/control-validator';
  * This is the base class for `FormControl`, `FormGroup`, and `FormArray`.
  *
  */
-export abstract class AbstractControl {
+export abstract class AbstractControl<T = any> {
     public htmlElement: HTMLElement | undefined;
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
@@ -34,7 +34,8 @@ export abstract class AbstractControl {
         }
     }
 
-    public abstract get value(): any;
+    public abstract get value(): T;
+    public abstract set value(value: T);
     public abstract get valid(): boolean;
     public abstract get enabled(): boolean;
     public abstract set enabled(isEnabled: boolean);
@@ -43,6 +44,8 @@ export abstract class AbstractControl {
     public abstract get readonly(): boolean;
     public abstract set readonly(isReadonly: boolean);
     public abstract get touched(): boolean;
+    public abstract get controls(): AbstractControl[];
+    public abstract getControl<T = any>(name: string): AbstractControl<T>;
 
     public get pristine(): boolean {
         return this._pristine;
