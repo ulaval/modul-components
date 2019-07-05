@@ -1,0 +1,635 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-toggle-buttons default 1`] = `
+<div
+  class="m-toggle-buttons m--is-default"
+>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      June 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      July 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      August 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      September 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-toggle-buttons disabled 1`] = `
+<div
+  class="m-toggle-buttons m--is-default"
+>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary m--is-disabled"
+    disabled="disabled"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      August 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary m--is-disabled"
+    disabled="disabled"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      September 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="true"
+    class="m-button m-toggle-buttons__button m--is-skin-primary m--is-disabled"
+    disabled="disabled"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      October 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary m--is-disabled"
+    disabled="disabled"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      November 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-toggle-buttons multiple selection 1`] = `
+<div
+  class="m-toggle-buttons m--is-default"
+>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      September 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="true"
+    class="m-button m-toggle-buttons__button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      October 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      November 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="true"
+    class="m-button m-toggle-buttons__button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      December 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-toggle-buttons single selection 1`] = `
+<div
+  class="m-toggle-buttons m--is-default"
+>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      August 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      September 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="true"
+    class="m-button m-toggle-buttons__button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      October 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      November 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-toggle-buttons skin rounded 1`] = `
+<div
+  class="m-toggle-buttons m--is-rounded"
+>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      June 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      July 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      August 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      September 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+</div>
+`;
+
+exports[`Storyshots components|m-toggle-buttons with slots 1`] = `
+<div
+  class="m-toggle-buttons m--is-default"
+>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       August 
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       September 
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="true"
+    class="m-button m-toggle-buttons__button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       October 
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+  <button
+    aria-pressed="false"
+    class="m-button m-toggle-buttons__button m--is-skin-secondary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       November 
+      <svg
+        aria-hidden="true"
+        class="m-icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+</div>
+`;

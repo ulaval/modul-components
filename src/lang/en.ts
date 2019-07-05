@@ -14,6 +14,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/list-item/list-item.lang.en.json'),
                 require('../components/modal/modal.lang.en.json'),
                 require('../components/chip/chip.lang.en.json'),
+                require('../components/copy-to-clipboard/copy-to-clipboard.lang.en.json'),
                 require('../components/datefields/datefields.lang.en.json'),
                 require('../components/datepicker/datepicker.lang.en.json'),
                 require('../components/daterangepicker/daterangepicker.lang.en.json'),
@@ -34,11 +35,13 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/dialog/dialog.lang.en.json'),
                 require('../components/pagination/pagination.lang.en.json'),
                 require('../components/phone-number/phone-number.lang.en.json'),
+                require('../components/phonefield/phonefield.lang.en.json'),
                 require('../components/repeater/repeater.lang.en.json'),
                 require('../components/rich-text-editor/rich-text-editor.lang.en.json'),
                 require('../components/table/table.lang.en.json'),
                 require('../components/toast/toast.lang.en.json'),
                 require('../components/tree/tree.lang.en.json'),
+                require('../components/select/select.lang.en.json'),
                 require('../components/scroll-top/scroll-top.lang.en.json'),
                 require('../components/show-more/show-more.lang.en.json'),
                 require('../components/sidebar/sidebar.lang.en.json'),
@@ -53,6 +56,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../filters/date/period/period.lang.en.json'),
                 require('../filters/date/time/time.lang.en.json'),
                 require('../filters/date/date-time/date-time.lang.en.json')
+
             ];
 
             msgs.forEach(msgs => i18n.addMessages(ENGLISH, msgs));

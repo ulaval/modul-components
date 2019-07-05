@@ -1,0 +1,17 @@
+@import 'commons';
+
+.m-copy-to-clipboard {
+    &__button.m-link {
+        padding: 0 4px;
+        border-radius: 8px;
+        transition: background-color $m-transition-duration ease, color $m-transition-duration ease;
+
+        &:hover {
+            background-color: m-color(interactive, lightest);
+        }
+    }
+
+    .m-input-style.m--is-readonly .m-input-style__main {
+        border-style: solid;
+    }
+}

@@ -254,7 +254,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.setInputWidth();
     }
 
-    private portalContentMounted(): void {
+    private portalMounted(): void {
         this.buildItemsMap();
 
         this.observer = new MutationObserver(() => {

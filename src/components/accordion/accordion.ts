@@ -101,6 +101,8 @@ export class MAccordion extends ModulVue implements AccordionGateway {
     public paddingHeader: boolean;
     @Prop({ default: true })
     public paddingBody: boolean;
+    @Prop({ default: false })
+    public keepContentAlive: boolean;
 
     public titleMenuOpen: string = this.$i18n.translate('m-accordion:open');
     public titleMenuClose: string = this.$i18n.translate('m-accordion:close');

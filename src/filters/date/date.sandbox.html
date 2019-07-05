@@ -38,6 +38,7 @@
                  label="minutes"></m-textfield>
 
     <h4>{{ date | f-m-time }}</h4>
+    <h4 v-if="current.hours">{{ timeString | f-m-time }}</h4>
 
     <h3>Period Format</h3>
 
