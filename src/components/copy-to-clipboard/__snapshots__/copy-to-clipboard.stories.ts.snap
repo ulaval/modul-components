@@ -85,6 +85,10 @@ exports[`Storyshots components|m-copy-to-clipboard custom 1`] = `
       <!---->
     </div>
   </div>
+   
+  <button>
+    Some button
+  </button>
 </div>
 `;
 
