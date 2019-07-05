@@ -9,7 +9,9 @@
         @click="onClick"
         @mousedown="onMousedown"
         @focus="onFocus"
-        @blur="onBlur">
+        @blur="onBlur"
+        @touchstart="onTouchstart"
+        @touchend="onTouchend">
     <m-icon aria-hidden="true"
             class="m-button__icon m--is-left"
             :name="iconName"

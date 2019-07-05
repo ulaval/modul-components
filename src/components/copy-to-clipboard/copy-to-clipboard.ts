@@ -1,21 +1,30 @@
 import ClipboardJs from 'clipboard';
 import { PluginObject } from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { InputSelectable } from '../../utils/input/input';
 import { ModulVue } from '../../utils/vue/vue';
-import { COPY_TO_CLIPBOARD_NAME } from '../component-names';
+import { COPY_TO_CLIPBOARD_FEEDBACK_NAME, COPY_TO_CLIPBOARD_NAME } from '../component-names';
+import I18nPlugin from '../i18n/i18n';
 import LinkPlugin from '../link/link';
 import TextfieldPlugin from '../textfield/textfield';
-import CopyToClipboardFeedbackPlugin from './copy-to-clipboard-feedback';
+import ToastPlugin from '../toast/toast';
+import { MCopyToClipboardFeedback } from './copy-to-clipboard-feedback';
 import WithRender from './copy-to-clipboard.html';
 import './copy-to-clipboard.scss';
 
-export interface CopyToClipboardInputSupport {
+interface CopyToClipboardInputProps {
     value: any;
     readonly: boolean;
     selection: string;
 }
 
-class DefaultCopyToClipboardPropsValue implements CopyToClipboardInputSupport {
+export interface CopyToClipboardInputSupport extends InputSelectable, CopyToClipboardInputProps {
+    value: any;
+    readonly: boolean;
+    selection: string;
+}
+
+class DefaultCopyToClipboardPropsValue implements CopyToClipboardInputProps {
     constructor(public readonly: boolean = true, public selection: string = '', public value: string = '') { }
 }
 
@@ -54,33 +63,27 @@ export class MCopyToClipboard extends ModulVue {
     labelCopyBtn: string = this.$i18n.translate('m-copy-to-clipboard:copy');
     selectedText: string = '';
 
-    get inputProps(): CopyToClipboardInputSupport {
+    get inputProps(): CopyToClipboardInputProps {
         return new DefaultCopyToClipboardPropsValue(true, this.selectedText, this.value);
-    }
-
-    get inputHandlers(): { [key: string]: (value: string) => void } {
-        return {
-            click: this.selectText
-        };
     }
 
     get buttonHandlers(): { [key: string]: (value: string) => void } {
         return {
-            click: this.copyText,
-            mousedown: () => requestAnimationFrame(() => this.selectText()) // Avoid selection flicker when spamming copy button.
+            click: this.copyText
         };
     }
 
     selectText(): void {
-        this.selectedText = '';
-        this.$nextTick(() => {
-            this.selectedText = this.value;
+        requestAnimationFrame(() => {
+            this.selectedText = '';
+            this.$nextTick(() => {
+                this.selectedText = this.value;
+            });
         });
     }
 
     copyText(): void {
         copyToClipboard(this.value);
-        this.selectText();
         this.$emit('copy');
     }
 }
@@ -88,9 +91,12 @@ export class MCopyToClipboard extends ModulVue {
 const CopyToClipboardPlugin: PluginObject<any> = {
     install(v): void {
         v.component(COPY_TO_CLIPBOARD_NAME, MCopyToClipboard);
+        v.component(COPY_TO_CLIPBOARD_FEEDBACK_NAME, MCopyToClipboardFeedback);
         v.use(TextfieldPlugin);
         v.use(LinkPlugin);
-        v.use(CopyToClipboardFeedbackPlugin);
+        v.use(I18nPlugin);
+        v.use(TextfieldPlugin);
+        v.use(ToastPlugin);
     }
 };
 

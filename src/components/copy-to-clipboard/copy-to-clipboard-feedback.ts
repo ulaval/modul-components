@@ -1,11 +1,8 @@
-import { PluginObject, VNode } from 'vue';
+import { VNode } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
-import { COPY_TO_CLIPBOARD_FEEDBACK_NAME } from '../component-names';
-import I18nPlugin from '../i18n/i18n';
-import TextfieldPlugin from '../textfield/textfield';
-import ToastPlugin, { MToastPosition, MToastTimeout } from '../toast/toast';
+import { MToastPosition, MToastTimeout } from '../toast/toast';
 
 @Component
 export class MCopyToClipboardFeedback extends ModulVue {
@@ -41,13 +38,3 @@ export class MCopyToClipboardFeedback extends ModulVue {
     }
 }
 
-const CopyToClipboardFeedbackPlugin: PluginObject<any> = {
-    install(v): void {
-        v.component(COPY_TO_CLIPBOARD_FEEDBACK_NAME, MCopyToClipboardFeedback);
-        v.use(I18nPlugin);
-        v.use(TextfieldPlugin);
-        v.use(ToastPlugin);
-    }
-};
-
-export default CopyToClipboardFeedbackPlugin;

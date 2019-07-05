@@ -70,6 +70,12 @@ export class MButton extends Vue {
     @Emit('mousedown')
     onMousedown(event: Event): void { }
 
+    @Emit('touchstart')
+    onTouchstart(event: Event): void { }
+
+    @Emit('touchend')
+    onTouchend(event: Event): void { }
+
     @Emit('focus')
     onFocus(event: Event): void { }
 

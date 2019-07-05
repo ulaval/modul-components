@@ -1,7 +1,7 @@
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
-import { InputState, InputStateMixin } from '../input-state/input-state';
+import { InputStateMixin } from '../input-state/input-state';
 
 
 export interface InputManagementProps {
@@ -34,8 +34,6 @@ export class InputManagement extends ModulVue
     public autocomplete: string;
     @Prop()
     public focus: boolean;
-    @Prop({ default: '' })
-    public selection: string;
 
     public trimWordWrap: boolean = false;
 
@@ -58,15 +56,6 @@ export class InputManagement extends ModulVue
 
     public get hasValue(): boolean {
         return !!(this.model || '').toString().trim();
-    }
-
-    @Watch('selection')
-    private updateSelection(): void {
-        const inputElement: HTMLInputElement = this.as<InputState>().getInput() as HTMLInputElement;
-        if (inputElement && this.selection) {
-            inputElement.focus();
-            inputElement.select();
-        }
     }
 
     onClick(event: MouseEvent): void {

@@ -6,6 +6,7 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import { changeSelection, InputSelectable } from '../../utils/input/input';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import CharacterCountPlugin from '../character-count/character-count';
@@ -37,7 +38,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
         InputLabel
     ]
 })
-export class MTextfield extends ModulVue implements InputManagementData {
+export class MTextfield extends ModulVue implements InputManagementData, InputSelectable {
     @Prop({
         default: MTextfieldType.Text,
         validator: value =>
@@ -61,6 +62,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
     public characterCountThreshold: number;
+    @Prop({ default: '' })
+    public selection: string;
 
     readonly internalValue: string;
 
@@ -149,6 +152,11 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private resetModel(): void {
         this.$emit('input', '');
+    }
+
+    @Watch('selection')
+    updateSelection(): void {
+        changeSelection(this.as<InputState>().getInput() as HTMLInputElement, this.selection);
     }
 }
 

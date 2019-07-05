@@ -1,17 +1,17 @@
-<div class="m-copy-to-clipboard">
-    <slot name="input"
-          :props="inputProps"
-          :handlers="inputHandlers">
-        <m-textfield v-bind="inputProps"
-                     v-on="inputHandlers">
+<div class="m-copy-to-clipboard"
+     @mousedown="selectText"
+     @mouseup="selectText"
+     @touchstart="selectText"
+     @touchend="selectText"
+     @click="selectText">
+    <slot :input-props="inputProps"
+          :button-handlers="buttonHandlers">
+        <m-textfield v-bind="inputProps">
             <template slot="suffix">
-                <slot name="button"
-                      :handlers="buttonHandlers">
-                    <m-link mode="button"
-                            :underline="false"
-                            v-on="buttonHandlers"
-                            class="m-copy-to-clipboard__button">{{labelCopyBtn}}</m-link>
-                </slot>
+                <m-link mode="button"
+                        :underline="false"
+                        v-on="buttonHandlers"
+                        class="m-copy-to-clipboard__button">{{labelCopyBtn}}</m-link>
             </template>
         </m-textfield>
     </slot>
