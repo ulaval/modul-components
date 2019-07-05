@@ -445,77 +445,84 @@ exports[`Storyshots components|m-form/all fields autocomplete 1`] = `
   >
     <div
       class="m-input-style m--has-cursor-pointer m--has-label m--is-tag-default"
-      style="width: 100%;"
+      style="width: 100%; margin-top: 10px;"
     >
       <div
-        class="m-input-style__content"
-        style="margin-top: 10px;"
+        class="m-input-style__main"
       >
-        <label
-          class="m-input-style__label"
-          for="mDropdown-uuid"
-        >
-          <span
-            class="m-input-style__text"
-          >
-            <span>
-              Autocomplete
-            </span>
-             
-            <sup
-              class="m-input-style__required-marker"
-            >
-              *
-            </sup>
-          </span>
-        </label>
-         
         <div
           class="m-input-style__body"
         >
-          <!---->
+          <label
+            class="m-input-style__label"
+            for="mDropdown-uuid"
+            style="margin-right: 0px;"
+          >
+            <span
+              class="m-input-style__text"
+            >
+              <span>
+                Autocomplete
+              </span>
+               
+              <sup
+                class="m-input-style__required-marker"
+              >
+                *
+              </sup>
+            </span>
+          </label>
            
           <div
-            class="m-input-style__left-content"
+            class="m-input-style__input"
           >
-            <svg
-              aria-hidden="true"
-              class="m-icon m-dropdown__placeholder-icon"
-              height="16px"
-              width="16px"
+            <!---->
+             
+            <div
+              class="m-input-style__content"
             >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-dropdown__placeholder-icon"
+                height="16px"
+                width="16px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <input
+                aria-controls="mDropdown-uuid-controls"
+                aria-haspopup="true"
+                autocomplete="new-password"
+                class="m-dropdown__input"
+                id="mDropdown-uuid"
+                type="text"
+              />
+               
               <!---->
                
-              <use
-                aria-hidden="true"
-                class=""
-              />
-            </svg>
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
              
-            <input
-              aria-controls="mDropdown-uuid-controls"
-              aria-haspopup="true"
-              autocomplete="new-password"
-              class="m-dropdown__input"
-              id="mDropdown-uuid"
-              type="text"
-            />
-             
-            <!---->
-             
-            <!---->
-             
-            <!---->
-             
-            <!---->
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
           </div>
-           
-          <div
-            class="m-input-style__right-content"
-          />
-           
-          <!---->
         </div>
+         
+        <!---->
       </div>
     </div>
      

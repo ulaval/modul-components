@@ -12,58 +12,63 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
       >
         <div
           class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Numéro civique
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Numéro civique
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -89,58 +94,63 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
       >
         <div
           class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Unité
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Unité
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -166,58 +176,63 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
       >
         <div
           class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Rue
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Rue
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -243,58 +258,63 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
       >
         <div
           class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Ville
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Ville
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -320,77 +340,83 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
       >
         <div
           class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
-          style="width: 100%;"
+          style="width: 100%; margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mDropdown-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Pays
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
+              <label
+                class="m-input-style__label"
+                for="mDropdown-uuid"
+                style="margin-right: 0px;"
               >
-                <!---->
-                 
-                <input
-                  aria-controls="mDropdown-uuid-controls"
-                  aria-haspopup="true"
-                  class="m-dropdown__input"
-                  id="mDropdown-uuid"
-                  readonly="readonly"
-                  type="text"
-                />
-                 
-                <!---->
-                  
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
-              >
-                <div
-                  class="m-dropdown__arrow"
+                <span
+                  class="m-input-style__text"
                 >
-                  <svg
-                    aria-hidden="true"
-                    class="m-icon m-dropdown__arrow__icon"
-                    height="16px"
-                    width="16px"
+                  <span>
+                    Pays
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <!---->
+                   
+                  <input
+                    aria-controls="mDropdown-uuid-controls"
+                    aria-haspopup="true"
+                    class="m-dropdown__input"
+                    id="mDropdown-uuid"
+                    readonly="readonly"
+                    type="text"
+                  />
+                   
+                  <!---->
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <div
+                    class="m-dropdown__arrow"
                   >
-                    <!---->
-                     
-                    <use
+                    <svg
                       aria-hidden="true"
-                      class=""
-                    />
-                  </svg>
+                      class="m-icon m-dropdown__arrow__icon"
+                      height="16px"
+                      width="16px"
+                    >
+                      <!---->
+                       
+                      <use
+                        aria-hidden="true"
+                        class=""
+                      />
+                    </svg>
+                  </div>
+                   
+                  <!---->
                 </div>
               </div>
-               
-              <!---->
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -425,58 +451,63 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
       >
         <div
           class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Code Postal
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Code Postal
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -538,58 +569,63 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
       >
         <div
           class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Numéro civique
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Numéro civique
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -615,58 +651,63 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
       >
         <div
           class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Unité
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Unité
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -692,58 +733,63 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
       >
         <div
           class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Rue
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Rue
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -769,58 +815,63 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
       >
         <div
           class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Ville
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Ville
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -846,77 +897,83 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
       >
         <div
           class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
-          style="width: 100%;"
+          style="width: 100%; margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mDropdown-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Pays
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
+              <label
+                class="m-input-style__label"
+                for="mDropdown-uuid"
+                style="margin-right: 0px;"
               >
-                <!---->
-                 
-                <input
-                  aria-controls="mDropdown-uuid-controls"
-                  aria-haspopup="true"
-                  class="m-dropdown__input"
-                  id="mDropdown-uuid"
-                  readonly="readonly"
-                  type="text"
-                />
-                 
-                <!---->
-                  
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
-              >
-                <div
-                  class="m-dropdown__arrow"
+                <span
+                  class="m-input-style__text"
                 >
-                  <svg
-                    aria-hidden="true"
-                    class="m-icon m-dropdown__arrow__icon"
-                    height="16px"
-                    width="16px"
+                  <span>
+                    Pays
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <!---->
+                   
+                  <input
+                    aria-controls="mDropdown-uuid-controls"
+                    aria-haspopup="true"
+                    class="m-dropdown__input"
+                    id="mDropdown-uuid"
+                    readonly="readonly"
+                    type="text"
+                  />
+                   
+                  <!---->
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <div
+                    class="m-dropdown__arrow"
                   >
-                    <!---->
-                     
-                    <use
+                    <svg
                       aria-hidden="true"
-                      class=""
-                    />
-                  </svg>
+                      class="m-icon m-dropdown__arrow__icon"
+                      height="16px"
+                      width="16px"
+                    >
+                      <!---->
+                       
+                      <use
+                        aria-hidden="true"
+                        class=""
+                      />
+                    </svg>
+                  </div>
+                   
+                  <!---->
                 </div>
               </div>
-               
-              <!---->
             </div>
+             
+            <!---->
           </div>
         </div>
          
@@ -951,58 +1008,63 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
       >
         <div
           class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
         >
           <div
-            class="m-input-style__content"
-            style="margin-top: 10px;"
+            class="m-input-style__main"
           >
-            <label
-              class="m-input-style__label"
-              for="mTextfield-uuid"
-            >
-              <span
-                class="m-input-style__text"
-              >
-                <span>
-                  Code Postal
-                </span>
-                 
-                <!---->
-              </span>
-            </label>
-             
             <div
               class="m-input-style__body"
             >
-              <!---->
-               
-              <div
-                class="m-input-style__left-content"
-              >
-                <input
-                  class="m-textfield__input"
-                  id="mTextfield-uuid"
-                  maxlength="Infinity"
-                  type="text"
-                />
-                  
-                <!---->
-                 
-                <!---->
-                 
-                <!---->
-              </div>
-               
-              <div
-                class="m-input-style__right-content"
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
               >
                 <span
-                  style="white-space: nowrap;"
-                />
-              </div>
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Code Postal
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
                
-              <!---->
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
             </div>
+             
+            <!---->
           </div>
         </div>
          
