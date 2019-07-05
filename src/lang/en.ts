@@ -12,6 +12,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/list-item/list-item.lang.en.json'),
                 require('../components/modal/modal.lang.en.json'),
                 require('../components/chip/chip.lang.en.json'),
+                require('../components/copy-to-clipboard/copy-to-clipboard.lang.en.json'),
                 require('../components/datefields/datefields.lang.en.json'),
                 require('../components/datepicker/datepicker.lang.en.json'),
                 require('../components/daterangepicker/daterangepicker.lang.en.json'),
