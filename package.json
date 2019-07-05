@@ -41,6 +41,7 @@
     "dependencies": {
         "axios": "^0.17.1",
         "cleave.js": "^1.5.0",
+        "clipboard": "^2.0.4",
         "css-element-queries": "^0.4.0",
         "enquire.js": "^2.1.6",
         "es6-promise": "^4.1.1",
