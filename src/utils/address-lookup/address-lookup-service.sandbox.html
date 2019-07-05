@@ -1,0 +1,56 @@
+<div>
+    <h1>Basic lookup</h1>
+    <dl>
+        <template v-for="address in addresses">
+            <dt>ID</dt>
+            <dd>{{ address.id }}</dd>
+            <dt>User Input</dt>
+            <dd>{{ address.userInput }}</dd>
+            <dt>Text</dt>
+            <dd>{{ address.text }}</dd>
+            <dt>Type</dt>
+            <dd>{{ address.type}}</dd>
+            <dt>Description</dt>
+            <dd>{{ address.description}}</dd>
+        </template>
+    </dl>
+    <h1>Drill down</h1>
+    <dl>
+        <template v-for="address in addressDrillDown">
+            <dt>ID</dt>
+            <dd>{{ address.id }}</dd>
+            <dt>User Input</dt>
+            <dd>{{ address.userInput }}</dd>
+            <dt>Text</dt>
+            <dd>{{ address.text }}</dd>
+            <dt>Type</dt>
+            <dd>{{ address.type}}</dd>
+            <dt>Description</dt>
+            <dd>{{ address.description}}</dd>
+        </template>
+    </dl>
+
+    <h1>Retrieve</h1>
+    <dl>
+        <template v-for="address in addressDetail">
+            <dt>Street</dt>
+            <dd>{{ address.street }}</dd>
+            <dt>City</dt>
+            <dd>{{ address.city }}</dd>
+            <dt>province</dt>
+            <dd>{{ address.province.province }} ({{ address.province.provinceCode }})</dd>
+            <dt>postalCode</dt>
+            <dd>{{ address.postalCode}}</dd>
+            <dt>Country</dt>
+            <dd>{{ address.country.country }} - {{ address.country.countryIso2 }} - {{ address.country.countryIso3 }}</dd>
+            <dt>Sub Building</dt>
+            <dd>{{ address.subBuilding }}</dd>
+            <dt>Label</dt>
+            <dd>{{ address.label }}</dd>
+            <dt>Language</dt>
+            <dd>{{ address.language }}</dd>
+            <dt>Language Alt</dt>
+            <dd>{{ address.alternativeLanguages }}</dd>
+        </template>
+    </dl>
+</div>

@@ -1,0 +1,11 @@
+{
+    "m-address-editor": {
+        "building-number": "Building number",
+        "sub-building": "Unit",
+        "street": "Street",
+        "city": "City",
+        "country": "Country",
+        "province": "Province / state",
+        "postal-code": "Postal Code"
+    }
+}
