@@ -1,0 +1,11 @@
+{
+    "m-address-editor": {
+        "building-number": "Numéro civique",
+        "sub-building": "Unité",
+        "street": "Rue",
+        "city": "Ville",
+        "country": "Pays",
+        "province": "Province / état",
+        "postal-code": "Code Postal"
+    }
+}

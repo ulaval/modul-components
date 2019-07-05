@@ -439,12 +439,114 @@ exports[`Storyshots components|m-form/all fields autocomplete 1`] = `
     style="width: 300px; margin-bottom: 5px; border-bottom: 1px solid black; display: flex; padding-bottom: 10px;"
   />
    
-  <m-autocomplete
-    error-message=""
-    label="Autocomplete"
-    required-marker="true"
-    results="[object Object],[object Object]"
-  />
+  <div
+    class="m-dropdown m--has-placeholder-icon"
+    style="width: 100%; max-width: 288px;"
+  >
+    <div
+      class="m-input-style m--has-cursor-pointer m--has-label m--is-tag-default"
+      style="width: 100%; margin-top: 10px;"
+    >
+      <div
+        class="m-input-style__main"
+      >
+        <div
+          class="m-input-style__body"
+        >
+          <label
+            class="m-input-style__label"
+            for="mDropdown-uuid"
+            style="margin-right: 0px;"
+          >
+            <span
+              class="m-input-style__text"
+            >
+              <span>
+                Autocomplete
+              </span>
+               
+              <sup
+                class="m-input-style__required-marker"
+              >
+                *
+              </sup>
+            </span>
+          </label>
+           
+          <div
+            class="m-input-style__input"
+          >
+            <!---->
+             
+            <div
+              class="m-input-style__content"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-dropdown__placeholder-icon"
+                height="16px"
+                width="16px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <input
+                aria-controls="mDropdown-uuid-controls"
+                aria-haspopup="true"
+                autocomplete="new-password"
+                class="m-dropdown__input"
+                id="mDropdown-uuid"
+                type="text"
+              />
+               
+              <!---->
+               
+              <!---->
+               
+              <!---->
+               
+              <!---->
+            </div>
+             
+            <div
+              class="m-input-style__suffix"
+            >
+               
+              <!---->
+            </div>
+          </div>
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-validation-message m-dropdown__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+     
+    <div
+      class="m-popup"
+    >
+      <div
+        class="m-popper"
+      >
+         
+        <!---->
+      </div>
+       
+      <!---->
+    </div>
+  </div>
    
   <div
     class="m-u--margin-top--l m-u--margin-bottom--l"

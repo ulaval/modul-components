@@ -1,0 +1,351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-limit-elements 1 element, limit of 2 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+  </ul>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements 2 elements, limit of 2 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+  </ul>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements 3 elements, limit of 2 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+    <li>
+      Element 3
+    </li>
+  </ul>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements 4 elements, limit of 2 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+  </ul>
+   
+  <a
+    class="m-link m--is-unvisited m--is-button m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      Afficher 2 de plus
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements 5 elements, limit of 2 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+  </ul>
+   
+  <a
+    class="m-link m--is-unvisited m--is-button m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      Afficher 3 de plus
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements open sync 1`] = `
+<div>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Toggle open 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="m-limit-elements"
+  >
+    <ul
+      class="m-limit-elements__list"
+    >
+      <li>
+        Element 1
+      </li>
+      <li>
+        Element 2
+      </li>
+    </ul>
+     
+    <a
+      class="m-link m--is-unvisited m--is-button m--has-content"
+      href="#"
+      tabindex="0"
+    >
+      <!---->
+       
+      <span
+        class="m-link__text"
+      >
+        Afficher 3 de plus
+      </span>
+       
+      <!---->
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements/limit="2" default 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+  </ul>
+   
+  <a
+    class="m-link m--is-unvisited m--is-button m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      Afficher 3 de plus
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements/limit="2" limit of 3 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+    <li>
+      Element 3
+    </li>
+  </ul>
+   
+  <a
+    class="m-link m--is-unvisited m--is-button m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      Afficher 2 de plus
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements/limit="2" limit of 4 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+    <li>
+      Element 3
+    </li>
+    <li>
+      Element 4
+    </li>
+    <li>
+      Element 5
+    </li>
+  </ul>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements/open="false" default 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+  </ul>
+   
+  <a
+    class="m-link m--is-unvisited m--is-button m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      Afficher 3 de plus
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-limit-elements/open="false" true 1`] = `
+<div
+  class="m-limit-elements"
+>
+  <ul
+    class="m-limit-elements__list"
+  >
+    <li>
+      Element 1
+    </li>
+    <li>
+      Element 2
+    </li>
+    <li>
+      Element 3
+    </li>
+    <li>
+      Element 4
+    </li>
+    <li>
+      Element 5
+    </li>
+  </ul>
+   
+  <a
+    class="m-link m--is-unvisited m--is-button m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
+     
+    <span
+      class="m-link__text"
+    >
+      Afficher moins
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;

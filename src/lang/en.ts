@@ -9,6 +9,8 @@ const EnglishPlugin: PluginObject<any> = {
             const msgs: BundleMessagesMap[] = [
                 require('../components/accordion/accordion.lang.en.json'),
                 require('../components/accordion-group/accordion-group.lang.en.json'),
+                require('../components/address/address-editor/address-editor.lang.en.json'),
+                require('../components/address/address-lookup-field/address-lookup-field.lang.en.json'),
                 require('../components/list-item/list-item.lang.en.json'),
                 require('../components/modal/modal.lang.en.json'),
                 require('../components/chip/chip.lang.en.json'),
@@ -25,6 +27,7 @@ const EnglishPlugin: PluginObject<any> = {
                 require('../components/inplace-edit/inplace-edit.lang.en.json'),
                 require('../components/input-style/input-style.lang.en.json'),
                 require('../components/link/link.lang.en.json'),
+                require('../components/limit-elements/limit-elements.lang.en.json'),
                 require('../components/limit-text/limit-text.lang.en.json'),
                 require('../components/login/login.lang.en.json'),
                 require('../components/message/message.lang.en.json'),
