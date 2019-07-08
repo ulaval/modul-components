@@ -6,12 +6,16 @@
      @click="selectText">
     <slot :input-props="inputProps"
           :button-handlers="buttonHandlers">
-        <m-textfield v-bind="inputProps">
+        <m-textfield :max-width="fieldMaxWidth"
+                     v-bind="inputProps">
             <template slot="suffix">
-                <m-link mode="button"
-                        :underline="false"
-                        v-on="buttonHandlers"
-                        class="m-copy-to-clipboard__button">{{labelCopyBtn}}</m-link>
+                <slot name="inputButton"
+                      :button-handlers="buttonHandlers">
+                    <m-link mode="button"
+                            :underline="false"
+                            v-on="buttonHandlers"
+                            class="m-copy-to-clipboard__button">{{labelCopyBtn}}</m-link>
+                </slot>
             </template>
         </m-textfield>
     </slot>
