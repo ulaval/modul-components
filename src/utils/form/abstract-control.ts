@@ -16,7 +16,7 @@ export abstract class AbstractControl<T = any> {
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;
-    protected _errors: ControlError[] = [];
+    protected errors: ControlError[] = [];
     protected _waiting: boolean = false;
     protected _enabled: boolean = true;
     protected _readonly: boolean = false;
@@ -46,26 +46,20 @@ export abstract class AbstractControl<T = any> {
     public abstract get touched(): boolean;
     public abstract get controls(): AbstractControl[];
     public abstract getControl<T = any>(name: string): AbstractControl<T>;
+    public abstract get errorsRecursive(): ControlError[];
+    public abstract set errorsRecursive(errors: ControlError[]);
 
     public get pristine(): boolean {
         return this._pristine;
     }
 
-    public get errors(): ControlError[] {
-        return (this.enabled && !this.readonly) ? this._errors : [];
-    }
-
-    public set errors(errors: ControlError[]) {
-        this._errors = [...errors];
-    }
-
     public hasError(): boolean {
-        return this.errors.length > 0;
+        return this.errorsRecursive.length > 0;
     }
 
     public get errorMessage(): string {
         if (this.hasError()) {
-            return getString(this.errors[0].message);
+            return getString(this.errorsRecursive[0].message);
         } else {
             return '';
         }
@@ -85,7 +79,7 @@ export abstract class AbstractControl<T = any> {
         this._pristine = true;
         this.validators.forEach(v => v.lastCheck = undefined);
         this._editionContext = ControlEditionContext.None;
-        this._errors = [];
+        this.errors = [];
     }
 
     public upwardValueChanged(): void {
@@ -156,7 +150,7 @@ export abstract class AbstractControl<T = any> {
             return;
         }
 
-        if (this.errors.length > 0) {
+        if (this.errorsRecursive.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this.pristine) {
             this._editionContext = ControlEditionContext.Pristine;
@@ -188,7 +182,7 @@ export abstract class AbstractControl<T = any> {
     }
 
     private _updateErrors(): void {
-        this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
+        this.errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
 
     protected _hasAnyControlsInError(): boolean {

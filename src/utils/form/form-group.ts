@@ -1,4 +1,5 @@
 import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
@@ -70,6 +71,21 @@ export class FormGroup extends AbstractControl {
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
         this.controls.forEach(c => c.readonly = isReadonly);
+    }
+
+    public get errorsRecursive(): ControlError[] {
+        if (!this.enabled || this.readonly) {
+            return [];
+        }
+        let errors: ControlError[] = [...this.errors];
+        this.controls.forEach((control: AbstractControl) => {
+            errors = [...errors, ...control.errorsRecursive];
+        });
+        return errors;
+    }
+
+    public set errorsRecursive(errors: ControlError[]) {
+        this.errors = [...errors];
     }
 
     public get touched(): boolean {

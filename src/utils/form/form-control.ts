@@ -1,4 +1,5 @@
 import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { FormControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
@@ -28,7 +29,7 @@ export class FormControl<T> extends AbstractControl {
     }
 
     public get controls(): AbstractControl[] {
-        throw Error('FormControl do not contain other controls');
+        return [];
     }
 
     public getControl<T = any>(name: string): AbstractControl<T> {
@@ -84,6 +85,14 @@ export class FormControl<T> extends AbstractControl {
 
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
+    }
+
+    public get errorsRecursive(): ControlError[] {
+        return (this.enabled && !this.readonly) ? this.errors : [];
+    }
+
+    public set errorsRecursive(errors: ControlError[]) {
+        this.errors = [...errors];
     }
 
     /**

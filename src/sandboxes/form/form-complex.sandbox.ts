@@ -7,11 +7,50 @@ import { ControlValidatorValidationType } from '../../utils/form/control-validat
 import { FormArray } from '../../utils/form/form-array';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
+import { ControlValidator, ControlValidatorOptions } from '../../utils/form/validators/control-validator';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
 import { MinLengthValidator } from '../../utils/form/validators/min-length/min-length';
 import { RequiredValidator } from '../../utils/form/validators/required/required';
 import { ModulVue } from '../../utils/vue/vue';
 import WithRender from './form-complex.sandbox.html';
+
+const ID_FORM_APPLES: string = 'apples';
+const ID_FORM_BANANAS: string = 'bananas';
+const ID_FORM_FRUITS: string = 'fruits';
+
+class Validations {
+    static validatePickingLessThen24Bananas: (options?: ControlValidatorOptions) => ControlValidator = (options?: ControlValidatorOptions): ControlValidator => {
+        return {
+            validationFunction: (self: AbstractControl): boolean => {
+                let valeur: number = 0;
+                self.controls.forEach((control) => {
+                    valeur = valeur + control.getControl(ID_FORM_FRUITS).getControl(ID_FORM_BANANAS).value;
+                });
+                return valeur <= 24;
+            },
+            error: {
+                message: 'There are only 24 bananas available in the store'
+            },
+            validationType: ControlValidatorValidationType.OnGoing
+        };
+    }
+
+    static validatePickingLessThen24FruitsInCart: (options?: ControlValidatorOptions) => ControlValidator = (options?: ControlValidatorOptions): ControlValidator => {
+        return {
+            validationFunction: (self: AbstractControl): boolean => {
+                let valeur: number = 0;
+                self.controls.forEach((obj) => {
+                    valeur = valeur + obj.value;
+                });
+                return valeur <= 24;
+            },
+            error: {
+                message: 'You can only put 24 fruits in this cart.'
+            },
+            validationType: ControlValidatorValidationType.OnGoing
+        };
+    }
+}
 
 @WithRender
 @Component
@@ -31,8 +70,8 @@ export class MFormAllSandbox extends ModulVue {
             supplField3: 'suppl field 3'
         },
         items: [
-            { name: 'Joe', apples: 4, bananas: 10 },
-            { name: 'John', apples: 3, bananas: 11 }
+            { name: 'Joe', [ID_FORM_APPLES]: 4, [ID_FORM_BANANAS]: 10 },
+            { name: 'John', [ID_FORM_APPLES]: 3, [ID_FORM_BANANAS]: 11 }
         ]
     };
 
@@ -183,19 +222,7 @@ export class MFormAllSandbox extends ModulVue {
                 }),
             champSuppl: this.buildChampSupplFormGroup(data.champSuppl ? data.champSuppl : {}),
             items: new FormArray([],
-                [{
-                    validationFunction: (self: AbstractControl): boolean => {
-                        let valeur: number = 0;
-                        self.controls.forEach((control) => {
-                            valeur = valeur + control.getControl('fruits').getControl('bananas').value;
-                        });
-                        return valeur <= 24;
-                    },
-                    error: {
-                        message: 'There are only 24 bananas available in the store'
-                    },
-                    validationType: ControlValidatorValidationType.OnGoing
-                }])
+                [Validations.validatePickingLessThen24Bananas()])
         });
 
         if (data.items && data.items.length > 0) {
@@ -239,35 +266,23 @@ export class MFormAllSandbox extends ModulVue {
                 }
             ),
             fruits: new FormGroup({
-                apples: new FormControl<number>(
+                [ID_FORM_APPLES]: new FormControl<number>(
                     [
                         RequiredValidator()
                     ],
                     {
-                        initialValue: data.apples ? data.apples : ''
+                        initialValue: data[ID_FORM_APPLES] ? data[ID_FORM_APPLES] : ''
                     }
                 ),
-                bananas: new FormControl<number>(
+                [ID_FORM_BANANAS]: new FormControl<number>(
                     [
                         RequiredValidator()
                     ],
                     {
-                        initialValue: data.bananas ? data.bananas : ''
+                        initialValue: data[ID_FORM_BANANAS] ? data[ID_FORM_BANANAS] : ''
                     }
                 )
-            }, [{
-                validationFunction: (self: AbstractControl): boolean => {
-                    let valeur: number = 0;
-                    self.controls.forEach((obj) => {
-                        valeur = valeur + obj.value;
-                    });
-                    return valeur <= 24;
-                },
-                error: {
-                    message: 'You can only put 24 fruits in this cart.'
-                },
-                validationType: ControlValidatorValidationType.OnGoing
-            }])
+            }, [Validations.validatePickingLessThen24FruitsInCart()])
         });
     }
 }
