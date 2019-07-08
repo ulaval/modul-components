@@ -5,3 +5,6 @@
 # m-form
 /src/components/form/ @guignol1981
 /utils/form/ @guignol1981
+
+# m-copy-to-clipboard
+/src/components/copy-to-clipboard/ @Mboulianne
