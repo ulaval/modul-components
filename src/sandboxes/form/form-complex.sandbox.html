@@ -82,11 +82,11 @@
         <m-add @click="addItem()">Add Cart (max 24 fruits, max total 24 bananas)</m-add>
         <div v-for="(control, index) in itemsArray.controls"
              :key="index">
-            <m-textfield v-m-control="control.getControl('name')"
-                         v-model="control.getControl('name').value"
-                         label="Name"
-                         :error="control.getControl('name').hasError()"
-                         :error-message="control.getControl('name').errorMessage">
+            <m-textfield v-m-control="control.getControl('client')"
+                         v-model="control.getControl('client').value"
+                         label="Client"
+                         :error="control.getControl('client').hasError()"
+                         :error-message="control.getControl('client').errorMessage">
             </m-textfield>
             <m-integerfield v-m-control="control.getControl('fruits').getControl('apples')"
                             v-model="control.getControl('fruits').getControl('apples').value"
