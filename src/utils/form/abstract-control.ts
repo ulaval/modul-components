@@ -16,7 +16,7 @@ export abstract class AbstractControl<T = any> {
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;
-    protected errors: ControlError[] = [];
+    public errors: ControlError[] = [];
     protected _waiting: boolean = false;
     protected _enabled: boolean = true;
     protected _readonly: boolean = false;
