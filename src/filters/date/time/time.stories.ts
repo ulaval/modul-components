@@ -82,12 +82,12 @@ storiesOf(`${filtersHierarchyRootSeparator}${TIME_NAME}`, module)
     )
     .add('Simple (from Dates)', () => getBaseSimpleVue(`
         <div>
-            <div>at the top of the hour (AM): {{ new Date('2019-06-23T11:00') | f-m-time({ preposition }) }}</div>
-            <div>hour with minutes (AM): {{ new Date('2019-06-23T11:59') | f-m-time({ preposition }) }}</div>
-            <div>at the top of the hour (PM): {{ new Date('2019-06-23T14:00') | f-m-time({ preposition }) }}</div>
-            <div>hour with minutes (PM): {{ new Date('2019-06-23T14:59') | f-m-time({ preposition }) }}</div>
-            <div>at the top of the hour (Midnight): {{ new Date('2019-06-23T00:00') | f-m-time({ preposition }) }}</div>
-            <div>hour with minutes (Midnight): {{ new Date('2019-06-23T00:59') | f-m-time({ preposition }) }}</div>
+            <div>at the top of the hour (AM): {{ new Date('2019-06-23T11:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>hour with minutes (AM): {{ new Date('2019-06-23T11:59:00Z') | f-m-time({ preposition }) }}</div>
+            <div>at the top of the hour (PM): {{ new Date('2019-06-23T14:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>hour with minutes (PM): {{ new Date('2019-06-23T14:59:00Z') | f-m-time({ preposition }) }}</div>
+            <div>at the top of the hour (Midnight): {{ new Date('2019-06-23T00:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>hour with minutes (Midnight): {{ new Date('2019-06-23T00:59:00Z') | f-m-time({ preposition }) }}</div>
         </div>`)
     )
     .add('Period (from strings)', () => getBasePeriodVue(`
@@ -104,9 +104,9 @@ storiesOf(`${filtersHierarchyRootSeparator}${TIME_NAME}`, module)
         <div>
             <div>undefined period: {{ undefined | f-m-time-period({ preposition }) }}</div>
             <div>empty period: {{ {} | f-m-time-period({ preposition }) }}</div>
-            <div>from only: {{ { from: new Date('2019-06-23T11:00') } | f-m-time-period({ preposition }) }}</div>
-            <div>to only: {{ { to: new Date('2019-06-23T11:59') } | f-m-time-period({ preposition }) }}</div>
-            <div>full period: {{ { from: new Date('2019-06-23T11:59'), to: new Date('2019-06-23T14:15') } | f-m-time-period({ preposition }) }}</div>
-            <div>full period, same time: {{ { from: new Date('2019-06-23T11:59'), to: new Date('2019-06-23T11:59') } | f-m-time-period({ preposition }) }}</div>
+            <div>from only: {{ { from: new Date('2019-06-23T11:00:00Z') } | f-m-time-period({ preposition }) }}</div>
+            <div>to only: {{ { to: new Date('2019-06-23T11:59:00Z') } | f-m-time-period({ preposition }) }}</div>
+            <div>full period: {{ { from: new Date('2019-06-23T11:59:00Z'), to: new Date('2019-06-23T14:15:00Z') } | f-m-time-period({ preposition }) }}</div>
+            <div>full period, same time: {{ { from: new Date('2019-06-23T11:59:00Z'), to: new Date('2019-06-23T11:59:00Z') } | f-m-time-period({ preposition }) }}</div>
         </div>`)
     );

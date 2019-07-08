@@ -19,7 +19,7 @@ exports[`Storyshots filters|f-m-time Period (from dates) 1`] = `
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} à mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} - mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
@@ -47,7 +47,7 @@ exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} à mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} - mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>

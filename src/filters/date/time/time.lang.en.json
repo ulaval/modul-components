@@ -4,7 +4,7 @@
         "atTime": "At %(time)s",
         "fromTime": "From %(time)s",
         "untilTime": "Until %(time)s",
-        "timePeriod": "%(from)s to %(to)s",
+        "timePeriod": "%(from)s - %(to)s",
         "timePeriodWithPreposition": "From %(from)s to %(to)s"
     }
 }
