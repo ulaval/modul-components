@@ -26,3 +26,4 @@ Vue.use(FiltersPlugin);
 
 Vue.use(FrenchPlugin);
 Vue.use(DefaultSpritesPlugin);
+

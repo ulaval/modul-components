@@ -1,0 +1,6 @@
+{
+    "m-limit-elements": {
+        "show-more-label": "Show %(nbElements)s more",
+        "show-less-label": "Show less"
+    }
+}

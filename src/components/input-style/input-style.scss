@@ -134,11 +134,6 @@ $m-input-style-border-radius: 3px;
         .m-input-style__main {
             border-style: dashed;
         }
-
-        input,
-        textarea {
-            user-select: none;
-        }
     }
 
     &.m--is-disabled,
@@ -165,9 +160,7 @@ $m-input-style-border-radius: 3px;
     }
 
     &.m--is-readonly {
-        @include input-style-cursor() {
-            user-select: none;
-        }
+        @include input-style-cursor();
     }
 
     &.m--is-anim-ready {
