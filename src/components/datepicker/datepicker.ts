@@ -1,4 +1,4 @@
-import { CleaveOptions } from 'cleave.js/options';
+
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
@@ -17,7 +17,7 @@ import CalendarPlugin from '../calendar/calendar';
 import { MBaseCalendarType, MBaseCalendarView } from '../calendar/calendar-renderer/base-calendar/base-calendar';
 import { DATEPICKER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
-import { MInputMask } from '../input-mask/input-mask';
+import { InternalCleaveOptions, MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -99,7 +99,7 @@ export class MDatepicker extends ModulVue {
         }
     }
 
-    public get inputOptions(): CleaveOptions {
+    public get inputOptions(): InternalCleaveOptions {
         if (this.isTypeYearsMonths) {
             return {
                 numericOnly: true,
@@ -240,7 +240,7 @@ export class MDatepicker extends ModulVue {
     // Model management
 
     // override from InputManagement
-    @Watch('value')
+    @Watch('value', { immediate: true })
     private onValueChange(value: DatePickerSupportedTypes): void {
         if (this.internalDateModel !== this.convertModelToString(value)) {
             this.internalDateModel = this.convertModelToString(value);

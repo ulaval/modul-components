@@ -273,7 +273,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     }
 
     get yearsMonths(): {} {
-        this.$log.log('yearsMonths', JSON.stringify(this.calendar.yearsMonths));
         return this.calendar.yearsMonths;
     }
 
