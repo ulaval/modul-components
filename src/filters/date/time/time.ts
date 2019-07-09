@@ -30,15 +30,17 @@ export interface MTimeRange<T extends SupportedTimeTypes = string> {
 }
 
 function getLocalDateTime(time: SupportedTimeTypes): Date | undefined {
+    let date: Date | undefined = undefined;
     try {
         if (time instanceof Date) {
-            return new Date(time);
+            date = new Date(time);
         } else if (typeof time === 'string') {
             const now: Date = new Date();
             const datePart: string = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
             const timePart: string = !time.includes(':') ? `${time.padStart(2, '0')}:00:00` : time.split(':').length === 2 ? `${time}:00` : time;
-            return new Date(`${datePart}T${timePart}Z`);
+            date = new Date(`${datePart}T${timePart}Z`);
         }
+        return isNaN(date as any) ? undefined : date;
     } catch {
         return undefined;
     }
