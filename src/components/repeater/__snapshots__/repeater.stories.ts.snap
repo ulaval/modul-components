@@ -86,6 +86,7 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
       <button
         class="m-icon-button m-repeater__delete m--is-skin-light m--has-ripple"
         style="width: 44px; height: 44px;"
+        title="Delete"
         type="button"
       >
         <svg
@@ -119,6 +120,7 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
       <button
         class="m-icon-button m-repeater__delete m--is-skin-light m--has-ripple"
         style="width: 44px; height: 44px;"
+        title="Delete"
         type="button"
       >
         <svg
