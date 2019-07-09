@@ -1,9 +1,10 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { ModulVue } from '../../utils/vue/vue';
-import { ACCORDION_TRANSITION_NAME } from '../component-names';
-import WithRender from './accordion-transition.html?style=./accordion-transition.scss';
+import { ModulVue } from '../../../utils/vue/vue';
+import { ACCORDION_TRANSITION_NAME } from '../../component-names';
+import WithRender from './accordion-transition.html';
+import './accordion-transition.scss';
 
 const CLASS_HAS_TRANSITION: string = 'm--has-transition';
 
