@@ -28,7 +28,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
         <m-plus skin="light" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item-label">Medias</span> <span aria-hidden="true" class="m-tree-node__item-check"></span>
       </div>
       <m-accordion-transition>
-        <ul class="m-tree-node__children" style="display:none;">
+        <ul role="tabpanel" class="m-tree-node__children" style="display:none;">
           <li class="m-tree-node m-tree-node__child m--is-selected">
             <div tabindex="0" role="button" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span aria-hidden="true" class="m-tree-node__item-check"></span> </div>
           </li>
@@ -50,7 +50,7 @@ exports[`MTree Given a tree with multiple selection Given a tree with two nodes 
         <m-plus skin="light" aria-hidden="true" class="m-accordion__header-icon m-tree-icon m--is-left"></m-plus> <span class="m-tree-node__item-label">Medias</span> <span aria-hidden="true" class="m-tree-node__item-check"></span>
       </div>
       <m-accordion-transition>
-        <ul class="m-tree-node__children" style="display:none;">
+        <ul role="tabpanel" class="m-tree-node__children" style="display:none;">
           <li class="m-tree-node m-tree-node__child m--is-selected m--is-read-only">
             <div tabindex="0" role="button" class="m-tree-node__item"> <span class="m-tree-node__item-label">Videos</span> <span aria-hidden="true" class="m-tree-node__item-check"></span> </div>
           </li>
