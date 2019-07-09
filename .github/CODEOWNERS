@@ -6,5 +6,9 @@
 /src/components/form/ @guignol1981
 /utils/form/ @guignol1981
 
+# m-address
+/src/components/address/ @jfdion
+/utils/address-lookup/ @jfdion
+
 # m-copy-to-clipboard
 /src/components/copy-to-clipboard/ @Mboulianne
