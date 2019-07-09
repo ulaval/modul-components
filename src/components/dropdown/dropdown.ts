@@ -53,6 +53,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public focus: boolean;
     @Prop()
+    public forceOpen: boolean;
+    @Prop()
     public maxLength: number;
     @Prop({ default: true })
     public showArrowIcon: boolean;
@@ -87,6 +89,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private dirty: boolean = false;
     private id: string = `mDropdown-${uuid.generate()}`;
     private itemsHeightStyleInternal: number | object | undefined = {};
+
+    @Watch('forceOpen')
+    onForceOpenUpdate(): void {
+        if (this.forceOpen) {
+            this.internalOpen = this.forceOpen;
+        }
+    }
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;

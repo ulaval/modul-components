@@ -37,7 +37,6 @@
                @focus="onFocus"
                @keyup="onKeyup"
                @keydown="onKeydown"
-               @keydown.enter="onEnter"
                @paste="onPaste"
                ref="input" />
         <template v-if="!hasWordWrap"
@@ -52,6 +51,7 @@
                                @click="togglePasswordVisibility"
                                key="passwordIcon"
                                button-size="22px"></m-icon-button>
+                <slot name="suffix"></slot>
             </transition>
         </template>
         <textarea v-if="hasWordWrap"
