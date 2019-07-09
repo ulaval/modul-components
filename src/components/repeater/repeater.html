@@ -23,6 +23,7 @@
                                    class="m-repeater__delete"
                                    :ref="'deleteBtn' + index"
                                    @click="onDeleteBtnClick(index)"
+                                   :title="deleteBtnLabel"
                                    icon-name="m-svg__delete">{{ deleteBtnLabel }}</m-icon-button>
                 </component>
             </slot>
