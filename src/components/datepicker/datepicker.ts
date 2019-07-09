@@ -345,7 +345,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private validateDateFormat(dateString: string): boolean {
-        return !!dateString && !isNaN(Date.parse(dateString));
+        return Boolean(dateString) && !isNaN(Date.parse(dateString));
     }
 
     private convertStringToModel(newValue: string): DatePickerSupportedTypes {
