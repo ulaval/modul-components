@@ -16,7 +16,7 @@ export abstract class AbstractControl<T = any> {
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;
-    public errors: ControlError[] = [];
+    protected _errors: ControlError[] = [];
     protected _waiting: boolean = false;
     protected _enabled: boolean = true;
     protected _readonly: boolean = false;
@@ -46,20 +46,25 @@ export abstract class AbstractControl<T = any> {
     public abstract get touched(): boolean;
     public abstract get controls(): AbstractControl[];
     public abstract getControl<T = any>(name: string): AbstractControl<T>;
-    public abstract get errorsRecursive(): ControlError[];
-    public abstract set errorsRecursive(errors: ControlError[]);
+    public abstract get errors(): ControlError[];
+    public abstract set errors(errors: ControlError[]);
+    public abstract get errorsDeep(): ControlError[];
 
     public get pristine(): boolean {
         return this._pristine;
     }
 
     public hasError(): boolean {
-        return this.errorsRecursive.length > 0;
+        return this.errors.length > 0;
+    }
+
+    public hasErrorDeep(): boolean {
+        return this.errorsDeep.length > 0;
     }
 
     public get errorMessage(): string {
-        if (this.hasError()) {
-            return getString(this.errorsRecursive[0].message);
+        if (this.hasErrorDeep()) {
+            return getString(this.errors[0].message);
         } else {
             return '';
         }
@@ -150,7 +155,7 @@ export abstract class AbstractControl<T = any> {
             return;
         }
 
-        if (this.errorsRecursive.length > 0) {
+        if (this.errors.length > 0) {
             this._editionContext = ControlEditionContext.HasErrors;
         } else if (this.pristine) {
             this._editionContext = ControlEditionContext.Pristine;

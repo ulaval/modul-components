@@ -33,7 +33,7 @@ export class FormControl<T> extends AbstractControl {
     }
 
     public getControl<T = any>(name: string): AbstractControl<T> {
-        throw Error('FormControl do not contain other controls');
+        return undefined!;
     }
 
     get value(): T | undefined {
@@ -87,12 +87,16 @@ export class FormControl<T> extends AbstractControl {
         this._readonly = isReadonly;
     }
 
-    public get errorsRecursive(): ControlError[] {
-        return (this.enabled && !this.readonly) ? this.errors : [];
+    public get errors(): ControlError[] {
+        return (this.enabled && !this.readonly) ? this._errors : [];
     }
 
-    public set errorsRecursive(errors: ControlError[]) {
-        this.errors = [...errors];
+    public set errors(errors: ControlError[]) {
+        this._errors = [...errors];
+    }
+
+    public get errorsDeep(): ControlError[] {
+        return this.errors;
     }
 
     /**

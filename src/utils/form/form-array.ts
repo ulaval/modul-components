@@ -72,19 +72,23 @@ export class FormArray extends AbstractControl {
         return this.controls.every(c => c.touched);
     }
 
-    public get errorsRecursive(): ControlError[] {
+    public get errors(): ControlError[] {
+        return (this.enabled && !this.readonly) ? this._errors : [];
+    }
+
+    public set errors(errors: ControlError[]) {
+        this._errors = [...errors];
+    }
+
+    public get errorsDeep(): ControlError[] {
         if (!this.enabled || this.readonly) {
             return [];
         }
         let errors: ControlError[] = [...this.errors];
         this.controls.forEach((control: AbstractControl) => {
-            errors = [...errors, ...control.errorsRecursive];
+            errors = [...errors, ...control.errorsDeep];
         });
         return errors;
-    }
-
-    public set errorsRecursive(errors: ControlError[]) {
-        this.errors = [...errors];
     }
 
     public getControl<T = any>(name: string): AbstractControl<T> {

@@ -37,7 +37,7 @@ export class MForm extends ModulVue {
     }
 
     public get formErrors(): ControlError[] {
-        return this.formGroup.errorsRecursive;
+        return this.formGroup.errorsDeep;
     }
 
     public get summaryMessages(): string[] {
