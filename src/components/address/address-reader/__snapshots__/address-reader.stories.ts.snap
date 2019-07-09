@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|/address/m-address-reader Restructuring using scoped-slot 1`] = `
+<div>
+  <address
+    class="m-address-reader"
+  >
+    
+                G1V 0A6 
+    <br />
+    
+                Canada 
+    <br />
+    
+                Québec, QC 
+    <br />
+    
+                2325 rue de l'Université 
+    <!---->
+  </address>
+</div>
+`;
+
+exports[`Storyshots components|/address/m-address-reader default 1`] = `
+<div>
+  <address
+    class="m-address-reader"
+  >
+    <!---->
+     2325 rue de l'Université 
+    <br />
+    
+        Québec 
+    <span>
+      , QC
+    </span>
+    <br />
+    
+        Canada 
+    <br />
+    
+        G1V 0A6
+    
+  </address>
+</div>
+`;
+
+exports[`Storyshots components|/address/m-address-reader empty province 1`] = `
+<div>
+  <address
+    class="m-address-reader"
+  >
+    <!---->
+     2325 rue de l'Université 
+    <br />
+    
+        Québec 
+    <!---->
+    <br />
+    
+        Canada 
+    <br />
+    
+        G1V 0A6
+    
+  </address>
+</div>
+`;

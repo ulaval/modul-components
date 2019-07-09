@@ -26,21 +26,16 @@ export class MSearchfield extends ModulVue {
     public id: string = `mSearchfield-${uuid.generate()}`;
     public searchIconDescription: string = this.$i18n.translate('m-textfield:search');
 
-    public reset(): void {
-        this.emitNewValue('');
+    public onReset(): void {
+        this.as<InputManagement>().model = '';
     }
 
     public onSearch(event: KeyboardEvent | MouseEvent): void {
-        this.search(this.model);
+        this.search(this.as<InputManagement>().model);
     }
 
-    private get model(): string {
-        return this.as<InputManagement>().value;
-    }
-
-    private set model(value: string) {
-        this.emitNewValue(value);
-    }
+    @Emit('search')
+    private search(model: string): void { }
 
     private get hasSearchfieldError(): boolean {
         return this.as<InputState>().hasError;
@@ -49,12 +44,6 @@ export class MSearchfield extends ModulVue {
     private get isSearchfieldValid(): boolean {
         return this.as<InputState>().isValid;
     }
-
-    @Emit('input')
-    private emitNewValue(newValue?: string): void { }
-
-    @Emit('search')
-    private search(model: string): void { }
 }
 
 const SearchfieldPlugin: PluginObject<any> = {
