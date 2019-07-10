@@ -38,13 +38,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${COPY_TO_CLIPBOARD_NAME}`, module
     }))
     .add('custom', () => ({
         template: `
-        <${componentName} :value="value">
-            <template slot-scope="{ inputProps, buttonHandlers }">
-                <m-textfield v-bind="inputProps" :label="'some label'">
-                </m-textfield>
-                <button v-on="buttonHandlers">Some button</button>
-            </template>
-        </${componentName}>`,
+        <div>
+            <${componentName} :value="value">
+                <template slot-scope="{ inputProps, buttonHandlers }">
+                    <m-textfield v-bind="inputProps" :label="'some label'">
+                    </m-textfield>
+                    <button v-on="buttonHandlers">Some button</button>
+                </template>
+            </${componentName}>
+            <${componentName} :value="value">
+                <template slot="inputButton" slot-scope="{ buttonHandlers }">
+                    <button v-on="buttonHandlers">Some button</button>
+                </template>
+            </${componentName}>
+        </div>`,
         data: () => ({
             value: 'some value'
         }),

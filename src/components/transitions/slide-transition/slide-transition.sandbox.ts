@@ -1,6 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
-import { SLIDE_TRANSITION_NAME } from '../component-names';
+import { SLIDE_TRANSITION_NAME } from '../../component-names';
 import SlideTransitionPlugin, { MSlideTransitionDirection } from './slide-transition';
 import WithRender from './slide-transition.sandbox.html';
 

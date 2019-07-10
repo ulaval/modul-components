@@ -1,7 +1,6 @@
 import { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
 import { ModulVue } from '../../utils/vue/vue';
-import { I18N } from '../utils-names';
 import { FormatMode, FRENCH, Messages } from './i18n';
 import WithRender from './i18n-service.sandbox.html?style=./i18n-service.sandbox.scss';
 
@@ -89,7 +88,7 @@ export class MI18nServivceSandbox extends ModulVue {
 
 const ScrollToSandboxPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.component(`${I18N}-sandbox`, MI18nServivceSandbox);
+        v.component(`m-i18n-service-sandbox`, MI18nServivceSandbox);
     }
 };
 

@@ -10,7 +10,7 @@
          class="m-accordion__header"
          :class="{ 'm--has-padding': paddingHeader && padding }"
          :aria-expanded="propOpen"
-         :aria-controls="propId + '-controls'"
+         :aria-controls="idBodyWrap"
          @click.prevent="toggleAccordion"
          @keyup.self.enter="toggleAccordion"
          :tabindex="headerTabindex"
@@ -37,27 +37,27 @@
                 aria-hidden="true"></m-plus>
     </div>
     <m-accordion-transition v-if="hasContent()"
-                            :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 24 : 0">
+                            :height-delta="skin === 'default' || skin === 'dark' || skin === 'dark-b' ? 32 : 0">
         <template v-if="!keepContentAlive">
             <div v-if="propOpen"
-                 :id="propId + '-controls'"
+                 :id="idBodyWrap"
                  class="m-accordion__body-wrap"
                  :aria-labelledby="propId"
                  role="tabpanel">
                 <div class="m-accordion__body"
-                     :class="{ 'm--has-padding': paddingBody && padding }">
+                     :class="classBody">
                     <slot></slot>
                 </div>
             </div>
         </template>
         <template v-else>
             <div v-show="propOpen"
-                 :id="propId + '-controls'"
+                 :id="idBodyWrap"
                  class="m-accordion__body-wrap"
                  :aria-labelledby="propId"
                  role="tabpanel">
                 <div class="m-accordion__body"
-                     :class="{ 'm--has-padding': paddingBody && padding }">
+                     :class="classBody">
                     <slot></slot>
                 </div>
             </div>

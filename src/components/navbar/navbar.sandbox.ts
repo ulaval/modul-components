@@ -1,8 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import { Component } from 'vue-property-decorator';
-import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import ButtonPlugin from '../button/button';
 import { NAVBAR_NAME } from '../component-names';
+import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
 import NavbarPlugin from './navbar';
 import WithRender from './navbar.sandbox.html?style=./navbar.sandbox.scss';
 
