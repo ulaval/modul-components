@@ -33,13 +33,13 @@ const abstractCalendarStateTests: Function = (stateBuilder: (currentValue: strin
     });
 
     describe(`when calling event (from abstract class)`, () => {
-
         let calendarEvents: CalendarEvents;
+
         beforeEach(() => {
             calendarState = stateBuilder(CURRENT_VALUE, MIN_DATE, MAX_DATE);
             calendarEvents = calendarState.buildCurrentCalendar().calendarEvents;
-
         });
+
         describe(`day events`, () => {
             describe(`${CalendarEvent.DAY_SELECT}`, () => {
                 it(`will set focus on selected day`, () => {
@@ -80,7 +80,6 @@ const abstractCalendarStateTests: Function = (stateBuilder: (currentValue: strin
                     calendarEvents[CalendarEvent.MONTH_SELECT]({ month: 11, isDisabled: false, isCurrent: false } as MonthState);
 
                     const calendar: Calendar = calendarState.buildCurrentCalendar().calendar;
-
                     expect(calendar.dates.current.month()).toEqual(7);
                 });
             });
@@ -152,7 +151,6 @@ const abstractCalendarStateTests: Function = (stateBuilder: (currentValue: strin
 
                 it(`when selecting a year after the maximum date, the current month will be set to the maximum`, () => {
                     calendarEvents[CalendarEvent.YEAR_SELECT]({ year: 2020, isDisabled: false, isCurrent: false } as YearState);
-
                     const calendar: Calendar = calendarState.buildCurrentCalendar().calendar;
 
                     expect(calendar.dates.current.fullYear()).toEqual(2020);

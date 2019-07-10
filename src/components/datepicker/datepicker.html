@@ -25,7 +25,7 @@
                       :disabled="isDisabled || isWaiting"
                       :readonly="isReadonly"
                       :options="inputOptions"
-                      :placeholder="placeholder"
+                      :placeholder="propPlaceholder"
                       :raw="false"
                       :value="inputModel"
                       autocomplete="off"
@@ -74,6 +74,9 @@
             slot="header">{{label}}</h2>
         <m-calendar :min-date="minDateString"
                     :max-date="maxDateString"
+                    :type="type"
+                    :visible="open"
+                    :initial-view="initialView"
                     :show-month-before-after="false"
                     :value="formattedDate"
                     @input="selectDate"></m-calendar>

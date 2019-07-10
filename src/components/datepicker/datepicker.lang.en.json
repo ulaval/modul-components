@@ -1,6 +1,7 @@
 {
     "m-datepicker": {
-        "placeholder": "YYYY-MM-DD",
+        "placeholder-aaaa-mm-jj": "YYYY-MM-DD",
+        "placeholder-aaaa-mm": "YYYY-MM",
         "open": "Open calendar",
         "close": "Close calendar",
         "out-of-range-error": "Date is out of range",
