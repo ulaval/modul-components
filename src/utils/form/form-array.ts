@@ -3,7 +3,7 @@ import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
-export class FormArray extends AbstractControl {
+export class FormArray<T = any> extends AbstractControl {
     constructor(
         private _controls: AbstractControl[] = [],
         public readonly validators: ControlValidator[] = [],
@@ -21,11 +21,11 @@ export class FormArray extends AbstractControl {
     /**
      * Return an agregate values of all enabled controls.
      */
-    public get value(): any {
+    public get value(): T[] {
         return this._controls.filter(c => c.enabled).map(c => c.value);
     }
 
-    public set value(value: any) {
+    public set value(value: T[]) {
         throw Error('Assigning a value to a FormArray is not yet implemented');
     }
 

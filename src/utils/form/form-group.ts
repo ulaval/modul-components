@@ -3,7 +3,7 @@ import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
-export class FormGroup extends AbstractControl {
+export class FormGroup<T = any> extends AbstractControl {
     constructor(
         private _controls: { [name: string]: AbstractControl },
         public readonly validators: ControlValidator[] = [],
@@ -16,7 +16,7 @@ export class FormGroup extends AbstractControl {
     /**
      * Return an agregate values of all enabled controls.
      */
-    public get value(): any {
+    public get value(): T {
         const values: any = {};
         const enabledControls: { [name: string]: AbstractControl } = Object.keys(this._controls)
             .filter(c => this._controls[c].enabled)
@@ -30,7 +30,7 @@ export class FormGroup extends AbstractControl {
         return values;
     }
 
-    public set value(value: any) {
+    public set value(value: T) {
         throw Error('Assigning a value to a FormGroup is not yet implemented');
     }
 

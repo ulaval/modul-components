@@ -64,7 +64,7 @@ export abstract class AbstractControl<T = any> {
 
     public get errorMessage(): string {
         if (this.hasErrorDeep()) {
-            return getString(this.errors[0].message);
+            return getString(this.errorsDeep[0].message);
         } else {
             return '';
         }
