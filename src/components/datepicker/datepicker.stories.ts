@@ -134,6 +134,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     .add('label-up', () => ({
         template: `<m-datepicker label="Date label" :label-up="true"></m-datepicker>`
     }))
+    .add('required-marker', () => ({
+        template: `<m-datepicker label="Date label" :required-marker="true"></m-datepicker>`
+    }))
     .add('skip-input-validation=true', () => ({
         data: () => ({
             model1: '9999-99-99'

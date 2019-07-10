@@ -1900,6 +1900,123 @@ exports[`Storyshots components|m-datepicker readonly 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-datepicker required-marker 1`] = `
+<div
+  class="m-datepicker"
+  style="width: 100%; max-width: 136px;"
+>
+  <div
+    class="m-input-style m--has-label m--is-tag-default"
+    style="margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <label
+          class="m-input-style__label"
+          for="mDatepicker-uuid"
+          style="margin-right: 0px;"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              Date label
+            </span>
+             
+            <sup
+              class="m-input-style__required-marker"
+            >
+              *
+            </sup>
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <input
+              aria-haspopup="true"
+              autocomplete="off"
+              id="mDatepicker-uuid"
+              placeholder="AAAA-MM-JJ"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <button
+              aria-controls="mDatepicker-uuid"
+              class="m-icon-button m-datepicker__icon m--is-skin-light m--has-ripple"
+              style="width: 22px; height: 22px;"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-icon-button__icon"
+                height="20px"
+                width="20px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+               
+              <!---->
+            </button>
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-datepicker__validation"
+  >
+    <div
+      class="m-validation-message m-datepicker__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
 exports[`Storyshots components|m-datepicker skip-input-validation=true 1`] = `
 <div>
   <div
