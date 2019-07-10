@@ -1,4 +1,4 @@
-import { DirectiveOptions, VNodeDirective } from 'vue';
+import Vue, { DirectiveOptions, VNode, VNodeDirective } from 'vue';
 import { AbstractControl } from '../../utils/form/abstract-control';
 import { FormControl } from '../../utils/form/form-control';
 
@@ -7,7 +7,7 @@ const INPUT_SELECTOR: string = 'input, textarea, [contenteditable=true]';
 export const AbstractControlDirective: DirectiveOptions = {
     bind(
         el: HTMLElement,
-        binding: VNodeDirective,
+        binding: VNodeDirective
     ): void {
         const control: AbstractControl = binding.value;
 
@@ -24,7 +24,7 @@ export const AbstractControlDirective: DirectiveOptions = {
     },
     unbind(
         el: HTMLElement,
-        binding: VNodeDirective,
+        binding: VNodeDirective
     ): void {
         const control: AbstractControl = binding.value;
         const inputElement: Element | null = el.querySelector(INPUT_SELECTOR);
