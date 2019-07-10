@@ -37,7 +37,7 @@ export class MForm extends ModulVue {
     }
 
     public get formErrors(): ControlError[] {
-        return this._getAllFormErrors(this.formGroup);
+        return this.formGroup.errorsDeep;
     }
 
     public get summaryMessages(): string[] {
@@ -45,7 +45,7 @@ export class MForm extends ModulVue {
     }
 
     public get toastMessage(): string {
-        let errorCount: number = this._getAllControlsInError(this.formGroup).length;
+        let errorCount: number = this.formErrors.length;
 
         return this.$i18n.translate(
             errorCount <= 1 ? 'm-form:multipleErrorsToCorrect' : 'm-form:multipleErrorsToCorrect.p',
@@ -91,20 +91,6 @@ export class MForm extends ModulVue {
     protected beforeDestroy(): void {
         this.triggerActionFallouts(FormActions.Destroyed);
         this.formGroup.reset();
-    }
-
-    private _getAllFormErrors(control: FormGroup | FormArray): ControlError[] {
-        let result: ControlError[] = control.errors;
-
-        control.controls.forEach(c => {
-            if (c instanceof FormControl) {
-                result = result.concat(c.errors);
-            } else if (c instanceof FormGroup || c instanceof FormArray) {
-                result = result.concat(this._getAllFormErrors(c));
-            }
-        });
-
-        return result;
     }
 
     private _getAllFormValidators(control: FormGroup | FormArray): ControlValidator[] {

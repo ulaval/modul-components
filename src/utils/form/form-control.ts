@@ -1,4 +1,5 @@
 import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { FormControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
@@ -25,6 +26,14 @@ export class FormControl<T> extends AbstractControl {
 
     public get touched(): boolean {
         return this._touched;
+    }
+
+    public get controls(): AbstractControl[] {
+        return [];
+    }
+
+    public getControl<T = any>(name: string): AbstractControl<T> {
+        return undefined!;
     }
 
     get value(): T | undefined {
@@ -76,6 +85,18 @@ export class FormControl<T> extends AbstractControl {
 
     public set readonly(isReadonly: boolean) {
         this._readonly = isReadonly;
+    }
+
+    public get errors(): ControlError[] {
+        return (this.enabled && !this.readonly) ? this._errors : [];
+    }
+
+    public set errors(errors: ControlError[]) {
+        this._errors = [...errors];
+    }
+
+    public get errorsDeep(): ControlError[] {
+        return this.errors;
     }
 
     /**
