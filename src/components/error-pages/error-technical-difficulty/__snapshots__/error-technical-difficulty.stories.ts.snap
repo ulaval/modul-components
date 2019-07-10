@@ -52,7 +52,7 @@ exports[`Storyshots components|m-error-technical-difficulty Error 1`] = `
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -178,7 +178,7 @@ exports[`Storyshots components|m-error-technical-difficulty default 1`] = `
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -304,7 +304,7 @@ exports[`Storyshots components|m-error-technical-difficulty errorDate (5 days be
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -430,7 +430,7 @@ exports[`Storyshots components|m-error-technical-difficulty errorReferenceNumber
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -557,7 +557,7 @@ exports[`Storyshots components|m-error-technical-difficulty hints 1`] = `
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -683,7 +683,7 @@ exports[`Storyshots components|m-error-technical-difficulty links 1`] = `
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -848,7 +848,7 @@ exports[`Storyshots components|m-error-technical-difficulty showStackTrace 1`] =
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"
@@ -972,7 +972,7 @@ exports[`Storyshots components|m-error-technical-difficulty title 1`] = `
           class="m-accordion m--is-light m--is-closed m--has-icon-left"
         >
           <div
-            aria-controls="uuid-controls"
+            aria-controls="uuid-body-wrap"
             class="m-accordion__header m--has-padding"
             id="uuid"
             role="tab"

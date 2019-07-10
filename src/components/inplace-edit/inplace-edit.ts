@@ -2,10 +2,10 @@ import Vue, { PluginObject } from 'vue';
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
 import { ModulVue } from '../../utils/vue/vue';
-import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import ButtonPlugin from '../button/button';
 import { INPLACE_EDIT_NAME } from '../component-names';
 import OverlayPlugin from '../overlay/overlay';
+import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
 import WithRender from './inplace-edit.html?style=./inplace-edit.scss';
 
 @WithRender

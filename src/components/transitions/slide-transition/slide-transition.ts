@@ -2,9 +2,9 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
-import { ScrollToDuration } from '../../utils/scroll-to/scroll-to';
-import { ModulVue } from '../../utils/vue/vue';
-import { SLIDE_TRANSITION_NAME } from '../component-names';
+import { ScrollToDuration } from '../../../utils/scroll-to/scroll-to';
+import { ModulVue } from '../../../utils/vue/vue';
+import { SLIDE_TRANSITION_NAME } from '../../component-names';
 import WithRender from './slide-transition.html?style=./slide-transition.scss';
 
 export enum MSlideTransitionDirection {

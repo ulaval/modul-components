@@ -1,83 +1,92 @@
 <div :id="id"
      class="m-base-calendar"
-     :class="{'m--is-picker-mode-year': isPickerModeYear}">
+     :class="{'m--is-years-months-view': isYearsMonthsView,
+              'm--is-max-row': isMaxRow}">
     <nav class="m-base-calendar__header"
-         :class="{'m--is-select-mode': !isPickerModeDay}">
-        <m-link class="m-base-calendar__current-month-and-year"
+         :class="{'m--is-select-mode': !isDaysView}">
+        <strong v-if="isButtonToogleViewDisabled">{{ currentMonthName }} {{ currentYear }}</strong>
+        <m-link v-else
+                class="m-base-calendar__current-month-and-year"
                 :mode="modeLinkCurrentMonthAndYear"
-                @click.stop="onYearClick"
+                @click.stop="onToogleView"
                 aria-live="polite"
                 ref="currentDate">{{ currentMonthName }} {{ currentYear }}</m-link>
-        <div v-if="isPickerModeDay"
-             class="m-base-calendar__nav-buttons">
-            <m-icon-button class="m-base-calendar__previous"
-                           @click.stop="onMonthPrevious()"
-                           :disabled="isMinMonth"
-                           icon-name="m-svg__chevron--left"
-                           ref="previousMonth"
-                           skin="link">{{ previousMonthLabel }}</m-icon-button>
-            <m-icon-button class="m-base-calendar__next"
-                           @click.stop="onMonthNext()"
-                           :disabled="isMaxMonth"
-                           icon-name="m-svg__chevron--right"
-                           ref="nextMonth"
-                           skin="link">{{ nextMonthLabel }}</m-icon-button>
-        </div>
+        <transition name="m--is">
+            <div v-if="isDaysView"
+                 class="m-base-calendar__nav-buttons">
+                <m-icon-button class="m-base-calendar__previous"
+                               @click.stop="onMonthPrevious()"
+                               :disabled="isMinMonth"
+                               icon-name="m-svg__chevron--left"
+                               icon-size="16px"
+                               ref="previousMonth"
+                               skin="link">{{ previousMonthLabel }}</m-icon-button>
+                <m-icon-button class="m-base-calendar__next"
+                               @click.stop="onMonthNext()"
+                               :disabled="isMaxMonth"
+                               icon-name="m-svg__chevron--right"
+                               icon-size="16px"
+                               ref="nextMonth"
+                               skin="link">{{ nextMonthLabel }}</m-icon-button>
+            </div>
+        </transition>
     </nav>
     <div class="m-base-calendar__body"
-         :class="{'m--is-max-row': isMaxRow}"
-         aria-live="polite">
-
-        <div v-if="isPickerModeYear"
-             class="m-base-calendar__years">
-            <m-calendar-button v-for="(y, yearIndex) in years"
-                               :key="yearIndex"
-                               @click.stop="onYearSelect(y)"
-                               @keyup.enter="onYearSelect(y)"
-                               :selected="y.isCurrent"
-                               :ref="buildRef('year', y)">{{ y.year }}</m-calendar-button>
-        </div>
-        <div v-if="isPickerModeMonth"
-             class="m-base-calendar__months">
-            <m-calendar-button v-for="(m, monthIndex) in months"
-                               :key="monthIndex"
-                               :disabled="m.isDisabled"
-                               :selected="m.isCurrent"
-                               @click.stop="onMonthSelect(m)"
-                               @keyup.enter="onMonthSelect(m)"
-                               :ref="buildRef('month', m)"
-                               :tabindex="monthTabIndex(m)">{{ monthIndexToShortName(m.month) }}</m-calendar-button>
-        </div>
-        <template v-if="isPickerModeDay">
-            <div class="m-base-calendar__week">
-                <span v-for="(w, weekdayIndex) in weekdaysLabels"
-                      :key="weekdayIndex"
-                      class="m-base-calendar__weekday">{{ w }}</span>
-            </div>
-            <div class="m-base-calendar__days">
-                <m-calendar-button v-for="(d, dayIndex) in days"
-                                   :key="dayIndex"
-                                   class="m-base-calendar__day"
-                                   :class="{ 'm--is-highlighted': d.isHighlighted,
+         aria-live="polite"
+         ref="body">
+        <transition name="m--is">
+            <div v-if="isDaysView"
+                 class="m-base-calendar__days-view">
+                <div class="m-base-calendar__week">
+                    <span v-for="(w, weekdayIndex) in weekdaysLabels"
+                          :key="weekdayIndex"
+                          class="m-base-calendar__weekday">{{ w }}</span>
+                </div>
+                <div class="m-base-calendar__days-grid">
+                    <m-calendar-button v-for="(d, dayIndex) in days"
+                                       :key="dayIndex"
+                                       class="m-base-calendar__day"
+                                       :class="{ 'm--is-highlighted': d.isHighlighted,
                                              'm--is-in-future': isDateInFuture(d),
                                              'm--is-inside-range': isInsideRange(d),
                                              'm--is-other-month': d.isInPreviousMonth || d.isInNextMonth,
                                              'm--is-selection-start': isSelectionStart(d),
                                              'm--is-selection-end': isSelectionEnd(d)}"
-                                   :disabled="d.isDisabled || hideDay(d)"
-                                   :selected="d.isSelected"
-                                   :today="d.isToday"
-                                   @click.stop="onDaySelect(d)"
-                                   @keyup.enter="onDaySelect(d)"
-                                   @keyup.tab="onDaykeyboardTab(d)"
-                                   @mouseenter="onDayMouseEnter(d)"
-                                   @mouseleave="onDayMouseLeave(d)"
-                                   :ref="buildRef('day', d)"
-                                   :tabindex="dayTabIndex(d)">
-                    <span class="m-base-calendar__day-content"
-                          :class="{ 'm--is-hidden': hideDay(d) }">{{ d.day }}</span>
-                </m-calendar-button>
+                                       :disabled="d.isDisabled || hideDay(d)"
+                                       :selected="d.isSelected"
+                                       :today="d.isToday"
+                                       @click.stop="onDaySelect(d)"
+                                       @keyup.enter="onDaySelect(d)"
+                                       @keyup.tab="onDaykeyboardTab(d)"
+                                       @mouseenter="onDayMouseEnter(d)"
+                                       @mouseleave="onDayMouseLeave(d)"
+                                       :ref="buildRef(mBaseCalendarView.DAYS, currentYear, currentMonth + 1, d.day)">
+                        <span class="m-base-calendar__day-content"
+                              :class="{ 'm--is-hidden': hideDay(d) }">{{ d.day }}</span>
+                    </m-calendar-button>
+                </div>
             </div>
-        </template>
+        </transition>
+        <transition name="m--is"
+                    @enter="scrollToCurrentYear">
+            <div v-if="isYearsMonthsView"
+                 class="m-base-calendar__years-months-view"
+                 ref="yearsMonthsView">
+                <template v-for="(yM, yearsMonthsIndex) in yearsMonths">
+                    <h2 class="m-base-calendar__year-title"
+                        :class="{'m--is-current': yM.year.isCurrent}"
+                        :data-current-year="yM.year.isCurrent">{{yM.year.year}}</h2>
+                    <div class="m-base-calendar__month-list">
+                        <m-calendar-button v-for="(m, monthIndex) in yM.months"
+                                           :key="monthIndex"
+                                           :disabled="m.isDisabled"
+                                           @click.stop="onYearMonthSelect(yM.year, m)"
+                                           @keyup.enter="onYearMonthSelect(yM.year.year, m)"
+                                           :selected="m.isCurrent"
+                                           :ref="buildRef(mBaseCalendarView.YEARS_MONTHS, yM.year.year, m.month + 1)">{{ monthIndexToShortName(m.month) }}</m-calendar-button>
+                    </div>
+                </template>
+            </div>
+        </transition>
     </div>
 </div>

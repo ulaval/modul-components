@@ -19,7 +19,7 @@ exports[`Storyshots filters|f-m-time Period (from dates) 1`] = `
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} à mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} - mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
@@ -47,7 +47,7 @@ exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
   </div>
    
   <div>
-    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} à mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    full period: mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}} - mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
@@ -59,27 +59,35 @@ exports[`Storyshots filters|f-m-time Period (from strings) 1`] = `
 exports[`Storyshots filters|f-m-time Simple (from Dates) 1`] = `
 <div>
   <div>
-    at the top of the hour (AM): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+    at the top of the hour a.m. (11:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
   </div>
    
   <div>
-    hour with minutes (AM): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    hour with minutes a.m. (11:59): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
-    at the top of the hour (PM): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+    at the top of the hour p.m. (14:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
   </div>
    
   <div>
-    hour with minutes (PM): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    hour with minutes p.m. (14:59): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
-    at the top of the hour (Midnight): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+    hours and minutes single digit (04:04): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
-    hour with minutes (Midnight): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    Midnight (00:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+  </div>
+   
+  <div>
+    Midnight with minutes (00:59): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+  </div>
+   
+  <div>
+    Noon (12:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
   </div>
 </div>
 `;
@@ -87,27 +95,35 @@ exports[`Storyshots filters|f-m-time Simple (from Dates) 1`] = `
 exports[`Storyshots filters|f-m-time Simple (from strings) 1`] = `
 <div>
   <div>
-    at the top of the hour (AM): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+    at the top of the hour a.m. (11:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
   </div>
    
   <div>
-    hour with minutes (AM): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    hour with minutes a.m. (11:59): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
-    at the top of the hour (PM): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+    at the top of the hour p.m. (14:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
   </div>
    
   <div>
-    hour with minutes (PM): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    hour with minutes p.m. (14:59): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
-    at the top of the hour (Midnight): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+    hours and minutes single digit (04:04): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
   </div>
    
   <div>
-    hour with minutes (Midnight): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+    Midnight (00:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
+  </div>
+   
+  <div>
+    Midnight with minutes (00:59): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+  </div>
+   
+  <div>
+    Noon (12:00): mock-intl-dateTimeFormat-{"hour":"numeric"}}
   </div>
 </div>
 `;

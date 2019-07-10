@@ -1,9 +1,7 @@
 <div :id="id"
      class="m-calendar"
-     :class="{
-    'm-calendar-single-date': isSingleDate,
-    'm-calendar-date-range': isDateRange
-}">
+     :class="{ 'm-calendar-single-date': isSingleDate,
+               'm-calendar-date-range': isDateRange}">
     <m-calendar-state-machine v-model="innerValue"
                               @input="onInput"
                               :mode="mode"
@@ -12,9 +10,12 @@
                               ref="calendarState">
         <m-base-calendar slot-scope="{ calendar, calendarEvents }"
                          v-on="calendarEvents"
-                         :calendar="calendar"
                          class="m-calendar__renderer"
-                         ref="calendarRenderer"
-                         :show-month-before-after="showMonthBeforeAfter"></m-base-calendar>
+                         :calendar="calendar"
+                         :type="type"
+                         :visible="visible"
+                         :initial-view="initialView"
+                         :show-month-before-after="showMonthBeforeAfter"
+                         ref="calendarRenderer"></m-base-calendar>
     </m-calendar-state-machine>
 </div>
