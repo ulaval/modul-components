@@ -1,0 +1,1779 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-input-group default 1`] = `
+<div
+  class="m-input-group"
+>
+  <!---->
+   
+  <div
+    class="m-validation-message m-input-group__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group error-message 1`] = `
+<div
+  class="m-input-group m--has-error m--has-validation-message"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <p
+      class="m-validation-message__error"
+    >
+      <svg
+        class="m-icon m-validation-message__icon"
+        height="1em"
+        width="1em"
+      >
+        <title>
+          Erreur
+        </title>
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <span
+        class="m-validation-message__text"
+      >
+        This is an error message
+      </span>
+    </p>
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-describedby="uuid"
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group helper-message 1`] = `
+<div
+  class="m-input-group m--has-validation-message"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <!---->
+     
+    <p
+      class="m-validation-message__helper"
+    >
+      This is an helper message
+    </p>
+  </div>
+   
+  <div
+    aria-describedby="uuid"
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group inline 1`] = `
+<div
+  class="m-input-group m--is-inline"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group label 1`] = `
+<div
+  class="m-input-group"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group required-marker 1`] = `
+<div
+  class="m-input-group"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <sup
+      class="m-input-group__required-marker"
+    >
+      *
+    </sup>
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group valid-message 1`] = `
+<div
+  class="m-input-group m--is-valid m--has-validation-message"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <p
+      class="m-validation-message__valid"
+    >
+      <svg
+        class="m-icon m-validation-message__icon"
+        height="1em"
+        width="1em"
+      >
+        <title>
+          Valide
+        </title>
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <span
+        class="m-validation-message__text"
+      >
+        This is an valid message
+      </span>
+    </p>
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-describedby="uuid"
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group/validation-message-position bottom - no label 1`] = `
+<div
+  class="m-input-group m--has-error m--has-validation-message m--is-validation-message-position-bottom"
+>
+  <!---->
+   
+  <!---->
+   
+  <div
+    aria-describedby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <p
+      class="m-validation-message__error"
+    >
+      <svg
+        class="m-icon m-validation-message__icon"
+        height="1em"
+        width="1em"
+      >
+        <title>
+          Erreur
+        </title>
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <span
+        class="m-validation-message__text"
+      >
+        This is an error message
+      </span>
+    </p>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-group/validation-message-position bottom 1`] = `
+<div
+  class="m-input-group m--has-error m--has-validation-message m--is-validation-message-position-bottom"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <!---->
+   
+  <div
+    aria-describedby="uuid"
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <p
+      class="m-validation-message__error"
+    >
+      <svg
+        class="m-icon m-validation-message__icon"
+        height="1em"
+        width="1em"
+      >
+        <title>
+          Erreur
+        </title>
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <span
+        class="m-validation-message__text"
+      >
+        This is an error message
+      </span>
+    </p>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-input-group/validation-message-position top - no label 1`] = `
+<div
+  class="m-input-group m--has-error m--has-validation-message"
+>
+  <!---->
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <p
+      class="m-validation-message__error"
+    >
+      <svg
+        class="m-icon m-validation-message__icon"
+        height="1em"
+        width="1em"
+      >
+        <title>
+          Erreur
+        </title>
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <span
+        class="m-validation-message__text"
+      >
+        This is an error message
+      </span>
+    </p>
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-describedby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-input-group/validation-message-position top 1`] = `
+<div
+  class="m-input-group m--has-error m--has-validation-message"
+>
+  <p
+    class="m-input-group__label"
+    id="uuid"
+  >
+    This is a label 
+    <!---->
+  </p>
+   
+  <div
+    class="m-validation-message m-input-group__message"
+    id="uuid"
+  >
+    <p
+      class="m-validation-message__error"
+    >
+      <svg
+        class="m-icon m-validation-message__icon"
+        height="1em"
+        width="1em"
+      >
+        <title>
+          Erreur
+        </title>
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <span
+        class="m-validation-message__text"
+      >
+        This is an error message
+      </span>
+    </p>
+     
+    <!---->
+  </div>
+   
+  <div
+    aria-describedby="uuid"
+    aria-labelledby="uuid"
+    class="m-input-group__body"
+  >
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 1
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 2
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div
+      class="m-checkbox m--is-checkbox-left"
+    >
+      <input
+        class="m-checkbox__hidden"
+        id="mCheckbox-uuid"
+        type="checkbox"
+      />
+       
+      <!---->
+       
+      <label
+        class="m-checkbox__wrap"
+        for="mCheckbox-uuid"
+      >
+        <span
+          aria-hidden="true"
+          class="m-checkbox__input"
+        >
+          <span
+            class="m-checkbox__input__icon"
+          />
+        </span>
+         
+        <span
+          class="m-checkbox__label"
+        >
+          Checkbox 3
+        </span>
+      </label>
+       
+      <div
+        class="m-validation-message m-checkbox__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <!---->
+</div>
+`;

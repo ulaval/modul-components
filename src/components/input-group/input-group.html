@@ -1,15 +1,18 @@
-<fieldset class="m-input-group"
-          :class="classes">
-    <legend v-if="legend && visible"
-            class="m-input-group__legend">{{ legend }}</legend>
-    <slot :disabled="isDisabled"
-          :waiting="isWaiting"
-          :error="hasError"
-          :valid="isValid"
-          :readonly="readonly"
-          :validation-message="hasValidationMessage"></slot>
-    <m-validation-message v-if="displayValidation"
-                          class="m-input-group__validation__message"
+<div class="m-input-group"
+     :class="{ 'm--is-inline': inline,
+               'm--is-disabled': stateIsDisabled,
+               'm--has-error': hasError,
+               'm--is-valid': isValid,
+               'm--has-validation-message': hasValidationMessage,
+               'm--is-validation-message-position-bottom': isValidationMessagePositionBottom }">
+    <p :id="idLabel"
+       class="m-input-group__label"
+       v-if="hasLabel">{{ label }}&nbsp;<sup v-if="requiredMarker"
+             class="m-input-group__required-marker">*</sup>
+    </p>
+    <m-validation-message v-if="isValidationMessagePositionTop"
+                          :id="idValidationMessage"
+                          class="m-input-group__message"
                           :disabled="isDisabled"
                           :waiting="isWaiting"
                           :error="hasError"
@@ -17,4 +20,20 @@
                           :valid="isValid"
                           :valid-message="validMessage"
                           :helper-message="helperMessage"></m-validation-message>
-</fieldset>
+    <div class="m-input-group__body"
+         :aria-labelledby="idLabel"
+         :aria-describedby="idValidationMessage">
+        <slot></slot>
+    </div>
+
+    <m-validation-message v-if="isValidationMessagePositionBottom"
+                          :id="idValidationMessage"
+                          class="m-input-group__message"
+                          :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasError"
+                          :error-message="errorMessage"
+                          :valid="isValid"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
+</div>
