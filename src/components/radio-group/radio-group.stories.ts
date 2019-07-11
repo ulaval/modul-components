@@ -82,6 +82,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
+    }))
+    .add('error-message & label', () => ({
+        template: `<m-radio-group error-message="This is an error message" label="This is a label">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('required-marker', () => ({
+        template: `<m-radio-group :required-marker="true" label="This is a label">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/radios-position="right"`, module)

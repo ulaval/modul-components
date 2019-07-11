@@ -28,6 +28,8 @@ export class MRadioGroup extends BaseRadioGroup implements RadioGroup {
     public inline: boolean;
     @Prop()
     public label: string;
+    @Prop()
+    public requiredMarker: boolean;
     @Prop({
         default: MRadioVerticalAlignement.Top,
         validator: value =>

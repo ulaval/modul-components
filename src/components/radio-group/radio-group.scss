@@ -29,6 +29,13 @@
         margin-left: $m-margin--xs;
     }
 
+    &__required-marker {
+        color: $m-color--accent;
+        font-size: inherit;
+        font-weight: $m-font-weight--bold;
+        vertical-align: baseline;
+    }
+
     &.m--has-validation-message {
         .m-radio-group__label {
             ~ .m-radio-group__message {

@@ -1463,7 +1463,8 @@ exports[`Storyshots components|m-form/all fields radio 1`] = `
       id="uuid"
     >
       <span>
-        Style de coupe
+        Style de coupe 
+        <!---->
       </span>
        
       <span
@@ -3796,7 +3797,8 @@ exports[`Storyshots components|m-form/rules Radio button required 1`] = `
         id="uuid"
       >
         <span>
-          Select a role :
+          Select a role : 
+          <!---->
         </span>
          
         <span
