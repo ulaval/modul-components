@@ -14,9 +14,11 @@
                    :valid="isValid"
                    :valid-message="validMessage"
                    :helper-message="helperMessage">
-        <template #icon>
+
+        <template slot="icon">
             <slot name="icon"></slot>
         </template>
+
         <ul class="m-radio-group__body"
             role="radiogroup">
             <slot></slot>

@@ -55,6 +55,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
+    .add('icon slot', () => ({
+        template: `<m-radio-group label="This is a label">
+                        <template #icon>
+                            <m-icon name="m-svg__add-circle" />
+                        </template>
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
     .add('focus', () => ({
         template: `<m-radio-group :focus="true">
                         <m-radio>Radio Option 1</m-radio>
