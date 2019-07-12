@@ -1,12 +1,12 @@
 {
     "m-timepicker": {
         "button-ok": "OK",
-        "placeholder": "hh mm",
+        "placeholder": "HH:MM",
         "hours": "Hours",
         "minutes": "Minutes",
         "open": "Open time selector",
         "close": "Close time selector",
         "out-of-bounds-error": "Time out of bounds",
-        "error-format": "Invalid format"
+        "error-format": "Enter a time in the format HH:MM"
     }
 }

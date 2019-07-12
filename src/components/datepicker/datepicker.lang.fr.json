@@ -5,6 +5,6 @@
         "open": "Ouvrir le calendrier",
         "close": "Fermer le calendrier",
         "out-of-range-error": "Date hors limites",
-        "format-error": "Format invalide"
+        "format-error": "Entrez une date au format AAAA-MM-JJ"
     }
 }

@@ -5,6 +5,6 @@
         "open": "Open calendar",
         "close": "Close calendar",
         "out-of-range-error": "Date is out of range",
-        "format-error": "Invalid format"
+        "format-error": "Enter a date in the format YYYY-MM-DD"
     }
 }
