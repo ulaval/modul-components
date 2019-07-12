@@ -6,7 +6,7 @@
         "minutes": "Minutes",
         "open": "Ouvrir le sélecteur de temps",
         "close": "Fermer le sélecteur de temps",
-        "out-of-bounds-error": "Entrer une heure comprise entre %(min)s et %(max)s",
-        "error-format": "Le format attendu est HH:MM"
+        "out-of-bounds-error": "Entrez une heure comprise entre %(min)s et %(max)s",
+        "error-format": "Entrez une heure au format HH:MM"
     }
 }
