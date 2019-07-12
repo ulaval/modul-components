@@ -220,7 +220,7 @@ exports[`Storyshots components|m-datepicker date format invalid 1`] = `
           <span
             class="m-validation-message__text"
           >
-            Format invalide
+            Entrez une date au format AAAA-MM-JJ
           </span>
         </p>
          
