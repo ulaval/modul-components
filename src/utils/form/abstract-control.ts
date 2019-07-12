@@ -12,7 +12,7 @@ import { ControlValidator } from './validators/control-validator';
  *
  */
 export abstract class AbstractControl<T = any> {
-    public htmlElement: HTMLElement | undefined;
+    public htmlElementAccessor: () => HTMLElement | undefined;
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
     protected _editionContext: ControlEditionContext = ControlEditionContext.None;
@@ -49,6 +49,10 @@ export abstract class AbstractControl<T = any> {
     public abstract get errors(): ControlError[];
     public abstract set errors(errors: ControlError[]);
     public abstract get errorsDeep(): ControlError[];
+
+    public get htmlElement(): HTMLElement | undefined {
+        return this.htmlElementAccessor();
+    }
 
     public get pristine(): boolean {
         return this._pristine;
