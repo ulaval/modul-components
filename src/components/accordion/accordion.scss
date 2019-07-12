@@ -1,5 +1,4 @@
 @import 'commons';
-@import 'accordion-transition';
 
 $m-accordion--icon-l-width: 16px !default;
 $m-accordion--icon-width: 12px !default;
@@ -194,15 +193,15 @@ $m-accordion--color-default: $m-color--interactive !default;
         .m-accordion.m--is-dark > &,
         .m-accordion.m--is-dark-b > &,
         .m-accordion.m--is-default > & {
-            &.m-accordion-enter-to {
+            &.m--is-enter-to {
                 .m-accordion__body {
                     transform: translate(0, 0);
                     opacity: 1;
                 }
             }
 
-            &.m-accordion-enter,
-            &.m-accordion-leave-to {
+            &.m--is-enter,
+            &.m--is-leave-to {
                 .m-accordion__body {
                     transform: translate(0, $m-spacing--l);
                     opacity: 0;

@@ -69,7 +69,6 @@ import SearchfieldPlugin from './searchfield/searchfield';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import ShowMorePlugin from './show-more/show-more';
 import SidebarPlugin from './sidebar/sidebar';
-import SlideTransitionPlugin from './slide-transition/slide-transition';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
@@ -87,10 +86,10 @@ import TimepickerPlugin from './timepicker/timepicker';
 import ToastPlugin from './toast/toast';
 import ToggleButtonsPlugin from './toggle-buttons/toggle-buttons';
 import TooltipPlugin from './tooltip/tooltip';
+import AccordionTransitionPlugin from './transitions/accordion-transition/accordion-transition';
+import SlideTransitionPlugin from './transitions/slide-transition/slide-transition';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
-
-
 
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
@@ -107,6 +106,7 @@ const ComponentsPlugin: PluginObject<any> = {
 
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
+        Vue.use(AccordionTransitionPlugin);
         Vue.use(AddPlugin);
         Vue.use(AddressPlugin, { loqateKey: options.loquateOptions ? 'LOQATE_KEY=BT13-ZT19-TB79-DC28' : undefined } as AddressLookupPluginOptions);
         Vue.use(ButtonPlugin);

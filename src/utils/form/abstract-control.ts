@@ -11,7 +11,7 @@ import { ControlValidator } from './validators/control-validator';
  * This is the base class for `FormControl`, `FormGroup`, and `FormArray`.
  *
  */
-export abstract class AbstractControl {
+export abstract class AbstractControl<T = any> {
     public htmlElement: HTMLElement | undefined;
     protected readonly _validationGuard: ControlValidationGuard = DefaultValidationGuard;
     protected _parent: FormGroup | FormArray;
@@ -34,7 +34,8 @@ export abstract class AbstractControl {
         }
     }
 
-    public abstract get value(): any;
+    public abstract get value(): T;
+    public abstract set value(value: T);
     public abstract get valid(): boolean;
     public abstract get enabled(): boolean;
     public abstract set enabled(isEnabled: boolean);
@@ -43,26 +44,27 @@ export abstract class AbstractControl {
     public abstract get readonly(): boolean;
     public abstract set readonly(isReadonly: boolean);
     public abstract get touched(): boolean;
+    public abstract get controls(): AbstractControl[];
+    public abstract getControl<T = any>(name: string): AbstractControl<T>;
+    public abstract get errors(): ControlError[];
+    public abstract set errors(errors: ControlError[]);
+    public abstract get errorsDeep(): ControlError[];
 
     public get pristine(): boolean {
         return this._pristine;
-    }
-
-    public get errors(): ControlError[] {
-        return (this.enabled && !this.readonly) ? this._errors : [];
-    }
-
-    public set errors(errors: ControlError[]) {
-        this._errors = [...errors];
     }
 
     public hasError(): boolean {
         return this.errors.length > 0;
     }
 
+    public hasErrorDeep(): boolean {
+        return this.errorsDeep.length > 0;
+    }
+
     public get errorMessage(): string {
-        if (this.hasError()) {
-            return getString(this.errors[0].message);
+        if (this.hasErrorDeep()) {
+            return getString(this.errorsDeep[0].message);
         } else {
             return '';
         }
@@ -82,7 +84,7 @@ export abstract class AbstractControl {
         this._pristine = true;
         this.validators.forEach(v => v.lastCheck = undefined);
         this._editionContext = ControlEditionContext.None;
-        this._errors = [];
+        this.errors = [];
     }
 
     public upwardValueChanged(): void {
@@ -185,7 +187,7 @@ export abstract class AbstractControl {
     }
 
     private _updateErrors(): void {
-        this._errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
+        this.errors = this.validators.filter(v => v.lastCheck === false).map(v => v.error);
     }
 
     protected _hasAnyControlsInError(): boolean {

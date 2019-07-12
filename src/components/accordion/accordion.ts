@@ -6,7 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import PlusPlugin, { MPlusSkin } from '../plus/plus';
-import AccordionTransitionPlugin from './accordion-transition';
+import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
 
 
@@ -140,6 +140,16 @@ export class MAccordion extends ModulVue implements AccordionGateway {
 
     public get propId(): string {
         return this.id || this.uuid;
+    }
+
+    public get idBodyWrap(): string {
+        return `${this.propId}-body-wrap`;
+    }
+
+    public get classBody(): Object {
+        return {
+            'm--has-padding': this.paddingBody && this.padding
+        };
     }
 
     public get propOpen(): boolean {

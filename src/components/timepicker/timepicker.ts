@@ -273,21 +273,27 @@ export class MTimepicker extends ModulVue {
     ///////////////////////////////////////
 
     public get currentTime(): string {
-        return this.internalTime ? this.internalTime : '';
+        if (!this.internalTime) { return ''; }
+
+        const hourParts: string[] = this.internalTime.split(':');
+        return hourParts.length > 1 ? `${hourParts[0]}:${hourParts[1]}` : '';
     }
 
     public set currentTime(value: string) {
+        const hourParts: string[] = (value || '').split(':');
+        const newValue: string = hourParts.length > 1 ? `${hourParts[0]}:${hourParts[1]}` : '';
+
         let oldTime: string = this.internalTime;
-        this.internalTime = value;
+        this.internalTime = newValue;
 
         // When the user type in something we close de popup.
         this.open = false;
 
         if (value && this.validateTime(value) && validateTimeString(value)) {
-            this.updatePopupTime(value);
+            this.updatePopupTime(newValue);
 
-            if (value !== oldTime) {
-                this.$emit('input', value);
+            if (newValue !== oldTime) {
+                this.$emit('input', newValue);
             }
 
         } else {

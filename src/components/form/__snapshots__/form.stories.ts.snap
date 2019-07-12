@@ -750,7 +750,11 @@ exports[`Storyshots components|m-form/all fields datepicker 1`] = `
                 Birthdate
               </span>
                
-              <!---->
+              <sup
+                class="m-input-style__required-marker"
+              >
+                *
+              </sup>
             </span>
           </label>
            

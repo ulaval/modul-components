@@ -4,6 +4,7 @@ import { FORM_NAME } from '../../components/component-names';
 import { MForm } from '../../components/form/form';
 import { FormActions } from '../../components/form/form-action-type';
 import FormPlugin from '../../components/form/form.plugin';
+import { AbstractControl } from '../../utils/form/abstract-control';
 import { FormControl } from '../../utils/form/form-control';
 import { FormGroup } from '../../utils/form/form-group';
 import { MaxLengthValidator } from '../../utils/form/validators/max-length/max-length';
@@ -24,12 +25,12 @@ export class MFormExternalValidationSandbox extends ModulVue {
 
     pendingSubmit: boolean = false;
 
-    get nameField(): FormControl<string> {
-        return this.formGroup.getControl(ID_FORM_CONTROL_NAME) as FormControl<string>;
+    get nameField(): AbstractControl<string> {
+        return this.formGroup.getControl<string>(ID_FORM_CONTROL_NAME);
     }
 
-    get descriptionField(): FormControl<string> {
-        return this.formGroup.getControl(ID_FORM_CONTROL_DESCRIPTION) as FormControl<string>;
+    get descriptionField(): AbstractControl<string> {
+        return this.formGroup.getControl<string>(ID_FORM_CONTROL_DESCRIPTION);
     }
 
     get maxNameLength(): number {

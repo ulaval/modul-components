@@ -1,6 +1,7 @@
 import ClipboardJs from 'clipboard';
 import { PluginObject } from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { InputSelectable } from '../../utils/input/input';
 import { ModulVue } from '../../utils/vue/vue';
 import { COPY_TO_CLIPBOARD_FEEDBACK_NAME, COPY_TO_CLIPBOARD_NAME } from '../component-names';
@@ -60,6 +61,7 @@ export class MCopyToClipboard extends ModulVue {
     })
     value: string;
 
+    fieldMaxWidth: InputMaxWidth = InputMaxWidth.None;
     labelCopyBtn: string = this.$i18n.translate('m-copy-to-clipboard:copy');
     selectedText: string = '';
 
