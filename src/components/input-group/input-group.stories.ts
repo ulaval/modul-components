@@ -9,11 +9,17 @@ Vue.use(InputGroupPlugin);
 storiesOf(`${componentsHierarchyRootSeparator}${INPUT_GROUP_NAME}`, module)
 
     .add('default', () => ({
-        template: `<m-input-group>
-                       <m-checkbox>Checkbox 1</m-checkbox>
-                       <m-checkbox>Checkbox 2</m-checkbox>
-                       <m-checkbox>Checkbox 3</m-checkbox>
-                   </m-input-group>`
+        template: `<div>
+                        <m-input-group>
+                            <m-checkbox>Checkbox 1</m-checkbox>
+                            <m-checkbox>Checkbox 2</m-checkbox>
+                            <m-checkbox>Checkbox 3</m-checkbox>
+                        </m-input-group>
+                        <m-input-group class="m-u--margin-top--l">
+                            <m-textfield label="Texfield 1"></m-textfield>
+                            <m-textfield label="Texfield 2"></m-textfield>
+                        </m-input-group>
+                    </div>`
     }))
     .add('label', () => ({
         template: `<m-input-group label="This is a label">
@@ -29,8 +35,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${INPUT_GROUP_NAME}`, module)
                        <m-checkbox>Checkbox 3</m-checkbox>
                    </m-input-group>`
     }))
-    .add('inline', () => ({
-        template: `<m-input-group label="This is a label" :inline="true">
+    .add('icon slot', () => ({
+        template: `<m-input-group label="This is a label" :required-marker="true">
+                       <template #icon>
+                           <m-icon name="m-svg__add-circle" />
+                       </template>
                        <m-checkbox>Checkbox 1</m-checkbox>
                        <m-checkbox>Checkbox 2</m-checkbox>
                        <m-checkbox>Checkbox 3</m-checkbox>

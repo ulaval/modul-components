@@ -5,29 +5,24 @@
     &.m--has-validation-message {
         &:not(.m--is-validation-message-position-bottom) {
             .m-input-group__label {
-                ~ .m-input-group__message {
+                ~ .m-input-group__body {
                     margin-top: $m-spacing--xs;
                 }
             }
 
-            .m-input-group__body {
+            .m-input-group__content {
                 margin-top: $m-spacing--s;
             }
         }
 
         &.m--is-validation-message-position-bottom {
-            .m-input-group__message {
+            .m-input-group__body {
+                flex-direction: column-reverse;
                 margin-top: $m-spacing--xs;
             }
-        }
-    }
 
-    &.m--is-inline {
-        .m-input-group__body {
-            flex-direction: row;
-
-            > :not(:first-child) {
-                margin-left: $m-spacing--s;
+            .m-input-group__message {
+                margin-top: $m-spacing--xs;
             }
         }
     }
@@ -42,6 +37,13 @@
         ~ .m-input-group__body {
             margin-top: $m-spacing--s;
         }
+    }
+
+    &__icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: $m-margin--xs;
     }
 
     &__required-marker {

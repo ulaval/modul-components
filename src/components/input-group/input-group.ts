@@ -14,6 +14,12 @@ export enum MMInputGroupValidationMessagePosition {
     Bottom = 'bottom'
 }
 
+export interface MInputGroupProps {
+    readonly label: string;
+    readonly requiredMarker?: boolean;
+    readonly validationMessagePosition?: MMInputGroupValidationMessagePosition;
+}
+
 @WithRender
 @Component({
     mixins: [
@@ -21,16 +27,12 @@ export enum MMInputGroupValidationMessagePosition {
         InputManagement
     ]
 })
-export class MInputGroup extends ModulVue {
+export class MInputGroup extends ModulVue implements MInputGroupProps {
 
     @Prop()
     readonly label!: string;
-
     @Prop()
     readonly requiredMarker!: boolean;
-
-    @Prop()
-    readonly inline!: boolean;
 
     @Prop({
         default: MMInputGroupValidationMessagePosition.Top,
@@ -40,24 +42,8 @@ export class MInputGroup extends ModulVue {
     })
     public validationMessagePosition: MMInputGroupValidationMessagePosition;
 
-    get stateIsDisabled(): boolean {
-        return this.as<InputState>().isDisabled;
-    }
-
-    get stateIsError(): boolean {
-        return this.as<InputState>().hasError;
-    }
-
-    get stateIsValid(): boolean {
-        return this.as<InputState>().isValid;
-    }
-
     get hasLabel(): boolean {
         return !!this.label;
-    }
-
-    get isValidationMessagePositionTop(): boolean {
-        return this.validationMessagePosition === MMInputGroupValidationMessagePosition.Top;
     }
 
     get isValidationMessagePositionBottom(): boolean {
@@ -76,9 +62,8 @@ export class MInputGroup extends ModulVue {
 
 const InputGroupPlugin: PluginObject<any> = {
     install(v, options): void {
-        v.prototype.$log.debug(INPUT_GROUP_NAME, 'plugin.install');
-        v.component(INPUT_GROUP_NAME, MInputGroup);
         v.use(ValidationMessagePlugin);
+        v.component(INPUT_GROUP_NAME, MInputGroup);
     }
 };
 

@@ -4,8 +4,8 @@ import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import { InputState } from '../../mixins/input-state/input-state';
 import uuid from '../../utils/uuid/uuid';
 import { RADIO_GROUP_NAME } from '../component-names';
+import InputGroupPlugin from '../input-group/input-group';
 import RadioPlugin, { BaseRadioGroup, MRadioPosition, MRadioVerticalAlignement, RadioGroup } from '../radio/radio';
-import ValidationMessagePlugin from '../validation-message/validation-message';
 import WithRender from './radio-group.html?style=./radio-group.scss';
 
 @WithRender
@@ -107,7 +107,7 @@ const RadioGroupPlugin: PluginObject<any> = {
     install(v, options): void {
 
         v.use(RadioPlugin);
-        v.use(ValidationMessagePlugin);
+        v.use(InputGroupPlugin);
         v.component(RADIO_GROUP_NAME, MRadioGroup);
     }
 };

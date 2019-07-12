@@ -1458,115 +1458,124 @@ exports[`Storyshots components|m-form/all fields radio 1`] = `
   <div
     class="m-radio-group"
   >
-    <p
-      class="m-radio-group__label"
-      id="uuid"
-    >
-      <span>
-        Style de coupe 
-        <!---->
-      </span>
-       
-      <span
-        class="m-radio-group__icon"
-      />
-    </p>
-     
     <div
-      class="m-validation-message m-radio-group__message"
+      class="m-input-group"
     >
-      <!---->
+      <p
+        class="m-input-group__label"
+        id="uuid"
+      >
+        Style de coupe
+        <!---->
+         
+        <!---->
+      </p>
        
-      <!---->
+      <div
+        class="m-input-group__body"
+      >
+        <div
+          class="m-validation-message m-input-group__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          aria-labelledby="uuid"
+          class="m-input-group__content"
+        >
+           
+          <ul
+            class="m-radio-group__body"
+            role="radiogroup"
+          >
+            <li
+              class="m-radio"
+            >
+              <input
+                class="m-radio__hidden"
+                id="uuid"
+                name="uuid"
+                type="radio"
+                value="régulière"
+              />
+               
+              <label
+                class="m-radio__wrap"
+                for="uuid"
+              >
+                <span
+                  aria-hidden="true"
+                  class="m-radio__input"
+                />
+                 
+                <span
+                  class="m-radio__label"
+                >
+                  régulière
+                </span>
+              </label>
+            </li>
+            <li
+              class="m-radio"
+            >
+              <input
+                class="m-radio__hidden"
+                id="uuid"
+                name="uuid"
+                type="radio"
+                value="julienne"
+              />
+               
+              <label
+                class="m-radio__wrap"
+                for="uuid"
+              >
+                <span
+                  aria-hidden="true"
+                  class="m-radio__input"
+                />
+                 
+                <span
+                  class="m-radio__label"
+                >
+                  julienne
+                </span>
+              </label>
+            </li>
+            <li
+              class="m-radio"
+            >
+              <input
+                class="m-radio__hidden"
+                id="uuid"
+                name="uuid"
+                type="radio"
+                value="ondulé"
+              />
+               
+              <label
+                class="m-radio__wrap"
+                for="uuid"
+              >
+                <span
+                  aria-hidden="true"
+                  class="m-radio__input"
+                />
+                 
+                <span
+                  class="m-radio__label"
+                >
+                  ondulé
+                </span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-     
-    <ul
-      aria-labelledby="uuid"
-      class="m-radio-group__body"
-      role="radiogroup"
-    >
-      <li
-        class="m-radio"
-      >
-        <input
-          class="m-radio__hidden"
-          id="uuid"
-          name="uuid"
-          type="radio"
-          value="régulière"
-        />
-         
-        <label
-          class="m-radio__wrap"
-          for="uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-radio__input"
-          />
-           
-          <span
-            class="m-radio__label"
-          >
-            régulière
-          </span>
-        </label>
-      </li>
-      <li
-        class="m-radio"
-      >
-        <input
-          class="m-radio__hidden"
-          id="uuid"
-          name="uuid"
-          type="radio"
-          value="julienne"
-        />
-         
-        <label
-          class="m-radio__wrap"
-          for="uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-radio__input"
-          />
-           
-          <span
-            class="m-radio__label"
-          >
-            julienne
-          </span>
-        </label>
-      </li>
-      <li
-        class="m-radio"
-      >
-        <input
-          class="m-radio__hidden"
-          id="uuid"
-          name="uuid"
-          type="radio"
-          value="ondulé"
-        />
-         
-        <label
-          class="m-radio__wrap"
-          for="uuid"
-        >
-          <span
-            aria-hidden="true"
-            class="m-radio__input"
-          />
-           
-          <span
-            class="m-radio__label"
-          >
-            ondulé
-          </span>
-        </label>
-      </li>
-    </ul>
   </div>
    
   <div
@@ -2639,313 +2648,315 @@ exports[`Storyshots components|m-form/rules Checkbox 2 to 5 selections 1`] = `
         <!---->
          
         <div
-          class="m-validation-message m-input-group__message"
-        >
-          <!---->
-           
-          <!---->
-        </div>
-         
-        <div
           class="m-input-group__body"
         >
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
+          <div
+            class="m-validation-message m-input-group__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-group__content"
+          >
+            <li>
+              <div
+                class="m-checkbox m--is-checkbox-left"
               >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
+                 
+                <!---->
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Sys admin
-                </span>
-              </label>
-               
+                  </span>
+                </label>
+                 
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </li>
+            <li>
               <div
-                class="m-validation-message m-checkbox__message"
+                class="m-checkbox m--is-checkbox-left"
               >
-                <!---->
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
                  
                 <!---->
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
-              >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Unit admin
-                </span>
-              </label>
-               
+                  </span>
+                </label>
+                 
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </li>
+            <li>
               <div
-                class="m-validation-message m-checkbox__message"
+                class="m-checkbox m--is-checkbox-left"
               >
-                <!---->
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
                  
                 <!---->
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
-              >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Conceptor
-                </span>
-              </label>
-               
+                  </span>
+                </label>
+                 
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </li>
+            <li>
               <div
-                class="m-validation-message m-checkbox__message"
+                class="m-checkbox m--is-checkbox-left"
               >
-                <!---->
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
                  
                 <!---->
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
-              >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Assitant
-                </span>
-              </label>
-               
+                  </span>
+                </label>
+                 
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </li>
+            <li>
               <div
-                class="m-validation-message m-checkbox__message"
+                class="m-checkbox m--is-checkbox-left"
               >
-                <!---->
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
                  
                 <!---->
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
-              >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Moderator
-                </span>
-              </label>
-               
+                  </span>
+                </label>
+                 
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </li>
+            <li>
               <div
-                class="m-validation-message m-checkbox__message"
+                class="m-checkbox m--is-checkbox-left"
               >
-                <!---->
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
                  
                 <!---->
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
-              >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Student
-                </span>
-              </label>
-               
+                  </span>
+                </label>
+                 
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </li>
+            <li>
               <div
-                class="m-validation-message m-checkbox__message"
+                class="m-checkbox m--is-checkbox-left"
               >
-                <!---->
+                <input
+                  class="m-checkbox__hidden"
+                  id="mCheckbox-uuid"
+                  type="checkbox"
+                />
                  
                 <!---->
-              </div>
-            </div>
-          </li>
-          <li>
-            <div
-              class="m-checkbox m--is-checkbox-left"
-            >
-              <input
-                class="m-checkbox__hidden"
-                id="mCheckbox-uuid"
-                type="checkbox"
-              />
-               
-              <!---->
-               
-              <label
-                class="m-checkbox__wrap"
-                for="mCheckbox-uuid"
-              >
-                <span
-                  aria-hidden="true"
-                  class="m-checkbox__input"
+                 
+                <label
+                  class="m-checkbox__wrap"
+                  for="mCheckbox-uuid"
                 >
                   <span
-                    class="m-checkbox__input__icon"
-                  />
-                </span>
-                 
-                <span
-                  class="m-checkbox__label"
-                >
-                  
+                    aria-hidden="true"
+                    class="m-checkbox__input"
+                  >
+                    <span
+                      class="m-checkbox__input__icon"
+                    />
+                  </span>
+                   
+                  <span
+                    class="m-checkbox__label"
+                  >
+                    
                             Invited
-                </span>
-              </label>
-               
-              <div
-                class="m-validation-message m-checkbox__message"
-              >
-                <!---->
+                  </span>
+                </label>
                  
-                <!---->
+                <div
+                  class="m-validation-message m-checkbox__message"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </div>
         </div>
-         
-        <!---->
       </div>
     </ul>
      
@@ -3016,157 +3027,94 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
       <!---->
        
       <div
-        class="m-validation-message m-input-group__message"
-      >
-        <!---->
-         
-        <!---->
-      </div>
-       
-      <div
         class="m-input-group__body"
       >
         <div
-          class="m-textfield m--has-label m--is-type-text"
-          style="width: 100%; max-width: 288px;"
+          class="m-validation-message m-input-group__message"
         >
-          <div
-            class="m-input-style m--has-label m--is-tag-default"
-            style="margin-top: 10px;"
-          >
-            <div
-              class="m-input-style__main"
-            >
-              <div
-                class="m-input-style__body"
-              >
-                <label
-                  class="m-input-style__label"
-                  for="mTextfield-uuid"
-                  style="margin-right: 0px;"
-                >
-                  <span
-                    class="m-input-style__text"
-                  >
-                    <span>
-                      Email
-                    </span>
-                     
-                    <!---->
-                  </span>
-                </label>
-                 
-                <div
-                  class="m-input-style__input"
-                >
-                  <!---->
-                   
-                  <div
-                    class="m-input-style__content"
-                  >
-                    <input
-                      class="m-textfield__input"
-                      id="mTextfield-uuid"
-                      maxlength="Infinity"
-                      type="text"
-                    />
-                      
-                    <!---->
-                     
-                    <!---->
-                     
-                    <!---->
-                  </div>
-                   
-                  <div
-                    class="m-input-style__suffix"
-                  >
-                    <!---->
-                     
-                    <!---->
-                  </div>
-                </div>
-              </div>
-               
-              <!---->
-            </div>
-          </div>
+          <!---->
            
-          <div
-            class="m-textfield__validation"
-          >
-            <div
-              class="m-validation-message m-textfield__validation__message"
-            >
-              <!---->
-               
-              <!---->
-            </div>
-             
-            <!---->
-          </div>
+          <!---->
         </div>
          
         <div
-          class="m-textfield m--has-label m--is-type-text"
-          style="width: 100%; max-width: 288px;"
+          class="m-input-group__content"
         >
           <div
-            class="m-input-style m--has-label m--is-tag-default"
-            style="margin-top: 10px;"
+            class="m-textfield m--has-label m--is-type-text"
+            style="width: 100%; max-width: 288px;"
           >
             <div
-              class="m-input-style__main"
+              class="m-input-style m--has-label m--is-tag-default"
+              style="margin-top: 10px;"
             >
               <div
-                class="m-input-style__body"
+                class="m-input-style__main"
               >
-                <label
-                  class="m-input-style__label"
-                  for="mTextfield-uuid"
-                  style="margin-right: 0px;"
-                >
-                  <span
-                    class="m-input-style__text"
-                  >
-                    <span>
-                      Email confirmation
-                    </span>
-                     
-                    <!---->
-                  </span>
-                </label>
-                 
                 <div
-                  class="m-input-style__input"
+                  class="m-input-style__body"
                 >
-                  <!---->
-                   
-                  <div
-                    class="m-input-style__content"
+                  <label
+                    class="m-input-style__label"
+                    for="mTextfield-uuid"
+                    style="margin-right: 0px;"
                   >
-                    <input
-                      class="m-textfield__input"
-                      id="mTextfield-uuid"
-                      maxlength="Infinity"
-                      type="text"
-                    />
-                      
-                    <!---->
-                     
-                    <!---->
-                     
-                    <!---->
-                  </div>
+                    <span
+                      class="m-input-style__text"
+                    >
+                      <span>
+                        Email
+                      </span>
+                       
+                      <!---->
+                    </span>
+                  </label>
                    
                   <div
-                    class="m-input-style__suffix"
+                    class="m-input-style__input"
                   >
                     <!---->
                      
-                    <!---->
+                    <div
+                      class="m-input-style__content"
+                    >
+                      <input
+                        class="m-textfield__input"
+                        id="mTextfield-uuid"
+                        maxlength="Infinity"
+                        type="text"
+                      />
+                        
+                      <!---->
+                       
+                      <!---->
+                       
+                      <!---->
+                    </div>
+                     
+                    <div
+                      class="m-input-style__suffix"
+                    >
+                      <!---->
+                       
+                      <!---->
+                    </div>
                   </div>
                 </div>
+                 
+                <!---->
+              </div>
+            </div>
+             
+            <div
+              class="m-textfield__validation"
+            >
+              <div
+                class="m-validation-message m-textfield__validation__message"
+              >
+                <!---->
+                 
+                <!---->
               </div>
                
               <!---->
@@ -3174,22 +3122,87 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
           </div>
            
           <div
-            class="m-textfield__validation"
+            class="m-textfield m--has-label m--is-type-text"
+            style="width: 100%; max-width: 288px;"
           >
             <div
-              class="m-validation-message m-textfield__validation__message"
+              class="m-input-style m--has-label m--is-tag-default"
+              style="margin-top: 10px;"
             >
-              <!---->
+              <div
+                class="m-input-style__main"
+              >
+                <div
+                  class="m-input-style__body"
+                >
+                  <label
+                    class="m-input-style__label"
+                    for="mTextfield-uuid"
+                    style="margin-right: 0px;"
+                  >
+                    <span
+                      class="m-input-style__text"
+                    >
+                      <span>
+                        Email confirmation
+                      </span>
+                       
+                      <!---->
+                    </span>
+                  </label>
+                   
+                  <div
+                    class="m-input-style__input"
+                  >
+                    <!---->
+                     
+                    <div
+                      class="m-input-style__content"
+                    >
+                      <input
+                        class="m-textfield__input"
+                        id="mTextfield-uuid"
+                        maxlength="Infinity"
+                        type="text"
+                      />
+                        
+                      <!---->
+                       
+                      <!---->
+                       
+                      <!---->
+                    </div>
+                     
+                    <div
+                      class="m-input-style__suffix"
+                    >
+                      <!---->
+                       
+                      <!---->
+                    </div>
+                  </div>
+                </div>
+                 
+                <!---->
+              </div>
+            </div>
+             
+            <div
+              class="m-textfield__validation"
+            >
+              <div
+                class="m-validation-message m-textfield__validation__message"
+              >
+                <!---->
+                 
+                <!---->
+              </div>
                
               <!---->
             </div>
-             
-            <!---->
           </div>
         </div>
       </div>
-       
-      <!---->
     </div>
      
     <p
@@ -3827,173 +3840,182 @@ exports[`Storyshots components|m-form/rules Radio button required 1`] = `
     <div
       class="m-radio-group"
     >
-      <p
-        class="m-radio-group__label"
-        id="uuid"
-      >
-        <span>
-          Select a role : 
-          <!---->
-        </span>
-         
-        <span
-          class="m-radio-group__icon"
-        />
-      </p>
-       
       <div
-        class="m-validation-message m-radio-group__message"
+        class="m-input-group"
       >
-        <!---->
+        <p
+          class="m-input-group__label"
+          id="uuid"
+        >
+          Select a role :
+          <!---->
+           
+          <!---->
+        </p>
          
-        <!---->
+        <div
+          class="m-input-group__body"
+        >
+          <div
+            class="m-validation-message m-input-group__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            aria-labelledby="uuid"
+            class="m-input-group__content"
+          >
+             
+            <ul
+              class="m-radio-group__body"
+              role="radiogroup"
+            >
+              <li
+                class="m-radio"
+              >
+                <input
+                  class="m-radio__hidden"
+                  id="uuid"
+                  name="uuid"
+                  type="radio"
+                  value="Sys admin"
+                />
+                 
+                <label
+                  class="m-radio__wrap"
+                  for="uuid"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="m-radio__input"
+                  />
+                   
+                  <span
+                    class="m-radio__label"
+                  >
+                    Sys admin
+                  </span>
+                </label>
+              </li>
+               
+              <li
+                class="m-radio"
+              >
+                <input
+                  class="m-radio__hidden"
+                  id="uuid"
+                  name="uuid"
+                  type="radio"
+                  value="Unit admin"
+                />
+                 
+                <label
+                  class="m-radio__wrap"
+                  for="uuid"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="m-radio__input"
+                  />
+                   
+                  <span
+                    class="m-radio__label"
+                  >
+                    Unit admin
+                  </span>
+                </label>
+              </li>
+               
+              <li
+                class="m-radio"
+              >
+                <input
+                  class="m-radio__hidden"
+                  id="uuid"
+                  name="uuid"
+                  type="radio"
+                  value="Conceptor"
+                />
+                 
+                <label
+                  class="m-radio__wrap"
+                  for="uuid"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="m-radio__input"
+                  />
+                   
+                  <span
+                    class="m-radio__label"
+                  >
+                    Conceptor
+                  </span>
+                </label>
+              </li>
+               
+              <li
+                class="m-radio"
+              >
+                <input
+                  class="m-radio__hidden"
+                  id="uuid"
+                  name="uuid"
+                  type="radio"
+                  value="Assistant"
+                />
+                 
+                <label
+                  class="m-radio__wrap"
+                  for="uuid"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="m-radio__input"
+                  />
+                   
+                  <span
+                    class="m-radio__label"
+                  >
+                    Assistant
+                  </span>
+                </label>
+              </li>
+               
+              <li
+                class="m-radio"
+              >
+                <input
+                  class="m-radio__hidden"
+                  id="uuid"
+                  name="uuid"
+                  type="radio"
+                  value="Student"
+                />
+                 
+                <label
+                  class="m-radio__wrap"
+                  for="uuid"
+                >
+                  <span
+                    aria-hidden="true"
+                    class="m-radio__input"
+                  />
+                   
+                  <span
+                    class="m-radio__label"
+                  >
+                    Student
+                  </span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-       
-      <ul
-        aria-labelledby="uuid"
-        class="m-radio-group__body"
-        role="radiogroup"
-      >
-        <li
-          class="m-radio"
-        >
-          <input
-            class="m-radio__hidden"
-            id="uuid"
-            name="uuid"
-            type="radio"
-            value="Sys admin"
-          />
-           
-          <label
-            class="m-radio__wrap"
-            for="uuid"
-          >
-            <span
-              aria-hidden="true"
-              class="m-radio__input"
-            />
-             
-            <span
-              class="m-radio__label"
-            >
-              Sys admin
-            </span>
-          </label>
-        </li>
-         
-        <li
-          class="m-radio"
-        >
-          <input
-            class="m-radio__hidden"
-            id="uuid"
-            name="uuid"
-            type="radio"
-            value="Unit admin"
-          />
-           
-          <label
-            class="m-radio__wrap"
-            for="uuid"
-          >
-            <span
-              aria-hidden="true"
-              class="m-radio__input"
-            />
-             
-            <span
-              class="m-radio__label"
-            >
-              Unit admin
-            </span>
-          </label>
-        </li>
-         
-        <li
-          class="m-radio"
-        >
-          <input
-            class="m-radio__hidden"
-            id="uuid"
-            name="uuid"
-            type="radio"
-            value="Conceptor"
-          />
-           
-          <label
-            class="m-radio__wrap"
-            for="uuid"
-          >
-            <span
-              aria-hidden="true"
-              class="m-radio__input"
-            />
-             
-            <span
-              class="m-radio__label"
-            >
-              Conceptor
-            </span>
-          </label>
-        </li>
-         
-        <li
-          class="m-radio"
-        >
-          <input
-            class="m-radio__hidden"
-            id="uuid"
-            name="uuid"
-            type="radio"
-            value="Assistant"
-          />
-           
-          <label
-            class="m-radio__wrap"
-            for="uuid"
-          >
-            <span
-              aria-hidden="true"
-              class="m-radio__input"
-            />
-             
-            <span
-              class="m-radio__label"
-            >
-              Assistant
-            </span>
-          </label>
-        </li>
-         
-        <li
-          class="m-radio"
-        >
-          <input
-            class="m-radio__hidden"
-            id="uuid"
-            name="uuid"
-            type="radio"
-            value="Student"
-          />
-           
-          <label
-            class="m-radio__wrap"
-            for="uuid"
-          >
-            <span
-              aria-hidden="true"
-              class="m-radio__input"
-            />
-             
-            <span
-              class="m-radio__label"
-            >
-              Student
-            </span>
-          </label>
-        </li>
-      </ul>
     </div>
      
     <p
@@ -4946,182 +4968,18 @@ exports[`Storyshots components|m-form/validators compare fields 1`] = `
     <!---->
      
     <div
-      class="m-validation-message m-input-group__message"
+      class="m-input-group__body"
     >
-      <!---->
+      <div
+        class="m-validation-message m-input-group__message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
        
       <!---->
     </div>
-     
-    <div
-      class="m-input-group__body"
-    >
-      <div>
-        <div
-          class="m-textfield m--has-label m--is-type-text"
-          style="width: 100%; max-width: 288px;"
-        >
-          <div
-            class="m-input-style m--has-label m--is-tag-default"
-            style="margin-top: 10px;"
-          >
-            <div
-              class="m-input-style__main"
-            >
-              <div
-                class="m-input-style__body"
-              >
-                <label
-                  class="m-input-style__label"
-                  for="mTextfield-uuid"
-                  style="margin-right: 0px;"
-                >
-                  <span
-                    class="m-input-style__text"
-                  >
-                    <span>
-                      email
-                    </span>
-                     
-                    <!---->
-                  </span>
-                </label>
-                 
-                <div
-                  class="m-input-style__input"
-                >
-                  <!---->
-                   
-                  <div
-                    class="m-input-style__content"
-                  >
-                    <input
-                      class="m-textfield__input"
-                      id="mTextfield-uuid"
-                      maxlength="Infinity"
-                      type="text"
-                    />
-                      
-                    <!---->
-                     
-                    <!---->
-                     
-                    <!---->
-                  </div>
-                   
-                  <div
-                    class="m-input-style__suffix"
-                  >
-                    <!---->
-                     
-                    <!---->
-                  </div>
-                </div>
-              </div>
-               
-              <!---->
-            </div>
-          </div>
-           
-          <div
-            class="m-textfield__validation"
-          >
-            <div
-              class="m-validation-message m-textfield__validation__message"
-            >
-              <!---->
-               
-              <!---->
-            </div>
-             
-            <!---->
-          </div>
-        </div>
-         
-        <div
-          class="m-textfield m--has-label m--is-type-text"
-          style="width: 100%; max-width: 288px;"
-        >
-          <div
-            class="m-input-style m--has-label m--is-tag-default"
-            style="margin-top: 10px;"
-          >
-            <div
-              class="m-input-style__main"
-            >
-              <div
-                class="m-input-style__body"
-              >
-                <label
-                  class="m-input-style__label"
-                  for="mTextfield-uuid"
-                  style="margin-right: 0px;"
-                >
-                  <span
-                    class="m-input-style__text"
-                  >
-                    <span>
-                      confirm email
-                    </span>
-                     
-                    <!---->
-                  </span>
-                </label>
-                 
-                <div
-                  class="m-input-style__input"
-                >
-                  <!---->
-                   
-                  <div
-                    class="m-input-style__content"
-                  >
-                    <input
-                      class="m-textfield__input"
-                      id="mTextfield-uuid"
-                      maxlength="Infinity"
-                      type="text"
-                    />
-                      
-                    <!---->
-                     
-                    <!---->
-                     
-                    <!---->
-                  </div>
-                   
-                  <div
-                    class="m-input-style__suffix"
-                  >
-                    <!---->
-                     
-                    <!---->
-                  </div>
-                </div>
-              </div>
-               
-              <!---->
-            </div>
-          </div>
-           
-          <div
-            class="m-textfield__validation"
-          >
-            <div
-              class="m-validation-message m-textfield__validation__message"
-            >
-              <!---->
-               
-              <!---->
-            </div>
-             
-            <!---->
-          </div>
-        </div>
-      </div>
-    </div>
-     
-    <!---->
   </div>
    
   <p
