@@ -2,47 +2,63 @@
 @import './../input-style/input-style.scss';
 
 .m-input-group {
-    border: 1px solid $m-color--grey-light;
-    border-radius: $m-border-radius--s;
+    &.m--has-validation-message {
+        &:not(.m--is-validation-message-position-bottom) {
+            .m-input-group__label {
+                ~ .m-input-group__body {
+                    margin-top: $m-spacing--xs;
+                }
+            }
 
-    &.m--border-hidden {
-        border-width: 0;
-    }
+            .m-input-group__content {
+                margin-top: $m-spacing--s;
+            }
+        }
 
-    &__legend {
-        color: $m-color--text-light;
-    }
+        &.m--is-validation-message-position-bottom {
+            .m-input-group__body {
+                flex-direction: column-reverse;
+                margin-top: $m-spacing--xs;
+            }
 
-    &.m--is-readonly,
-    &.m--is-disabled {
-        border-style: dashed;
-
-        .m-input-group__legend {
-            color: $m-input-style--color-disabled;
+            .m-input-group__message {
+                margin-top: $m-spacing--xs;
+            }
         }
     }
 
-    &.m--is-waiting {
-        @include input-style-cursor(wait);
-    }
+    &__label {
+        margin: 0;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--semi-bold;
+        display: flex;
+        align-items: center;
 
-    &.m--is-valid {
-        border-color: $m-input-style--color-valid;
-
-        .m-input-group__legend {
-            color: $m-input-style--color-valid;
+        ~ .m-input-group__body {
+            margin-top: $m-spacing--s;
         }
     }
 
-    &.m--has-error {
-        border-color: $m-input-style--color-error;
+    &__icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: $m-margin--xs;
+    }
 
-        .m-input-group__legend {
-            color: $m-input-style--color-error;
-        }
+    &__required-marker {
+        color: $m-color--accent;
+        font-size: inherit;
+        font-weight: $m-font-weight--bold;
+        vertical-align: baseline;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
     }
 
     &__validation__message {
-        margin-top: $m-spacing--xs;
+        transition: margin $m-transition-duration ease;
     }
 }
