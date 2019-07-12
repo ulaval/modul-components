@@ -1977,7 +1977,7 @@ exports[`Storyshots components|m-form/all fields timepicker 1`] = `
                 inputmode="decimal"
                 max="23:59"
                 min="00:00"
-                placeholder="hh:mm"
+                placeholder="HH:MM"
                 step="300"
                 type="text"
               />
