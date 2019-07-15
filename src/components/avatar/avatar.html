@@ -3,7 +3,8 @@
      :class="avatarClass"
      @click="click"
      @mouseover="mouseOver"
-     @mouseleave="mouseLeave">
+     @mouseleave="mouseLeave"
+     ref="avatar">
     <slot name="avatar">
         <m-icon class="m-avatar__default-image"
                 name="m-svg__avatar"

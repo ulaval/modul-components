@@ -17,7 +17,7 @@ export class MAvatar extends Vue {
     @Prop({ default: MAvatarShape.CIRCLE })
     shape: MAvatarShape;
 
-    @Prop({ required: true })
+    @Prop({ default: '32px' })
     size: string;
 
     @Prop({ default: false })
