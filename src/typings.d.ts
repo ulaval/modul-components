@@ -34,3 +34,6 @@ declare module '*.svg' {
     const content: any;
     export default content;
 }
+
+/// <reference path="../node_modules/@types/googlemaps/index.d.ts" />
+declare module 'googlemaps';

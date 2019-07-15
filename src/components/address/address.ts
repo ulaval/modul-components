@@ -10,11 +10,12 @@ import { MAddressReader } from './address-reader/address-reader';
 
 export interface AddressPluginOptions {
     loqateKey: string;
+    googleKey: string;
 }
 
 const AddressPlugin: PluginObject<any> = {
-    install(v, options: AddressPluginOptions | undefined = { loqateKey: '' }): void {
-        v.use(AddressLookupPlugin, { loqateKey: options.loqateKey } as AddressLookupPluginOptions);
+    install(v, options: AddressPluginOptions | undefined = { loqateKey: '', googleKey: '' }): void {
+        v.use(AddressLookupPlugin, { loqateKey: options.loqateKey, googleKey: options.googleKey } as AddressLookupPluginOptions);
         v.use(AutoCompletePlugin);
         v.component(ADDRESS_AUTOCOMPLETE_FIELD_NAME, MAddressAutocompleteField);
         v.component(ADDRESS_EDITOR_NAME, MAddressEditor);

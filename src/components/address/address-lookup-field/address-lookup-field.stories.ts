@@ -5,7 +5,7 @@ import Address from '../../../utils/address-lookup/address';
 import { ADDRESS_LOOKUP_FIELD_NAME } from '../../component-names';
 import AddressPlugin from '../address';
 
-Vue.use(AddressPlugin, { loqateKey: 'someKey' });
+Vue.use(AddressPlugin, { loqateKey: '', googleKey: 'AIzaSyCRjxCoNDjep1XEjw2Lhk6uSy7uwX1nKBw' });
 
 storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NAME}`, module)
     .add('default', () => ({
@@ -27,5 +27,11 @@ storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NA
                 @address-retrieved="onRetrieve">
             </${ADDRESS_LOOKUP_FIELD_NAME}>
             <div>RETRIEVED VALUE: {{ retrievedValue }}</div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="hehehe"></div>
+            :)
         </div>`
     }));
