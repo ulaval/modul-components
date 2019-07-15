@@ -21,9 +21,10 @@ export class MAvatar extends Vue {
     size: string;
 
     @Prop({ default: false })
-    editable: boolean;
+    clickable: boolean;
 
-    i18nEdit: string = this.$i18n.translate('m-avatar:edit');
+    hover: boolean = false;
+
 
     get sizeStyle(): { [property: string]: string } {
         return {
@@ -32,15 +33,25 @@ export class MAvatar extends Vue {
         };
     }
 
-    get shapeClass(): { [property: string]: boolean } {
+    get avatarClass(): { [property: string]: boolean } {
         return {
-            'm--is-circle': this.shape === MAvatarShape.CIRCLE
+            'm--is-circle': this.shape === MAvatarShape.CIRCLE,
+            'm--is-clickable': this.clickable
         };
     }
 
-    edit(): void {
-        // if edtiable
-        this.$emit('edit');
+    mouseOver(): void {
+        this.hover = true;
+    }
+
+    mouseLeave(): void {
+        this.hover = false;
+    }
+
+    click(): void {
+        if (this.clickable) {
+            this.$emit('click');
+        }
     }
 
 }

@@ -5,38 +5,17 @@ $m-avatar--button-height: 30%;
 .m-avatar {
     overflow: hidden;
     position: relative;
-    cursor: pointer;
 
     &.m--is-circle {
         border-radius: 50%;
     }
 
+    &.m--is-clickable {
+        cursor: pointer;
+    }
+
     &__default-image {
         background: $m-color--grey;
         color: $m-color--white;
-    }
-
-    &__edit-button {
-        transition: all 0.1s linear;
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        bottom: -$m-avatar--button-height;
-        height: $m-avatar--button-height;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba($m-color--grey-darker, 0.8);
-        color: $m-color--white;
-        // transform: translateY(-100%);
-
-        .m-avatar:hover & {
-            transform: translateY(-100%);
-        }
-    }
-
-    &__default-button {
-        font-weight: $m-font-weight--semi-bold;
-        // margin-bottom: 5px; // magic number
     }
 }
