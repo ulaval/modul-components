@@ -1,0 +1,15 @@
+<div class="m-avatar"
+     :style="sizeStyle"
+     :class="shapeClass"
+     @click="edit">
+    <slot name="avatar">
+        <m-icon class="m-avatar__default-image"
+                name="m-svg__avatar"
+                :size="size"></m-icon>
+    </slot>
+    <div class="m-avatar__edit-button">
+        <slot name="edit-button">
+            <span class="m-avatar__default-button">{{ i18nEdit }}</span>
+        </slot>
+    </div>
+</div>
