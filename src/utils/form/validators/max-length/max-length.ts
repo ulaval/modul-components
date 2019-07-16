@@ -52,6 +52,6 @@ export const MaxLengthValidator: (maxLength: number, options?: ControlValidatorO
                     : undefined
             },
         validationType: options && options.validationType ?
-            options.validationType : ControlValidatorValidationType.Correction
+            options.validationType : ControlValidatorValidationType.OnGoing
     };
 };
