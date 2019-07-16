@@ -3,6 +3,7 @@
 .m-avatar {
     overflow: hidden;
     position: relative;
+    color: $m-color--grey;
 
     &.m--is-circle {
         border-radius: 50%;
