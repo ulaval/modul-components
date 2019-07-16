@@ -92,9 +92,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     @Watch('forceOpen')
     onForceOpenUpdate(): void {
-        if (this.forceOpen) {
-            this.internalOpen = this.forceOpen;
-        }
+        this.internalOpen = this.forceOpen;
     }
 
     public matchFilter(text: string | undefined): boolean {

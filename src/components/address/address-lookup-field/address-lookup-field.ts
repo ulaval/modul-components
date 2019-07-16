@@ -75,8 +75,6 @@ export class MAddressLookupField extends ModulVue {
 
     onHandTypeLinkClick(): void {
         this.onHandTypeClick();
-        this.open = false;
-        this.currentResults = [];
     }
 
     get results(): MAutocompleteAddressResult[] {

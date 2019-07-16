@@ -34,8 +34,11 @@
                      :non-filterable="true">{{ propTextNoMatch }}</m-dropdown-item>
     <m-dropdown-item v-if="isShowHandTypeLink"
                      class="m-autocomplete__hand-type-link"
-                     :non-filterable="true">
+                     :non-filterable="true"
+                     value="-1"
+                     @click="onHandTypeLinkClick">
         <m-link @click="onHandTypeLinkClick"
+                :underline="false"
                 :mode="mLinkModeButton">{{ showHandTypeText }}</m-link>
     </m-dropdown-item>
 </m-dropdown>

@@ -92,6 +92,8 @@ export class MAutocomplete extends ModulVue {
         this.refreshItemsOnSelectionChange(this.selection);
         if (this.selection === '') {
             this.inputText = this.selection;
+        } else if (this.selection === '-1') {
+            this.inputText = '';
         }
         return this.selection;
     }
@@ -119,6 +121,10 @@ export class MAutocomplete extends ModulVue {
     }
 
     onHandTypeLinkClick(): void {
+        setTimeout(() => {
+            this.open = false;
+            this.items = [];
+        }, this.throttle);
         this.onHandTypeClick();
     }
 
