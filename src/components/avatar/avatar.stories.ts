@@ -10,22 +10,22 @@ const image192: string = 'http://placekitten.com/192/192';
 
 storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     .add('Small', () => ({
-        template: `<m-avatar size="32px"></m-avatar>`
+        template: `<m-avatar pixel-size="32"></m-avatar>`
     }))
     .add('Large', () => ({
-        template: `<m-avatar size="192px"></m-avatar>`
+        template: `<m-avatar pixel-size="192"></m-avatar>`
     }))
     .add('Square', () => ({
-        template: `<m-avatar size="192px" shape="square"></m-avatar>`
+        template: `<m-avatar pixel-size="192" shape="square"></m-avatar>`
     }))
     .add('Image slot', () => ({
-        template: `<m-avatar size="192px"><img slot="avatar" src="${image192}"></m-avatar>`
+        template: `<m-avatar pixel-size="192"><img slot="avatar" src="${image192}"></m-avatar>`
     }))
     .add('Clickable', () => ({
-        template: `<m-avatar size="192px" :clickable="true"><img slot="avatar" src="${image192}"></m-avatar>`
+        template: `<m-avatar pixel-size="192" :clickable="true"><img slot="avatar" src="${image192}"></m-avatar>`
     }))
     .add('Custom slot - animation', () => ({
-        template: `<m-avatar size="192px" :clickable="true">
+        template: `<m-avatar pixel-size="192" :clickable="true">
                         <img slot="avatar" src="${image192}">
                         <div slot="content" slot-scope={hover} style="
                             transition: all 0.1s linear;

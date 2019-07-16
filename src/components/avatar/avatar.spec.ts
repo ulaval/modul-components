@@ -28,7 +28,7 @@ describe('MAvatar', () => {
             wrapper.setMethods({ click: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('click');
 
-            expect(wrapper.vm.click).toHaveBeenCalled();
+            expect(wrapper.vm.click).toHaveBeenCalledTimes(1);
         });
 
         describe(`and clickable = true`, async () => {
@@ -62,7 +62,7 @@ describe('MAvatar', () => {
             wrapper.setMethods({ mouseOver: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseover');
 
-            expect(wrapper.vm.mouseOver).toHaveBeenCalled();
+            expect(wrapper.vm.mouseOver).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -73,7 +73,7 @@ describe('MAvatar', () => {
             wrapper.setMethods({ mouseLeave: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseleave');
 
-            expect(wrapper.vm.mouseLeave).toHaveBeenCalled();
+            expect(wrapper.vm.mouseLeave).toHaveBeenCalledTimes(1);
         });
     });
 

@@ -10,15 +10,23 @@ export enum MAvatarShape {
     SQUARE = 'square'
 }
 
+const SMALL_AVATAR_SIZE: number = 32;
+
 @WithRender
 @Component
 export class MAvatar extends Vue {
 
-    @Prop({ default: MAvatarShape.CIRCLE })
+    @Prop({
+        default: MAvatarShape.CIRCLE,
+        validator: (valeur: MAvatarShape): boolean => (
+            valeur === MAvatarShape.CIRCLE
+            || valeur === MAvatarShape.SQUARE
+        )
+    })
     shape: MAvatarShape;
 
-    @Prop({ default: '32px' })
-    size: string;
+    @Prop({ default: SMALL_AVATAR_SIZE })
+    pixelSize: number;
 
     @Prop({ default: false })
     clickable: boolean;
@@ -28,16 +36,24 @@ export class MAvatar extends Vue {
 
     get sizeStyle(): { [property: string]: string } {
         return {
-            width: this.size,
-            height: this.size
+            width: this.pixelSize + 'px',
+            height: this.pixelSize + 'px'
         };
     }
 
-    get avatarClass(): { [property: string]: boolean } {
+    get shapeAvatar(): { [property: string]: boolean } {
         return {
             'm--is-circle': this.shape === MAvatarShape.CIRCLE,
             'm--is-clickable': this.clickable
         };
+    }
+
+    get defaultAvatar(): string {
+        return this.isSmall ? 'm-svg__profile' : 'm-svg__avatar';
+    }
+
+    get isSmall(): boolean {
+        return this.pixelSize <= SMALL_AVATAR_SIZE;
     }
 
     mouseOver(): void {

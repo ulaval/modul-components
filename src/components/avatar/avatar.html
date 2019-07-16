@@ -1,14 +1,15 @@
 <div class="m-avatar"
+     :class="shapeAvatar"
      :style="sizeStyle"
-     :class="avatarClass"
      @click="click"
      @mouseover="mouseOver"
      @mouseleave="mouseLeave"
      ref="avatar">
     <slot name="avatar">
         <m-icon class="m-avatar__default-image"
-                name="m-svg__avatar"
-                :size="size"></m-icon>
+                :class="{ 'm--is-avatar-large': !isSmall }"
+                :name="defaultAvatar"
+                :size="pixelSize"></m-icon>
     </slot>
     <slot name="content"
           :hover="hover"></slot>
