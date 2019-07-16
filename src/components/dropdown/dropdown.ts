@@ -365,7 +365,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
+        return this.as<InputState>().isDisabled || this.as<InputState>().isReadonly || this.as<InputState>().isWaiting;
     }
 
     private get hasFooterSlot(): boolean {
@@ -541,7 +541,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get hasPointer(): boolean {
-        return !this.filterable || (this.filterable && !this.open);
+        return (!this.as<InputState>().isDisabled && !this.as<InputState>().isReadonly) &&
+            !this.filterable || (this.filterable && !this.open);
     }
 
     private get hasPlaceholderIcon(): boolean {

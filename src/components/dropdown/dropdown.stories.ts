@@ -52,9 +52,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
     }))
     .add('filterable and placeholder', () => ({
         data: () => ({
-            model3: ''
+            model4: ''
         }),
-        template: `<m-dropdown label="Animals" v-model="model3" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
+        template: `<m-dropdown label="Animals" v-model="model4" placeholder="Type to filter" placeholder-icon-name="m-svg__search"
         filterable="true">
                         <m-dropdown-item value="1a" label="Steer"></m-dropdown-item>
                         <m-dropdown-item value="1b" label="Chameleon"></m-dropdown-item>
@@ -66,11 +66,24 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
     }))
     .add('label-up', () => ({
         data: () => ({
-            model1: ''
+            model5: ''
         }),
-        template: `<m-dropdown :label-up="true" label="Name" v-model="model1" placeholder="placeholder">
+        template: `<m-dropdown :label-up="true" label="Name" v-model="model5" placeholder="placeholder">
                         <m-dropdown-item value="james" label="James"></m-dropdown-item>
                         <m-dropdown-item value="yvan" label="Yvan"></m-dropdown-item>
+                    </m-dropdown>`
+    }))
+    .add('readonly', () => ({
+        data: () => ({
+            model6: ''
+        }),
+        template: `<m-dropdown :readonly="true" label="Avengers" v-model="model6">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
                     </m-dropdown>`
     }));
 
