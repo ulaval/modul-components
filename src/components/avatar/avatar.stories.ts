@@ -7,7 +7,6 @@ import AvatarPlugin from './avatar';
 Vue.use(AvatarPlugin);
 
 const image192: string = 'http://placekitten.com/192/192';
-const image500x600: string = 'http://placekitten.com/500/800';
 
 storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     .add('Small', () => ({
