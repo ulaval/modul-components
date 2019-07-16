@@ -5565,7 +5565,7 @@ exports[`Storyshots components|m-form/validators max-length 1`] = `
   <!---->
    
   <p>
-    default validationType =  correction
+    default validationType =  on-going
   </p>
    
   <div
