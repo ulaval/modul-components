@@ -440,7 +440,7 @@ exports[`Storyshots components|m-form/all fields autocomplete 1`] = `
   />
    
   <div
-    class="m-dropdown m--has-placeholder-icon"
+    class="m-dropdown m-autocomplete m--has-placeholder-icon"
     style="width: 100%; max-width: 288px;"
   >
     <div

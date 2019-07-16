@@ -1,11 +1,14 @@
 <div class="m-address-lookup-field">
-    <m-autocomplete :placeholder="i18nPlaceholder"
+    <m-autocomplete v-model="selection"
+                    :placeholder="i18nPlaceholder"
                     :label="i18nSearch"
                     :results="results"
                     :open.sync="open"
+                    :show-hand-type-link="showHandTypeLink"
+                    :show-hand-type-text="propShowHandTypeText"
                     @complete="onComplete"
                     @change="onSelect"
-                    v-model="selection">
+                    @hand-type-click="onHandTypeLinkClick">
         <template slot-scope="{item}">
             <span :class="item.classesToggle">
                 <span class="m-address-lookup-field__address">{{ item.label }}</span>

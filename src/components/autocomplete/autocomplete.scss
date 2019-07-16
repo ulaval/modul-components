@@ -1,1 +1,7 @@
 @import 'commons';
+
+.m-autocomplete {
+    &__hand-type-link {
+        border-top: $m-border-width--s solid $m-color--grey;
+    }
+}

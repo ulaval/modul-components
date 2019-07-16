@@ -21,17 +21,20 @@ export interface AddressLookupFieldProps {
 @WithRender
 @Component
 export class MAddressLookupField extends ModulVue {
-
     // IP address, ISO2 or ISO3 country code for origin
     @Prop()
     origin: string | undefined;
-
     // Prefered language for results 2 or 4 chars fr, en, fr-ca, fr-fr, etc.
     @Prop()
     language: string | undefined;
+    @Prop()
+    showHandTypeLink: boolean;
+    @Prop()
+    showHandTypeText: string;
 
     i18nSearch: string = this.$i18n.translate('m-address-lookup-field:search-field');
     i18nPlaceholder: string = this.$i18n.translate('m-address-lookup-field:placeholder');
+    i18nManuallyAddress: string = this.$i18n.translate('m-address-lookup-field:manually-address');
 
     selection: string = '';
 
@@ -67,6 +70,13 @@ export class MAddressLookupField extends ModulVue {
     private emitSelection(_currentAddress: Address): void {
     }
 
+    @Emit('hand-type-click')
+    private onHandTypeClick(): void { }
+
+    onHandTypeLinkClick(): void {
+        this.onHandTypeClick();
+    }
+
     get results(): MAutocompleteAddressResult[] {
         const data: MAutocompleteAddressResult[] = this.currentResults
             .map((row) => ({
@@ -82,6 +92,10 @@ export class MAddressLookupField extends ModulVue {
         return data;
     }
 
+    get propShowHandTypeText(): string {
+        return !!this.showHandTypeText && this.showHandTypeText !== '' ? this.showHandTypeText : this.i18nManuallyAddress;
+    }
+
     private formatHTMLDescription(address: LoqateFindResponse): string {
         if (address.type === KEY_ADDRESS_TYPE) {
             return address.description;
@@ -94,7 +108,7 @@ export class MAddressLookupField extends ModulVue {
         if (!lastPart) {
             return '';
         }
-        return parts + `<span class="m-address-lookup-field__results">${lastPart}</span>`;
+        return parts + `<span class="m-address-lookup-field__result-group">${lastPart}</span>`;
     }
 
     private async fetchData(value: string, id?: string): Promise<LoqateFindResponse[]> {

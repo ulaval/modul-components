@@ -16,7 +16,7 @@
         background-color: $m-color--accent-light;
     }
 
-    /deep/ &__results {
+    /deep/ &__result-group {
         display: flex;
         align-items: center;
         color: $m-color--interactive;

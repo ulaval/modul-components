@@ -1,6 +1,7 @@
 {
     "m-address-lookup-field": {
         "search-field": "Search address",
-        "placeholder": "Enter an address to lookup"
+        "placeholder": "Enter an address to lookup",
+        "manually-address": "Enter an address manually"
     }
 }

@@ -1,4 +1,6 @@
-<m-dropdown :filterable="true"
+<m-dropdown v-model="selection"
+            class="m-autocomplete"
+            :filterable="true"
             :clear-invalid-selection-on-close="clearInvalidSelectionOnClose"
             :show-arrow-icon="false"
             :enable-animation="false"
@@ -6,7 +8,7 @@
             :clear-model-on-selected-text="false"
             :placeholder="placeholder"
             :focus="focus"
-            :force-open="open"
+            :force-open="true"
             :label-up="labelUp"
             :disabled="disabled"
             :error-message="errorMessage"
@@ -19,7 +21,6 @@
             :tag-style="tagStyle"
             :max-length="maxLength"
             :autocomplete="autocomplete"
-            v-model="selection"
             @input="onInputChangeThrottled">
     <m-dropdown-item v-for="i in items"
                      :key="i.value"
@@ -31,4 +32,10 @@
     <m-dropdown-item v-if="showNoResult"
                      :readonly="true"
                      :non-filterable="true">{{ propTextNoMatch }}</m-dropdown-item>
+    <m-dropdown-item v-if="isShowHandTypeLink"
+                     class="m-autocomplete__hand-type-link"
+                     :non-filterable="true">
+        <m-link @click="onHandTypeLinkClick"
+                :mode="mLinkModeButton">{{ showHandTypeText }}</m-link>
+    </m-dropdown-item>
 </m-dropdown>

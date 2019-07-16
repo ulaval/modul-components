@@ -28,4 +28,27 @@ storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NA
             </${ADDRESS_LOOKUP_FIELD_NAME}>
             <div>RETRIEVED VALUE: {{ retrievedValue }}</div>
         </div>`
+    }))
+    .add('showHandTypeLink', () => ({
+        data: () => ({
+            origin: 'CA',
+            language: 'fr',
+            retrievedValue: 'nothing',
+            showHandTypeLink: true
+        }),
+        methods: {
+            onRetrieve(value: Address): void {
+                (this as any).retrievedValue = value;
+            }
+        },
+        template: `<div>
+            current key is: {{ $addressLookup.key }}
+            <${ADDRESS_LOOKUP_FIELD_NAME}
+                :origin="origin"
+                :language="language"
+                :show-hand-type-link="showHandTypeLink"
+                @address-retrieved="onRetrieve">
+            </${ADDRESS_LOOKUP_FIELD_NAME}>
+            <div>RETRIEVED VALUE: {{ retrievedValue }}</div>
+        </div>`
     }));

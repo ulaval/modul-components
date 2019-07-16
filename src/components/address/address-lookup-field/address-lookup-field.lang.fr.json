@@ -1,6 +1,7 @@
 {
     "m-address-lookup-field": {
         "search-field": "Rechercher une adresse",
-        "placeholder": "Entrez une adresse à rechercher"
+        "placeholder": "Entrez une adresse à rechercher",
+        "manually-address": "Saisir une adresse manuellement"
     }
 }

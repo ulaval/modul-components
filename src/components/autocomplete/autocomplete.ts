@@ -7,6 +7,7 @@ import { Enums } from '../../utils/enums/enums';
 import { ModulVue } from '../../utils/vue/vue';
 import { AUTOCOMPLETE_NAME } from '../component-names';
 import DropdownPlugin from '../dropdown/dropdown';
+import { MLinkMode } from '../link/link';
 import WithRender from './autocomplete.html?style=./autocomplete.scss';
 
 export interface MAutoCompleteResult {
@@ -56,6 +57,10 @@ export class MAutocomplete extends ModulVue {
     label: string;
     @Prop()
     requiredMarker: boolean;
+    @Prop()
+    showHandTypeLink: boolean;
+    @Prop()
+    showHandTypeText: string;
     @Prop({
         default: InputStateTagStyle.Default,
         validator: value => Enums.toValueArray(InputStateTagStyle).indexOf(value) !== -1
@@ -68,6 +73,7 @@ export class MAutocomplete extends ModulVue {
     loading: boolean = false;
     throttleTimeout: any;
     autocomplete: string = 'new-password';
+    mLinkModeButton: MLinkMode = MLinkMode.Button;
 
     created(): void {
         this.refreshItemsOnSelectionChange(this.model);
@@ -90,6 +96,14 @@ export class MAutocomplete extends ModulVue {
         return this.selection;
     }
 
+    @Emit('complete')
+    private emitComplete(value: string): string {
+        return value;
+    }
+
+    @Emit('hand-type-click')
+    private onHandTypeClick(): void { }
+
     @Watch('results')
     onResults(): void {
         this.items = this.results;
@@ -104,14 +118,22 @@ export class MAutocomplete extends ModulVue {
         }, this.throttle);
     }
 
+    onHandTypeLinkClick(): void {
+        this.onHandTypeClick();
+    }
+
     get showNoResult(): boolean {
         return !this.loading &&
             this.items.length === 0 &&
             this.inputText.length >= this.minimumChars;
     }
 
+    get isShowHandTypeLink(): boolean {
+        return this.showHandTypeLink && !!this.showHandTypeText && this.showHandTypeText !== '' && this.items.length >= 1;
+    }
+
     get propTextNoMatch(): string {
-        return (this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result'));
+        return this.textNoMatch ? this.textNoMatch : this.$i18n.translate('m-dropdown:no-result');
     }
 
     private refreshItemsOnSelectionChange(value: string): void {
@@ -132,11 +154,6 @@ export class MAutocomplete extends ModulVue {
             this.emitComplete(value);
             this.loading = true;
         }
-    }
-
-    @Emit('complete')
-    private emitComplete(value: string): string {
-        return value;
     }
 }
 

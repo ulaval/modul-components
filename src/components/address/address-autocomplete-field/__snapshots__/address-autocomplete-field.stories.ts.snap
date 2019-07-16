@@ -10,7 +10,7 @@ exports[`Storyshots components|/address/m-address-autocomplete-field default 1`]
         class="m-address-lookup-field"
       >
         <div
-          class="m-dropdown"
+          class="m-dropdown m-autocomplete"
           style="width: 100%; max-width: 288px;"
         >
           <div
