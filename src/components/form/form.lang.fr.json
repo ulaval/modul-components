@@ -1,7 +1,7 @@
 {
     "m-form": {
-        "multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> est à corriger pour continuer.",
-        "multipleErrorsToCorrect.p": "<strong>%(totalNbOfErrors)s informations</strong> sont à corriger pour continuer.",
+        "multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> est à revoir pour continuer.",
+        "multipleErrorsToCorrect.p": "<strong>%(totalNbOfErrors)s informations</strong> sont à revoir pour continuer.",
         "requiredValidatorErrorMessage": "Ce champ est requis.",
         "requiredValidatorErrorSummaryMessage": "Le champ %(controlLabel)s est requis.",
         "minLengthValidatorErrorMessage": "Le nombre minimal de caractères pour ce champ est %(minLength)s.",

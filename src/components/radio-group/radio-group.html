@@ -1,27 +1,28 @@
 <div class="m-radio-group"
      :class="{ 'm--is-inline': inline,
-              'm--is-disabled': stateIsDisabled,
+              'm--is-disabled': isDisabled,
               'm--has-error': hasError,
               'm--is-valid': isValid,
               'm--has-validation-message': hasValidationMessage }">
-    <p :id="idLabel"
-       class="m-radio-group__label"
-       v-if="hasLabel">
-        <span>{{ label }}</span>
-        <span class="m-radio-group__icon">
+
+    <m-input-group :label="label"
+                   :required-marker="requiredMarker"
+                   :disabled="isDisabled"
+                   :waiting="isWaiting"
+                   :error="hasError"
+                   :error-message="errorMessage"
+                   :valid="isValid"
+                   :valid-message="validMessage"
+                   :helper-message="helperMessage">
+
+        <template slot="icon">
             <slot name="icon"></slot>
-        </span>
-    </p>
-    <m-validation-message :id="idValidationMessage"
-                          class="m-radio-group__message"
-                          :disabled="stateIsDisabled"
-                          :error-message="errorMessage"
-                          :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
-    <ul class="m-radio-group__body"
-        role="radiogroup"
-        :aria-labelledby="idLabel"
-        :aria-describedby="idValidationMessage">
-        <slot></slot>
-    </ul>
+        </template>
+
+        <ul class="m-radio-group__body"
+            role="radiogroup">
+            <slot></slot>
+        </ul>
+    </m-input-group>
+
 </div>

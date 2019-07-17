@@ -11,7 +11,6 @@ Vue.use(AccordionGroupPlugin);
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
-
     .add('default', () => ({
         props: {
             text: {

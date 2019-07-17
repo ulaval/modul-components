@@ -1,11 +1,12 @@
 import { PluginObject } from 'vue';
 import { Component, Emit, Prop, Watch } from 'vue-property-decorator';
+import { Enums } from '../../utils/enums/enums';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import { CALENDAR_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import LinkPlugin from '../link/link';
-import MBaseCalendar from './calendar-renderer/base-calendar/base-calendar';
+import MBaseCalendar, { MBaseCalendarType, MBaseCalendarView } from './calendar-renderer/base-calendar/base-calendar';
 import MCalendarStateMachine from './calendar-state/calendar-state-machine';
 import { RangeDate, SingleDate } from './calendar-state/state/abstract-calendar-state';
 import WithRender from './calendar.html?style=./calendar.scss';
@@ -13,6 +14,11 @@ import WithRender from './calendar.html?style=./calendar.scss';
 export enum CalendarMode {
     SINGLE_DATE = 'single-date',
     DATE_RANGE = 'date-range'
+}
+
+export enum MCalendarType {
+    FullDate = 'full-date',
+    YearsMonths = 'years-months'
 }
 
 @WithRender
@@ -30,6 +36,12 @@ export class MCalendar extends ModulVue {
     @Prop({ default: CalendarMode.SINGLE_DATE })
     mode: CalendarMode;
 
+    @Prop({
+        default: MBaseCalendarType.FULL_DATE,
+        validator: value => Enums.toValueArray(MBaseCalendarType).includes(value)
+    })
+    type: MBaseCalendarType;
+
     @Prop()
     minDate: string;
 
@@ -38,6 +50,15 @@ export class MCalendar extends ModulVue {
 
     @Prop({ default: true })
     showMonthBeforeAfter: string;
+
+    @Prop({ default: true })
+    visible: boolean;
+
+    @Prop({
+        default: MBaseCalendarView.DAYS,
+        validator: value => Enums.toValueArray(MBaseCalendarView).includes(value)
+    })
+    initialView: MBaseCalendarView;
 
     innerValue: SingleDate | RangeDate = this.value;
     id: string = `m-calendar-${uuid.generate()}`;

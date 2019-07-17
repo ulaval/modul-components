@@ -364,7 +364,7 @@ describe(`A range date state`, () => {
         describe(`when building events`, () => {
             it(`then all events will be correctly initialized`, () => {
 
-                expect(Object.keys(calendarEvents)).toHaveLength(10);
+                expect(Object.keys(calendarEvents)).toHaveLength(11);
                 expect(calendarEvents[CalendarEvent.DAY_SELECT]).toBeDefined();
                 expect(calendarEvents[CalendarEvent.DAY_MOUSE_ENTER]).toBeDefined();
                 expect(calendarEvents[CalendarEvent.DAY_MOUSE_ENTER]).toBeDefined();
@@ -375,6 +375,7 @@ describe(`A range date state`, () => {
                 expect(calendarEvents[CalendarEvent.YEAR_SELECT]).toBeDefined();
                 expect(calendarEvents[CalendarEvent.YEAR_NEXT]).toBeDefined();
                 expect(calendarEvents[CalendarEvent.YEAR_PREVIOUS]).toBeDefined();
+                expect(calendarEvents[CalendarEvent.YEAR_MONTH_SELECT]).toBeDefined();
             });
         });
         describe(`day events`, () => {

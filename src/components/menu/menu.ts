@@ -3,12 +3,12 @@ import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { MENU_ITEM_NAME, MENU_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import PlusPlugin from '../plus/plus';
+import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
 import { MMenuItem } from './menu-item/menu-item';
 import WithRender from './menu.html?style=./menu.scss';
 

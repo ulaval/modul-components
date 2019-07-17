@@ -1,8 +1,9 @@
 import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
-export class FormArray extends AbstractControl {
+export class FormArray<T = any> extends AbstractControl {
     constructor(
         private _controls: AbstractControl[] = [],
         public readonly validators: ControlValidator[] = [],
@@ -20,8 +21,12 @@ export class FormArray extends AbstractControl {
     /**
      * Return an agregate values of all enabled controls.
      */
-    public get value(): any {
+    public get value(): T[] {
         return this._controls.filter(c => c.enabled).map(c => c.value);
+    }
+
+    public set value(value: T[]) {
+        throw Error('Assigning a value to a FormArray is not yet implemented');
     }
 
     public get valid(): boolean {
@@ -65,6 +70,29 @@ export class FormArray extends AbstractControl {
 
     public get touched(): boolean {
         return this.controls.every(c => c.touched);
+    }
+
+    public get errors(): ControlError[] {
+        return (this.enabled && !this.readonly) ? this._errors : [];
+    }
+
+    public set errors(errors: ControlError[]) {
+        this._errors = [...errors];
+    }
+
+    public get errorsDeep(): ControlError[] {
+        if (!this.enabled || this.readonly) {
+            return [];
+        }
+        let errors: ControlError[] = [...this.errors];
+        this.controls.forEach((control: AbstractControl) => {
+            errors = [...errors, ...control.errorsDeep];
+        });
+        return errors;
+    }
+
+    public getControl<T = any>(name: string): AbstractControl<T> {
+        throw Error('Getting a control from a FormArray is not yet implemented');
     }
 
     public async submit(): Promise<void> {
