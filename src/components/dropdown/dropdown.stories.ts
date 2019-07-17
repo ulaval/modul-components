@@ -75,15 +75,74 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}`, module)
     }))
     .add('readonly', () => ({
         data: () => ({
-            model6: ''
+            model6: '',
+            model7: '',
+            model8: 'f'
         }),
-        template: `<m-dropdown :readonly="true" label="Avengers" v-model="model6">
+        template: `<div>
+                    <h5>No item selected, no label</h5>
+                    <m-dropdown :readonly="true" v-model="model6">
                         <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
                         <m-dropdown-item value="b" label="Hulk"></m-dropdown-item>
                         <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
                         <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
                         <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
                         <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
-                    </m-dropdown>`
+                    </m-dropdown>
+                    <h5>No item selected, with label</h5>
+                    <m-dropdown :readonly="true" label="Avenger" v-model="model7">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
+                    </m-dropdown>
+                    <h5>Item selected, with label</h5>
+                    <m-dropdown :readonly="true" label="Avenger" v-model="model8">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
+                    </m-dropdown>
+                </div>`
+    }))
+    .add('disabled', () => ({
+        data: () => ({
+            model9: '',
+            model10: '',
+            model11: 'f'
+        }),
+        template: `<div>
+                    <h5>No item selected, no label</h5>
+                    <m-dropdown :disabled="true" v-model="model9">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" slectec label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
+                    </m-dropdown>
+                    <h5>No item selected, with label</h5>
+                    <m-dropdown :disabled="true" label="Avenger" v-model="model10">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" slectec label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
+                    </m-dropdown>
+                    <h5>Item selected, with label</h5>
+                    <m-dropdown :disabled="true" label="Avenger" v-model="model11">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" slectec label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
+                    </m-dropdown>
+                <div>`
     }));
 
