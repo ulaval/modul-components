@@ -1,5 +1,5 @@
 <div class="m-avatar"
-     :class="shapeAvatar"
+     :class="{ 'm--is-clickable': this.clickable }"
      :style="sizeStyle"
      @click="click"
      @mouseover="mouseOver"

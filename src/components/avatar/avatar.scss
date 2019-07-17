@@ -4,10 +4,7 @@
     overflow: hidden;
     position: relative;
     color: $m-color--grey;
-
-    &.m--is-circle {
-        border-radius: 50%;
-    }
+    border-radius: 50%;
 
     &.m--is-clickable {
         cursor: pointer;

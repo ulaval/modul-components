@@ -15,9 +15,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     .add('Large', () => ({
         template: `<m-avatar pixel-size="192"></m-avatar>`
     }))
-    .add('Square', () => ({
-        template: `<m-avatar pixel-size="192" shape="square"></m-avatar>`
-    }))
     .add('Image slot', () => ({
         template: `<m-avatar pixel-size="192"><img slot="avatar" src="${image192}"></m-avatar>`
     }))

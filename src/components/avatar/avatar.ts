@@ -5,25 +5,11 @@ import { AVATAR_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './avatar.html?style=./avatar.scss';
 
-export enum MAvatarShape {
-    CIRCLE = 'circle',
-    SQUARE = 'square'
-}
-
 const SMALL_AVATAR_SIZE: number = 32;
 
 @WithRender
 @Component
 export class MAvatar extends Vue {
-
-    @Prop({
-        default: MAvatarShape.CIRCLE,
-        validator: (valeur: MAvatarShape): boolean => (
-            valeur === MAvatarShape.CIRCLE
-            || valeur === MAvatarShape.SQUARE
-        )
-    })
-    shape: MAvatarShape;
 
     @Prop({ default: SMALL_AVATAR_SIZE })
     pixelSize: number;
@@ -33,18 +19,10 @@ export class MAvatar extends Vue {
 
     hover: boolean = false;
 
-
     get sizeStyle(): { [property: string]: string } {
         return {
             width: this.pixelSize + 'px',
             height: this.pixelSize + 'px'
-        };
-    }
-
-    get shapeAvatar(): { [property: string]: boolean } {
-        return {
-            'm--is-circle': this.shape === MAvatarShape.CIRCLE,
-            'm--is-clickable': this.clickable
         };
     }
 
