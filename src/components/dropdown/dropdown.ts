@@ -541,8 +541,9 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get hasPointer(): boolean {
-        return (!this.as<InputState>().isDisabled && !this.as<InputState>().isReadonly) &&
-            !this.filterable || (this.filterable && !this.open);
+        return !this.as<InputState>().isDisabled &&
+            !this.as<InputState>().isReadonly &&
+            (!this.filterable || (this.filterable && !this.open));
     }
 
     private get hasPlaceholderIcon(): boolean {
