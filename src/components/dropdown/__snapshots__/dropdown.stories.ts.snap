@@ -563,3 +563,115 @@ exports[`Storyshots components|m-dropdown label-up 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots components|m-dropdown readonly 1`] = `
+<div
+  class="m-dropdown m--is-readonly"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--is-readonly m--has-label m--is-tag-default"
+    style="width: 100%; margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <label
+          class="m-input-style__label"
+          for="mDropdown-uuid"
+          style="margin-right: 0px;"
+        >
+          <span
+            class="m-input-style__text"
+          >
+            <span>
+              Avengers
+            </span>
+             
+            <!---->
+          </span>
+        </label>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <!---->
+           
+          <div
+            class="m-input-style__content"
+          >
+            <!---->
+             
+            <input
+              aria-controls="mDropdown-uuid-controls"
+              aria-haspopup="true"
+              class="m-dropdown__input"
+              disabled="disabled"
+              id="mDropdown-uuid"
+              readonly="readonly"
+              type="text"
+            />
+             
+            <!---->
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+            <div
+              class="m-dropdown__arrow"
+            >
+              <svg
+                aria-hidden="true"
+                class="m-icon m-dropdown__arrow__icon"
+                disabled="disabled"
+                height="16px"
+                width="16px"
+              >
+                <!---->
+                 
+                <use
+                  aria-hidden="true"
+                  class=""
+                />
+              </svg>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-validation-message m-dropdown__validation-message"
+  >
+    <!---->
+     
+    <!---->
+  </div>
+   
+  <div
+    class="m-popup"
+  >
+    <div
+      class="m-popper"
+    >
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
