@@ -11,8 +11,10 @@ $m-option-item--color-active: $m-color--grey-lightest !default;
         max-width: 220px; // Magic number
     }
 
-    &:not(:last-child) {
-        border-bottom: 1px solid $m-color--border;
+    &:not(.m--has-no-border) {
+        &:not(:last-child) {
+            border-bottom: 1px solid $m-color--border;
+        }
     }
 
     .m--has-icon-spacing {

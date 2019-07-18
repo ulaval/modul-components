@@ -51,6 +51,14 @@ export class MOptionItem extends ModulVue {
         return false;
     }
 
+    private get hasBorder(): boolean {
+        if (this.hasRoot) {
+            (this.root).checkBorder();
+            return (this.root).hasItemBorder;
+        }
+        return true;
+    }
+
     private get hasDefaultSlot(): boolean {
         return !!this.$slots.default;
     }
