@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { PluginObject } from 'vue';
-import Address from './address';
+import { AddressLookupService } from './address-lookup';
 import AddressLookupGoogleService from './address-lookup-google-service';
-import AddressLookupLoqateService, { LoqateFindQuery, LoqateFindResponse, LoqateRetrieveQuery } from './address-lookup-loqate-service';
-import AddressLookupService from './address-lookup-service';
+import AddressLookupLoqateService from './address-lookup-loqate-service';
 
 declare module 'vue/types/vue' {
     interface Vue {
-        $addressLookup: AddressLookupService<LoqateFindQuery, LoqateFindResponse, LoqateRetrieveQuery, Address>;
+        $addressLookup: AddressLookupService;
     }
 }
 

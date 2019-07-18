@@ -1,6 +1,6 @@
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import Address, { AddressField, CountryKey, ProvinceKey } from '../../../utils/address-lookup/address';
+import { Address, AddressField, CountryKey, ProvinceKey } from '../../../utils/address-lookup/address';
 import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './address-reader.html';
 
@@ -81,6 +81,14 @@ export class MAddressReader extends ModulVue implements AddressReaderProps {
 
     get hasProvince(): boolean {
         return this.filterString(AddressField.PROVINCE, this.provinceKey).length > 0;
+    }
+
+    get isEstablishment(): boolean {
+        return this.address.isEstablishment;
+    }
+
+    get name(): string {
+        return this.address.name;
     }
 
     get filteredAddress(): DisplayableAddress {

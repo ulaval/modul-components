@@ -1,33 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { } from 'googlemaps';
-import Address from './address';
-import AddressLookupService from './address-lookup-service';
+import { ModulVue } from '../vue/vue';
+import { Address, AddressSummary } from './address';
+import { AddressLookupFindQuery, AddressLookupRetrieveQuery, AddressLookupService } from './address-lookup';
+import { GoogleFindResponseBuilder, GoogleRetrieveResponseBuilder } from './address-lookup-google';
+import { AddressLookupToAddressSummary, AddressRetrieveToAddress } from './address-lookup-response-mapper';
 
-interface GoogleFindResult {
-    // Items: LoqateFindItem[];
-}
-
-interface GoogleRetrieveQuery {
-
-}
-
-interface GoogleFindQuery {
-    input: string;
-    language?: string;
-    origin?: string;
-}
-
-interface GoogleFindResponse {
-    id: string;
-    text: string;
-    userInput: string;
-    description: string;
-    type: string;
-    highlight: string;
-}
-
-export default class AddressLookupGoogleService implements
-    AddressLookupService<GoogleFindQuery, GoogleFindResponse, GoogleRetrieveQuery, Address> {
+export default class AddressLookupGoogleService implements AddressLookupService {
     private readonly googleAPI: GoogleAPI;
     private sessionToken: google.maps.places.AutocompleteSessionToken;
 
@@ -35,53 +14,44 @@ export default class AddressLookupGoogleService implements
         this.googleAPI = new GoogleAPI(this.key);
     }
 
-    async find(query: GoogleFindQuery): Promise<GoogleFindResponse[]> {
+    async find(query: AddressLookupFindQuery): Promise<AddressSummary[]> {
         await this.ensureCreateToken();
-        return new Promise<GoogleFindResponse[]>(async (resolve, reject) => {
-            (await this.googleAPI.placesAutocomplete).getPlacePredictions({
-                input: query.input,
-                sessionToken: this.sessionToken
-            }, (results: google.maps.places.AutocompletePrediction[], status: google.maps.places.PlacesServiceStatus) => {
-                switch (status) {
-                    case google.maps.places.PlacesServiceStatus.ERROR:
-                    case google.maps.places.PlacesServiceStatus.INVALID_REQUEST:
-                    case google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT:
-                    case google.maps.places.PlacesServiceStatus.NOT_FOUND:
-                    case google.maps.places.PlacesServiceStatus.REQUEST_DENIED:
-                    case google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR:
-                        return reject({ results, status });
-                    case google.maps.places.PlacesServiceStatus.OK:
-                    case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
-                        return resolve(this.transformAutocompletePredictions(query, results));
-                    default:
-                        throw new Error('Unhandled google places service status');
-                }
-            });
-        });
+        const request: google.maps.places.AutocompletionRequest = {
+            input: query.input,
+            sessionToken: this.sessionToken
+        };
+
+        const results: google.maps.places.AutocompletePrediction[] = await this.googleAPI.promisifyFetch((await this.googleAPI.placesAutocomplete).getPlacePredictions, request);
+        return results
+            .map((prediction: google.maps.places.AutocompletePrediction) => new GoogleFindResponseBuilder()
+                .setRequest(request)
+                .setResult(prediction)
+                .build()
+                .mapTo(new AddressLookupToAddressSummary()));
     }
 
-    retrieve(query: GoogleRetrieveQuery): Promise<Address[]> {
-        throw new Error('Method not implemented.');
+    async retrieve(query: AddressLookupRetrieveQuery): Promise<Address[]> {
+        await this.ensureCreateToken();
+        const request: google.maps.places.PlaceDetailsRequest = {
+            placeId: query.id,
+            sessionToken: this.sessionToken
+        };
+
+        const results: google.maps.places.PlaceResult[] = await this.googleAPI.promisifyFetch((await this.googleAPI.placesService).getDetails, request);
+        return results
+            .map((prediction: google.maps.places.PlaceResult) => new GoogleRetrieveResponseBuilder()
+                .setRequest(request)
+                .setResult(prediction)
+                .build()
+                .mapTo(new AddressRetrieveToAddress()));
     }
 
     async ensureCreateToken(): Promise<void> {
-        const token: google.maps.places.AutocompleteSessionToken = !this.sessionToken ? this.googleAPI.createToken() : this.sessionToken;
+        const token: google.maps.places.AutocompleteSessionToken = !this.sessionToken ? await this.googleAPI.createToken() : this.sessionToken;
         this.sessionToken = token;
-    }
-
-    private transformAutocompletePredictions(query: GoogleFindQuery, predictions: google.maps.places.AutocompletePrediction[]): GoogleFindResponse[] {
-        return predictions.map((prediction: google.maps.places.AutocompletePrediction) => ({
-            id: prediction.place_id,
-            text: prediction.structured_formatting.main_text,
-            description: prediction.structured_formatting.secondary_text,
-            type: '',
-            userInput: query.input,
-            highlight: ''
-        }));
     }
 }
 
-// PlacesService
 class GoogleAPI {
     private readonly CALLBACK_NAME: string = 'gmapsCallback';
     private resolveInitPromise;
@@ -105,10 +75,56 @@ class GoogleAPI {
         return this.initPromise;
     }
 
+    promisifyFetch<TRequest, TResult>(fetchFunction: (request: TRequest, callback: (results: TResult, status: google.maps.places.PlacesServiceStatus) => void) => void, request: TRequest):
+        Promise<TResult extends Array<any> ? TResult : TResult[]> {
+        return new Promise(function(resolve: any, reject: any): void {
+            fetchFunction(request, (results: TResult, status: google.maps.places.PlacesServiceStatus) => {
+                const resultIsArray: boolean = results && (results as any).length !== undefined;
+                const resultsAsArray: TResult[] = results && resultIsArray ? [...(results as unknown as TResult[])] : results ? [results] : [];
+
+                switch (status) {
+                    case google.maps.places.PlacesServiceStatus.ERROR:
+                    case google.maps.places.PlacesServiceStatus.INVALID_REQUEST:
+                    case google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT:
+                    case google.maps.places.PlacesServiceStatus.NOT_FOUND:
+                    case google.maps.places.PlacesServiceStatus.REQUEST_DENIED:
+                    case google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR:
+                        return reject({ results, status });
+                    case google.maps.places.PlacesServiceStatus.OK:
+                    case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
+                        return resolve(resultsAsArray);
+                    default:
+                        throw new Error('Unhandled google places service status');
+                }
+            });
+        });
+    }
+
     get placesAutocomplete(): Promise<google.maps.places.AutocompleteService> {
         return this.instance
             .then(() => {
-                return new google.maps.places.AutocompleteService();
+                const service: google.maps.places.AutocompleteService = new google.maps.places.AutocompleteService();
+                return {
+                    getPlacePredictions: service.getPlacePredictions.bind(service),
+                    getQueryPredictions: service.getQueryPredictions.bind(service)
+                };
+            });
+    }
+
+    get placesService(): Promise<google.maps.places.PlacesService> {
+        return this.instance
+            .then(() => {
+                // the elements is never rendered in the DOM.  We have to show attributions manually after fetching an address.
+                const element: HTMLDivElement = document.createElement('div');
+                const service: google.maps.places.PlacesService = new google.maps.places.PlacesService(element);
+                return {
+                    findPlaceFromPhoneNumber: service.findPlaceFromPhoneNumber.bind(service),
+                    findPlaceFromQuery: service.findPlaceFromQuery.bind(service),
+                    getDetails: service.getDetails.bind(service),
+                    nearbySearch: service.nearbySearch.bind(service),
+                    radarSearch: undefined!, // radarSearch is deprecated so we don't need to wrap it.
+                    textSearch: service.textSearch.bind(service)
+                };
             });
     }
 
@@ -133,7 +149,12 @@ class GoogleAPI {
         const script: HTMLScriptElement = document.createElement('script');
         script.async = true;
         script.defer = true;
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${this.key}&libraries=places&callback=${this.CALLBACK_NAME}`;
+
+        const defaultLanguage: string | undefined = ModulVue.prototype.$i18n ? ModulVue.prototype.$i18n.currentLocale : undefined;
+        const languageParam: string = defaultLanguage ? `&language=${defaultLanguage}` : '';
+        // It's tricky to dynamically change google language at the moment.  https://stackoverflow.com/questions/20090711/google-map-dyanamic-language-change.
+        // So if the language change, google language won't change.
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${this.key}${languageParam}&libraries=places&callback=${this.CALLBACK_NAME}`;
         script.onerror = this.rejectInitPromise;
         document.querySelector('head')!.appendChild(script);
     }
