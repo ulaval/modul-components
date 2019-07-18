@@ -42,7 +42,7 @@ $m-option-item--color-active: $m-color--grey-lightest !default;
     &__text {
         flex: 1 1 auto;
         color: $m-color--text;
-        padding-right: $m-padding;
+        padding-right: $m-padding--s;
         padding-left: $m-padding;
     }
 
