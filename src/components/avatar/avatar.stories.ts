@@ -18,6 +18,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     .add('Image slot', () => ({
         template: `<m-avatar pixel-size="192"><img slot="avatar" src="${image192}"></m-avatar>`
     }))
+    .add('Svg slot', () => ({
+        template: `<m-avatar pixel-size="192"><m-icon slot="avatar" name="m-svg__profile" :size="192"></m-icon></m-avatar>`
+    }))
     .add('Clickable', () => ({
         template: `<m-avatar pixel-size="192" :clickable="true"><img slot="avatar" src="${image192}"></m-avatar>`
     }))
