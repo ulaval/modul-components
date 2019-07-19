@@ -12,6 +12,8 @@ export interface DisplayableAddress {
     subBuilding: string;
     country: string;
     province: string;
+    isEstablishment: boolean;
+    name: string;
 }
 
 export type addressFieldFilter = (value: string) => string;
@@ -99,7 +101,9 @@ export class MAddressReader extends ModulVue implements AddressReaderProps {
             postalCode: this.postalCode,
             subBuilding: this.subBuilding,
             country: this.country,
-            province: this.province
+            province: this.province,
+            isEstablishment: this.isEstablishment,
+            name: this.name
         };
     }
 
