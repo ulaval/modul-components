@@ -27,12 +27,16 @@ exports[`Storyshots components|/address/m-address-reader default 1`] = `
     class="m-address-reader"
   >
     <!---->
+     
+    <!---->
      2325 rue de l'Université 
     <br />
-    
-        Québec 
+     
     <span>
-      , QC
+      Québec ,
+    </span>
+    <span>
+       QC
     </span>
     <br />
     
@@ -51,10 +55,14 @@ exports[`Storyshots components|/address/m-address-reader empty province 1`] = `
     class="m-address-reader"
   >
     <!---->
+     
+    <!---->
      2325 rue de l'Université 
     <br />
-    
-        Québec 
+     
+    <span>
+      Québec ,
+    </span>
     <!---->
     <br />
     

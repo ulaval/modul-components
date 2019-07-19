@@ -9,7 +9,6 @@ export interface AddressSummary {
     type: string;
     label: string;
     description?: string;
-    classesToggle?: { [className: string]: boolean };
 }
 
 export interface Address {

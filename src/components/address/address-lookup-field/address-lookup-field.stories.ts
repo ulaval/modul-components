@@ -5,7 +5,7 @@ import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/uti
 import { ADDRESS_LOOKUP_FIELD_NAME } from '../../component-names';
 import AddressPlugin from '../address';
 
-Vue.use(AddressPlugin, { loqateKey: '', googleKey: 'AIzaSyCRjxCoNDjep1XEjw2Lhk6uSy7uwX1nKBw' });
+Vue.use(AddressPlugin, { loqateKey: '', googleKey: '' });
 
 storiesOf(`${componentsHierarchyRootSeparator}/address/${ADDRESS_LOOKUP_FIELD_NAME}`, module)
     .add('default', () => ({

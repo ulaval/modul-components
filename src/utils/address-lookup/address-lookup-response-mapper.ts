@@ -46,11 +46,7 @@ export class AddressLookupToAddressSummary implements FindResponseMapper<Address
             value: response.result.Id,
             type: type,
             label: response.result.Text,
-            description: this.formatHTMLDescription(response),
-            /* classesToggle: {
-                'm-address-lookup-field__item--address': type === KEY_ADDRESS_TYPE || type === undefined,
-                'm-address-lookup-field__item--expandable': type !== KEY_ADDRESS_TYPE
-            } */
+            description: this.formatHTMLDescription(response)
         };
     }
 
@@ -63,11 +59,7 @@ export class AddressLookupToAddressSummary implements FindResponseMapper<Address
             value: response.result.place_id,
             type: type,
             label: response.result.structured_formatting.main_text,
-            description: response.result.structured_formatting.secondary_text,
-            /* classesToggle: {
-                'm-address-lookup-field__item--address': type === KEY_ADDRESS_TYPE || type === undefined,
-                'm-address-lookup-field__item--expandable': type !== KEY_ADDRESS_TYPE
-            } */
+            description: response.result.structured_formatting.secondary_text
         };
     }
 
@@ -134,9 +126,6 @@ export class AddressRetrieveToAddress implements RetrieveResponseMapper<Address>
                 componentsByType[type] = component;
             });
         });
-
-        // tslint:disable-next-line:no-console
-        console.log(response.result);
 
         return {
             buildingNumber: componentsByType[GOOGLE_ADDRESS_COMPONENTS.STREER_NUMBER].long_name,

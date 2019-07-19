@@ -6,7 +6,7 @@ import { ADDRESS_AUTOCOMPLETE_FIELD_NAME } from '../../component-names';
 import AddressPlugin from '../address';
 import { AddressEditorValidator } from '../address-editor/address-editor';
 
-Vue.use(AddressPlugin, { loqateKey: '', googleKey: 'AIzaSyCRjxCoNDjep1XEjw2Lhk6uSy7uwX1nKBw' });
+Vue.use(AddressPlugin, { loqateKey: '', googleKey: '' });
 
 const countries: Country[] = [
     { countryIso2: 'US', country: 'United-States of America' },

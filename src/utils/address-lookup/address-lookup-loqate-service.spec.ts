@@ -81,12 +81,18 @@ describe(`Address lookup loqate service`, () => {
 
             expect(result).toEqual([
                 {
-                    'description': 'address', 'highlight': '0-3', 'id': 'first ID', 'text': `2325 rue de l'Université`,
-                    'type': 'address', 'userInput': `2325 rue de l'Université`
+                    description: 'address',
+                    value: 'first ID',
+                    label: `2325 rue de l'Université`,
+                    type: 'address',
+                    queryInput: `2325 rue de l'Université`
                 },
                 {
-                    'description': 'address', 'highlight': '0-3', 'id': 'second ID', 'text': `2325 rue de l'Université`,
-                    'type': 'building number', 'userInput': `2325 rue de l'Université`
+                    description: 'address',
+                    value: 'second ID',
+                    label: `2325 rue de l'Université`,
+                    type: 'building number',
+                    queryInput: `2325 rue de l'Université`
                 }]);
         });
     });

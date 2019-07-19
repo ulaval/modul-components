@@ -17,17 +17,15 @@ export interface AddressLookupPluginOptions {
 
 const AddressLookupPlugin: PluginObject<any> = {
     install(v, options: AddressLookupPluginOptions | undefined = { loqateKey: '', googleKey: '' }): void {
-        if ((!options.loqateKey && !options.googleKey) || (options.loqateKey && options.googleKey)) {
+        if (options.loqateKey && options.googleKey) {
             v.prototype.$log.error('The API key for Loqate Web Service OR Google Maps API must be provided');
         }
 
-        let addressLookup: AddressLookupGoogleService | AddressLookupLoqateService;
+        let addressLookup: AddressLookupGoogleService | AddressLookupLoqateService | undefined = undefined;
         if (options.googleKey) {
             addressLookup = new AddressLookupGoogleService(axios, options.googleKey);
         } else if (options.loqateKey) {
             addressLookup = new AddressLookupLoqateService(axios, options.loqateKey);
-        } else {
-            throw new Error('Unhandled addressLookup key.');
         }
 
         v.prototype.$addressLookup = addressLookup;
