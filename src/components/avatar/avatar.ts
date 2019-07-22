@@ -51,7 +51,7 @@ export class MAvatar extends Vue {
 }
 
 const AvatarPlugin: PluginObject<any> = {
-    install(v, options): void {
+    install(v): void {
         v.prototype.$log.debug(AVATAR_NAME, 'plugin.install');
         v.use(IconPlugin);
         v.component(AVATAR_NAME, MAvatar);
