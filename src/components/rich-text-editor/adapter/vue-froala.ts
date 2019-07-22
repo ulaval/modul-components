@@ -216,7 +216,7 @@ const ENTER_KEYCODE: number = 13;
             if (this.selectedImage) {
                 this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage)); // We need jquery for that function
             } else {
-                this.froalaEditor.image.insert(file.url, false, { id, batata: 'batata' });
+                this.froalaEditor.image.insert(file.url, false, { id });
             }
         });
     }
