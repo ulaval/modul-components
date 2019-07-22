@@ -2,7 +2,7 @@
 
 exports[`Storyshots components|m-avatar Clickable 1`] = `
 <div
-  class="m-avatar m--is-circle m--is-clickable"
+  class="m-avatar m--is-clickable"
   style="width: 192px; height: 192px;"
 >
   <img
@@ -14,7 +14,7 @@ exports[`Storyshots components|m-avatar Clickable 1`] = `
 
 exports[`Storyshots components|m-avatar Custom slot - animation 1`] = `
 <div
-  class="m-avatar m--is-circle m--is-clickable"
+  class="m-avatar m--is-clickable"
   style="width: 192px; height: 192px;"
 >
   <img
@@ -35,7 +35,7 @@ exports[`Storyshots components|m-avatar Custom slot - animation 1`] = `
 
 exports[`Storyshots components|m-avatar Image slot 1`] = `
 <div
-  class="m-avatar m--is-circle"
+  class="m-avatar"
   style="width: 192px; height: 192px;"
 >
   <img
@@ -47,7 +47,7 @@ exports[`Storyshots components|m-avatar Image slot 1`] = `
 
 exports[`Storyshots components|m-avatar Large 1`] = `
 <div
-  class="m-avatar m--is-circle"
+  class="m-avatar"
   style="width: 192px; height: 192px;"
 >
   <svg
@@ -69,7 +69,7 @@ exports[`Storyshots components|m-avatar Large 1`] = `
 
 exports[`Storyshots components|m-avatar Small 1`] = `
 <div
-  class="m-avatar m--is-circle"
+  class="m-avatar"
   style="width: 32px; height: 32px;"
 >
   <svg
@@ -89,14 +89,14 @@ exports[`Storyshots components|m-avatar Small 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-avatar Square 1`] = `
+exports[`Storyshots components|m-avatar Svg slot 1`] = `
 <div
   class="m-avatar"
   style="width: 192px; height: 192px;"
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-avatar__default-image m--is-avatar-large"
+    class="m-icon"
     height="192"
     width="192"
   >
