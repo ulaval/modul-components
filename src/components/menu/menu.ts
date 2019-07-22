@@ -1,4 +1,4 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
@@ -54,6 +54,7 @@ export class MMenu extends BaseMenu implements Menu {
     public $refs: {
         menu: HTMLElement;
         buttonMenu: HTMLElement;
+        transition: ModulVue
     };
 
     public animReady: boolean = false;
@@ -99,11 +100,11 @@ export class MMenu extends BaseMenu implements Menu {
 
     private buildItemsMap(): void {
         let items: MMenuItem[] = [];
-        this.$children.forEach(item => {
+        this.$refs.transition.$children.forEach(item => {
             if (item instanceof MMenuItem) {
                 items.push(item);
                 if (item.group) {
-                    (item as Vue).$children.forEach(groupItem => {
+                    item.getGroupItem().forEach(groupItem => {
                         if (groupItem instanceof MMenuItem) {
                             groupItem.insideGroup = true;
                             items.push(groupItem);

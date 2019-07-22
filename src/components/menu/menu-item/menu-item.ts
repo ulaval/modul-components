@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
@@ -41,7 +42,6 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     public selected: boolean = false;
     public groupSelected: boolean = false;
     public insideGroup = false;
-    // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
     public menuRoot: Menu | null = null;
     // tslint:disable-next-line:no-null-keyword
@@ -77,6 +77,10 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
 
     public get propOpen(): boolean {
         return this.internalOpen;
+    }
+
+    public getGroupItem(): Vue[] {
+        return this.$refs.transition.$children;
     }
 
     public get isAnimReady(): boolean {
