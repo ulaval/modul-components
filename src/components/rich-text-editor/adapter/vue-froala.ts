@@ -24,8 +24,9 @@ import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 require('froala-editor/js/languages/fr.js');
 
-
+// Bug watch "Clicking on full screen throws exception if toolbar is customized" in https://github.com/froala/wysiwyg-editor/issues/3483
 // Bug watch The button "Special Characters" isn't work in mobile  https://github.com/froala/angular-froala-wysiwyg/issues/317
+// Bug watch "JQuery dependence isn't fully removed from Froala" https://github.com/froala/angular-froala-wysiwyg/issues/324
 
 enum froalaEvents {
     Blur = 'blur',
@@ -214,6 +215,7 @@ const ENTER_KEYCODE: number = 13;
         this.froalaEditor.opts.modulImageUploaded = true;
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
             if (this.selectedImage) {
+                // Bug watch "JQuery dependence isn't fully removed from Froala" https://github.com/froala/angular-froala-wysiwyg/issues/324
                 this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage)); // We need jquery for that function
             } else {
                 this.froalaEditor.image.insert(file.url, false, { id });
