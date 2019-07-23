@@ -41,8 +41,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public value: any;
     @Prop()
-    public placeholder: string;
-    @Prop()
     public filterable: boolean;
     @Prop()
     public textNoData: string;
@@ -258,7 +256,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         if (this.as<InputState>().isReadonly) {
             return '';
         } else {
-            return this.placeholder;
+            return this.as<InputManagement>().placeholder;
         }
     }
 
@@ -573,11 +571,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get isEdgeSupport(): boolean {
-        return UserAgentUtil.isEdge() && this.placeholder === '' || this.placeholder === undefined;
+        return UserAgentUtil.isEdge() && this.as<InputManagement>().placeholder === '' || this.as<InputManagement>().placeholder === undefined;
     }
 
     private get isFirefoxSupport(): boolean {
-        return UserAgentUtil.isGecko() && this.placeholder === '' || this.placeholder === undefined;
+        return UserAgentUtil.isGecko() && this.as<InputManagement>().placeholder === '' || this.as<InputManagement>().placeholder === undefined;
     }
 
 }
