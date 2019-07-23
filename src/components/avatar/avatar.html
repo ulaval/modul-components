@@ -1,15 +1,17 @@
 <div class="m-avatar"
      :class="{ 'm--is-clickable': this.clickable }"
      :style="sizeStyle"
-     @click="click"
-     @mouseover="mouseOver"
-     @mouseleave="mouseLeave"
+     @click="onClick"
+     @keydown.enter="onClick"
+     @mouseover="onMouseOver"
+     @mouseleave="onMouseLeave"
+     tabindex="0"
      ref="avatar">
-    <slot name="avatar">
+    <slot>
         <m-icon class="m-avatar__default-image"
                 :class="{ 'm--is-avatar-large': !isSmall }"
                 :name="defaultAvatar"
-                :size="pixelSize"></m-icon>
+                :size="size"></m-icon>
     </slot>
     <slot name="content"
           :hover="hover"></slot>

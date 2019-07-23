@@ -4,6 +4,7 @@ exports[`Storyshots components|m-avatar Clickable 1`] = `
 <div
   class="m-avatar m--is-clickable"
   style="width: 192px; height: 192px;"
+  tabindex="0"
 >
   <img
     src="http://placekitten.com/192/192"
@@ -16,6 +17,7 @@ exports[`Storyshots components|m-avatar Custom slot - animation 1`] = `
 <div
   class="m-avatar m--is-clickable"
   style="width: 192px; height: 192px;"
+  tabindex="0"
 >
   <img
     src="http://placekitten.com/192/192"
@@ -37,6 +39,7 @@ exports[`Storyshots components|m-avatar Image slot 1`] = `
 <div
   class="m-avatar"
   style="width: 192px; height: 192px;"
+  tabindex="0"
 >
   <img
     src="http://placekitten.com/192/192"
@@ -49,6 +52,7 @@ exports[`Storyshots components|m-avatar Large 1`] = `
 <div
   class="m-avatar"
   style="width: 192px; height: 192px;"
+  tabindex="0"
 >
   <svg
     aria-hidden="true"
@@ -67,10 +71,34 @@ exports[`Storyshots components|m-avatar Large 1`] = `
 </div>
 `;
 
+exports[`Storyshots components|m-avatar Medium 1`] = `
+<div
+  class="m-avatar"
+  style="width: 64px; height: 64px;"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-avatar__default-image m--is-avatar-large"
+    height="64"
+    width="64"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+</div>
+`;
+
 exports[`Storyshots components|m-avatar Small 1`] = `
 <div
   class="m-avatar"
   style="width: 32px; height: 32px;"
+  tabindex="0"
 >
   <svg
     aria-hidden="true"
@@ -93,6 +121,7 @@ exports[`Storyshots components|m-avatar Svg slot 1`] = `
 <div
   class="m-avatar"
   style="width: 192px; height: 192px;"
+  tabindex="0"
 >
   <svg
     aria-hidden="true"

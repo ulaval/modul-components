@@ -1,18 +1,28 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { AVATAR_NAME } from '../component-names';
 import IconPlugin from '../icon/icon';
 import WithRender from './avatar.html?style=./avatar.scss';
 
-const SMALL_AVATAR_SIZE: number = 32;
+export enum MAvatarSize {
+    SMALL = 32,
+    MEDIUM = 64,
+    LARGE = 192
+}
 
 @WithRender
 @Component
 export class MAvatar extends Vue {
 
-    @Prop({ default: SMALL_AVATAR_SIZE })
-    pixelSize: number;
+    @Prop({
+        default: MAvatarSize.SMALL,
+        validator: value =>
+            value === MAvatarSize.SMALL ||
+            value === MAvatarSize.MEDIUM ||
+            value === MAvatarSize.LARGE
+    })
+    size: MAvatarSize;
 
     @Prop({ default: false })
     clickable: boolean;
@@ -21,8 +31,8 @@ export class MAvatar extends Vue {
 
     get sizeStyle(): { [property: string]: string } {
         return {
-            width: this.pixelSize + 'px',
-            height: this.pixelSize + 'px'
+            width: this.size + 'px',
+            height: this.size + 'px'
         };
     }
 
@@ -31,22 +41,25 @@ export class MAvatar extends Vue {
     }
 
     get isSmall(): boolean {
-        return this.pixelSize <= SMALL_AVATAR_SIZE;
+        return this.size === MAvatarSize.SMALL;
     }
 
-    mouseOver(): void {
+    onMouseOver(): void {
         this.hover = true;
     }
 
-    mouseLeave(): void {
+    onMouseLeave(): void {
         this.hover = false;
     }
 
-    click(): void {
+    onClick(): void {
         if (this.clickable) {
-            this.$emit('click');
+            this.emitClick();
         }
     }
+
+    @Emit('click')
+    emitClick(): void { }
 
 }
 

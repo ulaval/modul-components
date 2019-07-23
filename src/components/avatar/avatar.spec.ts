@@ -25,10 +25,10 @@ describe('MAvatar', () => {
         it(`should call click()`, () => {
             initializeShallowWrapper();
 
-            wrapper.setMethods({ click: jest.fn() });
+            wrapper.setMethods({ onClick: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('click');
 
-            expect(wrapper.vm.click).toHaveBeenCalledTimes(1);
+            expect(wrapper.vm.onClick).toHaveBeenCalledTimes(1);
         });
 
         describe(`and clickable = true`, async () => {
@@ -36,7 +36,7 @@ describe('MAvatar', () => {
                 propsClickable = true;
                 initializeShallowWrapper();
 
-                wrapper.vm.click();
+                wrapper.vm.onClick();
 
                 expect(wrapper.emitted('click')).toBeDefined();
             });
@@ -47,7 +47,7 @@ describe('MAvatar', () => {
                 propsClickable = false;
                 initializeShallowWrapper();
 
-                wrapper.vm.click();
+                wrapper.vm.onClick();
 
                 expect(wrapper.emitted('click')).toBeUndefined();
             });
@@ -55,14 +55,25 @@ describe('MAvatar', () => {
 
     });
 
+    describe(`When keydown.enter`, () => {
+        it(`should call onClick()`, () => {
+            initializeShallowWrapper();
+
+            wrapper.setMethods({ onClick: jest.fn() });
+            wrapper.find(REF_AVATAR).trigger('keydown.enter');
+
+            expect(wrapper.vm.onClick).toHaveBeenCalledTimes(1);
+        });
+    });
+
     describe(`When mouseover`, () => {
         it(`should call mouseOver()`, () => {
             initializeShallowWrapper();
 
-            wrapper.setMethods({ mouseOver: jest.fn() });
+            wrapper.setMethods({ onMouseOver: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseover');
 
-            expect(wrapper.vm.mouseOver).toHaveBeenCalledTimes(1);
+            expect(wrapper.vm.onMouseOver).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -70,10 +81,10 @@ describe('MAvatar', () => {
         it(`should call mouseLeave()`, () => {
             initializeShallowWrapper();
 
-            wrapper.setMethods({ mouseLeave: jest.fn() });
+            wrapper.setMethods({ onMouseLeave: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseleave');
 
-            expect(wrapper.vm.mouseLeave).toHaveBeenCalledTimes(1);
+            expect(wrapper.vm.onMouseLeave).toHaveBeenCalledTimes(1);
         });
     });
 

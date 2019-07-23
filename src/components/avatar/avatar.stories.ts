@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { AVATAR_NAME } from '../component-names';
-import AvatarPlugin from './avatar';
+import AvatarPlugin, { MAvatarSize } from './avatar';
 
 Vue.use(AvatarPlugin);
 
@@ -10,23 +10,26 @@ const image192: string = 'http://placekitten.com/192/192';
 
 storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     .add('Small', () => ({
-        template: `<m-avatar pixel-size="32"></m-avatar>`
+        template: `<m-avatar></m-avatar>`
+    }))
+    .add('Medium', () => ({
+        template: `<m-avatar :size="${MAvatarSize.MEDIUM}"></m-avatar>`
     }))
     .add('Large', () => ({
-        template: `<m-avatar pixel-size="192"></m-avatar>`
+        template: `<m-avatar :size="${MAvatarSize.LARGE}"></m-avatar>`
     }))
     .add('Image slot', () => ({
-        template: `<m-avatar pixel-size="192"><img slot="avatar" src="${image192}"></m-avatar>`
+        template: `<m-avatar :size="${MAvatarSize.LARGE}"><img src="${image192}"></m-avatar>`
     }))
     .add('Svg slot', () => ({
-        template: `<m-avatar pixel-size="192"><m-icon slot="avatar" name="m-svg__profile" :size="192"></m-icon></m-avatar>`
+        template: `<m-avatar :size="${MAvatarSize.LARGE}"><m-icon name="m-svg__profile" :size="${MAvatarSize.LARGE}"></m-icon></m-avatar>`
     }))
     .add('Clickable', () => ({
-        template: `<m-avatar pixel-size="192" :clickable="true"><img slot="avatar" src="${image192}"></m-avatar>`
+        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true"><img src="${image192}"></m-avatar>`
     }))
     .add('Custom slot - animation', () => ({
-        template: `<m-avatar pixel-size="192" :clickable="true">
-                        <img slot="avatar" src="${image192}">
+        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true">
+                        <img src="${image192}">
                         <div slot="content" slot-scope={hover} style="
                             transition: all 0.1s linear;
                             width: 100%;
