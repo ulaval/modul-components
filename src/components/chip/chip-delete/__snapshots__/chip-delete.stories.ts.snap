@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-chip-delete default 1`] = `
+<div
+  class="m-chip-delete"
+>
+  <div
+    class="m-chip-delete__body"
+  >
+    <span
+      class="m-chip-delete__text"
+      id="mChipDeleteText-uuid"
+    >
+      <span
+        class="m-chip-delete__hidden-text"
+      >
+        Supprimer : 
+      </span>
+       Chip delete
+    </span>
+     
+    <button
+      aria-labelledby="mChipDeleteText-uuid"
+      class="m-chip-delete__button"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-chip-delete__icon"
+        height="14px"
+        width="14px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-chip-delete disabled 1`] = `
+<div
+  class="m-chip-delete m--is-disabled"
+>
+  <div
+    class="m-chip-delete__body"
+  >
+    <span
+      class="m-chip-delete__text"
+      id="mChipDeleteText-uuid"
+    >
+      <span
+        class="m-chip-delete__hidden-text"
+      >
+        Supprimer : 
+      </span>
+       Disabled
+    </span>
+     
+    <button
+      aria-labelledby="mChipDeleteText-uuid"
+      class="m-chip-delete__button"
+      disabled="disabled"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-chip-delete__icon"
+        height="14px"
+        width="14px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;

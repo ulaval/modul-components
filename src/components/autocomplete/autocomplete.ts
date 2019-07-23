@@ -34,6 +34,12 @@ export class MAutocomplete extends ModulVue {
     placeholder: string;
     @Prop()
     focus: boolean;
+    @Prop({ default: true })
+    clearInvalidSelectionOnClose: boolean;
+    @Prop()
+    open: boolean;
+    @Prop()
+    labelUp: boolean;
     @Prop()
     disabled: boolean;
     @Prop()

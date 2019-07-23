@@ -1,0 +1,1005 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-phonefield default 1`] = `
+<div>
+  <div
+    class="m-phonefield"
+  >
+    <div
+      class="m-phonefield__wrapper"
+    >
+      <div
+        class="m-select m-phonefield__country"
+        style="width: auto; max-width: 288px;"
+        tabindex="0"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="m-select-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Pays
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <div>
+                    <div
+                      class="m-phonefield__flag-wrapper"
+                    >
+                      <svg
+                        class="m-phonefield__flag"
+                        height="20px"
+                        width="27px"
+                      >
+                        <use
+                          aria-hidden="true"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <div
+                    class="m-select__arrow"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="m-icon m-select__arrow__icon"
+                      height="16px"
+                      width="16px"
+                    >
+                      <!---->
+                       
+                      <use
+                        aria-hidden="true"
+                        class=""
+                      />
+                    </svg>
+                  </div>
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-validation-message m-select__validation-message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-popup"
+        >
+          <div
+            class="m-popper"
+          >
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div>
+        <div
+          class="m-input-style m-phonefield__number m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mIntegerfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Numéro de téléphone
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    id="mIntegerfield-uuid"
+                  />
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <p
+          class="m-phonefield__example"
+          x-ms-format-detection="none"
+        >
+          Ex. : +1 506 234 5678
+        </p>
+      </div>
+    </div>
+     
+    <div
+      class="m-phonefield__validation"
+    >
+      <div
+        class="m-validation-message m-phonefield__validation-message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+  <p>
+    v-model = 
+  </p>
+  <p>
+    country selected = {"iso":"ca","prefix":"1"}
+  </p>
+</div>
+`;
+
+exports[`Storyshots components|m-phonefield disabled 1`] = `
+<div
+  class="m-phonefield m--is-disabled"
+>
+  <div
+    class="m-phonefield__wrapper"
+  >
+    <div
+      class="m-select m-phonefield__country m--is-disabled"
+      style="width: auto; max-width: 288px;"
+      tabindex="0"
+    >
+      <div
+        class="m-input-style m--is-label-up m--is-disabled m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="m-select-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Pays
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <div>
+                  <div
+                    class="m-phonefield__flag-wrapper"
+                  >
+                    <svg
+                      class="m-phonefield__flag"
+                      height="20px"
+                      width="27px"
+                    >
+                      <use
+                        aria-hidden="true"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                 
+                <!---->
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-validation-message m-select__validation-message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-popup"
+      >
+        <div
+          class="m-popper"
+        >
+           
+          <!---->
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div>
+      <div
+        class="m-input-style m-phonefield__number m--is-label-up m--is-disabled m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mIntegerfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Numéro de téléphone
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <input
+                  disabled="disabled"
+                  id="mIntegerfield-uuid"
+                />
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <p
+        class="m-phonefield__example"
+        x-ms-format-detection="none"
+      >
+        Ex. : +1 506 234 5678
+      </p>
+    </div>
+  </div>
+   
+  <div
+    class="m-phonefield__validation"
+  >
+    <div
+      class="m-validation-message m-phonefield__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-phonefield error 1`] = `
+<div
+  class="m-phonefield m--has-error"
+>
+  <div
+    class="m-phonefield__wrapper"
+  >
+    <div
+      class="m-select m-phonefield__country"
+      style="width: auto; max-width: 288px;"
+      tabindex="0"
+    >
+      <div
+        class="m-input-style m--is-label-up m--has-cursor-pointer m--has-error m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="m-select-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Pays
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <div>
+                  <div
+                    class="m-phonefield__flag-wrapper"
+                  >
+                    <svg
+                      class="m-phonefield__flag"
+                      height="20px"
+                      width="27px"
+                    >
+                      <use
+                        aria-hidden="true"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                <div
+                  class="m-select__arrow"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="m-icon m-select__arrow__icon"
+                    height="16px"
+                    width="16px"
+                  >
+                    <!---->
+                     
+                    <use
+                      aria-hidden="true"
+                      class=""
+                    />
+                  </svg>
+                </div>
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-validation-message m-select__validation-message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-popup"
+      >
+        <div
+          class="m-popper"
+        >
+           
+          <!---->
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div>
+      <div
+        class="m-input-style m-phonefield__number m--is-label-up m--has-error m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mIntegerfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Numéro de téléphone
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <input
+                  id="mIntegerfield-uuid"
+                />
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <p
+        class="m-phonefield__example"
+        x-ms-format-detection="none"
+      >
+        Ex. : +1 506 234 5678
+      </p>
+    </div>
+  </div>
+   
+  <div
+    class="m-phonefield__validation"
+  >
+    <div
+      class="m-validation-message m-phonefield__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-phonefield error message 1`] = `
+<div
+  class="m-phonefield m--has-error m--has-validation-message"
+>
+  <div
+    class="m-phonefield__wrapper"
+  >
+    <div
+      class="m-select m-phonefield__country"
+      style="width: auto; max-width: 288px;"
+      tabindex="0"
+    >
+      <div
+        class="m-input-style m--is-label-up m--has-cursor-pointer m--has-error m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="m-select-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Pays
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <div>
+                  <div
+                    class="m-phonefield__flag-wrapper"
+                  >
+                    <svg
+                      class="m-phonefield__flag"
+                      height="20px"
+                      width="27px"
+                    >
+                      <use
+                        aria-hidden="true"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                <div
+                  class="m-select__arrow"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="m-icon m-select__arrow__icon"
+                    height="16px"
+                    width="16px"
+                  >
+                    <!---->
+                     
+                    <use
+                      aria-hidden="true"
+                      class=""
+                    />
+                  </svg>
+                </div>
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-validation-message m-select__validation-message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-popup"
+      >
+        <div
+          class="m-popper"
+        >
+           
+          <!---->
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div>
+      <div
+        class="m-input-style m-phonefield__number m--is-label-up m--has-error m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mIntegerfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Numéro de téléphone
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <input
+                  id="mIntegerfield-uuid"
+                />
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <p
+        class="m-phonefield__example"
+        x-ms-format-detection="none"
+      >
+        Ex. : +1 506 234 5678
+      </p>
+    </div>
+  </div>
+   
+  <div
+    class="m-phonefield__validation"
+  >
+    <div
+      class="m-validation-message m-phonefield__validation-message"
+    >
+      <p
+        class="m-validation-message__error"
+      >
+        <svg
+          class="m-icon m-validation-message__icon"
+          height="1em"
+          width="1em"
+        >
+          <title>
+            Erreur
+          </title>
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-validation-message__text"
+        >
+          Error message
+        </span>
+      </p>
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-phonefield waiting 1`] = `
+<div
+  class="m-phonefield m--is-waiting"
+>
+  <div
+    class="m-phonefield__wrapper"
+  >
+    <div
+      class="m-select m-phonefield__country m--is-disabled"
+      style="width: auto; max-width: 288px;"
+      tabindex="0"
+    >
+      <div
+        class="m-input-style m--is-label-up m--is-disabled m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="m-select-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Pays
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <div>
+                  <div
+                    class="m-phonefield__flag-wrapper"
+                  >
+                    <svg
+                      class="m-phonefield__flag"
+                      height="20px"
+                      width="27px"
+                    >
+                      <use
+                        aria-hidden="true"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                 
+                <!---->
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-validation-message m-select__validation-message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-popup"
+      >
+        <div
+          class="m-popper"
+        >
+           
+          <!---->
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+     
+    <div>
+      <div
+        class="m-input-style m-phonefield__number m--is-label-up m--is-waiting m--has-label m--has-value m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mIntegerfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Numéro de téléphone
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <input
+                  disabled="disabled"
+                  id="mIntegerfield-uuid"
+                />
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <div
+                  class="m-spinner m-input-style__spinner"
+                >
+                  <!---->
+                   
+                  <div />
+                </div>
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <p
+        class="m-phonefield__example"
+        x-ms-format-detection="none"
+      >
+        Ex. : +1 506 234 5678
+      </p>
+    </div>
+  </div>
+   
+  <div
+    class="m-phonefield__validation"
+  >
+    <div
+      class="m-validation-message m-phonefield__validation-message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;

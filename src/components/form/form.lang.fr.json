@@ -1,6 +1,27 @@
 {
     "m-form": {
-        "required": "Obligatoire",
-        "multipleErrorsToCorrect": "Les <strong>%(totalNbOfErrors)s</strong> informations en rouges sont à revoir pour continuer"
+        "multipleErrorsToCorrect": "<strong>%(totalNbOfErrors)s information</strong> est à revoir pour continuer.",
+        "multipleErrorsToCorrect.p": "<strong>%(totalNbOfErrors)s informations</strong> sont à revoir pour continuer.",
+        "requiredValidatorErrorMessage": "Ce champ est requis.",
+        "requiredValidatorErrorSummaryMessage": "Le champ %(controlLabel)s est requis.",
+        "minLengthValidatorErrorMessage": "Le nombre minimal de caractères pour ce champ est %(minLength)s.",
+        "minLengthValidatorErrorSummaryMessage": "Le nombre minimal de caractères pour le champ %(controlLabel)s est %(minLength)s.",
+        "maxLengthValidatorErrorMessage": "Le nombre maximal de caractères pour ce champ est %(maxLength)s.",
+        "maxLengthValidatorErrorSummaryMessage": "Le nombre maximal de caractères pour le champ %(controlLabel)s est %(maxLength)s.",
+        "minValidatorErrorMessage": "La valeur minimal de ce champ est %(min)s.",
+        "minValidatorErrorSummaryMessage": "La valeur minimal du champ %(controlLabel)s est %(min)s.",
+        "maxValidatorErrorMessage": "La valeur maximal de ce champ est %(max)s.",
+        "maxValidatorErrorSummaryMessage": "La valeur maximal du champ %(controlLabel)s est %(max)s.",
+        "betweenValidatorErrorMessage": "La valeur doit être entre %(lowerBound)s et %(upperBound)s.",
+        "betweenValidatorErrorSummaryMessage": "La valeur du champ %(controlLabel)s doit être entre %(lowerBound)s et %(upperBound)s.",
+        "emailValidatorErrorMessage": "Le format de l'adresse courriel est invalide.",
+        "emailValidatorErrorSummaryMessage": "Le format de l'adresse courriel pour %(controlLabel)s est invalide.",
+        "compareValidatorErrorMessage": "Les valeurs du groupe %(controlLabels)s doivent être identiques.",
+        "compareValidatorErrorSummaryMessage": "Les valeurs du groupe %(controlLabels)s doivent être identiques.",
+        "compareValidatorErrorMessageNoName": "Les valeurs de ce groupe doivent être identiques.",
+        "dateFormatValidatorErrorMessage": "Entrez une date avec un format AAAA-MM-JJ",
+        "dateFormValidatorErrorSummaryMessage": "Le format de la date est AAAA-MM-JJ pour %(controlLabel)s",
+        "dateBetweenValidatorErrorMessage": "Entrez une date comprise entre le %(start)s et le %(end)s",
+        "dateBetweenValidatorErrorSummaryMessage": "La date doit être comprise entre le %(start)s et le %(end)s pour %(controlLabel)s"
     }
 }

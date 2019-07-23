@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,14 +7,10 @@ import AccordionGroupPlugin from './accordion-group';
 Vue.use(AccordionGroupPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('default', () => ({
         props: {
             text: {
@@ -51,8 +46,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('reverse-header', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+    .add('toggle-link-left', () => ({
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h2 slot="title">An Accordion Group Title</h2>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -68,7 +63,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled="true"`, module)
-    .addDecorator(withA11y)
     .add('all childrens disabled="false"', () => ({
         template: `<m-accordion-group :disabled="true">
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -92,7 +86,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled="
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled=false`, module)
-    .addDecorator(withA11y)
     .add('all childrens disabled="false"', () => ({
         template: `<m-accordion-group :disabled="false">
                         <m-accordion :disabled="false"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -117,7 +110,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/disabled=f
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/skin`, module)
-    .addDecorator(withA11y)
+
     .add('skin="default"', () => ({
         template: `<m-accordion-group>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -141,7 +134,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/skin`, mod
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/openedIds=[x,y,z]`, module)
-    .addDecorator(withA11y)
+
     .add('openedIds=[1,2,3]', () => ({
         template: `<m-accordion-group :openedIds="[1,2,3]">
                         <m-accordion :id="1"><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -165,7 +158,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/openedIds=
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-content`, module)
-    .addDecorator(withA11y)
+
     .add('default', () => ({
         template: `<m-accordion-group>
                         <h2 slot="title">An Accordion Group Title</h2>
@@ -175,8 +168,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('reverse-header', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+    .add('toggle-link-left', () => ({
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h2 slot="title">An Accordion Group Title</h2>
                         <h3 slot="secondary-content">An Accordion Group Title</h3>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -185,7 +178,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-
     </m-accordion-group>`
     }))
     .add('m-link', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h2 slot="title">An Accordion Group Title</h2>
                         <m-link icon-name="m-svg__add-circle-filled" icon-size="22px" mode="button" slot="secondary-content">Add content</m-link>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
@@ -201,8 +194,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_GROUP_NAME}/secondary-
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
     </m-accordion-group>`
     }))
-    .add('no-title-reverse-header', () => ({
-        template: `<m-accordion-group :reverse-header="true">
+    .add('no-title-toggle-link-left', () => ({
+        template: `<m-accordion-group :toggle-link-left="true">
                         <h3 slot="secondary-content">An Accordion Group Title</h3>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>
                         <m-accordion><h3 slot="header">An Accordion Title</h3>Some Accordion Content</m-accordion>

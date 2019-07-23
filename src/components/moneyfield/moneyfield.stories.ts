@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { select, withKnobs } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -9,8 +8,7 @@ import { MONEYFIELD_NAME } from './../component-names';
 import { MMoneyfield } from './moneyfield';
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Basic', () => ({
         components: { MMoneyfield },
         template: `
@@ -29,15 +27,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('States', () => ({
         components: { MMoneyfield },
         template: `
             <div>
                 <div><${MONEYFIELD_NAME} v-model="value" :disabled="true" :placeholder="'Disabled'"></${MONEYFIELD_NAME}></div>
                 <div><${MONEYFIELD_NAME} v-model="value" :placeholder="'Read-only'" :readonly="true"></${MONEYFIELD_NAME}></div>
-                <div><${MONEYFIELD_NAME} v-model="value" :placeholder="'Waiting'" :waiting="true"></${MONEYFIELD_NAME}></div>
+                <div><${MONEYFIELD_NAME} v-model="value" label="label bla label" :placeholder="'Waiting'" :waiting="true"></${MONEYFIELD_NAME}></div>
             </div>
         `,
         data: () => ({
@@ -46,8 +43,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('With initial value (0)', () => ({
         components: { MMoneyfield },
         template: `<${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>`,
@@ -57,19 +53,17 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('With initial value', () => ({
         components: { MMoneyfield },
         template: `<${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>`,
         data: () => ({
-            value: 123456.78
+            value: 123456.7
         })
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Localization', () => ({
         components: { MMoneyfield },
         template: `
@@ -89,7 +83,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
             }
         },
         data: () => ({
-            value: 123456.78,
+            value: 123456.7,
             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
             i18n: Vue.prototype.$i18n
         }),
@@ -98,9 +92,52 @@ storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
         }
     }));
 
+// storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
+//
+//     .add('Format', () => ({
+//         components: { MMoneyfield },
+//         template: `<div>
+//                 <${MONEYFIELD_NAME} v-model="value"></${MONEYFIELD_NAME}>
+//                 => {{ formatedOuput }}
+//             </div>
+//         `,
+//         props: {
+//             lang: {
+//                 default: select('Language', {
+//                     [FRENCH]: FRENCH,
+//                     [ENGLISH]: ENGLISH
+//                 }, (Vue.prototype as ModulVue).$i18n.currentLang())
+//             },
+//             stripDecimalZeroes: {
+//                 default: boolean('Strip decimal zeroes', false)
+//             }
+//         },
+//         watch: {
+//             lang: function(): void {
+//                 this.i18n.currentLang(this.lang);
+//             }
+//         },
+//         computed: {
+//             formatedOuput(): string {
+//                 return formatCurrencyWithOptions(this.value, {
+//                     currency: (Vue.prototype as ModulVue).$l10n.currentCurrency,
+//                     stripDecimalZeroes: this.stripDecimalZeroes
+//                 });
+//             }
+//         },
+//         data: () => ({
+//             value: 123456.7,
+//             originalLang: (Vue.prototype as ModulVue).$i18n.currentLang(),
+//             i18n: Vue.prototype.$i18n,
+//             l10n: Vue.prototype.$l10n
+//         }),
+//         destroyed(): void {
+//             (Vue.prototype as ModulVue).$i18n.currentLang(this.originalLang);
+//         }
+//     }));
+
 storiesOf(`${componentsHierarchyRootSeparator}${MONEYFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('Default precision', () => ({
         components: { MMoneyfield },
         template: `

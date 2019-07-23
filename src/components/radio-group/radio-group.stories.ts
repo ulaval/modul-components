@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -11,14 +10,11 @@ Vue.use(RadioPlugin);
 Vue.use(RadioGroupPlugin);
 
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         props: {
             text: {
@@ -59,6 +55,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
+    .add('icon slot', () => ({
+        template: `<m-radio-group label="This is a label">
+                        <template #icon>
+                            <m-icon name="m-svg__add-circle" />
+                        </template>
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
     .add('focus', () => ({
         template: `<m-radio-group :focus="true">
                         <m-radio>Radio Option 1</m-radio>
@@ -86,10 +92,23 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
+    }))
+    .add('error-message & label', () => ({
+        template: `<m-radio-group error-message="This is an error message" label="This is a label">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('required-marker', () => ({
+        template: `<m-radio-group :required-marker="true" label="This is a label">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/radios-position="right"`, module)
-    .addDecorator(withA11y)
     .add('inline', () => ({
         template: `<m-radio-group inline="true" radios-position="right">
                         <m-radio>Radio Option 1</m-radio>
@@ -162,7 +181,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/radios-positio
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly="false"`, module)
-    .addDecorator(withA11y)
     .add('all childrens readonly="false"', () => ({
         template: `<m-radio-group :readonly="false">
                         <m-radio :readonly="false">Radio Option 1</m-radio>
@@ -186,7 +204,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly="fals
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly="true"`, module)
-    .addDecorator(withA11y)
+
     .add('default', () => ({
         template: `<m-radio-group :readonly="true">
                         <m-radio>Radio Option 1</m-radio>
@@ -217,7 +235,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/readonly="true
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled="false"`, module)
-    .addDecorator(withA11y)
     .add('all childrens disabled="false"', () => ({
         template: `<m-radio-group :disabled="false">
                         <m-radio :disabled="false">Radio Option 1</m-radio>
@@ -241,7 +258,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled="fals
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}/disabled="true"`, module)
-    .addDecorator(withA11y)
     .add('default', () => ({
         template: `<m-radio-group :disabled="true">
                         <m-radio>Radio Option 1</m-radio>

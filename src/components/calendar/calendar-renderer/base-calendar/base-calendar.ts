@@ -1,5 +1,8 @@
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Enums } from '../../../../utils/enums/enums';
 import uuid from '../../../../utils/uuid/uuid';
+import { MLinkMode } from '../../../link/link';
+import { MCalendarButton } from '../../calendar-button/calendar-button';
 import { RangeDate } from '../../calendar-state/state/abstract-calendar-state';
 import { CalendarType, DayState, MonthState, YearState } from '../../calendar-state/state/calendar-state';
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
@@ -36,18 +39,29 @@ enum WeekdayNames {
     SATURDAY = 'saturday'
 }
 
-export enum PickerMode {
-    DAY = 'day',
-    MONTH = 'month',
-    YEAR = 'year'
+export enum MBaseCalendarView {
+    DAYS = 'days',
+    YEARS_MONTHS = 'years-months'
+}
+
+export enum MBaseCalendarType {
+    FULL_DATE = 'full-date',
+    YEARS_MONTHS = 'years-months'
 }
 
 @WithRender
-@Component
+@Component({
+    components: {
+        MCalendarButton
+    }
+})
 export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
-    @Prop({ default: PickerMode.DAY })
-    initialPickerMode: PickerMode;
+    @Prop({
+        default: MBaseCalendarView.DAYS,
+        validator: value => Enums.toValueArray(MBaseCalendarView).includes(value)
+    })
+    initialView: MBaseCalendarView;
 
     @Prop({ default: true })
     showMonthBeforeAfter: boolean;
@@ -85,22 +99,62 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     })
     daysNames: string[];
 
+    @Prop({
+        default: MBaseCalendarType.FULL_DATE,
+        validator: value => Enums.toValueArray(MBaseCalendarType).includes(value)
+    })
+    type: MBaseCalendarType;
+
+    @Prop({ default: true })
+    visible: boolean;
+
+    mBaseCalendarView = MBaseCalendarView;
     previousMonthLabel: string = this.$i18n.translate('m-calendar:previous.month');
     nextMonthLabel: string = this.$i18n.translate('m-calendar:next.month');
     previousYearLabel: string = this.$i18n.translate('m-calendar:previous.year');
     nextYearLabel: string = this.$i18n.translate('m-calendar:next.year');
-
     id: string = `m-simple-calendar-${uuid.generate()}`;
 
-    private currentPickerMode: PickerMode = this.initialPickerMode;
+    $refs: {
+        body: HTMLElement;
+        yearsMonthsView: HTMLElement;
+    };
 
-    onYearClick(): void {
-        this.currentPickerMode = this.isPickerModeDay ? this.currentPickerMode = PickerMode.YEAR : this.currentPickerMode = PickerMode.DAY;
+    public modeLinkCurrentMonthAndYear: MLinkMode = MLinkMode.Button;
+    animReady: boolean = false;
+    private internalCurrentView: MBaseCalendarView = MBaseCalendarView.DAYS;
+
+    @Watch('visible', { immediate: true })
+    visibleChanged(visible: boolean): void {
+        if (visible && this.isTypeYearsMonths) {
+            this.scrollToCurrentYear();
+        }
     }
 
-    onYearSelect(year: YearState): void {
-        super.onYearSelect(year);
-        this.currentPickerMode = PickerMode.MONTH;
+    protected created(): void {
+        this.currentView = this.initialView; // Set currentView value in created() to hide animation when the component is diplayed for the firt time
+    }
+
+    onToogleView(): void {
+        this.currentView === MBaseCalendarView.DAYS ? this.currentView = MBaseCalendarView.YEARS_MONTHS : this.currentView = MBaseCalendarView.DAYS;
+    }
+
+    onYearMonthSelect(year: YearState, month: MonthState): void {
+        if (!month.isDisabled) {
+            month.isCurrent = true;
+
+            if (this.isTypeYearsMonths) {
+                super.onYearMonthSelect(year, month);
+            } else {
+                super.onYearSelect(year);
+                super.onMonthSelect(month);
+
+                // Delay to show the user selection
+                setTimeout(() => {
+                    this.currentView = MBaseCalendarView.DAYS;
+                }, 300);
+            }
+        }
     }
 
     onYearNext(event: Event): void {
@@ -111,17 +165,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         super.onYearPrevious(event);
     }
 
-    onMonthClick(): void {
-        this.currentPickerMode = PickerMode.MONTH;
-    }
-
-    onMonthSelect(month: MonthState): void {
-        if (!month.isDisabled) {
-            super.onMonthSelect(month);
-            this.currentPickerMode = PickerMode.DAY;
-        }
-    }
-
     onMonthNext(event: Event): void {
         super.onMonthNext(event);
     }
@@ -130,15 +173,8 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         super.onMonthPrevious(event);
     }
 
-    monthTabIndex(month: MonthState): string {
-        return month.isDisabled ? '-1' : '0';
-    }
-
     onDaySelect(day: DayState): void {
         super.onDaySelect(day);
-
-        // TODO when there will be a directive to manage focus, replace this behaviour with it
-        this.$nextTick(() => (this.$refs[this.buildRef('day', day)][0] as HTMLButtonElement).focus());
     }
 
     onDayMouseEnter(day: DayState): void {
@@ -151,10 +187,6 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
 
     onDayMouseLeave(day: DayState): void {
         super.onDayMouseLeave(day);
-    }
-
-    dayTabIndex(day: DayState): string {
-        return day.isDisabled || this.hideDay(day) ? '-1' : '0';
     }
 
     isDateInFuture(day: DayState): boolean {
@@ -182,24 +214,42 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return (day.isInNextMonth || day.isInPreviousMonth) && !this.showMonthBeforeAfter;
     }
 
-    buildRef(prefix: string, state: DayState | MonthState | YearState): string {
-        const parts: string[] = [prefix];
-
-        if ('year' in state) {
-            parts.push(this.padString(state.year.toString(), 4));
+    buildRef(refPrefix: MBaseCalendarView, year: number, month: number, day?: number): string {
+        let refName: string = `${refPrefix}-${this.padString(year, 4)}-${this.padString(month, 2)}`;
+        if (refPrefix === MBaseCalendarView.DAYS) {
+            return `${refName}-${this.padString(day, 2)}`;
         }
-        if ('month' in state) {
-            parts.push(this.padString((state.month + 1).toString()));
-        }
-        if ('day' in state) {
-            parts.push(this.padString(state.day.toString()));
-        }
-
-        return parts.join('');
+        return refName;
     }
 
     monthIndexToShortName(index: number): string {
         return this.monthsNames[index];
+    }
+
+    scrollToCurrentYear(): void {
+        this.$nextTick(() => {
+            let yearsMonthsViewEl: HTMLElement = this.$refs.yearsMonthsView;
+            const spacingBeforeCurrentYear: number = 16;
+            if (yearsMonthsViewEl) {
+                yearsMonthsViewEl.scrollTop = (yearsMonthsViewEl.querySelector('[data-current-year="true"]') as HTMLElement).offsetTop - spacingBeforeCurrentYear || 0;
+            }
+        });
+    }
+
+    set currentView(view: MBaseCalendarView) {
+        if (this.isTypeYearsMonths) {
+            this.internalCurrentView = MBaseCalendarView.YEARS_MONTHS;
+        } else {
+            this.internalCurrentView = view;
+        }
+    }
+
+    get currentView(): MBaseCalendarView {
+        return this.internalCurrentView;
+    }
+
+    get isTypeYearsMonths(): boolean {
+        return this.type === MBaseCalendarType.YEARS_MONTHS;
     }
 
     get currentYear(): number {
@@ -222,20 +272,24 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
         return this.calendar.years;
     }
 
+    get yearsMonths(): {} {
+        return this.calendar.yearsMonths;
+    }
+
     get months(): {} {
         return this.calendar.months;
     }
 
-    get isPickerModeYear(): boolean {
-        return this.currentPickerMode === PickerMode.YEAR;
+    get days(): {} {
+        return this.calendar.days;
     }
 
-    get isPickerModeMonth(): boolean {
-        return this.currentPickerMode === PickerMode.MONTH;
+    get isYearsMonthsView(): boolean {
+        return this.currentView === MBaseCalendarView.YEARS_MONTHS;
     }
 
-    get isPickerModeDay(): boolean {
-        return this.currentPickerMode === PickerMode.DAY;
+    get isDaysView(): boolean {
+        return this.currentView === MBaseCalendarView.DAYS;
     }
 
     get isMinYear(): boolean {
@@ -255,12 +309,15 @@ export default class MBaseCalendar extends MAbstractCalendarRenderer {
     }
 
     get isMaxRow(): boolean {
+        if (this.isTypeYearsMonths) {
+            return false;
+        }
         let numberOfDays: number = this.calendar.days.length;
         return numberOfDays / 7 > 5 ? true : false;
     }
 
-    get days(): DayState[] {
-        return this.calendar.days;
+    get isButtonToogleViewDisabled(): boolean {
+        return this.isMinMonth && this.isMaxYear || this.isTypeYearsMonths;
     }
 
     private padString(value: any, length: number = 2): string {

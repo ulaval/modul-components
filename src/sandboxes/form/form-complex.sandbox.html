@@ -1,0 +1,133 @@
+<div class="m-add-sandbox">
+    <h2 class="m-u--no-margin">Test for MForm complex example</h2>
+    <br />
+    <m-form :form-group="formGroup"
+            @reset="reset()"
+            @submit="submit()">
+
+        <h4 class="m-u--h6">General</h4>
+
+        <m-textfield v-m-control="nameField"
+                     v-model="nameField.value"
+                     label="Name"
+                     :required-marker="true"
+                     helper-message="2 characters min - 20 characters max"
+                     :character-count="true"
+                     max-length="20"
+                     :error="nameField.hasError()"
+                     :error-message="nameField.errorMessage">
+        </m-textfield> <br />
+
+        <m-textarea v-m-control="descriptionField"
+                    v-model="descriptionField.value"
+                    label="Description"
+                    :required-marker="true"
+                    helper-message="255 caracter max"
+                    :error="descriptionField.hasError()"
+                    :error-message="descriptionField.errorMessage">
+        </m-textarea> <br />
+
+        <m-datepicker v-m-control="birthdateField"
+                      v-model="birthdateField.value"
+                      label="Birthdate"
+                      min="1900-01-01"
+                      max="2020-01-01"
+                      :required-marker="true"
+                      :error="birthdateField.hasError()"
+                      :error-message="birthdateField.errorMessage">
+        </m-datepicker> <br />
+
+        <m-dropdown v-m-control="typeField"
+                    v-model="typeField.value"
+                    label="Type"
+                    :required-marker="true"
+                    :error="typeField.hasError()"
+                    :error-message="typeField.errorMessage">
+            <m-dropdown-item v-for="type of types"
+                             :value="type"
+                             :label="type"></m-dropdown-item>
+        </m-dropdown> <br />
+
+
+        <h4 class="m-u--h6">Nested formgroup</h4>
+
+        <m-checkbox v-m-control="champSupplActive"
+                    v-model="champSupplActive.value">Activer les champs supplementaires ?</m-checkbox><br />
+
+        <m-textfield v-m-control="supplField1"
+                     v-model="supplField1.value"
+                     label="supplField1"
+                     :required-marker="true"
+                     :error="supplField1.hasError()"
+                     :error-message="supplField1.errorMessage"
+                     :disabled="!supplField1.enabled">
+        </m-textfield> <br />
+        <m-textfield v-m-control="supplField2"
+                     v-model="supplField2.value"
+                     label="supplField2"
+                     :error="supplField2.hasError()"
+                     :error-message="supplField2.errorMessage"
+                     :disabled="!supplField2.enabled">
+        </m-textfield> <br />
+        <m-textfield v-m-control="supplField3"
+                     v-model="supplField3.value"
+                     label="supplField3"
+                     :error="supplField3.hasError()"
+                     :error-message="supplField3.errorMessage"
+                     :disabled="!supplField3.enabled">
+        </m-textfield> <br />
+
+
+        <h4 class="m-u--h6">Formarray</h4>
+        <m-add @click="addItem()">Add Cart (max 24 fruits, max total 24 bananas)</m-add>
+        <div v-for="(control, index) in itemsArray.controls"
+             :key="index">
+            <m-textfield v-m-control="control.getControl('client')"
+                         v-model="control.getControl('client').value"
+                         label="Client"
+                         :error="control.getControl('client').hasError()"
+                         :error-message="control.getControl('client').errorMessage">
+            </m-textfield>
+            <m-integerfield v-m-control="control.getControl('fruits').getControl('apples')"
+                            v-model="control.getControl('fruits').getControl('apples').value"
+                            label="Apples"
+                            :error="control.getControl('fruits').hasError()">
+            </m-integerfield>
+            <m-integerfield v-m-control="control.getControl('fruits').getControl('bananas')"
+                            v-model="control.getControl('fruits').getControl('bananas').value"
+                            label="Bananas"
+                            :error="control.getControl('fruits').hasError()">
+            </m-integerfield>
+            <m-button icon-name="m-svg__close-clear"
+                      @click="deleteItem(index)">Delete</m-button>
+            <m-validation-message :error="control.getControl('fruits').hasError()"
+                                  :error-message="control.getControl('fruits').errorMessage"></m-validation-message>
+            <br />
+
+        </div>
+        <m-validation-message :error="itemsArray.hasError()"
+                              :error-message="itemsArray.errorMessage"></m-validation-message>
+
+        <p class="m-u--margin-top--l m-u--margin-bottom--l">
+            <m-button type="submit"
+                      :waiting="pendingSubmit">Submit</m-button>
+            <m-button type="reset"
+                      skin="secondary">Reset</m-button>
+        </p>
+
+        <h4 class="m-u--h6">Form Values</h4>
+
+        <p>{{ formGroup.value }}</p>
+
+        <h4 class="m-u--h6">Form Errors</h4>
+
+        <p>{{ formGroup.errorsDeep }}</p>
+        <h4 class="m-u--h6">Form Validity = {{ formGroup.valid }} / Form Waiting = {{ formGroup.waiting }} / Form Enabled = {{ formGroup.enabled }} / Form Readonly = {{ formGroup.readonly }}</h4>
+        <p>
+            <m-button skin="secondary"
+                      @click="loadValue()">Load form initial data</m-button>
+            <m-button skin="secondary"
+                      @click="clearValue()">Clearform initial data</m-button>
+        </p>
+    </m-form>
+</div>

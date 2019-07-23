@@ -1,5 +1,4 @@
 @import 'commons';
-@import '../../accordion/accordion-transition';
 
 $m-tree-node--height: 40px;
 $m-tree-node--child-indentation: 20px;
@@ -10,7 +9,7 @@ $m-tree-node--child-indentation: 20px;
     position: relative;
 
     .m-tree-node::before {
-        content: "";
+        content: '';
         position: absolute;
         left: -$m-tree-node--child-indentation;
         top: 15px; // Magic number
@@ -20,7 +19,7 @@ $m-tree-node--child-indentation: 20px;
     }
 
     .m-tree-node::after {
-        content: "";
+        content: '';
         position: absolute;
         left: -$m-tree-node--child-indentation;
         top: -25px; // Magic number
@@ -71,7 +70,6 @@ $m-tree-node--child-indentation: 20px;
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: $m-line-height;
-            flex-grow: 1;
         }
 
         &-check {
@@ -87,6 +85,11 @@ $m-tree-node--child-indentation: 20px;
 
         /deep/ .m-checkbox__input {
             margin-right: $m-tree-node--child-indentation / 2;
+        }
+
+        .m-tree-node__warning-icon {
+            margin-left: $m-spacing--s;
+            color: $m-color--warning;
         }
     }
 
@@ -131,7 +134,7 @@ $m-tree-node--child-indentation: 20px;
 
     &.m-tree-node__has-children > .m-tree-node__item,
     &.m-tree-node__has-children.m--is-disabled > .m-tree-node__item {
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
         cursor: pointer;
     }
 
@@ -177,7 +180,7 @@ $m-tree-node--child-indentation: 20px;
     }
 
     &__line-extension::before {
-        content: "";
+        content: '';
         position: absolute;
         left: -$m-tree-node--child-indentation;
         top: 0;

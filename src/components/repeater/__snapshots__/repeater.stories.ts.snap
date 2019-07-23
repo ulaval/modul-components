@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-repeater Empty 1`] = `
+<div
+  class="m-repeater"
+>
+  <ul
+    class="m-repeater__list"
+  >
+    <li
+      class="m-repeater__row m--is-empty"
+    >
+      
+            The list is empty
+        
+    </li>
+    <li
+      class="m-repeater__footer"
+    >
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-repeater Operations 1`] = `
+<div
+  class="m-repeater"
+>
+  <ul
+    class="m-repeater__list"
+  >
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
+                    #0 Custom template for item (id: 324525 name: Albert Einstein)
+                
+      </div>
+       
+      <!---->
+    </li>
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
+                    #1 Custom template for item (id: 64564556 name: Nikola Tesla)
+                
+      </div>
+       
+      <!---->
+    </li>
+    <li
+      class="m-repeater__footer"
+    >
+      <!---->
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-repeater With items (Custom item template) 1`] = `
+<div
+  class="m-repeater"
+>
+  <ul
+    class="m-repeater__list"
+  >
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
+                    Item # 0 uuid
+                
+      </div>
+       
+      <button
+        class="m-icon-button m-repeater__delete m--is-skin-light m--has-ripple"
+        style="width: 44px; height: 44px;"
+        title="Supprimer"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </li>
+    <li
+      class="m-repeater__row"
+    >
+      <div
+        class="m-repeater__col"
+      >
+        
+                    Item # 1 uuid
+                
+      </div>
+       
+      <button
+        class="m-icon-button m-repeater__delete m--is-skin-light m--has-ripple"
+        style="width: 44px; height: 44px;"
+        title="Supprimer"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </li>
+    <li
+      class="m-repeater__footer"
+    >
+      <a
+        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
+        href="#"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-link__icon"
+          height="24px"
+          width="24px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-link__text"
+        >
+          Ajouter
+        </span>
+         
+        <!---->
+      </a>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Storyshots components|m-repeater With items (Custom row template) 1`] = `
+<div
+  class="m-repeater"
+>
+  <ul
+    class="m-repeater__list"
+  >
+    <li>
+      <button>
+        Delete
+      </button>
+      
+                    Item # 0 uuid
+                
+    </li>
+    <li>
+      <button>
+        Delete
+      </button>
+      
+                    Item # 1 uuid
+                
+    </li>
+    <li
+      class="m-repeater__footer m--is-slot-row"
+    >
+      <a
+        class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
+        href="#"
+        tabindex="0"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-link__icon"
+          height="24px"
+          width="24px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <span
+          class="m-link__text"
+        >
+          Ajouter
+        </span>
+         
+        <!---->
+      </a>
+    </li>
+  </ul>
+</div>
+`;

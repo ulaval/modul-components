@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip should render correctly 1`] = `
+<button type="button" class="m-chip-add">
+  <div class="m-chip-add__body"><span class="m-chip-add__hidden-text">chip:add : </span>
+    <m-icon size="20px" name="m-svg__add-circle" class="m-chip-add__icon"></m-icon>
+  </div>
+</button>
+`;

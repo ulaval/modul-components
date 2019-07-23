@@ -15,6 +15,7 @@
                    :label="label"
                    :label-for="id"
                    :focus="isFocus"
+                   :label-up="labelUp"
                    :empty="isEmpty"
                    :readonly="isReadonly"
                    :required-marker="requiredMarker"
@@ -32,12 +33,10 @@
                       @blur="onBlur"
                       @keyup="onKeyup"
                       @change="onChange"
-                      @drop="onDropDecimalfield"
                       ref="inputMask"
                       :options="inputMaskOptions"
-                      inputmode="numeric"></m-input-mask>
-
-        <template slot="right-content">
+                      inputmode="decimal"></m-input-mask>
+        <template slot="suffix">
             <slot name="suffix"></slot>
         </template>
     </m-input-style>

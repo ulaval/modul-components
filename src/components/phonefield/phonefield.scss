@@ -1,0 +1,100 @@
+@import 'commons';
+
+.m-phonefield {
+    display: inline-flex;
+    flex-direction: column;
+
+    &.m--has-validation-message {
+        .m-phonefield__validation {
+            margin-top: $m-spacing--xs;
+        }
+    }
+
+    &.m--is-country-focus {
+        .m-phonefield {
+            &__number {
+                /deep/ .m-input-style__main {
+                    border-left-color: $m-color--interactive;
+                }
+            }
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: $m-spacing;
+    }
+
+    &__country {
+        flex-direction: row;
+        margin-right: -1px; // Magic Number
+
+        /deep/ .m-input-style__label {
+            visibility: hidden;
+        }
+
+        /deep/ .m-input-style__main {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right-color: transparent !important;
+        }
+    }
+
+    &__flag-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-right: $m-spacing--s;
+    }
+
+    &__item-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__flag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+    }
+
+    &__item-flag-wrapper {
+        width: 27px;
+        height: 20px;
+        margin-right: $m-spacing--s;
+    }
+
+    &__item-dialCode {
+        margin-left: $m-spacing--s;
+        color: $m-color--grey;
+    }
+
+    &__number {
+        flex-shrink: 0;
+
+        /deep/ .m-input-style__main {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    &__example {
+        position: absolute;
+        margin-top: $m-spacing--xs;
+        color: $m-color--grey-dark;
+        font-size: $m-font-size--xs;
+        padding-left: calc(#{$m-input-style--padding} + #{$m-border-width--s});
+    }
+
+    &__validation {
+        transition: margin-top $m-transition-duration ease;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__validation-message {
+        flex: 1 1 auto;
+    }
+}

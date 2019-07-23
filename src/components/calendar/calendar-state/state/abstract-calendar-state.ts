@@ -1,5 +1,5 @@
 import ModulDate, { DatePrecision } from './../../../../utils/modul-date/modul-date';
-import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, CalendarType, DaySelectCallBack, DayState, MonthState, YearState } from './calendar-state';
+import CalendarState, { Calendar, CalendarCurrentState, CalendarEvent, CalendarEvents, CalendarType, DaySelectCallBack, DayState, MonthState, YearMonthState, YearState } from './calendar-state';
 
 export const MAX_DATE_OFFSET: number = 10;
 export const MIN_DATE_OFFSET: number = 10;
@@ -31,6 +31,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         dates: { min: new ModulDate(), current: new ModulDate(), max: new ModulDate() },
         years: [],
         months: [],
+        yearsMonths: [],
         days: []
     };
 
@@ -108,6 +109,10 @@ export default abstract class AbstractCalendarState implements CalendarState {
         this.updateCurrentlyDisplayedDate(year.year, this.currentlyDisplayedMonth(), this.currentlyDisplayedDay());
     }
 
+    protected selectYearMonth(year: YearState, month: MonthState): void {
+        this.updateCurrentlyDisplayedDate(year.year, month.month, this.currentlyDisplayedDay());
+    }
+
     protected selectMonth(month: MonthState): void {
         this.updateCurrentlyDisplayedDate(this.currentlyDisplayedYear(), month.month, this.currentlyDisplayedDay());
     }
@@ -130,6 +135,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
         this.calendar.months = this.months();
         this.calendar.days = this.daysOfMonth();
         this.calendar.type = this.calendarType();
+        this.calendar.yearsMonths = this.yearsMonths();
         return this.calendar;
     }
 
@@ -144,6 +150,7 @@ export default abstract class AbstractCalendarState implements CalendarState {
                 [CalendarEvent.MONTH_PREVIOUS]: this.previousMonth.bind(this),
                 [CalendarEvent.MONTH_NEXT]: this.nextMonth.bind(this),
                 [CalendarEvent.YEAR_SELECT]: this.selectYear.bind(this),
+                [CalendarEvent.YEAR_MONTH_SELECT]: this.selectYearMonth.bind(this),
                 [CalendarEvent.YEAR_PREVIOUS]: this.previousYear.bind(this),
                 [CalendarEvent.YEAR_NEXT]: this.nextYear.bind(this)
             } as CalendarEvents;
@@ -232,6 +239,30 @@ export default abstract class AbstractCalendarState implements CalendarState {
             });
         }
         return months;
+    }
+
+    private yearsMonths(): YearMonthState[] {
+        let yearsMonths: YearMonthState[] = [];
+        for (let year: number = this.currentMinDate.fullYear(); year <= this.currentMaxDate.fullYear(); year++) {
+            let months: MonthState[] = [];
+            let date: ModulDate;
+            let isYearsCurrent: boolean = this.currentlyDisplayedDate.fullYear() === year;
+            let isYearMinOrMax: boolean = (year === this.currentMinDate.fullYear()) || (year === this.currentMaxDate.fullYear());
+            for (let monthIndex: number = FIRST_MONTH_INDEX; monthIndex <= LAST_MONTH_INDEX; monthIndex++) {
+                date = new ModulDate(year, monthIndex, 1);
+                months.push({
+                    month: monthIndex,
+                    isCurrent: isYearsCurrent && (this.currentlyDisplayedMonth() === monthIndex),
+                    isDisabled: isYearMinOrMax && !date.isBetween(this.currentMinDate, this.currentMaxDate, DatePrecision.MONTH)
+                });
+            }
+
+            yearsMonths.push({
+                year: { year: year, isCurrent: this.currentlyDisplayedYear() === year },
+                months: months
+            });
+        }
+        return yearsMonths;
     }
 
     private daysOfMonth(): DayState[] {

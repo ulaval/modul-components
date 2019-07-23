@@ -1,13 +1,18 @@
 import Vue, { PluginObject } from 'vue';
+import { AddressLookupPluginOptions } from '../utils/address-lookup/address-lookup.plugin';
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import AddPlugin from './add/add';
+import AddressPlugin from './address/address';
 import ButtonPlugin from './button/button';
 import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
 import CharacterCountPlugin from './character-count/character-count';
 import CheckboxPlugin from './checkbox/checkbox';
+import ChipPlugin from './chip/chip';
+import ChipAddPlugin from './chip/chip-add/chip-add';
+import ChipDeletePlugin from './chip/chip-delete/chip-delete';
 import DatefieldsPlugin from './datefields/datefields';
 import DatepickerPlugin from './datepicker/datepicker';
 import DaterangepickerPlugin from './daterangepicker/daterangepicker';
@@ -22,6 +27,7 @@ import ErrorConfigNotSupported from './error-pages/error-config-not-supported/er
 import ErrorCookiesNotSupported from './error-pages/error-cookies-not-supported/error-cookies-not-supported';
 import ErrorPageNotFoundPlugin from './error-pages/error-page-not-found/error-page-not-found';
 import ErrorTechnicalDifficultyPlugin from './error-pages/error-technical-difficulty/error-technical-difficulty';
+import ExpandableLayoutPlugin from './expandable-layout/expandable-layout';
 import FileSelectPlugin from './file-select/file-select';
 import FileUploadPlugin from './file-upload/file-upload';
 import FlexTemplatePlugin from './flex-template/flex-template';
@@ -59,10 +65,10 @@ import RichTextEditorPlugin from './rich-text-editor/rich-text-editor';
 import RichTextLicensePlugin, { RichTextLicensePluginOptions } from './rich-text-editor/rich-text-license-plugin';
 import RichTextPlugin from './rich-text/rich-text';
 import ScrollTopPlugin from './scroll-top/scroll-top';
+import SearchfieldPlugin from './searchfield/searchfield';
 import SessionExpiredPlugin from './session-expired/session-expired';
 import ShowMorePlugin from './show-more/show-more';
 import SidebarPlugin from './sidebar/sidebar';
-import SlideTransitionPlugin from './slide-transition/slide-transition';
 import SliderPlugin from './slider/slider';
 import SpinnerPlugin from './spinner/spinner';
 import Status from './status/status';
@@ -80,13 +86,14 @@ import TimepickerPlugin from './timepicker/timepicker';
 import ToastPlugin from './toast/toast';
 import ToggleButtonsPlugin from './toggle-buttons/toggle-buttons';
 import TooltipPlugin from './tooltip/tooltip';
+import AccordionTransitionPlugin from './transitions/accordion-transition/accordion-transition';
+import SlideTransitionPlugin from './transitions/slide-transition/slide-transition';
 import TreePlugin from './tree/tree';
 import ValidationMessagePlugin from './validation-message/validation-message';
 
-
-
 export interface ComponentPluginOptions {
     richTextOptions?: RichTextLicensePluginOptions;
+    loquateOptions?: AddressLookupPluginOptions;
 }
 
 const ComponentsPlugin: PluginObject<any> = {
@@ -97,15 +104,19 @@ const ComponentsPlugin: PluginObject<any> = {
 
         v.prototype.$log.error('ComponentsPlugin will be deprecated in modul v.1.0, components should now be installed separately');
 
-
         Vue.use(AccordionGroupPlugin);
         Vue.use(AccordionPlugin);
+        Vue.use(AccordionTransitionPlugin);
         Vue.use(AddPlugin);
+        Vue.use(AddressPlugin, { loqateKey: options.loquateOptions ? 'LOQATE_KEY=BT13-ZT19-TB79-DC28' : undefined } as AddressLookupPluginOptions);
         Vue.use(ButtonPlugin);
         Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);
         Vue.use(CharacterCountPlugin);
         Vue.use(CheckboxPlugin);
+        Vue.use(ChipPlugin);
+        Vue.use(ChipAddPlugin);
+        Vue.use(ChipDeletePlugin);
         Vue.use(DatefieldsPlugin);
         Vue.use(DatepickerPlugin);
         Vue.use(DaterangepickerPlugin);
@@ -121,6 +132,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ErrorMessage);
         Vue.use(ErrorPageNotFoundPlugin);
         Vue.use(ErrorTechnicalDifficultyPlugin);
+        Vue.use(ExpandableLayoutPlugin);
         Vue.use(MessagePagePlugin);
         Vue.use(FileSelectPlugin);
         Vue.use(FileUploadPlugin);
@@ -173,6 +185,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(TemplatePlugin);
         Vue.use(TextareaPlugin);
         Vue.use(TextfieldPlugin);
+        Vue.use(SearchfieldPlugin);
         Vue.use(TimepickerPlugin);
         Vue.use(ToastPlugin);
         Vue.use(ToggleButtonsPlugin);

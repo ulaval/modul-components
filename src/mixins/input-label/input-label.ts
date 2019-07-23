@@ -8,6 +8,8 @@ export class InputLabel extends ModulVue {
     @Prop()
     public label: string;
     @Prop()
+    public labelUp: boolean;
+    @Prop()
     public requiredMarker: boolean;
 
     private get hasLabel(): boolean {

@@ -1,0 +1,93 @@
+<div class="m-select"
+     :class="{ 'm--is-open': open,
+               'm--is-disabled': isDisabled,
+               'm--is-waiting': isWaiting,
+               'm--has-validation-message': hasValidationMessage }"
+     :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
+     @focus="onFocus"
+     @blur="onBlur"
+     @keydown.up.prevent="onKeydownUp"
+     @keydown.down.prevent="onKeydownDown"
+     @keydown.enter.prevent="onKeydownEnter"
+     @keydown.return.prevent="onKeydownEnter"
+     @keydown.esc="onKeydownEsc"
+     @keydown.tab="onKeydownTab"
+     tabindex="0">
+    <m-input-style :label="label"
+                   :label-for="id"
+                   :disabled="isDisabled"
+                   :waiting="isWaiting"
+                   :focus="internalIsFocus"
+                   :label-up="labelUp"
+                   :empty="isEmpty"
+                   :error="hasError"
+                   :cursor-pointer="true"
+                   :valid="isValid"
+                   :required-marker="requiredMarker"
+                   :tag-style="tagStyle"
+                   v-m-popup:popup>
+        <div>
+            <slot>{{ internalValue }}</slot>
+        </div>
+        <div class="m-select__arrow"
+             slot="suffix"
+             :class="{ 'm--is-open': open }"
+             v-if="active">
+            <m-icon class="m-select__arrow__icon"
+                    ref="arrow"
+                    name="m-svg__arrow-head-filled--down"
+                    size="16px"
+                    :disabled="!active"
+                    @keydown.enter.prevent="open = active">
+                <m-i18n k="m-select:open"
+                        v-if="!open"></m-i18n>
+                <m-i18n k="m-select:close"
+                        v-else></m-i18n>
+            </m-icon>
+        </div>
+    </m-input-style>
+    <m-validation-message class="m-select__validation-message"
+                          :disabled="isDisabled"
+                          :waiting="isWaiting"
+                          :error="hasError"
+                          :valid="isValid"
+                          :error-message="errorMessage"
+                          :valid-message="validMessage"
+                          :helper-message="helperMessage"></m-validation-message>
+
+    <m-popup ref="popup"
+             placement="bottom-start"
+             :open.sync="open"
+             :disabled="!active"
+             :padding="false"
+             :preload="true"
+             :lazy="false"
+             :focus-management="false"
+             :close-on-backdrop="true"
+             :open-trigger="'mousedown'"
+             @open="onOpen"
+             @close="onClose">
+
+        <div>
+            <ul :id="ariaControls"
+                class="m-select__list"
+                ref="items"
+                :aria-labelledby="id"
+                aria-live="polite"
+                :style="{ minWidth: inputMaxWidth }">
+
+
+                <m-select-item v-for="(option, index) of options"
+                               :key="index"
+                               :focused="index === focusedIndex"
+                               :selected="isSelected(option)"
+                               @click="select(option, index)">
+                    <slot name="option"
+                          :option="option"
+                          :index="index">{{ option }}</slot>
+                </m-select-item>
+            </ul>
+        </div>
+
+    </m-popup>
+</div>

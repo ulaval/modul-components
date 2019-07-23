@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-spinner default 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner description 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner description-message 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner processing 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-spinner title 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner title-message 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/knobs all props 1`] = `
+<div>
+  <div
+    class="m-spinner"
+  >
+    <!---->
+     
+    <div />
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/size size="large" 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/size size="small" 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/skin skin="dark" 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/skin skin="light" 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/skin skin="lighter" 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;
+
+exports[`Storyshots components|m-spinner/skin skin="regular" 1`] = `
+<div
+  class="m-spinner"
+>
+  <!---->
+   
+  <div />
+</div>
+`;

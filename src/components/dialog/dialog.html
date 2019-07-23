@@ -17,17 +17,20 @@
                         <h2>{{ title }}</h2>
                     </header>
                     <div class="m-dialog__body">
-                        <div class="m-dialog__type-icon" v-if="type !== 'default'">
+                        <div class="m-dialog__state-icon"
+                             v-if="state !== 'default'">
                             <m-message class="m-u--margin-top--l"
                                        :state="getState"
                                        skin="page-light"></m-message>
                         </div>
-                        <div class="m-dialog__message" v-if="hasDefaultSlot || hasMessage">
+                        <div class="m-dialog__message"
+                             v-if="hasDefaultSlot || hasMessage">
                             <p v-if="hasMessage"
                                v-html="message"></p>
                             <slot></slot>
                         </div>
-                        <div class="m-dialog__hint" v-if="hasHint">
+                        <div class="m-dialog__hint"
+                             v-if="hasHint">
                             <div class="m-dialog__hint--body">
                                 <div class="m-dialog__hint--icon">
                                     <m-icon name="m-svg__hint"
@@ -43,7 +46,8 @@
                         <slot name="footer"></slot>
                         <nav class="m-dialog__footer__nav"
                              v-if="!hasFooterSlot">
-                            <m-button @click="onOk()" :style="dialogStyles">
+                            <m-button @click="onOk()"
+                                      :style="dialogStyles">
                                 <template v-if="hasOkLabel">{{ okLabel }}</template>
                                 <m-i18n v-else
                                         k="m-dialog:ok"></m-i18n>
@@ -56,12 +60,15 @@
                                       @click="onSecondaryBtn()"
                                       skin="secondary">
                                 <template v-if="hasSecBtnLabel">{{ secBtnLabel }}</template>
-                                <m-i18n v-else k="m-dialog:cancel"></m-i18n>
+                                <m-i18n v-else
+                                        k="m-dialog:cancel"></m-i18n>
                                 <template v-if="hasSecBtnPrecision"
                                           slot="precision">{{ secBtnPrecision }}
                                 </template>
                             </m-button>
-                            <m-link v-if="negativeLink" @click="onCancel()" mode="button">
+                            <m-link v-if="negativeLink"
+                                    @click="onCancel()"
+                                    mode="button">
                                 <template v-if="hasCancelLabel">{{ cancelLabel }}</template>
                                 <m-i18n v-else
                                         k="m-dialog:cancel"></m-i18n>

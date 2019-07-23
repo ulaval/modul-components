@@ -2,7 +2,7 @@
      :class="{ 'm--is-open': open,
                'm--is-disabled': isDisabled,
                'm--is-waiting': isWaiting,
-               'm--is-filterable': filterable,
+               'm--has-placeholder-icon': hasPlaceholderIcon,
                'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
      ref="mDropdown">
@@ -12,6 +12,7 @@
                    :disabled="isDisabled"
                    :waiting="isWaiting"
                    :focus="internalIsFocus"
+                   :label-up="labelUp"
                    :empty="isEmpty"
                    :error="hasError"
                    :cursor-pointer="hasPointer"
@@ -21,6 +22,11 @@
                    :tag-style="tagStyle"
                    @click="onOpen"
                    v-m-popup:popup>
+        <m-icon class="m-dropdown__placeholder-icon"
+                aria-hidden="true"
+                v-if="hasPlaceholderIcon"
+                name="m-svg__search"
+                size="16px"></m-icon>
         <input type="text"
                ref="input"
                :id="id"
@@ -49,7 +55,7 @@
         <div class="m-dropdown__arrow"
              :class="{ 'm--is-open': open }"
              v-if="active && showArrowIcon"
-             slot="right-content">
+             slot="suffix">
             <m-icon class="m-dropdown__arrow__icon"
                     ref="arrow"
                     name="m-svg__arrow-head-filled--down"
@@ -87,8 +93,8 @@
              :lazy="false"
              @open="onOpen"
              @close="onClose"
-             @portal-content-visible="calculateFilterableListeHeight"
-             @portal-content-mounted="portalContentMounted">
+             @portal-after-open="calculateFilterableListeHeight"
+             @portal-mounted="portalMounted">
         <template slot="header"
                   v-if="isMqMaxS && (hasLabel || filterable)">
             <h2 class="m-dropdown__header__label"

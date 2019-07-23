@@ -15,6 +15,7 @@ import WithRender from './toast.html?style=./toast.scss';
 
 export enum MToastTimeout {
     none = 'none',
+    xshort = 'xshort',
     short = 'short',
     long = 'long'
 }
@@ -38,8 +39,10 @@ export enum MToastState {
 export enum MToastDuration {
     MobileLong = 5000,
     MobileShort = 3000,
+    MobileXShort = 1500,
     DesktopLong = 8000,
     DesktopShort = 5000,
+    DesktopXShort = 2500,
     None = 0
 }
 
@@ -74,6 +77,7 @@ export class MToast extends ModulVue implements PortalMixinImpl {
         default: MToastTimeout.none,
         validator: value =>
             value === MToastTimeout.none ||
+            value === MToastTimeout.xshort ||
             value === MToastTimeout.short ||
             value === MToastTimeout.long
     })
@@ -101,6 +105,8 @@ export class MToast extends ModulVue implements PortalMixinImpl {
 
     private buttonMode: MLinkMode = MLinkMode.Button;
     private timerCloseToast: any;
+    private internalTimeout: number;
+    private instantTimeoutStart: number;
 
     public doCustomPropOpen(value: boolean, el: HTMLElement): boolean {
         el.style.position = 'absolute';
@@ -109,19 +115,20 @@ export class MToast extends ModulVue implements PortalMixinImpl {
                 this.getPortalElement().style.transform = `translateY(${this.offset})`;
             }
 
+            this.internalTimeout = this.convertTimeout(this.timeout);
             this.startCloseToast();
         }
         return true;
     }
 
     private startCloseToast(): void {
-        let internalTimeout: number = this.convertTimeout(this.timeout);
+        this.instantTimeoutStart = Date.now();
 
-        if (internalTimeout > 0) {
+        if (this.internalTimeout > 0) {
             this.timerCloseToast
                 = setTimeout(() => {
                     this.onClose();
-                }, internalTimeout);
+                }, this.internalTimeout);
         }
     }
 
@@ -149,6 +156,8 @@ export class MToast extends ModulVue implements PortalMixinImpl {
                 return this.isMobile ? MToastDuration.MobileLong : MToastDuration.DesktopLong;
             case MToastTimeout.short:
                 return this.isMobile ? MToastDuration.MobileShort : MToastDuration.DesktopShort;
+            case MToastTimeout.xshort:
+                return this.isMobile ? MToastDuration.MobileXShort : MToastDuration.DesktopXShort;
             case MToastTimeout.none:
             default:
                 return MToastDuration.None;
@@ -227,9 +236,16 @@ export class MToast extends ModulVue implements PortalMixinImpl {
     }
 
     public mouseEnterToast(): void {
-        if (!this.isMobile) {
+        if (!this.isMobile && this.timerCloseToast !== undefined) {
+            this.restoreTimeout();
             clearTimeout(this.timerCloseToast);
+            this.timerCloseToast = undefined;
         }
+    }
+
+    private restoreTimeout(): void {
+        let instantTimeoutStop: number = Date.now();
+        this.internalTimeout -= (instantTimeoutStop - this.instantTimeoutStart);
     }
 
     public mouseLeaveToast(): void {

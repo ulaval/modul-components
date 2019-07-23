@@ -5,7 +5,7 @@ import DateFilterPlugin from './date';
 import { dateTimeFilter } from './date-time/date-time';
 import WithRender from './date.sandbox.html';
 import { dateFilter } from './date/date';
-import { ModulPeriod, PeriodFilter } from './period/period';
+import { MFormatMode, ModulPeriod, PeriodFilter } from './period/period';
 
 @WithRender
 @Component
@@ -71,11 +71,35 @@ export class MDateSandbox extends Vue {
         return PeriodFilter.formatPeriod(period);
     }
 
+    get formattedPeriodShortDate(): string {
+        let period: ModulPeriod;
+
+        period = {
+            start: this.current.year ? this.date : undefined,
+            end: this.later.year ? this.dateLater : undefined
+        };
+
+        return PeriodFilter.formatPeriod(period, MFormatMode.ShortMonth);
+    }
+
     get periodThroughFilter(): ModulPeriod {
         return {
             start: this.current.year ? this.date : undefined,
             end: this.later.year ? this.dateLater : undefined
         };
+    }
+
+    get timeString(): string {
+        if (!this.current.hours) {
+            return '';
+        }
+
+        let timeString: string = this.current.hours.toString().padStart(2, '0');
+        if (this.current.minutes) {
+            timeString += `:${this.current.minutes.toString().padStart(2, '0')}`;
+        }
+
+        return timeString;
     }
 }
 

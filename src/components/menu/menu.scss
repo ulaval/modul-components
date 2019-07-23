@@ -1,6 +1,5 @@
 @import 'commons';
 @import 'menu-skins';
-@import '../accordion/accordion-transition.scss';
 
 .m-menu {
     overflow: hidden;
@@ -12,7 +11,7 @@
         z-index: 1;
         outline: none;
         padding: $m-spacing;
-        font-weight: $m-font-weight--black;
+        font-weight: $m-font-weight--bold;
         display: flex;
         align-items: center;
         text-transform: uppercase;

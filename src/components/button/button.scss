@@ -11,7 +11,7 @@ $m-button--border-radius: 4px !default;
     font-size: $m-font-size;
     border-radius: $m-button--border-radius;
     padding: 11px $m-padding 11px $m-padding; // Magic number
-    font-weight: $m-font-weight--bold;
+    font-weight: $m-font-weight--semi-bold;
 
     @include m-button();
 
@@ -81,7 +81,7 @@ $m-button--border-radius: 4px !default;
     &__precision {
         display: block;
         font-size: $m-font-size--s;
-        font-weight: $m-font-weight;
+        font-weight: $m-font-weight--light;
         margin-top: $m-margin--xs;
 
         &:empty {

@@ -1,0 +1,666 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-pagination default 1`] = `
+<div
+  class="m-pagination"
+>
+  <div
+    class="m-pagination__status"
+  >
+    Page 1 de 25 - 500 résultats
+  </div>
+   
+  <div
+    class="m-pagination__indicator"
+  />
+   
+  <div
+    class="m-pagination__nav"
+  >
+    <button
+      class="m-icon-button m-pagination__previous-button m--is-skin-link m--has-ripple m--is-disabled"
+      disabled="disabled"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+     
+    <ul
+      class="m-pagination__pages"
+    >
+      <li
+        class="m-pagination__item m--is-active"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          1
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            2
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            3
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            4
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item m-pagination__item--ellipsis"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          ...
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            25
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+    </ul>
+     
+    <button
+      class="m-icon-button m-pagination__next-button m--is-skin-link m--has-ripple"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-pagination items-per-page="14" 1`] = `
+<div
+  class="m-pagination"
+>
+  <div
+    class="m-pagination__status"
+  >
+    Page 1 de 36 - 500 résultats
+  </div>
+   
+  <div
+    class="m-pagination__indicator"
+  />
+   
+  <div
+    class="m-pagination__nav"
+  >
+    <button
+      class="m-icon-button m-pagination__previous-button m--is-skin-link m--has-ripple m--is-disabled"
+      disabled="disabled"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+     
+    <ul
+      class="m-pagination__pages"
+    >
+      <li
+        class="m-pagination__item m--is-active"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          1
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            2
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            3
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            4
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item m-pagination__item--ellipsis"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          ...
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            36
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+    </ul>
+     
+    <button
+      class="m-icon-button m-pagination__next-button m--is-skin-link m--has-ripple"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-pagination loading 1`] = `
+<div
+  class="m-pagination m--is-loading"
+>
+  <div
+    class="m-pagination__status"
+  >
+    Page 1 de 25 - 500 résultats
+  </div>
+   
+  <div
+    class="m-pagination__indicator"
+  />
+   
+  <div
+    class="m-pagination__nav"
+  >
+    <button
+      class="m-icon-button m-pagination__previous-button m--is-skin-link m--has-ripple m--is-disabled"
+      disabled="disabled"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+     
+    <ul
+      class="m-pagination__pages"
+    >
+      <li
+        class="m-pagination__item m--is-active"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          1
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
+          href="#"
+          tabindex="-1"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            2
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
+          href="#"
+          tabindex="-1"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            3
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
+          href="#"
+          tabindex="-1"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            4
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item m-pagination__item--ellipsis"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          ...
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
+          href="#"
+          tabindex="-1"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            25
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+    </ul>
+     
+    <button
+      class="m-icon-button m-pagination__next-button m--is-skin-link m--has-ripple m--is-disabled"
+      disabled="disabled"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-pagination value 1`] = `
+<div
+  class="m-pagination"
+>
+  <div
+    class="m-pagination__status"
+  >
+    Page 12 de 25 - 500 résultats
+  </div>
+   
+  <div
+    class="m-pagination__indicator"
+  />
+   
+  <div
+    class="m-pagination__nav"
+  >
+    <button
+      class="m-icon-button m-pagination__previous-button m--is-skin-link m--has-ripple"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+     
+    <ul
+      class="m-pagination__pages"
+    >
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            1
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item m-pagination__item--ellipsis"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          ...
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            11
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item m--is-active"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          12
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            13
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+      <li
+        class="m-pagination__item m-pagination__item--ellipsis"
+      >
+        <span
+          class="m-pagination__item--text"
+        >
+          ...
+        </span>
+      </li>
+      <li
+        class="m-pagination__item"
+      >
+        <a
+          class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            25
+          </span>
+           
+          <!---->
+        </a>
+      </li>
+    </ul>
+     
+    <button
+      class="m-icon-button m-pagination__next-button m--is-skin-link m--has-ripple"
+      style="width: 44px; height: 44px;"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-icon-button__icon"
+        height="20px"
+        width="20px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;

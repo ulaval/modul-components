@@ -1,0 +1,91 @@
+@import 'commons';
+@import '../input-style/input-style';
+
+.m-searchfield {
+    $m-searchfield-color: $m-color--grey-lightest;
+
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+
+    @include m-input-inline-spacing();
+
+    &__search-button {
+        @include m-button;
+
+        border: unset;
+        background-color: inherit;
+        border-radius: 0 $m-input-style-border-radius $m-input-style-border-radius 0;
+        width: 100%;
+        color: $m-color--interactive;
+        padding: 0 $m-input-style--padding;
+
+        @include m-button--hover();
+    }
+
+    &__reset {
+        margin-left: $m-spacing--s;
+    }
+
+    &__validation {
+        transition: margin-top $m-transition-duration ease;
+        display: flex;
+
+        .m--has-validation-message & {
+            margin-top: $m-spacing--xs;
+        }
+
+        .m--has-error & {
+            color: $m-color--error;
+        }
+
+        .m--is-valid & {
+            color: $m-color--success;
+        }
+    }
+
+    input {
+        &[type='search']::-webkit-search-decoration,
+        &[type='search']::-webkit-search-cancel-button,
+        &[type='search']::-webkit-search-results-button,
+        &[type='search']::-webkit-search-results-decoration {
+            display: none;
+        }
+
+        &[type='search']::-webkit-textfield-decoration-container {
+            background-color: $m-searchfield-color;
+        }
+    }
+
+    // overrides :-(
+    .m-input-style {
+        input::placeholder {
+            color: $m-color--text-light;
+            font-weight: $m-font-weight--light;
+        }
+
+        .m-input-style__main {
+            background-color: $m-searchfield-color;
+        }
+
+        &.m--is-label-up {
+            .m-input-style__text {
+                background: $m-searchfield-color;
+            }
+        }
+
+        &:not(.m--has-error):not(.m--is-valid) {
+            .m-input-style__main {
+                &:hover {
+                    border-color: $m-input-style--color-hover;
+                }
+            }
+        }
+
+        &:not(.m--is-label-up):not(.m--has-error):not(.m--is-valid):not(:hover) {
+            .m-input-style__main {
+                border-color: $m-color--white;
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip should render correctly 1`] = `
+<div class="m-chip-delete">
+  <div class="m-chip-delete__body"><span id="mChipDeleteText-uuid" class="m-chip-delete__text"><span class="m-chip-delete__hidden-text">chip:delete : </span> </span> <button aria-labelledby="mChipDeleteText-uuid" type="button" class="m-chip-delete__button">
+      <m-icon size="14px" name="m-svg__close-clear" class="m-chip-delete__icon"></m-icon>
+    </button></div>
+</div>
+`;

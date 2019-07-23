@@ -27,12 +27,17 @@
 
 @function m-spacing($size: 'base') {
     $m-map: $m-spacing-map;
+    $m-spacing-multiplier: 8;
 
     @if map-has-key($m-map, $size) {
         @return map-get($m-map, $size);
     }
 
-    @error "Unknown spacing size '#{$size}', Valide sizes are : '#{$m-map}' ";
+    @else if(is-number($size)) {
+        @return round($size * $m-spacing-multiplier) + px;
+    }
+
+    @error "Unknown spacing size '#{$size}', valide sizes are : '#{$m-map}' or a number";
 
     @return null;
 }

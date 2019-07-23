@@ -6,6 +6,7 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputManagement, InputManagementData } from '../../mixins/input-management/input-management';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputWidth } from '../../mixins/input-width/input-width';
+import { changeSelection, InputSelectable } from '../../utils/input/input';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import CharacterCountPlugin from '../character-count/character-count';
@@ -22,14 +23,11 @@ export enum MTextfieldType {
     Email = 'email',
     Url = 'url',
     Telephone = 'tel',
-    Search = 'search',
     Number = 'number'
 }
 
 const ICON_NAME_PASSWORD_VISIBLE: string = 'm-svg__show';
 const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
-
-
 
 @WithRender
 @Component({
@@ -40,8 +38,7 @@ const ICON_NAME_PASSWORD_HIDDEN: string = 'm-svg__hide';
         InputLabel
     ]
 })
-export class MTextfield extends ModulVue implements InputManagementData {
-
+export class MTextfield extends ModulVue implements InputManagementData, InputSelectable {
     @Prop({
         default: MTextfieldType.Text,
         validator: value =>
@@ -50,7 +47,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
             value === MTextfieldType.Telephone ||
             value === MTextfieldType.Text ||
             value === MTextfieldType.Url ||
-            value === MTextfieldType.Search ||
             value === MTextfieldType.Number
     })
     public type: MTextfieldType;
@@ -66,13 +62,14 @@ export class MTextfield extends ModulVue implements InputManagementData {
     public lengthOverflow: boolean;
     @Prop({ default: 0 })
     public characterCountThreshold: number;
+    @Prop({ default: '' })
+    public selection: string;
 
     readonly internalValue: string;
 
     private passwordAsText: boolean = false;
     private iconDescriptionShowPassword: string = this.$i18n.translate('m-textfield:show-password');
     private iconDescriptionHidePassword: string = this.$i18n.translate('m-textfield:hide-password');
-    private searchIconDescription: string = this.$i18n.translate('m-textfield:search');
     private id: string = `mTextfield-${uuid.generate()}`;
 
     protected created(): void {
@@ -100,23 +97,8 @@ export class MTextfield extends ModulVue implements InputManagementData {
         this.as<InputManagement>().trimWordWrap = this.hasWordWrap;
     }
 
-
     private togglePasswordVisibility(event): void {
         this.passwordAsText = !this.passwordAsText;
-    }
-
-    private onEnter(): void {
-        if (this.isTypeSearch) {
-            this.search();
-        }
-    }
-
-    private search(): void {
-        this.$emit('search');
-    }
-
-    private reset(): void {
-        this.$emit('input', '');
     }
 
     public get inputType(): MTextfieldType {
@@ -138,10 +120,6 @@ export class MTextfield extends ModulVue implements InputManagementData {
 
     private get passwordIconDescription(): string {
         return this.passwordAsText ? this.iconDescriptionHidePassword : this.iconDescriptionShowPassword;
-    }
-
-    private get searchIcon(): boolean {
-        return this.icon && this.type === MTextfieldType.Search;
     }
 
     private get hasWordWrap(): boolean {
@@ -168,18 +146,17 @@ export class MTextfield extends ModulVue implements InputManagementData {
         return this.as<InputState>().isValid;
     }
 
-    private get isTypeSearch(): boolean {
-        return this.type === MTextfieldType.Search;
-    }
-
     private get hasCounterTransition(): boolean {
         return !this.as<InputState>().hasErrorMessage;
     }
 
-
-
     private resetModel(): void {
         this.$emit('input', '');
+    }
+
+    @Watch('selection')
+    updateSelection(): void {
+        changeSelection(this.as<InputState>().getInput() as HTMLInputElement, this.selection);
     }
 }
 

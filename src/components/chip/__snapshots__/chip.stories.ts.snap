@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-chip default 1`] = `
+<button
+  class="m-chip-add"
+  type="button"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouter : 
+    </span>
+     Default chip 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+  </div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip disabled 1`] = `
+<button
+  class="m-chip-add m--is-disabled"
+  disabled="disabled"
+  type="button"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouter : 
+    </span>
+     Disabled 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+  </div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip mode="add" 1`] = `
+<button
+  class="m-chip-add"
+  type="button"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouter : 
+    </span>
+     Add mode 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+  </div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip mode="delete" 1`] = `
+<div
+  class="m-chip-delete"
+>
+  <div
+    class="m-chip-delete__body"
+  >
+    <span
+      class="m-chip-delete__text"
+      id="mChipDeleteText-uuid"
+    >
+      <span
+        class="m-chip-delete__hidden-text"
+      >
+        Supprimer : 
+      </span>
+       Delete mode
+    </span>
+     
+    <button
+      aria-labelledby="mChipDeleteText-uuid"
+      class="m-chip-delete__button"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="m-icon m-chip-delete__icon"
+        height="14px"
+        width="14px"
+      >
+        <!---->
+         
+        <use
+          aria-hidden="true"
+          class=""
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;

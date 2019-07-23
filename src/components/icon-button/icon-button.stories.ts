@@ -1,5 +1,4 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,9 +7,7 @@ import IconButtonPlugin from './icon-button';
 
 Vue.use(IconButtonPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 const ICON_BUTTON_SKINS: {} = {
     'light': 'light',
@@ -34,8 +31,8 @@ const ICON_BUTTON_ICONNAMES: {} = {
 };
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('name (short)', () => ({
         template: '<m-icon-button></m-icon-button>'
     }))
@@ -98,8 +95,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/skin`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('all skins (use knob)', () => ({
         props: {
             skin: {
@@ -128,8 +125,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/skin`, module)
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${ICON_BUTTON_NAME}/all props`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
+
     .add('make your own', () => ({
         props: {
             skin: {

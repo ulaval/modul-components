@@ -17,7 +17,12 @@ export enum MediaQueriesBpMin {
     L = '(min-width: 1200px)',
     M = '(min-width: 1024px)',
     S = '(min-width: 768px)',
-    XS = '(min-width: 480px)'
+    XS = '(min-width: 480px)',
+    FROM_DESKTOP = XL,
+    FROM_LAPTOP = L,
+    FROM_TABLET_LANDSCAPE = M,
+    FROM_TABLET_PORTRAIT = S,
+    FROM_PHONE_PORTRAIT = XS
 }
 
 export enum MediaQueriesBpMax {
@@ -25,7 +30,12 @@ export enum MediaQueriesBpMax {
     L = '(max-width: 1199px)',
     M = '(max-width: 1023px)',
     S = '(max-width: 767px)',
-    XS = '(max-width: 479px)'
+    XS = '(max-width: 479px)',
+    LESS_THAN_DESKTOP = XL,
+    LESS_THAN_LAPTOP = L,
+    LESS_THAN_TABLET_LANDSCAPE = M,
+    LESS_THAN_TABLET_PORTRAIT = S,
+    LESS_THAN_PHONE_PORTRAIT = XS
 }
 
 export enum MediaQueriesBp {

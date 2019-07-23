@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-tooltip close-button="false" 1`] = `
+<span>
+  Lorem Ipsum
+  <div
+    class="m-popup m-tooltip m--is-inline"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <button
+          aria-controls="mTooltip-uuid-controls"
+          class="m-icon-button m-tooltip__icon m--is-skin-light m--has-ripple"
+          id="mTooltip-uuid"
+          style="width: 22px; height: 22px;"
+          title="Ouvrir l'infobulle"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip default 1`] = `
+<span>
+  Lorem Ipsum
+  <div
+    class="m-popup m-tooltip m--is-inline"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <button
+          aria-controls="mTooltip-uuid-controls"
+          class="m-icon-button m-tooltip__icon m--is-skin-light m--has-ripple"
+          id="mTooltip-uuid"
+          style="width: 22px; height: 22px;"
+          title="Ouvrir l'infobulle"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip disabled 1`] = `
+<span>
+  Lorem Ipsum
+  <div
+    class="m-popup m-tooltip m--is-inline m--is-disabled"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <button
+          aria-controls="mTooltip-uuid-controls"
+          class="m-icon-button m-tooltip__icon m--is-skin-light m--has-ripple m--is-disabled"
+          disabled="disabled"
+          id="mTooltip-uuid"
+          style="width: 22px; height: 22px;"
+          title="Ouvrir l'infobulle"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip/mode mode="definition" 1`] = `
+<span>
+  Spicy jalapeno
+                        
+  <div
+    class="m-popup m-tooltip m--is-inline m--is-mode-definition"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <a
+          aria-controls="mTooltip-uuid-controls"
+          aria-haspopup="true"
+          class="m-link m-tooltip__link m--is-unvisited m--no-underline m--is-button m--has-content"
+          href="#"
+          id="mTooltip-uuid"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            <span>
+              bacon ipsum
+            </span>
+          </span>
+           
+          <!---->
+        </a>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+  
+                    dolor amet irure deserunt dolore bacon, ribeye turkey salami tongue consectetur meatball turducken
+                    ball tip jowl. Chicken laborum strip steak ut picanha adipisicing turducken do doner ad prosciutto
+                    pastrami ullamco.
+  <p />
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip/mode mode="icon" 1`] = `
+<span>
+  Lorem Ipsum
+  <div
+    class="m-popup m-tooltip m--is-inline"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <button
+          aria-controls="mTooltip-uuid-controls"
+          class="m-icon-button m-tooltip__icon m--is-skin-light m--has-ripple"
+          id="mTooltip-uuid"
+          style="width: 22px; height: 22px;"
+          title="Ouvrir l'infobulle"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip/mode mode="link" 1`] = `
+<span>
+  Spicy jalapeno
+                        
+  <div
+    class="m-popup m-tooltip m--is-inline"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <a
+          aria-controls="mTooltip-uuid-controls"
+          aria-haspopup="true"
+          class="m-link m-tooltip__link m--is-unvisited m--is-button m--has-content"
+          href="#"
+          id="mTooltip-uuid"
+          tabindex="0"
+        >
+          <!---->
+           
+          <span
+            class="m-link__text"
+          >
+            <span>
+              bacon ipsum
+            </span>
+          </span>
+           
+          <!---->
+        </a>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+  
+                    dolor amet irure deserunt dolore bacon, ribeye turkey salami tongue consectetur meatball turducken
+                    ball tip jowl. Chicken laborum strip steak ut picanha adipisicing turducken do doner ad prosciutto
+                    pastrami ullamco.
+  <p />
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip/size size="large" 1`] = `
+<span>
+  Lorem Ipsum
+  <div
+    class="m-popup m-tooltip m--is-inline"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <button
+          aria-controls="mTooltip-uuid-controls"
+          class="m-icon-button m-tooltip__icon m--is-skin-light m--has-ripple"
+          id="mTooltip-uuid"
+          style="width: 22px; height: 22px;"
+          title="Ouvrir l'infobulle"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</span>
+`;
+
+exports[`Storyshots components|m-tooltip/size size="small" 1`] = `
+<span>
+  Lorem Ipsum
+  <div
+    class="m-popup m-tooltip m--is-inline"
+  >
+    <div
+      class="m-popper"
+    >
+      <div>
+        <button
+          aria-controls="mTooltip-uuid-controls"
+          class="m-icon-button m-tooltip__icon m--is-skin-light m--has-ripple"
+          id="mTooltip-uuid"
+          style="width: 22px; height: 22px;"
+          title="Ouvrir l'infobulle"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="m-icon m-icon-button__icon"
+            height="20px"
+            width="20px"
+          >
+            <!---->
+             
+            <use
+              aria-hidden="true"
+              class=""
+            />
+          </svg>
+           
+          <!---->
+        </button>
+      </div>
+       
+      <!---->
+    </div>
+     
+    <!---->
+  </div>
+</span>
+`;

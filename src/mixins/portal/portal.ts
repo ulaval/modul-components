@@ -121,7 +121,7 @@ export class Portal extends ModulVue implements PortalMixin {
         }
         if (this.$modul.peekElement() === this.stackId) {
             if (this.$listeners && this.$listeners.beforeClose) {
-                this.$emit('beforeClose', (close: boolean) => {
+                this.$emit('portal-before-close', (close: boolean) => {
                     this.propOpen = !close;
                 });
             } else {
@@ -180,12 +180,12 @@ export class Portal extends ModulVue implements PortalMixin {
                             // could appear behind the content of the page if it was toggled too quickly.
                             this.opening = true;
                             setTimeout(() => {
-                                this.$emit('portal-content-visible');
+                                this.$emit('portal-after-open');
                                 this.setFocusToPortal();
                                 this.opening = false;
                             }, this.transitionDuration);
                         } else {
-                            this.$emit('portal-content-visible');
+                            this.$emit('portal-after-open');
                         }
                     }
                 });
@@ -200,8 +200,11 @@ export class Portal extends ModulVue implements PortalMixin {
                             // $emit update:open has been launched, animation already occurs
                             if (!this.opening) {
                                 this.portalTargetEl.style.position = '';
+                                this.$emit('portal-after-close');
                             }
                         }, this.transitionDuration);
+                    } else {
+                        this.$emit('portal-after-close');
                     }
                 }
             }
@@ -245,9 +248,6 @@ export class Portal extends ModulVue implements PortalMixin {
     }
 
     private handleTrigger(): void {
-        if (this.internalTrigger) {
-            this.$log.warn('portal.ts : Trigger change or multiple triggers not supported');
-        }
         if (this.trigger) {
             this.internalTrigger = this.trigger;
         } else if (this.$slots.trigger && this.$slots.trigger[0]) {
@@ -295,7 +295,7 @@ export class Portal extends ModulVue implements PortalMixin {
             this.$nextTick(() => {
                 this.portalTargetMounted = true;
                 this.portalTargetEl = document.querySelector(this.portalTargetSelector) as HTMLElement;
-                this.$emit('portal-content-mounted');
+                this.$emit('portal-mounted');
                 onPortalReady();
             });
         } else {

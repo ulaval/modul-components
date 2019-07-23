@@ -1,0 +1,19 @@
+@import 'commons';
+
+.m-accordion-transition {
+    &.m--is-enter {
+        height: 0;
+    }
+
+    &.m--has-transition {
+        &.m--is-enter-active,
+        &.m--is-leave-active {
+            transition: height $m-transition-duration ease;
+            overflow: hidden;
+        }
+    }
+
+    &.m--is-leave-to {
+        height: 0 !important;
+    }
+}

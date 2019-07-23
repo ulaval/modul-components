@@ -5,6 +5,8 @@
     display: inline-flex;
     flex-direction: column;
 
+    @include m-input-inline-spacing();
+
     &.m--has-validation-message {
         .m-textarea__validation {
             margin-top: $m-spacing--xs;
@@ -25,7 +27,7 @@
 
     &__label {
         font-size: $m-font-size;
-        font-weight: $m-font-weight--bold;
+        font-weight: $m-font-weight--semi-bold;
     }
 
     &__validation {

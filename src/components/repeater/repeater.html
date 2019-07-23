@@ -1,0 +1,46 @@
+<div class="m-repeater">
+
+    <transition-group class="m-repeater__list"
+                      name="m--is"
+                      :tag="tag">
+
+        <template v-for="(item, index) in list">
+
+            <slot :props="getRowProps(item, index)"
+                  :listeners="getRowListeners(item, index)"
+                  name="row">
+
+                <component :is="itemTag"
+                           class="m-repeater__row"
+                           :key="getItemKey(item, index)">
+
+                    <div class="m-repeater__col">
+                        <slot :props="getItemProps(item, index)"
+                              name="item"></slot>
+                    </div>
+
+                    <m-icon-button v-if="canDelete"
+                                   class="m-repeater__delete"
+                                   :ref="'deleteBtn' + index"
+                                   @click="onDeleteBtnClick(index)"
+                                   :title="deleteBtnLabel"
+                                   icon-name="m-svg__delete">{{ deleteBtnLabel }}</m-icon-button>
+                </component>
+            </slot>
+        </template>
+        <component :is="itemTag"
+                   v-if="emptyMessage && list.length === 0"
+                   class="m-repeater__row m--is-empty"
+                   key="empty-row">
+            {{ emptyMessage }}
+        </component>
+        <component :is="itemTag"
+                   class="m-repeater__footer"
+                   :class="{'m--is-slot-row' : hasRowSlot}"
+                   key="footer">
+            <m-add v-if="canAdd"
+                   ref="addBtn"
+                   @click="onAddBtnClick()">{{ addBtnLabel }}</m-add>
+        </component>
+    </transition-group>
+</div>

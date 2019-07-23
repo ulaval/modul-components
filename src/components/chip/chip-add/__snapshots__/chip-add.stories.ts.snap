@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-chip-add default 1`] = `
+<button
+  class="m-chip-add"
+  type="button"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouter : 
+    </span>
+     Chip add 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+  </div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip-add disabled 1`] = `
+<button
+  class="m-chip-add m--is-disabled"
+  disabled="disabled"
+  type="button"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouter : 
+    </span>
+     Disabled 
+    <svg
+      aria-hidden="true"
+      class="m-icon m-chip-add__icon"
+      height="20px"
+      width="20px"
+    >
+      <!---->
+       
+      <use
+        aria-hidden="true"
+        class=""
+      />
+    </svg>
+  </div>
+</button>
+`;
+
+exports[`Storyshots components|m-chip-add icon=false 1`] = `
+<button
+  class="m-chip-add"
+  type="button"
+>
+  <div
+    class="m-chip-add__body"
+  >
+    <span
+      class="m-chip-add__hidden-text"
+    >
+      Ajouter : 
+    </span>
+     Chip 
+    <!---->
+  </div>
+</button>
+`;

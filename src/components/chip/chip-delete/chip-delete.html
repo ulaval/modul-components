@@ -1,0 +1,20 @@
+<div class="m-chip-delete"
+     :class="{'m--is-disabled': disabled}">
+    <div class="m-chip-delete__body">
+        <span :id="textId"
+              class="m-chip-delete__text">
+            <span class="m-chip-delete__hidden-text">{{ 'chip:delete' | f-m-i18n }}&nbsp;: </span>
+            <slot></slot>
+        </span>
+        <button class="m-chip-delete__button"
+                :aria-labelledby="textId"
+                :disabled="disabled"
+                @click="onClick"
+                type="button">
+            <m-icon class="m-chip-delete__icon"
+                    size="14px"
+                    name="m-svg__close-clear">
+            </m-icon>
+        </button>
+    </div>
+</div>

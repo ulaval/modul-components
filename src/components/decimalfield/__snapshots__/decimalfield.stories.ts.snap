@@ -1,0 +1,1186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-decimalfield Basic 1`] = `
+<div>
+  <div>
+    <div
+      class="m-decimalfield"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-label"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-label m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mDecimalfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Label
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-label"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-label m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mDecimalfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Required label
+                </span>
+                 
+                <sup
+                  class="m-input-style__required-marker"
+                >
+                  *
+                </sup>
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--is-valid m--has-validation-message"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-valid m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <p
+            class="m-validation-message__valid"
+          >
+            <svg
+              class="m-icon m-validation-message__icon"
+              height="1em"
+              width="1em"
+            >
+              <title>
+                Valide
+              </title>
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-validation-message__text"
+            >
+              Valid message
+            </span>
+          </p>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-validation-message"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <p
+            class="m-validation-message__helper"
+          >
+            Helper message
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-error m--has-validation-message"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-error m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <p
+            class="m-validation-message__error"
+          >
+            <svg
+              class="m-icon m-validation-message__icon"
+              height="1em"
+              width="1em"
+            >
+              <title>
+                Erreur
+              </title>
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <span
+              class="m-validation-message__text"
+            >
+              Error message
+            </span>
+          </p>
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--has-label"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-label-up m--has-label m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mDecimalfield-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Label
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Enter a decimal number"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield Custom precision 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield Default precision 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield Localization 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield States 1`] = `
+<div>
+  <div>
+    <div
+      class="m-decimalfield m--is-disabled"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-disabled m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  disabled="disabled"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Disabled"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--is-readonly"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-readonly m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Read-only"
+                  readonly="readonly"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    <div
+      class="m-decimalfield m--is-waiting"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--is-waiting m--is-tag-default"
+        style="margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <span
+              class="m-input-style__label"
+              style="z-index: -1;"
+            >
+              <span
+                class="m-input-style__text"
+              />
+            </span>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <div
+                class="m-input-style__prefix"
+              />
+               
+              <div
+                class="m-input-style__content"
+              >
+                 
+                <input
+                  class="m-decimalfield__input"
+                  disabled="disabled"
+                  id="mDecimalfield-uuid"
+                  inputmode="decimal"
+                  placeholder="Waiting"
+                />
+                  
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <div
+                  class="m-spinner m-input-style__spinner"
+                >
+                  <!---->
+                   
+                  <div />
+                </div>
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-decimalfield__validation"
+      >
+        <div
+          class="m-validation-message m-decimalfield__validation__message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield With initial value (0) 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|m-decimalfield With initial value 1`] = `
+<div
+  class="m-decimalfield"
+  style="width: 100%; max-width: 288px;"
+>
+  <div
+    class="m-input-style m--has-value m--is-tag-default"
+    style="margin-top: 10px;"
+  >
+    <div
+      class="m-input-style__main"
+    >
+      <div
+        class="m-input-style__body"
+      >
+        <span
+          class="m-input-style__label"
+          style="z-index: -1;"
+        >
+          <span
+            class="m-input-style__text"
+          />
+        </span>
+         
+        <div
+          class="m-input-style__input"
+        >
+          <div
+            class="m-input-style__prefix"
+          />
+           
+          <div
+            class="m-input-style__content"
+          >
+             
+            <input
+              class="m-decimalfield__input"
+              id="mDecimalfield-uuid"
+              inputmode="decimal"
+            />
+              
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <div
+            class="m-input-style__suffix"
+          >
+             
+            <!---->
+          </div>
+        </div>
+      </div>
+       
+      <!---->
+    </div>
+  </div>
+   
+  <div
+    class="m-decimalfield__validation"
+  >
+    <div
+      class="m-validation-message m-decimalfield__validation__message"
+    >
+      <!---->
+       
+      <!---->
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-toast action-label 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast default 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast icon="false" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast offset=40px" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast open 1`] = `
+<div>
+  <button
+    class="m-button m--is-skin-primary"
+    type="button"
+  >
+    <!---->
+     
+    <!---->
+     
+    <span
+      class="m-button__text"
+    >
+      Toggle the toast 
+      <!---->
+    </span>
+     
+    <!---->
+     
+    <!---->
+  </button>
+   
+  <div
+    class="v-portal"
+    style="display: none;"
+  />
+</div>
+`;
+
+exports[`Storyshots components|m-toast/position all positions (knob) 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/position position="bottom-center" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/position position="bottom-left" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/position position="bottom-right" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/position position="top-center" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/position position="top-left" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/position position="top-right" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/state all states (knob) 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/state state="confirmation" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/state state="error" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/state state="information" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/state state="warning" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/timeout timeout="long" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/timeout timeout="none" 1`] = `<!---->`;
+
+exports[`Storyshots components|m-toast/timeout timeout="short" 1`] = `<!---->`;

@@ -38,6 +38,10 @@ export abstract class MAbstractCalendarRenderer extends ModulVue {
     onYearSelect(year: YearState): void {
     }
 
+    @Emit(CalendarEvent.YEAR_MONTH_SELECT)
+    onYearMonthSelect(year: YearState, month: MonthState): void {
+    }
+
     @Emit(CalendarEvent.YEAR_NEXT)
     onYearNext(event: Event): void {
     }

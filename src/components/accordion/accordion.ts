@@ -6,7 +6,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import { ACCORDION_NAME, BUTTON_GROUP_NAME, CHECKBOX_NAME, INPLACE_EDIT_NAME, INPUT_STYLE_NAME, LINK_NAME, RADIO_GROUP_NAME, RADIO_NAME } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import PlusPlugin, { MPlusSkin } from '../plus/plus';
-import AccordionTransitionPlugin from './accordion-transition';
+import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
 import WithRender from './accordion.html?style=./accordion.scss';
 
 
@@ -101,6 +101,8 @@ export class MAccordion extends ModulVue implements AccordionGateway {
     public paddingHeader: boolean;
     @Prop({ default: true })
     public paddingBody: boolean;
+    @Prop({ default: false })
+    public keepContentAlive: boolean;
 
     public titleMenuOpen: string = this.$i18n.translate('m-accordion:open');
     public titleMenuClose: string = this.$i18n.translate('m-accordion:close');
@@ -112,8 +114,42 @@ export class MAccordion extends ModulVue implements AccordionGateway {
     private uuid: string = uuid.generate();
     private internalPropOpen: boolean = false;
 
+
+    @Emit('click')
+    private clickEvent(event: Event): void {
+    }
+
+    public get propDisabled(): boolean {
+        return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
+            this.disabled;
+    }
+
+    protected created(): void {
+        this.internalPropOpen = this.open;
+
+        if (isAccordionGroup(this.$parent)) {
+            this.$parent.addAccordion(this);
+        }
+    }
+
+    protected beforeDestroy(): void {
+        if (isAccordionGroup(this.$parent)) {
+            this.$parent.removeAccordion(this.propId);
+        }
+    }
+
     public get propId(): string {
         return this.id || this.uuid;
+    }
+
+    public get idBodyWrap(): string {
+        return `${this.propId}-body-wrap`;
+    }
+
+    public get classBody(): Object {
+        return {
+            'm--has-padding': this.paddingBody && this.padding
+        };
     }
 
     public get propOpen(): boolean {
@@ -127,34 +163,19 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         }
     }
 
-    @Emit('click')
-    private clickEvent(event: Event): void {
+    public get headerTabindex(): number | undefined {
+        return this.propDisabled || !this.hasContent() ? undefined : 0;
     }
 
-    public get propDisabled(): boolean {
-        return (isAccordionGroup(this.$parent) && this.$parent.disabled) ||
-            this.disabled;
+    public hasContent(): boolean {
+        return !!this.$slots.default;
     }
 
-    private created(): void {
-        this.internalPropOpen = this.open;
-
-        if (isAccordionGroup(this.$parent)) {
-            this.$parent.addAccordion(this);
-        }
-    }
-
-    private beforeDestroy(): void {
-        if (isAccordionGroup(this.$parent)) {
-            this.$parent.removeAccordion(this.propId);
-        }
-    }
-
-    private get propSkin(): MAccordionSkin {
+    public get propSkin(): MAccordionSkin {
         return isAccordionGroup(this.$parent) ? this.$parent.skin : this.skin;
     }
 
-    private get plusSkin(): MPlusSkin {
+    public get plusSkin(): MPlusSkin {
         if (this.skin === MAccordionSkin.DarkB) {
             if (this.propOpen) {
                 return MPlusSkin.CurrentColor;
@@ -166,7 +187,7 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         }
     }
 
-    private get hasIconBorder(): boolean {
+    public get hasIconBorder(): boolean {
         if (this.iconBorder) {
             return this.iconBorder;
         }
@@ -174,7 +195,11 @@ export class MAccordion extends ModulVue implements AccordionGateway {
         return this.propSkin === MAccordionSkin.Light ? true : false;
     }
 
-    private toggleAccordion(event: Event): void {
+    public toggleAccordion(event: Event): void {
+        if (!this.hasContent()) {
+            return;
+        }
+
         let target: Element | null = (event.target as HTMLElement).closest('[href], [onclick], a, button, input, textarea, radio, ' + COMPONENT_IN_CLOSEST);
 
         if (!this.propDisabled && !target) {

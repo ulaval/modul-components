@@ -1,55 +1,41 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { text, select, boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
+import { InputStateTagStyle } from '../../mixins/input-state/input-state';
+import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { TEXTFIELD_NAME } from '../component-names';
-import TextfieldPlugin from './textfield';
+import TextfieldPlugin, { MTextfieldType } from './textfield';
+
 
 Vue.use(TextfieldPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
 
-const TEXTFIELD_TYPES: {} = {
-    'text': 'text',
-    'password': 'password',
-    'email': 'email',
-    'url': 'url',
-    'tel': 'tel',
-    'search': 'search',
-    'number': 'number'
-};
-
-const TEXTFIELD_WIDTHS: {} = {
-    'X-Small': 'x-small',
-    'Small': 'small',
-    'Regular': 'regular',
-    'Medium': 'medium',
-    'Large': 'large'
-};
-
-const TEXTFIELD_STYLES: {} = {
-    'h1': 'h1',
-    'h2': 'h2',
-    'h3': 'h3',
-    'h4': 'h4',
-    'h5': 'h5',
-    'h6': 'h6',
-    'h7': 'h7'
-};
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
-        props: {
-            text: {
-                default: text('Text', 'A Textfield')
+        data: () => ({
+            model: ''
+        }),
+        methods: {
+            onInputChange(value: string): string {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onInputChange=' + value);
+                return value;
+            },
+            onFocus(value: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onFocus');
+
+            },
+            onBlur(event: Event): void {
+                // tslint:disable-next-line: no-console
+                console.log('MtextField.onBlur');
+
             }
         },
-        template: '<m-textfield>{{ text }}</m-textfield>'
+        template: '<div><m-textfield v-model="model" @input="model = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-textfield><br/>model value = {{model}}</div>'
     }))
     .add('placeholder', () => ({
         props: {
@@ -67,14 +53,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         },
         template: '<m-textfield :label="label"></m-textfield>'
     }))
-    .add('placeholder', () => ({
-        props: {
-            placeholder: {
-                default: text('Text', 'A placeholder')
-            }
-        },
-        template: '<m-textfield :placeholder="placeholder"></m-textfield>'
-    }))
     .add('value', () => ({
         props: {
             value: {
@@ -84,10 +62,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield :value="value"></m-textfield>'
     }))
     .add('required-marker', () => ({
-        template: '<m-textfield :required-marker="true"></m-textfield>'
-    }))
-    .add('required', () => ({
-        template: '<m-textfield :required="true"></m-textfield>'
+        template: '<m-textfield label="Label" :required-marker="true"></m-textfield>'
     }))
     .add('waiting', () => ({
         template: '<m-textfield :waiting="true"></m-textfield>'
@@ -114,16 +89,22 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}`, module)
         template: '<m-textfield helper-message="This message is here to help you" type="tel" value="12345"></m-textfield>'
     }))
     .add('word-wrap', () => ({
-        template: '<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true"></m-textfield>'
+        template: `<m-textfield value="abcdefghijklmnopqrstuvwxyz-123456789123456789123456789" word-wrap="true" waiting="true">
+        </m-textfield>`
+    }))
+    .add('focus', () => ({
+        template: '<m-textfield label="label" focus="true" placeholder="placeholder"></m-textfield>'
+    }))
+    .add('label-up', () => ({
+        template: '<m-textfield label="label" label-up="true" placeholder="placeholder"></m-textfield>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all types', () => ({
         props: {
             type: {
-                default: select('input type', TEXTFIELD_TYPES, 'text')
+                default: select('input type', Object.values(MTextfieldType), MTextfieldType.Text)
             }
         },
         template: '<m-textfield :label="type" :placeholder="type" :type="type"></m-textfield>'
@@ -132,7 +113,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
         template: '<m-textfield type="text" value="Text"></m-textfield>'
     }))
     .add('type="password"', () => ({
-        template: '<m-textfield type="password" value="password"></m-textfield>'
+        template: '<m-textfield type="password" value="password" label="lsdhfasdj khgjkd fhjkghj kadfhgf jkdghdfjk ghdfjkg hdfjk ghd fjkghdj k gh djh"></m-textfield>'
     }))
     .add('type="email"', () => ({
         template: '<m-textfield type="email" value="john.doe@gmail.com"></m-textfield>'
@@ -143,16 +124,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/type`, module)
     .add('type="tel"', () => ({
         template: '<m-textfield type="tel" value="123456789"></m-textfield>'
     }))
-    .add('type="search"', () => ({
-        template: '<m-textfield type="search" value="Search Query"></m-textfield>'
-    }))
     .add('type="number"', () => ({
         template: '<m-textfield type="number" value="156168468"></m-textfield>'
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all props', () => ({
         props: {
             maxLength: {
@@ -168,34 +145,71 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/Counter`, module
                 default: boolean('length-overflow', false)
             }
         },
-        template: `<m-textfield :character-count="characterCount" :character-count-threshold="characterCountThreshold"
-                label="Enter a value" :length-overflow="lengthOverflow" :max-length="maxLength"
-                placeholder="change knobs to further test"></m-textfield>`
+        template: `<div>
+                        <m-textfield :character-count="characterCount" :character-count-threshold="characterCountThreshold"
+                        label="Enter a value" :length-overflow="lengthOverflow" :max-length="maxLength"
+                        placeholder="change knobs to further test"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">{{maxLength}}</span></p>
+                        <p><span style="color: blue">character-count</span> is equal to <span style="color: red">{{characterCount}}</span></p>
+                        <p><span style="color: blue">character-count-threshold</span> is equal to  <span style="color: red">{{characterCountThreshold}}</span></p>
+                        <p><span style="color: blue">length-overflow</span> is equal to <span style="color: red">{{lengthOverflow}}</span></p>
+                   </div>`
     }))
     .add('max-length="20"', () => ({
-        template: `<m-textfield :length-overflow="false" placeholder="max-length='20' length-overflow='false'"
-                    max-length="20"></m-textfield>`
+        template: `<div>
+                        <m-textfield :length-overflow="false" placeholder="Enter a value" max-length="20"
+                        value="This is a value"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">"20"</span></p>
+                        <p><span style="color: blue">length-overflow</span> is equal to <span style="color: red">false</span></p>
+                   </div>`
+    }))
+    .add('max-length="200" and :word-wrap="true"', () => ({
+        template: `<div>
+                        <m-textfield :word-wrap="true" :length-overflow="false" placeholder="Enter a value" max-length="200"
+                        value="This is a value"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">"200"</span></p>
+                        <p><span style="color: blue">length-overflow</span> is equal to <span style="color: red">false</span></p>
+                        <p><span style="color: blue">word-wrap</span> is equal to <span style="color: red">true</span></p>
+                   </div>`
     }))
     .add('character-count', () => ({
-        template: `<m-textfield :character-count="true" placeholder=":character-count='true' max-length='20'"
-                    max-length="20"></m-textfield>`
+        template: `<div>
+                        <m-textfield :character-count="true" placeholder="Enter a value" max-length="20"
+                        value="This is a value"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">"20"</span></p>
+                        <p><span style="color: blue">character-count</span> is equal to <span style="color: red">true</span></p>
+                   </div>`
     }))
     .add('length-overflow="true"', () => ({
-        template: `<m-textfield :length-overflow="true" placeholder=":length-overflow='true' max-length='20'"
-                    max-length="20"></m-textfield>`
+        template: `<div>
+                        <m-textfield :length-overflow="true" placeholder="Enter a value" max-length="20"
+                        value="This is a value"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">"20"</span></p>
+                        <p><span style="color: blue">length-overflow</span> is equal to <span style="color: red">true</span></p>
+                   </div>`
     }))
     .add('character-count-threshold="10"', () => ({
-        template: `<m-textfield :character-count="true" :character-count-threshold="10" max-length="20"
-                    placeholder=":character-count='true' :character-count-threshold='10' max-length='20'"></m-textfield>`
+        template: `<div>
+                        <m-textfield :character-count="true" :character-count-threshold="10" max-length="20"
+                        placeholder="Enter a value" value="This is a value"></m-textfield>
+                        <br>
+                        <p><span style="color: blue">max-length</span> is equal to <span style="color: red">"20"</span></p>
+                        <p><span style="color: blue">character-count</span> is equal to <span style="color: red">true</span></p>
+                        <p><span style="color: blue">character-count-threshold</span> is equal to  <span style="color: red">"10"</span></p>
+                   </div>`
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/max-width`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all max-width presets', () => ({
         props: {
             maxWidth: {
-                default: select('textfield width', TEXTFIELD_WIDTHS, 'text')
+                default: select('textfield width', Object.values(InputMaxWidth), InputMaxWidth.Regular)
             }
         },
         template: '<m-textfield :label="maxWidth" :max-width="maxWidth" :placeholder="type" :type="type"></m-textfield>'
@@ -217,16 +231,35 @@ storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/max-width`, modu
     }))
     .add('custom width', () => ({
         template: `<m-textfield label="width='333px' / max-width='none'" max-width="none" width="333px"></m-textfield>`
+    }))
+    .add('pyramid', () => ({
+        template: `
+        <div>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <m-textfield label="xs" max-width="x-small" value=""></m-textfield>
+            <br />
+            <m-textfield label="small" max-width="small" value=""></m-textfield>
+            <m-textfield label="small" max-width="small" value=""></m-textfield>
+            <br />
+            <m-textfield label="regular" max-width="regular" value=""></m-textfield>
+            <m-textfield label="regular" max-width="regular" value="" :label-offset="false"></m-textfield>
+            <br />
+            <m-textfield label="medium" max-width="medium" value=""></m-textfield>
+            <br />
+            <m-textfield label="large" max-width="large" value=""></m-textfield>
+        </div>
+        `
     }));
 
 storiesOf(`${componentsHierarchyRootSeparator}${TEXTFIELD_NAME}/tag-style`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('all tag styles', () => ({
         props: {
-            maxWidth: {
-                default: select('textfield tag style', TEXTFIELD_STYLES, 'text')
+            tagStyle: {
+                default: select('tag style', Object.values(InputStateTagStyle), InputStateTagStyle.H3)
             }
         },
-        template: '<m-textfield :label="TEXTFIELD_STYLES" :tag-style="TEXTFIELD_STYLES"></m-textfield>'
+        template: '<m-textfield :label="tagStyle" :tag-style="tagStyle" :value="tagStyle"></m-textfield>'
     }));

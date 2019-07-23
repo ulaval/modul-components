@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -8,25 +6,25 @@ import DatepickerPlugin from './datepicker';
 
 Vue.use(DatepickerPlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
 
 storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
+
     .add('default', () => ({
         template: `<m-datepicker></m-datepicker>`
     }))
     .add('events', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            model: '2011-01-01',
+            skipInputValidation: true
         }),
         methods: {
             onInputChange(value: string): string {
                 // tslint:disable-next-line: no-console
                 console.log('MDatePicker.onInputChange=' + value);
                 return value;
+            },
+            onResetModel(): void {
+                this.$data.model = '';
             },
             onFocus(value: Event): void {
                 // tslint:disable-next-line: no-console
@@ -39,7 +37,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
             }
         },
-        template: `<div><m-datepicker :value="model1" @change="model1 = onInputChange($event)" @focus="onFocus" @blur="onBlur"></m-datepicker> <br/><br/>model value = {{model1}}</div>`
+        template: `<div><p class="m-u--no-margin">Model value = "{{model}}"<br>skipInputValidation = "{{skipInputValidation}}"</p><m-datepicker class="m-u--margin-top" :value="model" @change="model = onInputChange($event)" @focus="onFocus" @blur="onBlur" min="2019-05-10" max="2019-05-24" :skip-input-validation="skipInputValidation"></m-datepicker><p><m-button @click="onResetModel">Reset model</m-button></p><p><m-checkbox v-model="skipInputValidation">skipInputValidation</m-checkbox></p></div>`
     }))
     .add('label', () => ({
         template: `<m-datepicker label="Date label"></m-datepicker>`
@@ -53,29 +51,63 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
         template: `<m-datepicker :waiting="true"></m-datepicker>`
     }))
 
-    .add('min="2008-01-01" && max="2014-12-31"', () => ({
+    .add('min and max', () => ({
         data: () => ({
-            model1: '2011-01-01'
+            value: '2008-02-02',
+            dateMin: '2000-01-10',
+            dateMax: '2008-03-20'
         }),
-        template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+        methods: {
+            resetValue(): void {
+                this.$data.value = '';
+            },
+            setValueInRange(): void {
+                this.$data.value = '2008-02-07';
+            },
+            setValueOutOfRange(): void {
+                this.$data.value = '2010-02-07';
+            }
+        },
+        template: `
+        <div>
+            <p><strong>Model value:</strong> {{value}}</p>
+            <p><strong>Date min:</strong> {{dateMin}}</p>
+            <p><strong>Date max:</strong> {{dateMax}}</p>
+            <m-datepicker v-model="value" class="m-u--margin-top" :min="dateMin" :max="dateMax"></m-datepicker>
+            <div class="m-u--margin-top">
+                <m-button class="m-u--margin-right" @click="resetValue()">Reset value</m-button>
+                <m-button class="m-u--margin-right" skin="secondary" @click="setValueInRange()">Date in the range</m-button>
+                <m-button class="m-u--margin-right" skin="secondary" @click="setValueOutOfRange()">Date out de range</m-button>
+            </div>
+        </div>`
     }))
+
     .add('date format invalid', () => ({
         data: () => ({
             model1: '2000-19-12'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
+
     .add('date off limit min', () => ({
         data: () => ({
             model1: '2000-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
+
     .add('date off limit  max', () => ({
         data: () => ({
             model1: '2015-01-01'
         }),
         template: `<div><m-datepicker min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
+    }))
+
+    .add('date big min and max limit', () => ({
+        data: () => ({
+            model1: '2000-01-01'
+        }),
+        template: `<div><m-datepicker min="1901-01-01" max="2250-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }))
 
     .add('disabled', () => ({
@@ -98,5 +130,36 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
             model1: '9999-99-99'
         }),
         template: `<m-datepicker v-model="model1" :hide-internal-error-message="true"></m-datepicker>`
+    }))
+    .add('label-up', () => ({
+        template: `<m-datepicker label="Date label" :label-up="true"></m-datepicker>`
+    }))
+    .add('required-marker', () => ({
+        template: `<m-datepicker label="Date label" :required-marker="true"></m-datepicker>`
+    }))
+    .add('skip-input-validation=true', () => ({
+        data: () => ({
+            model1: '9999-99-99'
+        }),
+        template: `<div><m-datepicker :skip-input-validation="true" min="2008-01-01" max="2014-12-31" v-model="model1"></m-datepicker>model value = {{model1}}</div>`
     }));
 
+
+storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/type`, module)
+    .add('full-date', () => ({
+        template: `<m-datepicker type="full-date"></m-datepicker>`
+    }))
+    .add('years-months', () => ({
+        template: `<m-datepicker type="years-months"></m-datepicker>`
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/initial-view`, module)
+    .add('days', () => ({
+        template: `<m-datepicker initial-view="days"></m-datepicker>`
+    }))
+    .add('years-months', () => ({
+        template: `<m-datepicker helperMessage="Range between 2000 and 2030" initial-view="years-months" min="2000-01-31" max="2030-12-31"></m-datepicker>`
+    }))
+    .add('years-months-birthdate', () => ({
+        template: `<m-datepicker label="Birthdate" helperMessage="Range between 1900 and 2000" initial-view="years-months" min="1900-01-31" max="2000-12-31"></m-datepicker>`
+    }));

@@ -1,20 +1,36 @@
-<fieldset class="m-input-group"
-          :class="classes">
-    <legend v-if="legend && visible"
-            class="m-input-group__legend">{{ legend }}</legend>
-    <slot :disabled="isDisabled"
-          :waiting="isWaiting"
-          :error="hasError"
-          :valid="isValid"
-          :readonly="readonly"
-          :validation-message="hasValidationMessage"></slot>
-    <m-validation-message v-if="displayValidation"
-                          class="m-input-group__validation__message"
-                          :disabled="isDisabled"
-                          :waiting="isWaiting"
-                          :error="hasError"
-                          :error-message="errorMessage"
-                          :valid="isValid"
-                          :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
-</fieldset>
+<div class="m-input-group"
+     :class="{ 'm--is-disabled': isDisabled,
+               'm--has-error': hasError,
+               'm--is-valid': isValid,
+               'm--has-validation-message': hasValidationMessage,
+               'm--is-validation-message-position-bottom': isValidationMessagePositionBottom }">
+
+    <p v-if="hasLabel"
+       :id="idLabel"
+       class="m-input-group__label">{{ label }}<span v-if="$slots.icon"
+              class="m-input-group__icon">
+            <slot name="icon"></slot>
+        </span>&nbsp;<sup v-if="requiredMarker"
+             class="m-input-group__required-marker">*</sup>
+    </p>
+
+    <div class="m-input-group__body">
+        <m-validation-message :id="idValidationMessage"
+                              class="m-input-group__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasError"
+                              :error-message="errorMessage"
+                              :valid="isValid"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+
+        <div v-if="$slots.default"
+             class="m-input-group__content"
+             :aria-labelledby="idLabel"
+             :aria-describedby="idValidationMessage">
+            <slot></slot>
+        </div>
+    </div>
+
+</div>

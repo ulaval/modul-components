@@ -1,6 +1,7 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import { Enums } from '../../utils/enums/enums';
 import { ModulVue } from '../../utils/vue/vue';
 import { TABLE_NAME } from '../component-names';
 import ProgressPlugin from '../progress/progress';
@@ -8,7 +9,8 @@ import WithRender from './table.html?style=./table.scss';
 
 
 export enum MTableSkin {
-    Regular = 'regular'
+    Regular = 'regular',
+    Simple = 'simple'
 }
 
 export enum MColumnSortDirection {
@@ -24,6 +26,7 @@ export interface MColumnTable {
     width?: string;
     sortable?: boolean;
     centered?: boolean;
+    class?: string;
     sortDirection?: MColumnSortDirection;
 }
 
@@ -33,37 +36,40 @@ export class MTable extends ModulVue {
 
     @Prop({
         default: MTableSkin.Regular,
-        validator: value =>
-            value === MTableSkin.Regular
+        validator: value => Enums.toValueArray(MTableSkin).includes(value)
     })
-    skin: MTableSkin;
+    public skin: MTableSkin;
 
     @Prop({ default: () => [] })
-    columns: MColumnTable[];
+    public columns: MColumnTable[];
 
     @Prop({ default: () => [] })
-    rows: any[];
+    public rows: any[];
 
     @Prop({ default: false })
-    loading: boolean;
+    public loading: boolean;
 
-    i18nEmptyTable: string = this.$i18n.translate('m-table:empty-table');
-    i18nLoading: string = this.$i18n.translate('m-table:loading');
-    i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
+    @Prop({ default: true })
+    public rowHighlightedOnHover: boolean;
+
+    public i18nEmptyTable: string = this.$i18n.translate('m-table:no-data');
+    public i18nLoading: string = this.$i18n.translate('m-table:loading');
+    public i18nPleaseWait: string = this.$i18n.translate('m-table:please-wait');
+    public i18nSort: string = this.$i18n.translate('m-table:sort');
 
     @Emit('add')
-    onAdd(): void {
+    private onAdd(): void {
     }
 
     @Emit('sortApplied')
-    emitSortApplied(columnTable: MColumnTable): void { }
+    private emitSortApplied(columnTable: MColumnTable): void { }
 
-    get isEmpty(): boolean {
+    public get isEmpty(): boolean {
         return this.rows.length === 0 && !this.loading;
     }
 
     public sort(columnTable: MColumnTable): void {
-        if (this.loading) {
+        if (this.loading || !columnTable.sortable) {
             return;
         }
 
@@ -96,15 +102,18 @@ export class MTable extends ModulVue {
         return columnTable.sortDirection === MColumnSortDirection.Asc || columnTable.sortDirection === MColumnSortDirection.Dsc;
     }
 
-    public getIconName(columnTable: MColumnTable): string | undefined {
-        if (columnTable.sortDirection === MColumnSortDirection.Dsc) {
-            return 'm-svg__arrow-thin--down';
+    public getColumnSortDirectionClass(columnTable: MColumnTable): string | undefined {
+        switch (columnTable.sortDirection) {
+            case MColumnSortDirection.Asc:
+                return 'm--is-sort-asc';
+            case MColumnSortDirection.Dsc:
+                return 'm--is-sort-desc';
+            default:
+                return undefined;
         }
-
-        return 'm-svg__arrow-thin--up';
     }
 
-    columnWidth(col: MColumnTable): { width: string } | '' {
+    public columnWidth(col: MColumnTable): { width: string } | '' {
         return col.width ? { width: col.width } : '';
     }
 }

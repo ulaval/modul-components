@@ -53,6 +53,8 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public focus: boolean;
     @Prop()
+    public forceOpen: boolean;
+    @Prop()
     public maxLength: number;
     @Prop({ default: true })
     public showArrowIcon: boolean;
@@ -87,6 +89,13 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     private dirty: boolean = false;
     private id: string = `mDropdown-${uuid.generate()}`;
     private itemsHeightStyleInternal: number | object | undefined = {};
+
+    @Watch('forceOpen')
+    onForceOpenUpdate(): void {
+        if (this.forceOpen) {
+            this.internalOpen = this.forceOpen;
+        }
+    }
 
     public matchFilter(text: string | undefined): boolean {
         let result: boolean = true;
@@ -245,7 +254,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.setInputWidth();
     }
 
-    private portalContentMounted(): void {
+    private portalMounted(): void {
         this.buildItemsMap();
 
         this.observer = new MutationObserver(() => {
@@ -533,6 +542,24 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get hasPointer(): boolean {
         return !this.filterable || (this.filterable && !this.open);
+    }
+
+    private get hasPlaceholderIcon(): boolean {
+        if (UserAgentUtil.isEdge() && !UserAgentUtil.isBlink()) {
+            return this.filterable && this.selectedText === '' && this.isEdgeSupport;
+        } else if (UserAgentUtil.isGecko() && !UserAgentUtil.isBlink()) {
+            return this.filterable && this.selectedText === '' && this.isFirefoxSupport;
+        } else {
+            return this.filterable && this.selectedText === '';
+        }
+    }
+
+    private get isEdgeSupport(): boolean {
+        return UserAgentUtil.isEdge() && this.placeholder === '' || this.placeholder === undefined;
+    }
+
+    private get isFirefoxSupport(): boolean {
+        return UserAgentUtil.isGecko() && this.placeholder === '' || this.placeholder === undefined;
     }
 
 }

@@ -2,7 +2,7 @@
      :class="{ 'm--is-disabled': isDisabled,
             'm--is-readonly': isReadonly,
             'm--is-waiting': isWaiting,
-            'm--has-error': calandarError,
+            'm--has-error': hasCalandarError,
             'm--is-valid': isValid,
             'm--has-validation-message': hasValidationMessage }"
      :style="{ width: inputWidth, maxWidth: inputMaxWidth }"
@@ -12,10 +12,12 @@
                    :label="label"
                    :label-for="id"
                    :readonly="isReadonly"
+                   :required-marker="requiredMarker"
                    :waiting="isWaiting"
                    :focus="isFocus"
+                   :label-up="labelUp"
                    :empty="isEmpty"
-                   :error="calandarError"
+                   :error="hasCalandarError"
                    :valid="isValid">
         <m-input-mask ref="input"
                       :id="id"
@@ -24,7 +26,7 @@
                       :disabled="isDisabled || isWaiting"
                       :readonly="isReadonly"
                       :options="inputOptions"
-                      :placeholder="placeholder"
+                      :placeholder="propPlaceholder"
                       :raw="false"
                       :value="inputModel"
                       autocomplete="off"
@@ -35,25 +37,29 @@
                       @keydown="onKeydown">
         </m-input-mask>
         <m-icon-button class="m-datepicker__icon"
-                       slot="right-content"
+                       slot="suffix"
                        :aria-controls="id"
                        button-size="22px"
                        :disabled="!active"
                        icon-name="m-svg__calendar"
-                       @click="togglePopup">
+                       @click="togglePopup($event)">
             <m-i18n k="m-datepicker:open"
                     v-if="!open"></m-i18n>
             <m-i18n k="m-datepicker:close"
                     v-if="open"></m-i18n>
         </m-icon-button>
     </m-input-style>
-    <m-validation-message class="m-datepicker__validation-message"
-                          :disabled="isDisabled"
-                          :waiting="isWaiting"
-                          :error="calandarError"
-                          :error-message="calandarErrorMessage"
-                          :valid-message="validMessage"
-                          :helper-message="helperMessage"></m-validation-message>
+
+    <div class="m-datepicker__validation">
+        <m-validation-message class="m-datepicker__validation__message"
+                              :disabled="isDisabled"
+                              :waiting="isWaiting"
+                              :error="hasCalandarError"
+                              :error-message="calandarErrorMessage"
+                              :valid-message="validMessage"
+                              :helper-message="helperMessage"></m-validation-message>
+    </div>
+
     <m-popup ref="popup"
              :open.sync="open"
              :disabled="!active"
@@ -64,8 +70,14 @@
              placement="bottom"
              @open="onOpen"
              @close="onClose">
+        <h2 v-if="label && isMqMaxS"
+            class="m-datepicker__header-label"
+            slot="header">{{label}}</h2>
         <m-calendar :min-date="minDateString"
                     :max-date="maxDateString"
+                    :type="type"
+                    :visible="open"
+                    :initial-view="initialView"
                     :show-month-before-after="false"
                     :value="formattedDate"
                     @input="selectDate"></m-calendar>

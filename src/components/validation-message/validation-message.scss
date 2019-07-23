@@ -1,5 +1,4 @@
 @import 'commons';
-@import '../accordion/accordion-transition';
 
 $m-validation-message--color-error: $m-color--error !default;
 $m-validation-message--color-success: $m-color--success !default;
@@ -14,10 +13,10 @@ $m-validation-message--margin: $m-padding--xs !default;
     &__icon {
         display: table-cell;
         position: relative;
-        top: 1px; // Magic number
+        top: 1px; // Magic number: align icon with text
+        flex-shrink: 0;
         font-size: $m-font-size--s;
         margin-right: $m-padding--xs;
-        min-width: $m-font-size--s;
     }
 
     &__error,
@@ -44,7 +43,6 @@ $m-validation-message--margin: $m-padding--xs !default;
 
     &__text {
         position: relative;
-        top: 2px; // Magic number: align icon with text
         flex: 1 1 auto;
     }
 

@@ -1,5 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -7,13 +5,9 @@ import { TABLE_NAME } from '../component-names';
 import TablePlugin, { MColumnTable } from './table';
 Vue.use(TablePlugin);
 
-declare module '@storybook/addon-knobs' {
-    export function withKnobs(): any;
-}
+
 
 storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
-    .addDecorator(withA11y)
-    .addDecorator(withKnobs)
     .add('Default', () => ({
         props: {
             columns: {
@@ -52,7 +46,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
                     { id: '2', name: 'Carl', age: '30', username: 'carl.30' },
                     { id: '3', name: 'Jacob', age: '26', username: 'jacob.26' },
                     { id: '4', name: 'Vincent', age: '34', username: 'vincent.34' },
-                    { id: '5', name: 'Manon', age: '28', username: 'manon.28' }
+                    { id: '5', name: 'Manon', age: '28', username: 'manon.34' }
                 ]
             }
         },
@@ -260,12 +254,39 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
             onSortApplied(columnTable: MColumnTable): void {
                 this.$data.rows.sort((a, b) => {
                     if (a[columnTable.dataProp] < b[columnTable.dataProp]) {
-                        return 1 * columnTable.sortDirection!;
-                    } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
                         return -1 * columnTable.sortDirection!;
+                    } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
+                        return 1 * columnTable.sortDirection!;
                     }
                     return 0;
                 });
             }
         }
+    }))
+    .add('skin="simple"', () => ({
+        props: {
+            columns: {
+                default: [
+                    { id: 'name', title: 'Name, Username', dataProp: 'name' },
+                    { id: 'age', title: 'Age', dataProp: 'age', width: '80px' }
+                ]
+            },
+            rows: {
+                default: [
+                    { id: '1', name: 'Jonathan', age: '25', username: 'jonathan.25' },
+                    { id: '2', name: 'Carl', age: '30', username: 'carl.30' },
+                    { id: '3', name: 'Jacob', age: '26', username: 'jacob.26' },
+                    { id: '4', name: 'Vincent', age: '34', username: 'vincent.34' }
+                ]
+            }
+        },
+        template: `<m-table skin="simple" :columns="columns" width="100%">
+                    <tbody slot="body">
+                        <tr v-for="(row, index) in rows"
+                            :key="index">
+                            <td>{{ row.name }} - {{ row.username }}</td>
+                            <td>{{ row.age }}</td>
+                        </tr>
+                    </tbody>
+                </m-table>`
     }));

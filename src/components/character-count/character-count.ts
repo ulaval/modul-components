@@ -1,8 +1,8 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import AccordionTransitionPlugin from '../accordion/accordion-transition';
 import { CHARACTER_COUNT_NAME } from '../component-names';
+import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
 import WithRender from './character-count.html?style=./character-count.scss';
 
 
@@ -27,7 +27,7 @@ export class MCharacterCount extends Vue {
     @Prop({ default: true })
     public transition: boolean;
 
-    private get hasCounter(): boolean {
+    public get hasCounter(): boolean {
         return this.maxLength > 0 && this.valueLength >= Math.max(0, Math.min(this.threshold, this.maxLength));
     }
 }

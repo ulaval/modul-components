@@ -21,6 +21,8 @@ export class MInputStyle extends ModulVue {
     public labelFor: string;
     @Prop({ default: false })
     public focus: boolean;
+    @Prop({ default: false })
+    public append: boolean;
     @Prop({ default: true })
     public empty: boolean;
     @Prop()
@@ -31,16 +33,19 @@ export class MInputStyle extends ModulVue {
     public readonly: boolean;
     @Prop({ default: false })
     public cursorPointer: boolean;
+    @Prop({ default: false })
+    public labelUp: boolean;
 
     public $refs: {
         root: HTMLElement,
         label: HTMLElement,
         body: HTMLElement,
         adjustWidthAuto: HTMLElement,
-        rightContent: HTMLElement
+        suffix: HTMLElement
     };
 
     public labelOffset: string | undefined = CSS_LABEL_DEFAULT_MARGIN + 'px';
+    public suffixOffset: string | undefined = '0px';
     public animReady: boolean = false;
 
     protected created(): void {
@@ -51,7 +56,8 @@ export class MInputStyle extends ModulVue {
     }
 
     protected mounted(): void {
-        this.calculateLabelOffset();
+        this.computeLabelOffset();
+        this.computeSuffixOffset();
     }
 
     public setInputWidth(): void {
@@ -85,7 +91,7 @@ export class MInputStyle extends ModulVue {
     }
 
     @Watch('isLabelUp')
-    private calculateLabelOffset(): void {
+    private computeLabelOffset(): void {
         if (this.label) {
             let labelOffset: number = this.$refs.label.clientHeight / 2;
             this.labelOffset = this.isLabelUp && labelOffset > CSS_LABEL_DEFAULT_MARGIN ? `${labelOffset}px` : `${CSS_LABEL_DEFAULT_MARGIN}px`;
@@ -94,8 +100,17 @@ export class MInputStyle extends ModulVue {
         }
     }
 
+    public async computeSuffixOffset(): Promise<void> {
+        await this.$nextTick();
+        if (this.label && this.$refs.suffix) {
+            this.suffixOffset = this.$refs.suffix.clientWidth + 'px';
+        } else {
+            this.suffixOffset = undefined;
+        }
+    }
+
     public get isLabelUp(): boolean {
-        return (this.hasValue || (this.isFocus && this.hasValue)) && this.hasLabel;
+        return (this.hasValue || (this.isFocus && this.hasValue) || this.labelUp) && this.hasLabel;
     }
 
     public get showPrefix(): boolean {
