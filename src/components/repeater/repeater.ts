@@ -125,7 +125,11 @@ export class MRepeater extends ModulVue {
     }
 
     get hasRowSlot(): boolean {
-        return this.$scopedSlots.row ? true : false;
+        return !!this.$scopedSlots.row;
+    }
+
+    get hasItemSlot(): boolean {
+        return !!this.$scopedSlots.item;
     }
 }
 
