@@ -564,11 +564,11 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
 
     private get hasPlaceholderIcon(): boolean {
         if (UserAgentUtil.isEdge() && !UserAgentUtil.isBlink()) {
-            return this.filterable && this.selectedText === '' && this.isEdgeSupport;
+            return this.filterable && this.selectedText === '' && !this.as<InputState>().isReadonly && this.isEdgeSupport;
         } else if (UserAgentUtil.isGecko() && !UserAgentUtil.isBlink()) {
-            return this.filterable && this.selectedText === '' && this.isFirefoxSupport;
+            return this.filterable && this.selectedText === '' && !this.as<InputState>().isReadonly && this.isFirefoxSupport;
         } else {
-            return this.filterable && this.selectedText === '';
+            return this.filterable && this.selectedText === '' && !this.as<InputState>().isReadonly;
         }
     }
 
