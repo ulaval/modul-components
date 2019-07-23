@@ -12,9 +12,12 @@ $m-repeater-translate-offset: 50px;
         display: flex;
         align-items: center;
         background-color: $m-color--white;
-        margin-top: $m-spacing;
         position: relative;
         z-index: 3;
+
+        & + & {
+            margin-top: $m-spacing;
+        }
 
         &.m--is-empty {
             border: 1px solid transparent;
