@@ -51,5 +51,10 @@ describe('http serializer', () => {
         it('should serialize complex objects', () => {
             expect(serializeParams({ param1: { a1: 'text', a2: 33, a3: true } })).toEqual('param1={"a1":"text","a2":33,"a3":true}');
         });
+
+        it('should serialize dates', () => {
+            // support DST
+            expect(['param1=2019-07-23T04:00:00.000Z', 'param1=2019-07-23T05:00:00.000Z']).toContain(serializeParams({ param1: new Date(2019, 6, 23) }));
+        });
     });
 });
