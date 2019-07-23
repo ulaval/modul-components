@@ -1,0 +1,6 @@
+{
+    "m-limit-elements": {
+        "show-more-label": "Afficher %(nbElements)s de plus",
+        "show-less-label": "Afficher moins"
+    }
+}

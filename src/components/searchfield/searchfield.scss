@@ -8,11 +8,6 @@
     display: inline-flex;
     flex-direction: column;
 
-    ::placeholder {
-        color: $m-color--text-light;
-        font-weight: $m-font-weight--light;
-    }
-
     @include m-input-inline-spacing();
 
     &__search-button {
@@ -64,6 +59,11 @@
 
     // overrides :-(
     .m-input-style {
+        input::placeholder {
+            color: $m-color--text-light;
+            font-weight: $m-font-weight--light;
+        }
+
         .m-input-style__main {
             background-color: $m-searchfield-color;
         }

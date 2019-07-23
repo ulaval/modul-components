@@ -48,6 +48,23 @@ exports[`Storyshots components|m-select default 1`] = `
             <div
               class="m-input-style__suffix"
             >
+              <div
+                class="m-select__arrow"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-select__arrow__icon"
+                  height="16px"
+                  width="16px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+              </div>
                
               <!---->
             </div>

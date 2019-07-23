@@ -11,7 +11,8 @@ export enum CalendarEvent {
     MONTH_PREVIOUS = 'month-previous',
     YEAR_SELECT = 'year-select',
     YEAR_NEXT = 'year-next',
-    YEAR_PREVIOUS = 'year-previous'
+    YEAR_PREVIOUS = 'year-previous',
+    YEAR_MONTH_SELECT = 'year-month-select'
 }
 
 export enum CalendarType {
@@ -37,6 +38,7 @@ export interface Calendar {
     dates: { min: ModulDate, current: ModulDate, max: ModulDate };
     years: YearState[];
     months: MonthState[];
+    yearsMonths: YearMonthState[];
     days: DayState[];
     type?: CalendarType;
 }
@@ -52,6 +54,7 @@ export interface CalendarEvents {
     [CalendarEvent.YEAR_SELECT]: (event: YearState) => void;
     [CalendarEvent.YEAR_PREVIOUS]: (event: Event) => void;
     [CalendarEvent.YEAR_NEXT]: (event: Event) => void;
+    [CalendarEvent.YEAR_MONTH_SELECT]: (event: Event) => void;
 }
 
 export interface YearState {
@@ -63,6 +66,11 @@ export interface MonthState {
     month: number;
     isCurrent: boolean;
     isDisabled: boolean;
+}
+
+export interface YearMonthState {
+    year: YearState;
+    months: MonthState[];
 }
 
 export interface DayState {

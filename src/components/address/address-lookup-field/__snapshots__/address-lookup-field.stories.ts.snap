@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|/address/m-address-lookup-field default 1`] = `
+<div>
+  
+            current key is: someKey
+            
+  <div
+    class="m-address-lookup-field"
+  >
+    <div
+      class="m-dropdown"
+      style="width: 100%; max-width: 288px;"
+    >
+      <div
+        class="m-input-style m--has-cursor-pointer m--has-label m--is-tag-default"
+        style="width: 100%; margin-top: 10px;"
+      >
+        <div
+          class="m-input-style__main"
+        >
+          <div
+            class="m-input-style__body"
+          >
+            <label
+              class="m-input-style__label"
+              for="mDropdown-uuid"
+              style="margin-right: 0px;"
+            >
+              <span
+                class="m-input-style__text"
+              >
+                <span>
+                  Rechercher une adresse
+                </span>
+                 
+                <!---->
+              </span>
+            </label>
+             
+            <div
+              class="m-input-style__input"
+            >
+              <!---->
+               
+              <div
+                class="m-input-style__content"
+              >
+                <!---->
+                 
+                <input
+                  aria-controls="mDropdown-uuid-controls"
+                  aria-haspopup="true"
+                  autocomplete="new-password"
+                  class="m-dropdown__input"
+                  id="mDropdown-uuid"
+                  placeholder="Entrez une adresse à rechercher"
+                  type="text"
+                />
+                 
+                <!---->
+                 
+                <!---->
+                 
+                <!---->
+                 
+                <!---->
+              </div>
+               
+              <div
+                class="m-input-style__suffix"
+              >
+                 
+                <!---->
+              </div>
+            </div>
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+       
+      <div
+        class="m-validation-message m-dropdown__validation-message"
+      >
+        <!---->
+         
+        <!---->
+      </div>
+       
+      <div
+        class="m-popup"
+      >
+        <div
+          class="m-popper"
+        >
+           
+          <!---->
+        </div>
+         
+        <!---->
+      </div>
+    </div>
+  </div>
+   
+  <div>
+    RETRIEVED VALUE: nothing
+  </div>
+</div>
+`;

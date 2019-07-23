@@ -1,4 +1,4 @@
-import { CleaveOptions } from 'cleave.js/options';
+
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Model, Prop, Watch } from 'vue-property-decorator';
@@ -14,7 +14,7 @@ import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import { MCalendarButton } from '../calendar/calendar-button/calendar-button';
 import { TIMEPICKER_NAME } from '../component-names';
-import { MInputMask } from '../input-mask/input-mask';
+import { InternalCleaveOptions, MInputMask } from '../input-mask/input-mask';
 import InputStylePlugin from '../input-style/input-style';
 import PopupPlugin from '../popup/popup';
 import ValidationMessagePlugin from '../validation-message/validation-message';
@@ -273,21 +273,27 @@ export class MTimepicker extends ModulVue {
     ///////////////////////////////////////
 
     public get currentTime(): string {
-        return this.internalTime ? this.internalTime : '';
+        if (!this.internalTime) { return ''; }
+
+        const hourParts: string[] = this.internalTime.split(':');
+        return hourParts.length > 1 ? `${hourParts[0]}:${hourParts[1]}` : '';
     }
 
     public set currentTime(value: string) {
+        const hourParts: string[] = (value || '').split(':');
+        const newValue: string = hourParts.length > 1 ? `${hourParts[0]}:${hourParts[1]}` : '';
+
         let oldTime: string = this.internalTime;
-        this.internalTime = value;
+        this.internalTime = newValue;
 
         // When the user type in something we close de popup.
         this.open = false;
 
         if (value && this.validateTime(value) && validateTimeString(value)) {
-            this.updatePopupTime(value);
+            this.updatePopupTime(newValue);
 
-            if (value !== oldTime) {
-                this.$emit('input', value);
+            if (newValue !== oldTime) {
+                this.$emit('input', newValue);
             }
 
         } else {
@@ -341,7 +347,7 @@ export class MTimepicker extends ModulVue {
         });
     }
 
-    private get inputMaskOptions(): CleaveOptions {
+    private get inputMaskOptions(): InternalCleaveOptions {
         return {
             time: true,
             timePattern: ['h', 'm']

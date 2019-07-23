@@ -1,0 +1,8 @@
+<address class="m-address-reader">
+    <slot :filtered-address="filteredAddress">
+        <template v-if="subBuilding !== ''">{{ subBuilding }} -</template> {{ buildingNumber }} {{ street }} <br />
+        {{ city }} <span v-if="hasProvince">, {{ province }}</span><br />
+        {{ country }} <br />
+        {{ postalCode }}
+    </slot>
+</address>

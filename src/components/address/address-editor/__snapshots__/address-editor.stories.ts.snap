@@ -1,0 +1,1105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|/address/m-address-editor default 1`] = `
+<div>
+  <div>
+    <div
+      class="m-address-editor"
+    >
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Numéro civique
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Unité
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Rue
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Ville
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-dropdown"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+          style="width: 100%; margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mDropdown-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Pays
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <!---->
+                   
+                  <input
+                    aria-controls="mDropdown-uuid-controls"
+                    aria-haspopup="true"
+                    class="m-dropdown__input"
+                    id="mDropdown-uuid"
+                    readonly="readonly"
+                    type="text"
+                  />
+                   
+                  <!---->
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <div
+                    class="m-dropdown__arrow"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="m-icon m-dropdown__arrow__icon"
+                      height="16px"
+                      width="16px"
+                    >
+                      <!---->
+                       
+                      <use
+                        aria-hidden="true"
+                        class=""
+                      />
+                    </svg>
+                  </div>
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-validation-message m-dropdown__validation-message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-popup"
+        >
+          <div
+            class="m-popper"
+          >
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <!---->
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-label m--has-value m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Code Postal
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+   
+  <div
+    style="border-top: 1px solid #000; margin-top: 50px;"
+  >
+    <div>
+      Current address valid : true
+    </div>
+     
+    <div>
+      Address from editor : {
+  "buildingNumber": "2325",
+  "city": "Québec",
+  "country": {
+    "country": "Canada",
+    "countryIso2": "CA"
+  },
+  "province": {
+    "province": "Québec",
+    "provinceCode": "QC"
+  },
+  "street": "Rue de l'Université",
+  "postalCode": "G1V 0A6",
+  "subBuilding": ""
+}
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
+<div>
+  <div>
+    <div
+      class="m-address-editor"
+    >
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Numéro civique
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Unité
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Rue
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Ville
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <div
+        class="m-dropdown"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--is-label-up m--has-cursor-pointer m--has-label m--has-value m--is-tag-default"
+          style="width: 100%; margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mDropdown-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Pays
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <!---->
+                   
+                  <input
+                    aria-controls="mDropdown-uuid-controls"
+                    aria-haspopup="true"
+                    class="m-dropdown__input"
+                    id="mDropdown-uuid"
+                    readonly="readonly"
+                    type="text"
+                  />
+                   
+                  <!---->
+                    
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <div
+                    class="m-dropdown__arrow"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="m-icon m-dropdown__arrow__icon"
+                      height="16px"
+                      width="16px"
+                    >
+                      <!---->
+                       
+                      <use
+                        aria-hidden="true"
+                        class=""
+                      />
+                    </svg>
+                  </div>
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-validation-message m-dropdown__validation-message"
+        >
+          <!---->
+           
+          <!---->
+        </div>
+         
+        <div
+          class="m-popup"
+        >
+          <div
+            class="m-popper"
+          >
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+       
+      <!---->
+       
+      <div
+        class="m-textfield m--has-label m--is-type-text"
+        style="width: 100%; max-width: 288px;"
+      >
+        <div
+          class="m-input-style m--has-label m--is-tag-default"
+          style="margin-top: 10px;"
+        >
+          <div
+            class="m-input-style__main"
+          >
+            <div
+              class="m-input-style__body"
+            >
+              <label
+                class="m-input-style__label"
+                for="mTextfield-uuid"
+                style="margin-right: 0px;"
+              >
+                <span
+                  class="m-input-style__text"
+                >
+                  <span>
+                    Code Postal
+                  </span>
+                   
+                  <!---->
+                </span>
+              </label>
+               
+              <div
+                class="m-input-style__input"
+              >
+                <!---->
+                 
+                <div
+                  class="m-input-style__content"
+                >
+                  <input
+                    class="m-textfield__input"
+                    id="mTextfield-uuid"
+                    maxlength="Infinity"
+                    type="text"
+                  />
+                    
+                  <!---->
+                   
+                  <!---->
+                   
+                  <!---->
+                </div>
+                 
+                <div
+                  class="m-input-style__suffix"
+                >
+                  <!---->
+                   
+                  <!---->
+                </div>
+              </div>
+            </div>
+             
+            <!---->
+          </div>
+        </div>
+         
+        <div
+          class="m-textfield__validation"
+        >
+          <div
+            class="m-validation-message m-textfield__validation__message"
+          >
+            <!---->
+             
+            <!---->
+          </div>
+           
+          <!---->
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+   
+  <div
+    style="border-top: 1px solid #000; margin-top: 50px;"
+  >
+    Address from editor : {
+  "buildingNumber": "",
+  "city": "",
+  "country": {
+    "country": "Canada",
+    "countryIso2": "CA"
+  },
+  "street": "",
+  "postalCode": "",
+  "subBuilding": ""
+}
+  </div>
+</div>
+`;

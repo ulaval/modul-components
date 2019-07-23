@@ -1,0 +1,52 @@
+<div class="m-address-editor">
+    <m-textfield :label="i18nBuildingNumber"
+                 :value="buildingNumber"
+                 :error="buildingNumberHasError"
+                 :error-message="buildingNumberNextError"
+                 @input="onBuildingNumberChange"></m-textfield><br />
+    <m-textfield :label="i18nSubBuilding"
+                 :value="subBuilding"
+                 :error="subBuildingHasError"
+                 :error-message="subBuildingNextError"
+                 @input="onSubBuildingChange"></m-textfield><br />
+    <m-textfield :label="i18nStreet"
+                 :value="street"
+                 :error="streetHasError"
+                 :error-message="streetNextError"
+                 @input="onStreetChange"></m-textfield><br />
+
+    <m-textfield :label="i18nCity"
+                 :value="city"
+                 :error="cityHasError"
+                 :error-message="cityNextError"
+                 @input="onCityChange"></m-textfield><br />
+
+    <m-dropdown :label="i18nCountry"
+                :value="country"
+                :error="countryHasError"
+                :error-message="countryNextError"
+                @change="onCountryChange">
+        <m-dropdown-item v-for="country in countries"
+                         :key="country.countryIso2"
+                         :value="country.countryIso2"
+                         :label="country.country"></m-dropdown-item>
+    </m-dropdown><br />
+
+    <div v-if="provinces.length > 0">
+        <m-dropdown :label="i18nProvince"
+                    :value="province"
+                    :error="provinceHasError"
+                    :error-message="provinceNextError"
+                    @change="onProvinceChange">
+            <m-dropdown-item v-for="province in provinces"
+                             :key="province.provinceCode"
+                             :value="province.provinceCode"
+                             :label="province.province"></m-dropdown-item>
+        </m-dropdown><br />
+    </div>
+    <m-textfield :label="i18nPostalCode"
+                 :value="postalCode"
+                 :error="postalCodeHasError"
+                 :error-message="postalCodeNextError"
+                 @input="onPostalCodeChange"></m-textfield><br />
+</div>

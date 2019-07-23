@@ -1,8 +1,9 @@
 import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
 import { ControlValidator } from './validators/control-validator';
 
-export class FormGroup extends AbstractControl {
+export class FormGroup<T = any> extends AbstractControl {
     constructor(
         private _controls: { [name: string]: AbstractControl },
         public readonly validators: ControlValidator[] = [],
@@ -15,7 +16,7 @@ export class FormGroup extends AbstractControl {
     /**
      * Return an agregate values of all enabled controls.
      */
-    public get value(): any {
+    public get value(): T {
         const values: any = {};
         const enabledControls: { [name: string]: AbstractControl } = Object.keys(this._controls)
             .filter(c => this._controls[c].enabled)
@@ -27,6 +28,10 @@ export class FormGroup extends AbstractControl {
         Object.keys(enabledControls).map((c: string) => values[c] = enabledControls[c].value);
 
         return values;
+    }
+
+    public set value(value: T) {
+        throw Error('Assigning a value to a FormGroup is not yet implemented');
     }
 
     public get valid(): boolean {
@@ -68,6 +73,25 @@ export class FormGroup extends AbstractControl {
         this.controls.forEach(c => c.readonly = isReadonly);
     }
 
+    public get errors(): ControlError[] {
+        return (this.enabled && !this.readonly) ? this._errors : [];
+    }
+
+    public set errors(errors: ControlError[]) {
+        this._errors = [...errors];
+    }
+
+    public get errorsDeep(): ControlError[] {
+        if (!this.enabled || this.readonly) {
+            return [];
+        }
+        let errors: ControlError[] = [...this.errors];
+        this.controls.forEach((control: AbstractControl) => {
+            errors = [...errors, ...control.errorsDeep];
+        });
+        return errors;
+    }
+
     public get touched(): boolean {
         return this.controls.every(c => c.touched);
     }
@@ -98,9 +122,9 @@ export class FormGroup extends AbstractControl {
         return Object.values(this._controls);
     }
 
-    public getControl(name: string): AbstractControl {
+    public getControl<T = any>(name: string): AbstractControl<T> {
         if (this._controls[name] !== undefined) {
-            return this._controls[name];
+            return this._controls[name] as AbstractControl<T>;
         } else {
             throw Error(`There is no control with the name ${name} in this group`);
         }

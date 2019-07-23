@@ -1,0 +1,37 @@
+<div class="m-address-autocomplete-field">
+    <slot name="lookup-field">
+        <m-address-lookup-field :origin="origin"
+                                :language="language"
+                                @address-retrieved="onRetrieve">
+        </m-address-lookup-field>
+    </slot>
+    <div v-if="hasValue">
+        <slot name="edit-section">
+            <m-inplace-edit :edit-mode="editing"
+                            :error="error"
+                            @ok="onConfirm"
+                            @cancel="onCancel"
+                            @click="onClick"
+                            :title="editFormTitle">
+                <slot name="reader">
+                    <m-address-reader slot="readMode"
+                                      :filters="filters"
+                                      :province-key="provinceKey"
+                                      :country-key="countryKey"
+                                      :address="currentAddress"></m-address-reader>
+                </slot>
+                <div slot="editMode">
+                    <slot name="form">
+                        <m-address-editor v-model="editAddress"
+                                          :countries="countries"
+                                          :provinces="currentProvinces"
+                                          :validations="validations"
+                                          @country-change="onCountryChange"
+                                          @is-valid="onIsValid"></m-address-editor>
+                    </slot>
+                </div>
+            </m-inplace-edit>
+        </slot>
+    </div>
+
+</div>

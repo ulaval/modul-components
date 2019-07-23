@@ -5,7 +5,7 @@ exports[`Storyshots components|m-accordion default 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -40,7 +40,7 @@ exports[`Storyshots components|m-accordion disabled 1`] = `
   class="m-accordion m--is-default m--is-closed m--is-disabled m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -79,7 +79,7 @@ exports[`Storyshots components|m-accordion empty $slots.default 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large m--is-empty-content"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -114,7 +114,7 @@ exports[`Storyshots components|m-accordion header 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -154,7 +154,7 @@ exports[`Storyshots components|m-accordion icon-border="true" 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -194,7 +194,7 @@ exports[`Storyshots components|m-accordion id 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="id123-controls"
+    aria-controls="id123-body-wrap"
     class="m-accordion__header m--has-padding"
     id="id123"
     role="tab"
@@ -234,7 +234,7 @@ exports[`Storyshots components|m-accordion open 1`] = `
   class="m-accordion m--is-default m--is-open m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     aria-expanded="true"
     class="m-accordion__header m--has-padding"
     id="uuid"
@@ -269,7 +269,7 @@ exports[`Storyshots components|m-accordion open 1`] = `
   <div
     aria-labelledby="uuid"
     class="m-accordion__body-wrap"
-    id="uuid-controls"
+    id="uuid-body-wrap"
     role="tabpanel"
   >
     <div
@@ -286,7 +286,7 @@ exports[`Storyshots components|m-accordion/icon-position="right" default 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -326,7 +326,7 @@ exports[`Storyshots components|m-accordion/icon-position="right" icon-border="tr
   class="m-accordion m--is-default m--is-closed m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -366,7 +366,7 @@ exports[`Storyshots components|m-accordion/icon-position="right" icon-size="smal
   class="m-accordion m--is-default m--is-closed"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -406,7 +406,7 @@ exports[`Storyshots components|m-accordion/icon-position="right" icon-size="smal
   class="m-accordion m--is-default m--is-closed"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -446,7 +446,7 @@ exports[`Storyshots components|m-accordion/icon-size="small" default 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -486,7 +486,7 @@ exports[`Storyshots components|m-accordion/icon-size="small" icon-border="true" 
   class="m-accordion m--is-default m--is-closed m--has-icon-left"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -521,12 +521,104 @@ exports[`Storyshots components|m-accordion/icon-size="small" icon-border="true" 
 </article>
 `;
 
+exports[`Storyshots components|m-accordion/keepContentAlive default 1`] = `
+<article
+  class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+>
+  <div
+    aria-controls="uuid-body-wrap"
+    class="m-accordion__header m--has-padding"
+    id="uuid"
+    role="tab"
+    tabindex="0"
+  >
+    <div
+      class="m-accordion__header__content"
+    >
+      <h3
+        class="m-u--no-margin"
+      >
+        An Accordion Title
+      </h3>
+       
+      <span
+        class="m-i18n m-accordion__hidden"
+      >
+        Cliquer pour afficher le contenu
+      </span>
+       
+      <!---->
+    </div>
+     
+    <span
+      aria-hidden="true"
+      class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+      title="Cliquer pour afficher le contenu"
+    />
+  </div>
+   
+  <!---->
+</article>
+`;
+
+exports[`Storyshots components|m-accordion/keepContentAlive keep-content-alive="true" 1`] = `
+<article
+  class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
+>
+  <div
+    aria-controls="uuid-body-wrap"
+    class="m-accordion__header m--has-padding"
+    id="uuid"
+    role="tab"
+    tabindex="0"
+  >
+    <div
+      class="m-accordion__header__content"
+    >
+      <h3
+        class="m-u--no-margin"
+      >
+        An Accordion Title
+      </h3>
+       
+      <span
+        class="m-i18n m-accordion__hidden"
+      >
+        Cliquer pour afficher le contenu
+      </span>
+       
+      <!---->
+    </div>
+     
+    <span
+      aria-hidden="true"
+      class="m-plus m-accordion__header-icon m--is-skin-default m--is-large m--is-left"
+      title="Cliquer pour afficher le contenu"
+    />
+  </div>
+   
+  <div
+    aria-labelledby="uuid"
+    class="m-accordion__body-wrap"
+    id="uuid-body-wrap"
+    role="tabpanel"
+    style="display: none;"
+  >
+    <div
+      class="m-accordion__body m--has-padding"
+    >
+       Some Accordion Content
+    </div>
+  </div>
+</article>
+`;
+
 exports[`Storyshots components|m-accordion/padding default 1`] = `
 <article
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -566,7 +658,7 @@ exports[`Storyshots components|m-accordion/padding padding-body="false" 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header"
     id="uuid"
     role="tab"
@@ -606,7 +698,7 @@ exports[`Storyshots components|m-accordion/padding padding-header="false" 1`] = 
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header"
     id="uuid"
     role="tab"
@@ -646,7 +738,7 @@ exports[`Storyshots components|m-accordion/skin dark 1`] = `
   class="m-accordion m--is-dark m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -686,7 +778,7 @@ exports[`Storyshots components|m-accordion/skin dark-b 1`] = `
   class="m-accordion m--is-dark-b m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -726,7 +818,7 @@ exports[`Storyshots components|m-accordion/skin default 1`] = `
   class="m-accordion m--is-default m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -766,7 +858,7 @@ exports[`Storyshots components|m-accordion/skin light 1`] = `
   class="m-accordion m--is-light m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"
@@ -806,7 +898,7 @@ exports[`Storyshots components|m-accordion/skin plain 1`] = `
   class="m-accordion m--is-plain m--is-closed m--has-icon-left m--has-icon-large"
 >
   <div
-    aria-controls="uuid-controls"
+    aria-controls="uuid-body-wrap"
     class="m-accordion__header m--has-padding"
     id="uuid"
     role="tab"

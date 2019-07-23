@@ -11,7 +11,7 @@
                      v-model="nameField.value"
                      label="Name"
                      :required-marker="true"
-                     helper-message="2 caracters min - 20 caracters max"
+                     helper-message="2 characters min - 20 characters max"
                      :character-count="true"
                      max-length="20"
                      :error="nameField.hasError()"
@@ -79,25 +79,34 @@
 
 
         <h4 class="m-u--h6">Formarray</h4>
-        <m-add @click="addItem()">Add Item</m-add>
+        <m-add @click="addItem()">Add Cart (max 24 fruits, max total 24 bananas)</m-add>
         <div v-for="(control, index) in itemsArray.controls"
              :key="index">
-            <m-textfield v-m-control="control.getControl('name')"
-                         v-model="control.getControl('name').value"
-                         label="Name"
-                         :error="control.getControl('name').hasError()"
-                         :error-message="control.getControl('name').errorMessage">
+            <m-textfield v-m-control="control.getControl('client')"
+                         v-model="control.getControl('client').value"
+                         label="Client"
+                         :error="control.getControl('client').hasError()"
+                         :error-message="control.getControl('client').errorMessage">
             </m-textfield>
-            <m-textfield v-m-control="control.getControl('optionalData')"
-                         v-model="control.getControl('optionalData').value"
-                         label="Optional data"
-                         :error="control.getControl('optionalData').hasError()"
-                         :error-message="control.getControl('optionalData').errorMessage">
-            </m-textfield>
+            <m-integerfield v-m-control="control.getControl('fruits').getControl('apples')"
+                            v-model="control.getControl('fruits').getControl('apples').value"
+                            label="Apples"
+                            :error="control.getControl('fruits').hasError()">
+            </m-integerfield>
+            <m-integerfield v-m-control="control.getControl('fruits').getControl('bananas')"
+                            v-model="control.getControl('fruits').getControl('bananas').value"
+                            label="Bananas"
+                            :error="control.getControl('fruits').hasError()">
+            </m-integerfield>
             <m-button icon-name="m-svg__close-clear"
                       @click="deleteItem(index)">Delete</m-button>
+            <m-validation-message :error="control.getControl('fruits').hasError()"
+                                  :error-message="control.getControl('fruits').errorMessage"></m-validation-message>
             <br />
+
         </div>
+        <m-validation-message :error="itemsArray.hasError()"
+                              :error-message="itemsArray.errorMessage"></m-validation-message>
 
         <p class="m-u--margin-top--l m-u--margin-bottom--l">
             <m-button type="submit"
@@ -109,6 +118,10 @@
         <h4 class="m-u--h6">Form Values</h4>
 
         <p>{{ formGroup.value }}</p>
+
+        <h4 class="m-u--h6">Form Errors</h4>
+
+        <p>{{ formGroup.errorsDeep }}</p>
         <h4 class="m-u--h6">Form Validity = {{ formGroup.valid }} / Form Waiting = {{ formGroup.waiting }} / Form Enabled = {{ formGroup.enabled }} / Form Readonly = {{ formGroup.readonly }}</h4>
         <p>
             <m-button skin="secondary"

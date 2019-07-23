@@ -91,3 +91,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/skin`, module)
     .add('plain', () => ({
         template: '<m-accordion skin="plain"><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
     }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${ACCORDION_NAME}/keepContentAlive`, module)
+    .add('default', () => ({
+        template: '<m-accordion :keep-content-alive="false"><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }))
+    .add('keep-content-alive="true"', () => ({
+        template: '<m-accordion :keep-content-alive="true" ><h3 class="m-u--no-margin" slot="header">An Accordion Title</h3> Some Accordion Content</m-accordion>'
+    }));

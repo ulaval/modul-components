@@ -13,7 +13,7 @@
     &.m--is-country-focus {
         .m-phonefield {
             &__number {
-                /deep/ .m-input-style__content {
+                /deep/ .m-input-style__main {
                     border-left-color: $m-color--interactive;
                 }
             }
@@ -34,7 +34,7 @@
             visibility: hidden;
         }
 
-        /deep/ .m-input-style__content {
+        /deep/ .m-input-style__main {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             border-right-color: transparent !important;
@@ -74,7 +74,7 @@
     &__number {
         flex-shrink: 0;
 
-        /deep/ .m-input-style__content {
+        /deep/ .m-input-style__main {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
