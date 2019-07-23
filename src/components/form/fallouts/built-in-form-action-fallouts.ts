@@ -57,7 +57,7 @@ export const FocusOnFirstError: FormActionFallout = {
         let control: AbstractControl | undefined = getFirstControlInError(form.formGroup);
 
         if (control) {
-            if (control.htmlElement instanceof HTMLInputElement) {
+            if (control.htmlElement instanceof HTMLInputElement || control.htmlElement instanceof HTMLTextAreaElement) {
                 scrollToElement(control.htmlElement, form.$form.scrollToOffset);
                 control.htmlElement.focus();
             } else if (control.htmlElement) {

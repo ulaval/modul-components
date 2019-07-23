@@ -1,4 +1,5 @@
-import Vue, { PluginObject } from 'vue';
+
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
 import PopupDirectivePlugin from '../../directives/popup/popup';
@@ -6,12 +7,14 @@ import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState, InputStateMixin } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { MediaQueries } from '../../mixins/media-queries/media-queries';
+import { Enums } from '../../utils/enums/enums';
 import MediaQueriesPlugin from '../../utils/media-queries/media-queries';
 import ModulDate from '../../utils/modul-date/modul-date';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
 import ButtonPlugin from '../button/button';
 import CalendarPlugin from '../calendar/calendar';
+import { MBaseCalendarType, MBaseCalendarView } from '../calendar/calendar-renderer/base-calendar/base-calendar';
 import { DATEPICKER_NAME } from '../component-names';
 import IconButtonPlugin from '../icon-button/icon-button';
 import { InternalCleaveOptions, MInputMask } from '../input-mask/input-mask';
@@ -23,7 +26,10 @@ import WithRender from './datepicker.html?style=./datepicker.scss';
 
 export type DatePickerSupportedTypes = Date | string | undefined;
 
-export const MAX_LENGTH_DATE_VALUE: number = 10;
+export enum MDatepickerDefaultView {
+    Month = 'month',
+    Day = 'day'
+}
 
 @WithRender
 @Component({
@@ -47,13 +53,25 @@ export class MDatepicker extends ModulVue {
     @Prop()
     public label: string;
 
+    @Prop({
+        default: MBaseCalendarView.DAYS,
+        validator: value => Enums.toValueArray(MBaseCalendarView).includes(value)
+    })
+    public initialView: MBaseCalendarView;
+
+    @Prop({
+        default: MBaseCalendarType.FULL_DATE,
+        validator: value => Enums.toValueArray(MBaseCalendarType).includes(value)
+    })
+    public type: MBaseCalendarType;
+
     @Prop({ default: () => { return new ModulDate().subtract(10, 'year'); } })
     public min: DatePickerSupportedTypes;
 
     @Prop({ default: () => { return new ModulDate().add(10, 'year'); } })
     public max: DatePickerSupportedTypes;
 
-    @Prop({ default: () => Vue.prototype.$i18n.translate('m-datepicker:placeholder') })
+    @Prop()
     public placeholder: string;
 
     @Prop({ default: InputMaxWidth.Small })
@@ -82,11 +100,30 @@ export class MDatepicker extends ModulVue {
     }
 
     public get inputOptions(): InternalCleaveOptions {
+        if (this.isTypeYearsMonths) {
+            return {
+                numericOnly: true,
+                delimiters: ['-'],
+                blocks: [4, 2]
+            };
+        }
+
         return {
             numericOnly: true,
             delimiters: ['-', '-'],
             blocks: [4, 2, 2]
         };
+    }
+
+    public get isTypeYearsMonths(): boolean {
+        return this.type === MBaseCalendarType.YEARS_MONTHS;
+    }
+
+    public get propPlaceholder(): string {
+        if (this.placeholder) {
+            return this.placeholder;
+        }
+        return this.isTypeYearsMonths ? this.$i18n.translate('m-datepicker:placeholder-aaaa-mm') : this.$i18n.translate('m-datepicker:placeholder-aaaa-mm-jj');
     }
 
     public get formattedDate(): string {
@@ -130,6 +167,10 @@ export class MDatepicker extends ModulVue {
 
     private get maxModulDate(): ModulDate {
         return new ModulDate(this.max);
+    }
+
+    private get maxInputLenght(): number {
+        return this.isTypeYearsMonths ? 7 : 10;
     }
 
     @Emit('open')
@@ -187,7 +228,7 @@ export class MDatepicker extends ModulVue {
             if (this.skipInputValidation) {
                 this.model = inputValue;
             } else {
-                if (inputValue.length === MAX_LENGTH_DATE_VALUE && this.showErrorMessage(inputValue)) {
+                if (inputValue.length === this.maxInputLenght && this.showErrorMessage(inputValue)) {
                     this.model = this.inputModel;
                 } else {
                     this.model = '';
@@ -205,9 +246,7 @@ export class MDatepicker extends ModulVue {
             this.internalDateModel = this.convertModelToString(value);
 
             this.inputModel = this.internalDateModel ? this.internalDateModel : '';
-            if (!this.skipInputValidation) {
-                this.showErrorMessage(this.inputModel);
-            }
+            this.showErrorMessage(this.inputModel);
         }
     }
 
@@ -306,12 +345,7 @@ export class MDatepicker extends ModulVue {
     }
 
     private validateDateFormat(dateString: string): boolean {
-        if (dateString) {
-            if (!isNaN(Date.parse(dateString))) {
-                return true;
-            }
-        }
-        return false;
+        return Boolean(dateString) && !isNaN(Date.parse(dateString));
     }
 
     private convertStringToModel(newValue: string): DatePickerSupportedTypes {
@@ -342,7 +376,7 @@ export class MDatepicker extends ModulVue {
         if (inputValue === '' || inputValue === undefined || inputValue === null || this.skipInputValidation) {
             this.internalCalendarErrorMessage = '';
             return true;
-        } else if (inputValue.length === 10 && this.validateDateFormat(inputValue)) {
+        } else if (inputValue.length === this.maxInputLenght && this.validateDateFormat(inputValue)) {
             let newDate: ModulDate = new ModulDate(inputValue);
             if (newDate.isBetween(this.minModulDate, this.maxModulDate)) {
                 this.internalCalendarErrorMessage = '';

@@ -18,7 +18,7 @@ export enum DateComparison {
     IS_AFTER = 1
 }
 
-export const DATE_FORMAT_REGEX: RegExp = /(^(\d{1,4})[\.|\\/|-](\d{1,2})[\.|\\/|-](\d{1,4})).*$/;
+export const DATE_FORMAT_REGEX: RegExp = /(^(\d{1,4})[\.|\\\/|-](\d{1,2})(([\.|\\\/|-])(\d{1,4}))?)$/;
 export default class ModulDate {
 
     private innerDate: Date;
@@ -299,34 +299,35 @@ export default class ModulDate {
 
         // Otherwise we try to build the date from a partial date string (2010-12-01 or 2010/12/01)
 
-
-        const parts: string[] = DATE_FORMAT_REGEX.exec(value) as string[];
-        if (!parts || parts.length < 4) {
+        if (!DATE_FORMAT_REGEX.test(value)) {
             throw Error(`Impossible to find date parts in date`);
-        }
+        } else {
+            const stringToDelete: RegExp = /[\.|\\/|-]/g;
+            const parts: string[] = value.split(stringToDelete);
 
-        let first: string = parts[2];
-        let second: string = parts[3];
-        let third: string = parts[4];
+            let first: string = parts[0];
+            let second: string = parts[1];
+            let third: string = parts[2] || '1';
 
-        if (parseInt(first, 10) > 12 && parseInt(second, 10) > 12 && parseInt(third, 10) > 12) {
-            throw Error(`No suitable month value`);
-        } else if (parseInt(first, 10) > 31 && parseInt(third, 10) > 31) {
-            throw Error(`No suitable day of month value`);
-        }
+            if (parseInt(first, 10) > 12 && parseInt(second, 10) > 12 && parseInt(third, 10) > 12) {
+                throw Error(`No suitable month value`);
+            } else if (parseInt(first, 10) > 31 && parseInt(third, 10) > 31) {
+                throw Error(`No suitable day of month value`);
+            }
 
-        if (third.length === 4 || third.length > first.length) {
-            third = [first, first = third][0];
-        }
-        const year: string = (first.length === 2) ? '20' + first : first;
+            if (third.length === 4 || third.length > first.length) {
+                third = [first, first = third][0];
+            }
+            const year: string = (first.length === 2) ? '20' + first : first;
 
-        if (parseInt(second, 10) > 12) {
-            third = [second, second = third][0];
+            if (parseInt(second, 10) > 12) {
+                third = [second, second = third][0];
+            }
+            const month: string = this.padString(second);
+            const day: string = this.padString(third);
+            const date: Date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
+            return date;
         }
-        const month: string = this.padString(second);
-        const day: string = this.padString(third);
-        const date: Date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
-        return date;
     }
 
     private padString(input: string): string {

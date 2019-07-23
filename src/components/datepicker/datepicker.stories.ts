@@ -7,7 +7,6 @@ import DatepickerPlugin from './datepicker';
 Vue.use(DatepickerPlugin);
 
 
-
 storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
 
     .add('default', () => ({
@@ -135,6 +134,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     .add('label-up', () => ({
         template: `<m-datepicker label="Date label" :label-up="true"></m-datepicker>`
     }))
+    .add('required-marker', () => ({
+        template: `<m-datepicker label="Date label" :required-marker="true"></m-datepicker>`
+    }))
     .add('skip-input-validation=true', () => ({
         data: () => ({
             model1: '9999-99-99'
@@ -143,3 +145,21 @@ storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}`, module)
     }));
 
 
+storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/type`, module)
+    .add('full-date', () => ({
+        template: `<m-datepicker type="full-date"></m-datepicker>`
+    }))
+    .add('years-months', () => ({
+        template: `<m-datepicker type="years-months"></m-datepicker>`
+    }));
+
+storiesOf(`${componentsHierarchyRootSeparator}${DATEPICKER_NAME}/initial-view`, module)
+    .add('days', () => ({
+        template: `<m-datepicker initial-view="days"></m-datepicker>`
+    }))
+    .add('years-months', () => ({
+        template: `<m-datepicker helperMessage="Range between 2000 and 2030" initial-view="years-months" min="2000-01-31" max="2030-12-31"></m-datepicker>`
+    }))
+    .add('years-months-birthdate', () => ({
+        template: `<m-datepicker label="Birthdate" helperMessage="Range between 1900 and 2000" initial-view="years-months" min="1900-01-31" max="2000-12-31"></m-datepicker>`
+    }));

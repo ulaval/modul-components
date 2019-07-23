@@ -55,6 +55,16 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
                         <m-radio>Radio Option 3</m-radio>
                    </m-radio-group>`
     }))
+    .add('icon slot', () => ({
+        template: `<m-radio-group label="This is a label">
+                        <template #icon>
+                            <m-icon name="m-svg__add-circle" />
+                        </template>
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
     .add('focus', () => ({
         template: `<m-radio-group :focus="true">
                         <m-radio>Radio Option 1</m-radio>
@@ -78,6 +88,20 @@ storiesOf(`${componentsHierarchyRootSeparator}${RADIO_GROUP_NAME}`, module)
     }))
     .add('error-message', () => ({
         template: `<m-radio-group error-message="This is an error message">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('error-message & label', () => ({
+        template: `<m-radio-group error-message="This is an error message" label="This is a label">
+                        <m-radio>Radio Option 1</m-radio>
+                        <m-radio>Radio Option 2</m-radio>
+                        <m-radio>Radio Option 3</m-radio>
+                   </m-radio-group>`
+    }))
+    .add('required-marker', () => ({
+        template: `<m-radio-group :required-marker="true" label="This is a label">
                         <m-radio>Radio Option 1</m-radio>
                         <m-radio>Radio Option 2</m-radio>
                         <m-radio>Radio Option 3</m-radio>
