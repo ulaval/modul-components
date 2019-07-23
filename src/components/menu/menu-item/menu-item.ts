@@ -33,6 +33,10 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     @Prop()
     public disabled: boolean;
 
+    $refs: {
+        transition: ModulVue;
+    };
+
     public group: boolean = false;
     public selected: boolean = false;
     public groupSelected: boolean = false;
@@ -54,11 +58,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
             console.error('<m-menu-item> need to be inside <m-menu>');
         }
 
-        this.$children.forEach(item => {
-            if (item instanceof MMenuItem) {
-                this.group = true;
-            }
-        });
+        this.group = !!this.$refs.transition.$children.find(item => item instanceof MMenuItem);
 
         this.propOpen = this.open;
     }
