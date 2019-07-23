@@ -29,7 +29,6 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     }))
     .add('Custom slot - animation', () => ({
         template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true">
-                        <img src="${image192}">
                         <div slot="content" slot-scope={hover} style="
                             transition: all 0.1s linear;
                             width: 100%;
