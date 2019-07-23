@@ -254,6 +254,22 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.setInputWidth();
     }
 
+    private get internalPlaceholder(): string {
+        if (this.as<InputState>().isReadonly) {
+            return '';
+        } else {
+            return this.placeholder;
+        }
+    }
+
+    private get internallLabelUp(): boolean {
+        if (this.as<InputState>().isReadonly) {
+            return true;
+        } else {
+            return this.as<InputLabel>().labelUp;
+        }
+    }
+
     private portalMounted(): void {
         this.buildItemsMap();
 

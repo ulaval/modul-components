@@ -127,6 +127,22 @@ storiesOf(`${componentsHierarchyRootSeparator}${DROPDOWN_NAME}/readonly`, module
                     </m-dropdown>
                 </div>`
     }))
+    .add('No selection, no label, with placeholder', () => ({
+        data: () => ({
+            model72: ''
+        }),
+        template: `<div>
+                        <p class="m-u--font-weight--semi-bold m-u--padding-bottom--s">No selection, no label, with placeholder</p>
+                        <m-dropdown :readonly="true" placeholder="Select your avenger" v-model="model72">
+                        <m-dropdown-item value="a" label="Iron Man"></m-dropdown-item>
+                        <m-dropdown-item value="b" label="Hulk"></m-dropdown-item>
+                        <m-dropdown-item value="c" label="Thor"></m-dropdown-item>
+                        <m-dropdown-item value="d" label="Widow choy"></m-dropdown-item>
+                        <m-dropdown-item value="e" label="Vision"></m-dropdown-item>
+                        <m-dropdown-item value="f" label="Captain America"></m-dropdown-item>
+                    </m-dropdown>
+                </div>`
+    }))
 
     .add('Item selected, with label', () => ({
         data: () => ({
