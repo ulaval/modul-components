@@ -83,8 +83,9 @@ export class MTreeNode extends ModulVue {
             this.$emit('update:open', this.internalOpen);
         } else if (this.selectable) {
             this.emitClick(this.currentPath);
+            this.$refs.item.blur();
         }
-        this.$refs.item.blur();
+
     }
 
     public onAutoSelectButtonClick(): void {
