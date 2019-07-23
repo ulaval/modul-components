@@ -40,6 +40,10 @@ describe('http serializer', () => {
             expect(serializeParams({ param1: [{ key: 'k1', value: 'v1' }, { key: 'k2', value: 'v2' }] })).toEqual('param1={"key":"k1","value":"v1"}&param1={"key":"k2","value":"v2"}');
         });
 
+        it('should serialize arrays with undefined values', () => {
+            expect(serializeParams({ param1: [1, undefined, 3] })).toEqual('param1=1&param1=undefined&param1=3');
+        });
+
         it('should not serialize empty arrays', () => {
             expect(serializeParams({ param1: [], param2: 'text' })).toEqual('param2=text');
         });
