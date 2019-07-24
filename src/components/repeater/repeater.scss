@@ -15,7 +15,10 @@ $m-repeater-spacing: $m-spacing;
         background-color: $m-color--white;
         position: relative;
         z-index: 3;
-        margin-bottom: $m-repeater-spacing;
+
+        &:not(.m--is-empty) {
+            margin-bottom: $m-repeater-spacing;
+        }
 
         &.m--is-empty {
             border: 1px solid transparent;
@@ -34,7 +37,6 @@ $m-repeater-spacing: $m-spacing;
 
     &__footer {
         display: block;
-        margin-top: $m-repeater-spacing;
         position: relative;
         z-index: 2;
         background-color: $m-color--white;
