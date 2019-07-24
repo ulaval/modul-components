@@ -8,7 +8,7 @@ import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import PlusPlugin from '../plus/plus';
-import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
+import AccordionTransitionPlugin, { MAccordionTransition } from '../transitions/accordion-transition/accordion-transition';
 import { MMenuItem } from './menu-item/menu-item';
 import WithRender from './menu.html?style=./menu.scss';
 
@@ -54,7 +54,7 @@ export class MMenu extends BaseMenu implements Menu {
     public $refs: {
         menu: HTMLElement;
         buttonMenu: HTMLElement;
-        transition: ModulVue
+        transition: MAccordionTransition
     };
 
     public animReady: boolean = false;
@@ -105,10 +105,8 @@ export class MMenu extends BaseMenu implements Menu {
                 items.push(item);
                 if (item.group) {
                     item.getGroupItem().forEach(groupItem => {
-                        if (groupItem instanceof MMenuItem) {
-                            groupItem.insideGroup = true;
-                            items.push(groupItem);
-                        }
+                        groupItem.insideGroup = true;
+                        items.push(groupItem);
                     });
                 }
             }

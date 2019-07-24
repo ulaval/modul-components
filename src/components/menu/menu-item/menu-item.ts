@@ -1,9 +1,9 @@
-import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
+import { MAccordionTransition } from '../../transitions/accordion-transition/accordion-transition';
 import { BaseMenu, Menu } from '../menu';
 import WithRender from './menu-item.html?style=./menu-item.scss';
 
@@ -35,7 +35,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     public disabled: boolean;
 
     $refs: {
-        transition: ModulVue;
+        transition: MAccordionTransition;
     };
 
     public group: boolean = false;
@@ -79,8 +79,10 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
         return this.internalOpen;
     }
 
-    public getGroupItem(): Vue[] {
-        return this.$refs.transition.$children;
+    public getGroupItem(): MMenuItem[] {
+        return this.$refs.transition.$children
+            .filter(child => child instanceof MMenuItem)
+            .map(child => child as MMenuItem);
     }
 
     public get isAnimReady(): boolean {
