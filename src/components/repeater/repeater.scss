@@ -4,11 +4,6 @@ $m-repeater-translate-offset: 50px;
 $m-repeater-spacing: $m-spacing;
 
 .m-repeater {
-    &.m--has-item-slot {
-        // To accommodate the capricious animation, but have no margin on the first element. ¯\_(ツ)_/¯
-        margin-top: -$m-repeater-spacing;
-    }
-
     ul {
         padding: 0;
         margin: 0;
@@ -20,7 +15,7 @@ $m-repeater-spacing: $m-spacing;
         background-color: $m-color--white;
         position: relative;
         z-index: 3;
-        margin-top: $m-repeater-spacing;
+        margin-bottom: $m-repeater-spacing;
 
         &.m--is-empty {
             border: 1px solid transparent;
@@ -39,7 +34,7 @@ $m-repeater-spacing: $m-spacing;
 
     &__footer {
         display: block;
-        padding-top: $m-repeater-spacing;
+        margin-top: $m-repeater-spacing;
         position: relative;
         z-index: 2;
         background-color: $m-color--white;

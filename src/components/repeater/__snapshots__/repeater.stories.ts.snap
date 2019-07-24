@@ -2,7 +2,7 @@
 
 exports[`Storyshots components|m-repeater Empty 1`] = `
 <div
-  class="m-repeater m--has-item-slot"
+  class="m-repeater"
 >
   <ul
     class="m-repeater__list"
@@ -25,7 +25,7 @@ exports[`Storyshots components|m-repeater Empty 1`] = `
 
 exports[`Storyshots components|m-repeater Operations 1`] = `
 <div
-  class="m-repeater m--has-item-slot"
+  class="m-repeater"
 >
   <ul
     class="m-repeater__list"
@@ -67,7 +67,7 @@ exports[`Storyshots components|m-repeater Operations 1`] = `
 
 exports[`Storyshots components|m-repeater With items (Custom item template) 1`] = `
 <div
-  class="m-repeater m--has-item-slot"
+  class="m-repeater"
 >
   <ul
     class="m-repeater__list"

@@ -127,10 +127,6 @@ export class MRepeater extends ModulVue {
     get hasRowSlot(): boolean {
         return !!this.$scopedSlots.row;
     }
-
-    get hasItemSlot(): boolean {
-        return !!this.$scopedSlots.item;
-    }
 }
 
 const RepeaterPlugin: PluginObject<any> = {
