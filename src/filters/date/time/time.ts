@@ -39,6 +39,7 @@ function getLocalDateTime(time: SupportedTimeTypes): Date | undefined {
             const datePart: string = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
             const timePart: string = !time.includes(':') ? `${time.padStart(2, '0')}:00:00` : time.split(':').length === 2 ? `${time}:00` : time;
             date = new Date(`${datePart}T${timePart}Z`);
+            date.setHours(date.getHours() + date.getTimezoneOffset() / 60);
         }
         return isNaN(date as any) ? undefined : date;
     } catch {
@@ -70,8 +71,6 @@ export const timeFilter: (time: SupportedTimeTypes, options?: TimeFilterOptions)
 
     const date: Date | undefined = getLocalDateTime(time);
     if (date) {
-        date.setHours(date.getHours() + date.getTimezoneOffset() / 60);
-
         const intlOptions: Intl.DateTimeFormatOptions = {
             hour: 'numeric',
             minute: date.getMinutes() !== 0 ? 'numeric' : undefined

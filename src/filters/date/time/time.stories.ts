@@ -84,14 +84,19 @@ storiesOf(`${filtersHierarchyRootSeparator}${TIME_NAME}`, module)
     )
     .add('Simple (from Dates)', () => getBaseSimpleVue(`
         <div>
-            <div>at the top of the hour a.m. (11:00): {{ new Date('2019-06-23T11:00:00Z') | f-m-time({ preposition }) }}</div>
-            <div>hour with minutes a.m. (11:59): {{ new Date('2019-06-23T11:59:00Z') | f-m-time({ preposition }) }}</div>
-            <div>at the top of the hour p.m. (14:00): {{ new Date('2019-06-23T14:00:00Z') | f-m-time({ preposition }) }}</div>
-            <div>hour with minutes p.m. (14:59): {{ new Date('2019-06-23T14:59:00Z') | f-m-time({ preposition }) }}</div>
-            <div>hours and minutes single digit (04:04): {{ new Date('2019-06-23T04:04:00Z') | f-m-time({ preposition }) }}</div>
-            <div>Midnight (00:00): {{ new Date('2019-06-23T00:00:00Z') | f-m-time({ preposition }) }}</div>
-            <div>Midnight with minutes (00:59): {{ new Date('2019-06-23T00:59:00Z') | f-m-time({ preposition }) }}</div>
-            <div>Noon (12:00): {{ new Date('2019-06-23T12:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>at the top of the hour a.m. (11:00): {{ new Date('2019-06-23T15:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>hour with minutes a.m. (11:59): {{ new Date('2019-06-23T15:59:00Z') | f-m-time({ preposition }) }}</div>
+            <div>at the top of the hour p.m. (14:00): {{ new Date('2019-06-23T18:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>hour with minutes p.m. (14:59): {{ new Date('2019-06-23T18:59:00Z') | f-m-time({ preposition }) }}</div>
+            <div>hours and minutes single digit (04:04): {{ new Date('2019-06-23T08:04:00Z') | f-m-time({ preposition }) }}</div>
+            <div>Midnight (00:00): {{ new Date('2019-06-23T04:00:00Z') | f-m-time({ preposition }) }}</div>
+            <div>Midnight with minutes (00:59): {{ new Date('2019-06-23T04:59:00Z') | f-m-time({ preposition }) }}</div>
+            <div>Noon (12:00): {{ new Date('2019-06-23T16:00:00Z') | f-m-time({ preposition }) }}</div>
+        </div>`)
+    )
+    .add('Complex (from Dates)', () => getBaseSimpleVue(`
+        <div>
+            <div>iso string with offset (10:58): {{ new Date('2019-07-19T10:58:38.107-04:00') | f-m-time({ preposition }) }}</div>
         </div>`)
     )
     .add('Period (from strings)', () => getBasePeriodVue(`

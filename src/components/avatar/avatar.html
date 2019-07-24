@@ -1,0 +1,20 @@
+<div class="m-avatar"
+     :class="{ 'm--is-clickable': this.clickable }"
+     :style="sizeStyle"
+     @click="onClick"
+     @keydown.enter="onClick"
+     @mouseover="setHover(true)"
+     @mouseleave="setHover(false)"
+     @focus="setHover(true)"
+     @blur="setHover(false)"
+     :tabindex="tabindex"
+     ref="avatar">
+    <slot>
+        <m-icon class="m-avatar__default-image"
+                :class="{ 'm--is-avatar-large': !isSmall }"
+                :name="defaultAvatar"
+                :size="size"></m-icon>
+    </slot>
+    <slot name="content"
+          :hover="hover"></slot>
+</div>

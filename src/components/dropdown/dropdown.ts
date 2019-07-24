@@ -41,8 +41,6 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     @Prop()
     public value: any;
     @Prop()
-    public placeholder: string;
-    @Prop()
     public filterable: boolean;
     @Prop()
     public textNoData: string;
@@ -254,6 +252,22 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
         this.setInputWidth();
     }
 
+    private get internalPlaceholder(): string {
+        if (this.as<InputState>().isReadonly) {
+            return '';
+        } else {
+            return this.as<InputManagement>().placeholder;
+        }
+    }
+
+    private get internallLabelUp(): boolean {
+        if (this.as<InputState>().isReadonly) {
+            return true;
+        } else {
+            return this.as<InputLabel>().labelUp;
+        }
+    }
+
     private portalMounted(): void {
         this.buildItemsMap();
 
@@ -365,7 +379,7 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     public get inactive(): boolean {
-        return this.as<InputState>().isDisabled || this.as<InputState>().isWaiting;
+        return this.as<InputState>().isDisabled || this.as<InputState>().isReadonly || this.as<InputState>().isWaiting;
     }
 
     private get hasFooterSlot(): boolean {
@@ -541,25 +555,27 @@ export class MDropdown extends BaseDropdown implements MDropdownInterface {
     }
 
     private get hasPointer(): boolean {
-        return !this.filterable || (this.filterable && !this.open);
+        return !this.as<InputState>().isDisabled &&
+            !this.as<InputState>().isReadonly &&
+            (!this.filterable || (this.filterable && !this.open));
     }
 
     private get hasPlaceholderIcon(): boolean {
         if (UserAgentUtil.isEdge() && !UserAgentUtil.isBlink()) {
-            return this.filterable && this.selectedText === '' && this.isEdgeSupport;
+            return this.filterable && this.selectedText === '' && !this.as<InputState>().isReadonly && this.isEdgeSupport;
         } else if (UserAgentUtil.isGecko() && !UserAgentUtil.isBlink()) {
-            return this.filterable && this.selectedText === '' && this.isFirefoxSupport;
+            return this.filterable && this.selectedText === '' && !this.as<InputState>().isReadonly && this.isFirefoxSupport;
         } else {
-            return this.filterable && this.selectedText === '';
+            return this.filterable && this.selectedText === '' && !this.as<InputState>().isReadonly;
         }
     }
 
     private get isEdgeSupport(): boolean {
-        return UserAgentUtil.isEdge() && this.placeholder === '' || this.placeholder === undefined;
+        return UserAgentUtil.isEdge() && this.as<InputManagement>().placeholder === '' || this.as<InputManagement>().placeholder === undefined;
     }
 
     private get isFirefoxSupport(): boolean {
-        return UserAgentUtil.isGecko() && this.placeholder === '' || this.placeholder === undefined;
+        return UserAgentUtil.isGecko() && this.as<InputManagement>().placeholder === '' || this.as<InputManagement>().placeholder === undefined;
     }
 
 }

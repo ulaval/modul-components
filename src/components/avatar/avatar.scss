@@ -1,0 +1,18 @@
+@import 'commons';
+
+.m-avatar {
+    overflow: hidden;
+    position: relative;
+    color: $m-color--grey;
+    border-radius: 50%;
+    outline: none;
+
+    &.m--is-clickable {
+        cursor: pointer;
+    }
+
+    .m--is-avatar-large {
+        background: $m-color--grey-light;
+        color: $m-color--white;
+    }
+}
