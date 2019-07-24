@@ -7,7 +7,6 @@ import { InputStateMixin } from '../input-state/input-state';
 export interface InputManagementProps {
     value: string;
     placeholder: string;
-    readonly: boolean;
     focus: boolean;
 }
 
@@ -28,8 +27,6 @@ export class InputManagement extends ModulVue
     public value: string;
     @Prop()
     public placeholder: string;
-    @Prop()
-    public readonly: boolean;
     @Prop()
     public autocomplete: string;
     @Prop()
