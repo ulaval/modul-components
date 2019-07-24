@@ -3,6 +3,7 @@ import { Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
+import { MAccordionTransition } from '../../transitions/accordion-transition/accordion-transition';
 import { BaseMenu, Menu } from '../menu';
 import WithRender from './menu-item.html?style=./menu-item.scss';
 
@@ -34,14 +35,13 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     public disabled: boolean;
 
     $refs: {
-        transition: ModulVue;
+        transition: MAccordionTransition;
     };
 
     public group: boolean = false;
     public selected: boolean = false;
     public groupSelected: boolean = false;
     public insideGroup = false;
-    // should be initialized to be reactive
     // tslint:disable-next-line:no-null-keyword
     public menuRoot: Menu | null = null;
     // tslint:disable-next-line:no-null-keyword
@@ -77,6 +77,12 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
 
     public get propOpen(): boolean {
         return this.internalOpen;
+    }
+
+    public getGroupItem(): MMenuItem[] {
+        return this.$refs.transition.$children
+            .filter(child => child instanceof MMenuItem)
+            .map(child => child as MMenuItem);
     }
 
     public get isAnimReady(): boolean {
