@@ -7,9 +7,11 @@
                     @change="onSelect"
                     v-model="selection">
         <template slot-scope="{item}">
-            <div :class="item.classesToggle">
-                <b>{{ item.label }}</b>
-                <div v-html="item.description"></div>
-            </div>
-        </template></m-autocomplete>
+            <span :class="item.classesToggle">
+                <span class="m-address-lookup-field__address">{{ item.label }}</span>
+                <span class="m-address-lookup-field__further-information"
+                      v-html="item.description"></span>
+            </span>
+        </template>
+    </m-autocomplete>
 </div>
