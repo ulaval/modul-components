@@ -67,24 +67,46 @@ describe('MAvatar', () => {
     });
 
     describe(`When mouseover`, () => {
-        it(`should call mouseOver()`, () => {
+        it(`should call setHover(true)`, () => {
             initializeShallowWrapper();
 
-            wrapper.setMethods({ onMouseOver: jest.fn() });
+            wrapper.setMethods({ setHover: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseover');
 
-            expect(wrapper.vm.onMouseOver).toHaveBeenCalledTimes(1);
+            expect(wrapper.vm.setHover).toHaveBeenCalledWith(true);
         });
     });
 
     describe(`When mouseleave`, () => {
-        it(`should call mouseLeave()`, () => {
+        it(`should call setHover(false)`, () => {
             initializeShallowWrapper();
 
-            wrapper.setMethods({ onMouseLeave: jest.fn() });
+            wrapper.setMethods({ setHover: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseleave');
 
-            expect(wrapper.vm.onMouseLeave).toHaveBeenCalledTimes(1);
+            expect(wrapper.vm.setHover).toHaveBeenCalledWith(false);
+        });
+    });
+
+    describe(`When focus`, () => {
+        it(`should call setHover(true)`, () => {
+            initializeShallowWrapper();
+
+            wrapper.setMethods({ setHover: jest.fn() });
+            wrapper.find(REF_AVATAR).trigger('focus');
+
+            expect(wrapper.vm.setHover).toHaveBeenCalledWith(true);
+        });
+    });
+
+    describe(`When blur`, () => {
+        it(`should call setHover(false)`, () => {
+            initializeShallowWrapper();
+
+            wrapper.setMethods({ setHover: jest.fn() });
+            wrapper.find(REF_AVATAR).trigger('blur');
+
+            expect(wrapper.vm.setHover).toHaveBeenCalledWith(false);
         });
     });
 

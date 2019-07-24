@@ -44,12 +44,12 @@ export class MAvatar extends Vue {
         return this.size === MAvatarSize.SMALL;
     }
 
-    onMouseOver(): void {
-        this.hover = true;
+    get tabindex(): number {
+        return this.clickable ? 0 : -1;
     }
 
-    onMouseLeave(): void {
-        this.hover = false;
+    setHover(isHover: boolean): void {
+        this.hover = isHover;
     }
 
     onClick(): void {

@@ -3,9 +3,11 @@
      :style="sizeStyle"
      @click="onClick"
      @keydown.enter="onClick"
-     @mouseover="onMouseOver"
-     @mouseleave="onMouseLeave"
-     tabindex="0"
+     @mouseover="setHover(true)"
+     @mouseleave="setHover(false)"
+     @focus="setHover(true)"
+     @blur="setHover(false)"
+     :tabindex="tabindex"
      ref="avatar">
     <slot>
         <m-icon class="m-avatar__default-image"
