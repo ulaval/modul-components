@@ -23,10 +23,10 @@ export class MSlideTransition extends ModulVue {
     public scrollToOffset: number; // the offset to add (in case of a sticky header)
 
     @Prop({ default: true })
-    public transition: boolean;
+    public disabled: boolean;
 
     public get transitionName(): string | undefined {
-        return this.transition ? 'm--is' : undefined;
+        return !this.disabled ? 'm--is' : undefined;
     }
 
     public get isLeftToRight(): boolean {
@@ -35,7 +35,7 @@ export class MSlideTransition extends ModulVue {
 
     @Emit('enter')
     private transitionEnter(el: HTMLElement, done): void {
-        if (this.transition) {
+        if (!this.disabled) {
             this.$scrollTo.goTo(this.$el as HTMLElement, this.scrollToOffset, ScrollToDuration.Regular);
             setTimeout(() => {
                 this.transitionBeforeLeave(el);

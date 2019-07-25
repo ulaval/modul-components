@@ -15,14 +15,14 @@ export class MAccordionTransition extends ModulVue {
     public heightDelta: number;
 
     @Prop({ default: true })
-    public transition: boolean;
+    public disabled: boolean;
 
     public setClassHasTransition(el: HTMLElement): void {
         if (!el.classList.contains(ACCORDION_TRANSITION_NAME)) {
             el.classList.add(ACCORDION_TRANSITION_NAME);
         }
 
-        if (this.transition) {
+        if (!this.disabled) {
             el.classList.add(CLASS_HAS_TRANSITION);
         } else if (el.classList.contains(CLASS_HAS_TRANSITION)) {
             el.classList.remove(CLASS_HAS_TRANSITION);

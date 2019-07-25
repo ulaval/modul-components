@@ -42,7 +42,7 @@
                 ref="plus"
                 v-if="group"></m-plus>
     </span>
-    <m-accordion-transition :transition="isAnimReady"
+    <m-accordion-transition :disabled="!isAnimReady"
                             ref="transition">
         <ul :id="ariaControls"
             class="m-menu-item__group"
