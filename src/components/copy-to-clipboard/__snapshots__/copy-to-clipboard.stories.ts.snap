@@ -2,9 +2,6 @@
 
 exports[`Storyshots components|m-copy-to-clipboard States 1`] = `
 <div>
-  
-                HUH false
-                
   <div>
     <div
       class="m-copy-to-clipboard"
@@ -210,11 +207,11 @@ exports[`Storyshots components|m-copy-to-clipboard States 1`] = `
       class="m-copy-to-clipboard"
     >
       <div
-        class="m-textfield m--is-readonly m--is-type-text"
+        class="m-textfield m--is-waiting m--is-type-text"
         style="width: 100%;"
       >
         <div
-          class="m-input-style m--is-readonly m--is-tag-default"
+          class="m-input-style m--is-waiting m--is-tag-default"
           style="margin-top: 10px;"
         >
           <div
@@ -244,10 +241,10 @@ exports[`Storyshots components|m-copy-to-clipboard States 1`] = `
                 >
                   <input
                     class="m-textfield__input"
+                    disabled="disabled"
                     id="mTextfield-uuid"
                     maxlength="Infinity"
                     placeholder="Waiting"
-                    readonly="readonly"
                     type="text"
                   />
                     
@@ -262,24 +259,14 @@ exports[`Storyshots components|m-copy-to-clipboard States 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
-                  <a
-                    class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
-                    href="#"
-                    tabindex="0"
+                    
+                  <div
+                    class="m-spinner m-input-style__spinner"
                   >
                     <!---->
                      
-                    <span
-                      class="m-link__text"
-                    >
-                      Copier
-                    </span>
-                     
-                    <!---->
-                  </a>
-                   
-                  <!---->
+                    <div />
+                  </div>
                 </div>
               </div>
             </div>
