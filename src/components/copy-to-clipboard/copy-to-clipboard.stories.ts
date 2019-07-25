@@ -23,28 +23,15 @@ storiesOf(`${componentsHierarchyRootSeparator}${COPY_TO_CLIPBOARD_NAME}`, module
     .add('States', () => ({
         template: `
             <div>
-                HUH {{ waiting }}
                 <div><${componentName} v-model="value" :disabled="true" :placeholder="'Disabled'" /></div>
                 <div><${componentName} v-model="value" :placeholder="'Read-only'" :readonly="true" /></div>
-                <div><${componentName} v-model="value" :placeholder="'Waiting'" :waiting="waiting" /></div>
+                <div><${componentName} v-model="value" :placeholder="'Waiting'" :waiting="true" /></div>
                 <button @click="test">Test</button>
             </div>
         `,
         data: () => ({
-            value: undefined,
-            waiting: false
-        }),
-        methods: {
-            test(): void {
-                // tslint:disable-next-line:no-console
-                console.log('huh');
-                const test: any = this;
-                test.waiting = true;
-                setTimeout(function(): void {
-                    test.waiting = false;
-                }, 3000);
-            }
-        }
+            value: undefined
+        })
     }))
     .add('user feedback', () => ({
         template: `
