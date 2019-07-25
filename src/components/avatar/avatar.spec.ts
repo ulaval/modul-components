@@ -66,6 +66,17 @@ describe('MAvatar', () => {
         });
     });
 
+    describe(`When keyup.tab.enter`, () => {
+        it(`should call focusDisplay(true)`, () => {
+            initializeShallowWrapper();
+
+            wrapper.setMethods({ focusDisplay: jest.fn() });
+            wrapper.find(REF_AVATAR).trigger('keyup.tab');
+
+            expect(wrapper.vm.focusDisplay).toHaveBeenCalledWith(true);
+        });
+    });
+
     describe(`When mouseover`, () => {
         it(`should call setHover(true)`, () => {
             initializeShallowWrapper();

@@ -27,7 +27,8 @@ export class MAvatar extends Vue {
     @Prop({ default: false })
     clickable: boolean;
 
-    hover: boolean = false;
+    isHover: boolean = false;
+    isFocusVisible: boolean = false;
 
     get sizeStyle(): { [property: string]: string } {
         return {
@@ -48,11 +49,24 @@ export class MAvatar extends Vue {
         return this.clickable ? 0 : -1;
     }
 
-    setHover(isHover: boolean): void {
-        this.hover = isHover;
+    get interactionClass(): { [property: string]: boolean } {
+        return {
+            'm--is-clickable': this.clickable,
+            'm--is-focus-visible': this.isFocusVisible
+        };
+    }
+
+    setHover(hover: boolean): void {
+        this.focusDisplay(false);
+        this.isHover = hover;
+    }
+
+    focusDisplay(focusVisible: boolean): void {
+        this.isFocusVisible = focusVisible;
     }
 
     onClick(): void {
+        this.focusDisplay(false);
         if (this.clickable) {
             this.emitClick();
         }

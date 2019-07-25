@@ -5,10 +5,13 @@
     position: relative;
     color: $m-color--grey;
     border-radius: 50%;
-    outline: none;
 
     &.m--is-clickable {
         cursor: pointer;
+    }
+
+    &:not(.m--is-focus-visible) {
+        outline: none;
     }
 
     .m--is-avatar-large {
