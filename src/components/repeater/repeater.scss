@@ -1,6 +1,7 @@
 @import 'commons';
 
 $m-repeater-translate-offset: 50px;
+$m-repeater-spacing: $m-spacing;
 
 .m-repeater {
     ul {
@@ -12,13 +13,16 @@ $m-repeater-translate-offset: 50px;
         display: flex;
         align-items: center;
         background-color: $m-color--white;
-        margin-top: $m-spacing;
         position: relative;
         z-index: 3;
 
+        &:not(.m--is-empty) {
+            margin-bottom: $m-repeater-spacing;
+        }
+
         &.m--is-empty {
             border: 1px solid transparent;
-            padding: $m-spacing;
+            padding: $m-repeater-spacing;
             z-index: 1;
         }
     }
@@ -26,14 +30,13 @@ $m-repeater-translate-offset: 50px;
     &__col {
         &:first-child {
             border: 1px solid $m-color--border;
-            padding: $m-spacing;
+            padding: $m-repeater-spacing;
             flex: 1;
         }
     }
 
     &__footer {
         display: block;
-        padding: $m-spacing;
         position: relative;
         z-index: 2;
         background-color: $m-color--white;

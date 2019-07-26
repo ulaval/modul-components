@@ -1,6 +1,7 @@
 <div class="m-dropdown"
      :class="{ 'm--is-open': open,
                'm--is-disabled': isDisabled,
+               'm--is-readonly': isReadonly,
                'm--is-waiting': isWaiting,
                'm--has-placeholder-icon': hasPlaceholderIcon,
                'm--has-validation-message': hasValidationMessage }"
@@ -10,9 +11,10 @@
                    :label="label"
                    :label-for="id"
                    :disabled="isDisabled"
+                   :readonly="isReadonly"
                    :waiting="isWaiting"
                    :focus="internalIsFocus"
-                   :label-up="labelUp"
+                   :label-up="internallLabelUp"
                    :empty="isEmpty"
                    :error="hasError"
                    :cursor-pointer="hasPointer"
@@ -35,8 +37,8 @@
                :aria-controls="ariaControls"
                :aria-expanded="open"
                :disabled="!active"
-               :readonly="!filterable"
-               :placeholder="placeholder"
+               :readonly="!filterable || isReadonly"
+               :placeholder="internalPlaceholder"
                :maxlength="maxLength"
                :autocomplete="autocomplete"
                @keydown.enter.prevent="onKeydownEnter"
@@ -54,7 +56,7 @@
                   v-if="width === 'auto'">{{ selectedText }}</template>
         <div class="m-dropdown__arrow"
              :class="{ 'm--is-open': open }"
-             v-if="active && showArrowIcon"
+             v-if="showArrowIcon"
              slot="suffix">
             <m-icon class="m-dropdown__arrow__icon"
                     ref="arrow"

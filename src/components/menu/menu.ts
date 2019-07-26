@@ -1,4 +1,4 @@
-import Vue, { PluginObject } from 'vue';
+import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
@@ -8,7 +8,7 @@ import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
 import PlusPlugin from '../plus/plus';
-import AccordionTransitionPlugin from '../transitions/accordion-transition/accordion-transition';
+import AccordionTransitionPlugin, { MAccordionTransition } from '../transitions/accordion-transition/accordion-transition';
 import { MMenuItem } from './menu-item/menu-item';
 import WithRender from './menu.html?style=./menu.scss';
 
@@ -54,6 +54,7 @@ export class MMenu extends BaseMenu implements Menu {
     public $refs: {
         menu: HTMLElement;
         buttonMenu: HTMLElement;
+        transition: MAccordionTransition
     };
 
     public animReady: boolean = false;
@@ -99,15 +100,13 @@ export class MMenu extends BaseMenu implements Menu {
 
     private buildItemsMap(): void {
         let items: MMenuItem[] = [];
-        this.$children.forEach(item => {
+        this.$refs.transition.$children.forEach(item => {
             if (item instanceof MMenuItem) {
                 items.push(item);
                 if (item.group) {
-                    (item as Vue).$children.forEach(groupItem => {
-                        if (groupItem instanceof MMenuItem) {
-                            groupItem.insideGroup = true;
-                            items.push(groupItem);
-                        }
+                    item.getGroupItem().forEach(groupItem => {
+                        groupItem.insideGroup = true;
+                        items.push(groupItem);
                     });
                 }
             }

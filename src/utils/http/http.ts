@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
-import qs from 'qs/lib';
 import { PluginObject } from 'vue';
 import { WindowErrorHandler } from '../errors/window-error-handler';
 import * as strUtils from '../str/str';
+import { serializeParams } from './http-param-serializer';
 import { RequestConfig, RestAdapter } from './rest';
 
 const AUTHORIZATION_HEADER: string = 'Authorization';
@@ -115,14 +115,12 @@ export class HttpService implements RestAdapter {
                 };
             }
 
-            axiosConfig.data = qs.stringify(config.formParams, { arrayFormat: 'repeat' });
+            axiosConfig.data = serializeParams(config.formParams);
         } else {
             axiosConfig.data = config.data;
         }
 
-        axiosConfig.paramsSerializer = params => {
-            return qs.stringify(params, { arrayFormat: 'repeat' });
-        };
+        axiosConfig.paramsSerializer = params => serializeParams(params);
 
         return axiosConfig;
     }

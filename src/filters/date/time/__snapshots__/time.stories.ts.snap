@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots filters|f-m-time Complex (from Dates) 1`] = `
+<div>
+  <div>
+    iso string with offset (10:58): mock-intl-dateTimeFormat-{"hour":"numeric","minute":"numeric"}}
+  </div>
+</div>
+`;
+
 exports[`Storyshots filters|f-m-time Period (from dates) 1`] = `
 <div>
   <div>
