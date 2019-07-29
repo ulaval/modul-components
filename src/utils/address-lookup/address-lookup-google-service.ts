@@ -8,7 +8,7 @@ import { AddressLookupToAddressSummary, AddressRetrieveToAddress } from './addre
 
 export default class AddressLookupGoogleService implements AddressLookupService {
     private readonly googleAPI: GoogleAPI;
-    private sessionToken: google.maps.places.AutocompleteSessionToken;
+    private sessionToken?: google.maps.places.AutocompleteSessionToken;
 
     constructor(private axios: AxiosInstance, private key: string) {
         this.googleAPI = new GoogleAPI(this.key);
@@ -38,6 +38,7 @@ export default class AddressLookupGoogleService implements AddressLookupService 
         };
 
         const results: google.maps.places.PlaceResult[] = await this.googleAPI.promisifyFetch((await this.googleAPI.placesService).getDetails, request);
+        this.discardToken();
         return results
             .map((prediction: google.maps.places.PlaceResult) => new GoogleRetrieveResponseBuilder()
                 .setRequest(request)
@@ -46,9 +47,14 @@ export default class AddressLookupGoogleService implements AddressLookupService 
                 .mapTo(new AddressRetrieveToAddress()));
     }
 
-    async ensureCreateToken(): Promise<void> {
+    private async ensureCreateToken(): Promise<void> {
         const token: google.maps.places.AutocompleteSessionToken = !this.sessionToken ? await this.googleAPI.createToken() : this.sessionToken;
         this.sessionToken = token;
+    }
+
+    private discardToken(): void {
+        // The moment at which the token should be discarded is still unclear.  It might get moved later.
+        this.sessionToken = undefined;
     }
 }
 
