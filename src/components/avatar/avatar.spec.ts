@@ -121,5 +121,54 @@ describe('MAvatar', () => {
         });
     });
 
+    describe(`When touchend`, () => {
+        it(`should call onTouchend()`, () => {
+            propsClickable = false;
+            initializeShallowWrapper();
+
+            wrapper.setMethods({ onTouchend: jest.fn() });
+            wrapper.find(REF_AVATAR).trigger('touchend');
+
+            expect(wrapper.vm.onTouchend).toHaveBeenCalledTimes(1);
+        });
+
+        describe(`when clickable = true`, () => {
+
+            beforeEach(() => {
+                propsClickable = true;
+                initializeShallowWrapper();
+            });
+
+            describe(`and the avatar is not touched`, () => {
+                it(`should not emit touch`, () => {
+                    wrapper.vm.isTouched = false;
+
+                    wrapper.vm.onTouchend();
+
+                    expect(wrapper.emitted('touch')).toBeUndefined();
+                });
+            });
+
+            describe(`and the avatar is touched`, () => {
+                it(`should emit touch`, () => {
+                    wrapper.vm.isTouched = true;
+
+                    wrapper.vm.onTouchend();
+
+                    expect(wrapper.emitted('touch')).toBeDefined();
+                });
+            });
+        });
+
+        describe(`when clickable = false`, () => {
+            it(`should not emit touch`, () => {
+                initializeShallowWrapper();
+                wrapper.vm.onTouchend();
+
+                expect(wrapper.emitted('touch')).toBeUndefined();
+            });
+        });
+    });
+
 });
 

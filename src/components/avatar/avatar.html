@@ -4,6 +4,7 @@
      :tabindex="tabindex"
      @click="onClick"
      @keydown.enter="onClick"
+     @touchend.prevent="onTouchend"
      @keyup.tab="focusDisplay(true)"
      @mouseover="setHover(true)"
      @mouseleave="setHover(false)"
@@ -17,5 +18,5 @@
                 :size="size"></m-icon>
     </slot>
     <slot name="content"
-          :hover="isHover"></slot>
+          :content-visible="showContent"></slot>
 </div>
