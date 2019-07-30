@@ -52,6 +52,10 @@ describe('http serializer', () => {
             expect(serializeParams({ param1: { a1: 'text', a2: 33, a3: true } })).toEqual('param1={"a1":"text","a2":33,"a3":true}');
         });
 
+        it(`should encode values`, () => {
+            expect(serializeParams({ param1: 'lksjadf==#sjhdfdfas' })).toEqual('param1=lksjadf%3D%3D%23sjhdfdfas');
+        });
+
         it('should serialize dates', () => {
             // support DST
             expect(['param1=2019-07-23T00:00:00.000Z', 'param1=2019-07-23T04:00:00.000Z', 'param1=2019-07-23T05:00:00.000Z']).toContain(serializeParams({ param1: new Date(2019, 6, 23) }));
