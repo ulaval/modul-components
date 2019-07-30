@@ -17,6 +17,8 @@ export class MNavbarItem extends ModulVue {
     public value: string;
     @Prop()
     public disabled: boolean;
+    @Prop({ default: false })
+    readonly selected!: boolean;
     @Prop()
     public url: string | Location;
     @Prop()
@@ -116,19 +118,8 @@ export class MNavbarItem extends ModulVue {
         return this.disabled;
     }
 
-    private get isActiveLink(): boolean {
-        let currentUrl: string = window.location.pathname;
-        let currentRoot: string = currentUrl.trim().substr(1).split('/')[1];
-        let urlRoot: string = String(this.url).trim().substr(1).split('/')[1];
-
-        if (urlRoot) {
-            return urlRoot.indexOf(currentRoot) !== -1;
-        }
-        return false;
-    }
-
     public get isSelected(): boolean {
-        return (!!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model) || this.isActiveLink;
+        return (!!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model) || this.selected;
     }
 
     private get hasDefaultSlot(): boolean {
