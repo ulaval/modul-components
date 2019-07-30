@@ -120,7 +120,11 @@ export class MNavbarItem extends ModulVue {
         let currentUrl: string = window.location.pathname;
         let currentRoot: string = currentUrl.trim().substr(1).split('/')[1];
         let urlRoot: string = String(this.url).trim().substr(1).split('/')[1];
-        return urlRoot.indexOf(currentRoot) !== -1;
+
+        if (urlRoot) {
+            return urlRoot.indexOf(currentRoot) !== -1;
+        }
+        return false;
     }
 
     public get isSelected(): boolean {
