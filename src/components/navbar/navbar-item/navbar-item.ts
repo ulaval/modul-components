@@ -18,7 +18,7 @@ export class MNavbarItem extends ModulVue {
     @Prop()
     public disabled: boolean;
     @Prop({ default: false })
-    readonly selected!: boolean;
+    readonly isSelectedItem!: boolean;
     @Prop()
     public url: string | Location;
     @Prop()
@@ -119,7 +119,7 @@ export class MNavbarItem extends ModulVue {
     }
 
     public get isSelected(): boolean {
-        return (!!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model) || this.selected;
+        return (!!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model) || this.isSelectedItem;
     }
 
     private get hasDefaultSlot(): boolean {

@@ -3,7 +3,7 @@
              'm--is-disabled': disabled }"
         role="menuitem">
         <router-link class="m-navbar-item__contents"
-                     :class="{'router-link-active': selected }"
+                     :class="{'router-link-active': isSelectedItem }"
                      ref="item"
                      :to="url"
                      v-if="url && !disabled"
