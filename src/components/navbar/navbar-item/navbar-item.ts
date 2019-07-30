@@ -117,8 +117,10 @@ export class MNavbarItem extends ModulVue {
     }
 
     private get isActiveLink(): boolean {
-        const currentUrl: string = window.location.pathname;
-        return currentUrl.indexOf(String(this.url)) !== -1;
+        let currentUrl: string = window.location.pathname;
+        let currentRoot: string = currentUrl.trim().substr(1).split('/')[1];
+        let urlRoot: string = String(this.url).trim().substr(1).split('/')[1];
+        return urlRoot.indexOf(currentRoot) !== -1;
     }
 
     public get isSelected(): boolean {
