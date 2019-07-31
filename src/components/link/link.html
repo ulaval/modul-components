@@ -17,6 +17,7 @@
         <m-icon :name="propIconName"
                 :size="iconSize"
                 class="m-link__icon"
+                :class="{ 'm-link__icon--with-stroke': withStroke }"
                 v-if="hasIcon"
                 aria-hidden="true"></m-icon>
         <span class="m-link__text">
@@ -44,6 +45,7 @@
        :tabindex="disabled ? '-1' : tabindex"
        ref="link">
         <m-icon class="m-link__icon"
+                :class="{ 'm-link__icon--with-stroke': withStroke }"
                 :name="propIconName"
                 :size="iconSize"
                 v-if="hasIcon"

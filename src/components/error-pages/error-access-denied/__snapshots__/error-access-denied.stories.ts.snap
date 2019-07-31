@@ -156,7 +156,7 @@ exports[`Storyshots components|m-error-access-denied links 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m-link__icon--with-stroke"
               height="12px"
               width="12px"
             >
@@ -190,7 +190,7 @@ exports[`Storyshots components|m-error-access-denied links 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m-link__icon--with-stroke"
               height="12px"
               width="12px"
             >

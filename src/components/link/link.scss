@@ -89,6 +89,9 @@
         display: inline-flex;
         flex-shrink: 0;
         vertical-align: middle;
+    }
+
+    &__icon--with-stroke {
         stroke-width: 2px;
     }
 
