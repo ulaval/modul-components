@@ -116,13 +116,8 @@ export class MNavbarItem extends ModulVue {
         return this.disabled;
     }
 
-    private get isActiveLink(): boolean {
-        const currentUrl: string = window.location.pathname;
-        return currentUrl.indexOf(String(this.url)) !== -1;
-    }
-
     public get isSelected(): boolean {
-        return (!!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model) || this.isActiveLink;
+        return !!this.parentNavbar && !this.disabled && this.value === this.parentNavbar.model;
     }
 
     private get hasDefaultSlot(): boolean {
