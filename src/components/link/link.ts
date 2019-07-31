@@ -83,6 +83,12 @@ export class MLink extends ModulVue {
     @Prop({ default: '0' })
     public tabindex: string;
 
+    protected created(): void {
+        if (this.icon && !this.iconName) {
+            this.iconSize = '12px';
+        }
+    }
+
     protected mounted(): void {
         this.isButtonChanged(this.mode === MLinkMode.Button);
     }
