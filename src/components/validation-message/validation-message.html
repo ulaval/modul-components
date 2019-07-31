@@ -1,6 +1,6 @@
 <div class="m-validation-message"
      @click="onClick">
-    <m-accordion-transition :transition="transition">
+    <m-accordion-transition :disabled="!transition">
         <p :class="['m-validation-message__' + classMessage]"
            v-if="message">
             <m-icon class="m-validation-message__icon"
@@ -12,7 +12,7 @@
                   v-html="message"></span>
         </p>
     </m-accordion-transition>
-    <m-accordion-transition :transition="transition">
+    <m-accordion-transition :disabled="!transition">
         <p class="m-validation-message__helper"
            v-if="hasHelperMessage"
            v-html="helperMessage"></p>
