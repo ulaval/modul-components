@@ -43,7 +43,7 @@ exports[`Storyshots components|m-link icon 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon m-link__icon--with-stroke"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="24px"
     width="24px"
   >
@@ -103,7 +103,7 @@ exports[`Storyshots components|m-link icon-position="right" 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon m-link__icon--with-stroke"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="24px"
     width="24px"
   >
@@ -133,7 +133,7 @@ exports[`Storyshots components|m-link icon-size 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon m-link__icon--with-stroke"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="20px"
     width="20px"
   >
@@ -359,7 +359,7 @@ exports[`Storyshots components|m-link/skin="light" icon 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="m-icon m-link__icon m-link__icon--with-stroke"
+      class="m-icon m-link__icon m--has-large-stroke"
       height="24px"
       width="24px"
     >
@@ -423,7 +423,7 @@ exports[`Storyshots components|m-link/skin="light" icon-position="right" 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="m-icon m-link__icon m-link__icon--with-stroke"
+      class="m-icon m-link__icon m--has-large-stroke"
       height="24px"
       width="24px"
     >
@@ -455,7 +455,7 @@ exports[`Storyshots components|m-link/skin="light" icon-size="20px" 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="m-icon m-link__icon m-link__icon--with-stroke"
+      class="m-icon m-link__icon m--has-large-stroke"
       height="20px"
       width="20px"
     >
@@ -504,7 +504,7 @@ exports[`Storyshots components|m-link/skin="text" icon 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon m-link__icon--with-stroke"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="24px"
     width="24px"
   >
