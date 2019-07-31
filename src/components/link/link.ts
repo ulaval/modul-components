@@ -116,8 +116,8 @@ export class MLink extends ModulVue {
         return this.mode === MLinkMode.RouterLink;
     }
 
-    private get withStroke(): boolean {
-        return (this.icon && (!this.iconName || this.iconName === '')) || this.iconName.includes('m-svg__chevron');
+    private get iconHasLargeStroke(): boolean {
+        return (this.icon && !this.iconName) || this.iconName.includes('m-svg__chevron');
     }
 
     private onKeyup(event): void {
