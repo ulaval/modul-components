@@ -42,6 +42,8 @@
     }
 
     &.m--is-collapsed /deep/ {
+        margin: -#{$m-input-style-rte--margin};
+
         .fr-box.fr-basic .fr-element {
             padding: 0;
             min-height: unset;
