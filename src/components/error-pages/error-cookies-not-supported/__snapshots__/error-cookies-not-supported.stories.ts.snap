@@ -55,8 +55,8 @@ exports[`Storyshots components|m-error-cookies-not-supported default 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -142,8 +142,8 @@ exports[`Storyshots components|m-error-cookies-not-supported hints 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -223,8 +223,8 @@ exports[`Storyshots components|m-error-cookies-not-supported links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -257,8 +257,8 @@ exports[`Storyshots components|m-error-cookies-not-supported links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -341,8 +341,8 @@ exports[`Storyshots components|m-error-cookies-not-supported title 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                

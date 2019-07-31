@@ -100,8 +100,8 @@ exports[`Storyshots components|m-error-technical-difficulty Error 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -226,8 +226,8 @@ exports[`Storyshots components|m-error-technical-difficulty default 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -352,8 +352,8 @@ exports[`Storyshots components|m-error-technical-difficulty errorDate (5 days be
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -478,8 +478,8 @@ exports[`Storyshots components|m-error-technical-difficulty errorReferenceNumber
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -605,8 +605,8 @@ exports[`Storyshots components|m-error-technical-difficulty hints 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -731,8 +731,8 @@ exports[`Storyshots components|m-error-technical-difficulty links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -765,8 +765,8 @@ exports[`Storyshots components|m-error-technical-difficulty links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -896,8 +896,8 @@ exports[`Storyshots components|m-error-technical-difficulty showStackTrace 1`] =
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                
@@ -1020,8 +1020,8 @@ exports[`Storyshots components|m-error-technical-difficulty title 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="12px"
-              width="12px"
+              height="16px"
+              width="16px"
             >
               <!---->
                

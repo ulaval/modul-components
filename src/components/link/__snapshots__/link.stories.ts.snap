@@ -44,8 +44,8 @@ exports[`Storyshots components|m-link icon 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon m-link__icon--with-stroke"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
@@ -74,8 +74,8 @@ exports[`Storyshots components|m-link icon-name 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
@@ -104,8 +104,8 @@ exports[`Storyshots components|m-link icon-position="right" 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon m-link__icon--with-stroke"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
@@ -201,8 +201,8 @@ exports[`Storyshots components|m-link target 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
@@ -360,8 +360,8 @@ exports[`Storyshots components|m-link/skin="light" icon 1`] = `
     <svg
       aria-hidden="true"
       class="m-icon m-link__icon m-link__icon--with-stroke"
-      height="12px"
-      width="12px"
+      height="16px"
+      width="16px"
     >
       <!---->
        
@@ -392,8 +392,8 @@ exports[`Storyshots components|m-link/skin="light" icon-name="m-svg__clock" 1`] 
     <svg
       aria-hidden="true"
       class="m-icon m-link__icon"
-      height="12px"
-      width="12px"
+      height="16px"
+      width="16px"
     >
       <!---->
        
@@ -424,8 +424,8 @@ exports[`Storyshots components|m-link/skin="light" icon-position="right" 1`] = `
     <svg
       aria-hidden="true"
       class="m-icon m-link__icon m-link__icon--with-stroke"
-      height="12px"
-      width="12px"
+      height="16px"
+      width="16px"
     >
       <!---->
        
@@ -505,8 +505,8 @@ exports[`Storyshots components|m-link/skin="text" icon 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon m-link__icon--with-stroke"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
@@ -535,8 +535,8 @@ exports[`Storyshots components|m-link/skin="text" icon-name="m-svg__clock" 1`] =
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
@@ -565,8 +565,8 @@ exports[`Storyshots components|m-link/skin="text" icon-position="right" 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
+    height="16px"
+    width="16px"
   >
     <!---->
      
