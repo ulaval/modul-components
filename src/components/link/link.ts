@@ -77,7 +77,7 @@ export class MLink extends ModulVue {
     })
     public iconPosition: MLinkIconPosition;
 
-    @Prop({ default: '16px' })
+    @Prop({ default: '24px' })
     public iconSize: string;
 
     @Prop({ default: '0' })

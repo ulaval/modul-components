@@ -167,8 +167,8 @@ exports[`Storyshots components|m-error-config-not-supported links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="16px"
-              width="16px"
+              height="24px"
+              width="24px"
             >
               <!---->
                
@@ -201,8 +201,8 @@ exports[`Storyshots components|m-error-config-not-supported links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m-link__icon--with-stroke"
-              height="16px"
-              width="16px"
+              height="24px"
+              width="24px"
             >
               <!---->
                
