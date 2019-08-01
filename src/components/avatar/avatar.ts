@@ -27,7 +27,14 @@ export class MAvatar extends Vue {
     @Prop({ default: false })
     clickable: boolean;
 
-    hover: boolean = false;
+    isFocusVisible: boolean = false;
+    isHovered: boolean = false;
+    isTouched: boolean = false;
+    timeoutContentVisible: number = 0;
+
+    destroy(): void {
+        this.resetTouch();
+    }
 
     get sizeStyle(): { [property: string]: string } {
         return {
@@ -48,8 +55,27 @@ export class MAvatar extends Vue {
         return this.clickable ? 0 : -1;
     }
 
-    setHover(isHover: boolean): void {
-        this.hover = isHover;
+    get interactionClass(): { [property: string]: boolean } {
+        return {
+            'm--is-clickable': this.clickable,
+            'm--is-focus-visible': this.isFocusVisible
+        };
+    }
+
+    get showContent(): boolean {
+        return this.hover || this.isTouched;
+    }
+
+    get hover(): boolean {
+        return this.isHovered;
+    }
+
+    set hover(hover: boolean) {
+        this.isHovered = hover;
+    }
+
+    focusDisplay(focusVisible: boolean): void {
+        this.isFocusVisible = focusVisible;
     }
 
     onClick(): void {
@@ -57,6 +83,30 @@ export class MAvatar extends Vue {
             this.emitClick();
         }
     }
+
+    onTouchend(): void {
+        if (this.clickable) {
+            if (this.isTouched) {
+                this.resetTouch();
+                this.emitTouch();
+            } else {
+                this.$modul.event.$on('click', this.resetTouch);
+                this.isTouched = true;
+                this.timeoutContentVisible = window.setTimeout(() => {
+                    this.isTouched = false;
+                }, 5000);
+            }
+        }
+    }
+
+    private resetTouch(): void {
+        this.$modul.event.$off('click', this.resetTouch);
+        clearTimeout(this.timeoutContentVisible);
+        this.isTouched = false;
+    }
+
+    @Emit('touch')
+    emitTouch(): void { }
 
     @Emit('click')
     emitClick(): void { }
