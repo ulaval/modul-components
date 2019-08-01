@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { ModulVue } from '../../../utils/vue/vue';
 import { ACCORDION_TRANSITION_NAME } from '../../component-names';
 import WithRender from './accordion-transition.html';
@@ -29,24 +29,33 @@ export class MAccordionTransition extends ModulVue {
         }
     }
 
+    @Emit('before-enter')
     public beforeEnter(el: HTMLElement): void {
         this.setClassHasTransition(el);
     }
 
+    @Emit('enter')
     public enter(el: HTMLElement): void {
         const heightDelta: number = this.heightDelta || 0;
         el.style.height = `${el.scrollHeight - heightDelta}px`;
     }
 
+    @Emit('after-enter')
     public afterEnter(el: HTMLElement): void {
         el.style.removeProperty('height');
     }
 
+    @Emit('before-leave')
     public beforeLeave(el: HTMLElement): void {
         el.style.height = parseInt((window.getComputedStyle(el).height as string), 10) + 'px';
         this.setClassHasTransition(el);
     }
 
+    @Emit('leave')
+    public leave(el: HTMLElement): void {
+    }
+
+    @Emit('after-leave')
     public afterLeave(el: HTMLElement): void {
         el.style.removeProperty('height');
     }
