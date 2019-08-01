@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-slide-transition Tabs example 1`] = `
+<div>
+  <m-navbar
+    selected="1"
+    skin="tab-light"
+  >
+    <m-navbar-item
+      value="1"
+    >
+      
+                    Tab 1
+                
+    </m-navbar-item>
+    <m-navbar-item
+      value="2"
+    >
+      
+                    Tab 2
+                
+    </m-navbar-item>
+    <m-navbar-item
+      value="3"
+    >
+      
+                    Tab 3
+                
+    </m-navbar-item>
+    <m-navbar-item
+      value="4"
+    >
+      
+                    Tab 4
+                
+    </m-navbar-item>
+    <m-navbar-item
+      value="5"
+    >
+      
+                    Tab 5
+                
+    </m-navbar-item>
+    <m-navbar-item
+      value="6"
+    >
+      
+                    Tab 6
+                
+    </m-navbar-item>
+    <m-navbar-item
+      value="7"
+    >
+      
+                    Tab 7
+                
+    </m-navbar-item>
+  </m-navbar>
+   
+  <div
+    class="m-slide-transition m--is-left-to-right-transition"
+  >
+    <div
+      class="m-u--margin-top"
+    >
+      <h3
+        class="m-u--no-margin"
+      >
+        Tab 1
+      </h3>
+       
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A laudantium odio ipsum, quae quos cum dolor, omnis perferendis, veritatis deleniti iusto consectetur? Impedit tempora quam ab laborum maiores sapiente earum?
+      </p>
+    </div>
+  </div>
+   
+  <div
+    class="m-u--margin-top--m"
+  >
+    <button
+      class="m-button m--is-skin-primary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Add tab 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m-u--margin-left m--is-skin-secondary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Delete tab 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+     
+    <button
+      class="m-button m-u--margin-left m--is-skin-secondary"
+      type="button"
+    >
+      <!---->
+       
+      <!---->
+       
+      <span
+        class="m-button__text"
+      >
+        Disabled transition 
+        <!---->
+      </span>
+       
+      <!---->
+       
+      <!---->
+    </button>
+  </div>
+</div>
+`;

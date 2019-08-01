@@ -16,7 +16,7 @@ export function serializeParams(params: any): any {
 
 function serializeValue(value: any): string {
     return typeof value !== 'object'
-        ? value
+        ? encodeURIComponent(value)
         : toString.call(value) === '[object Date]'
             ? (value as Date).toISOString()
             : JSON.stringify(value);

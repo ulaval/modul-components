@@ -29,7 +29,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     }))
     .add('Custom slot - animation', () => ({
         template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true">
-                        <div slot="content" slot-scope={hover} style="
+                        <div slot="content" slot-scope={contentVisible} style="
                             transition: all 0.1s linear;
                             width: 100%;
                             text-align: center;
@@ -41,7 +41,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
                             justify-content: center;
                             background-color: #333;
                             color: white"
-                            :style="[hover ? { 'transform': 'translateY(-100%)' } : {}]"
+                            :style="[contentVisible ? { 'transform': 'translateY(-100%)' } : {}]"
                         >
                             <span class="m-avatar__default-button">Edit</span>
                         </div>
