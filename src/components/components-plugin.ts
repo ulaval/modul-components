@@ -5,6 +5,7 @@ import AccordionGroupPlugin from './accordion-group/accordion-group';
 import AccordionPlugin from './accordion/accordion';
 import AddPlugin from './add/add';
 import AddressPlugin from './address/address';
+import AvatarPlugin from './avatar/avatar';
 import ButtonPlugin from './button/button';
 import CalendarPlugin from './calendar/calendar';
 import CarouselPlugin from './carousel/carousel';
@@ -109,6 +110,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(AccordionTransitionPlugin);
         Vue.use(AddPlugin);
         Vue.use(AddressPlugin, { loqateKey: options.loquateOptions ? 'LOQATE_KEY=BT13-ZT19-TB79-DC28' : undefined } as AddressLookupPluginOptions);
+        Vue.use(AvatarPlugin);
         Vue.use(ButtonPlugin);
         Vue.use(CalendarPlugin);
         Vue.use(CarouselPlugin);

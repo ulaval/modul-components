@@ -6,7 +6,7 @@ exports[`MDropdown should render correctly 1`] = `
     <!----> <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" class="m-dropdown__input">
     <!---->
     <div slot="suffix" class="m-dropdown__arrow">
-      <m-icon name="m-svg__arrow-head-filled--down" size="16px" class="m-dropdown__arrow__icon">
+      <m-icon name="m-svg__arrow-head-filled--down" size="12px" class="m-dropdown__arrow__icon">
         <m-i18n k="m-dropdown:open"></m-i18n>
       </m-icon>
     </div>
@@ -29,7 +29,7 @@ exports[`MDropdown should render correctly when placeholder is set 1`] = `
     <!----> <input type="text" id="mDropdown-uuid" aria-haspopup="true" aria-controls="mDropdown-uuid-controls" readonly="readonly" placeholder="placeholder test" class="m-dropdown__input">
     <!---->
     <div slot="suffix" class="m-dropdown__arrow">
-      <m-icon name="m-svg__arrow-head-filled--down" size="16px" class="m-dropdown__arrow__icon">
+      <m-icon name="m-svg__arrow-head-filled--down" size="12px" class="m-dropdown__arrow__icon">
         <m-i18n k="m-dropdown:open"></m-i18n>
       </m-icon>
     </div>

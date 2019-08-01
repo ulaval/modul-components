@@ -1,0 +1,22 @@
+<div class="m-avatar"
+     :class="interactionClass"
+     :style="sizeStyle"
+     :tabindex="tabindex"
+     @click="onClick"
+     @keydown.enter="onClick"
+     @touchend.prevent="onTouchend"
+     @keyup.tab="focusDisplay(true)"
+     @mouseover="hover = true"
+     @mouseleave="hover = false"
+     @focus="hover = true"
+     @blur="hover = false"
+     ref="avatar">
+    <slot>
+        <m-icon class="m-avatar__default-image"
+                :class="{ 'm--is-avatar-large': !isSmall }"
+                :name="defaultAvatar"
+                :size="size"></m-icon>
+    </slot>
+    <slot name="content"
+          :content-visible="showContent"></slot>
+</div>

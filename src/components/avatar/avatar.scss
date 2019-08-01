@@ -1,0 +1,22 @@
+@import 'commons';
+
+.m-avatar {
+    overflow: hidden;
+    position: relative;
+    color: $m-color--grey;
+    border-radius: 50%;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); // Fix a translate problem on safari - https://gist.github.com/ayamflow/b602ab436ac9f05660d9c15190f4fd7b
+
+    &.m--is-clickable {
+        cursor: pointer;
+    }
+
+    &:not(.m--is-focus-visible) {
+        outline: none;
+    }
+
+    .m--is-avatar-large {
+        background: $m-color--grey-light;
+        color: $m-color--white;
+    }
+}

@@ -18,10 +18,8 @@ $m-dropdown--margin: $m-padding--xs !default;
         }
     }
 
-    &:not(.m--is-disabled) {
-        .m-dropdown__arrow {
-            cursor: pointer;
-        }
+    .m-dropdown__arrow {
+        cursor: pointer;
     }
 
     &.m--has-placeholder-icon {
@@ -99,6 +97,17 @@ $m-dropdown--margin: $m-padding--xs !default;
             .m-dropdown__arrow__icon {
                 transform: rotate(-180deg);
             }
+        }
+    }
+
+    &.m--is-disabled,
+    &.m--is-readonly {
+        .m-dropdown__arrow {
+            cursor: default;
+        }
+
+        .m-dropdown__arrow__icon {
+            color: $m-input-style--color-disabled;
         }
     }
 

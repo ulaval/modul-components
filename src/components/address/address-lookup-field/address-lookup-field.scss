@@ -1,5 +1,37 @@
 @import 'commons';
 
-.m-address-lookup-field__item--expandable {
-    background-color: $m-color--accent-light;
+.m-address-lookup-field {
+    &__address {
+        display: block;
+        font-weight: $m-font-weight--regular;
+        font-size: $m-font-size--s;
+    }
+
+    &__further-information {
+        display: block;
+        font-size: $m-font-size--s;
+    }
+
+    &__item-expandable {
+        background-color: $m-color--accent-light;
+    }
+
+    /deep/ &__results {
+        display: flex;
+        align-items: center;
+        color: $m-color--interactive;
+        font-size: $m-font-size;
+        font-weight: $m-font-weight--regular;
+
+        &::after {
+            content: '';
+            border: solid $m-color--interactive;
+            border-width: 0 $m-border-width--s $m-border-width--s 0;
+            display: inline-block;
+            padding: $m-padding--xs;
+            transform: rotate(-45deg);
+            margin-left: 2px; // Magic number
+            margin-top: 2px; // Magic number
+        }
+    }
 }
