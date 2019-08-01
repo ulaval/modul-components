@@ -4,6 +4,18 @@
     position: relative;
     transition: height $m-transition-duration--l ease;
 
+    &.m--is-left-to-right-transition > {
+        .m--is-enter {
+            transform: translate3d(-110%, 0, 0);
+        }
+
+        .m--is-leave-to {
+            transform: translate3d(110%, 0, 0);
+        }
+    }
+}
+
+.m-slide-transition > {
     .m--is-enter-active,
     .m--is-leave-active {
         cursor: not-allowed;
@@ -26,15 +38,5 @@
     .m--is-leave-active {
         transition: transform $m-transition-duration--l ease, opacity $m-transition-duration--l ease;
         position: absolute;
-    }
-
-    &.m--is-left-to-right-transition {
-        .m--is-enter {
-            transform: translate3d(-110%, 0, 0);
-        }
-
-        .m--is-leave-to {
-            transform: translate3d(110%, 0, 0);
-        }
     }
 }

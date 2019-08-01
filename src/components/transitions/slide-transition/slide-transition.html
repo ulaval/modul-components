@@ -1,6 +1,7 @@
 <div class="m-slide-transition"
      :class="{'m--is-left-to-right-transition': isLeftToRight}">
     <transition :name="transitionName"
+                :css="!disabled"
                 @enter="transitionEnter"
                 @after-enter="transitionAfterEnter"
                 @before-leave="transitionBeforeLeave"
