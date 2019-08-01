@@ -1,6 +1,7 @@
 import Vue, { PluginObject } from 'vue';
 import Component from 'vue-class-component';
 import { Emit, Prop } from 'vue-property-decorator';
+import { InputLabel } from '../../mixins/input-label/input-label';
 import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth, InputWidth } from '../../mixins/input-width/input-width';
 import { ModulVue } from '../../utils/vue/vue';
@@ -13,6 +14,7 @@ import WithRender from './daterangepicker.html';
 @WithRender
 @Component({
     mixins: [
+        InputLabel,
         InputState,
         InputWidth
     ]
