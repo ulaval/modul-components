@@ -58,7 +58,7 @@
         "zingtouch": "^1.0.6"
     },
     "peerDependencies": {
-        "vue": "^2.5.9",
+        "vue": "^2.6.4",
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
@@ -128,7 +128,7 @@
         "typescript-tslint-plugin": "^0.3.0",
         "uglifyjs-webpack-plugin": "^2.1.2",
         "url-loader": "^1.1.2",
-        "vue": "^2.5.23",
+        "vue": "^2.6.10",
         "vue-class-component": "^6.1.1",
         "vue-loader": "^15.7.0",
         "vue-property-decorator": "^6.0.0",
