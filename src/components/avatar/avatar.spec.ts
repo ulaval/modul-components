@@ -10,6 +10,14 @@ const initializeShallowWrapper: any = () => {
     wrapper = shallowMount(MAvatar, {
         propsData: {
             clickable: propsClickable
+        },
+        mocks: {
+            $modul: {
+                event: {
+                    $on: jest.fn(),
+                    $off: jest.fn()
+                }
+            }
         }
     });
 };
@@ -78,46 +86,50 @@ describe('MAvatar', () => {
     });
 
     describe(`When mouseover`, () => {
-        it(`should call setHover(true)`, () => {
+        it(`hover = true`, () => {
             initializeShallowWrapper();
+            wrapper.vm.hover = false;
 
             wrapper.setMethods({ setHover: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseover');
 
-            expect(wrapper.vm.setHover).toHaveBeenCalledWith(true);
+            expect(wrapper.vm.hover).toBe(true);
         });
     });
 
     describe(`When mouseleave`, () => {
-        it(`should call setHover(false)`, () => {
+        it(`hover = false`, () => {
             initializeShallowWrapper();
+            wrapper.vm.hover = true;
 
             wrapper.setMethods({ setHover: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('mouseleave');
 
-            expect(wrapper.vm.setHover).toHaveBeenCalledWith(false);
+            expect(wrapper.vm.hover).toBe(false);
         });
     });
 
     describe(`When focus`, () => {
         it(`should call setHover(true)`, () => {
             initializeShallowWrapper();
+            wrapper.vm.hover = false;
 
             wrapper.setMethods({ setHover: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('focus');
 
-            expect(wrapper.vm.setHover).toHaveBeenCalledWith(true);
+            expect(wrapper.vm.hover).toBe(true);
         });
     });
 
     describe(`When blur`, () => {
         it(`should call setHover(false)`, () => {
             initializeShallowWrapper();
+            wrapper.vm.hover = true;
 
             wrapper.setMethods({ setHover: jest.fn() });
             wrapper.find(REF_AVATAR).trigger('blur');
 
-            expect(wrapper.vm.setHover).toHaveBeenCalledWith(false);
+            expect(wrapper.vm.hover).toBe(false);
         });
     });
 

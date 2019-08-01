@@ -6,10 +6,10 @@
      @keydown.enter="onClick"
      @touchend.prevent="onTouchend"
      @keyup.tab="focusDisplay(true)"
-     @mouseover="setHover(true)"
-     @mouseleave="setHover(false)"
-     @focus="setHover(true)"
-     @blur="setHover(false)"
+     @mouseover="hover = true"
+     @mouseleave="hover = false"
+     @focus="hover = true"
+     @blur="hover = false"
      ref="avatar">
     <slot>
         <m-icon class="m-avatar__default-image"
