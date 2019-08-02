@@ -1,4 +1,5 @@
 import Vue, { PluginObject } from 'vue';
+import VueCroppie from 'vue-croppie';
 import { AddressLookupPluginOptions } from '../utils/address-lookup/address-lookup.plugin';
 import LoggerPlugin from '../utils/logger/logger';
 import AccordionGroupPlugin from './accordion-group/accordion-group';
@@ -195,6 +196,7 @@ const ComponentsPlugin: PluginObject<any> = {
         Vue.use(ValidationMessagePlugin);
         Vue.use(InplaceEditPlugin);
         Vue.use(TreePlugin);
+        Vue.use(VueCroppie);
     }
 };
 
