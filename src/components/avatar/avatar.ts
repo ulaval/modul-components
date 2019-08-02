@@ -66,6 +66,10 @@ export class MAvatar extends Vue {
         return this.hover || this.isTouched;
     }
 
+    get emptyContentSlot(): boolean {
+        return !this.$scopedSlots.content;
+    }
+
     get hover(): boolean {
         return this.isHovered;
     }
@@ -86,7 +90,7 @@ export class MAvatar extends Vue {
 
     onTouchend(): void {
         if (this.clickable) {
-            if (this.isTouched) {
+            if (this.isTouched || this.emptyContentSlot) {
                 this.resetTouch();
                 this.emitTouch();
             } else {
