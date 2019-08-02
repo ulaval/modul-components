@@ -14,7 +14,7 @@ export class MAccordionTransition extends ModulVue {
     @Prop()
     public heightDelta: number;
 
-    @Prop({ default: true })
+    @Prop({ default: false })
     public disabled: boolean;
 
     public setClassHasTransition(el: HTMLElement): void {
