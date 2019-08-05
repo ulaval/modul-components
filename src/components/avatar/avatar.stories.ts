@@ -1,3 +1,4 @@
+import { actions } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
@@ -28,7 +29,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
         template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true"><img src="${image192}"></m-avatar>`
     }))
     .add('Custom slot - animation', () => ({
-        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true">
+        methods: actions(
+            'click',
+            'touch'
+        ),
+        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true" @click="click" @touch="touch">
                         <div slot="content" slot-scope={contentVisible} style="
                             transition: all 0.1s linear;
                             width: 100%;
