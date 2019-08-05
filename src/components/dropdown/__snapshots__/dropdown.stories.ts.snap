@@ -66,8 +66,8 @@ exports[`Storyshots components|m-dropdown default 1`] = `
               <svg
                 aria-hidden="true"
                 class="m-icon m-dropdown__arrow__icon"
-                height="16px"
-                width="16px"
+                height="12px"
+                width="12px"
               >
                 <!---->
                  
@@ -176,8 +176,8 @@ exports[`Storyshots components|m-dropdown focus 1`] = `
               <svg
                 aria-hidden="true"
                 class="m-icon m-dropdown__arrow__icon"
-                height="16px"
-                width="16px"
+                height="12px"
+                width="12px"
               >
                 <!---->
                  
@@ -287,8 +287,8 @@ exports[`Storyshots components|m-dropdown label-up 1`] = `
               <svg
                 aria-hidden="true"
                 class="m-icon m-dropdown__arrow__icon"
-                height="16px"
-                width="16px"
+                height="12px"
+                width="12px"
               >
                 <!---->
                  
@@ -406,8 +406,8 @@ exports[`Storyshots components|m-dropdown/disabled Item selected, with label 1`]
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -523,8 +523,8 @@ exports[`Storyshots components|m-dropdown/disabled No selection, no label 1`] = 
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -641,8 +641,8 @@ exports[`Storyshots components|m-dropdown/disabled No selection, no label, with 
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -761,8 +761,8 @@ exports[`Storyshots components|m-dropdown/disabled No selection, with label 1`] 
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -885,8 +885,8 @@ exports[`Storyshots components|m-dropdown/filterable No placeholder 1`] = `
               <svg
                 aria-hidden="true"
                 class="m-icon m-dropdown__arrow__icon"
-                height="16px"
-                width="16px"
+                height="12px"
+                width="12px"
               >
                 <!---->
                  
@@ -996,8 +996,8 @@ exports[`Storyshots components|m-dropdown/filterable With placeholder 1`] = `
               <svg
                 aria-hidden="true"
                 class="m-icon m-dropdown__arrow__icon"
-                height="16px"
-                width="16px"
+                height="12px"
+                width="12px"
               >
                 <!---->
                  
@@ -1116,8 +1116,8 @@ exports[`Storyshots components|m-dropdown/readonly Item selected, with label 1`]
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -1232,8 +1232,8 @@ exports[`Storyshots components|m-dropdown/readonly No selection, no label 1`] = 
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -1348,8 +1348,8 @@ exports[`Storyshots components|m-dropdown/readonly No selection, no label, with 
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -1469,8 +1469,8 @@ exports[`Storyshots components|m-dropdown/readonly No selection, with label 1`] 
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
@@ -1590,8 +1590,8 @@ exports[`Storyshots components|m-dropdown/readonly No selection, with label, wit
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
                   disabled="disabled"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    

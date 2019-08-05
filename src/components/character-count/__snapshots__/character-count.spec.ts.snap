@@ -4,7 +4,7 @@ exports[`MCharacterCount should render correctly 1`] = `<div class="m-character-
 
 exports[`MCharacterCount should render correctly when maxLength prop is set 1`] = `
 <div class="m-character-count">
-  <div aria-hidden="true" name="m--is" class="m-character-count__wrap"><span>20</span>/40</div>
+  <div aria-hidden="true" name="m--is" css="true" class="m-character-count__wrap"><span>20</span>/40</div>
 </div>
 `;
 

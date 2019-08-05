@@ -1,13 +1,15 @@
 <div class="m-avatar"
-     :class="{ 'm--is-clickable': this.clickable }"
+     :class="interactionClass"
      :style="sizeStyle"
+     :tabindex="tabindex"
      @click="onClick"
      @keydown.enter="onClick"
-     @mouseover="setHover(true)"
-     @mouseleave="setHover(false)"
-     @focus="setHover(true)"
-     @blur="setHover(false)"
-     :tabindex="tabindex"
+     @touchend.prevent="onTouchend"
+     @keyup.tab="focusDisplay(true)"
+     @mouseover="hover = true"
+     @mouseleave="hover = false"
+     @focus="hover = true"
+     @blur="hover = false"
      ref="avatar">
     <slot>
         <m-icon class="m-avatar__default-image"
@@ -16,5 +18,5 @@
                 :size="size"></m-icon>
     </slot>
     <slot name="content"
-          :hover="hover"></slot>
+          :content-visible="showContent"></slot>
 </div>

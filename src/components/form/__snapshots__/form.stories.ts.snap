@@ -1196,8 +1196,8 @@ exports[`Storyshots components|m-form/all fields dropdown 1`] = `
                 <svg
                   aria-hidden="true"
                   class="m-icon m-dropdown__arrow__icon"
-                  height="16px"
-                  width="16px"
+                  height="12px"
+                  width="12px"
                 >
                   <!---->
                    
