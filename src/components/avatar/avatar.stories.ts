@@ -26,7 +26,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
         template: `<m-avatar :size="${MAvatarSize.LARGE}"><m-icon name="m-svg__profile" :size="${MAvatarSize.LARGE}"></m-icon></m-avatar>`
     }))
     .add('Clickable', () => ({
-        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true"><img src="${image192}"></m-avatar>`
+        methods: actions(
+            'click',
+            'touch'
+        ),
+        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true" @click="click" @touch="touch"><img src="${image192}"></m-avatar>`
     }))
     .add('Custom slot - animation', () => ({
         methods: actions(
