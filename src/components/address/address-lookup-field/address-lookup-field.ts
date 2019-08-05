@@ -56,8 +56,8 @@ export class MAddressLookupField extends ModulVue {
 
     getClassToggles(address: AddressSummary): { [className: string]: boolean } {
         return {
-            'm-address-lookup-field__item--address': address.type === KEY_ADDRESS_TYPE || address.type === undefined,
-            'm-address-lookup-field__item--expandable': address.type !== KEY_ADDRESS_TYPE
+            'm-address-lookup-field__item-address': address.type === KEY_ADDRESS_TYPE || address.type === undefined,
+            'm-address-lookup-field__item-expandable': address.type !== KEY_ADDRESS_TYPE
         };
     }
 

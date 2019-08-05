@@ -77,7 +77,7 @@ export class AddressLookupToAddressSummary implements FindResponseMapper<Address
         if (!lastPart) {
             return '';
         }
-        return parts.join('-') + ` - <em>${lastPart}</em>`;
+        return parts + `<span class="m-address-lookup-field__results">${lastPart}</span>`;
     }
 }
 
