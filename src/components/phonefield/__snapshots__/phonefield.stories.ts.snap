@@ -24,7 +24,7 @@ exports[`Storyshots components|m-phonefield default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label m-u--line-height"
+                class="m-input-style__label m--has-line-height"
                 for="m-select-uuid"
                 style="margin-right: 0px;"
               >
@@ -132,7 +132,7 @@ exports[`Storyshots components|m-phonefield default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label m-u--line-height"
+                class="m-input-style__label m--has-line-height"
                 for="mIntegerfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -230,7 +230,7 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="m-select-uuid"
               style="margin-right: 0px;"
             >
@@ -323,7 +323,7 @@ exports[`Storyshots components|m-phonefield disabled 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mIntegerfield-uuid"
               style="margin-right: 0px;"
             >
@@ -415,7 +415,7 @@ exports[`Storyshots components|m-phonefield error 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="m-select-uuid"
               style="margin-right: 0px;"
             >
@@ -523,7 +523,7 @@ exports[`Storyshots components|m-phonefield error 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mIntegerfield-uuid"
               style="margin-right: 0px;"
             >
@@ -614,7 +614,7 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="m-select-uuid"
               style="margin-right: 0px;"
             >
@@ -722,7 +722,7 @@ exports[`Storyshots components|m-phonefield error message 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mIntegerfield-uuid"
               style="margin-right: 0px;"
             >
@@ -836,7 +836,7 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="m-select-uuid"
               style="margin-right: 0px;"
             >
@@ -929,7 +929,7 @@ exports[`Storyshots components|m-phonefield waiting 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mIntegerfield-uuid"
               style="margin-right: 0px;"
             >

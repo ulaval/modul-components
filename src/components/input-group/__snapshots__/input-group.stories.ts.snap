@@ -178,7 +178,7 @@ exports[`Storyshots components|m-input-group default 1`] = `
                 class="m-input-style__body"
               >
                 <label
-                  class="m-input-style__label m-u--line-height"
+                  class="m-input-style__label m--has-line-height"
                   for="mTextfield-uuid"
                   style="margin-right: 0px;"
                 >
@@ -259,7 +259,7 @@ exports[`Storyshots components|m-input-group default 1`] = `
                 class="m-input-style__body"
               >
                 <label
-                  class="m-input-style__label m-u--line-height"
+                  class="m-input-style__label m--has-line-height"
                   for="mTextfield-uuid"
                   style="margin-right: 0px;"
                 >

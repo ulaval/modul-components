@@ -356,7 +356,7 @@ exports[`Storyshots components|m-textfield focus 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -522,7 +522,7 @@ exports[`Storyshots components|m-textfield label 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -605,7 +605,7 @@ exports[`Storyshots components|m-textfield label-up 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -847,7 +847,7 @@ exports[`Storyshots components|m-textfield required-marker 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -1363,7 +1363,7 @@ exports[`Storyshots components|m-textfield/Counter all props 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2118,7 +2118,7 @@ exports[`Storyshots components|m-textfield/max-width all max-width presets 1`] =
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -2201,7 +2201,7 @@ exports[`Storyshots components|m-textfield/max-width custom width 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -2284,7 +2284,7 @@ exports[`Storyshots components|m-textfield/max-width large 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -2367,7 +2367,7 @@ exports[`Storyshots components|m-textfield/max-width medium 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -2451,7 +2451,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2532,7 +2532,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2613,7 +2613,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2694,7 +2694,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2777,7 +2777,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2858,7 +2858,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -2941,7 +2941,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -3022,7 +3022,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -3105,7 +3105,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -3188,7 +3188,7 @@ exports[`Storyshots components|m-textfield/max-width pyramid 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -3272,7 +3272,7 @@ exports[`Storyshots components|m-textfield/max-width regular 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -3355,7 +3355,7 @@ exports[`Storyshots components|m-textfield/max-width small 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -3438,7 +3438,7 @@ exports[`Storyshots components|m-textfield/max-width x-small 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -3521,7 +3521,7 @@ exports[`Storyshots components|m-textfield/tag-style all tag styles 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -3604,7 +3604,7 @@ exports[`Storyshots components|m-textfield/type all types 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >
@@ -3844,7 +3844,7 @@ exports[`Storyshots components|m-textfield/type type="password" 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mTextfield-uuid"
           style="margin-right: 0px;"
         >

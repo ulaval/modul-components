@@ -1277,7 +1277,7 @@ exports[`Storyshots components|m-datepicker label 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mDatepicker-uuid"
           style="margin-right: 0px;"
         >
@@ -1390,7 +1390,7 @@ exports[`Storyshots components|m-datepicker label-up 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mDatepicker-uuid"
           style="margin-right: 0px;"
         >
@@ -1916,7 +1916,7 @@ exports[`Storyshots components|m-datepicker required-marker 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mDatepicker-uuid"
           style="margin-right: 0px;"
         >
@@ -2588,7 +2588,7 @@ exports[`Storyshots components|m-datepicker/initial-view years-months-birthdate 
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="mDatepicker-uuid"
           style="margin-right: 0px;"
         >

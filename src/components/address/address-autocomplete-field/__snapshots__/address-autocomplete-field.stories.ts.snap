@@ -24,7 +24,7 @@ exports[`Storyshots components|/address/m-address-autocomplete-field default 1`]
                 class="m-input-style__body"
               >
                 <label
-                  class="m-input-style__label m-u--line-height"
+                  class="m-input-style__label m--has-line-height"
                   for="mDropdown-uuid"
                   style="margin-right: 0px;"
                 >

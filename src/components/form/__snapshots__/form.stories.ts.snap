@@ -454,7 +454,7 @@ exports[`Storyshots components|m-form/all fields autocomplete 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mDropdown-uuid"
             style="margin-right: 0px;"
           >
@@ -739,7 +739,7 @@ exports[`Storyshots components|m-form/all fields datepicker 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mDatepicker-uuid"
             style="margin-right: 0px;"
           >
@@ -994,7 +994,7 @@ exports[`Storyshots components|m-form/all fields decimalfield 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mDecimalfield-uuid"
             style="margin-right: 0px;"
           >
@@ -1142,7 +1142,7 @@ exports[`Storyshots components|m-form/all fields dropdown 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mDropdown-uuid"
             style="margin-right: 0px;"
           >
@@ -1808,7 +1808,7 @@ exports[`Storyshots components|m-form/all fields textfield 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTextfield-uuid"
             style="margin-right: 0px;"
           >
@@ -1957,7 +1957,7 @@ exports[`Storyshots components|m-form/all fields timepicker 1`] = `
           class="m-input-style__body"
         >
           <label
-            class="m-input-style__label m-u--line-height"
+            class="m-input-style__label m--has-line-height"
             for="mTimepicker-uuid"
             style="margin-right: 0px;"
           >
@@ -3055,7 +3055,7 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
                   class="m-input-style__body"
                 >
                   <label
-                    class="m-input-style__label m-u--line-height"
+                    class="m-input-style__label m--has-line-height"
                     for="mTextfield-uuid"
                     style="margin-right: 0px;"
                   >
@@ -3136,7 +3136,7 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
                   class="m-input-style__body"
                 >
                   <label
-                    class="m-input-style__label m-u--line-height"
+                    class="m-input-style__label m--has-line-height"
                     for="mTextfield-uuid"
                     style="margin-right: 0px;"
                   >
@@ -3280,7 +3280,7 @@ exports[`Storyshots components|m-form/rules Format with fixed max characters (po
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mTextfield-uuid"
               style="margin-right: 0px;"
             >
@@ -3421,7 +3421,7 @@ exports[`Storyshots components|m-form/rules Format without fixed max characters 
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mTextfield-uuid"
               style="margin-right: 0px;"
             >
@@ -3566,7 +3566,7 @@ exports[`Storyshots components|m-form/rules Live check username availability (as
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mTextfield-uuid"
               style="margin-right: 0px;"
             >
@@ -3711,7 +3711,7 @@ exports[`Storyshots components|m-form/rules More than one validations (course co
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mTextfield-uuid"
               style="margin-right: 0px;"
             >
@@ -4093,7 +4093,7 @@ exports[`Storyshots components|m-form/rules required and 5 characters min 1`] = 
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mTextfield-uuid"
               style="margin-right: 0px;"
             >
@@ -4234,7 +4234,7 @@ exports[`Storyshots components|m-form/rules required and 20 characters max 1`] =
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m-u--line-height"
+              class="m-input-style__label m--has-line-height"
               for="mTextfield-uuid"
               style="margin-right: 0px;"
             >

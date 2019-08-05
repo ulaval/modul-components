@@ -12,7 +12,7 @@ exports[`Storyshots components|m-input-style cursorPointer 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -116,7 +116,7 @@ exports[`Storyshots components|m-input-style disabled 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -170,7 +170,7 @@ exports[`Storyshots components|m-input-style empty 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -225,7 +225,7 @@ exports[`Storyshots components|m-input-style error 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           style="margin-right: 0px;"
         >
           <span
@@ -286,7 +286,7 @@ exports[`Storyshots components|m-input-style error 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           style="margin-right: 0px;"
         >
           <span
@@ -341,7 +341,7 @@ exports[`Storyshots components|m-input-style focus 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -397,7 +397,7 @@ exports[`Storyshots components|m-input-style label 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -459,7 +459,7 @@ exports[`Storyshots components|m-input-style labelFor 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           for="Label for"
           style="margin-right: 0px;"
         >
@@ -531,7 +531,7 @@ exports[`Storyshots components|m-input-style readonly 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -585,7 +585,7 @@ exports[`Storyshots components|m-input-style requiredMarker 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -645,7 +645,7 @@ exports[`Storyshots components|m-input-style tagStyle 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -699,7 +699,7 @@ exports[`Storyshots components|m-input-style testAllProps 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -754,7 +754,7 @@ exports[`Storyshots components|m-input-style valid 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           style="margin-right: 0px;"
         >
           <span
@@ -815,7 +815,7 @@ exports[`Storyshots components|m-input-style valid 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label m-u--line-height"
+          class="m-input-style__label m--has-line-height"
           style="margin-right: 0px;"
         >
           <span
@@ -870,7 +870,7 @@ exports[`Storyshots components|m-input-style waiting 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
@@ -930,7 +930,7 @@ exports[`Storyshots components|m-input-style width 1`] = `
       class="m-input-style__body"
     >
       <label
-        class="m-input-style__label m-u--line-height"
+        class="m-input-style__label m--has-line-height"
         style="margin-right: 0px;"
       >
         <span
