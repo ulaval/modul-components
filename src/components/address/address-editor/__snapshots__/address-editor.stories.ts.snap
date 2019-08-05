@@ -21,7 +21,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -103,7 +103,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -185,7 +185,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -267,7 +267,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -349,7 +349,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mDropdown-uuid"
                 style="margin-right: 0px;"
               >
@@ -460,7 +460,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -578,7 +578,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -660,7 +660,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -742,7 +742,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -824,7 +824,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >
@@ -906,7 +906,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mDropdown-uuid"
                 style="margin-right: 0px;"
               >
@@ -1017,7 +1017,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
               class="m-input-style__body"
             >
               <label
-                class="m-input-style__label"
+                class="m-input-style__label m-u--line-height"
                 for="mTextfield-uuid"
                 style="margin-right: 0px;"
               >

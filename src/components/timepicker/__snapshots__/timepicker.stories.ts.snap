@@ -125,7 +125,7 @@ exports[`Storyshots components|m-timepicker label 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label"
+          class="m-input-style__label m-u--line-height"
           for="mTimepicker-uuid"
           style="margin-right: 0px;"
         >
@@ -239,7 +239,7 @@ exports[`Storyshots components|m-timepicker label-up 1`] = `
         class="m-input-style__body"
       >
         <label
-          class="m-input-style__label"
+          class="m-input-style__label m-u--line-height"
           for="mTimepicker-uuid"
           style="margin-right: 0px;"
         >

@@ -2,6 +2,7 @@
 
 $m-input-style-base-height: $m-line-height + em;
 $m-input-style-border-radius: 3px;
+$m-line-height-rich-text: 21px !default;
 
 @mixin input-style-cursor($cursor: default) {
     &,
@@ -184,6 +185,10 @@ $m-input-style-border-radius: 3px;
         font-size: $m-font-size;
         font-weight: $m-font-weight--light;
         color: $m-color--text-light;
+
+        &.m-u--line-height {
+            line-height: $m-line-height-rich-text;
+        }
 
         .m-icon {
             font-size: 85%;
