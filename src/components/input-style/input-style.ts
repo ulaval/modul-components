@@ -113,6 +113,10 @@ export class MInputStyle extends ModulVue {
         return (this.hasValue || (this.isFocus && this.hasValue) || this.labelUp) && this.hasLabel;
     }
 
+    public get hasLineHeight(): boolean {
+        return Boolean(this.label) && (this.label !== '');
+    }
+
     public get showPrefix(): boolean {
         return this.hasLabel ? this.isFocus : true;
     }

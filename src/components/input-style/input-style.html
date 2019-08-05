@@ -19,7 +19,8 @@
     <div class="m-input-style__main">
         <div class="m-input-style__body">
             <label v-if="hasLabel"
-                   class="m-input-style__label m-u--line-height"
+                   class="m-input-style__label"
+                   :class="{ 'm--has-line-height': hasLineHeight }"
                    :style="{ marginRight: suffixOffset }"
                    :for="labelFor"
                    ref="label">

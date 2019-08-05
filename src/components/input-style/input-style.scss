@@ -186,7 +186,7 @@ $m-line-height-rich-text: 21px !default;
         font-weight: $m-font-weight--light;
         color: $m-color--text-light;
 
-        &.m-u--line-height {
+        &.m--has-line-height {
             line-height: $m-line-height-rich-text;
         }
 
