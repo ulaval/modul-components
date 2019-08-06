@@ -114,7 +114,7 @@ export class MInputStyle extends ModulVue {
     }
 
     public get hasLineHeight(): boolean {
-        return Boolean(this.label) && (this.label !== '');
+        return this.labelFor.includes('mrich-text-');
     }
 
     public get showPrefix(): boolean {
