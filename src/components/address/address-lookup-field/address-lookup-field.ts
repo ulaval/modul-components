@@ -75,8 +75,8 @@ export class MAddressLookupField extends ModulVue {
                 description: row['description'] ? this.formatHTMLDescription(row) : undefined,
                 type: row['type'],
                 classesToggle: {
-                    'm-address-lookup-field__item--address': row['type'] === KEY_ADDRESS_TYPE || row['type'] === undefined,
-                    'm-address-lookup-field__item--expandable': row['type'] !== KEY_ADDRESS_TYPE
+                    'm-address-lookup-field__item-address': row['type'] === KEY_ADDRESS_TYPE || row['type'] === undefined,
+                    'm-address-lookup-field__item-expandable': row['type'] !== KEY_ADDRESS_TYPE
                 }
             }));
         return data;
@@ -94,7 +94,7 @@ export class MAddressLookupField extends ModulVue {
         if (!lastPart) {
             return '';
         }
-        return parts.join('-') + ` - <em>${lastPart}</em>`;
+        return parts + `<span class="m-address-lookup-field__results">${lastPart}</span>`;
     }
 
     private async fetchData(value: string, id?: string): Promise<LoqateFindResponse[]> {

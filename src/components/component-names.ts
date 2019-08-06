@@ -7,6 +7,7 @@ export const ADDRESS_EDITOR_NAME: string = 'm-address-editor';
 export const ADDRESS_LOOKUP_FIELD_NAME: string = 'm-address-lookup-field';
 export const ADDRESS_READER: string = 'm-address-reader';
 export const AUTOCOMPLETE_NAME: string = 'm-autocomplete';
+export const AVATAR_NAME: string = 'm-avatar';
 export const BUTTON_NAME: string = 'm-button';
 export const BUTTON_GROUP_NAME: string = 'm-button-group';
 export const CALENDAR_NAME: string = 'm-calendar';
