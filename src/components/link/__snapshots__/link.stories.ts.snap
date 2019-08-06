@@ -35,7 +35,7 @@ exports[`Storyshots components|m-link disabled 1`] = `
 </a>
 `;
 
-exports[`Storyshots components|m-link icon 1`] = `
+exports[`Storyshots components|m-link icon-chevron 1`] = `
 <a
   class="m-link m--has-left-icon m--has-content"
   href="#"
@@ -43,7 +43,7 @@ exports[`Storyshots components|m-link icon 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="12px"
     width="12px"
   >
@@ -74,8 +74,8 @@ exports[`Storyshots components|m-link icon-name 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
+    height="1em"
+    width="1em"
   >
     <!---->
      
@@ -103,7 +103,7 @@ exports[`Storyshots components|m-link icon-position="right" 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="12px"
     width="12px"
   >
@@ -193,24 +193,12 @@ exports[`Storyshots components|m-link tabindex="1" 1`] = `
 
 exports[`Storyshots components|m-link target 1`] = `
 <a
-  class="m-link m--has-left-icon m--has-content"
+  class="m-link m--has-content"
   href="#"
   tabindex="0"
   target="self"
 >
-  <svg
-    aria-hidden="true"
-    class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
+  <!---->
    
   <span
     class="m-link__text"
@@ -350,7 +338,7 @@ exports[`Storyshots components|m-link/skin="light" default 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-link/skin="light" icon 1`] = `
+exports[`Storyshots components|m-link/skin="light" icon-chevron 1`] = `
 <div>
   <a
     class="m-link m--is-skin-light m--has-left-icon m--has-content"
@@ -359,7 +347,7 @@ exports[`Storyshots components|m-link/skin="light" icon 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="m-icon m-link__icon"
+      class="m-icon m-link__icon m--has-large-stroke"
       height="12px"
       width="12px"
     >
@@ -392,8 +380,8 @@ exports[`Storyshots components|m-link/skin="light" icon-name="m-svg__clock" 1`] 
     <svg
       aria-hidden="true"
       class="m-icon m-link__icon"
-      height="12px"
-      width="12px"
+      height="1em"
+      width="1em"
     >
       <!---->
        
@@ -423,7 +411,7 @@ exports[`Storyshots components|m-link/skin="light" icon-position="right" 1`] = `
   >
     <svg
       aria-hidden="true"
-      class="m-icon m-link__icon"
+      class="m-icon m-link__icon m--has-large-stroke"
       height="12px"
       width="12px"
     >
@@ -496,7 +484,7 @@ exports[`Storyshots components|m-link/skin="text" default 1`] = `
 </a>
 `;
 
-exports[`Storyshots components|m-link/skin="text" icon 1`] = `
+exports[`Storyshots components|m-link/skin="text" icon-chevron 1`] = `
 <a
   class="m-link m--is-skin-text m--has-left-icon m--has-content"
   href="#"
@@ -504,7 +492,7 @@ exports[`Storyshots components|m-link/skin="text" icon 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="12px"
     width="12px"
   >
@@ -528,23 +516,11 @@ exports[`Storyshots components|m-link/skin="text" icon 1`] = `
 
 exports[`Storyshots components|m-link/skin="text" icon-name="m-svg__clock" 1`] = `
 <a
-  class="m-link m--is-skin-text m--has-left-icon m--has-content"
+  class="m-link m--is-skin-text m--has-content"
   href="#"
   tabindex="0"
 >
-  <svg
-    aria-hidden="true"
-    class="m-icon m-link__icon"
-    height="12px"
-    width="12px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
+  <!---->
    
   <span
     class="m-link__text"
@@ -564,7 +540,7 @@ exports[`Storyshots components|m-link/skin="text" icon-position="right" 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="m-icon m-link__icon"
+    class="m-icon m-link__icon m--has-large-stroke"
     height="12px"
     width="12px"
   >

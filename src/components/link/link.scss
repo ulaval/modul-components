@@ -89,7 +89,10 @@
         display: inline-flex;
         flex-shrink: 0;
         vertical-align: middle;
-        stroke-width: 2px;
+
+        &.m--has-large-stroke {
+            stroke-width: 2px;
+        }
     }
 
     &__hidden {
