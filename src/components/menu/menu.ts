@@ -76,6 +76,14 @@ export class MMenu extends BaseMenu implements Menu {
     @Emit('click')
     onClick(event: Event, value: string): void { }
 
+    @Watch('$route')
+    private routeChanged(to: any, from: any): void {
+        console.log('argum', arguments);
+        this.$nextTick(() => {
+            this.propOpen = false;
+        });
+    }
+
     protected mounted(): void {
         this.model = this.selected;
         this.propOpen = this.open;

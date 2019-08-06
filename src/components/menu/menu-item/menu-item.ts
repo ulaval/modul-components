@@ -86,7 +86,7 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
     }
 
     public get isAnimReady(): boolean {
-        return (this.menuRoot && this.menuRoot.animReady) ? this.menuRoot.animReady : false;
+        return this.menuRoot ? this.menuRoot.animReady : false;
     }
 
     private get isUrl(): boolean {
