@@ -78,7 +78,6 @@ export class MMenu extends BaseMenu implements Menu {
 
     @Watch('$route')
     private routeChanged(to: any, from: any): void {
-        console.log('argum', arguments);
         this.$nextTick(() => {
             this.propOpen = false;
         });
