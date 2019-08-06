@@ -118,7 +118,7 @@ exports[`Storyshots components|m-searchfield error state 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m--has-line-height"
+              class="m-input-style__label"
               for="mSearchfield-uuid"
               style="margin-right: 0px;"
             >
@@ -367,7 +367,7 @@ exports[`Storyshots components|m-searchfield valid state 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m--has-line-height"
+              class="m-input-style__label"
               for="mSearchfield-uuid"
               style="margin-right: 0px;"
             >
@@ -516,7 +516,7 @@ exports[`Storyshots components|m-searchfield with label 1`] = `
             class="m-input-style__body"
           >
             <label
-              class="m-input-style__label m--has-line-height"
+              class="m-input-style__label"
               for="mSearchfield-uuid"
               style="margin-right: 0px;"
             >
