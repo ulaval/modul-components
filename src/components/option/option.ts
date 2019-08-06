@@ -71,8 +71,8 @@ export class MOption extends BaseOption implements MOptionInterface {
     public size: string;
     @Prop({ default: false })
     public focusManagement: boolean;
-    @Prop()
-    public menuMaxHeight: string;
+    @Prop({ default: true })
+    public scroll: boolean;
 
     public hasIcon: boolean = false;
     public hasItemBorder: boolean = true;
@@ -124,6 +124,10 @@ export class MOption extends BaseOption implements MOptionInterface {
 
     private get ariaControls(): string {
         return this.id + '-controls';
+    }
+
+    private get menuMaxHeight(): string | undefined {
+        return this.scroll ? undefined : 'none';
     }
 }
 

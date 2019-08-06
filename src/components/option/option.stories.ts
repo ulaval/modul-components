@@ -57,11 +57,11 @@ storiesOf(`${componentsHierarchyRootSeparator}${OPTION_NAME}`, module)
                        <m-option-item-delete></m-option-item-delete>
                    </m-option>`
     }))
-    .add('menu-max-height', () => ({
+    .add('scroll', () => ({
         data: () => ({
             model1: ''
         }),
-        template: `<m-option menu-max-height="232px">
+        template: `<m-option :scroll="false">
                        <m-option-title>Title 1</m-option-title>
                        <m-option-item-add></m-option-item-add>
                        <m-option-separator></m-option-separator>
