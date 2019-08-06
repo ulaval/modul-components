@@ -100,6 +100,10 @@
         > .m-menu-item__link {
             cursor: pointer;
 
+            &.router-link-active {
+                color: $m-color--white;
+            }
+
             &:hover,
             &:focus {
                 color: $m-color--white;
