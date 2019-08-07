@@ -1,7 +1,7 @@
 import { MLoadingStates } from './loading-states';
 
-export const DEFAULT_ACTIVE_INVISIBLE_THRESHOLD_IN_MILLISECONDS: number = 300;
-export const DEFAULT_ACTIVE_VISIBLE_MIN_DURATION_IN_MILLISECONDS: number = 1000;
+export const DEFAULT_INVISBLE_THRESHOLD_IN_MILISECONDS: number = 300;
+export const DEFAULT_VISIBLE_THRESHOLD_IN_MILISECONDS: number = 1000;
 export const INTERVAL_STEP_IN_MILLISECONDS: number = 100;
 
 export default class LoadingScheduler {
@@ -10,8 +10,8 @@ export default class LoadingScheduler {
 
     constructor(
         private _stateTransitionCb: (state: MLoadingStates) => void,
-        private _activeInvisibleThresholdInMilliseconds: number = DEFAULT_ACTIVE_INVISIBLE_THRESHOLD_IN_MILLISECONDS,
-        private _activeVisibleMinDurationInMilliseconds: number = DEFAULT_ACTIVE_VISIBLE_MIN_DURATION_IN_MILLISECONDS
+        private _invisibleThresholdInMiliseconds: number = DEFAULT_INVISBLE_THRESHOLD_IN_MILISECONDS,
+        private _visibleThresholdInMiliseconds: number = DEFAULT_VISIBLE_THRESHOLD_IN_MILISECONDS
     ) { }
 
     public start(): void {
@@ -20,7 +20,7 @@ export default class LoadingScheduler {
         this._interval = setInterval(() => {
             this._loadingTimeInMilliseconds += INTERVAL_STEP_IN_MILLISECONDS;
 
-            if (this._loadingTimeInMilliseconds >= this._activeInvisibleThresholdInMilliseconds) {
+            if (this._loadingTimeInMilliseconds >= this._invisibleThresholdInMiliseconds) {
                 this._stateTransitionCb(MLoadingStates.ActiveVisible);
             }
         }, INTERVAL_STEP_IN_MILLISECONDS);
@@ -28,18 +28,18 @@ export default class LoadingScheduler {
 
     public stop(): void {
         if (
-            this._loadingTimeInMilliseconds < this._activeInvisibleThresholdInMilliseconds
+            this._loadingTimeInMilliseconds < this._invisibleThresholdInMiliseconds
             ||
             (
                 this._loadingTimeInMilliseconds
                 >
-                (this._activeInvisibleThresholdInMilliseconds + this._activeVisibleMinDurationInMilliseconds)
+                (this._invisibleThresholdInMiliseconds + this._visibleThresholdInMiliseconds)
             )
         ) {
             this._stateTransitionCb(MLoadingStates.Inactive);
         } else {
             setTimeout(() => this._stateTransitionCb(MLoadingStates.Inactive),
-                (this._activeInvisibleThresholdInMilliseconds + this._activeVisibleMinDurationInMilliseconds)
+                (this._invisibleThresholdInMiliseconds + this._visibleThresholdInMiliseconds)
                 -
                 this._loadingTimeInMilliseconds
             );

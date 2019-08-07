@@ -1,8 +1,8 @@
-import LoadingScheduler, { DEFAULT_ACTIVE_INVISIBLE_THRESHOLD_IN_MILLISECONDS, DEFAULT_ACTIVE_VISIBLE_MIN_DURATION_IN_MILLISECONDS } from './loading-scheduler';
+import LoadingScheduler, { DEFAULT_INVISBLE_THRESHOLD_IN_MILISECONDS, DEFAULT_VISIBLE_THRESHOLD_IN_MILISECONDS } from './loading-scheduler';
 import { MLoadingStates } from './loading-states';
 
 describe('laoding-scheduler', () => {
-    it('', (done) => {
+    it('should respect invisible and visible thresholds', (done) => {
         let test: any = { state: MLoadingStates.Inactive };
 
         const scheduler: LoadingScheduler = new LoadingScheduler((state: MLoadingStates) => {
@@ -24,8 +24,8 @@ describe('laoding-scheduler', () => {
                 expect(test.state).toBe(MLoadingStates.Inactive);
 
                 done();
-            }, DEFAULT_ACTIVE_VISIBLE_MIN_DURATION_IN_MILLISECONDS + 1);
+            }, DEFAULT_VISIBLE_THRESHOLD_IN_MILISECONDS + 1);
 
-        }, DEFAULT_ACTIVE_INVISIBLE_THRESHOLD_IN_MILLISECONDS + 1);
+        }, DEFAULT_INVISBLE_THRESHOLD_IN_MILISECONDS + 1);
     });
 });
