@@ -38,7 +38,7 @@ export default class LoadingScheduler {
         ) {
             this._stateTransitionCb(MLoadingStates.Inactive);
         } else {
-            setTimeout(() => this._stateTransitionCb(MLoadingStates.Inactive));
+            setTimeout(() => this._stateTransitionCb(MLoadingStates.Inactive), 1000);
         }
 
         clearInterval(this._interval);
