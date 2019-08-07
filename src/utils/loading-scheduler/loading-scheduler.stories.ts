@@ -43,7 +43,7 @@ storiesOf(`loading-scheduler`, module)
         },
         template: `
         <div>
-            <m-spinner v-if="ressource.loadingState & mLoadingStates.Active"></m-spinner>
+            <m-spinner v-if="ressource.loadingState === mLoadingStates.ActiveVisible"></m-spinner>
             <m-button @click="startLoading()">Start loading</m-button>
             <m-button @click="stopLoading()">Stop loading</m-button>
         </div>
