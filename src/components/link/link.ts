@@ -65,10 +65,7 @@ export class MLink extends ModulVue {
     public target: string;
 
     @Prop()
-    public icon: boolean;
-
-    @Prop()
-    public iconChevron: boolean;
+    public bulletPointIcon: boolean;
 
     @Prop()
     public iconName: string;
@@ -155,23 +152,23 @@ export class MLink extends ModulVue {
     }
 
     private get isIconPositionLeft(): boolean {
-        return this.hasIcon && this.iconPosition === MLinkIconPosition.Left;
+        return (this.hasIcon && this.iconPosition === MLinkIconPosition.Left) && !this.bulletPointIcon;
     }
 
     private get isIconPositionRight(): boolean {
-        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right;
+        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right && !this.bulletPointIcon;
     }
 
     public get hasIcon(): boolean {
-        return this.iconChevron || Boolean(this.propIconName);
+        return Boolean(this.propIconName) || this.bulletPointIcon;
     }
 
     public get propIconSize(): string {
-        return this.iconChevron ? '12px' : this.iconSize;
+        return this.bulletPointIcon ? '12px' : this.iconSize;
     }
 
     private get propIconName(): string {
-        return this.iconChevron ? ICON_NAME_CHEVRON : this.iconName;
+        return this.bulletPointIcon ? ICON_NAME_CHEVRON : this.iconName;
     }
 
     private get propUrl(): string | undefined {

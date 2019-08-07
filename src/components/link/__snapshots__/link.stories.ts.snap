@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots components|m-link bullet-point-icon 1`] = `
+<a
+  class="m-link m--has-content"
+  href="#"
+  tabindex="0"
+>
+  <svg
+    aria-hidden="true"
+    class="m-icon m-link__icon m--has-large-stroke"
+    height="12px"
+    width="12px"
+  >
+    <!---->
+     
+    <use
+      aria-hidden="true"
+      class=""
+    />
+  </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
 exports[`Storyshots components|m-link default 1`] = `
 <a
   class="m-link m--has-content"
@@ -24,36 +54,6 @@ exports[`Storyshots components|m-link disabled 1`] = `
   tabindex="-1"
 >
   <!---->
-   
-  <span
-    class="m-link__text"
-  >
-    A link
-  </span>
-   
-  <!---->
-</a>
-`;
-
-exports[`Storyshots components|m-link icon-chevron 1`] = `
-<a
-  class="m-link m--has-left-icon m--has-content"
-  href="#"
-  tabindex="0"
->
-  <svg
-    aria-hidden="true"
-    class="m-icon m-link__icon m--has-large-stroke"
-    height="12px"
-    width="12px"
-  >
-    <!---->
-     
-    <use
-      aria-hidden="true"
-      class=""
-    />
-  </svg>
    
   <span
     class="m-link__text"
@@ -104,8 +104,8 @@ exports[`Storyshots components|m-link icon-position="right" 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon m--has-large-stroke"
-    height="12px"
-    width="12px"
+    height="1em"
+    width="1em"
   >
     <!---->
      
@@ -318,30 +318,10 @@ exports[`Storyshots components|m-link/mode mode="link 1`] = `
 </a>
 `;
 
-exports[`Storyshots components|m-link/skin="light" default 1`] = `
+exports[`Storyshots components|m-link/skin="light" bullet-point-icon 1`] = `
 <div>
   <a
     class="m-link m--is-skin-light m--has-content"
-    href="#"
-    tabindex="0"
-  >
-    <!---->
-     
-    <span
-      class="m-link__text"
-    >
-      A link
-    </span>
-     
-    <!---->
-  </a>
-</div>
-`;
-
-exports[`Storyshots components|m-link/skin="light" icon-chevron 1`] = `
-<div>
-  <a
-    class="m-link m--is-skin-light m--has-left-icon m--has-content"
     href="#"
     tabindex="0"
   >
@@ -358,6 +338,26 @@ exports[`Storyshots components|m-link/skin="light" icon-chevron 1`] = `
         class=""
       />
     </svg>
+     
+    <span
+      class="m-link__text"
+    >
+      A link
+    </span>
+     
+    <!---->
+  </a>
+</div>
+`;
+
+exports[`Storyshots components|m-link/skin="light" default 1`] = `
+<div>
+  <a
+    class="m-link m--is-skin-light m--has-content"
+    href="#"
+    tabindex="0"
+  >
+    <!---->
      
     <span
       class="m-link__text"
@@ -412,8 +412,8 @@ exports[`Storyshots components|m-link/skin="light" icon-position="right" 1`] = `
     <svg
       aria-hidden="true"
       class="m-icon m-link__icon m--has-large-stroke"
-      height="12px"
-      width="12px"
+      height="1em"
+      width="1em"
     >
       <!---->
        
@@ -466,27 +466,9 @@ exports[`Storyshots components|m-link/skin="light" icon-size="20px" 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-link/skin="text" default 1`] = `
+exports[`Storyshots components|m-link/skin="text" bullet-point-icon 1`] = `
 <a
   class="m-link m--is-skin-text m--has-content"
-  href="#"
-  tabindex="0"
->
-  <!---->
-   
-  <span
-    class="m-link__text"
-  >
-    A link
-  </span>
-   
-  <!---->
-</a>
-`;
-
-exports[`Storyshots components|m-link/skin="text" icon-chevron 1`] = `
-<a
-  class="m-link m--is-skin-text m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -503,6 +485,24 @@ exports[`Storyshots components|m-link/skin="text" icon-chevron 1`] = `
       class=""
     />
   </svg>
+   
+  <span
+    class="m-link__text"
+  >
+    A link
+  </span>
+   
+  <!---->
+</a>
+`;
+
+exports[`Storyshots components|m-link/skin="text" default 1`] = `
+<a
+  class="m-link m--is-skin-text m--has-content"
+  href="#"
+  tabindex="0"
+>
+  <!---->
    
   <span
     class="m-link__text"
@@ -541,8 +541,8 @@ exports[`Storyshots components|m-link/skin="text" icon-position="right" 1`] = `
   <svg
     aria-hidden="true"
     class="m-icon m-link__icon m--has-large-stroke"
-    height="12px"
-    width="12px"
+    height="1em"
+    width="1em"
   >
     <!---->
      
