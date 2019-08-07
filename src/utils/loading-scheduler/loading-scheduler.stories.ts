@@ -9,6 +9,7 @@ import { MLoadingStates } from './loading-states';
 Vue.use(SpinnerPlugin);
 Vue.use(ButtonPlugin);
 
+
 storiesOf(`loading-scheduler`, module)
     .add('default', () => ({
         props: {
@@ -20,6 +21,7 @@ storiesOf(`loading-scheduler`, module)
             }
         },
         data: () => ({
+            mLoadingStates: MLoadingStates,
             ressource: {
                 loadingState: MLoadingStates.Inactive
             },
@@ -41,7 +43,7 @@ storiesOf(`loading-scheduler`, module)
         },
         template: `
         <div>
-            <m-spinner v-if="ressource.loadingState === 4"></m-spinner>
+            <m-spinner v-if="ressource.loadingState & mLoadingStates.Active"></m-spinner>
             <m-button @click="startLoading()">Start loading</m-button>
             <m-button @click="stopLoading()">Stop loading</m-button>
         </div>
