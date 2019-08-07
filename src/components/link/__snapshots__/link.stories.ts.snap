@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots components|m-link bullet-point-icon 1`] = `
+exports[`Storyshots components|m-link bullet-point 1`] = `
 <a
   class="m-link m--has-content"
   href="#"
@@ -318,7 +318,7 @@ exports[`Storyshots components|m-link/mode mode="link 1`] = `
 </a>
 `;
 
-exports[`Storyshots components|m-link/skin="light" bullet-point-icon 1`] = `
+exports[`Storyshots components|m-link/skin="light" bullet-point 1`] = `
 <div>
   <a
     class="m-link m--is-skin-light m--has-content"
@@ -466,7 +466,7 @@ exports[`Storyshots components|m-link/skin="light" icon-size="20px" 1`] = `
 </div>
 `;
 
-exports[`Storyshots components|m-link/skin="text" bullet-point-icon 1`] = `
+exports[`Storyshots components|m-link/skin="text" bullet-point 1`] = `
 <a
   class="m-link m--is-skin-text m--has-content"
   href="#"

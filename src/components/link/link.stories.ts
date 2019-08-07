@@ -60,8 +60,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
         },
         template: '<m-link :target="target" mode="link" url="#">A link</m-link>'
     }))
-    .add('bullet-point-icon', () => ({
-        template: '<m-link mode="link" url="#" :bullet-point-icon="true">A link</m-link>'
+    .add('bullet-point', () => ({
+        template: '<m-link mode="link" url="#" :bullet-point="true">A link</m-link>'
     }))
     .add('icon-size', () => ({
         props: {
@@ -105,9 +105,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="light"`, module
                         <m-link mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
-    .add('bullet-point-icon', () => ({
+    .add('bullet-point', () => ({
         template: `<div style="background: grey;">
-                        <m-link :bullet-point-icon="true" mode="link" url="#" skin="light">A link</m-link>
+                        <m-link :bullet-point="true" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
     .add('icon-position="right"', () => ({
@@ -132,8 +132,8 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
     .add('default', () => ({
         template: '<m-link mode="link" url="#" skin="text">A link</m-link>'
     }))
-    .add('bullet-point-icon', () => ({
-        template: '<m-link :bullet-point-icon="true" mode="link" url="#" skin="text">A link</m-link>'
+    .add('bullet-point', () => ({
+        template: '<m-link :bullet-point="true" mode="link" url="#" skin="text">A link</m-link>'
     }))
     .add('icon-name="m-svg__clock"', () => ({
         template: '<m-link :icon-name="m-svg__clock" mode="link" url="#" skin="text">A link</m-link>'
