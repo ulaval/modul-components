@@ -50,7 +50,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
     .add('target', () => ({
         props: {
             target: {
-                default: select('iconName', {
+                default: select('target', {
                     'self': '_self',
                     'blank': '_blank',
                     'parent': '_parent',
@@ -58,10 +58,10 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
                 }, 'self')
             }
         },
-        template: '<m-link :target="target" mode="link" url="#" icon-name="iconName">A link</m-link>'
+        template: '<m-link :target="target" mode="link" url="#">A link</m-link>'
     }))
-    .add('icon', () => ({
-        template: '<m-link mode="link" url="#" :icon="true">A link</m-link>'
+    .add('bullet-point', () => ({
+        template: '<m-link mode="link" url="#" :bullet-point="true">A link</m-link>'
     }))
     .add('icon-size', () => ({
         props: {
@@ -69,7 +69,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
                 default: text('iconSize', '20px')
             }
         },
-        template: '<m-link :icon="true" mode="link" url="#" :icon-size="iconSize">A link</m-link>'
+        template: '<m-link icon-name="m-svg__calendar" mode="link" url="#" :icon-size="iconSize">A link</m-link>'
     }))
     .add('icon-name', () => ({
         props: {
@@ -89,7 +89,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
         template: '<m-link :icon-name="iconName" mode="link" url="#" >A link</m-link>'
     }))
     .add('icon-position="right"', () => ({
-        template: '<m-link mode="link" url="#" :icon="true" icon-position="right">A link</m-link>'
+        template: '<m-link mode="link" url="#" icon-name="m-svg__chevron--right" icon-position="right">A link</m-link>'
     }))
     .add('tabindex="1"', () => ({
         template: '<m-link mode="link" url="#" tabindex="1">A link</m-link>'
@@ -105,24 +105,24 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="light"`, module
                         <m-link mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
-    .add('icon', () => ({
+    .add('bullet-point', () => ({
         template: `<div style="background: grey;">
-                        <m-link :icon="true" mode="link" url="#" skin="light">A link</m-link>
+                        <m-link :bullet-point="true" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
     .add('icon-position="right"', () => ({
         template: `<div style="background: grey;">
-                        <m-link :icon="true" icon-position="right" mode="link" url="#" skin="light">A link</m-link>
+                        <m-link icon-name="m-svg__chevron--right" icon-position="right" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
     .add('icon-name="m-svg__clock"', () => ({
         template: `<div style="background: grey;">
-                        <m-link :icon="true" icon-name="m-svg__clock" mode="link" url="#" skin="light">A link</m-link>
+                        <m-link icon-name="m-svg__clock" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }))
     .add('icon-size="20px"', () => ({
         template: `<div style="background: grey;">
-                        <m-link :icon="true" icon-size="20px" mode="link" url="#" skin="light">A link</m-link>
+                        <m-link icon-name="m-svg__clock" icon-size="20px" mode="link" url="#" skin="light">A link</m-link>
                    </div>`
     }));
 
@@ -132,14 +132,14 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/skin="text"`, module)
     .add('default', () => ({
         template: '<m-link mode="link" url="#" skin="text">A link</m-link>'
     }))
-    .add('icon', () => ({
-        template: '<m-link :icon="true" mode="link" url="#" skin="text">A link</m-link>'
+    .add('bullet-point', () => ({
+        template: '<m-link :bullet-point="true" mode="link" url="#" skin="text">A link</m-link>'
     }))
     .add('icon-name="m-svg__clock"', () => ({
-        template: '<m-link :icon="true" icon-name="m-svg__clock" mode="link" url="#" skin="text">A link</m-link>'
+        template: '<m-link :icon-name="m-svg__clock" mode="link" url="#" skin="text">A link</m-link>'
     }))
     .add('icon-position="right"', () => ({
-        template: '<m-link icon-position="right" icon-name="m-svg__clock" mode="link" url="#" skin="text">A link</m-link>'
+        template: '<m-link icon-position="right" icon-name="m-svg__chevron--right" mode="link" url="#" skin="text">A link</m-link>'
     }))
     .add('icon-size="20px"', () => ({
         template: '<m-link icon-size="20px" icon-name="m-svg__clock" mode="link" url="#" skin="text">A link</m-link>'
@@ -160,4 +160,3 @@ storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}/mode`, module)
     .add('mode="button"', () => ({
         template: '<m-link mode="button" url="http://www.google.ca">A link</m-link>'
     }));
-

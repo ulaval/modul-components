@@ -51,7 +51,7 @@ exports[`tooltip should render correctly when is open 1`] = `
 
 exports[`tooltip should render correctly when mode is link 1`] = `
 <m-popup-stub placement="bottom" openTrigger="click" closeOnBackdrop="true" width="auto" paddingHeader="true" paddingBody="true" paddingFooter="true" lazy="true" class="m-tooltip">
-  <m-link-stub url="/" mode="button" underline="true" skin="default" iconPosition="left" iconSize="12px" tabindex="0" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" class="m-tooltip__link">Link</m-link-stub>
+  <m-link-stub url="/" mode="button" underline="true" skin="default" iconPosition="left" iconSize="1em" tabindex="0" id="mTooltip-uuid" aria-haspopup="true" aria-controls="mTooltip-uuid-controls" class="m-tooltip__link">Link</m-link-stub>
   <div id="mTooltip-uuid-controls" aria-labelledby="mTooltip-uuid" class="m-tooltip__body-container m--has-close-button">
     <m-icon-button-stub skin="light" buttonSize="44px" iconName="m-svg__close-clear" iconSize="14px" ripple="true" svg-tile="m-tooltip:close" class="m-tooltip__close-button"></m-icon-button-stub>
     <div class="m-tooltip__body">Tooltip text</div>
