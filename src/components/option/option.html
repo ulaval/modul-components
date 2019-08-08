@@ -25,6 +25,7 @@
     </m-icon-button>
     <ul :id="ariaControls"
         class="m-option__list"
+        :style="{ maxHeight: menuMaxHeight }"
         :aria-labelledby="id"
         ref="menu">
         <slot></slot>

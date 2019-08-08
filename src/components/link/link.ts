@@ -26,7 +26,7 @@ export enum MLinkSkin {
     Text = 'text'
 }
 
-const ICON_NAME_DEFAULT: string = 'm-svg__chevron--right';
+const ICON_NAME_CHEVRON: string = 'm-svg__chevron--right';
 
 @WithRender
 @Component
@@ -65,7 +65,7 @@ export class MLink extends ModulVue {
     public target: string;
 
     @Prop()
-    public icon: boolean;
+    public bulletPoint: boolean;
 
     @Prop()
     public iconName: string;
@@ -77,7 +77,7 @@ export class MLink extends ModulVue {
     })
     public iconPosition: MLinkIconPosition;
 
-    @Prop({ default: '12px' })
+    @Prop({ default: '1em' })
     public iconSize: string;
 
     @Prop({ default: '0' })
@@ -116,6 +116,18 @@ export class MLink extends ModulVue {
         return this.mode === MLinkMode.RouterLink;
     }
 
+    public get iconHasLargeStroke(): boolean {
+        switch (this.propIconName) {
+            case 'm-svg__chevron--up':
+            case 'm-svg__chevron--right':
+            case 'm-svg__chevron--down':
+            case 'm-svg__chevron--left':
+                return true;
+            default:
+                return false;
+        }
+    }
+
     private onKeyup(event): void {
         event = event || window.event;
         if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
@@ -140,23 +152,23 @@ export class MLink extends ModulVue {
     }
 
     private get isIconPositionLeft(): boolean {
-        return this.hasIcon && this.iconPosition === MLinkIconPosition.Left;
+        return (this.hasIcon && this.iconPosition === MLinkIconPosition.Left) && !this.bulletPoint;
     }
 
     private get isIconPositionRight(): boolean {
-        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right;
+        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right && !this.bulletPoint;
     }
 
-    private get hasIcon(): boolean {
-        return this.iconName !== undefined && this.iconName !== ''
-            ? true
-            : this.icon;
+    public get hasIcon(): boolean {
+        return Boolean(this.propIconName) || this.bulletPoint;
+    }
+
+    public get propIconSize(): string {
+        return this.bulletPoint ? '12px' : this.iconSize;
     }
 
     private get propIconName(): string {
-        return this.iconName !== undefined && this.iconName !== ''
-            ? this.iconName
-            : ICON_NAME_DEFAULT;
+        return this.bulletPoint ? ICON_NAME_CHEVRON : this.iconName;
     }
 
     private get propUrl(): string | undefined {
