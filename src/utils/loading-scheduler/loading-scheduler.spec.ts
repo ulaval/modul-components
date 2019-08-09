@@ -5,9 +5,7 @@ describe('loading-scheduler', () => {
     it('should respect invisible and visible thresholds', (done) => {
         let test: any = { state: MLoadingStates.Inactive };
 
-        const scheduler: LoadingScheduler = new LoadingScheduler((state: MLoadingStates) => {
-            test.state = state;
-        });
+        const scheduler: LoadingScheduler = new LoadingScheduler((state: MLoadingStates) => test.state = state);
 
         scheduler.start();
 
@@ -24,8 +22,8 @@ describe('loading-scheduler', () => {
                 expect(test.state).toBe(MLoadingStates.Inactive);
 
                 done();
-            }, DEFAULT_VISIBLE_THRESHOLD_IN_MILISECONDS + 1);
+            }, DEFAULT_VISIBLE_THRESHOLD_IN_MILISECONDS + 100);
 
-        }, DEFAULT_INVISBLE_THRESHOLD_IN_MILISECONDS + 1);
+        }, DEFAULT_INVISBLE_THRESHOLD_IN_MILISECONDS + 100);
     });
 });
