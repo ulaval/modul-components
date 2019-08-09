@@ -334,13 +334,45 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       <td
         class=""
       >
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          "&gt;
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          "&gt;
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -402,13 +434,45 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       <td
         class=""
       >
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          "&gt;
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          "&gt;
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -470,13 +534,45 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       <td
         class=""
       >
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          "&gt;
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          "&gt;
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -538,13 +634,45 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       <td
         class=""
       >
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          "&gt;
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          "&gt;
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -606,13 +734,45 @@ exports[`Storyshots components|m-table Custom cell 1`] = `
       <td
         class=""
       >
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          "&gt;
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          "&gt;
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
   </tbody>
@@ -736,13 +896,45 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       </td>
        
       <td>
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          <m-option-item-edit />
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          <m-option-item-delete />
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -761,13 +953,45 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       </td>
        
       <td>
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          <m-option-item-edit />
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          <m-option-item-delete />
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -786,13 +1010,45 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       </td>
        
       <td>
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          <m-option-item-edit />
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          <m-option-item-delete />
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -811,13 +1067,45 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       </td>
        
       <td>
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          <m-option-item-edit />
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          <m-option-item-delete />
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
     <tr>
@@ -836,13 +1124,45 @@ exports[`Storyshots components|m-table Custom row 1`] = `
       </td>
        
       <td>
-        <m-option
-          size="33px"
+        <div
+          class="m-popup m-option m--is-inline"
         >
-          <m-option-item-edit />
+          <div
+            class="m-popper"
+          >
+            <div>
+              <button
+                aria-controls="mOption-uuid-controls"
+                aria-haspopup="true"
+                class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+                id="mOption-uuid"
+                style="width: 33px; height: 33px;"
+                title="Ouvrir le menu"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="m-icon m-icon-button__icon"
+                  height="20px"
+                  width="20px"
+                >
+                  <!---->
+                   
+                  <use
+                    aria-hidden="true"
+                    class=""
+                  />
+                </svg>
+                 
+                <!---->
+              </button>
+            </div>
+             
+            <!---->
+          </div>
            
-          <m-option-item-delete />
-        </m-option>
+          <!---->
+        </div>
       </td>
     </tr>
   </tbody>

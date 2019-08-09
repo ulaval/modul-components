@@ -23,20 +23,20 @@
                                        :state="getState"
                                        skin="page-light"></m-message>
                         </div>
-                        <div class="m-dialog__message"
-                             v-if="hasDefaultSlot || hasMessage">
+                        <div v-if="hasDefaultSlot || hasMessage"
+                             class="m-dialog__message">
                             <p v-if="hasMessage"
                                v-html="message"></p>
                             <slot></slot>
                         </div>
                         <div class="m-dialog__hint"
                              v-if="hasHint">
-                            <div class="m-dialog__hint--body">
-                                <div class="m-dialog__hint--icon">
+                            <div class="m-dialog__hint-body">
+                                <div class="m-dialog__hint-icon">
                                     <m-icon name="m-svg__hint"
                                             size="32px"></m-icon>
                                 </div>
-                                <div class="m-dialog__hint--text">
+                                <div class="m-dialog__hint-text">
                                     <span>{{ hint }}</span>
                                 </div>
                             </div>

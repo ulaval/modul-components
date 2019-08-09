@@ -11,8 +11,10 @@ $m-option-item--color-active: $m-color--grey-lightest !default;
         max-width: 220px; // Magic number
     }
 
-    &:not(:last-child) {
-        border-bottom: 1px solid $m-color--border;
+    &:not(.m--has-no-border) {
+        &:not(:last-child) {
+            border-bottom: 1px solid $m-color--border;
+        }
     }
 
     .m--has-icon-spacing {
@@ -41,7 +43,7 @@ $m-option-item--color-active: $m-color--grey-lightest !default;
         flex: 1 1 auto;
         color: $m-color--text;
         padding-right: $m-padding;
-        padding-left: $m-padding;
+        padding-left: $m-padding--s;
     }
 
     &.m--is-disabled {

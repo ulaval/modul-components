@@ -1,4 +1,5 @@
 @import 'commons';
+$m-line-height-rich-text: 21px !default;
 
 .m-rich-text {
     position: relative;
@@ -13,5 +14,11 @@
 
     &__validation-message {
         transition: margin-top $m-transition-duration ease;
+    }
+
+    /deep/ .m-input-style {
+        &__label {
+            line-height: $m-line-height-rich-text;
+        }
     }
 }

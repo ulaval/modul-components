@@ -1,0 +1,8 @@
+@import 'commons';
+
+.m-option-separator {
+    display: flex;
+    text-decoration: none;
+    height: $m-border-width--s;
+    background-color: $m-color--grey-light;
+}
