@@ -150,6 +150,7 @@ exports[`Storyshots components|m-tooltip/mode mode="definition" 1`] = `
           class="m-link m-tooltip__link m--is-unvisited m--no-underline m--is-button m--has-content"
           href="#"
           id="mTooltip-uuid"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -240,6 +241,7 @@ exports[`Storyshots components|m-tooltip/mode mode="link" 1`] = `
           class="m-link m-tooltip__link m--is-unvisited m--is-button m--has-content"
           href="#"
           id="mTooltip-uuid"
+          role="button"
           tabindex="0"
         >
           <!---->

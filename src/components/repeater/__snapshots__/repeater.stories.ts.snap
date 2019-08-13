@@ -146,6 +146,7 @@ exports[`Storyshots components|m-repeater With items (Custom item template) 1`] 
       <a
         class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
         href="#"
+        role="button"
         tabindex="0"
       >
         <svg
@@ -204,6 +205,7 @@ exports[`Storyshots components|m-repeater With items (Custom row template) 1`] =
       <a
         class="m-link m-add m--is-unvisited m--is-button m--has-left-icon m--has-content"
         href="#"
+        role="button"
         tabindex="0"
       >
         <svg

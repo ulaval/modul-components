@@ -21,12 +21,7 @@ const storyRouterDecorator: any = (links = {}, routerProps = {}): any => {
     };
 };
 
-
-
-
 storiesOf(`${componentsHierarchyRootSeparator}${LINK_NAME}`, module)
-
-
     .add('default', () => ({
         template: '<m-link mode="link" url="#">A link</m-link>'
     }))
