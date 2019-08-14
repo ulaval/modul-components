@@ -165,9 +165,7 @@ export class MLink extends ModulVue {
                 return undefined;
             case MLinkMode.RouterLink:
             default:
-                if (this.disabled) {
-                    return undefined;
-                } else if (!this.url) {
+                if (this.disabled || !this.url) {
                     return { path: '/' };
                 } else {
                     return this.isObject(this.url) ? this.url as Location : { path: this.url as string };
