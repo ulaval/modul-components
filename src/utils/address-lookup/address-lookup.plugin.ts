@@ -30,6 +30,8 @@ const AddressLookupPlugin: PluginObject<any> = {
             addressLookup = new AddressLookupGoogleService(axios, options.googleKey);
         } else if (options.loqateKey) {
             addressLookup = new AddressLookupLoqateService(axios, options.loqateKey);
+        } else {
+            v.prototype.$log.error(`You need to provide a Loqate Web Service or Google Maps API key.`);
         }
 
         v.prototype.$addressLookup = addressLookup;

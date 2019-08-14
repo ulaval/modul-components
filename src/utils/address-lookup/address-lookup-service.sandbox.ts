@@ -1,5 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
+import AddressPlugin from '../../components/address/address';
 import { ModulVue } from '../vue/vue';
 import { Address, AddressSummary } from './address';
 import WithRender from './address-lookup-service.sandbox.html';
@@ -30,6 +31,7 @@ export class MAddressLookupServiceSandbox extends ModulVue {
 
 const MAddressLookupServiceSandboxPlugin: PluginObject<any> = {
     install(v): void {
+        v.use(AddressPlugin);
         v.component(`m-address-lookup-service-sandbox`, MAddressLookupServiceSandbox);
     }
 };
