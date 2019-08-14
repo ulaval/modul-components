@@ -14,10 +14,11 @@
                  :tabindex="disabled ? '-1' : tabindex"
                  ref="router"
                  :event="routerEvent">
-        <m-icon :name="propIconName"
-                :size="iconSize"
+        <m-icon v-if="hasIcon"
                 class="m-link__icon"
-                v-if="hasIcon"
+                :class="{ 'm--has-large-stroke': iconHasLargeStroke }"
+                :name="propIconName"
+                :size="propIconSize"
                 aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>
@@ -43,10 +44,11 @@
        @keyup="onKeyup"
        :tabindex="disabled ? '-1' : tabindex"
        ref="link">
-        <m-icon class="m-link__icon"
+        <m-icon v-if="hasIcon"
+                class="m-link__icon"
+                :class="{ 'm--has-large-stroke': iconHasLargeStroke }"
                 :name="propIconName"
-                :size="iconSize"
-                v-if="hasIcon"
+                :size="propIconSize"
                 aria-hidden="true"></m-icon>
         <span class="m-link__text">
             <slot></slot>

@@ -252,9 +252,9 @@ exports[`Storyshots components|m-error-browser-not-supported linksMobile 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
-              height="12px"
-              width="12px"
+              class="m-icon m-link__icon m--has-large-stroke"
+              height="1em"
+              width="1em"
             >
               <!---->
                
@@ -286,9 +286,9 @@ exports[`Storyshots components|m-error-browser-not-supported linksMobile 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
-              height="12px"
-              width="12px"
+              class="m-icon m-link__icon m--has-large-stroke"
+              height="1em"
+              width="1em"
             >
               <!---->
                

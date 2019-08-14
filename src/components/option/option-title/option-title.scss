@@ -1,0 +1,10 @@
+@import 'commons';
+
+.m-option-title {
+    display: flex;
+    text-decoration: none;
+    font-weight: $m-font-weight--bold;
+    font-weight: $m-font-size--s;
+    color: $m-color--grey;
+    padding: $m-spacing--s $m-spacing;
+}

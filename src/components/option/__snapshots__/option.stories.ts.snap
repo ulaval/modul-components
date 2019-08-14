@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots components|m-option default 1`] = `
+<div
+  class="m-popup m-option m--is-inline"
+>
+  <div
+    class="m-popper"
+  >
+    <div>
+      <button
+        aria-controls="mOption-uuid-controls"
+        aria-haspopup="true"
+        class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+        id="mOption-uuid"
+        style="width: 44px; height: 44px;"
+        title="Ouvrir le menu"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </div>
+     
+    <!---->
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-option option-separator 1`] = `
+<div
+  class="m-popup m-option m--is-inline"
+>
+  <div
+    class="m-popper"
+  >
+    <div>
+      <button
+        aria-controls="mOption-uuid-controls"
+        aria-haspopup="true"
+        class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+        id="mOption-uuid"
+        style="width: 44px; height: 44px;"
+        title="Ouvrir le menu"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </div>
+     
+    <!---->
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-option option-title & separator 1`] = `
+<div
+  class="m-popup m-option m--is-inline"
+>
+  <div
+    class="m-popper"
+  >
+    <div>
+      <button
+        aria-controls="mOption-uuid-controls"
+        aria-haspopup="true"
+        class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+        id="mOption-uuid"
+        style="width: 44px; height: 44px;"
+        title="Ouvrir le menu"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </div>
+     
+    <!---->
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-option option-title 1`] = `
+<div
+  class="m-popup m-option m--is-inline"
+>
+  <div
+    class="m-popper"
+  >
+    <div>
+      <button
+        aria-controls="mOption-uuid-controls"
+        aria-haspopup="true"
+        class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+        id="mOption-uuid"
+        style="width: 44px; height: 44px;"
+        title="Ouvrir le menu"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </div>
+     
+    <!---->
+  </div>
+   
+  <!---->
+</div>
+`;
+
+exports[`Storyshots components|m-option scroll 1`] = `
+<div
+  class="m-popup m-option m--is-inline"
+>
+  <div
+    class="m-popper"
+  >
+    <div>
+      <button
+        aria-controls="mOption-uuid-controls"
+        aria-haspopup="true"
+        class="m-icon-button m-option__button m--is-skin-light m--has-ripple"
+        id="mOption-uuid"
+        style="width: 44px; height: 44px;"
+        title="Ouvrir le menu"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="m-icon m-icon-button__icon"
+          height="20px"
+          width="20px"
+        >
+          <!---->
+           
+          <use
+            aria-hidden="true"
+            class=""
+          />
+        </svg>
+         
+        <!---->
+      </button>
+    </div>
+     
+    <!---->
+  </div>
+   
+  <!---->
+</div>
+`;

@@ -19,7 +19,7 @@
                 skin="current-color"></m-plus>
         <slot name="trigger"></slot>
     </div>
-    <m-accordion-transition>
+    <m-accordion-transition ref="transition">
         <ul v-show="propOpen"
             :id="idAriaControls"
             class="m-menu__body"
