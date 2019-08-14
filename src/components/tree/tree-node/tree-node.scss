@@ -193,7 +193,7 @@ $m-tree-node--child-indentation: 20px;
             > .m-tree-node__item:not(.m--no-hover) {
                 &:hover,
                 &:focus {
-                    background: linear-gradient(to right, $m-color--information, transparent);
+                    background: linear-gradient(to right, $m-color--information, rgba($m-color--white, 0));
                     cursor: pointer;
                 }
             }
@@ -266,7 +266,7 @@ $m-tree-node--child-indentation: 20px;
     }
 
     &.m--is-selected:not(.m--is-read-only) > .m-tree-node__item.m--no-hover {
-        background-color: transparent;
+        background-color: rgba($m-color--white, 0);
         color: $m-color--text;
 
         &:hover,
@@ -281,6 +281,6 @@ $m-tree-node--child-indentation: 20px;
 
     &:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m--no-hover {
         cursor: pointer;
-        background-color: transparent;
+        background-color: rgba($m-color--white, 0);
     }
 }
