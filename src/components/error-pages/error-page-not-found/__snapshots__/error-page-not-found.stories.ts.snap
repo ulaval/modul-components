@@ -47,7 +47,7 @@ exports[`Storyshots components|m-error-page-not-found default 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
@@ -55,8 +55,8 @@ exports[`Storyshots components|m-error-page-not-found default 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m--has-large-stroke"
-              height="1em"
-              width="1em"
+              height="12px"
+              width="12px"
             >
               <!---->
                
@@ -134,7 +134,7 @@ exports[`Storyshots components|m-error-page-not-found hints 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
@@ -142,8 +142,8 @@ exports[`Storyshots components|m-error-page-not-found hints 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m--has-large-stroke"
-              height="1em"
-              width="1em"
+              height="12px"
+              width="12px"
             >
               <!---->
                
@@ -215,7 +215,7 @@ exports[`Storyshots components|m-error-page-not-found links 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="http://www.ulaval.ca"
             tabindex="0"
             target="_blank"
@@ -223,8 +223,8 @@ exports[`Storyshots components|m-error-page-not-found links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m--has-large-stroke"
-              height="1em"
-              width="1em"
+              height="12px"
+              width="12px"
             >
               <!---->
                
@@ -249,7 +249,7 @@ exports[`Storyshots components|m-error-page-not-found links 1`] = `
         </li>
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="http://www.google.com"
             tabindex="0"
             target="_blank"
@@ -257,8 +257,8 @@ exports[`Storyshots components|m-error-page-not-found links 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m--has-large-stroke"
-              height="1em"
-              width="1em"
+              height="12px"
+              width="12px"
             >
               <!---->
                
@@ -333,7 +333,7 @@ exports[`Storyshots components|m-error-page-not-found title 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
@@ -341,8 +341,8 @@ exports[`Storyshots components|m-error-page-not-found title 1`] = `
             <svg
               aria-hidden="true"
               class="m-icon m-link__icon m--has-large-stroke"
-              height="1em"
-              width="1em"
+              height="12px"
+              width="12px"
             >
               <!---->
                
