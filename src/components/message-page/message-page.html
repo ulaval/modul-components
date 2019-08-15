@@ -12,9 +12,9 @@
         <div class="m-message-page__icon-container"
              aria-hidden="true">
             <div class="m-message-page__icon"
-                :style="styleObject"
-                v-html="svg"
-                v-if="isSvg"></div>
+                 :style="styleObject"
+                 v-html="svg"
+                 v-if="isSvg"></div>
             <m-icon class="m-message-page__icon"
                     :name="iconNameProp"
                     :size="propImageSize"
@@ -24,12 +24,12 @@
     <div class="m-message-page__body"
          v-if="hasBody">
         <p class="m-message-page__hints"
-            :class="{'m--no-content': !hasLinksAndSlot}"
-            v-if="hasHints"
-            v-for="hint in hints"
-            ref="hint">{{hint}}</p>
+           :class="{'m--no-content': !hasLinksAndSlot}"
+           v-if="hasHints"
+           v-for="hint in hints"
+           ref="hint">{{hint}}</p>
         <div class="m-message-page__details"
-            v-if="$slots.default">
+             v-if="$slots.default">
             <slot></slot>
         </div>
         <ul class="m-message-page__links"
@@ -37,8 +37,9 @@
             <li ref="link"
                 v-for="link in links">
                 <m-link class="m-message-page__link"
-                        icon-name="m-svg__chevron--right"
-                        mode="link" :url="link.url"
+                        bullet-point="true"
+                        mode="link"
+                        :url="link.url"
                         :target="isTargetExternal(link.external)">{{link.label}}</m-link>
             </li>
         </ul>

@@ -2,33 +2,39 @@
     :class="{ 'm--is-selected': isSelected && !isDisabled,
             'm--is-disabled' : isDisabled,
             'm--is-read-only' : isReadonlyStyle,
-            'm-tree-node__has-children' : isFolder,
-            'm-tree-node__with-checkboxes' : withCheckboxes,
-            'm-tree-node__file-icons' : useFilesIcons }">
+            'm--has-children' : isFolder,
+            'm--is-with-checkboxes' : withCheckboxes,
+            'm--has-file-icons' : useFilesIcons }">
     <div class="m-tree-node__item"
+         :class="{ 'm--no-hover': moveSelectionZoneToCheckbox }"
+         :tabindex="isDisabled || (withCheckboxes && !isFolder) ? '-1' : 0"
+         :aria-selected="isSelected && !isDisabled"
+         @click="onClick"
+         @keypress.enter="onClick"
+         @keypress.space.prevent="onClick"
          ref="item"
-         role="button"
-         :class="{ 'm-tree-node__item--no-hover': moveSelectionZoneToCheckbox }"
-         :tabindex="isDisabled ? '-1' : 0"
-         @click="onClick">
+         role="button">
         <m-tree-icon v-if="useFilesIcons"
-                     class="m-tree-icon"
                      :is-folder-open="internalOpen"
                      :is-folder="isFolder"></m-tree-icon>
-        <m-tree-icon class="m-tree-icon"
-                     :filename="node.id"
+        <m-tree-icon :filename="node.id"
                      :is-folder-open="internalOpen"
                      :use-files-icons="useFilesIcons"
                      :is-folder="isFolder"></m-tree-icon>
         <m-checkbox v-if="withCheckboxes"
+                    class="m-tree-node__checkbox"
                     ref="checkbox"
                     :value="isSelected"
                     :indeterminate="isIndeterminate"
                     :disabled="isDisabled"
                     :readonly="readonly"
-                    @change="onCheckboxClick"></m-checkbox>
-        <span class="m-tree-node__item-label">{{label}}</span>
-        <span class="m-tree-node__item-check"></span>
+                    @change="onCheckboxClick">{{label}}</m-checkbox>
+        <template v-if="!withCheckboxes">
+            <span class="m-tree-node__item-label">{{label}}</span>
+            <span v-if="!isFolder"
+                  class="m-tree-node__item-check"
+                  aria-hidden="true"></span>
+        </template>
         <m-icon v-if="hasRightIcon"
                 class="m-tree-node__warning-icon"
                 :name="node.rightIconName"
@@ -37,12 +43,13 @@
     <template v-if="isFolder">
         <m-accordion-transition v-if="hasChildren">
             <ul class="m-tree-node__children"
+                :class="{'m--has-line-extension' : hasSibling}"
                 ref="children"
                 v-show="internalOpen"
-                :class="{'m-tree-node__line-extension' : hasSibling}">
-                <m-tree-node class="m-tree-node__child"
-                             v-for="(childNode, index) in node.children"
+                role="tabpanel">
+                <m-tree-node v-for="(childNode, index) in node.children"
                              :key="childNode.id"
+                             class="m-tree-node__child"
                              :path="currentPath"
                              :selectable="selectable"
                              :selected="isSelected"
@@ -55,13 +62,14 @@
                              :checkboxes="checkboxes"
                              :has-sibling="childHasSibling(index)"
                              @auto-select-child-checkbox-change="onAutoSelectChildCheckboxChange"
-                             @click="onChildClick"></m-tree-node>
+                             @click="emitClick"></m-tree-node>
             </ul>
         </m-accordion-transition>
         <m-accordion-transition v-else>
-            <ul class="m-tree-node__children"
-                v-show="internalOpen"
-                :class="{'m-tree-node__line-extension' : hasSibling}">
+            <ul v-show="internalOpen"
+                class="m-tree-node__children"
+                :class="{'m--has-line-extension' : hasSibling}"
+                role="tabpanel">
                 <li class="m-tree-node__child-empty">
                     {{emptyContentMessage}}
                 </li>
@@ -70,8 +78,8 @@
     </template>
     <template v-if="displaySelectionButton">
         <button class="m-tree-node__auto-select-button"
-                ref="autoSelectButton"
-                :class="{ 'm-tree-node__auto-select-button--selected': allChildrenAndSelfSelected}"
-                @click="onAutoSelectButtonClick"></button>
+                :class="{ 'm--is-selected': allChildrenAndSelfSelected}"
+                @click="onAutoSelectButtonClick"
+                ref="autoSelectButton"></button>
     </template>
 </li>

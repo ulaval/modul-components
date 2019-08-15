@@ -1767,6 +1767,222 @@ exports[`Storyshots components|m-table Sortable 1`] = `
 </table>
 `;
 
+exports[`Storyshots components|m-table Sortable with unsorting 1`] = `
+<table
+  cellspacing="0"
+  class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th
+        class="m--is-sortable"
+        scope="col"
+      >
+        <div
+          class="m-table__header-wrap"
+        >
+          <span
+            class="m-table__header-name"
+          >
+            Name
+          </span>
+           
+          <button
+            class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+            style="width: 14px; height: 14px;"
+            title="Trier la colonne"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
+      </th>
+      <th
+        class="m--is-sortable"
+        scope="col"
+      >
+        <div
+          class="m-table__header-wrap"
+        >
+          <span
+            class="m-table__header-name"
+          >
+            Age
+          </span>
+           
+          <button
+            class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+            style="width: 14px; height: 14px;"
+            title="Trier la colonne"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
+      </th>
+      <th
+        class="m--is-sortable"
+        scope="col"
+      >
+        <div
+          class="m-table__header-wrap"
+        >
+          <span
+            class="m-table__header-name"
+          >
+            Username
+          </span>
+           
+          <button
+            class="m-icon-button m-table__sortable-icon m--is-skin-bold m--has-ripple"
+            style="width: 14px; height: 14px;"
+            title="Trier la colonne"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="m-icon m-icon-button__icon"
+              height="12px"
+              width="12px"
+            >
+              <!---->
+               
+              <use
+                aria-hidden="true"
+                class=""
+              />
+            </svg>
+             
+            <!---->
+          </button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+   
+  <tbody>
+    <!---->
+     
+    <tr>
+      <td
+        class=""
+      >
+        Jonathan
+      </td>
+      <td
+        class=""
+      >
+        25
+      </td>
+      <td
+        class=""
+      >
+        jonathan.25
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Carl
+      </td>
+      <td
+        class=""
+      >
+        30
+      </td>
+      <td
+        class=""
+      >
+        carl.30
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Jacob
+      </td>
+      <td
+        class=""
+      >
+        26
+      </td>
+      <td
+        class=""
+      >
+        jacob.26
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Vincent
+      </td>
+      <td
+        class=""
+      >
+        34
+      </td>
+      <td
+        class=""
+      >
+        vincent.34
+      </td>
+    </tr>
+    <tr>
+      <td
+        class=""
+      >
+        Manon
+      </td>
+      <td
+        class=""
+      >
+        28
+      </td>
+      <td
+        class=""
+      >
+        manon.28
+      </td>
+    </tr>
+  </tbody>
+   
+  <!---->
+</table>
+`;
+
 exports[`Storyshots components|m-table skin="simple" 1`] = `
 <table
   cellspacing="0"

@@ -5,6 +5,7 @@ const REF_AVATAR: RefSelector = { ref: 'avatar' };
 
 let wrapper: Wrapper<MAvatar>;
 let propsClickable: boolean = false;
+let slotContent: string = '';
 
 const initializeShallowWrapper: any = () => {
     wrapper = shallowMount(MAvatar, {
@@ -18,6 +19,9 @@ const initializeShallowWrapper: any = () => {
                     $off: jest.fn()
                 }
             }
+        },
+        scopedSlots: {
+            content: slotContent
         }
     });
 };
@@ -26,6 +30,7 @@ describe('MAvatar', () => {
 
     beforeEach(() => {
         propsClickable = false;
+        slotContent = '';
     });
 
     describe(`When someone click on the avatar`, () => {
@@ -148,12 +153,11 @@ describe('MAvatar', () => {
 
             beforeEach(() => {
                 propsClickable = true;
-                initializeShallowWrapper();
             });
 
-            describe(`and the avatar is not touched`, () => {
-                it(`should not emit touch`, () => {
-                    wrapper.vm.isTouched = false;
+            describe(`and there's no content slot`, () => {
+                it(`should emit touch`, () => {
+                    initializeShallowWrapper();
 
                     wrapper.vm.onTouchend();
 
@@ -161,13 +165,28 @@ describe('MAvatar', () => {
                 });
             });
 
-            describe(`and the avatar is touched`, () => {
-                it(`should emit touch`, () => {
-                    wrapper.vm.isTouched = true;
+            describe('with a content slot', () => {
+                describe(`and the avatar is not touched`, () => {
+                    it(`should not emit touch`, () => {
+                        slotContent = '<div class="content-slot" />';
+                        initializeShallowWrapper();
 
-                    wrapper.vm.onTouchend();
+                        wrapper.vm.isTouched = false;
+                        wrapper.vm.onTouchend();
 
-                    expect(wrapper.emitted('touch')).toBeDefined();
+                        expect(wrapper.emitted('touch')).toBeUndefined();
+                    });
+                });
+
+                describe(`and the avatar is touched`, () => {
+                    it(`should emit touch`, () => {
+                        initializeShallowWrapper();
+                        wrapper.vm.isTouched = true;
+
+                        wrapper.vm.onTouchend();
+
+                        expect(wrapper.emitted('touch')).toBeDefined();
+                    });
                 });
             });
         });

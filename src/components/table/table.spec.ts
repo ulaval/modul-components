@@ -119,7 +119,7 @@ describe(`MTable`, () => {
                     it(`Should emit a action event`, () => {
                         wrapper.find('.m-table__sortable-icon').trigger('click');
 
-                        expect(wrapper.emitted('sortApplied')).toBeTruthy();
+                        expect(wrapper.emitted('sort-applied')).toBeTruthy();
                     });
                 });
             });

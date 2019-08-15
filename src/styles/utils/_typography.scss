@@ -26,6 +26,10 @@
     }
 
     &-weight {
+        &--black {
+            font-weight: $m-font-weight--black;
+        }
+
         &--bold {
             font-weight: $m-font-weight--bold;
         }

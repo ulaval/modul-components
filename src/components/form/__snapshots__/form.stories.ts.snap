@@ -59,7 +59,7 @@ exports[`Storyshots components|m-form default 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -190,7 +190,7 @@ exports[`Storyshots components|m-form reactive initial value 1`] = `
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -343,7 +343,7 @@ exports[`Storyshots components|m-form submit outside-form 1`] = `
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -1849,7 +1849,7 @@ exports[`Storyshots components|m-form/all fields textfield 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -2159,7 +2159,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts default 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -2289,7 +2289,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts focus first field
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -2419,7 +2419,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts message summary a
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -2549,7 +2549,7 @@ exports[`Storyshots components|m-form/built-in action-fallouts toast and clear t
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -3096,7 +3096,7 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
                       class="m-input-style__suffix"
                     >
                       <!---->
-                       
+                        
                       <!---->
                     </div>
                   </div>
@@ -3177,7 +3177,7 @@ exports[`Storyshots components|m-form/rules Email confirmation 1`] = `
                       class="m-input-style__suffix"
                     >
                       <!---->
-                       
+                        
                       <!---->
                     </div>
                   </div>
@@ -3321,7 +3321,7 @@ exports[`Storyshots components|m-form/rules Format with fixed max characters (po
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -3462,7 +3462,7 @@ exports[`Storyshots components|m-form/rules Format without fixed max characters 
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -3607,7 +3607,7 @@ exports[`Storyshots components|m-form/rules Live check username availability (as
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -3752,7 +3752,7 @@ exports[`Storyshots components|m-form/rules More than one validations (course co
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -4134,7 +4134,7 @@ exports[`Storyshots components|m-form/rules required and 5 characters min 1`] = 
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -4275,7 +4275,7 @@ exports[`Storyshots components|m-form/rules required and 20 characters max 1`] =
                 class="m-input-style__suffix"
               >
                 <!---->
-                 
+                  
                 <!---->
               </div>
             </div>
@@ -4414,7 +4414,7 @@ exports[`Storyshots components|m-form/validation-type at-exit 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -4548,7 +4548,7 @@ exports[`Storyshots components|m-form/validation-type correction 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -4682,7 +4682,7 @@ exports[`Storyshots components|m-form/validation-type modification 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -4816,7 +4816,7 @@ exports[`Storyshots components|m-form/validation-type on-going 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -5423,7 +5423,7 @@ exports[`Storyshots components|m-form/validators email 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -5619,7 +5619,7 @@ exports[`Storyshots components|m-form/validators max-length 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -5815,7 +5815,7 @@ exports[`Storyshots components|m-form/validators min-length 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>
@@ -5949,7 +5949,7 @@ exports[`Storyshots components|m-form/validators required 1`] = `
               class="m-input-style__suffix"
             >
               <!---->
-               
+                
               <!---->
             </div>
           </div>

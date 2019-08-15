@@ -1,6 +1,8 @@
 import ClipboardJs from 'clipboard';
 import { PluginObject } from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import { InputManagement } from '../../mixins/input-management/input-management';
+import { InputState } from '../../mixins/input-state/input-state';
 import { InputMaxWidth } from '../../mixins/input-width/input-width';
 import { InputSelectable } from '../../utils/input/input';
 import { ModulVue } from '../../utils/vue/vue';
@@ -15,18 +17,19 @@ import './copy-to-clipboard.scss';
 
 interface CopyToClipboardInputProps {
     value: any;
-    readonly: boolean;
     selection: string;
+    readonly: boolean;
 }
 
 export interface CopyToClipboardInputSupport extends InputSelectable, CopyToClipboardInputProps {
     value: any;
-    readonly: boolean;
     selection: string;
 }
 
 class DefaultCopyToClipboardPropsValue implements CopyToClipboardInputProps {
-    constructor(public readonly: boolean = true, public selection: string = '', public value: string = '') { }
+    readonly: boolean;
+
+    constructor(public selection: string = '', public value: string = '') { }
 }
 
 function copyToClipboard(text: string): Promise<void> {
@@ -53,7 +56,9 @@ function copyToClipboard(text: string): Promise<void> {
 }
 
 @WithRender
-@Component
+@Component({
+    mixins: [InputManagement, InputState]
+})
 export class MCopyToClipboard extends ModulVue {
     @Prop({
         default: '',
@@ -61,12 +66,17 @@ export class MCopyToClipboard extends ModulVue {
     })
     value: string;
 
+    @Prop({
+        default: true
+    })
+    public readonly: boolean;
+
     fieldMaxWidth: InputMaxWidth = InputMaxWidth.None;
     labelCopyBtn: string = this.$i18n.translate('m-copy-to-clipboard:copy');
     selectedText: string = '';
 
     get inputProps(): CopyToClipboardInputProps {
-        return new DefaultCopyToClipboardPropsValue(true, this.selectedText, this.value);
+        return { ...this.$props, ...new DefaultCopyToClipboardPropsValue(this.selectedText, this.value) };
     }
 
     get buttonHandlers(): { [key: string]: (value: string) => void } {
