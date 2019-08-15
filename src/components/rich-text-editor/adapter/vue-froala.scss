@@ -1,5 +1,6 @@
 @import 'commons';
 @import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css'); /* FA CSS import */
+$m-collapsed-input-style--margin: 16px !default;
 
 .vue-froala {
     overflow: hidden;
@@ -7,6 +8,10 @@
     // to overcome input-style base padding.
     .m-input-style & {
         margin: -#{$m-input-style--padding};
+    }
+
+    .m-input-style &.m--is-collapsed {
+        margin: -#{$m-collapsed-input-style--margin};
     }
 
     // to overcome input-style base padding, minus space for the label.
