@@ -263,7 +263,7 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
             onSortApplied: defaultOnSortApplied
         }
     }))
-    .add('Sortable without unsorting', () => ({
+    .add('Sortable with unsorting', () => ({
         data: function(): any {
             return {
                 rows: [
@@ -278,9 +278,9 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
         props: {
             columns: {
                 default: [
-                    { id: 'name', title: 'Name', dataProp: 'name', sortable: true, disableUnsort: true },
-                    { id: 'age', title: 'Age', dataProp: 'age', sortable: true, disableUnsort: true },
-                    { id: 'username', title: 'Username', dataProp: 'username', sortable: true, disableUnsort: true }
+                    { id: 'name', title: 'Name', dataProp: 'name', sortable: true, enableUnsort: true },
+                    { id: 'age', title: 'Age', dataProp: 'age', sortable: true, enableUnsort: true },
+                    { id: 'username', title: 'Username', dataProp: 'username', sortable: true, enableUnsort: true }
                 ]
             }
         },

@@ -25,7 +25,7 @@ export interface MColumnTable {
     dataProp: string;
     width?: string;
     sortable?: boolean;
-    disableUnsort?: boolean;
+    enableUnsort?: boolean;
     centered?: boolean;
     class?: string;
     sortDirection?: MColumnSortDirection;
@@ -92,7 +92,7 @@ export class MTable extends ModulVue {
                 columnTable.sortDirection = MColumnSortDirection.Dsc;
                 break;
             case MColumnSortDirection.Dsc:
-                columnTable.sortDirection = columnTable.disableUnsort ? MColumnSortDirection.Asc : MColumnSortDirection.None;
+                columnTable.sortDirection = columnTable.enableUnsort ? MColumnSortDirection.None : MColumnSortDirection.Asc;
                 break;
         }
 

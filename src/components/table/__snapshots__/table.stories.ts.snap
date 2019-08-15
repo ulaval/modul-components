@@ -1767,7 +1767,7 @@ exports[`Storyshots components|m-table Sortable 1`] = `
 </table>
 `;
 
-exports[`Storyshots components|m-table Sortable without unsorting 1`] = `
+exports[`Storyshots components|m-table Sortable with unsorting 1`] = `
 <table
   cellspacing="0"
   class="m-table m--is-skin-regular m--is-row-highlighted-on-hover"
