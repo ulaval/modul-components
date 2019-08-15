@@ -55,18 +55,18 @@ $m-tree-node--child-indentation: 20px;
                 top: $m-tree-node--child-indentation;
             }
 
-            &.m-tree-node__has-children:last-child::after {
+            &.m-tree-node.m--has-children:last-child::after {
                 height: 46px; // Magic number
             }
         }
 
-        > .m-tree-node:not(.m--is-single):not(.m-tree-node__has-children) {
+        > .m-tree-node:not(.m--is-single):not(.m-tree-node.m--has-children) {
             &::after {
                 top: -23px; // Magic number
             }
         }
 
-        > .m-tree-node:first-child:not(.m--is-single):not(.m-tree-node__has-children) {
+        > .m-tree-node:first-child:not(.m--is-single):not(.m-tree-node.m--has-children) {
             &::after {
                 top: 16px; // Magic number
                 height: 39px; // Magic number
