@@ -292,6 +292,18 @@
                 }
             }
         }
+
+        p[class^='rte-h'] {
+            b,
+            strong {
+                font-weight: $m-font-weight--black;
+            }
+        }
+
+        b,
+        strong {
+            font-weight: $m-font-weight--bold;
+        }
     }
 
     &.m--is-mobile {
