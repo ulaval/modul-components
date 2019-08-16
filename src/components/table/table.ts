@@ -25,6 +25,7 @@ export interface MColumnTable {
     dataProp: string;
     width?: string;
     sortable?: boolean;
+    enableUnsort?: boolean;
     centered?: boolean;
     class?: string;
     sortDirection?: MColumnSortDirection;
@@ -61,7 +62,7 @@ export class MTable extends ModulVue {
     private onAdd(): void {
     }
 
-    @Emit('sortApplied')
+    @Emit('sort-applied')
     private emitSortApplied(columnTable: MColumnTable): void { }
 
     public get isEmpty(): boolean {
@@ -91,7 +92,7 @@ export class MTable extends ModulVue {
                 columnTable.sortDirection = MColumnSortDirection.Dsc;
                 break;
             case MColumnSortDirection.Dsc:
-                columnTable.sortDirection = MColumnSortDirection.None;
+                columnTable.sortDirection = columnTable.enableUnsort ? MColumnSortDirection.None : MColumnSortDirection.Asc;
                 break;
         }
 

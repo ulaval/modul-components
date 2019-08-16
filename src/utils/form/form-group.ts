@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { AbstractControl } from './abstract-control';
 import { ControlError } from './control-error';
 import { ControlOptions } from './control-options';
@@ -135,12 +136,9 @@ export class FormGroup<T = any> extends AbstractControl {
             throw Error(`There is already a control with name ${name} in this group`);
         }
 
-        const result: any = Object.assign(this._controls);
-
         control.parent = this;
-        result[name] = control;
 
-        this._controls = result;
+        Vue.prototype.$set(this._controls, name, control);
     }
 
     public removeControl(name: string): void {
@@ -148,11 +146,7 @@ export class FormGroup<T = any> extends AbstractControl {
             throw Error(`There is no control with name ${name} in this group`);
         }
 
-        const result: any = Object.assign(this._controls);
-
-        delete result[name];
-
-        this._controls = result;
+        Vue.prototype.$delete(this._controls, name);
     }
 
     private setupControlsParent(): void {

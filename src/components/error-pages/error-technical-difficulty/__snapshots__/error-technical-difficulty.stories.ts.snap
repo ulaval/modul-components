@@ -92,14 +92,14 @@ exports[`Storyshots components|m-error-technical-difficulty Error 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -218,14 +218,14 @@ exports[`Storyshots components|m-error-technical-difficulty default 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -344,14 +344,14 @@ exports[`Storyshots components|m-error-technical-difficulty errorDate (5 days be
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -470,14 +470,14 @@ exports[`Storyshots components|m-error-technical-difficulty errorReferenceNumber
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -597,14 +597,14 @@ exports[`Storyshots components|m-error-technical-difficulty hints 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -723,14 +723,14 @@ exports[`Storyshots components|m-error-technical-difficulty links 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="http://www.ulaval.ca"
             tabindex="0"
             target="_blank"
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -757,14 +757,14 @@ exports[`Storyshots components|m-error-technical-difficulty links 1`] = `
         </li>
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="http://www.google.com"
             tabindex="0"
             target="_blank"
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -888,14 +888,14 @@ exports[`Storyshots components|m-error-technical-difficulty showStackTrace 1`] =
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >
@@ -1012,14 +1012,14 @@ exports[`Storyshots components|m-error-technical-difficulty title 1`] = `
       >
         <li>
           <a
-            class="m-link m-message-page__link m--has-left-icon m--has-content"
+            class="m-link m-message-page__link m--has-content"
             href="\\\\"
             tabindex="0"
             target=""
           >
             <svg
               aria-hidden="true"
-              class="m-icon m-link__icon"
+              class="m-icon m-link__icon m--has-large-stroke"
               height="12px"
               width="12px"
             >

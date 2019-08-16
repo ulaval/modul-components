@@ -47,8 +47,10 @@ export class MTreeNode extends ModulVue {
     public disabledNodes: string[];
 
     public internalOpen: boolean = false;
-
     public allChildrenAndSelfSelected: boolean = false;
+    public $refs: {
+        item: HTMLElement
+    };
 
     private selectedChildrenCount: number = 0;
 
@@ -63,6 +65,11 @@ export class MTreeNode extends ModulVue {
         }
     }
 
+    @Emit('click')
+    public emitClick(path: string): string {
+        return path;
+    }
+
     protected mounted(): void {
         this.internalOpen = this.open || this.isParentOfOpenedFolder() || this.isParentOfSelectedFile;
         if (this.isSelected) {
@@ -75,13 +82,8 @@ export class MTreeNode extends ModulVue {
             this.internalOpen = !this.internalOpen;
             this.$emit('update:open', this.internalOpen);
         } else if (this.selectable) {
-            this.$emit('click', this.currentPath);
+            this.emitClick(this.currentPath);
         }
-    }
-
-    @Emit('click')
-    public onChildClick(path: string): string {
-        return path;
     }
 
     public onAutoSelectButtonClick(): void {
@@ -112,7 +114,7 @@ export class MTreeNode extends ModulVue {
         if (this.hasChildren && (this.isCheckboxAutoSelect || this.isParentAutoSelect)) {
             this.recursiveSelect();
         } else {
-            this.$emit('click', this.currentPath);
+            this.emitClick(this.currentPath);
         }
     }
 
@@ -138,7 +140,7 @@ export class MTreeNode extends ModulVue {
         paths.forEach(path => {
             let nodeAlreadySelected: boolean = this.selectedNodes.indexOf(path) !== -1;
             if ((addNodesToSelected && !nodeAlreadySelected) || (!addNodesToSelected && nodeAlreadySelected)) { // Prevent nodes to be pushed twice or unselected nodes to be removed
-                this.$emit('click', path);
+                this.emitClick(path);
             }
         });
     }
@@ -174,10 +176,10 @@ export class MTreeNode extends ModulVue {
 
     private updateCheckboxParentNode(allChildrenSelected: boolean): void {
         if (allChildrenSelected && !this.isSelected) {
-            this.$emit('click', this.currentPath); // Auto-push current, emit to parent for recursivity
+            this.emitClick(this.currentPath); // Auto-push current, emit to parent for recursivity
             this.$emit('auto-select-child-checkbox-change', true);
         } else if (this.isSelected) {
-            this.$emit('click', this.currentPath);
+            this.emitClick(this.currentPath);
             this.$emit('auto-select-child-checkbox-change', false); // Not all children are selected, stop recursivity
         }
     }
@@ -221,7 +223,7 @@ export class MTreeNode extends ModulVue {
     }
 
     public get currentPath(): string {
-        return this.path + '/' + this.node.id;
+        return `${this.path}/${this.node.id}`;
     }
 
     public get label(): string {

@@ -1,5 +1,5 @@
+import { sprintf, vsprintf } from 'sprintf-js';
 import Vue, { PluginObject } from 'vue';
-import { sprintf, vsprintf } from '../str/str';
 
 
 declare module 'vue/types/vue' {

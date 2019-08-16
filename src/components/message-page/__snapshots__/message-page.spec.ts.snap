@@ -13,8 +13,8 @@ exports[`message-page integration tests Given an error with all props and slots 
       <div id="theSlotId">The slot content</div>
     </div>
     <ul class="m-message-page__links">
-      <li><a icon-name="m-svg__chevron--right" mode="link" url="an Url" target="" class="m-message-page__link">a link</a></li>
-      <li><a icon-name="m-svg__chevron--right" mode="link" url="another Url" target="" class="m-message-page__link">another link</a></li>
+      <li><a bullet-point="true" mode="link" url="an Url" target="" class="m-message-page__link">a link</a></li>
+      <li><a bullet-point="true" mode="link" url="another Url" target="" class="m-message-page__link">another link</a></li>
     </ul>
   </div>
 </article>

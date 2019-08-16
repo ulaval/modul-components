@@ -3,7 +3,7 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import uuid from '../../utils/uuid/uuid';
 import { ModulVue } from '../../utils/vue/vue';
-import { OPTION_ITEM_ADD_NAME, OPTION_ITEM_ARCHIVE_NAME, OPTION_ITEM_DELETE_NAME, OPTION_ITEM_EDIT_NAME, OPTION_ITEM_NAME, OPTION_NAME } from '../component-names';
+import { OPTION_ITEM_ADD_NAME, OPTION_ITEM_ARCHIVE_NAME, OPTION_ITEM_DELETE_NAME, OPTION_ITEM_EDIT_NAME, OPTION_ITEM_NAME, OPTION_NAME, OPTION_SEPARATOR, OPTION_TITLE } from '../component-names';
 import I18nPlugin from '../i18n/i18n';
 import IconButtonPlugin from '../icon-button/icon-button';
 import IconPlugin from '../icon/icon';
@@ -14,6 +14,8 @@ import { MOptionItemAdd } from './option-item/option-item-add';
 import { MOptionItemArchive } from './option-item/option-item-archive';
 import { MOptionItemDelete } from './option-item/option-item-delete';
 import { MOptionItemEdit } from './option-item/option-item-edit';
+import { MOptionSeparator } from './option-separator/option-separator';
+import { MOptionTitle } from './option-title/option-title';
 import WithRender from './option.html?style=./option.scss';
 
 export abstract class BaseOption extends ModulVue {
@@ -21,7 +23,9 @@ export abstract class BaseOption extends ModulVue {
 
 export interface MOptionInterface {
     hasIcon: boolean;
+    hasItemBorder: boolean;
     checkIcon(el: boolean): void;
+    checkBorder(): void;
     close(): void;
 }
 
@@ -67,8 +71,11 @@ export class MOption extends BaseOption implements MOptionInterface {
     public size: string;
     @Prop({ default: false })
     public focusManagement: boolean;
+    @Prop({ default: true })
+    public scroll: boolean;
 
     public hasIcon: boolean = false;
+    public hasItemBorder: boolean = true;
     private open = false;
     private id: string = `mOption-${uuid.generate()}`;
 
@@ -76,6 +83,14 @@ export class MOption extends BaseOption implements MOptionInterface {
         if (icon) {
             this.hasIcon = true;
         }
+    }
+
+    public checkBorder(): void {
+        this.$slots.default!.forEach(vNode => {
+            if (vNode && vNode.componentOptions && (vNode.componentOptions.tag === OPTION_SEPARATOR || vNode.componentOptions.tag === OPTION_TITLE)) {
+                this.hasItemBorder = false;
+            }
+        });
     }
 
     public close(): void {
@@ -110,6 +125,10 @@ export class MOption extends BaseOption implements MOptionInterface {
     private get ariaControls(): string {
         return this.id + '-controls';
     }
+
+    private get menuMaxHeight(): string | undefined {
+        return this.scroll ? undefined : 'none';
+    }
 }
 
 const OptionPlugin: PluginObject<any> = {
@@ -123,6 +142,8 @@ const OptionPlugin: PluginObject<any> = {
         v.component(OPTION_ITEM_ADD_NAME, MOptionItemAdd);
         v.component(OPTION_ITEM_DELETE_NAME, MOptionItemDelete);
         v.component(OPTION_ITEM_EDIT_NAME, MOptionItemEdit);
+        v.component(OPTION_TITLE, MOptionTitle);
+        v.component(OPTION_SEPARATOR, MOptionSeparator);
         v.component(OPTION_NAME, MOption);
 
     }

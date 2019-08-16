@@ -1,6 +1,7 @@
 <li class="m-option-item"
     :class="{ 'm--is-disabled' : disabled,
-              'm--has-icon-spacing': hasIcon }"
+              'm--has-icon-spacing': hasIcon,
+              'm--has-no-border' : !hasBorder, }"
     ref="m-option-item"
     :tabindex="disabled ? '-1' : '0'"
     role="option"

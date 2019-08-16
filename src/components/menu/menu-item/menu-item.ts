@@ -1,5 +1,5 @@
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop, Watch } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
@@ -68,6 +68,9 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
         this.propOpen = open;
     }
 
+    @Emit('click')
+    public emitClick(event: Event): void { }
+
     public set propOpen(open: boolean) {
         if (this.group) {
             this.internalOpen = open;
@@ -105,11 +108,11 @@ export class MMenuItem extends BaseMenuItem implements MenuItem {
         if (!this.isDisabled && this.menuRoot && !this.menuRoot.closeOnSelectionInAction) {
             if (this.group) {
                 this.toggleOpen();
-            } else if (this.value !== this.menuRoot.model) {
+            } else {
                 this.menuRoot.updateValue(this.value);
                 this.menuRoot.onClick(event, this.value);
             }
-            this.$emit('click', event);
+            this.emitClick(event);
         }
     }
 }
