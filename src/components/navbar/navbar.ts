@@ -100,6 +100,7 @@ export class MNavbar extends BaseNavbar implements Navbar {
     private showArrowLeft: boolean = false;
     private showArrowRight: boolean = false;
     private computedHeight: number = 0;
+    private observer: MutationObserver;
 
     public updateValue(value: any): void {
         this.model = value;
@@ -139,11 +140,18 @@ export class MNavbar extends BaseNavbar implements Navbar {
         });
 
         this.$refs.wrap.addEventListener('scroll', this.setDisplayNavigationButtons);
+
+        if (this.skin === MNavbarSkin.TabUnderline || this.skin === MNavbarSkin.TabArrow) {
+            this.observer = new MutationObserver(() => this.updateSelectedIndicatorPosition());
+            this.observer.observe(this.$refs.list, { subtree: true, childList: true, characterData: true });
+            if (this.selected) { this.updateSelectedIndicatorPosition(); }
+        }
     }
 
     protected beforeDestroy(): void {
         this.as<ElementQueries>().$off('resize', this.setupScrolllH);
         this.$refs.wrap.removeEventListener('scroll', this.setDisplayNavigationButtons);
+        if (this.observer) { this.observer.disconnect(); }
     }
 
     @Watch('multiline')
@@ -242,6 +250,16 @@ export class MNavbar extends BaseNavbar implements Navbar {
                     this.setDisplayNavigationButtons();
                 }
             });
+        });
+    }
+
+    private updateSelectedIndicatorPosition(): void {
+        this.navbarItems().elements.forEach(element => {
+            if (element && element.$props.value === this.model) {
+                setTimeout(() => {
+                    this.setSelectedIndicatorPosition(element, this.skin);
+                });
+            }
         });
     }
 
