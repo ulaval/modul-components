@@ -23,8 +23,7 @@ import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
 require('froala-editor/js/languages/fr.js');
-
-// Bug watch "Clicking on full screen throws exception if toolbar is customized" in https://github.com/froala/wysiwyg-editor/issues/3483
+// Bug placeholder in the version 3.0.5.
 // Bug watch The button "Special Characters" isn't work in mobile  https://github.com/froala/angular-froala-wysiwyg/issues/317
 // Bug watch "JQuery dependence isn't fully removed from Froala" https://github.com/froala/angular-froala-wysiwyg/issues/324
 
@@ -335,20 +334,13 @@ const ENTER_KEYCODE: number = 13;
                         let fullscreenWasActivated: boolean = !this.froalaEditor.fullscreen.isActive();
                         if (fullscreenWasActivated) {
                             this.froalaEditor.toolbar.hide();
-                            setTimeout(() => {
-                                this.froalaEditor.toolbar.show(); // Hot fix for bug
-                            }, 50);
                         } else {
                             this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant); // Hot fix for bug
-                            setTimeout(() => {
-                                this.froalaEditor.events.focus(); // Hot fix for bug
-                            }, 50);
                         }
                         this.onFullscreen(fullscreenWasActivated);
                     }
                 },
                 [froalaEvents.CommandAfter]: (cmd: any, param1: any, param2: any) => {
-                    // Bug, watch "Clicking on full screen throws exception if toolbar is customized" in https://github.com/froala/wysiwyg-editor/issues/3483
                     if (cmd === 'fullscreen') {
                         if (this.froalaEditor.fullscreen.isActive()) {
                             this.froalaEditor.toolbar.show();
