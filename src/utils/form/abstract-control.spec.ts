@@ -1,5 +1,32 @@
-import { AbstractControlTest } from './abstract-control-test';
+import { AbstractControl } from './abstract-control';
+import { ControlError } from './control-error';
 import { ControlValidatorValidationType } from './control-validator-validation-type';
+import { ControlValidator } from './validators/control-validator';
+
+export class AbstractControlTest extends AbstractControl {
+    constructor(private _controls: {
+        [name: string]: AbstractControl;
+    }, public readonly validators: ControlValidator[] = []) {
+        super(validators);
+    }
+    public value: any;
+    public valid: boolean;
+    public enabled: boolean;
+    public waiting: boolean;
+    public readonly: boolean;
+    public touched: boolean;
+    public errors: ControlError[];
+    public errorsDeep: ControlError[];
+    public get controls(): AbstractControl[] {
+        return Object.values(this._controls);
+    }
+    public getControl<T = any>(name: string): AbstractControl<T> {
+        throw new Error('Method not implemented.');
+    }
+    public submit(): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+}
 
 describe(`Given abstract-control implementation`, () => {
     describe(`Without async validators`, () => {
@@ -31,7 +58,7 @@ describe(`Given abstract-control implementation`, () => {
             });
         });
     });
-    describe(`Witk async validators`, () => {
+    describe(`With async validators`, () => {
         const mockValidationFunction: jest.Mock = jest.fn(() => Promise.resolve(true));
         const control: AbstractControlTest = new AbstractControlTest({}, [{
             key: 'asyncValidator',
