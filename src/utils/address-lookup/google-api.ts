@@ -1,4 +1,3 @@
-import { } from 'googlemaps';
 import { ModulVue } from '../vue/vue';
 
 export default class GoogleAPI {

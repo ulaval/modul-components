@@ -20,7 +20,8 @@
         "types": [
             "node",
             "jest",
-            "webpack-env"
+            "webpack-env",
+            "googlemaps"
         ],
         "typeRoots": [
             "node_modules/@types"
