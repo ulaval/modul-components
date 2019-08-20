@@ -37,7 +37,7 @@ export default class GoogleAPI {
                     case google.maps.places.PlacesServiceStatus.NOT_FOUND:
                     case google.maps.places.PlacesServiceStatus.REQUEST_DENIED:
                     case google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR:
-                        return reject({ results, status });
+                        return reject(`Google places API error: ${status}`);
                     case google.maps.places.PlacesServiceStatus.OK:
                     case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
                         return resolve(resultsAsArray);
