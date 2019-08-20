@@ -5,7 +5,16 @@ import { TABLE_NAME } from '../component-names';
 import TablePlugin, { MColumnTable } from './table';
 Vue.use(TablePlugin);
 
-
+function defaultOnSortApplied(columnTable: MColumnTable): void {
+    this.$data.rows.sort((a, b) => {
+        if (a[columnTable.dataProp] < b[columnTable.dataProp]) {
+            return -1 * columnTable.sortDirection!;
+        } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
+            return 1 * columnTable.sortDirection!;
+        }
+        return 0;
+    });
+}
 
 storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
     .add('Default', () => ({
@@ -249,18 +258,35 @@ storiesOf(`${componentsHierarchyRootSeparator}${TABLE_NAME}`, module)
                 ]
             }
         },
-        template: '<m-table :columns="columns" :rows="rows" width="100%" @sortApplied="onSortApplied($event)"></m-table>',
+        template: '<m-table :columns="columns" :rows="rows" width="100%" @sort-applied="onSortApplied($event)"></m-table>',
         methods: {
-            onSortApplied(columnTable: MColumnTable): void {
-                this.$data.rows.sort((a, b) => {
-                    if (a[columnTable.dataProp] < b[columnTable.dataProp]) {
-                        return -1 * columnTable.sortDirection!;
-                    } else if (a[columnTable.dataProp] > b[columnTable.dataProp]) {
-                        return 1 * columnTable.sortDirection!;
-                    }
-                    return 0;
-                });
+            onSortApplied: defaultOnSortApplied
+        }
+    }))
+    .add('Sortable with unsorting', () => ({
+        data: function(): any {
+            return {
+                rows: [
+                    { id: '1', name: 'Jonathan', age: '25', username: 'jonathan.25' },
+                    { id: '2', name: 'Carl', age: '30', username: 'carl.30' },
+                    { id: '3', name: 'Jacob', age: '26', username: 'jacob.26' },
+                    { id: '4', name: 'Vincent', age: '34', username: 'vincent.34' },
+                    { id: '5', name: 'Manon', age: '28', username: 'manon.28' }
+                ]
+            };
+        },
+        props: {
+            columns: {
+                default: [
+                    { id: 'name', title: 'Name', dataProp: 'name', sortable: true, enableUnsort: true },
+                    { id: 'age', title: 'Age', dataProp: 'age', sortable: true, enableUnsort: true },
+                    { id: 'username', title: 'Username', dataProp: 'username', sortable: true, enableUnsort: true }
+                ]
             }
+        },
+        template: '<m-table :columns="columns" :rows="rows" width="100%" @sort-applied="onSortApplied($event)"></m-table>',
+        methods: {
+            onSortApplied: defaultOnSortApplied
         }
     }))
     .add('skin="simple"', () => ({

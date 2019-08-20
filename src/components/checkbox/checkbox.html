@@ -26,12 +26,12 @@
            type="hidden" />
     <label class="m-checkbox__wrap"
            :for="id"
-           :aria-hidden="!hasLabelSlot">
+           :aria-hidden="!hasLabelSlot()">
         <span class="m-checkbox__input"
               aria-hidden="true">
             <span class="m-checkbox__input__icon"></span>
         </span>
-        <span v-if="hasLabelSlot"
+        <span v-if="hasLabelSlot()"
               class="m-checkbox__label">
             <slot></slot>
         </span>

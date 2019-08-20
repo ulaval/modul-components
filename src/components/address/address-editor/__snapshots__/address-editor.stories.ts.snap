@@ -62,7 +62,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -144,7 +144,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -226,7 +226,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -308,7 +308,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -501,7 +501,7 @@ exports[`Storyshots components|/address/m-address-editor default 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -619,7 +619,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -701,7 +701,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -783,7 +783,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -865,7 +865,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
@@ -1058,7 +1058,7 @@ exports[`Storyshots components|/address/m-address-editor empty address 1`] = `
                   class="m-input-style__suffix"
                 >
                   <!---->
-                   
+                    
                   <!---->
                 </div>
               </div>
