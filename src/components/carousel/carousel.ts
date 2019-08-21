@@ -22,6 +22,9 @@ export class MCarousel extends Vue {
     @Prop({ default: 0 })
     margin: number;
 
+    @Prop({ default: false })
+    swipeDisabled: boolean;
+
     private items: MCarouselItem[] = [];
     private internalIndex: number = 0;
     private updateInterval: any;
@@ -129,13 +132,13 @@ export class MCarousel extends Vue {
     }
 
     private showPrevItem(resetInterval: boolean = false): void {
-        if (this.isIndexValid(this.propIndex - 1)) {
+        if (!this.swipeDisabled && this.isIndexValid(this.propIndex - 1)) {
             this.showItem(this.propIndex - 1, resetInterval);
         }
     }
 
     private showNextItem(resetInterval: boolean = false): void {
-        if (this.isIndexValid(this.propIndex + 1)) {
+        if (!this.swipeDisabled && this.isIndexValid(this.propIndex + 1)) {
             this.showItem(this.propIndex + 1, resetInterval);
         }
     }
