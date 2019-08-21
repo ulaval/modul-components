@@ -6,7 +6,7 @@ export const INTERVAL_STEP_IN_MILLISECONDS: number = 100;
 
 export default class LoadingScheduler {
     private _loadingTimeInMilliseconds: number = 0;
-    private _interval: any;
+    private _interval: number;
 
     constructor(
         private _stateTransitionCb: (state: MLoadingStates) => void,
@@ -17,7 +17,7 @@ export default class LoadingScheduler {
     public start(): void {
         this._stateTransitionCb(MLoadingStates.ActiveInvisible);
 
-        this._interval = setInterval(() => {
+        this._interval = window.setInterval(() => {
             this._loadingTimeInMilliseconds += INTERVAL_STEP_IN_MILLISECONDS;
 
             if (this._loadingTimeInMilliseconds >= this._invisibleThresholdInMiliseconds) {
@@ -38,7 +38,7 @@ export default class LoadingScheduler {
         ) {
             this._stateTransitionCb(MLoadingStates.Inactive);
         } else {
-            setTimeout(() => this._stateTransitionCb(MLoadingStates.Inactive),
+            window.setTimeout(() => this._stateTransitionCb(MLoadingStates.Inactive),
                 (this._invisibleThresholdInMiliseconds + this._visibleThresholdInMiliseconds)
                 -
                 this._loadingTimeInMilliseconds
