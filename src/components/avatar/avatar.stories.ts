@@ -1,5 +1,7 @@
+import { actions } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
+import { DefaultMethods } from 'vue/types/options';
 import { componentsHierarchyRootSeparator } from '../../../conf/storybook/utils';
 import { AVATAR_NAME } from '../component-names';
 import AvatarPlugin, { MAvatarSize } from './avatar';
@@ -7,6 +9,10 @@ import AvatarPlugin, { MAvatarSize } from './avatar';
 Vue.use(AvatarPlugin);
 
 const image192: string = 'http://placekitten.com/192/192';
+const methods: DefaultMethods<Vue> = actions(
+    'click',
+    'touch'
+);
 
 storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
     .add('Small', () => ({
@@ -25,10 +31,12 @@ storiesOf(`${componentsHierarchyRootSeparator}${AVATAR_NAME}`, module)
         template: `<m-avatar :size="${MAvatarSize.LARGE}"><m-icon name="m-svg__profile" :size="${MAvatarSize.LARGE}"></m-icon></m-avatar>`
     }))
     .add('Clickable', () => ({
-        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true"><img src="${image192}"></m-avatar>`
+        methods,
+        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true" @click="click" @touch="touch"><img src="${image192}"></m-avatar>`
     }))
     .add('Custom slot - animation', () => ({
-        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true">
+        methods,
+        template: `<m-avatar :size="${MAvatarSize.LARGE}" :clickable="true" @click="click" @touch="touch">
                         <div slot="content" slot-scope={contentVisible} style="
                             transition: all 0.1s linear;
                             width: 100%;

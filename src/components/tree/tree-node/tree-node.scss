@@ -8,33 +8,35 @@ $m-tree-node--child-indentation: 20px;
     margin-left: $m-tree-node--child-indentation / 2;
     position: relative;
 
-    .m-tree-node::before {
-        content: '';
-        position: absolute;
-        left: -$m-tree-node--child-indentation;
-        top: 15px; // Magic number
-        width: $m-tree-node--child-indentation;
-        height: 1px;
-        background-color: $m-color--interactive;
+    .m-tree-node {
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            left: -$m-tree-node--child-indentation;
+            background-color: $m-color--interactive;
+        }
+
+        &::before {
+            top: 15px; // Magic number
+            width: $m-tree-node--child-indentation;
+            height: 1px;
+        }
+
+        &::after {
+            top: -25px; // Magic number
+            width: 1px;
+            height: $m-tree-node--height + 5px;
+        }
     }
 
-    .m-tree-node::after {
-        content: '';
-        position: absolute;
-        left: -$m-tree-node--child-indentation;
-        top: -25px; // Magic number
-        width: 1px;
-        height: $m-tree-node--height + 5px;
-        background-color: $m-color--interactive;
-    }
-
-    .m-tree-node.m-tree-node__has-children {
+    .m-tree-node.m--has-children {
         &::before {
             top: $m-tree-node--child-indentation;
         }
     }
 
-    &:not(.m-tree-node__has-children)::after {
+    &:not(.m--has-children)::after {
         height: $m-tree-node--child-indentation * 2;
         top: -25px; // Magic number
     }
@@ -51,12 +53,20 @@ $m-tree-node--child-indentation: 20px;
         height: $m-tree-node--height / 2;
         background: red;
 
-        &--selected {
+        &.m--is-selected {
             background: blue;
         }
     }
 
+    &__warning-icon {
+        margin-left: $m-spacing--s;
+        color: $m-color--warning;
+    }
+
     &__item {
+        transition-property: background-color, background-image, color, border;
+        transition-duration: $m-transition-duration;
+        transition-timing-function: ease;
         padding-left: $m-tree-node--child-indentation;
         padding-right: $m-tree-node--child-indentation;
         width: $m-min-width;
@@ -64,88 +74,135 @@ $m-tree-node--child-indentation: 20px;
         display: flex;
         align-items: center;
         position: relative;
+        outline: none;
+    }
 
-        &-label {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: $m-line-height;
-        }
+    &__item-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: $m-line-height;
+    }
 
-        &-check {
+    &__item-check {
+        position: absolute;
+        width: $m-tree-node--child-indentation;
+        height: 100%;
+        right: 0;
+
+        &::before,
+        &::after {
+            transition-property: opacity, background-color;
+            transition-duration: $m-transition-duration;
+            transition-timing-function: linear;
             position: absolute;
-            width: $m-tree-node--child-indentation;
-            height: 100%;
-            right: 0;
+            content: '';
+            background: $m-color--white;
+            border-radius: 2px;
         }
 
-        &:focus {
-            outline: 1px solid $m-color--interactive-lighter;
+        &::before {
+            transform: rotate(-50deg);
+            right: 16px;
+            bottom: 16px;
+            width: 10px;
+            height: 2px;
         }
 
-        /deep/ .m-checkbox__input {
-            margin-right: $m-tree-node--child-indentation / 2;
-        }
-
-        .m-tree-node__warning-icon {
-            margin-left: $m-spacing--s;
-            color: $m-color--warning;
-        }
-    }
-
-    &:not(.m-tree-node__has-children) .m-tree-node__item:hover,
-    &.m--is-selected:not(.m-tree-node__has-children) .m-tree-node__item:hover,
-    &.m--is-selected:not(.m-tree-node__has-children) .m-tree-node__item {
-        .m-tree-node__item-check {
-            &::before,
-            &::after {
-                content: '';
-                position: absolute;
-                right: 16px;
-                background: $m-color--white;
-                border-radius: 2px;
-            }
-
-            &::before {
-                transform: rotate(-50deg);
-                bottom: 16px;
-                width: 10px;
-                height: 2px;
-            }
-
-            &::after {
-                transform: rotate(-30deg);
-                right: 24px;
-                bottom: 12px;
-                width: 2px;
-                height: 6px;
-            }
+        &::after {
+            transform: rotate(-30deg);
+            right: 24px;
+            bottom: 12px;
+            width: 2px;
+            height: 6px;
         }
     }
 
-    &:not(.m-tree-node__has-children):not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) .m-tree-node__item:hover {
-        .m-tree-node__item-check {
-            &::before,
-            &::after {
-                background: $m-color--interactive;
+    &__child {
+        margin-left: $m-tree-node--child-indentation;
+    }
+
+    &__child-empty {
+        margin-left: 0;
+        margin-top: $m-margin;
+        color: $m-color--text;
+    }
+
+    &.m--has-file-icons.m--has-file-icons .m-tree-node__item {
+        padding-left: $m-tree-node--height + 10px;
+    }
+
+    &:not(.m--has-children) {
+        &:not(.m--is-disabled):not(.m--is-read-only) {
+            > .m-tree-node__item:not(.m--no-hover) {
+                &:hover {
+                    background: $m-color--information;
+                    color: $m-color--interactive;
+
+                    .m-tree-node__item-check::before,
+                    .m-tree-node__item-check::after {
+                        background: $m-color--interactive;
+                    }
+                }
+
+                &:active {
+                    background: $m-color--interactive-dark;
+                    color: $m-color--white;
+
+                    .m-tree-node__item-check::before,
+                    .m-tree-node__item-check::after {
+                        background: $m-color--white;
+                    }
+                }
+            }
+
+            &:not(.m--is-selected) > .m-tree-node__item:not(.m--no-hover) {
+                &:focus:not(:active) {
+                    .m-tree-node__item-check::before,
+                    .m-tree-node__item-check::after {
+                        background: $m-color--interactive;
+                    }
+                }
+            }
+        }
+
+        &:not(.m--is-disabled):not(.m--is-read-only):not(.m--is-with-checkboxes) {
+            > .m-tree-node__item {
+                cursor: pointer;
+
+                &:focus {
+                    border-color: $m-color--interactive;
+                }
+            }
+        }
+
+        > .m-tree-node__item {
+            background: $m-color--white;
+            color: $m-color--interactive;
+            height: 32px; // Magic number
+            width: auto;
+            display: inline-flex;
+            border: 1px solid $m-color--white;
+            border-radius: $m-tree-node--child-indentation;
+            padding-right: $m-tree-node--child-indentation * 2;
+        }
+    }
+
+    &.m--has-children {
+        &:not(.m--is-disabled) {
+            > .m-tree-node__item:not(.m--no-hover) {
+                &:hover,
+                &:focus {
+                    background: linear-gradient(to right, $m-color--information, rgba($m-color--white, 0));
+                    cursor: pointer;
+                }
             }
         }
     }
 
-    &.m-tree-node__has-children > .m-tree-node__item,
-    &.m-tree-node__has-children.m--is-disabled > .m-tree-node__item {
+    &.m--has-children > &__item {
         font-weight: $m-font-weight--semi-bold;
         cursor: pointer;
-    }
-
-    &:not(.m-tree-node__has-children) > .m-tree-node__item {
-        background: $m-color--white;
-        color: $m-color--interactive;
-        height: 32px; // Magic number
-        width: auto;
-        display: inline-flex;
-        border-radius: $m-tree-node--child-indentation;
-        padding-right: $m-tree-node--child-indentation * 2;
     }
 
     &.m--is-read-only > &__item {
@@ -158,28 +215,26 @@ $m-tree-node--child-indentation: 20px;
         background: $m-color--white;
     }
 
-    &.m--is-selected:not(.m-tree-node__has-children) > &__item,
-    &.m--is-selected:not(.m--is-read-only) > &__item {
-        background-color: $m-color--interactive;
-        color: $m-color--white;
-    }
-
-    &:not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) > &__item:not(.m-tree-node__item--no-hover):hover,
-    &:not(.m--is-disabled).m--is-selected:not(.m--is-read-only) > &__item:not(.m-tree-node__item--no-hover):hover,
-    &:not(.m--is-disabled):not(.m--is-selected):not(.m--is-read-only) > &__item.m-tree-node__item--no-hover:hover {
-        background: rgba($m-color--interactive, 0.15);
-        cursor: pointer;
-    }
-
-    &:not(.m--is-disabled) > &__item:hover,
     &.m--is-selected {
+        &:not(.m--has-children):not(.m--is-read-only):not(.m--is-disabled) {
+            > .m-tree-node__item {
+                background-color: $m-color--interactive;
+                color: $m-color--white;
+            }
+
+            .m-tree-node__item-check::before,
+            .m-tree-node__item-check::after {
+                background: $m-color--white;
+            }
+        }
+
         .m-tree-icon::before,
         .m-tree-icon::after {
             background-color: $m-color--white;
         }
     }
 
-    &__line-extension::before {
+    .m-tree-node__children.m--has-line-extension::before {
         content: '';
         position: absolute;
         left: -$m-tree-node--child-indentation;
@@ -188,71 +243,44 @@ $m-tree-node--child-indentation: 20px;
         width: 1px;
         background-color: $m-color--interactive;
     }
+}
 
-    &__child {
-        margin-left: $m-tree-node--child-indentation;
-
-        &-empty {
-            margin-left: 0;
-            margin-top: $m-margin;
-            color: $m-color--text;
-        }
-    }
-
-    &__file-icons .m-tree-node__item {
-        padding-left: $m-tree-node--height + 10px;
-    }
-
-    /* Règles des exceptions du Tree-node with checkboxes  */
-
-    &.m-tree-node__with-checkboxes:not(.m-tree-node__has-children) > .m-tree-node__item {
+.m-tree-node.m--is-with-checkboxes {
+    &:not(.m--has-children) > .m-tree-node__item {
         color: $m-color--text;
     }
 
-    &.m-tree-node__with-checkboxes.m--is-selected.m-tree-node__has-children > .m-tree-node__item {
+    &.m--is-selected.m--has-children > .m-tree-node__item {
         background-color: $m-color--grey-lighter;
         color: $m-color--text;
     }
 
-    &.m-tree-node__with-checkboxes .m-tree-node__item.m-tree-node__item--no-hover .m-tree-node__item-check,
-    &.m-tree-node__with-checkboxes .m-tree-node__child:not(.m-tree-node__has-children):not(.m--is-disabled) .m-tree-node__item .m-tree-node__item-check {
-        display: none;
+    &.m--is-disabled.m--has-children {
+        &::before {
+            background-color: $m-color--interactive;
+        }
+
+        > .m-tree-node__item {
+            border-color: $m-color--interactive;
+        }
     }
 
-    &.m-tree-node__with-checkboxes.m--is-disabled.m-tree-node__has-children::before {
-        background-color: $m-color--ul-blue;
-    }
-
-    &.m-tree-node__with-checkboxes.m--is-disabled.m-tree-node__has-children > .m-tree-node__item {
-        border-color: $m-color--ul-blue;
-    }
-
-    &.m-tree-node__with-checkboxes:not(.m--is-read-only):not(.m--is-disabled):not(.m--is-selected) > .m-tree-node__item--no-hover:hover /deep/ .m-checkbox__input,
-    &.m-tree-node__with-checkboxes:not(.m--is-read-only):not(.m--is-disabled).m--is-selected > .m-tree-node__item--no-hover:hover /deep/ .m-checkbox__input {
-        background: $m-color--interactive-lightest;
-        border-color: $m-color--interactive;
-    }
-
-    &.m-tree-node__with-checkboxes:not(.m--is-read-only):not(.m--is-disabled):not(.m--is-selected) > .m-tree-node__item.m-tree-node__item--no-hover:hover {
-        background: transparent;
-        color: $m-color--interactive;
-    }
-
-    &.m-tree-node__with-checkboxes.m--is-selected:not(.m--is-read-only) > .m-tree-node__item.m-tree-node__item--no-hover {
-        background-color: transparent;
+    &.m--is-selected:not(.m--is-read-only) > .m-tree-node__item.m--no-hover {
+        background-color: rgba($m-color--white, 0);
         color: $m-color--text;
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: $m-color--interactive;
         }
     }
 
-    &.m-tree-node__with-checkboxes.m--is-selected.m--is-read-only > .m-tree-node__item.m-tree-node__item--no-hover:hover {
+    &.m--is-selected.m--is-read-only > .m-tree-node__item.m--no-hover:hover {
         cursor: default;
     }
 
-    &.m-tree-node__with-checkboxes:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m-tree-node__item--no-hover {
+    &:not(.m--is-disabled).m--is-selected > .m-tree-node__item.m--no-hover {
         cursor: pointer;
-        background-color: transparent;
+        background-color: rgba($m-color--white, 0);
     }
 }

@@ -219,7 +219,7 @@ exports[`Storyshots components|m-input-group default 1`] = `
                     class="m-input-style__suffix"
                   >
                     <!---->
-                     
+                      
                     <!---->
                   </div>
                 </div>
@@ -300,7 +300,7 @@ exports[`Storyshots components|m-input-group default 1`] = `
                     class="m-input-style__suffix"
                   >
                     <!---->
-                     
+                      
                     <!---->
                   </div>
                 </div>
