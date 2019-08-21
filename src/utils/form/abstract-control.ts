@@ -116,7 +116,7 @@ export abstract class AbstractControl<T = any> {
             const validationResult: Promise<boolean> | boolean = v.validationFunction(this);
 
             if (!(validationResult instanceof Promise)) {
-                v.lastCheck = v.validationFunction(this) as boolean;
+                v.lastCheck = validationResult;
             } else {
                 throw new Error('if you are using a async validation function  you must set the async flag to true');
             }
@@ -142,7 +142,7 @@ export abstract class AbstractControl<T = any> {
                     if (validationResult instanceof Promise) {
                         this._waiting = true;
 
-                        v.lastCheck = await v.validationFunction(this);
+                        v.lastCheck = await validationResult;
 
                         this._waiting = false;
                     } else {
