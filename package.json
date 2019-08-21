@@ -74,6 +74,7 @@
         "@storybook/vue": "^5.1.8",
         "@types/cleave.js": "^1.4.0",
         "@types/filesize": "^3.6.0",
+        "@types/googlemaps": "^3.37.0",
         "@types/jest": "^23.3.14",
         "@types/node": "^10.12.20",
         "@types/sprintf-js": "^1.1.0",

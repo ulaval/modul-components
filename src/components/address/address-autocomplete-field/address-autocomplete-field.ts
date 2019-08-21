@@ -1,6 +1,6 @@
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
-import Address, { AddressField, copyAddress, Country, CountryKey, Province, ProvinceKey } from '../../../utils/address-lookup/address';
+import { Address, AddressField, copyAddress, Country, CountryKey, Province, ProvinceKey } from '../../../utils/address-lookup/address';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MInplaceEdit } from '../../inplace-edit/inplace-edit';
 import MAddressEditor, { AddressEditorValidator } from '../address-editor/address-editor';

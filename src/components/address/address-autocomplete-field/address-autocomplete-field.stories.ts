@@ -1,12 +1,12 @@
 import { storiesOf } from '@storybook/vue';
 import Vue from 'vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
-import Address, { AddressField, Country, CountryKey, Province, ProvinceKey } from '../../../utils/address-lookup/address';
+import { Address, AddressField, Country, CountryKey, Province, ProvinceKey } from '../../../utils/address-lookup/address';
 import { ADDRESS_AUTOCOMPLETE_FIELD_NAME } from '../../component-names';
 import AddressPlugin from '../address';
 import { AddressEditorValidator } from '../address-editor/address-editor';
 
-Vue.use(AddressPlugin, { loqateKey: 'someKey' });
+Vue.use(AddressPlugin, { loqateKey: '', googleKey: '' });
 
 const countries: Country[] = [
     { countryIso2: 'US', country: 'United-States of America' },

@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { componentsHierarchyRootSeparator } from '../../../../conf/storybook/utils';
-import Address, { AddressField, Country, Province } from '../../../utils/address-lookup/address';
+import { Address, AddressField, Country, Province } from '../../../utils/address-lookup/address';
 import { ADDRESS_EDITOR_NAME } from '../../component-names';
 import MAddressEditor, { AddressEditorValidator } from './address-editor';
 

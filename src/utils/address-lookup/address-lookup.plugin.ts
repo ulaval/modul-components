@@ -1,27 +1,39 @@
 import axios from 'axios';
 import { PluginObject } from 'vue';
-import Address from './address';
-import AddressLookupLoqateService, { LoqateFindQuery, LoqateFindResponse, LoqateRetrieveQuery } from './address-lookup-loqate-service';
-import AddressLookupService from './address-lookup-service';
+import { AddressLookupService } from './address-lookup';
+import AddressLookupGoogleService from './address-lookup-google-service';
+import AddressLookupLoqateService from './address-lookup-loqate-service';
 
 declare module 'vue/types/vue' {
     interface Vue {
-        $addressLookup: AddressLookupService<LoqateFindQuery, LoqateFindResponse, LoqateRetrieveQuery, Address>;
+        $addressLookup: AddressLookupService;
     }
 }
 
 export interface AddressLookupPluginOptions {
     loqateKey: string;
+    googleKey: string;
 }
 
-export const LOQATE_LICENSE_KEY: string = 'm-loqate-license-key';
-
 const AddressLookupPlugin: PluginObject<any> = {
-    install(v, options: AddressLookupPluginOptions | undefined = { loqateKey: '' }): void {
-        if (!options.loqateKey) {
-            v.prototype.$log.error('The API key for Loqate Web Service must be provided');
+    install(v, options: AddressLookupPluginOptions | undefined = { loqateKey: '', googleKey: '' }): void {
+        if (options.loqateKey && options.googleKey) {
+            v.prototype.$log.error('The API key for Loqate Web Service OR Google Maps API must be provided');
         }
-        let addressLookup: AddressLookupLoqateService = new AddressLookupLoqateService(axios, options.loqateKey);
+
+        if (options.googleKey) {
+            v.prototype.$log.error(`Address lookup using google shouldn't be used in prod yet.`);
+        }
+
+        let addressLookup: AddressLookupGoogleService | AddressLookupLoqateService | undefined = undefined;
+        if (options.googleKey) {
+            addressLookup = new AddressLookupGoogleService(axios, options.googleKey);
+        } else if (options.loqateKey) {
+            addressLookup = new AddressLookupLoqateService(axios, options.loqateKey);
+        } else {
+            v.prototype.$log.error(`You need to provide a Loqate Web Service or Google Maps API key.`);
+        }
+
         v.prototype.$addressLookup = addressLookup;
     }
 };
