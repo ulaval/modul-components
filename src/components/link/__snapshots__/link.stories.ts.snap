@@ -2,7 +2,7 @@
 
 exports[`Storyshots components|m-link bullet-point 1`] = `
 <a
-  class="m-link m--has-content"
+  class="m-link m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
@@ -286,6 +286,7 @@ exports[`Storyshots components|m-link/mode mode="button" 1`] = `
 <a
   class="m-link m--is-unvisited m--is-button m--has-content"
   href="#"
+  role="button"
   tabindex="0"
 >
   <!---->
@@ -321,7 +322,7 @@ exports[`Storyshots components|m-link/mode mode="link 1`] = `
 exports[`Storyshots components|m-link/skin="light" bullet-point 1`] = `
 <div>
   <a
-    class="m-link m--is-skin-light m--has-content"
+    class="m-link m--is-skin-light m--has-left-icon m--has-content"
     href="#"
     tabindex="0"
   >
@@ -468,7 +469,7 @@ exports[`Storyshots components|m-link/skin="light" icon-size="20px" 1`] = `
 
 exports[`Storyshots components|m-link/skin="text" bullet-point 1`] = `
 <a
-  class="m-link m--is-skin-text m--has-content"
+  class="m-link m--is-skin-text m--has-left-icon m--has-content"
   href="#"
   tabindex="0"
 >
