@@ -79,8 +79,7 @@ export abstract class AbstractControl<T = any> {
     }
 
     /**
-     * Gets the first error message, if any, of one of the children control errors.
-     * The current control errors are excluded.
+     * Gets the first error message, if any, of one of the current control and children control errors.
      */
     public get errorMessageDeep(): string {
         if (this.hasErrorDeep()) {
