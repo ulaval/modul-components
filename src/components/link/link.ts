@@ -1,6 +1,6 @@
 import { PluginObject } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch } from 'vue-property-decorator';
+import { Emit, Prop } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import { KeyCode } from '../../utils/keycode/keycode';
 import { ModulVue } from '../../utils/vue/vue';
@@ -83,37 +83,15 @@ export class MLink extends ModulVue {
     @Prop({ default: '0' })
     public tabindex: string;
 
-    protected mounted(): void {
-        this.isButtonChanged(this.mode === MLinkMode.Button);
-    }
+    @Emit('click')
+    private emitClick(event: Event): void { }
 
-    @Watch('isButton')
-    private isButtonChanged(isButton: boolean): void {
-        if (isButton) {
-            this.$nextTick(() => {
-                this.$el.setAttribute('role', 'button');
-            });
-        } else {
-            this.$nextTick(() => {
-                if (this.$el.hasAttribute('role')) {
-                    this.$el.removeAttribute('role');
-                }
-            });
-        }
-    }
-
-    private onClick(event): void {
-        (this.$el as HTMLElement).blur();
-        if (this.isButton || this.disabled) {
-            event.preventDefault();
-        }
-        if (!this.disabled) {
-            this.$emit('click', event);
-        }
-    }
-
-    private get isRouterLink(): boolean {
+    public get isRouterLink(): boolean {
         return this.mode === MLinkMode.RouterLink;
+    }
+
+    public get roleButton(): string | undefined {
+        return this.isButton ? 'button' : undefined;
     }
 
     public get iconHasLargeStroke(): boolean {
@@ -128,35 +106,32 @@ export class MLink extends ModulVue {
         }
     }
 
-    private onKeyup(event): void {
-        event = event || window.event;
-        if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
-            this.onClick(event);
-        }
+    public get linkRef(): string {
+        return this.isRouterLink ? 'router' : 'link';
     }
 
-    private get isButton(): boolean {
+    public get isButton(): boolean {
         return this.mode === MLinkMode.Button;
     }
 
-    private get isSkinText(): boolean {
+    public get isSkinText(): boolean {
         return this.skin === MLinkSkin.Text;
     }
 
-    private get isSkinLight(): boolean {
+    public get isSkinLight(): boolean {
         return this.skin === MLinkSkin.Light;
     }
 
-    private get isUnvisited(): boolean {
+    public get isUnvisited(): boolean {
         return this.isButton ? true : this.unvisited;
     }
 
-    private get isIconPositionLeft(): boolean {
-        return (this.hasIcon && this.iconPosition === MLinkIconPosition.Left) && !this.bulletPoint;
+    public get isIconPositionLeft(): boolean {
+        return this.hasIcon && this.iconPosition === MLinkIconPosition.Left;
     }
 
-    private get isIconPositionRight(): boolean {
-        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right && !this.bulletPoint;
+    public get isIconPositionRight(): boolean {
+        return this.hasIcon && this.iconPosition === MLinkIconPosition.Right;
     }
 
     public get hasIcon(): boolean {
@@ -167,30 +142,71 @@ export class MLink extends ModulVue {
         return this.bulletPoint ? '12px' : this.iconSize;
     }
 
-    private get propIconName(): string {
+    public get propIconName(): string {
         return this.bulletPoint ? ICON_NAME_CHEVRON : this.iconName;
     }
 
-    private get propUrl(): string | undefined {
-        return this.isButton
-            ? '#'
-            : !this.disabled ? this.url as string : undefined;
+    public get propUrl(): string | undefined {
+        switch (this.mode) {
+            case MLinkMode.Link:
+                return !this.disabled ? this.url as string : undefined;
+            case MLinkMode.Button:
+                return '#';
+            case MLinkMode.RouterLink:
+            default:
+                return undefined;
+        }
     }
 
-    private get isTargetBlank(): boolean {
+    public get routerLinkUrl(): Location | undefined {
+        switch (this.mode) {
+            case MLinkMode.Link:
+            case MLinkMode.Button:
+                return undefined;
+            case MLinkMode.RouterLink:
+            default:
+                if (this.disabled || !this.url) {
+                    return { path: '/' };
+                } else {
+                    return this.isObject(this.url) ? this.url as Location : { path: this.url as string };
+                }
+        }
+    }
+
+    public get isTargetBlank(): boolean {
         return this.target === '_blank';
     }
 
-    private get routerLinkUrl(): string | Location {
-        return this.isObject(this.url) ? this.url as Location : { path: this.url as string };
+    public get routerEvent(): string | undefined {
+        if (!this.isRouterLink) {
+            return undefined;
+        }
+        return this.disabled ? '' : 'click';
     }
 
-    private get routerEvent(): string {
-        return this.disabled ? '' : 'click';
+    public get tagName(): string {
+        return this.isRouterLink ? 'router-link' : 'a';
     }
 
     private isObject(a): boolean {
         return !!a && a.constructor === Object;
+    }
+
+    public onClick(event): void {
+        (this.$el as HTMLElement).blur();
+        if (this.isButton || this.disabled) {
+            event.preventDefault();
+        }
+        if (!this.disabled) {
+            this.emitClick(event);
+        }
+    }
+
+    public onKeyup(event): void {
+        event = event || window.event;
+        if (event.keyCode === KeyCode.M_SPACE && this.isButton) {
+            this.onClick(event);
+        }
     }
 
 }

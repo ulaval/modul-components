@@ -1,4 +1,18 @@
-export default interface Address {
+export enum AddressSources {
+    LOQATE = 'loqate',
+    GOOGLE_PLACES = 'google_places'
+}
+
+export interface AddressSummary {
+    queryInput: string;
+    value: string;
+    type: string;
+    label: string;
+    description?: string;
+}
+
+export interface Address {
+    name: string;
     buildingNumber: string;
     street: string;
     city: string;
@@ -6,6 +20,9 @@ export default interface Address {
     postalCode: string;
     country: Country;
     subBuilding: string;
+    attributions: string[];
+    source: AddressSources;
+    isEstablishment: boolean;
 }
 
 export interface Province {
@@ -25,7 +42,9 @@ export enum AddressField {
     POSTAL_CODE = 'postalCode',
     SUB_BUILDING = 'subBuilding',
     COUNTRY = 'country',
-    PROVINCE = 'province'
+    PROVINCE = 'province',
+    name = 'name',
+    isEstablishment = 'isEstablishment'
 }
 
 export enum ProvinceKey {

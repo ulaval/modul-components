@@ -66,7 +66,22 @@ export abstract class AbstractControl<T = any> {
         return this.errorsDeep.length > 0;
     }
 
+    /**
+     * Gets the first error message, if any, of the current control errors.
+     * Children errors are excluded.
+     */
     public get errorMessage(): string {
+        if (this.hasError()) {
+            return getString(this.errors[0].message);
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * Gets the first error message, if any, of one of the current control and children control errors.
+     */
+    public get errorMessageDeep(): string {
         if (this.hasErrorDeep()) {
             return getString(this.errorsDeep[0].message);
         } else {
@@ -116,7 +131,7 @@ export abstract class AbstractControl<T = any> {
             const validationResult: Promise<boolean> | boolean = v.validationFunction(this);
 
             if (!(validationResult instanceof Promise)) {
-                v.lastCheck = v.validationFunction(this) as boolean;
+                v.lastCheck = validationResult;
             } else {
                 throw new Error('if you are using a async validation function  you must set the async flag to true');
             }
@@ -142,7 +157,7 @@ export abstract class AbstractControl<T = any> {
                     if (validationResult instanceof Promise) {
                         this._waiting = true;
 
-                        v.lastCheck = await v.validationFunction(this);
+                        v.lastCheck = await validationResult;
 
                         this._waiting = false;
                     } else {

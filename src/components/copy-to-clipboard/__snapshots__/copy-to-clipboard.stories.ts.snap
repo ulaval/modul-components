@@ -63,6 +63,7 @@ exports[`Storyshots components|m-copy-to-clipboard States 1`] = `
                   <a
                     class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
                     href="#"
+                    role="button"
                     tabindex="0"
                   >
                     <!---->
@@ -163,6 +164,7 @@ exports[`Storyshots components|m-copy-to-clipboard States 1`] = `
                   <a
                     class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
                     href="#"
+                    role="button"
                     tabindex="0"
                   >
                     <!---->
@@ -537,6 +539,7 @@ exports[`Storyshots components|m-copy-to-clipboard custom user feedback 1`] = `
               <a
                 class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
                 href="#"
+                role="button"
                 tabindex="0"
               >
                 <!---->
@@ -636,6 +639,7 @@ exports[`Storyshots components|m-copy-to-clipboard default 1`] = `
               <a
                 class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
                 href="#"
+                role="button"
                 tabindex="0"
               >
                 <!---->
@@ -735,6 +739,7 @@ exports[`Storyshots components|m-copy-to-clipboard default with value 1`] = `
               <a
                 class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
                 href="#"
+                role="button"
                 tabindex="0"
               >
                 <!---->
@@ -834,6 +839,7 @@ exports[`Storyshots components|m-copy-to-clipboard user feedback 1`] = `
               <a
                 class="m-link m-copy-to-clipboard__button m--is-unvisited m--no-underline m--is-button m--has-content"
                 href="#"
+                role="button"
                 tabindex="0"
               >
                 <!---->

@@ -1,6 +1,6 @@
 import Component from 'vue-class-component';
 import { Emit, Model, Prop, Watch } from 'vue-property-decorator';
-import Address, { AddressField, copyAddress, Country, CountryKey, Province } from '../../../utils/address-lookup/address';
+import { Address, AddressField, copyAddress, Country, CountryKey, Province } from '../../../utils/address-lookup/address';
 import { ModulVue } from '../../../utils/vue/vue';
 import { MDropdown } from '../../dropdown/dropdown';
 import { MTextfield } from '../../textfield/textfield';

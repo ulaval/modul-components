@@ -58,6 +58,7 @@ exports[`Storyshots components|m-pagination default 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -77,6 +78,7 @@ exports[`Storyshots components|m-pagination default 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -96,6 +98,7 @@ exports[`Storyshots components|m-pagination default 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -124,6 +127,7 @@ exports[`Storyshots components|m-pagination default 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -222,6 +226,7 @@ exports[`Storyshots components|m-pagination items-per-page="14" 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -241,6 +246,7 @@ exports[`Storyshots components|m-pagination items-per-page="14" 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -260,6 +266,7 @@ exports[`Storyshots components|m-pagination items-per-page="14" 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -288,6 +295,7 @@ exports[`Storyshots components|m-pagination items-per-page="14" 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -386,6 +394,7 @@ exports[`Storyshots components|m-pagination loading 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="-1"
         >
           <!---->
@@ -405,6 +414,7 @@ exports[`Storyshots components|m-pagination loading 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="-1"
         >
           <!---->
@@ -424,6 +434,7 @@ exports[`Storyshots components|m-pagination loading 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="-1"
         >
           <!---->
@@ -452,6 +463,7 @@ exports[`Storyshots components|m-pagination loading 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-disabled m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="-1"
         >
           <!---->
@@ -541,6 +553,7 @@ exports[`Storyshots components|m-pagination value 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -569,6 +582,7 @@ exports[`Storyshots components|m-pagination value 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -597,6 +611,7 @@ exports[`Storyshots components|m-pagination value 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->
@@ -625,6 +640,7 @@ exports[`Storyshots components|m-pagination value 1`] = `
         <a
           class="m-link m-pagination__item--link m--is-unvisited m--is-button m--has-content"
           href="#"
+          role="button"
           tabindex="0"
         >
           <!---->

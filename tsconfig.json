@@ -15,16 +15,15 @@
         "types": [
             "node",
             "jest",
-            "webpack-env"
+            "webpack-env",
+            "googlemaps"
         ],
         "typeRoots": [
             "node_modules/@types"
         ],
-        "plugins": [
-            {
-                "name": "typescript-tslint-plugin"
-            }
-        ]
+        "plugins": [{
+            "name": "typescript-tslint-plugin"
+        }]
     },
     "exclude": [
         "node_modules",
