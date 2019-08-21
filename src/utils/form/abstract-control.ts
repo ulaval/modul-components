@@ -66,6 +66,10 @@ export abstract class AbstractControl<T = any> {
         return this.errorsDeep.length > 0;
     }
 
+    /**
+     * Gets the first error message, if any, of the current control errors.
+     * Children errors are excluded.
+     */
     public get errorMessage(): string {
         if (this.hasError()) {
             return getString(this.errors[0].message);
@@ -74,6 +78,10 @@ export abstract class AbstractControl<T = any> {
         }
     }
 
+    /**
+     * Gets the first error message, if any, of one of the children control errors.
+     * The current control errors are excluded.
+     */
     public get errorMessageDeep(): string {
         if (this.hasErrorDeep()) {
             return getString(this.errorsDeep[0].message);
