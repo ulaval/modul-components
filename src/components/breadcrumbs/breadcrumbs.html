@@ -1,0 +1,9 @@
+<div class="m-breadcrumbs">
+    <template v-for="item in items">
+        <m-link v-if="item.url && item.text"
+                :icon-name="item.iconName"
+                :disabled="disabled || item.disabled"
+                :url="item.url">{{ item.divider || divider }}{{ item.text }}</m-link>
+        <span v-else-if="item.text">{{ item.divider || divider }}{{ item.text }}</span>
+    </template>
+</div>
