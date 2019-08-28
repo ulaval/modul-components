@@ -68,7 +68,7 @@ describe('MRichTextEditor', () => {
         });
         it('default options are standard default options', () => {
             expect(richTextEditor.getOptions().pluginsEnabled).toContain('image');
-            expect(richTextEditor.getOptions().toolbarButtons).toContain('insertImage');
+            expect(richTextEditor.getOptions().toolbarButtons.moreRich.buttons).toContain('insertImage');
         });
 
     });
@@ -115,7 +115,7 @@ describe('MRichTextEditor', () => {
 
     describe('without props set', () => {
         it('internal options are defaultOptions', () => {
-            const customOptions: any = { placeholderText: ' ', scrollableContainer: undefined };
+            const customOptions: any = { placeholderText: ' ', scrollableContainer: 'body' };
             expect(richTextEditor.internalOptions).toEqual({ ...defaultOptions, ...customOptions });
         });
     });

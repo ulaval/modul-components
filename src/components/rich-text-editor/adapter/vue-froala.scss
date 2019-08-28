@@ -32,10 +32,6 @@ $m-collapsed-input-style--margin: 16px !default;
         float: right;
     }
 
-    /deep/ .fr-separator:last-of-type {
-        display: none;
-    }
-
     &.m--is-dirty {
         overflow: unset;
     }
@@ -46,15 +42,15 @@ $m-collapsed-input-style--margin: 16px !default;
         }
     }
 
+    /deep/.fr-box.fr-basic.fr-top .fr-wrapper {
+        border: 0;
+    }
+
     &.m--is-collapsed /deep/ {
         .fr-box.fr-basic .fr-element {
             padding: 0;
             min-height: unset;
             height: 0;
-        }
-
-        .fr-box.fr-basic.fr-top .fr-wrapper {
-            box-shadow: unset;
         }
 
         .fr-wrapper.show-placeholder .fr-placeholder {
@@ -132,6 +128,12 @@ $m-collapsed-input-style--margin: 16px !default;
 
         .fr-box.fr-basic.fr-top .fr-wrapper {
             background: $m-color--white;
+            transition: margin $m-transition-duration--l ease;
+        }
+
+        .fr-box.fr-basic.fr-top.fr-toolbar-open .fr-wrapper {
+            transition: margin $m-transition-duration--l ease;
+            margin-top: $m-margin--xl;
         }
 
         .fr-toolbar {
@@ -174,6 +176,9 @@ $m-collapsed-input-style--margin: 16px !default;
             transition: padding $m-transition-duration--l ease;
             min-height: unset;
             overflow-x: unset;
+            font-family: unset;
+            font-size: unset;
+            line-height: unset;
         }
 
         .fr-wrapper {
@@ -309,47 +314,28 @@ $m-collapsed-input-style--margin: 16px !default;
         strong {
             font-weight: $m-font-weight--bold;
         }
-    }
 
-    &.m--is-mobile {
-        /deep/ .fr-command {
-            display: none;
+        .second-toolbar {
+            border: 0; // hide second toolbar in Froala (V3)
+        }
 
-            &[data-cmd*='-sub-menu'],
-            &[data-cmd='fullscreen'],
-            &[data-cmd='insertLink'],
-            &[data-cmd='insertImage'],
-            &[data-cmd='specialCharacters'] {
-                display: inline-block;
-            }
+        .fr-command.fr-btn {
+            width: 38px;
+            height: 38px;
+            margin: 0 2px;
 
-            &.fr-submit {
-                display: inline-block;
+            &.fr-active {
+                color: $m-color--interactive;
             }
         }
 
-        /deep/ .fr-separator {
-            display: none;
-        }
-
-        &.m--is-focus {
-            /deep/ .fr-placeholder {
-                padding-top: 50px !important;
+        .fr-btn-grp {
+            &.fr-float-left {
+                margin-left: 0;
             }
 
-            /deep/ .fr-box.fr-basic .fr-element {
-                padding-top: 50px;
-            }
-        }
-    }
-
-    &.m--is-desktop {
-        /deep/ .fr-command {
-            display: inline-block;
-
-            &[data-cmd*='-sub-menu'],
-            &[data-cmd='hide'] {
-                display: none;
+            &.fr-float-right {
+                margin-right: 0;
             }
         }
     }

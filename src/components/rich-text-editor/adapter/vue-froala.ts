@@ -1,5 +1,9 @@
 // This code is largery borrowed from https://github.com/froala/vue-froala-wysiwyg.
 // However some changes have been made to "inputify" the froala editor and render is compatible with modUL input-style.
+import FroalaEditor from 'froala-editor';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/js/plugins.pkgd.min.js';
 import $ from 'jquery';
 import Component from 'vue-class-component';
 import { Emit, Prop, Watch } from 'vue-property-decorator';
@@ -14,32 +18,31 @@ import titleIcon from '../../../assets/icons/svg/Froala-title.svg';
 import { ElementQueries } from '../../../mixins/element-queries/element-queries';
 import { replaceTags } from '../../../utils/clean/htmlClean';
 import { MFile } from '../../../utils/file/file';
+import { ScrollToDuration } from '../../../utils/scroll-to/scroll-to';
 import uuid from '../../../utils/uuid/uuid';
 import { ModulVue } from '../../../utils/vue/vue';
-import { PopupPlugin } from './popup-plugin';
-import SubMenuPlugin from './submenu-plugin';
 import WithRender from './vue-froala.html?style=./vue-froala.scss';
-
-require('froala-editor/js/froala_editor.pkgd.min');
-require('froala-editor/css/froala_editor.pkgd.min.css');
 require('froala-editor/js/languages/fr.js');
+// Bug placeholder in the version 3.0.5.
+// Bug watch The button "Special Characters" isn't work in mobile  https://github.com/froala/angular-froala-wysiwyg/issues/317
+// Bug watch "JQuery dependence isn't fully removed from Froala" https://github.com/froala/angular-froala-wysiwyg/issues/324
 
 enum froalaEvents {
-    Blur = 'froalaEditor.blur',
-    Click = 'froalaEditor.click',
-    CommandAfter = 'froalaEditor.commands.after',
-    CommandBefore = 'froalaEditor.commands.before',
-    ContentChanged = 'froalaEditor.contentChanged',
-    Focus = 'froalaEditor.focus',
-    ImageRemoved = 'froalaEditor.image.removed',
-    ImageInserted = 'froalaEditor.image.inserted',
-    Initialized = 'froalaEditor.initialized',
-    InitializationDelayed = 'froalaEditor.initializationDelayed',
-    KeyUp = 'froalaEditor.keyup',
-    KeyDown = 'froalaEditor.keydown',
-    PasteAfter = 'froalaEditor.paste.after',
-    PasteAfterCleanup = 'froalaEditor.paste.afterCleanup',
-    ShowLinkInsert = 'froalaEditor.popups.show.link.insert'
+    Blur = 'blur',
+    Click = 'click',
+    CommandAfter = 'commands.after',
+    CommandBefore = 'commands.before',
+    ContentChanged = 'contentChanged',
+    Focus = 'focus',
+    ImageInserted = 'image.inserted',
+    ImageRemoved = 'image.removed',
+    Initialized = 'initialized',
+    InitializationDelayed = 'initializationDelayed',
+    KeyDown = 'keydown',
+    KeyUp = 'keyup',
+    PasteAfter = 'paste.after',
+    PasteAfterCleanup = 'paste.afterCleanup',
+    ShowLinkInsert = 'popups.show.link.insert'
 }
 
 enum FroalaElements {
@@ -57,13 +60,27 @@ export enum FroalaStatus {
     Focused = 'focused'
 }
 
+export enum FroalaToolbarButtons {
+    moreTextVisible = 6,
+    moreTextVisibleXS = 0,
+    moreParagraphVisible = 4,
+    moreParagraphVisibleXS = 0,
+    moreRichVisible = 3,
+    moreRichVisibleXS = 3,
+    moreMiscVisible = 1,
+    moreMiscVisibleXS = 1
+}
+
 const ENTER_KEYCODE: number = 13;
 
 @WithRender
 @Component({
     mixins: [
         ElementQueries
-    ]
+    ],
+    components: {
+        FroalaEditor
+    }
 }) export class VueFroala extends ModulVue {
     @Prop({
         default: 'div'
@@ -92,13 +109,12 @@ const ENTER_KEYCODE: number = 13;
     protected currentTag: string = 'div';
     protected listeningEvents: Event[] = [];
     protected froalaEditor: any = undefined;
-    protected _$element: any = undefined;
-    protected _$editor: any = undefined;
     protected currentConfig: any = undefined;
     protected defaultConfig: any = {
         immediateVueModelUpdate: false,
         vueIgnoreAttrs: undefined
     };
+    protected initEvents: any[] = [];
 
     protected isFocused: boolean = false;
     protected isInitialized: boolean = false;
@@ -126,148 +142,71 @@ const ENTER_KEYCODE: number = 13;
         this.froalaClientWidth = (this.$el as HTMLElement).clientWidth;
     }
 
-    protected get isDesktop(): boolean {
-        if (this.config && this.config.pluginsEnabled.includes('image')) {
-            return this.froalaClientWidth >= FroalaBreakingPoint.minOneMode;
-        }
-        return this.froalaClientWidth >= FroalaBreakingPoint.minDefault;
-    }
-
     public get isEmpty(): boolean {
         return this.value.length === 0;
     }
 
-    protected addPopup(name: string, icon: string, buttonList: string[]): void {
-        const buttonName: string = `${name}Popup`;
-        const pluginName: string = `${name}Plugin`;
-
-        $.FroalaEditor.POPUP_TEMPLATES[`${pluginName}.popup`] = '[_BUTTONS_]';
-
-        // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new PopupPlugin(name, editor, buttonList); };
-
-        // Create the button that'll open the popup
-        $.FroalaEditor.RegisterCommand(buttonName, {
-            title: name,
-            icon: icon,
-            undo: false,
-            focus: false,
-            plugin: pluginName,
-            callback: function(): void {
-                this[pluginName].showPopup();
-            }
-        });
-    }
-
-    protected addSubMenu(name: string, icon: string, buttonList: string[]): void {
-        const buttonName: string = `${name}-sub-menu`;
-        const pluginName: string = `${name}SubMenu`;
-
-        // The custom popup is defined inside a plugin (new or existing).
-        $.FroalaEditor.PLUGINS[pluginName] = (editor) => { return new SubMenuPlugin(editor, buttonList); };
-
-        // Create the button that'll open the popup
-        $.FroalaEditor.RegisterCommand(buttonName, {
-            title: name,
-            icon: icon,
-            undo: false,
-            focus: false,
-            plugin: pluginName,
-            callback: function(): void {
-                this[pluginName].showSubMenu();
-            }
-        });
-    }
-
     protected addCustomIcons(): void {
-        $.FroalaEditor.DefineIconTemplate('custom-icons', '[SVG]');
+        FroalaEditor.DefineIconTemplate('custom-icons', '[SVG]');
 
         if (this.$i18n.currentLang() === 'fr') {
-            $.FroalaEditor.DefineIcon('bold', { SVG: (boldIcon as string), template: 'custom-icons' });
+            FroalaEditor.DefineIcon('bold', { SVG: (boldIcon as string), template: 'custom-icons' });
         }
-        $.FroalaEditor.DefineIcon('styles', { SVG: (stylesIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('lists', { SVG: (listsIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('paragraphStyle', { SVG: (titleIcon as string), template: 'custom-icons' });
-    }
 
-    protected addPopups(): void {
-        // add mobile mode popups
-        $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript']);
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
-        this.addPopup(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters', 'insertImage']);
-    }
+        if (this.config && this.config.pluginsEnabled.includes('image')) {
+            this.addImageButton();
+        }
 
-    protected addSubMenus(): void {
-        // add mobile mode submenus
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:styles'), 'styles', ['paragraphStyle', 'bold', 'italic', 'subscript', 'superscript']);
-        this.addSubMenu(this.$i18n.translate('m-rich-text-editor:lists'), 'lists', ['formatUL', 'formatOL', 'outdent', 'indent']);
-
-        // we'll use this submodule when we'll support images,tables,...
-        //  $.FroalaEditor.DefineIcon('plus', { NAME: 'plus' });
-        // this.addSubMenu(this.$i18n.translate('m-rich-text-editor:insert'), 'plus', ['insertLink', 'specialCharacters']);
-
-        // add "hide sub-menu" button
-        $.FroalaEditor.DefineIcon('angle-left', { NAME: 'angle-left' });
-        $.FroalaEditor.RegisterCommand('hide', {
-            title: this.$i18n.translate('m-rich-text-editor:hide-submenu'),
-            icon: 'angle-left',
-            undo: false,
-            focus: false,
-            callback: function(): void {
-                // Important not to use an arrow function here with this.froalaEditor since the editor is corrupted for some reason.
-                this.stylesSubMenu.hideSubMenu();
-                this.listesSubMenu.hideSubMenu();
-                // we'll use this submenu when we'll support images,tables,...
-                // this.froalaEditor.insertionsSubMenu.hideSubMenu();
-            }
-        });
+        FroalaEditor.DefineIcon('paragraphStyle', { SVG: (titleIcon as string), template: 'custom-icons' });
+        FroalaEditor.DefineIcon('moreText', { SVG: (stylesIcon as string), template: 'custom-icons' });
+        FroalaEditor.DefineIcon('moreParagraph', { SVG: (listsIcon as string), template: 'custom-icons' });
     }
 
     protected addImageButton(): void {
-        $.FroalaEditor.RegisterCommand('insertImage', {
+        FroalaEditor.RegisterCommand('insertImage', {
             title: this.$i18n.translate('m-rich-text-editor:insert-image'),
             undo: true,
             focus: true,
             showOnMobile: true,
+            refreshAfterCallback: false,
             callback: function(): void {
-                let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
-                currentInstance.allowedExtensions = currentInstance.imageExtensions;
-                currentInstance.isFileUploadOpen = true;
-                currentInstance.selectedImage = undefined;
+                let vueFroala: VueFroala = this.$oel[0].parentNode.__vue__;
+                vueFroala.allowedExtensions = this.imageExtensions;
+                vueFroala.isFileUploadOpen = true;
+                vueFroala.selectedImage = undefined;
             }
         });
 
-        $.FroalaEditor.DefineIcon('imageReplace', { SVG: (replaceIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.RegisterCommand('imageReplace', {
+        FroalaEditor.DefineIcon('imageReplace', { SVG: (replaceIcon as string), template: 'custom-icons' });
+        FroalaEditor.RegisterCommand('imageReplace', {
             title: this.$i18n.translate('m-rich-text-editor:replace-image'),
             undo: true,
             focus: true,
             showOnMobile: true,
             callback: function(): void {
-                let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
-                currentInstance.allowedExtensions = currentInstance.imageExtensions;
-                currentInstance.isFileUploadOpen = true;
+                let vueFroala: VueFroala = this.$oel[0].parentNode.__vue__;
+                vueFroala.allowedExtensions = this.imageExtensions;
+                vueFroala.isFileUploadOpen = true;
             },
             refresh: function(): void {
-                const selectedElement: HTMLElement = this.selection.element();
+                let vueFroala: VueFroala = this.$oel[0].parentNode.__vue__;
+                let selectedElement: HTMLElement = vueFroala.froalaEditor.selection.element();
                 if (selectedElement.tagName === 'IMG') {
-                    let currentInstance: VueFroala = this.$oel[0].parentNode.__vue__;
-                    currentInstance.selectedImage = selectedElement;
+                    vueFroala.selectedImage = selectedElement;
                 }
             }
         });
 
-        $.FroalaEditor.DefineIcon('image-align-center', { SVG: (imageAlignCenterIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('image-align-left', { SVG: (imageAlignLeftIcon as string), template: 'custom-icons' });
-        $.FroalaEditor.DefineIcon('image-align-right', { SVG: (imageAlignRightIcon as string), template: 'custom-icons' });
+        FroalaEditor.DefineIcon('image-align-center', { SVG: (imageAlignCenterIcon as string), template: 'custom-icons' });
+        FroalaEditor.DefineIcon('image-align-left', { SVG: (imageAlignLeftIcon as string), template: 'custom-icons' });
+        FroalaEditor.DefineIcon('image-align-right', { SVG: (imageAlignRightIcon as string), template: 'custom-icons' });
     }
 
     protected filesReady(files: MFile[]): void {
         this.$emit('image-ready', files[0], this.fileUploadStoreName);
     }
 
-    protected onClose(): void {
+    protected onCloseFileUpload(): void {
         this.froalaEditor.events.focus();
     }
 
@@ -275,7 +214,8 @@ const ENTER_KEYCODE: number = 13;
         this.froalaEditor.opts.modulImageUploaded = true;
         this.$emit('image-added', files[0], (file: MFile, id: string) => {
             if (this.selectedImage) {
-                this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage));
+                // Bug watch "JQuery dependence isn't fully removed from Froala" https://github.com/froala/angular-froala-wysiwyg/issues/324
+                this.froalaEditor.image.insert(file.url, false, { id }, $(this.selectedImage)); // We need jquery for that function
             } else {
                 this.froalaEditor.image.insert(file.url, false, { id });
             }
@@ -290,7 +230,7 @@ const ENTER_KEYCODE: number = 13;
 
     protected mousedownListener(event: MouseEvent): void {
         this.mousedownTriggered = true;
-        if (this.$el.contains(event.target as HTMLElement) || $('.fr-modal.fr-active').length > 0) {
+        if (this.$el.contains(event.target as HTMLElement) || document.body.querySelector('.fr-modal.fr-active')) {
             this.mousedownInsideEditor = true;
         } else {
             this.mousedownInsideEditor = false;
@@ -298,25 +238,21 @@ const ENTER_KEYCODE: number = 13;
     }
 
     protected mouseupListener(event: MouseEvent): void {
-        this.mousedownTriggered = false;
         if (!this.mousedownInsideEditor && !this.$el.contains(event.target as HTMLElement) && this.isFocused
-            && !this.isFileUploadOpen && $('.fr-image-resizer.fr-active').length === 0) {
+            && !this.isFileUploadOpen && !document.body.querySelector('.fr-image-resizer.fr-active')) {
+            this.mousedownTriggered = false;
             this.closeEditor();
         }
     }
 
     protected mounted(): void {
-        if ($.FE !== undefined
-            && $.FE.LANGUAGE[this.config.language] !== undefined
-            && this.customTranslations !== undefined
-        ) {
-            Object.assign($.FE.LANGUAGE[this.config.language].translation, this.customTranslations);
+        if (FroalaEditor !== undefined && this.config !== undefined) {
+            if (FroalaEditor.LANGUAGE[this.config.language] !== undefined && this.customTranslations !== undefined) {
+                Object.assign(FroalaEditor.LANGUAGE[this.config.language].translation, this.customTranslations);
+            }
+
+            this.createEditor();
         }
-
-        this.createEditor();
-
-        // add a dropdown arrow to popups buttons
-        $(`button[id*='Popup']`).addClass('popup-button');
     }
 
     protected destroyed(): void {
@@ -340,40 +276,6 @@ const ENTER_KEYCODE: number = 13;
         }
     }
 
-    protected desktopMode(): void {
-        if (this.froalaEditor && this.froalaEditor.$tb) {
-            this.froalaEditor.$tb.find(`.fr-command`).show();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).hide();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
-        }
-    }
-
-    protected mobileMode(): void {
-        if (this.froalaEditor && this.froalaEditor.$tb) {
-            this.froalaEditor.$tb.find(`.fr-command`).hide();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd*="-sub-menu"]`).show();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="fullscreen"]`).show();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertLink"]`).show();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="specialCharacters"]`).show();
-            this.froalaEditor.$tb.find(`.fr-command[data-cmd="insertImage"]`).show();
-            // show submit buttons (ex: link insertion submit button)
-            this.froalaEditor.$tb.find(`.fr-submit`).show();
-        }
-    }
-
-    @Watch('isDesktop')
-    private changeMode(): void {
-        // mode desktop
-        if (this.isDesktop) {
-            this.desktopMode();
-            // hide hide button
-            if (this.froalaEditor && this.froalaEditor.$tb) {
-                this.froalaEditor.$tb.find(`.fr-command[data-cmd="hide"]`).hide();
-            }
-        } else {
-            this.mobileMode();
-        }
-    }
 
     private createEditor(): void {
         if (this.isInitialized) {
@@ -381,38 +283,22 @@ const ENTER_KEYCODE: number = 13;
         }
 
         this.setClientWidth();
+        this.setFroalaToolbarDesktop();
         this.addCustomIcons();
-        this.addSubMenus();
-
-        if (this.config && this.config.pluginsEnabled.includes('image')) {
-            this.addImageButton();
-        }
 
         this.currentConfig = Object.assign(this.config || this.defaultConfig, {
             // we reemit each valid input events so froala can work in input-style component.
             events: {
-                [froalaEvents.InitializationDelayed]: (_e, editor) => {
-                    this.froalaEditor = editor;
+                [froalaEvents.InitializationDelayed]: () => {
                     this.isLoaded = true;
                     this.setReadOnly();
                     this.htmlSet();
                     window.addEventListener('resize', this.onResize);
                 },
-                [froalaEvents.Initialized]: (_e, editor) => {
-                    this.froalaEditor = editor;
-                    this.isInitialized = true;
-
-                    // We have to delay the initialization of disabled until the rich text is initialized.
-                    // It will remain glitchy otherwise when combined with init on click.
-                    // See comment https://github.com/froala/angular-froala-wysiwyg/issues/75#issuecomment-310709095
-                    this.isDisabled = this.disabled;
-
-                    this.manageInitialFocus(editor);
-                },
-                [froalaEvents.ContentChanged]: (_e, _editor) => {
+                [froalaEvents.ContentChanged]: () => {
                     this.updateModel();
                 },
-                [froalaEvents.Focus]: (_e) => {
+                [froalaEvents.Focus]: () => {
                     this.activateRichText();
                 },
                 [froalaEvents.Blur]: () => {
@@ -420,74 +306,93 @@ const ENTER_KEYCODE: number = 13;
                         this.closeEditor();
                     }
                 },
-                [froalaEvents.KeyUp]: (_e, _editor) => {
+                [froalaEvents.KeyUp]: (key: any) => {
                     if (this.currentConfig.immediateVueModelUpdate) {
                         this.updateModel();
                     }
                     this.$emit('keyup');
                 },
-                [froalaEvents.KeyDown]: (_e, editor, key) => {
+                [froalaEvents.KeyDown]: (key: any) => {
                     this.$emit('keydown');
                     this.isDirty = true;
                     if (key.keyCode === ENTER_KEYCODE) {
-                        editor.paragraphStyle.apply('');
+                        this.froalaEditor.paragraphStyle.apply('');
                     }
                 },
-                [froalaEvents.PasteAfter]: (_e, _editor) => {
+                [froalaEvents.PasteAfter]: () => {
                     this.$emit('paste');
                 },
                 // if we use pasteBeforeCleanup, there's an error in froala's code
-                [froalaEvents.PasteAfterCleanup]: (_e, _editor, data: string) => {
+                [froalaEvents.PasteAfterCleanup]: (data: string) => {
                     if (data.replace) {
                         data = replaceTags(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div'], 'p', data);
-                        return _editor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input', 'img']);
+                        return this.froalaEditor.clean.html(data, ['table', 'video', 'u', 's', 'blockquote', 'button', 'input', 'img']);
                     }
                 },
-                [froalaEvents.CommandBefore]: (_e, _editor, cmd) => {
+                [froalaEvents.CommandBefore]: (cmd: any, param1: any, param2: any) => {
                     if (cmd === 'fullscreen') {
-
-                        let fullscreenWasActivated: boolean = !_editor.fullscreen.isActive();
-                        this.onFullscreen(fullscreenWasActivated);
-
+                        let fullscreenWasActivated: boolean = !this.froalaEditor.fullscreen.isActive();
                         if (fullscreenWasActivated) {
-                            this.hideToolbar();
+                            this.froalaEditor.toolbar.hide();
+                        } else {
+                            this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant); // Hot fix for bug
                         }
+                        this.onFullscreen(fullscreenWasActivated);
                     }
                 },
-                [froalaEvents.CommandAfter]: (_e, _editor, cmd) => {
+                [froalaEvents.CommandAfter]: (cmd: any, param1: any, param2: any) => {
                     if (cmd === 'fullscreen') {
-                        if (_editor.fullscreen.isActive()) {
-                            this.showToolbar();
+                        if (this.froalaEditor.fullscreen.isActive()) {
+                            this.froalaEditor.toolbar.show();
+                        } else {
+                            this.$scrollTo.goTo(this.$el as HTMLElement, -50, ScrollToDuration.Instant);
+                            this.froalaEditor.events.focus();
                         }
                     }
                 },
-                [froalaEvents.ShowLinkInsert]: (_e, editor) => {
-                    this.manageLinkInsert(editor);
+                [froalaEvents.ShowLinkInsert]: () => {
+                    this.manageLinkInsert();
                 },
-                [froalaEvents.ImageRemoved]: (_e, _editor, img) => {
-                    this.$emit('image-removed', img[0].dataset.id, this.fileUploadStoreName);
+                [froalaEvents.ImageRemoved]: ($img) => {
+                    this.$emit('image-removed', $img[0].dataset.id, this.fileUploadStoreName);
                     this.updateModel();
                 },
-                [froalaEvents.ImageInserted]: (_e, _editor, img) => {
-                    if (_editor.opts.modulImageUploaded) {
-                        img[0].alt = '';
+                [froalaEvents.ImageInserted]: ($img) => {
+                    if (this.froalaEditor.opts.modulImageUploaded) {
+                        $img[0].alt = '';
                         this.updateModel();
                     } else {
                         setTimeout(() => {
-                            _editor.image.remove(img);
+                            this.froalaEditor.image.remove($img);
                         });
                     }
 
-                    _editor.opts.modulImageUploaded = false;
+                    this.froalaEditor.opts.modulImageUploaded = false;
                 }
             }
         });
 
-        this._$element = $(this.$refs.editor);
+        this.froalaEditor = new FroalaEditor(this.$refs.editor, this.currentConfig, () => {
+            this.isInitialized = true;
 
-        this.registerEvents();
-        if (this._$element.froalaEditor) {
-            this._$editor = this._$element.froalaEditor(this.currentConfig).data('froala.editor').$el;
+            this.setDisabled();
+            this.manageInitialFocus();
+        });
+    }
+
+    private setFroalaToolbarDesktop(): void {
+        if (this.froalaClientWidth < 550) {
+            // toolbar for desktop devices with RTE Width with less then 550 px
+            this.config.toolbarButtons.moreText.buttonsVisible = FroalaToolbarButtons.moreTextVisibleXS;
+            this.config.toolbarButtons.moreParagraph.buttonsVisible = FroalaToolbarButtons.moreParagraphVisibleXS;
+            this.config.toolbarButtons.moreRich.buttonsVisible = FroalaToolbarButtons.moreRichVisibleXS;
+            this.config.toolbarButtons.moreMisc.buttonsVisible = FroalaToolbarButtons.moreMiscVisibleXS;
+        } else {
+            // toolbar for desktop devices with RTE Width with or more then 550 px
+            this.config.toolbarButtons.moreText.buttonsVisible = FroalaToolbarButtons.moreTextVisible;
+            this.config.toolbarButtons.moreParagraph.buttonsVisible = FroalaToolbarButtons.moreParagraphVisible;
+            this.config.toolbarButtons.moreRich.buttonsVisible = FroalaToolbarButtons.moreRichVisible;
+            this.config.toolbarButtons.moreMisc.buttonsVisible = FroalaToolbarButtons.moreMiscVisible;
         }
     }
 
@@ -565,17 +470,17 @@ const ENTER_KEYCODE: number = 13;
         return this.froalaEditor !== undefined && this.froalaEditor !== null && this.isInitialized;
     }
 
-    private manageInitialFocus(editor: any): void {
+    private manageInitialFocus(): void {
         // the editor might or might not be focused when initializing.  If it is focused, we have to emit the focus event.  Otherwise, we have to hide the toolbar.
-        if (!editor.core.hasFocus()) {
+        if (!this.froalaEditor.core.hasFocus()) {
             this.hideToolbar();
         } else {
             this.$emit('focus');
         }
     }
 
-    private manageLinkInsert(editor: any): void {
-        const popup: HTMLElement = editor.popups.get('link.insert')[0];
+    private manageLinkInsert(): void {
+        const popup: HTMLElement = this.froalaEditor.popups.get('link.insert')[0];
         const urlField: HTMLInputElement = popup.querySelector(`[name="href"]`) as HTMLInputElement;
 
         if (!urlField.value) {
@@ -591,9 +496,9 @@ const ENTER_KEYCODE: number = 13;
     }
 
     private showToolbar(): void {
-        if (this.editorIsAvailable() && !this.internalReadonly) {
+        const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
+        if (this.editorIsAvailable() && !this.internalReadonly && toolBar) {
             this.froalaEditor.toolbar.show();
-            const toolBar: HTMLElement = this.$el.querySelector(FroalaElements.TOOLBAR) as HTMLElement;
             toolBar.style.removeProperty('margin-top');
         }
     }
@@ -606,19 +511,15 @@ const ENTER_KEYCODE: number = 13;
     }
 
     private destroyEditor(): void {
-        if (this._$element) {
-            this.isLoaded = false;
-            this.isInitialized = false;
-            this.isFocused = false;
-            this.listeningEvents && this._$element.off(this.listeningEvents.join(' '));
-            if (this.froalaEditor) {
-                this.froalaEditor.destroy();
-            }
-            this.listeningEvents.length = 0;
-            this._$element = undefined;
-            this.froalaEditor = undefined;
-            this.internalReadonly = false;
+        this.isLoaded = false;
+        this.isInitialized = false;
+        this.isFocused = false;
+        if (this.froalaEditor) {
+            this.froalaEditor.destroy();
         }
+        this.listeningEvents.length = 0;
+        this.froalaEditor = undefined;
+        this.internalReadonly = false;
     }
 
     private activateRichText(): void {
@@ -634,7 +535,7 @@ const ENTER_KEYCODE: number = 13;
     }
 
     private updateModel(): void {
-        const returnedHtml: any = this._$element.froalaEditor('html.get');
+        const returnedHtml: any = this.froalaEditor.html.get();
         if (this.internalValue === returnedHtml) { return; }
 
         const modelContent: string = this.removeEmptyHTML(returnedHtml);
@@ -651,28 +552,6 @@ const ENTER_KEYCODE: number = 13;
             return value;
         }
         return '';
-    }
-
-    private registerEvent(element: any, eventName: any, callback: any): void {
-        if (!element || !eventName || !callback) {
-            return;
-        }
-
-        this.listeningEvents.push(eventName);
-        element.on(eventName, callback);
-    }
-
-    private registerEvents(): void {
-        const events: any = this.currentConfig.events;
-        if (!events) {
-            return;
-        }
-
-        for (let event in events) {
-            if (events.hasOwnProperty(event)) {
-                this.registerEvent(this._$element, event, events[event]);
-            }
-        }
     }
 
     private htmlSet(): void {

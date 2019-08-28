@@ -7,8 +7,6 @@
         'm--is-collapsed': collapsed,
         'm--is-anim-ready': isInitialized,
         'm--is-dirty': isDirty,
-        'm--is-desktop' : isDesktop,
-        'm--is-mobile' : !isDesktop,
         'm--is-readonly' : readonly,
         'm--is-disabled' : disabled
     }">
@@ -20,5 +18,5 @@
                    :allowed-extensions="allowedExtensions"
                    @files-ready="filesReady"
                    @done="filesAdded"
-                   @close="onClose"></m-file-upload>
+                   @close="onCloseFileUpload"></m-file-upload>
 </div>

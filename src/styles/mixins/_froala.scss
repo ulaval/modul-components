@@ -49,4 +49,10 @@
             @extend %m-u--link-text--hover-focus;
         }
     }
+
+    svg {
+        width: 14px;
+        height: 14px;
+        margin: 12px;
+    }
 }
