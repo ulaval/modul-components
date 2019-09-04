@@ -1,9 +1,9 @@
 import ZingTouch from 'zingtouch';
-
 import { MZingGestureDirections, MZingTapInteractions, MZingTouchGestures } from './enums';
 
+
 export type MZingGestureCallback = (event: CustomEvent) => void;
-export interface MZingGesture {}
+export interface MZingGesture { }
 
 export interface MZingRegion {
     bind(element: HTMLElement, gesture: MZingTouchGestures | MZingGesture, callback: MZingGestureCallback): void;

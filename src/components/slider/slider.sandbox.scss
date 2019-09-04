@@ -1,0 +1,28 @@
+@import 'commons';
+
+.slider {
+    height: 20px;
+    width: 100%;
+    background-color: orangered;
+    position: relative;
+
+    &__bar {
+        height: 100%;
+        width: 100%;
+        background-color: yellowgreen;
+    }
+
+    &__knob {
+        position: absolute;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        background-color: purple;
+        left: 0;
+        top: -8px;
+    }
+}
+
+.actions {
+    margin-top: 10px;
+}

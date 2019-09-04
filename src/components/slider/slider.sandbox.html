@@ -8,6 +8,43 @@
         -->
     </p>
     <p>
-        <m-slider><!-- Test case --></m-slider>
+        <div class="slider"
+             ref="slider">
+            <div class="slider__bar"
+                 ref="bar">
+            </div>
+            <div class="slider__knob"
+                 :style="{ left: percentage() + '%' }"
+                 ref="knob">
+            </div>
+        </div>
+
+        <div v-if="currentEvent">
+            <ul>
+                <li>
+                    current direction: {{currentEvent.detail.data[0].currentDirection}}
+                </li>
+                <li>
+                    direction from origin: {{currentEvent.detail.data[0].directionFromOrigin}}
+                </li>
+                <li>
+                    distance from origin: {{currentEvent.detail.data[0].distanceFromOrigin}}
+                </li>
+                <li>
+                    x: {{currentEvent.detail.events[0].x}}
+                </li>
+                <li>
+                    panValue: {{panValue}}
+                </li>
+                <li>
+                    value: {{value}}
+                </li>
+                <li>
+                    percentage: {{percentage()}}
+                </li>
+            </ul>
+        </div>
+        <m-button @click="reset()"
+                  class="actions">reset</m-button>
     </p>
 </div>
