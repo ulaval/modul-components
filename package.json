@@ -39,7 +39,7 @@
         "includeFailureMsg": true
     },
     "dependencies": {
-        "axios": "^0.17.1",
+        "axios": "^0.21.1",
         "cleave.js": "^1.5.0",
         "clipboard": "^2.0.4",
         "css-element-queries": "^0.4.0",
