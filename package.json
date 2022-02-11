@@ -46,7 +46,7 @@
         "enquire.js": "^2.1.6",
         "es6-promise": "^4.1.1",
         "filesize": "^3.6.0",
-        "froala-editor": "2.9.3",
+        "froala-editor": "4.0.7",
         "jquery": "^3.3.1",
         "libphonenumber-js": "^1.7.19",
         "mobile-drag-drop": "^2.3.0-rc.1",
